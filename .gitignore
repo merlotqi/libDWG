@@ -1,7 +1,70 @@
-out
-dist
-node_modules
-.vscode-test/
-*.vsix
+# Build directories for Meson and CMake
+build/
+_build/
+meson-logs/
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.user
+CMakeLists.txt.state
+cmake_install.cmake
+Makefile
+*.cmake
+*.mk
+
+# Compiled Object files
+*.o
+*.obj
+*.lo
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.pdb
+*.exp
+
+# Compiled Dynamic Libraries
+*.dll
+*.so
+*.dylib
+
+# Compiled static libraries
+*.a
+*.lib
+
+# Executable files
+*.exe
+*.out
+*.app
+
+# Temporary files from IDEs
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# IDE and editor specific
+.vscode/
+.idea/
+
+# Catch test framework output (if using Catch2)
+catch_report/
+
+# Coverage output (if using gcov)
+*.gcda
+*.gcno
+*.gcov
+
+# Build-related tools
+*.user
+*.desktop
+*.aux
+
+# C++ cache files
+*.d
+
+# C++ precompiled headers
+*.gch
+*.pch
 .DS_Store
-src/*.js
