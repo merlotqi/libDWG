@@ -20,24 +20,30 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef __DWG_MACRO_H__
-#define __DWG_MACRO_H__
+#ifndef __DWG_UTIL_COORDINATE_H__
+#define __DWG_UTIL_COORDINATE_H__
 
-namespace DWG
+namespace DWG {
+namespace Util {
+
+struct XYZ
 {
+    double X;
+    double Y;
+    double Z;
 
-#define DXF_NAME_ATTRIBUTE(name)                                               \
-private:                                                                       \
-  std::string m_name;                                                          \
-                                                                               \
-public:                                                                        \
-  inline const std::string& name() const                                       \
-  {                                                                            \
-    return m_name;                                                             \
-  }
+    XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
+};
 
+struct XY
+{
+    double X;
+    double Y;
 
+    XY(double x, double y) : X(x), Y(y) {}
+};
 
-} // namespace DWG
+}// namespace Util
+}// namespace DWG
 
-#endif /* __DWG_MACRO_H__ */
+#endif /* __DWG_UTIL_COORDINATE_H__ */
