@@ -1,32 +1,25 @@
-BasedOnStyle: GNU
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
 Language: Cpp
-IndentWidth: 2
-TabWidth: 8
-UseTab: Never
-BreakBeforeBraces: GNU
-BraceWrapping:
-  AfterClass: true
-  AfterFunction: true
-  AfterNamespace: true
-  BeforeCatch: true
-  BeforeElse: true
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
-SpacesInAngles: false
-SpaceBeforeSquareBrackets: false
-SpaceAfterCStyleCast: true
-AllowShortFunctionsOnASingleLine: None
+AccessModifierOffset: -4
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+  PadOperators: true
+AlignEscapedNewlines: Left
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Stroustrup
+ForEachMacros:
+  - DGL_FOREACH_NODE
+  - DGL_FOREACH_EDGE
+  - BOOST_FOREACH
+IfMacros:
+  - SORT_DEBUG
+MacroBlockBegin: GNO_BEGIN
+MacroBlockEnd: GNO_END
+SortIncludes: Never
 ColumnLimit: 80
-AlwaysBreakAfterReturnType: None
-BreakConstructorInitializersBeforeComma: false
-CommentPragmas: '^ IWYU pragma:'
-IndentExternBlock: AfterExternBlock
-AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-AlignOperands: true
-AlignTrailingComments: true
-ReflowComments: true
-SortIncludes: true
-PointerAlignment: Left
-SpaceBeforeCaseColon: false

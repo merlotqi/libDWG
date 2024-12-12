@@ -1,7 +1,5 @@
-/******************************************************************************
+/**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
- *
- * Copyright (C) 2024 Merlot.Rain <merlotrain@gmail.com>
  *
  * This file is part of libDWG.
  *
@@ -20,22 +18,28 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * For more information, visit the project's homepage or contact the author.
- *
- * Author's email: merlotrain@gmail.com
- ******************************************************************************
  */
 
-#ifndef LIBDWG_EXPORTS_H
-#define LIBDWG_EXPORTS_H
+#ifndef DWG_UTIL_COORDINATE_H
+#define DWG_UTIL_COORDINATE_H
 
-#ifdef _WIN32
-#ifdef LIBDWG_EXPORTS
-#define LIBDWG_API __declspec(dllexport)
-#else
-#define LIBDWG_API __declspec(dllimport)
-#endif
-#else
-#define LIBDWG_API __attribute__((visibility("default")))
-#endif
+namespace dwg {
 
-#endif // LIBDWG_EXPORTS_H
+struct XYZ {
+    double X;
+    double Y;
+    double Z;
+
+    XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
+};
+
+struct XY {
+    double X;
+    double Y;
+
+    XY(double x, double y) : X(x), Y(y) {}
+};
+
+} // namespace dwg
+
+#endif /* __DWG_UTIL_COORDINATE_H__ */
