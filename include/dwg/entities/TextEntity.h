@@ -1,61 +1,72 @@
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
+
+#pragma once
+
+#include <dwg/entities/IText.h>
+#include <dwg/entities/Entity.h>
+
+#include <dwg/enums/entities/TextMirrorFlag.h>
+#include <dwg/enums/entities/TextHorizontalAlignment.h>
+#include <dwg/enums/entities/TextVerticalAlignmentType.h>
 
 namespace dwg {
-namespace Entities {
+namespace entities {
 
-enum TextHorizontalAlignment : short {
-    Left = 0,
-    Center = 1,
-    Right = 2,
-    /// <summary>
-    /// Aligned (if vertical alignment = 0)
-    /// </summary>
-    Aligned = 3,
-    /// <summary>
-    /// Middle (if vertical alignment = 0)
-    /// </summary>
-    Middle = 4,
-    /// <summary>
-    /// Fit (if vertical alignment = 0)
-    /// </summary>
-    Fit = 5,
+
+class TextEntity : public Entity, IText
+{
+public:
+TextEntity();
+virtual ~TextEntity();
+
+double thickness; // 39 
+XYZ insertPoint; //10, 20, 30
+double height; // 40
+
+// 1
+std::string value() const;
+void setValue(const std::string& value);
+
+double rotation; // 50
+
+double widthFactor; // 41, optional
+double obliqueAngle; // 51
+
+// 7 name
+TextEntity* style() const;
+void setStyle(TextEntity* style);
+
+
+TextMirrorFlag mirror; // 71
+TextHorizontalAlignment horizontalAlignment; // 72
+XYZ alignmentPoint; // 11, 21, 31
+XYZ normal; //210, 220, 230
+TextVerticalAlignmentType verticalAlignment; // 73
+
+ 
+
 };
 
-enum TextMirrorFlag : short
-	{
-		None = 0,
-		/// <summary>
-		/// Mirrored in X
-		/// </summary>
-		Backward = 2,
 
-		/// <summary>
-		/// Mirrored in Y
-		/// </summary>
-		UpsideDown = 4,
-	}
-
-	enum TextVerticalAlignmentType : short
-	{
-		/// <summary>
-		/// Text aligned to baseline.
-		/// </summary>
-		Baseline = 0,
-
-		/// <summary>
-		/// Bottom
-		/// </summary>
-		Bottom = 1,
-
-		/// <summary>
-		/// Middle
-		/// </summary>
-		Middle = 2,
-
-		/// <summary>
-		/// Top
-		/// </summary>
-		Top = 3,
-	}
-
-} // namespace Entities
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

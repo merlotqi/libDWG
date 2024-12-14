@@ -2,7 +2,7 @@
 #define DWG_MATHUTILS_H
 
 #include <math.h>
-#include <dwg/util/Coordinate.h>
+#include <dwg/Coordinate.h>
 
 namespace dwg {
 

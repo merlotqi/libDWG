@@ -1,11 +1,7 @@
 namespace dwg {
-namespace Entities {
+namespace entities {
 
-class Vertex : Entity, IVertex {};
-
-class Vertex2D : public Vertex {};
-
-class Vertex3D : public Vertex {};
+class Vertex {};
 
 } // namespace Entities
 } // namespace dwg

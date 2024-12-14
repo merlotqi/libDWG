@@ -1,9 +1,10 @@
-#ifndef DXFSUBCLASSMARKER_H
-#define DXFSUBCLASSMARKER_H
+#ifndef LIBDWG_DXFSUBCLASSMARKER_H
+#define LIBDWG_DXFSUBCLASSMARKER_H
 
 namespace dwg {
 
-class DxfSubclassMarker {
+class DxfSubclassMarker
+{
     static constexpr auto ApplicationId = "AcDbRegAppTableRecord";
     static constexpr auto AcDbPlaceHolder = "AcDbPlaceHolder";
     static constexpr auto Table = "AcDbSymbolTable";
@@ -49,7 +50,7 @@ class DxfSubclassMarker {
     static constexpr auto MultiLeader = "AcDbMLeader";
     static constexpr auto MLeaderStyle = "AcDbMLeaderStyle";
     static constexpr auto MultiLeaderAnnotContext =
-        "AcDbMultiLeaderAnnotContext";
+            "AcDbMultiLeaderAnnotContext";
     static constexpr auto LwPolyline = "AcDbPolyline";
     static constexpr auto PolylineVertex = "AcDb2dVertex";
     static constexpr auto Polyline3d = "AcDb3dPolyline";
@@ -87,10 +88,10 @@ class DxfSubclassMarker {
     static constexpr auto Scale = "AcDbScale";
     static constexpr auto EvalGraph = "AcDbEvalGraph";
     static constexpr auto BlockVisibilityParameter =
-        "AcDbBlockVisibilityParameter";
+            "AcDbBlockVisibilityParameter";
     static constexpr auto DbColor = "AcDbColor";
 };
 
-} // namespace dwg
+}// namespace dwg
 
 #endif /* DXFSUBCLASSMARKER_H */

@@ -1,39 +1,61 @@
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
 
+#ifndef LIBDWG_LINE_TYPE_H
+#define LIBDWG_LINE_TYPE_H
+
+#include <dwg/tables/TableEntry.h>
 namespace dwg {
-namespace Tables {
+namespace tables {
 
 /// Represents a line type complex element type.
 enum LinetypeShapeFlags : short
-	{
-		/// <summary>
-		/// None.
-		/// </summary>
-		None = 0,
+{
+    /// None.
+    None = 0,
+    /// Text is rotated 0 degrees, otherwise it follows the segment.
+    RotationIsAbsolute = 1,
+    /// Complex shape code holds the index of the shape to be drawn.
+    Text = 2,
+    /// Complex shape code holds the index into the text area of the string to be drawn.
+    Shape = 4,
+};
 
-		/// <summary>
-		/// Text is rotated 0 degrees, otherwise it follows the segment.
-		/// </summary>
-		RotationIsAbsolute = 1,
-
-		/// <summary>
-		/// Complex shape code holds the index of the shape to be drawn.
-		/// </summary>
-		Text = 2,
-
-		/// <summary>
-		/// Complex shape code holds the index into the text area of the string to be drawn.
-		/// </summary>
-		Shape = 4,
-	}
-
-    class LineType : public TableEntity
-    {
+class LineType : public TableEntry
+{
 public:
-    class Segment {};
+    class Segment
+    {
+    };
 
     const char *BY_LAYER_NAME = "ByLayer";
     const char *BY_BLOCK_NAME = "ByBlock";
 };
 
-} // namespace Tables
-} // namespace dwg
+class LineTypesTable : public Table<LineType>
+{
+};
+
+}// namespace tables
+}// namespace dwg
+
+#endif// LIBDWG_LINE_TYPE_H

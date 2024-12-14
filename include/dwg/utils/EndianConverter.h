@@ -2,44 +2,83 @@
 #define LIBDWG_ENDIANCONVERTER_H
 
 #include <memory>
+#include <type_traits>
 #include <dwg/exports.h>
 
 namespace dwg {
+namespace utils {
 
-class LIBDWG_API EndianConverter {
+class LIBDWG_API EndianConverter
+{
 public:
     EndianConverter() = default;
-    virtual std::vector<unsigned char> GetBytes(char value) = 0;
-    virtual std::vector<unsigned char> GetBytes(short value) = 0;
-    virtual std::vector<unsigned char> GetBytes(unsigned short value) = 0;
-    virtual std::vector<unsigned char> GetBytes(int value) = 0;
-    virtual std::vector<unsigned char> GetBytes(unsigned int value) = 0;
-    virtual std::vector<unsigned char> GetBytes(long long value) = 0;
-    virtual std::vector<unsigned char> GetBytes(unsigned long long value) = 0;
-    virtual std::vector<unsigned char> GetBytes(double value) = 0;
-    virtual std::vector<unsigned char> GetBytes(float value) = 0;
+    std::unique_ptr<unsigned char[]> GetBytes(char value);
+    std::unique_ptr<unsigned char[]> GetBytes(short value);
+    std::unique_ptr<unsigned char[]> GetBytes(unsigned short value);
+    std::unique_ptr<unsigned char[]> GetBytes(int value);
+    std::unique_ptr<unsigned char[]> GetBytes(unsigned int value);
+    std::unique_ptr<unsigned char[]> GetBytes(long long value);
+    std::unique_ptr<unsigned char[]> GetBytes(unsigned long long value);
+    std::unique_ptr<unsigned char[]> GetBytes(double value);
+    std::unique_ptr<unsigned char[]> GetBytes(float value);
 
-    virtual char ToChar(unsigned char *bytes) = 0;
-    virtual short ToInt16(unsigned char *bytes) = 0;
-    virtual unsigned short ToUInt16(unsigned char *bytes) = 0;
-    virtual int ToInt32(unsigned char *bytes) = 0;
-    virtual unsigned int ToUint32(unsigned char *bytes) = 0;
-    virtual long long ToInt64(unsigned char *bytes) = 0;
-    virtual unsigned long long ToUInt64(unsigned char *bytes) = 0;
+    char ToChar(const unsigned char *bytes);
+    int16_t ToInt16(const unsigned char *bytes);
+    uint16_t ToUInt16(const unsigned char *bytes);
+    int32_t ToInt32(const unsigned char *bytes);
+    uint32_t ToUint32(const unsigned char *bytes);
+    int64_t ToInt64(const unsigned char *bytes);
+    uint64_t ToUInt64(const unsigned char *bytes);
+    float ToFloat(const unsigned char *bytes);
+    double ToDouble(const unsigned char *bytes);
+
+    template <class T>
+    std::unique_ptr<unsigned char[]> GetBytes(T value)
+    {
+        static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,
+                      "T must be integral number or floating point number.");
+        constexpr size_t sz = sizeof(T);
+        std::unique_ptr<unsigned char[]> buffer(new unsigned char[sz]);
+        byteswap(buffer.get(), sz);
+        memcpy(buffer.get(), &value, sz);
+        return buffer;
+    }
+
+    template <class T>
+    T FromBytes(const unsigned char *bytes)
+    {
+        static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,
+                      "T must be integral number or floating point number.");
+        constexpr size_t sz = sizeof(T);
+        std::unique_ptr<unsigned char[]> buffer(new unsigned char[sz]);
+        std::memcpy(buffer.get(), bytes, sz);
+        byteswap(buffer.get(), sz);
+        T value;
+        std::memcpy(&value, buffer.get(), sz);
+        return value;
+    }
+
+protected:
+    virtual void byteswap(unsigned char *buffer, size_t length) = 0;
 };
 
-class BigEndianConverter : public EndianConverter {
+class LIBDWG_API BigEndianConverter : public EndianConverter
+{
 public:
-    BigEndianConverter();
-    static std::shared_ptr<EndianConverter> Instance();
+    BigEndianConverter()  = default;
+    ~BigEndianConverter() = default;
+    static std::unique_ptr<EndianConverter> Instance();
 };
 
-class LittleEndianConverter : public EndianConverter {
+class LIBDWG_API LittleEndianConverter : public EndianConverter
+{
 public:
-    LittleEndianConverter();
-    static std::shared_ptr<EndianConverter> Instance();
+    LittleEndianConverter()  = default;
+    ~LittleEndianConverter() = default;
+    static std::unique_ptr<EndianConverter> Instance();
 };
 
+} // namespace utils
 } // namespace dwg
 
 #endif // LIBDWG_ENDIANCONVERTER_H

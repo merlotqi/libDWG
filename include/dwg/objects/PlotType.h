@@ -1,46 +1,46 @@
-#ifndef PLOTTYPE_H
-#define PLOTTYPE_H
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
+
+#pragma once
 
 namespace dwg {
-namespace Object {
+namespace objects {
 
-/// <summary>
 /// Defines the portion of paper space to output to the media
-/// </summary>
-enum PlotType {
-    /// <summary>
+enum PlotType
+{
     /// Last screen display
-    /// </summary>
     LastScreenDisplay = 0,
-
-    /// <summary>
     /// Drawing extents
-    /// </summary>
     DrawingExtents = 1,
-
-    /// <summary>
     /// Drawing limits
-    /// </summary>
     DrawingLimits = 2,
-
-    /// <summary>
     /// View specified by the plot view name
-    /// </summary>
     View = 3,
-
-    /// <summary>
     /// Window specified by the upper-right and bottom-left window corners
-    /// </summary>
     Window = 4,
-
-    /// <summary>
     /// Layout information
-    /// </summary>
     LayoutInformation = 5
 };
 
-} // namespace Object
-
-} // namespace dwg
-
-#endif
+}// namespace objects
+}// namespace dwg

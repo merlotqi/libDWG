@@ -1,27 +1,67 @@
-namespace dwg {
-namespace Entities {
-enum AttributeFlags {
-    /// <summary>
-    /// No flags.
-    /// </summary>
-    None = 0,
-    /// <summary>
-    /// Attribute is invisible (does not appear).
-    /// </summary>
-    Hidden = 1,
-    /// <summary>
-    /// This is a constant attribute.
-    /// </summary>
-    Constant = 2,
-    /// <summary>
-    /// Verification is required on input of this attribute.
-    /// </summary>
-    Verify = 4,
-    /// <summary>
-    /// Attribute is preset (no prompt during insertion).
-    /// </summary>
-    Preset = 8
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
+
+#pragma once
+
+#include <dwg/entities/TextEntity.h>
+
+#include <dwg/enums/entities/TextVerticalAlignmentType.h>
+#include <dwg/enums/entities/AttributeFlags.h>
+
+#include <dwg/entities/MText.h>
+
+namespace dwg
+{
+    namespace entities
+    {
+        
+        	 enum AttributeType
+	{
+		SingleLine = 1,
+		MultiLine = 2,
+		ConstantMultiLine = 4,
+	};
+class AttributeBase : public TextEntity
+{
+public:
+    TextVerticalAlignmentType verticalAlignment; // 74
+    unsigned char version; // 280
+
+    std::string tag;// 2
+    AttributeFlags flags; // 70
+
+    AttributeType attributeType; // 71
+    
+    public:
+    bool IsReallyLocked() const;
+    void IsReallyLocked(bool value);
+
+    MText mtext() const;
+    void mtext(const MText& value);
+
+    protected:
+    void matchAttributeProperties(const AttributeBase& other);
 };
 
-}
+    } // namespace entities
+    
 } // namespace dwg

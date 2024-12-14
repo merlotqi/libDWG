@@ -1,46 +1,62 @@
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
+
+#ifndef LIBDWG_LAYER_H
+#define LIBDWG_LAYER_H
+
+#include <dwg/tables/TableEntry.h>
+
 namespace dwg {
-namespace Tables {
+namespace tables {
 /// Standard layer flags (bit-coded values).
-enum LayerFlags : short {
-    /// <summary>
+enum LayerFlags : short
+{
     /// None
-    /// </summary>
     None = 0,
-
-    /// <summary>
     /// Layer is frozen; otherwise layer is thawed
-    /// </summary>
     Frozen = 1,
-
-    /// <summary>
     /// Layer is frozen by default in new viewports
-    /// </summary>
     FrozenNewViewports = 2,
-
-    /// <summary>
     /// Layer is locked
-    /// </summary>
     Locked = 4,
-
-    /// <summary>
     /// If set, table entry is externally dependent on an xRef
-    /// </summary>
     XrefDependent = 16,
-
-    /// <summary>
     /// If both this bit and bit 16 are set, the externally dependent xRef has
     /// been successfully resolved
-    /// </summary>
     XrefResolved = 32,
-
-    /// <summary>
     /// If set, the table entry was referenced by at least one entity in the
     /// drawing the last time the drawing was edited.
-    /// </summary>
     Referenced = 64
 };
 
-class Layer : public TableEntity {};
+class Layer : public TableEntry
+{
+};
 
-} // namespace Tables
-} // namespace dwg
+class LayersTable : public Table<Layer>
+{
+};
+
+}// namespace tables
+}// namespace dwg
+
+#endif// LIBDWG_LAYER_H

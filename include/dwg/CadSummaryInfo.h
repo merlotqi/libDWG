@@ -1,6 +1,7 @@
-#include <string>
-#include <map>
 #include <ctime>
+#include <map>
+#include <string>
+
 
 class CadSummaryInfo
 {
@@ -17,27 +18,27 @@ class CadSummaryInfo
 
 public:
     CadSummaryInfo();
-    
+
     std::string getTitle() const;
-    void setTitle(const std::string& value);
-    
+    void setTitle(const std::string &value);
+
     std::string getSubject() const;
-    void stSubject(const std::string& value);
-    
+    void stSubject(const std::string &value);
+
     std::string getAuthor() const;
-    void setAuthor(const std::string& value);
-    
+    void setAuthor(const std::string &value);
+
     std::string getKeywords() const;
-    void setKeywords(const std::string& value);
+    void setKeywords(const std::string &value);
 
     std::string getComments() const;
-    void setComments(const std::string& value);
+    void setComments(const std::string &value);
 
     std::string getLastSavedBy() const;
-    void setLastSavedBy(const std::string& value);
+    void setLastSavedBy(const std::string &value);
 
     std::string getHyperlinkBase() const;
-    void setHyperlinkBase(const std::string& value);
+    void setHyperlinkBase(const std::string &value);
 
     time_t getCreatedDate() const;
     void setCreatedDate(time_t value);
@@ -46,6 +47,5 @@ public:
     void setModifiedDate(time_t value);
 
     std::map<std::string, std::string> getProperties() const;
-    void setProperties(const std::map<std::string, std::string>& value);
-
+    void setProperties(const std::map<std::string, std::string> &value);
 };

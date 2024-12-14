@@ -1,56 +1,82 @@
-namespace dwg {
-namespace Entities {
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
 
-enum PolylineFlags {
-    /// <summary>
+#ifndef LIBDWG_POLYLINE_H
+#define LIBDWG_POLYLINE_H
+
+#include <dwg/entities/Entity.h>
+
+namespace dwg {
+namespace entities {
+
+enum PolylineFlags
+{
     /// Default, open polyline.
-    /// </summary>
     Default = 0,
-    /// <summary>
     /// This is a closed polyline (or a polygon mesh closed in the M direction).
-    /// </summary>
     ClosedPolylineOrClosedPolygonMeshInM = 1,
-    /// <summary>
     /// Curve-fit vertexes have been added.
-    /// </summary>
     CurveFit = 2,
-    /// <summary>
     /// Spline-fit vertexes have been added.
-    /// </summary>
     SplineFit = 4,
-    /// <summary>
     /// This is a 3D polyline.
-    /// </summary>
     Polyline3D = 8,
-    /// <summary>
     /// This is a 3D polygon mesh.
-    /// </summary>
     PolygonMesh = 16,
-    /// <summary>
     /// The polygon mesh is closed in the N direction.
-    /// </summary>
     ClosedPolygonMeshInN = 32,
-    /// <summary>
     /// The polyline is a polyface mesh.
-    /// </summary>
     PolyfaceMesh = 64,
-    /// <summary>
     /// The line type pattern is generated continuously around the vertexes of
     /// this polyline.
-    /// </summary>
     ContinuousLinetypePattern = 128
 };
 
-class IPolyline {};
+class IPolyline
+{
+};
 
-class LwPolyline : Entity, IPolyline {};
+class LwPolyline : Entity, IPolyline
+{
+};
 
-class Polyline : public Entity, IPolyline {};
+class Polyline : public Entity, IPolyline
+{
+};
 
-class Polyline2D : public Polyline {};
+class Polyline2D : public Polyline
+{
+};
 
-class Polyline3D : public Polyline {};
+class Polyline3D : public Polyline
+{
+};
 
-class PolyfaceMesh : public Polyline {};
-} // namespace Entities
-} // namespace dwg
+class PolyfaceMesh : public Polyline
+{
+};
+
+
+}// namespace entities
+}// namespace dwg
+
+#endif// LIBDWG_POLYLINE_H

@@ -1,120 +1,121 @@
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
+
+#pragma once
+
+#include <dwg/entities/Entity.h>
+#include <dwg/entities/AttributeDefinition.h>
+#include <dwg/objects/MultiLeaderAnnotContext.h>
+#include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/enums/entities/MultiLeaderPropertyOverrideFlags.h>
+#include <dwg/enums/entities/MultiLeaderPathType.h>
+#include <dwg/utils/Color.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/enums/LineWeightType.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/enums/objects/LeaderContentType.h>
+
+#include <dwg/tables/TextStyle.h>
+#include <dwg/enums/TextAttachmentType.h>
+#include <dwg/enums/TextAngleType.h>
+#include <dwg/enums/TextAlignmentType.h>
+#include <dwg/enums/entities/BlockContentConnectionType.h>
+#include <dwg/enums/TextAttachmentPointType.h>
+#include <dwg/enums/TextAttachmentDirectionType.h>
+
+
 namespace dwg {
-namespace Entities {
+namespace entities {
 
-enum MultiLeaderPropertyOverrideFlags : int {
+class MultiLeader : public Entity 
+{
+public:
+    MultiLeader();
+    virtual ~MultiLeader();
 
-    /// No Flag: No property to be overridden
-    None = 0,
+    class BlockAttribute
+    {
+        public:
+AttributeDefinition* attributeDefinition; // 330
+short Index; // 177
 
-    /// Override <see cref="MultiLeaderStyle.PathType"/> property.
-    PathType = 0x1,
+double width; // 44
+std::string text; // 302
 
-    /// Override <see cref="MultiLeaderStyle.LineColor" /> property.
-    LineColor = 0x2,
+    };
 
-    /// Override <see cref="MultiLeaderStyle.LeaderLineType" /> property.
-    LeaderLineType = 0x4,
+MultiLeaderAnnotContext* contextData;
+MultiLeaderStyle* style;
 
-    /// Override <see cref="MultiLeaderStyle.LeaderLineWeight" /> property.
-    LeaderLineWeight = 0x8,
+MultiLeaderPropertyOverrideFlags propertyOverrideFlags; // 90
+MultiLeaderPathType pathType; // 170
+utils::Color lineColoe; // 91
 
-    /// Override <see cref="MultiLeaderStyle.EnableLanding" /> property.
-    EnableLanding = 0x10,
+tables::LineType leaderLineType; // 341
+LineweightType leaderLineWeight ; // 171
 
-    /// Override <see cref="MultiLeaderStyle.LandingGap"/> property.
-    LandingGap = 0x20,
+bool enableLanding; // 290
+bool enableDogleg; // 291
+double landingDistance; // 41
 
-    /// Override <see cref="MultiLeaderStyle.EnableDogleg"/> property.
-    EnableDogleg = 0x40,
+tables::BlockRecord* arrowhead; // 342
 
-    /// Override <see cref="MultiLeaderStyle.LandingDistance"/> property.
-    LandingDistance = 0x80,
+double arrowheadSize; // 42
 
-    /// Override <see cref="MultiLeaderStyle.Arrowhead"/> property.
-    Arrowhead = 0x100,
+LeaderContentType contentType; // 172
 
-    /// Override <see cref="MultiLeaderStyle.ArrowheadSize"/> property.
-    ArrowheadSize = 0x200,
 
-    /// Override <see cref="MultiLeaderStyle.ContentType"/> property.
-    ContentType = 0x400,
+tables::TextStyle* textStyle; // 343
+TextAttachmentType textLeftAttachment;// 173
+TextAttachmentType textRightAttachment;// 95
+TextAngleType textAngle; // 174
+TextAlignmentType textAlignment; // 175
+utils::Color textColor; // 92
+bool textFrame; // 292
 
-    /// Override <see cref="MultiLeaderStyle.TextStyle"/> property.
-    TextStyle = 0x800,
+tables::BlockRecord* blockContent; // 344
+utils::Color blockContentColor; // 93
+XYZ blockContentScale; // 10, 20, 30
+double blockContentRotation; // 43
+BlockContentConnectionType blockContentConnection; // 176
 
-    /// Override <see cref="MultiLeaderStyle.TextLeftAttachment"/> property.
-    TextLeftAttachment = 0x1000,
 
-    /// Override <see cref="MultiLeaderStyle.TextAngle"/> property.
 
-    TextAngle = 0x2000,
+bool enableAnnotationScale = 293;
 
-    /// Override <see cref="MultiLeaderStyle.TextAlignment"/> property.
+std::vector<BlockAttribute> blockAttributes;
 
-    TextAlignment = 0x4000,
+bool textDirectionNegative; // 294
+short textAligninIPE; // 178
+TextAttachmentPointType textAttachmentPoint; // 179
+double scaleFactor; // 45
+TextAttachmentDirectionType textAttachmentDirection; // 271
+TextAttachmentType textBottomAttachment; // 272
+TextAttachmentType textTopAttachment; // 273
 
-    /// Override <see cref="MultiLeaderStyle.TextColor"/> property.
 
-    TextColor = 0x8000,
-
-    /// Override <see cref="MultiLeaderStyle.TextHeight" /> property.
-
-    TextHeight = 0x10000,
-
-    /// Override <see cref="MultiLeaderStyle.TextFrame"/> property.
-
-    TextFrame = 0x20000,
-
-    /// Override <see cref="MultiLeaderStyle.??" /> property.
-
-    EnableUseDefaultMText = 0x40000,
-
-    /// Override <see cref="MultiLeaderStyle.BlockContent"/> property.
-
-    BlockContent = 0x80000,
-
-    /// Override <see cref="MultiLeaderStyle.BlockContentColor"/> property.
-
-    BlockContentColor = 0x100000,
-
-    /// Override <see cref="MultiLeaderStyle.BlockContentScale"/> property.
-
-    BlockContentScale = 0x200000,
-
-    /// Override <see cref="MultiLeaderStyle.BlockContentRotation"/> property.
-
-    BlockContentRotation = 0x400000,
-
-    /// Override <see cref="MultiLeaderStyle.BlockContentConnection"/> property.
-
-    BlockContentConnection = 0x800000,
-
-    /// Override <see cref="MultiLeaderStyle.ScaleFactor"/> property.
-
-    ScaleFactor = 0x1000000,
-
-    ///	Override <see cref="MultiLeaderStyle.TextRightAttachment"/> property.
-
-    TextRightAttachment = 0x2000000,
-
-    ///	Override <see cref="MultiLeaderStyle.?? which"/> property.
-
-    TextSwitchAlignmentType = 0x4000000,
-
-    /// Override <see cref="MultiLeaderStyle.TextAttachmentDirection"/>
-    /// property.
-
-    TextAttachmentDirection = 0x8000000,
-
-    /// Override <see cref="MultiLeaderStyle.TextTopAttachment"/> property.
-
-    TextTopAttachment = 0x10000000,
-
-    /// Override <see cref="MultiLeaderStyle.TextBottomAttachment"/> property.
-
-    TextBottomAttachment = 0x20000000
+bool extendedToText;
 };
 
-class MultiLeader : public Entity {};
+
 } // namespace Entities
 } // namespace dwg
