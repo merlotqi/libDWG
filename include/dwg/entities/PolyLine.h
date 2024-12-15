@@ -20,63 +20,49 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_POLYLINE_H
-#define LIBDWG_POLYLINE_H
+#pragma once
 
 #include <dwg/entities/Entity.h>
+#include <dwg/entities/IPolyline.h>
+#include <dwg/enums/entities/PolylineFlags.h>
+#include <dwg/enums/entities/SmoothSurfaceType.h>
+
+#include <dwg/entities/Vertex.h>
 
 namespace dwg {
 namespace entities {
 
-enum PolylineFlags
-{
-    /// Default, open polyline.
-    Default = 0,
-    /// This is a closed polyline (or a polygon mesh closed in the M direction).
-    ClosedPolylineOrClosedPolygonMeshInM = 1,
-    /// Curve-fit vertexes have been added.
-    CurveFit = 2,
-    /// Spline-fit vertexes have been added.
-    SplineFit = 4,
-    /// This is a 3D polyline.
-    Polyline3D = 8,
-    /// This is a 3D polygon mesh.
-    PolygonMesh = 16,
-    /// The polygon mesh is closed in the N direction.
-    ClosedPolygonMeshInN = 32,
-    /// The polyline is a polyface mesh.
-    PolyfaceMesh = 64,
-    /// The line type pattern is generated continuously around the vertexes of
-    /// this polyline.
-    ContinuousLinetypePattern = 128
-};
-
-class IPolyline
-{
-};
-
-class LwPolyline : Entity, IPolyline
-{
-};
-
 class Polyline : public Entity, IPolyline
 {
+    public:
+    double elevation; // 30
+    double thickness; // 39
+
+    XYZ normal; // 210, 220, 230
+    PolylineFlags flags; // 70
+
+    double startWidth; // 40
+    double endWidth; // 41
+
+    SmoothSurfaceType smoothSurface; // 75
+
+    SeqendCollection<Vertex> vertices;
 };
 
 class Polyline2D : public Polyline
 {
+    public:
+    Polyline2D();
+    ~Polyline2D();
 };
 
 class Polyline3D : public Polyline
 {
-};
-
-class PolyfaceMesh : public Polyline
-{
+    public:
+    Polyline3D();
+    ~Polyline3D();
 };
 
 
 }// namespace entities
 }// namespace dwg
-
-#endif// LIBDWG_POLYLINE_H

@@ -22,48 +22,33 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
-
-
-namespace dwg {
-class CadDocument;
-}// namespace dwg
-
+#include <dwg/entities/Entity.h>
+#include <dwg/enums/entities/UnderlayDisplayFlags.h>
+#include <dwg/objects/UnderlayDefinition.h>
 
 namespace dwg {
+namespace entities {
 
-
-
-class LIBDWG_API CadHeader
-{
-
+class UnderlayEntity : public Entity {
 public:
-    CadHeader(CadDocument *document);
-    CadHeader(ACadVersion version);
+    UnderlayEntity() : Entity() {}
+    virtual ~UnderlayEntity() {}
 
-    std::string VersionString;
+    XYZ normal; // 210, 220, 230
+    XYZ insertPoint; // 10, 20, 30
 
-    ACadVersion Version;
+    double XScale; // 41
+    double YScale; // 42
+    double ZScale; // 43
 
-    // "$ACADMAINTVER", 70
-    short maintenanceVersion;
-    // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
-    // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
-    // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
-    // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
+    double rotation; // 50
+    UnderlayDisplayFlags flags; // 280
 
-    bool DIMSAV;
+    unsigned char contrast; // 281
+    unsigned char Fade; // 282
 
-    // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
-    // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
+    objects::UnderlayDefinition* definition;
 };
 
+}// namespace entities
 }// namespace dwg

@@ -22,48 +22,27 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
-
+#include <dwg/entities/Entity.h>
+#include <dwg/tables/TextStyle.h>
 
 namespace dwg {
-class CadDocument;
-}// namespace dwg
+namespace entities {
 
+class Shape : public Entity {
+  public:
+  double thickness; // 39
+  XYZ insertionPoint; // 10, 20, 30
+  double size; // 40
 
-namespace dwg {
+    tables::TextStyle* textStyle; // name 2
 
+    double rotation; // 50
+    double relativeXScale; // 41
+    double obliqueAngle; // 51
 
+    XYZ normal; // 210, 220, 230
 
-class LIBDWG_API CadHeader
-{
-
-public:
-    CadHeader(CadDocument *document);
-    CadHeader(ACadVersion version);
-
-    std::string VersionString;
-
-    ACadVersion Version;
-
-    // "$ACADMAINTVER", 70
-    short maintenanceVersion;
-    // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
-    // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
-    // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
-    // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
-
-    bool DIMSAV;
-
-    // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
-    // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
 };
 
+}// namespace entities
 }// namespace dwg

@@ -22,48 +22,20 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
+#include <dwg/entities/Entity.h>
 
-
-namespace dwg {
-class CadDocument;
-}// namespace dwg
-
-
-namespace dwg {
-
-
-
-class LIBDWG_API CadHeader
+namespace dwg
 {
-
+    namespace entities
+    {
+        
+class XLine : public Entity
+{
 public:
-    CadHeader(CadDocument *document);
-    CadHeader(ACadVersion version);
-
-    std::string VersionString;
-
-    ACadVersion Version;
-
-    // "$ACADMAINTVER", 70
-    short maintenanceVersion;
-    // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
-    // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
-    // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
-    // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
-
-    bool DIMSAV;
-
-    // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
-    // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
+XYZ firstPoint; // 10，20，30
+XYZ direction; // 11, 21, 31
 };
 
-}// namespace dwg
+    } // namespace entities
+    
+} // namespace dwg

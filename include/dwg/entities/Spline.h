@@ -22,48 +22,44 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
+#include <dwg/entities/Entity.h>
 
-
-namespace dwg {
-class CadDocument;
-}// namespace dwg
-
+#include <dwg/enums/entities/SplineFlags.h>
+#include <dwg/enums/entities/KnotParameterization.h>
 
 namespace dwg {
+namespace entities {
 
-
-
-class LIBDWG_API CadHeader
+class Spline : public Entity
 {
-
 public:
-    CadHeader(CadDocument *document);
-    CadHeader(ACadVersion version);
+    Spline();
+    virtual ~Spline();
 
-    std::string VersionString;
+    XYZ normal;// 210, 220, 230
 
-    ACadVersion Version;
+    SplineFlags flags;// 70
 
-    // "$ACADMAINTVER", 70
-    short maintenanceVersion;
-    // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
-    // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
-    // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
-    // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
+    int degree;// 71
 
-    bool DIMSAV;
+    std::vector<double> knots;     // 72|40
+    std::vector<XYZ> controlPoints;// 73|10, 20, 30
 
-    // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
-    // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
+    std::vector<XYZ> fitPoints;    // 74|11, 21, 31
+
+    double knotTolerance;// 42
+    double controlPointTolerance;// 43
+    double fitTolerance;// 44
+
+    XYZ startTangent;// 12, 22, 32
+    XYZ endTangent;// 13, 23, 33
+
+    std::vector<double> weights; // 41
+
+
+    SplineFlags1 flags1;
+    KnotParameterization knotParameterization;
 };
 
+}// namespace entities
 }// namespace dwg
