@@ -25,14 +25,4 @@
  ******************************************************************************
  */
 
-#ifndef __LIBDWG_H__
-#define __LIBDWG_H__
-
-// version
-
-#include "dwg_entity.h"
-#include "dwg_macro.h"
-#include "dwg_table.h"
-#include "dwg_type.h"
-
-#endif /* __LIBDWG_H__ */
+#pragma once

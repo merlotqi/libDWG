@@ -27,18 +27,6 @@
 namespace dwg {
 namespace tables {
 
-/// Represents a line type complex element type.
-enum LinetypeShapeFlags : short
-{
-    /// None.
-    None = 0,
-    /// Text is rotated 0 degrees, otherwise it follows the segment.
-    RotationIsAbsolute = 1,
-    /// Complex shape code holds the index of the shape to be drawn.
-    Text = 2,
-    /// Complex shape code holds the index into the text area of the string to be drawn.
-    Shape = 4,
-};
 
 class LineType : public TableEntry
 {

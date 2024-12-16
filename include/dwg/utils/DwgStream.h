@@ -9,7 +9,6 @@
 
 
 namespace dwg {
-namespace utils {
 
 class EndianConverter;
 
@@ -132,7 +131,6 @@ public:
     OutputStream(std::istream *stream, bool createCopy, bool resetPosition);
 };
 
-}// namespace utils
 }// namespace dwg
 
 #endif// LIBDWG_STREAMIO_H

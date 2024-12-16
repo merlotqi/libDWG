@@ -20,8 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_CADDOCUMENT_H
-#define LIBDWG_CADDOCUMENT_H
+#pragma once
 
 #include <dwg/CadHeader.h>
 #include <dwg/CadSummaryInfo.h>
@@ -93,5 +92,3 @@ public:
 };
 
 }// namespace dwg
-
-#endif// LIBDWG_CADDOCUMENT_H

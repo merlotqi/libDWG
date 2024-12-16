@@ -28,37 +28,6 @@
 namespace dwg {
 namespace tables {
 
-/// Display Ucs icon
-enum UscIconType : short
-{
-    /// Off; No icon is displayed
-    Off,
-    /// On; the icon is displayed only in the lower-left corner of the current viewport or layout
-    OnLower,
-    /// Off; if the icon is turned on, it is displayed at the UCS origin, if possible
-    OffOrigin,
-    /// On; Displays the UCS icon at the origin, if possible.
-    OnOrigin
-};
-
-/// Default lighting type
-enum DefaultLightingType : short
-{
-    /// One distant light
-    OneDistantLight,
-    /// Two distant lights
-    TwoDistantLights,
-};
-
-enum GridFlags : short
-{
-    _0 = 0,
-    _1 = 1,
-    _2 = 2,
-    _3 = 4,
-    _4 = 8,
-};
-
 class VPort : public TableEntry
 {
 };

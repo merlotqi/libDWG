@@ -20,8 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_INAMEDCADOBJECT_H
-#define LIBDWG_INAMEDCADOBJECT_H
+#pragma once
 
 #include <dwg/utils/delegate.h>
 
@@ -39,5 +38,3 @@ public:
 };
 
 } // namespace dwg
-
-#endif // LIBDWG_INAMEDCADOBJECT_H

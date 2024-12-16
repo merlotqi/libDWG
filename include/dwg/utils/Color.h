@@ -27,8 +27,6 @@
 #include <vector>
 
 namespace dwg {
-namespace utils {
-
 
 class LIBDWG_API Color
 {

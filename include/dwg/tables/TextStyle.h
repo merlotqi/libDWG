@@ -28,35 +28,6 @@
 namespace dwg {
 namespace tables {
 
-/// Represent the font character formatting, such as italic, bold, or regular.
-enum FontFlags
-{
-    /// Regular.
-    Regular = 0,
-    /// Italic or oblique.
-    Italic = 1,
-    /// Bold.
-    Bold = 2
-};
-
-/// Standard layer flags (bit-coded values).
-enum StyleFlags
-{
-    /// Default
-    None = 0,
-    /// If set, this entry describes a shape
-    IsShape = 1,
-    /// Vertical text
-    VerticalText = 4,
-    /// If set, table entry is externally dependent on an xRef.
-    XrefDependent = 16,
-    /// If both this bit and bit 16 are set, the externally dependent xRef has
-    /// been successfully resolved.
-    XrefResolved = 32,
-    /// If set, the table entry was referenced by at least one entity in the
-    /// drawing the last time the drawing was edited.
-    Referenced = 64
-};
 
 class TextStyle : public TableEntry
 {

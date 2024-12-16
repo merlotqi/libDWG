@@ -27,26 +27,7 @@
 
 namespace dwg {
 namespace tables {
-/// Standard layer flags (bit-coded values).
-enum LayerFlags : short
-{
-    /// None
-    None = 0,
-    /// Layer is frozen; otherwise layer is thawed
-    Frozen = 1,
-    /// Layer is frozen by default in new viewports
-    FrozenNewViewports = 2,
-    /// Layer is locked
-    Locked = 4,
-    /// If set, table entry is externally dependent on an xRef
-    XrefDependent = 16,
-    /// If both this bit and bit 16 are set, the externally dependent xRef has
-    /// been successfully resolved
-    XrefResolved = 32,
-    /// If set, the table entry was referenced by at least one entity in the
-    /// drawing the last time the drawing was edited.
-    Referenced = 64
-};
+
 
 class Layer : public TableEntry
 {

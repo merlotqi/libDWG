@@ -6,7 +6,6 @@
 #include <dwg/exports.h>
 
 namespace dwg {
-namespace utils {
 
 class LIBDWG_API EndianConverter
 {
@@ -78,7 +77,6 @@ public:
     static std::unique_ptr<EndianConverter> Instance();
 };
 
-} // namespace utils
 } // namespace dwg
 
 #endif // LIBDWG_ENDIANCONVERTER_H

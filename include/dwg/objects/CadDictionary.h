@@ -20,30 +20,66 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_CADDICTIONARY_H
-#define LIBDWG_CADDICTIONARY_H
+#pragma once
+
+#include <vector>
+#include <string>
 
 namespace dwg {
 namespace objects {
 
-/// Duplicate record cloning flag (determines how to merge duplicate entries).
-enum DictionaryCloningFlags : short
+class CadDictionary : public NonGraphicalObject
 {
-    /// Not applicable.
-    NotApplicable = 0,
-    /// Keep existing.
-    KeepExisting = 1,
-    /// Use clone.
-    UseClone = 2,
-    /// External reference name.
-    XrefName = 3,
-    /// Name.
-    Name = 4,
-    /// Unmangle name.
-    UnmangleName = 5
+    std::map<std::string, NonGraphicalObject*> _entries;
+public:
+    static constexpr auto Root = "ROOT";
+    static constexpr auto AcadColor = "ACAD_COLOR";
+    static constexpr auto AcadGroup = "ACAD_GROUP";
+    static constexpr auto AcadLayout = "ACAD_LAYOUT";
+    static constexpr auto  AcadMaterial = "ACAD_MATERIAL";
+    static constexpr auto  AcadSortEnts = "ACAD_SORTENTS";
+	static constexpr auto  AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
+	static constexpr auto  AcadMLineStyle = "ACAD_MLINESTYLE";
+	static constexpr auto  AcadTableStyle = "ACAD_TABLESTYLE";
+    static constexpr auto  AcadPlotSettings = "ACAD_PLOTSETTINGS";
+    static constexpr auto  VariableDictionary = "AcDbVariableDictionary";
+    static constexpr auto  AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
+    static constexpr auto  AcadScaleList = "ACAD_SCALELIST";
+    static constexpr auto  AcadVisualStyle = "ACAD_VISUALSTYLE";
+    static constexpr auto  AcadFieldList = "ACAD_FIELDLIST";
+    static constexpr auto  AcadImageDict = "ACAD_IMAGE_DICT";
+
+    bool HardOwnerFlag;
+
+    DictionaryCloningFlags ClonningFlags;
+    std::vector<std::string> EntryName() const;
+    std::vector<unsigned long long> EntryHandles() const;
+
+    CadObject* operator[](const std::string& key);
+
+    static CadDictionary* CreateRoot();
+    static void CreateDefaultEntries(CadDictionary* root);
+
+public:
+    CadDictionary() {}
+    CadDictionary(const std::string& name)
+    {
+
+    }
+    void Add(const std::string& key, NonGraphicalObject* value);
+    void Add(NonGraphicalObject* value);
+    bool TryAdd(NonGraphicalObject* value) const;
+    bool ContainsKey(const std::string& key) const;
+    void Remove(const std::string& key, NonGraphicalObject*& item);
+    void Clear();
+
+    template<class T>
+    bool TryGetEntry(const std::string& name, T*& value)
+    {
+        
+    }
+
 };
 
 }// namespace objects
 }// namespace dwg
-
-#endif// LIBDWG_CADDICTIONARY_H

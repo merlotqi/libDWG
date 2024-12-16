@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_IHANDLEDCADOBJECT_H
-#define LIBDWG_IHANDLEDCADOBJECT_H
+#pragma once
+
 namespace dwg {
 
 class IHandledCadObject
@@ -33,5 +33,3 @@ public:
 };
 
 } // namespace dwg
-
-#endif // LIBDWG_IHANDLEDCADOBJECT_H
