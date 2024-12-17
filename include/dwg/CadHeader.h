@@ -54,111 +54,111 @@ public:
     ACadVersion Version;
 
     // "$ACADMAINTVER", 70
-    short maintenanceVersion;
+    short MaintenanceVersion;
     // "$DWGCODEPAGE", 3
     std::string CodePage; // "ANSI_1252"
     // "$LASTSAVEDBY", 3
     std::string LastSavedBy; // "libDWG"
     // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
+    bool AssociatedDimensions;
     // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
+    bool UpdateDimensionsWhileDragging;
 
     bool DIMSAV;
 
     // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
+    header::MeasurementUnits MeasurementUnits;
     // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
+    bool PolylineLineTypeGeneration;
     // "$ORTHOMODE", 70
-    bool orthoMode;
+    bool OrthoMode;
     // "$REGENMODE", 70
-    bool regenerationMode;
+    bool RegenerationMode;
     // "$FILLMODE", 70
-    bool fillMode;
+    bool FillMode;
     // "$QTEXTMODE", 70
-    bool quickTextMode;
+    bool QuickTextMode;
     // "$PSLTSCALE", 70
-    bool limitCheckingOn;
+    bool LimitCheckingOn;
     // "$BLIPMODE", 70
-    bool blipMode;
+    bool BlipMode;
     // "$USRTIMER", 70
-    bool userTimer;
+    bool UserTimer;
     // "$SKPOLY", 70
-    bool sketchPolylines;
+    bool SketchPolylines;
     // "$ANGDIR", 70
-    AngularDirection angularDirection;
+    AngularDirection AngularDirection;
     // "$SPLFRAME", 70
-    bool showSplineControlPoints;
+    bool ShowSplineControlPoints;
     // "$MIRRTEXT", 70
-    bool mirrorText;
+    bool MirrorText;
     // "$WORLDVIEW", 70
-    bool worldView;
+    bool WorldView;
     // "$TILEMODE", 70
-    bool showModelSpace;  
+    bool ShowModelSpace;  
     // "$PLIMCHECK", 70
-    bool paperSpaceLimitsChecking;
+    bool PaperSpaceLimitsChecking;
     // "$VISRETAIN", 70
-    bool retainXRefDependentVisibilitySettings;
+    bool RetainXRefDependentVisibilitySettings;
     // "$DISPSILH", 70
-    bool displaySilhouetteCurves;
+    bool DisplaySilhouetteCurves;
 
 
     bool CreateEllipseAsPolyline;
 
     // "$PROXYGRAPHICS", 70
-    bool proxyGraphics;
+    bool ProxyGraphics;
     // "$TREEDEPTH", 70
-    short spatialIndexMaxTreeDepth;
+    short SpatialIndexMaxTreeDepth;
     // "$LUNITS", 70
-    LinearUnitFormat linearUnitFormat;
+    LinearUnitFormat LinearUnitFormat;
     // "$LUPREC", 70
-    short linearUnitPrecision;
+    short LinearUnitPrecision;
     // "$AUNITS", 70
-    AngularUnitFormat angularUnit;
+    AngularUnitFormat AngularUnit;
     // "$AUPREC", 70
     short AngularUnitPrecision;
 
 
-    ObjectSnapMode objectSnapMode;
+    ObjectSnapMode ObjectSnapMode;
     // "$ATTMODE", 70
-    AttributeVisibilityMode attributeVisibility;
+    AttributeVisibilityMode AttributeVisibility;
     // "$PDMODE", 70
-    short ointDisplayMode;
+    short OintDisplayMode;
     // "$USERI1", 70
-    short userShort1;
+    short UserShort1;
     // "$USERI2", 70
-    short userShort2;
+    short UserShort2;
     // "$USERI3", 70
-    short userShort3;
+    short UserShort3;
     // "$USERI4", 70
-    short userShort4;
+    short UserShort4;
     // "$USERI5", 70
-    short userShort5;
+    short UserShort5;
     // "$SPLINESEGS", 70
     short NumberOfSplineSegments = 8;
     // "$SURFU", 70
-    short surfaceDensityU;
+    short SurfaceDensityU;
     // "$SURFV", 70
     short SurfaceDensityV;
     // "$SURFTYPE", 70
-    short surfaceType;
+    short SurfaceType;
     // "$SURFTAB1", 70
-    short surfaceMeshTabulationCount1;
+    short SurfaceMeshTabulationCount1;
     // "$SURFTAB2", 70
-    short surfaceMeshTabulationCount2;
+    short SurfaceMeshTabulationCount2;
     // "$SPLINETYPE", 70
-    SplineType splineType;
+    SplineType SplineType;
     // "$SHADEDGE", 70
-    ShadeEdgeType shadeEdgeType;
+    ShadeEdgeType ShadeEdgeType;
     // "$SHADEDIF", 70
-    short shadeDiffuseToAmbientPercentage;
+    short ShadeDiffuseToAmbientPercentage;
     // "$UNITMODE", 70
-    short unitMode;
+    short UnitMode;
     // "$MAXACTVP", 70
-    short maxViewportCount;
+    short MaxViewportCount;
     
-    short surfaceIsolineCount;
+    short SurfaceIsolineCount;
 
     // "$CMLJUST", 70
     VerticalAlignmentType CurrentMultilineJustification;

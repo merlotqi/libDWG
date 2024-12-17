@@ -32,109 +32,14 @@
 namespace dwg {
 namespace io {
 
-struct DwgLocalSectionMap
-{
-    int32_t Compression = 2;
-    bool IsEmpty;
-    uint64_t Offset;
-    uint64_t CompressedSize;
-    int32_t PageNumber;
-    uint64_t DecompressedSize;
-    int64_t Seeker;
-    int64_t Size;
-    uint64_t Checksum;
-    uint64_t CRC;
-    int64_t PageSize;
-    uint32_t ODA;
-    int32_t SectionMap;
 
-    DwgLocalSectionMap(int value = 0);
-};
 
-struct DwgSectionLocatorRecord
-{
-    int32_t Number;
-    int64_t Seeker;
-    int64_t Size;
 
-    DwgSectionLocatorRecord(int32_t number = 0, int64_t seeker = 0,
-                            int64_t size = 0);
-    bool IsInTheRecord(int32_t position) const;
-};
 
-struct DwgSectionDescriptor
-{
-    int64_t PageType;
-    std::string Name;
-    uint64_t CompressedSize;
-    int32_t PageCount;
-    uint64_t DecompressedSize;
-    int32_t Compressed;
-    int32_t SectionId;
-    int32_t Encrypted;
-    uint64_t HashCode;
-    uint64_t Encoding;
-    std::vector<DwgLocalSectionMap> LocalSections;
 
-    DwgSectionDescriptor(const std::string &name = std::string());
-};
 
-struct DwgFileHeader
-{
-public:
-    ACadVersion Version;
-    int64_t PreviewAddress;
-    int32_t AcadMaintenanceVersion;
-    CodePage DrawingCodePage;
 
-    DwgFileHeader();
-    DwgFileHeader(ACadVersion version);
 
-    static DwgFileHeader *CreateFileHeader(ACadVersion version);
-
-    virtual void AddSection(const std::string &name) = 0;
-    virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
-};
-
-struct DwgFileHeaderAC15 : DwgFileHeader
-{
-    static std::vector<unsigned char> EndSentinel;
-    std::map<int32_t, DwgSectionLocatorRecord> Records;
-    void AddSection(const std::string &name) override;
-    DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
-
-    DwgFileHeaderAC15();
-    DwgFileHeaderAC15(ACadVersion version);
-};
-
-struct DwgFileHeaderAC18 : DwgFileHeaderAC15
-{
-    uint8_t DwgVersion;
-    uint8_t AppReleaseVersion;
-    int64_t SummaryInfoAddr;
-    int64_t SecurityType;
-    int64_t VbaProjectAddr;
-    int32_t RootTreeNodeGap;
-    uint32_t GapArraySize;
-    uint32_t CRCSeed;
-    int32_t LastPageId;
-    int64_t LastSectionAddr;
-    int64_t SecondHeaderAddr;
-    uint32_t GapAmount;
-    uint32_t SectionAmount;
-    uint32_t SectionPageMapId;
-    int64_t PageMapAddress;
-    uint32_t SectionMapId;
-    uint32_t SectionArrayPageSize;
-    int32_t RigthGap;
-    int32_t LeftGap;
-    std::map<std::string, DwgSectionDescriptor> Descriptiors;
-
-    DwgFileHeaderAC18();
-    DwgFileHeaderAC18(ACadVersion version);
-    void AddSection(const std::string &name);
-    void AddSection(const DwgSectionDescriptor &descriptor);
-};
 
 
 struct Dwg21CompressedMetadata

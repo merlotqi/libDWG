@@ -22,22 +22,32 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgStreamWriterAC18.h>
+#include <string>
+#include <dwg/utils/CodePages.h>
+#include <vector>
 
 namespace dwg {
-namespace io {
 
-
-class DwgStreamWriterAC21 : public DwgStreamWriterAC18
+class Encoding
 {
+    CodePage _codePage;
 public:
-    DwgStreamWriterAC21(std::ostream* stream, Encoding encoding)
-        : DwgStreamWriterAC18(stream, encoding)
-    {}
+    Encoding(CodePage codePage);
+    virtual ~Encoding() = default;
 
-    void WriteVariableText(const std::string& value) override;
-    void WriteTextUnicode(const std::string& value) override;
+    std::vector<unsigned char> GetBytes(const std::string& str) const;
+    std::string GetString(const std::vector<unsigned char>& bytes) const;
+    std::string GetString(const unsigned char* bytes, size_t length) const;
+
+public:
+    static Encoding UTF8();
+    static Encoding Default();
+    static Encoding ASCII();
+    static Encoding Windows1252();
+    static Encoding GBK();
+    static Encoding GB18030();    
 };
 
-}
-}
+
+}// namespace dwg
+

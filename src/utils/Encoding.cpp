@@ -20,24 +20,73 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/writers/DwgStreamWriterAC18.h>
+#include <dwg/utils/Encoding.h>
+#include <iconv.h>
 
 namespace dwg {
-namespace io {
 
 
-class DwgStreamWriterAC21 : public DwgStreamWriterAC18
+Encoding::Encoding(CodePage codepage)
 {
-public:
-    DwgStreamWriterAC21(std::ostream* stream, Encoding encoding)
-        : DwgStreamWriterAC18(stream, encoding)
-    {}
+    _codePage = codePage;
+}
 
-    void WriteVariableText(const std::string& value) override;
-    void WriteTextUnicode(const std::string& value) override;
-};
+Encoding::~Encoding()
+{
 
 }
+
+std::vector<unsigned char> Encoding::GetBytes(const std::string& str) const
+{
+
 }
+
+std::string Encoding::GetString(const std::vector<unsigned char>& bytes) const
+{
+
+}
+
+std::string Encoding::GetString(const unsigned char* bytes, size_t length) const
+{
+
+}
+
+Encoding Encoding::UTF8()
+{
+    Encoding coding(Utf8);
+    return coding;
+}
+
+Encoding Encoding::Default()
+{
+    Encoding coding(Utf8);
+    return coding;
+}
+
+Encoding Encoding::ASCII()
+{
+    Encoding coding(Usascii);
+    return coding;
+}
+
+Encoding Encoding::Windows1252()
+{
+    Encoding coding(Windows1252);
+    return coding;
+}
+
+Encoding Encoding::GBK()
+{
+    Encoding coding(Gb2312);
+    return coding;
+}
+
+Encoding Encoding::GB18030();
+{
+    Encoding coding(Gb18030);
+    return coding;
+}
+
+
+}// namespace dwg
+
