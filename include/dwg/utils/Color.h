@@ -20,8 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_COLOR_H
-#define LIBDWG_COLOR_H
+#pragma once
 
 #include <dwg/exports.h>
 #include <vector>
@@ -30,7 +29,6 @@ namespace dwg {
 
 class LIBDWG_API Color
 {
-
     static const unsigned char indexRgb[][3];
 
     const int m_maxTrueColor = 0b0001'0000'0000'0000'0000'0000'0000;
@@ -41,6 +39,7 @@ class LIBDWG_API Color
     Color(unsigned int trueColor);
 
 public:
+    Color();
     Color(short index);
     Color(unsigned char r, unsigned char g, unsigned char b);
     Color(const std::vector<unsigned char> rgb);
@@ -66,7 +65,4 @@ public:
     friend bool operator!=(const Color &lhs, const Color &rhs);
 };
 
-}// namespace utils
 }// namespace dwg
-
-#endif// LIBDWG_COLOR_H

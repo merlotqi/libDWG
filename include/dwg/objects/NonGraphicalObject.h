@@ -32,8 +32,7 @@ namespace objects {
 class NonGraphicalObject : public CadObject, INamedCadObject
 {
 public:
-    
 };
 
-}
-}
+}// namespace objects
+}// namespace dwg

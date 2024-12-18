@@ -23,16 +23,40 @@
 #pragma once
 
 #include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
-#include <dwg/enums/units/AngularDirection.h>
-#include <dwg/enums/units/LinearUnitFormat.h>
-#include <dwg/enums/units/AngularUnitFormat.h>
-#include <dwg/enums/header/ObjectSnapMode.h>
-#include <dwg/enums/header/AttributeVisibilityMode.h>
-#include <dwg/enums/header/SplineType.h>
-#include <dwg/enums/header/ShadeEdgeType.h>
+#include <dwg/enums/LineWeightType.h>
 #include <dwg/enums/entities/VerticalAlignmentType.h>
+#include <dwg/enums/header/AttributeVisibilityMode.h>
+#include <dwg/enums/header/DimensionAssociation.h>
+#include <dwg/enums/header/EntityPlotStyleType.h>
+#include <dwg/enums/header/IndexCreationFlags.h>
+#include <dwg/enums/header/MeasurementUnits.h>
+#include <dwg/enums/header/ObjectSnapMode.h>
+#include <dwg/enums/header/ObjectSortingFlags.h>
+#include <dwg/enums/header/ShadeEdgeType.h>
+#include <dwg/enums/header/ShadowMode.h>
+#include <dwg/enums/header/SplineType.h>
+#include <dwg/enums/tables/ArcLengthSymbolPosition.h>
+#include <dwg/enums/tables/DimensionTextBackgroundFillMode.h>
+#include <dwg/enums/tables/DimensionTextHorizontalAlignment.h>
+#include <dwg/enums/tables/DimensionTextVerticalAlignment.h>
+#include <dwg/enums/tables/FractionFormat.h>
+#include <dwg/enums/tables/TextArrowFitType.h>
+#include <dwg/enums/tables/TextDirection.h>
+#include <dwg/enums/tables/TextMovement.h>
+#include <dwg/enums/tables/ToleranceAlignment.h>
+#include <dwg/enums/tables/ZeroHandling.h>
+#include <dwg/enums/units/AngularDirection.h>
+#include <dwg/enums/units/AngularUnitFormat.h>
+#include <dwg/enums/units/LinearUnitFormat.h>
+#include <dwg/enums/units/UnitsType.h>
+#include <dwg/exports.h>
+#include <dwg/utils/Color.h>
+#include <dwg/utils/Coordinate.h>
+#include <dwg/utils/DateTime.h>
+#include <dwg/utils/Timespan.h>
+
+#include <string>
+
 
 namespace dwg {
 class CadDocument;
@@ -42,7 +66,7 @@ class CadDocument;
 namespace dwg {
 namespace header {
 
-class LIBDWG_API CadHeader
+class CadHeader
 {
 
 public:
@@ -54,114 +78,114 @@ public:
     ACadVersion Version;
 
     // "$ACADMAINTVER", 70
-    short maintenanceVersion;
+    short MaintenanceVersion;
     // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
+    std::string CodePage;// "ANSI_1252"
     // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
+    std::string LastSavedBy;// "libDWG"
     // "$REQUIREDVERSIONS", 70
-    bool associatedDimensions;
+    bool AssociatedDimensions;
     // "$DIMSHO", 70
-    bool updateDimensionsWhileDragging;
+    bool UpdateDimensionsWhileDragging;
 
     bool DIMSAV;
 
     // "$MEASUREMENT", 70
-    header::MeasurementUnits measurementUnits;
+    MeasurementUnits MeasurementUnits;
     // "$PLINEGEN", 70
-    bool polylineLineTypeGeneration;
+    bool PolylineLineTypeGeneration;
     // "$ORTHOMODE", 70
-    bool orthoMode;
+    bool OrthoMode;
     // "$REGENMODE", 70
-    bool regenerationMode;
+    bool RegenerationMode;
     // "$FILLMODE", 70
-    bool fillMode;
+    bool FillMode;
     // "$QTEXTMODE", 70
-    bool quickTextMode;
+    bool QuickTextMode;
     // "$PSLTSCALE", 70
-    bool limitCheckingOn;
+    bool LimitCheckingOn;
     // "$BLIPMODE", 70
-    bool blipMode;
+    bool BlipMode;
     // "$USRTIMER", 70
-    bool userTimer;
+    bool UserTimer;
     // "$SKPOLY", 70
-    bool sketchPolylines;
+    bool SketchPolylines;
     // "$ANGDIR", 70
-    AngularDirection angularDirection;
+    units::AngularDirection AngularDirection;
     // "$SPLFRAME", 70
-    bool showSplineControlPoints;
+    bool ShowSplineControlPoints;
     // "$MIRRTEXT", 70
-    bool mirrorText;
+    bool MirrorText;
     // "$WORLDVIEW", 70
-    bool worldView;
+    bool WorldView;
     // "$TILEMODE", 70
-    bool showModelSpace;  
+    bool ShowModelSpace;
     // "$PLIMCHECK", 70
-    bool paperSpaceLimitsChecking;
+    bool PaperSpaceLimitsChecking;
     // "$VISRETAIN", 70
-    bool retainXRefDependentVisibilitySettings;
+    bool RetainXRefDependentVisibilitySettings;
     // "$DISPSILH", 70
-    bool displaySilhouetteCurves;
+    bool DisplaySilhouetteCurves;
 
 
     bool CreateEllipseAsPolyline;
 
     // "$PROXYGRAPHICS", 70
-    bool proxyGraphics;
+    bool ProxyGraphics;
     // "$TREEDEPTH", 70
-    short spatialIndexMaxTreeDepth;
+    short SpatialIndexMaxTreeDepth;
     // "$LUNITS", 70
-    LinearUnitFormat linearUnitFormat;
+    units::LinearUnitFormat LinearUnitFormat;
     // "$LUPREC", 70
-    short linearUnitPrecision;
+    short LinearUnitPrecision;
     // "$AUNITS", 70
-    AngularUnitFormat angularUnit;
+    units::AngularUnitFormat AngularUnit;
     // "$AUPREC", 70
     short AngularUnitPrecision;
 
 
-    ObjectSnapMode objectSnapMode;
+    ObjectSnapMode ObjectSnapMode;
     // "$ATTMODE", 70
-    AttributeVisibilityMode attributeVisibility;
+    AttributeVisibilityMode AttributeVisibility;
     // "$PDMODE", 70
-    short ointDisplayMode;
+    short OintDisplayMode;
     // "$USERI1", 70
-    short userShort1;
+    short UserShort1;
     // "$USERI2", 70
-    short userShort2;
+    short UserShort2;
     // "$USERI3", 70
-    short userShort3;
+    short UserShort3;
     // "$USERI4", 70
-    short userShort4;
+    short UserShort4;
     // "$USERI5", 70
-    short userShort5;
+    short UserShort5;
     // "$SPLINESEGS", 70
     short NumberOfSplineSegments = 8;
     // "$SURFU", 70
-    short surfaceDensityU;
+    short SurfaceDensityU;
     // "$SURFV", 70
     short SurfaceDensityV;
     // "$SURFTYPE", 70
-    short surfaceType;
+    short SurfaceType;
     // "$SURFTAB1", 70
-    short surfaceMeshTabulationCount1;
+    short SurfaceMeshTabulationCount1;
     // "$SURFTAB2", 70
-    short surfaceMeshTabulationCount2;
+    short SurfaceMeshTabulationCount2;
     // "$SPLINETYPE", 70
-    SplineType splineType;
+    SplineType SplineType;
     // "$SHADEDGE", 70
-    ShadeEdgeType shadeEdgeType;
+    ShadeEdgeType ShadeEdge;
     // "$SHADEDIF", 70
-    short shadeDiffuseToAmbientPercentage;
+    short ShadeDiffuseToAmbientPercentage;
     // "$UNITMODE", 70
-    short unitMode;
+    short UnitMode;
     // "$MAXACTVP", 70
-    short maxViewportCount;
-    
-    short surfaceIsolineCount;
+    short MaxViewportCount;
+
+    short SurfaceIsolineCount;
 
     // "$CMLJUST", 70
-    VerticalAlignmentType CurrentMultilineJustification;
+    entities::VerticalAlignmentType CurrentMultilineJustification;
 
     short TextQuality;
 
@@ -216,7 +240,7 @@ public:
     double ChamferLength;
     // "$CHAMFERD", 40
     double ChamferAngle;
-    
+
     double FacetResolution;
 
     // "$CMLSCALE", 40
@@ -226,7 +250,7 @@ public:
     // "$MENU", 1
     std::string MenuFileName = ".";
     // "$HANDSEED", 5
-    ulong HandleSeed = 0x0;
+    unsigned long long HandleSeed = 0x0;
     // "$TDCREATE", 40
     DateTime CreateDateTime;
 
@@ -237,15 +261,15 @@ public:
     // "$TDUUPDATE", 40
     DateTime UniversalUpdateDateTime;
     // "$TDINDWG", 40
-    TimeSpan TotalEditingTime;
+    Timespan TotalEditingTime;
     // "$TDUSRTIMER", 40
-    TimeSpan UserElapsedTimeSpan;
+    Timespan UserElapsedTimeSpan;
     // "$CECOLOR", 62
-    Color CurrentEntityColor = Color.ByLayer;
+    Color CurrentEntityColor = Color::ByLayer();
     // "$PSVPSCALE", 40
     double ViewportDefaultViewScaleFactor;
     // "$PINSBASE", 10, 20, 30
-    XYZ PaperSpaceInsertionBase = XYZ.Zero;
+    XYZ PaperSpaceInsertionBase = XYZ::Zero;
     // "$PEXTMIN", 10, 20, 30
     XYZ PaperSpaceExtMin;
     // "$PEXTMAX", 10, 20, 30
@@ -291,7 +315,7 @@ public:
     // "$UCSORGBACK", 10, 20, 30
     XYZ ModelSpaceOrthographicBackDOrigin;
     // "$INSBASE", 10, 20, 30
-    XYZ ModelSpaceInsertionBase = XYZ.Zero;
+    XYZ ModelSpaceInsertionBase = XYZ::Zero;
     // "$EXTMIN", 10, 20, 30
     XYZ ModelSpaceExtMin;
     // "$EXTMAX", 10, 20, 30
@@ -320,7 +344,7 @@ public:
     std::string DimensionBlockNameFirst;
     // "$DIMBLK2", 1
     std::string DimensionBlockNameSecon;
-    
+
 
     short StackedTextAlignment = 1;
     short StackedTextSizePercentage = 70;
@@ -329,7 +353,7 @@ public:
     // "$HYPERLINKBASE", 1
     std::string HyperLinkBase;
     // "$CELWEIGHT", 370
-    LineweightType CurrentEntityLineWeight = LineweightType.ByLayer;
+    LineweightType CurrentEntityLineWeight = LineweightType::ByLayer;
     // "$ENDCAPS", 280
     short EndCaps;
     // "$JOINSTYLE", 280
@@ -342,17 +366,16 @@ public:
     bool ExtendedNames = true;
     // "$PSTYLEMODE", 290
     short PlotStyleMode;
-	//[CadSystemVariable("$OLESTARTUP", 290
+    //[CadSystemVariable("$OLESTARTUP", 290
     bool LoadOLEObject;
     // "$INSUNITS", 70
-    UnitsType InsUnits = UnitsType.Unitless;
+    units::UnitsType InsUnits = units::UnitsType::Unitless;
     // "$CEPSNTYPE", 380
     EntityPlotStyleType CurrentEntityPlotStyle;
     // "$FINGERPRINTGUID", 2
-    std::string FingerPrintGuid { get; internal set; } = Guid.NewGuid().ToString();
-
+    std::string FingerPrintGuid;
     // "$VERSIONGUID", 2
-    std::string VersionGuid { get; internal set; } = Guid.NewGuid().ToString();
+    std::string VersionGuid;
 
     // "$SORTENTS", 280
     ObjectSortingFlags EntitySortingFlags;
@@ -393,7 +416,7 @@ public:
     double DraftMagnitudeSecondCrossSection;
     short SolidLoftedShape;
     char LoftedObjectNormals;
-    
+
     // "$LATITUDE", 40
     double Latitude = 37.7950;
     // "$LONGITUDE", 40
@@ -405,16 +428,19 @@ public:
 
     char DisplayLightGlyphs;
     // "$DWFFRAME", 280
-    char DwgUnderlayFramesVisibility;;
+    char DwgUnderlayFramesVisibility;
+
     // "$DGNFRAME", 280
-    char DgnUnderlayFramesVisibility;;
+    char DgnUnderlayFramesVisibility;
+
     // "$CSHADOW", 280
-    ShadowMode ShadowMode;;
+    ShadowMode ShadowMode;
+
     // "$SHADOWPLANELOCATION", 40
     double ShadowPlaneLocation;
 
     std::string StyleSheetName;
-    '
+
     // "$DIMTXSTY", true, 7
     std::string DimensionTextStyleName;
     // "$DIMSTYLE", true, 2
@@ -428,7 +454,7 @@ public:
     // "$DIMALT", 70
     bool DimensionAlternateUnitDimensioning;
     // "$DIMALTU", 70
-    LinearUnitFormat DimensionAlternateUnitFormat;
+    units::LinearUnitFormat DimensionAlternateUnitFormat;
     // "$DIMALTF", 40
     double DimensionAlternateUnitScaleFactor;
     // "$DIMEXO", 40
@@ -440,17 +466,17 @@ public:
     // "$DIMALTTD", 70
     short DimensionAlternateUnitToleranceDecimalPlaces;
     // "$DIMAUNIT", 70
-    AngularUnitFormat DimensionAngularUnit;
+    units::AngularUnitFormat DimensionAngularUnit;
     // "$DIMFRAC", 70
-    FractionFormat DimensionFractionFormat;
+    tables::FractionFormat DimensionFractionFormat;
     // "$DIMLUNIT", 70
-    LinearUnitFormat DimensionLinearUnitFormat;
+    units::LinearUnitFormat DimensionLinearUnitFormat;
     // "$DIMDSEP", 70
     char DimensionDecimalSeparator;
     // "$DIMTMOVE", 70
-    TextMovement DimensionTextMovement;
+    tables::TextMovement DimensionTextMovement;
     // "$DIMJUST", 70
-    DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment;
+    tables::DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment;
     // "$DIMSD1", 70
     bool DimensionSuppressFirstDimensionLine;
     // "$DIMSD2", 70
@@ -458,21 +484,21 @@ public:
     // "$DIMTOL", 70
     bool DimensionGenerateTolerances;
     // "$DIMTOLJ", 70
-    ToleranceAlignment DimensionToleranceAlignment;
+    tables::ToleranceAlignment DimensionToleranceAlignment;
     // "$DIMZIN", 70
-    ZeroHandling DimensionZeroHandling;
+    tables::ZeroHandling DimensionZeroHandling;
     // "$DIMTZIN", 70
-    ZeroHandling DimensionToleranceZeroHandling;
+    tables::ZeroHandling DimensionToleranceZeroHandling;
     // "$DIMFIT", 70
     short DimensionFit;
     // "$DIMALTZ", 70
-    ZeroHandling DimensionAlternateUnitZeroHandling;
+    tables::ZeroHandling DimensionAlternateUnitZeroHandling;
     // "$DIMALTTZ", 70
-    ZeroHandling DimensionAlternateUnitToleranceZeroHandling;
+    tables::ZeroHandling DimensionAlternateUnitToleranceZeroHandling;
     // "$DIMUPT", 70
     bool DimensionCursorUpdate;
     // "$DIMATFIT", 70
-    TextArrowFitType DimensionDimensionTextArrowFit;
+    tables::TextArrowFitType DimensionDimensionTextArrowFit;
     // "$DIMALTRND", 40
     double DimensionAlternateUnitRounding;
     // "$DIMAPOST", 1
@@ -480,9 +506,9 @@ public:
     // "$DIMASZ", 40
     double DimensionArrowSize;
     // "$DIMAZIN", 70
-    ZeroHandling DimensionAngularZeroHandling;
+    tables::ZeroHandling DimensionAngularZeroHandling;
     // "$DIMARCSYM", 70
-    ArcLengthSymbolPosition DimensionArcLengthSymbolPosition;
+    tables::ArcLengthSymbolPosition DimensionArcLengthSymbolPosition;
     // "$DIMSAH", 70
     bool DimensionSeparateArrowBlocks;
     // "$DIMCEN", 40
@@ -508,7 +534,7 @@ public:
     // "$DIMJOGANG", 40
     double DimensionJoggedRadiusDimensionTransverseSegmentAngle;
     // "$DIMTFILL", 70
-    DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode;
+    tables::DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode;
     // DxfReferenceType.Ignored, "$DIMTFILLCLR", 62
     Color DimensionTextBackgroundColor;
     // "$DIMGAP", 40
@@ -532,7 +558,7 @@ public:
     // "$DIMSOXD", 70
     bool DimensionSuppressOutsideExtensions;
     // "$DIMTAD", 70
-    DimensionTextVerticalAlignment DimensionTextVerticalAlignment;
+    tables::DimensionTextVerticalAlignment DimensionTextVerticalAlignment;
     // "$DIMUNIT", 70
     short DimensionUnit;
     // "$DIMTFAC", 40
@@ -554,7 +580,7 @@ public:
     // "$DIMTXT", 40
     double DimensionTextHeight;
     // "$DIMTXTDIRECTION", 70
-    TextDirection DimensionTextDirection;
+    tables::TextDirection DimensionTextDirection;
     // "$DIMALTMZF", 40
     double DimensionAltMzf;
     // "$DIMALTMZS", 6
@@ -570,16 +596,13 @@ public:
     // "$DIMLTEX2", 6
     std::string DimensionTex2 = "ByBlock";
 
-		//TODO: How header UCS work??
+    //TODO: How header UCS work??
     UCS ModelSpaceUcs;
 
-    UCS ModelSpaceUcsBase ;
-    UCS PaperSpaceUcs ;
+    UCS ModelSpaceUcsBase;
+    UCS PaperSpaceUcs;
 
-    UCS PaperSpaceUcsBase ;
-
-
-
+    UCS PaperSpaceUcsBase;
 };
 
 }// namespace header

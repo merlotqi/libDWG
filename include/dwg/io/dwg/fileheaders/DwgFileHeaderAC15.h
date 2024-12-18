@@ -23,6 +23,8 @@
 #pragma once
 
 #include <dwg/io/dwg/fileheaders/DwgFileHeader.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord.h>
+#include <map>
 
 namespace dwg {
 namespace io {
@@ -39,5 +41,5 @@ public:
     DwgFileHeaderAC15(ACadVersion version);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

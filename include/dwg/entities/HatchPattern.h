@@ -46,8 +46,8 @@ public:
         std::vector<double> dashLengths;
     };
 
-    std::string name; // 2
-    double angle; // 53
+    std::string name;// 2
+    double angle;    // 53
 
     double scale;
     std::vector<HatchPattern::Line> lines;

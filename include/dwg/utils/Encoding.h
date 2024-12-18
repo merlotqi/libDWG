@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <string>
 #include <dwg/utils/CodePages.h>
+#include <string>
 #include <vector>
 
 namespace dwg {
@@ -31,13 +31,14 @@ namespace dwg {
 class Encoding
 {
     CodePage _codePage;
+
 public:
     Encoding(CodePage codePage);
     virtual ~Encoding() = default;
 
-    std::vector<unsigned char> GetBytes(const std::string& str) const;
-    std::string GetString(const std::vector<unsigned char>& bytes) const;
-    std::string GetString(const unsigned char* bytes, size_t length) const;
+    std::vector<unsigned char> GetBytes(const std::string &str) const;
+    std::string GetString(const std::vector<unsigned char> &bytes) const;
+    std::string GetString(const unsigned char *bytes, size_t length) const;
 
 public:
     static Encoding UTF8();
@@ -45,9 +46,8 @@ public:
     static Encoding ASCII();
     static Encoding Windows1252();
     static Encoding GBK();
-    static Encoding GB18030();    
+    static Encoding GB18030();
 };
 
 
 }// namespace dwg
-

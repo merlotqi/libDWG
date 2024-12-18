@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 enum TextMirrorFlag : short
 {
     None = 0,

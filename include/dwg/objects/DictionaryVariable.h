@@ -31,10 +31,10 @@ class DictionaryVariable : NonGraphicalObject
 public:
     DictionaryVariable();
     ~DictionaryVariable();
-    
+
     std::string Value;
     int ObjectSchemaNumber;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

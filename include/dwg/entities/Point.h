@@ -27,12 +27,13 @@
 namespace dwg {
 namespace entities {
 
-class Point : public Entity {
-  public:
-  XYZ location; // 10, 20, 30
-  double thickness; // 39
-  XYZ normal; // 210, 220, 230
-  double rotation; // 50
+class Point : public Entity
+{
+public:
+    XYZ location;    // 10, 20, 30
+    double thickness;// 39
+    XYZ normal;      // 210, 220, 230
+    double rotation; // 50
 };
 
 }// namespace entities

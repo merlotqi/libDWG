@@ -32,10 +32,9 @@ class GradientColor
 {
 public:
     GradientColor();
-    double value;// 463
+    double value;      // 463
     utils::Color color;// 421
 };
 
 }// namespace entities
-
 }// namespace dwg

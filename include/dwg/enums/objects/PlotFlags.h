@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 /// Defines the plot settings flag.
 enum PlotFlags
 {

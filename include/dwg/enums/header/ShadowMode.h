@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Shadow mode for a 3D object
 enum ShadowMode : unsigned char
 {

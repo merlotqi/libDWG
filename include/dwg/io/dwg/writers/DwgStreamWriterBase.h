@@ -35,25 +35,31 @@ protected:
     Encoding _encoding;
 
 public:
-    DwgStreamWriterBase(std::ostream* stream, Encoding encoding) : OutputStream(stream)
+    DwgStreamWriterBase(std::ostream *stream, Encoding encoding)
+        : OutputStream(stream)
     {
         _encoding = encoding;
     }
 
-    static IDwgStreamWriter* GetStreamWriter(ACadVersion version, std::ostream* stream, Encoding encoding);
-    static IDwgStreamWriter* GetMergedWriter(ACadVersion version, std::ostream* stream, Encoding encoding);
+    static IDwgStreamWriter *GetStreamWriter(ACadVersion version,
+                                             std::ostream *stream,
+                                             Encoding encoding);
+    static IDwgStreamWriter *GetMergedWriter(ACadVersion version,
+                                             std::ostream *stream,
+                                             Encoding encoding);
     void Write(int value);
     virtual void WriteObjectType(short value);
     void WriteObjectType(ObjectType value);
     void WriteRawLong(long long value);
-    void WriteBytes(const std::vector<unsigned char>& arr) override;
-    void WriteBytes(const std::vector<unsigned char>& arr, size_t initialIndex, size_t length);
+    void WriteBytes(const std::vector<unsigned char> &arr) override;
+    void WriteBytes(const std::vector<unsigned char> &arr, size_t initialIndex,
+                    size_t length);
     void WriteBitShort(short value);
     void WriteBitDouble(double value);
     void WriteBitLong(int value);
     void WriteBitLongLong(long long value);
-    virtual void WriteVariableText(const std::string& value);
-    virtual void WriteTextUnicode(const std::string& value);
+    virtual void WriteVariableText(const std::string &value);
+    virtual void WriteTextUnicode(const std::string &value);
     void Write2Bits(unsigned char value);
     void WriteBit(bool value);
     void WriteByte(unsigned char value);
@@ -62,15 +68,16 @@ public:
     void Write8BitJulianDate(DateTime value);
     virtual void WriteCmColor(Color color);
     virtual void WriteEnColor(Color color, Transparency transparency);
-    virtual void WriteEnColor(Color color, Transparency transparency, bool isBookColor);
+    virtual void WriteEnColor(Color color, Transparency transparency,
+                              bool isBookColor);
     void Write2BitDouble(XY value);
     void Write3BitDouble(XYZ value);
     void Write2RawDouble(XY value);
     void WriteRawShort(short value);
     void WriteRawShort(ushort value);
     void WriteRawDouble(double value);
-    void HandleReference(IHandledCadObject* cadObject);
-    void HandleReference(DwgReferenceType type, IHandledCadObject* cadObject);
+    void HandleReference(IHandledCadObject *cadObject);
+    void HandleReference(DwgReferenceType type, IHandledCadObject *cadObject);
     void HandleReference(unsigned long long handle);
     void HandleReference(DwgReferenceType type, unsigned long long handle);
     void WriteSpearShift();
@@ -90,5 +97,5 @@ private:
     void write3Bits(unsigned char value);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

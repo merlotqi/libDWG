@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Default lighting type
 enum DefaultLightingType : short
 {

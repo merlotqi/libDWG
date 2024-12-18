@@ -25,49 +25,59 @@
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include <dwg/utils/Format.h>
+#include <dwg/version.h>
 
 namespace dwg {
 namespace io {
 
 class DwgAppInfoWriter : public DwgSectionIO
 {
-    IDwgStreamWriter* _writer;
+    IDwgStreamWriter *_writer;
     std::vector<unsigned char> _emptyArr;
 
 public:
     std::string SectionName() const { return DwgSectionDefinition::AppInfo; }
 
-    DwgAppInfoWriter(ACadVersion version, std::ostream* stream) : DwgSectionIO(version)
+    DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
+        : DwgSectionIO(version)
     {
         _emptyArr.resize(16);
         std::fill(_emptyArr, 0);
-        _writer = DwgStreamWriterBase::GetStreamWriter(version, stream, Encoding::Unicode);
+        _writer = DwgStreamWriterBase::GetStreamWriter(version, stream,
+                                                       Encoding::Unicode);
     }
 
     void Write()
     {
-        std::string version;  // Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        std::string version = LIBDWG_VERSION;
         //UInt32	4	class_version (default: 3)
-		_writer->WriteInt(3);
-		//String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
-		_writer->WriteTextUnicode("AppInfoDataList");
-		//UInt32	4	num strings (default: 3)
-		_writer->WriteInt(3);
-		//Byte[]	16	Version data(checksum, ODA writes zeroes)
-		_writer->WriteBytes(_emptyArr);
-		//String	2 + 2 * n + 2	Version
-		_writer->WriteTextUnicode(version);
-		//Byte[]	16	Comment data(checksum, ODA writes zeroes)
-		_writer->WriteBytes(_emptyArr);
-		//String	2 + 2 * n + 2	Comment
-		_writer->WriteTextUnicode("This is a comment from libDWG");
-		//Byte[]	16	Product data(checksum, ODA writes zeroes)
-		_writer->WriteBytes(_emptyArr);
-		//String	2 + 2 * n + 2	Product
-		_writer->WriteTextUnicode($"<ProductInformation name =\"libDWG\" build_version=\"{version}\" registry_version=\"{version}\" install_id_string=\"libDWG\" registry_localeID=\"1033\"/>");
+        _writer->WriteInt(3);
+        //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
+        _writer->WriteTextUnicode("AppInfoDataList");
+        //UInt32	4	num strings (default: 3)
+        _writer->WriteInt(3);
+        //Byte[]	16	Version data(checksum, ODA writes zeroes)
+        _writer->WriteBytes(_emptyArr);
+        //String	2 + 2 * n + 2	Version
+        _writer->WriteTextUnicode(version);
+        //Byte[]	16	Comment data(checksum, ODA writes zeroes)
+        _writer->WriteBytes(_emptyArr);
+        //String	2 + 2 * n + 2	Comment
+        _writer->WriteTextUnicode("This is a comment from libDWG");
+        //Byte[]	16	Product data(checksum, ODA writes zeroes)
+        _writer->WriteBytes(_emptyArr);
+        //String	2 + 2 * n + 2	Product
+        std::string productInfo = str_format(
+                "<ProductInformation name =\"libDWG\" build_version=\"%s\" "
+                "registry_version=\"%s\" install_id_string=\"libDWG\" "
+                "registry_localeID=\"1033\"/>",
+                version.c_str(), version.c_str());
+
+        _writer->WriteTextUnicode(productInfo);
     }
 };
 
 
-}
-}
+}// namespace io
+}// namespace dwg

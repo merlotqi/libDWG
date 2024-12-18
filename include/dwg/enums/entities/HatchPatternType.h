@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Hatch pattern fill type.
 enum HatchPatternType
 {

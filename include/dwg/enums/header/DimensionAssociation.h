@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Controls the associativity of dimension objects.
 enum DimensionAssociation : short
 {

@@ -24,44 +24,42 @@
 
 #include <dwg/entities/TextEntity.h>
 
-#include <dwg/enums/entities/TextVerticalAlignmentType.h>
 #include <dwg/enums/entities/AttributeFlags.h>
+#include <dwg/enums/entities/TextVerticalAlignmentType.h>
+
 
 #include <dwg/entities/MText.h>
 
-namespace dwg
+namespace dwg {
+namespace entities {
+
+enum AttributeType
 {
-    namespace entities
-    {
-        
-        	 enum AttributeType
-	{
-		SingleLine = 1,
-		MultiLine = 2,
-		ConstantMultiLine = 4,
-	};
+    SingleLine = 1,
+    MultiLine = 2,
+    ConstantMultiLine = 4,
+};
 class AttributeBase : public TextEntity
 {
 public:
-    TextVerticalAlignmentType verticalAlignment; // 74
-    unsigned char version; // 280
+    TextVerticalAlignmentType verticalAlignment;// 74
+    unsigned char version;                      // 280
 
-    std::string tag;// 2
-    AttributeFlags flags; // 70
+    std::string tag;     // 2
+    AttributeFlags flags;// 70
 
-    AttributeType attributeType; // 71
-    
-    public:
+    AttributeType attributeType;// 71
+
+public:
     bool IsReallyLocked() const;
     void IsReallyLocked(bool value);
 
     MText mtext() const;
-    void mtext(const MText& value);
+    void mtext(const MText &value);
 
-    protected:
-    void matchAttributeProperties(const AttributeBase& other);
+protected:
+    void matchAttributeProperties(const AttributeBase &other);
 };
 
-    } // namespace entities
-    
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

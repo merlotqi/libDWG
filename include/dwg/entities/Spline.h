@@ -24,8 +24,8 @@
 
 #include <dwg/entities/Entity.h>
 
-#include <dwg/enums/entities/SplineFlags.h>
 #include <dwg/enums/entities/KnotParameterization.h>
+#include <dwg/enums/entities/SplineFlags.h>
 
 namespace dwg {
 namespace entities {
@@ -45,16 +45,16 @@ public:
     std::vector<double> knots;     // 72|40
     std::vector<XYZ> controlPoints;// 73|10, 20, 30
 
-    std::vector<XYZ> fitPoints;    // 74|11, 21, 31
+    std::vector<XYZ> fitPoints;// 74|11, 21, 31
 
-    double knotTolerance;// 42
+    double knotTolerance;        // 42
     double controlPointTolerance;// 43
-    double fitTolerance;// 44
+    double fitTolerance;         // 44
 
     XYZ startTangent;// 12, 22, 32
-    XYZ endTangent;// 13, 23, 33
+    XYZ endTangent;  // 13, 23, 33
 
-    std::vector<double> weights; // 41
+    std::vector<double> weights;// 41
 
 
     SplineFlags1 flags1;

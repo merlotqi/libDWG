@@ -41,18 +41,15 @@ namespace tables {
 class TableEntry : public CadObject, INamedCadObject
 {
 protected:
-    std::string m_Name;
     TableEntry();
 
 public:
+    StandardFlags Flags;
+    std::string Name;
+
     TableEntry(const std::string &name);
 
     std::string SubclassMarker() const;
-
-    virtual std::string Name() const;
-    void Name(const std::string name);
-    StandardFlags Flags() const;
-    void Flags(StandardFlags flags);
 };
 
 
@@ -68,6 +65,28 @@ public:
     {
         if (m_entries.find(entry.Name()) != m_entries.end()) return;
         m_entries[entry.Name()] = entry;
+    }
+
+    T Remove(const std::string &name) {}
+
+    bool Contains(const std::string &key) {}
+
+    bool TryGetValue(const std::string &key, T &item) {}
+
+    void CreateDefaultEntries() {}
+
+protected:
+    void add(const std::string &key, const T &item)
+    {
+        m_entries.insert({key, item});
+        item.Owner = this;
+    }
+
+    void addHandlePrefix(const T &item)
+    {
+        item.Owner = this;
+        std::string key = str_format("%llu:%s", item.Handle, item.Name);
+        m_entries.insert({key, item});
     }
 };
 

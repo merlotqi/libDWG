@@ -22,77 +22,71 @@
 
 #pragma once
 
-#include <dwg/utils/Color.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/utils/Color.h>
 
 
-#include <dwg/enums/entities/HatchStyleType.h>
 #include <dwg/enums/entities/HatchPatternType.h>
+#include <dwg/enums/entities/HatchStyleType.h>
 
-#include <dwg/entities/HatchPattern.h>
-#include <dwg/entities/HatchGradientPattern.h>
+
 #include <dwg/entities/HatchBoundaryPath.h>
+#include <dwg/entities/HatchGradientPattern.h>
+#include <dwg/entities/HatchPattern.h>
+
 
 namespace dwg {
 namespace entities {
 
 
-class Hatch : public Entity{
+class Hatch : public Entity
+{
 public:
-Hatch();
-~Hatch();
+    Hatch();
+    ~Hatch();
 
-double elevation; // 30
-XYZ normal; // 210, 220, 230
+    double elevation;// 30
+    XYZ normal;      // 210, 220, 230
 
-HatchPattern pattern; // 2, name
-bool isSolid; // 70
-bool isAssociative; // 71
-HatchStyleType style; // 75
-HatchPatternType patternType; // 76
+    HatchPattern pattern;        // 2, name
+    bool isSolid;                // 70
+    bool isAssociative;          // 71
+    HatchStyleType style;        // 75
+    HatchPatternType patternType;// 76
 
-// 52
-double patternAngle() const
-{
-    return pattern.angle;
-}
-void patternAngle(double angle)
-{
-    pattern.angle = angle;
-}
+    // 52
+    double patternAngle() const { return pattern.angle; }
+    void patternAngle(double angle) { pattern.angle = angle; }
 
-// 41
-double patternScale() const {return pattern.scale;}
-void patternScale(double scale) {pattern.scale = scale;}
+    // 41
+    double patternScale() const { return pattern.scale; }
+    void patternScale(double scale) { pattern.scale = scale; }
 
-		//73	For MPolygon, boundary annotation flag:
-		//0 = boundary is not an annotated boundary
-		//1 = boundary is an annotated boundary
+    //73	For MPolygon, boundary annotation flag:
+    //0 = boundary is not an annotated boundary
+    //1 = boundary is an annotated boundary
 
-    		//78	Number of pattern definition lines
-		//varies
-		//Pattern line data.Repeats number of times specified by code 78. See Pattern Data
+    //78	Number of pattern definition lines
+    //varies
+    //Pattern line data.Repeats number of times specified by code 78. See Pattern Data
 
-// 77
-bool isDouble;
+    // 77
+    bool isDouble;
 
-double pixelSize; //47
+    double pixelSize;//47
 
-		//11	For MPolygon, offset vector
+    //11	For MPolygon, offset vector
 
-		//99	For MPolygon, number of degenerate boundary paths(loops), where a degenerate boundary path is a border that is ignored by the hatch
+    //99	For MPolygon, number of degenerate boundary paths(loops), where a degenerate boundary path is a border that is ignored by the hatch
 
-std::vector<XY> seedPoints; // 98 count, 10, 20
+    std::vector<XY> seedPoints;// 98 count, 10, 20
 
-// 470, name
-HatchGradientPattern gradientColor;
+    // 470, name
+    HatchGradientPattern gradientColor;
 
 
-std::vector<HatchBoundaryPath> paths;// 91 count
-
+    std::vector<HatchBoundaryPath> paths;// 91 count
 };
-
-
 
 
 }// namespace entities

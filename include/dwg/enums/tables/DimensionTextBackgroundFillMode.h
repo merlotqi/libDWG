@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Represents the dimension text background color.
 enum DimensionTextBackgroundFillMode : short
 {

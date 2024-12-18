@@ -27,7 +27,6 @@ namespace objects {
 
 class MLineStyle
 {
-
 };
 
 }// namespace objects

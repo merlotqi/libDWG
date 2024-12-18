@@ -27,9 +27,8 @@
 namespace dwg {
 namespace io {
 
-class DwgSectionLocatorRecord
+struct DwgSectionLocatorRecord
 {
-public:
     int32_t Number;
     int64_t Seeker;
     int64_t Size;
@@ -39,6 +38,5 @@ public:
     bool IsInTheRecord(int32_t position) const;
 };
 
-}
-}
-
+}// namespace io
+}// namespace dwg

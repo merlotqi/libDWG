@@ -24,8 +24,8 @@
 
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/IPolyline.h>
-#include <dwg/enums/entities/LwPolylineFlags.h>
 #include <dwg/entities/Vertex.h>
+#include <dwg/enums/entities/LwPolylineFlags.h>
 
 namespace dwg {
 namespace entities {
@@ -36,18 +36,17 @@ public:
     LwPolyline();
     virtual ~LwPolyline();
 
-    LwPolylineFlags flags; // 70
-    double constantWidth; // 43
-    double elevation; // 38
-    double thickness; // 39
-    XYZ normal; // 210, 220, 230
-    std::vector<Vertex> vertices; // 90
+    LwPolylineFlags flags;       // 70
+    double constantWidth;        // 43
+    double elevation;            // 38
+    double thickness;            // 39
+    XYZ normal;                  // 210, 220, 230
+    std::vector<Vertex> vertices;// 90
 
     bool isClosed() const;
     void isClosed(bool value);
 
-    std::vector<Entity*> explode() const;
-
+    std::vector<Entity *> explode() const;
 };
 
 }// namespace entities

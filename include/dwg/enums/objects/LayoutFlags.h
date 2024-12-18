@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 /// Layout flags
 enum LayoutFlags : short
 {

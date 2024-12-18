@@ -30,6 +30,17 @@ namespace tables {
 
 class AppId : public TableEntry
 {
+public:
+    static constexpr auto DefaultName = "libDWG";
+
+    ObjectType ObjectType() const override { return ObjectType::APPID; }
+    std::string ObjectName() const { return DxfFileToken::TableAppId; }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::ApplicationId;
+    }
+
+    AppId(const std::string &name) : TableEntry(name) {}
 };
 
 class AppIdsTable : public Table<AppId>

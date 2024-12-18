@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 /// Plot paper units
 enum PlotPaperUnits
 {

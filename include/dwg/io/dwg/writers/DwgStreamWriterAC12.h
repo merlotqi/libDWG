@@ -31,10 +31,11 @@ namespace io {
 class DwgStreamWriterAC12 : public DwgStreamWriterBase
 {
 public:
-    DwgStreamWriterAC12(std::ostream* stream, Encoding encoding)
+    DwgStreamWriterAC12(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterBase(stream, encoding)
-    {}
+    {
+    }
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

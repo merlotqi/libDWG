@@ -28,15 +28,14 @@
 namespace dwg {
 namespace io {
 
-
 class DwgFileHeaderAC21 : public DwgFileHeaderAC18
 {
 public:
-	Dwg21CompressedMetadata CompressedMetadata;
+    Dwg21CompressedMetadata CompressedMetadata;
 
-	DwgFileHeaderAC21();
-	DwgFileHeaderAC21(ACadVersion version);
-}
+    DwgFileHeaderAC21();
+    DwgFileHeaderAC21(ACadVersion version);
+};
 
-}
-}
+}// namespace io
+}// namespace dwg

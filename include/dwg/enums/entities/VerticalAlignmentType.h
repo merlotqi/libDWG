@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Text vertical justification.
 enum VerticalAlignmentType : short
 {

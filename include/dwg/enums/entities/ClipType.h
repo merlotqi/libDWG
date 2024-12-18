@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 enum ClipType : short
 {
     Rectangular = 1,

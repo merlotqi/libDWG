@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 ///Attribute flags.
 enum AttributeFlags
 {

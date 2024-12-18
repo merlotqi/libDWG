@@ -31,9 +31,11 @@ class DwgObjectWriter : public DwgSectionIO
     std::map<unsigned long long, long long> _map;
 
 public:
-    DwgObjectWriter(std::ostream* stream, CadDocument* document, Encoding encoding, bool writeXRecords = true)
+    DwgObjectWriter(std::ostream *stream, CadDocument *document,
+                    Encoding encoding, bool writeXRecords = true)
         : DwgSectionIO(document->Header().Version)
-    {}
+    {
+    }
 
     void Write();
 
@@ -46,20 +48,20 @@ private:
     void writeEntries(Table<T> table);
 
     void writeBlockEntities();
-    void writeAppId(AppId* app);
-    void writeBlockRecord(BlockRecord* blkRecord);
-    void writeBlockHeader(BlockRecord* record);
-    void writeBlockBegin(Block* block);
-    void writeBlockEnd(BlockEnd* blkEnd);
-    void writeLayer(Layer* layer);
-    void writeLineType(LineType* ltype);
-    void writeTextStyle(TextStyle* style);
-    void writeUCS(UCS* ucs);
-    void writeView(View* view);
-    void writeDimensionStyle(DimensionStyle* dimStyle);
-    void writeVPort(VPort* vport);
-    void writeEntity(Entity* entity);
-    void writeArc(Arc* arc);
+    void writeAppId(AppId *app);
+    void writeBlockRecord(BlockRecord *blkRecord);
+    void writeBlockHeader(BlockRecord *record);
+    void writeBlockBegin(Block *block);
+    void writeBlockEnd(BlockEnd *blkEnd);
+    void writeLayer(Layer *layer);
+    void writeLineType(LineType *ltype);
+    void writeTextStyle(TextStyle *style);
+    void writeUCS(UCS *ucs);
+    void writeView(View *view);
+    void writeDimensionStyle(DimensionStyle *dimStyle);
+    void writeVPort(VPort *vport);
+    void writeEntity(Entity *entity);
+    void writeArc(Arc *arc);
     void writeAttribute(AttributeEntity att);
     void writeAttDefinition(AttributeDefinition attdef);
     void writeCommonAttData(AttributeBase att);
@@ -125,5 +127,5 @@ private:
     void writeXRecord(XRecord xrecord);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

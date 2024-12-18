@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Bitmask flags to set the various object sorting types.
 enum ObjectSortingFlags : unsigned char
 {

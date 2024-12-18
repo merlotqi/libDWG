@@ -31,13 +31,14 @@ namespace io {
 class DwgStreamWriterAC15 : public DwgStreamWriterAC12
 {
 public:
-    DwgStreamWriterAC15(std::ostream* stream, Encoding encoding)
+    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC12(stream, encoding)
-    {}
+    {
+    }
 
     void WriteBitExtrusion(XYZ normal) override;
     void WriteBitThickness(double thickness) override;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

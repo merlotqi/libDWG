@@ -29,7 +29,7 @@ namespace dwg {
 class INamedCadObject
 {
 public:
-    INamedCadObject()          = default;
+    INamedCadObject() = default;
     virtual ~INamedCadObject() = default;
 
     std::string getName() const;
@@ -37,4 +37,4 @@ public:
     Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 };
 
-} // namespace dwg
+}// namespace dwg

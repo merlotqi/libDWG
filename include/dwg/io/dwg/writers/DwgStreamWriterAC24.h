@@ -31,12 +31,13 @@ namespace io {
 class DwgStreamWriterAC24 : public DwgStreamWriterAC21
 {
 public:
-    DwgStreamWriterAC24(std::ostream* stream, Encoding encoding)
+    DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC21(stream, encoding)
-    {}
+    {
+    }
 
     void WriteObjectType(short value) override;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

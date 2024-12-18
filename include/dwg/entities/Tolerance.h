@@ -28,22 +28,21 @@
 namespace dwg {
 namespace entities {
 
-class Tolerance : public Entity {
+class Tolerance : public Entity
+{
 public:
     Tolerance();
     virtual ~Tolerance();
 
-tables::DimensionStyle* style; // 3, name
+    tables::DimensionStyle *style;// 3, name
 
-XYZ insertionPoint; // 10, 20, 30
+    XYZ insertionPoint;// 10, 20, 30
 
-XYZ direction; // 11, 21, 31
+    XYZ direction;// 11, 21, 31
 
-XYZ normal; // 210, 220, 230
+    XYZ normal;// 210, 220, 230
 
-std::string text; // 1
-
-
+    std::string text;// 1
 };
 
 }// namespace entities

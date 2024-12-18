@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/io/dwg/fileheaders/DwgFileHeader.h>
 #include <dwg/enums/ACadVersion.h>
 #include <dwg/io/CadWriterBase.h>
 #include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeader.h>
 
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace dwg {
 namespace io {
 
-class DwgWriter : public CadWriterBase<CadWriterConfiguration> {
+class DwgWriter : public CadWriterBase<CadWriterConfiguration>
+{
 private:
     ACadVersion _version;
     DwgFileHeader *_fileHeader;
@@ -71,46 +72,45 @@ public:
         _fileHeaderWriter->writeFile();
 
         m_stream->flush();
-        if (m_configuration->CloseStream()) {
-            m_stream->close();
-        }
+        if (m_configuration->CloseStream()) { m_stream->close(); }
     }
 
 private:
     void getFileHeaderWriter()
     {
-        switch (m_document->getHeader().Version) {
-        case ACadVersion::MC0_0:
-        case ACadVersion::AC1_2:
-        case ACadVersion::AC1_4:
-        case ACadVersion::AC1_50:
-        case ACadVersion::AC2_10:
-        case ACadVersion::AC1002:
-        case ACadVersion::AC1003:
-        case ACadVersion::AC1004:
-        case ACadVersion::AC1006:
-        case ACadVersion::AC1009:
-        case ACadVersion::AC1012:
-            throw new std::runtime_error("");
-        case ACadVersion::AC1014:
-        case ACadVersion::AC1015:
-            _fileHeaderWriter =
-                new DwgFileHeaderWriterAC15(m_stream, m_document);
-            break;
-        case ACadVersion::AC1018:
-            _fileHeaderWriter =
-                new DwgFileHeaderWriterAC18(m_stream, m_document);
-            break;
-        case ACadVersion::AC1021:
-            throw new std::runtime_error("");
-        case ACadVersion::AC1024:
-        case ACadVersion::AC1027:
-        case ACadVersion::AC1032:
-            _fileHeaderWriter =
-                new DwgFileHeaderWriterAC18(m_stream, m_document);
-            break;
-        default:
-            throw new std::runtime_error("");
+        switch (m_document->getHeader().Version)
+        {
+            case ACadVersion::MC0_0:
+            case ACadVersion::AC1_2:
+            case ACadVersion::AC1_4:
+            case ACadVersion::AC1_50:
+            case ACadVersion::AC2_10:
+            case ACadVersion::AC1002:
+            case ACadVersion::AC1003:
+            case ACadVersion::AC1004:
+            case ACadVersion::AC1006:
+            case ACadVersion::AC1009:
+            case ACadVersion::AC1012:
+                throw new std::runtime_error("");
+            case ACadVersion::AC1014:
+            case ACadVersion::AC1015:
+                _fileHeaderWriter =
+                        new DwgFileHeaderWriterAC15(m_stream, m_document);
+                break;
+            case ACadVersion::AC1018:
+                _fileHeaderWriter =
+                        new DwgFileHeaderWriterAC18(m_stream, m_document);
+                break;
+            case ACadVersion::AC1021:
+                throw new std::runtime_error("");
+            case ACadVersion::AC1024:
+            case ACadVersion::AC1027:
+            case ACadVersion::AC1032:
+                _fileHeaderWriter =
+                        new DwgFileHeaderWriterAC18(m_stream, m_document);
+                break;
+            default:
+                throw new std::runtime_error("");
         };
     }
 
@@ -120,28 +120,30 @@ private:
 
     void writeSummaryInfo()
     {
-        std::ostringstream* stream = new std::ostringstream();
-        IDwgStreamWriter* writer = DwgStreamWriterBase::GetStreamWriter(_version, stream);
+        std::ostringstream *stream = new std::ostringstream();
+        IDwgStreamWriter *writer =
+                DwgStreamWriterBase::GetStreamWriter(_version, stream);
         CadSummaryInfo info = m_document->getSummaryInfo();
         writer->WriteTextUnicode(info.getTitle());
 
-        _fileHeaderWriter->addSection(DwgSectionDefinition::SummaryInfo, stream, false, 0x100);
+        _fileHeaderWriter->addSection(DwgSectionDefinition::SummaryInfo, stream,
+                                      false, 0x100);
     }
 
     void writePreview()
     {
-        std::ostringstream* stream = new std::ostringstream();
+        std::ostringstream *stream = new std::ostringstream();
         // previewWriter;
-        _fileHeaderWriter->addSection(DwgSectionDefinition::Preview, stream, false, 0x400);
+        _fileHeaderWriter->addSection(DwgSectionDefinition::Preview, stream,
+                                      false, 0x400);
     }
 
     void writeAppInfo()
     {
-        if(_fileHeader->Version < ACadVersion::AC1018)
-        return;
+        if (_fileHeader->Version < ACadVersion::AC1018) return;
 
-        std::ostringstream* stream = new std::ostringstream();
-        DwgAppInfoWriter* writer = new DwgAppInfoWriter(_version, stream);
+        std::ostringstream *stream = new std::ostringstream();
+        DwgAppInfoWriter *writer = new DwgAppInfoWriter(_version, stream);
     }
 
     void writeFileDepList();

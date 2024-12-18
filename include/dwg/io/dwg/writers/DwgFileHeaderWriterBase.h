@@ -29,99 +29,92 @@ namespace io {
 
 class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 {
-		abstract int HandleSectionOffset { get; }
+protected:
+    ACadVersion _version;
+    Encoding _encoding;
+    std::ostream *_stream;
+    CadDocument *_document;
 
-		 abstract int _fileHeaderSize { get; }
+    virtual int HandleSectionOffset() const = 0;
+    virtual int _fileHeaderSize() const = 0;
 
-		 DwgFileHeader _fileHeader { get; }
+public:
+    DwgFileHeaderWriterBase(std::ostream *stream, Encoding encoding,
+                            CadDocument *model)
+    {
+        assert(stream);
+        assert(model);
+        _document = model;
+        _stream = stream;
+        _version = model->Header.Version;
+        _encoding = encoding;
+    }
 
-		 ACadVersion _version;
+    virtual void AddSection(const std::string name, std::ostringstream *stream,
+                            bool isCompressed, int decompsize = 0x7400) = 0;
+    virtual void WriteFile() = 0;
 
-		 Encoding _encoding;
+    unsigned short getFileCodePage()
+    {
+        unsigned short codePage = _document->Header.CodePage;
+        if (codePage < 1) { return 30; }
+        else { return codePage; }
+    }
 
-		 Stream _stream;
+    void applyMask(std::vector<unsigned char> &buffer, int offset, int length)
+    {
+        std::vector<unsigned char> bytes =
+                LittleEndianConverter::Instance->GetBytes(0x4164536B ^
+                                                          _stream->tellp());
+        int diff = offset + length;
+        while (offset < diff)
+        {
+            for (int i = 0; i < 4; i++) { buffer[offset + i] ^= bytes[i]; }
 
-		 CadDocument _document;
+            offset += 4;
+        }
+    }
 
-		 DwgFileHeaderWriterBase(Stream stream, Encoding encoding, CadDocument model)
-		{
-			if (!stream.CanSeek || !stream.CanWrite)
-			{
-				throw new ArgumentException();
-			}
+    bool checkEmptyBytes(const std::vector<unsigned char> &buffer,
+                         unsigned long long offset,
+                         unsigned long long spearBytes) const
+    {
+        bool result = true;
+        unsigned long long num = offset + spearBytes;
 
-			this._document = model;
-			this._stream = stream;
-			this._version = model.Header.Version;
-			this._encoding = encoding;
-		}
+        for (unsigned long long i = offset; i < num; i++)
+        {
+            if (buffer[i] != 0)
+            {
+                result = false;
+                break;
+            }
+        }
 
-		 abstract void AddSection(string name, MemoryStream stream, bool isCompressed, int decompsize = 0x7400);
+        return result;
+    }
 
-		 abstract void WriteFile();
+    void writeMagicNumber()
+    {
+        for (int i = 0; i < (int) (_stream->tellp() % 0x20); i++)
+        {
+            unsigned char b = DwgCheckSumCalculator::MagicSequence[i];
+            _stream->write(reinterpret_cast<char *>(&b), sizeof(unsigned char));
+        }
+    }
 
-		 ushort getFileCodePage()
-		{
-			ushort codePage = (ushort)CadUtils.GetCodeIndex(CadUtils.GetCodePage(_document.Header.CodePage));
-			if (codePage < 1)
-			{
-				return 30;
-			}
-			else
-			{
-				return codePage;
-			}
-		}
-
-		 void applyMask(byte[] buffer, int offset, int length)
-		{
-			byte[] bytes = LittleEndianConverter.Instance.GetBytes(0x4164536B ^ (int)this._stream.Position);
-			int diff = offset + length;
-			while (offset < diff)
-			{
-				for (int i = 0; i < 4; i++)
-				{
-					buffer[offset + i] ^= bytes[i];
-				}
-
-				offset += 4;
-			}
-		}
-
-		 bool checkEmptyBytes(byte[] buffer, ulong offset, ulong spearBytes)
-		{
-			bool result = true;
-			ulong num = offset + spearBytes;
-
-			for (ulong i = offset; i < num; i++)
-			{
-				if (buffer[i] != 0)
-				{
-					result = false;
-					break;
-				}
-			}
-
-			return result;
-		}
-
-		 void writeMagicNumber()
-		{
-			for (int i = 0; i < (int)(this._stream.Position % 0x20); i++)
-			{
-				this._stream.WriteByte(DwgCheckSumCalculator.MagicSequence[i]);
-			}
-		}
-
-		 void applyMagicSequence(MemoryStream stream)
-		{
-			byte[] buffer = stream.GetBuffer();
-			for (int i = 0; i < (int)stream.Length; i++)
-			{
-				buffer[i] ^= DwgCheckSumCalculator.MagicSequence[i];
-			}
-		}
+    void applyMagicSequence(std::ostringstream *stream)
+    {
+        std::string buffer = stream->str();
+        for (auto &byte: buffer)
+        {
+            byte ^= DwgCheckSumCalculator::MagicSequence[i];
+        }
+        stream->str("");
+        stream->clear();
+        *stream << buffer;
+    }
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

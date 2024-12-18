@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 enum ColumnType : short
 {
     NoColumns,

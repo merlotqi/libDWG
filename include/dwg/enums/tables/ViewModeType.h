@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 enum ViewModeType
 {
     /// Off

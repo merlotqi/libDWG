@@ -62,5 +62,4 @@ public:
 };
 
 }// namespace entities
-
 }// namespace dwg

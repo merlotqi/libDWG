@@ -22,12 +22,14 @@
 
 #pragma once
 
-#include <math.h>
 #include <dwg/Coordinate.h>
+#include <math.h>
+
 
 namespace dwg {
 
-class MathUtils {
+class MathUtils
+{
 public:
     static constexpr double RadToDegFactor = (180.0 / M_PI);
     static constexpr double DegToRadFactor = (M_PI / 180.0);
@@ -47,4 +49,4 @@ public:
                               double &radius);
 };
 
-} // namespace dwg
+}// namespace dwg

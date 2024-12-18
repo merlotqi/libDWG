@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 enum ScaledType
 {
     ScaledToFit = 0,// Scaled to Fit

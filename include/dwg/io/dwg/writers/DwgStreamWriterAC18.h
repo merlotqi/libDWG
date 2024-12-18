@@ -31,14 +31,16 @@ namespace io {
 class DwgStreamWriterAC18 : public DwgStreamWriterAC15
 {
 public:
-    DwgStreamWriterAC15(std::ostream* stream, Encoding encoding)
+    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC15(stream, encoding)
-    {}
+    {
+    }
 
     void WriteCmColor(Color value) override;
     void WriteEnColor(Color color, Transparency transparency) override;
-    void WriteEnColor(Color color, Transparency transparency, bool isBookColor) override;
+    void WriteEnColor(Color color, Transparency transparency,
+                      bool isBookColor) override;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

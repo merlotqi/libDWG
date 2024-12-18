@@ -22,10 +22,25 @@
 
 #pragma once
 
+#include <dwg/IHandledCadObject.h>
+#include <dwg/enums/ObjectType.h>
+#include <string>
+
 namespace dwg {
 
-class CadObject
+class CadObject : public IHandledCadObject
 {
+public:
+    virtual ObjectType ObjectType() const = 0;
+    virtual std::string ObjectName() const = 0;
+    virtual std::string SubclassMarker() const = 0;
+    virtual unsigned long long Handle() const = 0;
+
+
+    IHandledCadObject *Owner;// handle 330
+
+protected:
+    void Handle(unsigned long long value);
 };
 
 

@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Represents the text direction (left-to-right or right-to-left).
 enum TextDirection : unsigned char
 {

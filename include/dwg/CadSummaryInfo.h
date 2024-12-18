@@ -75,4 +75,4 @@ public:
     void setProperties(const std::map<std::string, std::string> &value);
 };
 
-}
+}// namespace dwg

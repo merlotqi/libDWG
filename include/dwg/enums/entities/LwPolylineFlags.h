@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Polyline flag (bit-coded)
 enum LwPolylineFlags
 {

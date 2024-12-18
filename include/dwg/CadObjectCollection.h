@@ -30,24 +30,19 @@ template<class T>
 class CadObjectCollection : IObservableCadCollection
 {
 protected:
-    std::set<T*> _entries;
-    CadObject* m_Owner;
+    std::set<T *> _entries;
+    CadObject *m_Owner;
+
 public:
-    CadObjectCollection(CadObject* owner)
+    CadObjectCollection(CadObject *owner) { m_Owner = owner; }
+
+    void Add(T *item)
     {
-        m_Owner = owner;
-    }
+        if (!item) throw new std::invalid_argument("");
 
-    void Add(T* item)
-    {
-        if(!item)
-            throw new std::invalid_argument("");
+        if (item->Owner() != nullptr) throw new std::invalid_argument("");
 
-        if(item->Owner() != nullptr)
-            throw new std::invalid_argument("");
-
-        if(_entries.contains(item))
-            throw new std::invalid_argument("");
+        if (_entries.contains(item)) throw new std::invalid_argument("");
 
         _entries.insert(item);
         item->Owner(m_Owner);
@@ -55,11 +50,7 @@ public:
         OnAdd(item);
     }
 
-    void Remove(T* item)
-    {
-        
-    }
-
+    void Remove(T *item) {}
 };
 
-}
+}// namespace dwg

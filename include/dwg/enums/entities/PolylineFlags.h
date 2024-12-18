@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Defines the polyline flags.
 enum PolylineFlags
 {

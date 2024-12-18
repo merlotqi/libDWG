@@ -23,37 +23,37 @@
 
 #pragma once
 
+#include <dwg/entities/AttributeEntity.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/tables/BlockRecord.h>
-#include <dwg/entities/AttributeEntity.h>
 
 namespace dwg {
 namespace entities {
 
 class Insert : Entity
 {
-    public:
+public:
     // name 2
-tables::BlockRecord* block;
+    tables::BlockRecord *block;
 
-XYZ insertPoint; // 10, 20, 30
+    XYZ insertPoint;// 10, 20, 30
 
-double XScale; // 41
-double YScale; // 42
-double ZScale; // 43
+    double XScale;// 41
+    double YScale;// 42
+    double ZScale;// 43
 
-double rotation; // 50
-XYZ normal; // 210, 220, 230
+    double rotation;// 50
+    XYZ normal;     // 210, 220, 230
 
-unsigned short columnCount; // 70
-unsigned short rowCount; // 71
+    unsigned short columnCount;// 70
+    unsigned short rowCount;   // 71
 
-double columnSpacing; // 44
-double rowSpacing; // 45
+    double columnSpacing;// 44
+    double rowSpacing;   // 45
 
-bool hasAttributes; // 66
+    bool hasAttributes;// 66
 
-SeqendCollection<AttributeEntity> attributes;
+    SeqendCollection<AttributeEntity> attributes;
 };
 
 

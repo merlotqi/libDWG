@@ -29,29 +29,33 @@ namespace io {
 
 class DwgmMergedStreamWriterAC14 : public DwgMergedStreamWriter
 {
-	public DwgmMergedStreamWriterAC14(std::ostream* stream, IDwgStreamWriter* main, IDwgStreamWriter* handle)
-		: DwgMergedStreamWriter(stream, main, main, handle)
-	{
-	}
+public
+    DwgmMergedStreamWriterAC14(std::ostream *stream, IDwgStreamWriter *main,
+                               IDwgStreamWriter *handle)
+        : DwgMergedStreamWriter(stream, main, main, handle)
+    {
+    }
 
-	 void WriteSpearShift() override
-	{
-		int pos = (int)this.Main.PositionInBits;
+    void WriteSpearShift() override
+    {
+        int pos = (int) this.Main.PositionInBits;
 
-		if (this._savedPosition)
-		{
-			this.Main.WriteSpearShift();
-			this.Main.SetPositionInBits(this.PositionInBits);
-			this.Main.WriteRawLong(pos);
-			this.Main.WriteShiftValue();
-			this.Main.SetPositionInBits(pos);
-		}
+        if (this._savedPosition)
+        {
+            this.Main.WriteSpearShift();
+            this.Main.SetPositionInBits(this.PositionInBits);
+            this.Main.WriteRawLong(pos);
+            this.Main.WriteShiftValue();
+            this.Main.SetPositionInBits(pos);
+        }
 
-		this.HandleWriter.WriteSpearShift();
-		this.Main.WriteBytes(((MemoryStream)this.HandleWriter.Stream).GetBuffer(), 0, (int)this.HandleWriter.Stream.Length);
-		this.Main.WriteSpearShift();
-	}
+        this.HandleWriter.WriteSpearShift();
+        this.Main.WriteBytes(
+                ((MemoryStream) this.HandleWriter.Stream).GetBuffer(), 0,
+                (int) this.HandleWriter.Stream.Length);
+        this.Main.WriteSpearShift();
+    }
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

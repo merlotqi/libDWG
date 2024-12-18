@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Display Ucs icon
 enum UscIconType : short
 {

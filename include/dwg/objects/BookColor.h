@@ -25,7 +25,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 class BookColor
 {
 };

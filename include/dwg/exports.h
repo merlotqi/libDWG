@@ -38,4 +38,4 @@
 #define LIBDWG_API __attribute__((visibility("default")))
 #endif
 
-#endif // LIBDWG_EXPORTS_H
+#endif// LIBDWG_EXPORTS_H

@@ -25,24 +25,26 @@
 namespace dwg {
 namespace entities {
 
-class Vertex {};
-
-
-class Vertex2D : public Vertex {
-    
+class Vertex
+{
 };
 
-class Vertex3D : public Vertex {
-    
+
+class Vertex2D : public Vertex
+{
 };
 
-class VertexFaceMesh : public Vertex {
-    
+class Vertex3D : public Vertex
+{
 };
 
-class VertexFaceRecord : public Vertex {
-    
+class VertexFaceMesh : public Vertex
+{
 };
 
-} // namespace Entities
-} // namespace dwg
+class VertexFaceRecord : public Vertex
+{
+};
+
+}// namespace entities
+}// namespace dwg

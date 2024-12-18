@@ -34,12 +34,12 @@ struct PaperMargin
 
     PaperMargin(double left, double bottom, double right, double top)
     {
-		Left = left;
-		Bottom = bottom;
-		Right = right;
-		Top = top;
+        Left = left;
+        Bottom = bottom;
+        Right = right;
+        Top = top;
     }
 };
 
-}
-}
+}// namespace objects
+}// namespace dwg

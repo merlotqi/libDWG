@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Controls the arc length symbol position in an arc length dimension.
 enum ArcLengthSymbolPosition : short
 {

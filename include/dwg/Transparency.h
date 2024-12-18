@@ -24,7 +24,8 @@
 
 namespace dwg {
 
-class Transparency {
+class Transparency
+{
     short m_value;
 
 public:
@@ -41,4 +42,4 @@ public:
     static Transparency Opaque();
 };
 
-} // namespace dwg
+}// namespace dwg

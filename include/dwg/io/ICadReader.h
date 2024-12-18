@@ -20,66 +20,26 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/CadDocument.h>
-#include <dwg/CadHander.h>
-#include <dwg/utils/StreamIO.h>
+#pragma once
 
+#include <dwg/CadDocument.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/CadReaderConfiguration.h>
+#include <dwg/utils/DwgStream.h>
 #include <type_traits>
 
 namespace dwg {
 namespace io {
 
-class ICadReader {
+class ICadReader
+{
 public:
     ICadReader() = default;
     virtual ~ICadReader() = default;
-    virtual CadDocument* Read() = 0;
-    virtual CadHander& ReadHeader() = 0;
+    virtual CadDocument *Read() = 0;
+    virtual header::CadHeader &ReadHeader() = 0;
 };
 
-class CadReaderConfiguration
-{
-    bool m_failsafe;
-    bool m_keepUnknownEntities;
-    bool m_keepUnknownNonGraphicalObjects;
 
-public:
-    CadReaderConfiguration()
-    {
-        m_failsafe = true;
-        m_keepUnknownEntities = false;
-        m_keepUnknownNonGraphicalObjects = false;
-    }
-    virtual ~CadReaderConfiguration() = default;
-
-    bool Failsafe() const;
-    void Failsafe(bool value);
-
-    bool KeepUnknownEntities() const;
-    void KeepUnknownEntities(bool value);
-
-    bool KeepUnknownNonGraphicalObjects() const;
-    void KeepUnknownNonGraphicalObjects(bool value);
-};
-
-template<class T>
-class CadReaderBase : public ICadReader
-{
-    static_assert(std::is_base_of_v<CadReaderConfiguration, T>, "";)
-
-public:
-    virtual ~CadReaderBase();
-
-protected:
-    CadReaderBase() = default;
-    CadReaderBase(const std::string& filename);
-    CadReaderBase(std::ifstream* stream);
-
-protected:
-    T* m_configuration = nullptr;
-    CadDocument* m_document;
-    InputStream* m_fileStream;
-};
-
-} // namespace io
-} // namespace dwg
+}// namespace io
+}// namespace dwg

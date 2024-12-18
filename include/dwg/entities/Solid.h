@@ -34,12 +34,12 @@ public:
     virtual ~Solid();
 
     XYZ firstCorner; // 10,20,30
-    XYZ secondCorner; // 11,21,31
+    XYZ secondCorner;// 11,21,31
     XYZ thirdCorner; // 12,22,32
-    XYZ fourthCorner; // 13,23,33
+    XYZ fourthCorner;// 13,23,33
 
-    double thickness; // 39
-    XYZ normal; // 210,220,230
+    double thickness;// 39
+    XYZ normal;      // 210,220,230
 };
 
 }// namespace entities

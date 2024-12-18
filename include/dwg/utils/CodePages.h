@@ -22,8 +22,7 @@
 
 #pragma once
 
-namespace dwg
-{
+namespace dwg {
 
 
 /// \brief Code page <seealso cref="Encoding"/>.
@@ -198,4 +197,4 @@ enum CodePage
     Utf8 = 65001,                 //Unicode (UTF-8)
 };
 
-};
+};// namespace dwg

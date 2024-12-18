@@ -30,14 +30,13 @@ namespace entities {
 class Line : public Entity
 {
 public:
-Line();
-~Line();
+    Line();
+    ~Line();
 
-double thickness; // 39
-XYZ normal; // 210, 220, 230
-XYZ startPoint; // 10, 20, 30
-XYZ endPoint; // 11, 21, 31
-
+    double thickness;// 39
+    XYZ normal;      // 210, 220, 230
+    XYZ startPoint;  // 10, 20, 30
+    XYZ endPoint;    // 11, 21, 31
 };
 
 }// namespace entities

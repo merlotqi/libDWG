@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// How dimension text and arrows are arranged when space is not sufficient to place both within the extension lines.
 enum TextArrowFitType : unsigned char
 {

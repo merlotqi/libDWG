@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// viewport status flags
 enum ViewportStatusFlags
 {

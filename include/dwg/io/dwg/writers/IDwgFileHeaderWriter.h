@@ -22,13 +22,14 @@
 
 #pragma once
 
-#include <string>
 #include <iostream>
+#include <string>
 
 namespace dwg {
 namespace io {
-    
-class IDwgFileHeaderWriter {
+
+class IDwgFileHeaderWriter
+{
 public:
     IDwgFileHeaderWriter() = default;
     virtual ~IDwgFileHeaderWriter() = default;
@@ -38,5 +39,5 @@ public:
     virtual void writeFile() = 0;
 };
 
-} // namespace io
-} // namespace dwg
+}// namespace io
+}// namespace dwg

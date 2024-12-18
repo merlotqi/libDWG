@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Controls the placement of dimension text.
 enum DimensionTextVerticalAlignment
 {

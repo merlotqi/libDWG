@@ -24,29 +24,25 @@
 
 #include <dwg/entities/Entity.h>
 
-namespace dwg
+namespace dwg {
+namespace entities {
+
+
+class Ellipse : Entity
 {
-    namespace entities
-    {
-        
+public:
+    Ellipse();
 
-    class Ellipse : Entity
-    {
-        public:
-        Ellipse();
+    double thickness;// 39
+    XYZ normal;      // 210, 220, 230
 
-        double thickness; // 39
-        XYZ normal; // 210, 220, 230
+    XYZ center;           // 10, 20, 30
+    XYZ endPoint;         // 11, 21, 31
+    double radiusRatio;   // 40
+    double startParameter;// 41
+    double endParameter;  // 42
 
-        XYZ center; // 10, 20, 30
-        XYZ endPoint; // 11, 21, 31
-        double radiusRatio; // 40
-        double startParameter; // 41
-        double endParameter; // 42
-
-        double rotation() const;
-        
-    };
-    } // namespace entities
-    
-} // namespace dwg
+    double rotation() const;
+};
+}// namespace entities
+}// namespace dwg

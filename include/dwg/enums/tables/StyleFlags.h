@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Standard layer flags (bit-coded values).
 enum StyleFlags
 {

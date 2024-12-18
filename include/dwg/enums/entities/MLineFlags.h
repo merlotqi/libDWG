@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Flags (bit-coded values)
 enum MLineFlags
 {

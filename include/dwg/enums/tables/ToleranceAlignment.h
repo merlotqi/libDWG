@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Tolerance alignment.
 enum ToleranceAlignment : unsigned char
 {

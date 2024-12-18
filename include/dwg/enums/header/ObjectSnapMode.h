@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Object snap mode AcDb::OsnapMask
 enum ObjectSnapMode : unsigned short
 {

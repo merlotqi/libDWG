@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Represents a background fill flags
 enum BackgroundFillFlags : unsigned char
 {

@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Defines the vertex flags.
 enum VertexFlags
 {

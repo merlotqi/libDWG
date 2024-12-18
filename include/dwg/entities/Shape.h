@@ -28,20 +28,20 @@
 namespace dwg {
 namespace entities {
 
-class Shape : public Entity {
-  public:
-  double thickness; // 39
-  XYZ insertionPoint; // 10, 20, 30
-  double size; // 40
+class Shape : public Entity
+{
+public:
+    double thickness;  // 39
+    XYZ insertionPoint;// 10, 20, 30
+    double size;       // 40
 
-    tables::TextStyle* textStyle; // name 2
+    tables::TextStyle *textStyle;// name 2
 
-    double rotation; // 50
-    double relativeXScale; // 41
-    double obliqueAngle; // 51
+    double rotation;      // 50
+    double relativeXScale;// 41
+    double obliqueAngle;  // 51
 
-    XYZ normal; // 210, 220, 230
-
+    XYZ normal;// 210, 220, 230
 };
 
 }// namespace entities

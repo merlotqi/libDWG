@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Standard entry flags (bit-coded values).
 enum EntryFlags
 {

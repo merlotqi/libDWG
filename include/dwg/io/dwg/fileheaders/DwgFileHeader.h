@@ -22,7 +22,11 @@
 
 #pragma once
 
+#include <cstdint>
 #include <dwg/enums/ACadVersion.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor.h>
+#include <dwg/utils/CodePages.h>
+#include <string>
 
 namespace dwg {
 namespace io {
@@ -44,5 +48,5 @@ public:
     virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

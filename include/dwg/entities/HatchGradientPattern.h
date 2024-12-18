@@ -24,29 +24,27 @@
 
 #include <dwg/entities/GradientColor.h>
 
-#include <vector>
 #include <string>
+#include <vector>
 
 
-namespace dwg
-{
-    namespace entities   
-    {
-        
+namespace dwg {
+namespace entities {
+
 class HatchGradientPattern
 {
 public:
-    bool enabled; // 450
-    int reserved; // 451
-    double angle; // 460
-    double shift; // 461
-    bool isSignleColorGradient; // 452
-    double colorTint; // 462
+    bool enabled;              // 450
+    int reserved;              // 451
+    double angle;              // 460
+    double shift;              // 461
+    bool isSignleColorGradient;// 452
+    double colorTint;          // 462
 
-    std::vector<GradientColor> colors; // 453
-    std::string name; // 470
+    std::vector<GradientColor> colors;// 453
+    std::string name;                 // 470
 };
 
 
-    } // namespace entities  
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

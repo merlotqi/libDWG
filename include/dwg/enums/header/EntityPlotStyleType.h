@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Plot style type of new objects
 enum EntityPlotStyleType : short
 {

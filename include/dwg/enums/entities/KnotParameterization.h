@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Knot parameterization
 enum KnotParameterization : unsigned short
 {

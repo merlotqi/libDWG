@@ -23,20 +23,15 @@
 #pragma once
 
 
-
 #include <dwg/entities/AttributeBase.h>
 
-namespace dwg
+namespace dwg {
+namespace entities {
+
+class AttributeEntity : public AttributeBase
 {
-    namespace entities
-    {
-        
-        class AttributeEntity : public AttributeBase
-        {
 public:
+};
 
-        };
-
-    } // namespace entities
-    
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

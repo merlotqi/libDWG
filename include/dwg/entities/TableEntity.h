@@ -2,9 +2,11 @@
 namespace dwg {
 namespace Entities {
 
-class TableEntity : public Insert {
+class TableEntity : public Insert
+{
 public:
-    enum CellStyleTypeType {
+    enum CellStyleTypeType
+    {
         Cell = 1,
         Row,
         Column,
@@ -12,18 +14,21 @@ public:
         Table,
     };
 
-    enum BorderType : short {
+    enum BorderType : short
+    {
         Single = 1,
         Double = 2,
     };
 
-    enum BreakFlowDirection {
+    enum BreakFlowDirection
+    {
         Right = 1,
         Vertical,
         Left,
     };
 
-    enum BreakOptionFlags {
+    enum BreakOptionFlags
+    {
         None,
         EnableBreaks = 1,
         RepeatTopLabels = 2,
@@ -32,11 +37,12 @@ public:
         AllowManualHeights = 16,
     };
 
-    class Row {
+    class Row
+    {
         double m_height;
         int m_customData;
     };
 };
 
-} // namespace Entities
-} // namespace dwg
+}// namespace Entities
+}// namespace dwg

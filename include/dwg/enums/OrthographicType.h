@@ -23,7 +23,7 @@
 #pragma once
 
 namespace dwg {
-    
+
 /// Orthographic type
 enum OrthographicType
 {

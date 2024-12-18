@@ -33,8 +33,8 @@ public:
     IObservableCadCollection() = default;
     virtual ~IObservableCadCollection() = default;
 
-    Delegate<CadObject*> OnAdd;
-    Delegate<CadObject*> OnRemove;
+    Delegate<CadObject *> OnAdd;
+    Delegate<CadObject *> OnRemove;
 };
 
-}
+}// namespace dwg

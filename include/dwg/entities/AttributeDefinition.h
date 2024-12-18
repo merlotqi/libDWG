@@ -23,20 +23,16 @@
 #pragma once
 
 
-
 #include <dwg/entities/AttributeBase.h>
 
-namespace dwg
-{
-    namespace entities
-    {
-        
-        class AttributeDefinition : public AttributeBase
-        {
-public:
-std::string Prompt; // 3
-        };
+namespace dwg {
+namespace entities {
 
-    } // namespace entities
-    
-} // namespace dwg
+class AttributeDefinition : public AttributeBase
+{
+public:
+    std::string Prompt;// 3
+};
+
+}// namespace entities
+}// namespace dwg

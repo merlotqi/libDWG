@@ -22,13 +22,14 @@
 
 #pragma once
 
+#include <cstdint>
+
 namespace dwg {
 namespace io {
 
-class DwgLocalSectionMap
+struct DwgLocalSectionMap
 {
 public:
-
     int32_t Compression = 2;
     bool IsEmpty;
     uint64_t Offset;
@@ -43,8 +44,8 @@ public:
     uint32_t ODA;
     int32_t SectionMap;
 
-    DwgLocalSectionMap(int value = 0);
+    DwgLocalSectionMap(int value = 0) : SectionMap(value) {}
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

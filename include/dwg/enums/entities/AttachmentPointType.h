@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Attachment point for Multiline text.
 enum AttachmentPointType : short
 {

@@ -30,14 +30,14 @@ namespace entities {
 
 class Face3D : public Entity
 {
-    public:
+public:
     Face3D();
     XYZ firstCorner; // 10, 20, 30
-    XYZ secondCorner; // 11, 21, 31
+    XYZ secondCorner;// 11, 21, 31
     XYZ thirdCorner; // 12, 22, 32
-    XYZ fourthCorner; // 13, 23, 33
+    XYZ fourthCorner;// 13, 23, 33
 
-    InvisibleEdgeFlags flags; // 70
+    InvisibleEdgeFlags flags;// 70
 };
 
 }// namespace entities

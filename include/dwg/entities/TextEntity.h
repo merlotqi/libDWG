@@ -22,12 +22,14 @@
 
 #pragma once
 
-#include <dwg/entities/IText.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/entities/IText.h>
 
-#include <dwg/enums/entities/TextMirrorFlag.h>
+
 #include <dwg/enums/entities/TextHorizontalAlignment.h>
+#include <dwg/enums/entities/TextMirrorFlag.h>
 #include <dwg/enums/entities/TextVerticalAlignmentType.h>
+
 
 namespace dwg {
 namespace entities {
@@ -36,35 +38,32 @@ namespace entities {
 class TextEntity : public Entity, IText
 {
 public:
-TextEntity();
-virtual ~TextEntity();
+    TextEntity();
+    virtual ~TextEntity();
 
-double thickness; // 39 
-XYZ insertPoint; //10, 20, 30
-double height; // 40
+    double thickness;// 39
+    XYZ insertPoint; //10, 20, 30
+    double height;   // 40
 
-// 1
-std::string value() const;
-void setValue(const std::string& value);
+    // 1
+    std::string value() const;
+    void setValue(const std::string &value);
 
-double rotation; // 50
+    double rotation;// 50
 
-double widthFactor; // 41, optional
-double obliqueAngle; // 51
+    double widthFactor; // 41, optional
+    double obliqueAngle;// 51
 
-// 7 name
-TextEntity* style() const;
-void setStyle(TextEntity* style);
+    // 7 name
+    TextEntity *style() const;
+    void setStyle(TextEntity *style);
 
 
-TextMirrorFlag mirror; // 71
-TextHorizontalAlignment horizontalAlignment; // 72
-XYZ alignmentPoint; // 11, 21, 31
-XYZ normal; //210, 220, 230
-TextVerticalAlignmentType verticalAlignment; // 73
-
- 
-
+    TextMirrorFlag mirror;                      // 71
+    TextHorizontalAlignment horizontalAlignment;// 72
+    XYZ alignmentPoint;                         // 11, 21, 31
+    XYZ normal;                                 //210, 220, 230
+    TextVerticalAlignmentType verticalAlignment;// 73
 };
 
 

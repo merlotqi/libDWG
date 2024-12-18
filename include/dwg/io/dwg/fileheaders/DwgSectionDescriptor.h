@@ -22,23 +22,22 @@
 
 #pragma once
 
+#include <cstdint>
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap.h>
 #include <string>
 #include <vector>
-#include <cstdint>
-#include <dwg/io/dwg/fileheaers/DwgLocalSectionMap.h>
 
 namespace dwg {
 namespace io {
 
-
-class DwgSectionDescriptor
+struct DwgSectionDescriptor
 {
-public:
     int64_t PageType;
     std::string Name;
     uint64_t CompressedSize;
     int32_t PageCount;
     uint64_t DecompressedSize;
+    int CompressedCode;
     int32_t Compressed;
     int32_t SectionId;
     int32_t Encrypted;
@@ -50,5 +49,5 @@ public:
 };
 
 
-}
-}
+}// namespace io
+}// namespace dwg

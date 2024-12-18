@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Edge shape type
 enum ShadeEdgeType : short
 {

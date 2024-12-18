@@ -50,12 +50,7 @@ public:
         int End;
         double Crease;
 
-        Edge(int start, int end)
-        : Start(start),
-            End(end),
-            Crease(0.0)
-        {
-        }
+        Edge(int start, int end) : Start(start), End(end), Crease(0.0) {}
     };
 
 
@@ -76,5 +71,4 @@ public:
 
 
 }// namespace entities
-
 }// namespace dwg

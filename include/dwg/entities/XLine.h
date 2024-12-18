@@ -24,18 +24,15 @@
 
 #include <dwg/entities/Entity.h>
 
-namespace dwg
-{
-    namespace entities
-    {
-        
+namespace dwg {
+namespace entities {
+
 class XLine : public Entity
 {
 public:
-XYZ firstPoint; // 10，20，30
-XYZ direction; // 11, 21, 31
+    XYZ firstPoint;// 10，20，30
+    XYZ direction; // 11, 21, 31
 };
 
-    } // namespace entities
-    
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

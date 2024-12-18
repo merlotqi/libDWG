@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 enum ImageDisplayFlags : short
 {
     /// None

@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Underlay display options.
 enum UnderlayDisplayFlags : unsigned char
 {

@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace units {
-    
+
 /// Angular unit format
 enum AngularUnitFormat : short
 {

@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 /// Defines the spline flags
 enum SplineFlags : unsigned short
 {

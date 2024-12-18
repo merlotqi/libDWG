@@ -23,16 +23,16 @@
 #pragma once
 
 #include <dwg/enums/ACadVersion.h>
-#include <dwg/exports.h>
-#include <dwg/enums/header/MeasurementUnits.h>
-#include <dwg/enums/units/AngularDirection.h>
-#include <dwg/enums/units/LinearUnitFormat.h>
-#include <dwg/enums/units/AngularUnitFormat.h>
-#include <dwg/enums/header/ObjectSnapMode.h>
-#include <dwg/enums/header/AttributeVisibilityMode.h>
-#include <dwg/enums/header/SplineType.h>
-#include <dwg/enums/header/ShadeEdgeType.h>
 #include <dwg/enums/entities/VerticalAlignmentType.h>
+#include <dwg/enums/header/AttributeVisibilityMode.h>
+#include <dwg/enums/header/MeasurementUnits.h>
+#include <dwg/enums/header/ObjectSnapMode.h>
+#include <dwg/enums/header/ShadeEdgeType.h>
+#include <dwg/enums/header/SplineType.h>
+#include <dwg/enums/units/AngularDirection.h>
+#include <dwg/enums/units/AngularUnitFormat.h>
+#include <dwg/enums/units/LinearUnitFormat.h>
+#include <dwg/exports.h>
 
 namespace dwg {
 class CadDocument;
@@ -56,9 +56,9 @@ public:
     // "$ACADMAINTVER", 70
     short MaintenanceVersion;
     // "$DWGCODEPAGE", 3
-    std::string CodePage; // "ANSI_1252"
+    std::string CodePage;// "ANSI_1252"
     // "$LASTSAVEDBY", 3
-    std::string LastSavedBy; // "libDWG"
+    std::string LastSavedBy;// "libDWG"
     // "$REQUIREDVERSIONS", 70
     bool AssociatedDimensions;
     // "$DIMSHO", 70
@@ -95,7 +95,7 @@ public:
     // "$WORLDVIEW", 70
     bool WorldView;
     // "$TILEMODE", 70
-    bool ShowModelSpace;  
+    bool ShowModelSpace;
     // "$PLIMCHECK", 70
     bool PaperSpaceLimitsChecking;
     // "$VISRETAIN", 70
@@ -157,7 +157,7 @@ public:
     short UnitMode;
     // "$MAXACTVP", 70
     short MaxViewportCount;
-    
+
     short SurfaceIsolineCount;
 
     // "$CMLJUST", 70
@@ -216,7 +216,7 @@ public:
     double ChamferLength;
     // "$CHAMFERD", 40
     double ChamferAngle;
-    
+
     double FacetResolution;
 
     // "$CMLSCALE", 40
@@ -320,7 +320,7 @@ public:
     std::string DimensionBlockNameFirst;
     // "$DIMBLK2", 1
     std::string DimensionBlockNameSecon;
-    
+
 
     short StackedTextAlignment = 1;
     short StackedTextSizePercentage = 70;
@@ -342,17 +342,27 @@ public:
     bool ExtendedNames = true;
     // "$PSTYLEMODE", 290
     short PlotStyleMode;
-	//[CadSystemVariable("$OLESTARTUP", 290
+    //[CadSystemVariable("$OLESTARTUP", 290
     bool LoadOLEObject;
     // "$INSUNITS", 70
     UnitsType InsUnits = UnitsType.Unitless;
     // "$CEPSNTYPE", 380
     EntityPlotStyleType CurrentEntityPlotStyle;
     // "$FINGERPRINTGUID", 2
-    std::string FingerPrintGuid { get; internal set; } = Guid.NewGuid().ToString();
+    std::string FingerPrintGuid
+    {
+        get;
+        internal set;
+    }
+    = Guid.NewGuid().ToString();
 
     // "$VERSIONGUID", 2
-    std::string VersionGuid { get; internal set; } = Guid.NewGuid().ToString();
+    std::string VersionGuid
+    {
+        get;
+        internal set;
+    }
+    = Guid.NewGuid().ToString();
 
     // "$SORTENTS", 280
     ObjectSortingFlags EntitySortingFlags;
@@ -393,7 +403,7 @@ public:
     double DraftMagnitudeSecondCrossSection;
     short SolidLoftedShape;
     char LoftedObjectNormals;
-    
+
     // "$LATITUDE", 40
     double Latitude = 37.7950;
     // "$LONGITUDE", 40
@@ -405,11 +415,14 @@ public:
 
     char DisplayLightGlyphs;
     // "$DWFFRAME", 280
-    char DwgUnderlayFramesVisibility;;
+    char DwgUnderlayFramesVisibility;
+    ;
     // "$DGNFRAME", 280
-    char DgnUnderlayFramesVisibility;;
+    char DgnUnderlayFramesVisibility;
+    ;
     // "$CSHADOW", 280
-    ShadowMode ShadowMode;;
+    ShadowMode ShadowMode;
+    ;
     // "$SHADOWPLANELOCATION", 40
     double ShadowPlaneLocation;
 
@@ -569,16 +582,13 @@ public:
     // "$DIMLTEX2", 6
     std::string DimensionTex2 = "ByBlock";
 
-		//TODO: How header UCS work??
+    //TODO: How header UCS work??
     UCS ModelSpaceUcs;
 
-    UCS ModelSpaceUcsBase ;
-    UCS PaperSpaceUcs ;
+    UCS ModelSpaceUcsBase;
+    UCS PaperSpaceUcs;
 
-    UCS PaperSpaceUcsBase ;
-
-
-
+    UCS PaperSpaceUcsBase;
 };
 
 }// namespace header

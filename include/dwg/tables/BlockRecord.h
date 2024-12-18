@@ -29,6 +29,53 @@ namespace tables {
 
 class BlockRecord : public TableEntry
 {
+public:
+    static constexpr auto ModelSpaceName = "*Model_Space";
+    static constexpr auto PaperSpaceName = "*Paper_Space";
+
+    static BlockRecord *ModelSpace()
+    {
+        BlockRecord *record = new BlockRecord(ModelSpaceName);
+        Layout *layout = new Layout();
+        layout->Name = Layout::ModelLayoutName;
+        layout->AssociatedBlock(record);
+        return record;
+    }
+
+    static BlockRecord *PaperSpace()
+    {
+        BlockRecord *record = new BlockRecord(PaperSpaceName);
+        Layout *layout = new Layout();
+        layout->Name = Layout::PaperLayoutName;
+        layot->AssociatedBlock(record);
+        return record;
+    }
+
+    ObjectType ObjectType() const override { return ObjectType::BLOCK_HEADER; }
+    std::string ObjectName() const override
+    {
+        return DxfFileToken::TableBlockRecord;
+    }
+    std::string SubclasMarker() const override
+    {
+        return DxfSubclasMarker::BlockRecord;
+    }
+
+    UnitsType Units;
+
+    BlockTypeFlags Flags;
+
+    bool IsExplodable;                 // 280
+    bool CanScale;                     // 281
+    std::vector<unsigned char> Preview;// 310
+    Layout *Layout;                    // handle 340
+
+    bool HasAttributes;
+    std::vector<Viewport> Viewports;
+    CadObjectCollection<Entity *> Entities;
+
+    Block BlockEntity;
+    BlockEnd BlockEnd;
 };
 
 class BlockRecordsTable : public Table<BlockRecord>

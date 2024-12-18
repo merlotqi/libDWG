@@ -27,11 +27,9 @@
 namespace dwg {
 namespace io {
 
-
 class DwgFileHeaderAC18 : DwgFileHeaderAC15
 {
 public:
-
     uint8_t DwgVersion;
     uint8_t AppReleaseVersion;
     int64_t SummaryInfoAddr;
@@ -60,5 +58,5 @@ public:
 };
 
 
-}
-}
+}// namespace io
+}// namespace dwg

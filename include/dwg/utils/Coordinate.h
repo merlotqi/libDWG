@@ -24,19 +24,23 @@
 
 namespace dwg {
 
-struct XYZ {
+struct XYZ
+{
     double X;
     double Y;
     double Z;
 
+    static XYZ Zero;
+
     XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
 };
 
-struct XY {
+struct XY
+{
     double X;
     double Y;
 
     XY(double x, double y) : X(x), Y(y) {}
 };
 
-} // namespace dwg
+}// namespace dwg

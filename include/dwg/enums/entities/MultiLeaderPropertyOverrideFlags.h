@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace entities {
-    
+
 enum MultiLeaderPropertyOverrideFlags : int
 {
     /// No Flag: No property to be overridden

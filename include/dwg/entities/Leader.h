@@ -23,9 +23,10 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/tables/DimensionStyle.h>
-#include <dwg/enums/entities/LeaderPathType.h>
 #include <dwg/enums/entities/LeaderCreationType.h>
+#include <dwg/enums/entities/LeaderPathType.h>
+#include <dwg/tables/DimensionStyle.h>
+
 
 namespace dwg {
 namespace entities {
@@ -35,27 +36,26 @@ class Leader : public Entity
 public:
     Leader();
     virtual ~Leader();
-    tables::DimensionStyle *style; // 3 name
-    bool arrowHeadEnabled; // 71
-    LeaderPathType pathType; // 72 
-    LeaderCreationType creationType; // 73
-    bool hookLineDirection; // 74
-    bool hasHookline; // 75
-    double textHeight; // 40
+    tables::DimensionStyle *style;  // 3 name
+    bool arrowHeadEnabled;          // 71
+    LeaderPathType pathType;        // 72
+    LeaderCreationType creationType;// 73
+    bool hookLineDirection;         // 74
+    bool hasHookline;               // 75
+    double textHeight;              // 40
 
-    double textWidth; // 41
+    double textWidth;// 41
 
-    std::vector<XYZ> vertices; // 76; 10,20,30
+    std::vector<XYZ> vertices;// 76; 10,20,30
     //77	Color to use if leader's DIMCLRD = BYBLOCK
 
 
-Entity* AssociatedAnnotation; // 340 handle
+    Entity *AssociatedAnnotation;// 340 handle
 
-XYZ normal; // 210, 220, 230
-XYZ horizontalDirection; // 211, 221, 231
-XYZ blockOffset; // 212, 222, 232
-XYZ annotationOffset; // 213, 223, 233
-
+    XYZ normal;             // 210, 220, 230
+    XYZ horizontalDirection;// 211, 221, 231
+    XYZ blockOffset;        // 212, 222, 232
+    XYZ annotationOffset;   // 213, 223, 233
 };
 
 }// namespace entities

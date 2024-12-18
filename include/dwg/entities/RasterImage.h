@@ -24,15 +24,12 @@
 
 #include <dwg/entities/CadImageBase.h>
 
-namespace dwg
-{
-    namespace entities
-    {
-        
+namespace dwg {
+namespace entities {
+
 class RasterImage : public CadImageBase
 {
-
 };
 
-    } // namespace entities 
-} // namespace dwg
+}// namespace entities
+}// namespace dwg

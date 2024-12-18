@@ -28,11 +28,9 @@
 namespace dwg {
 namespace entities {
 
-class IText {
-
+class IText
+{
 };
-
-
 
 
 }// namespace entities

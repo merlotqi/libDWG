@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Controls paper space linetype scaling.
 enum SpaceLineTypeScaling : short
 {

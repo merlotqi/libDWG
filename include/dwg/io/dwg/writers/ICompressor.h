@@ -22,8 +22,8 @@
 
 #pragma once
 
+#include <iostream>
 #include <vector>
-#include <iostream> 
 
 namespace dwg {
 namespace io {
@@ -33,8 +33,10 @@ class ICompressor
 public:
     ICompressor() = default;
     virtual ~ICompressor() = default;
-    virtual void Compress(const std::vector<unsigned char>& source, size_t offset, size_t totalSize, std::ostream* dest) = 0;
+    virtual void Compress(const std::vector<unsigned char> &source,
+                          size_t offset, size_t totalSize,
+                          std::ostream *dest) = 0;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

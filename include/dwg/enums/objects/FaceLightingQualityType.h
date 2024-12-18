@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 enum FaceLightingQualityType : short
 {
     NoLighting = 0,

@@ -22,14 +22,14 @@
 
 #pragma once
 
-#include <dwg/utils/Encoding.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/DateTime.h>
-#include <dwg/utils/Coordinate.h>
-#include <dwg/utils/TimeSpan.h>
 #include <dwg/IHandledCadObject.h>
-#include <dwg/enums/DwgReferenceType.h>
 #include <dwg/Transparency.h>
+#include <dwg/enums/DwgReferenceType.h>
+#include <dwg/utils/Color.h>
+#include <dwg/utils/Coordinate.h>
+#include <dwg/utils/DateTime.h>
+#include <dwg/utils/Encoding.h>
+#include <dwg/utils/TimeSpan.h>
 
 #include <iostream>
 #include <string>
@@ -40,100 +40,104 @@ namespace io {
 
 class IDwgStreamWriter
 {
-		virtual Encoding Encoding() const = 0;
+    virtual Encoding Encoding() const = 0;
 
-		virtual IDwgStreamWriter* Main() const = 0;
+    virtual IDwgStreamWriter *Main() const = 0;
 
-		virtual std::ostream* Stream() const = 0;
+    virtual std::ostream *Stream() const = 0;
 
-		virtual long long SetPositionInBits() const = 0;
+    virtual long long SetPositionInBits() const = 0;
 
-		virtual long long SavedPositionInBits() const = 0;
+    virtual long long SavedPositionInBits() const = 0;
 
-		virtual void WriteBytes(const std::vector<unsigned char>& bytes) = 0;
+    virtual void WriteBytes(const std::vector<unsigned char> &bytes) = 0;
 
-		virtual void WriteBytes(const std::vector<unsigned char>& bytes, int offset, int length) = 0;
+    virtual void WriteBytes(const std::vector<unsigned char> &bytes, int offset,
+                            int length) = 0;
 
-		virtual void WriteInt(int value) = 0;
+    virtual void WriteInt(int value) = 0;
 
-		virtual void WriteObjectType(short value) = 0;
+    virtual void WriteObjectType(short value) = 0;
 
-		virtual void WriteObjectType(ObjectType value) = 0;
+    virtual void WriteObjectType(ObjectType value) = 0;
 
-		virtual void WriteRawLong(long long value) = 0;
+    virtual void WriteRawLong(long long value) = 0;
 
-		virtual void WriteBitDouble(double value) = 0;
+    virtual void WriteBitDouble(double value) = 0;
 
-		virtual void WriteBitLong(int value) = 0;
+    virtual void WriteBitLong(int value) = 0;
 
-		virtual void WriteBitLongLong(long long value) = 0;
+    virtual void WriteBitLongLong(long long value) = 0;
 
-		virtual void WriteVariableText(const std::string& value) = 0;
+    virtual void WriteVariableText(const std::string &value) = 0;
 
-		virtual void WriteTextUnicode(const std::string& value) = 0;
+    virtual void WriteTextUnicode(const std::string &value) = 0;
 
-		virtual void WriteBit(bool value) = 0;
+    virtual void WriteBit(bool value) = 0;
 
-		virtual void Write2Bits(unsigned char value) = 0;
+    virtual void Write2Bits(unsigned char value) = 0;
 
-		virtual void WriteBitShort(short value) = 0;
+    virtual void WriteBitShort(short value) = 0;
 
-		virtual void WriteDateTime(DateTime value) = 0;
+    virtual void WriteDateTime(DateTime value) = 0;
 
-		virtual void Write8BitJulianDate(DateTime value) = 0;
+    virtual void Write8BitJulianDate(DateTime value) = 0;
 
-		virtual void WriteTimeSpan(TimeSpan value) = 0;
+    virtual void WriteTimeSpan(TimeSpan value) = 0;
 
-		virtual void WriteCmColor(Color value) = 0;
+    virtual void WriteCmColor(Color value) = 0;
 
-		virtual void WriteEnColor(Color color, Transparency transparency) = 0;
+    virtual void WriteEnColor(Color color, Transparency transparency) = 0;
 
-		virtual void WriteEnColor(Color color, Transparency transparency, bool isBookColor) = 0;
+    virtual void WriteEnColor(Color color, Transparency transparency,
+                              bool isBookColor) = 0;
 
-		virtual void Write2BitDouble(XY value) = 0;
+    virtual void Write2BitDouble(XY value) = 0;
 
-		virtual void Write3BitDouble(XYZ value) = 0;
+    virtual void Write3BitDouble(XYZ value) = 0;
 
-		virtual void Write2RawDouble(XY value) = 0;
+    virtual void Write2RawDouble(XY value) = 0;
 
-		virtual void WriteByte(unsigned char value) = 0;
+    virtual void WriteByte(unsigned char value) = 0;
 
-		virtual void HandleReference(IHandledCadObject* cadObject) = 0;
+    virtual void HandleReference(IHandledCadObject *cadObject) = 0;
 
-		virtual void HandleReference(DwgReferenceType type, IHandledCadObject* cadObject) = 0;
+    virtual void HandleReference(DwgReferenceType type,
+                                 IHandledCadObject *cadObject) = 0;
 
-		virtual void HandleReference(unsigned long long handle) = 0;
+    virtual void HandleReference(unsigned long long handle) = 0;
 
-		virtual void HandleReference(DwgReferenceType type, unsigned long long handle) = 0;
+    virtual void HandleReference(DwgReferenceType type,
+                                 unsigned long long handle) = 0;
 
-		virtual void WriteSpearShift() = 0;
+    virtual void WriteSpearShift() = 0;
 
-		virtual void WriteRawShort(short value) = 0;
+    virtual void WriteRawShort(short value) = 0;
 
-		virtual void WriteRawShort(unsigned short value) = 0;
+    virtual void WriteRawShort(unsigned short value) = 0;
 
-		virtual void WriteRawDouble(double value) = 0;
+    virtual void WriteRawDouble(double value) = 0;
 
-		virtual void WriteBitThickness(double thickness) = 0;
+    virtual void WriteBitThickness(double thickness) = 0;
 
-		virtual void WriteBitExtrusion(XYZ normal) = 0;
+    virtual void WriteBitExtrusion(XYZ normal) = 0;
 
-		virtual void WriteBitDoubleWithDefault(double def, double value) = 0;
+    virtual void WriteBitDoubleWithDefault(double def, double value) = 0;
 
-		virtual void Write2BitDoubleWithDefault(XY def, XY value) = 0;
+    virtual void Write2BitDoubleWithDefault(XY def, XY value) = 0;
 
-		virtual void Write3BitDoubleWithDefault(XYZ def, XYZ value) = 0;
+    virtual void Write3BitDoubleWithDefault(XYZ def, XYZ value) = 0;
 
-		virtual void ResetStream() = 0;
+    virtual void ResetStream() = 0;
 
-		virtual void SavePositonForSize() = 0;
+    virtual void SavePositonForSize() = 0;
 
-		virtual void SetPositionInBits(long long posInBits) = 0;
+    virtual void SetPositionInBits(long long posInBits) = 0;
 
-		virtual void SetPositionByFlag(long long pos) = 0;
+    virtual void SetPositionByFlag(long long pos) = 0;
 
-		virtual void WriteShiftValue() = 0;
+    virtual void WriteShiftValue() = 0;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

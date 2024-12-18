@@ -27,10 +27,11 @@
 namespace dwg {
 namespace entities {
 
-class Ray : public Entity {
-  public:
-  XYZ startPoint; // 10, 20, 30
-  XYZ direction; // 11, 21, 31
+class Ray : public Entity
+{
+public:
+    XYZ startPoint;// 10, 20, 30
+    XYZ direction; // 11, 21, 31
 };
 
 }// namespace entities

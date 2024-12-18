@@ -1,31 +1,41 @@
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
 
-#include <dwg/IO/ICadWriter.h>
-#include <dwg/Common/CadDocument.h>
+#pragma once
+
+
+#include <dwg/CadDocument.h>
+#include <dwg/io/ICadWriter.h>
 
 namespace dwg {
-namespace IO {
+namespace io {
 
-class CadWriterConfiguration {
-public:
-    CadWriterConfiguration() = default;
-    virtual ~CadWriterConfiguration() = default;
 
-    bool CloseStream() const { return m_closeStream; }
-    void CloseStream(bool value) { m_closeStream = value; }
-
-    bool WriteXRords() const { return m_writeXRords; }
-    void WriteXRords(bool value) { m_writeXRords = value; }
-
-protected:
-    bool m_closeStream;
-    bool m_writeXRords;
-};
-
-template <class T>
-class CadWriterBase : public ICadWriter {
+template<class T>
+class CadWriterBase : public ICadWriter
+{
     static_cast(
-        std::is_base_v<CadWriterConfiguration, T>,
-        "Class CadWriterBase template must based CadWriterConfiguration");
+            std::is_base_v<CadWriterConfiguration, T>,
+            "Class CadWriterBase template must based CadWriterConfiguration");
 
 public:
     using pointer = T *;
@@ -40,7 +50,8 @@ protected:
     std::iostream *m_stream;
     Common::CadDocument *m_document;
     // encoding
-}
+};
 
-} // namespace IO
-} // namespace dwg
+
+}// namespace io
+}// namespace dwg

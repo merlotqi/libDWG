@@ -29,25 +29,26 @@
 namespace dwg {
 namespace entities {
 
-class UnderlayEntity : public Entity {
+class UnderlayEntity : public Entity
+{
 public:
     UnderlayEntity() : Entity() {}
     virtual ~UnderlayEntity() {}
 
-    XYZ normal; // 210, 220, 230
-    XYZ insertPoint; // 10, 20, 30
+    XYZ normal;     // 210, 220, 230
+    XYZ insertPoint;// 10, 20, 30
 
-    double XScale; // 41
-    double YScale; // 42
-    double ZScale; // 43
+    double XScale;// 41
+    double YScale;// 42
+    double ZScale;// 43
 
-    double rotation; // 50
-    UnderlayDisplayFlags flags; // 280
+    double rotation;           // 50
+    UnderlayDisplayFlags flags;// 280
 
-    unsigned char contrast; // 281
-    unsigned char Fade; // 282
+    unsigned char contrast;// 281
+    unsigned char Fade;    // 282
 
-    objects::UnderlayDefinition* definition;
+    objects::UnderlayDefinition *definition;
 };
 
 }// namespace entities

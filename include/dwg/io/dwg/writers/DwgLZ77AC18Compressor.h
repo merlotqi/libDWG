@@ -39,7 +39,8 @@ class DwgLZ77AC18Compressor : public ICompressor
 
 public:
     DwgLZ77AC18Compressor();
-    void Compress(const std::vector<unsigned char>& source, size_t offset, size_t totalSize, std::ostream* dest);
+    void Compress(const std::vector<unsigned char> &source, size_t offset,
+                  size_t totalSize, std::ostream *dest);
 
 private:
     void restartBlock();
@@ -47,8 +48,8 @@ private:
     void writeOpCode(int opCode, int compressionOffset, int value);
     void writeLiteralLength(int length);
     void applyMask(int matchPosition, int compressionOffset, int mask);
-    bool compressChunk(int& offset, int& matchPos);
+    bool compressChunk(int &offset, int &matchPos);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

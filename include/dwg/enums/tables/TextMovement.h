@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Text movement rules.
 enum TextMovement : short
 {

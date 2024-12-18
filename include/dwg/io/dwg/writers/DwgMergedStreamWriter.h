@@ -29,60 +29,74 @@ namespace io {
 
 class DwgMergedStreamWriter : public IDwgStreamWriter
 {
-	Encoding Encoding { get { return this.Main.Encoding; } }
+protected:
+    std::ostream *_stream;
+    IDwgStreamWriter *_main;
+    IDwgStreamWriter *_textWriter;
+    IDwgStreamWriter *_handleWriter;
+    bool _savedPosition;
+    int64_t _savedPositionInBits;
+    int64_t _positionInBits;
 
-	IDwgStreamWriter Main { get; }
-    IDwgStreamWriter TextWriter { get; }
-    IDwgStreamWriter HandleWriter { get; }
-	Stream Stream { get; }
-	long SavedPositionInBits { get; private set; }
-	long PositionInBits { get; private set; }
-	protected bool _savedPosition;
+protected:
+    Encoding Encoding() const;
+    IDwgStreamWriter *Main();
+    IDwgStreamWriter *TextWriter();
+    IDwgStreamWriter *HandleWriter();
+    Stream Stream { get; }
+    int64_t SavedPositionInBits() const;
+    void SavedPositionInBits(int64_t value);
+    int64_t PositionInBits() const;
+    void PositionInBits(int64_t value);
+
 public:
-	DwgMergedStreamWriter(Stream stream, IDwgStreamWriter main, IDwgStreamWriter textwriter, IDwgStreamWriter handlewriter);
-	void HandleReference(IHandledCadObject cadObject);
-	void HandleReference(DwgReferenceType type, IHandledCadObject cadObject);
-	void HandleReference(ulong handle);
-	void HandleReference(DwgReferenceType type, ulong handle);
-	void ResetStream();
-	void SavePositonForSize();
-	void Write2RawDouble(XY value);
-	void Write2BitDouble(XY value);
-	void Write3BitDouble(XYZ value);
-	void WriteBit(bool value);
-	void Write2Bits(byte value);
-	void WriteBitDouble(double value);
-	void Write2BitDoubleWithDefault(XY def, XY value);
-	void Write3BitDoubleWithDefault(XYZ def, XYZ value);
-	void WriteBitDoubleWithDefault(double def, double value);
-	void WriteBitExtrusion(XYZ value);
-	void WriteBitLong(int value);
-	void WriteBitLongLong(long value);
-	void WriteBitShort(short value);
-	void WriteBitThickness(double value);
-	void WriteByte(byte value);
-	void WriteBytes(byte[] bytes);
-	void WriteCmColor(Color value);
-	void WriteEnColor(Color color, Transparency transparency);
-	void WriteDateTime(DateTime value);
-	void Write8BitJulianDate(DateTime value);
-	void WriteInt(int value);
-	void WriteObjectType(short value);
-	void WriteObjectType(ObjectType value);
-	void WriteRawDouble(double value);
-	void WriteRawLong(long value);
-	void WriteRawShort(short value);
-	void WriteRawShort(ushort value);
-	virtual void WriteSpearShift();
-	void WriteTimeSpan(TimeSpan value);
-	void WriteVariableText(string value);
-	void WriteTextUnicode(string value);
-	void SetPositionInBits(long posInBits);
-	void SetPositionByFlag(long pos);
-	void WriteShiftValue();
-	void WriteBytes(byte[] bytes, int offset, int length);
-	void WriteEnColor(Color color, Transparency transparency, bool isBookColor);
+    DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main,
+                          IDwgStreamWriter *textwriter,
+                          IDwgStreamWriter *handlewriter);
+    void HandleReference(IHandledCadObject *cadObject);
+    void HandleReference(DwgReferenceType type, IHandledCadObject *cadObject);
+    void HandleReference(uint64_t handle);
+    void HandleReference(DwgReferenceType type, uint64_t handle);
+    void ResetStream();
+    void SavePositonForSize();
+    void Write2RawDouble(XY value);
+    void Write2BitDouble(XY value);
+    void Write3BitDouble(XYZ value);
+    void WriteBit(bool value);
+    void Write2Bits(unsigned char value);
+    void WriteBitDouble(double value);
+    void Write2BitDoubleWithDefault(XY def, XY value);
+    void Write3BitDoubleWithDefault(XYZ def, XYZ value);
+    void WriteBitDoubleWithDefault(double def, double value);
+    void WriteBitExtrusion(XYZ value);
+    void WriteBitLong(int value);
+    void WriteBitLongLong(int64_t value);
+    void WriteBitShort(short value);
+    void WriteBitThickness(double value);
+    void WriteByte(unsigned char value);
+    void WriteBytes(unsigned char[] bytes);
+    void WriteCmColor(const Color &value);
+    void WriteEnColor(const Color &color, Transparency transparency);
+    void WriteDateTime(DateTime value);
+    void Write8BitJulianDate(DateTime value);
+    void WriteInt(int value);
+    void WriteObjectType(short value);
+    void WriteObjectType(ObjectType value);
+    void WriteRawDouble(double value);
+    void WriteRawLong(int64_t value);
+    void WriteRawShort(short value);
+    void WriteRawShort(unsigned short value);
+    virtual void WriteSpearShift();
+    void WriteTimeSpan(TimeSpan value);
+    void WriteVariableText(const std::string &value);
+    void WriteTextUnicode(const std::string &value);
+    void SetPositionInBits(int64_t posInBits);
+    void SetPositionByFlag(int64_t pos);
+    void WriteShiftValue();
+    void WriteBytes(const std::vector<unsigned char> &bytes, size_t offset,
+                    size_t length);
+    void WriteEnColor(Color color, Transparency transparency, bool isBookColor);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

@@ -25,33 +25,34 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/IHandledCadObject.h>
+#include <dwg/Transparency.h>
+#include <dwg/enums/LineWeightType.h>
+#include <dwg/objects/BookColor.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/enums/LineWeightType.h>
 #include <dwg/utils/Color.h>
-#include <dwg/Transparency.h>
-#include <dwg/objects/BookColor.h>
 
 namespace dwg {
 namespace entities {
 
-class Entity : IHandledCadObject {
-  public:
-  Entity();
+class Entity : IHandledCadObject
+{
+public:
+    Entity();
 
 public:
-    tables::Layer* layer; // 8, name
-    utils::Color color; // 62, 420
+    tables::Layer *layer;      // 8, name
+    utils::Color color;        // 62, 420
     LineweightType lineweight; // 370
-    double linetypeScale; // 48
-    bool isInvisible; // 60
+    double linetypeScale;      // 48
+    bool isInvisible;          // 60
     Transparency transparency; // 440
-    tables::LineType* linetype; // 6, name
+    tables::LineType *linetype;// 6, name
     // Material* material; // 347, handle
 
-    objects::BookColor bookColor; //430, name
+    objects::BookColor bookColor;//430, name
 
-    void MatchProperties(const Entity* other);
+    void MatchProperties(const Entity *other);
 };
 
 }// namespace entities

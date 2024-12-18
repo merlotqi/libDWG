@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 /// Defines the shade plot mode
 enum ShadePlotMode
 {

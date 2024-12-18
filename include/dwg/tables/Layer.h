@@ -31,6 +31,9 @@ namespace tables {
 
 class Layer : public TableEntry
 {
+public:
+    static constexpr auto DefaultName = "0";
+    static Layer *Default() { return new Layer(DefaultName); }
 };
 
 class LayersTable : public Table<Layer>

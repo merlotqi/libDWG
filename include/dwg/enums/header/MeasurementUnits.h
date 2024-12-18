@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace header {
-    
+
 /// Measurement units
 enum MeasurementUnits : short
 {

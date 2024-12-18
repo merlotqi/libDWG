@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Represents a line type complex element type.
 enum LinetypeShapeFlags : short
 {

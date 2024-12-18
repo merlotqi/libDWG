@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace units {
-    
+
 /// Units format for decimal numbers
 enum LinearUnitFormat : short
 {

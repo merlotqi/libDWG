@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Represents the fraction format when the linear unit format is set to architectural or fractional.
 enum FractionFormat : short
 {

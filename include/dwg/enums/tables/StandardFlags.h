@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace tables {
-    
+
 /// Standard flags for tables
 enum StandardFlags : short
 {

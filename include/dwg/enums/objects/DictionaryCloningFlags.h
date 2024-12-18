@@ -24,7 +24,7 @@
 
 namespace dwg {
 namespace objects {
-    
+
 /// Duplicate record cloning flag (determines how to merge duplicate entries).
 enum DictionaryCloningFlags : short
 {

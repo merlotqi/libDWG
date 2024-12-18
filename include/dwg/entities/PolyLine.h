@@ -34,31 +34,31 @@ namespace entities {
 
 class Polyline : public Entity, IPolyline
 {
-    public:
-    double elevation; // 30
-    double thickness; // 39
+public:
+    double elevation;// 30
+    double thickness;// 39
 
-    XYZ normal; // 210, 220, 230
-    PolylineFlags flags; // 70
+    XYZ normal;         // 210, 220, 230
+    PolylineFlags flags;// 70
 
-    double startWidth; // 40
-    double endWidth; // 41
+    double startWidth;// 40
+    double endWidth;  // 41
 
-    SmoothSurfaceType smoothSurface; // 75
+    SmoothSurfaceType smoothSurface;// 75
 
     SeqendCollection<Vertex> vertices;
 };
 
 class Polyline2D : public Polyline
 {
-    public:
+public:
     Polyline2D();
     ~Polyline2D();
 };
 
 class Polyline3D : public Polyline
 {
-    public:
+public:
     Polyline3D();
     ~Polyline3D();
 };

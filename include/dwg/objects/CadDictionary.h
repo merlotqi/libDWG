@@ -22,32 +22,34 @@
 
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
+
 
 namespace dwg {
 namespace objects {
 
 class CadDictionary : public NonGraphicalObject
 {
-    std::map<std::string, NonGraphicalObject*> _entries;
+    std::map<std::string, NonGraphicalObject *> _entries;
+
 public:
     static constexpr auto Root = "ROOT";
     static constexpr auto AcadColor = "ACAD_COLOR";
     static constexpr auto AcadGroup = "ACAD_GROUP";
     static constexpr auto AcadLayout = "ACAD_LAYOUT";
-    static constexpr auto  AcadMaterial = "ACAD_MATERIAL";
-    static constexpr auto  AcadSortEnts = "ACAD_SORTENTS";
-	static constexpr auto  AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
-	static constexpr auto  AcadMLineStyle = "ACAD_MLINESTYLE";
-	static constexpr auto  AcadTableStyle = "ACAD_TABLESTYLE";
-    static constexpr auto  AcadPlotSettings = "ACAD_PLOTSETTINGS";
-    static constexpr auto  VariableDictionary = "AcDbVariableDictionary";
-    static constexpr auto  AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
-    static constexpr auto  AcadScaleList = "ACAD_SCALELIST";
-    static constexpr auto  AcadVisualStyle = "ACAD_VISUALSTYLE";
-    static constexpr auto  AcadFieldList = "ACAD_FIELDLIST";
-    static constexpr auto  AcadImageDict = "ACAD_IMAGE_DICT";
+    static constexpr auto AcadMaterial = "ACAD_MATERIAL";
+    static constexpr auto AcadSortEnts = "ACAD_SORTENTS";
+    static constexpr auto AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
+    static constexpr auto AcadMLineStyle = "ACAD_MLINESTYLE";
+    static constexpr auto AcadTableStyle = "ACAD_TABLESTYLE";
+    static constexpr auto AcadPlotSettings = "ACAD_PLOTSETTINGS";
+    static constexpr auto VariableDictionary = "AcDbVariableDictionary";
+    static constexpr auto AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
+    static constexpr auto AcadScaleList = "ACAD_SCALELIST";
+    static constexpr auto AcadVisualStyle = "ACAD_VISUALSTYLE";
+    static constexpr auto AcadFieldList = "ACAD_FIELDLIST";
+    static constexpr auto AcadImageDict = "ACAD_IMAGE_DICT";
 
     bool HardOwnerFlag;
 
@@ -55,30 +57,25 @@ public:
     std::vector<std::string> EntryName() const;
     std::vector<unsigned long long> EntryHandles() const;
 
-    CadObject* operator[](const std::string& key);
+    CadObject *operator[](const std::string &key);
 
-    static CadDictionary* CreateRoot();
-    static void CreateDefaultEntries(CadDictionary* root);
+    static CadDictionary *CreateRoot();
+    static void CreateDefaultEntries(CadDictionary *root);
 
 public:
     CadDictionary() {}
-    CadDictionary(const std::string& name)
-    {
-
-    }
-    void Add(const std::string& key, NonGraphicalObject* value);
-    void Add(NonGraphicalObject* value);
-    bool TryAdd(NonGraphicalObject* value) const;
-    bool ContainsKey(const std::string& key) const;
-    void Remove(const std::string& key, NonGraphicalObject*& item);
+    CadDictionary(const std::string &name) {}
+    void Add(const std::string &key, NonGraphicalObject *value);
+    void Add(NonGraphicalObject *value);
+    bool TryAdd(NonGraphicalObject *value) const;
+    bool ContainsKey(const std::string &key) const;
+    void Remove(const std::string &key, NonGraphicalObject *&item);
     void Clear();
 
     template<class T>
-    bool TryGetEntry(const std::string& name, T*& value)
+    bool TryGetEntry(const std::string &name, T *&value)
     {
-        
     }
-
 };
 
 }// namespace objects

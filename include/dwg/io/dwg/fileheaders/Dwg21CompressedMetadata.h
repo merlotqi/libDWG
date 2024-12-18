@@ -25,46 +25,44 @@
 namespace dwg {
 namespace io {
 
-class Dwg21CompressedMetadata
+struct Dwg21CompressedMetadata
 {
 public:
-    Dwg21CompressedMetadata() = default;
-    virtual ~Dwg21CompressedMetadata() = default;
-	unsigned long long HeaderSize = 0x70;
-	unsigned long long FileSize = 0;
-	unsigned long long PagesMapCrcCompressed = 0;
-	unsigned long long PagesMapCorrectionFactor = 0;
-	unsigned long long PagesMapCrcSeed = 0;
-	unsigned long long Map2Offset = 0;
-	unsigned long long Map2Id = 0;
-	unsigned long long PagesMapOffset = 0;
-	unsigned long long Header2offset = 0;
-	unsigned long long PagesMapSizeCompressed = 0;
-	unsigned long long PagesMapSizeUncompressed = 0;
-	unsigned long long PagesAmount = 0;
-	unsigned long long PagesMaxId = 0;
-	unsigned long long SectionsMap2Id = 0;
-	unsigned long long PagesMapId = 0;
-	unsigned long long Unknow0x20 = 32;
-	unsigned long long Unknow0x40 = 64;
-	unsigned long long PagesMapCrcUncompressed = 0;
-	unsigned long long Unknown0xF800 = 0xF800;
-	unsigned long long Unknown4 = 4;
-	unsigned long long Unknown1 = 1;
-	unsigned long long SectionsAmount = 0;
-	unsigned long long SectionsMapCrcUncompressed = 0;
-	unsigned long long SectionsMapSizeCompressed = 0;
-	unsigned long long SectionsMapId = 0;
-	unsigned long long SectionsMapSizeUncompressed = 0;
-	unsigned long long SectionsMapCrcCompressed = 0;
-	unsigned long long SectionsMapCorrectionFactor = 0;
-	unsigned long long SectionsMapCrcSeed = 0;
-	unsigned long long StreamVersion = 393472;
-	unsigned long long CrcSeed = 0;
-	unsigned long long CrcSeedEncoded = 0;
-	unsigned long long RandomSeed = 0;
-	unsigned long long HeaderCRC64 = 0;
+    unsigned long long HeaderSize = 0x70;
+    unsigned long long FileSize = 0;
+    unsigned long long PagesMapCrcCompressed = 0;
+    unsigned long long PagesMapCorrectionFactor = 0;
+    unsigned long long PagesMapCrcSeed = 0;
+    unsigned long long Map2Offset = 0;
+    unsigned long long Map2Id = 0;
+    unsigned long long PagesMapOffset = 0;
+    unsigned long long Header2offset = 0;
+    unsigned long long PagesMapSizeCompressed = 0;
+    unsigned long long PagesMapSizeUncompressed = 0;
+    unsigned long long PagesAmount = 0;
+    unsigned long long PagesMaxId = 0;
+    unsigned long long SectionsMap2Id = 0;
+    unsigned long long PagesMapId = 0;
+    unsigned long long Unknow0x20 = 32;
+    unsigned long long Unknow0x40 = 64;
+    unsigned long long PagesMapCrcUncompressed = 0;
+    unsigned long long Unknown0xF800 = 0xF800;
+    unsigned long long Unknown4 = 4;
+    unsigned long long Unknown1 = 1;
+    unsigned long long SectionsAmount = 0;
+    unsigned long long SectionsMapCrcUncompressed = 0;
+    unsigned long long SectionsMapSizeCompressed = 0;
+    unsigned long long SectionsMapId = 0;
+    unsigned long long SectionsMapSizeUncompressed = 0;
+    unsigned long long SectionsMapCrcCompressed = 0;
+    unsigned long long SectionsMapCorrectionFactor = 0;
+    unsigned long long SectionsMapCrcSeed = 0;
+    unsigned long long StreamVersion = 393472;
+    unsigned long long CrcSeed = 0;
+    unsigned long long CrcSeedEncoded = 0;
+    unsigned long long RandomSeed = 0;
+    unsigned long long HeaderCRC64 = 0;
 };
 
-}
-}
+}// namespace io
+}// namespace dwg
