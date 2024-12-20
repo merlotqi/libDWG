@@ -21,3 +21,38 @@
  */
 
 #pragma once
+
+
+#include <dwg/enums/objects/DictionaryCloningFlags.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <vector>
+
+namespace dwg {
+namespace objects {
+
+class XRecord : public NonGraphicalObject
+{
+public:
+    dwg::ObjectType ObjectType() const { return ObjectType::XRECORD; }
+    std::string ObjectName() const { return DxfFileToken::ObjectXRecord; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::XRecord; }
+
+
+    struct Entry
+    {
+    };
+
+
+    // 280)]
+    DictionaryCloningFlags CloningFlags
+    {
+        get;
+        set;
+    }
+
+private:
+    std::vector<XRecord::Entry> _entries;
+};
+
+}// namespace objects
+}// namespace dwg

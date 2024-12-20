@@ -23,14 +23,16 @@
 
 #pragma once
 
-#include <dwg/Coordinate.h>
+#include <dwg/utils/Coordinate.h>
 
 namespace dwg {
 namespace entities {
 
-XYZ location;
-double bulge;
+class IVertex
+{
+    XYZ location;
+    double bulge;
+};
 
 }// namespace entities
-
 }// namespace  dwg

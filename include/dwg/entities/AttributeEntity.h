@@ -22,7 +22,6 @@
 
 #pragma once
 
-
 #include <dwg/entities/AttributeBase.h>
 
 namespace dwg {

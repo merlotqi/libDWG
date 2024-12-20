@@ -27,7 +27,6 @@
 namespace dwg {
 namespace entities {
 
-
 class Circle : Entity
 {
 public:

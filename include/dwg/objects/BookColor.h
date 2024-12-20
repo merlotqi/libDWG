@@ -23,11 +23,28 @@
 
 #pragma once
 
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/utils/Color.h>
+
 namespace dwg {
 namespace objects {
 
-class BookColor
+class BookColor : NonGraphicalObject
 {
+public:
+    BookColor();
+    BookColor(const std::string &name) : NonGraphicalObject(name) {}
+
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const { return DxfFileToken::ObjectDBColor; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::DbColor; }
+
+    std::string Name() const;
+
+    std::string ColorName() const;
+    std::string BookName() const;
+
+    Color Color;// 62, 420
 };
 
 }// namespace objects

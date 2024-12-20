@@ -23,6 +23,7 @@
 
 #pragma once
 
+#include <dwg/CadObjectCollection.h>
 #include <dwg/entities/AttributeEntity.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/tables/BlockRecord.h>
@@ -35,7 +36,6 @@ class Insert : Entity
 public:
     // name 2
     tables::BlockRecord *block;
-
     XYZ insertPoint;// 10, 20, 30
 
     double XScale;// 41
@@ -53,7 +53,7 @@ public:
 
     bool hasAttributes;// 66
 
-    SeqendCollection<AttributeEntity> attributes;
+    CadObjectCollection<AttributeEntity> attributes;
 };
 
 

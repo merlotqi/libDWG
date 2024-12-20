@@ -278,4 +278,4 @@ inline void swap(Timespan &s1, Timespan &s2) noexcept { s1.swap(s2); }
 inline Timespan::~Timespan() {}
 
 
-}// namespace Poco
+}// namespace dwg

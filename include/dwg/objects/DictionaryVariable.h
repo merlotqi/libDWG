@@ -22,19 +22,28 @@
 
 #pragma once
 
+#include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
-namespace io {
+namespace objects {
 
-class DictionaryVariable : NonGraphicalObject
+class DictionaryVariable : public NonGraphicalObject
 {
 public:
     DictionaryVariable();
     ~DictionaryVariable();
 
-    std::string Value;
-    int ObjectSchemaNumber;
+
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const { return DxfFileToken::ObjectDictionaryVar; }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::DictionaryVariables;
+    }
+
+    std::string Value;     // 1
+    int ObjectSchemaNumber;// 280
 };
 
-}// namespace io
+}// namespace objects
 }// namespace dwg

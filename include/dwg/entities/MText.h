@@ -24,8 +24,6 @@
 
 
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IText.h>
-
 #include <dwg/enums/entities/AttachmentPointType.h>
 #include <dwg/enums/entities/BackgroundFillFlags.h>
 #include <dwg/enums/entities/ColumnType.h>
@@ -39,7 +37,7 @@
 namespace dwg {
 namespace entities {
 
-class MText : public Entity, IText
+class MText : public Entity
 {
 public:
     struct Edge
@@ -73,7 +71,7 @@ public:
     double backgroundScale;                 // 45
 
 
-    utils::Color backgroundColor;       // 63, 420, 430
+    Color backgroundColor;              // 63, 420, 430
     Transparency backgroundTransparency;// 441；
 
 

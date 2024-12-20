@@ -22,12 +22,10 @@
 
 #pragma once
 
-
 #include <dwg/entities/Entity.h>
 #include <dwg/enums/entities/ClipMode.h>
 #include <dwg/enums/entities/ClipType.h>
 #include <dwg/enums/entities/ImageDisplayFlags.h>
-
 #include <dwg/objects/ImageDefinition.h>
 #include <dwg/objects/ImageDefinitionReactor.h>
 
@@ -56,9 +54,9 @@ public:
     // 91, 14, 24
     std::vector<XY> clipBoundaryVertices;
 
-    ImageDefinition definition;// 340, handle
+    objects::ImageDefinition definition;// 340, handle
 
-    ImageDefinitionReactor definitionReactor;// 360, handle
+    objects::ImageDefinitionReactor definitionReactor;// 360, handle
 };
 
 }// namespace entities

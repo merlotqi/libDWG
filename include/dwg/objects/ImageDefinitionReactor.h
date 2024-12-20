@@ -21,3 +21,30 @@
  */
 
 #pragma once
+
+#include <dwg/objects/NonGraphicalObject.h>
+
+namespace dwg {
+namespace objects {
+
+
+class ImageDefinitionReactor : public NonGraphicalObject
+{
+public:
+    ImageDefinitionReactor();
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const
+    {
+        return DxfFileToken::ObjectImageDefinitionReactor;
+    }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::RasterImageDefReactor;
+    }
+
+    int RasterImageDefReactor;               //90
+    unsigned long long ImageDefinitionHandle;// 330;
+};
+
+}// namespace objects
+}// namespace dwg

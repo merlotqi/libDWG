@@ -30,8 +30,9 @@ struct PaperMargin
     double Left;
     double Bottom;
     double Right;
-    double To;
+    double Top;
 
+    PaperMargin() {}
     PaperMargin(double left, double bottom, double right, double top)
     {
         Left = left;

@@ -23,10 +23,8 @@
 #pragma once
 
 #include <dwg/entities/GradientColor.h>
-
 #include <string>
 #include <vector>
-
 
 namespace dwg {
 namespace entities {

@@ -29,10 +29,40 @@ namespace tables {
 
 class UCS : public TableEntry
 {
+public:
+    UCS() {}
+    UCS(const std::string &name) : TableEntry(name) {}
+
+    dwg::ObjectType ObjectType() const override { return dwg::ObjectType::UCS; }
+    std::string ObjectName() const override { return DxfFileToken::TableUcs; }
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::Ucs;
+    }
+
+    XYZ Origin = XYZ::Zero;
+    XYZ XAxis = XYZ::AxisX;
+    XYZ YAxis = XYZ::AxisY;
+    OrthographicType orthographicType;
+    OrthographicType OrthographicViewType;
+    double Elevation;
 };
 
 class UCSTable : public Table<UCS>
 {
+public:
+    UCSTable() = default;
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::UCS_CONTROL_OBJ;
+    }
+    std::string ObjectName() const override { return DxfFileToken::TableUcs; }
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return std::vector<std::string>();
+    }
 };
 
 }// namespace tables

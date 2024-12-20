@@ -21,3 +21,20 @@
  */
 
 #pragma once
+
+#include <dwg/objects/UnderlayDefinition.h>
+
+namespace dwg {
+namespace objects {
+
+class PdfUnderlayDefinition : public UnderlayDefinition
+{
+public:
+    PdfUnderlayDefinition();
+    std::string Page;
+
+    std::string ObjectName() const { return DxfFileToken::ObjectPdfDefinition; }
+};
+
+}// namespace objects
+}// namespace dwg

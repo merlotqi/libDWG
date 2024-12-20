@@ -22,6 +22,10 @@
 
 #pragma once
 
+#include <dwg/entities/Viewport.h>
+#include <dwg/enums/blockes/BlockTypeFlags.h>
+#include <dwg/enums/units/UnitsType.h>
+#include <dwg/objects/Layout.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -51,7 +55,10 @@ public:
         return record;
     }
 
-    ObjectType ObjectType() const override { return ObjectType::BLOCK_HEADER; }
+    dwg::ObjectType ObjectType() const override
+    {
+        return ObjectType::BLOCK_HEADER;
+    }
     std::string ObjectName() const override
     {
         return DxfFileToken::TableBlockRecord;
@@ -61,9 +68,9 @@ public:
         return DxfSubclasMarker::BlockRecord;
     }
 
-    UnitsType Units;
+    units::UnitsType Units;
 
-    BlockTypeFlags Flags;
+    blockes::BlockTypeFlags Flags;
 
     bool IsExplodable;                 // 280
     bool CanScale;                     // 281
@@ -71,7 +78,7 @@ public:
     Layout *Layout;                    // handle 340
 
     bool HasAttributes;
-    std::vector<Viewport> Viewports;
+    std::vector<entities::Viewport> Viewports;
     CadObjectCollection<Entity *> Entities;
 
     Block BlockEntity;

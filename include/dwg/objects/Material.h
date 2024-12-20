@@ -21,3 +21,16 @@
  */
 
 #pragma once
+
+namespace dwg {
+namespace objects {
+
+class Material
+{
+public:
+    Material() = default;
+    ~Material() = default;
+};
+
+}// namespace objects
+}// namespace dwg

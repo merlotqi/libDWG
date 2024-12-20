@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/DxfFileToken.h>
+#include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/enums/ObjectType.h>
 #include <string>
@@ -30,17 +32,23 @@ namespace dwg {
 
 class CadObject : public IHandledCadObject
 {
+protected:
+    unsigned long long _handle;
+
 public:
+    CadObject() = default;
+    virtual ~CadObject() = default;
+
     virtual ObjectType ObjectType() const = 0;
     virtual std::string ObjectName() const = 0;
     virtual std::string SubclassMarker() const = 0;
-    virtual unsigned long long Handle() const = 0;
+    unsigned long long Handle() const { return _handle; }
 
 
     IHandledCadObject *Owner;// handle 330
 
 protected:
-    void Handle(unsigned long long value);
+    void Handle(unsigned long long value) { _handle = value; }
 };
 
 

@@ -21,3 +21,38 @@
  */
 
 #pragma once
+
+#include <dwg/objects/NonGraphicalObject.h>
+#include <vector>
+
+namespace dwg {
+namespace objects {
+
+
+class EvaluationGraph : public NonGraphicalObject
+{
+public:
+    EvaluationGraph();
+
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const { return DxfFileToken::ObjectEvalGraph; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::EvalGraph; }
+
+    struct GraphNode
+    {
+        int Index;            // 91
+        int NextNodeIndex;    // 95
+        GraphNode *Next;      // 95
+        int Flags;            // 93
+        int Data1;            // 92
+        int Data2;            // 92
+        int Data3;            // 92
+        int Data4;            // 92
+        CadObject *NodeObject;// 360
+    };
+
+    std::vector<GraphNode> Nodes;
+};
+
+}// namespace objects
+}// namespace dwg

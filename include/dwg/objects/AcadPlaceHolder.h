@@ -21,3 +21,23 @@
  */
 
 #pragma once
+
+#include <dwg/objects/NonGraphicalObject.h>
+
+namespace dwg {
+namespace objects {
+
+class AcdbPlaceHolder : public NonGraphicalObject
+{
+public:
+    AcdbPlaceHolder();
+    dwg::ObjectType ObjectType() const { return ObjectType::ACDBPLACEHOLDER; }
+    std::string ObjectName() const { return DxfFileToken::ObjectPlaceholder; }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::AcDbPlaceHolder;
+    }
+};
+
+}// namespace objects
+}// namespace dwg

@@ -20,10 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_LAYER_H
-#define LIBDWG_LAYER_H
+#pragma once
 
+#include <dwg/enums/LineweightType.h>
+#include <dwg/enums/tables/LayerFlags.h>
+#include <dwg/tables/LineType.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/utils/Color.h>
+
 
 namespace dwg {
 namespace tables {
@@ -33,14 +37,43 @@ class Layer : public TableEntry
 {
 public:
     static constexpr auto DefaultName = "0";
-    static Layer *Default() { return new Layer(DefaultName); }
+    static Layer Default;
+
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::LAYER;
+    }
+    std::string ObjectName() const override { return DxfFileToken::TableLayer; }
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::Layer;
+    }
+
+    LayerFlags Flags;
+    Color color;                     // 62, 420, 430
+    std::string LineTypeName;        // linetype Name
+    LineType lineType;               // 6
+    bool PlotFlag;                   // 200
+    unsigned long long PlotStyleName;// 390
+    // Material* material; // 347 handle
+    bool IsOn;// Indicates if the Layer is visible in the model
+
+    Layer() = default;
+    Layer(const std::string &name) : TableEntry(name) {}
 };
 
 class LayersTable : public Table<Layer>
 {
+public:
+    LayersTable() = default;
+    std::string ObjectName() const { return DxfFileToken::TableLayer; }
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return {Layer::DefaultName};
+    }
 };
 
 }// namespace tables
 }// namespace dwg
-
-#endif// LIBDWG_LAYER_H

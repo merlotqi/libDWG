@@ -115,8 +115,8 @@ public:
     double brightness;// 141
     double contrast;  // 142
 
-    utils::Color AmbientLightColor;// 63, 421, 431
-                                   //361	Sun ID/Handle(optional)
+    Color AmbientLightColor;// 63, 421, 431
+                            //361	Sun ID/Handle(optional)
 
     //335
 

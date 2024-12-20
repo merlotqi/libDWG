@@ -24,6 +24,11 @@
 
 namespace dwg {
 
+struct IVector
+{
+    std::size_t Dimension;
+};
+
 struct XYZ
 {
     double X;
@@ -31,8 +36,14 @@ struct XYZ
     double Z;
 
     static XYZ Zero;
+    static XYZ AxisX;
+    static XYZ AxisY;
+    static XYZ AxisZ;
 
+    XYZ() : X(0), Y(0), Z(0) {}
     XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
+    double operator[](int index) const {}
+    double &operator[](int index) {}
 };
 
 struct XY
@@ -40,7 +51,12 @@ struct XY
     double X;
     double Y;
 
+    static XY Zero;
+
+    XY() : X(0), Y(0) {}
     XY(double x, double y) : X(x), Y(y) {}
+    double operator[](int index) const {}
+    double &operator[](int index) {}
 };
 
 }// namespace dwg

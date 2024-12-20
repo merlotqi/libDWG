@@ -20,10 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_LINE_TYPE_H
-#define LIBDWG_LINE_TYPE_H
+#pragma once
 
+#include <dwg/enums/tables/LinetypeShapeFlags.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/tables/TextStyle.h>
+
+
 namespace dwg {
 namespace tables {
 
@@ -31,19 +34,73 @@ namespace tables {
 class LineType : public TableEntry
 {
 public:
-    class Segment
+    LineType() = default;
+    LineType(const std::string &name) : TableEntry(name) {}
+
+    struct Segment
     {
+        double Length;// 49
+        LinetypeShapeFlags ShapeFlag;
+        short ShapeNumber;
+        XY Offset;
+        double Rotation;
+        double Scale;
+        std::string Text;
+        TextStyle Style;
     };
 
-    const char *BY_LAYER_NAME = "ByLayer";
-    const char *BY_BLOCK_NAME = "ByBlock";
+    static constexpr auto ByLayerName = "ByLayer";
+    static constexpr auto ByBlockName = "ByBlock";
+    static constexpr auto ContinuousName = "Continuous";
+
+    static LineType ByLayer;
+    static LineType ByBlock;
+    static LineType Continuous;
+
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::LTYPE;
+    }
+    std::string ObjectName() const override
+    {
+        return DxfFileToken::TableLinetype;
+    }
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::Linetype;
+    }
+
+    std::string Description;  // 3
+    double PatternLen() const;// 40
+    char Alignment = 'A';     // 72
+
+    void AddSegment(const Segment &segmnnt);
+
+private:
+    std::vector<Segment> _segments;
 };
 
 class LineTypesTable : public Table<LineType>
 {
+public:
+    LineType ByLayer;
+    LineType ByBlock;
+    LineType Continuous;
+
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::APPID_CONTROL_OBJ;
+    }
+
+    LineTypesTable() = default;
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return {LineType::ByLayerName, LineType::ByBlockName,
+                LineType::ContinuousName};
+    }
 };
 
 }// namespace tables
 }// namespace dwg
-
-#endif// LIBDWG_LINE_TYPE_H

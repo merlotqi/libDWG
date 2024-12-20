@@ -22,8 +22,7 @@
 
 #pragma once
 
-#include <dwg/Coordinate.h>
-
+#include <dwg/utils/Coordinate.h>
 #include <string>
 #include <vector>
 

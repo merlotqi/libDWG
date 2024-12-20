@@ -23,9 +23,6 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IText.h>
-
-
 #include <dwg/enums/entities/TextHorizontalAlignment.h>
 #include <dwg/enums/entities/TextMirrorFlag.h>
 #include <dwg/enums/entities/TextVerticalAlignmentType.h>

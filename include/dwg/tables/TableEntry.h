@@ -25,14 +25,10 @@
 #include <algorithm>
 #include <dwg/CadObject.h>
 #include <dwg/DxfFileToken.h>
+#include <dwg/DxfSubclassMarker.h>
 #include <dwg/INamedCadObject.h>
+#include <dwg/enums/tables/StandardFlags.h>
 #include <dwg/exports.h>
-#include <dwg/tables/StandardFlags.h>
-#include <iostream>
-#include <map>
-#include <stdexcept>
-#include <string>
-#include <vector>
 
 namespace dwg {
 namespace tables {
@@ -40,16 +36,23 @@ namespace tables {
 
 class TableEntry : public CadObject, INamedCadObject
 {
-protected:
-    TableEntry();
-
 public:
+    TableEntry(const std::string &name) : _name(name) {}
+
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::TableRecord;
+    }
+
+    virtual std::string Name() const { return _name; }
+    virtual void Name(const std::string &value) { _name = value; }
+    // 70
     StandardFlags Flags;
-    std::string Name;
 
-    TableEntry(const std::string &name);
+protected:
+    TableEntry() {}
 
-    std::string SubclassMarker() const;
+    std::string _name;
 };
 
 
@@ -59,21 +62,43 @@ class Table : public CadObject
     std::map<std::string, T> m_entries;
 
 public:
-    Table();
+    Table() = default;
     std::string ObjectName() const override { return DxfFileToken::TableEntry; }
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::Table;
+    }
+
     void Add(const T &entry)
     {
         if (m_entries.find(entry.Name()) != m_entries.end()) return;
         m_entries[entry.Name()] = entry;
     }
 
-    T Remove(const std::string &name) {}
+    bool Contains(const std::string &key)
+    {
+        if (m_entries.find(key) != m_entries.end()) return true;
+        return false;
+    }
 
-    bool Contains(const std::string &key) {}
+    bool TryGetValue(const std::string &key, T &item)
+    {
+        if (!Contains(key)) return false;
+        else
+            item = m_entries[key];
+        return true;
+    }
 
-    bool TryGetValue(const std::string &key, T &item) {}
+    void CreateDefaultEntries()
+    {
+        auto &&entris = defaultEntries();
+        for (auto &&entry: entris)
+        {
+            if (Contains(entry)) continue;
 
-    void CreateDefaultEntries() {}
+            Add(T(entry));
+        }
+    }
 
 protected:
     void add(const std::string &key, const T &item)
@@ -88,6 +113,8 @@ protected:
         std::string key = str_format("%llu:%s", item.Handle, item.Name);
         m_entries.insert({key, item});
     }
+
+    virtual std::vector<std::string> defaultEntries() const = 0;
 };
 
 

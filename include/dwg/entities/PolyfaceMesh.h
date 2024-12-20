@@ -29,7 +29,6 @@ namespace entities {
 
 class PolyfaceMesh : public Polyline
 {
-
 public:
 };
 

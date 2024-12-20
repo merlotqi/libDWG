@@ -44,9 +44,9 @@ public:
     Color(unsigned char r, unsigned char g, unsigned char b);
     Color(const std::vector<unsigned char> rgb);
 
-    static Color ByLayer();
-    static Color ByBlock();
-    static Color ByEntity();
+    static Color ByLayer;
+    static Color ByBlock;
+    static Color ByEntity;
     static Color FromTrueColor(unsigned int color);
     static unsigned char ApproxIndex(unsigned char r, unsigned char g,
                                      unsigned char b);

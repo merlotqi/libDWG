@@ -22,48 +22,17 @@
 
 #pragma once
 
-#include <dwg/CadObjectCollection.h>
-#include <dwg/entities/Entity.h>
-#include <dwg/entities/IPolyline.h>
-#include <dwg/entities/Vertex.h>
-#include <dwg/enums/entities/PolylineFlags.h>
-#include <dwg/enums/entities/SmoothSurfaceType.h>
-
-
 namespace dwg {
-namespace entities {
+namespace objects {
 
-class Polyline : public Entity, IPolyline
+/// Flags (bit-coded).
+enum MultiLeaderDrawOrderType
 {
-public:
-    double elevation;// 30
-    double thickness;// 39
-
-    XYZ normal;         // 210, 220, 230
-    PolylineFlags flags;// 70
-
-    double startWidth;// 40
-    double endWidth;  // 41
-
-    SmoothSurfaceType smoothSurface;// 75
-
-    CadObjectCollection<Vertex> vertices;
+    /// draw content first,
+    ContentFirst = 0,
+    /// draw leader first
+    LeaderFirst = 1
 };
 
-class Polyline2D : public Polyline
-{
-public:
-    Polyline2D();
-    ~Polyline2D();
-};
-
-class Polyline3D : public Polyline
-{
-public:
-    Polyline3D();
-    ~Polyline3D();
-};
-
-
-}// namespace entities
+}// namespace objects
 }// namespace dwg

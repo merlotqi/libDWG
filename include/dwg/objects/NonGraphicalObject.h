@@ -24,6 +24,7 @@
 
 #include <dwg/CadObject.h>
 #include <dwg/INamedCadObject.h>
+#include <string>
 
 namespace dwg {
 namespace objects {
@@ -31,7 +32,19 @@ namespace objects {
 
 class NonGraphicalObject : public CadObject, INamedCadObject
 {
+protected:
+    std::string _name;
+
 public:
+    NonGraphicalObject() = default;
+
+    NonGraphicalObject(const std::string &name) : _name(name) {}
+
+    virtual ~NonGraphicalObject() = default;
+
+    std::string Name() const override { return _name; }
+
+    void Name(const std::string &value) { _name = value; }
 };
 
 }// namespace objects

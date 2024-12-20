@@ -32,7 +32,6 @@
 namespace dwg {
 namespace entities {
 
-
 class Dimension : public Entity
 {
 public:
@@ -55,7 +54,6 @@ public:
     double textRotation;                  // 53, optional
     double horizontalDirection;           // 51, optional
     tables::DimensionStyle *dimStyle;     // 3, name
-
 
     virtual double measurement() const = 0;// 42, optional
 

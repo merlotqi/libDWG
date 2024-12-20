@@ -22,14 +22,12 @@
 
 #pragma once
 
+#include <dwg/entities/Entity.h>
 #include <dwg/enums/entities/BoundaryPathFlags.h>
 #include <vector>
 
-#include <dwg/entities/Entity.h>
-
 namespace dwg {
 namespace entities {
-
 
 class HatchBoundaryPath
 {

@@ -27,7 +27,6 @@
 namespace dwg {
 namespace entities {
 
-
 class Ellipse : Entity
 {
 public:

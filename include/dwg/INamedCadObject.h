@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <dwg/utils/delegate.h>
-
 namespace dwg {
 
 class INamedCadObject
@@ -31,10 +29,7 @@ class INamedCadObject
 public:
     INamedCadObject() = default;
     virtual ~INamedCadObject() = default;
-
-    std::string getName() const;
-
-    Delegate<void(const std::string &, const std::string &)> OnNameChanged;
+    virtual std::string Name() const = 0;
 };
 
 }// namespace dwg

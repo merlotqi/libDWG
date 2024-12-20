@@ -23,21 +23,16 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/utils/Color.h>
-
-
-#include <dwg/enums/entities/HatchPatternType.h>
-#include <dwg/enums/entities/HatchStyleType.h>
-
-
 #include <dwg/entities/HatchBoundaryPath.h>
 #include <dwg/entities/HatchGradientPattern.h>
 #include <dwg/entities/HatchPattern.h>
+#include <dwg/enums/entities/HatchPatternType.h>
+#include <dwg/enums/entities/HatchStyleType.h>
+#include <dwg/utils/Color.h>
 
 
 namespace dwg {
 namespace entities {
-
 
 class Hatch : public Entity
 {

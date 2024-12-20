@@ -63,12 +63,12 @@ public:
         std::string text;// 302
     };
 
-    MultiLeaderAnnotContext *contextData;
-    MultiLeaderStyle *style;
+    objects::MultiLeaderAnnotContext *contextData;
+    objects::MultiLeaderStyle *style;
 
     MultiLeaderPropertyOverrideFlags propertyOverrideFlags;// 90
     MultiLeaderPathType pathType;                          // 170
-    utils::Color lineColoe;                                // 91
+    Color lineColoe;                                       // 91
 
     tables::LineType leaderLineType;// 341
     LineweightType leaderLineWeight;// 171
@@ -81,7 +81,7 @@ public:
 
     double arrowheadSize;// 42
 
-    LeaderContentType contentType;// 172
+    objects::LeaderContentType contentType;// 172
 
 
     tables::TextStyle *textStyle;          // 343
@@ -89,11 +89,11 @@ public:
     TextAttachmentType textRightAttachment;// 95
     TextAngleType textAngle;               // 174
     TextAlignmentType textAlignment;       // 175
-    utils::Color textColor;                // 92
+    Color textColor;                       // 92
     bool textFrame;                        // 292
 
     tables::BlockRecord *blockContent;                // 344
-    utils::Color blockContentColor;                   // 93
+    Color blockContentColor;                          // 93
     XYZ blockContentScale;                            // 10, 20, 30
     double blockContentRotation;                      // 43
     BlockContentConnectionType blockContentConnection;// 176

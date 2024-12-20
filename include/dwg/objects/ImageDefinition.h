@@ -21,3 +21,35 @@
  */
 
 #pragma once
+
+#include <dwg/enums/objects/ResolutionUnit.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/utils/Coordinate.h>
+
+namespace dwg {
+namespace objects {
+
+class ImageDefinition : public NonGraphicalObject
+{
+public:
+    ImageDefinition();
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const
+    {
+        return DxfFileToken::ObjectImageDefinition;
+    }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::RasterImageDef;
+    }
+
+    int ClassVersion;         //90
+    std::string FileName;     // 1
+    XY Size;                  // 10, 20
+    XY DefaultSize = XY(1, 1);// 11, 21
+    bool IsLoaded = 200;
+    ResolutionUnit Units;// 281
+};
+
+}// namespace objects
+}// namespace dwg

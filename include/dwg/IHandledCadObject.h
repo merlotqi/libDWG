@@ -29,7 +29,7 @@ class IHandledCadObject
 public:
     IHandledCadObject() = default;
     virtual ~IHandledCadObject() = default;
-    virtual unsigned long handle() const = 0;
+    virtual unsigned long long Handle() const = 0;
 };
 
 }// namespace dwg

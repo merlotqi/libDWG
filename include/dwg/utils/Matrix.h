@@ -22,48 +22,14 @@
 
 #pragma once
 
-#include <dwg/CadObjectCollection.h>
-#include <dwg/entities/Entity.h>
-#include <dwg/entities/IPolyline.h>
-#include <dwg/entities/Vertex.h>
-#include <dwg/enums/entities/PolylineFlags.h>
-#include <dwg/enums/entities/SmoothSurfaceType.h>
-
-
 namespace dwg {
-namespace entities {
 
-class Polyline : public Entity, IPolyline
+struct Matrix4
 {
-public:
-    double elevation;// 30
-    double thickness;// 39
-
-    XYZ normal;         // 210, 220, 230
-    PolylineFlags flags;// 70
-
-    double startWidth;// 40
-    double endWidth;  // 41
-
-    SmoothSurfaceType smoothSurface;// 75
-
-    CadObjectCollection<Vertex> vertices;
+    double m00, m01, m02, m03;
+    double m10, m11, m12, m13;
+    double m20, m21, m22, m23;
+    double m30, m31, m32, m33;
 };
 
-class Polyline2D : public Polyline
-{
-public:
-    Polyline2D();
-    ~Polyline2D();
-};
-
-class Polyline3D : public Polyline
-{
-public:
-    Polyline3D();
-    ~Polyline3D();
-};
-
-
-}// namespace entities
 }// namespace dwg

@@ -23,22 +23,30 @@
 #pragma once
 
 namespace dwg {
-namespace tables {
+namespace objects {
 
-/// Standard flags for tables
-enum StandardFlags : short
+/// Flags (bit-coded).
+enum MLineStyleFlags
 {
     /// None
     None = 0,
-    /// If set, table entry is externally dependent on an xRef
-    XrefDependent = 16,
-    /// If both this bit and bit 16 are set, the externally dependent xRef has
-    /// been successfully resolved
-    XrefResolved = 32,
-    /// If set, the table entry was referenced by at least one entity in the
-    /// drawing the last time the drawing was edited.
-    Referenced = 64,
+    /// Fill on
+    FillOn = 1,
+    /// Display miters at the joints (inner vertexes)
+    DisplayJoints = 2,
+    /// Start square (line) cap
+    StartSquareCap = 16,
+    /// Start inner arcs cap
+    StartInnerArcsCap = 32,
+    /// Start round (outer arcs) cap
+    StartRoundCap = 64,
+    /// End square (line) cap
+    EndSquareCap = 256,
+    /// End inner arcs cap
+    EndInnerArcsCap = 512,
+    /// End round (outer arcs) cap
+    EndRoundCap = 1024
 };
 
-}// namespace tables
+}// namespace objects
 }// namespace dwg

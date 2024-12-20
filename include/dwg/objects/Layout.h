@@ -21,3 +21,59 @@
  */
 
 #pragma once
+
+#include <dwg/enums/OrthographicType.h>
+#include <dwg/enums/objects/LayoutFlags.h>
+#include <dwg/objects/PlotSettings.h>
+#include <dwg/utils/Coordinate.h>
+#include <string>
+
+namespace dwg {
+namespace objects {
+
+
+class Layout : PlotSettings
+{
+public:
+    Layout(const std::string &name,
+           const std::string &blockName = std::string())
+    {
+    }
+
+    static constexpr auto ModelLayoutName = "Model";
+    static constexpr auto PaperLayoutName = "Layout1";
+
+    dwg::ObjectType ObjectType() const { return ObjectType::LAYOUT; }
+    std::string ObjectName() const { return DxfFileToken::ObjectLayout; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::Layout; }
+
+    // 70
+    LayoutFlags LayoutFlags;
+    // 71
+    int TabOrder;
+    XY MinLimites = XY(-20.0, -7.5);        // 10, 20
+    XY MaxLimits = XY(277.0, 202.5);        // 11, 21
+    XYZ InsertionBasePoint;                 // 12, 22, 32
+    XYZ MinExtents = XYZ(25.7, 19.5, 0.0);  // 14, 24, 34
+    XYZ MaxExtents = XYZ(231.3, 175.5, 0.0);// 15, 25, 35
+    double Elevation;                       // 146
+    XYZ Origin = XYZ::Zero;                 // 13, 23, 33
+    XYZ XAxis = XYZ::AxisX;                 // 16, 26, 36
+    XYZ YAxis = XYZ::AxisY;                 // 17, 27, 37
+    OrthographicType UcsOrthographicType;   // 76
+
+    /// The associated paper space block table record.
+    unsigned long long AssociatedBlockHandle;
+    ;// 330
+    /// Viewport that was last active in this layout when the layout was current.
+    unsigned long long ViewportHandle;// 331
+    /// UCS Table Record if UCS is a named UCS.
+    unsigned long long USCHandle;    // 345
+    unsigned long long BaseUSCHandle;// 346
+
+
+    bool IsPaperSpace() const;
+};
+
+}// namespace objects
+}// namespace dwg

@@ -21,3 +21,56 @@
  */
 
 #pragma once
+
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/utils/Coordinate.h>
+#include <type_traits>
+
+namespace dwg {
+namespace objects {
+
+class Scale : public NonGraphicalObject
+{
+public:
+    static Scale Default;
+    Scale() = default;
+    Scale(const std::string &name);
+    Scale(const std::string &name, double paperUnits, double drawingUnits,
+          bool isUnitScale)
+        : NonGraphicalObject(name), PaperUnits(paperUnits),
+          DrawingUnits(drawingUnits), IsUnitScale(isUnitScale)
+    {
+    }
+
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const { return DxfFileToken::ObjectScale; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::Scale; }
+
+    // 140)]
+    double PaperUnits;
+    // 141)]
+    double DrawingUnits;
+    // 290)]
+    bool IsUnitScale;
+
+    double ScaleFactor() const { return PaperUnits / DrawingUnits; }
+
+
+    double ApplyTo(double value) { return value * ScaleFactor(); }
+
+    template<class T>
+    T ApplyTo(T value)
+    {
+        T result;
+        static_assert(std::is_base_of<IVector>::value, "");
+        for (size_t i = 0; i < value.Dimension; ++i)
+        {
+            result[i] = ApplyTo(value[i]);
+        }
+        return result;
+    }
+};
+
+Scale Scale::Default = Scale("1:1", 1.0, 1.0, true);
+}// namespace objects
+}// namespace dwg

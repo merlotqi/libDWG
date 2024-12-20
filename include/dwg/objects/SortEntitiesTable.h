@@ -21,3 +21,45 @@
  */
 
 #pragma once
+
+#include <dwg/entities/Entity.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/tables/BlockRecord.h>
+#include <vector>
+
+namespace dwg {
+namespace objects {
+
+class SortEntitiesTable : NonGraphicalObject
+{
+public:
+    struct Sorter
+    {
+        entities::Entity *Entity;
+        unsigned long long _handle;
+        Sorter(entities::Entity *entity, unsigned long long handle)
+        {
+            Entity = entity;
+            _handle = handle;
+        }
+    };
+
+    static constexpr auto DictionaryEntryName = "ACAD_SORTENTS";
+
+
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const { return DxfFileToken::ObjectSortEntsTable; }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::SortentsTable;
+    }
+
+    // (330)]
+    tables::BlockRecord BlockOwner;
+
+
+    std::vector<Sorter> Sorters;
+};
+
+}// namespace objects
+}// namespace dwg

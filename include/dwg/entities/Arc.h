@@ -30,7 +30,7 @@ namespace entities {
 class Arc : public Circle
 {
 public:
-    Arc();
+    Arc() = default;
     double StartAngle;// 50
     double EndAngle;  // 51
 };

@@ -21,3 +21,50 @@
  */
 
 #pragma once
+
+#include <dwg/CadObject.h>
+#include <dwg/entities/Entity.h>
+#include <dwg/utils/Coordinate.h>
+#include <vector>
+
+namespace dwg {
+namespace objects {
+
+
+class BlockVisibilityParameter : public CadObject
+{
+public:
+    BlockVisibilityParameter();
+    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    std::string ObjectName() const
+    {
+        return DxfFileToken::ObjectBlockVisibilityParameter;
+    }
+    std::string SubclassMarker() const
+    {
+        return DxfSubclassMarker::BlockVisibilityParameter;
+    }
+
+
+    struct SubBlock
+    {
+        std::string Name;
+        std::vector<entities::Entity *> Entities;
+    };
+
+    std::vector<entities::Entity *> Entities;
+    std::vector<SubBlock> SubBlocks;
+    // 1010, 1020, 1030
+    XYZ BasePosition;
+    // 300
+    std::string ParameterType;
+    // 301
+    std::string Name;
+    // 302
+    std::string Description;
+    // 91
+    int L91;
+};
+
+}// namespace objects
+}// namespace dwg

@@ -22,13 +22,11 @@
 
 #pragma once
 
+#include <dwg/entities/MText.h>
 #include <dwg/entities/TextEntity.h>
-
 #include <dwg/enums/entities/AttributeFlags.h>
 #include <dwg/enums/entities/TextVerticalAlignmentType.h>
 
-
-#include <dwg/entities/MText.h>
 
 namespace dwg {
 namespace entities {

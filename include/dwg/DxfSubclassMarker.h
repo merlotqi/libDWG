@@ -26,6 +26,7 @@ namespace dwg {
 
 class DxfSubclassMarker
 {
+public:
     static constexpr auto ApplicationId = "AcDbRegAppTableRecord";
     static constexpr auto AcDbPlaceHolder = "AcDbPlaceHolder";
     static constexpr auto Table = "AcDbSymbolTable";

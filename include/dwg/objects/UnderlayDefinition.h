@@ -21,3 +21,18 @@
  */
 
 #pragma once
+
+
+#include <dwg/objects/NonGraphicalObject.h>
+
+namespace dwg {
+namespace objects {
+
+class UnderlayDefinition : public NonGraphicalObject
+{
+public:
+    std::string File;// 1
+};
+
+}// namespace objects
+}// namespace dwg

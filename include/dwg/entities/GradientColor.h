@@ -25,15 +25,14 @@
 #include <dwg/utils/Color.h>
 
 namespace dwg {
-
 namespace entities {
 
 class GradientColor
 {
 public:
     GradientColor();
-    double value;      // 463
-    utils::Color color;// 421
+    double Value;// 463
+    Color Color; // 421
 };
 
 }// namespace entities

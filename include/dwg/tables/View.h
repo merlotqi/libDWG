@@ -22,6 +22,9 @@
 
 #pragma once
 
+#include <dwg/enums/OrthographicType.h>
+#include <dwg/enums/RenderMode.h>
+#include <dwg/enums/tables/ViewModeType.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -29,11 +32,51 @@ namespace tables {
 
 class View : public TableEntry
 {
+public:
+    View() = default;
+    View(const std::string &name) : TableEntry(name) {}
+    double Height;
+    double Width;
+    double LensLength;
+    double FrontClipping;
+    double BackClipping;
+    double Angle;
+    ViewModeType ViewMode;
+    bool IsUcsAssociated = false;
+    bool IsPlottable;
+    RenderMode RenderMode;
+
+    XY Center;
+    XYZ Direction;
+    XYZ Target;
+
+    unsigned long long VisualStyleHandle;
+
+    XYZ UcsOrigin;
+    XYZ UcsXAxis;
+    XYZ UcsYAxis;
+    double UcsElevation;
+
+    OrthographicType UcsOrthographicType;
 };
 
 class ViewsTable : public Table<View>
 {
+public:
+    ViewsTable() = default;
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::VIEW_CONTROL_OBJ;
+    }
+    std::string ObjectName() const override { return DxfFileToken::TableView; }
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return std::vector<std::string>();
+    }
 };
+
 
 }// namespace tables
 }// namespace dwg

@@ -20,8 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#ifndef LIBDWG_APPID_H
-#define LIBDWG_APPID_H
+#pragma once
 
 #include <dwg/tables/TableEntry.h>
 
@@ -33,7 +32,7 @@ class AppId : public TableEntry
 public:
     static constexpr auto DefaultName = "libDWG";
 
-    ObjectType ObjectType() const override { return ObjectType::APPID; }
+    dwg::ObjectType ObjectType() const override { return ObjectType::APPID; }
     std::string ObjectName() const { return DxfFileToken::TableAppId; }
     std::string SubclassMarker() const
     {
@@ -45,10 +44,20 @@ public:
 
 class AppIdsTable : public Table<AppId>
 {
+public:
+    AppIdsTable() = default;
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::APPID_CONTROL_OBJ;
+    }
+    std::string ObjectName() const override { return DxfFileToken::TableAppId; }
+
+protected:
+    std::vector<std::string> defaultEntries() const override
+    {
+        return {AppId::DefaultName};
+    }
 };
 
 }// namespace tables
 }// namespace dwg
-
-
-#endif// LIBDWG_APPID_H

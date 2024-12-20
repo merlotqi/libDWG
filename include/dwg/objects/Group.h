@@ -21,3 +21,28 @@
  */
 
 #pragma once
+
+#include <dwg/entities/Entity.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <map>
+
+namespace dwg {
+namespace objects {
+
+
+class Group : public NonGraphicalObject
+{
+public:
+    Group();
+    dwg::ObjectType ObjectType() const { return ObjectType::GROUP; }
+    std::string ObjectName() const { return DxfFileToken::TableGroup; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::Group; }
+
+    std::string Description;// 300
+    bool IsUnnamed;         // 71
+    bool Selectable;        // 71
+    std::map<unsigned long long, entities::Entity *> Entities;
+};
+
+}// namespace objects
+}// namespace dwg

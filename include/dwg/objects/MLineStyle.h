@@ -22,12 +22,48 @@
 
 #pragma once
 
+#include <dwg/enums/objects/MLineStyleFlags.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/utils/Color.h>
+
+
 namespace dwg {
 namespace objects {
 
-class MLineStyle
+class MLineStyle : public NonGraphicalObject
 {
+public:
+    MLineStyle();
+    MLineStyle(const std::string &name) : NonGraphicalObject(name) {}
+
+    static constexpr auto DefaultName = "Standard";
+    static MLineStyle Default;
+
+    dwg::ObjectType ObjectType() const { return ObjectType::MLINESTYLE; }
+    std::string ObjectName() const { return DxfFileToken::ObjectMLineStyle; }
+    std::string SubclassMarker() const { return DxfSubclassMarker::MLineStyle; }
+
+
+    // 70
+    MLineStyleFlags Flags;
+    std::string Description;         // 3
+    Color FillColor = Color::ByLayer;// 62
+    double StartAngle = M_PI / 2.0;  // 51
+    double EndAngle = M_PI / 2.0;    // 52
+
+
+    struct Element
+    {
+        double Offset;               // 49
+        Color Color = Color::ByBlock;// 62
+        tables::LineType LineType = tables::LineType::ByLayer;
+    };
+
+    std::vector<Element> Elements;// count 71
 };
+
+MLineStyle MLineStyle::Default = MLineStyle(MLineStyle::DefaultName);
 
 }// namespace objects
 }// namespace dwg
