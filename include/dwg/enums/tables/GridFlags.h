@@ -22,10 +22,12 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
-enum GridFlags : short
+enum GridFlag : short
 {
     _0 = 0,
     _1 = 1,
@@ -33,6 +35,7 @@ enum GridFlags : short
     _3 = 4,
     _4 = 8,
 };
+DECLARE_FLAGS(GridFlags, GridFlag)
 
 }// namespace tables
 }// namespace dwg

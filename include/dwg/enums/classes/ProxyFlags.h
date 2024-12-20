@@ -22,10 +22,12 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace classes {
 
-enum ProxyFlags : unsigned short
+enum ProxyFlag : unsigned short
 {
     /// None.
     None = 0,
@@ -58,6 +60,7 @@ enum ProxyFlags : unsigned short
     /// R13 format proxy.
     R13FormatProxy = 32768,
 };
+DECLARE_FLAGS(ProxyFlags, ProxyFlag)
 
 }// namespace classes
 }// namespace dwg

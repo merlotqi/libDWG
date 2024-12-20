@@ -22,10 +22,12 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
-enum ImageDisplayFlags : short
+enum ImageDisplayFlag : short
 {
     /// None
     None = 0,
@@ -38,6 +40,7 @@ enum ImageDisplayFlags : short
     /// Transparency is on
     TransparencyIsOn = 8
 };
+DECLARE_FLAGS(ImageDisplayFlags, ImageDisplayFlag)
 
 }// namespace entities
 }// namespace dwg

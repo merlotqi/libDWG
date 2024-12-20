@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace objects {
 
 /// Duplicate record cloning flag (determines how to merge duplicate entries).
-enum DictionaryCloningFlags : short
+enum DictionaryCloningFlag : short
 {
     /// Not applicable.
     NotApplicable = 0,
@@ -35,12 +37,13 @@ enum DictionaryCloningFlags : short
     /// Use clone.
     UseClone = 2,
     /// External reference name.
-    XrefName = 3,
+    XrefName = 4,
     /// Name.
-    Name = 4,
+    Name = 8,
     /// Unmangle name.
-    UnmangleName = 5
+    UnmangleName = 16
 };
+DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag)
 
 }// namespace objects
 }// namespace dwg

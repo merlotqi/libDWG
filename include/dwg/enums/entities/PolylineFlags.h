@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Defines the polyline flags.
-enum PolylineFlags
+enum PolylineFlag
 {
     /// Default, open polyline.
     Default = 0,
@@ -47,6 +49,7 @@ enum PolylineFlags
     /// The line type pattern is generated continuously around the vertexes of this polyline.
     ContinuousLinetypePattern = 128
 };
+DECLARE_FLAGS(PolylineFlags, PolylineFlag)
 
 }// namespace entities
 }// namespace dwg

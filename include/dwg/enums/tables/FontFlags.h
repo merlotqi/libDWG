@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
 /// Represent the font character formatting, such as italic, bold, or regular.
-enum FontFlags
+enum FontFlag
 {
     /// Regular.
     Regular = 0,
@@ -35,6 +37,7 @@ enum FontFlags
     /// Bold.
     Bold = 2
 };
+DECLARE_FLAGS(FontFlags, FontFlag)
 
 }// namespace tables
 }// namespace dwg

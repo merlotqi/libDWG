@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
 /// Represents a line type complex element type.
-enum LinetypeShapeFlags : short
+enum LinetypeShapeFlag : short
 {
     /// None.
     None = 0,
@@ -40,6 +42,7 @@ enum LinetypeShapeFlags : short
     /// Complex shape code holds the index into the text area of the string to be drawn.
     Shape = 4,
 };
+DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag)
 
 }// namespace tables
 }// namespace dwg

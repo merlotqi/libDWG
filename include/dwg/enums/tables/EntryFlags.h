@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
 /// Standard entry flags (bit-coded values).
-enum EntryFlags
+enum EntryFlag
 {
     /// Default
     None = 0,
@@ -38,6 +40,8 @@ enum EntryFlags
     /// drawing was edited.
     Referenced = 64
 };
+
+DECLARE_FLAGS(EntryFlags, EntryFlag)
 
 }// namespace tables
 }// namespace dwg

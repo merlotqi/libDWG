@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Represents a background fill flags
-enum BackgroundFillFlags : unsigned char
+enum BackgroundFillFlag : unsigned char
 {
     /// None
     None = 0,
@@ -40,6 +42,7 @@ enum BackgroundFillFlags : unsigned char
     /// Adds a text frame
     TextFrame = 16,// 0x10
 };
+DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
 
 }// namespace entities
 }// namespace dwg

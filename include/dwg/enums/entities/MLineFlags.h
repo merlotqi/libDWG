@@ -22,24 +22,24 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Flags (bit-coded values)
-enum MLineFlags
+enum MLineFlag
 {
     /// Has at least one vertex (code 72 is greater than 0)
     Has = 1,
-
     /// Closed
     Closed = 2,
-
     /// Suppress start caps
     NoStartCaps = 4,
-
     /// Suppress end caps
     NoEndCaps = 8
 };
+DECLARE_FLAGS(MLineFlags, MLineFlag)
 
 }// namespace entities
 }// namespace dwg

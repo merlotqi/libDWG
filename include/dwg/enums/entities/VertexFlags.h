@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Defines the vertex flags.
-enum VertexFlags
+enum VertexFlag
 {
     /// Default.
     Default = 0,
@@ -48,6 +50,7 @@ enum VertexFlags
     /// Polyface mesh vertex.
     PolyfaceMeshVertex = 128
 };
+DECLARE_FLAGS(VertexFlags, VertexFlag)
 
 }// namespace entities
 }// namespace dwg

@@ -37,12 +37,12 @@ public:
     constexpr inline Flag(unsigned int value) noexcept : i(int(value)) {}
     constexpr inline Flag(short value) noexcept : i(int(value)) {}
     constexpr inline Flag(unsigned short value) noexcept
-        : i(int(unsigned int(value)))
+        : i(int((unsigned int) (value)))
     {
     }
     constexpr inline operator unsigned int() const noexcept
     {
-        return unsigned int(i);
+        return (unsigned int) (i);
     }
 };
 
@@ -147,6 +147,6 @@ private:
     int i;
 };
 
-#define DECLARE_FLAGS(Flags, Enum) typedef Flags<Enum> Flags;
+#define DECLARE_FLAGS(F, E) typedef dwg::Flags<E> F;
 
 }// namespace dwg

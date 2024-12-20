@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Defines the spline flags
-enum SplineFlags : unsigned short
+enum SplineFlag : unsigned short
 {
     /// None
     None = 0,
@@ -46,9 +48,10 @@ enum SplineFlags : unsigned short
     /// Linear (planar flag is also set)
     Linear = 16,
 };
+DECLARE_FLAGS(SplineFlags, SplineFlag)
 
 /// Defines the spline flags 1
-enum SplineFlags1 : unsigned short
+enum SplineFlag1 : unsigned short
 {
     /// None
     None = 0,
@@ -65,6 +68,7 @@ enum SplineFlags1 : unsigned short
     /// Use knot parameter
     UseKnotParameter = 8,
 };
+DECLARE_FLAGS(SplineFlags1, SplineFlag1)
 
 }// namespace entities
 }// namespace dwg

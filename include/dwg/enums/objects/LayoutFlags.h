@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace objects {
 
 /// Layout flags
-enum LayoutFlags : short
+enum LayoutFlag : short
 {
     /// None
     None = 0,
@@ -35,6 +37,7 @@ enum LayoutFlags : short
     /// Indicates the LIMCHECK value for this layout when this layout is current
     LimitsChecking = 2,
 };
+DECLARE_FLAGS(LayoutFlags, LayoutFlag)
 
 }// namespace objects
 }// namespace dwg

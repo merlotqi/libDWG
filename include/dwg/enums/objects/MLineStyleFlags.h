@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace objects {
 
 /// Flags (bit-coded).
-enum MLineStyleFlags
+enum MLineStyleFlag
 {
     /// None
     None = 0,
@@ -47,6 +49,7 @@ enum MLineStyleFlags
     /// End round (outer arcs) cap
     EndRoundCap = 1024
 };
+DECLARE_FLAGS(MLineStyleFlags, MLineStyleFlag)
 
 }// namespace objects
 }// namespace dwg

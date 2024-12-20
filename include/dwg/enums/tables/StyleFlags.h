@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
 /// Standard layer flags (bit-coded values).
-enum StyleFlags
+enum StyleFlag
 {
     /// Default
     None = 0,
@@ -47,6 +49,7 @@ enum StyleFlags
     /// drawing was edited.
     Referenced = 64
 };
+DECLARE_FLAGS(StyleFlags, StyleFlag)
 
 }// namespace tables
 }// namespace dwg

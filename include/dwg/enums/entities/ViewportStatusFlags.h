@@ -22,11 +22,12 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
 namespace dwg {
 namespace entities {
 
 /// viewport status flags
-enum ViewportStatusFlags
+enum ViewportStatusFlag
 {
     /// Enables perspective mode.
     PerspectiveMode = 1,
@@ -91,6 +92,8 @@ enum ViewportStatusFlags
     /// Enables subdivision of the grid below the set grid spacing when the grid display is adaptive.
     SubdivisionGridBelowSpacing = 1048576
 };
+
+DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag)
 
 }// namespace entities
 }// namespace dwg

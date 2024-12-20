@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Underlay display options.
-enum UnderlayDisplayFlags : unsigned char
+enum UnderlayDisplayFlag : unsigned char
 {
     /// Clipping is on.
     ClippingOn = 1,
@@ -43,6 +45,7 @@ enum UnderlayDisplayFlags : unsigned char
     /// Clip is inside mode.
     ClipInsideMode = 16
 };
+DECLARE_FLAGS(UnderlayDisplayFlags, UnderlayDisplayFlag)
 
 }// namespace entities
 }// namespace dwg

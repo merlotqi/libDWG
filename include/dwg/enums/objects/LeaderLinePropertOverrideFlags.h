@@ -22,39 +22,22 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace objects {
 
-/// These flags specify whether properties of a leader line primarily defined by the object are overridden for an individual leader line.
-enum LeaderLinePropertOverrideFlags : int
+enum LeaderLinePropertOverrideFlag : int
 {
-    /// No property to be overridden
     None = 0,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.PathType" /> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     PathType = 1,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.LineColor" /> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     LineColor = 2,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.LineType"/> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     LineType = 4,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.LineWeight" /> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     LineWeight = 8,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.ArrowheadSize" /> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     ArrowheadSize = 16,
-
-    /// <see cref="MultiLeaderAnnotContext.LeaderLine.Arrowhead" /> property
-    /// overrides settings from <see cref="MultiLeader"/> and <see cref="MultiLeaderStyle"/>.
     Arrowhead = 32,
 };
+DECLARE_FLAGS(LeaderLinePropertOverrideFlags, LeaderLinePropertOverrideFlag)
 
 }// namespace objects
 }// namespace dwg

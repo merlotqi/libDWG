@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace tables {
 
 /// Standard flags for tables
-enum StandardFlags : short
+enum StandardFlag : short
 {
     /// None
     None = 0,
@@ -41,6 +43,7 @@ enum StandardFlags : short
     /// drawing was edited.
     Referenced = 64,
 };
+DECLARE_FLAGS(StandardFlags, StandardFlag)
 
 }// namespace tables
 }// namespace dwg

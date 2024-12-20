@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 ///Attribute flags.
-enum AttributeFlags
+enum AttributeFlag
 {
     /// No flags.
     None = 0,
@@ -39,6 +41,7 @@ enum AttributeFlags
     /// Attribute is preset (no prompt during insertion).
     Preset = 8
 };
+DECLARE_FLAGS(AttributeFlags, AttributeFlag)
 
 }// namespace entities
 }// namespace dwg

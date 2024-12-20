@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace objects {
 
 /// Defines the plot settings flag.
-enum PlotFlags
+enum PlotFlag
 {
     /// None
     None = 0,
@@ -73,6 +75,8 @@ enum PlotFlags
     /// Preview plot initialization.
     PrevPlotInit = 16384
 };
+
+DECLARE_FLAGS(PlotFlags, PlotFlag)
 
 }// namespace objects
 }// namespace dwg

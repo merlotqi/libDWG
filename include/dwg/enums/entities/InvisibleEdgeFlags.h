@@ -22,10 +22,12 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 /// Defines which edges are hidden.
-enum InvisibleEdgeFlags
+enum InvisibleEdgeFlag
 {
     /// No flags equivalent to all edges are visible.
     None = 0,
@@ -38,6 +40,7 @@ enum InvisibleEdgeFlags
     /// Fourth edge is invisible.
     Fourth = 8
 };
+DECLARE_FLAGS(InvisibleEdgeFlags, InvisibleEdgeFlag)
 
 }// namespace entities
 }// namespace dwg

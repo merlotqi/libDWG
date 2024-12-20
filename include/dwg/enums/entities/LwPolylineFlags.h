@@ -22,16 +22,19 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Polyline flag (bit-coded)
-enum LwPolylineFlags
+enum LwPolylineFlag
 {
     Default = 0,
     Closed = 1,
     Plinegen = 128
 };
+DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
 
 }// namespace entities
 }// namespace dwg

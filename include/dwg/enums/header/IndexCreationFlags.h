@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace header {
 
 /// Controls whether layer and spatial indexes are created and saved in drawing files
-enum IndexCreationFlags : unsigned char
+enum IndexCreationFlag : unsigned char
 {
     /// No indexes are created
     NoIndex = 0b0,
@@ -37,6 +39,7 @@ enum IndexCreationFlags : unsigned char
     /// Layer and spatial indexes are created
     LayerAndSpatialIndex = 0b11
 };
+DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag)
 
 }// namespace header
 }// namespace dwg

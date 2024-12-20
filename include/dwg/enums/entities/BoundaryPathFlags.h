@@ -22,12 +22,14 @@
 
 #pragma once
 
+#include <dwg/utils/Flags.h>
+
 namespace dwg {
 namespace entities {
 
 /// Defines the boundary path type of the hatch.
 /// \remarks Bit flag
-enum BoundaryPathFlags
+enum BoundaryPathFlag
 {
     /// Default.
     Default = 0,
@@ -60,6 +62,7 @@ enum BoundaryPathFlags
     /// Describes if the hatch is an annotative block.
     IsAnnotativeBlock = 8192,
 };
+DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
 
 }// namespace entities
 }// namespace dwg
