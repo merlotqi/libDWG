@@ -68,6 +68,12 @@ public:
     LayersTable() = default;
     std::string ObjectName() const { return DxfFileToken::TableLayer; }
 
+public:
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::APPID_CONTROL_OBJ;
+    }
+
 protected:
     std::vector<std::string> defaultEntries() const
     {

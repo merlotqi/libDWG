@@ -22,6 +22,12 @@
 
 #pragma once
 
+#include <dwg/io/dwg/DwgSectionIO.h>
+#include <dwg/CadDocument.h>
+#include <dwg/utils/Encoding.h>
+#include <dwg/tables/TableEntry.h>
+#include <map>
+
 namespace dwg {
 namespace io {
 
@@ -33,7 +39,7 @@ class DwgObjectWriter : public DwgSectionIO
 public:
     DwgObjectWriter(std::ostream *stream, CadDocument *document,
                     Encoding encoding, bool writeXRecords = true)
-        : DwgSectionIO(document->Header().Version)
+        : DwgSectionIO(document->Header.Version)
     {
     }
 
@@ -43,9 +49,9 @@ private:
     void writeLTypeControlObject();
     void writeBlockControl();
     template<class T>
-    void writeTable(Table<T> table);
+    void writeTable(tables::Table<T> table);
     template<class T>
-    void writeEntries(Table<T> table);
+    void writeEntries(tables::Table<T> table);
 
     void writeBlockEntities();
     void writeAppId(AppId *app);

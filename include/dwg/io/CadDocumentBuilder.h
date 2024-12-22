@@ -23,6 +23,17 @@
 #pragma once
 
 #include <dwg/io/CadDocumentBuilder.h>
+#include <dwg/enums/ACadVersion.h>
+#include <dwg/CadDocument.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/tables/View.h>
+#include <dwg/tables/VPort.h>
 
 namespace dwg {
 namespace io {
@@ -33,20 +44,19 @@ class CadDocumentBuilder
 public:
     ACadVersion Version;
     CadDocument *DocumentToBuild;
-    AppIdsTable AppIds;
-    BlockRecordsTable BlockRecords;
-    BlockRecordsTable BlockRecords;
-    DimensionStylesTable DimensionStyles;
-    LayersTable Layers;
-    LineTypesTable LineTypesTable;
-    TextStylesTable TextStyles;
-    UCSTable UCSs;
-    ViewsTable Views;
-    VPortsTable VPorts;
+    tables::AppIdsTable AppIds;
+    tables::BlockRecordsTable BlockRecords;
+    tables::DimensionStylesTable DimensionStyles;
+    tables::LayersTable Layers;
+    tables::LineTypesTable LineTypesTable;
+    tables::TextStylesTable TextStyles;
+    tables::UCSTable UCSs;
+    tables::ViewsTable Views;
+    tables::VPortsTable VPorts;
 
-    abstract bool KeepUnknownEntities;
+    bool KeepUnknownEntities;
 
-    abstract bool KeepUnknownNonGraphicalObjects;
+    bool KeepUnknownNonGraphicalObjects;
 
     unsigned long long InitialHandSeed;
 

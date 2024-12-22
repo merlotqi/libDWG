@@ -33,6 +33,7 @@ class Encoding
     CodePage _codePage;
 
 public:
+    Encoding() = default;
     Encoding(CodePage codePage);
     virtual ~Encoding() = default;
 

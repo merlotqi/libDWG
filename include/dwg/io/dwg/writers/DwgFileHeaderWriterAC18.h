@@ -22,7 +22,12 @@
 
 #pragma once
 
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18.h>
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase.h>
+#include <dwg/io/dwg/writers/DwgLZ77AC18Compressor.h>
+#include <dwg/io/dwg/writers/ICompressor.h>
 
 namespace dwg {
 namespace io {
@@ -45,10 +50,10 @@ public:
                             CadDocument *document)
         : DwgFileHeaderWriterBase(stream, encoding, document)
     {
-        _descriptors = _fileHeader.Descriptors;
+        _descriptors = _fileHeader->Descriptors;
         compressor = new DwgLZ77AC18Compressor();
         // File header info
-        for (int i = 0; i < _fileHeaderSize; i++)
+        for (int i = 0; i < _fileHeaderSize(); i++)
         {
             char b = 0;
             _stream->write(&b, sizeof(char));
@@ -67,7 +72,7 @@ public:
         writeFileMetaData();
     }
 
-    void AddSection(const std::string &name, std::ostringstream *stream,
+    void AddSection(std::string &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) override
     {
         DwgSectionDescriptor descriptor(name);
@@ -190,7 +195,7 @@ protected:
         return stream;
     }
 
-private
+private:
     void writeDescriptors()
     {
         MemoryStream stream = new MemoryStream();
@@ -209,7 +214,7 @@ private
 
         //0x10	4	Unknown (long), ODA writes NumDescriptions here.
         swriter.WriteInt(_descriptors.Count);
-        foreach (var descriptors in _descriptors.Values)
+        for (var descriptors in _descriptors.Values)
         {
             //0x00	8	Size of section(OdUInt64)
             swriter.WriteBytes(LittleEndianConverter.Instance.GetBytes(
@@ -272,7 +277,7 @@ private
         addSection(sectionHolder);
     }
 
-public
+public:
     void writeRecords()
     {
         writeMagicNumber();

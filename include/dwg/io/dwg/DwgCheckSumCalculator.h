@@ -29,6 +29,7 @@ namespace io {
 
 class DwgCheckSumCalculator
 {
+public:
     static unsigned char MagicSequence[];
     static int CompressionCalculator(int length)
     {

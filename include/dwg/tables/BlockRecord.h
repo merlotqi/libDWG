@@ -22,8 +22,11 @@
 
 #pragma once
 
+#include <dwg/CadObjectCollection.h>
+#include <dwg/blocks/Block.h>
+#include <dwg/blocks/BlockEnd.h>
 #include <dwg/entities/Viewport.h>
-#include <dwg/enums/blockes/BlockTypeFlags.h>
+#include <dwg/enums/blocks/BlockTypeFlags.h>
 #include <dwg/enums/units/UnitsType.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/TableEntry.h>
@@ -34,24 +37,26 @@ namespace tables {
 class BlockRecord : public TableEntry
 {
 public:
+    BlockRecord(const std::string &name) : TableEntry(name) {}
+
     static constexpr auto ModelSpaceName = "*Model_Space";
     static constexpr auto PaperSpaceName = "*Paper_Space";
 
     static BlockRecord *ModelSpace()
     {
         BlockRecord *record = new BlockRecord(ModelSpaceName);
-        Layout *layout = new Layout();
-        layout->Name = Layout::ModelLayoutName;
-        layout->AssociatedBlock(record);
+        // objects::Layout *layout = new objects::Layout();
+        // layout->Name = Layout::ModelLayoutName;
+        // layout->AssociatedBlock(record);
         return record;
     }
 
     static BlockRecord *PaperSpace()
     {
         BlockRecord *record = new BlockRecord(PaperSpaceName);
-        Layout *layout = new Layout();
-        layout->Name = Layout::PaperLayoutName;
-        layot->AssociatedBlock(record);
+        // objects::Layout *layout = new objects::Layout();
+        // layout->Name = Layout::PaperLayoutName;
+        // layot->AssociatedBlock(record);
         return record;
     }
 
@@ -63,30 +68,42 @@ public:
     {
         return DxfFileToken::TableBlockRecord;
     }
-    std::string SubclasMarker() const override
+    std::string SubclassMarker() const override
     {
-        return DxfSubclasMarker::BlockRecord;
+        return DxfSubclassMarker::BlockRecord;
     }
 
     units::UnitsType Units;
 
-    blockes::BlockTypeFlags Flags;
+    blocks::BlockTypeFlags Flags;
 
     bool IsExplodable;                 // 280
     bool CanScale;                     // 281
     std::vector<unsigned char> Preview;// 310
-    Layout *Layout;                    // handle 340
+    objects::Layout *Layout;           // handle 340
+    unsigned long long LayoutHandle;   // 340
 
     bool HasAttributes;
     std::vector<entities::Viewport> Viewports;
-    CadObjectCollection<Entity *> Entities;
+    CadObjectCollection<entities::Entity *> Entities;
 
-    Block BlockEntity;
-    BlockEnd BlockEnd;
+    blocks::Block BlockEntity;
+    blocks::BlockEnd BlockEnd;
 };
 
 class BlockRecordsTable : public Table<BlockRecord>
 {
+public:
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::APPID_CONTROL_OBJ;
+    }
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
+    }
 };
 
 }// namespace tables

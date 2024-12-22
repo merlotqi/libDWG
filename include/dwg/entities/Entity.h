@@ -35,7 +35,7 @@
 namespace dwg {
 namespace entities {
 
-class Entity : public CadObject, IHandledCadObject
+class Entity : public CadObject
 {
 public:
     Entity();

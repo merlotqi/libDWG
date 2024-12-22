@@ -72,7 +72,7 @@ public:
     double LastHeight;        // 42
     double ObliqueAngle = 0.0;// 50
     entities::TextMirrorFlag MirrorFlag = entities::TextMirrorFlag::None;
-    FontFlags TrueType = FontFlags::Regular;
+    FontFlags TrueType = FontFlag::Regular;
 
     TextStyle() {}
     TextStyle(const std::string &name) : TableEntry(name) {}
@@ -84,6 +84,10 @@ class TextStylesTable : public Table<TextStyle>
 {
 public:
     TextStylesTable() = default;
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::APPID_CONTROL_OBJ;
+    }
 
 protected:
     std::vector<std::string> defaultEntries() const

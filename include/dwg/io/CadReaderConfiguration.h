@@ -25,30 +25,15 @@
 namespace dwg {
 namespace io {
 
-
 class CadReaderConfiguration
 {
-    bool m_failsafe;
-    bool m_keepUnknownEntities;
-    bool m_keepUnknownNonGraphicalObjects;
-
 public:
-    CadReaderConfiguration()
-    {
-        m_failsafe = true;
-        m_keepUnknownEntities = false;
-        m_keepUnknownNonGraphicalObjects = false;
-    }
+    CadReaderConfiguration() = default;
     virtual ~CadReaderConfiguration() = default;
 
-    bool Failsafe() const;
-    void Failsafe(bool value);
-
-    bool KeepUnknownEntities() const;
-    void KeepUnknownEntities(bool value);
-
-    bool KeepUnknownNonGraphicalObjects() const;
-    void KeepUnknownNonGraphicalObjects(bool value);
+    bool Failsafe = true;
+    bool KeepUnknownEntities = false;
+    bool KeepUnknownNonGraphicalObjects = false;
 };
 
 }// namespace io

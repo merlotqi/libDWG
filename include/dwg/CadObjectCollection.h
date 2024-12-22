@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/IObservableCadCollection.h>
+#include <set>
 
 namespace dwg {
 
 template<class T>
-class CadObjectCollection : IObservableCadCollection
+class CadObjectCollection
 {
 protected:
     std::set<T *> _entries;
     CadObject *m_Owner;
 
 public:
+    CadObjectCollection() {}
     CadObjectCollection(CadObject *owner) { m_Owner = owner; }
 
     void Add(T *item)

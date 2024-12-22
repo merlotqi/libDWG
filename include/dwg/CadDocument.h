@@ -22,73 +22,55 @@
 
 #pragma once
 
-#include <dwg/CadHeader.h>
+#include <dwg/header/CadHeader.h>
 #include <dwg/CadSummaryInfo.h>
 #include <dwg/IHandledCadObject.h>
-
+#include <dwg/DxfClass.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/tables/View.h>
+#include <dwg/tables/VPort.h>
 
 namespace dwg {
 
 class CadDocument : IHandledCadObject
 {
 public:
-    unsigned long handle() const override;
+    unsigned long long Handle() const override;
+    header::CadHeader Header;
+    CadSummaryInfo SummaryInfo;
+    DxfClassCollection Classes;
 
-    CadHeader getHeader() const;
+    tables::AppIdsTable AppIds;
+    tables::BlockRecordsTable BlockRecords;
+    tables::DimensionStylesTable DimensionStyles;
+    tables::LayersTable Layers;
+    tables::LineTypesTable LineTypes;
+    tables::TextStylesTable TextStyles;
+    tables::UCSTable UCSs;
+    tables::ViewsTable Views;
+    tables::VPortsTable VPorts;
 
-    void setHeader(const CadHeader &value);
+    ColorCollection Colors;
+    LayoutCollection Layouts;
+    GroupCollection Groups;
+    ScaleCollection Scales;
+    MLineStyleCollection MLineStyles;
+    ImageDefinitionCollection ImageDefinitions;
+    MLeaderStyleCollection MLeaderStyles;
 
-    CadSummaryInfo getSummaryInfo() const;
+    CadObjectCollection<Entity*> Entities;
+    tables::BlockRecord& ModelSpace();
+    tables::BlockRecord& PaperSpace();
 
-    void setSummaryInfo(const CadSummaryInfo &value);
+    CadDictionary _rootDictionary;
 
-    DxfCalssCollection getClasses() const;
-
-    void setClasses(const DxfCalssCollection &value);
-
-    AppIdsTable getAppIds() const;
-
-    void setAppIds(const AppIdsTable &value);
-
-    BlockRecordsTable getBlockRecords() const;
-
-    void setBlockRecords(const BlockRecordsTable &value);
-
-    DimensionStylesTable getDimensionStyles() const;
-
-    void setDimensionStyles(const DimensionStylesTable &value);
-
-    LayersTable getLayers() const;
-
-    void setLayers(const LayersTable &value);
-
-    LineTypesTable getLineTypes() const;
-
-    void setLineTypes(const LineTypesTable &value);
-
-    TextStylesTable getTextStyles() const;
-
-    void setTextStyles(const TextStylesTable &value);
-
-    UCSTable getUCSs() const;
-
-    void setUCSs(const UCSTable &value);
-
-    ViewsTable getViews() const;
-
-    void setViews(const ViewsTable &value);
-
-    VPortsTable getVPorts() const;
-
-    void setVPorts(const VPortsTable &value);
-
-    LayoutCollection getLayouts() const;
-
-    void setLayouts(const LayoutCollection &value);
-
-    GroupCollection getGroups() const;
-
-    void setGroups(const GroupCollection &value);
+    std::map<unsigned long long, IHandledCadObject*> _objects;
 };
 
 }// namespace dwg

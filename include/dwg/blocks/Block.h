@@ -22,12 +22,39 @@
 
 #pragma once
 
+#include <dwg/entities/Entity.h>
+#include <dwg/enums/blocks/BlockTypeFlags.h>
+#include <dwg/tables/BlockRecord.h>
+
 namespace dwg {
 namespace blocks {
 
-
-class Block
+class Block : public entities::Entity
 {
+public:
+    Block();
+    virtual ~Block();
+
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::BLOCK;
+    }
+    std::string ObjectName() const override { return DxfFileToken::Block; }
+    std::string SubclassMarker() const override
+    {
+        return DxfSubclassMarker::BlockBegin;
+    }
+
+    tables::BlockRecord *BlockRecord() const;
+    std::string Name;         // 2, 3
+    BlockTypeFlags Flags;     // 70
+    XYZ BasePoint = XYZ::Zero;// 10, 20, 30
+    std::string XrefPath;     // 1
+    std::string Comments;     // 4
+
+    Block(tables::BlockRecord *record) {}
 };
+
+
 }// namespace blocks
 }// namespace dwg

@@ -48,7 +48,7 @@ class DimensionStyle : public TableEntry
 {
 public:
     static constexpr auto DefaultName = "Standard";
-    static DimensionStyle *Default() { return new DimensionStyle(DefaultName;) }
+    static DimensionStyle *Default() { return new DimensionStyle(DefaultName); }
 
     dwg::ObjectType ObjectType() const { return ObjectType::DIMSTYLE; }
     std::string ObjectName() const { return DxfFileToken::TableDimstyle; }
@@ -159,7 +159,7 @@ public:
     // 70
     Color TextBackgroundColor = Color::ByBlock;
     // 79
-    tables::AngularZeroHandling = ZeroHandling::SuppressZeroFeetAndInches;
+    tables::ZeroHandling AngularZeroHandling = ZeroHandling::SuppressZeroFeetAndInches;
     // 90
     ArcLengthSymbolPosition ArcLengthSymbolPosition =
             ArcLengthSymbolPosition::BeforeDimensionText;
@@ -234,6 +234,27 @@ protected:
     std::string Mzs;
     double AltMzf;
     double Mzf;
+};
+
+class DimensionStylesTable : public Table<DimensionStyle>
+{
+public:
+    DimensionStylesTable();
+
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::DIMSTYLE_CONTROL_OBJ;
+    }
+    std::string ObjectName() const override
+    {
+        return DxfFileToken::TableDimstyle;
+    }
+
+protected:
+    std::vector<std::string> defaultEntries() const
+    {
+        return {DimensionStyle::DefaultName};
+    }
 };
 
 }// namespace tables

@@ -22,12 +22,19 @@
 
 #pragma once
 
+#include <dwg/entities/Entity.h>
+
 namespace dwg {
 namespace blocks {
 
-
-class BlockEnd
+class BlockEnd : public entities::Entity
 {
+    public:
+    std::string ObjectName() const override { return DxfFileToken::EndBlock;}
+    dwg::ObjectType ObjectType() const override { return dwg::ObjectType::ENDBLK;}
+    std::string SubclassMarker() const override { return DxfSubclassMarker::BlockEnd;}
 };
+
+
 }// namespace blocks
 }// namespace dwg

@@ -49,7 +49,7 @@ public:
     uint32_t SectionArrayPageSize;
     int32_t RigthGap;
     int32_t LeftGap;
-    std::map<std::string, DwgSectionDescriptor> Descriptiors;
+    std::map<std::string, DwgSectionDescriptor> Descriptors;
 
     DwgFileHeaderAC18();
     DwgFileHeaderAC18(ACadVersion version);

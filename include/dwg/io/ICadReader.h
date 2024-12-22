@@ -24,9 +24,6 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/header/CadHeader.h>
-#include <dwg/io/CadReaderConfiguration.h>
-#include <dwg/utils/DwgStream.h>
-#include <type_traits>
 
 namespace dwg {
 namespace io {

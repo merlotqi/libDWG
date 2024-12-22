@@ -25,31 +25,38 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/io/ICadWriter.h>
+#include <dwg/utils/Encoding.h>
+#include <iostream>
+#include <dwg/io/CadWriterConfiguration.h>
 
 namespace dwg {
 namespace io {
 
-
-template<class T>
 class CadWriterBase : public ICadWriter
 {
-    static_cast(
-            std::is_base_v<CadWriterConfiguration, T>,
-            "Class CadWriterBase template must based CadWriterConfiguration");
-
 public:
-    using pointer = T *;
-    using reference = T &;
 
-    T *Configuration() const { return m_configuration; }
+    CadWriterBase() = default;
 
-    void Configuration(const T *value) { m_configuration = value; }
+    CadWriterBase(std::ostream *stream, CadDocument *document)
+        : _stream(stream), _document(document)
+    {
+    }
+
+    virtual void Write() override
+    {
+        DxfClassCollection::UpdateDxfClasses(_document);
+        _encoding = getListedEncoding(_document->Header.CodePage);
+    }
 
 protected:
-    T *m_configuration;
-    std::iostream *m_stream;
-    Common::CadDocument *m_document;
-    // encoding
+    Encoding getListedEncoding(const std::string &codePage);
+
+protected:
+    CadWriterConfiguration* _configuration;
+    std::ostream *_stream;
+    CadDocument *_document;
+    Encoding _encoding;
 };
 
 

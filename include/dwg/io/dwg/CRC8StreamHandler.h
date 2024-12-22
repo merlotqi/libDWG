@@ -21,3 +21,40 @@
  */
 
 #pragma once
+
+#include <dwg/io/dwg/CRC.h>
+
+namespace dwg {
+namespace io {
+
+
+class CRC8StreamHandler
+{
+public:
+    static unsigned short GetCRCValue(unsigned short seed,
+                                      const std::vector<unsigned char> &buffer,
+                                      long startPos, long endPos)
+    {
+        unsigned short currValue = seed;
+        int index = (int) startPos;
+
+        while (endPos-- > 0)
+        {
+            currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
+            index++;
+        }
+
+        return currValue;
+    }
+
+private:
+    static unsigned short decode(unsigned short key, unsigned char value)
+    {
+        int index = value ^ (unsigned char) key;
+        key = (unsigned short) ((unsigned int) key >> 8 ^ CRC::CrcTable[index]);
+        return key;
+    }
+};
+
+}// namespace io
+}// namespace dwg

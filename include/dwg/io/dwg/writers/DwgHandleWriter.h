@@ -26,6 +26,10 @@
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
 
+#include <dwg/io/dwg/CRC8StreamHandler.h>
+#include <sstream>
+#include <stdexcept>
+
 namespace dwg {
 namespace io {
 
@@ -39,8 +43,8 @@ class DwgHandleWriter : public DwgSectionIO
 public:
     std::string SectionName() const { return DwgSectionDefinition::Handles; }
 
-    DwgAppInfoWriter(ACadVersion version, std::ostringstream *stream,
-                     const std::map<unsigned long long, long long> &handlemap)
+    DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
+                    const std::map<unsigned long long, long long> &handlemap)
         : DwgSectionIO(version)
     {
         _stream = stream;
@@ -49,112 +53,131 @@ public:
 
     void Write(int sectionOffset = 0)
     {
-        byte[] array = new byte[10];
-        byte[] array2 = new byte[5];
+        std::vector<unsigned char> array(10, 0);
+        std::vector<unsigned char> array2(5, 0);
 
-        ulong offset = 0uL;
-        long initialLoc = 0L;
+        unsigned long long offset = 0ULL;
+        long long initialLoc = 0L;
 
-        long lastPosition = this._stream.Position;
+        std::streampos lastPosition = _stream->tellp();
 
-        this._stream.WriteByte(0);
-        this._stream.WriteByte(0);
+        unsigned char buf_ch = 0;
+        _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                       sizeof(unsigned char));
+        _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                       sizeof(unsigned char));
 
-        foreach (var pair in this._handleMap)
+
+        for (auto pair: _handleMap)
         {
-            ulong handleOff = pair.Key - offset;
-            long lastLoc = (long) pair.Value + sectionOffset;
-            long locDiff = lastLoc - initialLoc;
+            unsigned long long handleOff = pair.first - offset;
+            long long lastLoc = (long long) pair.second + sectionOffset;
+            long long locDiff = lastLoc - initialLoc;
 
             int offsetSize = modularShortToValue(handleOff, array);
             int locSize = signedModularShortToValue((int) locDiff, array2);
 
-            if (this._stream.Position - lastPosition + (offsetSize + locSize) >
-                2032)
+            if (_stream->tellp() - lastPosition + (offsetSize + locSize) > 2032)
             {
-                this.processPosition(lastPosition);
+                processPosition(lastPosition);
                 offset = 0uL;
                 initialLoc = 0L;
-                lastPosition = this._stream.Position;
-                this._stream.WriteByte(0);
-                this._stream.WriteByte(0);
+                lastPosition = _stream->tellp();
+                _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                               sizeof(unsigned char));
+                _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                               sizeof(unsigned char));
                 offset = 0uL;
                 initialLoc = 0L;
-                handleOff = pair.Key - offset;
+                handleOff = pair.first - offset;
 
-                if (handleOff == 0) { throw new System.Exception(); }
+                if (handleOff == 0) { throw new std::runtime_error(""); }
 
                 locDiff = lastLoc - initialLoc;
                 offsetSize = modularShortToValue(handleOff, array);
                 locSize = signedModularShortToValue((int) locDiff, array2);
             }
 
-            this._stream.Write(array, 0, offsetSize);
-            this._stream.Write(array2, 0, locSize);
-            offset = pair.Key;
+            _stream->write(reinterpret_cast<const char *>(array.data()),
+                           offsetSize);
+            _stream->write(reinterpret_cast<const char *>(array2.data()),
+                           locSize);
+            offset = pair.first;
             initialLoc = lastLoc;
         }
 
-        this.processPosition(lastPosition);
-        lastPosition = this._stream.Position;
-        this._stream.WriteByte(0);
-        this._stream.WriteByte(0);
-        this.processPosition(lastPosition);
+        processPosition(lastPosition);
+        lastPosition = _stream->tellp();
+        _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                       sizeof(unsigned char));
+        _stream->write(reinterpret_cast<const char *>(&buf_ch),
+                       sizeof(unsigned char));
+        processPosition(lastPosition);
     }
 
 private:
-    int modularShortToValue(ulong value, byte[] arr)
+    int modularShortToValue(unsigned long long value,
+                            std::vector<unsigned char> &arr)
     {
         int i = 0;
         while (value >= 0b10000000)
         {
-            arr[i] = (byte) ((value & 0b1111111) | 0b10000000);
+            arr[i] = (unsigned char) ((value & 0b1111111) | 0b10000000);
             i++;
             value >>= 7;
         }
-        arr[i] = (byte) value;
+        arr[i] = (unsigned char) value;
         return i + 1;
     }
 
-    int signedModularShortToValue(int value, byte[] arr)
+    int signedModularShortToValue(int value, std::vector<unsigned char> &arr)
     {
         int i = 0;
         if (value < 0)
         {
             for (value = -value; value >= 64; value >>= 7)
             {
-                arr[i] = (byte) (((uint) value & 0x7Fu) | 0x80u);
+                arr[i] = (unsigned char) (((unsigned int) value & 0x7Fu) |
+                                          0x80u);
                 i++;
             }
-            arr[i] = (byte) ((uint) value | 0x40u);
+            arr[i] = (unsigned char) ((unsigned int) value | 0x40u);
             return i + 1;
         }
 
         while (value >= 0b1000000)
         {
-            arr[i] = (byte) (((uint) value & 0x7Fu) | 0x80u);
+            arr[i] = (unsigned char) (((unsigned int) value & 0x7Fu) | 0x80u);
             i++;
             value >>= 7;
         }
 
-        arr[i] = (byte) value;
+        arr[i] = (unsigned char) value;
         return i + 1;
     }
 
-    void processPosition(long pos)
+    void processPosition(std::streampos pos)
     {
-        ushort diff = (ushort) (this._stream.Position - pos);
-        long streamPos = this._stream.Position;
-        this._stream.Position = pos;
-        this._stream.WriteByte((byte) (diff >> 8));
-        this._stream.WriteByte((byte) (diff & 0b11111111));
-        this._stream.Position = streamPos;
+        unsigned short diff = (unsigned short) (_stream->tellp() - pos);
+        long streamPos = _stream->tellp();
+        _stream->seekp(pos);
+        unsigned char ch = (unsigned char) (diff >> 8);
+        _stream->write(reinterpret_cast<const char *>(&ch),
+                       sizeof(unsigned char));
+        ch = (unsigned char) (diff & 0b11111111);
+        _stream->write(reinterpret_cast<const char *>(&ch),
+                       sizeof(unsigned char));
+        _stream->seekp(streamPos);
 
-        ushort crc =
-                CRC8StreamHandler.GetCRCValue(0xC0C1, this._stream.GetBuffer(),
-                                              pos, this._stream.Length - pos);
-        this._stream.WriteByte((byte) (crc >> 8));
-        this._stream.WriteByte((byte) (crc & 0b11111111));
+        unsigned short crc = CRC8StreamHandler::GetCRCValue(
+                0xC0C1, _stream->str().data(), pos, _stream->tellp() - pos);
+
+        ch = (unsigned char) (crc >> 8);
+        _stream->write(reinterpret_cast<const char *>(&ch),
+                       sizeof(unsigned char));
+        ch = (unsigned char) (crc & 0b11111111);
+        _stream->write(reinterpret_cast<const char *>(&ch),
+                       sizeof(unsigned char));
     }
 };
 

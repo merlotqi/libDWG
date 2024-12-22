@@ -25,11 +25,12 @@
 #include <dwg/IHandledCadObject.h>
 #include <dwg/Transparency.h>
 #include <dwg/enums/DwgReferenceType.h>
+#include <dwg/enums/ObjectType.h>
 #include <dwg/utils/Color.h>
 #include <dwg/utils/Coordinate.h>
 #include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
-#include <dwg/utils/TimeSpan.h>
+#include <dwg/utils/Timespan.h>
 
 #include <iostream>
 #include <string>
@@ -40,6 +41,7 @@ namespace io {
 
 class IDwgStreamWriter
 {
+public:
     virtual Encoding Encoding() const = 0;
 
     virtual IDwgStreamWriter *Main() const = 0;
@@ -83,7 +85,7 @@ class IDwgStreamWriter
 
     virtual void Write8BitJulianDate(DateTime value) = 0;
 
-    virtual void WriteTimeSpan(TimeSpan value) = 0;
+    virtual void WriteTimeSpan(Timespan value) = 0;
 
     virtual void WriteCmColor(Color value) = 0;
 

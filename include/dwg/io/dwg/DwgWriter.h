@@ -26,6 +26,9 @@
 #include <dwg/io/CadWriterBase.h>
 #include <dwg/io/CadWriterConfiguration.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeader.h>
+#include <dwg/io/dwg/writers/IDwgFileHeaderWriter.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18.h>
 
 #include <sstream>
 #include <stdexcept>
@@ -44,7 +47,7 @@ public:
     DwgWriter(std::ofstream *stream, CadDocument *document)
         : CadWriterBase(stream, document)
     {
-        _version = document->getHeader().Version;
+        _version = document->Header.Version;
         _fileHeader = DwgFileHeader::CreateFileHeader(_version);
     }
 
@@ -71,14 +74,14 @@ public:
 
         _fileHeaderWriter->writeFile();
 
-        m_stream->flush();
-        if (m_configuration->CloseStream()) { m_stream->close(); }
+        _stream->flush();
+        if (Configuration.CloseStream) { _stream->clear(); }
     }
 
 private:
     void getFileHeaderWriter()
     {
-        switch (m_document->getHeader().Version)
+        switch (_document->Header.Version)
         {
             case ACadVersion::MC0_0:
             case ACadVersion::AC1_2:
@@ -95,11 +98,11 @@ private:
             case ACadVersion::AC1014:
             case ACadVersion::AC1015:
                 _fileHeaderWriter =
-                        new DwgFileHeaderWriterAC15(m_stream, m_document);
+                        new DwgFileHeaderWriterAC15(_stream, _document);
                 break;
             case ACadVersion::AC1018:
                 _fileHeaderWriter =
-                        new DwgFileHeaderWriterAC18(m_stream, m_document);
+                        new DwgFileHeaderWriterAC18(_stream, _document);
                 break;
             case ACadVersion::AC1021:
                 throw new std::runtime_error("");
@@ -107,7 +110,7 @@ private:
             case ACadVersion::AC1027:
             case ACadVersion::AC1032:
                 _fileHeaderWriter =
-                        new DwgFileHeaderWriterAC18(m_stream, m_document);
+                        new DwgFileHeaderWriterAC18(_stream, _document);
                 break;
             default:
                 throw new std::runtime_error("");
@@ -153,5 +156,8 @@ private:
     void writeObjFreeSpace();
     void writeTemplate();
     void writeHandles();
+};
+
+
 }
 }

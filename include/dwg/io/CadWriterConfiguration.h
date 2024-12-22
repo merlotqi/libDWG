@@ -25,22 +25,14 @@
 namespace dwg {
 namespace io {
 
-
 class CadWriterConfiguration
 {
 public:
     CadWriterConfiguration() = default;
     virtual ~CadWriterConfiguration() = default;
 
-    bool CloseStream() const { return m_closeStream; }
-    void CloseStream(bool value) { m_closeStream = value; }
-
-    bool WriteXRords() const { return m_writeXRords; }
-    void WriteXRords(bool value) { m_writeXRords = value; }
-
-protected:
-    bool m_closeStream;
-    bool m_writeXRords;
+    bool CloseStream = true;
+    bool WriteXRords = false;
 };
 
 }// namespace io

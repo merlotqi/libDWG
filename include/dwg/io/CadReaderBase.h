@@ -21,6 +21,7 @@
  */
 
 #pragma once
+
 #include <dwg/io/ICadReader.h>
 
 namespace dwg {
@@ -40,7 +41,7 @@ protected:
     CadReaderBase(std::ifstream *stream);
 
 protected:
-    T *m_configuration = nullptr;
+    T m_configuration;
     CadDocument *m_document;
     InputStream *m_fileStream;
 };

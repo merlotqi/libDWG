@@ -33,24 +33,24 @@ class DwgFileHeaderWriterAC21 : DwgFileHeaderWriterAC18
 protected:
     int _fileHeaderSize() const override { return 0x480; }
 
-    void craeteLocalSection(const DwgSectionDescriptor &descriptor,
+    void craeteLocalSection(DwgSectionDescriptor descriptor,
                             const std::vector<unsigned char> &buffer,
-                            int decompressedSize, ulong offset, int totalSize,
-                            bool isCompressed) override
+                            int decompressedSize, unsigned long long offset,
+                            int totalSize, bool isCompressed) override
     {
         std::ostringstream descriptorStream = applyCompression(
                 buffer, decompressedSize, offset, totalSize, isCompressed);
         writeMagicNumber();
     }
 
-public
+public:
     DwgFileHeaderWriterAC21(std::ostream *stream, Encoding encoding,
                             CadDocument *model)
         : DwgFileHeaderWriterAC18(stream, encoding, model)
     {
         compressor = new DwgLZ77AC21Compressor();
     }
-}
+};
 
 }// namespace io
 }// namespace dwg

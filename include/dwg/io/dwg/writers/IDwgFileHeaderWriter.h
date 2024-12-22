@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <iostream>
+#include <sstream>
 #include <string>
 
 namespace dwg {
@@ -34,9 +34,9 @@ public:
     IDwgFileHeaderWriter() = default;
     virtual ~IDwgFileHeaderWriter() = default;
     virtual int HandleSectionOffset() const = 0;
-    virtual void addSection(std::string &name, std::ostream *stream,
-                            bool isCompressed, int decompsie = 0x7400) = 0;
-    virtual void writeFile() = 0;
+    virtual void AddSection(std::string &name, std::ostringstream *stream,
+                            bool isCompressed, int decompsize = 0x7400) = 0;
+    virtual void WriteFile() = 0;
 };
 
 }// namespace io

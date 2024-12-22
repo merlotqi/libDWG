@@ -68,7 +68,6 @@ namespace header {
 
 class CadHeader
 {
-
 public:
     CadHeader(CadDocument *document);
     CadHeader(ACadVersion version);
@@ -265,7 +264,7 @@ public:
     // "$TDUSRTIMER", 40
     Timespan UserElapsedTimeSpan;
     // "$CECOLOR", 62
-    Color CurrentEntityColor = Color::ByLayer();
+    Color CurrentEntityColor = Color::ByLayer;
     // "$PSVPSCALE", 40
     double ViewportDefaultViewScaleFactor;
     // "$PINSBASE", 10, 20, 30
@@ -597,12 +596,10 @@ public:
     std::string DimensionTex2 = "ByBlock";
 
     //TODO: How header UCS work??
-    UCS ModelSpaceUcs;
-
-    UCS ModelSpaceUcsBase;
-    UCS PaperSpaceUcs;
-
-    UCS PaperSpaceUcsBase;
+    tables::UCS ModelSpaceUcs;
+    tables::UCS ModelSpaceUcsBase;
+    tables::UCS PaperSpaceUcs;
+    tables::UCS PaperSpaceUcsBase;
 };
 
 }// namespace header

@@ -22,7 +22,16 @@
 
 #pragma once
 
-#include <dwg/io/dwg/IDwgFileHeaderWriter.h>
+#include <dwg/io/dwg/writers/IDwgFileHeaderWriter.h>
+#include <dwg/enums/ACadVersion.h>
+#include <dwg/utils/Encoding.h>
+#include <dwg/CadDocument.h>
+#include <dwg/io/dwg/DwgCheckSumCalculator.h>
+#include <dwg/utils/EndianConverter.h>
+#include <dwg/CadUtils.h>
+#include <sstream>
+
+#include <assert.h>
 
 namespace dwg {
 namespace io {
@@ -50,22 +59,18 @@ public:
         _encoding = encoding;
     }
 
-    virtual void AddSection(const std::string name, std::ostringstream *stream,
-                            bool isCompressed, int decompsize = 0x7400) = 0;
-    virtual void WriteFile() = 0;
-
     unsigned short getFileCodePage()
     {
-        unsigned short codePage = _document->Header.CodePage;
+        unsigned short codePage =  CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->Header.CodePage));
         if (codePage < 1) { return 30; }
         else { return codePage; }
     }
 
     void applyMask(std::vector<unsigned char> &buffer, int offset, int length)
     {
-        std::vector<unsigned char> bytes =
-                LittleEndianConverter::Instance->GetBytes(0x4164536B ^
-                                                          _stream->tellp());
+        auto&& bytes =
+                LittleEndianConverter::Instance()->GetBytes(0x4164536B ^
+                                                          (int)_stream->tellp());
         int diff = offset + length;
         while (offset < diff)
         {
@@ -106,9 +111,9 @@ public:
     void applyMagicSequence(std::ostringstream *stream)
     {
         std::string buffer = stream->str();
-        for (auto &byte: buffer)
+        for(size_t i = 0; i < buffer.size(); ++i)
         {
-            byte ^= DwgCheckSumCalculator::MagicSequence[i];
+            buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];
         }
         stream->str("");
         stream->clear();
