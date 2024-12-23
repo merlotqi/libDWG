@@ -69,6 +69,11 @@ public:
         return DxfSubclassMarker::Table;
     }
 
+    T operator[](const std::string &key) const 
+    {
+        return m_entries[key];
+    }
+
     void Add(const T &entry)
     {
         if (m_entries.find(entry.Name()) != m_entries.end()) return;

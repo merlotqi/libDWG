@@ -34,7 +34,7 @@ public:
     IDwgFileHeaderWriter() = default;
     virtual ~IDwgFileHeaderWriter() = default;
     virtual int HandleSectionOffset() const = 0;
-    virtual void AddSection(std::string &name, std::ostringstream *stream,
+    virtual void AddSection(const std::string &name, std::ostringstream *stream,
                             bool isCompressed, int decompsize = 0x7400) = 0;
     virtual void WriteFile() = 0;
 };

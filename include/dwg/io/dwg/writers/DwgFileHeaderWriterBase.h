@@ -30,6 +30,7 @@
 #include <dwg/utils/EndianConverter.h>
 #include <dwg/CadUtils.h>
 #include <sstream>
+#include <fstream>
 
 #include <assert.h>
 
@@ -41,14 +42,14 @@ class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 protected:
     ACadVersion _version;
     Encoding _encoding;
-    std::ostream *_stream;
+    std::ofstream *_stream;
     CadDocument *_document;
 
     virtual int HandleSectionOffset() const = 0;
     virtual int _fileHeaderSize() const = 0;
 
 public:
-    DwgFileHeaderWriterBase(std::ostream *stream, Encoding encoding,
+    DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding,
                             CadDocument *model)
     {
         assert(stream);

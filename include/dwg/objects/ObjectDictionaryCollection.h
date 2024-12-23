@@ -65,6 +65,7 @@ protected:
 class ColorCollection : public ObjectDictionaryCollection<BookColor>
 {
 public:
+    
     ColorCollection(const CadDictionary &dictionary);
 };
 
@@ -87,6 +88,13 @@ class LayoutCollection : public ObjectDictionaryCollection<Layout>
 {
 public:
     LayoutCollection(const CadDictionary &dictionary);
+};
+
+
+class MLineStyleCollection : public ObjectDictionaryCollection<MLineStyle>
+{
+public:
+    MLineStyleCollection(const CadDictionary &dictionary);
 };
 
 

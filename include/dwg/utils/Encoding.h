@@ -48,6 +48,7 @@ public:
     static Encoding Windows1252();
     static Encoding GBK();
     static Encoding GB18030();
+    static Encoding Unicode();
 };
 
 

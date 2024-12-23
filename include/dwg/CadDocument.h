@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <dwg/header/CadHeader.h>
 #include <dwg/CadSummaryInfo.h>
-#include <dwg/IHandledCadObject.h>
 #include <dwg/DxfClass.h>
+#include <dwg/IHandledCadObject.h>
+#include <dwg/header/CadHeader.h>
 #include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
@@ -33,14 +33,27 @@
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TextStyle.h>
 #include <dwg/tables/UCS.h>
-#include <dwg/tables/View.h>
 #include <dwg/tables/VPort.h>
+#include <dwg/tables/View.h>
+
+#include <dwg/entities/Entity.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
 class CadDocument : IHandledCadObject
 {
 public:
+    CadDocument(bool createDefault)
+    {
+        _cadObjects.insert({Handle(), this});
+        if(createDefault)
+        {
+            CreateDefaults();
+        }
+    }
+
     unsigned long long Handle() const override;
     header::CadHeader Header;
     CadSummaryInfo SummaryInfo;
@@ -56,21 +69,26 @@ public:
     tables::ViewsTable Views;
     tables::VPortsTable VPorts;
 
-    ColorCollection Colors;
-    LayoutCollection Layouts;
-    GroupCollection Groups;
-    ScaleCollection Scales;
-    MLineStyleCollection MLineStyles;
-    ImageDefinitionCollection ImageDefinitions;
-    MLeaderStyleCollection MLeaderStyles;
+    objects::ColorCollection Colors;
+    objects::LayoutCollection Layouts;
+    objects::GroupCollection Groups;
+    objects::ScaleCollection Scales;
+    objects::MLineStyleCollection MLineStyles;
+    objects::ImageDefinitionCollection ImageDefinitions;
+    objects::MLeaderStyleCollection MLeaderStyles;
 
-    CadObjectCollection<Entity*> Entities;
-    tables::BlockRecord& ModelSpace();
-    tables::BlockRecord& PaperSpace();
+    CadObjectCollection<entities::Entity *> Entities;
+    tables::BlockRecord &ModelSpace();
+    tables::BlockRecord &PaperSpace();
 
-    CadDictionary _rootDictionary;
+    objects::CadDictionary _rootDictionary;
 
-    std::map<unsigned long long, IHandledCadObject*> _objects;
+    std::map<unsigned long long, IHandledCadObject *> _cadObjects;
+
+    void CreateDefaults()
+    {
+        DxfClassCollection::UpdateDxfClasses(this);
+    }
 };
 
 }// namespace dwg

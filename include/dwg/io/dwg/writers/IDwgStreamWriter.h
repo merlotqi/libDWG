@@ -101,12 +101,7 @@ public:
     virtual void Write2RawDouble(XY value) = 0;
 
     virtual void WriteByte(unsigned char value) = 0;
-
-    virtual void HandleReference(IHandledCadObject *cadObject) = 0;
-
-    virtual void HandleReference(DwgReferenceType type,
-                                 IHandledCadObject *cadObject) = 0;
-
+    
     virtual void HandleReference(unsigned long long handle) = 0;
 
     virtual void HandleReference(DwgReferenceType type,

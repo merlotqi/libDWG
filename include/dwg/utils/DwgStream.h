@@ -149,7 +149,11 @@ class LIBDWG_API OutputStream
 
 public:
     OutputStream(const std::string &name, int mode);
-    OutputStream(std::istream *stream, bool createCopy, bool resetPosition);
+    OutputStream(std::ostream *stream, bool createCopy, bool resetPosition);
+    
+    template<class T>
+    void Write(const T &value)
+    {}
 };
 
 template<class T>

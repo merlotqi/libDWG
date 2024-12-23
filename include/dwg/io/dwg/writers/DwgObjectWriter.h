@@ -28,6 +28,8 @@
 #include <dwg/tables/TableEntry.h>
 #include <map>
 
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
+
 namespace dwg {
 namespace io {
 
@@ -44,6 +46,7 @@ public:
     }
 
     void Write();
+    std::string SectionName() const override { return DwgSectionDefinition::AcDbObjects; }
 
 private:
     void writeLTypeControlObject();

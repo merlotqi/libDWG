@@ -44,7 +44,6 @@ public:
     virtual std::string SubclassMarker() const = 0;
     unsigned long long Handle() const { return _handle; }
 
-
     IHandledCadObject *Owner;// handle 330
 
 protected:

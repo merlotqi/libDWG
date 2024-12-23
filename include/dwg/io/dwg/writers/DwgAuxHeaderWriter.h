@@ -25,6 +25,8 @@
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
 
 namespace dwg {
 namespace io {
@@ -34,17 +36,14 @@ class DwgAuxHeaderWriter : public DwgSectionIO
     IDwgStreamWriter *_writer;
     std::ostringstream *_stream;
     Encoding _encoding;
-    CadHeader _header;
-I
+    header::CadHeader _header;
 
-        public : std::string
-                 SectionName() const
-    {
-        return DwgSectionDefinition::AuxHeader;
-    }
+
+public:
+    std::string SectionName() const { return DwgSectionDefinition::AuxHeader; }
 
     DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding,
-                       const CadHeader &header)
+                       const header::CadHeader &header)
         : DwgSectionIO(header.Version)
     {
         _stream = stream;

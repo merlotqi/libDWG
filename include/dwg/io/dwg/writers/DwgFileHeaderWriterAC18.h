@@ -46,7 +46,7 @@ protected:
     ICompressor *compressor;
 
 public:
-    DwgFileHeaderWriterAC18(std::ostream *stream, Encoding encoding,
+    DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding,
                             CadDocument *document)
         : DwgFileHeaderWriterBase(stream, encoding, document)
     {
@@ -72,7 +72,7 @@ public:
         writeFileMetaData();
     }
 
-    void AddSection(std::string &name, std::ostringstream *stream,
+    void AddSection(const std::string &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) override
     {
         DwgSectionDescriptor descriptor(name);

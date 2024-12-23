@@ -33,17 +33,6 @@ class Flag
 public:
     constexpr inline Flag(int value) noexcept : i(value) {}
     constexpr inline operator int() const noexcept { return i; }
-
-    constexpr inline Flag(unsigned int value) noexcept : i(int(value)) {}
-    constexpr inline Flag(short value) noexcept : i(int(value)) {}
-    constexpr inline Flag(unsigned short value) noexcept
-        : i(int((unsigned int) (value)))
-    {
-    }
-    constexpr inline operator unsigned int() const noexcept
-    {
-        return (unsigned int) (i);
-    }
 };
 
 template<typename Enum>
@@ -56,95 +45,81 @@ class Flags
                   "Flags is only usable on enumeration types.");
 
 public:
+    typedef int Int;
     typedef Enum enum_type;
     constexpr inline Flags() noexcept : i(0) {}
-    constexpr inline Flags(Enum flags) noexcept : i(int(flags)) {}
+    constexpr inline Flags(Enum flags) noexcept : i(Int(flags)) {}
     constexpr inline Flags(Flag flag) noexcept : i(flag) {}
-    constexpr inline Flags &operator&=(int mask) noexcept
-    {
-        i &= mask;
-        return *this;
-    }
-    constexpr inline Flags &operator&=(uint mask) noexcept
-    {
-        i &= mask;
-        return *this;
-    }
-    constexpr inline Flags &operator&=(Enum mask) noexcept
-    {
-        i &= int(mask);
-        return *this;
-    }
-    constexpr inline Flags &operator|=(Flags other) noexcept
-    {
-        i |= other.i;
-        return *this;
-    }
-    constexpr inline Flags &operator|=(Enum other) noexcept
-    {
-        i |= int(other);
-        return *this;
-    }
-    constexpr inline Flags &operator^=(Flags other) noexcept
-    {
-        i ^= other.i;
-        return *this;
-    }
-    constexpr inline Flags &operator^=(Enum other) noexcept
-    {
-        i ^= int(other);
-        return *this;
-    }
 
-    constexpr inline operator int() const noexcept { return i; }
+    constexpr inline Flags(std::initializer_list<Enum> flags) noexcept
+        : i(initializer_list_helper(flags.begin(), flags.end())) {}
 
-    constexpr inline Flags operator|(Flags other) const noexcept
-    {
-        return Flags(Flag(i | other.i));
-    }
-    constexpr inline Flags operator|(Enum other) const noexcept
-    {
-        return Flags(Flag(i | int(other)));
-    }
-    constexpr inline Flags operator^(Flags other) const noexcept
-    {
-        return Flags(Flag(i ^ other.i));
-    }
-    constexpr inline Flags operator^(Enum other) const noexcept
-    {
-        return Flags(Flag(i ^ int(other)));
-    }
-    constexpr inline Flags operator&(int mask) const noexcept
-    {
-        return Flags(Flag(i & mask));
-    }
-    constexpr inline Flags operator&(uint mask) const noexcept
-    {
-        return Flags(Flag(i & mask));
-    }
-    constexpr inline Flags operator&(Enum other) const noexcept
-    {
-        return Flags(Flag(i & int(other)));
-    }
-    constexpr inline Flags operator~() const noexcept
-    {
-        return Flags(Flag(~i));
-    }
+    constexpr static inline Flags fromInt(Int i) noexcept { return Flags(Flag(i)); }
+    constexpr inline Int toInt() const noexcept { return i; }
 
+
+    constexpr inline Flags &operator&=(int mask) noexcept { i &= mask; return *this; }
+    constexpr inline Flags &operator&=(uint mask) noexcept { i &= mask; return *this; }
+    constexpr inline Flags &operator&=(Flags mask) noexcept { i &= mask.i; return *this; }
+    constexpr inline Flags &operator&=(Enum mask) noexcept { i &= Int(mask); return *this; }
+    constexpr inline Flags &operator|=(Flags other) noexcept { i |= other.i; return *this; }
+    constexpr inline Flags &operator|=(Enum other) noexcept { i |= Int(other); return *this; }
+    constexpr inline Flags &operator^=(Flags other) noexcept { i ^= other.i; return *this; }
+    constexpr inline Flags &operator^=(Enum other) noexcept { i ^= Int(other); return *this; }
+
+    constexpr inline operator Int() const noexcept { return i; }
     constexpr inline bool operator!() const noexcept { return !i; }
 
-    constexpr inline bool testFlag(Enum flag) const noexcept
-    {
-        return (i & int(flag)) == int(flag) &&
-               (int(flag) != 0 || i == int(flag));
-    }
+
+    constexpr inline Flags operator|(Flags other) const noexcept { return Flags(Flag(i | other.i)); }
+    constexpr inline Flags operator|(Enum other) const noexcept { return Flags(Flag(i | Int(other))); }
+    constexpr inline Flags operator^(Flags other) const noexcept { return Flags(Flag(i ^ other.i)); }
+    constexpr inline Flags operator^(Enum other) const noexcept { return Flags(Flag(i ^ Int(other))); }
+    constexpr inline Flags operator&(int mask) const noexcept { return Flags(Flag(i & mask)); }
+    constexpr inline Flags operator&(uint mask) const noexcept { return Flags(Flag(i & mask)); }
+
+    constexpr inline Flags operator&(Flags other) const noexcept { return Flags(Flag(i & other.i)); }
+    constexpr inline Flags operator&(Enum other) const noexcept { return Flags(Flag(i & Int(other))); }
+    constexpr inline Flags operator~() const noexcept { return Flags(Flag(~i)); }
+
+    constexpr inline void operator+(Flags other) const noexcept = delete;
+    constexpr inline void operator+(Enum other) const noexcept = delete;
+    constexpr inline void operator+(int other) const noexcept = delete;
+    constexpr inline void operator-(Flags other) const noexcept = delete;
+    constexpr inline void operator-(Enum other) const noexcept = delete;
+    constexpr inline void operator-(int other) const noexcept = delete;
+
+    constexpr inline bool testFlag(Enum flag) const noexcept { return testFlags(flag); }
+    constexpr inline bool testFlags(Flags flags) const noexcept { return flags.i ? ((i & flags.i) == flags.i) : i == Int(0); }
+    constexpr inline bool testAnyFlag(Enum flag) const noexcept { return testAnyFlags(flag); }
+    constexpr inline bool testAnyFlags(Flags flags) const noexcept { return (i & flags.i) != Int(0); }
     constexpr inline Flags &setFlag(Enum flag, bool on = true) noexcept
     {
-        return on ? (*this |= flag) : (*this &= ~int(flag));
+        return on ? (*this |= flag) : (*this &= ~Flags(flag));
     }
 
+    friend constexpr inline bool operator==(Flags lhs, Flags rhs) noexcept
+    { return lhs.i == rhs.i; }
+    friend constexpr inline bool operator!=(Flags lhs, Flags rhs) noexcept
+    { return lhs.i != rhs.i; }
+    friend constexpr inline bool operator==(Flags lhs, Enum rhs) noexcept
+    { return lhs == Flags(rhs); }
+    friend constexpr inline bool operator!=(Flags lhs, Enum rhs) noexcept
+    { return lhs != Flags(rhs); }
+    friend constexpr inline bool operator==(Enum lhs, Flags rhs) noexcept
+    { return Flags(lhs) == rhs; }
+    friend constexpr inline bool operator!=(Enum lhs, Flags rhs) noexcept
+    { return Flags(lhs) != rhs; }
+
 private:
-    int i;
+    constexpr static inline Int initializer_list_helper(typename std::initializer_list<Enum>::const_iterator it,
+                                                               typename std::initializer_list<Enum>::const_iterator end)
+    noexcept
+    {
+        return (it == end ? Int(0) : (Int(*it) | initializer_list_helper(it + 1, end)));
+    }
+
+    Int i;
 };
 
 #define DECLARE_FLAGS(F, E) typedef dwg::Flags<E> F;

@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord.h>
 #include <array>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
 
 namespace dwg {
@@ -55,7 +55,7 @@ public:
 
     int _fileHeaderSize() const override { return 0x61; }
 
-    DwgFileHeaderWriterAC15(std::ostream *stream, Encoding encoding,
+    DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding,
                             CadDocument *model)
         : DwgFileHeaderWriterBase(stream, encoding, model)
     {
@@ -81,7 +81,7 @@ public:
         };
     }
 
-    void AddSection(const std::string name, std::ostringstream *stream,
+    void AddSection(const std::string &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) override
     {
         // _records[name].first.Size = ostream_length(stream);

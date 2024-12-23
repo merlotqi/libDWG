@@ -26,7 +26,7 @@
 #include <dwg/CadDocument.h>
 #include <dwg/io/ICadWriter.h>
 #include <dwg/utils/Encoding.h>
-#include <iostream>
+#include <fstream>
 #include <dwg/io/CadWriterConfiguration.h>
 
 namespace dwg {
@@ -38,7 +38,7 @@ public:
 
     CadWriterBase() = default;
 
-    CadWriterBase(std::ostream *stream, CadDocument *document)
+    CadWriterBase(std::ofstream *stream, CadDocument *document)
         : _stream(stream), _document(document)
     {
     }
@@ -54,7 +54,7 @@ protected:
 
 protected:
     CadWriterConfiguration* _configuration;
-    std::ostream *_stream;
+    std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;
 };

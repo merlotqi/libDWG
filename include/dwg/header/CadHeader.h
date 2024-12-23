@@ -54,6 +54,7 @@
 #include <dwg/utils/Coordinate.h>
 #include <dwg/utils/DateTime.h>
 #include <dwg/utils/Timespan.h>
+#include <dwg/enums/header/SpaceLineTypeScaling.h>
 
 #include <string>
 
@@ -69,6 +70,7 @@ namespace header {
 class CadHeader
 {
 public:
+    CadHeader();
     CadHeader(CadDocument *document);
     CadHeader(ACadVersion version);
 
@@ -101,6 +103,7 @@ public:
     bool FillMode;
     // "$QTEXTMODE", 70
     bool QuickTextMode;
+    SpaceLineTypeScaling PaperSpaceLineTypeScaling = SpaceLineTypeScaling::Normal;
     // "$PSLTSCALE", 70
     bool LimitCheckingOn;
     // "$BLIPMODE", 70
@@ -147,7 +150,7 @@ public:
     // "$ATTMODE", 70
     AttributeVisibilityMode AttributeVisibility;
     // "$PDMODE", 70
-    short OintDisplayMode;
+    short PointDisplayMode;
     // "$USERI1", 70
     short UserShort1;
     // "$USERI2", 70
@@ -342,7 +345,7 @@ public:
     // "$DIMBLK1", 1
     std::string DimensionBlockNameFirst;
     // "$DIMBLK2", 1
-    std::string DimensionBlockNameSecon;
+    std::string DimensionBlockNameSecond;
 
 
     short StackedTextAlignment = 1;
@@ -400,7 +403,7 @@ public:
     std::string ProjectName;
 
     bool CameraDisplayObjects;
-    double StepsPerSecon;
+    double StepsPerSecond;
     double StepSize;
     double Dw3DPrecision;
     double LensLength;
@@ -527,7 +530,7 @@ public:
     // "$DIMEXE", 40
     double DimensionExtensionLineExtension;
     // "$DIMFXLON", 70
-    bool DimensionIsExtensionLineLengthFixe;
+    bool DimensionIsExtensionLineLengthFixed;
     // "$DIMFXL", 40
     double DimensionFixedExtensionLineLength;
     // "$DIMJOGANG", 40
@@ -594,6 +597,12 @@ public:
     std::string DimensionTex1 = "ByBlock";
     // "$DIMLTEX2", 6
     std::string DimensionTex2 = "ByBlock";
+
+   tables::Layer CurrentLayer;
+   tables::LineType CurrentLineType;
+   tables::TextStyle CurrentTextStyle;
+   tables::TextStyle DimensionTextStyle;
+   tables::DimensionStyle DimensionStyleOverrides;
 
     //TODO: How header UCS work??
     tables::UCS ModelSpaceUcs;

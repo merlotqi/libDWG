@@ -26,7 +26,9 @@
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
 #include <dwg/utils/Format.h>
+#include <dwg/utils/Encoding.h>
 #include <dwg/version.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
 
 namespace dwg {
 namespace io {
@@ -42,10 +44,10 @@ public:
     DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
         : DwgSectionIO(version)
     {
-        _emptyArr.resize(16);
-        std::fill(_emptyArr, 0);
+        for(size_t i = 0; i < 16; ++i)
+            _emptyArr.push_back(0);
         _writer = DwgStreamWriterBase::GetStreamWriter(version, stream,
-                                                       Encoding::Unicode);
+                                                       Encoding::Unicode());
     }
 
     void Write()

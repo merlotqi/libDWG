@@ -68,6 +68,10 @@ public:
 public:
     CadDictionary() {}
     CadDictionary(const std::string &name) {}
+     dwg::ObjectType ObjectType() const override {return dwg::ObjectType::DICTIONARY;}
+     std::string ObjectName() const override {return DxfFileToken::ObjectDictionary;}
+     std::string SubclassMarker() const override {return DxfSubclassMarker::Dictionary;}
+
     void Add(const std::string &key, NonGraphicalObject *value);
     void Add(NonGraphicalObject *value);
     bool TryAdd(NonGraphicalObject *value) const;
