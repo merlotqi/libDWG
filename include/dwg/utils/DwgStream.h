@@ -146,14 +146,18 @@ public:
 class LIBDWG_API OutputStream
 {
     std::ostream *m_stream;
+    unsigned int _seed;
 
 public:
     OutputStream(const std::string &name, int mode);
     OutputStream(std::ostream *stream, bool createCopy, bool resetPosition);
+    void setSeed(unsigned int seed) { _seed = seed; }
     
     template<class T>
     void Write(const T &value)
     {}
+
+    void WriteCRC8(const std::vector<unsigned char> & buffer, size_t offset, )
 };
 
 template<class T>

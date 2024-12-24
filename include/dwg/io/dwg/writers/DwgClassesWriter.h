@@ -50,7 +50,7 @@ public:
         _startWriter =
                 DwgStreamWriterBase.GetStreamWriter(_version, stream, encoding);
 
-        _writer = DwgStreamWriterBase::GetStreamWriter(_version, stream,
+        _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_sectionStream,
                                                        encoding);
 
         _startSentinel = {0x8D, 0xA1, 0xC4, 0xB8, 0xC4, 0xA9, 0xF8, 0xC5,

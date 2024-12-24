@@ -32,8 +32,12 @@
 namespace dwg {
 namespace io {
 
-class CadWriterBase : public ICadWriter
-{
+class CadWriterConfiguration;
+
+template<class T>
+class CadWriterBase : public ICadWriter, protected T
+{	
+    static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
 public:
 
     CadWriterBase() = default;
@@ -53,7 +57,6 @@ protected:
     Encoding getListedEncoding(const std::string &codePage);
 
 protected:
-    CadWriterConfiguration* _configuration;
     std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;

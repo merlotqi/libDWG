@@ -43,7 +43,7 @@
 namespace dwg {
 namespace io {
 
-class DwgWriter : public CadWriterBase
+class DwgWriter : public CadWriterBase<CadWriterConfiguration>
 {
 private:
     ACadVersion _version;
