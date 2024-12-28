@@ -22,40 +22,44 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include "DwgLocalSectionMap.h"
+#include <cstdint>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgSectionDescriptor
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+    int32_t _CompressedCode = 2;
 
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    int64_t PageType = 0x4163043B;
+    std::string Name;
+    uint64_t CompressedSize = 0;
+    int32_t PageCount = 0;
+    uint64_t DecompressedSize = 0x7400;
+    int32_t Compressed = 0;
+    int32_t SectionId = 0;
+    int32_t Encrypted = 0;
+    uint64_t HashCode = 0;
+    uint64_t Encoding = 0;
+    std::vector<DwgLocalSectionMap> LocalSections;
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+public:
+    DwgSectionDescriptor(const std::string &name = std::string()) : Name(name)
+    {
+    }
+
+    inline int32_t CompressedCode() const { return _CompressedCode; }
+    inline void CompressedCode(int32_t value)
+    {
+        if (value == 1 || value == 2) _CompressedCode = value;
+        else
+            throw new std::exception();
+    }
 };
 
 

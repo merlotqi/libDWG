@@ -22,42 +22,40 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/dwg/writers/DwgMergedStreamWriter.h>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgmMergedStreamWriterAC14 : public DwgMergedStreamWriter
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+public
+    DwgmMergedStreamWriterAC14(std::ostream *stream, IDwgStreamWriter *main,
+                               IDwgStreamWriter *handle)
+        : DwgMergedStreamWriter(stream, main, main, handle)
+    {
+    }
 
-public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    void WriteSpearShift() override
+    {
+        int pos = (int) this.Main.PositionInBits;
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+        if (this._savedPosition)
+        {
+            this.Main.WriteSpearShift();
+            this.Main.SetPositionInBits(this.PositionInBits);
+            this.Main.WriteRawLong(pos);
+            this.Main.WriteShiftValue();
+            this.Main.SetPositionInBits(pos);
+        }
+
+        this.HandleWriter.WriteSpearShift();
+        this.Main.WriteBytes(
+                ((MemoryStream) this.HandleWriter.Stream).GetBuffer(), 0,
+                (int) this.HandleWriter.Stream.Length);
+        this.Main.WriteSpearShift();
+    }
 };
-
 
 }// namespace io
 }// namespace dwg

@@ -29,20 +29,21 @@ namespace dwg {
 
 class LIBDWG_API Color
 {
-    static const unsigned char indexRgb[][3];
+    static const std::vector<std::vector<unsigned char>> _indexRgb[][3];
 
-    const int m_maxTrueColor = 0b0001'0000'0000'0000'0000'0000'0000;
-    const int m_trueColorFlag = 0b0100'0000'0000'0000'0000'0000'0000'0000;
+    const int _maxTrueColor = 0b0001'0000'0000'0000'0000'0000'0000;
+    const int _trueColorFlag = 0b0100'0000'0000'0000'0000'0000'0000'0000;
 
-    unsigned int m_color;
+    unsigned int _color;
 
+    static unsigned int getInt24(const std::vector<unsigned char> &array);
+    std::vector<unsigned char> getRgb() const;
     Color(unsigned int trueColor);
 
 public:
-    Color();
     Color(short index);
     Color(unsigned char r, unsigned char g, unsigned char b);
-    Color(const std::vector<unsigned char> rgb);
+    Color(const std::vector<unsigned char> &rgb);
 
     static Color ByLayer;
     static Color ByBlock;
@@ -64,5 +65,12 @@ public:
     friend bool operator==(const Color &lhs, const Color &rhs);
     friend bool operator!=(const Color &lhs, const Color &rhs);
 };
+
+bool operator==(const Color &lhs, const Color &rhs)
+{
+    return lhs._color == rhs._color;
+}
+
+bool operator!=(const Color &lhs, const Color &rhs) { return !(lhs == rhs); }
 
 }// namespace dwg

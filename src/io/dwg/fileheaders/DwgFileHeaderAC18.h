@@ -22,40 +22,40 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include "DwgFileHeaderAC15.h"
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgFileHeaderAC18 : public DwgFileHeaderAC15
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
-
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    uint8_t DwgVersion;
+    uint8_t AppReleaseVersion;
+    int64_t SummaryInfoAddr;
+    int64_t SecurityType;
+    int64_t VbaProjectAddr;
+    int32_t RootTreeNodeGap;
+    uint32_t GapArraySize;
+    uint32_t CRCSeed;
+    int32_t LastPageId;
+    int64_t LastSectionAddr;
+    int64_t SecondHeaderAddr;
+    uint32_t GapAmount;
+    uint32_t SectionAmount;
+    uint32_t SectionPageMapId;
+    int64_t PageMapAddress;
+    uint32_t SectionMapId;
+    uint32_t SectionArrayPageSize;
+    int32_t RigthGap;
+    int32_t LeftGap;
+    std::map<std::string, DwgSectionDescriptor> Descriptors;
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    DwgFileHeaderAC18();
+    DwgFileHeaderAC18(ACadVersion version);
+    void AddSection(const std::string &name) override;
+    void AddSection(const DwgSectionDescriptor &descriptor);
+    DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
 };
 
 

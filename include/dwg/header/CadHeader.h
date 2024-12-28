@@ -67,7 +67,7 @@ class CadDocument;
 namespace dwg {
 namespace header {
 
-class CadHeader
+class LIBDWG_API CadHeader
 {
 public:
     CadHeader();

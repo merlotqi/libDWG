@@ -22,42 +22,25 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include "DwgFileHeader.h"
+#include "DwgSectionLocatorRecord.h"
+#include <map>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgFileHeaderAC15 : public DwgFileHeader
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
-
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
-
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    static std::vector<unsigned char> EndSentinel;
+    std::map<int32_t, DwgSectionLocatorRecord> Records;
+    
+public:
+    DwgFileHeaderAC15();
+    DwgFileHeaderAC15(ACadVersion version);
+    void AddSection(const std::string &name) override;
+    DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
 };
-
 
 }// namespace io
 }// namespace dwg

@@ -20,11 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#ifndef LIBDWG_UTILS_FLAGS_H
+#define LIBDWG_UTILS_FLAGS_H
 
 #include <type_traits>
 
-namespace dwg {
 
 class Flag
 {
@@ -59,7 +59,7 @@ public:
 
 
     constexpr inline Flags &operator&=(int mask) noexcept { i &= mask; return *this; }
-    constexpr inline Flags &operator&=(uint mask) noexcept { i &= mask; return *this; }
+    constexpr inline Flags &operator&=(unsigned  mask) noexcept { i &= mask; return *this; }
     constexpr inline Flags &operator&=(Flags mask) noexcept { i &= mask.i; return *this; }
     constexpr inline Flags &operator&=(Enum mask) noexcept { i &= Int(mask); return *this; }
     constexpr inline Flags &operator|=(Flags other) noexcept { i |= other.i; return *this; }
@@ -122,6 +122,7 @@ private:
     Int i;
 };
 
-#define DECLARE_FLAGS(F, E) typedef dwg::Flags<E> F;
+#define DECLARE_FLAGS(F, E) typedef Flags<E> F;
 
-}// namespace dwg
+
+#endif// LIBDWG_UTILS_FLAGS_H

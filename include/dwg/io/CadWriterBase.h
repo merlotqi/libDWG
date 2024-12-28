@@ -54,9 +54,14 @@ public:
     }
 
 protected:
-    Encoding getListedEncoding(const std::string &codePage);
+    Encoding getListedEncoding(const std::string& codePage)
+    {
+        CodePage code = CadUtils::GetCodePage(codePage);
+        return Encoding(code);
+    }
 
 protected:
+    T _configuration;
     std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;

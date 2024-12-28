@@ -22,42 +22,34 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/dwg/writers/ICompressor.h>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgLZ77AC18Compressor : public ICompressor
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+    std::vector<unsigned char> _source;
+    std::ostringstream _dest;
+    std::vector<int> _block;
+    int _initialOffset;
+    int _currPosition;
+    int _currOffset;
+    int _totalOffset;
 
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    DwgLZ77AC18Compressor();
+    void Compress(const std::vector<unsigned char> &source, size_t offset,
+                  size_t totalSize, std::ostream *dest);
 
 private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    void restartBlock();
+    void writeLen(int len);
+    void writeOpCode(int opCode, int compressionOffset, int value);
+    void writeLiteralLength(int length);
+    void applyMask(int matchPosition, int compressionOffset, int mask);
+    bool compressChunk(int &offset, int &matchPos);
 };
-
 
 }// namespace io
 }// namespace dwg

@@ -22,42 +22,25 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterAC15.h>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+
+class DwgStreamWriterAC18 : public DwgStreamWriterAC15
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
-
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
+        : DwgStreamWriterAC15(stream, encoding)
+    {
+    }
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    void WriteCmColor(Color value) override;
+    void WriteEnColor(Color color, Transparency transparency) override;
+    void WriteEnColor(Color color, Transparency transparency,
+                      bool isBookColor) override;
 };
-
 
 }// namespace io
 }// namespace dwg

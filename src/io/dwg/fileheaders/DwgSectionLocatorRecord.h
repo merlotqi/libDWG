@@ -22,42 +22,41 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <cstdint>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgSectionLocatorRecord
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+    int32_t _Number;
+    int64_t _Seeker;
+    int64_t _Size;
 
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    DwgSectionLocatorRecord(int32_t number = 0, int64_t seeker = 0,
+                            int64_t size = 0)
+        : _Number(number), _Seeker(seeker), _Size(size)
+    {
+    }
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    bool IsInTheRecord(int32_t position) const
+    {
+        return position >= _Seeker && position < _Seeker + _Size;
+    }
+
+    inline int32_t Number() const { return _Number; }
+    
+    inline int64_t Seeker() const { return _Seeker; }
+    
+    inline int64_t Size() const { return _Size; }
+    
+    inline void Number(int32_t number) { _Number = number; }
+    
+    inline void Seeker(int64_t seeker) { _Seeker = seeker; }
+    
+    inline void Size(int64_t size) { _Size = size; }
 };
-
 
 }// namespace io
 }// namespace dwg

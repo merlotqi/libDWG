@@ -25,7 +25,6 @@
 
 namespace dwg {
 
-
 Encoding::Encoding(CodePage codepage)
 {
     _codePage = codePage;

@@ -22,42 +22,35 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18.h>
+#include <dwg/io/dwg/writers/DwgLZ77AC21Compressor.h>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgFileHeaderWriterAC21 : DwgFileHeaderWriterAC18
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+protected:
+    int _fileHeaderSize() const override { return 0x480; }
+
+    void craeteLocalSection(DwgSectionDescriptor descriptor,
+                            const std::vector<unsigned char> &buffer,
+                            int decompressedSize, unsigned long long offset,
+                            int totalSize, bool isCompressed) override
+    {
+        std::ostringstream descriptorStream = applyCompression(
+                buffer, decompressedSize, offset, totalSize, isCompressed);
+        writeMagicNumber();
+    }
 
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
-
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    DwgFileHeaderWriterAC21(std::ostream *stream, Encoding encoding,
+                            CadDocument *model)
+        : DwgFileHeaderWriterAC18(stream, encoding, model)
+    {
+        compressor = new DwgLZ77AC21Compressor();
+    }
 };
-
 
 }// namespace io
 }// namespace dwg

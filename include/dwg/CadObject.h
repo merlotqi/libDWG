@@ -26,6 +26,7 @@
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/enums/ObjectType.h>
+#include <dwg/objects//CadDictionary.h>
 #include <string>
 
 namespace dwg {
@@ -39,12 +40,12 @@ public:
     CadObject() = default;
     virtual ~CadObject() = default;
 
-    virtual ObjectType ObjectType() const = 0;
+    virtual dwg::ObjectType ObjectType() const = 0;
     virtual std::string ObjectName() const = 0;
     virtual std::string SubclassMarker() const = 0;
     unsigned long long Handle() const { return _handle; }
 
-    IHandledCadObject *Owner;// handle 330
+    unsigned long long OwnerHandle; // 330
 
 protected:
     void Handle(unsigned long long value) { _handle = value; }

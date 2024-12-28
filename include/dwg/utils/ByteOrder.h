@@ -22,42 +22,15 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
-
 namespace dwg {
-namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+struct byte_order
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
-
-public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
-
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    static constexpr unsigned short value   = 0x0102;
+    static constexpr auto is_little_endian = (value & 0xFF) == 0x02;
 };
 
+constexpr bool is_little_endian = byte_order::is_little_endian;
+constexpr bool is_big_endian    = !byte_order::is_little_endian;
 
-}// namespace io
-}// namespace dwg
+} // namespace dwg

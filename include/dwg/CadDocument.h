@@ -42,7 +42,7 @@
 
 namespace dwg {
 
-class CadDocument : IHandledCadObject
+class CadDocument : public IHandledCadObject
 {
 public:
     CadDocument(bool createDefault)
@@ -85,10 +85,7 @@ public:
 
     std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 
-    void CreateDefaults()
-    {
-        DxfClassCollection::UpdateDxfClasses(this);
-    }
+    void CreateDefaults();
 };
 
 }// namespace dwg

@@ -22,42 +22,33 @@
 
 #pragma once
 
+#include "DwgSectionDescriptor.h"
+#include <cstdint>
 #include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/utils/CodePages.h>
+#include <string>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class DwgFileHeader
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+public:
+    ACadVersion Version = ACadVersion::Unknown;
+    int64_t PreviewAddress = -1;
+    int32_t AcadMaintenanceVersion = 0;
+    CodePage DrawingCodePage = CodePage::Windows1251;
 
 public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+    static DwgFileHeader *CreateFileHeader(ACadVersion version);
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
+    virtual void AddSection(const std::string &name) = 0;
+    virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
+    
+    protected:
+    DwgFileHeader() = default;
+    DwgFileHeader(ACadVersion version);
 };
-
 
 }// namespace io
 }// namespace dwg

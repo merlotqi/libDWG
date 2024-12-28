@@ -20,44 +20,30 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include "DwgFileHeaderAC15.h"
+#include <stdexcept>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+std::vector<unsigned char> DwgFileHeaderAC15::EndSentinel = {0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5, 0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00 };
+
+DwgFileHeaderAC15::DwgFileHeaderAC15() {}
+
+DwgFileHeaderAC15::DwgFileHeaderAC15(ACadVersion version)
+    : DwgFileHeader(version)
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
+}
 
-public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+void DwgFileHeaderAC15::AddSection(const std::string &name)
+{
+    throw new std::exception("not implemented");
+}
 
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
-};
-
+DwgSectionDescriptor &DwgFileHeaderAC15::GetDescriptor(const std::string &name)
+{
+    throw new std::exception("not implemented");
+}
 
 }// namespace io
 }// namespace dwg

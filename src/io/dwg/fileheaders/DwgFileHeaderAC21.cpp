@@ -22,42 +22,17 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/io/CadWriterBase.h>
-#include <dwg/io/CadWriterConfiguration.h>
+#include "DwgFileHeaderAC21.h"
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeader;
-class IDwgFileHeaderWriter;
-class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
+DwgFileHeaderAC21::DwgFileHeaderAC21() {}
+
+DwgFileHeaderAC21::DwgFileHeaderAC21(ACadVersion version)
+    : DwgFileHeaderAC18(version)
 {
-private:
-    ACadVersion _version;
-    DwgFileHeader *_fileHeader;
-    IDwgFileHeaderWriter *_fileHeaderWriter;
-
-public:
-    DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
-
-private:
-    void getFileHeaderWriter();
-    void writeHeader();
-    void writeClasses();
-    void writeSummaryInfo();
-    void writePreview();
-    void writeAppInfo();
-    void writeFileDepList();
-    void writeRevHistory();
-    void writeAuxHeader();
-    void writeObjects();
-    void writeObjFreeSpace();
-    void writeTemplate();
-    void writeHandles();
-};
-
+}
 
 }// namespace io
 }// namespace dwg
