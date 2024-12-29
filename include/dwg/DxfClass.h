@@ -23,8 +23,8 @@
 #pragma once
 
 #include <dwg/CadDocument.h>
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/enums/classes/ProxyFlags.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/classes/ProxyFlags.h>
 #include <dwg/exports.h>
 #include <map>
 #include <string>
@@ -37,7 +37,7 @@ public:
     std::string DxfName;
     std::string CppClassName;
     std::string ApplicationName = "ObjectDBX Classes";
-    dwg::classes::ProxyFlags proxyFlags;
+    dwg::ProxyFlags proxyFlags;
     int InstanceCount;
     bool WasZombie;
     bool IsAnEntity;
@@ -50,13 +50,13 @@ public:
     DxfClass(const std::string &_cppClassName, short _classNumber,
              ACadVersion _version, const std::string &_dxfName,
              short _itemClassId, short _maintenanceVersion,
-             classes::ProxyFlags _proxyFlags, bool _wasZombie);
+             ProxyFlags _proxyFlags, bool _wasZombie);
 
     DxfClass(const std::string &_applicationName,
              const std::string &_cppClassName, short _classNumber,
              ACadVersion _version, const std::string &_dxfName,
              short _itemClassId, short _maintenanceVersion,
-             classes::ProxyFlags _proxyFlags, bool _wasZombie);
+             ProxyFlags _proxyFlags, bool _wasZombie);
 };
 
 class LIBDWG_API DxfClassCollection

@@ -23,14 +23,13 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/AttachmentPointType.h>
-#include <dwg/enums/entities/DimensionType.h>
-#include <dwg/enums/entities/LineSpacingStyleType.h>
+#include <dwg/entities/AttachmentPointType.h>
+#include <dwg/entities/DimensionType.h>
+#include <dwg/entities/LineSpacingStyleType.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
-namespace entities {
 
 class Dimension : public Entity
 {
@@ -39,7 +38,7 @@ public:
 
 public:
     unsigned char version;                // 280
-    tables::BlockRecord *block;           // 2, name
+    BlockRecord *block;           // 2, name
     XYZ definitionPoint;                  // 10, 20, 30
     XYZ textMiddlePoint;                  // 11, 21, 31
     XYZ insertionPoint;                   // 12, 22, 32
@@ -53,7 +52,7 @@ public:
     std::string text;                     // 1, optional
     double textRotation;                  // 53, optional
     double horizontalDirection;           // 51, optional
-    tables::DimensionStyle *dimStyle;     // 3, name
+    DimensionStyle *dimStyle;     // 3, name
 
     virtual double measurement() const = 0;// 42, optional
 
@@ -152,5 +151,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

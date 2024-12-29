@@ -28,16 +28,15 @@
 #include <vector>
 
 namespace dwg {
-namespace objects {
 
 class SortEntitiesTable : NonGraphicalObject
 {
 public:
     struct Sorter
     {
-        entities::Entity *Entity;
+        Entity *Entity;
         unsigned long long _handle;
-        Sorter(entities::Entity *entity, unsigned long long handle)
+        Sorter(Entity *entity, unsigned long long handle)
         {
             Entity = entity;
             _handle = handle;
@@ -55,11 +54,10 @@ public:
     }
 
     // (330)]
-    tables::BlockRecord BlockOwner;
+    BlockRecord BlockOwner;
 
 
     std::vector<Sorter> Sorters;
 };
 
-}// namespace objects
 }// namespace dwg

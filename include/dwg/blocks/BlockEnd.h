@@ -25,9 +25,8 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace blocks {
 
-class BlockEnd : public entities::Entity
+class BlockEnd : public Entity
 {
     public:
     std::string ObjectName() const override { return DxfFileToken::EndBlock;}
@@ -35,6 +34,4 @@ class BlockEnd : public entities::Entity
     std::string SubclassMarker() const override { return DxfSubclassMarker::BlockEnd;}
 };
 
-
-}// namespace blocks
 }// namespace dwg

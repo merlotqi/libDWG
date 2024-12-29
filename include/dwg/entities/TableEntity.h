@@ -25,7 +25,6 @@
 #include <dwg/entities/Insert.h>
 
 namespace dwg {
-namespace entities {
 
 class TableEntity : public Insert
 {
@@ -69,5 +68,4 @@ public:
     };
 };
 
-}// namespace entities
 }// namespace dwg

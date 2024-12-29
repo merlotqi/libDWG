@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Point : public Entity
 {
@@ -36,5 +35,4 @@ public:
     double rotation; // 50
 };
 
-}// namespace entities
 }// namespace dwg

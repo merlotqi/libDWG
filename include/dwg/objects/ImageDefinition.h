@@ -22,12 +22,11 @@
 
 #pragma once
 
-#include <dwg/enums/objects/ResolutionUnit.h>
+#include <dwg/objects/ResolutionUnit.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 
 namespace dwg {
-namespace objects {
 
 class ImageDefinition : public NonGraphicalObject
 {
@@ -51,5 +50,4 @@ public:
     ResolutionUnit Units;// 281
 };
 
-}// namespace objects
 }// namespace dwg

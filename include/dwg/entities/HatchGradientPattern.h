@@ -27,7 +27,6 @@
 #include <vector>
 
 namespace dwg {
-namespace entities {
 
 class HatchGradientPattern
 {
@@ -44,5 +43,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

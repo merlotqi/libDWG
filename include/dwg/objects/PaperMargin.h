@@ -23,7 +23,6 @@
 #pragma once
 
 namespace dwg {
-namespace objects {
 
 struct PaperMargin
 {
@@ -42,5 +41,4 @@ struct PaperMargin
     }
 };
 
-}// namespace objects
 }// namespace dwg

@@ -37,9 +37,9 @@ public:
 
     static int ToAlphaValue(Transparency transparency);
     static Transparency FromAlphaValue(int value);
-    static Transparency ByLayer();
-    static Transparency ByBlock();
-    static Transparency Opaque();
+    static Transparency ByLayer;
+    static Transparency ByBlock;
+    static Transparency Opaque;
 };
 
 }// namespace dwg

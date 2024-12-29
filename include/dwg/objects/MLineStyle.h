@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <dwg/enums/objects/MLineStyleFlags.h>
+#include <dwg/objects/MLineStyleFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 
 namespace dwg {
-namespace objects {
 
 class MLineStyle : public NonGraphicalObject
 {
@@ -57,7 +56,7 @@ public:
     {
         double Offset;               // 49
         Color Color = Color::ByBlock;// 62
-        tables::LineType LineType = tables::LineType::ByLayer;
+        LineType LineType = LineType::ByLayer;
     };
 
     std::vector<Element> Elements;// count 71
@@ -65,5 +64,4 @@ public:
 
 MLineStyle MLineStyle::Default = MLineStyle(MLineStyle::DefaultName);
 
-}// namespace objects
 }// namespace dwg

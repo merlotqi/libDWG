@@ -22,12 +22,11 @@
 
 #pragma once
 
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 #include <string>
 #include <vector>
 
 namespace dwg {
-namespace entities {
 
 class HatchPattern
 {
@@ -53,5 +52,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

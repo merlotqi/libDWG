@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <dwg/enums/entities/TextMirrorFlag.h>
-#include <dwg/enums/tables/FontFlags.h>
-#include <dwg/enums/tables/StyleFlags.h>
+#include <dwg/entities/TextMirrorFlag.h>
+#include <dwg/tables/FontFlags.h>
+#include <dwg/tables/StyleFlags.h>
 #include <dwg/tables/TableEntry.h>
 
 
 namespace dwg {
-namespace tables {
 
 
 class TextStyle : public TableEntry
@@ -71,7 +70,7 @@ public:
 
     double LastHeight;        // 42
     double ObliqueAngle = 0.0;// 50
-    entities::TextMirrorFlag MirrorFlag = entities::TextMirrorFlag::None;
+    TextMirrorFlag MirrorFlag = TextMirrorFlag::None;
     FontFlags TrueType = FontFlag::Regular;
 
     TextStyle() {}
@@ -96,5 +95,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

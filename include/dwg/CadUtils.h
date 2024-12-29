@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/enums/LineWeightType.h>
-#include <dwg/utils/CodePages.h>
-#include <dwg/utils/DateTime.h>
-#include <dwg/utils/Timespan.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/LineWeightType.h>
+#include <dwg/base/CodePages.h>
+#include <dwg/base/DateTime.h>
+#include <dwg/base/Timespan.h>
 #include <map>
 #include <string>
 #include <vector>

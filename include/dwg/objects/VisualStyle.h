@@ -23,15 +23,14 @@
 #pragma once
 
 
-#include <dwg/enums/objects/FaceColorMode.h>
-#include <dwg/enums/objects/FaceLightingModelType.h>
-#include <dwg/enums/objects/FaceLightingQualityType.h>
-#include <dwg/enums/objects/FaceModifierType.h>
+#include <dwg/objects/FaceColorMode.h>
+#include <dwg/objects/FaceLightingModelType.h>
+#include <dwg/objects/FaceLightingQualityType.h>
+#include <dwg/objects/FaceModifierType.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 namespace dwg {
-namespace objects {
 
 class VisualStyle : public NonGraphicalObject
 {
@@ -153,5 +152,4 @@ public:
     bool InternalFlag;
 };
 
-}// namespace objects
 }// namespace dwg

@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/enums/objects/DictionaryCloningFlags.h>
+#include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <map>
 #include <string>
@@ -30,7 +30,6 @@
 
 
 namespace dwg {
-namespace objects {
 
 class CadDictionary : public NonGraphicalObject
 {
@@ -85,5 +84,4 @@ public:
     }
 };
 
-}// namespace objects
 }// namespace dwg

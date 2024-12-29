@@ -22,158 +22,151 @@
 
 #pragma once
 
+#include "DwgFileHeaderWriterAC15.h"
 #include <array>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord.h>
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include <dwg/base/DwgStream.h>
+#include "DwgStreamWriterBase.h"
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
+std::vector<unsigned char> DwgFileHeaderWriterAC15::_endSentinel = {
+        0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
+        0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
+
+int DwgFileHeaderWriterAC15::HandleSectionOffset() const
 {
-    std::map<std::string,
-             std::pair<DwgSectionLocatorRecord, std::ostringstream *>>
-            _records;
-    std::array<unsigned char, 16> _endSentinel;
+    size_t offset = _fileHeaderSize();
 
-public:
-    int HandleSectionOffset() const override
+    for (auto &&item: _records)
     {
-        size_t offset = _fileHeaderSize();
+        if (item.first == DwgSectionDefinition::AcDbObjects) break;
 
-        // for (auto &&item : _records)
-        // {
-        //     if (item.first == DwgSectionDefinition::AcDbObjects) break;
-
-        //     offset += istream_length(item.second.second);
-        // }
-
-        return offset;
+        offset += istream_length(item.second.second);
     }
 
-    int _fileHeaderSize() const override { return 0x61; }
+    return (int) offset;
+}
 
-    DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model)
-        : DwgFileHeaderWriterBase(stream, encoding, model)
+int DwgFileHeaderWriterAC15::_fileHeaderSize() const { return 0x61; }
+
+DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream,
+                                                 Encoding encoding,
+                                                 CadDocument *model)
+    : DwgFileHeaderWriterBase(stream, encoding, model)
+{
+    _records = {
+            {      DwgSectionDefinition::Header,
+             {DwgSectionLocatorRecord(0), nullptr}   },
+            {     DwgSectionDefinition::Classes,
+             {DwgSectionLocatorRecord(1), nullptr}   },
+            {DwgSectionDefinition::ObjFreeSpace,
+             {DwgSectionLocatorRecord(3), nullptr}   },
+            {    DwgSectionDefinition::Template,
+             {DwgSectionLocatorRecord(4), nullptr}   },
+            {   DwgSectionDefinition::AuxHeader,
+             {DwgSectionLocatorRecord(5), nullptr}   },
+            { DwgSectionDefinition::AcDbObjects,
+             {DwgSectionLocatorRecord(NULL), nullptr}},
+            {     DwgSectionDefinition::Handles,
+             {DwgSectionLocatorRecord(2), nullptr}   },
+            {     DwgSectionDefinition::Preview,
+             {DwgSectionLocatorRecord(NULL), nullptr}},
+    };
+}
+
+void DwgFileHeaderWriterAC15::AddSection(const std::string &name,
+                                         std::ostringstream *stream,
+                                         bool isCompressed,
+                                         int decompsize = 0x7400)
+{
+    _records[name].first.Size = ostream_length(stream);
+    _records[name] = {_records[name].first, stream};
+}
+
+void DwgFileHeaderWriterAC15::WriteFile()
+{
+    setRecordSeekers();
+    writeFileHeader();
+    writeRecordStreams();
+}
+
+void DwgFileHeaderWriterAC15::setRecordSeekers()
+{
+    long currOffset = _fileHeaderSize();
+    for (auto it = _records.begin(); it != _records.end(); ++it)
     {
-        _endSentinel = {0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
-                        0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
-        _records = {
-                {      DwgSectionDefinition::Header,
-                 {DwgSectionLocatorRecord(0), nullptr}   },
-                {     DwgSectionDefinition::Classes,
-                 {DwgSectionLocatorRecord(1), nullptr}   },
-                {DwgSectionDefinition::ObjFreeSpace,
-                 {DwgSectionLocatorRecord(3), nullptr}   },
-                {    DwgSectionDefinition::Template,
-                 {DwgSectionLocatorRecord(4), nullptr}   },
-                {   DwgSectionDefinition::AuxHeader,
-                 {DwgSectionLocatorRecord(5), nullptr}   },
-                { DwgSectionDefinition::AcDbObjects,
-                 {DwgSectionLocatorRecord(NULL), nullptr}},
-                {     DwgSectionDefinition::Handles,
-                 {DwgSectionLocatorRecord(2), nullptr}   },
-                {     DwgSectionDefinition::Preview,
-                 {DwgSectionLocatorRecord(NULL), nullptr}},
-        };
+        it->second.first.Seeker(currOffset);
+        currOffset += ostream_length(it->second.second);
     }
+}
 
-    void AddSection(const std::string &name, std::ostringstream *stream,
-                    bool isCompressed, int decompsize = 0x7400) override
+
+void DwgFileHeaderWriterAC15::writeFileHeader()
+{
+    // std::ostringstream memoryStream;
+
+    // //0x00	6	“ACXXXX” version string
+     IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(
+    //         _version, &memoryStream, _encoding);
+    // writer->WriteBytes(
+    //         Encoding::ASCII.GetBytes(_document.Header.VersionString));
+    // //The next 7 starting at offset 0x06 are to be six bytes of 0
+    // //(in R14, 5 0’s and the ACADMAINTVER variable) and a byte of 1.
+    // writer->WriteBytes({0, 0, 0, 0, 0, 15, 1});
+    // //At 0x0D is a seeker (4 byte long absolute address) for the beginning sentinel of the image data.
+    // writer->WriteRawLong(
+    //         _records[DwgSectionDefinition::Preview].first.Seeker);
+
+    // writer->WriteByte(0x1B);
+    // writer->WriteByte(0x19);
+
+    // //Bytes at 0x13 and 0x14 are a raw short indicating the value of the code page for this drawing file.
+
+    // writer->WriteBytes(
+    //         LittleEndianConverter::Instance()->GetBytes(getFileCodePage()));
+    // writer->WriteBytes(LittleEndianConverter::Instance()->GetBytes(6));
+
+    // foreach (var item in this._records.Values.Select(r = > r.Item1))
+    // {
+    //     if (!item.Number.HasValue) continue;
+
+    //     this.writeRecord(writer, item);
+    // }
+
+    // //CRC
+    // writer->WriteSpearShift();
+    // writer->WriteRawShort((short) CRC8StreamHandler.GetCRCValue(
+    //         0xC0C1, memoryStream.GetBuffer(), 0L, memoryStream.Length));
+
+    // //0x95,0xA0,0x4E,0x28,0x99,0x82,0x1A,0xE5,0x5E,0x41,0xE0,0x5F,0x9D,0x3A,0x4D,0x00
+    // writer->WriteBytes(_endSentinel);
+
+    // _stream->write(memoryStream.str().c_str(), memoryStream.str().size());
+    // delete writer;
+}
+
+void DwgFileHeaderWriterAC15::writeRecord(IDwgStreamWriter *writer,
+                                          const DwgSectionLocatorRecord &record)
+{
+    //Record number (raw byte) | Seeker (raw long) | Size (raw long)
+    // writer->WriteByte((unsigned char) record.Number.Value);
+    // writer->WriteRawLong(record.Seeker);
+    // writer->WriteRawLong(record.Size);
+}
+
+void DwgFileHeaderWriterAC15::writeRecordStreams()
+{
+    for (auto it = _records.begin(); it != _records.end(); ++it)
     {
-        // _records[name].first.Size = ostream_length(stream);
-        // _records[name] = {_records[name].first, stream};
-    }
-
-    void WriteFile() override
-    {
-        setRecordSeekers();
-        writeFileHeader();
-        writeRecordStreams();
-    }
-
-private:
-    void setRecordSeekers()
-    {
-        // long currOffset = _fileHeaderSize();
-        // for (auto it = _records.begin(); it != _records.end(); ++it)
-        // {
-        //     it->first->Seeker = currOffset;
-        //     currOffset += ostream_length(it->second);
-        // }
-    }
-
-private:
-    void writeFileHeader()
-    {
-        // std::ostringstream memoryStream;
-
-        // //0x00	6	“ACXXXX” version string
-        // IDwgStreamWriter *writer = DwgStreamWriterBase.GetStreamWriter(
-        //         _version, &memoryStream, _encoding);
-        // writer->WriteBytes(
-        //         Encoding::ASCII.GetBytes(_document.Header.VersionString));
-        // //The next 7 starting at offset 0x06 are to be six bytes of 0
-        // //(in R14, 5 0’s and the ACADMAINTVER variable) and a byte of 1.
-        // writer->WriteBytes({0, 0, 0, 0, 0, 15, 1});
-        // //At 0x0D is a seeker (4 byte long absolute address) for the beginning sentinel of the image data.
-        // writer->WriteRawLong(
-        //         _records[DwgSectionDefinition::Preview].first.Seeker);
-
-        // writer->WriteByte(0x1B);
-        // writer->WriteByte(0x19);
-
-        // //Bytes at 0x13 and 0x14 are a raw short indicating the value of the code page for this drawing file.
-
-        // writer->WriteBytes(
-        //         LittleEndianConverter::Instance()->GetBytes(getFileCodePage()));
-        // writer->WriteBytes(LittleEndianConverter::Instance()->GetBytes(6));
-
-        // foreach (var item in this._records.Values.Select(r = > r.Item1))
-        // {
-        //     if (!item.Number.HasValue) continue;
-
-        //     this.writeRecord(writer, item);
-        // }
-
-        // //CRC
-        // writer->WriteSpearShift();
-        // writer->WriteRawShort((short) CRC8StreamHandler.GetCRCValue(
-        //         0xC0C1, memoryStream.GetBuffer(), 0L, memoryStream.Length));
-
-        // //0x95,0xA0,0x4E,0x28,0x99,0x82,0x1A,0xE5,0x5E,0x41,0xE0,0x5F,0x9D,0x3A,0x4D,0x00
-        // writer->WriteBytes(_endSentinel);
-
-        // _stream->write(memoryStream.str().c_str(), memoryStream.str().size());
-        // delete writer;
-    }
-
-    void writeRecord(IDwgStreamWriter *writer,
-                     const DwgSectionLocatorRecord &record)
-    {
-        //Record number (raw byte) | Seeker (raw long) | Size (raw long)
-        // writer->WriteByte((unsigned char) record.Number.Value);
-        // writer->WriteRawLong(record.Seeker);
-        // writer->WriteRawLong(record.Size);
-    }
-
-    void writeRecordStreams()
-    {
-        for (auto it = _records.begin(); it != _records.end(); ++it)
+        auto &&ss = it->second.second;
+        if (ss)
         {
-            auto &&ss = it->second.second;
-            if (ss)
-            {
-                std::string data = ss->str();
-                std::size_t len = data.size();
-                _stream->write(data.c_str(), len);
-            }
+            std::string data = ss->str();
+            std::size_t len = data.size();
+            _stream->write(data.c_str(), len);
         }
     }
-};
-
+}
 }// namespace io
 }// namespace dwg

@@ -25,8 +25,8 @@
 #include "IDwgFileHeaderWriter.h"
 #include <assert.h>
 #include <dwg/CadDocument.h>
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/utils/Encoding.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/base/Encoding.h>
 #include <fstream>
 #include <sstream>
 

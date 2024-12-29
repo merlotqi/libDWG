@@ -23,11 +23,10 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/BoundaryPathFlags.h>
+#include <dwg/entities/BoundaryPathFlags.h>
 #include <vector>
 
 namespace dwg {
-namespace entities {
 
 class HatchBoundaryPath
 {
@@ -134,5 +133,4 @@ public:
     };
 };
 
-}// namespace entities
 }// namespace dwg

@@ -25,12 +25,10 @@
 #include <dwg/entities/AttributeBase.h>
 
 namespace dwg {
-namespace entities {
 
 class AttributeEntity : public AttributeBase
 {
 public:
 };
 
-}// namespace entities
 }// namespace dwg

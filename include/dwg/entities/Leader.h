@@ -23,20 +23,19 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/LeaderCreationType.h>
-#include <dwg/enums/entities/LeaderPathType.h>
+#include <dwg/entities/LeaderCreationType.h>
+#include <dwg/entities/LeaderPathType.h>
 #include <dwg/tables/DimensionStyle.h>
 
 
 namespace dwg {
-namespace entities {
 
 class Leader : public Entity
 {
 public:
     Leader();
     virtual ~Leader();
-    tables::DimensionStyle *style;  // 3 name
+    DimensionStyle *style;  // 3 name
     bool arrowHeadEnabled;          // 71
     LeaderPathType pathType;        // 72
     LeaderCreationType creationType;// 73
@@ -58,5 +57,4 @@ public:
     XYZ annotationOffset;   // 213, 223, 233
 };
 
-}// namespace entities
 }// namespace dwg

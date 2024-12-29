@@ -24,11 +24,10 @@
 
 #include <dwg/entities/Entity.h>
 
-#include <dwg/enums/entities/KnotParameterization.h>
-#include <dwg/enums/entities/SplineFlags.h>
+#include <dwg/entities/KnotParameterization.h>
+#include <dwg/entities/SplineFlags.h>
 
 namespace dwg {
-namespace entities {
 
 class Spline : public Entity
 {
@@ -61,5 +60,4 @@ public:
     KnotParameterization knotParameterization;
 };
 
-}// namespace entities
 }// namespace dwg

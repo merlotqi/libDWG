@@ -34,7 +34,6 @@
 #include <dwg/objects/Scale.h>
 
 namespace dwg {
-namespace objects {
 
 
 template<class T>
@@ -113,5 +112,4 @@ public:
 };
 
 
-}// namespace objects
 }// namespace dwg

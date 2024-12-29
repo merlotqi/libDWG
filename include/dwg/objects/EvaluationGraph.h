@@ -26,7 +26,6 @@
 #include <vector>
 
 namespace dwg {
-namespace objects {
 
 
 class EvaluationGraph : public NonGraphicalObject
@@ -54,5 +53,4 @@ public:
     std::vector<GraphNode> Nodes;
 };
 
-}// namespace objects
 }// namespace dwg

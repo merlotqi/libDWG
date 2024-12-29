@@ -22,19 +22,18 @@
 
 #pragma once
 
-#include <dwg/enums/objects/PlotFlags.h>
-#include <dwg/enums/objects/PlotPaperUnits.h>
-#include <dwg/enums/objects/PlotRotation.h>
-#include <dwg/enums/objects/PlotType.h>
-#include <dwg/enums/objects/ScaledType.h>
-#include <dwg/enums/objects/ShadePlotMode.h>
-#include <dwg/enums/objects/ShadePlotResolutionMode.h>
+#include <dwg/objects/PlotFlags.h>
+#include <dwg/objects/PlotPaperUnits.h>
+#include <dwg/objects/PlotRotation.h>
+#include <dwg/objects/PlotType.h>
+#include <dwg/objects/ScaledType.h>
+#include <dwg/objects/ShadePlotMode.h>
+#include <dwg/objects/ShadePlotResolutionMode.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/PaperMargin.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 
 namespace dwg {
-namespace objects {
 
 class PlotSettings : public NonGraphicalObject
 {
@@ -113,5 +112,4 @@ public:
     // 333
     unsigned long long ShadePlotIDHandle;
 };
-}// namespace objects
 }// namespace dwg

@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Ray : public Entity
 {
@@ -34,5 +33,4 @@ public:
     XYZ direction; // 11, 21, 31
 };
 
-}// namespace entities
 }// namespace dwg

@@ -26,13 +26,12 @@
 #include <dwg/entities/HatchBoundaryPath.h>
 #include <dwg/entities/HatchGradientPattern.h>
 #include <dwg/entities/HatchPattern.h>
-#include <dwg/enums/entities/HatchPatternType.h>
-#include <dwg/enums/entities/HatchStyleType.h>
-#include <dwg/utils/Color.h>
+#include <dwg/entities/HatchPatternType.h>
+#include <dwg/entities/HatchStyleType.h>
+#include <dwg/base/Color.h>
 
 
 namespace dwg {
-namespace entities {
 
 class Hatch : public Entity
 {
@@ -84,5 +83,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

@@ -24,16 +24,15 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <dwg/Transparency.h>
-#include <dwg/enums/LineWeightType.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/Material.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
 
 namespace dwg {
-namespace entities {
 
 class Entity : public CadObject
 {
@@ -42,19 +41,18 @@ public:
     std::string SubclassMarker() const { return DxfSubclassMarker::Entity; }
 
 public:
-    tables::Layer *layer;       // 8, name
+    Layer *layer;       // 8, name
     Color color;                // 62, 420
     LineweightType lineweight;  // 370
     double linetypeScale;       // 48
     bool isInvisible;           // 60
     Transparency transparency;  // 440
-    tables::LineType *linetype; // 6, name
-    objects::Material *material;// 347, handle
+    LineType *linetype; // 6, name
+    Material *material;// 347, handle
 
-    objects::BookColor bookColor;//430, name
+    BookColor bookColor;//430, name
 
     void MatchProperties(const Entity *other);
 };
 
-}// namespace entities
 }// namespace dwg

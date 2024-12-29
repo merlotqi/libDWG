@@ -25,7 +25,6 @@
 #include <dwg/entities/Circle.h>
 
 namespace dwg {
-namespace entities {
 
 class Arc : public Circle
 {
@@ -35,6 +34,4 @@ public:
     double EndAngle;  // 51
 };
 
-
-}// namespace entities
 }// namespace dwg

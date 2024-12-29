@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <dwg/utils/DwgStream.h>
+#include <dwg/base/DwgStream.h>
 
 namespace dwg {
 namespace io {

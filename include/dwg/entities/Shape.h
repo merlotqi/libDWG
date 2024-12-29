@@ -26,7 +26,6 @@
 #include <dwg/tables/TextStyle.h>
 
 namespace dwg {
-namespace entities {
 
 class Shape : public Entity
 {
@@ -35,7 +34,7 @@ public:
     XYZ insertionPoint;// 10, 20, 30
     double size;       // 40
 
-    tables::TextStyle *textStyle;// name 2
+    TextStyle *textStyle;// name 2
 
     double rotation;      // 50
     double relativeXScale;// 41
@@ -44,5 +43,4 @@ public:
     XYZ normal;// 210, 220, 230
 };
 
-}// namespace entities
 }// namespace dwg

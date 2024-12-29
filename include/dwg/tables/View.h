@@ -22,13 +22,12 @@
 
 #pragma once
 
-#include <dwg/enums/OrthographicType.h>
-#include <dwg/enums/RenderMode.h>
-#include <dwg/enums/tables/ViewModeType.h>
+#include <dwg/OrthographicType.h>
+#include <dwg/RenderMode.h>
+#include <dwg/tables/ViewModeType.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
-namespace tables {
 
 class View : public TableEntry
 {
@@ -78,5 +77,4 @@ protected:
 };
 
 
-}// namespace tables
 }// namespace dwg

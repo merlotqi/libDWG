@@ -23,13 +23,12 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/TextHorizontalAlignment.h>
-#include <dwg/enums/entities/TextMirrorFlag.h>
-#include <dwg/enums/entities/TextVerticalAlignmentType.h>
+#include <dwg/entities/TextHorizontalAlignment.h>
+#include <dwg/entities/TextMirrorFlag.h>
+#include <dwg/entities/TextVerticalAlignmentType.h>
 
 
 namespace dwg {
-namespace entities {
 
 
 class TextEntity : public Entity, IText
@@ -64,5 +63,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

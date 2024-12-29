@@ -23,7 +23,6 @@
 #pragma once
 
 namespace dwg {
-namespace entities {
 
 class Vertex
 {
@@ -46,5 +45,4 @@ class VertexFaceRecord : public Vertex
 {
 };
 
-}// namespace entities
 }// namespace dwg

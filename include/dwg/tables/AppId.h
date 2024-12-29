@@ -25,7 +25,6 @@
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
-namespace tables {
 
 class AppId : public TableEntry
 {
@@ -59,5 +58,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

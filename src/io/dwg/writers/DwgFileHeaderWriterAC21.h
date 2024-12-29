@@ -22,8 +22,7 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18.h>
-#include <dwg/io/dwg/writers/DwgLZ77AC21Compressor.h>
+#include "DwgFileHeaderWriterAC18.h"
 
 namespace dwg {
 namespace io {
@@ -31,25 +30,15 @@ namespace io {
 class DwgFileHeaderWriterAC21 : DwgFileHeaderWriterAC18
 {
 protected:
-    int _fileHeaderSize() const override { return 0x480; }
-
+    int _fileHeaderSize() const override;
     void craeteLocalSection(DwgSectionDescriptor descriptor,
                             const std::vector<unsigned char> &buffer,
                             int decompressedSize, unsigned long long offset,
-                            int totalSize, bool isCompressed) override
-    {
-        std::ostringstream descriptorStream = applyCompression(
-                buffer, decompressedSize, offset, totalSize, isCompressed);
-        writeMagicNumber();
-    }
+                            int totalSize, bool isCompressed) override;
 
 public:
-    DwgFileHeaderWriterAC21(std::ostream *stream, Encoding encoding,
-                            CadDocument *model)
-        : DwgFileHeaderWriterAC18(stream, encoding, model)
-    {
-        compressor = new DwgLZ77AC21Compressor();
-    }
+    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding,
+                            CadDocument *model);
 };
 
 }// namespace io

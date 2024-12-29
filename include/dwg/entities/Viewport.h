@@ -23,19 +23,18 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/ViewportStatusFlags.h>
+#include <dwg/entities/ViewportStatusFlags.h>
 #include <dwg/tables/Layer.h>
 
-#include <dwg/enums/OrthographicType.h>
-#include <dwg/enums/RenderMode.h>
-#include <dwg/enums/entities/LightingType.h>
-#include <dwg/enums/objects/ShadePlotMode.h>
+#include <dwg/OrthographicType.h>
+#include <dwg/RenderMode.h>
+#include <dwg/entities/LightingType.h>
+#include <dwg/objects/ShadePlotMode.h>
 #include <dwg/objects/Scale.h>
 #include <dwg/objects/VisualStyle.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 namespace dwg {
-namespace entities {
 
 class Viewport : public Entity
 {
@@ -71,7 +70,7 @@ public:
     double twistAngle;      // 51
     short circleZoomPercent;// 72
 
-    std::vector<tables::Layer *> frozonLayers;// 331 /ignored
+    std::vector<Layer *> frozonLayers;// 331 /ignored
 
 
     ViewportStatusFlags status;// 90
@@ -99,14 +98,14 @@ public:
     OrthographicType ucsOrthographicType;// 79
 
     double elevation;                    // 146
-    objects::ShadePlotMode shadePlotMode;// 170
+    ShadePlotMode shadePlotMode;// 170
 
     short MajorGridLineFrequency;// 61
                                  //332	Background ID/Handle(optional)
 
     //333	Shade plot ID/Handle(optional)
 
-    objects::VisualStyle *visualStyle;// 348
+    VisualStyle *visualStyle;// 348
 
 
     bool UseDefaultLighting;         // 292
@@ -132,8 +131,7 @@ public:
     //Soft pointer reference to viewport object (for layer VP property override)
 
 
-    objects::Scale *scale() const;
+    Scale *scale() const;
 };
 
-}// namespace entities
 }// namespace dwg

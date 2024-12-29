@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Line : public Entity
 {
@@ -39,5 +38,4 @@ public:
     XYZ endPoint;    // 11, 21, 31
 };
 
-}// namespace entities
 }// namespace dwg

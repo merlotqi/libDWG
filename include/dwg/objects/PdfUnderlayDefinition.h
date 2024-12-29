@@ -25,7 +25,6 @@
 #include <dwg/objects/UnderlayDefinition.h>
 
 namespace dwg {
-namespace objects {
 
 class PdfUnderlayDefinition : public UnderlayDefinition
 {
@@ -36,5 +35,4 @@ public:
     std::string ObjectName() const { return DxfFileToken::ObjectPdfDefinition; }
 };
 
-}// namespace objects
 }// namespace dwg

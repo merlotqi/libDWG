@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Solid3D : public Entity
 {
@@ -34,5 +33,4 @@ public:
     virtual ~Solid3D();
 };
 
-}// namespace entities
 }// namespace dwg

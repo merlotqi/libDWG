@@ -22,34 +22,36 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/ICompressor.h>
+#include "DwgLZ77AC18Compressor.h"
 
 namespace dwg {
 namespace io {
 
-class DwgLZ77AC18Compressor : public ICompressor
+DwgLZ77AC18Compressor::DwgLZ77AC18Compressor() {}
+
+void DwgLZ77AC18Compressor::Compress(const std::vector<unsigned char> &source,
+                                     size_t offset, size_t totalSize,
+                                     std::ostream *dest)
 {
-    std::vector<unsigned char> _source;
-    std::ostringstream _dest;
-    std::vector<int> _block;
-    int _initialOffset;
-    int _currPosition;
-    int _currOffset;
-    int _totalOffset;
+}
 
-public:
-    DwgLZ77AC18Compressor();
-    void Compress(const std::vector<unsigned char> &source, size_t offset,
-                  size_t totalSize, std::ostream *dest);
+void DwgLZ77AC18Compressor::restartBlock() {}
 
-private:
-    void restartBlock();
-    void writeLen(int len);
-    void writeOpCode(int opCode, int compressionOffset, int value);
-    void writeLiteralLength(int length);
-    void applyMask(int matchPosition, int compressionOffset, int mask);
-    bool compressChunk(int &offset, int &matchPos);
-};
+void DwgLZ77AC18Compressor::writeLen(int len) {}
+
+void DwgLZ77AC18Compressor::writeOpCode(int opCode, int compressionOffset,
+                                        int value)
+{
+}
+
+void DwgLZ77AC18Compressor::writeLiteralLength(int length) {}
+
+void DwgLZ77AC18Compressor::applyMask(int matchPosition, int compressionOffset,
+                                      int mask)
+{
+}
+
+bool DwgLZ77AC18Compressor::compressChunk(int &offset, int &matchPos) {}
 
 }// namespace io
 }// namespace dwg

@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Circle : Entity
 {
@@ -37,5 +36,4 @@ public:
     double Radius;   // 40
 };
 
-}// namespace entities
 }// namespace dwg

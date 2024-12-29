@@ -1,3 +1,5 @@
+
+
 /**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
  *
@@ -20,33 +22,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18.h>
-#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor.h>
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase.h>
-#include <dwg/io/dwg/writers/DwgLZ77AC18Compressor.h>
-#include <dwg/io/dwg/writers/ICompressor.h>
+#include "../fileheaders/DwgFileHeaderAC18.h"
+#include "../fileheaders/DwgLocalSectionMap.h"
+#include "../fileheaders/DwgSectionDescriptor.h"
+#include "DwgFileHeaderWriterBase.h"
+#include "DwgFileHeaderWriterAC18.h"
+#include "ICompressor.h"
+#include "DwgLZ77AC18Compressor.h"
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
-{
-    std::vector<DwgLocalSectionMap> _localSectionsMaps;
-    std::map<std::string, DwgSectionDescriptor> _descriptors;
+    int DwgFileHeaderWriterAC18::HandleSectionOffset() const { return 0; }
 
-public:
-    int HandleSectionOffset() const { return 0; }
+    int DwgFileHeaderWriterAC18::_fileHeaderSize() const  { return 0x100; }
 
-protected:
-    int _fileHeaderSize() const override { return 0x100; }
-    DwgFileHeaderAC18 *_fileHeader;
-    ICompressor *compressor;
 
-public:
-    DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding,
+    DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding,
                             CadDocument *document)
         : DwgFileHeaderWriterBase(stream, encoding, document)
     {
@@ -60,7 +52,7 @@ public:
         }
     }
 
-    void WriteFile() override
+    void DwgFileHeaderWriterAC18::WriteFile() 
     {
         _fileHeader->SectionArrayPageSize =
                 (unsigned int) (_localSectionsMaps.size() + 2);
@@ -72,8 +64,8 @@ public:
         writeFileMetaData();
     }
 
-    void AddSection(const std::string &name, std::ostringstream *stream,
-                    bool isCompressed, int decompsize = 0x7400) override
+    void DwgFileHeaderWriterAC18::AddSection(const std::string &name, std::ostringstream *stream,
+                    bool isCompressed, int decompsize = 0x7400) 
     {
         DwgSectionDescriptor descriptor(name);
         _fileHeader->AddSection(descriptor);
@@ -106,8 +98,8 @@ public:
         }
     }
 
-protected:
-    virtual void craeteLocalSection(DwgSectionDescriptor descriptor,
+
+    void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor,
                                     const std::vector<unsigned char> &buffer,
                                     int decompressedSize,
                                     unsigned long long offset, int totalSize,
@@ -169,7 +161,7 @@ protected:
     }
 
     std::ostringstream
-    applyCompression(const std::vector<unsigned char> &buffer,
+    DwgFileHeaderWriterAC18::applyCompression(const std::vector<unsigned char> &buffer,
                      int decompressedSize, unsigned long long offset,
                      int totalSize, bool isCompressed)
     {
@@ -195,8 +187,7 @@ protected:
         return stream;
     }
 
-private:
-    void writeDescriptors()
+    void DwgFileHeaderWriterAC18::writeDescriptors()
     {
         MemoryStream stream = new MemoryStream();
         var swriter = DwgStreamWriterBase.GetStreamWriter(_version, stream,
@@ -277,8 +268,7 @@ private:
         addSection(sectionHolder);
     }
 
-public:
-    void writeRecords()
+    void DwgFileHeaderWriterAC18::writeRecords()
     {
         writeMagicNumber();
 
@@ -320,8 +310,7 @@ public:
         _fileHeader.PageMapAddress = (unsigned long long) section.Seeker;
     }
 
-private:
-    void writeFileMetaData()
+    void DwgFileHeaderWriterAC18::writeFileMetaData()
     {
         StreamIO writer = new StreamIO(_stream);
 
@@ -395,7 +384,7 @@ private:
         _stream.Write(DwgCheckSumCalculator.MagicSequence, 236, 20);
     }
 
-    void writeFileHeader(MemoryStream stream)
+    void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream* stream)
     {
         CRC32StreamHandler crcStream = new CRC32StreamHandler(stream, 0u);
         StreamIO swriter = new StreamIO(crcStream);
@@ -467,13 +456,13 @@ private:
         applyMagicSequence(stream);
     }
 
-    void addSection(DwgLocalSectionMap section)
+    void DwgFileHeaderWriterAC18::addSection(DwgLocalSectionMap section)
     {
         section.PageNumber = _localSectionsMaps.Count + 1;
         _localSectionsMaps.Add(section);
     }
 
-    DwgLocalSectionMap setSeeker(int map, MemoryStream stream)
+    DwgLocalSectionMap DwgFileHeaderWriterAC18::setSeeker(int map, std::ostringstream* stream)
     {
         DwgLocalSectionMap holder = new DwgLocalSectionMap{SectionMap = map};
 
@@ -486,7 +475,7 @@ private:
         return holder;
     }
 
-    void compressChecksum(DwgLocalSectionMap section, MemoryStream stream)
+    void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap section, std::ostringstream* stream)
     {
         //Compress the local map section and write the checksum once is done
         section.DecompressedSize = (unsigned long long) stream.Length;
@@ -508,7 +497,7 @@ private:
         _stream.Write(main.GetBuffer(), 0, (int) main.Length);
     }
 
-    void writePageHeaderData(DwgLocalSectionMap section, Stream stream)
+    void DwgFileHeaderWriterAC18::writePageHeaderData(DwgLocalSectionMap section, std::ostream* stream)
     {
         StreamIO writer = new StreamIO(stream);
 
@@ -526,7 +515,7 @@ private:
         writer.Write<uint>((uint) section.Checksum);
     }
 
-    void writeDataSection(Stream stream, DwgSectionDescriptor descriptor,
+    void DwgFileHeaderWriterAC18::writeDataSection(std::ostream* stream, DwgSectionDescriptor descriptor,
                           DwgLocalSectionMap map, int size)
     {
         StreamIO writer = new StreamIO(stream);
@@ -546,7 +535,6 @@ private:
         //0x1C	4	Unknown (ODA writes a 0)
         writer.Write(map.ODA);
     }
-};
 
 }// namespace io
 }// namespace dwg

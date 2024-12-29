@@ -23,11 +23,10 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/UnderlayDisplayFlags.h>
+#include <dwg/entities/UnderlayDisplayFlags.h>
 #include <dwg/objects/UnderlayDefinition.h>
 
 namespace dwg {
-namespace entities {
 
 class UnderlayEntity : public Entity
 {
@@ -48,8 +47,7 @@ public:
     unsigned char contrast;// 281
     unsigned char Fade;    // 282
 
-    objects::UnderlayDefinition *definition;
+    UnderlayDefinition *definition;
 };
 
-}// namespace entities
 }// namespace dwg

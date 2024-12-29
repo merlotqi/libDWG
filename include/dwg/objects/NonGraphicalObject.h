@@ -27,7 +27,6 @@
 #include <string>
 
 namespace dwg {
-namespace objects {
 
 
 class NonGraphicalObject : public CadObject, INamedCadObject
@@ -47,5 +46,4 @@ public:
     void Name(const std::string &value) { _name = value; }
 };
 
-}// namespace objects
 }// namespace dwg

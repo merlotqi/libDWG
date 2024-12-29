@@ -22,15 +22,14 @@
 
 #pragma once
 
-#include <dwg/enums/LineweightType.h>
-#include <dwg/enums/tables/LayerFlags.h>
+#include <dwg/LineweightType.h>
+#include <dwg/tables/LayerFlags.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TableEntry.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 
 namespace dwg {
-namespace tables {
 
 
 class Layer : public TableEntry
@@ -81,5 +80,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

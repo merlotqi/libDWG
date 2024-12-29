@@ -22,26 +22,25 @@
 
 #pragma once
 
-#include <dwg/enums/FlowDirectionType.h>
-#include <dwg/enums/LineSpacingStyle.h>
-#include <dwg/enums/LineweightType.h>
-#include <dwg/enums/TextAlignmentType.h>
-#include <dwg/enums/TextAttachmentDirectionType.h>
-#include <dwg/enums/TextAttachmentPointType.h>
-#include <dwg/enums/TextAttachmentType.h>
-#include <dwg/enums/entities/BlockContentConnectionType.h>
-#include <dwg/enums/entities/MultiLeaderPathType.h>
-#include <dwg/enums/objects/LeaderLinePropertOverrideFlags.h>
+#include <dwg/FlowDirectionType.h>
+#include <dwg/LineSpacingStyle.h>
+#include <dwg/LineweightType.h>
+#include <dwg/TextAlignmentType.h>
+#include <dwg/TextAttachmentDirectionType.h>
+#include <dwg/TextAttachmentPointType.h>
+#include <dwg/TextAttachmentType.h>
+#include <dwg/entities/BlockContentConnectionType.h>
+#include <dwg/entities/MultiLeaderPathType.h>
+#include <dwg/objects/LeaderLinePropertOverrideFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TextStyle.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
-#include <dwg/utils/Matrix.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
+#include <dwg/base/Matrix.h>
 
 namespace dwg {
-namespace objects {
 
 class MultiLeaderAnnotContext : public NonGraphicalObject
 {
@@ -71,12 +70,12 @@ public:
         int SegmentIndex;
         std::vector<StartEndPointPair> StartEndPoints;
         int Index;                             // 91
-        entities::MultiLeaderPathType PathType;// 170
+        MultiLeaderPathType PathType;// 170
         Color LineColor;                       // 92
-        tables::LineType LineType;
+        LineType LineType;
         LineweightType LineWeight;// 171
         double ArrowheadSize;     // 40
-        tables::BlockRecord ArrowHead;
+        BlockRecord ArrowHead;
         LeaderLinePropertOverrideFlags OverrideFlags;
     };
 
@@ -102,11 +101,11 @@ public:
     TextAttachmentType TextLeftAttachment;                      // 174
     TextAttachmentType TextRightAttachment;                     // 175
     TextAlignmentType TextAlignment;                            // 176
-    entities::BlockContentConnectionType BlockContentConnection;// 177
+    BlockContentConnectionType BlockContentConnection;// 177
     bool HasTextContents;                                       // 290
     std::string TextLabel;                                      // 304
     XYZ TextNormal;                                             // 11,21,31
-    tables::TextStyle TextStyle;                                // 340
+    TextStyle TextStyle;                                // 340
 
     XYZ TextLocation;// 12,22,32
     XYZ Direction;   // 13,23,33
@@ -139,7 +138,7 @@ public:
     // 296
     bool HasContentsBlock;
     // 341
-    tables::BlockRecord BlockContent;
+    BlockRecord BlockContent;
     // 14, 24, 34
     XYZ BlockContentNormal;
     // 15, 25, 35
@@ -166,5 +165,4 @@ public:
     TextAttachmentType TextBottomAttachment;
 };
 
-}// namespace objects
 }// namespace dwg

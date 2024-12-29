@@ -24,28 +24,27 @@
 
 #include <dwg/entities/AttributeDefinition.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/LineWeightType.h>
-#include <dwg/enums/entities/MultiLeaderPathType.h>
-#include <dwg/enums/entities/MultiLeaderPropertyOverrideFlags.h>
-#include <dwg/enums/objects/LeaderContentType.h>
+#include <dwg/LineWeightType.h>
+#include <dwg/entities/MultiLeaderPathType.h>
+#include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
+#include <dwg/objects/LeaderContentType.h>
 #include <dwg/objects/MultiLeaderAnnotContext.h>
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 
-#include <dwg/enums/TextAlignmentType.h>
-#include <dwg/enums/TextAngleType.h>
-#include <dwg/enums/TextAttachmentDirectionType.h>
-#include <dwg/enums/TextAttachmentPointType.h>
-#include <dwg/enums/TextAttachmentType.h>
-#include <dwg/enums/entities/BlockContentConnectionType.h>
+#include <dwg/TextAlignmentType.h>
+#include <dwg/TextAngleType.h>
+#include <dwg/TextAttachmentDirectionType.h>
+#include <dwg/TextAttachmentPointType.h>
+#include <dwg/TextAttachmentType.h>
+#include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/tables/TextStyle.h>
 
 
 namespace dwg {
-namespace entities {
 
 class MultiLeader : public Entity
 {
@@ -63,28 +62,28 @@ public:
         std::string text;// 302
     };
 
-    objects::MultiLeaderAnnotContext *contextData;
-    objects::MultiLeaderStyle *style;
+    MultiLeaderAnnotContext *contextData;
+    MultiLeaderStyle *style;
 
     MultiLeaderPropertyOverrideFlags propertyOverrideFlags;// 90
     MultiLeaderPathType pathType;                          // 170
     Color lineColoe;                                       // 91
 
-    tables::LineType leaderLineType;// 341
+    LineType leaderLineType;// 341
     LineweightType leaderLineWeight;// 171
 
     bool enableLanding;    // 290
     bool enableDogleg;     // 291
     double landingDistance;// 41
 
-    tables::BlockRecord *arrowhead;// 342
+    BlockRecord *arrowhead;// 342
 
     double arrowheadSize;// 42
 
-    objects::LeaderContentType contentType;// 172
+    LeaderContentType contentType;// 172
 
 
-    tables::TextStyle *textStyle;          // 343
+    TextStyle *textStyle;          // 343
     TextAttachmentType textLeftAttachment; // 173
     TextAttachmentType textRightAttachment;// 95
     TextAngleType textAngle;               // 174
@@ -92,7 +91,7 @@ public:
     Color textColor;                       // 92
     bool textFrame;                        // 292
 
-    tables::BlockRecord *blockContent;                // 344
+    BlockRecord *blockContent;                // 344
     Color blockContentColor;                          // 93
     XYZ blockContentScale;                            // 10, 20, 30
     double blockContentRotation;                      // 43
@@ -116,5 +115,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

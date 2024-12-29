@@ -27,11 +27,10 @@
 #include <dwg/DxfFileToken.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/INamedCadObject.h>
-#include <dwg/enums/tables/StandardFlags.h>
+#include <dwg/tables/StandardFlags.h>
 #include <dwg/exports.h>
 
 namespace dwg {
-namespace tables {
 
 
 class TableEntry : public CadObject, INamedCadObject
@@ -123,5 +122,4 @@ protected:
 };
 
 
-}// namespace tables
 }// namespace dwg

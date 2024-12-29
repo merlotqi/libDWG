@@ -25,7 +25,6 @@
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
-namespace objects {
 
 
 class ImageDefinitionReactor : public NonGraphicalObject
@@ -46,5 +45,4 @@ public:
     unsigned long long ImageDefinitionHandle;// 330;
 };
 
-}// namespace objects
 }// namespace dwg

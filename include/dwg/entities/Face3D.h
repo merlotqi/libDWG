@@ -23,10 +23,9 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/enums/entities/InvisibleEdgeFlags.h>
+#include <dwg/entities/InvisibleEdgeFlags.h>
 
 namespace dwg {
-namespace entities {
 
 class Face3D : public Entity
 {
@@ -40,5 +39,4 @@ public:
     InvisibleEdgeFlags flags;// 70
 };
 
-}// namespace entities
 }// namespace dwg

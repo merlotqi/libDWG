@@ -24,12 +24,11 @@
 
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/Vertex.h>
-#include <dwg/enums/entities/MLineFlags.h>
-#include <dwg/enums/entities/MLineJustification.h>
+#include <dwg/entities/MLineFlags.h>
+#include <dwg/entities/MLineJustification.h>
 #include <dwg/objects/MLineStyle.h>
 
 namespace dwg {
-namespace entities {
 
 class MLine : public Entity
 {
@@ -38,7 +37,7 @@ public:
     MLine();
     ~MLine();
 
-    objects::MLineStyle *mLineStyle;// handle | name 340
+    MLineStyle *mLineStyle;// handle | name 340
 
     double scaleFactor;              // 40
     MLineJustification justification;// 70
@@ -64,5 +63,4 @@ public:
     std::vector<Vertex> vertices;// count,72
 };
 
-}// namespace entities
 }// namespace dwg

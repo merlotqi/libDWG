@@ -26,7 +26,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class IPolyline : public Entity
 {
@@ -37,5 +36,4 @@ public:
     double Thickness;
 };
 
-}// namespace entities
 }// namespace dwg

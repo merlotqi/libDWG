@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
+#include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
 #include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>

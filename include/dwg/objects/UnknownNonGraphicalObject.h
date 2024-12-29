@@ -26,12 +26,10 @@
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
-namespace objects {
 
 class UnknownNonGraphicalObject : public NonGraphicalObject
 {
 public:
 };
 
-}// namespace objects
 }// namespace dwg

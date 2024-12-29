@@ -23,12 +23,11 @@
 #pragma once
 
 
-#include <dwg/enums/objects/DictionaryCloningFlags.h>
+#include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <vector>
 
 namespace dwg {
-namespace objects {
 
 class XRecord : public NonGraphicalObject
 {
@@ -54,5 +53,4 @@ private:
     std::vector<XRecord::Entry> _entries;
 };
 
-}// namespace objects
 }// namespace dwg

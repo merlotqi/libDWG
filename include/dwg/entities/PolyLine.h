@@ -26,12 +26,11 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/IPolyline.h>
 #include <dwg/entities/Vertex.h>
-#include <dwg/enums/entities/PolylineFlags.h>
-#include <dwg/enums/entities/SmoothSurfaceType.h>
+#include <dwg/entities/PolylineFlags.h>
+#include <dwg/entities/SmoothSurfaceType.h>
 
 
 namespace dwg {
-namespace entities {
 
 class Polyline : public Entity, IPolyline
 {
@@ -65,5 +64,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

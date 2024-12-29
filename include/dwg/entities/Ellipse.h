@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Ellipse : Entity
 {
@@ -43,5 +42,4 @@ public:
 
     double rotation() const;
 };
-}// namespace entities
 }// namespace dwg

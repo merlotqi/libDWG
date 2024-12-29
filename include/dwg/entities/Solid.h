@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class Solid : public Entity
 {
@@ -42,5 +41,4 @@ public:
     XYZ normal;      // 210,220,230
 };
 
-}// namespace entities
 }// namespace dwg

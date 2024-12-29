@@ -22,51 +22,46 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/enums/LineWeightType.h>
-#include <dwg/enums/entities/VerticalAlignmentType.h>
-#include <dwg/enums/header/AttributeVisibilityMode.h>
-#include <dwg/enums/header/DimensionAssociation.h>
-#include <dwg/enums/header/EntityPlotStyleType.h>
-#include <dwg/enums/header/IndexCreationFlags.h>
-#include <dwg/enums/header/MeasurementUnits.h>
-#include <dwg/enums/header/ObjectSnapMode.h>
-#include <dwg/enums/header/ObjectSortingFlags.h>
-#include <dwg/enums/header/ShadeEdgeType.h>
-#include <dwg/enums/header/ShadowMode.h>
-#include <dwg/enums/header/SplineType.h>
-#include <dwg/enums/tables/ArcLengthSymbolPosition.h>
-#include <dwg/enums/tables/DimensionTextBackgroundFillMode.h>
-#include <dwg/enums/tables/DimensionTextHorizontalAlignment.h>
-#include <dwg/enums/tables/DimensionTextVerticalAlignment.h>
-#include <dwg/enums/tables/FractionFormat.h>
-#include <dwg/enums/tables/TextArrowFitType.h>
-#include <dwg/enums/tables/TextDirection.h>
-#include <dwg/enums/tables/TextMovement.h>
-#include <dwg/enums/tables/ToleranceAlignment.h>
-#include <dwg/enums/tables/ZeroHandling.h>
-#include <dwg/enums/units/AngularDirection.h>
-#include <dwg/enums/units/AngularUnitFormat.h>
-#include <dwg/enums/units/LinearUnitFormat.h>
-#include <dwg/enums/units/UnitsType.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/LineWeightType.h>
+#include <dwg/entities/VerticalAlignmentType.h>
+#include <dwg/header/AttributeVisibilityMode.h>
+#include <dwg/header/DimensionAssociation.h>
+#include <dwg/header/EntityPlotStyleType.h>
+#include <dwg/header/IndexCreationFlags.h>
+#include <dwg/header/MeasurementUnits.h>
+#include <dwg/header/ObjectSnapMode.h>
+#include <dwg/header/ObjectSortingFlags.h>
+#include <dwg/header/ShadeEdgeType.h>
+#include <dwg/header/ShadowMode.h>
+#include <dwg/header/SpaceLineTypeScaling.h>
+#include <dwg/header/SplineType.h>
+#include <dwg/tables/ArcLengthSymbolPosition.h>
+#include <dwg/tables/DimensionTextBackgroundFillMode.h>
+#include <dwg/tables/DimensionTextHorizontalAlignment.h>
+#include <dwg/tables/DimensionTextVerticalAlignment.h>
+#include <dwg/tables/FractionFormat.h>
+#include <dwg/tables/TextArrowFitType.h>
+#include <dwg/tables/TextDirection.h>
+#include <dwg/tables/TextMovement.h>
+#include <dwg/tables/ToleranceAlignment.h>
+#include <dwg/tables/ZeroHandling.h>
+#include <dwg/units/AngularDirection.h>
+#include <dwg/units/AngularUnitFormat.h>
+#include <dwg/units/LinearUnitFormat.h>
+#include <dwg/units/UnitsType.h>
 #include <dwg/exports.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
-#include <dwg/utils/DateTime.h>
-#include <dwg/utils/Timespan.h>
-#include <dwg/enums/header/SpaceLineTypeScaling.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
+#include <dwg/base/DateTime.h>
+#include <dwg/base/Timespan.h>
 
 #include <string>
 
-
 namespace dwg {
+
 class CadDocument;
-}// namespace dwg
-
-
-namespace dwg {
-namespace header {
-
 class LIBDWG_API CadHeader
 {
 public:
@@ -103,7 +98,8 @@ public:
     bool FillMode;
     // "$QTEXTMODE", 70
     bool QuickTextMode;
-    SpaceLineTypeScaling PaperSpaceLineTypeScaling = SpaceLineTypeScaling::Normal;
+    SpaceLineTypeScaling PaperSpaceLineTypeScaling =
+            SpaceLineTypeScaling::Normal;
     // "$PSLTSCALE", 70
     bool LimitCheckingOn;
     // "$BLIPMODE", 70
@@ -113,7 +109,7 @@ public:
     // "$SKPOLY", 70
     bool SketchPolylines;
     // "$ANGDIR", 70
-    units::AngularDirection AngularDirection;
+    AngularDirection AngularDirection;
     // "$SPLFRAME", 70
     bool ShowSplineControlPoints;
     // "$MIRRTEXT", 70
@@ -137,11 +133,11 @@ public:
     // "$TREEDEPTH", 70
     short SpatialIndexMaxTreeDepth;
     // "$LUNITS", 70
-    units::LinearUnitFormat LinearUnitFormat;
+    LinearUnitFormat linearUnitFormat;
     // "$LUPREC", 70
     short LinearUnitPrecision;
     // "$AUNITS", 70
-    units::AngularUnitFormat AngularUnit;
+    AngularUnitFormat AngularUnit;
     // "$AUPREC", 70
     short AngularUnitPrecision;
 
@@ -187,7 +183,7 @@ public:
     short SurfaceIsolineCount;
 
     // "$CMLJUST", 70
-    entities::VerticalAlignmentType CurrentMultilineJustification;
+    VerticalAlignmentType CurrentMultilineJustification;
 
     short TextQuality;
 
@@ -371,7 +367,7 @@ public:
     //[CadSystemVariable("$OLESTARTUP", 290
     bool LoadOLEObject;
     // "$INSUNITS", 70
-    units::UnitsType InsUnits = units::UnitsType::Unitless;
+    UnitsType InsUnits = UnitsType::Unitless;
     // "$CEPSNTYPE", 380
     EntityPlotStyleType CurrentEntityPlotStyle;
     // "$FINGERPRINTGUID", 2
@@ -456,7 +452,7 @@ public:
     // "$DIMALT", 70
     bool DimensionAlternateUnitDimensioning;
     // "$DIMALTU", 70
-    units::LinearUnitFormat DimensionAlternateUnitFormat;
+    LinearUnitFormat DimensionAlternateUnitFormat;
     // "$DIMALTF", 40
     double DimensionAlternateUnitScaleFactor;
     // "$DIMEXO", 40
@@ -468,17 +464,17 @@ public:
     // "$DIMALTTD", 70
     short DimensionAlternateUnitToleranceDecimalPlaces;
     // "$DIMAUNIT", 70
-    units::AngularUnitFormat DimensionAngularUnit;
+    AngularUnitFormat DimensionAngularUnit;
     // "$DIMFRAC", 70
-    tables::FractionFormat DimensionFractionFormat;
+    FractionFormat DimensionFractionFormat;
     // "$DIMLUNIT", 70
-    units::LinearUnitFormat DimensionLinearUnitFormat;
+    LinearUnitFormat DimensionLinearUnitFormat;
     // "$DIMDSEP", 70
     char DimensionDecimalSeparator;
     // "$DIMTMOVE", 70
-    tables::TextMovement DimensionTextMovement;
+    TextMovement DimensionTextMovement;
     // "$DIMJUST", 70
-    tables::DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment;
+    DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment;
     // "$DIMSD1", 70
     bool DimensionSuppressFirstDimensionLine;
     // "$DIMSD2", 70
@@ -486,21 +482,21 @@ public:
     // "$DIMTOL", 70
     bool DimensionGenerateTolerances;
     // "$DIMTOLJ", 70
-    tables::ToleranceAlignment DimensionToleranceAlignment;
+    ToleranceAlignment DimensionToleranceAlignment;
     // "$DIMZIN", 70
-    tables::ZeroHandling DimensionZeroHandling;
+    ZeroHandling DimensionZeroHandling;
     // "$DIMTZIN", 70
-    tables::ZeroHandling DimensionToleranceZeroHandling;
+    ZeroHandling DimensionToleranceZeroHandling;
     // "$DIMFIT", 70
     short DimensionFit;
     // "$DIMALTZ", 70
-    tables::ZeroHandling DimensionAlternateUnitZeroHandling;
+    ZeroHandling DimensionAlternateUnitZeroHandling;
     // "$DIMALTTZ", 70
-    tables::ZeroHandling DimensionAlternateUnitToleranceZeroHandling;
+    ZeroHandling DimensionAlternateUnitToleranceZeroHandling;
     // "$DIMUPT", 70
     bool DimensionCursorUpdate;
     // "$DIMATFIT", 70
-    tables::TextArrowFitType DimensionDimensionTextArrowFit;
+    TextArrowFitType DimensionDimensionTextArrowFit;
     // "$DIMALTRND", 40
     double DimensionAlternateUnitRounding;
     // "$DIMAPOST", 1
@@ -508,9 +504,9 @@ public:
     // "$DIMASZ", 40
     double DimensionArrowSize;
     // "$DIMAZIN", 70
-    tables::ZeroHandling DimensionAngularZeroHandling;
+    ZeroHandling DimensionAngularZeroHandling;
     // "$DIMARCSYM", 70
-    tables::ArcLengthSymbolPosition DimensionArcLengthSymbolPosition;
+    ArcLengthSymbolPosition DimensionArcLengthSymbolPosition;
     // "$DIMSAH", 70
     bool DimensionSeparateArrowBlocks;
     // "$DIMCEN", 40
@@ -536,7 +532,7 @@ public:
     // "$DIMJOGANG", 40
     double DimensionJoggedRadiusDimensionTransverseSegmentAngle;
     // "$DIMTFILL", 70
-    tables::DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode;
+    DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode;
     // DxfReferenceType.Ignored, "$DIMTFILLCLR", 62
     Color DimensionTextBackgroundColor;
     // "$DIMGAP", 40
@@ -560,7 +556,7 @@ public:
     // "$DIMSOXD", 70
     bool DimensionSuppressOutsideExtensions;
     // "$DIMTAD", 70
-    tables::DimensionTextVerticalAlignment DimensionTextVerticalAlignment;
+    DimensionTextVerticalAlignment DimensionTextVerticalAlignment;
     // "$DIMUNIT", 70
     short DimensionUnit;
     // "$DIMTFAC", 40
@@ -582,7 +578,7 @@ public:
     // "$DIMTXT", 40
     double DimensionTextHeight;
     // "$DIMTXTDIRECTION", 70
-    tables::TextDirection DimensionTextDirection;
+    TextDirection DimensionTextDirection;
     // "$DIMALTMZF", 40
     double DimensionAltMzf;
     // "$DIMALTMZS", 6
@@ -598,18 +594,17 @@ public:
     // "$DIMLTEX2", 6
     std::string DimensionTex2 = "ByBlock";
 
-   tables::Layer CurrentLayer;
-   tables::LineType CurrentLineType;
-   tables::TextStyle CurrentTextStyle;
-   tables::TextStyle DimensionTextStyle;
-   tables::DimensionStyle DimensionStyleOverrides;
+    Layer CurrentLayer;
+    LineType CurrentLineType;
+    TextStyle CurrentTextStyle;
+    TextStyle DimensionTextStyle;
+    DimensionStyle DimensionStyleOverrides;
 
     //TODO: How header UCS work??
-    tables::UCS ModelSpaceUcs;
-    tables::UCS ModelSpaceUcsBase;
-    tables::UCS PaperSpaceUcs;
-    tables::UCS PaperSpaceUcsBase;
+    UCS ModelSpaceUcs;
+    UCS ModelSpaceUcsBase;
+    UCS PaperSpaceUcs;
+    UCS PaperSpaceUcsBase;
 };
 
-}// namespace header
 }// namespace dwg

@@ -25,11 +25,9 @@
 #include <dwg/entities/UnderlayEntity.h>
 
 namespace dwg {
-namespace entities {
 
 class PdfUnderlay : public UnderlayEntity
 {
 };
 
-}// namespace entities
 }// namespace dwg

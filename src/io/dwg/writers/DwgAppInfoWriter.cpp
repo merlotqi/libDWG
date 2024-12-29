@@ -25,8 +25,8 @@
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <dwg/utils/Format.h>
-#include <dwg/utils/Encoding.h>
+#include <dwg/base/Format.h>
+#include <dwg/base/Encoding.h>
 #include <dwg/version.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
 

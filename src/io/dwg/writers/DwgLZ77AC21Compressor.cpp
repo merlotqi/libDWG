@@ -22,18 +22,18 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/ICompressor.h>
+#include "DwgLZ77AC21Compressor.h"
 
 namespace dwg {
 namespace io {
 
-class DwgLZ77AC21Compressor : public ICompressor
+DwgLZ77AC21Compressor::DwgLZ77AC21Compressor() {}
+
+void DwgLZ77AC21Compressor::Compress(const std::vector<unsigned char> &source,
+                                     size_t offset, size_t totalSize,
+                                     std::ostream *dest)
 {
-public:
-    DwgLZ77AC21Compressor();
-    void Compress(const std::vector<unsigned char> &source, size_t offset,
-                  size_t totalSize, std::ostream *dest);
-};
+}
 
 }// namespace io
 }// namespace dwg

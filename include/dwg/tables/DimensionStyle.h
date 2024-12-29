@@ -23,25 +23,24 @@
 #pragma once
 
 #include <dwg/DxfSubclassMarker.h>
-#include <dwg/enums/LineweightType.h>
-#include <dwg/enums/tables/ArcLengthSymbolPosition.h>
-#include <dwg/enums/tables/DimensionTextBackgroundFillMode.h>
-#include <dwg/enums/tables/DimensionTextHorizontalAlignment.h>
-#include <dwg/enums/tables/DimensionTextVerticalAlignment.h>
-#include <dwg/enums/tables/FractionFormat.h>
-#include <dwg/enums/tables/TextArrowFitType.h>
-#include <dwg/enums/tables/TextDirection.h>
-#include <dwg/enums/tables/TextMovement.h>
-#include <dwg/enums/tables/ToleranceAlignment.h>
-#include <dwg/enums/tables/ZeroHandling.h>
-#include <dwg/enums/units/AngularUnitFormat.h>
-#include <dwg/enums/units/LinearUnitFormat.h>
+#include <dwg/LineweightType.h>
+#include <dwg/tables/ArcLengthSymbolPosition.h>
+#include <dwg/tables/DimensionTextBackgroundFillMode.h>
+#include <dwg/tables/DimensionTextHorizontalAlignment.h>
+#include <dwg/tables/DimensionTextVerticalAlignment.h>
+#include <dwg/tables/FractionFormat.h>
+#include <dwg/tables/TextArrowFitType.h>
+#include <dwg/tables/TextDirection.h>
+#include <dwg/tables/TextMovement.h>
+#include <dwg/tables/ToleranceAlignment.h>
+#include <dwg/tables/ZeroHandling.h>
+#include <dwg/units/AngularUnitFormat.h>
+#include <dwg/units/LinearUnitFormat.h>
 #include <dwg/tables/TableEntry.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 
 namespace dwg {
-namespace tables {
 
 
 class DimensionStyle : public TableEntry
@@ -79,7 +78,7 @@ public:
     DimensionTextVerticalAlignment TextVerticalAlignment =
             DimensionTextVerticalAlignment::Above;
     // 78
-    tables::ZeroHandling ZeroHandling =
+    ZeroHandling ZeroHandling =
             ZeroHandling::SuppressDecimalTrailingZeroes;
     // 170
     bool AlternateUnitDimensioning = false;
@@ -105,30 +104,30 @@ public:
     // 283
     ToleranceAlignment ToleranceAlignment = ToleranceAlignment::Bottom;
     // 284
-    tables::ZeroHandling ToleranceZeroHandling =
+    ZeroHandling ToleranceZeroHandling =
             ZeroHandling::SuppressDecimalTrailingZeroes;
     // 285
-    tables::ZeroHandling AlternateUnitZeroHandling =
+    ZeroHandling AlternateUnitZeroHandling =
             ZeroHandling::SuppressZeroFeetAndInches;
     // 287
     short DimensionFit;
     // 288
     bool CursorUpdate = false;
     // 286
-    tables::ZeroHandling AlternateUnitToleranceZeroHandling =
+    ZeroHandling AlternateUnitToleranceZeroHandling =
             ZeroHandling::SuppressZeroFeetAndInches;
     // 270
     short DimensionUnit = 2;
     // 275
-    units::AngularUnitFormat AngularUnit =
-            units::AngularUnitFormat::DecimalDegrees;
+    AngularUnitFormat AngularUnit =
+            AngularUnitFormat::DecimalDegrees;
     // 271
     short DecimalPlaces = 2;
     // 272
     short ToleranceDecimalPlaces = 2;
     // 273
-    units::LinearUnitFormat AlternateUnitFormat =
-            units::LinearUnitFormat::Decimal;
+    LinearUnitFormat AlternateUnitFormat =
+            LinearUnitFormat::Decimal;
     // 274
     short AlternateUnitToleranceDecimalPlaces = 3;
     // 40
@@ -159,7 +158,7 @@ public:
     // 70
     Color TextBackgroundColor = Color::ByBlock;
     // 79
-    tables::ZeroHandling AngularZeroHandling = ZeroHandling::SuppressZeroFeetAndInches;
+    ZeroHandling AngularZeroHandling = ZeroHandling::SuppressZeroFeetAndInches;
     // 90
     ArcLengthSymbolPosition ArcLengthSymbolPosition =
             ArcLengthSymbolPosition::BeforeDimensionText;
@@ -194,7 +193,7 @@ public:
     FractionFormat FractionFormat = FractionFormat::Horizontal;
 
     // 277
-    units::LinearUnitFormat LinearUnitFormat = units::LinearUnitFormat::Decimal;
+    LinearUnitFormat LinearUnitFormat = LinearUnitFormat::Decimal;
 
     // 278
     char DecimalSeparator = '.';
@@ -257,5 +256,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

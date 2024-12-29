@@ -25,7 +25,6 @@
 #include <dwg/objects/CadDictionary.h>
 
 namespace dwg {
-namespace objects {
 
 class CadDictionaryWithDefault : public CadDictionary
 {
@@ -45,5 +44,4 @@ public:
     unsigned long long DefaultEntity;// 340, CadObjct Handle
 };
 
-}// namespace objects
 }// namespace dwg

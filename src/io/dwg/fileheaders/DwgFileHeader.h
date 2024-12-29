@@ -24,8 +24,8 @@
 
 #include "DwgSectionDescriptor.h"
 #include <cstdint>
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/utils/CodePages.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/base/CodePages.h>
 #include <string>
 
 namespace dwg {

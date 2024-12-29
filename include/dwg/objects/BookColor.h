@@ -24,10 +24,9 @@
 #pragma once
 
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 namespace dwg {
-namespace objects {
 
 class BookColor : NonGraphicalObject
 {
@@ -47,6 +46,5 @@ public:
     Color Color;// 62, 420
 };
 
-}// namespace objects
 
 }// namespace dwg

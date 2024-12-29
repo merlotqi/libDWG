@@ -25,7 +25,6 @@
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
-namespace objects {
 
 class AcdbPlaceHolder : public NonGraphicalObject
 {
@@ -39,5 +38,4 @@ public:
     }
 };
 
-}// namespace objects
 }// namespace dwg

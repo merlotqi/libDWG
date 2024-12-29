@@ -25,11 +25,9 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 class UnknownEntity : public Entity
 {
 };
 
-}// namespace entities
 }// namespace dwg

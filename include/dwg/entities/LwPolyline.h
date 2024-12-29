@@ -25,10 +25,9 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/IPolyline.h>
 #include <dwg/entities/Vertex.h>
-#include <dwg/enums/entities/LwPolylineFlags.h>
+#include <dwg/entities/LwPolylineFlags.h>
 
 namespace dwg {
-namespace entities {
 
 class LwPolyline : public Entity, IPolyline
 {
@@ -49,5 +48,4 @@ public:
     std::vector<Entity *> explode() const;
 };
 
-}// namespace entities
 }// namespace dwg

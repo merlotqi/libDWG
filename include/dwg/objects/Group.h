@@ -27,7 +27,6 @@
 #include <map>
 
 namespace dwg {
-namespace objects {
 
 
 class Group : public NonGraphicalObject
@@ -41,8 +40,7 @@ public:
     std::string Description;// 300
     bool IsUnnamed;         // 71
     bool Selectable;        // 71
-    std::map<unsigned long long, entities::Entity *> Entities;
+    std::map<unsigned long long, Entity *> Entities;
 };
 
-}// namespace objects
 }// namespace dwg

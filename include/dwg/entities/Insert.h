@@ -29,13 +29,12 @@
 #include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
-namespace entities {
 
 class Insert : Entity
 {
 public:
     // name 2
-    tables::BlockRecord *block;
+    BlockRecord *block;
     XYZ insertPoint;// 10, 20, 30
 
     double XScale;// 41
@@ -57,5 +56,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

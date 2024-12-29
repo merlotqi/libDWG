@@ -25,7 +25,6 @@
 #include <dwg/entities/CadImageBase.h>
 
 namespace dwg {
-namespace entities {
 
 class Wipeout : public CadImageBase
 {
@@ -38,5 +37,4 @@ public:
     }
 };
 
-}// namespace entities
 }// namespace dwg

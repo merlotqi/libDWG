@@ -23,19 +23,18 @@
 
 #pragma once
 
-#include <dwg/enums/OrthographicType.h>
-#include <dwg/enums/RenderMode.h>
-#include <dwg/enums/tables/DefaultLightingType.h>
-#include <dwg/enums/tables/GridFlags.h>
-#include <dwg/enums/tables/UscIconType.h>
-#include <dwg/enums/tables/ViewModeType.h>
+#include <dwg/OrthographicType.h>
+#include <dwg/RenderMode.h>
+#include <dwg/tables/DefaultLightingType.h>
+#include <dwg/tables/GridFlags.h>
+#include <dwg/tables/UscIconType.h>
+#include <dwg/tables/ViewModeType.h>
 #include <dwg/tables/TableEntry.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
 
 
 namespace dwg {
-namespace tables {
 
 class VPort : public TableEntry
 {
@@ -119,5 +118,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

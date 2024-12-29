@@ -25,12 +25,10 @@
 #include <dwg/entities/Polyline.h>
 
 namespace dwg {
-namespace entities {
 
 class PolyfaceMesh : public Polyline
 {
 public:
 };
 
-}// namespace entities
 }// namespace dwg

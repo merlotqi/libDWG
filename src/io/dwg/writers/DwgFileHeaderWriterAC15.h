@@ -26,7 +26,7 @@
 #include "../fileheaders/DwgSectionLocatorRecord.h"
 #include "DwgFileHeaderWriterBase.h"
 #include "IDwgStreamWriter.h"
-#include <array>
+#include <vector>
 
 namespace dwg {
 namespace io {
@@ -36,7 +36,7 @@ class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
     std::map<std::string,
              std::pair<DwgSectionLocatorRecord, std::ostringstream *>>
             _records;
-    std::array<unsigned char, 16> _endSentinel;
+    static std::vector<unsigned char> _endSentinel;
 
 public:
     DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding,

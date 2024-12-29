@@ -22,105 +22,94 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/IDwgFileHeaderWriter.h>
-#include <dwg/enums/ACadVersion.h>
-#include <dwg/utils/Encoding.h>
-#include <dwg/CadDocument.h>
-#include <dwg/io/dwg/DwgCheckSumCalculator.h>
-#include <dwg/utils/EndianConverter.h>
-#include <dwg/CadUtils.h>
-#include <sstream>
-#include <fstream>
-
+#include "DwgFileHeaderWriterBase.h"
+#include "../DwgCheckSumCalculator.h"
 #include <assert.h>
+#include <dwg/CadDocument.h>
+#include <dwg/CadUtils.h>
+#include <dwg/ACadVersion.h>
+#include <dwg/base/Encoding.h>
+#include <dwg/base/EndianConverter.h>
+#include <fstream>
+#include <sstream>
 
 namespace dwg {
 namespace io {
 
-class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
+DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream,
+                                                 Encoding encoding,
+                                                 CadDocument *model)
 {
-protected:
-    ACadVersion _version;
-    Encoding _encoding;
-    std::ofstream *_stream;
-    CadDocument *_document;
+    assert(stream);
+    assert(model);
+    _document = model;
+    _stream = stream;
+    _version = model->Header.Version;
+    _encoding = encoding;
+}
 
-    virtual int HandleSectionOffset() const = 0;
-    virtual int _fileHeaderSize() const = 0;
+unsigned short DwgFileHeaderWriterBase::getFileCodePage()
+{
+    unsigned short codePage = CadUtils::GetCodeIndex(
+            CadUtils::GetCodePage(_document->Header.CodePage));
+    if (codePage < 1) { return 30; }
+    else { return codePage; }
+}
 
-public:
-    DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model)
+void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer,
+                                        int offset, int length)
+{
+    auto &&bytes = LittleEndianConverter::Instance()->GetBytes(
+            0x4164536B ^ (int) _stream->tellp());
+    int diff = offset + length;
+    while (offset < diff)
     {
-        assert(stream);
-        assert(model);
-        _document = model;
-        _stream = stream;
-        _version = model->Header.Version;
-        _encoding = encoding;
+        for (int i = 0; i < 4; i++) { buffer[offset + i] ^= bytes[i]; }
+
+        offset += 4;
     }
+}
 
-    unsigned short getFileCodePage()
-    {
-        unsigned short codePage =  CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->Header.CodePage));
-        if (codePage < 1) { return 30; }
-        else { return codePage; }
-    }
+bool DwgFileHeaderWriterBase::checkEmptyBytes(
+        const std::vector<unsigned char> &buffer, unsigned long long offset,
+        unsigned long long spearBytes) const
+{
+    bool result = true;
+    unsigned long long num = offset + spearBytes;
 
-    void applyMask(std::vector<unsigned char> &buffer, int offset, int length)
+    for (unsigned long long i = offset; i < num; i++)
     {
-        auto&& bytes =
-                LittleEndianConverter::Instance()->GetBytes(0x4164536B ^
-                                                          (int)_stream->tellp());
-        int diff = offset + length;
-        while (offset < diff)
+        if (buffer[i] != 0)
         {
-            for (int i = 0; i < 4; i++) { buffer[offset + i] ^= bytes[i]; }
-
-            offset += 4;
+            result = false;
+            break;
         }
     }
 
-    bool checkEmptyBytes(const std::vector<unsigned char> &buffer,
-                         unsigned long long offset,
-                         unsigned long long spearBytes) const
+    return result;
+}
+
+void DwgFileHeaderWriterBase::writeMagicNumber()
+{
+    for (int i = 0; i < (int) (_stream->tellp() % 0x20); i++)
     {
-        bool result = true;
-        unsigned long long num = offset + spearBytes;
-
-        for (unsigned long long i = offset; i < num; i++)
-        {
-            if (buffer[i] != 0)
-            {
-                result = false;
-                break;
-            }
-        }
-
-        return result;
+        unsigned char b = DwgCheckSumCalculator::MagicSequence[i];
+        _stream->write(reinterpret_cast<char *>(&b), sizeof(unsigned char));
     }
+}
 
-    void writeMagicNumber()
+void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
+{
+    std::string buffer = stream->str();
+    for (size_t i = 0; i < buffer.size(); ++i)
     {
-        for (int i = 0; i < (int) (_stream->tellp() % 0x20); i++)
-        {
-            unsigned char b = DwgCheckSumCalculator::MagicSequence[i];
-            _stream->write(reinterpret_cast<char *>(&b), sizeof(unsigned char));
-        }
+        buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];
     }
+    stream->str("");
+    stream->clear();
+    *stream << buffer;
+}
 
-    void applyMagicSequence(std::ostringstream *stream)
-    {
-        std::string buffer = stream->str();
-        for(size_t i = 0; i < buffer.size(); ++i)
-        {
-            buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];
-        }
-        stream->str("");
-        stream->clear();
-        *stream << buffer;
-    }
-};
 
 }// namespace io
 }// namespace dwg

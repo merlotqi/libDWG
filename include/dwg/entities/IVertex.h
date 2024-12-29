@@ -23,10 +23,9 @@
 
 #pragma once
 
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 
 namespace dwg {
-namespace entities {
 
 class IVertex
 {
@@ -34,5 +33,4 @@ class IVertex
     double bulge;
 };
 
-}// namespace entities
 }// namespace  dwg

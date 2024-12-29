@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/ICompressor.h>
+#include "ICompressor.h"
 
 namespace dwg {
 namespace io {

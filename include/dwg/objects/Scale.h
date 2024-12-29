@@ -23,11 +23,10 @@
 #pragma once
 
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 #include <type_traits>
 
 namespace dwg {
-namespace objects {
 
 class Scale : public NonGraphicalObject
 {
@@ -72,5 +71,4 @@ public:
 };
 
 Scale Scale::Default = Scale("1:1", 1.0, 1.0, true);
-}// namespace objects
 }// namespace dwg

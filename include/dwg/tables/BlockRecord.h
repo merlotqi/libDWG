@@ -26,13 +26,12 @@
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
 #include <dwg/entities/Viewport.h>
-#include <dwg/enums/blocks/BlockTypeFlags.h>
-#include <dwg/enums/units/UnitsType.h>
+#include <dwg/blocks/BlockTypeFlags.h>
+#include <dwg/units/UnitsType.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
-namespace tables {
 
 class BlockRecord : public TableEntry
 {
@@ -45,7 +44,7 @@ public:
     static BlockRecord *ModelSpace()
     {
         BlockRecord *record = new BlockRecord(ModelSpaceName);
-        // objects::Layout *layout = new objects::Layout();
+        // Layout *layout = new Layout();
         // layout->Name = Layout::ModelLayoutName;
         // layout->AssociatedBlock(record);
         return record;
@@ -54,7 +53,7 @@ public:
     static BlockRecord *PaperSpace()
     {
         BlockRecord *record = new BlockRecord(PaperSpaceName);
-        // objects::Layout *layout = new objects::Layout();
+        // Layout *layout = new Layout();
         // layout->Name = Layout::PaperLayoutName;
         // layot->AssociatedBlock(record);
         return record;
@@ -73,19 +72,19 @@ public:
         return DxfSubclassMarker::BlockRecord;
     }
 
-    units::UnitsType Units;
+    UnitsType Units;
 
     blocks::BlockTypeFlags Flags;
 
     bool IsExplodable;                 // 280
     bool CanScale;                     // 281
     std::vector<unsigned char> Preview;// 310
-    objects::Layout *Layout;           // handle 340
+    Layout *Layout;           // handle 340
     unsigned long long LayoutHandle;   // 340
 
     bool HasAttributes;
-    std::vector<entities::Viewport> Viewports;
-    CadObjectCollection<entities::Entity *> Entities;
+    std::vector<Viewport> Viewports;
+    CadObjectCollection<Entity *> Entities;
 
     blocks::Block BlockEntity;
     blocks::BlockEnd BlockEnd;
@@ -106,5 +105,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

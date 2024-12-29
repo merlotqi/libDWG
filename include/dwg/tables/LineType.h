@@ -22,13 +22,12 @@
 
 #pragma once
 
-#include <dwg/enums/tables/LinetypeShapeFlags.h>
+#include <dwg/tables/LinetypeShapeFlags.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextStyle.h>
 
 
 namespace dwg {
-namespace tables {
 
 
 class LineType : public TableEntry
@@ -102,5 +101,4 @@ protected:
     }
 };
 
-}// namespace tables
 }// namespace dwg

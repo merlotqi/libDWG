@@ -26,7 +26,6 @@
 #include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
-namespace entities {
 
 class Tolerance : public Entity
 {
@@ -34,7 +33,7 @@ public:
     Tolerance();
     virtual ~Tolerance();
 
-    tables::DimensionStyle *style;// 3, name
+    DimensionStyle *style;// 3, name
 
     XYZ insertionPoint;// 10, 20, 30
 
@@ -45,5 +44,4 @@ public:
     std::string text;// 1
 };
 
-}// namespace entities
 }// namespace dwg

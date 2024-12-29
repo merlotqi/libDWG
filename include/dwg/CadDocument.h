@@ -59,29 +59,29 @@ public:
     CadSummaryInfo SummaryInfo;
     DxfClassCollection Classes;
 
-    tables::AppIdsTable AppIds;
-    tables::BlockRecordsTable BlockRecords;
-    tables::DimensionStylesTable DimensionStyles;
-    tables::LayersTable Layers;
-    tables::LineTypesTable LineTypes;
-    tables::TextStylesTable TextStyles;
-    tables::UCSTable UCSs;
-    tables::ViewsTable Views;
-    tables::VPortsTable VPorts;
+    AppIdsTable AppIds;
+    BlockRecordsTable BlockRecords;
+    DimensionStylesTable DimensionStyles;
+    LayersTable Layers;
+    LineTypesTable LineTypes;
+    TextStylesTable TextStyles;
+    UCSTable UCSs;
+    ViewsTable Views;
+    VPortsTable VPorts;
 
-    objects::ColorCollection Colors;
-    objects::LayoutCollection Layouts;
-    objects::GroupCollection Groups;
-    objects::ScaleCollection Scales;
-    objects::MLineStyleCollection MLineStyles;
-    objects::ImageDefinitionCollection ImageDefinitions;
-    objects::MLeaderStyleCollection MLeaderStyles;
+    ColorCollection Colors;
+    LayoutCollection Layouts;
+    GroupCollection Groups;
+    ScaleCollection Scales;
+    MLineStyleCollection MLineStyles;
+    ImageDefinitionCollection ImageDefinitions;
+    MLeaderStyleCollection MLeaderStyles;
 
-    CadObjectCollection<entities::Entity *> Entities;
-    tables::BlockRecord &ModelSpace();
-    tables::BlockRecord &PaperSpace();
+    CadObjectCollection<Entity *> Entities;
+    BlockRecord &ModelSpace();
+    BlockRecord &PaperSpace();
 
-    objects::CadDictionary _rootDictionary;
+    CadDictionary _rootDictionary;
 
     std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 

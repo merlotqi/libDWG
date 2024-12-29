@@ -24,7 +24,7 @@
 
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/CadDocument.h>
-#include <dwg/utils/Encoding.h>
+#include <dwg/base/Encoding.h>
 #include <dwg/tables/TableEntry.h>
 #include <map>
 

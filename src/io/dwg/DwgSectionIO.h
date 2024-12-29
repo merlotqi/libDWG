@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/enums/ACadVersion.h>
+#include <dwg/ACadVersion.h>
 #include <string>
 #include <vector>
 

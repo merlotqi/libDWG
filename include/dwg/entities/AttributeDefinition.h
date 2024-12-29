@@ -25,7 +25,6 @@
 #include <dwg/entities/AttributeBase.h>
 
 namespace dwg {
-namespace entities {
 
 class AttributeDefinition : public AttributeBase
 {
@@ -33,5 +32,4 @@ public:
     std::string Prompt;// 3
 };
 
-}// namespace entities
 }// namespace dwg

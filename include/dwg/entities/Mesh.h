@@ -25,7 +25,6 @@
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
-namespace entities {
 
 
 class Mesh : public Entity
@@ -70,5 +69,4 @@ public:
 };
 
 
-}// namespace entities
 }// namespace dwg

@@ -24,13 +24,13 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <dwg/Transparency.h>
-#include <dwg/enums/DwgReferenceType.h>
-#include <dwg/enums/ObjectType.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
-#include <dwg/utils/DateTime.h>
-#include <dwg/utils/Encoding.h>
-#include <dwg/utils/Timespan.h>
+#include <dwg/DwgReferenceType.h>
+#include <dwg/ObjectType.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
+#include <dwg/base/DateTime.h>
+#include <dwg/base/Encoding.h>
+#include <dwg/base/Timespan.h>
 
 #include <iostream>
 #include <string>

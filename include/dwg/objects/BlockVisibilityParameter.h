@@ -24,11 +24,10 @@
 
 #include <dwg/CadObject.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 #include <vector>
 
 namespace dwg {
-namespace objects {
 
 
 class BlockVisibilityParameter : public CadObject
@@ -49,10 +48,10 @@ public:
     struct SubBlock
     {
         std::string Name;
-        std::vector<entities::Entity *> Entities;
+        std::vector<Entity *> Entities;
     };
 
-    std::vector<entities::Entity *> Entities;
+    std::vector<Entity *> Entities;
     std::vector<SubBlock> SubBlocks;
     // 1010, 1020, 1030
     XYZ BasePosition;
@@ -66,5 +65,4 @@ public:
     int L91;
 };
 
-}// namespace objects
 }// namespace dwg

@@ -22,10 +22,9 @@
 
 #pragma once
 
-#include <dwg/utils/Color.h>
+#include <dwg/base/Color.h>
 
 namespace dwg {
-namespace entities {
 
 class GradientColor
 {
@@ -35,5 +34,4 @@ public:
     Color Color; // 421
 };
 
-}// namespace entities
 }// namespace dwg

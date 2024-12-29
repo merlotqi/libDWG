@@ -25,7 +25,6 @@
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
-namespace objects {
 
 class DictionaryVariable : public NonGraphicalObject
 {
@@ -45,5 +44,4 @@ public:
     int ObjectSchemaNumber;// 280
 };
 
-}// namespace objects
 }// namespace dwg

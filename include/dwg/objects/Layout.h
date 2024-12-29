@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <dwg/enums/OrthographicType.h>
-#include <dwg/enums/objects/LayoutFlags.h>
+#include <dwg/OrthographicType.h>
+#include <dwg/objects/LayoutFlags.h>
 #include <dwg/objects/PlotSettings.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Coordinate.h>
 #include <string>
 
 namespace dwg {
-namespace objects {
 
 
 class Layout : PlotSettings
@@ -75,5 +74,4 @@ public:
     bool IsPaperSpace() const;
 };
 
-}// namespace objects
 }// namespace dwg

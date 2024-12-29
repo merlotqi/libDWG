@@ -22,22 +22,21 @@
 
 #pragma once
 
-#include <dwg/enums/LineweightType.h>
-#include <dwg/enums/TextAlignmentType.h>
-#include <dwg/enums/TextAngleType.h>
-#include <dwg/enums/TextAttachmentDirectionType.h>
-#include <dwg/enums/TextAttachmentType.h>
-#include <dwg/enums/entities/BlockContentConnectionType.h>
-#include <dwg/enums/entities/MultiLeaderPathType.h>
-#include <dwg/enums/objects/LeaderContentType.h>
-#include <dwg/enums/objects/LeaderDrawOrderType.h>
+#include <dwg/LineweightType.h>
+#include <dwg/TextAlignmentType.h>
+#include <dwg/TextAngleType.h>
+#include <dwg/TextAttachmentDirectionType.h>
+#include <dwg/TextAttachmentType.h>
+#include <dwg/entities/BlockContentConnectionType.h>
+#include <dwg/entities/MultiLeaderPathType.h>
+#include <dwg/objects/LeaderContentType.h>
+#include <dwg/objects/LeaderDrawOrderType.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/utils/Color.h>
-#include <dwg/utils/Coordinate.h>
+#include <dwg/base/Color.h>
+#include <dwg/base/Coordinate.h>
 
 
 namespace dwg {
-namespace objects {
 
 
 class MultiLeaderStyle : NonGraphicalObject
@@ -68,7 +67,7 @@ public:
     // 41
     double SecondSegmentAngleConstraint;
     // 173
-    entities::MultiLeaderPathType PathType;
+    MultiLeaderPathType PathType;
     // 91
     Color LineColor;
     // DxfReferenceType.Handle, 340
@@ -124,7 +123,7 @@ public:
     // 294
     bool EnableBlockContentRotation;
     // 177
-    entities::BlockContentConnectionType BlockContentConnection;
+    BlockContentConnectionType BlockContentConnection;
     // 142
     double ScaleFactor;
     // 295
@@ -149,5 +148,4 @@ public:
 MultiLeaderStyle MultiLeaderStyle::Default =
         MultiLeaderStyle(MultiLeaderStyle::DefaultName);
 
-}// namespace objects
 }// namespace dwg

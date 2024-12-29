@@ -25,7 +25,7 @@
 #include <dwg/DxfFileToken.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
-#include <dwg/enums/ObjectType.h>
+#include <dwg/ObjectType.h>
 #include <dwg/objects//CadDictionary.h>
 #include <string>
 
