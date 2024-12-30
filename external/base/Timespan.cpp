@@ -1,277 +1,214 @@
-//
-// Timespan.h
-//
-// Library: Foundation
-// Package: DateTime
-// Module:  Timespan
-//
-// Definition of the Timespan class.
-//
-// Copyright (c) 2004-2006, Applied Informatics Software Engineering GmbH.
-// and Contributors.
-//
-// SPDX-License-Identifier:	BSL-1.0
-//
+/**
+ * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
+ *
+ * This file is part of libDWG.
+ *
+ * libDWG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * libDWG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * For more information, visit the project's homepage or contact the author.
+ */
 
-#pragma once
 
-#include <chrono>
-#include "Timestamp.h"
+#include "Timespan.h"
+#include <algorithm>
 
+const Timespan::TimeDiff Timespan::MILLISECONDS = 1000;
+const Timespan::TimeDiff Timespan::SECONDS = 1000 * Timespan::MILLISECONDS;
+const Timespan::TimeDiff Timespan::MINUTES = 60 * Timespan::SECONDS;
+const Timespan::TimeDiff Timespan::HOURS = 60 * Timespan::MINUTES;
+const Timespan::TimeDiff Timespan::DAYS = 24 * Timespan::HOURS;
 
-class Timespan
-/// A class that represents time spans up to microsecond resolution.
+Timespan::Timespan() : _span(0) {}
+
+Timespan::Timespan(TimeDiff microSeconds) : _span(microSeconds) {}
+
+Timespan::Timespan(long seconds, long microSeconds)
+    : _span(TimeDiff(seconds) * SECONDS + microSeconds)
 {
-public:
-    using TimeDiff = Timestamp::TimeDiff;
+}
 
-    Timespan();
-    /// Creates a zero Timespan.
+Timespan::Timespan(int days, int hours, int minutes, int seconds,
+                   int microSeconds)
+    : _span(TimeDiff(microSeconds) + TimeDiff(seconds) * SECONDS +
+            TimeDiff(minutes) * MINUTES + TimeDiff(hours) * HOURS +
+            TimeDiff(days) * DAYS)
+{
+}
 
-    Timespan(TimeDiff microseconds);
-    /// Creates a Timespan.
+Timespan::Timespan(const Timespan &timespan) : _span(timespan._span) {}
 
-    Timespan(long seconds, long microseconds);
-    /// Creates a Timespan. Useful for creating
-    /// a Timespan from a struct timeval.
+Timespan::~Timespan() {}
 
-    Timespan(int days, int hours, int minutes, int seconds, int microSeconds);
-    /// Creates a Timespan.
+Timespan &Timespan::operator=(const Timespan &timespan)
+{
+    _span = timespan._span;
+    return *this;
+}
 
-    Timespan(const Timespan &timespan);
-    /// Creates a Timespan from another one.
+Timespan &Timespan::operator=(TimeDiff microSeconds)
+{
+    _span = microSeconds;
+    return *this;
+}
 
-    template<class T, class Period>
-    Timespan(const std::chrono::duration<T, Period> &dtime)
-        : _span(std::chrono::duration_cast<std::chrono::microseconds>(dtime)
-                        .count())
-    {
-    }
-    /// Creates a Timespan from std::chrono::duration
+int Timespan::days() const { return int(_span / DAYS); }
 
-    ~Timespan();
-    /// Destroys the Timespan.
+int Timespan::hours() const { return int((_span / HOURS) % 24); }
 
-    Timespan &operator=(const Timespan &timespan);
-    /// Assignment operator.
+int Timespan::totalHours() const { return int(_span / HOURS); }
 
-    Timespan &operator=(TimeDiff microseconds);
-    /// Assignment operator.
+int Timespan::minutes() const { return int((_span / MINUTES) % 60); }
 
-    Timespan &assign(int days, int hours, int minutes, int seconds,
-                     int microSeconds);
-    /// Assigns a new span.
+int Timespan::totalMinutes() const { return int(_span / MINUTES); }
 
-    Timespan &assign(long seconds, long microseconds);
-    /// Assigns a new span. Useful for assigning
-    /// from a struct timeval.
+int Timespan::seconds() const { return int((_span / SECONDS) % 60); }
 
-    template<class T, class Period>
-    Timespan &assign(const std::chrono::duration<T, Period> &dtime)
-    /// Assigns a new span from std::chrono::duration.
-    {
-        _span = std::chrono::duration_cast<std::chrono::microseconds>(dtime)
-                        .count();
-        return *this;
-    }
+int Timespan::totalSeconds() const { return int(_span / SECONDS); }
 
-    void swap(Timespan &timespan) noexcept;
-    /// Swaps the Timespan with another one.
-
-    bool operator==(const Timespan &ts) const;
-    bool operator!=(const Timespan &ts) const;
-    bool operator>(const Timespan &ts) const;
-    bool operator>=(const Timespan &ts) const;
-    bool operator<(const Timespan &ts) const;
-    bool operator<=(const Timespan &ts) const;
-
-    bool operator==(TimeDiff microSeconds) const;
-    bool operator!=(TimeDiff microSeconds) const;
-    bool operator>(TimeDiff microSeconds) const;
-    bool operator>=(TimeDiff microSeconds) const;
-    bool operator<(TimeDiff microSeconds) const;
-    bool operator<=(TimeDiff microSeconds) const;
-
-    Timespan operator+(const Timespan &d) const;
-    Timespan operator-(const Timespan &d) const;
-    Timespan &operator+=(const Timespan &d);
-    Timespan &operator-=(const Timespan &d);
-
-    Timespan operator+(TimeDiff microSeconds) const;
-    Timespan operator-(TimeDiff microSeconds) const;
-    Timespan &operator+=(TimeDiff microSeconds);
-    Timespan &operator-=(TimeDiff microSeconds);
-
-    int days() const;
-    /// Returns the number of days.
-
-    int hours() const;
-    /// Returns the number of hours (0 to 23).
-
-    int totalHours() const;
-    /// Returns the total number of hours.
-
-    int minutes() const;
-    /// Returns the number of minutes (0 to 59).
-
-    int totalMinutes() const;
-    /// Returns the total number of minutes.
-
-    int seconds() const;
-    /// Returns the number of seconds (0 to 59).
-
-    int totalSeconds() const;
-    /// Returns the total number of seconds.
-
-    int milliseconds() const;
-    /// Returns the number of milliseconds (0 to 999).
-
-    TimeDiff totalMilliseconds() const;
-    /// Returns the total number of milliseconds.
-
-    int microseconds() const;
-    /// Returns the fractions of a millisecond
-    /// in microseconds (0 to 999).
-
-    int useconds() const;
-    /// Returns the fractions of a second
-    /// in microseconds (0 to 999999).
-
-    TimeDiff totalMicroseconds() const;
-    /// Returns the total number of microseconds.
-
-    static const TimeDiff
-            MILLISECONDS;/// The number of microseconds in a millisecond.
-    static const TimeDiff SECONDS;/// The number of microseconds in a second.
-    static const TimeDiff MINUTES;/// The number of microseconds in a minute.
-    static const TimeDiff HOURS;  /// The number of microseconds in a hour.
-    static const TimeDiff DAYS;   /// The number of microseconds in a day.
-
-private:
-    TimeDiff _span;
-};
-
-
-//
-// inlines
-//
-inline int Timespan::days() const { return int(_span / DAYS); }
-
-
-inline int Timespan::hours() const { return int((_span / HOURS) % 24); }
-
-
-inline int Timespan::totalHours() const { return int(_span / HOURS); }
-
-
-inline int Timespan::minutes() const { return int((_span / MINUTES) % 60); }
-
-
-inline int Timespan::totalMinutes() const { return int(_span / MINUTES); }
-
-
-inline int Timespan::seconds() const { return int((_span / SECONDS) % 60); }
-
-
-inline int Timespan::totalSeconds() const { return int(_span / SECONDS); }
-
-
-inline int Timespan::milliseconds() const
+int Timespan::milliseconds() const
 {
     return int((_span / MILLISECONDS) % 1000);
 }
 
-
-inline Timespan::TimeDiff Timespan::totalMilliseconds() const
+Timespan::TimeDiff Timespan::totalMilliseconds() const
 {
     return _span / MILLISECONDS;
 }
 
+int Timespan::microseconds() const { return int(_span % 1000); }
 
-inline int Timespan::microseconds() const { return int(_span % 1000); }
+int Timespan::useconds() const { return int(_span % 1000000); }
 
+Timespan::TimeDiff Timespan::totalMicroseconds() const { return _span; }
 
-inline int Timespan::useconds() const { return int(_span % 1000000); }
-
-
-inline Timespan::TimeDiff Timespan::totalMicroseconds() const { return _span; }
-
-
-inline bool Timespan::operator==(const Timespan &ts) const
+bool Timespan::operator==(const Timespan &ts) const
 {
     return _span == ts._span;
 }
 
-
-inline bool Timespan::operator!=(const Timespan &ts) const
+bool Timespan::operator!=(const Timespan &ts) const
 {
     return _span != ts._span;
 }
 
+bool Timespan::operator>(const Timespan &ts) const { return _span > ts._span; }
 
-inline bool Timespan::operator>(const Timespan &ts) const
-{
-    return _span > ts._span;
-}
-
-
-inline bool Timespan::operator>=(const Timespan &ts) const
+bool Timespan::operator>=(const Timespan &ts) const
 {
     return _span >= ts._span;
 }
 
+bool Timespan::operator<(const Timespan &ts) const { return _span < ts._span; }
 
-inline bool Timespan::operator<(const Timespan &ts) const
-{
-    return _span < ts._span;
-}
-
-
-inline bool Timespan::operator<=(const Timespan &ts) const
+bool Timespan::operator<=(const Timespan &ts) const
 {
     return _span <= ts._span;
 }
 
-
-inline bool Timespan::operator==(TimeDiff microSeconds) const
+bool Timespan::operator==(TimeDiff microSeconds) const
 {
     return _span == microSeconds;
 }
 
-
-inline bool Timespan::operator!=(TimeDiff microSeconds) const
+bool Timespan::operator!=(TimeDiff microSeconds) const
 {
     return _span != microSeconds;
 }
 
-
-inline bool Timespan::operator>(TimeDiff microSeconds) const
+bool Timespan::operator>(TimeDiff microSeconds) const
 {
     return _span > microSeconds;
 }
 
-
-inline bool Timespan::operator>=(TimeDiff microSeconds) const
+bool Timespan::operator>=(TimeDiff microSeconds) const
 {
     return _span >= microSeconds;
 }
 
-
-inline bool Timespan::operator<(TimeDiff microSeconds) const
+bool Timespan::operator<(TimeDiff microSeconds) const
 {
     return _span < microSeconds;
 }
 
-
-inline bool Timespan::operator<=(TimeDiff microSeconds) const
+bool Timespan::operator<=(TimeDiff microSeconds) const
 {
     return _span <= microSeconds;
 }
 
+void swap(Timespan &s1, Timespan &s2) noexcept { s1.swap(s2); }
 
-inline void swap(Timespan &s1, Timespan &s2) noexcept { s1.swap(s2); }
+Timespan &Timespan::assign(int days, int hours, int minutes, int seconds,
+                           int microSeconds)
+{
+    _span = TimeDiff(microSeconds) + TimeDiff(seconds) * SECONDS +
+            TimeDiff(minutes) * MINUTES + TimeDiff(hours) * HOURS +
+            TimeDiff(days) * DAYS;
+    return *this;
+}
 
+Timespan &Timespan::assign(long seconds, long microSeconds)
+{
+    _span = TimeDiff(seconds) * SECONDS + TimeDiff(microSeconds);
+    return *this;
+}
 
-inline Timespan::~Timespan() {}
+void Timespan::swap(Timespan &timespan) noexcept
+{
+    std::swap(_span, timespan._span);
+}
 
+Timespan Timespan::operator+(const Timespan &d) const
+{
+    return Timespan(_span + d._span);
+}
 
+Timespan Timespan::operator-(const Timespan &d) const
+{
+    return Timespan(_span - d._span);
+}
+
+Timespan &Timespan::operator+=(const Timespan &d)
+{
+    _span += d._span;
+    return *this;
+}
+
+Timespan &Timespan::operator-=(const Timespan &d)
+{
+    _span -= d._span;
+    return *this;
+}
+
+Timespan Timespan::operator+(TimeDiff microSeconds) const
+{
+    return Timespan(_span + microSeconds);
+}
+
+Timespan Timespan::operator-(TimeDiff microSeconds) const
+{
+    return Timespan(_span - microSeconds);
+}
+
+Timespan &Timespan::operator+=(TimeDiff microSeconds)
+{
+    _span += microSeconds;
+    return *this;
+}
+
+Timespan &Timespan::operator-=(TimeDiff microSeconds)
+{
+    _span -= microSeconds;
+    return *this;
+}

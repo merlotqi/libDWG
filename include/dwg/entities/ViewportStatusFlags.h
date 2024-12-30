@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/base/Flags.h>
+#include <base.h>
 namespace dwg {
 
 /// viewport status flags

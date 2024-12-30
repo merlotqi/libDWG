@@ -26,11 +26,8 @@
 #include <dwg/Transparency.h>
 #include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
-#include <dwg/base/DateTime.h>
-#include <dwg/base/Encoding.h>
-#include <dwg/base/Timespan.h>
+#include <dwg/Color.h>
+#include <base.h>
 
 #include <iostream>
 #include <string>

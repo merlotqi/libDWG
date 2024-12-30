@@ -23,8 +23,8 @@
 #pragma once
 
 #include "IDwgStreamWriter.h"
-#include <dwg/base/DwgStream.h>
-#include <dwg/base/Encoding.h>
+#include "DwgStream.h"
+#include <base.h>
 
 namespace dwg {
 namespace io {

@@ -21,3 +21,38 @@
  */
 
 #include "Coordinate.h"
+#include <stdexcept>
+
+XYZ XYZ::Zero = XYZ(0, 0, 0);
+
+XYZ XYZ::AxisX = XYZ(1, 0, 0);
+
+XYZ XYZ::AxisY = XYZ(0, 1, 0);
+
+XYZ XYZ::AxisZ = XYZ(0, 0, 1);
+
+double XYZ::operator[](int index) const
+{
+    if (index > 2) throw std::out_of_range("Index out of range");
+    return u[index];
+}
+
+double &XYZ::operator[](int index)
+{
+    if (index > 2) throw std::out_of_range("Index out of range");
+    return u[index];
+}
+
+XY XY::Zero = XY(0, 0);
+
+double XY::operator[](int index) const
+{
+    if (index > 1) throw std::out_of_range("Index out of range");
+    return u[index];
+}
+
+double &XY::operator[](int index)
+{
+    if (index > 1) throw std::out_of_range("Index out of range");
+    return u[index];
+}

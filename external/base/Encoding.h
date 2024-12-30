@@ -204,7 +204,7 @@ class Encoding
 public:
     Encoding() = default;
     Encoding(CodePage codePage);
-    virtual ~Encoding() = default;
+    virtual ~Encoding();
 
     std::vector<unsigned char> GetBytes(const std::string &str) const;
     std::string GetString(const std::vector<unsigned char> &bytes) const;

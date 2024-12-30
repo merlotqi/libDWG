@@ -26,7 +26,7 @@
 #include <assert.h>
 #include <dwg/CadDocument.h>
 #include <dwg/ACadVersion.h>
-#include <dwg/base/Encoding.h>
+#include <base.h>
 #include <fstream>
 #include <sstream>
 

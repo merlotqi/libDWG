@@ -14,6 +14,5 @@ add_subdirectory(src)
 if(WIN32)
     target_compile_definitions(dwg PRIVATE LIBDWG_EXPORTS)
 endif()
-target_link_libraries(dwg PUBLIC Iconv::Iconv)
-
+target_link_libraries(dwg dwg_base)
 add_subdirectory(examples)

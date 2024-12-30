@@ -20,11 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/base/EndianConverter.h>
-#include <dwg/base/ByteOrder.h>
+#include "EndianConverter.h"
+#include "byte_order.h"
 
-namespace dwg
-{
+
 
 std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(char value)
 {
@@ -169,5 +168,3 @@ std::unique_ptr<EndianConverter> LittleEndianConverter::Instance()
         return std::unique_ptr<EndianConverter>(new DefaultEndianConverter());
     }
 }
-
-} // namespace dwg

@@ -20,34 +20,27 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/base/Encoding.h>
+#include "Encoding.h"
 #include <iconv.h>
 
-namespace dwg {
 
-Encoding::Encoding(CodePage codepage)
+Encoding::Encoding(CodePage codepage) { _codePage = codepage; }
+
+Encoding::~Encoding() {}
+
+std::vector<unsigned char> Encoding::GetBytes(const std::string &str) const
 {
-    _codePage = codePage;
+    return std::vector<unsigned char>();
 }
 
-Encoding::~Encoding()
+std::string Encoding::GetString(const std::vector<unsigned char> &bytes) const
 {
-
+    return std::string();
 }
 
-std::vector<unsigned char> Encoding::GetBytes(const std::string& str) const
+std::string Encoding::GetString(const unsigned char *bytes, size_t length) const
 {
-
-}
-
-std::string Encoding::GetString(const std::vector<unsigned char>& bytes) const
-{
-
-}
-
-std::string Encoding::GetString(const unsigned char* bytes, size_t length) const
-{
-
+    return std::string();
 }
 
 Encoding Encoding::UTF8()
@@ -70,7 +63,7 @@ Encoding Encoding::ASCII()
 
 Encoding Encoding::Windows1252()
 {
-    Encoding coding(Windows1252);
+    Encoding coding(CodePage::Windows1252);
     return coding;
 }
 
@@ -80,12 +73,8 @@ Encoding Encoding::GBK()
     return coding;
 }
 
-Encoding Encoding::GB18030();
+Encoding Encoding::GB18030()
 {
-    Encoding coding(Gb18030);
+    Encoding coding(CodePage::Gb18030);
     return coding;
 }
-
-
-}// namespace dwg
-

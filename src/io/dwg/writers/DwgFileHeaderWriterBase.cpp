@@ -28,8 +28,8 @@
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
 #include <dwg/ACadVersion.h>
-#include <dwg/base/Encoding.h>
-#include <dwg/base/EndianConverter.h>
+#include <base.h>
+#include <base.h>
 #include <fstream>
 #include <sstream>
 

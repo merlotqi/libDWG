@@ -14,3 +14,5 @@ target_include_directories(dwg_base
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
 )
+
+target_link_libraries(dwg_base PUBLIC Iconv::Iconv)

@@ -21,7 +21,7 @@
  */
 
 #include "DwgStream.h"
-#include <dwg/base/EndianConverter.h>
+#include <base.h>
 
 
 

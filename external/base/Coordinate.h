@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <array>
 #include <stddef.h>
 
 struct IVector
@@ -29,11 +30,19 @@ struct IVector
     size_t Dimension;
 };
 
+
 struct XYZ
 {
-    double X;
-    double Y;
-    double Z;
+    union
+    {
+        struct
+        {
+            double X;
+            double Y;
+            double Z;
+        };
+        double u[3];
+    };
 
     static XYZ Zero;
     static XYZ AxisX;
@@ -42,20 +51,26 @@ struct XYZ
 
     XYZ() : X(0), Y(0), Z(0) {}
     XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
-    double operator[](int index) const {}
-    double &operator[](int index) {}
+    double operator[](int index) const;
+    double &operator[](int index);
 };
 
 struct XY
 {
-    double X;
-    double Y;
+    union
+    {
+        struct
+        {
+            double X;
+            double Y;
+        };
+        double u[2];
+    };
 
     static XY Zero;
 
     XY() : X(0), Y(0) {}
     XY(double x, double y) : X(x), Y(y) {}
-    double operator[](int index) const {}
-    double &operator[](int index) {}
+    double operator[](int index) const;
+    double &operator[](int index);
 };
-
