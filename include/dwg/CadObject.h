@@ -22,33 +22,72 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <dwg/DxfFileToken.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/ObjectType.h>
-#include <dwg/objects//CadDictionary.h>
+#include <dwg/objects/CadDictionary.h>
 #include <string>
 
 namespace dwg {
 
-class CadObject : public IHandledCadObject
+class CadObject;
+SMARTER_PTR(CadObject)
+
+/// \brief Base class representing a CAD object with support for handle-based identification
+/// and ownership hierarchy.
+class LIBDWG_API CadObject : public IHandledCadObject
 {
 protected:
+    /// \brief Unique handle identifying the CAD object.
     unsigned long long _handle;
 
+    /// \brief Weak pointer to the owning CAD object.
+    CadObjectWPtr _owner;
+
 public:
+    /// \brief Default constructor.
     CadObject() = default;
+
+    /// \brief Virtual destructor.
     virtual ~CadObject() = default;
 
+    /// \brief Get the type of the CAD object.
+    /// \details This method must be implemented by derived classes to return the specific
+    /// type of the object.
+    /// \return The type of the object as a value from the `dwg::ObjectType` enumeration.
     virtual dwg::ObjectType ObjectType() const = 0;
-    virtual std::string ObjectName() const = 0;
-    virtual std::string SubclassMarker() const = 0;
-    unsigned long long Handle() const { return _handle; }
 
-    unsigned long long OwnerHandle; // 330
+    /// \brief Get the name of the CAD object.
+    /// \details This method must be implemented by derived classes to return the name
+    /// associated with the object.
+    /// \return A string representing the object's name.
+    virtual std::string ObjectName() const = 0;
+
+    /// \brief Get the subclass marker of the CAD object.
+    /// \details This method must be implemented by derived classes to return a marker
+    /// indicating the object's subclass.
+    /// \return A string representing the subclass marker.
+    virtual std::string SubclassMarker() const = 0;
+
+    /// \brief Get the unique handle of the CAD object.
+    /// \return The handle of the object as an unsigned long long value.
+    unsigned long long Handle() const;
+
+    /// \brief Get the owning CAD object of this object.
+    /// \details The ownership establishes a hierarchical relationship between CAD objects.
+    /// \return A smart pointer to the owning CAD object, or nullptr if no owner is set.
+    CadObjectPtr Owner();
+
+    /// \brief Set the owning CAD object for this object.
+    /// \param obj Pointer to the new owning CAD object.
+    void Owner(CadObject *obj);
 
 protected:
-    void Handle(unsigned long long value) { _handle = value; }
+    /// \brief Set the unique handle of the CAD object.
+    /// \param value The handle value to assign.
+    void Handle(unsigned long long value);
 };
 
 

@@ -22,14 +22,17 @@
 
 #pragma once
 
+#include <dwg/utility/object.h>
+
 namespace dwg {
 
-class IHandledCadObject
+class IHandledCadObject : public RefObject
 {
 public:
     IHandledCadObject() = default;
     virtual ~IHandledCadObject() = default;
     virtual unsigned long long Handle() const = 0;
 };
+SMARTER_PTR(IHandledCadObject)
 
 }// namespace dwg

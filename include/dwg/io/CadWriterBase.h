@@ -25,7 +25,7 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/io/ICadWriter.h>
-#include <dwg/base/Encoding.h>
+#include <dwg/Encoding.h>
 #include <fstream>
 #include <dwg/io/CadWriterConfiguration.h>
 

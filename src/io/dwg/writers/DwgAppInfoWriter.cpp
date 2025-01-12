@@ -22,13 +22,13 @@
 
 #pragma once
 
+#include <Poco/Format.h>
+#include <base.h>
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <base.h>
-#include <base.h>
-#include <dwg/version.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include <dwg/version.h>
 
 namespace dwg {
 namespace io {
@@ -44,8 +44,7 @@ public:
     DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
         : DwgSectionIO(version)
     {
-        for(size_t i = 0; i < 16; ++i)
-            _emptyArr.push_back(0);
+        for (size_t i = 0; i < 16; ++i) _emptyArr.push_back(0);
         _writer = DwgStreamWriterBase::GetStreamWriter(version, stream,
                                                        Encoding::Unicode());
     }
@@ -70,11 +69,11 @@ public:
         //Byte[]	16	Product data(checksum, ODA writes zeroes)
         _writer->WriteBytes(_emptyArr);
         //String	2 + 2 * n + 2	Product
-        std::string productInfo = str_format(
-                "<ProductInformation name =\"libDWG\" build_version=\"%s\" "
-                "registry_version=\"%s\" install_id_string=\"libDWG\" "
+        std::string productInfo = Poco::format(
+                "<ProductInformation name =\"libDWG\" build_version=\"{}\" "
+                "registry_version=\"{}\" install_id_string=\"libDWG\" "
                 "registry_localeID=\"1033\"/>",
-                version.c_str(), version.c_str());
+                version, version);
 
         _writer->WriteTextUnicode(productInfo);
     }

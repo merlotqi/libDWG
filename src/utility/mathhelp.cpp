@@ -20,57 +20,39 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/Coordinate.h>
+#include <stdexcept>
 
-#include <array>
-#include <stddef.h>
+XYZ XYZ::Zero = XYZ(0, 0, 0);
 
-struct IVector
+XYZ XYZ::AxisX = XYZ(1, 0, 0);
+
+XYZ XYZ::AxisY = XYZ(0, 1, 0);
+
+XYZ XYZ::AxisZ = XYZ(0, 0, 1);
+
+double XYZ::operator[](int index) const
 {
-    size_t Dimension;
-};
+    if (index > 2) throw std::out_of_range("Index out of range");
+    return u[index];
+}
 
-
-struct XYZ
+double &XYZ::operator[](int index)
 {
-    union
-    {
-        struct
-        {
-            double X;
-            double Y;
-            double Z;
-        };
-        double u[3];
-    };
+    if (index > 2) throw std::out_of_range("Index out of range");
+    return u[index];
+}
 
-    static XYZ Zero;
-    static XYZ AxisX;
-    static XYZ AxisY;
-    static XYZ AxisZ;
+XY XY::Zero = XY(0, 0);
 
-    XYZ() : X(0), Y(0), Z(0) {}
-    XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
-    double operator[](int index) const;
-    double &operator[](int index);
-};
-
-struct XY
+double XY::operator[](int index) const
 {
-    union
-    {
-        struct
-        {
-            double X;
-            double Y;
-        };
-        double u[2];
-    };
+    if (index > 1) throw std::out_of_range("Index out of range");
+    return u[index];
+}
 
-    static XY Zero;
-
-    XY() : X(0), Y(0) {}
-    XY(double x, double y) : X(x), Y(y) {}
-    double operator[](int index) const;
-    double &operator[](int index);
-};
+double &XY::operator[](int index)
+{
+    if (index > 1) throw std::out_of_range("Index out of range");
+    return u[index];
+}

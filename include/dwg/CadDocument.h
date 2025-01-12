@@ -45,17 +45,10 @@ namespace dwg {
 class CadDocument : public IHandledCadObject
 {
 public:
-    CadDocument(bool createDefault)
-    {
-        _cadObjects.insert({Handle(), this});
-        if(createDefault)
-        {
-            CreateDefaults();
-        }
-    }
+    CadDocument(bool createDefault);
 
     unsigned long long Handle() const override;
-    header::CadHeader Header;
+    CadHeader Header;
     CadSummaryInfo SummaryInfo;
     DxfClassCollection Classes;
 
@@ -87,5 +80,6 @@ public:
 
     void CreateDefaults();
 };
+SMARTER_PTR(CadDocument)
 
 }// namespace dwg

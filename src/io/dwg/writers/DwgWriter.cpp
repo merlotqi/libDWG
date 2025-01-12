@@ -20,7 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <Poco/MemoryStream.h>
 
+#include "DwgStreamWriterBase.h"
 #include "DwgAppInfoWriter.h"
 #include "DwgAuxHeaderWriter.h"
 #include "DwgClassesWriter.h"
@@ -33,6 +35,7 @@
 #include "../fileheaders/DwgFileHeader.h"
 #include "../fileheaders/DwgSectionDefinition.h"
 #include <dwg/io/dwg/DwgWriter.h>
+#include "../../../DwgStream.h"
 
 #include <sstream>
 #include <stdexcept>

@@ -43,15 +43,15 @@ class CadDocumentBuilder
 public:
     ACadVersion Version;
     CadDocument *DocumentToBuild;
-    tables::AppIdsTable AppIds;
-    tables::BlockRecordsTable BlockRecords;
-    tables::DimensionStylesTable DimensionStyles;
-    tables::LayersTable Layers;
-    tables::LineTypesTable LineTypesTable;
-    tables::TextStylesTable TextStyles;
-    tables::UCSTable UCSs;
-    tables::ViewsTable Views;
-    tables::VPortsTable VPorts;
+    AppIdsTable AppIds;
+    BlockRecordsTable BlockRecords;
+    DimensionStylesTable DimensionStyles;
+    LayersTable Layers;
+    LineTypesTable LineTypesTable;
+    TextStylesTable TextStyles;
+    UCSTable UCSs;
+    ViewsTable Views;
+    VPortsTable VPorts;
 
     bool KeepUnknownEntities;
 

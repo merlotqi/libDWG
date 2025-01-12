@@ -68,3 +68,4 @@ catch_report/
 *.gch
 *.pch
 .DS_Store
+.vs

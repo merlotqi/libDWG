@@ -29,8 +29,8 @@
 #include <dwg/objects/Material.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
+#include <dwg/Color.h>
+#include <dwg/Coordinate.h>
 
 namespace dwg {
 

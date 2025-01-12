@@ -23,15 +23,17 @@
 #pragma once
 
 #include <string>
+#include <dwg/utility/object.h>
 
 namespace dwg {
 
-class INamedCadObject
+class INamedCadObject : public RefObject
 {
 public:
     INamedCadObject() = default;
     virtual ~INamedCadObject() = default;
     virtual std::string Name() const = 0;
 };
+SMARTER_PTR(INamedCadObject)
 
 }// namespace dwg

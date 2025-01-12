@@ -21,3 +21,24 @@
  */
 
 #pragma once
+
+#include <map>
+#include <dwg/tables/AppId.h>
+#include <dwg/DxfCode.h>
+#include <dwg/exports.h>
+
+namespace dwg {
+
+class ExtendedData;
+
+class ExtendedDataRecord
+{
+    DxfCode _code;
+
+};
+
+typedef std::map<AppId, ExtendedData> ExtendedDataDictionary;
+
+
+
+}

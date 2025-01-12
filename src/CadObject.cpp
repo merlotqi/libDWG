@@ -20,14 +20,26 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/CadObject.h>
 
-#include "Coordinate.h"
-#include "DateTime.h"
-#include "Encoding.h"
-#include "EndianConverter.h"
-#include "Flags.h"
-#include "Format.h"
-#include "Matrix.h"
-#include "Timespan.h"
-#include "Timestamp.h"
+namespace dwg {
+
+unsigned long long CadObject::Handle() const { return _handle; }
+
+CadObjectPtr CadObject::Owner()
+{
+    if (!_owner.Expired()) { return _owner.Lock(); }
+    return NULL;
+}
+
+void CadObject::Owner(CadObject* obj)
+{
+	_owner = obj;
+}
+
+void CadObject::Handle(unsigned long long value)
+{
+	_handle = value;
+}
+
+} // namespace dwg

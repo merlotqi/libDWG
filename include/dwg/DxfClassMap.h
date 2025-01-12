@@ -26,13 +26,7 @@
 #include <map>
 #include <string>
 
-
 namespace dwg {
 
-class LIBDWG_API DxfMapBase
-{
-    std::string m_name;
-    std::map<int, DxfProperty> m_dxfProperties;
-};
 
 }// namespace dwg

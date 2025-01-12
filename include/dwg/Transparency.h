@@ -22,11 +22,13 @@
 
 #pragma once
 
+#include <dwg/exports.h>
+
 namespace dwg {
 
-class Transparency
+class LIBDWG_API Transparency
 {
-    short m_value;
+    short _value;
 
 public:
     Transparency(short value);

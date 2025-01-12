@@ -22,36 +22,59 @@
 
 #pragma once
 
-#include <set>
+#include <vector>
+#include <dwg/CadObject.h>
+#include <dwg/utility/delegate.h>
 
 namespace dwg {
 
-template<class T>
-class CadObjectCollection
+/// \brief Collection of CAD objects with support for adding, removing, and event handling.
+class LIBDWG_API CadObjectCollection
 {
 protected:
-    std::set<T *> _entries;
-    CadObject *m_Owner;
+    /// \brief Internal storage of CAD objects as a vector of smart pointers.
+    std::vector<CadObjectPtr> _entries;
+
+    /// \brief Pointer to the owning CAD object of this collection.
+    CadObject *_owner;
 
 public:
-    CadObjectCollection() {}
-    CadObjectCollection(CadObject *owner) { m_Owner = owner; }
+    /// \brief Constructor to initialize the collection with an owner.
+    /// \param owner Pointer to the owning CAD object.
+    CadObjectCollection(CadObject *owner);
 
-    void Add(T *item)
-    {
-        if (!item) throw new std::invalid_argument("");
+    /// \brief Destructor to clean up resources.
+    ~CadObjectCollection();
 
-        if (item->Owner() != nullptr) throw new std::invalid_argument("");
+    /// \brief Add a CAD object to the collection.
+    /// \param item Pointer to the CAD object to add.
+    void Add(CadObject *item);
 
-        if (_entries.contains(item)) throw new std::invalid_argument("");
+    /// \brief Remove a CAD object from the collection.
+    /// \param item Pointer to the CAD object to remove.
+    void Remove(CadObject *item);
 
-        _entries.insert(item);
-        item->Owner(m_Owner);
+    /// \brief Get the number of CAD objects in the collection.
+    /// \return The count of objects in the collection.
+    size_t Count() const;
 
-        OnAdd(item);
-    }
+    /// \brief Get the owning CAD object of the collection.
+    /// \return Pointer to the owning CAD object.
+    CadObject *Owner() const;
 
-    void Remove(T *item) {}
+    /// \brief Access a CAD object in the collection by its index.
+    /// \param index The index of the CAD object to access.
+    /// \return Smart pointer to the CAD object at the specified index.
+    CadObjectPtr operator[](int index);
+
+    /// \brief Delegate triggered when a CAD object is added to the collection.
+    /// \details This allows registering custom callbacks that will execute when an object is added.
+    Delegate<void(CadObject *)> OnAdd;
+
+    /// \brief Delegate triggered when a CAD object is removed from the collection.
+    /// \details This allows registering custom callbacks that will execute when an object is removed.
+    Delegate<void(CadObject *)> OnRemove;
 };
+
 
 }// namespace dwg

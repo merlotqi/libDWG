@@ -20,53 +20,50 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "EndianConverter.h"
-#include "byte_order.h"
+#include <dwg/utility/byteendian.h>
 
-
-
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(char value)
+std::vector<unsigned char> EndianConverter::GetBytes(char value)
 {
     return GetBytes<char>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(short value)
+std::vector<unsigned char> EndianConverter::GetBytes(short value)
 {
     return GetBytes<short>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(unsigned short value)
+std::vector<unsigned char> EndianConverter::GetBytes(unsigned short value)
 {
     return GetBytes<unsigned short>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(int value)
+std::vector<unsigned char> EndianConverter::GetBytes(int value)
 {
     return GetBytes<int>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(unsigned int value)
+std::vector<unsigned char> EndianConverter::GetBytes(unsigned int value)
 {
     return GetBytes<unsigned int>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(long long value)
+std::vector<unsigned char> EndianConverter::GetBytes(long long value)
 {
     return GetBytes<long long>(value);
 }
 
-std::unique_ptr<unsigned char[]>
+std::vector<unsigned char>
 EndianConverter::GetBytes(unsigned long long value)
 {
     return GetBytes<unsigned long long>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(double value)
+std::vector<unsigned char> EndianConverter::GetBytes(double value)
 {
     return GetBytes<double>(value);
 }
 
-std::unique_ptr<unsigned char[]> EndianConverter::GetBytes(float value)
+std::vector<unsigned char> EndianConverter::GetBytes(float value)
 {
     return GetBytes<float>(value);
 }

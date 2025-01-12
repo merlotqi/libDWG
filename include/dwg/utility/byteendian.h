@@ -22,23 +22,35 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <memory>
 #include <type_traits>
+#include <vector>
 
 
-class EndianConverter
+struct byte_order
+{
+    static constexpr unsigned short value = 0x0102;
+    static constexpr auto is_little_endian = (value & 0xFF) == 0x02;
+};
+
+constexpr bool is_little_endian = byte_order::is_little_endian;
+constexpr bool is_big_endian = !byte_order::is_little_endian;
+
+
+class LIBDWG_API EndianConverter
 {
 public:
     EndianConverter() = default;
-    std::unique_ptr<unsigned char[]> GetBytes(char value);
-    std::unique_ptr<unsigned char[]> GetBytes(short value);
-    std::unique_ptr<unsigned char[]> GetBytes(unsigned short value);
-    std::unique_ptr<unsigned char[]> GetBytes(int value);
-    std::unique_ptr<unsigned char[]> GetBytes(unsigned int value);
-    std::unique_ptr<unsigned char[]> GetBytes(long long value);
-    std::unique_ptr<unsigned char[]> GetBytes(unsigned long long value);
-    std::unique_ptr<unsigned char[]> GetBytes(double value);
-    std::unique_ptr<unsigned char[]> GetBytes(float value);
+    std::vector<unsigned char> GetBytes(char value);
+    std::vector<unsigned char> GetBytes(short value);
+    std::vector<unsigned char> GetBytes(unsigned short value);
+    std::vector<unsigned char> GetBytes(int value);
+    std::vector<unsigned char> GetBytes(unsigned int value);
+    std::vector<unsigned char> GetBytes(long long value);
+    std::vector<unsigned char> GetBytes(unsigned long long value);
+    std::vector<unsigned char> GetBytes(double value);
+    std::vector<unsigned char> GetBytes(float value);
 
     char ToChar(const unsigned char *bytes);
     int16_t ToInt16(const unsigned char *bytes);
@@ -51,12 +63,12 @@ public:
     double ToDouble(const unsigned char *bytes);
 
     template<class T>
-    std::unique_ptr<unsigned char[]> GetBytes(T value)
+    std::vector<unsigned char> GetBytes(T value)
     {
         static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,
                       "T must be integral number or floating point number.");
         constexpr size_t sz = sizeof(T);
-        std::unique_ptr<unsigned char[]> buffer(new unsigned char[sz]);
+        std::vector<unsigned char> buffer(new unsigned char[sz]);
         byteswap(buffer.get(), sz);
         memcpy(buffer.get(), &value, sz);
         return buffer;
@@ -68,7 +80,7 @@ public:
         static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,
                       "T must be integral number or floating point number.");
         constexpr size_t sz = sizeof(T);
-        std::unique_ptr<unsigned char[]> buffer(new unsigned char[sz]);
+        std::vector<unsigned char> buffer(new unsigned char[sz]);
         std::memcpy(buffer.get(), bytes, sz);
         byteswap(buffer.get(), sz);
         T value;
@@ -80,7 +92,7 @@ protected:
     virtual void byteswap(unsigned char *buffer, size_t length) = 0;
 };
 
-class BigEndianConverter : public EndianConverter
+class LIBDWG_API BigEndianConverter : public EndianConverter
 {
 public:
     BigEndianConverter() = default;
@@ -88,7 +100,7 @@ public:
     static std::unique_ptr<EndianConverter> Instance();
 };
 
-class LittleEndianConverter : public EndianConverter
+class LIBDWG_API LittleEndianConverter : public EndianConverter
 {
 public:
     LittleEndianConverter() = default;
