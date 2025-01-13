@@ -23,37 +23,41 @@
 #pragma once
 
 #include <dwg/io/dwg/CRC.h>
+#include <dwg/utility/memorymanager.h>
 
 namespace dwg {
 namespace io {
 
 
-class CRC8StreamHandler
+class CRC8StreamHandlerBase
 {
+    static unsigned short decode(unsigned short key, unsigned char value);
+
 public:
+    CRC8StreamHandlerBase();
+    virtual ~CRC8StreamHandlerBase();
     static unsigned short GetCRCValue(unsigned short seed,
                                       const std::vector<unsigned char> &buffer,
-                                      long startPos, long endPos)
-    {
-        unsigned short currValue = seed;
-        int index = (int) startPos;
+                                      long startPos, long endPos);  
+    unsigned short Seed() const;
+    void Seed(unsigned short);
 
-        while (endPos-- > 0)
-        {
-            currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
-            index++;
-        }
+protected:
+    unsigned short _seed;
+};
 
-        return currValue;
-    }
+class CRC8InputStreamHandler : public MemoryInputStream, CRC8StreamHandlerBase
+{
+public:
+    CRC8InputStreamHandler();
+    int RawRead(unsigned char *buff, int nLen) override;
+};
 
-private:
-    static unsigned short decode(unsigned short key, unsigned char value)
-    {
-        int index = value ^ (unsigned char) key;
-        key = (unsigned short) ((unsigned int) key >> 8 ^ CRC::CrcTable[index]);
-        return key;
-    }
+class CRC8OutputStreamHandler : public MemoryOutputStream, CRC8StreamHandlerBase
+{
+public:
+    CRC8InputStreamHandler();
+    int RawWrite(const unsigned char *buff, int nLen) override;
 };
 
 }// namespace io

@@ -32,9 +32,6 @@
 
 namespace dwg {
 
-class CadObject;
-SMARTER_PTR(CadObject)
-
 /// \brief Base class representing a CAD object with support for handle-based identification
 /// and ownership hierarchy.
 class LIBDWG_API CadObject : public IHandledCadObject
@@ -44,7 +41,9 @@ protected:
     unsigned long long _handle;
 
     /// \brief Weak pointer to the owning CAD object.
-    CadObjectWPtr _owner;
+    WeakSmarterPtr<CadObject> _owner;
+
+    CadDocumentWPtr _document;
 
 public:
     /// \brief Default constructor.
@@ -78,17 +77,40 @@ public:
     /// \brief Get the owning CAD object of this object.
     /// \details The ownership establishes a hierarchical relationship between CAD objects.
     /// \return A smart pointer to the owning CAD object, or nullptr if no owner is set.
-    CadObjectPtr Owner();
+    SmarterPtr<CadObject> Owner();
 
-    /// \brief Set the owning CAD object for this object.
-    /// \param obj Pointer to the new owning CAD object.
-    void Owner(CadObject *obj);
+    CadDocumentPtr Document();
+
+    void Document(CadDocument*);
+
+    virtual SmarterPtr<CadObject> Clone();
 
 protected:
     /// \brief Set the unique handle of the CAD object.
     /// \param value The handle value to assign.
     void Handle(unsigned long long value);
+    
+    /// \brief Set the owning CAD object for this object.
+    /// \param obj Pointer to the new owning CAD object.
+    void Owner(CadObject *obj);
+
+    virtual void AssignDocument(CadDocument* doc);
+    virtual void UnassignDocument();
+
+    template<class T>
+    SmarterPtr<T> updateTable(T* entity, Table<T>* table)
+    {
+        return NULL;
+    }
+
+    Template<class T>
+    SmarterPtr<T> updateCollection(T* entity, ObjectDictionaryCollection<T> * collection)
+    {
+        return NULL;
+    }
+
 };
+SMARTER_PTR(CadObject)
 
 
 }// namespace dwg

@@ -20,50 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/entities/Entity.h>
-#include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-class LIBDWG_API Block : public Entity
-{
-    std::string _name;
-    BlockTypeFlags _flags;
-    XYZ _base_point = XYZ::Zero;
-    std::string _xrefPath;
-    std::string _comments;
-public:
-    Block(BlockRecord *record);
-    ~Block();
 
-    dwg::ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
-
-    BlockRecordPtr BlockRecord() const;
-
-    std::string Name() const;
-    void Name(const std::string& name);
-
-    BlockTypeFlags Flags() const;
-    void Flags(BlockTypeFlags flags);
-
-    XYZ BasePoint() const;
-    void BasePoint(XYZ p);
-
-    std::string XrefPath() const;
-    void XrefPath(const std::string& value);
-
-    std::string Comments() const;
-    void Comments(const std::string& value);
-
-protected:
-    Block();
-
-};
-SMARTER_PTR(Block)
-
-}// namespace dwg
+}

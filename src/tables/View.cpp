@@ -19,26 +19,3 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
-
-#pragma once
-
-#include <dwg/objects/CadDictionary.h>
-
-namespace dwg {
-
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
-{
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
-
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
-
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
-
-}// namespace dwg

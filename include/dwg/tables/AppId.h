@@ -26,36 +26,29 @@
 
 namespace dwg {
 
-class AppId : public TableEntry
+class LIBDWG_API AppId : public TableEntry
 {
-public:
-    static constexpr auto DefaultName = "libDWG";
+public:    
+    AppId(const std::string &name);
 
-    dwg::ObjectType ObjectType() const override { return ObjectType::APPID; }
-    std::string ObjectName() const { return DxfFileToken::TableAppId; }
-    std::string SubclassMarker() const
-    {
-        return DxfSubclassMarker::ApplicationId;
-    }
+    static std::string DefaultName;
 
-    AppId(const std::string &name) : TableEntry(name) {}
+    dwg::ObjectType ObjectType() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 };
+SMARTER_PTR(AppId)
 
 class AppIdsTable : public Table<AppId>
 {
 public:
-    AppIdsTable() = default;
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::APPID_CONTROL_OBJ;
-    }
-    std::string ObjectName() const override { return DxfFileToken::TableAppId; }
+    AppIdsTable();
+    dwg::ObjectType ObjectType() const override;
+    std::string ObjectName() const override;
 
 protected:
-    std::vector<std::string> defaultEntries() const override
-    {
-        return {AppId::DefaultName};
-    }
+    std::vector<std::string> defaultEntries() const override;
 };
+SMARTER_PTR(AppIdsTable)
 
 }// namespace dwg

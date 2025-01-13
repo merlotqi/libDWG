@@ -26,14 +26,29 @@
 
 namespace dwg {
 
-class Circle : Entity
+class LIBDWG_API Circle : Entity
 {
+    XYZ _center = XYZ::Zero;
+    XYZ _normal = XYZ::AxisZ;
+    double _thickness = 0.0;
+    double _radius = 1.0;
+
 public:
     Circle();
-    XYZ Normal;      // 210, 220, 230
-    double Thickness;// 39
-    XYZ Center;      // 10, 20, 30
-    double Radius;   // 40
+    virtual ~Circle();
+    virtual dwg::ObjectType ObjectType() const overide;
+    virtual std::string ObjectName() const override;
+    virtual std::string SubclassMarker() const override;
+    XYZ Normal() const;
+    XYZ Center() const;
+    double Thickness() const;
+    double Radius() const;
+
+    void Normal(XYZ );
+    void Center(XYZ);
+    void Thickness(double);
+    void Radius(double);
 };
+SMARTER_PTR(Circle)
 
 }// namespace dwg

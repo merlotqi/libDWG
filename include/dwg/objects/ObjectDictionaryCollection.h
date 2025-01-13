@@ -24,7 +24,6 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <type_traits>
-
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/Group.h>
 #include <dwg/objects/ImageDefinition.h>

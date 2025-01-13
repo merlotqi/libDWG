@@ -22,20 +22,21 @@
 
 #pragma once
 
-#include <dwg/IHandledCadObject.h>
-#include <dwg/Transparency.h>
-#include <dwg/LineWeightType.h>
-#include <dwg/objects/BookColor.h>
-#include <dwg/objects/Material.h>
-#include <dwg/tables/Layer.h>
-#include <dwg/tables/LineType.h>
-#include <dwg/Color.h>
-#include <dwg/Coordinate.h>
+#include <dwg/entitis/IEntity.h>
 
 namespace dwg {
 
-class Entity : public CadObject
+class LIBDWG_API Entity : public CadObject, IEntity
 {
+    dwg::LayerWPtr _layer;
+    dwg::Color _color;
+    LineweightType _lineweight;
+    double _linetypeScale;
+    bool _isInvisible;
+    dwg::Transparency _transparency;
+    dwg::LineTypeWPtr _linetype;
+    dwg::BookColor _bookColor;
+
 public:
     Entity();
     std::string SubclassMarker() const { return DxfSubclassMarker::Entity; }
@@ -54,5 +55,6 @@ public:
 
     void MatchProperties(const Entity *other);
 };
+SMARTER_PTR(Entity)
 
 }// namespace dwg

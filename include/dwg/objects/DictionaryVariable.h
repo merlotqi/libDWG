@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class DictionaryVariable : public NonGraphicalObject
+class LIBDWG_API DictionaryVariable : public NonGraphicalObject
 {
 public:
     DictionaryVariable();
@@ -43,5 +43,6 @@ public:
     std::string Value;     // 1
     int ObjectSchemaNumber;// 280
 };
+SMARTER_PTR(DictionaryVariable)
 
 }// namespace dwg

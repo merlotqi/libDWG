@@ -20,50 +20,42 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/entities/Entity.h>
-#include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/AppId.h>
+#include <stdexcept>
 
 namespace dwg {
 
-class LIBDWG_API Block : public Entity
+std::string AppId::DefaultName = "libDWG";
+
+dwg::ObjectType AppId::ObjectType() const  { return ObjectType::APPID; }
+    
+std::string AppId::ObjectName() const { return DxfFileToken::TableAppId; }
+    
+std::string AppId::SubclassMarker() const
 {
-    std::string _name;
-    BlockTypeFlags _flags;
-    XYZ _base_point = XYZ::Zero;
-    std::string _xrefPath;
-    std::string _comments;
-public:
-    Block(BlockRecord *record);
-    ~Block();
+    return DxfSubclassMarker::ApplicationId;
+}
 
-    dwg::ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+AppId::AppId(const std::string &name) : TableEntry(name) 
+{
+    if(StringHelp::IsNullOrEmpty(name))
+        throw new std::invalid_argument("Application id must have a name.");
+}
 
-    BlockRecordPtr BlockRecord() const;
+AppIdsTable::AppIdsTable()
+{
+}
 
-    std::string Name() const;
-    void Name(const std::string& name);
+dwg::ObjectType AppIdsTable::ObjectType() const 
+{
+    return dwg::ObjectType::APPID_CONTROL_OBJ;
+}
 
-    BlockTypeFlags Flags() const;
-    void Flags(BlockTypeFlags flags);
+std::string AppIdsTable::ObjectName() const { return DxfFileToken::TableAppId; }
 
-    XYZ BasePoint() const;
-    void BasePoint(XYZ p);
-
-    std::string XrefPath() const;
-    void XrefPath(const std::string& value);
-
-    std::string Comments() const;
-    void Comments(const std::string& value);
-
-protected:
-    Block();
-
-};
-SMARTER_PTR(Block)
+std::vector<std::string> AppIdsTable::defaultEntries() const
+{
+    return {AppId::DefaultName};
+}
 
 }// namespace dwg

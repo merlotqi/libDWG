@@ -28,22 +28,24 @@
 
 namespace dwg {
 
-
-class NonGraphicalObject : public CadObject, INamedCadObject
+class LIBDWG_API NonGraphicalObject : public CadObject, INamedCadObject
 {
 protected:
     std::string _name;
 
 public:
-    NonGraphicalObject() = default;
+    NonGraphicalObject();
 
-    NonGraphicalObject(const std::string &name) : _name(name) {}
+    NonGraphicalObject(const std::string &name);
 
-    virtual ~NonGraphicalObject() = default;
+    virtual ~NonGraphicalObject();
 
-    std::string Name() const override { return _name; }
+    std::string Name() const override;
+    
+    void Name(const std::string &value);
 
-    void Name(const std::string &value) { _name = value; }
+    Delegate<void(const std::string&, const std::string&)> OnNameChanged;
 };
+SMARTER_PTR(NonGraphicalObject)
 
 }// namespace dwg

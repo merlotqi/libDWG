@@ -20,25 +20,33 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/CadDictionaryWithDefault.h>
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
-{
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
+    CadDictionaryWithDefault::CadDictionaryWithDefault() {}
 
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+    dwg::ObjectType CadDictionaryWithDefault::ObjectType() const { return ObjectType::UNLISTED; }
+    std::string CadDictionaryWithDefault::ObjectName() const
+    {
+        return DxfFileToken::ObjectDictionaryWithDefault;
+    }
+    std::string CadDictionaryWithDefault::SubclassMarker() const
+    {
+        return DxfSubclassMarker::DictionaryWithDefault;
+    }
 
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
+    CadObjectPtr CadDictionaryWithDefault::DefaultEntry() const
+    {
+        if(!_default_entry.Expired())
+            return _default_entry.Lock();
+        
+        return NULL;
+    }
 
-}// namespace dwg
+    void CadDictionaryWithDefault::DefaultEntry(CadObject* obj)
+    {
+        _default_entry = obj;
+    }
+
+}

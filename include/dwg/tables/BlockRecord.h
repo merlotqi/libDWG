@@ -74,7 +74,7 @@ public:
 
     UnitsType Units;
 
-    blocks::BlockTypeFlags Flags;
+    BlockTypeFlags Flags;
 
     bool IsExplodable;                 // 280
     bool CanScale;                     // 281
@@ -86,8 +86,8 @@ public:
     std::vector<Viewport> Viewports;
     CadObjectCollection<Entity *> Entities;
 
-    blocks::Block BlockEntity;
-    blocks::BlockEnd BlockEnd;
+    Block BlockEntity;
+    BlockEnd BlockEnd;
 };
 
 class BlockRecordsTable : public Table<BlockRecord>

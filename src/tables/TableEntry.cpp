@@ -20,25 +20,42 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/objects/CadDictionary.h>
+#include <dwg/tables/TableEntry.h>
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
+TableEntry::TableEntry(const std::string &name) 
+    : _name(name) 
+{}
+
+std::string TableEntry::SubclassMarker() const
 {
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
+    return DxfSubclassMarker::TableRecord;
+}
 
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+std::string TableEntry::Name() const 
+{ 
+    return _name; 
+}
 
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
+void TableEntry::Name(const std::string &value) 
+{ 
+    if(StringHelp::IsNullOrEmpty(value))
+    {
+        throw new std::invalid_argument("The Table Entry must have a name");
+    }
+    OnNameChanged(_name, value);
+    _name = value; 
+}
+
+StandardFlags TableEntry::Flags() const
+{
+    return _flags;
+}
+
+void TableEntry::Flags(StandardFlags flags)
+{
+    _flags = flags;
+}
 
 }// namespace dwg

@@ -20,25 +20,25 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/CadDictionary.h>
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
-{
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
+std::string CadDictionary::Root = "ROOT";
+std::string CadDictionary::AcadColor = "ACAD_COLOR";
+std::string CadDictionary::AcadGroup = "ACAD_GROUP";
+std::string CadDictionary::AcadLayout = "ACAD_LAYOUT";
+std::string CadDictionary::AcadMaterial = "ACAD_MATERIAL";
+std::string CadDictionary::AcadSortEnts = "ACAD_SORTENTS";
+std::string CadDictionary::AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
+std::string CadDictionary::AcadMLineStyle = "ACAD_MLINESTYLE";
+std::string CadDictionary::AcadTableStyle = "ACAD_TABLESTYLE";
+std::string CadDictionary::AcadPlotSettings = "ACAD_PLOTSETTINGS";
+std::string CadDictionary::VariableDictionary = "AcDbVariableDictionary";
+std::string CadDictionary::AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
+std::string CadDictionary::AcadScaleList = "ACAD_SCALELIST";
+std::string CadDictionary::AcadVisualStyle = "ACAD_VISUALSTYLE";
+std::string CadDictionary::AcadFieldList = "ACAD_FIELDLIST";
+std::string CadDictionary::AcadImageDict = "ACAD_IMAGE_DICT";
 
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
-
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
-
-}// namespace dwg
+}

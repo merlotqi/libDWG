@@ -20,25 +20,21 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
-{
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
+    NonGraphicalObject::NonGraphicalObject(const std::string &name) : _name(name) {}
+    
+    NonGraphicalObject::~NonGraphicalObject() {}
 
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+    std::string Name() const override { return _name; }
 
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
+    void Name(const std::string &value) 
+    {
+        OnNameChanged(_name, value); 
+        _name = value; 
+    }
 
-}// namespace dwg
+
+}

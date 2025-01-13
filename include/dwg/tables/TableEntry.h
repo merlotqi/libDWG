@@ -29,68 +29,64 @@
 #include <dwg/INamedCadObject.h>
 #include <dwg/tables/StandardFlags.h>
 #include <dwg/exports.h>
+#include <assert.h>
 
 namespace dwg {
 
-
-class TableEntry : public CadObject, INamedCadObject
+class LIBDWG_API TableEntry : public CadObject, INamedCadObject
 {
 public:
-    TableEntry(const std::string &name) : _name(name) {}
-
-    std::string SubclassMarker() const override
-    {
-        return DxfSubclassMarker::TableRecord;
-    }
-
-    virtual std::string Name() const { return _name; }
-    virtual void Name(const std::string &value) { _name = value; }
+    TableEntry(const std::string &name);
+    std::string SubclassMarker() const override;
+    virtual std::string Name() const;
+    virtual void Name(const std::string &value);
     // 70
-    StandardFlags Flags;
+    StandardFlags Flags() const;
+    void Flags(StandardFlags flags);
 
 protected:
-    TableEntry() {}
-
+    TableEntry();
+    StandardFlags _flags;
     std::string _name;
 };
+SMARTER_PTR(TableEntry)
 
 
 template<typename T>
 class Table : public CadObject
 {
-    std::map<std::string, T> m_entries;
+    std::map<std::string, SmarterPtr<T>> _entries;
 
 public:
-    Table() = default;
-    std::string ObjectName() const override { return DxfFileToken::TableEntry; }
-    std::string SubclassMarker() const override
+    Table();
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
+
+    SmarterPtr<T> operator[](const std::string &key) const 
     {
-        return DxfSubclassMarker::Table;
+        return _entries[key];
     }
 
-    T operator[](const std::string &key) const 
+    void Add(T *entry)
     {
-        return m_entries[key];
+        assert(entry);
+        auto itFind = _entries.find(entry->Name());
+        if(itFind != _entries.end())
+        {
+            // exist entry
+            return;
+        }
+        _entries[entry->Name()] = entry;
     }
 
-    void Add(const T &entry)
-    {
-        if (m_entries.find(entry.Name()) != m_entries.end()) return;
-        m_entries[entry.Name()] = entry;
-    }
+    bool Contains(const std::string &key);
 
-    bool Contains(const std::string &key)
+    SmarterPtr<T> GetValue(const std::string& key)
     {
-        if (m_entries.find(key) != m_entries.end()) return true;
-        return false;
-    }
+        if(!Contains(key))
+            return NULL;
 
-    bool TryGetValue(const std::string &key, T &item)
-    {
-        if (!Contains(key)) return false;
-        else
-            item = m_entries[key];
-        return true;
+        return _entries[key];
     }
 
     void CreateDefaultEntries()
@@ -100,22 +96,24 @@ public:
         {
             if (Contains(entry)) continue;
 
-            Add(T(entry));
+            Add(new T(entry));
         }
     }
 
 protected:
-    void add(const std::string &key, const T &item)
+    void add(const std::string &key, T *item)
     {
-        m_entries.insert({key, item});
-        item.Owner = this;
+        assert(item);
+        _entries.insert({key, item});
+        item->Owner(this);
     }
 
-    void addHandlePrefix(const T &item)
+    void addHandlePrefix(T *item)
     {
-        item.Owner = this;
-        std::string key = str_format("%llu:%s", item.Handle, item.Name);
-        m_entries.insert({key, item});
+        assert(item);
+        item->Owner(this);
+        std::string key = fmt::format("%llu:%s", item->Handle(), item->Name());
+        _entries.insert({key, item});
     }
 
     virtual std::vector<std::string> defaultEntries() const = 0;

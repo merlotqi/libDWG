@@ -26,12 +26,21 @@
 
 namespace dwg {
 
-class Arc : public Circle
+class LIBDWG_API Arc : public Circle
 {
+    double _startangle;
+    double _endangle;
 public:
-    Arc() = default;
-    double StartAngle;// 50
-    double EndAngle;  // 51
+    Arc();
+    ~Arc();
+    virtual dwg::ObjectType ObjectType() const overide;
+    virtual std::string ObjectName() const override;
+    virtual std::string SubclassMarker() const override;
+    double StartAngle() const;
+    double EndAngle() const;
+    void StartAngle(double);
+    void EndAngle(double);
 };
+SMARTER_PTR(Arc)
 
 }// namespace dwg

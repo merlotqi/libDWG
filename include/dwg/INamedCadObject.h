@@ -24,6 +24,7 @@
 
 #include <string>
 #include <dwg/utility/object.h>
+#include <dwg/utility/delegate.h>
 
 namespace dwg {
 
@@ -33,6 +34,8 @@ public:
     INamedCadObject() = default;
     virtual ~INamedCadObject() = default;
     virtual std::string Name() const = 0;
+
+    Delegate<void(const std::string&, const std::string&)> OnNameChanged;
 };
 SMARTER_PTR(INamedCadObject)
 

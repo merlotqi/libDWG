@@ -28,45 +28,36 @@
 #include <string>
 #include <vector>
 
-
 namespace dwg {
 
 class CadDictionary : public NonGraphicalObject
 {
-    std::map<std::string, NonGraphicalObject *> _entries;
+    std::map<std::string, NonGraphicalObjectPtr> _entries;
+    bool _hard_owner_flag;
+    DictionaryCloningFlags _clonning_flags;
 
 public:
-    static constexpr auto Root = "ROOT";
-    static constexpr auto AcadColor = "ACAD_COLOR";
-    static constexpr auto AcadGroup = "ACAD_GROUP";
-    static constexpr auto AcadLayout = "ACAD_LAYOUT";
-    static constexpr auto AcadMaterial = "ACAD_MATERIAL";
-    static constexpr auto AcadSortEnts = "ACAD_SORTENTS";
-    static constexpr auto AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
-    static constexpr auto AcadMLineStyle = "ACAD_MLINESTYLE";
-    static constexpr auto AcadTableStyle = "ACAD_TABLESTYLE";
-    static constexpr auto AcadPlotSettings = "ACAD_PLOTSETTINGS";
-    static constexpr auto VariableDictionary = "AcDbVariableDictionary";
-    static constexpr auto AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
-    static constexpr auto AcadScaleList = "ACAD_SCALELIST";
-    static constexpr auto AcadVisualStyle = "ACAD_VISUALSTYLE";
-    static constexpr auto AcadFieldList = "ACAD_FIELDLIST";
-    static constexpr auto AcadImageDict = "ACAD_IMAGE_DICT";
+    static std::string Root;
+    static std::string AcadColor;
+    static std::string AcadGroup;
+    static std::string AcadLayout;
+    static std::string AcadMaterial;
+    static std::string AcadSortEnts;
+    static std::string AcadMLeaderStyle;
+    static std::string AcadMLineStyle;
+    static std::string AcadTableStyle;
+    static std::string AcadPlotSettings;
+    static std::string VariableDictionary;
+    static std::string AcadPlotStyleName;
+    static std::string AcadScaleList;
+    static std::string AcadVisualStyle;
+    static std::string AcadFieldList;
+    static std::string AcadImageDict;
 
-    bool HardOwnerFlag;
-
-    DictionaryCloningFlags ClonningFlags;
-    std::vector<std::string> EntryName() const;
-    std::vector<unsigned long long> EntryHandles() const;
-
-    CadObject *operator[](const std::string &key);
-
-    static CadDictionary *CreateRoot();
-    static void CreateDefaultEntries(CadDictionary *root);
 
 public:
-    CadDictionary() {}
-    CadDictionary(const std::string &name) {}
+    CadDictionary();
+    CadDictionary(const std::string &name);
      dwg::ObjectType ObjectType() const override {return dwg::ObjectType::DICTIONARY;}
      std::string ObjectName() const override {return DxfFileToken::ObjectDictionary;}
      std::string SubclassMarker() const override {return DxfSubclassMarker::Dictionary;}
@@ -75,13 +66,30 @@ public:
     void Add(NonGraphicalObject *value);
     bool TryAdd(NonGraphicalObject *value) const;
     bool ContainsKey(const std::string &key) const;
-    void Remove(const std::string &key, NonGraphicalObject *&item);
+    NonGraphicalObjectPtr Remove(const std::string &key);
     void Clear();
 
-    template<class T>
-    bool TryGetEntry(const std::string &name, T *&value)
-    {
-    }
+    bool HardOwnerFlag() const;
+    void HardOwnerFlag(bool );
+
+    DictionaryCloningFlags ClonningFlags() const;
+    void ClonningFlags(DictionaryCloningFlags );
+    
+    std::vector<std::string> EntryName() const;
+    std::vector<unsigned long long> EntryHandles() const;
+
+    CadObjectPtr operator[](const std::string &key);
+
+    static SmarterPtr<CadDictionary> CreateRoot();
+    static void CreateDefaultEntries(CadDictionary *root);
+
+    NonGraphicalObjectPtr TryGetEntry(const std::string &name);
+
+private:
+    SmarterPtr<CadDictionary> ensureCadDictionaryExist(const std::string& name);
+    void onEntryNameChanged(const std::string& olName, const std::string& newName);
 };
+SMARTER_PTR(CadDictionary)
+
 
 }// namespace dwg

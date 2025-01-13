@@ -22,18 +22,20 @@
 
 #pragma once
 
-#include <map>
+#include <limits.h>
+#include <vector>
 
 namespace dwg {
 namespace io {
 
-class DwgHeaderHandlesCollection
+class CRC
 {
-    std::map<std::string, unsigned long long> _handles;
-
 public:
-
+    static std::vector<unsigned short> CrcTable;
+    static std::vector<unsigned int> Crc32Table;
+    static unsigned short ApplyCrc8(unsigned short dx,
+                                    const std::vector<unsigned char> &arr);
 };
 
-}
-}
+}// namespace io
+}// namespace dwg

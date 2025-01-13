@@ -26,20 +26,36 @@
 
 namespace dwg {
 
-class Ellipse : Entity
+class LIBDWG_API Ellipse : Entity
 {
+    XYZ _normal = XYZ::AxisZ;
+    XYZ _center = XYZ::Zero;
+    XYZ _endPoint = XYZ XAxisX;
+    double _radiusRatio = 0.0;
+    double _startParameter = 0.0;
+    double _endParameter = 2 * M_PI;
 public:
     Ellipse();
+    ~Ellipse();
+    dwg::ObjectType ObjectType() const overide;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
+    XYZ Normal() const;
+    XYZ Center() const;
+    XYZ EndPoint() const;
+    double Thickness() const;
+    double RadiusRatio() const;
+    double StartParameter() const;
+    double EndParameter() const;
 
-    double thickness;// 39
-    XYZ normal;      // 210, 220, 230
-
-    XYZ center;           // 10, 20, 30
-    XYZ endPoint;         // 11, 21, 31
-    double radiusRatio;   // 40
-    double startParameter;// 41
-    double endParameter;  // 42
-
-    double rotation() const;
+    void Normal(XYZ);
+    void Center(XYZ);
+    void EndPoint(XYZ);
+    void Thickness(double);
+    void RadiusRatio(double);
+    void StartParameter(double);
+    void EndParameter(double);
 };
+SMARTER_PTR(Ellipse)
+
 }// namespace dwg

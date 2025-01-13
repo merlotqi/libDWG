@@ -26,16 +26,29 @@
 
 namespace dwg {
 
-class Line : public Entity
+class LIBDWG_API Line : public Entity
 {
+    XYZ _normal = XYZ::AxisZ;
+    XYZ _startPoint = XYZ::Zero;
+    XYZ _endPoint = XYZ::Zero;
+    double _thickness = 0.0;
 public:
     Line();
     ~Line();
+    dwg::ObjectType ObjectType() const overide;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
-    double thickness;// 39
-    XYZ normal;      // 210, 220, 230
-    XYZ startPoint;  // 10, 20, 30
-    XYZ endPoint;    // 11, 21, 31
+    XYZ Normal() const;      
+    XYZ StartPoint() const;  
+    XYZ EndPoint() const; 
+    double Thickness() const;  
+
+    void Normal(XYZ);
+    void StartPoint(XYZ);
+    void EndPoint(XYZ);
+    void Thickness(double);
 };
+SMARTER_PTR(Line)
 
 }// namespace dwg

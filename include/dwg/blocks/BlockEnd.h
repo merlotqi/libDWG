@@ -23,15 +23,20 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-class BlockEnd : public Entity
+class LIBDWG_API BlockEnd : public Entity
 {
-    public:
-    std::string ObjectName() const override { return DxfFileToken::EndBlock;}
-    dwg::ObjectType ObjectType() const override { return dwg::ObjectType::ENDBLK;}
-    std::string SubclassMarker() const override { return DxfSubclassMarker::BlockEnd;}
+public:
+    BlockEnd(BlockRecord *record);
+    ~BlockEnd() = default;
+
+    std::string ObjectName() const override;
+    dwg::ObjectType ObjectType() const override;
+    std::string SubclassMarker() const override;
 };
+SMARTER_PTR(BlockEnd)
 
 }// namespace dwg

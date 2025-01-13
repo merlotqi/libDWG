@@ -20,4 +20,39 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+
 #pragma once
+
+#include <dwg/io/dwg/CRC.h>
+#include <dwg/utility/memorymanager.h>
+
+namespace dwg {
+namespace io {
+
+class CRC32StreamHandlerBase
+{
+public:
+    unsigned int Seed() const;
+
+protected:
+    unsigned int _seed;
+};
+
+class CRC32InputStreamHandler : public MemoryInputStream, CRC32StreamHandlerBase
+{
+public:
+    CRC32InputStreamHandler(std::vector<unsigned char>& arr, unsigned int seed);
+    CRC32InputStreamHandler(const MemoryInputStream& rhs);
+    int RawRead(unsigned char *buff, int nLen) override;
+};
+
+class CRC32OutputStreamHandler : public MemoryOutputStream, CRC32StreamHandlerBase
+{
+public:
+    CRC32OutputStreamHandler(std::vector<unsigned char>& arr, unsigned int seed);
+    CRC32OutputStreamHandler(const MemoryOutputStream& rhs);
+    int RawWrite(const unsigned char *buff, int nLen) override;
+};
+
+}
+}

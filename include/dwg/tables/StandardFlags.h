@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <dwg/utility/flags.h>
 
 namespace dwg {
 

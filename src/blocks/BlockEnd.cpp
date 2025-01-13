@@ -20,25 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/objects/CadDictionary.h>
+#include <dwg/blocks/BlockEnd.h>
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
-{
-    CadObjectWPtr _default_entry;
-public:
-    CadDictionaryWithDefault();
+std::string BlockEnd::ObjectName() const { return DxfFileToken::EndBlock;}
 
-    dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+dwg::ObjectType BlockEnd::ObjectType() const { return dwg::ObjectType::ENDBLK;}
 
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
-};
-SMARTER_PTR(CadDictionaryWithDefault)
-
-}// namespace dwg
+std::string BlockEnd::SubclassMarker() const { return DxfSubclassMarker::BlockEnd;}
+}
