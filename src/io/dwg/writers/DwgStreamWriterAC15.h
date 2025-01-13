@@ -22,19 +22,15 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgStreamWriterAC12.h>
+#include "DwgStreamWriterAC12.h"
 
 namespace dwg {
 namespace io {
 
-
 class DwgStreamWriterAC15 : public DwgStreamWriterAC12
 {
 public:
-    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterAC12(stream, encoding)
-    {
-    }
+    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding);
 
     void WriteBitExtrusion(XYZ normal) override;
     void WriteBitThickness(double thickness) override;

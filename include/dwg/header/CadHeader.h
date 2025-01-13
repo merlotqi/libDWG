@@ -52,12 +52,9 @@
 #include <dwg/units/UnitsType.h>
 #include <dwg/exports.h>
 #include <dwg/tables/UCS.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
-#include <dwg/base/DateTime.h>
-#include <dwg/base/Timespan.h>
-
-#include <string>
+#include <dwg/Color.h>
+#include <dwg/utility/stringhelp.h>
+#include <dwg/utility/datatime.h>
 
 namespace dwg {
 

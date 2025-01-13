@@ -35,7 +35,6 @@
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/VPort.h>
 #include <dwg/tables/View.h>
-
 #include <dwg/entities/Entity.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/ObjectDictionaryCollection.h>

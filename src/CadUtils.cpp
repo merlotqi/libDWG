@@ -22,7 +22,6 @@
 
 #include <cmath>
 #include <dwg/CadUtils.h>
-#include <Poco/String.h>
 
 namespace dwg {
 

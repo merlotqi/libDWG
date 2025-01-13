@@ -88,7 +88,7 @@ public:
 
     /// \brief Retrieve the current reference count
     /// \return Returns the current value of the reference count.
-    virtual int RefCount();
+    virtual int RefCount() noexcept;
 
     /// \brief Cast the object to a specific type
     /// Attempts to cast the current object to the specified type using

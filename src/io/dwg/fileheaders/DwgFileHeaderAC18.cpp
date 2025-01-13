@@ -20,8 +20,6 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include "DwgFileHeaderAC18.h"
 
 namespace dwg {

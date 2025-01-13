@@ -20,29 +20,16 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
 
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include "DwgClassesWriter.h"
 
 namespace dwg {
 namespace io {
 
-class DwgClassesWriter : public DwgSectionIO
-{
-    CadDocument *_document;
-    std::ostringstream _sectionStream;
-    IDwgStreamWriter *_startWriter;
-    IDwgStreamWriter *_writer;
 
-    std::vector<unsigned char> _startSentinel;
-    srd::vector<unsigned char> _endSentinel;
+    std::string DwgClassesWriter::SectionName() const { return DwgSectionDefinition::Classes; }
 
-public:
-    std::string SectionName() const { return DwgSectionDefinition::Classes; }
-
-    DwgClassesWriter(std::ostream *stream, CadDocument *document,
+    DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document,
                      Encoding encoding)
         : DwgSectionIO(document->Header().Version)
     {
@@ -59,7 +46,7 @@ public:
                         0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
     }
 
-    void Write()
+    void DwgClassesWriter::Write()
     {
         if (R2007Plus) { _writer->SavePositonForSize(); }
 
@@ -117,7 +104,7 @@ public:
 
         writeSizeAndCrc();
     }
-    void writeSizeAndCrc()
+    void DwgClassesWriter::writeSizeAndCrc()
     {
         //SN : 0x8D 0xA1 0xC4 0xB8 0xC4 0xA9 0xF8 0xC5 0xC0 0xDC 0xF4 0x5F 0xE7 0xCF 0xB6 0x8A
         _startWriter.WriteBytes(_startSentinel);
@@ -153,7 +140,7 @@ public:
             _startWriter.WriteRawLong(0);
         }
     }
-};
+
 
 }// namespace io
 }// namespace dwg

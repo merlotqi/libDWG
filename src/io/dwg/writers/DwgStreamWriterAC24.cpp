@@ -20,24 +20,19 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
 
-#include <dwg/io/dwg/writers/DwgStreamWriterAC21.h>
+
+#include "DwgStreamWriterAC24.h"
 
 namespace dwg {
 namespace io {
 
-
-class DwgStreamWriterAC24 : public DwgStreamWriterAC21
-{
-public:
-    DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
+    DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC21(stream, encoding)
     {
     }
 
-    void WriteObjectType(short value) override;
-};
+    void DwgStreamWriterAC24::WriteObjectType(short value) {}
 
 }// namespace io
 }// namespace dwg

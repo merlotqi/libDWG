@@ -20,22 +20,15 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
+#include "DwgStreamWriterAC12.h"
 
 namespace dwg {
 namespace io {
 
-
-class DwgStreamWriterAC12 : public DwgStreamWriterBase
-{
-public:
-    DwgStreamWriterAC12(std::ostream *stream, Encoding encoding)
+    DwgStreamWriterAC12::DwgStreamWriterAC12(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterBase(stream, encoding)
     {
     }
-};
 
 }// namespace io
 }// namespace dwg

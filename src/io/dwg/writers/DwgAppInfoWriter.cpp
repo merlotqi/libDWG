@@ -20,65 +20,56 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <Poco/Format.h>
-#include <base.h>
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include "DwgAppInfoWriter.h"
+#include "../DwgSectionIO.h"
+#include "../fileheaders/DwgSectionDefinition.h"
+#include "DwgStreamWriterBase.h"
+#include "IDwgStreamWriter.h"
 #include <dwg/version.h>
+#include <dwg/utility/stringhelp.h>
+#include <fmt/core.h>
 
 namespace dwg {
 namespace io {
 
-class DwgAppInfoWriter : public DwgSectionIO
+std::string DwgAppInfoWriter::SectionName() const { return DwgSectionDefinition::AppInfo; }
+
+DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
+    : DwgSectionIO(version)
 {
-    IDwgStreamWriter *_writer;
-    std::vector<unsigned char> _emptyArr;
+    for (size_t i = 0; i < 16; ++i) _emptyArr.push_back(0);
+    _writer = DwgStreamWriterBase::GetStreamWriter(version, stream,
+                                                   Encoding());
+}
 
-public:
-    std::string SectionName() const { return DwgSectionDefinition::AppInfo; }
+void DwgAppInfoWriter::Write()
+{
+    std::string version = LIBDWG_VERSION;
+    //UInt32	4	class_version (default: 3)
+    _writer->WriteInt(3);
+    //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
+    _writer->WriteTextUnicode("AppInfoDataList");
+    //UInt32	4	num strings (default: 3)
+    _writer->WriteInt(3);
+    //Byte[]	16	Version data(checksum, ODA writes zeroes)
+    _writer->WriteBytes(_emptyArr);
+    //String	2 + 2 * n + 2	Version
+    _writer->WriteTextUnicode(version);
+    //Byte[]	16	Comment data(checksum, ODA writes zeroes)
+    _writer->WriteBytes(_emptyArr);
+    //String	2 + 2 * n + 2	Comment
+    _writer->WriteTextUnicode("This is a comment from libDWG");
+    //Byte[]	16	Product data(checksum, ODA writes zeroes)
+    _writer->WriteBytes(_emptyArr);
+    //String	2 + 2 * n + 2	Product
+    std::string productInfo = fmt::format(
+            "<ProductInformation name =\"libDWG\" build_version=\"{}\" "
+            "registry_version=\"{}\" install_id_string=\"libDWG\" "
+            "registry_localeID=\"1033\"/>",
+            version, version);
 
-    DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
-        : DwgSectionIO(version)
-    {
-        for (size_t i = 0; i < 16; ++i) _emptyArr.push_back(0);
-        _writer = DwgStreamWriterBase::GetStreamWriter(version, stream,
-                                                       Encoding::Unicode());
-    }
-
-    void Write()
-    {
-        std::string version = LIBDWG_VERSION;
-        //UInt32	4	class_version (default: 3)
-        _writer->WriteInt(3);
-        //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
-        _writer->WriteTextUnicode("AppInfoDataList");
-        //UInt32	4	num strings (default: 3)
-        _writer->WriteInt(3);
-        //Byte[]	16	Version data(checksum, ODA writes zeroes)
-        _writer->WriteBytes(_emptyArr);
-        //String	2 + 2 * n + 2	Version
-        _writer->WriteTextUnicode(version);
-        //Byte[]	16	Comment data(checksum, ODA writes zeroes)
-        _writer->WriteBytes(_emptyArr);
-        //String	2 + 2 * n + 2	Comment
-        _writer->WriteTextUnicode("This is a comment from libDWG");
-        //Byte[]	16	Product data(checksum, ODA writes zeroes)
-        _writer->WriteBytes(_emptyArr);
-        //String	2 + 2 * n + 2	Product
-        std::string productInfo = Poco::format(
-                "<ProductInformation name =\"libDWG\" build_version=\"{}\" "
-                "registry_version=\"{}\" install_id_string=\"libDWG\" "
-                "registry_localeID=\"1033\"/>",
-                version, version);
-
-        _writer->WriteTextUnicode(productInfo);
-    }
-};
-
+    _writer->WriteTextUnicode(productInfo);
+}
 
 }// namespace io
 }// namespace dwg

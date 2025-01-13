@@ -20,7 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <Poco/Format.h>
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 #include <assert.h>
 #include <chrono>
 #include <cstring>
@@ -33,16 +36,10 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <fmt/core.h>
 
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-
-
-const Timestamp::TimeVal Timestamp::TIMEVAL_MIN =
-        std::numeric_limits<Timestamp::TimeVal>::min();
-const Timestamp::TimeVal Timestamp::TIMEVAL_MAX =
-        std::numeric_limits<Timestamp::TimeVal>::max();
+const Timestamp::TimeVal Timestamp::TIMEVAL_MIN = INT64_MIN;
+const Timestamp::TimeVal Timestamp::TIMEVAL_MAX = INT64_MAX;
 
 Timestamp::Timestamp() { update(); }
 
@@ -606,12 +603,12 @@ void DateTime::checkValid()
 {
     if (!isValid(_year, _month, _day, _hour, _minute, _second, _millisecond,
                  _microsecond))
-        throw std::invalid_argument(Poco::format(
-                "Date time is %hd-%hd-%hdT%hd:%hd:%hd.%hd.%hd\n"
+        throw std::invalid_argument(fmt::format(
+                "Date time is {0}-{1}-{2}T{3}:{4}:{5}.{6}.{7}\n"
                 "Valid values:\n"
                 "-4713 <= year <= 9999\n"
                 "1 <= month <= 12\n"
-                "1 <= day <=  %d\n"
+                "1 <= day <=  {8}\n"
                 "0 <= hour <= 23\n"
                 "0 <= minute <= 59\n"
                 "0 <= second <= 60\n"

@@ -3,7 +3,7 @@ project(libDWG LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(Iconv REQUIRED)
-find_package(Poco REQUIRED COMPONENTS Foundation)
+find_package(fmt REQUIRED)
 
 add_library(dwg SHARED)
 
@@ -14,5 +14,5 @@ if(WIN32)
     target_compile_definitions(dwg PRIVATE LIBDWG_EXPORTS)    
     target_compile_definitions(dwg PUBLIC _USE_MATH_DEFINES)
 endif()
-target_link_libraries(dwg PRIVATE Iconv::Iconv Poco::Foundation)
+target_link_libraries(dwg PRIVATE Iconv::Iconv fmt::fmt)
 add_subdirectory(examples)

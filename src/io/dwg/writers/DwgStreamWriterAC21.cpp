@@ -20,25 +20,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/writers/DwgStreamWriterAC18.h>
+#include "DwgStreamWriterAC21.h"
 
 namespace dwg {
 namespace io {
 
-
-class DwgStreamWriterAC21 : public DwgStreamWriterAC18
-{
-public:
-    DwgStreamWriterAC21(std::ostream *stream, Encoding encoding)
+    DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC18(stream, encoding)
     {
     }
 
-    void WriteVariableText(const std::string &value) override;
-    void WriteTextUnicode(const std::string &value) override;
-};
+    void DwgStreamWriterAC21::WriteVariableText(const std::string &value) {}
+    void DwgStreamWriterAC21::WriteTextUnicode(const std::string &value) {}
 
 }// namespace io
 }// namespace dwg

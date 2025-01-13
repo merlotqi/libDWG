@@ -20,35 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <dwg/CadDocument.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
-#include <dwg/io/dwg/CRC8StreamHandler.h>
-
-#include <sstream>
+#include "DwgHeaderWriter.h"
 
 namespace dwg {
 namespace io {
 
-class DwgHeaderWriter : DwgSectionIO
-{
-        public:
-    std::string SectionName() const override {return DwgSectionDefinition::Header;}
+std::string DwgHeaderWriter::SectionName() const {return DwgSectionDefinition::Header;}
 
-private:
-    std::ostringstream _msmain;
-    IDwgStreamWriter* _startWriter;
-    IDwgStreamWriter* _writer;
-    CadDocument* _document;
-    Encoding _encoding;
-
-public:
-    DwgHeaderWriter(std::ostream* stream, CadDocument* document, Encoding encoding)
+    DwgHeaderWriter::DwgHeaderWriter(std::ostream* stream, CadDocument* document, Encoding encoding)
         : DwgSectionIO(document->Header.Version)
     {
         _document = document;
@@ -60,7 +39,7 @@ public:
                 _version, &_msmain, _encoding);
     }
 
-    void Write()
+    void DwgHeaderWriter::Write()
     {
         //+R2007 Only:
         if (R2007Plus)
@@ -1193,8 +1172,7 @@ public:
         writeSizeAndCrc();
     }
 
-private:
-    void writeSizeAndCrc()
+    void DwgHeaderWriter::writeSizeAndCrc()
     {
         //0xCF,0x7B,0x1F,0x23,0xFD,0xDE,0x38,0xA9,0x5F,0x7C,0x68,0xB8,0x4E,0x6D,0x33,0x5F
         _startWriter->WriteBytes(
@@ -1225,8 +1203,6 @@ private:
         _startWriter->WriteBytes(
                 DwgSectionDefinition::EndSentinels[SectionName()]);
     }
-};
-
 
 }// namespace io
 }// namespace dwg

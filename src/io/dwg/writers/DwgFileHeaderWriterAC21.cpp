@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+
 
 #include "DwgFileHeaderWriterAC21.h"
 #include "DwgLZ77AC21Compressor.h"

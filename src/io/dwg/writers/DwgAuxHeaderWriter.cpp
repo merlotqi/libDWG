@@ -20,30 +20,17 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
+#include "DwgAuxHeaderWriter.h"
+#include "../fileheaders/DwgSectionDefinition.h"
+#include "DwgStreamWriterBase.h"
 
 namespace dwg {
 namespace io {
 
-class DwgAuxHeaderWriter : public DwgSectionIO
-{
-    IDwgStreamWriter *_writer;
-    std::ostringstream *_stream;
-    Encoding _encoding;
-    header::CadHeader _header;
+    std::string DwgAuxHeaderWriter::SectionName() const { return DwgSectionDefinition::AuxHeader; }
 
-
-public:
-    std::string SectionName() const { return DwgSectionDefinition::AuxHeader; }
-
-    DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding,
-                       const header::CadHeader &header)
+    DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding,
+                       const CadHeader &header)
         : DwgSectionIO(header.Version)
     {
         _stream = stream;
@@ -51,10 +38,10 @@ public:
         _header = header;
 
         _writer = DwgStreamWriterBase::GetStreamWriter(_version, _stream,
-                                                       Encoding::Unicode);
+                                                       Encoding());
     }
 
-    void Write()
+    void DwgAuxHeaderWriter::Write()
     {
         //RC: 0xff 0x77 0x01
         _writer->WriteByte(0xFF);
@@ -176,8 +163,6 @@ public:
             _writer->WriteRawShort(0);
         }
     }
-};
-
 
 }// namespace io
 }// namespace dwg

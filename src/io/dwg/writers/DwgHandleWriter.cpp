@@ -20,30 +20,15 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-
-#include <dwg/io/dwg/CRC8StreamHandler.h>
-#include <sstream>
-#include <stdexcept>
+#include "DwgHandleWriter.h"
 
 namespace dwg {
 namespace io {
 
-class DwgHandleWriter : public DwgSectionIO
-{
-    IDwgStreamWriter *_writer;
-    std::vector<unsigned char> _emptyArr;
-    std::ostringstream *_stream;
-    std::map<unsigned long long, long long> _handleMap;
 
-public:
-    std::string SectionName() const { return DwgSectionDefinition::Handles; }
+    std::string DwgHandleWriter::SectionName() const { return DwgSectionDefinition::Handles; }
 
-    DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
+    DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
                     const std::map<unsigned long long, long long> &handlemap)
         : DwgSectionIO(version)
     {
@@ -51,7 +36,7 @@ public:
         _handleMap = handlemap;
     }
 
-    void Write(int sectionOffset = 0)
+    void DwgHandleWriter::Write(int sectionOffset)
     {
         std::vector<unsigned char> array(10, 0);
         std::vector<unsigned char> array2(5, 0);
@@ -115,8 +100,7 @@ public:
         processPosition(lastPosition);
     }
 
-private:
-    int modularShortToValue(unsigned long long value,
+    int DwgHandleWriter::modularShortToValue(unsigned long long value,
                             std::vector<unsigned char> &arr)
     {
         int i = 0;
@@ -130,7 +114,7 @@ private:
         return i + 1;
     }
 
-    int signedModularShortToValue(int value, std::vector<unsigned char> &arr)
+    int DwgHandleWriter::signedModularShortToValue(int value, std::vector<unsigned char> &arr)
     {
         int i = 0;
         if (value < 0)
@@ -156,7 +140,7 @@ private:
         return i + 1;
     }
 
-    void processPosition(std::streampos pos)
+    void DwgHandleWriter::processPosition(std::streampos pos)
     {
         unsigned short diff = (unsigned short) (_stream->tellp() - pos);
         long streamPos = _stream->tellp();
@@ -179,8 +163,6 @@ private:
         _stream->write(reinterpret_cast<const char *>(&ch),
                        sizeof(unsigned char));
     }
-};
-
 
 }// namespace io
 }// namespace dwg

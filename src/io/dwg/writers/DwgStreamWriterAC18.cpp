@@ -20,27 +20,22 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
 
-#include <dwg/io/dwg/writers/DwgStreamWriterAC15.h>
+
+#include "DwgStreamWriterAC18.h"
 
 namespace dwg {
 namespace io {
 
-
-class DwgStreamWriterAC18 : public DwgStreamWriterAC15
-{
-public:
-    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
+    DwgStreamWriterAC18::DwgStreamWriterAC18(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC15(stream, encoding)
     {
     }
 
-    void WriteCmColor(Color value) override;
-    void WriteEnColor(Color color, Transparency transparency) override;
-    void WriteEnColor(Color color, Transparency transparency,
-                      bool isBookColor) override;
-};
+    void DwgStreamWriterAC18::WriteCmColor(Color value) {}
+    void DwgStreamWriterAC18::WriteEnColor(Color color, Transparency transparency) {}
+    void DwgStreamWriterAC18::WriteEnColor(Color color, Transparency transparency,
+                      bool isBookColor) {}
 
 }// namespace io
 }// namespace dwg

@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+
 
 #include <dwg/io/dwg/writers/DwgMergedStreamWriter.h>
 

@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgStreamWriterAC15.h>
+#include "DwgStreamWriterAC15.h"
 
 namespace dwg {
 namespace io {
@@ -31,10 +31,7 @@ namespace io {
 class DwgStreamWriterAC18 : public DwgStreamWriterAC15
 {
 public:
-    DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterAC15(stream, encoding)
-    {
-    }
+    DwgStreamWriterAC18(std::ostream *stream, Encoding encoding);
 
     void WriteCmColor(Color value) override;
     void WriteEnColor(Color color, Transparency transparency) override;

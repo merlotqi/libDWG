@@ -20,8 +20,6 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <Poco/MemoryStream.h>
-
 #include "DwgStreamWriterBase.h"
 #include "DwgAppInfoWriter.h"
 #include "DwgAuxHeaderWriter.h"

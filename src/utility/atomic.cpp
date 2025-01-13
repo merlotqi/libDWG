@@ -28,44 +28,22 @@
 
 char Interlocked::Read(const volatile char *target)
 {
-#ifdef _WIN32
-    return InterlockedExchange(reinterpret_cast<volatile LONG *>(
-                                       const_cast<volatile char *>(target)),
-                               0);// Windows
-#else
-    return *target;// Linux/macOS
-#endif
+    return *target;
 }
 
 short Interlocked::Read(const volatile short *target)
 {
-#ifdef _WIN32
-    return _InterlockedCompareExchange16(const_cast<volatile short *>(target),
-                                         0, 0);// Windows
-#else
-    return *target;// Linux/macOS
-#endif
+    return *target;
 }
 
 int Interlocked::Read(const volatile int *target)
 {
-#ifdef _WIN32
-    return InterlockedExchange(reinterpret_cast<volatile LONG *>(
-                                       const_cast<volatile int *>(target)),
-                               0);// Windows
-#else
-    return *target;// Linux/macOS
-#endif
+    return *target;
 }
 
 long long Interlocked::Read(const volatile long long *target)
 {
-#ifdef _WIN32
-    return _InterlockedCompareExchange64(
-            const_cast<volatile long long *>(target), 0, 0);// Windows
-#else
-    return *target;// Linux/macOS
-#endif
+    return *target;
 }
 
 char Interlocked::Exchange(volatile char *target, char value)

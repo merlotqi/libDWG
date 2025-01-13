@@ -1,4 +1,4 @@
-#include <dwg/utility/Object.h>
+#include <dwg/utility/object.h>
 
 
 bool RefObject::OnFinalRelease() { return true; }

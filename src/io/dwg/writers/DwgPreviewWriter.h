@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase.h>
+#include "../DwgSectionIO.h"
+#include "../fileheaders/DwgSectionDefinition.h"
+#include "IDwgStreamWriter.h"
+#include "DwgStreamWriterBase.h"
 
 namespace dwg {
 namespace io {
@@ -37,29 +37,10 @@ class DwgPreviewWriter : DwgSectionIO
     static std::vector<unsigned char> _endSentinel;
 
 public:
-    std::string SectionName() const { return DwgSectionDefinition::Preview; }
-
-    DwgPreviewWriter(ACadVersion version, std::ostream* stream) : DwgSectionIO(version)
-    {
-        _swriter = DwgStreamWriterBase::GetStreamWriter(version, stream,
-                                                       Encoding::Windows1252());
-    }
-
-    void Write()
-    {
-        _swriter->WriteBytes(_startSentinel);
-        _swriter->WriteRawLong(1);
-        _swriter->WriteByte(0);
-        _swriter->WriteBytes(_endSentinel);
-    }
+    DwgPreviewWriter(ACadVersion version, std::ostream* stream);
+    std::string SectionName() const;
+    void Write();
 };
-
-std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
-        0x1F, 0x25, 0x6D, 0x07, 0xD4, 0x36, 0x28, 0x28,
-        0x9D, 0x57, 0xCA, 0x3F, 0x9D, 0x44, 0x10, 0x2B};
-std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
-        0xE0, 0xDA, 0x92, 0xF8, 0x2B, 0xC9, 0xD7, 0xD7,
-        0x62, 0xA8, 0x35, 0xC0, 0x62, 0xBB, 0xEF, 0xD4};
         
 }// namespace io
 }// namespace dwg
