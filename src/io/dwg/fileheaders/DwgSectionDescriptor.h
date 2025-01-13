@@ -37,7 +37,7 @@ class DwgSectionDescriptor
 
 public:
     int64_t PageType = 0x4163043B;
-    std::string Name;
+    CPL::String Name;
     uint64_t CompressedSize = 0;
     int32_t PageCount = 0;
     uint64_t DecompressedSize = 0x7400;
@@ -49,7 +49,7 @@ public:
     std::vector<DwgLocalSectionMap> LocalSections;
 
 public:
-    DwgSectionDescriptor(const std::string &name = std::string()) : Name(name)
+    DwgSectionDescriptor(const CPL::String &name = CPL::String()) : Name(name)
     {
     }
 

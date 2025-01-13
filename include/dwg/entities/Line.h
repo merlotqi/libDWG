@@ -36,8 +36,8 @@ public:
     Line();
     ~Line();
     dwg::ObjectType ObjectType() const overide;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     XYZ Normal() const;      
     XYZ StartPoint() const;  
@@ -49,6 +49,6 @@ public:
     void EndPoint(XYZ);
     void Thickness(double);
 };
-SMARTER_PTR(Line)
+CPL_SMARTER_PTR(Line)
 
 }// namespace dwg

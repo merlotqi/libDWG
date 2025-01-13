@@ -25,7 +25,7 @@
 
 namespace dwg {
 
-static std::map<ACadVersion, std::string> AcadVersionToString = {
+static std::map<ACadVersion, CPL::String> AcadVersionToString = {
         {Unknown, "Unknown"},
         {  MC0_0,   "MC0_0"},
         {  AC1_2,   "AC1_2"},
@@ -47,7 +47,7 @@ static std::map<ACadVersion, std::string> AcadVersionToString = {
         { AC1032,  "AC1032"}
 };
 
-static std::map<std::string, ACadVersion> stringToAcadVersion = {
+static std::map<CPL::String, ACadVersion> stringToAcadVersion = {
         {"Unknown", Unknown},
         {  "MC0_0",   MC0_0},
         {  "AC1_2",   AC1_2},
@@ -69,7 +69,7 @@ static std::map<std::string, ACadVersion> stringToAcadVersion = {
         { "AC1032",  AC1032}
 };
 
-std::map<std::string, CodePage> CadUtils::_dxfEncodingMap = {
+std::map<CPL::String, CodePage> CadUtils::_dxfEncodingMap = {
         {    "gb2312",       CodePage::Gb2312},
         {   "kcs5601",      CodePage::Ksc5601},
         {     "ascii",      CodePage::Usascii},
@@ -210,7 +210,7 @@ unsigned char CadUtils::ToIndex(LineweightType value)
     return result;
 }
 
-CodePage CadUtils::GetCodePage(std::string &value)
+CodePage CadUtils::GetCodePage(CPL::String &value)
 {
     // if (_dxfEncodingMap.TryGetValue(value.ToLower(), out CodePage code))
     // {
@@ -222,10 +222,10 @@ CodePage CadUtils::GetCodePage(std::string &value)
     }
 }
 
-std::string CadUtils::GetCodePageName(CodePage value)
+CPL::String CadUtils::GetCodePageName(CodePage value)
 {
 
-    return std::string();
+    return CPL::String();
     //return _dxfEncodingMap.FirstOrDefault(o = > o.Value == value).Key;
 }
 
@@ -242,21 +242,21 @@ int CadUtils::GetCodeIndex(CodePage code)
     //  return _pageCodes..IndexOf(code);
 }
 
-ACadVersion CadUtils::GetVersionFromName(const std::string &name)
+ACadVersion CadUtils::GetVersionFromName(const CPL::String &name)
 {
     return ACadVersion::AC1018;
     // //Modify the format of the name
-    // std::string vname = name.Replace('.', '_').ToUpper();
+    // CPL::String vname = name.Replace('.', '_').ToUpper();
 
     // if (Enum.TryParse(vname, out ACadVersion version)) return version;
     // else
     //     return ACadVersion.Unknown;
 }
 
-std::string CadUtils::GetNameFromVersion(ACadVersion version)
+CPL::String CadUtils::GetNameFromVersion(ACadVersion version)
 {
     return acadVersionToString[version];
-    return std::string();//version.ToString().Replace('_', '.');
+    return CPL::String();//version.ToString().Replace('_', '.');
 }
 
 double CadUtils::ToJulianCalendar(DateTime date)

@@ -26,7 +26,7 @@ namespace dwg {
 namespace io {
 
 
-    std::string DwgHandleWriter::SectionName() const { return DwgSectionDefinition::Handles; }
+    CPL::String DwgHandleWriter::SectionName() const { return DwgSectionDefinition::Handles; }
 
     DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
                     const std::map<unsigned long long, long long> &handlemap)

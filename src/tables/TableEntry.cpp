@@ -24,21 +24,21 @@
 
 namespace dwg {
 
-TableEntry::TableEntry(const std::string &name) 
+TableEntry::TableEntry(const CPL::String &name) 
     : _name(name) 
 {}
 
-std::string TableEntry::SubclassMarker() const
+CPL::String TableEntry::SubclassMarker() const
 {
     return DxfSubclassMarker::TableRecord;
 }
 
-std::string TableEntry::Name() const 
+CPL::String TableEntry::Name() const 
 { 
     return _name; 
 }
 
-void TableEntry::Name(const std::string &value) 
+void TableEntry::Name(const CPL::String &value) 
 { 
     if(StringHelp::IsNullOrEmpty(value))
     {

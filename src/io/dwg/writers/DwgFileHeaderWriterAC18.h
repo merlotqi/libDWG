@@ -41,7 +41,7 @@ public:
 
     int HandleSectionOffset() const;
     void WriteFile() override;
-    void AddSection(const std::string &name, std::ostringstream *stream,
+    void AddSection(const CPL::String &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) override;
 
 
@@ -70,7 +70,7 @@ private:
                           DwgLocalSectionMap map, int size);
 
     std::vector<DwgLocalSectionMap> _localSectionsMaps;
-    std::map<std::string, DwgSectionDescriptor> _descriptors;
+    std::map<CPL::String, DwgSectionDescriptor> _descriptors;
 
 protected:
     DwgFileHeaderAC18 *_fileHeader;

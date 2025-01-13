@@ -42,7 +42,7 @@ class DwgClassesWriter : public DwgSectionIO
     std::vector<unsigned char> _endSentinel;
 
 public:
-    std::string SectionName() const;
+    CPL::String SectionName() const;
     DwgClassesWriter(std::ostream *stream, CadDocument *document,
                      Encoding encoding);
     void Write();

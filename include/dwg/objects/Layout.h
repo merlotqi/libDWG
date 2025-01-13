@@ -34,8 +34,8 @@ namespace dwg {
 class Layout : PlotSettings
 {
 public:
-    Layout(const std::string &name,
-           const std::string &blockName = std::string())
+    Layout(const CPL::String &name,
+           const CPL::String &blockName = CPL::String())
     {
     }
 
@@ -43,8 +43,8 @@ public:
     static constexpr auto PaperLayoutName = "Layout1";
 
     dwg::ObjectType ObjectType() const { return ObjectType::LAYOUT; }
-    std::string ObjectName() const { return DxfFileToken::ObjectLayout; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::Layout; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectLayout; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::Layout; }
 
     // 70
     LayoutFlags LayoutFlags;

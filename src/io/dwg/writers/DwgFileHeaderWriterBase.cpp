@@ -100,7 +100,7 @@ void DwgFileHeaderWriterBase::writeMagicNumber()
 
 void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
 {
-    std::string buffer = stream->str();
+    CPL::String buffer = stream->str();
     for (size_t i = 0; i < buffer.size(); ++i)
     {
         buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];

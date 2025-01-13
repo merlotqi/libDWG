@@ -32,41 +32,41 @@ namespace dwg {
 
 class CadDictionary : public NonGraphicalObject
 {
-    std::map<std::string, NonGraphicalObjectPtr> _entries;
+    std::map<CPL::String, NonGraphicalObjectPtr> _entries;
     bool _hard_owner_flag;
     DictionaryCloningFlags _clonning_flags;
 
 public:
-    static std::string Root;
-    static std::string AcadColor;
-    static std::string AcadGroup;
-    static std::string AcadLayout;
-    static std::string AcadMaterial;
-    static std::string AcadSortEnts;
-    static std::string AcadMLeaderStyle;
-    static std::string AcadMLineStyle;
-    static std::string AcadTableStyle;
-    static std::string AcadPlotSettings;
-    static std::string VariableDictionary;
-    static std::string AcadPlotStyleName;
-    static std::string AcadScaleList;
-    static std::string AcadVisualStyle;
-    static std::string AcadFieldList;
-    static std::string AcadImageDict;
+    static CPL::String Root;
+    static CPL::String AcadColor;
+    static CPL::String AcadGroup;
+    static CPL::String AcadLayout;
+    static CPL::String AcadMaterial;
+    static CPL::String AcadSortEnts;
+    static CPL::String AcadMLeaderStyle;
+    static CPL::String AcadMLineStyle;
+    static CPL::String AcadTableStyle;
+    static CPL::String AcadPlotSettings;
+    static CPL::String VariableDictionary;
+    static CPL::String AcadPlotStyleName;
+    static CPL::String AcadScaleList;
+    static CPL::String AcadVisualStyle;
+    static CPL::String AcadFieldList;
+    static CPL::String AcadImageDict;
 
 
 public:
     CadDictionary();
-    CadDictionary(const std::string &name);
+    CadDictionary(const CPL::String &name);
      dwg::ObjectType ObjectType() const override {return dwg::ObjectType::DICTIONARY;}
-     std::string ObjectName() const override {return DxfFileToken::ObjectDictionary;}
-     std::string SubclassMarker() const override {return DxfSubclassMarker::Dictionary;}
+     CPL::String ObjectName() const override {return DxfFileToken::ObjectDictionary;}
+     CPL::String SubclassMarker() const override {return DxfSubclassMarker::Dictionary;}
 
-    void Add(const std::string &key, NonGraphicalObject *value);
+    void Add(const CPL::String &key, NonGraphicalObject *value);
     void Add(NonGraphicalObject *value);
     bool TryAdd(NonGraphicalObject *value) const;
-    bool ContainsKey(const std::string &key) const;
-    NonGraphicalObjectPtr Remove(const std::string &key);
+    bool ContainsKey(const CPL::String &key) const;
+    NonGraphicalObjectPtr Remove(const CPL::String &key);
     void Clear();
 
     bool HardOwnerFlag() const;
@@ -75,21 +75,21 @@ public:
     DictionaryCloningFlags ClonningFlags() const;
     void ClonningFlags(DictionaryCloningFlags );
     
-    std::vector<std::string> EntryName() const;
+    std::vector<CPL::String> EntryName() const;
     std::vector<unsigned long long> EntryHandles() const;
 
-    CadObjectPtr operator[](const std::string &key);
+    CadObjectPtr operator[](const CPL::String &key);
 
     static SmarterPtr<CadDictionary> CreateRoot();
     static void CreateDefaultEntries(CadDictionary *root);
 
-    NonGraphicalObjectPtr TryGetEntry(const std::string &name);
+    NonGraphicalObjectPtr TryGetEntry(const CPL::String &name);
 
 private:
-    SmarterPtr<CadDictionary> ensureCadDictionaryExist(const std::string& name);
-    void onEntryNameChanged(const std::string& olName, const std::string& newName);
+    SmarterPtr<CadDictionary> ensureCadDictionaryExist(const CPL::String& name);
+    void onEntryNameChanged(const CPL::String& olName, const CPL::String& newName);
 };
-SMARTER_PTR(CadDictionary)
+CPL_SMARTER_PTR(CadDictionary)
 
 
 }// namespace dwg

@@ -30,8 +30,8 @@ namespace io {
     {
     }
 
-    void DwgStreamWriterAC21::WriteVariableText(const std::string &value) {}
-    void DwgStreamWriterAC21::WriteTextUnicode(const std::string &value) {}
+    void DwgStreamWriterAC21::WriteVariableText(const CPL::String &value) {}
+    void DwgStreamWriterAC21::WriteTextUnicode(const CPL::String &value) {}
 
 }// namespace io
 }// namespace dwg

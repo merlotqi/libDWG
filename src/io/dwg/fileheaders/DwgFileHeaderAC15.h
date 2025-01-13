@@ -38,8 +38,8 @@ public:
 public:
     DwgFileHeaderAC15();
     DwgFileHeaderAC15(ACadVersion version);
-    void AddSection(const std::string &name) override;
-    DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
+    void AddSection(const CPL::String &name) override;
+    DwgSectionDescriptor &GetDescriptor(const CPL::String &name) override;
 };
 
 }// namespace io

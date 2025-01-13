@@ -22,17 +22,17 @@
 
 #pragma once
 
-#include <dwg/utility/object.h>
+#include "cpl_port.h"
 
 namespace dwg {
 
-class IHandledCadObject : public RefObject
+class IHandledCadObject : public CPL::RefObject
 {
 public:
     IHandledCadObject() = default;
     virtual ~IHandledCadObject() = default;
     virtual unsigned long long Handle() const = 0;
 };
-SMARTER_PTR(IHandledCadObject)
+CPL_SMARTER_PTR(IHandledCadObject)
 
 }// namespace dwg

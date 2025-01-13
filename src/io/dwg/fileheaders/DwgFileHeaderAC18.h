@@ -49,13 +49,13 @@ public:
     uint32_t SectionArrayPageSize;
     int32_t RigthGap;
     int32_t LeftGap;
-    std::map<std::string, DwgSectionDescriptor> Descriptors;
+    std::map<CPL::String, DwgSectionDescriptor> Descriptors;
 
     DwgFileHeaderAC18();
     DwgFileHeaderAC18(ACadVersion version);
-    void AddSection(const std::string &name) override;
+    void AddSection(const CPL::String &name) override;
     void AddSection(const DwgSectionDescriptor &descriptor);
-    DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
+    DwgSectionDescriptor &GetDescriptor(const CPL::String &name) override;
 };
 
 

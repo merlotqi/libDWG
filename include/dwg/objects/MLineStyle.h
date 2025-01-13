@@ -34,19 +34,19 @@ class MLineStyle : public NonGraphicalObject
 {
 public:
     MLineStyle();
-    MLineStyle(const std::string &name) : NonGraphicalObject(name) {}
+    MLineStyle(const CPL::String &name) : NonGraphicalObject(name) {}
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle Default;
 
     dwg::ObjectType ObjectType() const { return ObjectType::MLINESTYLE; }
-    std::string ObjectName() const { return DxfFileToken::ObjectMLineStyle; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::MLineStyle; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectMLineStyle; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::MLineStyle; }
 
 
     // 70
     MLineStyleFlags Flags;
-    std::string Description;         // 3
+    CPL::String Description;         // 3
     Color FillColor = Color::ByLayer;// 62
     double StartAngle = M_PI / 2.0;  // 51
     double EndAngle = M_PI / 2.0;    // 52

@@ -47,8 +47,8 @@ public:
             Default;// { get { return new MultiLeaderStyle(DefaultName); } }
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectMLeaderStyle; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectMLeaderStyle; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::MLeaderStyle;
     }
@@ -83,13 +83,13 @@ public:
     // 43
     double LandingDistance;
     // 3
-    std::string Description;
+    CPL::String Description;
     // DxfReferenceType.Handle, 341
     unsigned long long ArrowheadHandle;
     // 44
     double ArrowheadSize;
     // 300
-    std::string DefaultTextContents;
+    CPL::String DefaultTextContents;
     // DxfReferenceType.Handle, 342
     unsigned long long TextStyleHandle;
     // 174
@@ -141,7 +141,7 @@ public:
 
 public:
     MultiLeaderStyle() {}
-    MultiLeaderStyle(const std::string &name) : NonGraphicalObject(name) {}
+    MultiLeaderStyle(const CPL::String &name) : NonGraphicalObject(name) {}
 };
 
 

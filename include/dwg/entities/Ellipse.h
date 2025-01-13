@@ -38,8 +38,8 @@ public:
     Ellipse();
     ~Ellipse();
     dwg::ObjectType ObjectType() const overide;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
     XYZ Normal() const;
     XYZ Center() const;
     XYZ EndPoint() const;
@@ -56,6 +56,6 @@ public:
     void StartParameter(double);
     void EndParameter(double);
 };
-SMARTER_PTR(Ellipse)
+CPL_SMARTER_PTR(Ellipse)
 
 }// namespace dwg

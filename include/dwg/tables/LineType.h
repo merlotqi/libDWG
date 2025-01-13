@@ -34,7 +34,7 @@ class LineType : public TableEntry
 {
 public:
     LineType() = default;
-    LineType(const std::string &name) : TableEntry(name) {}
+    LineType(const CPL::String &name) : TableEntry(name) {}
 
     struct Segment
     {
@@ -44,7 +44,7 @@ public:
         XY Offset;
         double Rotation;
         double Scale;
-        std::string Text;
+        CPL::String Text;
         TextStyle Style;
     };
 
@@ -60,16 +60,16 @@ public:
     {
         return dwg::ObjectType::LTYPE;
     }
-    std::string ObjectName() const override
+    CPL::String ObjectName() const override
     {
         return DxfFileToken::TableLinetype;
     }
-    std::string SubclassMarker() const override
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::Linetype;
     }
 
-    std::string Description;  // 3
+    CPL::String Description;  // 3
     double PatternLen() const;// 40
     char Alignment = 'A';     // 72
 
@@ -94,7 +94,7 @@ public:
     LineTypesTable() = default;
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {LineType::ByLayerName, LineType::ByBlockName,
                 LineType::ContinuousName};

@@ -34,15 +34,15 @@ public:
 
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectDictionaryVar; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectDictionaryVar; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::DictionaryVariables;
     }
 
-    std::string Value;     // 1
+    CPL::String Value;     // 1
     int ObjectSchemaNumber;// 280
 };
-SMARTER_PTR(DictionaryVariable)
+CPL_SMARTER_PTR(DictionaryVariable)
 
 }// namespace dwg

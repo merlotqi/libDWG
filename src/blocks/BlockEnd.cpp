@@ -24,9 +24,9 @@
 
 namespace dwg {
 
-std::string BlockEnd::ObjectName() const { return DxfFileToken::EndBlock;}
+CPL::String BlockEnd::ObjectName() const { return DxfFileToken::EndBlock;}
 
 dwg::ObjectType BlockEnd::ObjectType() const { return dwg::ObjectType::ENDBLK;}
 
-std::string BlockEnd::SubclassMarker() const { return DxfSubclassMarker::BlockEnd;}
+CPL::String BlockEnd::SubclassMarker() const { return DxfSubclassMarker::BlockEnd;}
 }

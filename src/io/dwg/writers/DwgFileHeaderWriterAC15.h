@@ -33,7 +33,7 @@ namespace io {
 
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {
-    std::map<std::string,
+    std::map<CPL::String,
              std::pair<DwgSectionLocatorRecord, std::ostringstream *>>
             _records;
     static std::vector<unsigned char> _endSentinel;
@@ -41,7 +41,7 @@ class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 public:
     DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding,
                             CadDocument *model);
-    void AddSection(const std::string &name, std::ostringstream *stream,
+    void AddSection(const CPL::String &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) override;
     void WriteFile() override;
 

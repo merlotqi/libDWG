@@ -32,7 +32,7 @@ DwgFileHeaderAC18::DwgFileHeaderAC18(ACadVersion version)
 {
 }
 
-void DwgFileHeaderAC18::AddSection(const std::string &name)
+void DwgFileHeaderAC18::AddSection(const CPL::String &name)
 {
     Descriptors.insert({name, DwgSectionDescriptor(name)});
 }
@@ -42,7 +42,7 @@ void DwgFileHeaderAC18::AddSection(const DwgSectionDescriptor &descriptor)
     Descriptors.insert({descriptor.Name, descriptor});
 }
 
-DwgSectionDescriptor &DwgFileHeaderAC18::GetDescriptor(const std::string &name)
+DwgSectionDescriptor &DwgFileHeaderAC18::GetDescriptor(const CPL::String &name)
 {
     return Descriptors.at(name);
 }

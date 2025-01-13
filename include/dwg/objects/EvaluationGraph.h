@@ -34,8 +34,8 @@ public:
     EvaluationGraph();
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectEvalGraph; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::EvalGraph; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectEvalGraph; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::EvalGraph; }
 
     struct GraphNode
     {

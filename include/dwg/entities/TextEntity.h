@@ -42,8 +42,8 @@ public:
     double height;   // 40
 
     // 1
-    std::string value() const;
-    void setValue(const std::string &value);
+    CPL::String value() const;
+    void setValue(const CPL::String &value);
 
     double rotation;// 50
 

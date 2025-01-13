@@ -24,13 +24,13 @@
 
 namespace dwg {
 
-    NonGraphicalObject::NonGraphicalObject(const std::string &name) : _name(name) {}
+    NonGraphicalObject::NonGraphicalObject(const CPL::String &name) : _name(name) {}
     
     NonGraphicalObject::~NonGraphicalObject() {}
 
-    std::string Name() const override { return _name; }
+    CPL::String Name() const override { return _name; }
 
-    void Name(const std::string &value) 
+    void Name(const CPL::String &value) 
     {
         OnNameChanged(_name, value); 
         _name = value; 

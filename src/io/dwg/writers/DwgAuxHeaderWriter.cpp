@@ -27,7 +27,7 @@
 namespace dwg {
 namespace io {
 
-    std::string DwgAuxHeaderWriter::SectionName() const { return DwgSectionDefinition::AuxHeader; }
+    CPL::String DwgAuxHeaderWriter::SectionName() const { return DwgSectionDefinition::AuxHeader; }
 
     DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding,
                        const CadHeader &header)

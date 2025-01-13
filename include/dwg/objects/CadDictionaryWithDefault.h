@@ -33,12 +33,12 @@ public:
     CadDictionaryWithDefault();
 
     dwg::ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+    CPL::String ObjectName() const;
+    CPL::String SubclassMarker() const;
 
     CadObjectPtr DefaultEntry() const;
     void DefaultEntry(CadObject* );
 };
-SMARTER_PTR(CadDictionaryWithDefault)
+CPL_SMARTER_PTR(CadDictionaryWithDefault)
 
 }// namespace dwg

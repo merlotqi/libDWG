@@ -23,20 +23,19 @@
 #pragma once
 
 #include <string>
-#include <dwg/utility/object.h>
-#include <dwg/utility/delegate.h>
+#include <cpl_port.h>
 
 namespace dwg {
 
-class INamedCadObject : public RefObject
+class INamedCadObject : public CPL::RefObject
 {
 public:
     INamedCadObject() = default;
     virtual ~INamedCadObject() = default;
-    virtual std::string Name() const = 0;
+    virtual CPL::String Name() const = 0;
 
-    Delegate<void(const std::string&, const std::string&)> OnNameChanged;
+    Delegate<void(const CPL::String&, const CPL::String&)> OnNameChanged;
 };
-SMARTER_PTR(INamedCadObject)
+CPL_SMARTER_PTR(INamedCadObject)
 
 }// namespace dwg

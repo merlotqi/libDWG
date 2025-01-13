@@ -77,7 +77,7 @@ public:
     Entity *boundary() const;
 
 
-    std::string styleSheetName;// 1
+    CPL::String styleSheetName;// 1
     RenderMode renderMode;     // 281
 
     bool ucsPreViewport;// 71

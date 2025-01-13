@@ -44,7 +44,7 @@ public:
         std::vector<double> dashLengths;
     };
 
-    std::string name;// 2
+    CPL::String name;// 2
     double angle;    // 53
 
     double scale;

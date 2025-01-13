@@ -30,7 +30,7 @@ namespace dwg {
 class UnderlayDefinition : public NonGraphicalObject
 {
 public:
-    std::string File;// 1
+    CPL::String File;// 1
 };
 
 }// namespace dwg

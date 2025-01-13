@@ -33,8 +33,8 @@ class Scale : public NonGraphicalObject
 public:
     static Scale Default;
     Scale() = default;
-    Scale(const std::string &name);
-    Scale(const std::string &name, double paperUnits, double drawingUnits,
+    Scale(const CPL::String &name);
+    Scale(const CPL::String &name, double paperUnits, double drawingUnits,
           bool isUnitScale)
         : NonGraphicalObject(name), PaperUnits(paperUnits),
           DrawingUnits(drawingUnits), IsUnitScale(isUnitScale)
@@ -42,8 +42,8 @@ public:
     }
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectScale; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::Scale; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectScale; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::Scale; }
 
     // 140)]
     double PaperUnits;

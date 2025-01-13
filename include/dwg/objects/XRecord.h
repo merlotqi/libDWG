@@ -33,8 +33,8 @@ class XRecord : public NonGraphicalObject
 {
 public:
     dwg::ObjectType ObjectType() const { return ObjectType::XRECORD; }
-    std::string ObjectName() const { return DxfFileToken::ObjectXRecord; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::XRecord; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectXRecord; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::XRecord; }
 
 
     struct Entry

@@ -31,21 +31,21 @@ namespace dwg {
 class LIBDWG_API NonGraphicalObject : public CadObject, INamedCadObject
 {
 protected:
-    std::string _name;
+    CPL::String _name;
 
 public:
     NonGraphicalObject();
 
-    NonGraphicalObject(const std::string &name);
+    NonGraphicalObject(const CPL::String &name);
 
     virtual ~NonGraphicalObject();
 
-    std::string Name() const override;
+    CPL::String Name() const override;
     
-    void Name(const std::string &value);
+    void Name(const CPL::String &value);
 
-    Delegate<void(const std::string&, const std::string&)> OnNameChanged;
+    Delegate<void(const CPL::String&, const CPL::String&)> OnNameChanged;
 };
-SMARTER_PTR(NonGraphicalObject)
+CPL_SMARTER_PTR(NonGraphicalObject)
 
 }// namespace dwg

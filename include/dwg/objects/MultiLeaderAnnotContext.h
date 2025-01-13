@@ -48,11 +48,11 @@ public:
     MultiLeaderAnnotContext();
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const
+    CPL::String ObjectName() const
     {
         return DxfFileToken::ObjectMLeaderContextData;
     }
-    std::string SubclassMarker() const
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::MultiLeaderAnnotContext;
     }
@@ -103,7 +103,7 @@ public:
     TextAlignmentType TextAlignment;                            // 176
     BlockContentConnectionType BlockContentConnection;// 177
     bool HasTextContents;                                       // 290
-    std::string TextLabel;                                      // 304
+    CPL::String TextLabel;                                      // 304
     XYZ TextNormal;                                             // 11,21,31
     TextStyle TextStyle;                                // 340
 

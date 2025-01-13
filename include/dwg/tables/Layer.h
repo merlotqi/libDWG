@@ -42,15 +42,15 @@ public:
     {
         return dwg::ObjectType::LAYER;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableLayer; }
-    std::string SubclassMarker() const override
+    CPL::String ObjectName() const override { return DxfFileToken::TableLayer; }
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::Layer;
     }
 
     LayerFlags Flags;
     Color color;                     // 62, 420, 430
-    std::string LineTypeName;        // linetype Name
+    CPL::String LineTypeName;        // linetype Name
     LineType lineType;               // 6
     bool PlotFlag;                   // 200
     unsigned long long PlotStyleName;// 390
@@ -58,14 +58,14 @@ public:
     bool IsOn;// Indicates if the Layer is visible in the model
 
     Layer() = default;
-    Layer(const std::string &name) : TableEntry(name) {}
+    Layer(const CPL::String &name) : TableEntry(name) {}
 };
 
 class LayersTable : public Table<Layer>
 {
 public:
     LayersTable() = default;
-    std::string ObjectName() const { return DxfFileToken::TableLayer; }
+    CPL::String ObjectName() const { return DxfFileToken::TableLayer; }
 
 public:
     dwg::ObjectType ObjectType() const override
@@ -74,7 +74,7 @@ public:
     }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {Layer::DefaultName};
     }

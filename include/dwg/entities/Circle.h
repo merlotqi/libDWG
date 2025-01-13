@@ -37,8 +37,8 @@ public:
     Circle();
     virtual ~Circle();
     virtual dwg::ObjectType ObjectType() const overide;
-    virtual std::string ObjectName() const override;
-    virtual std::string SubclassMarker() const override;
+    virtual CPL::String ObjectName() const override;
+    virtual CPL::String SubclassMarker() const override;
     XYZ Normal() const;
     XYZ Center() const;
     double Thickness() const;
@@ -49,6 +49,6 @@ public:
     void Thickness(double);
     void Radius(double);
 };
-SMARTER_PTR(Circle)
+CPL_SMARTER_PTR(Circle)
 
 }// namespace dwg

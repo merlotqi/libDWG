@@ -37,12 +37,12 @@ dwg::ObjectType Block::ObjectType() const
     return dwg::ObjectType::BLOCK;
 }
 
-std::string Block::ObjectName() const 
+CPL::String Block::ObjectName() const 
 { 
     return DxfFileToken::Block; 
 } 
 
-std::string Block::SubclassMarker() const
+CPL::String Block::SubclassMarker() const
 {
     return DxfSubclassMarker::BlockBegin;
 }

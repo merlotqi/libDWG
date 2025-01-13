@@ -41,7 +41,7 @@ public:
 
     XYZ normal;// 210, 220, 230
 
-    std::string text;// 1
+    CPL::String text;// 1
 };
 
 }// namespace dwg

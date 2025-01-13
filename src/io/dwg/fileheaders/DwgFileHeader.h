@@ -42,8 +42,8 @@ public:
 public:
     static DwgFileHeader *CreateFileHeader(ACadVersion version);
 
-    virtual void AddSection(const std::string &name) = 0;
-    virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
+    virtual void AddSection(const CPL::String &name) = 0;
+    virtual DwgSectionDescriptor &GetDescriptor(const CPL::String &name) = 0;
     
     protected:
     DwgFileHeader() = default;

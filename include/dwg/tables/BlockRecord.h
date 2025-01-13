@@ -36,7 +36,7 @@ namespace dwg {
 class BlockRecord : public TableEntry
 {
 public:
-    BlockRecord(const std::string &name) : TableEntry(name) {}
+    BlockRecord(const CPL::String &name) : TableEntry(name) {}
 
     static constexpr auto ModelSpaceName = "*Model_Space";
     static constexpr auto PaperSpaceName = "*Paper_Space";
@@ -63,11 +63,11 @@ public:
     {
         return ObjectType::BLOCK_HEADER;
     }
-    std::string ObjectName() const override
+    CPL::String ObjectName() const override
     {
         return DxfFileToken::TableBlockRecord;
     }
-    std::string SubclassMarker() const override
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::BlockRecord;
     }
@@ -99,7 +99,7 @@ public:
     }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
     }

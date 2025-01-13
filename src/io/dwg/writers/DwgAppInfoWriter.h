@@ -35,7 +35,7 @@ class DwgAppInfoWriter : public DwgSectionIO
     std::vector<unsigned char> _emptyArr;
 
 public:
-    std::string SectionName() const;
+    CPL::String SectionName() const;
 
     DwgAppInfoWriter(ACadVersion version, std::ostream *stream);
     void Write();

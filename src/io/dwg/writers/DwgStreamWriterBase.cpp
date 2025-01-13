@@ -59,8 +59,8 @@ public:
     void WriteBitDouble(double value);
     void WriteBitLong(int value);
     void WriteBitLongLong(long long value);
-    virtual void WriteVariableText(const std::string &value);
-    virtual void WriteTextUnicode(const std::string &value);
+    virtual void WriteVariableText(const CPL::String &value);
+    virtual void WriteTextUnicode(const CPL::String &value);
     void Write2Bits(unsigned char value);
     void WriteBit(bool value);
     void WriteByte(unsigned char value);

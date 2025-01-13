@@ -30,11 +30,11 @@ class UCS : public TableEntry
 {
 public:
     UCS() {}
-    UCS(const std::string &name) : TableEntry(name) {}
+    UCS(const CPL::String &name) : TableEntry(name) {}
 
     dwg::ObjectType ObjectType() const override { return dwg::ObjectType::UCS; }
-    std::string ObjectName() const override { return DxfFileToken::TableUcs; }
-    std::string SubclassMarker() const override
+    CPL::String ObjectName() const override { return DxfFileToken::TableUcs; }
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::Ucs;
     }
@@ -55,12 +55,12 @@ public:
     {
         return dwg::ObjectType::UCS_CONTROL_OBJ;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableUcs; }
+    CPL::String ObjectName() const override { return DxfFileToken::TableUcs; }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
-        return std::vector<std::string>();
+        return std::vector<CPL::String>();
     }
 };
 

@@ -32,11 +32,11 @@ class ImageDefinitionReactor : public NonGraphicalObject
 public:
     ImageDefinitionReactor();
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const
+    CPL::String ObjectName() const
     {
         return DxfFileToken::ObjectImageDefinitionReactor;
     }
-    std::string SubclassMarker() const
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::RasterImageDefReactor;
     }

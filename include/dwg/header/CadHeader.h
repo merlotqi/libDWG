@@ -66,16 +66,16 @@ public:
     CadHeader(CadDocument *document);
     CadHeader(ACadVersion version);
 
-    std::string VersionString;
+    CPL::String VersionString;
 
     ACadVersion Version;
 
     // "$ACADMAINTVER", 70
     short MaintenanceVersion;
     // "$DWGCODEPAGE", 3
-    std::string CodePage;// "ANSI_1252"
+    CPL::String CodePage;// "ANSI_1252"
     // "$LASTSAVEDBY", 3
-    std::string LastSavedBy;// "libDWG"
+    CPL::String LastSavedBy;// "libDWG"
     // "$REQUIREDVERSIONS", 70
     bool AssociatedDimensions;
     // "$DIMSHO", 70
@@ -191,16 +191,16 @@ public:
     double TextHeightDefault = 2.5;
 
     // "$TEXTSTYLE", true, 7
-    std::string TextStyleName;
+    CPL::String TextStyleName;
 
     // "$CLAYER", true, 8
-    std::string CurrentLayerName;
+    CPL::String CurrentLayerName;
 
     // "$CELTYPE", true, 6
-    std::string CurrentLineTypeName;
+    CPL::String CurrentLineTypeName;
 
     // "$CMLSTYLE", true, 2
-    std::string MultiLineStyleName = "Standard";
+    CPL::String MultiLineStyleName = "Standard";
 
     // "$TRACEWID", 40
     double TraceWidthDefault = 0;
@@ -243,7 +243,7 @@ public:
     // "$CELTSCALE", 40
     double CurrentEntityLinetypeScale = 1.0;
     // "$MENU", 1
-    std::string MenuFileName = ".";
+    CPL::String MenuFileName = ".";
     // "$HANDSEED", 5
     unsigned long long HandleSeed = 0x0;
     // "$TDCREATE", 40
@@ -276,9 +276,9 @@ public:
     // "$PELEVATION", 40
     double PaperSpaceElevation;
     // "$PUCSBASE", true, 2
-    std::string PaperSpaceBaseName;
+    CPL::String PaperSpaceBaseName;
     // "$PUCSNAME", true, 2
-    std::string PaperSpaceName;
+    CPL::String PaperSpaceName;
     // "$PUCSORG", 10, 20, 30
     XYZ PaperSpaceUcsOrigin;
     // "$PUCSXDIR", 10, 20, 30
@@ -320,9 +320,9 @@ public:
     // "$LIMMAX", 10, 20
     XY ModelSpaceLimitsMax;
     // "$UCSBASE", true, 2
-    std::string UcsBaseName;
+    CPL::String UcsBaseName;
     // "$UCSNAME", true, 2
-    std::string UcsName;
+    CPL::String UcsName;
     // "$ELEVATION", 40
     double Elevation;
     // "$UCSORG", 10, 20, 30
@@ -332,13 +332,13 @@ public:
     // "$UCSYDIR", 10, 20, 30
     XYZ ModelSpaceYAxis;
     // "$DIMBLK", 1
-    std::string DimensionBlockName;
+    CPL::String DimensionBlockName;
     // "$DIMLDRBLK", 1
-    std::string ArrowBlockName;
+    CPL::String ArrowBlockName;
     // "$DIMBLK1", 1
-    std::string DimensionBlockNameFirst;
+    CPL::String DimensionBlockNameFirst;
     // "$DIMBLK2", 1
-    std::string DimensionBlockNameSecond;
+    CPL::String DimensionBlockNameSecond;
 
 
     short StackedTextAlignment = 1;
@@ -346,7 +346,7 @@ public:
 
 
     // "$HYPERLINKBASE", 1
-    std::string HyperLinkBase;
+    CPL::String HyperLinkBase;
     // "$CELWEIGHT", 370
     LineweightType CurrentEntityLineWeight = LineweightType::ByLayer;
     // "$ENDCAPS", 280
@@ -368,9 +368,9 @@ public:
     // "$CEPSNTYPE", 380
     EntityPlotStyleType CurrentEntityPlotStyle;
     // "$FINGERPRINTGUID", 2
-    std::string FingerPrintGuid;
+    CPL::String FingerPrintGuid;
     // "$VERSIONGUID", 2
-    std::string VersionGuid;
+    CPL::String VersionGuid;
 
     // "$SORTENTS", 280
     ObjectSortingFlags EntitySortingFlags;
@@ -393,7 +393,7 @@ public:
 
     unsigned char IntersectionDisplay;
     // "$PROJECTNAME", 1
-    std::string ProjectName;
+    CPL::String ProjectName;
 
     bool CameraDisplayObjects;
     double StepsPerSecond;
@@ -434,12 +434,12 @@ public:
     // "$SHADOWPLANELOCATION", 40
     double ShadowPlaneLocation;
 
-    std::string StyleSheetName;
+    CPL::String StyleSheetName;
 
     // "$DIMTXSTY", true, 7
-    std::string DimensionTextStyleName;
+    CPL::String DimensionTextStyleName;
     // "$DIMSTYLE", true, 2
-    std::string DimensionStyleOverridesName;
+    CPL::String DimensionStyleOverridesName;
     // "$DIMADEC", 70
     short DimensionAngularDimensionDecimalPlaces;
     // "$DIMDEC", 70
@@ -497,7 +497,7 @@ public:
     // "$DIMALTRND", 40
     double DimensionAlternateUnitRounding;
     // "$DIMAPOST", 1
-    std::string DimensionAlternateDimensioningSuffix;
+    CPL::String DimensionAlternateDimensioningSuffix;
     // "$DIMASZ", 40
     double DimensionArrowSize;
     // "$DIMAZIN", 70
@@ -543,7 +543,7 @@ public:
     // "$DIMLWE", 70
     LineweightType ExtensionLineWeight;
     // "$DIMPOST", 1
-    std::string DimensionPostFix;
+    CPL::String DimensionPostFix;
     // "$DIMRND", 40
     double DimensionRounding;
     // "$DIMSE1", 70
@@ -579,17 +579,17 @@ public:
     // "$DIMALTMZF", 40
     double DimensionAltMzf;
     // "$DIMALTMZS", 6
-    std::string DimensionAltMzs;
+    CPL::String DimensionAltMzs;
     // "$DIMMZF", 40
     double DimensionMzf;
     // "$DIMMZS", 6
-    std::string DimensionMzs;
+    CPL::String DimensionMzs;
     // "$DIMLTYPE", 6
-    std::string DimensionLineType = "ByBlock";
+    CPL::String DimensionLineType = "ByBlock";
     // "$DIMLTEX1", 6
-    std::string DimensionTex1 = "ByBlock";
+    CPL::String DimensionTex1 = "ByBlock";
     // "$DIMLTEX2", 6
-    std::string DimensionTex2 = "ByBlock";
+    CPL::String DimensionTex2 = "ByBlock";
 
     Layer CurrentLayer;
     LineType CurrentLineType;

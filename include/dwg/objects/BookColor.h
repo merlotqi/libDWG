@@ -32,16 +32,16 @@ class BookColor : NonGraphicalObject
 {
 public:
     BookColor();
-    BookColor(const std::string &name) : NonGraphicalObject(name) {}
+    BookColor(const CPL::String &name) : NonGraphicalObject(name) {}
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectDBColor; }
-    std::string SubclassMarker() const { return DxfSubclassMarker::DbColor; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectDBColor; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::DbColor; }
 
-    std::string Name() const;
+    CPL::String Name() const;
 
-    std::string ColorName() const;
-    std::string BookName() const;
+    CPL::String ColorName() const;
+    CPL::String BookName() const;
 
     Color Color;// 62, 420
 };

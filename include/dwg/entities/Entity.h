@@ -39,7 +39,7 @@ class LIBDWG_API Entity : public CadObject, IEntity
 
 public:
     Entity();
-    std::string SubclassMarker() const { return DxfSubclassMarker::Entity; }
+    CPL::String SubclassMarker() const { return DxfSubclassMarker::Entity; }
 
 public:
     Layer *layer;       // 8, name
@@ -55,6 +55,6 @@ public:
 
     void MatchProperties(const Entity *other);
 };
-SMARTER_PTR(Entity)
+CPL_SMARTER_PTR(Entity)
 
 }// namespace dwg

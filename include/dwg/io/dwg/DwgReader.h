@@ -54,7 +54,7 @@ class DwgReader : public CadReaderBase<DwgReaderConfiguration>
     DwgFileHeader *m_fileHeader;
 
 public:
-    DwgReader(const std::string &name);
+    DwgReader(const CPL::String &name);
 
     CadDoument *Read();
     CadSummaryInfo *ReadSummaryInfo();
@@ -74,7 +74,7 @@ private:
                             IDwgStreamReader *sreader);
     void readFileMetaData(DwgFileHeaderAC18 *fileheader,
                           IDwgStreamReader *sreader);
-    IDwgStreamReader *getSectionStream(const std::string &sectionName);
+    IDwgStreamReader *getSectionStream(const CPL::String &sectionName);
     void getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType,
                            int64_t &decompressedSize, int64_t &compressedSize,
                            int64_t &compressionType, int64_t &checksum);

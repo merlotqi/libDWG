@@ -43,7 +43,7 @@ private:
     Encoding _encoding;
 
 public:
-    std::string SectionName() const override;
+    CPL::String SectionName() const override;
 
     DwgHeaderWriter(std::ostream* stream, CadDocument* document, Encoding encoding);
     void Write();

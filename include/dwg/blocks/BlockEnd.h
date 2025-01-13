@@ -33,10 +33,10 @@ public:
     BlockEnd(BlockRecord *record);
     ~BlockEnd() = default;
 
-    std::string ObjectName() const override;
+    CPL::String ObjectName() const override;
     dwg::ObjectType ObjectType() const override;
-    std::string SubclassMarker() const override;
+    CPL::String SubclassMarker() const override;
 };
-SMARTER_PTR(BlockEnd)
+CPL_SMARTER_PTR(BlockEnd)
 
 }// namespace dwg

@@ -30,16 +30,16 @@ namespace dwg {
 
 struct CadSummaryInfo
 {
-    std::string Title;
-    std::string mSubject;
-    std::string Author;
-    std::string Keywords;
-    std::string Comments;
-    std::string LastSavedBy;
-    std::string HyperlinkBase;
+    CPL::String Title;
+    CPL::String mSubject;
+    CPL::String Author;
+    CPL::String Keywords;
+    CPL::String Comments;
+    CPL::String LastSavedBy;
+    CPL::String HyperlinkBase;
     time_t CreateDate;
     time_t mModifiedDate;
-    std::map<std::string, std::string> Properties;
+    std::map<CPL::String, CPL::String> Properties;
 };
 
 }// namespace dwg

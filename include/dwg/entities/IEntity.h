@@ -51,6 +51,6 @@ public:
     // virtual void Material(dwg::Material*) = 0;
     virtual void MatchProperties(IEntity* entity) = 0;
 };
-SMARTER_PTR(IEntity)
+CPL_SMARTER_PTR(IEntity)
 
 }

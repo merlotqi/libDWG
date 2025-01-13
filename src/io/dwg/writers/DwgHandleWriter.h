@@ -40,7 +40,7 @@ class DwgHandleWriter : public DwgSectionIO
     std::map<unsigned long long, long long> _handleMap;
 
 public:
-    std::string SectionName() const;
+    CPL::String SectionName() const;
 
     DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
                     const std::map<unsigned long long, long long> &handlemap);

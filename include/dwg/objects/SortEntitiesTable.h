@@ -47,8 +47,8 @@ public:
 
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectSortEntsTable; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectSortEntsTable; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::SortentsTable;
     }

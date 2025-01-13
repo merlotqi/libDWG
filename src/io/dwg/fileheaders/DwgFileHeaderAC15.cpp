@@ -35,12 +35,12 @@ DwgFileHeaderAC15::DwgFileHeaderAC15(ACadVersion version)
 {
 }
 
-void DwgFileHeaderAC15::AddSection(const std::string &name)
+void DwgFileHeaderAC15::AddSection(const CPL::String &name)
 {
     throw new std::exception("not implemented");
 }
 
-DwgSectionDescriptor &DwgFileHeaderAC15::GetDescriptor(const std::string &name)
+DwgSectionDescriptor &DwgFileHeaderAC15::GetDescriptor(const CPL::String &name)
 {
     throw new std::exception("not implemented");
 }

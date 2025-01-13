@@ -56,7 +56,7 @@ public:
     double rectangleHeight;               // 46
     AttachmentPointType attachmentPoint;  // 71
     DrawingDirectionType drawingDirection;// 72
-    std::string value;                    // 1
+    CPL::String value;                    // 1
     TextStyle *textStyle;         // 7, name
 
     XYZ alignmentPoint;                    // 11, 21, 31

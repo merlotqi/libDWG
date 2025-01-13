@@ -29,7 +29,7 @@ namespace dwg {
 class AttributeDefinition : public AttributeBase
 {
 public:
-    std::string Prompt;// 3
+    CPL::String Prompt;// 3
 };
 
 }// namespace dwg

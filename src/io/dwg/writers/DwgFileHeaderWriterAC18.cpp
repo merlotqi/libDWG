@@ -64,7 +64,7 @@ namespace io {
         writeFileMetaData();
     }
 
-    void DwgFileHeaderWriterAC18::AddSection(const std::string &name, std::ostringstream *stream,
+    void DwgFileHeaderWriterAC18::AddSection(const CPL::String &name, std::ostringstream *stream,
                     bool isCompressed, int decompsize = 0x7400) 
     {
         DwgSectionDescriptor descriptor(name);
@@ -77,7 +77,7 @@ namespace io {
         int nlocalSections = (int) (ostream_length(stream) /
                                     (int) descriptor.DecompressedSize);
 
-        std::string buffer = stream->str();
+        CPL::String buffer = stream->str();
         unsigned long long offset = 0uL;
         for (int i = 0; i < nlocalSections; i++)
         {

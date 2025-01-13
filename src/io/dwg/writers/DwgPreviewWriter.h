@@ -38,7 +38,7 @@ class DwgPreviewWriter : DwgSectionIO
 
 public:
     DwgPreviewWriter(ACadVersion version, std::ostream* stream);
-    std::string SectionName() const;
+    CPL::String SectionName() const;
     void Write();
 };
         

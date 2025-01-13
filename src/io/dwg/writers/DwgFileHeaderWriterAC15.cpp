@@ -75,7 +75,7 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream,
     };
 }
 
-void DwgFileHeaderWriterAC15::AddSection(const std::string &name,
+void DwgFileHeaderWriterAC15::AddSection(const CPL::String &name,
                                          std::ostringstream *stream,
                                          bool isCompressed,
                                          int decompsize = 0x7400)
@@ -162,7 +162,7 @@ void DwgFileHeaderWriterAC15::writeRecordStreams()
         auto &&ss = it->second.second;
         if (ss)
         {
-            std::string data = ss->str();
+            CPL::String data = ss->str();
             std::size_t len = data.size();
             _stream->write(data.c_str(), len);
         }

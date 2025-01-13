@@ -41,21 +41,21 @@ public:
     {
         return dwg::ObjectType::STYLE;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableStyle; }
-    std::string SubclassMarker() const override
+    CPL::String ObjectName() const override { return DxfFileToken::TableStyle; }
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::TextStyle;
     }
 
     bool IsShapeFile() const { return false; }
 
-    virtual std::string Name() const
+    virtual CPL::String Name() const
     {
         if (IsShapeFile()) return Filename;
         else
             return _name;
     }
-    virtual void Name(const std::string &value)
+    virtual void Name(const CPL::String &value)
     {
         _name = value;
         if (IsShapeFile()) Filename = value;
@@ -63,8 +63,8 @@ public:
 
     StyleFlags Flags;
 
-    std::string Filename;       // 3
-    std::string BigFontFilename;// 4
+    CPL::String Filename;       // 3
+    CPL::String BigFontFilename;// 4
     double Height;              // 40
     double Width = 1.0;         // 41
 
@@ -74,7 +74,7 @@ public:
     FontFlags TrueType = FontFlag::Regular;
 
     TextStyle() {}
-    TextStyle(const std::string &name) : TableEntry(name) {}
+    TextStyle(const CPL::String &name) : TableEntry(name) {}
 };
 
 TextStyle TextStyle::Default = TextStyle(TextStyle::DefaultName);
@@ -89,7 +89,7 @@ public:
     }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {TextStyle::DefaultName};
     }

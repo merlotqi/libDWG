@@ -42,7 +42,7 @@ public:
     TextVerticalAlignmentType verticalAlignment;// 74
     unsigned char version;                      // 280
 
-    std::string tag;     // 2
+    CPL::String tag;     // 2
     AttributeFlags flags;// 70
 
     AttributeType attributeType;// 71

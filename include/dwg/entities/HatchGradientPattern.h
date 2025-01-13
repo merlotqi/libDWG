@@ -39,7 +39,7 @@ public:
     double colorTint;          // 462
 
     std::vector<GradientColor> colors;// 453
-    std::string name;                 // 470
+    CPL::String name;                 // 470
 };
 
 

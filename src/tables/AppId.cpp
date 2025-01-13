@@ -25,18 +25,18 @@
 
 namespace dwg {
 
-std::string AppId::DefaultName = "libDWG";
+CPL::String AppId::DefaultName = "libDWG";
 
 dwg::ObjectType AppId::ObjectType() const  { return ObjectType::APPID; }
     
-std::string AppId::ObjectName() const { return DxfFileToken::TableAppId; }
+CPL::String AppId::ObjectName() const { return DxfFileToken::TableAppId; }
     
-std::string AppId::SubclassMarker() const
+CPL::String AppId::SubclassMarker() const
 {
     return DxfSubclassMarker::ApplicationId;
 }
 
-AppId::AppId(const std::string &name) : TableEntry(name) 
+AppId::AppId(const CPL::String &name) : TableEntry(name) 
 {
     if(StringHelp::IsNullOrEmpty(name))
         throw new std::invalid_argument("Application id must have a name.");
@@ -51,9 +51,9 @@ dwg::ObjectType AppIdsTable::ObjectType() const
     return dwg::ObjectType::APPID_CONTROL_OBJ;
 }
 
-std::string AppIdsTable::ObjectName() const { return DxfFileToken::TableAppId; }
+CPL::String AppIdsTable::ObjectName() const { return DxfFileToken::TableAppId; }
 
-std::vector<std::string> AppIdsTable::defaultEntries() const
+std::vector<CPL::String> AppIdsTable::defaultEntries() const
 {
     return {AppId::DefaultName};
 }

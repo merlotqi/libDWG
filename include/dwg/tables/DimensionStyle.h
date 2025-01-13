@@ -50,18 +50,18 @@ public:
     static DimensionStyle *Default() { return new DimensionStyle(DefaultName); }
 
     dwg::ObjectType ObjectType() const { return ObjectType::DIMSTYLE; }
-    std::string ObjectName() const { return DxfFileToken::TableDimstyle; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::TableDimstyle; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::DimensionStyle;
     }
 
-    DimensionStyle(const std::string &name) : TableEntry(name) {}
+    DimensionStyle(const CPL::String &name) : TableEntry(name) {}
 
     // 3
-    std::string PostFix = "<>";
+    CPL::String PostFix = "<>";
     // 3
-    std::string AlternateDimensioningSuffix = "[]";
+    CPL::String AlternateDimensioningSuffix = "[]";
     // 71
     bool GenerateTolerances = false;
     // 72
@@ -229,8 +229,8 @@ public:
 
 
 protected:
-    std::string AltMzs;
-    std::string Mzs;
+    CPL::String AltMzs;
+    CPL::String Mzs;
     double AltMzf;
     double Mzf;
 };
@@ -244,13 +244,13 @@ public:
     {
         return dwg::ObjectType::DIMSTYLE_CONTROL_OBJ;
     }
-    std::string ObjectName() const override
+    CPL::String ObjectName() const override
     {
         return DxfFileToken::TableDimstyle;
     }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {DimensionStyle::DefaultName};
     }

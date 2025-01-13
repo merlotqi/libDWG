@@ -1,0 +1,3 @@
+[submodule "external/CPL"]
+	path = external/CPL
+	url = https://github.com/MerlotRain/CPL.git

@@ -40,7 +40,7 @@ class VPort : public TableEntry
 {
 public:
     VPort() {}
-    VPort(const std::string &name) : TableEntry(name) {}
+    VPort(const CPL::String &name) : TableEntry(name) {}
 
     static constexpr auto DefaultName = "*Active";
     static VPort Default;
@@ -49,8 +49,8 @@ public:
     {
         return dwg::ObjectType::VPORT;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableVport; }
-    std::string SubclassMarker() const override
+    CPL::String ObjectName() const override { return DxfFileToken::TableVport; }
+    CPL::String SubclassMarker() const override
     {
         return DxfSubclassMarker::VPort;
     }
@@ -109,10 +109,10 @@ public:
     {
         return dwg::ObjectType::VPORT_CONTROL_OBJ;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableVport; }
+    CPL::String ObjectName() const override { return DxfFileToken::TableVport; }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
         return {VPort::DefaultName};
     }

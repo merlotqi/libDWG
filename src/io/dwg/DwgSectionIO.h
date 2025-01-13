@@ -32,7 +32,7 @@ namespace io {
 class DwgSectionIO
 {
 public:
-    virtual std::string SectionName() const = 0;
+    virtual CPL::String SectionName() const = 0;
 
     DwgSectionIO(ACadVersion version);
     static bool CheckSentinel(const std::vector<unsigned char> &actual,

@@ -30,9 +30,9 @@ class PdfUnderlayDefinition : public UnderlayDefinition
 {
 public:
     PdfUnderlayDefinition();
-    std::string Page;
+    CPL::String Page;
 
-    std::string ObjectName() const { return DxfFileToken::ObjectPdfDefinition; }
+    CPL::String ObjectName() const { return DxfFileToken::ObjectPdfDefinition; }
 };
 
 }// namespace dwg

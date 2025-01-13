@@ -30,23 +30,23 @@ namespace dwg {
 
 class LIBDWG_API Block : public Entity
 {
-    std::string _name;
+    CPL::String _name;
     BlockTypeFlags _flags;
     XYZ _base_point = XYZ::Zero;
-    std::string _xrefPath;
-    std::string _comments;
+    CPL::String _xrefPath;
+    CPL::String _comments;
 public:
     Block(BlockRecord *record);
     ~Block();
 
     dwg::ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     BlockRecordPtr BlockRecord() const;
 
-    std::string Name() const;
-    void Name(const std::string& name);
+    CPL::String Name() const;
+    void Name(const CPL::String& name);
 
     BlockTypeFlags Flags() const;
     void Flags(BlockTypeFlags flags);
@@ -54,16 +54,16 @@ public:
     XYZ BasePoint() const;
     void BasePoint(XYZ p);
 
-    std::string XrefPath() const;
-    void XrefPath(const std::string& value);
+    CPL::String XrefPath() const;
+    void XrefPath(const CPL::String& value);
 
-    std::string Comments() const;
-    void Comments(const std::string& value);
+    CPL::String Comments() const;
+    void Comments(const CPL::String& value);
 
 protected:
     Block();
 
 };
-SMARTER_PTR(Block)
+CPL_SMARTER_PTR(Block)
 
 }// namespace dwg

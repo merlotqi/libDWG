@@ -36,16 +36,16 @@ class VisualStyle : public NonGraphicalObject
 {
 public:
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const { return DxfFileToken::ObjectVisualStyle; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectVisualStyle; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::VisualStyle;
     }
 
     // 1
-    std::string RasterFile;
+    CPL::String RasterFile;
     // 2
-    std::string Description;
+    CPL::String Description;
     // 70
     int Type;
     // 71

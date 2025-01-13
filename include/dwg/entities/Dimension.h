@@ -49,7 +49,7 @@ public:
     double lineSpacingFactor;             // 41, optional
     bool flipArrow1;                      // 74
     bool flipArrow2;                      // 75
-    std::string text;                     // 1, optional
+    CPL::String text;                     // 1, optional
     double textRotation;                  // 53, optional
     double horizontalDirection;           // 51, optional
     DimensionStyle *dimStyle;     // 3, name

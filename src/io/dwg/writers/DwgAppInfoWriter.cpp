@@ -32,7 +32,7 @@
 namespace dwg {
 namespace io {
 
-std::string DwgAppInfoWriter::SectionName() const { return DwgSectionDefinition::AppInfo; }
+CPL::String DwgAppInfoWriter::SectionName() const { return DwgSectionDefinition::AppInfo; }
 
 DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
     : DwgSectionIO(version)
@@ -44,7 +44,7 @@ DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::ostream *stream)
 
 void DwgAppInfoWriter::Write()
 {
-    std::string version = LIBDWG_VERSION;
+    CPL::String version = LIBDWG_VERSION;
     //UInt32	4	class_version (default: 3)
     _writer->WriteInt(3);
     //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
@@ -62,7 +62,7 @@ void DwgAppInfoWriter::Write()
     //Byte[]	16	Product data(checksum, ODA writes zeroes)
     _writer->WriteBytes(_emptyArr);
     //String	2 + 2 * n + 2	Product
-    std::string productInfo = fmt::format(
+    CPL::String productInfo = fmt::format(
             "<ProductInformation name =\"libDWG\" build_version=\"{}\" "
             "registry_version=\"{}\" install_id_string=\"libDWG\" "
             "registry_localeID=\"1033\"/>",

@@ -35,11 +35,11 @@ class BlockVisibilityParameter : public CadObject
 public:
     BlockVisibilityParameter();
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const
+    CPL::String ObjectName() const
     {
         return DxfFileToken::ObjectBlockVisibilityParameter;
     }
-    std::string SubclassMarker() const
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::BlockVisibilityParameter;
     }
@@ -47,7 +47,7 @@ public:
 
     struct SubBlock
     {
-        std::string Name;
+        CPL::String Name;
         std::vector<Entity *> Entities;
     };
 
@@ -56,11 +56,11 @@ public:
     // 1010, 1020, 1030
     XYZ BasePosition;
     // 300
-    std::string ParameterType;
+    CPL::String ParameterType;
     // 301
-    std::string Name;
+    CPL::String Name;
     // 302
-    std::string Description;
+    CPL::String Description;
     // 91
     int L91;
 };

@@ -62,13 +62,13 @@ public:
     /// \details This method must be implemented by derived classes to return the name
     /// associated with the object.
     /// \return A string representing the object's name.
-    virtual std::string ObjectName() const = 0;
+    virtual CPL::String ObjectName() const = 0;
 
     /// \brief Get the subclass marker of the CAD object.
     /// \details This method must be implemented by derived classes to return a marker
     /// indicating the object's subclass.
     /// \return A string representing the subclass marker.
-    virtual std::string SubclassMarker() const = 0;
+    virtual CPL::String SubclassMarker() const = 0;
 
     /// \brief Get the unique handle of the CAD object.
     /// \return The handle of the object as an unsigned long long value.
@@ -110,7 +110,7 @@ protected:
     }
 
 };
-SMARTER_PTR(CadObject)
+CPL_SMARTER_PTR(CadObject)
 
 
 }// namespace dwg

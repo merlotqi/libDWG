@@ -59,8 +59,8 @@ public:
     void WriteBitDouble(double value) override;
     void WriteBitLong(int value) override;
     void WriteBitLongLong(long long value) override;
-    virtual void WriteVariableText(const std::string &value) override;
-    virtual void WriteTextUnicode(const std::string &value) override;
+    virtual void WriteVariableText(const CPL::String &value) override;
+    virtual void WriteTextUnicode(const CPL::String &value) override;
     void Write2Bits(unsigned char value) override;
     void WriteBit(bool value) override;
     void WriteByte(unsigned char value) override;

@@ -33,7 +33,7 @@ class View : public TableEntry
 {
 public:
     View() = default;
-    View(const std::string &name) : TableEntry(name) {}
+    View(const CPL::String &name) : TableEntry(name) {}
     double Height;
     double Width;
     double LensLength;
@@ -67,12 +67,12 @@ public:
     {
         return dwg::ObjectType::VIEW_CONTROL_OBJ;
     }
-    std::string ObjectName() const override { return DxfFileToken::TableView; }
+    CPL::String ObjectName() const override { return DxfFileToken::TableView; }
 
 protected:
-    std::vector<std::string> defaultEntries() const
+    std::vector<CPL::String> defaultEntries() const
     {
-        return std::vector<std::string>();
+        return std::vector<CPL::String>();
     }
 };
 

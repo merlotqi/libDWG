@@ -36,10 +36,10 @@ namespace dwg {
 class LIBDWG_API TableEntry : public CadObject, INamedCadObject
 {
 public:
-    TableEntry(const std::string &name);
-    std::string SubclassMarker() const override;
-    virtual std::string Name() const;
-    virtual void Name(const std::string &value);
+    TableEntry(const CPL::String &name);
+    CPL::String SubclassMarker() const override;
+    virtual CPL::String Name() const;
+    virtual void Name(const CPL::String &value);
     // 70
     StandardFlags Flags() const;
     void Flags(StandardFlags flags);
@@ -47,22 +47,22 @@ public:
 protected:
     TableEntry();
     StandardFlags _flags;
-    std::string _name;
+    CPL::String _name;
 };
-SMARTER_PTR(TableEntry)
+CPL_SMARTER_PTR(TableEntry)
 
 
 template<typename T>
 class Table : public CadObject
 {
-    std::map<std::string, SmarterPtr<T>> _entries;
+    std::map<CPL::String, SmarterPtr<T>> _entries;
 
 public:
     Table();
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
-    SmarterPtr<T> operator[](const std::string &key) const 
+    SmarterPtr<T> operator[](const CPL::String &key) const 
     {
         return _entries[key];
     }
@@ -79,9 +79,9 @@ public:
         _entries[entry->Name()] = entry;
     }
 
-    bool Contains(const std::string &key);
+    bool Contains(const CPL::String &key);
 
-    SmarterPtr<T> GetValue(const std::string& key)
+    SmarterPtr<T> GetValue(const CPL::String& key)
     {
         if(!Contains(key))
             return NULL;
@@ -101,7 +101,7 @@ public:
     }
 
 protected:
-    void add(const std::string &key, T *item)
+    void add(const CPL::String &key, T *item)
     {
         assert(item);
         _entries.insert({key, item});
@@ -112,11 +112,11 @@ protected:
     {
         assert(item);
         item->Owner(this);
-        std::string key = fmt::format("%llu:%s", item->Handle(), item->Name());
+        CPL::String key = fmt::format("%llu:%s", item->Handle(), item->Name());
         _entries.insert({key, item});
     }
 
-    virtual std::vector<std::string> defaultEntries() const = 0;
+    virtual std::vector<CPL::String> defaultEntries() const = 0;
 };
 
 

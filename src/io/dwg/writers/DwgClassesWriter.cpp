@@ -27,7 +27,7 @@ namespace dwg {
 namespace io {
 
 
-    std::string DwgClassesWriter::SectionName() const { return DwgSectionDefinition::Classes; }
+    CPL::String DwgClassesWriter::SectionName() const { return DwgSectionDefinition::Classes; }
 
     DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document,
                      Encoding encoding)

@@ -46,7 +46,7 @@ public:
     }
 
     void Write();
-    std::string SectionName() const override { return DwgSectionDefinition::AcDbObjects; }
+    CPL::String SectionName() const override { return DwgSectionDefinition::AcDbObjects; }
 
 private:
     void writeLTypeControlObject();

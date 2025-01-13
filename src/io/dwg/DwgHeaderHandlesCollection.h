@@ -29,7 +29,7 @@ namespace io {
 
 class DwgHeaderHandlesCollection
 {
-    std::map<std::string, unsigned long long> _handles;
+    std::map<CPL::String, unsigned long long> _handles;
 
 public:
 

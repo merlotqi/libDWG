@@ -79,6 +79,6 @@ public:
 
     void CreateDefaults();
 };
-SMARTER_PTR(CadDocument)
+CPL_SMARTER_PTR(CadDocument)
 
 }// namespace dwg

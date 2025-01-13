@@ -27,11 +27,11 @@ namespace dwg {
     CadDictionaryWithDefault::CadDictionaryWithDefault() {}
 
     dwg::ObjectType CadDictionaryWithDefault::ObjectType() const { return ObjectType::UNLISTED; }
-    std::string CadDictionaryWithDefault::ObjectName() const
+    CPL::String CadDictionaryWithDefault::ObjectName() const
     {
         return DxfFileToken::ObjectDictionaryWithDefault;
     }
-    std::string CadDictionaryWithDefault::SubclassMarker() const
+    CPL::String CadDictionaryWithDefault::SubclassMarker() const
     {
         return DxfSubclassMarker::DictionaryWithDefault;
     }

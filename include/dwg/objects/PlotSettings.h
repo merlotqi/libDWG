@@ -41,20 +41,20 @@ public:
     PlotSettings();
 
     dwg::ObjectType ObjectType() const { return ObjectType::INVALID; }
-    std::string ObjectName() const { return DxfFileToken::ObjectPlotSettings; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectPlotSettings; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::PlotSettings;
     }
 
     // 1
-    std::string PageName = "none_device";
+    CPL::String PageName = "none_device";
     // 2
-    std::string SystemPrinterName;
+    CPL::String SystemPrinterName;
     // 4
-    std::string PaperSize = "ISO_A4_(210.00_x_297.00_MM)";
+    CPL::String PaperSize = "ISO_A4_(210.00_x_297.00_MM)";
     // 6
-    std::string PlotViewName;
+    CPL::String PlotViewName;
     // 40, 41, 42, 43
     PaperMargin UnprintableMargin;
     // 44
@@ -92,7 +92,7 @@ public:
     // 74
     PlotType PlotType = PlotType::DrawingExtents;
     // 7
-    std::string StyleSheet;
+    CPL::String StyleSheet;
     // 75
     ScaledType ScaledFit;
     // 76

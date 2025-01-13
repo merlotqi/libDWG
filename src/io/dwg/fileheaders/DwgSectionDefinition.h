@@ -45,13 +45,13 @@ public:
     static constexpr auto Preview = "AcDb:Preview";
     static constexpr auto RevHistory = "AcDb:RevHistory";
 
-    static std::map<std::string, std::vector<unsigned char>> StartSentinels;
-    static std::map<std::string, std::vector<unsigned char>> EndSentinels;
+    static std::map<CPL::String, std::vector<unsigned char>> StartSentinels;
+    static std::map<CPL::String, std::vector<unsigned char>> EndSentinels;
 
     static int GetSectionLocatorByName(const char *name);
 };
 
-std::map<std::string, std::vector<unsigned char>>
+std::map<CPL::String, std::vector<unsigned char>>
         DwgSectionDefinition::StartSentinels = {
                 { Header,
                  {0xCF, 0x7B, 0x1F, 0x23, 0xFD, 0xDE, 0x38, 0xA9, 0x5F, 0x7C,
@@ -64,7 +64,7 @@ std::map<std::string, std::vector<unsigned char>>
                  0xCA, 0x3F, 0x9D, 0x44, 0x10, 0x2B}},
 };
 
-std::map<std::string, std::vector<unsigned char>>
+std::map<CPL::String, std::vector<unsigned char>>
         DwgSectionDefinition::EndSentinels = {
                 { Header,
                  {0x30, 0x84, 0xE0, 0xDC, 0x02, 0x21, 0xC7, 0x56, 0xA0, 0x83,

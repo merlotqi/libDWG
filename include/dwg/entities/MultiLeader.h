@@ -59,7 +59,7 @@ public:
         short Index;                             // 177
 
         double width;    // 44
-        std::string text;// 302
+        CPL::String text;// 302
     };
 
     MultiLeaderAnnotContext *contextData;

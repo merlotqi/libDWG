@@ -34,13 +34,13 @@ public:
     Arc();
     ~Arc();
     virtual dwg::ObjectType ObjectType() const overide;
-    virtual std::string ObjectName() const override;
-    virtual std::string SubclassMarker() const override;
+    virtual CPL::String ObjectName() const override;
+    virtual CPL::String SubclassMarker() const override;
     double StartAngle() const;
     double EndAngle() const;
     void StartAngle(double);
     void EndAngle(double);
 };
-SMARTER_PTR(Arc)
+CPL_SMARTER_PTR(Arc)
 
 }// namespace dwg

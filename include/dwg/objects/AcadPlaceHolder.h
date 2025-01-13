@@ -31,8 +31,8 @@ class AcdbPlaceHolder : public NonGraphicalObject
 public:
     AcdbPlaceHolder();
     dwg::ObjectType ObjectType() const { return ObjectType::ACDBPLACEHOLDER; }
-    std::string ObjectName() const { return DxfFileToken::ObjectPlaceholder; }
-    std::string SubclassMarker() const
+    CPL::String ObjectName() const { return DxfFileToken::ObjectPlaceholder; }
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::AcDbPlaceHolder;
     }

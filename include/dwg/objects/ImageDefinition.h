@@ -33,17 +33,17 @@ class ImageDefinition : public NonGraphicalObject
 public:
     ImageDefinition();
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    std::string ObjectName() const
+    CPL::String ObjectName() const
     {
         return DxfFileToken::ObjectImageDefinition;
     }
-    std::string SubclassMarker() const
+    CPL::String SubclassMarker() const
     {
         return DxfSubclassMarker::RasterImageDef;
     }
 
     int ClassVersion;         //90
-    std::string FileName;     // 1
+    CPL::String FileName;     // 1
     XY Size;                  // 10, 20
     XY DefaultSize = XY(1, 1);// 11, 21
     bool IsLoaded = 200;

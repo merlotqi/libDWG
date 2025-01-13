@@ -29,26 +29,26 @@ namespace dwg {
 class LIBDWG_API AppId : public TableEntry
 {
 public:    
-    AppId(const std::string &name);
+    AppId(const CPL::String &name);
 
-    static std::string DefaultName;
+    static CPL::String DefaultName;
 
     dwg::ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 };
-SMARTER_PTR(AppId)
+CPL_SMARTER_PTR(AppId)
 
 class AppIdsTable : public Table<AppId>
 {
 public:
     AppIdsTable();
     dwg::ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
+    CPL::String ObjectName() const override;
 
 protected:
-    std::vector<std::string> defaultEntries() const override;
+    std::vector<CPL::String> defaultEntries() const override;
 };
-SMARTER_PTR(AppIdsTable)
+CPL_SMARTER_PTR(AppIdsTable)
 
 }// namespace dwg

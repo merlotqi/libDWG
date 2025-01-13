@@ -39,7 +39,7 @@ class DwgAuxHeaderWriter : public DwgSectionIO
 
 
 public:
-    std::string SectionName() const;
+    CPL::String SectionName() const;
     DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding,
                        const CadHeader &header);
     void Write();
