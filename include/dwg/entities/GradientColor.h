@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/base/Color.h>
+#include <dwg/Color.h>
 
 namespace dwg {
 

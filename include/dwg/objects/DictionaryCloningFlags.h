@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -42,6 +42,6 @@ enum DictionaryCloningFlag : short
     /// Unmangle name.
     UnmangleName = 16
 };
-DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag)
+CPL_DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag)
 
 }// namespace dwg

@@ -22,47 +22,46 @@
 
 #pragma once
 
-#include <dwg/exports.h>
+#include <cpl_ports.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
-#include <dwg/utility/stringhelp.h>
-#include <dwg/utility/datetime.h>
+#include <dwg/exports.h>
 #include <map>
-#include <string>
+
 #include <vector>
 
 namespace dwg {
 
 class LIBDWG_API CadUtils
 {
-    static std::map<CPL::String, CodePage> _dxfEncodingMap;
+    static std::map<CPL::String, CPL::CodePageID> _dxfEncodingMap;
     static std::vector<LineweightType> _indexedValue;
-    static std::vector<CodePage> CadUtils::_pageCodes;
+    static std::vector<CPL::CodePageID> CadUtils::_pageCodes;
 
 public:
     static LineweightType ToValue(unsigned char b);
 
     static unsigned char ToIndex(LineweightType value);
 
-    static CodePage GetCodePage(CPL::String &value);
+    static CPL::CodePageID GetCodePage(CPL::String &value);
 
-    static CPL::String GetCodePageName(CodePage value);
+    static CPL::String GetCodePageName(CPL::CodePageID value);
 
-    static CodePage GetCodePage(int value);
+    static CPL::CodePageID GetCodePage(int value);
 
-    static int GetCodeIndex(CodePage code);
+    static int GetCodeIndex(CPL::CodePageID code);
 
     static ACadVersion GetVersionFromName(const CPL::String &name);
 
     static CPL::String GetNameFromVersion(ACadVersion version);
 
-    static double ToJulianCalendar(DateTime date);
+    static double ToJulianCalendar(CPL::DateTime date);
 
-    static DateTime FromJulianCalendar(double date);
+    static CPL::DateTime FromJulianCalendar(double date);
 
-    static Timespan EditingTime(double elapsed);
+    static CPL::Timespan EditingTime(double elapsed);
 
-    static void DateToJulian(DateTime date, int &jdate, int &miliseconds);
+    static void DateToJulian(CPL::DateTime date, int &jdate, int &miliseconds);
 };
 
 }// namespace dwg

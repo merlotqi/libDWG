@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -48,6 +48,6 @@ enum StyleFlag
     /// drawing was edited.
     Referenced = 64
 };
-DECLARE_FLAGS(StyleFlags, StyleFlag)
+CPL_DECLARE_FLAGS(StyleFlags, StyleFlag)
 
 }// namespace dwg

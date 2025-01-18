@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -36,6 +36,6 @@ enum LeaderLinePropertOverrideFlag : int
     ArrowheadSize = 16,
     Arrowhead = 32,
 };
-DECLARE_FLAGS(LeaderLinePropertOverrideFlags, LeaderLinePropertOverrideFlag)
+CPL_DECLARE_FLAGS(LeaderLinePropertOverrideFlags, LeaderLinePropertOverrideFlag)
 
 }// namespace dwg

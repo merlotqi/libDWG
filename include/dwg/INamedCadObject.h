@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <string>
-#include <cpl_port.h>
+#include <cpl_ports.h>
+
 
 namespace dwg {
 
@@ -31,10 +31,10 @@ class INamedCadObject : public CPL::RefObject
 {
 public:
     INamedCadObject() = default;
-    virtual ~INamedCadObject() = default;
+    virtual ~INamedCadObject() {};
     virtual CPL::String Name() const = 0;
 
-    Delegate<void(const CPL::String&, const CPL::String&)> OnNameChanged;
+    CPL::Delegate<void(const CPL::String &, const CPL::String &)> OnNameChanged;
 };
 CPL_SMARTER_PTR(INamedCadObject)
 

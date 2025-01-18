@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <dwg/LineweightType.h>
+#include <dwg/Color.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/tables/LayerFlags.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TableEntry.h>
-#include <dwg/base/Color.h>
 
 
 namespace dwg {

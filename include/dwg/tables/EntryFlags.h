@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -40,6 +40,6 @@ enum EntryFlag
     Referenced = 64
 };
 
-DECLARE_FLAGS(EntryFlags, EntryFlag)
+CPL_DECLARE_FLAGS(EntryFlags, EntryFlag)
 
 }// namespace dwg

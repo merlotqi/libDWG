@@ -24,7 +24,7 @@
 
 #include <ctime>
 #include <map>
-#include <string>
+
 
 namespace dwg {
 

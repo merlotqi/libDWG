@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -36,6 +36,6 @@ enum FontFlag
     /// Bold.
     Bold = 2
 };
-DECLARE_FLAGS(FontFlags, FontFlag)
+CPL_DECLARE_FLAGS(FontFlags, FontFlag)
 
 }// namespace dwg

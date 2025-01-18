@@ -22,133 +22,117 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/entities/AttachmentPointType.h>
 #include <dwg/entities/DimensionType.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/entities/LineSpacingStyleType.h>
-#include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
 
-class Dimension : public Entity
+class BlockRecord;
+CPL_SMARTER_PTR(BlockRecord)
+// The Dimension class represents a dimension entity in a CAD system,
+// providing properties and methods for dimension management and manipulation.
+class LIBDWG_API Dimension : public Entity
 {
+    unsigned char _version;// The version of the dimension entity
+    BlockRecord *_block;   // Pointer to the block associated with the dimension
+    XYZ _definitionPoint;// The definition point (e.g., the base point) of the dimension
+    XYZ _textMiddlePoint;// The middle point of the dimension text
+    XYZ _insertionPoint; // The insertion point of the dimension entity
+    XYZ _normal;// The normal vector for the dimension (usually related to the drawing plane)
+    DimensionType
+            _flags;// Flags indicating dimension-specific settings or properties
+    AttachmentPointType
+            _attachmentPoint;// The attachment point type for the dimension text
+    LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
+    double _lineSpacingFactor;// The factor affecting the line spacing for text
+    bool _flipArrow1;    // Boolean indicating if the first arrow is flipped
+    bool _flipArrow2;    // Boolean indicating if the second arrow is flipped
+    CPL::String _text;   // The text displayed in the dimension
+    double _textRotation;// Rotation angle for the dimension text
+    double _horizontalDirection;// Horizontal direction for text alignment
+    DimensionStyle *_dimStyle;  // Pointer to the associated dimension style
+
 public:
+    // Default constructor for the Dimension class
     Dimension();
+    virtual ~Dimension();
 
 public:
-    unsigned char version;                // 280
-    BlockRecord *block;           // 2, name
-    XYZ definitionPoint;                  // 10, 20, 30
-    XYZ textMiddlePoint;                  // 11, 21, 31
-    XYZ insertionPoint;                   // 12, 22, 32
-    XYZ normal;                           // 210, 220, 230
-    DimensionType flags;                  // 70
-    AttachmentPointType attachmentPoint;  // 71
-    LineSpacingStyleType lineSpacingStyle;// 72 optional
-    double lineSpacingFactor;             // 41, optional
-    bool flipArrow1;                      // 74
-    bool flipArrow2;                      // 75
-    CPL::String text;                     // 1, optional
-    double textRotation;                  // 53, optional
-    double horizontalDirection;           // 51, optional
-    DimensionStyle *dimStyle;     // 3, name
+    // Getter and setter for the version of the dimension
+    unsigned char Version() const;
+    void Version(unsigned char value);
 
-    virtual double measurement() const = 0;// 42, optional
+    // Getter and setter for the associated block record
+    BlockRecordPtr Block() const;
+    void Block(BlockRecord *value);
+
+    // Getter and setter for the definition point of the dimension
+    XYZ DefinitionPoint() const;
+    void DefinitionPoint(const XYZ &value);
+
+    // Getter and setter for the middle point of the dimension text
+    XYZ TextMiddlePoint() const;
+    void TextMiddlePoint(const XYZ &value);
+
+    // Getter and setter for the insertion point of the dimension
+    XYZ InsertionPoint() const;
+    void InsertionPoint(const XYZ &value);
+
+    // Getter and setter for the normal vector of the dimension
+    XYZ Normal() const;
+    void Normal(const XYZ &value);
+
+    // Getter and setter for the flags (dimension-specific properties)
+    DimensionType Flags() const;
+    void Flags(DimensionType value);
+
+    // Getter and setter for the attachment point type of the dimension text
+    AttachmentPointType AttachmentPoint() const;
+    void AttachmentPoint(AttachmentPointType value);
+
+    // Getter and setter for the line spacing style of the dimension text
+    LineSpacingStyleType LineSpacingStyle() const;
+    void LineSpacingStyle(LineSpacingStyleType value);
+
+    // Getter and setter for the line spacing factor (affects text spacing)
+    double LineSpacingFactor() const;
+    void LineSpacingFactor(double value);
+
+    // Getter and setter for flipping the first arrow of the dimension
+    bool FlipArrow1() const;
+    void FlipArrow1(bool value);
+
+    // Getter and setter for flipping the second arrow of the dimension
+    bool FlipArrow2() const;
+    void FlipArrow2(bool value);
+
+    // Getter and setter for the dimension text
+    const CPL::String &Text() const;
+    void Text(const CPL::String &value);
+
+    // Getter and setter for the text rotation angle
+    double TextRotation() const;
+    void TextRotation(double value);
+
+    // Getter and setter for the horizontal direction of the text
+    double HorizontalDirection() const;
+    void HorizontalDirection(double value);
+
+    // Getter and setter for the associated dimension style
+    DimensionStyle *DimStyle() const;
+    void DimStyle(DimensionStyle *value);
+
+    // Pure virtual method that must be implemented by derived classes to calculate the dimension measurement
+    virtual double Measurement() const = 0;
 
 public:
+    // Determines if the text position is user-defined
     bool IsTextUserDefinedLocation() const;
     void IsTextUserDefinedLocation(bool value);
 };
-
-class DimensionAligned : public Dimension
-{
-public:
-    DimensionAligned();
-    ~DimensionAligned();
-
-    XYZ firstPoint;        // 13, 23, 33
-    XYZ secondPoint;       // 14, 24, 34
-    double extLineRotation;// 52, optional
-
-    virtual double measurement() const override;// 42, optional
-};
-
-
-class DimensionAngular2Line : public Dimension
-{
-public:
-    DimensionAngular2Line();
-    ~DimensionAngular2Line();
-
-    XYZ firstPoint;  // 13, 23, 33
-    XYZ secondPoint; // 14, 24, 34
-    XYZ angleVertex; // 15, 25, 35
-    XYZ dimensionArc;// 16, 26, 36
-
-    virtual double measurement() const override;// 42, optional
-};
-
-class DimensionAngular3Pt : public Dimension
-{
-public:
-    DimensionAngular3Pt();
-    ~DimensionAngular3Pt();
-
-    XYZ firstPoint; // 13, 23, 33
-    XYZ secondPoint;// 14, 24, 34
-    XYZ angleVertex;// 15, 25, 35
-
-    virtual double measurement() const override;// 42, optional
-};
-
-class DimensionDiameter : public Dimension
-{
-public:
-    DimensionDiameter();
-    ~DimensionDiameter();
-
-    XYZ angleVertex;    // 15, 25, 35
-    double leaderLength;// 40
-
-    virtual double measurement() const override;// 42, optional
-};
-
-class DimensionLinear : public DimensionAligned
-{
-public:
-    DimensionLinear();
-    ~DimensionLinear();
-
-    double rotation;// 50
-};
-
-class DimensionOrdinate : public Dimension
-{
-public:
-    DimensionOrdinate();
-    ~DimensionOrdinate();
-
-    XYZ featureLocation;// 13, 23, 33
-    XYZ leaderEndpoint; // 14, 24, 34
-
-
-    virtual double measurement() const override;// 42, optional
-
-    bool IsOrdinateTypeX() const;
-    void IsOrdinateTypeX(bool value);
-};
-
-class DimensionRadius : public Dimension
-{
-public:
-    DimensionRadius();
-    ~DimensionRadius();
-
-    XYZ angleVertex;                            // 15, 25, 35
-    double leaderLength;                        // 40
-    virtual double measurement() const override;// 42, optional
-};
-
+CPL_SMARTER_PTR(Dimension)
 
 }// namespace dwg

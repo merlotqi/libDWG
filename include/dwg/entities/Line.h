@@ -32,17 +32,18 @@ class LIBDWG_API Line : public Entity
     XYZ _startPoint = XYZ::Zero;
     XYZ _endPoint = XYZ::Zero;
     double _thickness = 0.0;
+
 public:
     Line();
     ~Line();
-    dwg::ObjectType ObjectType() const overide;
+    dwg::ObjectType ObjectType() const override;
     CPL::String ObjectName() const override;
     CPL::String SubclassMarker() const override;
 
-    XYZ Normal() const;      
-    XYZ StartPoint() const;  
-    XYZ EndPoint() const; 
-    double Thickness() const;  
+    XYZ Normal() const;
+    XYZ StartPoint() const;
+    XYZ EndPoint() const;
+    double Thickness() const;
 
     void Normal(XYZ);
     void StartPoint(XYZ);

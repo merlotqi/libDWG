@@ -27,11 +27,9 @@
 #include <dwg/tables/StyleFlags.h>
 #include <dwg/tables/TableEntry.h>
 
-
 namespace dwg {
 
-
-class TextStyle : public TableEntry
+class LIBDWG_API TextStyle : public TableEntry
 {
 public:
     static constexpr auto DefaultName = "Standard";
@@ -79,7 +77,7 @@ public:
 
 TextStyle TextStyle::Default = TextStyle(TextStyle::DefaultName);
 
-class TextStylesTable : public Table<TextStyle>
+class LIBDWG_API TextStylesTable : public Table
 {
 public:
     TextStylesTable() = default;

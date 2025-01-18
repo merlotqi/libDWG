@@ -26,29 +26,61 @@
 
 namespace dwg {
 
-class LIBDWG_API Circle : Entity
+class LIBDWG_API Circle : public Entity
 {
+    // The center of the circle (in 3D space)
     XYZ _center = XYZ::Zero;
+
+    // The normal vector to the plane of the circle (default is the Z-axis)
     XYZ _normal = XYZ::AxisZ;
+
+    // The thickness of the circle (for 3D circles or discs)
     double _thickness = 0.0;
+
+    // The radius of the circle
     double _radius = 1.0;
 
 public:
+    // Default constructor
     Circle();
+
+    // Destructor
     virtual ~Circle();
-    virtual dwg::ObjectType ObjectType() const overide;
+
+    // Override to return the object type of the Circle
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
+
+    // Getter for the normal vector
     XYZ Normal() const;
+
+    // Getter for the center of the circle
     XYZ Center() const;
+
+    // Getter for the thickness of the circle
     double Thickness() const;
+
+    // Getter for the radius of the circle
     double Radius() const;
 
-    void Normal(XYZ );
+    // Setter for the normal vector
+    void Normal(XYZ);
+
+    // Setter for the center of the circle
     void Center(XYZ);
+
+    // Setter for the thickness of the circle
     void Thickness(double);
+
+    // Setter for the radius of the circle
     void Radius(double);
 };
+
 CPL_SMARTER_PTR(Circle)
 
 }// namespace dwg

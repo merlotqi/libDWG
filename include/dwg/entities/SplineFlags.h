@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -47,7 +47,7 @@ enum SplineFlag : unsigned short
     /// Linear (planar flag is also set)
     Linear = 16,
 };
-DECLARE_FLAGS(SplineFlags, SplineFlag)
+CPL_DECLARE_FLAGS(SplineFlags, SplineFlag)
 
 /// Defines the spline flags 1
 enum SplineFlag1 : unsigned short
@@ -67,6 +67,6 @@ enum SplineFlag1 : unsigned short
     /// Use knot parameter
     UseKnotParameter = 8,
 };
-DECLARE_FLAGS(SplineFlags1, SplineFlag1)
+CPL_DECLARE_FLAGS(SplineFlags1, SplineFlag1)
 
 }// namespace dwg

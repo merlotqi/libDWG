@@ -22,9 +22,13 @@
 
 #pragma once
 
+#include <cpl_ports.h>
 #include <dwg/ACadVersion.h>
+#include <dwg/Color.h>
+#include <dwg/Coordinate.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/entities/VerticalAlignmentType.h>
+#include <dwg/exports.h>
 #include <dwg/header/AttributeVisibilityMode.h>
 #include <dwg/header/DimensionAssociation.h>
 #include <dwg/header/EntityPlotStyleType.h>
@@ -45,21 +49,17 @@
 #include <dwg/tables/TextDirection.h>
 #include <dwg/tables/TextMovement.h>
 #include <dwg/tables/ToleranceAlignment.h>
+#include <dwg/tables/UCS.h>
 #include <dwg/tables/ZeroHandling.h>
 #include <dwg/units/AngularDirection.h>
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
 #include <dwg/units/UnitsType.h>
-#include <dwg/exports.h>
-#include <dwg/tables/UCS.h>
-#include <dwg/Color.h>
-#include <dwg/utility/stringhelp.h>
-#include <dwg/utility/datatime.h>
 
 namespace dwg {
 
 class CadDocument;
-class LIBDWG_API CadHeader
+class LIBDWG_API CadHeader : public CPL::RefObject
 {
 public:
     CadHeader();
@@ -247,18 +247,18 @@ public:
     // "$HANDSEED", 5
     unsigned long long HandleSeed = 0x0;
     // "$TDCREATE", 40
-    DateTime CreateDateTime;
+    CPL::DateTime CreateDateTime;
 
     // "$TDUCREATE", 40
-    DateTime UniversalCreateDateTime;
+    CPL::DateTime UniversalCreateDateTime;
     // "$TDUPDATE", 40
-    DateTime UpdateDateTime;
+    CPL::DateTime UpdateDateTime;
     // "$TDUUPDATE", 40
-    DateTime UniversalUpdateDateTime;
+    CPL::DateTime UniversalUpdateDateTime;
     // "$TDINDWG", 40
-    Timespan TotalEditingTime;
+    CPL::Timespan TotalEditingTime;
     // "$TDUSRTIMER", 40
-    Timespan UserElapsedTimeSpan;
+    CPL::Timespan UserElapsedTimeSpan;
     // "$CECOLOR", 62
     Color CurrentEntityColor = Color::ByLayer;
     // "$PSVPSCALE", 40
@@ -603,5 +603,6 @@ public:
     UCS PaperSpaceUcs;
     UCS PaperSpaceUcsBase;
 };
+CPL_SMARTER_PTR(CadHeader)
 
 }// namespace dwg

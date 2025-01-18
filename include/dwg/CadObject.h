@@ -22,15 +22,21 @@
 
 #pragma once
 
-#include <dwg/exports.h>
+// clang-format off
 #include <dwg/DxfFileToken.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/ObjectType.h>
+#include <dwg/exports.h>
 #include <dwg/objects/CadDictionary.h>
-#include <string>
+#include <dwg/tables/TableEntry.h>
+#include <dwg/CadObjectCollection.h>
+// clang-format on
 
 namespace dwg {
+
+class CadDocument;
+CPL_SMARTER_PTR(CadDocument)
 
 /// \brief Base class representing a CAD object with support for handle-based identification
 /// and ownership hierarchy.
@@ -41,7 +47,7 @@ protected:
     unsigned long long _handle;
 
     /// \brief Weak pointer to the owning CAD object.
-    WeakSmarterPtr<CadObject> _owner;
+    CPL::WeakSmarterPtr<CadObject> _owner;
 
     CadDocumentWPtr _document;
 
@@ -50,7 +56,7 @@ public:
     CadObject() = default;
 
     /// \brief Virtual destructor.
-    virtual ~CadObject() = default;
+    virtual ~CadObject() noexcept override;
 
     /// \brief Get the type of the CAD object.
     /// \details This method must be implemented by derived classes to return the specific
@@ -77,38 +83,33 @@ public:
     /// \brief Get the owning CAD object of this object.
     /// \details The ownership establishes a hierarchical relationship between CAD objects.
     /// \return A smart pointer to the owning CAD object, or nullptr if no owner is set.
-    SmarterPtr<CadObject> Owner();
+    CPL::SmarterPtr<CadObject> Owner();
 
     CadDocumentPtr Document();
 
-    void Document(CadDocument*);
+    void Document(CadDocument *);
 
-    virtual SmarterPtr<CadObject> Clone();
+    virtual CPL::SmarterPtr<CadObject> Clone();
 
 protected:
     /// \brief Set the unique handle of the CAD object.
     /// \param value The handle value to assign.
     void Handle(unsigned long long value);
-    
+
     /// \brief Set the owning CAD object for this object.
     /// \param obj Pointer to the new owning CAD object.
     void Owner(CadObject *obj);
 
-    virtual void AssignDocument(CadDocument* doc);
+    virtual void AssignDocument(CadDocument *doc);
     virtual void UnassignDocument();
+    TableEntryPtr updateTable(TableEntry *entity, TablePtr table);
 
-    template<class T>
-    SmarterPtr<T> updateTable(T* entity, Table<T>* table)
-    {
-        return NULL;
-    }
-
-    Template<class T>
-    SmarterPtr<T> updateCollection(T* entity, ObjectDictionaryCollection<T> * collection)
-    {
-        return NULL;
-    }
-
+    // template<class T>
+    // CPL::SmarterPtr<T>
+    // updateCollection(T *entity, ObjectDictionaryCollection<T> *collection)
+    // {
+    //     return NULL;
+    // }
 };
 CPL_SMARTER_PTR(CadObject)
 

@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -40,6 +40,6 @@ enum AttributeFlag
     /// Attribute is preset (no prompt during insertion).
     Preset = 8
 };
-DECLARE_FLAGS(AttributeFlags, AttributeFlag)
+CPL_DECLARE_FLAGS(AttributeFlags, AttributeFlag)
 
 }// namespace dwg

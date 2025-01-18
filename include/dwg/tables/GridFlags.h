@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -34,6 +34,6 @@ enum GridFlag : short
     _3 = 4,
     _4 = 8,
 };
-DECLARE_FLAGS(GridFlags, GridFlag)
+CPL_DECLARE_FLAGS(GridFlags, GridFlag)
 
 }// namespace dwg

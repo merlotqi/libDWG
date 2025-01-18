@@ -23,15 +23,16 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
+#include <dwg/base/Coordinate.h>
 #include <dwg/tables/DefaultLightingType.h>
 #include <dwg/tables/GridFlags.h>
+#include <dwg/tables/TableEntry.h>
 #include <dwg/tables/UscIconType.h>
 #include <dwg/tables/ViewModeType.h>
-#include <dwg/tables/TableEntry.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
+
 
 
 namespace dwg {

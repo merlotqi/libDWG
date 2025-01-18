@@ -22,12 +22,13 @@
 
 #pragma once
 
-#include <dwg/CadDocument.h>
 #include <dwg/ACadVersion.h>
+#include <dwg/CadDocument.h>
 #include <dwg/classes/ProxyFlags.h>
 #include <dwg/exports.h>
 #include <map>
-#include <string>
+
+
 
 namespace dwg {
 

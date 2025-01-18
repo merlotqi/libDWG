@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -75,6 +75,6 @@ enum PlotFlag
     PrevPlotInit = 16384
 };
 
-DECLARE_FLAGS(PlotFlags, PlotFlag)
+CPL_DECLARE_FLAGS(PlotFlags, PlotFlag)
 
 }// namespace dwg

@@ -11,6 +11,6 @@ add_subdirectory(src)
 if(WIN32)
     target_compile_definitions(dwg PRIVATE LIBDWG_EXPORTS)
 endif()
-target_link_libraries(dwg PRIVATE cpl)
+target_link_libraries(dwg CPL::cpl)
 
 add_subdirectory(examples)

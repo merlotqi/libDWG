@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 /// Defines which edges are hidden.
@@ -39,6 +39,6 @@ enum InvisibleEdgeFlag
     /// Fourth edge is invisible.
     Fourth = 8
 };
-DECLARE_FLAGS(InvisibleEdgeFlags, InvisibleEdgeFlag)
+CPL_DECLARE_FLAGS(InvisibleEdgeFlags, InvisibleEdgeFlag)
 
 }// namespace dwg

@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <algorithm>
+#include <assert.h>
 #include <dwg/CadObject.h>
 #include <dwg/DxfFileToken.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/INamedCadObject.h>
-#include <dwg/tables/StandardFlags.h>
 #include <dwg/exports.h>
-#include <assert.h>
+#include <dwg/tables/StandardFlags.h>
 
 namespace dwg {
 
@@ -37,6 +36,7 @@ class LIBDWG_API TableEntry : public CadObject, INamedCadObject
 {
 public:
     TableEntry(const CPL::String &name);
+    ~TableEntry();
     CPL::String SubclassMarker() const override;
     virtual CPL::String Name() const;
     virtual void Name(const CPL::String &value);
@@ -51,73 +51,26 @@ protected:
 };
 CPL_SMARTER_PTR(TableEntry)
 
-
-template<typename T>
 class Table : public CadObject
 {
-    std::map<CPL::String, SmarterPtr<T>> _entries;
+    std::map<CPL::String, TableEntryPtr> _entries;
 
 public:
     Table();
     CPL::String ObjectName() const override;
     CPL::String SubclassMarker() const override;
-
-    SmarterPtr<T> operator[](const CPL::String &key) const 
-    {
-        return _entries[key];
-    }
-
-    void Add(T *entry)
-    {
-        assert(entry);
-        auto itFind = _entries.find(entry->Name());
-        if(itFind != _entries.end())
-        {
-            // exist entry
-            return;
-        }
-        _entries[entry->Name()] = entry;
-    }
-
+    TableEntryPtr operator[](const CPL::String &key) const;
+    void Add(TableEntry *entry);
     bool Contains(const CPL::String &key);
-
-    SmarterPtr<T> GetValue(const CPL::String& key)
-    {
-        if(!Contains(key))
-            return NULL;
-
-        return _entries[key];
-    }
-
-    void CreateDefaultEntries()
-    {
-        auto &&entris = defaultEntries();
-        for (auto &&entry: entris)
-        {
-            if (Contains(entry)) continue;
-
-            Add(new T(entry));
-        }
-    }
+    TableEntryPtr GetValue(const CPL::String &key);
+    void CreateDefaultEntries();
 
 protected:
-    void add(const CPL::String &key, T *item)
-    {
-        assert(item);
-        _entries.insert({key, item});
-        item->Owner(this);
-    }
-
-    void addHandlePrefix(T *item)
-    {
-        assert(item);
-        item->Owner(this);
-        CPL::String key = fmt::format("%llu:%s", item->Handle(), item->Name());
-        _entries.insert({key, item});
-    }
-
+    void add(const CPL::String &key, TableEntry *item);
+    void addHandlePrefix(TableEntry *item);
     virtual std::vector<CPL::String> defaultEntries() const = 0;
 };
+CPL_SMARTER_PTR(Table)
 
 
 }// namespace dwg

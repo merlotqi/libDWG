@@ -25,7 +25,7 @@
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <map>
-#include <string>
+
 #include <vector>
 
 namespace dwg {
@@ -58,9 +58,18 @@ public:
 public:
     CadDictionary();
     CadDictionary(const CPL::String &name);
-     dwg::ObjectType ObjectType() const override {return dwg::ObjectType::DICTIONARY;}
-     CPL::String ObjectName() const override {return DxfFileToken::ObjectDictionary;}
-     CPL::String SubclassMarker() const override {return DxfSubclassMarker::Dictionary;}
+    dwg::ObjectType ObjectType() const override
+    {
+        return dwg::ObjectType::DICTIONARY;
+    }
+    CPL::String ObjectName() const override
+    {
+        return DxfFileToken::ObjectDictionary;
+    }
+    CPL::String SubclassMarker() const override
+    {
+        return DxfSubclassMarker::Dictionary;
+    }
 
     void Add(const CPL::String &key, NonGraphicalObject *value);
     void Add(NonGraphicalObject *value);
@@ -70,24 +79,26 @@ public:
     void Clear();
 
     bool HardOwnerFlag() const;
-    void HardOwnerFlag(bool );
+    void HardOwnerFlag(bool);
 
     DictionaryCloningFlags ClonningFlags() const;
-    void ClonningFlags(DictionaryCloningFlags );
-    
+    void ClonningFlags(DictionaryCloningFlags);
+
     std::vector<CPL::String> EntryName() const;
     std::vector<unsigned long long> EntryHandles() const;
 
     CadObjectPtr operator[](const CPL::String &key);
 
-    static SmarterPtr<CadDictionary> CreateRoot();
+    static CPL::SmarterPtr<CadDictionary> CreateRoot();
     static void CreateDefaultEntries(CadDictionary *root);
 
     NonGraphicalObjectPtr TryGetEntry(const CPL::String &name);
 
 private:
-    SmarterPtr<CadDictionary> ensureCadDictionaryExist(const CPL::String& name);
-    void onEntryNameChanged(const CPL::String& olName, const CPL::String& newName);
+    CPL::SmarterPtr<CadDictionary>
+    ensureCadDictionaryExist(const CPL::String &name);
+    void onEntryNameChanged(const CPL::String &olName,
+                            const CPL::String &newName);
 };
 CPL_SMARTER_PTR(CadDictionary)
 

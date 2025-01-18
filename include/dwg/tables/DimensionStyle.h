@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/DxfSubclassMarker.h>
 #include <dwg/LineweightType.h>
 #include <dwg/tables/ArcLengthSymbolPosition.h>
@@ -29,6 +30,7 @@
 #include <dwg/tables/DimensionTextHorizontalAlignment.h>
 #include <dwg/tables/DimensionTextVerticalAlignment.h>
 #include <dwg/tables/FractionFormat.h>
+#include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextArrowFitType.h>
 #include <dwg/tables/TextDirection.h>
 #include <dwg/tables/TextMovement.h>
@@ -36,8 +38,7 @@
 #include <dwg/tables/ZeroHandling.h>
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
-#include <dwg/tables/TableEntry.h>
-#include <dwg/base/Color.h>
+
 
 
 namespace dwg {
@@ -78,8 +79,7 @@ public:
     DimensionTextVerticalAlignment TextVerticalAlignment =
             DimensionTextVerticalAlignment::Above;
     // 78
-    ZeroHandling ZeroHandling =
-            ZeroHandling::SuppressDecimalTrailingZeroes;
+    ZeroHandling ZeroHandling = ZeroHandling::SuppressDecimalTrailingZeroes;
     // 170
     bool AlternateUnitDimensioning = false;
     // 171
@@ -119,15 +119,13 @@ public:
     // 270
     short DimensionUnit = 2;
     // 275
-    AngularUnitFormat AngularUnit =
-            AngularUnitFormat::DecimalDegrees;
+    AngularUnitFormat AngularUnit = AngularUnitFormat::DecimalDegrees;
     // 271
     short DecimalPlaces = 2;
     // 272
     short ToleranceDecimalPlaces = 2;
     // 273
-    LinearUnitFormat AlternateUnitFormat =
-            LinearUnitFormat::Decimal;
+    LinearUnitFormat AlternateUnitFormat = LinearUnitFormat::Decimal;
     // 274
     short AlternateUnitToleranceDecimalPlaces = 3;
     // 40

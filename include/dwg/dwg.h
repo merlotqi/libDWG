@@ -1,7 +1,5 @@
-/******************************************************************************
+/**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
- *
- * Copyright (C) 2024 Merlot.Rain <merlotrain@gmail.com>
  *
  * This file is part of libDWG.
  *
@@ -20,9 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * For more information, visit the project's homepage or contact the author.
- *
- * Author's email: merlotrain@gmail.com
- ******************************************************************************
  */
 
 #pragma once

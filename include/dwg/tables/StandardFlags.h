@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/utility/flags.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -42,6 +42,6 @@ enum StandardFlag : short
     /// drawing was edited.
     Referenced = 64,
 };
-DECLARE_FLAGS(StandardFlags, StandardFlag)
+CPL_DECLARE_FLAGS(StandardFlags, StandardFlag)
 
 }// namespace dwg

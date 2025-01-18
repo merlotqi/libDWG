@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -48,6 +48,6 @@ enum PolylineFlag
     /// The line type pattern is generated continuously around the vertexes of this polyline.
     ContinuousLinetypePattern = 128
 };
-DECLARE_FLAGS(PolylineFlags, PolylineFlag)
+CPL_DECLARE_FLAGS(PolylineFlags, PolylineFlag)
 
 }// namespace dwg

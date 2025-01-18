@@ -23,10 +23,10 @@
 #pragma once
 
 #include <dwg/OrthographicType.h>
+#include <dwg/base/Coordinate.h>
 #include <dwg/objects/LayoutFlags.h>
 #include <dwg/objects/PlotSettings.h>
-#include <dwg/base/Coordinate.h>
-#include <string>
+
 
 namespace dwg {
 

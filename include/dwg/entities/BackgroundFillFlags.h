@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -41,6 +41,6 @@ enum BackgroundFillFlag : unsigned char
     /// Adds a text frame
     TextFrame = 16,// 0x10
 };
-DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
+CPL_DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
 
 }// namespace dwg

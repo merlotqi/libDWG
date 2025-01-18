@@ -26,13 +26,13 @@
 #include <dwg/entities/ViewportStatusFlags.h>
 #include <dwg/tables/Layer.h>
 
+#include <dwg/Color.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
 #include <dwg/entities/LightingType.h>
-#include <dwg/objects/ShadePlotMode.h>
 #include <dwg/objects/Scale.h>
+#include <dwg/objects/ShadePlotMode.h>
 #include <dwg/objects/VisualStyle.h>
-#include <dwg/base/Color.h>
 
 namespace dwg {
 
@@ -97,7 +97,7 @@ public:
 
     OrthographicType ucsOrthographicType;// 79
 
-    double elevation;                    // 146
+    double elevation;           // 146
     ShadePlotMode shadePlotMode;// 170
 
     short MajorGridLineFrequency;// 61

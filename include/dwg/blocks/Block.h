@@ -22,47 +22,83 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/tables/BlockRecord.h>
+#include <dwg/entities/Entity.h>
 
 namespace dwg {
 
+class BlockRecord;
+CPL_SMARTER_PTR(BlockRecord);
+
 class LIBDWG_API Block : public Entity
 {
+    // Block's name (string representation)
     CPL::String _name;
+
+    // Flags associated with the block type
     BlockTypeFlags _flags;
+
+    // Base point of the block, default initialized to zero
     XYZ _base_point = XYZ::Zero;
+
+    // Path to the external reference (xref) associated with the block
     CPL::String _xrefPath;
+
+    // Comments or description related to the block
     CPL::String _comments;
+
 public:
+    // Constructor accepting a BlockRecord pointer
     Block(BlockRecord *record);
+
+    // Destructor
     ~Block();
 
+    // Overrides the ObjectType method to return the type of object
     dwg::ObjectType ObjectType() const override;
+
+    // Overrides the ObjectName method to return the object's name
     CPL::String ObjectName() const override;
+
+    // Overrides the SubclassMarker method to return the subclass marker
     CPL::String SubclassMarker() const override;
 
+    // Returns the associated BlockRecord pointer
     BlockRecordPtr BlockRecord() const;
 
+    // Getter for the block's name
     CPL::String Name() const;
-    void Name(const CPL::String& name);
 
+    // Setter for the block's name
+    void Name(const CPL::String &name);
+
+    // Getter for the block's flags
     BlockTypeFlags Flags() const;
+
+    // Setter for the block's flags
     void Flags(BlockTypeFlags flags);
 
+    // Getter for the block's base point
     XYZ BasePoint() const;
+
+    // Setter for the block's base point
     void BasePoint(XYZ p);
 
+    // Getter for the block's xref path
     CPL::String XrefPath() const;
-    void XrefPath(const CPL::String& value);
 
+    // Setter for the block's xref path
+    void XrefPath(const CPL::String &value);
+
+    // Getter for the block's comments
     CPL::String Comments() const;
-    void Comments(const CPL::String& value);
+
+    // Setter for the block's comments
+    void Comments(const CPL::String &value);
 
 protected:
+    // Protected default constructor
     Block();
-
 };
 CPL_SMARTER_PTR(Block)
 

@@ -22,10 +22,11 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/objects/MLineStyleFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/base/Color.h>
+
 
 
 namespace dwg {

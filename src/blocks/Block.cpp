@@ -21,29 +21,48 @@
  */
 
 #include <dwg/blocks/Block.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-Block::Block()
-{}
+Block::Block(BlockRecord *record) { _owner = record; }
 
-Block::~Block()
-{
-    
-}
+Block::Block() {}
 
-dwg::ObjectType Block::ObjectType() const
-{
-    return dwg::ObjectType::BLOCK;
-}
+Block::~Block() {}
 
-CPL::String Block::ObjectName() const 
-{ 
-    return DxfFileToken::Block; 
-} 
+dwg::ObjectType Block::ObjectType() const { return dwg::ObjectType::BLOCK; }
+
+CPL::String Block::ObjectName() const { return DxfFileToken::Block; }
 
 CPL::String Block::SubclassMarker() const
 {
     return DxfSubclassMarker::BlockBegin;
 }
+
+BlockRecordPtr Block::BlockRecord() const
+{
+    return dynamic_cast<BlockRecord *>(_owner);
 }
+
+CPL::String Block::Name() const { return _name; }
+
+void Block::Name(const CPL::String &name) { _name = name; }
+
+BlockTypeFlags Block::Flags() const { return _flags; }
+
+void Block::Flags(BlockTypeFlags flags) { _flags = flags; }
+
+XYZ Block::BasePoint() const { return _base_point; }
+
+void Block::BasePoint(XYZ p) { _base_point = p; }
+
+CPL::String Block::XrefPath() const { return _xrefPath; }
+
+void Block::XrefPath(const CPL::String &value) { _xrefPath = value; }
+
+CPL::String Block::Comments() const { return _comments; }
+
+void Block::Comments(const CPL::String &value) { _comments = value; }
+
+}// namespace dwg

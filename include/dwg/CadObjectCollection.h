@@ -22,9 +22,8 @@
 
 #pragma once
 
-#include <vector>
 #include <dwg/CadObject.h>
-#include <dwg/utility/delegate.h>
+#include <vector>
 
 namespace dwg {
 
@@ -67,13 +66,13 @@ public:
     /// \return Smart pointer to the CAD object at the specified index.
     CadObjectPtr operator[](int index);
 
-    /// \brief Delegate triggered when a CAD object is added to the collection.
+    /// \brief CPL::Delegate triggered when a CAD object is added to the collection.
     /// \details This allows registering custom callbacks that will execute when an object is added.
-    Delegate<void(CadObject *)> OnAdd;
+    CPL::Delegate<void(CadObject *)> OnAdd;
 
-    /// \brief Delegate triggered when a CAD object is removed from the collection.
+    /// \brief CPL::Delegate triggered when a CAD object is removed from the collection.
     /// \details This allows registering custom callbacks that will execute when an object is removed.
-    Delegate<void(CadObject *)> OnRemove;
+    CPL::Delegate<void(CadObject *)> OnRemove;
 };
 
 

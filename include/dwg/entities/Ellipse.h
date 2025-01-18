@@ -26,34 +26,71 @@
 
 namespace dwg {
 
-class LIBDWG_API Ellipse : Entity
+class LIBDWG_API Ellipse : public Entity
 {
-    XYZ _normal = XYZ::AxisZ;
-    XYZ _center = XYZ::Zero;
-    XYZ _endPoint = XYZ XAxisX;
-    double _radiusRatio = 0.0;
-    double _startParameter = 0.0;
-    double _endParameter = 2 * M_PI;
+    XYZ _normal = XYZ::AxisZ;  // The normal vector of the ellipse (default is Z-axis)
+    XYZ _center = XYZ::Zero;   // The center point of the ellipse (default is the origin)
+    XYZ _endPoint = XYZ::AxisX; // A point on the ellipse (default is on the X-axis)
+    double _radiusRatio = 0.0;  // The ratio of the radii (default is 0)
+    double _startParameter = 0.0;  // The start parameter for the ellipse (default is 0)
+    double _endParameter = 2 * M_PI; // The end parameter for the ellipse (default is 2π)
+
 public:
+    // Default constructor
     Ellipse();
+
+    // Destructor
     ~Ellipse();
-    dwg::ObjectType ObjectType() const overide;
+
+    // Get the object type of the ellipse
+    dwg::ObjectType ObjectType() const override;
+
+    // Get the object name of the ellipse
     CPL::String ObjectName() const override;
+
+    // Get the subclass marker of the ellipse
     CPL::String SubclassMarker() const override;
+
+    // Get the normal vector of the ellipse
     XYZ Normal() const;
+
+    // Get the center of the ellipse
     XYZ Center() const;
+
+    // Get a point on the ellipse
     XYZ EndPoint() const;
+
+    // Get the thickness of the ellipse
     double Thickness() const;
+
+    // Get the radius ratio of the ellipse
     double RadiusRatio() const;
+
+    // Get the start parameter of the ellipse
     double StartParameter() const;
+
+    // Get the end parameter of the ellipse
     double EndParameter() const;
 
+    // Set the normal vector of the ellipse
     void Normal(XYZ);
+
+    // Set the center of the ellipse
     void Center(XYZ);
+
+    // Set a point on the ellipse
     void EndPoint(XYZ);
+
+    // Set the thickness of the ellipse
     void Thickness(double);
+
+    // Set the radius ratio of the ellipse
     void RadiusRatio(double);
+
+    // Set the start parameter of the ellipse
     void StartParameter(double);
+
+    // Set the end parameter of the ellipse
     void EndParameter(double);
 };
 CPL_SMARTER_PTR(Ellipse)

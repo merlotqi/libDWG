@@ -26,10 +26,11 @@
 
 namespace dwg {
 
-class AcdbPlaceHolder : public NonGraphicalObject
+class LIBDWG_API AcdbPlaceHolder : public NonGraphicalObject
 {
 public:
     AcdbPlaceHolder();
+    ~AcdbPlaceHolder();
     dwg::ObjectType ObjectType() const { return ObjectType::ACDBPLACEHOLDER; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectPlaceholder; }
     CPL::String SubclassMarker() const

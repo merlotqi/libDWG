@@ -22,9 +22,10 @@
 
 #pragma once
 
+#include <dwg/Color.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/entities/AttributeDefinition.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/LineWeightType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
 #include <dwg/objects/LeaderContentType.h>
@@ -32,7 +33,7 @@
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/base/Color.h>
+
 
 
 #include <dwg/TextAlignmentType.h>
@@ -69,7 +70,7 @@ public:
     MultiLeaderPathType pathType;                          // 170
     Color lineColoe;                                       // 91
 
-    LineType leaderLineType;// 341
+    LineType leaderLineType;        // 341
     LineweightType leaderLineWeight;// 171
 
     bool enableLanding;    // 290
@@ -83,7 +84,7 @@ public:
     LeaderContentType contentType;// 172
 
 
-    TextStyle *textStyle;          // 343
+    TextStyle *textStyle;                  // 343
     TextAttachmentType textLeftAttachment; // 173
     TextAttachmentType textRightAttachment;// 95
     TextAngleType textAngle;               // 174
@@ -91,7 +92,7 @@ public:
     Color textColor;                       // 92
     bool textFrame;                        // 292
 
-    BlockRecord *blockContent;                // 344
+    BlockRecord *blockContent;                        // 344
     Color blockContentColor;                          // 93
     XYZ blockContentScale;                            // 10, 20, 30
     double blockContentRotation;                      // 43

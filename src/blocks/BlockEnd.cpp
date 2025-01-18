@@ -21,12 +21,19 @@
  */
 
 #include <dwg/blocks/BlockEnd.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-CPL::String BlockEnd::ObjectName() const { return DxfFileToken::EndBlock;}
+BlockEnd::BlockEnd(BlockRecord *record) { _owner = record; }
 
-dwg::ObjectType BlockEnd::ObjectType() const { return dwg::ObjectType::ENDBLK;}
+CPL::String BlockEnd::ObjectName() const { return DxfFileToken::EndBlock; }
 
-CPL::String BlockEnd::SubclassMarker() const { return DxfSubclassMarker::BlockEnd;}
+dwg::ObjectType BlockEnd::ObjectType() const { return dwg::ObjectType::ENDBLK; }
+
+CPL::String BlockEnd::SubclassMarker() const
+{
+    return DxfSubclassMarker::BlockEnd;
 }
+
+}// namespace dwg

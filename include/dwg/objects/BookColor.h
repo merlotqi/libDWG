@@ -23,16 +23,16 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/base/Color.h>
 
 namespace dwg {
 
-class BookColor : NonGraphicalObject
+class LIBDWG_API BookColor : NonGraphicalObject
 {
 public:
     BookColor();
-    BookColor(const CPL::String &name) : NonGraphicalObject(name) {}
+    BookColor(const CPL::String &name);
 
     dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectDBColor; }

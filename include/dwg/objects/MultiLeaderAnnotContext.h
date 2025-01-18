@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/FlowDirectionType.h>
 #include <dwg/LineSpacingStyle.h>
 #include <dwg/LineweightType.h>
@@ -29,6 +30,8 @@
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
+#include <dwg/base/Coordinate.h>
+#include <dwg/base/Matrix.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/objects/LeaderLinePropertOverrideFlags.h>
@@ -36,9 +39,6 @@
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TextStyle.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
-#include <dwg/base/Matrix.h>
 
 namespace dwg {
 
@@ -69,9 +69,9 @@ public:
         int BreakInfoCount;
         int SegmentIndex;
         std::vector<StartEndPointPair> StartEndPoints;
-        int Index;                             // 91
+        int Index;                   // 91
         MultiLeaderPathType PathType;// 170
-        Color LineColor;                       // 92
+        Color LineColor;             // 92
         LineType LineType;
         LineweightType LineWeight;// 171
         double ArrowheadSize;     // 40
@@ -93,19 +93,19 @@ public:
     };
 
     std::vector<LeaderRoot> LeaderRoots;
-    double ScaleFactor;                                         // 40
-    XYZ ContentBasePoint;                                       // 10,20,30
-    double TextHeight;                                          // 41
-    double ArrowheadSize;                                       // 140
-    double LandingGap;                                          // 145
-    TextAttachmentType TextLeftAttachment;                      // 174
-    TextAttachmentType TextRightAttachment;                     // 175
-    TextAlignmentType TextAlignment;                            // 176
+    double ScaleFactor;                               // 40
+    XYZ ContentBasePoint;                             // 10,20,30
+    double TextHeight;                                // 41
+    double ArrowheadSize;                             // 140
+    double LandingGap;                                // 145
+    TextAttachmentType TextLeftAttachment;            // 174
+    TextAttachmentType TextRightAttachment;           // 175
+    TextAlignmentType TextAlignment;                  // 176
     BlockContentConnectionType BlockContentConnection;// 177
-    bool HasTextContents;                                       // 290
-    CPL::String TextLabel;                                      // 304
-    XYZ TextNormal;                                             // 11,21,31
-    TextStyle TextStyle;                                // 340
+    bool HasTextContents;                             // 290
+    CPL::String TextLabel;                            // 304
+    XYZ TextNormal;                                   // 11,21,31
+    TextStyle TextStyle;                              // 340
 
     XYZ TextLocation;// 12,22,32
     XYZ Direction;   // 13,23,33

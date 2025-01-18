@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -51,6 +51,6 @@ enum LayerFlag : short
     /// drawing was edited.
     Referenced = 64
 };
-DECLARE_FLAGS(LayerFlags, LayerFlag)
+CPL_DECLARE_FLAGS(LayerFlags, LayerFlag)
 
 }// namespace dwg

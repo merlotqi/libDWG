@@ -30,10 +30,26 @@ namespace dwg {
 class IPolyline : public Entity
 {
 public:
-    bool IsClosed;
-    double Elevation;
-    XY Normal;
-    double Thickness;
+    IPolyline();
+    virtual ~IPolyline();
+    
+    bool IsClosed() const;
+    void IssClosed(bool value);
+
+    double Elevation() const;
+    void Elevation(double value);
+
+    XY Normal() const;
+    void Normal(XY value);
+
+    double Thickness() const;
+    void Thickness(double value);
+
+protected:
+    bool _isClosed;
+    double _elevation;
+    XY _normal;
+    double _thickness;
 };
 
 }// namespace dwg

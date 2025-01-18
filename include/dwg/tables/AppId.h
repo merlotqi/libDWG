@@ -28,8 +28,9 @@ namespace dwg {
 
 class LIBDWG_API AppId : public TableEntry
 {
-public:    
+public:
     AppId(const CPL::String &name);
+    ~AppId();
 
     static CPL::String DefaultName;
 
@@ -39,7 +40,7 @@ public:
 };
 CPL_SMARTER_PTR(AppId)
 
-class AppIdsTable : public Table<AppId>
+class AppIdsTable : public Table
 {
 public:
     AppIdsTable();

@@ -24,7 +24,7 @@
 
 #include <dwg/CadObject.h>
 #include <dwg/INamedCadObject.h>
-#include <string>
+
 
 namespace dwg {
 
@@ -38,13 +38,13 @@ public:
 
     NonGraphicalObject(const CPL::String &name);
 
-    virtual ~NonGraphicalObject();
+    virtual ~NonGraphicalObject() override;
 
     CPL::String Name() const override;
-    
+
     void Name(const CPL::String &value);
 
-    Delegate<void(const CPL::String&, const CPL::String&)> OnNameChanged;
+    CPL::Delegate<void(const CPL::String &, const CPL::String &)> OnNameChanged;
 };
 CPL_SMARTER_PTR(NonGraphicalObject)
 

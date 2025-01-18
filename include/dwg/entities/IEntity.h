@@ -20,20 +20,26 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/Layer.h>
-#include <dwg/tables/LineType.h>
 #include <dwg/Color.h>
-#include <dwg/LineweightType.h>
+#include <dwg/IHandledCadObject.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/Transparency.h>
-#include <dwg/IHandleCadObject.h>
 
 namespace dwg {
 
-class LIBDWG_API IEntity : public IHandledCadObject
+class Layer;
+CPL_SMARTER_PTR(Layer)
+class LineType;
+CPL_SMARTER_PTR(LineType)
+class BookColor;
+CPL_SMARTER_PTR(BookColor)
+
+class IEntity : public IHandledCadObject
 {
 public:
+    virtual ~IEntity() noexcept {}
     virtual LayerPtr Layer() const = 0;
-    virtual void Layer(Layer*) = 0;
+    virtual void Layer(dwg::Layer *) = 0;
     virtual dwg::Color Color() const = 0;
     virtual void Color(dwg::Color) = 0;
     virtual LineweightType Lineweight() const = 0;
@@ -41,16 +47,16 @@ public:
     virtual double LinetypeScale() const = 0;
     virtual void LinetypeScale(double) = 0;
     virtual bool IsInvisible() const = 0;
-    virtual void IsInvisible(bool ) = 0;
+    virtual void IsInvisible(bool) = 0;
     virtual dwg::Transparency Transparency() const = 0;
     virtual void Transparency(dwg::Transparency) = 0;
     virtual LineTypePtr LineType() const = 0;
-    virtual void LineType(dwg::LineType* ) const = 0;
+    virtual void LineType(dwg::LineType *) const = 0;
     // Material object (present if not BYLAYER)
     // virtual MaterialPtr Material() const = 0;
     // virtual void Material(dwg::Material*) = 0;
-    virtual void MatchProperties(IEntity* entity) = 0;
+    virtual void MatchProperties(IEntity *entity) = 0;
 };
 CPL_SMARTER_PTR(IEntity)
 
-}
+}// namespace dwg

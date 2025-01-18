@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -61,6 +61,6 @@ enum BoundaryPathFlag
     /// Describes if the hatch is an annotative block.
     IsAnnotativeBlock = 8192,
 };
-DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
+CPL_DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
 
 }// namespace dwg

@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -41,6 +41,6 @@ enum LinetypeShapeFlag : short
     /// Complex shape code holds the index into the text area of the string to be drawn.
     Shape = 4,
 };
-DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag)
+CPL_DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag)
 
 }// namespace dwg

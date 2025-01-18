@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/utility/Flags.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -59,6 +59,6 @@ enum ProxyFlag : unsigned short
     /// R13 format proxy.
     R13FormatProxy = 32768,
 };
-DECLARE_FLAGS(ProxyFlags, ProxyFlag)
+CPL_DECLARE_FLAGS(ProxyFlags, ProxyFlag)
 
 }// namespace dwg

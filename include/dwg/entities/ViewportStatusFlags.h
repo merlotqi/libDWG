@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 namespace dwg {
 
 /// viewport status flags
@@ -92,6 +92,6 @@ enum ViewportStatusFlag
     SubdivisionGridBelowSpacing = 1048576
 };
 
-DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag)
+CPL_DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag)
 
 }// namespace dwg

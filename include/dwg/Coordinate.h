@@ -22,17 +22,52 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
-/// Polyline flag (bit-coded)
-enum LwPolylineFlag
+struct XYZ
 {
-    Default = 0,
-    Closed = 1,
-    Plinegen = 128
+    union
+    {
+        struct
+        {
+            double X;
+            double Y;
+            double Z;
+        };
+        double u[3];
+    };
+    static XYZ Zero;
+    static XYZ AxisX;
+    static XYZ AxisY;
+    static XYZ AxisZ;
+    XYZ() : X(0), Y(0), Z(0) {}
+    XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
+    double operator[](int index) const;
+    double &operator[](int index);
 };
-CPL_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
+struct XY
+{
+    union
+    {
+        struct
+        {
+            double X;
+            double Y;
+        };
+        double u[2];
+    };
+    static XY Zero;
+    XY() : X(0), Y(0) {}
+    XY(double x, double y) : X(x), Y(y) {}
+    double operator[](int index) const;
+    double &operator[](int index);
+};
+struct Matrix4
+{
+    double m00, m01, m02, m03;
+    double m10, m11, m12, m13;
+    double m20, m21, m22, m23;
+    double m30, m31, m32, m33;
+};
 
 }// namespace dwg

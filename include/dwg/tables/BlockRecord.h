@@ -25,11 +25,11 @@
 #include <dwg/CadObjectCollection.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
-#include <dwg/entities/Viewport.h>
 #include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/units/UnitsType.h>
+#include <dwg/entities/Viewport.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/units/UnitsType.h>
 
 namespace dwg {
 
@@ -79,7 +79,7 @@ public:
     bool IsExplodable;                 // 280
     bool CanScale;                     // 281
     std::vector<unsigned char> Preview;// 310
-    Layout *Layout;           // handle 340
+    Layout *Layout;                    // handle 340
     unsigned long long LayoutHandle;   // 340
 
     bool HasAttributes;
@@ -90,19 +90,13 @@ public:
     BlockEnd BlockEnd;
 };
 
-class BlockRecordsTable : public Table<BlockRecord>
+class BlockRecordsTable : public Table
 {
 public:
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::APPID_CONTROL_OBJ;
-    }
+    dwg::ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
-    }
+    std::vector<CPL::String> defaultEntries() const;
 };
 
 }// namespace dwg

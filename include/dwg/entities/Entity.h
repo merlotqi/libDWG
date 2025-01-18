@@ -22,7 +22,9 @@
 
 #pragma once
 
-#include <dwg/entitis/IEntity.h>
+#include <dwg/CadObject.h>
+#include <dwg/Coordinate.h>
+#include <dwg/entities/IEntity.h>
 
 namespace dwg {
 
@@ -35,24 +37,13 @@ class LIBDWG_API Entity : public CadObject, IEntity
     bool _isInvisible;
     dwg::Transparency _transparency;
     dwg::LineTypeWPtr _linetype;
-    dwg::BookColor _bookColor;
+    dwg::BookColorWPtr _bookColor;
 
 public:
     Entity();
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::Entity; }
+    CPL::String SubclassMarker() const;
 
 public:
-    Layer *layer;       // 8, name
-    Color color;                // 62, 420
-    LineweightType lineweight;  // 370
-    double linetypeScale;       // 48
-    bool isInvisible;           // 60
-    Transparency transparency;  // 440
-    LineType *linetype; // 6, name
-    Material *material;// 347, handle
-
-    BookColor bookColor;//430, name
-
     void MatchProperties(const Entity *other);
 };
 CPL_SMARTER_PTR(Entity)

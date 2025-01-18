@@ -23,16 +23,18 @@
 #pragma once
 
 
-#include <dwg/entities/Entity.h>
 #include <dwg/entities/AttachmentPointType.h>
 #include <dwg/entities/BackgroundFillFlags.h>
 #include <dwg/entities/ColumnType.h>
 #include <dwg/entities/DrawingDirectionType.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/entities/LineSpacingStyleType.h>
 #include <dwg/tables/TextStyle.h>
 
+
+#include <dwg/Color.h>
 #include <dwg/Transparency.h>
-#include <dwg/base/Color.h>
+
 
 namespace dwg {
 
@@ -57,7 +59,7 @@ public:
     AttachmentPointType attachmentPoint;  // 71
     DrawingDirectionType drawingDirection;// 72
     CPL::String value;                    // 1
-    TextStyle *textStyle;         // 7, name
+    TextStyle *textStyle;                 // 7, name
 
     XYZ alignmentPoint;                    // 11, 21, 31
     double horizontalWidth;                // 42,

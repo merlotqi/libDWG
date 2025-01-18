@@ -22,18 +22,18 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/LineweightType.h>
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentType.h>
+#include <dwg/base/Coordinate.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/objects/LeaderContentType.h>
 #include <dwg/objects/LeaderDrawOrderType.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/base/Color.h>
-#include <dwg/base/Coordinate.h>
 
 
 namespace dwg {

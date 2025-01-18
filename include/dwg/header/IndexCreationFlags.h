@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -38,6 +38,6 @@ enum IndexCreationFlag : unsigned char
     /// Layer and spatial indexes are created
     LayerAndSpatialIndex = 0b11
 };
-DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag)
+CPL_DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag)
 
 }// namespace dwg

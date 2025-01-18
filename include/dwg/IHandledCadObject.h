@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "cpl_port.h"
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -30,7 +30,7 @@ class IHandledCadObject : public CPL::RefObject
 {
 public:
     IHandledCadObject() = default;
-    virtual ~IHandledCadObject() = default;
+    virtual ~IHandledCadObject() noexcept {}
     virtual unsigned long long Handle() const = 0;
 };
 CPL_SMARTER_PTR(IHandledCadObject)

@@ -22,17 +22,28 @@
 
 #pragma once
 
-#include <cpl_ports.h>
+#include <dwg/entities/DimensionAligned.h>
 
 namespace dwg {
 
-/// Polyline flag (bit-coded)
-enum LwPolylineFlag
+class LIBDWG_API DimensionLinear : public DimensionAligned
 {
-    Default = 0,
-    Closed = 1,
-    Plinegen = 128
+    double _rotation;// The rotation angle of the linear dimension (in degrees or radians)
+
+public:
+    // Default constructor
+    DimensionLinear();
+
+    // Destructor
+    ~DimensionLinear();
+
+    // Get the rotation angle value
+    double Rotation() const;
+
+    // Set the rotation angle value
+    void SetRotation(double rotation);
 };
-CPL_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
+CPL_SMARTER_PTR(DimensionLinear)
+
 
 }// namespace dwg

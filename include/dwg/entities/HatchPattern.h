@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/base/Coordinate.h>
-#include <string>
+
 #include <vector>
 
 namespace dwg {

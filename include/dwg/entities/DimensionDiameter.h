@@ -22,17 +22,37 @@
 
 #pragma once
 
-#include <cpl_ports.h>
+#include <dwg/entities/Dimension.h>
 
 namespace dwg {
 
-/// Polyline flag (bit-coded)
-enum LwPolylineFlag
+class LIBDWG_API DimensionDiameter : public Dimension
 {
-    Default = 0,
-    Closed = 1,
-    Plinegen = 128
+    XYZ _angleVertex;  // The vertex of the angle (used for diameter dimension)
+    double _leaderLength;  // The length of the leader line (connection to the dimension line)
+
+public:
+    // Default constructor
+    DimensionDiameter();
+
+    // Destructor
+    ~DimensionDiameter();
+
+    // Get the angle vertex value
+    XYZ AngleVertex() const;
+
+    // Set the angle vertex value
+    void AngleVertex(const XYZ &value);
+
+    // Get the leader length value
+    double LeaderLength() const;
+
+    // Set the leader length value
+    void LeaderLength(double value);
+
+    // Override the Measurement method to calculate and return the diameter measurement
+    virtual double Measurement() const override;
 };
-CPL_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
+CPL_SMARTER_PTR(DimensionDiameter)
 
 }// namespace dwg

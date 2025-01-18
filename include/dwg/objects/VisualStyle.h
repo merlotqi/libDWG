@@ -23,12 +23,12 @@
 #pragma once
 
 
+#include <dwg/Color.h>
 #include <dwg/objects/FaceColorMode.h>
 #include <dwg/objects/FaceLightingModelType.h>
 #include <dwg/objects/FaceLightingQualityType.h>
 #include <dwg/objects/FaceModifierType.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/base/Color.h>
 
 namespace dwg {
 

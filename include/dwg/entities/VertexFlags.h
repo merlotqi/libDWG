@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <base.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -49,6 +49,6 @@ enum VertexFlag
     /// Polyface mesh vertex.
     PolyfaceMeshVertex = 128
 };
-DECLARE_FLAGS(VertexFlags, VertexFlag)
+CPL_DECLARE_FLAGS(VertexFlags, VertexFlag)
 
 }// namespace dwg
