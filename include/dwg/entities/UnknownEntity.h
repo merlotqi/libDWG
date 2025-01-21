@@ -23,11 +23,26 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
+#include <dwg/classes/DxfClass.h>
 
 namespace dwg {
 
-class UnknownEntity : public Entity
+class LIBDWG_API UnknownEntity : public Entity
 {
+    DxfClass _dxfclass;
+public:
+    UnknownEntity();
+    ~UnknownEntity();
+
+    dwg::ObjectType ObjectType() const;
+    CPL::String ObjectName() const;
+    CPL::String SubclassMarker() const;
+
+    dwg::DxfClass DxfClass() const;
+
+protected:
+    UnknownEntity(const DxfClass&);
 };
+CPL_SMARTER_PTR(UnknownEntity)
 
 }// namespace dwg

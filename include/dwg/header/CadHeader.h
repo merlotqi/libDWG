@@ -59,8 +59,10 @@
 namespace dwg {
 
 class CadDocument;
+class CadHeaderPrivate;
 class LIBDWG_API CadHeader : public CPL::RefObject
 {
+    CadHeaderPrivate *d;
 public:
     CadHeader();
     CadHeader(CadDocument *document);

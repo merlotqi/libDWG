@@ -27,21 +27,36 @@
 
 namespace dwg {
 
-class Tolerance : public Entity
+class LIBDWG_API Tolerance : public Entity
 {
+    DimensionStyleWPtr _style;
+    XYZ _insertionPoint;
+    XYZ _direction;
+    XYZ _normal;
+    CPL::String _text;
 public:
     Tolerance();
     virtual ~Tolerance();
 
-    DimensionStyle *style;// 3, name
+    dwg::ObjectType ObjectType() const;
+    CPL::String ObjectName() const;
+    CPL::String SubclassMarker() const;
 
-    XYZ insertionPoint;// 10, 20, 30
+    DimensionStylePtr Style() const;
+    void Style(DimensionStyle *);
 
-    XYZ direction;// 11, 21, 31
+    XYZ InsertionPoint() const;
+    void InsertionPoint(XYZ);
 
-    XYZ normal;// 210, 220, 230
+    XYZ Direction() const;
+    void Direction(XYZ);
 
-    CPL::String text;// 1
+    XYZ Normal() const;
+    void Normal(XYZ);
+
+    CPL::String Text() const;
+    void Text(const char*);
 };
+CPL_SMARTER_PTR(Tolerance)
 
 }// namespace dwg

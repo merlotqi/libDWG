@@ -26,11 +26,21 @@
 
 namespace dwg {
 
-class XLine : public Entity
+class LIBDWG_API XLine : public Entity
 {
+    XYZ _firstPoint;
+    XYZ _direction;
+
 public:
-    XYZ firstPoint;// 10，20，30
-    XYZ direction; // 11, 21, 31
+    XLine();
+    ~XLine();
+
+    XYZ FirstPoint() const;
+    void FirstPoint(XYZ);
+
+    XYZ Direction() const;
+    void Direction(XYZ);
 };
+CPL_SMARTER_PTR(XLine)
 
 }// namespace dwg

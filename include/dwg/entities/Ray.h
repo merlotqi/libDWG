@@ -26,11 +26,21 @@
 
 namespace dwg {
 
-class Ray : public Entity
+class LIBDWG_API Ray : public Entity
 {
+    XYZ _startPoint;
+    XYZ _direction;
+
 public:
-    XYZ startPoint;// 10, 20, 30
-    XYZ direction; // 11, 21, 31
+    Ray();
+    ~Ray();
+
+    XYZ StartPoint() const;
+    void StartPoint(XYZ);
+
+    XYZ Direction() const;
+    void Direction(XYZ);
 };
+CPL_SMARTER_PTR(Ray)
 
 }// namespace dwg

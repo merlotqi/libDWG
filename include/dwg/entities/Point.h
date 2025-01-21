@@ -26,13 +26,28 @@
 
 namespace dwg {
 
-class Point : public Entity
+class LIBDWG_API Point : public Entity
 {
+    XYZ _location;
+    XYZ _normal;
+    double _thickness;
+    double _rotation;
 public:
-    XYZ location;    // 10, 20, 30
-    double thickness;// 39
-    XYZ normal;      // 210, 220, 230
-    double rotation; // 50
+    Point();
+    ~Point();
+
+    XYZ Location() const;
+    void Location(XYZ);
+
+    XYZ Normal() const;
+    void Normal(XYZ);
+
+    double Thickness() const;
+    void Thickness(double);
+
+    double Rotation() const;
+    void Rotation(double);
 };
+CPL_SMARTER_PTR(Point)
 
 }// namespace dwg

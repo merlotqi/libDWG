@@ -28,26 +28,55 @@
 
 namespace dwg {
 
-class UnderlayEntity : public Entity
+class LIBDWG_API UnderlayEntity : public Entity
 {
+    XYZ _normal;
+    XYZ _insertPoint;
+    double _xscale;
+    double _yscale;
+    double _zscale;
+    double _rotation;
+    UnderlayDisplayFlags _flags;
+    unsigned char _contrast;
+    unsigned char _fade;
+    UnderlayDefinitionWPtr _definition;
+
 public:
-    UnderlayEntity() : Entity() {}
-    virtual ~UnderlayEntity() {}
+    UnderlayEntity();
+    ~UnderlayEntity();
 
-    XYZ normal;     // 210, 220, 230
-    XYZ insertPoint;// 10, 20, 30
+    CPL::String SubclassMarker() const;
+    
+    XYZ Normal() const;
+    void Normal(XYZ);
 
-    double XScale;// 41
-    double YScale;// 42
-    double ZScale;// 43
+    XYZ InsertPoint() const;
+    void InsertPoint(XYZ);
 
-    double rotation;           // 50
-    UnderlayDisplayFlags flags;// 280
+    double XScale() const;
+    void XScale(double);
 
-    unsigned char contrast;// 281
-    unsigned char Fade;    // 282
+    double YScale() const;
+    void YScale(double);
 
-    UnderlayDefinition *definition;
+    double ZScale() const;
+    void ZScale(double);
+
+    double Rotation() const;
+    void Rotation(double);
+
+    UnderlayDisplayFlags Flags() const;
+    void Flags(UnderlayDisplayFlags);
+
+    unsigned char Contrast() const;
+    void Contrast(unsigned char);
+
+    unsigned char Fade() const;
+    void Fade(unsigned char);
+
+    UnderlayDefinitionPtr Definition() const;
+    void Definition(UnderlayDefinition *);
 };
+CPL_SMARTER_PTR(UnderlayEntity)
 
 }// namespace dwg
