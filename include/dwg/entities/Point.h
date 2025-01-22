@@ -37,10 +37,10 @@ public:
     ~Point();
 
     XYZ Location() const;
-    void Location(XYZ);
+    void Location(const XYZ&);
 
     XYZ Normal() const;
-    void Normal(XYZ);
+    void Normal(const XYZ&);
 
     double Thickness() const;
     void Thickness(double);

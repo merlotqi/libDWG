@@ -36,10 +36,10 @@ public:
     ~XLine();
 
     XYZ FirstPoint() const;
-    void FirstPoint(XYZ);
+    void FirstPoint(const XYZ&);
 
     XYZ Direction() const;
-    void Direction(XYZ);
+    void Direction(const XYZ&);
 };
 CPL_SMARTER_PTR(XLine)
 

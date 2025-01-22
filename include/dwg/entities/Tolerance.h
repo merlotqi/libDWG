@@ -46,13 +46,13 @@ public:
     void Style(DimensionStyle *);
 
     XYZ InsertionPoint() const;
-    void InsertionPoint(XYZ);
+    void InsertionPoint(const XYZ&);
 
     XYZ Direction() const;
-    void Direction(XYZ);
+    void Direction(const XYZ&);
 
     XYZ Normal() const;
-    void Normal(XYZ);
+    void Normal(const XYZ&);
 
     CPL::String Text() const;
     void Text(const char*);

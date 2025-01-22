@@ -22,25 +22,32 @@
 
 #pragma once
 
-#include <dwg/exports.h>
+#include <cpl_ports.h>
 
 namespace dwg {
 
-struct LIBDWG_API Transparency
-{
-    short Value;
-    
-    Transparency(short value);
-    bool IsByLayer() const;
-    bool IsByBlock() const;
-    short Value() const;
-    void Value(short value);
+class TextStyle;
+CPL_SMARTER_PTR(TextStyle)
 
-    static int ToAlphaValue(Transparency transparency);
-    static Transparency FromAlphaValue(int value);
-    static Transparency ByLayer;
-    static Transparency ByBlock;
-    static Transparency Opaque;
+class IText
+{
+public:
+    virtual ~IText() = default;
+
+    virtual double Height() const = 0;
+
+    virtual void Height(double) = 0;
+
+    virtual CPL::String Value() const = 0;
+
+    virtual void Value(const char*) = 0;
+
+    virtual TextStylePtr Style() const = 0;
+    
+    virtual void Style(TextStyle *) = 0;
+
+protected:
+    IText() = default;
 };
 
 }// namespace dwg

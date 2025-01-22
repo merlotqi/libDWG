@@ -36,10 +36,10 @@ public:
     ~Ray();
 
     XYZ StartPoint() const;
-    void StartPoint(XYZ);
+    void StartPoint(const XYZ&);
 
     XYZ Direction() const;
-    void Direction(XYZ);
+    void Direction(const XYZ&);
 };
 CPL_SMARTER_PTR(Ray)
 

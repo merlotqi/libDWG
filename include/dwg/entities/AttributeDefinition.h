@@ -26,10 +26,28 @@
 
 namespace dwg {
 
-class AttributeDefinition : public AttributeBase
+class LIBDWG_API AttributeDefinition : public AttributeBase
 {
+    CPL::String _prompt;
+    
 public:
-    CPL::String Prompt;// 3
+    AttributeDefinition();
+    
+    ~AttributeDefinition();
+    
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;   
+
+    CPL::String Prompt() const;
+
+    void Prompt(const char*);
 };
+
 
 }// namespace dwg

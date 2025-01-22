@@ -22,7 +22,7 @@
 
 #pragma once
 
-
+#include <dwg/entities/IText.h>
 #include <dwg/entities/AttachmentPointType.h>
 #include <dwg/entities/BackgroundFillFlags.h>
 #include <dwg/entities/ColumnType.h>
@@ -30,70 +30,126 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/LineSpacingStyleType.h>
 #include <dwg/tables/TextStyle.h>
-
-
 #include <dwg/Color.h>
 #include <dwg/Transparency.h>
 
-
 namespace dwg {
 
-class MText : public Entity
+class LIBDWG_API MText : public Entity, IText
 {
-public:
-    struct Edge
-    {
-        int Start;
-        int End;
-        double Crease;
+    XYZ _insertPoint;
+    XYZ _normal;
+    XYZ _alignmentPoint;
+    double _height;
+    double _rectangleWidth;
+    double _rectangleHeight;
+    double _horizontalWidth;
+    double _verticalHeight;
+    double _rotation;
+    double _lineSpacing;
+    double _backgroundScale;
+    AttachmentPointType _attachmentPoint;
+    DrawingDirectionType _drawingDirection;
+    TextStyleWPtr _style;
+    LineSpacingStyleType _lineSpacingStyle;
+    dwg::BackgroundFillFlags _backgroundFillFlags;
+    Color _backgroundColor;
+    Transparency _backgroundTransparency;
+    bool _isAnnotative;
 
-        Edge(int start, int end);
+public:
+    struct LIBDWG_API TextColumn
+    {
+        dwg::ColumnType ColumnType;
+        int ColumnCount;
+        bool ColumnFlowReversed;
+        bool ColumnAutoHeight;
+        double ColumnWidth;
+        double ColumnGutter;
+        std::vector<double> ColumnHeights;
+
+        TextColumn();
     };
 
-
-    XYZ insertPoint;                      // 10, 20, 30
-    XYZ normal;                           // 210, 220, 230
-    double height;                        // 40;
-    double rectangleWidth;                //41
-    double rectangleHeight;               // 46
-    AttachmentPointType attachmentPoint;  // 71
-    DrawingDirectionType drawingDirection;// 72
-    CPL::String value;                    // 1
-    TextStyle *textStyle;                 // 7, name
-
-    XYZ alignmentPoint;                    // 11, 21, 31
-    double horizontalWidth;                // 42,
-    double verticalHeight;                 // 43
-    double rotation;                       // 50
-    LineSpacingStyleType lineSpaicingStyle;// 73
-
-    double lineSpacing;                     // 44
-    BackgroundFillFlags backgroundFillFlags;// 90
-    double backgroundScale;                 // 45
-
-
-    Color backgroundColor;              // 63, 420, 430
-    Transparency backgroundTransparency;// 441；
-
-
 public:
-    struct TextColumn
-    {
-        ColumnType columnType;  // 75
-        int columnCount;        // 76
-        bool columnFlowReversed;// 78
-        bool columnAutoHeight;  // 79
-        double columnWidhth;    // 48
-        double columnGutter;    // 49
-        std::vector<double> columnHeights;
-    };
+    MText();
+    ~MText();
 
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-public:
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+
+    XYZ InsertPoint() const;
+    void InsertPoint(const XYZ&);
+
+    XYZ Normal() const;
+    void Normal(const XYZ&);
+
+    double Height() const override;
+    void Height(double) override;
+
+    double RectangleHeight() const;
+    void RectangleHeight(double);
+
+    double RectangleWidth() const;
+    void RectangleWidth(double);
+
+    AttachmentPointType AttachmentPoint() const;
+    void AttachmentPoint(AttachmentPointType);
+
+    DrawingDirectionType DrawingDirection() const;
+    void DrawingDirection(DrawingDirectionType);
+
+    CPL::String Value() const override;
+    void Value(const char*) override;
+
+    TextStylePtr Style() const override;
+    void Style(TextStyle*) override;
+
+    XYZ AlignmentPoint() const;
+    void AlignmentPoint(const XYZ&);
+
+    double HorizontalWidth() const;
+    void HorizontalWidth(double);
+
+    double VerticalHeight() const;
+    void VerticalHeight(double);
+
+    double Rotation() const;
+    void Rotation(double);
+
+    LineSpacingStyleType LineSpacingStyle() const;
+    void LineSpacingStyle(LineSpacingStyleType);
+
+    double LineSpacing() const;
+    void LineSpacing(double);
+
+    dwg::BackgroundFillFlags BackgroundFillFlags() const;
+    void BackgroundFillFlags(dwg::BackgroundFillFlags);
+
+    double BackgroundScale() const;
+    void BackgroundScale(double);
+
+    Color BackgroundColor() const;
+    void BackgroundColor(const Color&);
+
+    Transparency BackgroundTransparency() const;
+    void BackgroundTransparency(const Transparency&);
+
     TextColumn Column() const;
-    void Column(TextColumn const &column);
+    void Column(const TextColumn&);
+
     bool IsAnnotative() const;
-    void IsAnnotative(bool isAnnotative);
+    void IsAnnotative(bool);
+
+private:
+    TextColumn _column;
 };
+CPL_SMARTER_PTR(MText)
 
 }// namespace dwg

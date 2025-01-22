@@ -68,542 +68,806 @@ public:
     CadHeader(CadDocument *document);
     CadHeader(ACadVersion version);
 
-    CPL::String VersionString;
+    CPL::String VersionString() const;
+    void VersionString(const char* );
 
-    ACadVersion Version;
+    ACadVersion Version() const;
+    void Version(ACadVersion);
 
-    // "$ACADMAINTVER", 70
-    short MaintenanceVersion;
-    // "$DWGCODEPAGE", 3
-    CPL::String CodePage;// "ANSI_1252"
-    // "$LASTSAVEDBY", 3
-    CPL::String LastSavedBy;// "libDWG"
-    // "$REQUIREDVERSIONS", 70
-    bool AssociatedDimensions;
-    // "$DIMSHO", 70
-    bool UpdateDimensionsWhileDragging;
+    short MaintenanceVersion() const;
+    void MaintenanceVersion(short);
+    
+    CPL::String CodePage() const;
+    void CodePage(const char*);
 
-    bool DIMSAV;
+    CPL::String LastSavedBy() const
+    void LastSavedBy(const char*);
+    
+    bool AssociatedDimensions() const;
+    void AssociatedDimensions(bool);
+    
+    bool UpdateDimensionsWhileDragging() const;
+    void UpdateDimensionsWhileDragging(bool);
 
-    // "$MEASUREMENT", 70
-    MeasurementUnits MeasurementUnits;
-    // "$PLINEGEN", 70
-    bool PolylineLineTypeGeneration;
-    // "$ORTHOMODE", 70
-    bool OrthoMode;
-    // "$REGENMODE", 70
-    bool RegenerationMode;
-    // "$FILLMODE", 70
-    bool FillMode;
-    // "$QTEXTMODE", 70
-    bool QuickTextMode;
-    SpaceLineTypeScaling PaperSpaceLineTypeScaling =
-            SpaceLineTypeScaling::Normal;
-    // "$PSLTSCALE", 70
-    bool LimitCheckingOn;
-    // "$BLIPMODE", 70
-    bool BlipMode;
-    // "$USRTIMER", 70
-    bool UserTimer;
-    // "$SKPOLY", 70
-    bool SketchPolylines;
-    // "$ANGDIR", 70
-    AngularDirection AngularDirection;
-    // "$SPLFRAME", 70
-    bool ShowSplineControlPoints;
-    // "$MIRRTEXT", 70
-    bool MirrorText;
-    // "$WORLDVIEW", 70
-    bool WorldView;
-    // "$TILEMODE", 70
-    bool ShowModelSpace;
-    // "$PLIMCHECK", 70
-    bool PaperSpaceLimitsChecking;
-    // "$VISRETAIN", 70
-    bool RetainXRefDependentVisibilitySettings;
-    // "$DISPSILH", 70
-    bool DisplaySilhouetteCurves;
+    bool DIMSAV() const;
+    void DIMSAV(bool);
 
+    dwg::MeasurementUnits MeasurementUnits() const;
+    void MeasurementUnits(dwg::MeasurementUnits);
+    
+    bool PolylineLineTypeGeneration() const;
+    void PolylineLineTypeGeneration(bool);
 
-    bool CreateEllipseAsPolyline;
+    bool OrthoMode() const;
+    void OrthoMode(bool);
+    
+    bool RegenerationMode() const;
+    void RegenerationMode(bool);
+    
+    bool FillMode() const;
+    void FillMode(bool);
+    
+    bool QuickTextMode() const;
+    void QuickTextMode(bool);
 
-    // "$PROXYGRAPHICS", 70
-    bool ProxyGraphics;
-    // "$TREEDEPTH", 70
-    short SpatialIndexMaxTreeDepth;
-    // "$LUNITS", 70
-    LinearUnitFormat linearUnitFormat;
-    // "$LUPREC", 70
-    short LinearUnitPrecision;
-    // "$AUNITS", 70
-    AngularUnitFormat AngularUnit;
-    // "$AUPREC", 70
-    short AngularUnitPrecision;
+    SpaceLineTypeScaling PaperSpaceLineTypeScaling() const;
+    void PaperSpaceLineTypeScaling(SpaceLineTypeScaling);
+    
+    bool LimitCheckingOn() const;
+    void LimitCheckingOn(bool);
+    
+    bool BlipMode() const;
+    void BlipMode(bool);
+    
+    bool UserTimer() const;
+    void UserTimer(bool);
+    
+    bool SketchPolylines() const;
+    void SketchPolylines(bool);
+    
+    dwg::AngularDirection AngularDirection() const;
+    void AngularDirection(dwg::AngularDirection);
+    
+    bool ShowSplineControlPoints() const;
+    void ShowSplineControlPoints(bool);
+    
+    bool MirrorText() const;
+    void MirrorText(bool);
+    
+    bool WorldView() const;
+    void WorldView(bool);
+    
+    bool ShowModelSpace() const;
+    void ShowModelSpace(bool);
+    
+    bool PaperSpaceLimitsChecking() const;
+    void PaperSpaceLimitsChecking(bool);
+    
+    bool RetainXRefDependentVisibilitySettings() const;
+    void RetainXRefDependentVisibilitySettings(bool);
+    
+    bool DisplaySilhouetteCurves() const;
+    void DisplaySilhouetteCurves(bool);
 
+    bool CreateEllipseAsPolyline() const;
+    void CreateEllipseAsPolyline(bool);
+    
+    bool ProxyGraphics() const;
+    void ProxyGraphics(bool);
+    
+    short SpatialIndexMaxTreeDepth() const;
+    void SpatialIndexMaxTreeDepth(short);
+    
+    dwg::LinearUnitFormat LinearUnitFormat() const;
+    void LinearUnitFormat(dwg::LinearUnitFormat);
+    
+    short LinearUnitPrecision() const;
+    void LinearUnitPrecision(short);
+    
+    AngularUnitFormat AngularUnit() const;
+    void AngularUnit(AngularUnitFormat);
+    
+    short AngularUnitPrecision() const;
+    void AngularUnitPrecision(short);
 
-    ObjectSnapMode ObjectSnapMode;
-    // "$ATTMODE", 70
-    AttributeVisibilityMode AttributeVisibility;
-    // "$PDMODE", 70
-    short PointDisplayMode;
-    // "$USERI1", 70
-    short UserShort1;
-    // "$USERI2", 70
-    short UserShort2;
-    // "$USERI3", 70
-    short UserShort3;
-    // "$USERI4", 70
-    short UserShort4;
-    // "$USERI5", 70
-    short UserShort5;
-    // "$SPLINESEGS", 70
-    short NumberOfSplineSegments = 8;
-    // "$SURFU", 70
-    short SurfaceDensityU;
-    // "$SURFV", 70
-    short SurfaceDensityV;
-    // "$SURFTYPE", 70
-    short SurfaceType;
-    // "$SURFTAB1", 70
-    short SurfaceMeshTabulationCount1;
-    // "$SURFTAB2", 70
-    short SurfaceMeshTabulationCount2;
-    // "$SPLINETYPE", 70
-    SplineType SplineType;
-    // "$SHADEDGE", 70
-    ShadeEdgeType ShadeEdge;
-    // "$SHADEDIF", 70
-    short ShadeDiffuseToAmbientPercentage;
-    // "$UNITMODE", 70
-    short UnitMode;
-    // "$MAXACTVP", 70
-    short MaxViewportCount;
+    dwg::ObjectSnapMode ObjectSnapMode() const;
+    void ObjectSnapMode(dwg::ObjectSnapMode);
+    
+    AttributeVisibilityMode AttributeVisibility() const;
+    void AttributeVisibility(AttributeVisibilityMode);
 
-    short SurfaceIsolineCount;
+    short PointDisplayMode() const;
+    void PointDisplayMode(short);
 
-    // "$CMLJUST", 70
-    VerticalAlignmentType CurrentMultilineJustification;
+    short UserShort1() const;
+    void UserShort1(short);
 
-    short TextQuality;
+    short UserShort2() const;
+    void UserShort2(short);
+    
+    short UserShort3() const;
+    void UserShort3(short);
+    
+    short UserShort4() const;
+    void UserShort4(short);
+    
+    short UserShort5() const;
+    void UserShort5(short);
 
-    // "$LTSCALE", 40
-    double LineTypeScale = 1.0;
+    short NumberOfSplineSegments() const;
+    void NumberOfSplineSegments(short);
 
-    // "$TEXTSIZE", 40
-    double TextHeightDefault = 2.5;
+    short SurfaceDensityU() const;
+    void SurfaceDensityU(short);
+    
+    short SurfaceDensityV() const;
+    void SurfaceDensityV(short);
+    
+    short SurfaceType() const;
+    void SurfaceType(short);
+    
+    short SurfaceMeshTabulationCount1() const;
+    void SurfaceMeshTabulationCount1(short);
+    
+    short SurfaceMeshTabulationCount2() const;
+    void SurfaceMeshTabulationCount2(short);
+    
+    dwg::SplineType SplineType() const;
+    void SplineType(dwg::SplineType);
 
-    // "$TEXTSTYLE", true, 7
-    CPL::String TextStyleName;
+    ShadeEdgeType ShadeEdge() const;
+    void ShadeEdge(ShadeEdgeType);
+    
+    short ShadeDiffuseToAmbientPercentage() const;
+    void ShadeDiffuseToAmbientPercentage(short);
+    
+    short UnitMode() const;
+    void UnitMode(short);
+    
+    short MaxViewportCount() const;
+    void MaxViewportCount(short);
 
-    // "$CLAYER", true, 8
-    CPL::String CurrentLayerName;
+    short SurfaceIsolineCount() const;
+    void SurfaceIsolineCount(short);
+    
+    VerticalAlignmentType CurrentMultilineJustification() const;
+    void CurrentMultilineJustification(VerticalAlignmentType);
 
-    // "$CELTYPE", true, 6
-    CPL::String CurrentLineTypeName;
+    short TextQuality() const;
+    void TextQuality(short);
+    
+    double LineTypeScale() const;
+    void LineTypeScale(double);
 
-    // "$CMLSTYLE", true, 2
-    CPL::String MultiLineStyleName = "Standard";
+    double TextHeightDefault() const;
+    void TextHeightDefault(double);
 
-    // "$TRACEWID", 40
-    double TraceWidthDefault = 0;
+    CPL::String TextStyleName() const;
+    void TextStyleName(const char*);
 
-    // "$SKETCHINC", 40
-    double SketchIncrement;
-    // "$FILLETRAD", 40
-    double FilletRadius;
-    // "$THICKNESS", 40
-    double ThicknessDefault;
-    // "$ANGBASE", 50
-    double AngleBase = 0.0;
-    // "$PDSIZE", 40
-    double PointDisplaySize = 0.0;
-    // "$PLINEWID", 40
-    double PolylineWidthDefault;
-    // "$USERR1", 40
-    double UserDouble1;
-    // "$USERR2", 40
-    double UserDouble2;
-    // "$USERR3", 40
-    double UserDouble3;
-    // "$USERR4", 40
-    double UserDouble4;
-    // "$USERR5", 40
-    double UserDouble5;
-    // "$CHAMFERA", 40
-    double ChamferDistance1;
-    // "$CHAMFERB", 40
-    double ChamferDistance2;
-    // "$CHAMFERC", 40
-    double ChamferLength;
-    // "$CHAMFERD", 40
-    double ChamferAngle;
+    CPL::String CurrentLayerName() const;
+    void CurrentLayerName(const char*);
+    
+    CPL::String CurrentLineTypeName() const;
+    void CurrentLineTypeName(const char*);
 
-    double FacetResolution;
+    CPL::String MultiLineStyleName() const;
+    void MultiLineStyleName(const char*);
+    
+    double TraceWidthDefault() const;
+    void TraceWidthDefault(double);
+    
+    double SketchIncrement() const;
+    void SketchIncrement(double);
+    
+    double FilletRadius() const;
+    void FilletRadius(double);
+    
+    double ThicknessDefault() const;
+    void ThicknessDefault(double);
+    
+    double AngleBase() const;
+    void AngleBase(double);
 
-    // "$CMLSCALE", 40
-    double CurrentMultilineScale = 20.0;
-    // "$CELTSCALE", 40
-    double CurrentEntityLinetypeScale = 1.0;
-    // "$MENU", 1
-    CPL::String MenuFileName = ".";
-    // "$HANDSEED", 5
-    unsigned long long HandleSeed = 0x0;
-    // "$TDCREATE", 40
-    CPL::DateTime CreateDateTime;
+    double PointDisplaySize() const;
+    void PointDisplaySize(double);
+    
+    double PolylineWidthDefault() const;
+    void PolylineWidthDefault(double);
+    
+    double UserDouble1() const;
+    void UserDouble1(double);
+    
+    double UserDouble2() const;
+    void UserDouble2(double);
+    
+    double UserDouble3() const;
+    void UserDouble3(double);
+    
+    double UserDouble4() const;
+    void UserDouble4(double);
+    
+    double UserDouble5() const;
+    void UserDouble5(double);
+    
+    double ChamferDistance1() const;
+    void ChamferDistance1(double);
+    
+    double ChamferDistance2() const;
+    void ChamferDistance2(double);
+    
+    double ChamferLength() const;
+    void ChamferLength(double);
+    
+    double ChamferAngle() const;
+    void ChamferAngle(double);
 
-    // "$TDUCREATE", 40
-    CPL::DateTime UniversalCreateDateTime;
-    // "$TDUPDATE", 40
-    CPL::DateTime UpdateDateTime;
-    // "$TDUUPDATE", 40
-    CPL::DateTime UniversalUpdateDateTime;
-    // "$TDINDWG", 40
-    CPL::Timespan TotalEditingTime;
-    // "$TDUSRTIMER", 40
-    CPL::Timespan UserElapsedTimeSpan;
-    // "$CECOLOR", 62
-    Color CurrentEntityColor = Color::ByLayer;
-    // "$PSVPSCALE", 40
-    double ViewportDefaultViewScaleFactor;
-    // "$PINSBASE", 10, 20, 30
-    XYZ PaperSpaceInsertionBase = XYZ::Zero;
-    // "$PEXTMIN", 10, 20, 30
-    XYZ PaperSpaceExtMin;
-    // "$PEXTMAX", 10, 20, 30
-    XYZ PaperSpaceExtMax;
-    // "$PLIMMIN", 10, 20
-    XY PaperSpaceLimitsMin;
-    // "$PLIMMAX", 10, 20
-    XY PaperSpaceLimitsMax;
-    // "$PELEVATION", 40
-    double PaperSpaceElevation;
-    // "$PUCSBASE", true, 2
-    CPL::String PaperSpaceBaseName;
-    // "$PUCSNAME", true, 2
-    CPL::String PaperSpaceName;
-    // "$PUCSORG", 10, 20, 30
-    XYZ PaperSpaceUcsOrigin;
-    // "$PUCSXDIR", 10, 20, 30
-    XYZ PaperSpaceUcsXAxis;
-    // "$PUCSYDIR", 10, 20, 30
-    XYZ PaperSpaceUcsYAxis;
-    // "$PUCSORGTOP", 10, 20, 30
-    XYZ PaperSpaceOrthographicTopDOrigin;
-    // "$PUCSORGBOTTOM", 10, 20, 30
-    XYZ PaperSpaceOrthographicBottomDOrigin;
-    // "$PUCSORGLEFT", 10, 20, 30
-    XYZ PaperSpaceOrthographicLeftDOrigin;
-    // "$PUCSORGRIGHT", 10, 20, 30
-    XYZ PaperSpaceOrthographicRightDOrigin;
-    // "$PUCSORGFRONT", 10, 20, 30
-    XYZ PaperSpaceOrthographicFrontDOrigin;
-    // "$PUCSORGBACK", 10, 20, 30
-    XYZ PaperSpaceOrthographicBackDOrigin;
-    // "$UCSORGTOP", 10, 20, 30
-    XYZ ModelSpaceOrthographicTopDOrigin;
-    // "$UCSORGBOTTOM", 10, 20, 30
-    XYZ ModelSpaceOrthographicBottomDOrigin;
-    // "$UCSORGLEFT", 10, 20, 30
-    XYZ ModelSpaceOrthographicLeftDOrigin;
-    // "$UCSORGRIGHT", 10, 20, 30
-    XYZ ModelSpaceOrthographicRightDOrigin;
-    // "$UCSORGFRONT", 10, 20, 30
-    XYZ ModelSpaceOrthographicFrontDOrigin;
-    // "$UCSORGBACK", 10, 20, 30
-    XYZ ModelSpaceOrthographicBackDOrigin;
-    // "$INSBASE", 10, 20, 30
-    XYZ ModelSpaceInsertionBase = XYZ::Zero;
-    // "$EXTMIN", 10, 20, 30
-    XYZ ModelSpaceExtMin;
-    // "$EXTMAX", 10, 20, 30
-    XYZ ModelSpaceExtMax;
-    // "$LIMMIN", 10, 20
-    XY ModelSpaceLimitsMin;
-    // "$LIMMAX", 10, 20
-    XY ModelSpaceLimitsMax;
-    // "$UCSBASE", true, 2
-    CPL::String UcsBaseName;
-    // "$UCSNAME", true, 2
-    CPL::String UcsName;
-    // "$ELEVATION", 40
-    double Elevation;
-    // "$UCSORG", 10, 20, 30
-    XYZ ModelSpaceOrigin;
-    // "$UCSXDIR", 10, 20, 30
-    XYZ ModelSpaceXAxis;
-    // "$UCSYDIR", 10, 20, 30
-    XYZ ModelSpaceYAxis;
-    // "$DIMBLK", 1
-    CPL::String DimensionBlockName;
-    // "$DIMLDRBLK", 1
-    CPL::String ArrowBlockName;
-    // "$DIMBLK1", 1
-    CPL::String DimensionBlockNameFirst;
-    // "$DIMBLK2", 1
-    CPL::String DimensionBlockNameSecond;
+    double FacetResolution() const;
+    void FacetResolution(double);
+    
+    double CurrentMultilineScale() const;
+    void CurrentMultilineScale(double);
+    
+    double CurrentEntityLinetypeScale() const;
+    void CurrentEntityLinetypeScale(double);
 
+    CPL::String MenuFileName() const;
+    void MenuFileName(const char*);
+    
+    unsigned long long HandleSeed() const;
+    void HandleSeed(unsigned long long);
 
-    short StackedTextAlignment = 1;
-    short StackedTextSizePercentage = 70;
+    CPL::DateTime CreateDateTime() const;
+    void CreateDateTime(CPL::DateTime);
+    
+    CPL::DateTime UniversalCreateDateTime() const;
+    void UniversalCreateDateTime(CPL::DateTime);
+    
+    CPL::DateTime UpdateDateTime() const;
+    void UpdateDateTime(CPL::DateTime);
+    
+    CPL::DateTime UniversalUpdateDateTime() const;
+    void UniversalUpdateDateTime(CPL::DateTime);
+    
+    CPL::Timespan TotalEditingTime() const;
+    void TotalEditingTime(CPL::Timespan);
+    
+    CPL::Timespan UserElapsedTimeSpan() const;
+    void UserElapsedTimeSpan(CPL::Timespan);
+    
+    Color CurrentEntityColor() const;
+    void CurrentEntityColor(const Color&);
 
+    double ViewportDefaultViewScaleFactor() const;
+    void ViewportDefaultViewScaleFactor(double);
+    
+    XYZ PaperSpaceInsertionBase() const;
+    void PaperSpaceInsertionBase(const XYZ&);
+    
+    XYZ PaperSpaceExtMin() const;
+    void PaperSpaceExtMin(const XYZ&);
+    
+    XYZ PaperSpaceExtMax() const;
+    void PaperSpaceExtMax(const XYZ&);
+    
+    XY PaperSpaceLimitsMin() const;
+    void PaperSpaceLimitsMin(const XYZ&);
+    
+    XY PaperSpaceLimitsMax() const;
+    void PaperSpaceLimitsMax(const XY&);
+    
+    double PaperSpaceElevation() const;
+    void PaperSpaceElevation(double);
+    
+    CPL::String PaperSpaceBaseName() const;
+    void PaperSpaceBaseName(const char*);
+    
+    CPL::String PaperSpaceName() const;
+    void PaperSpaceName(const char*);
+    
+    XYZ PaperSpaceUcsOrigin() const;
+    void PaperSpaceUcsOrigin(const XYZ&);
+    
+    XYZ PaperSpaceUcsXAxis() const;
+    void PaperSpaceUcsXAxis(const XYZ&);
+    
+    XYZ PaperSpaceUcsYAxis() const;
+    void PaperSpaceUcsYAxis(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicTopDOrigin() const;
+    void PaperSpaceOrthographicTopDOrigin(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicBottomDOrigin() const;
+    void PaperSpaceOrthographicBottomDOrigin(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicLeftDOrigin() const;
+    void PaperSpaceOrthographicLeftDOrigin(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicRightDOrigin() const;
+    void PaperSpaceOrthographicRightDOrigin(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicFrontDOrigin() const;
+    void PaperSpaceOrthographicFrontDOrigin(const XYZ&);
+    
+    XYZ PaperSpaceOrthographicBackDOrigin() const;
+    void PaperSpaceOrthographicBackDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicTopDOrigin() const;
+    void ModelSpaceOrthographicTopDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicBottomDOrigin() const;
+    void ModelSpaceOrthographicBottomDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicLeftDOrigin() const;
+    void ModelSpaceOrthographicLeftDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicRightDOrigin() const;
+    void ModelSpaceOrthographicRightDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicFrontDOrigin() const;
+    void ModelSpaceOrthographicFrontDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceOrthographicBackDOrigin() const;
+    void ModelSpaceOrthographicBackDOrigin(const XYZ&);
+    
+    XYZ ModelSpaceInsertionBase() const;
+    void ModelSpaceInsertionBase(const XYZ&);
 
-    // "$HYPERLINKBASE", 1
-    CPL::String HyperLinkBase;
-    // "$CELWEIGHT", 370
-    LineweightType CurrentEntityLineWeight = LineweightType::ByLayer;
-    // "$ENDCAPS", 280
-    short EndCaps;
-    // "$JOINSTYLE", 280
-    short JoinStyle;
-    // "$LWDISPLAY", 290
-    bool DisplayLineWeight = false;
-    // "$XEDIT", 290
-    bool XEdit;
-    // "$EXTNAMES", 290
-    bool ExtendedNames = true;
-    // "$PSTYLEMODE", 290
-    short PlotStyleMode;
-    //[CadSystemVariable("$OLESTARTUP", 290
-    bool LoadOLEObject;
-    // "$INSUNITS", 70
-    UnitsType InsUnits = UnitsType::Unitless;
-    // "$CEPSNTYPE", 380
-    EntityPlotStyleType CurrentEntityPlotStyle;
-    // "$FINGERPRINTGUID", 2
-    CPL::String FingerPrintGuid;
-    // "$VERSIONGUID", 2
-    CPL::String VersionGuid;
+    XYZ ModelSpaceExtMin() const;
+    void ModelSpaceExtMin(const XYZ&);
+    
+    XYZ ModelSpaceExtMax() const;
+    void ModelSpaceExtMax(const XYZ&);
+    
+    XY ModelSpaceLimitsMin() const;
+    void ModelSpaceLimitsMin(const XY&);
+    
+    XY ModelSpaceLimitsMax() const;
+    void ModelSpaceLimitsMax(const XY&);
+    
+    CPL::String UcsBaseName() const;
+    void UcsBaseName(const char*);
+    
+    CPL::String UcsName() const;
+    void UcsName(const char*);
 
-    // "$SORTENTS", 280
-    ObjectSortingFlags EntitySortingFlags;
-    // "$INDEXCTL", 280
-    IndexCreationFlags IndexCreationFlags;
-    // "$HIDETEXT", 280   //note: mismatch with docs, code 290
-    unsigned char HideText;
-    // "$XCLIPFRAME", 280 //note: mismatch with docs, code 290
-    unsigned char ExternalReferenceClippingBoundaryType;
-    // "$DIMASSOC", 280
-    DimensionAssociation DimensionAssociativity;
-    // "$HALOGAP", 280
-    unsigned char HaloGapPercentage;
+    double Elevation() const;
+    void Elevation(double);
+    
+    XYZ ModelSpaceOrigin() const;
+    void ModelSpaceOrigin(const XYZ&);
+    
+    XYZ ModelSpaceXAxis() const;
+    void ModelSpaceXAxis(const XYZ&);
+    
+    XYZ ModelSpaceYAxis() const;
+    void ModelSpaceYAxis(const XYZ&);
+    
+    CPL::String DimensionBlockName() const;
+    void DimensionBlockName(const char*);
+    
+    CPL::String ArrowBlockName() const;
+    void ArrowBlockName(const char*);
+    
+    CPL::String DimensionBlockNameFirst() const;
+    void DimensionBlockNameFirst(const char*);
+    
+    CPL::String DimensionBlockNameSecond() const;
+    void DimensionBlockNameSecond(const char*);
 
-    Color ObscuredColor;
-    // "$INTERFERECOLOR", 62
-    Color InterfereColor;
+    short StackedTextAlignment() const;
+    void StackedTextAlignment(short);
 
-    unsigned char ObscuredType;
+    short StackedTextSizePercentage() const;
+    void StackedTextSizePercentage(short);
 
-    unsigned char IntersectionDisplay;
-    // "$PROJECTNAME", 1
-    CPL::String ProjectName;
+    CPL::String HyperLinkBase() const;
+    void HyperLinkBase(const char*);
+    
+    LineweightType CurrentEntityLineWeight() const;
+    void CurrentEntityLineWeight(LineweightType);
+    
+    short EndCaps() const;
+    void EndCaps(short);
+    
+    short JoinStyle() const;
+    void JoinStyle(short);
+    
+    bool DisplayLineWeight() const;
+    void DisplayLineWeight(bool);
+    
+    bool XEdit() const;
+    void XEdit(bool);
+    
+    bool ExtendedNames() const;
+    void ExtendedNames(bool);
+    
+    short PlotStyleMode() const;
+    void PlotStyleMode(short);
+    
+    bool LoadOLEObject() const;
+    void LoadOLEObject(bool);
+    
+    UnitsType InsUnits() const;
+    void InsUnits(UnitsType);
+    
+    EntityPlotStyleType CurrentEntityPlotStyle() const;
+    void CurrentEntityPlotStyle(EntityPlotStyleType);
+    
+    CPL::String FingerPrintGuid() const;
+    void FingerPrintGuid(const char*);
+    
+    CPL::String VersionGuid() const;
+    void VersionGuid(const char*);
+    
+    ObjectSortingFlags EntitySortingFlags() const;
+    void EntitySortingFlags(ObjectSortingFlags);
 
-    bool CameraDisplayObjects;
-    double StepsPerSecond;
-    double StepSize;
-    double Dw3DPrecision;
-    double LensLength;
-    double CameraHeight;
-    char SolidsRetainHistory;
-    char ShowSolidsHistory;
-    double SweptSolidWidth;
-    double SweptSolidHeight;
-    double DraftAngleFirstCrossSection;
-    double DraftAngleSecondCrossSection;
-    double DraftMagnitudeFirstCrossSection;
-    double DraftMagnitudeSecondCrossSection;
-    short SolidLoftedShape;
-    char LoftedObjectNormals;
+    dwg::IndexCreationFlags IndexCreationFlags() const;
+    void IndexCreationFlags(dwg::IndexCreationFlags);
 
-    // "$LATITUDE", 40
-    double Latitude = 37.7950;
-    // "$LONGITUDE", 40
-    double Longitude = -122.394;
-    // "$NORTHDIRECTION", 40
-    double NorthDirection;
-    // "$TIMEZONE", 70
-    int TimeZone;
+    unsigned char HideText() const;
+    void HideText(unsigned char);
 
-    char DisplayLightGlyphs;
-    // "$DWFFRAME", 280
-    char DwgUnderlayFramesVisibility;
+    unsigned char ExternalReferenceClippingBoundaryType() const;
+    void ExternalReferenceClippingBoundaryType(unsigned char);
+    
+    DimensionAssociation DimensionAssociativity() const;
+    void DimensionAssociativity(DimensionAssociation);
+    
+    unsigned char HaloGapPercentage() const;
+    void HaloGapPercentage(unsigned char);
 
-    // "$DGNFRAME", 280
-    char DgnUnderlayFramesVisibility;
+    Color ObscuredColor() const;
+    void ObscuredColor(const Color&);
+    
+    Color InterfereColor() const;
+    void InterfereColor(const Color&);
 
-    // "$CSHADOW", 280
-    ShadowMode ShadowMode;
+    unsigned char ObscuredType() const;
+    void ObscuredType(unsigned char);
 
-    // "$SHADOWPLANELOCATION", 40
-    double ShadowPlaneLocation;
+    unsigned char IntersectionDisplay() const;
+    void IntersectionDisplay(unsigned char);
+    
+    CPL::String ProjectName() const;
+    void ProjectName(const char*);
 
-    CPL::String StyleSheetName;
+    bool CameraDisplayObjects() const;
+    void CameraDisplayObjects(bool);
 
-    // "$DIMTXSTY", true, 7
-    CPL::String DimensionTextStyleName;
-    // "$DIMSTYLE", true, 2
-    CPL::String DimensionStyleOverridesName;
-    // "$DIMADEC", 70
-    short DimensionAngularDimensionDecimalPlaces;
-    // "$DIMDEC", 70
-    short DimensionDecimalPlaces;
-    // "$DIMTDEC", 70
-    short DimensionToleranceDecimalPlaces;
-    // "$DIMALT", 70
-    bool DimensionAlternateUnitDimensioning;
-    // "$DIMALTU", 70
-    LinearUnitFormat DimensionAlternateUnitFormat;
-    // "$DIMALTF", 40
-    double DimensionAlternateUnitScaleFactor;
-    // "$DIMEXO", 40
-    double DimensionExtensionLineOffset;
-    // "$DIMSCALE", 40
-    double DimensionScaleFactor;
-    // "$DIMALTD", 70
-    short DimensionAlternateUnitDecimalPlaces;
-    // "$DIMALTTD", 70
-    short DimensionAlternateUnitToleranceDecimalPlaces;
-    // "$DIMAUNIT", 70
-    AngularUnitFormat DimensionAngularUnit;
-    // "$DIMFRAC", 70
-    FractionFormat DimensionFractionFormat;
-    // "$DIMLUNIT", 70
-    LinearUnitFormat DimensionLinearUnitFormat;
-    // "$DIMDSEP", 70
-    char DimensionDecimalSeparator;
-    // "$DIMTMOVE", 70
-    TextMovement DimensionTextMovement;
-    // "$DIMJUST", 70
-    DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment;
-    // "$DIMSD1", 70
-    bool DimensionSuppressFirstDimensionLine;
-    // "$DIMSD2", 70
-    bool DimensionSuppressSecondDimensionLine;
-    // "$DIMTOL", 70
-    bool DimensionGenerateTolerances;
-    // "$DIMTOLJ", 70
-    ToleranceAlignment DimensionToleranceAlignment;
-    // "$DIMZIN", 70
-    ZeroHandling DimensionZeroHandling;
-    // "$DIMTZIN", 70
-    ZeroHandling DimensionToleranceZeroHandling;
-    // "$DIMFIT", 70
-    short DimensionFit;
-    // "$DIMALTZ", 70
-    ZeroHandling DimensionAlternateUnitZeroHandling;
-    // "$DIMALTTZ", 70
-    ZeroHandling DimensionAlternateUnitToleranceZeroHandling;
-    // "$DIMUPT", 70
-    bool DimensionCursorUpdate;
-    // "$DIMATFIT", 70
-    TextArrowFitType DimensionDimensionTextArrowFit;
-    // "$DIMALTRND", 40
-    double DimensionAlternateUnitRounding;
-    // "$DIMAPOST", 1
-    CPL::String DimensionAlternateDimensioningSuffix;
-    // "$DIMASZ", 40
-    double DimensionArrowSize;
-    // "$DIMAZIN", 70
-    ZeroHandling DimensionAngularZeroHandling;
-    // "$DIMARCSYM", 70
-    ArcLengthSymbolPosition DimensionArcLengthSymbolPosition;
-    // "$DIMSAH", 70
-    bool DimensionSeparateArrowBlocks;
-    // "$DIMCEN", 40
-    double DimensionCenterMarkSize;
-    // "$DIMTSZ", 40
-    double DimensionTickSize;
-    // "$DIMCLRD", 70
-    Color DimensionLineColor;
-    // "$DIMCLRE", 70
-    Color DimensionExtensionLineColor;
-    // "$DIMCLRT", 70
-    Color DimensionTextColor;
-    // "$DIMDLE", 40
-    double DimensionLineExtension;
-    // "$DIMDLI", 40
-    double DimensionLineIncrement;
-    // "$DIMEXE", 40
-    double DimensionExtensionLineExtension;
-    // "$DIMFXLON", 70
-    bool DimensionIsExtensionLineLengthFixed;
-    // "$DIMFXL", 40
-    double DimensionFixedExtensionLineLength;
-    // "$DIMJOGANG", 40
-    double DimensionJoggedRadiusDimensionTransverseSegmentAngle;
-    // "$DIMTFILL", 70
-    DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode;
-    // DxfReferenceType.Ignored, "$DIMTFILLCLR", 62
-    Color DimensionTextBackgroundColor;
-    // "$DIMGAP", 40
-    double DimensionLineGap;
-    // "$DIMLFAC", 40
-    double DimensionLinearScaleFactor;
-    // "$DIMTVP", 40
-    double DimensionTextVerticalPosition;
-    // "$DIMLWD", 70
-    LineweightType DimensionLineWeight;
-    // "$DIMLWE", 70
-    LineweightType ExtensionLineWeight;
-    // "$DIMPOST", 1
-    CPL::String DimensionPostFix;
-    // "$DIMRND", 40
-    double DimensionRounding;
-    // "$DIMSE1", 70
-    bool DimensionSuppressFirstExtensionLine;
-    // "$DIMSE2", 70
-    bool DimensionSuppressSecondExtensionLine;
-    // "$DIMSOXD", 70
-    bool DimensionSuppressOutsideExtensions;
-    // "$DIMTAD", 70
-    DimensionTextVerticalAlignment DimensionTextVerticalAlignment;
-    // "$DIMUNIT", 70
-    short DimensionUnit;
-    // "$DIMTFAC", 40
-    double DimensionToleranceScaleFactor;
-    // "$DIMTIH", 70
-    bool DimensionTextInsideHorizontal;
-    // "$DIMTIX", 70
-    bool DimensionTextInsideExtensions;
-    // "$DIMTM", 40
-    double DimensionMinusTolerance;
-    // "$DIMTOFL", 70
-    bool DimensionTextOutsideExtensions;
-    // "$DIMTOH", 70
-    bool DimensionTextOutsideHorizontal;
-    // "$DIMLIM", 70
-    bool DimensionLimitsGeneration;
-    // "$DIMTP", 40
-    double DimensionPlusTolerance;
-    // "$DIMTXT", 40
-    double DimensionTextHeight;
-    // "$DIMTXTDIRECTION", 70
-    TextDirection DimensionTextDirection;
-    // "$DIMALTMZF", 40
-    double DimensionAltMzf;
-    // "$DIMALTMZS", 6
-    CPL::String DimensionAltMzs;
-    // "$DIMMZF", 40
-    double DimensionMzf;
-    // "$DIMMZS", 6
-    CPL::String DimensionMzs;
-    // "$DIMLTYPE", 6
-    CPL::String DimensionLineType = "ByBlock";
-    // "$DIMLTEX1", 6
-    CPL::String DimensionTex1 = "ByBlock";
-    // "$DIMLTEX2", 6
-    CPL::String DimensionTex2 = "ByBlock";
+    double StepsPerSecond() const;
+    void StepsPerSecond(double);
 
-    Layer CurrentLayer;
-    LineType CurrentLineType;
-    TextStyle CurrentTextStyle;
-    TextStyle DimensionTextStyle;
-    DimensionStyle DimensionStyleOverrides;
+    double StepSize() const;
+    void StepSize(double);
 
-    //TODO: How header UCS work??
-    UCS ModelSpaceUcs;
-    UCS ModelSpaceUcsBase;
-    UCS PaperSpaceUcs;
-    UCS PaperSpaceUcsBase;
+    double Dw3DPrecision() const;
+    void Dw3DPrecision(double);
+
+    double LensLength() const;
+    void LensLength(double);
+
+    double CameraHeight() const;
+    void CameraHeight(double);
+
+    char SolidsRetainHistory() const;
+    void SolidsRetainHistory(char);
+
+    char ShowSolidsHistory() const;
+    void ShowSolidsHistory(char);
+
+    double SweptSolidWidth() const;
+    void SweptSolidWidth(double);
+
+    double SweptSolidHeight() const;
+    void SweptSolidHeight(double);
+
+    double DraftAngleFirstCrossSection() const;
+    void DraftAngleFirstCrossSection(double);
+
+    double DraftAngleSecondCrossSection() const;
+    void DraftAngleSecondCrossSection(double);
+
+    double DraftMagnitudeFirstCrossSection() const;
+    void DraftMagnitudeFirstCrossSection(double);
+
+    double DraftMagnitudeSecondCrossSection() const;
+    void DraftMagnitudeSecondCrossSection(double);
+
+    short SolidLoftedShape() const;
+    void SolidLoftedShape(short);
+
+    char LoftedObjectNormals() const;
+    void LoftedObjectNormals(char);
+
+    double Latitude() const;
+    void Latitude(double);
+    
+    double Longitude() const;
+    void Longitude(double);
+    
+    double NorthDirection() const;
+    void NorthDirection(double);
+    
+    int TimeZone() const;
+    void TimeZone(int);
+
+    char DisplayLightGlyphs() const;
+    void DisplayLightGlyphs(char);
+    
+    char DwgUnderlayFramesVisibility() const;
+    void DwgUnderlayFramesVisibility(char);
+    
+    char DgnUnderlayFramesVisibility() const;
+    void DgnUnderlayFramesVisibility(char);
+    
+    dwg::ShadowMode ShadowMode() const;
+    void ShadowMode(dwg::ShadowMode);
+
+    double ShadowPlaneLocation() const;
+    void ShadowPlaneLocation(double);
+
+    CPL::String StyleSheetName() const;
+    void StyleSheetName(const char*);
+    
+    CPL::String DimensionTextStyleName() const;
+    void DimensionTextStyleName(const char*);
+    
+    CPL::String DimensionStyleOverridesName() const;
+    void DimensionStyleOverridesName(const char* );
+    
+    short DimensionAngularDimensionDecimalPlaces() const;
+    void DimensionAngularDimensionDecimalPlaces(short);
+    
+    short DimensionDecimalPlaces() const;
+    void DimensionDecimalPlaces(short);
+    
+    short DimensionToleranceDecimalPlaces() const;
+    void DimensionToleranceDecimalPlaces(short);
+    
+    bool DimensionAlternateUnitDimensioning() const;
+    void DimensionAlternateUnitDimensioning(bool);
+    
+    LinearUnitFormat DimensionAlternateUnitFormat() const;
+    void DimensionAlternateUnitFormat(LinearUnitFormat);
+    
+    double DimensionAlternateUnitScaleFactor() const;
+    void DimensionAlternateUnitScaleFactor(double);
+    
+    double DimensionExtensionLineOffset() const;
+    void DimensionExtensionLineOffset(double);
+    
+    double DimensionScaleFactor() const;
+    void DimensionScaleFactor(double);
+    
+    short DimensionAlternateUnitDecimalPlaces() const;
+    void DimensionAlternateUnitDecimalPlaces(short);
+    
+    short DimensionAlternateUnitToleranceDecimalPlaces() const;
+    void DimensionAlternateUnitToleranceDecimalPlaces(short);
+    
+    AngularUnitFormat DimensionAngularUnit() const;
+    void DimensionAngularUnit(AngularUnitFormat);
+    
+    FractionFormat DimensionFractionFormat() const;
+    void DimensionFractionFormat(FractionFormat);
+    
+    LinearUnitFormat DimensionLinearUnitFormat() const;
+    void DimensionLinearUnitFormat(LinearUnitFormat);
+    
+    char DimensionDecimalSeparator() const;
+    void DimensionDecimalSeparator(char);
+    
+    TextMovement DimensionTextMovement() const;
+    void DimensionTextMovement(TextMovement);
+    
+    dwg::DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment() const;
+    void DimensionTextHorizontalAlignment(dwg::DimensionTextHorizontalAlignment);
+    
+    bool DimensionSuppressFirstDimensionLine() const;
+    void DimensionSuppressFirstDimensionLine(bool);
+    
+    bool DimensionSuppressSecondDimensionLine() const;
+    void DimensionSuppressSecondDimensionLine(bool);
+    
+    bool DimensionGenerateTolerances() const;
+    void DimensionGenerateTolerances(bool);
+    
+    ToleranceAlignment DimensionToleranceAlignment() const;
+    void DimensionToleranceAlignment(ToleranceAlignment);
+    
+    ZeroHandling DimensionZeroHandling() const;
+    void DimensionZeroHandling(ZeroHandling);
+    
+    ZeroHandling DimensionToleranceZeroHandling() const;
+    void DimensionToleranceZeroHandling(ZeroHandling);
+    
+    short DimensionFit() const;
+    void DimensionFit(short);
+    
+    ZeroHandling DimensionAlternateUnitZeroHandling() const;
+    void DimensionAlternateUnitZeroHandling(ZeroHandling);
+    
+    ZeroHandling DimensionAlternateUnitToleranceZeroHandling() const;
+    void DimensionAlternateUnitToleranceZeroHandling(ZeroHandling);
+    
+    bool DimensionCursorUpdate() const;
+    void DimensionCursorUpdate(bool);
+    
+    TextArrowFitType DimensionDimensionTextArrowFit() const;
+    void DimensionDimensionTextArrowFit(TextArrowFitType);
+    
+    double DimensionAlternateUnitRounding() const;
+    void DimensionAlternateUnitRounding(double);
+    
+    CPL::String DimensionAlternateDimensioningSuffix() const;
+    void DimensionAlternateDimensioningSuffix(const char*);
+    
+    double DimensionArrowSize() const;
+    void DimensionArrowSize(double);
+
+    ZeroHandling DimensionAngularZeroHandling() const;
+    void DimensionAngularZeroHandling(ZeroHandling);
+
+    ArcLengthSymbolPosition DimensionArcLengthSymbolPosition() const;
+    void DimensionArcLengthSymbolPosition(ArcLengthSymbolPosition);
+    
+    bool DimensionSeparateArrowBlocks() const;
+    void DimensionSeparateArrowBlocks(bool);
+    
+    double DimensionCenterMarkSize() const;
+    void DimensionCenterMarkSize(double);
+
+    double DimensionTickSize() const;
+    void DimensionTickSize(double);
+    
+    Color DimensionLineColor() const;
+    void DimensionLineColor(const Color&);
+    
+    Color DimensionExtensionLineColor() const;
+    void DimensionExtensionLineColor(const Color&);
+
+    Color DimensionTextColor() const;
+    void DimensionTextColor(const Color&);
+    
+    double DimensionLineExtension() const;
+    void DimensionLineExtension(double);
+    
+    double DimensionLineIncrement() const;
+    void DimensionLineIncrement(double);
+    
+    double DimensionExtensionLineExtension() const;
+    void DimensionExtensionLineExtension(double);
+    
+    bool DimensionIsExtensionLineLengthFixed() const;
+    void DimensionIsExtensionLineLengthFixed(bool);
+    
+    double DimensionFixedExtensionLineLength() const;
+    void DimensionFixedExtensionLineLength(double);
+    
+    double DimensionJoggedRadiusDimensionTransverseSegmentAngle() const;
+    void DimensionJoggedRadiusDimensionTransverseSegmentAngle(double);
+    
+    dwg::DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode() const;
+    void DimensionTextBackgroundFillMode(dwg::DimensionTextBackgroundFillMode);
+    
+    Color DimensionTextBackgroundColor() const;
+    void DimensionTextBackgroundColor(const Color&);
+    
+    double DimensionLineGap() const;
+    void DimensionLineGap(double);
+    
+    double DimensionLinearScaleFactor() const;
+    void DimensionLinearScaleFactor(double);
+    
+    double DimensionTextVerticalPosition() const;
+    void DimensionTextVerticalPosition(double);
+    
+    LineweightType DimensionLineWeight() const;
+    void DimensionLineWeight(LineweightType);
+    
+    LineweightType ExtensionLineWeight() const;
+    void ExtensionLineWeight(LineweightType);
+    
+    CPL::String DimensionPostFix() const;
+    void DimensionPostFix(const char*);
+    
+    double DimensionRounding() const;
+    void DimensionRounding(double);
+    
+    bool DimensionSuppressFirstExtensionLine() const;
+    void DimensionSuppressFirstExtensionLine(bool);
+    
+    bool DimensionSuppressSecondExtensionLine() const;
+    void DimensionSuppressSecondExtensionLine(bool);
+    
+    bool DimensionSuppressOutsideExtensions() const;
+    void DimensionSuppressOutsideExtensions(bool);
+
+    dwg::DimensionTextVerticalAlignment DimensionTextVerticalAlignment() const;
+    void DimensionTextVerticalAlignment(dwg::DimensionTextVerticalAlignment);
+    
+    short DimensionUnit() const;
+    void DimensionUnit(short);
+    
+    double DimensionToleranceScaleFactor() const;
+    void DimensionToleranceScaleFactor(double);
+    
+    bool DimensionTextInsideHorizontal() const;
+    void DimensionTextInsideHorizontal(bool);
+    
+    bool DimensionTextInsideExtensions() const;
+    void DimensionTextInsideExtensions(bool);
+    
+    double DimensionMinusTolerance() const;
+    void DimensionMinusTolerance(double);
+    
+    bool DimensionTextOutsideExtensions() const;
+    void DimensionTextOutsideExtensions(bool);
+    
+    bool DimensionTextOutsideHorizontal() const;
+    void DimensionTextOutsideHorizontal(bool);
+    
+    bool DimensionLimitsGeneration() const;
+    void DimensionLimitsGeneration();
+    
+    double DimensionPlusTolerance() const;
+    void DimensionPlusTolerance(double);
+    
+    double DimensionTextHeight() const;
+    void DimensionTextHeight(double);
+    
+    TextDirection DimensionTextDirection() const;
+    void DimensionTextDirection(TextDirection);
+    
+    double DimensionAltMzf() const;
+    void DimensionAltMzf(double);
+    
+    CPL::String DimensionAltMzs() const;
+    void DimensionAltMzs(const char*);
+    
+    double DimensionMzf() const;
+    void DimensionMzf(double);
+    
+    CPL::String DimensionMzs() const;
+    void DimensionMzs(const char*);
+
+    CPL::String DimensionLineType() const;
+    void DimensionLineType(const char*);
+
+    CPL::String DimensionTex1() const;
+    void DimensionTex1(const char* );
+
+    CPL::String DimensionTex2() const;
+    void DimensionTex2(const char*);
+
+    LayerPtr CurrentLayer() const;
+    void CurrentLayer(Layer*);
+
+    LineTypePtr CurrentLineType() const;
+    void CurrentLineType(LineType*);
+
+    TextStylePtr CurrentTextStyle() const;
+    void TextStyle(TextStyle *);
+
+    TextStylePtr DimensionTextStyle() const;
+    void DimensionTextStyle(TextStyle *);
+
+    DimensionStylePtr DimensionStyleOverrides() const;
+    void DimensionStyleOverrides(DimensionStyle *);
+    
+    UCSPtr ModelSpaceUcs() const;
+    void ModelSpaceUcs(UCS *);
+
+    UCSPtr ModelSpaceUcsBase() const;
+    void ModelSpaceUcsBase(UCS *);
+
+    UCSPtr PaperSpaceUcs() const;
+    void PaperSpaceUcs(UCS *);
+
+    UCSPtr PaperSpaceUcsBase() const;
+    void PaperSpaceUcsBase(UCS *);
 };
 CPL_SMARTER_PTR(CadHeader)
 

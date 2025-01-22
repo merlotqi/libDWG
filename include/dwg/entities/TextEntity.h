@@ -22,45 +22,82 @@
 
 #pragma once
 
+#include <dwg/entities/IText.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/TextHorizontalAlignment.h>
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/entities/TextVerticalAlignmentType.h>
 
-
 namespace dwg {
 
-
-class TextEntity : public Entity, IText
+class LIBDWG_API TextEntity : public Entity, IText
 {
+    double _thickness;
+    XYZ _insertPoint;
+    double _height;
+    CPL::String _value;
+    double _rotation;
+    double _widthFactor;
+    double _obliqueAngle;
+    TextStyleWPtr _style;
+    TextMirrorFlag _mirror;
+    TextHorizontalAlignment _horizontalAlignment;
+    XYZ _alignmentPoint;
+    XYZ _normal;
+    TextVerticalAlignmentType _verticalAlignment;
+
 public:
     TextEntity();
     virtual ~TextEntity();
 
-    double thickness;// 39
-    XYZ insertPoint; //10, 20, 30
-    double height;   // 40
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-    // 1
-    CPL::String value() const;
-    void setValue(const CPL::String &value);
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
 
-    double rotation;// 50
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
-    double widthFactor; // 41, optional
-    double obliqueAngle;// 51
+    double Thickness() const;
+    void Thickness(double);
+    
+    XYZ InsertPoint() const;
+    void InsertPoint(XYZ);
+    
+    double Height() const override;
+    void Height(double) override;
+    
+    CPL::String Value() const override;
+    void Value(const char*) override;
+    
+    double Rotation() const;
+    void Rotation(double);
+    
+    double WidthFactor() const;
+    void WidthFactor(double);
+    
+    double ObliqueAngle() const;
+    void ObliqueAngle(double);
 
-    // 7 name
-    TextEntity *style() const;
-    void setStyle(TextEntity *style);
+    TextStylePtr Style() const;
+    void Style(TextStyle*);
+    
+    TextMirrorFlag Mirror() const;
+    void Mirror(TextMirrorFlag);
 
+    TextHorizontalAlignment HorizontalAlignment() const;
+    void HorizontalAlignment(TextHorizontalAlignment);
 
-    TextMirrorFlag mirror;                      // 71
-    TextHorizontalAlignment horizontalAlignment;// 72
-    XYZ alignmentPoint;                         // 11, 21, 31
-    XYZ normal;                                 //210, 220, 230
-    TextVerticalAlignmentType verticalAlignment;// 73
+    XYZ AlignmentPoint() const;
+    void AlignmentPoint(const XYZ&);
+
+    XYZ Normal() const;
+    void Normal(const XYZ&);
+    
+    TextVerticalAlignmentType VerticalAlignment() const;
+    void VerticalAlignment(TextVerticalAlignmentType);  
 };
-
+CPL_SMARTER_PTR(TextEntity)
 
 }// namespace dwg

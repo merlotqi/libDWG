@@ -73,13 +73,13 @@ public:
     double EndParameter() const;
 
     // Set the normal vector of the ellipse
-    void Normal(XYZ);
+    void Normal(const XYZ&);
 
     // Set the center of the ellipse
-    void Center(XYZ);
+    void Center(const XYZ&);
 
     // Set a point on the ellipse
-    void EndPoint(XYZ);
+    void EndPoint(const XYZ&);
 
     // Set the thickness of the ellipse
     void Thickness(double);

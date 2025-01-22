@@ -48,10 +48,10 @@ public:
     CPL::String SubclassMarker() const;
     
     XYZ Normal() const;
-    void Normal(XYZ);
+    void Normal(const XYZ&);
 
     XYZ InsertPoint() const;
-    void InsertPoint(XYZ);
+    void InsertPoint(const XYZ&);
 
     double XScale() const;
     void XScale(double);
