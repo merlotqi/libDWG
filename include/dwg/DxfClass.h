@@ -29,7 +29,6 @@
 #include <map>
 
 
-
 namespace dwg {
 
 class LIBDWG_API DxfClass

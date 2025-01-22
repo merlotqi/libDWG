@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/ResolutionUnit.h>
+#include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/base/Coordinate.h>
+#include <dwg/objects/ResolutionUnit.h>
 
 namespace dwg {
 

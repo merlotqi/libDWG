@@ -22,16 +22,17 @@
 
 #pragma once
 
-#include <dwg/entities/IText.h>
+#include <dwg/Color.h>
+#include <dwg/Transparency.h>
 #include <dwg/entities/AttachmentPointType.h>
 #include <dwg/entities/BackgroundFillFlags.h>
 #include <dwg/entities/ColumnType.h>
 #include <dwg/entities/DrawingDirectionType.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/entities/IText.h>
 #include <dwg/entities/LineSpacingStyleType.h>
 #include <dwg/tables/TextStyle.h>
-#include <dwg/Color.h>
-#include <dwg/Transparency.h>
+
 
 namespace dwg {
 
@@ -85,10 +86,10 @@ public:
     virtual CPL::String SubclassMarker() const override;
 
     XYZ InsertPoint() const;
-    void InsertPoint(const XYZ&);
+    void InsertPoint(const XYZ &);
 
     XYZ Normal() const;
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     double Height() const override;
     void Height(double) override;
@@ -106,13 +107,13 @@ public:
     void DrawingDirection(DrawingDirectionType);
 
     CPL::String Value() const override;
-    void Value(const char*) override;
+    void Value(const char *) override;
 
     TextStylePtr Style() const override;
-    void Style(TextStyle*) override;
+    void Style(TextStyle *) override;
 
     XYZ AlignmentPoint() const;
-    void AlignmentPoint(const XYZ&);
+    void AlignmentPoint(const XYZ &);
 
     double HorizontalWidth() const;
     void HorizontalWidth(double);
@@ -136,13 +137,13 @@ public:
     void BackgroundScale(double);
 
     Color BackgroundColor() const;
-    void BackgroundColor(const Color&);
+    void BackgroundColor(const Color &);
 
     Transparency BackgroundTransparency() const;
-    void BackgroundTransparency(const Transparency&);
+    void BackgroundTransparency(const Transparency &);
 
     TextColumn Column() const;
-    void Column(const TextColumn&);
+    void Column(const TextColumn &);
 
     bool IsAnnotative() const;
     void IsAnnotative(bool);

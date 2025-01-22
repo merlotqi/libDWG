@@ -24,8 +24,8 @@
 
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
-#include <dwg/tables/ViewModeType.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/tables/ViewModeType.h>
 
 namespace dwg {
 

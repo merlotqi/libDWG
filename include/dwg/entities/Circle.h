@@ -69,10 +69,10 @@ public:
     double Radius() const;
 
     // Setter for the normal vector
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     // Setter for the center of the circle
-    void Center(const XYZ&);
+    void Center(const XYZ &);
 
     // Setter for the thickness of the circle
     void Thickness(double);

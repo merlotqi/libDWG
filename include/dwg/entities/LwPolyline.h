@@ -24,8 +24,8 @@
 
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/IPolyline.h>
-#include <dwg/entities/Vertex.h>
 #include <dwg/entities/LwPolylineFlags.h>
+#include <dwg/entities/Vertex.h>
 
 namespace dwg {
 

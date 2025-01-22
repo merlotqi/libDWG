@@ -34,7 +34,6 @@
 #include <dwg/tables/ViewModeType.h>
 
 
-
 namespace dwg {
 
 class VPort : public TableEntry

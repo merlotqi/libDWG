@@ -29,6 +29,7 @@ namespace dwg {
 class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
 {
     CadObjectWPtr _default_entry;
+
 public:
     CadDictionaryWithDefault();
 
@@ -37,7 +38,7 @@ public:
     CPL::String SubclassMarker() const;
 
     CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject* );
+    void DefaultEntry(CadObject *);
 };
 CPL_SMARTER_PTR(CadDictionaryWithDefault)
 

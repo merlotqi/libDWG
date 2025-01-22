@@ -35,7 +35,7 @@ class Leader : public Entity
 public:
     Leader();
     virtual ~Leader();
-    DimensionStyle *style;  // 3 name
+    DimensionStyle *style;          // 3 name
     bool arrowHeadEnabled;          // 71
     LeaderPathType pathType;        // 72
     LeaderCreationType creationType;// 73

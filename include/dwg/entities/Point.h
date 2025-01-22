@@ -32,15 +32,16 @@ class LIBDWG_API Point : public Entity
     XYZ _normal;
     double _thickness;
     double _rotation;
+
 public:
     Point();
     ~Point();
 
     XYZ Location() const;
-    void Location(const XYZ&);
+    void Location(const XYZ &);
 
     XYZ Normal() const;
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     double Thickness() const;
     void Thickness(double);

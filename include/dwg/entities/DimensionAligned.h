@@ -41,6 +41,15 @@ public:
     // Destructor for the DimensionAligned class
     ~DimensionAligned();
 
+    // Override to return the object type of the Circle
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+
     // Getter and setter for the first point of the aligned dimension
     XYZ FirstPoint() const;
     void FirstPoint(const XYZ &value);

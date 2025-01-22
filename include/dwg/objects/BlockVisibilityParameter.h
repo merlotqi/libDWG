@@ -23,8 +23,8 @@
 #pragma once
 
 #include <dwg/CadObject.h>
-#include <dwg/entities/Entity.h>
 #include <dwg/base/Coordinate.h>
+#include <dwg/entities/Entity.h>
 #include <vector>
 
 namespace dwg {

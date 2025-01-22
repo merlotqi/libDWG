@@ -28,18 +28,36 @@ namespace dwg {
 
 class LIBDWG_API XLine : public Entity
 {
-    XYZ _firstPoint;
-    XYZ _direction;
+    XYZ _firstPoint;  // The first point defining the XLine.
+    XYZ _direction;   // The direction vector defining the XLine.
 
 public:
+    // Default constructor for XLine. Initializes the first point and direction.
     XLine();
+
+    // Destructor for XLine.
     ~XLine();
 
-    XYZ FirstPoint() const;
-    void FirstPoint(const XYZ&);
+    // Overrides the ObjectType method to return the specific object type for XLine.
+    virtual dwg::ObjectType ObjectType() const override;
 
+    // Overrides the ObjectName method to return the name of the object (XLine).
+    virtual CPL::String ObjectName() const override;
+
+    // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
+    virtual CPL::String SubclassMarker() const override;
+
+    // Getter for the first point of the XLine.
+    XYZ FirstPoint() const;
+
+    // Setter for the first point of the XLine.
+    void FirstPoint(const XYZ &);
+
+    // Getter for the direction of the XLine.
     XYZ Direction() const;
-    void Direction(const XYZ&);
+
+    // Setter for the direction of the XLine.
+    void Direction(const XYZ &);
 };
 CPL_SMARTER_PTR(XLine)
 

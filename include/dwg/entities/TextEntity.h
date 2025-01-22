@@ -22,11 +22,12 @@
 
 #pragma once
 
-#include <dwg/entities/IText.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/entities/IText.h>
 #include <dwg/entities/TextHorizontalAlignment.h>
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/entities/TextVerticalAlignmentType.h>
+
 
 namespace dwg {
 
@@ -61,28 +62,28 @@ public:
 
     double Thickness() const;
     void Thickness(double);
-    
+
     XYZ InsertPoint() const;
     void InsertPoint(XYZ);
-    
+
     double Height() const override;
     void Height(double) override;
-    
+
     CPL::String Value() const override;
-    void Value(const char*) override;
-    
+    void Value(const char *) override;
+
     double Rotation() const;
     void Rotation(double);
-    
+
     double WidthFactor() const;
     void WidthFactor(double);
-    
+
     double ObliqueAngle() const;
     void ObliqueAngle(double);
 
     TextStylePtr Style() const;
-    void Style(TextStyle*);
-    
+    void Style(TextStyle *);
+
     TextMirrorFlag Mirror() const;
     void Mirror(TextMirrorFlag);
 
@@ -90,13 +91,13 @@ public:
     void HorizontalAlignment(TextHorizontalAlignment);
 
     XYZ AlignmentPoint() const;
-    void AlignmentPoint(const XYZ&);
+    void AlignmentPoint(const XYZ &);
 
     XYZ Normal() const;
-    void Normal(const XYZ&);
-    
+    void Normal(const XYZ &);
+
     TextVerticalAlignmentType VerticalAlignment() const;
-    void VerticalAlignment(TextVerticalAlignmentType);  
+    void VerticalAlignment(TextVerticalAlignmentType);
 };
 CPL_SMARTER_PTR(TextEntity)
 

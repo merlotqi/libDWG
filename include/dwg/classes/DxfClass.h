@@ -22,10 +22,11 @@
 
 #pragma once
 
-#include <dwg/exports.h>
 #include <cpl_ports.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/classes/ProxyFlags.h>
+#include <dwg/exports.h>
+
 
 namespace dwg {
 

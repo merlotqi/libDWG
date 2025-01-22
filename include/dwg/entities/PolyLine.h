@@ -25,9 +25,9 @@
 #include <dwg/CadObjectCollection.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/IPolyline.h>
-#include <dwg/entities/Vertex.h>
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
+#include <dwg/entities/Vertex.h>
 
 
 namespace dwg {

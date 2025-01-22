@@ -28,7 +28,6 @@
 #include <dwg/tables/LineType.h>
 
 
-
 namespace dwg {
 
 class MLineStyle : public NonGraphicalObject

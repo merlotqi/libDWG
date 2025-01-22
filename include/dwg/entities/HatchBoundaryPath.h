@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/entities/BoundaryPathFlags.h>
+#include <dwg/entities/Entity.h>
 #include <vector>
 
 namespace dwg {

@@ -28,8 +28,8 @@ namespace dwg {
 
 class LIBDWG_API DimensionDiameter : public Dimension
 {
-    XYZ _angleVertex;  // The vertex of the angle (used for diameter dimension)
-    double _leaderLength;  // The length of the leader line (connection to the dimension line)
+    XYZ _angleVertex;// The vertex of the angle (used for diameter dimension)
+    double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:
     // Default constructor
@@ -37,6 +37,15 @@ public:
 
     // Destructor
     ~DimensionDiameter();
+
+    // Override to return the object type of the Circle
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
     // Get the angle vertex value
     XYZ AngleVertex() const;

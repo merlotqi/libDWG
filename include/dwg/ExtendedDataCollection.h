@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <map>
-#include <dwg/tables/AppId.h>
 #include <dwg/DxfCode.h>
 #include <dwg/exports.h>
+#include <dwg/tables/AppId.h>
+#include <map>
 
 namespace dwg {
 
@@ -34,11 +34,9 @@ class ExtendedData;
 class ExtendedDataRecord
 {
     DxfCode _code;
-
 };
 
 typedef std::map<AppId, ExtendedData> ExtendedDataDictionary;
 
 
-
-}
+}// namespace dwg

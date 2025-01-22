@@ -35,7 +35,6 @@
 #include <dwg/tables/LineType.h>
 
 
-
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>

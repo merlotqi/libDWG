@@ -26,20 +26,41 @@
 
 namespace dwg {
 
+// The Transparency struct represents the transparency properties of an object in LIBDWG.
+// It provides methods to manage and convert transparency values.
 struct LIBDWG_API Transparency
 {
+    // Member variable to store the transparency value.
     short Value;
-    
+
+    // Constructor to initialize the transparency with a given value.
     Transparency(short value);
+
+    // Checks if the transparency is set to "ByLayer".
     bool IsByLayer() const;
+
+    // Checks if the transparency is set to "ByBlock".
     bool IsByBlock() const;
+
+    // Getter method to retrieve the transparency value.
     short Value() const;
+
+    // Setter method to update the transparency value.
     void Value(short value);
 
+    // Converts a Transparency object to an alpha value (integer).
     static int ToAlphaValue(Transparency transparency);
+
+    // Creates a Transparency object from an alpha value (integer).
     static Transparency FromAlphaValue(int value);
+
+    // Predefined Transparency object representing "ByLayer" transparency.
     static Transparency ByLayer;
+
+    // Predefined Transparency object representing "ByBlock" transparency.
     static Transparency ByBlock;
+
+    // Predefined Transparency object representing fully opaque transparency.
     static Transparency Opaque;
 };
 

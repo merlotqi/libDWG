@@ -34,6 +34,7 @@ class LIBDWG_API Tolerance : public Entity
     XYZ _direction;
     XYZ _normal;
     CPL::String _text;
+
 public:
     Tolerance();
     virtual ~Tolerance();
@@ -46,16 +47,16 @@ public:
     void Style(DimensionStyle *);
 
     XYZ InsertionPoint() const;
-    void InsertionPoint(const XYZ&);
+    void InsertionPoint(const XYZ &);
 
     XYZ Direction() const;
-    void Direction(const XYZ&);
+    void Direction(const XYZ &);
 
     XYZ Normal() const;
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     CPL::String Text() const;
-    void Text(const char*);
+    void Text(const char *);
 };
 CPL_SMARTER_PTR(Tolerance)
 

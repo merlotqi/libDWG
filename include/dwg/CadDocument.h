@@ -25,7 +25,10 @@
 #include <dwg/CadSummaryInfo.h>
 #include <dwg/DxfClass.h>
 #include <dwg/IHandledCadObject.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/header/CadHeader.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 #include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
@@ -35,9 +38,7 @@
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/VPort.h>
 #include <dwg/tables/View.h>
-#include <dwg/entities/Entity.h>
-#include <dwg/objects/CadDictionary.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
+
 
 namespace dwg {
 

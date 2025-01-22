@@ -31,7 +31,7 @@ class IPolyline : public Entity
 public:
     IPolyline();
     virtual ~IPolyline();
-    
+
     bool IsClosed() const;
     void IssClosed(bool value);
 

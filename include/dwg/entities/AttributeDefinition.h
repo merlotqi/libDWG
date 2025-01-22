@@ -26,28 +26,35 @@
 
 namespace dwg {
 
+// AttributeDefinition class represents a specific type of attribute that extends AttributeBase.
+// It includes additional information such as a prompt message.
 class LIBDWG_API AttributeDefinition : public AttributeBase
 {
+    // Private member to store the prompt string associated with the attribute definition.
     CPL::String _prompt;
-    
+
 public:
+    // Default constructor for AttributeDefinition.
     AttributeDefinition();
-    
+
+    // Destructor for AttributeDefinition.
     ~AttributeDefinition();
-    
-    // Override to return the object type of the Arc
+
+    // Overrides the ObjectType method to return the specific object type for AttributeDefinition.
     virtual dwg::ObjectType ObjectType() const override;
 
-    // Override to return the name of the object
+    // Overrides the ObjectName method to return the name of the object (AttributeDefinition).
     virtual CPL::String ObjectName() const override;
 
-    // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;   
+    // Overrides the SubclassMarker method to return the subclass marker associated with AttributeDefinition.
+    virtual CPL::String SubclassMarker() const override;
 
+    // Getter method to retrieve the prompt string.
     CPL::String Prompt() const;
 
-    void Prompt(const char*);
+    // Setter method to update the prompt string.
+    void Prompt(const char *);
 };
-
+CPL_SMARTER_PTR(AttributeDefinition)
 
 }// namespace dwg

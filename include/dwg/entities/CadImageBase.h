@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/entities/ClipMode.h>
 #include <dwg/entities/ClipType.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/entities/ImageDisplayFlags.h>
 #include <dwg/objects/ImageDefinition.h>
 #include <dwg/objects/ImageDefinitionReactor.h>

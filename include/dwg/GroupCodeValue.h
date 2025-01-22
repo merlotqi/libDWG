@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/exports.h>
 #include <dwg/GroupCodeValueType.h>
+#include <dwg/exports.h>
+
 
 namespace dwg {
 

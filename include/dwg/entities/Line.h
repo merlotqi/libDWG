@@ -41,13 +41,13 @@ public:
     CPL::String SubclassMarker() const override;
 
     XYZ Normal() const;
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     XYZ StartPoint() const;
-    void StartPoint(const XYZ&);
+    void StartPoint(const XYZ &);
 
     XYZ EndPoint() const;
-    void EndPoint(const XYZ&);
+    void EndPoint(const XYZ &);
 
     double Thickness() const;
     void Thickness(double);

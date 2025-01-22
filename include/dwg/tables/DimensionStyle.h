@@ -40,7 +40,6 @@
 #include <dwg/units/LinearUnitFormat.h>
 
 
-
 namespace dwg {
 
 

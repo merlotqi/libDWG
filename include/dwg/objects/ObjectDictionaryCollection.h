@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/IHandledCadObject.h>
-#include <type_traits>
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/Group.h>
 #include <dwg/objects/ImageDefinition.h>
@@ -31,6 +30,7 @@
 #include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/Scale.h>
+#include <type_traits>
 
 namespace dwg {
 
@@ -63,7 +63,6 @@ protected:
 class ColorCollection : public ObjectDictionaryCollection<BookColor>
 {
 public:
-    
     ColorCollection(const CadDictionary &dictionary);
 };
 

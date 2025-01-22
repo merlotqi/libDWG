@@ -61,6 +61,9 @@ public:
     virtual ~Dimension();
 
 public:
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+
     // Getter and setter for the version of the dimension
     unsigned char Version() const;
     void Version(unsigned char value);

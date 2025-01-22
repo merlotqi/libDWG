@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/base/Coordinate.h>
+#include <dwg/objects/NonGraphicalObject.h>
 #include <type_traits>
 
 namespace dwg {

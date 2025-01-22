@@ -46,12 +46,12 @@ public:
     ~UnderlayEntity();
 
     CPL::String SubclassMarker() const;
-    
+
     XYZ Normal() const;
-    void Normal(const XYZ&);
+    void Normal(const XYZ &);
 
     XYZ InsertPoint() const;
-    void InsertPoint(const XYZ&);
+    void InsertPoint(const XYZ &);
 
     double XScale() const;
     void XScale(double);

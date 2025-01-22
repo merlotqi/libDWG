@@ -22,6 +22,9 @@
 
 #pragma once
 
+#include <dwg/base/Coordinate.h>
+#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/PaperMargin.h>
 #include <dwg/objects/PlotFlags.h>
 #include <dwg/objects/PlotPaperUnits.h>
 #include <dwg/objects/PlotRotation.h>
@@ -29,9 +32,6 @@
 #include <dwg/objects/ScaledType.h>
 #include <dwg/objects/ShadePlotMode.h>
 #include <dwg/objects/ShadePlotResolutionMode.h>
-#include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/PaperMargin.h>
-#include <dwg/base/Coordinate.h>
 
 namespace dwg {
 

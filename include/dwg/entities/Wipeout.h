@@ -26,15 +26,24 @@
 
 namespace dwg {
 
-class Wipeout : public CadImageBase
+class LIBDWG_API Wipeout : public CadImageBase
 {
 public:
-    Wipeout()
-    {
-        flags = ImageDisplayFlags::ShowImage |
-                ImageDisplayFlags::ShowNotAlignedImage |
-                ImageDisplayFlags::UseClippingBoundary;
-    }
+    // Constructor for Wipeout.
+    Wipeout();
+
+    // Destructor for Wipeout.
+    ~Wipeout();
+
+    // Overrides the ObjectType method to return the specific object type for XLine.
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Overrides the ObjectName method to return the name of the object (XLine).
+    virtual CPL::String ObjectName() const override;
+
+    // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
+    virtual CPL::String SubclassMarker() const override;
 };
+CPL_SMARTER_PTR(Wipeout)
 
 }// namespace dwg

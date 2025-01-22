@@ -22,14 +22,15 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/classes/DxfClass.h>
+#include <dwg/entities/Entity.h>
 
 namespace dwg {
 
 class LIBDWG_API UnknownEntity : public Entity
 {
     DxfClass _dxfclass;
+
 public:
     UnknownEntity();
     ~UnknownEntity();
@@ -41,7 +42,7 @@ public:
     dwg::DxfClass DxfClass() const;
 
 protected:
-    UnknownEntity(const DxfClass&);
+    UnknownEntity(const DxfClass &);
 };
 CPL_SMARTER_PTR(UnknownEntity)
 

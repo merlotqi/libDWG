@@ -31,7 +31,6 @@
 #include <dwg/entities/HatchStyleType.h>
 
 
-
 namespace dwg {
 
 class Hatch : public Entity

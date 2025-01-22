@@ -40,10 +40,10 @@ public:
 
     virtual CPL::String Value() const = 0;
 
-    virtual void Value(const char*) = 0;
+    virtual void Value(const char *) = 0;
 
     virtual TextStylePtr Style() const = 0;
-    
+
     virtual void Style(TextStyle *) = 0;
 
 protected:

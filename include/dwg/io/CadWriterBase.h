@@ -24,10 +24,11 @@
 
 
 #include <dwg/CadDocument.h>
-#include <dwg/io/ICadWriter.h>
 #include <dwg/Encoding.h>
-#include <fstream>
 #include <dwg/io/CadWriterConfiguration.h>
+#include <dwg/io/ICadWriter.h>
+#include <fstream>
+
 
 namespace dwg {
 namespace io {
@@ -36,10 +37,11 @@ class CadWriterConfiguration;
 
 template<class T>
 class CadWriterBase : public ICadWriter, protected T
-{	
-    static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
-public:
+{
+    static_assert(std::is_base_of<CadWriterConfiguration, T>::value,
+                  "T must is base CadWriterConfiguration");
 
+public:
     CadWriterBase() = default;
 
     CadWriterBase(std::ofstream *stream, CadDocument *document)
@@ -54,7 +56,7 @@ public:
     }
 
 protected:
-    Encoding getListedEncoding(const CPL::String& codePage)
+    Encoding getListedEncoding(const CPL::String &codePage)
     {
         CodePage code = CadUtils::GetCodePage(codePage);
         return Encoding(code);

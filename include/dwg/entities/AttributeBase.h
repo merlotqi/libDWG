@@ -22,9 +22,9 @@
 
 #pragma once
 
+#include <dwg/entities/AttributeFlags.h>
 #include <dwg/entities/MText.h>
 #include <dwg/entities/TextEntity.h>
-#include <dwg/entities/AttributeFlags.h>
 #include <dwg/entities/TextVerticalAlignmentType.h>
 
 

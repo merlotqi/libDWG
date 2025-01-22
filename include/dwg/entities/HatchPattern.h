@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/base/Coordinate.h>
-
+#include <cpl_ports.h>
+#include <dwg/Coordinate.h>
 #include <vector>
 
 namespace dwg {

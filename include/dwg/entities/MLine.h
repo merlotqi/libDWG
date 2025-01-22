@@ -23,9 +23,9 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/Vertex.h>
 #include <dwg/entities/MLineFlags.h>
 #include <dwg/entities/MLineJustification.h>
+#include <dwg/entities/Vertex.h>
 #include <dwg/objects/MLineStyle.h>
 
 namespace dwg {
