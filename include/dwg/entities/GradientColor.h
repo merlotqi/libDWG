@@ -26,12 +26,10 @@
 
 namespace dwg {
 
-class GradientColor
+struct GradientColor
 {
-public:
-    GradientColor();
-    double Value;// 463
-    Color Color; // 421
+    double Value;
+    dwg::Color Color;
 };
 
 }// namespace dwg

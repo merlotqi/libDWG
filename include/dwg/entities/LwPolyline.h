@@ -23,29 +23,55 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IPolyline.h>
 #include <dwg/entities/LwPolylineFlags.h>
-#include <dwg/entities/Vertex.h>
 
 namespace dwg {
 
-class LwPolyline : public Entity, IPolyline
+class LIBDWG_API LwPolyline : public Entity
 {
 public:
     LwPolyline();
+    
     virtual ~LwPolyline();
 
-    LwPolylineFlags flags;       // 70
-    double constantWidth;        // 43
-    double elevation;            // 38
-    double thickness;            // 39
-    XYZ normal;                  // 210, 220, 230
-    std::vector<Vertex> vertices;// 90
+    struct Vertex
+    {
+        XY Location;
+        double Bulge;
+        double StartWidth;
+        double EndWidth;
+        VertexFlags Flags;
+        double CurveTangent;
+        int Id;
+    };
 
-    bool isClosed() const;
-    void isClosed(bool value);
+    dwg::ObjectType ObjectType() const;
 
-    std::vector<Entity *> explode() const;
+    CPL::String ObjectName() const;
+
+    CPL::String SubclassMarker() const;
+
+    LwPolylineFlags Flags() const;
+    void Flags(LwPolylineFlags);
+
+    double ConstantWidth() const;
+    void ConstantWidth(double);
+
+    double Elevation() const;
+    void Elevation(double);
+
+    double Thickness() const;
+    void Thickness();
+
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    std::vector<Vertex> Vertices() const;
+    void Vertices(const std::vector<Vertex> &);
+
+    bool IsClosed() const;
+    void IsClosed(bool);
 };
+CPL_SMARTER_PTR(LwPolyline)
 
 }// namespace dwg

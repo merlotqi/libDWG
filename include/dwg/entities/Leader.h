@@ -25,36 +25,69 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/LeaderCreationType.h>
 #include <dwg/entities/LeaderPathType.h>
-#include <dwg/tables/DimensionStyle.h>
-
 
 namespace dwg {
 
-class Leader : public Entity
+class DimensionStyle;
+CPL_SMARTER_PTR(DimensionStyle)
+
+class LIBDWG_API Leader : public Entity
 {
 public:
     Leader();
-    virtual ~Leader();
-    DimensionStyle *style;          // 3 name
-    bool arrowHeadEnabled;          // 71
-    LeaderPathType pathType;        // 72
-    LeaderCreationType creationType;// 73
-    bool hookLineDirection;         // 74
-    bool hasHookline;               // 75
-    double textHeight;              // 40
 
-    double textWidth;// 41
+    ~Leader();
 
-    std::vector<XYZ> vertices;// 76; 10,20,30
-    //77	Color to use if leader's DIMCLRD = BYBLOCK
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
 
-    Entity *AssociatedAnnotation;// 340 handle
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
-    XYZ normal;             // 210, 220, 230
-    XYZ horizontalDirection;// 211, 221, 231
-    XYZ blockOffset;        // 212, 222, 232
-    XYZ annotationOffset;   // 213, 223, 233
+    DimensionStylePtr Style() const;
+    void Style(DimensionStyle *);
+
+    bool ArrowHeadEnabled() const;
+    void ArrowHeadEnabled(bool);
+
+    LeaderPathType PathType() const;
+    void PathType(LeaderPathType);
+
+    LeaderCreationType CreationType() const;
+    void CreationType(LeaderCreationType);
+
+    bool HookLineDirection() const;
+    void HookLineDirection(bool);
+
+    bool HasHookline() const;
+    void HasHookline(bool);
+
+    double TextHeight() const;
+    void TextHeight(double);
+
+    double TextWidth() const;
+    void TextWidth(double);
+
+    std::vector<XYZ> Vertices() const;
+    void Vertices(const std::vector<XYZ> &);
+
+    CPL::SmarterPtr<Entity> AssociatedAnnotation() const;
+    void AssociatedAnnotation(Entity *);
+
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    XYZ HorizontalDirection() const;
+    void HorizontalDirection(const XYZ &);
+
+    XYZ BlockOffset() const;
+    void BlockOffset(const XYZ &);
+
+    XYZ AnnotationOffset() const;
+    void AnnotationOffset(const XYZ &);
 };
 
 }// namespace dwg

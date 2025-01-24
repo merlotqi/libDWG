@@ -23,41 +23,86 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-
 #include <dwg/entities/KnotParameterization.h>
 #include <dwg/entities/SplineFlags.h>
 
 namespace dwg {
 
-class Spline : public Entity
+class LIBDWG_API Spline : public Entity
 {
+    SplineFlag1 _flags1;
+    KnotParameterization _knotParameterization;
+
+    XYZ _normal;
+    SplineFlags _flags;
+    int _degree;
+    std::vector<double> _knots;
+    std::vector<XYZ> _controlPoints;
+    std::vector<XYZ> _fitPoints;
+    double _knotTolerance;
+    double _controlPointTolerance;
+    double _fitTolerance;
+    XYZ _startTangent;
+    XYZ _endTangent;
+    std::vector<double> _weights;
+
 public:
     Spline();
+
     virtual ~Spline();
 
-    XYZ normal;// 210, 220, 230
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-    SplineFlags flags;// 70
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
 
-    int degree;// 71
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
-    std::vector<double> knots;     // 72|40
-    std::vector<XYZ> controlPoints;// 73|10, 20, 30
+    XYZ Normal() const;
+    void Normal(const XYZ &);
 
-    std::vector<XYZ> fitPoints;// 74|11, 21, 31
+    SplineFlags Flags() const;
+    void Flags(SplineFlags);
 
-    double knotTolerance;        // 42
-    double controlPointTolerance;// 43
-    double fitTolerance;         // 44
+    int Degree() const;
+    void Degree(int);
 
-    XYZ startTangent;// 12, 22, 32
-    XYZ endTangent;  // 13, 23, 33
+    std::vector<double> Knots() const;
+    void Knots(const std::vector<double> &);
 
-    std::vector<double> weights;// 41
+    std::vector<XYZ> ControlPoints() const;
+    void ControlPoints(const std::vector<XYZ> &);
 
+    std::vector<XYZ> FitPoints() const;
+    void FitPoints(const std::vector<XYZ> &);
 
-    SplineFlags1 flags1;
-    KnotParameterization knotParameterization;
+    double KnotTolerance() const;
+    void KnotTolerance(double);
+
+    double ControlPointTolerance() const;
+    void ControlPointTolerance(double);
+
+    double FitTolerance() const;
+    void FitTolerance(double);
+
+    XYZ StartTangent() const;
+    void StartTangent(const XYZ &);
+
+    XYZ EndTangent() const;
+    void EndTangent(const XYZ &);
+
+    std::vector<double> Weights() const;
+    void Weights(const std::vector<double> &);
+
+protected:
+    SplineFlag1 Flags1() const;
+    void Flags1(SplineFlag1);
+
+    dwg::KnotParameterization KnotParameterization() const;
+    void KnotParameterization(dwg::KnotParameterization);
 };
+CPL_SMARTER_PTR(Spline)
 
 }// namespace dwg

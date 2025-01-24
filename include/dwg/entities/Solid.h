@@ -26,19 +26,40 @@
 
 namespace dwg {
 
-class Solid : public Entity
+class LIBDWG_API Solid : public Entity
 {
 public:
     Solid();
+    
     virtual ~Solid();
 
-    XYZ firstCorner; // 10,20,30
-    XYZ secondCorner;// 11,21,31
-    XYZ thirdCorner; // 12,22,32
-    XYZ fourthCorner;// 13,23,33
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-    double thickness;// 39
-    XYZ normal;      // 210,220,230
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+
+    XYZ FirstCorner() const;
+    void FirstCorner(const XYZ &);
+
+    XYZ SecondCorner() const;
+    void SecondCorner(const XYZ &);
+
+    XYZ ThirdCorner() const;
+    void ThirdCorner(const XYZ &);
+
+    XYZ FourthCorner() const;
+    void FourthCorner(const XYZ &);
+
+    double Thickness() const;
+    void Thickness(double);
+
+    XYZ Normal() const;
+    void Normal(const XYZ &);
 };
+CPL_SMARTER_PTR(Solid)
 
 }// namespace dwg

@@ -24,11 +24,10 @@
 
 #include <dwg/CadObject.h>
 #include <dwg/Coordinate.h>
-#include <dwg/entities/IEntity.h>
 
 namespace dwg {
 
-class LIBDWG_API Entity : public CadObject, IEntity
+class LIBDWG_API Entity : public CadObject
 {
     dwg::LayerWPtr _layer;
     dwg::Color _color;
@@ -41,10 +40,40 @@ class LIBDWG_API Entity : public CadObject, IEntity
 
 public:
     Entity();
+    
+    virtual ~Entity();
+
     CPL::String SubclassMarker() const;
 
-public:
-    void MatchProperties(const Entity *other);
+    virtual LayerPtr Layer() const;
+    
+    virtual void Layer(dwg::Layer *);
+
+    virtual dwg::Color Color() const;
+
+    virtual void Color(dwg::Color);
+    
+    virtual LineweightType Lineweight() const;
+
+    virtual void Lineweight(LineweightType);
+
+    virtual double LinetypeScale() const;
+
+    virtual void LinetypeScale(double);
+
+    virtual bool IsInvisible() const;
+
+    virtual void IsInvisible(bool);
+
+    virtual dwg::Transparency Transparency() const;
+
+    virtual void Transparency(dwg::Transparency);
+
+    virtual LineTypePtr LineType() const;
+
+    virtual void LineType(dwg::LineType *) const;
+    
+    virtual void MatchProperties(Entity *entity);
 };
 CPL_SMARTER_PTR(Entity)
 

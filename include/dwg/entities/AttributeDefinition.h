@@ -26,6 +26,8 @@
 
 namespace dwg {
 
+class AttributeEntity;
+
 // AttributeDefinition class represents a specific type of attribute that extends AttributeBase.
 // It includes additional information such as a prompt message.
 class LIBDWG_API AttributeDefinition : public AttributeBase
@@ -36,6 +38,8 @@ class LIBDWG_API AttributeDefinition : public AttributeBase
 public:
     // Default constructor for AttributeDefinition.
     AttributeDefinition();
+
+    AttributeDefinition(AttributeEntity *);
 
     // Destructor for AttributeDefinition.
     ~AttributeDefinition();

@@ -28,25 +28,19 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
+#include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/objects/LeaderContentType.h>
 #include <dwg/objects/MultiLeaderAnnotContext.h>
 #include <dwg/objects/MultiLeaderStyle.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/LineType.h>
-
-
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
-#include <dwg/entities/BlockContentConnectionType.h>
-#include <dwg/tables/TextStyle.h>
-
 
 namespace dwg {
 
-class MultiLeader : public Entity
+class LIBDWG_API MultiLeader : public Entity
 {
 public:
     MultiLeader();
@@ -113,6 +107,6 @@ public:
 
     bool extendedToText;
 };
-
+CPL_SMARTER_PTR(MultiLeader)
 
 }// namespace dwg

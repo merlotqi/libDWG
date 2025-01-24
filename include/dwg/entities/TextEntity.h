@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IText.h>
 #include <dwg/entities/TextHorizontalAlignment.h>
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/entities/TextVerticalAlignmentType.h>
@@ -31,7 +30,7 @@
 
 namespace dwg {
 
-class LIBDWG_API TextEntity : public Entity, IText
+class LIBDWG_API TextEntity : public Entity
 {
     double _thickness;
     XYZ _insertPoint;
@@ -52,13 +51,13 @@ public:
     virtual ~TextEntity();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual dwg::ObjectType ObjectType() const;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual CPL::String ObjectName() const;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual CPL::String SubclassMarker() const;
 
     double Thickness() const;
     void Thickness(double);
@@ -66,11 +65,11 @@ public:
     XYZ InsertPoint() const;
     void InsertPoint(XYZ);
 
-    double Height() const override;
-    void Height(double) override;
+    double Height() const;
+    void Height(double);
 
-    CPL::String Value() const override;
-    void Value(const char *) override;
+    CPL::String Value() const;
+    void Value(const char *);
 
     double Rotation() const;
     void Rotation(double);

@@ -29,14 +29,13 @@
 #include <dwg/entities/ColumnType.h>
 #include <dwg/entities/DrawingDirectionType.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IText.h>
 #include <dwg/entities/LineSpacingStyleType.h>
 #include <dwg/tables/TextStyle.h>
 
 
 namespace dwg {
 
-class LIBDWG_API MText : public Entity, IText
+class LIBDWG_API MText : public Entity
 {
     XYZ _insertPoint;
     XYZ _normal;
@@ -91,8 +90,8 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 
-    double Height() const override;
-    void Height(double) override;
+    double Height() const;
+    void Height(double);
 
     double RectangleHeight() const;
     void RectangleHeight(double);
@@ -106,11 +105,11 @@ public:
     DrawingDirectionType DrawingDirection() const;
     void DrawingDirection(DrawingDirectionType);
 
-    CPL::String Value() const override;
-    void Value(const char *) override;
+    CPL::String Value() const;
+    void Value(const char *);
 
-    TextStylePtr Style() const override;
-    void Style(TextStyle *) override;
+    TextStylePtr Style() const;
+    void Style(TextStyle *);
 
     XYZ AlignmentPoint() const;
     void AlignmentPoint(const XYZ &);

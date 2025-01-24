@@ -26,41 +26,73 @@
 #include <dwg/entities/MLineFlags.h>
 #include <dwg/entities/MLineJustification.h>
 #include <dwg/entities/Vertex.h>
-#include <dwg/objects/MLineStyle.h>
 
 namespace dwg {
 
-class MLine : public Entity
+class MLineStyle;
+CPL_SMARTER_PTR(MLineStyle);
+
+class LIBDWG_API MLine : public Entity
 {
+    MLineStyleWPtr _style;
+    double _scaleFactor;
+    MLineJustification _justification;
+    MLineFlags _flags;
+    XYZ _startPoint;
+    XYZ _normal;
+
+public:
+    struct Segment
+    {
+        std::vector<double> Parameters;
+        std::vector<double> AreaFillParameters;
+    };
+
+    struct Vertex
+    {
+        XYZ Position;
+        XYZ Direction;
+        XYZ Miter;
+        std::vector<Segment> Segments;
+    };
 
 public:
     MLine();
     ~MLine();
 
-    MLineStyle *mLineStyle;// handle | name 340
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-    double scaleFactor;              // 40
-    MLineJustification justification;// 70
-    MLineFlags flags;                // 71
-    XYZ startPoint;                  // 10, 20, 30
-    XYZ normal;                      // 210, 220, 230
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
 
-    class Vertex
-    {
-    public:
-        struct Segment
-        {
-            std::vector<double> parameters;        // count 74; 41
-            std::vector<double> areaFillParameters;// count 75; 42
-        };
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
-        XYZ position;                 // 11, 21, 31
-        XYZ direction;                // 12, 22, 32
-        XYZ miter;                    // 13, 23, 33
-        std::vector<Segment> segments;// count,73
-    };
+    MLineStylePtr Style() const;
+    void Style(MLineStyle *);
 
-    std::vector<Vertex> vertices;// count,72
+    double ScaleFactor() const;
+    void ScaleFactor(double);
+
+    MLineJustification Justification() const;
+    void Justification(MLineJustification);
+
+    MLineFlags Flags() const;
+    void Flags(MLineFlags);
+
+    XYZ StartPoint() const;
+    void StartPoint(const XYZ &);
+
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    std::vector<Vertex> Vertices() const;
+    void Vertices(const std::vector<Vertex> &);
+
+private:
+    std::vector<Vertex> _vertices;
 };
+CPL_SMARTER_PTR(MLine)
 
 }// namespace dwg

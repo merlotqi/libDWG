@@ -26,36 +26,84 @@
 #include <dwg/entities/ClipType.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/ImageDisplayFlags.h>
-#include <dwg/objects/ImageDefinition.h>
-#include <dwg/objects/ImageDefinitionReactor.h>
 
 namespace dwg {
 
-class CadImageBase : public Entity
+class ImageDefinition;
+CPL_SMARTER_PTR(ImageDefinition);
+
+class ImageDefinitionReactor;
+CPL_SMARTER_PTR(ImageDefinitionReactor);
+
+class LIBDWG_API CadImageBase : public Entity
 {
+    int _classVersion;
+    XYZ _insertPoint;
+    XYZ _uvector;
+    XYZ _vvector;
+    XY _size;
+    ImageDisplayFlags _flags;
+    bool _clippingState;
+    unsigned char _brightness;
+    unsigned char _contrast;
+    unsigned char _fade;
+
+    ClipMode _clipMode;
+    ClipType _clipType;
+    std::vector<XY> _clipBoundaryVertices;
+    ImageDefinitionWPtr _definition;
+    ImageDefinitionReactorWPtr _definitionReactor;
+
 public:
-    int classVersion;// 90
-    XYZ insertPoint; // 10, 20, 30
-    XYZ uvector;     // 11, 21, 31
-    XYZ vvector;     // 12, 22, 32
-    XY size;         // 13, 23
+    CadImageBase();
 
-    ImageDisplayFlags flags;// 70
-    bool clippingState;     // 280
+    virtual ~CadImageBase();
 
-    unsigned char Brightness;// 281
-    unsigned char Contrast;  // 282
-    unsigned char Fade;      // 283
+    int ClassVersion() const;
+    void ClassVersion(int);
 
-    ClipMode clipMode;// 290
-    ClipType clipType;// 71
+    XYZ InsertPoint() const;
+    void InsertPoint(const XYZ &);
 
-    // 91, 14, 24
-    std::vector<XY> clipBoundaryVertices;
+    XYZ UVector() const;
+    void UVector(const XYZ &);
 
-    ImageDefinition definition;// 340, handle
+    XYZ VVector() const;
+    void VVector(const XYZ &);
 
-    ImageDefinitionReactor definitionReactor;// 360, handle
+    XY Size() const;
+    void Size(const XY &);
+
+    ImageDisplayFlags Flags() const;
+    void Flags(ImageDisplayFlags);
+
+    bool ClippingState() const;
+    void ClippingState(bool);
+
+    unsigned char Brightness() const;
+    void Brightness(unsigned char);
+
+    unsigned char Contrast() const;
+    void Contrast(unsigned char);
+
+    unsigned char Fade() const;
+    void Fade(unsigned char);
+
+    dwg::ClipMode ClipMode() const;
+    void ClipMode(dwg::ClipMode);
+
+    dwg::ClipType ClipType() const;
+    void ClipType(dwg::ClipType);
+
+    std::vector<XY> ClipBoundaryVertices() const;
+    void ClipBoundaryVertices(const std::vector<XY> &);
+
+    ImageDefinitionPtr Definition() const;
+    void Definition(ImageDefinition *);
+
+    ImageDefinitionReactorPtr DefinitionReactor() const;
+    void DefinitionReactor(ImageDefinitionReactor *);
 };
+CPL_SMARTER_PTR(CadImageBase)
 
 }// namespace dwg

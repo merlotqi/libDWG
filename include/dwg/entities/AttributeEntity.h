@@ -26,9 +26,25 @@
 
 namespace dwg {
 
-class AttributeEntity : public AttributeBase
+class AttributeDefinition;
+class LIBDWG_API AttributeEntity : public AttributeBase
 {
 public:
+    AttributeEntity();
+
+    AttributeEntity(AttributeDefinition *);
+
+    ~AttributeEntity();
+
+    // Overrides the ObjectType method to return the specific object type for AttributeDefinition.
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Overrides the ObjectName method to return the name of the object (AttributeDefinition).
+    virtual CPL::String ObjectName() const override;
+
+    // Overrides the SubclassMarker method to return the subclass marker associated with AttributeDefinition.
+    virtual CPL::String SubclassMarker() const override;
 };
+CPL_SMARTER_PTR(AttributeEntity)
 
 }// namespace dwg

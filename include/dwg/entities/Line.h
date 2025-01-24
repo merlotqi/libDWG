@@ -35,21 +35,29 @@ class LIBDWG_API Line : public Entity
 
 public:
     Line();
+    
     ~Line();
+
     dwg::ObjectType ObjectType() const override;
+
     CPL::String ObjectName() const override;
+
     CPL::String SubclassMarker() const override;
 
     XYZ Normal() const;
+
     void Normal(const XYZ &);
 
     XYZ StartPoint() const;
+
     void StartPoint(const XYZ &);
 
     XYZ EndPoint() const;
+
     void EndPoint(const XYZ &);
 
     double Thickness() const;
+
     void Thickness(double);
 };
 CPL_SMARTER_PTR(Line)

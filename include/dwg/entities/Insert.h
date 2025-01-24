@@ -26,14 +26,26 @@
 #include <dwg/CadObjectCollection.h>
 #include <dwg/entities/AttributeEntity.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-class Insert : Entity
+class BlockRecord;
+CPL_SMARTER_PTR(BlockRecord)
+
+class LIBDWG_API Insert : public Entity
 {
 public:
-    // name 2
+
+
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+    
     BlockRecord *block;
     XYZ insertPoint;// 10, 20, 30
 

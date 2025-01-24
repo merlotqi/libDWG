@@ -49,7 +49,6 @@
 #include <dwg/tables/TextDirection.h>
 #include <dwg/tables/TextMovement.h>
 #include <dwg/tables/ToleranceAlignment.h>
-#include <dwg/tables/UCS.h>
 #include <dwg/tables/ZeroHandling.h>
 #include <dwg/units/AngularDirection.h>
 #include <dwg/units/AngularUnitFormat.h>
@@ -57,6 +56,17 @@
 #include <dwg/units/UnitsType.h>
 
 namespace dwg {
+
+class UCS;
+CPL_SMARTER_PTR(UCS);
+class Layer;
+CPL_SMARTER_PTR(Layer);
+class LineType;
+CPL_SMARTER_PTR(LineType);
+class TextStyle;
+CPL_SMARTER_PTR(TextStyle);
+class DimensionStyle;
+CPL_SMARTER_PTR(DimensionStyle);
 
 class CadDocument;
 class CadHeaderPrivate;

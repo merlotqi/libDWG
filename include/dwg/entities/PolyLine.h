@@ -24,30 +24,42 @@
 
 #include <dwg/CadObjectCollection.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/IPolyline.h>
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
 #include <dwg/entities/Vertex.h>
 
-
 namespace dwg {
 
-class Polyline : public Entity, IPolyline
+class LIBDWG_API Polyline : public Entity
 {
 public:
-    double elevation;// 30
-    double thickness;// 39
+    Polyline();
+    ~Polyline();
 
-    XYZ normal;         // 210, 220, 230
-    PolylineFlags flags;// 70
+    virtual CPL::String ObjectName() const override;
 
-    double startWidth;// 40
-    double endWidth;  // 41
+    double Elevation() const;
+    void Elevation(double);
 
-    SmoothSurfaceType smoothSurface;// 75
+    double Thickness() const;
+    void Thickness(double);
 
-    CadObjectCollection<Vertex> vertices;
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    PolylineFlags Flags() const;
+    void Flags(PolylineFlags);
+
+    double StartWidth() const;
+    void StartWidth(double);
+
+    double EndWidth() const;
+    void EndWidth(double);
+
+    SmoothSurfaceType SmoothSurface() const;
+    void SmoothSurface(SmoothSurfaceType);
 };
+CPL_SMARTER_PTR(Polyline)
 
 class Polyline2D : public Polyline
 {

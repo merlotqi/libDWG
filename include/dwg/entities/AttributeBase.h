@@ -23,39 +23,61 @@
 #pragma once
 
 #include <dwg/entities/AttributeFlags.h>
-#include <dwg/entities/MText.h>
 #include <dwg/entities/TextEntity.h>
 #include <dwg/entities/TextVerticalAlignmentType.h>
 
-
 namespace dwg {
 
-enum AttributeType
-{
-    SingleLine = 1,
-    MultiLine = 2,
-    ConstantMultiLine = 4,
-};
-class AttributeBase : public TextEntity
+class MText;
+CPL_SMARTER_PTR(MText);
+
+class LIBDWG_API AttributeBase : public TextEntity
 {
 public:
-    TextVerticalAlignmentType verticalAlignment;// 74
-    unsigned char version;                      // 280
-
-    CPL::String tag;     // 2
-    AttributeFlags flags;// 70
-
-    AttributeType attributeType;// 71
+    enum AttributeType
+    {
+        SingleLine = 1,
+        MultiLine = 2,
+        ConstantMultiLine = 4,
+    };
 
 public:
+    AttributeBase();
+    virtual ~AttributeBase();
+
+    TextVerticalAlignmentType VerticalAlignment() const;
+    void VerticalAlignment(TextVerticalAlignmentType);
+    
+    unsigned char Version() const;
+    void Version(unsigned char);
+    
+    CPL::String Tag() const;
+    void Tag(const char*);
+    
+    AttributeFlags Flags() const;
+    void Flags(AttributeFlags);
+
+    AttributeType AttrType() const;
+    void AttrType(AttributeType);
+
     bool IsReallyLocked() const;
     void IsReallyLocked(bool value);
 
-    MText mtext() const;
-    void mtext(const MText &value);
+    MTextPtr MText() const;
+    void MText(dwg::MText *);
 
 protected:
-    void matchAttributeProperties(const AttributeBase &other);
+    void matchAttributeProperties(AttributeBase *src);
+
+protected:
+    unsigned char _version;
+    CPL::String _tag;
+    AttributeFlags _flags;
+    bool _isReallyLocked;
+    MTextWPtr _mtext;
+    AttributeType _attributeType;
+    MTextWPtr _mtext;
 };
+CPL_SMARTER_PTR(AttributeBase)
 
 }// namespace dwg

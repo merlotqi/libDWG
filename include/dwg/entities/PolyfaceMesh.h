@@ -26,9 +26,10 @@
 
 namespace dwg {
 
-class PolyfaceMesh : public Polyline
+class LIBDWG_API PolyfaceMesh : public Polyline
 {
 public:
 };
+CPL_SMARTER_PTR(PolyfaceMesh)
 
 }// namespace dwg

@@ -23,24 +23,55 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/tables/TextStyle.h>
 
 namespace dwg {
 
-class Shape : public Entity
+class TextStyle;
+CPL_SMARTER_PTR(TextStyle)
+
+class LIBDWG_API Shape : public Entity
 {
 public:
-    double thickness;  // 39
-    XYZ insertionPoint;// 10, 20, 30
-    double size;       // 40
+    Shape();
 
-    TextStyle *textStyle;// name 2
+    ~Shape();
 
-    double rotation;      // 50
-    double relativeXScale;// 41
-    double obliqueAngle;  // 51
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
-    XYZ normal;// 210, 220, 230
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+
+    double Thickness() const;
+    void Thickness(double);
+
+    XYZ InsertPoint() const;
+    void InsertPoint(const XYZ &);
+
+    double Size() const;
+    void Size(double);
+
+    TextStylePtr ShapeStyle() const;
+    void ShapeStyle(TextStyle *);
+
+    double Rotation() const;
+    void Rotation(double);
+
+    double RelativeXScale() const;
+    void RelativeXScale(double);
+
+    double ObliqueAngle() const;
+    void ObliqueAngle(double);
+
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    unsigned short ShapeIndex() const;
+    void ShapeIndex(unsigned short);
 };
+CPL_SMARTER_PTR(Shape)
 
 }// namespace dwg

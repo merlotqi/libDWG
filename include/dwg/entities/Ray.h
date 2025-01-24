@@ -35,6 +35,15 @@ public:
     Ray();
     ~Ray();
 
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
+    
     XYZ StartPoint() const;
     void StartPoint(const XYZ &);
 

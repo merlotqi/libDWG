@@ -26,8 +26,25 @@
 
 namespace dwg {
 
-class RasterImage : public CadImageBase
+class ImageDefinition;
+class LIBDWG_API RasterImage : public CadImageBase
 {
+public:
+    RasterImage();
+    
+    RasterImage(ImageDefinition *definition);
+
+    ~RasterImage();
+
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
+
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
+
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override; 
 };
+CPL_SMARTER_PTR(RasterImage)
 
 }// namespace dwg

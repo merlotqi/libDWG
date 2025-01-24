@@ -22,116 +22,155 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
-#include <dwg/entities/ViewportStatusFlags.h>
-#include <dwg/tables/Layer.h>
-
 #include <dwg/Color.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/entities/LightingType.h>
-#include <dwg/objects/Scale.h>
-#include <dwg/objects/ShadePlotMode.h>
-#include <dwg/objects/VisualStyle.h>
+#include <dwg/entities/ViewportStatusFlags.h>
 
 namespace dwg {
 
-class Viewport : public Entity
+class LIBDWG_API Viewport : public Entity
 {
 public:
-    Viewport();
-    ~Viewport();
-
     static constexpr int PaperViewId = 1;
     static constexpr auto ASDK_XREC_ANNOTATION_SCALE_INFO =
             "ASDK_XREC_ANNOTATION_SCALE_INFO";
 
-    XYZ center;   // 10, 20, 30
-    double width; // 40
-    double height;// 50
-    short Id;     // 69
+public:
+    Viewport();
 
-    XY viewCenter;    // 12, 22
-    XY snapBase;      // 13, 23
-    XY snapSpacing;   // 14, 24
-    XY gridSpacing;   // 15, 25
-    XYZ viewDirection;// 16, 26, 36
-    XYZ viewTarget;   // 17, 27, 37
+    ~Viewport();
 
-    double lensLength;    // 42
-    double frontClipPlane;// 43
-    double backClipPlane; // 44
-    double viewHeight;    // 45
+    // Override to return the object type of the Arc
+    virtual dwg::ObjectType ObjectType() const override;
 
+    // Override to return the name of the object
+    virtual CPL::String ObjectName() const override;
 
-    double viewWidth() const;
+    // Override to return the subclass marker associated with this object
+    virtual CPL::String SubclassMarker() const override;
 
-    double snapAngle;       // 50
-    double twistAngle;      // 51
-    short circleZoomPercent;// 72
+    XYZ Center() const;
+    void Center(const XYZ &);
 
-    std::vector<Layer *> frozonLayers;// 331 /ignored
+    double Width() const;
+    void Width(double);
 
+    double Height() const;
+    void Height() const;
 
-    ViewportStatusFlags status;// 90
-    Entity *boundary() const;
+    short Id() const;
 
+    XY ViewCenter() const;
+    void ViewCenter(const XY &);
 
-    CPL::String styleSheetName;// 1
-    RenderMode renderMode;     // 281
+    XY SnapBase() const;
+    void SnapBase(const XY &);
 
-    bool ucsPreViewport;// 71
-    bool displayUcsIcon;// 74
+    XY SnapSpacing() const;
+    void SnapSpacing(const XY &);
 
-    XYZ ucsOrigin;// 110, 120, 130
-    XYZ ucsXAxis; // 111, 121, 131
-    XYZ ucsYAxis; // 112, 122, 132
+    XY GridSpacing() const;
+    void GridSpacing(const XY &);
 
-    //345
+    XYZ ViewDirection() const;
+    void ViewDirection(const XYZ &);
 
-    //ID/handle of AcDbUCSTableRecord if UCS is a named UCS.If not present, then UCS is unnamed
+    XY ViewTarget() const;
+    void ViewTarget(const XY &);
 
-    //346
+    double LensLength() const;
+    void LensLength(double);
 
-    //ID/handle of AcDbUCSTableRecord of base UCS if UCS is orthographic(79 code is non-zero). If not present and 79 code is non-zero, then base UCS is taken to be WORLD
+    double FrontClipPlane() const;
+    void FrontClipPlane(double);
 
-    OrthographicType ucsOrthographicType;// 79
+    double BackClipPlane() const;
+    void BackClipPlane(double);
 
-    double elevation;           // 146
-    ShadePlotMode shadePlotMode;// 170
+    double ViewHeight() const;
+    void ViewHeight(double);
 
-    short MajorGridLineFrequency;// 61
-                                 //332	Background ID/Handle(optional)
+    double ViewWidth() const;
 
-    //333	Shade plot ID/Handle(optional)
+    double SnapAngle() const;
+    void SnapAngle(double);
 
-    VisualStyle *visualStyle;// 348
+    double TwistAngle() const;
+    void TwistAngle(double);
 
+    short CircleZoomPercent() const;
+    void CircleZoomPercent(short);
 
-    bool UseDefaultLighting;         // 292
-    LightingType DefaultLightingType;// 282
+    std::vector<LayerPtr> FrozenLayers() const;
+    void FrozenLayers(const std::vector<LayerPtr> &);
 
-    double brightness;// 141
-    double contrast;  // 142
+    ViewportStatusFlags Status() const;
+    void Status(ViewportStatusFlags);
 
-    Color AmbientLightColor;// 63, 421, 431
-                            //361	Sun ID/Handle(optional)
+    CPL::SmarterPtr<Entity> Boundary() const;
+    void Boundary(Entity *);
 
-    //335
+    CPL::String StyleSheetName() const;
+    void StyleSheetName(const char*);
 
-    //Soft pointer reference to viewport object (for layer VP property override)
-    //343
+    dwg::RenderMode RenderMode() const;
+    void RenderMode(dwg::RenderMode);
 
-    //Soft pointer reference to viewport object (for layer VP property override)
-    //344
+    bool UcsPerViewport() const;
+    void UcsPerViewport(bool);
 
-    //Soft pointer reference to viewport object (for layer VP property override)
-    //91
+    bool DisplayUcsIcon() const;
+    void DisplayUcsIcon(bool);
 
-    //Soft pointer reference to viewport object (for layer VP property override)
+    XYZ UcsOrigin() const;
+    void UcsOrigin(const XYZ &);
 
+    XYZ UcsXAxis() const;
+    void UcsXAxis(const XYZ &);
 
-    Scale *scale() const;
+    XYZ UcsYAxis() const;
+    void UcsYAxis(const XYZ &);
+
+    OrthographicType UcsOrthographicType() const;
+    void UcsOrthographicType(OrthographicType);
+
+    double Elevation() const;
+    void Elevation(double);
+
+    dwg::ShadePlotMode ShadePlotMode() const;
+    void ShadePlotMode(dwg::ShadePlotMode);
+
+    short MajorGridLineFrequency() const;
+    void MajorGridLineFrequency(short);
+
+    dwg::VisualStyle VisualStyle() const;
+    void VisualStyle(dwg::VisualStyle);
+
+    bool UseDefaultLighting() const;
+    void UseDefaultLighting(bool);
+
+    LightingType DefaultLightingType() const;
+    void DefaultLightingType(LightingType);
+
+    double Brightness() const;
+    void Brightness(double);
+
+    double Contrast() const;
+    void Contrast(double);
+
+    Color AmbientLightColor() const;
+    void AmbientLightColor(const Color &);
+
+    ScalePtr Scale() const;
+    void Scale(dwg::Scale *);
+
+    double ScaleFactor() const;
+
+    bool RepresentsPaper() const;
 };
+CPL_SMARTER_PTR(Viewport)
 
 }// namespace dwg
