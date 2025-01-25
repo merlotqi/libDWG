@@ -27,15 +27,17 @@
 
 namespace dwg {
 
-class INamedCadObject : public CPL::RefObject
+class DG_INamedCadObject : public CPL::RefObject
 {
 public:
-    INamedCadObject() = default;
-    virtual ~INamedCadObject() {};
+    DG_INamedCadObject() = default;
+
+    virtual ~DG_INamedCadObject() {}
+
     virtual CPL::String Name() const = 0;
 
-    CPL::Delegate<void(const CPL::String &, const CPL::String &)> OnNameChanged;
+    CPL::Delegate<void(const char *, const char *)> OnNameChanged;
 };
-CPL_SMARTER_PTR(INamedCadObject)
+CPL_SMARTER_PTR(DG_INamedCadObject)
 
 }// namespace dwg

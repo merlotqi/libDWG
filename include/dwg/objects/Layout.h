@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/OrthographicType.h>
-#include <dwg/base/Coordinate.h>
 #include <dwg/objects/LayoutFlags.h>
 #include <dwg/objects/PlotSettings.h>
 
@@ -31,21 +30,18 @@
 namespace dwg {
 
 
-class Layout : PlotSettings
+class DG_Layout : public DG_PlotSettings
 {
 public:
-    Layout(const CPL::String &name,
-           const CPL::String &blockName = CPL::String())
-    {
-    }
+    DG_Layout(const char *name, const char *blockName = CPL::String()) {}
 
     static constexpr auto ModelLayoutName = "Model";
     static constexpr auto PaperLayoutName = "Layout1";
 
-    dwg::ObjectType ObjectType() const { return ObjectType::LAYOUT; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectLayout; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::Layout; }
-
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
+    
     // 70
     LayoutFlags LayoutFlags;
     // 71

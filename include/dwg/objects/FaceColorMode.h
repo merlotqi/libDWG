@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum FaceColorMode : short
+enum DG_FaceColorMode : short
 {
     NoColor = 0,
     ObjectColor = 1,

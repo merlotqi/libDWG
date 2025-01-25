@@ -26,30 +26,30 @@
 
 namespace dwg {
 
-class LIBDWG_API Ray : public Entity
+class LIBDWG_API DG_Ray : public DG_Entity
 {
     XYZ _startPoint;
     XYZ _direction;
 
 public:
-    Ray();
-    ~Ray();
+    DG_Ray();
+    ~DG_Ray();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
-    
+
     XYZ StartPoint() const;
     void StartPoint(const XYZ &);
 
     XYZ Direction() const;
     void Direction(const XYZ &);
 };
-CPL_SMARTER_PTR(Ray)
+CPL_SMARTER_PTR(DG_Ray)
 
 }// namespace dwg

@@ -28,18 +28,18 @@
 
 namespace dwg {
 
-class DimensionStyle;
-CPL_SMARTER_PTR(DimensionStyle)
+class DG_DimensionStyle;
+CPL_SMARTER_PTR(DG_DimensionStyle)
 
-class LIBDWG_API Leader : public Entity
+class LIBDWG_API DG_Leader : public DG_Entity
 {
 public:
-    Leader();
+    DG_Leader();
 
-    ~Leader();
+    ~DG_Leader();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -47,17 +47,17 @@ public:
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
 
-    DimensionStylePtr Style() const;
-    void Style(DimensionStyle *);
+    DG_DimensionStylePtr Style() const;
+    void Style(DG_DimensionStyle *);
 
     bool ArrowHeadEnabled() const;
     void ArrowHeadEnabled(bool);
 
-    LeaderPathType PathType() const;
-    void PathType(LeaderPathType);
+    DG_LeaderPathType PathType() const;
+    void PathType(DG_LeaderPathType);
 
-    LeaderCreationType CreationType() const;
-    void CreationType(LeaderCreationType);
+    DG_LeaderCreationType CreationType() const;
+    void CreationType(DG_LeaderCreationType);
 
     bool HookLineDirection() const;
     void HookLineDirection(bool);
@@ -74,8 +74,8 @@ public:
     std::vector<XYZ> Vertices() const;
     void Vertices(const std::vector<XYZ> &);
 
-    CPL::SmarterPtr<Entity> AssociatedAnnotation() const;
-    void AssociatedAnnotation(Entity *);
+    CPL::SmarterPtr<DG_Entity> AssociatedAnnotation() const;
+    void AssociatedAnnotation(DG_Entity *);
 
     XYZ Normal() const;
     void Normal(const XYZ &);
@@ -89,5 +89,6 @@ public:
     XYZ AnnotationOffset() const;
     void AnnotationOffset(const XYZ &);
 };
+CPL_SMARTER_PTR(DG_Leader)
 
 }// namespace dwg

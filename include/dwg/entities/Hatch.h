@@ -33,7 +33,7 @@
 
 namespace dwg {
 
-class Hatch : public Entity
+class Hatch : public DG_Entity
 {
 public:
     Hatch();

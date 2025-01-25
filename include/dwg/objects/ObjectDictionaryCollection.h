@@ -46,16 +46,16 @@ class ObjectDictionaryCollection : IHandledCadObject
 public:
     unsigned long long Handle() const { return _dictionary.Handle(); }
 
-    T operator[](const CPL::String &name) const { return (T) _dictionary[key]; }
+    T operator[](const char *name) const { return (T) _dictionary[key]; }
 
 protected:
     ObjectDictionaryCollection(const CadDictionary &dictionary);
 
     virtual void Add(T entry);
-    bool ContainsKey(const CPL::String &key);
-    bool tryGetValue(const CPL::String &name, T &entry);
-    bool Remove(const CPL::String &name);
-    bool Remove(const CPL::String &name, T &entry);
+    bool ContainsKey(const char *key);
+    bool tryGetValue(const char *name, T &entry);
+    bool Remove(const char *name);
+    bool Remove(const char *name, T &entry);
     void Clear();
 };
 

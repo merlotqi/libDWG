@@ -26,19 +26,19 @@
 
 namespace dwg {
 
-class LIBDWG_API PdfUnderlay : public UnderlayEntity
+class LIBDWG_API DG_PdfUnderlay : public DG_UnderlayEntity
 {
 public:
-    PdfUnderlay();
+    DG_PdfUnderlay();
 
-    ~PdfUnderlay();
+    ~DG_PdfUnderlay();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
 };
-CPL_SMARTER_PTR(PdfUnderlay)
+CPL_SMARTER_PTR(DG_PdfUnderlay)
 
 }// namespace dwg

@@ -32,15 +32,12 @@
 
 namespace dwg {
 
-class VisualStyle : public NonGraphicalObject
+class DG_VisualStyle : public DG_NonGraphicalObject
 {
 public:
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectVisualStyle; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::VisualStyle;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     // 1
     CPL::String RasterFile;
@@ -49,21 +46,21 @@ public:
     // 70
     int Type;
     // 71
-    FaceLightingModelType FaceLightingModel;
+    DG_FaceLightingModelType FaceLightingModel;
     // 72
-    FaceLightingQualityType FaceLightingQuality;
+    DG_FaceLightingQualityType FaceLightingQuality;
     // 73
-    FaceColorMode FaceColorMode;
+    DG_FaceColorMode FaceColorMode;
     // 90
-    FaceModifierType FaceModifiers;
+    DG_FaceModifierType FaceModifiers;
     // 40
     double FaceOpacityLevel;
     // 41
     double FaceSpecularLevel;
     // 62, 63
-    Color color;
+    DG_Color color;
     // 421
-    Color FaceStyleMonoColor;
+    DG_Color FaceStyleMonoColor;
 
     //74
     //Edge style model

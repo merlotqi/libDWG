@@ -32,16 +32,16 @@
 
 namespace dwg {
 
-class LIBDWG_API CadUtils
+class LIBDWG_API DG_CadUtils
 {
     static std::map<CPL::String, CPL::CodePageID> _dxfEncodingMap;
-    static std::vector<LineweightType> _indexedValue;
-    static std::vector<CPL::CodePageID> CadUtils::_pageCodes;
+    static std::vector<DG_LineweightType> _indexedValue;
+    static std::vector<CPL::CodePageID> _pageCodes;
 
 public:
-    static LineweightType ToValue(unsigned char b);
+    static DG_LineweightType ToValue(unsigned char b);
 
-    static unsigned char ToIndex(LineweightType value);
+    static unsigned char ToIndex(DG_LineweightType value);
 
     static CPL::CodePageID GetCodePage(CPL::String &value);
 
@@ -51,9 +51,9 @@ public:
 
     static int GetCodeIndex(CPL::CodePageID code);
 
-    static ACadVersion GetVersionFromName(const CPL::String &name);
+    static DG_ACadVersion GetVersionFromName(const char *name);
 
-    static CPL::String GetNameFromVersion(ACadVersion version);
+    static CPL::String GetNameFromVersion(DG_ACadVersion version);
 
     static double ToJulianCalendar(CPL::DateTime date);
 

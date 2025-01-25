@@ -30,21 +30,21 @@
 
 namespace dwg {
 
-struct LIBDWG_API DxfClass
+struct LIBDWG_API DG_DxfClass
 {
     CPL::String DxfName;
     CPL::String CppClassName;
     CPL::String ApplicationName;
-    ProxyFlags Flags;
+    DG_ProxyFlags Flags;
     int InstanceCount;
     bool WasZombie;
     bool IsAnEntity;
     short ClassNumber;
     short ItemClassId;
-    ACadVersion DwgVersion;
+    DG_ACadVersion DwgVersion;
     short MaintenanceVersion;
 
-    DxfClass();
+    DG_DxfClass();
 };
 
 }// namespace dwg

@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum ImageDisplayFlag : short
+enum DG_ImageDisplayFlag : short
 {
     /// None
     None = 0,
@@ -39,6 +39,6 @@ enum ImageDisplayFlag : short
     /// Transparency is on
     TransparencyIsOn = 8
 };
-CPL_DECLARE_FLAGS(ImageDisplayFlags, ImageDisplayFlag)
+CPL_DECLARE_FLAGS(DG_ImageDisplayFlags, DG_ImageDisplayFlag)
 
 }// namespace dwg

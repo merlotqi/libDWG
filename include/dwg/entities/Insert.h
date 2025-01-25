@@ -29,23 +29,21 @@
 
 namespace dwg {
 
-class BlockRecord;
-CPL_SMARTER_PTR(BlockRecord)
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
 
-class LIBDWG_API Insert : public Entity
+class LIBDWG_API DG_Insert : public DG_Entity
 {
 public:
-
-
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
-    
+
     BlockRecord *block;
     XYZ insertPoint;// 10, 20, 30
 

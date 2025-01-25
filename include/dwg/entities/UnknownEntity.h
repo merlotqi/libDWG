@@ -27,16 +27,16 @@
 
 namespace dwg {
 
-class LIBDWG_API UnknownEntity : public Entity
+class LIBDWG_API DG_UnknownEntity : public DG_Entity
 {
-    DxfClass _dxfclass;
+    DG_DxfClass _dxfclass;
 
 public:
-    UnknownEntity();
-    ~UnknownEntity();
+    DG_UnknownEntity();
+    ~DG_UnknownEntity();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -44,11 +44,11 @@ public:
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
 
-    dwg::DxfClass DxfClass() const;
+    DG_DxfClass DxfClass() const;
 
 protected:
-    UnknownEntity(const DxfClass &);
+    DG_UnknownEntity(const DG_DxfClass &);
 };
-CPL_SMARTER_PTR(UnknownEntity)
+CPL_SMARTER_PTR(DG_UnknownEntity)
 
 }// namespace dwg

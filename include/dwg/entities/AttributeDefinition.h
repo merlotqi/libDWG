@@ -26,31 +26,31 @@
 
 namespace dwg {
 
-class AttributeEntity;
+class DG_AttributeEntity;
 
-// AttributeDefinition class represents a specific type of attribute that extends AttributeBase.
+// DG_AttributeDefinition class represents a specific type of attribute that extends AttributeBase.
 // It includes additional information such as a prompt message.
-class LIBDWG_API AttributeDefinition : public AttributeBase
+class LIBDWG_API DG_AttributeDefinition : public DG_AttributeBase
 {
     // Private member to store the prompt string associated with the attribute definition.
     CPL::String _prompt;
 
 public:
-    // Default constructor for AttributeDefinition.
-    AttributeDefinition();
+    // Default constructor for DG_AttributeDefinition.
+    DG_AttributeDefinition();
 
-    AttributeDefinition(AttributeEntity *);
+    DG_AttributeDefinition(DG_AttributeEntity *);
 
-    // Destructor for AttributeDefinition.
-    ~AttributeDefinition();
+    // Destructor for DG_AttributeDefinition.
+    ~DG_AttributeDefinition();
 
-    // Overrides the ObjectType method to return the specific object type for AttributeDefinition.
-    virtual dwg::ObjectType ObjectType() const override;
+    // Overrides the ObjectType method to return the specific object type for DG_AttributeDefinition.
+    virtual DG_ObjectType ObjectType() const override;
 
-    // Overrides the ObjectName method to return the name of the object (AttributeDefinition).
+    // Overrides the ObjectName method to return the name of the object (DG_AttributeDefinition).
     virtual CPL::String ObjectName() const override;
 
-    // Overrides the SubclassMarker method to return the subclass marker associated with AttributeDefinition.
+    // Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeDefinition.
     virtual CPL::String SubclassMarker() const override;
 
     // Getter method to retrieve the prompt string.
@@ -59,6 +59,6 @@ public:
     // Setter method to update the prompt string.
     void Prompt(const char *);
 };
-CPL_SMARTER_PTR(AttributeDefinition)
+CPL_SMARTER_PTR(DG_AttributeDefinition)
 
 }// namespace dwg

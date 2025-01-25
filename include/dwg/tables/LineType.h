@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/Coordinate.h>
 #include <dwg/tables/LinetypeShapeFlags.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextStyle.h>
@@ -29,45 +30,38 @@
 
 namespace dwg {
 
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
 
-class LineType : public TableEntry
+class LIBDWG_API DG_LineType : public DG_TableEntry
 {
 public:
-    LineType() = default;
-    LineType(const CPL::String &name) : TableEntry(name) {}
+    DG_LineType();
+    DG_LineType(const char *name);
 
     struct Segment
     {
         double Length;// 49
-        LinetypeShapeFlags ShapeFlag;
+        DG_LinetypeShapeFlags ShapeFlag;
         short ShapeNumber;
         XY Offset;
         double Rotation;
         double Scale;
         CPL::String Text;
-        TextStyle Style;
+        DG_TextStyleWPtr Style;
     };
 
     static constexpr auto ByLayerName = "ByLayer";
     static constexpr auto ByBlockName = "ByBlock";
     static constexpr auto ContinuousName = "Continuous";
 
-    static LineType ByLayer;
-    static LineType ByBlock;
-    static LineType Continuous;
+    static CPL::SmarterPtr<DG_LineType> ByLayer();
+    static CPL::SmarterPtr<DG_LineType> ByBlock();
+    static CPL::SmarterPtr<DG_LineType> Continuous();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::LTYPE;
-    }
-    CPL::String ObjectName() const override
-    {
-        return DxfFileToken::TableLinetype;
-    }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::Linetype;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     CPL::String Description;  // 3
     double PatternLen() const;// 40
@@ -79,26 +73,19 @@ private:
     std::vector<Segment> _segments;
 };
 
-class LineTypesTable : public Table<LineType>
+class LIBDWG_API DG_LineTypesTable : public DG_Table
 {
 public:
-    LineType ByLayer;
-    LineType ByBlock;
-    LineType Continuous;
+    CPL::SmarterPtr<DG_LineType> ByLayer;
+    CPL::SmarterPtr<DG_LineType> ByBlock;
+    CPL::SmarterPtr<DG_LineType> Continuous;
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::APPID_CONTROL_OBJ;
-    }
+    DG_ObjectType ObjectType() const override;
 
-    LineTypesTable() = default;
+    DG_LineTypesTable() = default;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {LineType::ByLayerName, LineType::ByBlockName,
-                LineType::ContinuousName};
-    }
+    std::vector<CPL::String> defaultEntries() const;
 };
 
 }// namespace dwg

@@ -35,34 +35,34 @@
 
 namespace dwg {
 
-class CadDocument;
-CPL_SMARTER_PTR(CadDocument)
+class DG_CadDocument;
+CPL_SMARTER_PTR(DG_CadDocument)
 
 /// \brief Base class representing a CAD object with support for handle-based identification
 /// and ownership hierarchy.
-class LIBDWG_API CadObject : public IHandledCadObject
+class LIBDWG_API DG_CadObject : public DG_IHandledCadObject
 {
 protected:
     /// \brief Unique handle identifying the CAD object.
     unsigned long long _handle;
 
     /// \brief Weak pointer to the owning CAD object.
-    CPL::WeakSmarterPtr<CadObject> _owner;
+    CPL::WeakSmarterPtr<DG_CadObject> _owner;
 
-    CadDocumentWPtr _document;
+    DG_CadDocumentWPtr _document;
 
 public:
     /// \brief Default constructor.
-    CadObject() = default;
+    DG_CadObject() = default;
 
     /// \brief Virtual destructor.
-    virtual ~CadObject() noexcept override;
+    virtual ~DG_CadObject() noexcept override;
 
     /// \brief Get the type of the CAD object.
     /// \details This method must be implemented by derived classes to return the specific
     /// type of the object.
-    /// \return The type of the object as a value from the `dwg::ObjectType` enumeration.
-    virtual dwg::ObjectType ObjectType() const = 0;
+    /// \return The type of the object as a value from the `DG_ObjectType` enumeration.
+    virtual DG_ObjectType ObjectType() const = 0;
 
     /// \brief Get the name of the CAD object.
     /// \details This method must be implemented by derived classes to return the name
@@ -83,13 +83,13 @@ public:
     /// \brief Get the owning CAD object of this object.
     /// \details The ownership establishes a hierarchical relationship between CAD objects.
     /// \return A smart pointer to the owning CAD object, or nullptr if no owner is set.
-    CPL::SmarterPtr<CadObject> Owner();
+    CPL::SmarterPtr<DG_CadObject> Owner();
 
-    CadDocumentPtr Document();
+    DG_CadDocumentPtr Document();
 
-    void Document(CadDocument *);
+    void Document(DG_CadDocument *);
 
-    virtual CPL::SmarterPtr<CadObject> Clone();
+    virtual CPL::SmarterPtr<DG_CadObject> Clone();
 
 protected:
     /// \brief Set the unique handle of the CAD object.
@@ -98,11 +98,11 @@ protected:
 
     /// \brief Set the owning CAD object for this object.
     /// \param obj Pointer to the new owning CAD object.
-    void Owner(CadObject *obj);
+    void Owner(DG_CadObject *obj);
 
-    virtual void AssignDocument(CadDocument *doc);
+    virtual void AssignDocument(DG_CadDocument *doc);
     virtual void UnassignDocument();
-    TableEntryPtr updateTable(TableEntry *entity, TablePtr table);
+    DG_TableEntryPtr updateTable(DG_TableEntry *entity, DG_TablePtr table);
 
     // template<class T>
     // CPL::SmarterPtr<T>
@@ -111,7 +111,7 @@ protected:
     //     return NULL;
     // }
 };
-CPL_SMARTER_PTR(CadObject)
+CPL_SMARTER_PTR(DG_CadObject)
 
 
 }// namespace dwg

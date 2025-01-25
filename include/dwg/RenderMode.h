@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Viewport render mode
-enum RenderMode
+enum DG_RenderMode
 {
     /// Classic 2D
     Optimized2D,

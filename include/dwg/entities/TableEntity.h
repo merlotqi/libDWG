@@ -26,10 +26,10 @@
 
 namespace dwg {
 
-class TableEntity : public Insert
+class TableEntity : public DG_Insert
 {
 public:
-    enum CellStyleTypeType
+    enum DG_CellStyleTypeType
     {
         Cell = 1,
         Row,
@@ -38,20 +38,20 @@ public:
         Table,
     };
 
-    enum BorderType : short
+    enum DG_BorderType : short
     {
         Single = 1,
         Double = 2,
     };
 
-    enum BreakFlowDirection
+    enum DG_BreakFlowDirection
     {
         Right = 1,
         Vertical,
         Left,
     };
 
-    enum BreakOptionFlags
+    enum DG_BreakOptionFlags
     {
         None,
         EnableBreaks = 1,

@@ -23,24 +23,26 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
-#include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
 
-class LIBDWG_API Tolerance : public Entity
+class DG_DimensionStyle;
+CPL_SMARTER_PTR(DG_DimensionStyle)
+
+class LIBDWG_API DG_Tolerance : public DG_Entity
 {
-    DimensionStyleWPtr _style;
+    DG_DimensionStyleWPtr _style;
     XYZ _insertionPoint;
     XYZ _direction;
     XYZ _normal;
     CPL::String _text;
 
 public:
-    Tolerance();
-    virtual ~Tolerance();
+    DG_Tolerance();
+    virtual ~DG_Tolerance();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -48,8 +50,8 @@ public:
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
 
-    DimensionStylePtr Style() const;
-    void Style(DimensionStyle *);
+    DG_DimensionStylePtr Style() const;
+    void Style(DG_DimensionStyle *);
 
     XYZ InsertionPoint() const;
     void InsertionPoint(const XYZ &);
@@ -63,6 +65,6 @@ public:
     CPL::String Text() const;
     void Text(const char *);
 };
-CPL_SMARTER_PTR(Tolerance)
+CPL_SMARTER_PTR(DG_Tolerance)
 
 }// namespace dwg

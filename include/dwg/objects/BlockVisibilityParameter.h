@@ -23,36 +23,28 @@
 #pragma once
 
 #include <dwg/CadObject.h>
-#include <dwg/base/Coordinate.h>
+#include <dwg/Coordinate.h>
 #include <dwg/entities/Entity.h>
 #include <vector>
 
 namespace dwg {
 
 
-class BlockVisibilityParameter : public CadObject
+class DG_BlockVisibilityParameter : public DG_CadObject
 {
 public:
-    BlockVisibilityParameter();
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const
-    {
-        return DxfFileToken::ObjectBlockVisibilityParameter;
-    }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::BlockVisibilityParameter;
-    }
-
-
-    struct SubBlock
+    DG_BlockVisibilityParameter();
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
+    struct DG_SubBlock
     {
         CPL::String Name;
-        std::vector<Entity *> Entities;
+        std::vector<DG_Entity *> Entities;
     };
 
-    std::vector<Entity *> Entities;
-    std::vector<SubBlock> SubBlocks;
+    std::vector<DG_Entity *> Entities;
+    std::vector<DG_SubBlock> SubBlocks;
     // 1010, 1020, 1030
     XYZ BasePosition;
     // 300

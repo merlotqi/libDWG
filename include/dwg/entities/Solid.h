@@ -26,15 +26,15 @@
 
 namespace dwg {
 
-class LIBDWG_API Solid : public Entity
+class LIBDWG_API DG_Solid : public DG_Entity
 {
 public:
-    Solid();
-    
-    virtual ~Solid();
+    DG_Solid();
+
+    virtual ~DG_Solid();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -60,6 +60,6 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 };
-CPL_SMARTER_PTR(Solid)
+CPL_SMARTER_PTR(DG_Solid)
 
 }// namespace dwg

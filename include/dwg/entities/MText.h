@@ -30,12 +30,13 @@
 #include <dwg/entities/DrawingDirectionType.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/LineSpacingStyleType.h>
-#include <dwg/tables/TextStyle.h>
-
 
 namespace dwg {
 
-class LIBDWG_API MText : public Entity
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
+
+class LIBDWG_API DG_MText : public DG_Entity
 {
     XYZ _insertPoint;
     XYZ _normal;
@@ -48,19 +49,19 @@ class LIBDWG_API MText : public Entity
     double _rotation;
     double _lineSpacing;
     double _backgroundScale;
-    AttachmentPointType _attachmentPoint;
-    DrawingDirectionType _drawingDirection;
-    TextStyleWPtr _style;
-    LineSpacingStyleType _lineSpacingStyle;
-    dwg::BackgroundFillFlags _backgroundFillFlags;
-    Color _backgroundColor;
-    Transparency _backgroundTransparency;
+    DG_AttachmentPointType _attachmentPoint;
+    DG_DrawingDirectionType _drawingDirection;
+    DG_TextStyleWPtr _style;
+    DG_LineSpacingStyleType _lineSpacingStyle;
+    DG_BackgroundFillFlags _backgroundFillFlags;
+    DG_Color _backgroundColor;
+    DG_Transparency _backgroundTransparency;
     bool _isAnnotative;
 
 public:
     struct LIBDWG_API TextColumn
     {
-        dwg::ColumnType ColumnType;
+        DG_ColumnType ColumnType;
         int ColumnCount;
         bool ColumnFlowReversed;
         bool ColumnAutoHeight;
@@ -72,11 +73,11 @@ public:
     };
 
 public:
-    MText();
-    ~MText();
+    DG_MText();
+    ~DG_MText();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -99,17 +100,17 @@ public:
     double RectangleWidth() const;
     void RectangleWidth(double);
 
-    AttachmentPointType AttachmentPoint() const;
-    void AttachmentPoint(AttachmentPointType);
+    DG_AttachmentPointType AttachmentPoint() const;
+    void AttachmentPoint(DG_AttachmentPointType);
 
-    DrawingDirectionType DrawingDirection() const;
-    void DrawingDirection(DrawingDirectionType);
+    DG_DrawingDirectionType DrawingDirection() const;
+    void DrawingDirection(DG_DrawingDirectionType);
 
     CPL::String Value() const;
     void Value(const char *);
 
-    TextStylePtr Style() const;
-    void Style(TextStyle *);
+    DG_TextStylePtr Style() const;
+    void Style(DG_TextStyle *);
 
     XYZ AlignmentPoint() const;
     void AlignmentPoint(const XYZ &);
@@ -123,23 +124,23 @@ public:
     double Rotation() const;
     void Rotation(double);
 
-    LineSpacingStyleType LineSpacingStyle() const;
-    void LineSpacingStyle(LineSpacingStyleType);
+    DG_LineSpacingStyleType LineSpacingStyle() const;
+    void LineSpacingStyle(DG_LineSpacingStyleType);
 
     double LineSpacing() const;
     void LineSpacing(double);
 
-    dwg::BackgroundFillFlags BackgroundFillFlags() const;
-    void BackgroundFillFlags(dwg::BackgroundFillFlags);
+    DG_BackgroundFillFlags BackgroundFillFlags() const;
+    void BackgroundFillFlags(DG_BackgroundFillFlags);
 
     double BackgroundScale() const;
     void BackgroundScale(double);
 
-    Color BackgroundColor() const;
-    void BackgroundColor(const Color &);
+    DG_Color BackgroundColor() const;
+    void BackgroundColor(const DG_Color &);
 
-    Transparency BackgroundTransparency() const;
-    void BackgroundTransparency(const Transparency &);
+    DG_Transparency BackgroundTransparency() const;
+    void BackgroundTransparency(const DG_Transparency &);
 
     TextColumn Column() const;
     void Column(const TextColumn &);
@@ -150,6 +151,6 @@ public:
 private:
     TextColumn _column;
 };
-CPL_SMARTER_PTR(MText)
+CPL_SMARTER_PTR(DG_MText)
 
 }// namespace dwg

@@ -24,7 +24,7 @@
 
 #include <dwg/Color.h>
 #include <dwg/DxfSubclassMarker.h>
-#include <dwg/LineweightType.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/tables/ArcLengthSymbolPosition.h>
 #include <dwg/tables/DimensionTextBackgroundFillMode.h>
 #include <dwg/tables/DimensionTextHorizontalAlignment.h>
@@ -39,24 +39,20 @@
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
 
-
 namespace dwg {
 
-
-class DimensionStyle : public TableEntry
+class LIBDWG_API DG_DimensionStyle : public DG_TableEntry
 {
 public:
     static constexpr auto DefaultName = "Standard";
-    static DimensionStyle *Default() { return new DimensionStyle(DefaultName); }
+    static CPL::SmarterPtr<DG_DimensionStyle> Default();
 
-    dwg::ObjectType ObjectType() const { return ObjectType::DIMSTYLE; }
-    CPL::String ObjectName() const { return DxfFileToken::TableDimstyle; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::DimensionStyle;
-    }
+public:
+    DG_DimensionStyle(const char *name);
 
-    DimensionStyle(const CPL::String &name) : TableEntry(name) {}
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     // 3
     CPL::String PostFix = "<>";
@@ -232,25 +228,16 @@ protected:
     double Mzf;
 };
 
-class DimensionStylesTable : public Table<DimensionStyle>
+class LIBDWG_API DG_DimensionStylesTable : public DG_Table
 {
 public:
-    DimensionStylesTable();
+    DG_DimensionStylesTable();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::DIMSTYLE_CONTROL_OBJ;
-    }
-    CPL::String ObjectName() const override
-    {
-        return DxfFileToken::TableDimstyle;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {DimensionStyle::DefaultName};
-    }
+    std::vector<CPL::String> defaultEntries() const;
 };
 
 }// namespace dwg

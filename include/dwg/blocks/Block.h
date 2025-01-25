@@ -27,16 +27,16 @@
 
 namespace dwg {
 
-class BlockRecord;
-CPL_SMARTER_PTR(BlockRecord);
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord);
 
-class LIBDWG_API Block : public Entity
+class LIBDWG_API DG_Block : public DG_Entity
 {
     // Block's name (string representation)
     CPL::String _name;
 
     // Flags associated with the block type
-    BlockTypeFlags _flags;
+    DG_BlockTypeFlags _flags;
 
     // Base point of the block, default initialized to zero
     XYZ _base_point = XYZ::Zero;
@@ -49,13 +49,13 @@ class LIBDWG_API Block : public Entity
 
 public:
     // Constructor accepting a BlockRecord pointer
-    Block(BlockRecord *record);
+    DG_Block(DG_BlockRecord *record);
 
     // Destructor
-    ~Block();
+    ~DG_Block();
 
     // Overrides the ObjectType method to return the type of object
-    dwg::ObjectType ObjectType() const override;
+    DG_ObjectType ObjectType() const override;
 
     // Overrides the ObjectName method to return the object's name
     CPL::String ObjectName() const override;
@@ -64,19 +64,19 @@ public:
     CPL::String SubclassMarker() const override;
 
     // Returns the associated BlockRecord pointer
-    BlockRecordPtr BlockRecord() const;
+    DG_BlockRecordPtr BlockRecord() const;
 
     // Getter for the block's name
     CPL::String Name() const;
 
     // Setter for the block's name
-    void Name(const CPL::String &name);
+    void Name(const char *name);
 
     // Getter for the block's flags
-    BlockTypeFlags Flags() const;
+    DG_BlockTypeFlags Flags() const;
 
     // Setter for the block's flags
-    void Flags(BlockTypeFlags flags);
+    void Flags(DG_BlockTypeFlags flags);
 
     // Getter for the block's base point
     XYZ BasePoint() const;
@@ -88,18 +88,18 @@ public:
     CPL::String XrefPath() const;
 
     // Setter for the block's xref path
-    void XrefPath(const CPL::String &value);
+    void XrefPath(const char *value);
 
     // Getter for the block's comments
     CPL::String Comments() const;
 
     // Setter for the block's comments
-    void Comments(const CPL::String &value);
+    void Comments(const char *value);
 
 protected:
     // Protected default constructor
-    Block();
+    DG_Block();
 };
-CPL_SMARTER_PTR(Block)
+CPL_SMARTER_PTR(DG_Block)
 
 }// namespace dwg

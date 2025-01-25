@@ -23,39 +23,51 @@
 #pragma once
 
 #include <dwg/CadObject.h>
+#include <dwg/Color.h>
 #include <dwg/Coordinate.h>
+#include <dwg/LineWeightType.h>
+#include <dwg/Transparency.h>
 
 namespace dwg {
 
-class LIBDWG_API Entity : public CadObject
+class DG_Layer;
+CPL_SMARTER_PTR(DG_Layer)
+
+class DG_LineType;
+CPL_SMARTER_PTR(DG_LineType)
+
+class DG_BookColor;
+CPL_SMARTER_PTR(DG_BookColor)
+
+class LIBDWG_API DG_Entity : public DG_CadObject
 {
-    dwg::LayerWPtr _layer;
-    dwg::Color _color;
-    LineweightType _lineweight;
+    DG_LayerWPtr _layer;
+    DG_Color _color;
+    DG_LineweightType _lineweight;
     double _linetypeScale;
     bool _isInvisible;
-    dwg::Transparency _transparency;
-    dwg::LineTypeWPtr _linetype;
-    dwg::BookColorWPtr _bookColor;
+    DG_Transparency _transparency;
+    DG_LineTypeWPtr _linetype;
+    DG_BookColorWPtr _bookColor;
 
 public:
-    Entity();
-    
-    virtual ~Entity();
+    DG_Entity();
+
+    virtual ~DG_Entity();
 
     CPL::String SubclassMarker() const;
 
-    virtual LayerPtr Layer() const;
-    
-    virtual void Layer(dwg::Layer *);
+    virtual DG_LayerPtr Layer() const;
 
-    virtual dwg::Color Color() const;
+    virtual void Layer(DG_Layer *);
 
-    virtual void Color(dwg::Color);
-    
-    virtual LineweightType Lineweight() const;
+    virtual DG_Color Color() const;
 
-    virtual void Lineweight(LineweightType);
+    virtual void Color(const DG_Color &);
+
+    virtual DG_LineweightType Lineweight() const;
+
+    virtual void Lineweight(DG_LineweightType);
 
     virtual double LinetypeScale() const;
 
@@ -65,16 +77,16 @@ public:
 
     virtual void IsInvisible(bool);
 
-    virtual dwg::Transparency Transparency() const;
+    virtual DG_Transparency Transparency() const;
 
-    virtual void Transparency(dwg::Transparency);
+    virtual void Transparency(DG_Transparency);
 
-    virtual LineTypePtr LineType() const;
+    virtual DG_LineTypePtr LineType() const;
 
-    virtual void LineType(dwg::LineType *) const;
-    
-    virtual void MatchProperties(Entity *entity);
+    virtual void LineType(DG_LineType *) const;
+
+    virtual void MatchProperties(DG_Entity *entity);
 };
-CPL_SMARTER_PTR(Entity)
+CPL_SMARTER_PTR(DG_Entity)
 
 }// namespace dwg

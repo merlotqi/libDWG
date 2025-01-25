@@ -31,7 +31,13 @@
 
 namespace dwg {
 
-class LIBDWG_API Viewport : public Entity
+class DG_Layer;
+CPL_SMARTER_PTR(DG_Layer)
+
+class DG_Scale;
+CPL_SMARTER_PTR(DG_Scale)
+
+class LIBDWG_API DG_Viewport : public DG_Entity
 {
 public:
     static constexpr int PaperViewId = 1;
@@ -39,12 +45,12 @@ public:
             "ASDK_XREC_ANNOTATION_SCALE_INFO";
 
 public:
-    Viewport();
+    DG_Viewport();
 
-    ~Viewport();
+    ~DG_Viewport();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -59,7 +65,7 @@ public:
     void Width(double);
 
     double Height() const;
-    void Height() const;
+    void Height(double) const;
 
     short Id() const;
 
@@ -104,20 +110,20 @@ public:
     short CircleZoomPercent() const;
     void CircleZoomPercent(short);
 
-    std::vector<LayerPtr> FrozenLayers() const;
-    void FrozenLayers(const std::vector<LayerPtr> &);
+    std::vector<DG_LayerPtr> FrozenLayers() const;
+    void FrozenLayers(const std::vector<DG_LayerPtr> &);
 
-    ViewportStatusFlags Status() const;
-    void Status(ViewportStatusFlags);
+    DG_ViewportStatusFlags Status() const;
+    void Status(DG_ViewportStatusFlags);
 
-    CPL::SmarterPtr<Entity> Boundary() const;
-    void Boundary(Entity *);
+    CPL::SmarterPtr<DG_Entity> Boundary() const;
+    void Boundary(DG_Entity *);
 
     CPL::String StyleSheetName() const;
-    void StyleSheetName(const char*);
+    void StyleSheetName(const char *);
 
-    dwg::RenderMode RenderMode() const;
-    void RenderMode(dwg::RenderMode);
+    DG_RenderMode RenderMode() const;
+    void RenderMode(DG_RenderMode);
 
     bool UcsPerViewport() const;
     void UcsPerViewport(bool);
@@ -134,26 +140,26 @@ public:
     XYZ UcsYAxis() const;
     void UcsYAxis(const XYZ &);
 
-    OrthographicType UcsOrthographicType() const;
-    void UcsOrthographicType(OrthographicType);
+    DG_OrthographicType UcsOrthographicType() const;
+    void UcsOrthographicType(DG_OrthographicType);
 
     double Elevation() const;
     void Elevation(double);
 
-    dwg::ShadePlotMode ShadePlotMode() const;
-    void ShadePlotMode(dwg::ShadePlotMode);
+    DG_ShadePlotMode ShadePlotMode() const;
+    void ShadePlotMode(DG_ShadePlotMode);
 
     short MajorGridLineFrequency() const;
     void MajorGridLineFrequency(short);
 
-    dwg::VisualStyle VisualStyle() const;
-    void VisualStyle(dwg::VisualStyle);
+    DG_VisualStyle VisualStyle() const;
+    void VisualStyle(DG_VisualStyle);
 
     bool UseDefaultLighting() const;
     void UseDefaultLighting(bool);
 
-    LightingType DefaultLightingType() const;
-    void DefaultLightingType(LightingType);
+    DG_LightingType DefaultLightingType() const;
+    void DefaultLightingType(DG_LightingType);
 
     double Brightness() const;
     void Brightness(double);
@@ -161,16 +167,16 @@ public:
     double Contrast() const;
     void Contrast(double);
 
-    Color AmbientLightColor() const;
-    void AmbientLightColor(const Color &);
+    DG_Color AmbientLightColor() const;
+    void AmbientLightColor(const DG_Color &);
 
-    ScalePtr Scale() const;
-    void Scale(dwg::Scale *);
+    DG_ScalePtr Scale() const;
+    void Scale(DG_Scale *);
 
     double ScaleFactor() const;
 
     bool RepresentsPaper() const;
 };
-CPL_SMARTER_PTR(Viewport)
+CPL_SMARTER_PTR(DG_Viewport)
 
 }// namespace dwg

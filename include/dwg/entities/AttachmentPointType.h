@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Attachment point for Multiline text.
-enum AttachmentPointType : short
+enum DG_AttachmentPointType : short
 {
     /// Top left.
     TopLeft = 1,

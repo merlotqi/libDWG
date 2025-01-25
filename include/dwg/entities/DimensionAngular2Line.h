@@ -26,9 +26,9 @@
 
 namespace dwg {
 
-// The DimensionAngular2Line class represents an angular dimension between two lines
+// The DG_DimensionAngular2Line class represents an angular dimension between two lines
 // defined by three points: two points on the lines and the vertex at the angle.
-class LIBDWG_API DimensionAngular2Line : public Dimension
+class LIBDWG_API DG_DimensionAngular2Line : public DG_Dimension
 {
     XYZ _firstPoint;// The first point on the first line that defines the angle
     XYZ _secondPoint;// The second point on the second line that defines the angle
@@ -36,14 +36,14 @@ class LIBDWG_API DimensionAngular2Line : public Dimension
     XYZ _dimensionArc;// The arc that represents the angular dimension
 
 public:
-    // Default constructor for the DimensionAngular2Line class
-    DimensionAngular2Line();
+    // Default constructor for the DG_DimensionAngular2Line class
+    DG_DimensionAngular2Line();
 
-    // Destructor for the DimensionAngular2Line class
-    ~DimensionAngular2Line();
-    
+    // Destructor for the DG_DimensionAngular2Line class
+    ~DG_DimensionAngular2Line();
+
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -70,6 +70,6 @@ public:
     // Override the Measurement method to calculate the angular dimension between the two lines
     virtual double Measurement() const override;
 };
-CPL_SMARTER_PTR(DimensionAngular2Line)
+CPL_SMARTER_PTR(DG_DimensionAngular2Line)
 
 }// namespace dwg

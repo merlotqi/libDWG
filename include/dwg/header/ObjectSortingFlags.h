@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Bitmask flags to set the various object sorting types.
-enum ObjectSortingFlags : unsigned char
+enum DG_ObjectSortingFlags : unsigned char
 {
     /// Disables SORTENTS.
     Disabled = 0,

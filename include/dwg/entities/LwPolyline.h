@@ -27,12 +27,12 @@
 
 namespace dwg {
 
-class LIBDWG_API LwPolyline : public Entity
+class LIBDWG_API DG_LwPolyline : public DG_Entity
 {
 public:
-    LwPolyline();
-    
-    virtual ~LwPolyline();
+    DG_LwPolyline();
+
+    virtual ~DG_LwPolyline();
 
     struct Vertex
     {
@@ -40,19 +40,19 @@ public:
         double Bulge;
         double StartWidth;
         double EndWidth;
-        VertexFlags Flags;
+        DG_VertexFlags Flags;
         double CurveTangent;
         int Id;
     };
 
-    dwg::ObjectType ObjectType() const;
+    DG_ObjectType ObjectType() const;
 
     CPL::String ObjectName() const;
 
     CPL::String SubclassMarker() const;
 
-    LwPolylineFlags Flags() const;
-    void Flags(LwPolylineFlags);
+    DG_LwPolylineFlags Flags() const;
+    void Flags(DG_LwPolylineFlags);
 
     double ConstantWidth() const;
     void ConstantWidth(double);
@@ -72,6 +72,6 @@ public:
     bool IsClosed() const;
     void IsClosed(bool);
 };
-CPL_SMARTER_PTR(LwPolyline)
+CPL_SMARTER_PTR(DG_LwPolyline)
 
 }// namespace dwg

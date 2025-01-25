@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/base/Coordinate.h>
+#include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/PaperMargin.h>
 #include <dwg/objects/PlotFlags.h>
@@ -35,18 +35,14 @@
 
 namespace dwg {
 
-class PlotSettings : public NonGraphicalObject
+class LIBDWG_API DG_PlotSettings : public DG_NonGraphicalObject
 {
 public:
-    PlotSettings();
+    DG_PlotSettings();
 
-    dwg::ObjectType ObjectType() const { return ObjectType::INVALID; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectPlotSettings; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::PlotSettings;
-    }
-
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
     // 1
     CPL::String PageName = "none_device";
     // 2

@@ -25,12 +25,15 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/TextHorizontalAlignment.h>
 #include <dwg/entities/TextMirrorFlag.h>
-#include <dwg/entities/TextVerticalAlignmentType.h>
+#include <dwg/entities/TextVerticalAlignment.h>
 
 
 namespace dwg {
 
-class LIBDWG_API TextEntity : public Entity
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
+
+class LIBDWG_API DG_TextEntity : public DG_Entity
 {
     double _thickness;
     XYZ _insertPoint;
@@ -39,19 +42,19 @@ class LIBDWG_API TextEntity : public Entity
     double _rotation;
     double _widthFactor;
     double _obliqueAngle;
-    TextStyleWPtr _style;
-    TextMirrorFlag _mirror;
-    TextHorizontalAlignment _horizontalAlignment;
+    DG_TextStyleWPtr _style;
+    DG_TextMirrorFlag _mirror;
+    DG_TextHorizontalAlignment _horizontalAlignment;
     XYZ _alignmentPoint;
     XYZ _normal;
-    TextVerticalAlignmentType _verticalAlignment;
+    DG_TextVerticalAlignment _verticalAlignment;
 
 public:
-    TextEntity();
-    virtual ~TextEntity();
+    DG_TextEntity();
+    virtual ~DG_TextEntity();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const;
+    virtual DG_ObjectType ObjectType() const;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const;
@@ -80,14 +83,14 @@ public:
     double ObliqueAngle() const;
     void ObliqueAngle(double);
 
-    TextStylePtr Style() const;
-    void Style(TextStyle *);
+    DG_TextStylePtr Style() const;
+    void Style(DG_TextStyle *);
 
-    TextMirrorFlag Mirror() const;
-    void Mirror(TextMirrorFlag);
+    DG_TextMirrorFlag Mirror() const;
+    void Mirror(DG_TextMirrorFlag);
 
-    TextHorizontalAlignment HorizontalAlignment() const;
-    void HorizontalAlignment(TextHorizontalAlignment);
+    DG_TextHorizontalAlignment HorizontalAlignment() const;
+    void HorizontalAlignment(DG_TextHorizontalAlignment);
 
     XYZ AlignmentPoint() const;
     void AlignmentPoint(const XYZ &);
@@ -95,9 +98,9 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 
-    TextVerticalAlignmentType VerticalAlignment() const;
-    void VerticalAlignment(TextVerticalAlignmentType);
+    DG_TextVerticalAlignment VerticalAlignment() const;
+    void VerticalAlignment(DG_TextVerticalAlignment);
 };
-CPL_SMARTER_PTR(TextEntity)
+CPL_SMARTER_PTR(DG_TextEntity)
 
 }// namespace dwg

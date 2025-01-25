@@ -26,39 +26,39 @@
 
 namespace dwg {
 
-class LIBDWG_API XLine : public Entity
+class LIBDWG_API DG_XLine : public DG_Entity
 {
-    XYZ _firstPoint;  // The first point defining the XLine.
-    XYZ _direction;   // The direction vector defining the XLine.
+    XYZ _firstPoint;// The first point defining the DG_XLine.
+    XYZ _direction; // The direction vector defining the DG_XLine.
 
 public:
-    // Default constructor for XLine. Initializes the first point and direction.
-    XLine();
+    // Default constructor for DG_XLine. Initializes the first point and direction.
+    DG_XLine();
 
-    // Destructor for XLine.
-    ~XLine();
+    // Destructor for DG_XLine.
+    ~DG_XLine();
 
-    // Overrides the ObjectType method to return the specific object type for XLine.
-    virtual dwg::ObjectType ObjectType() const override;
+    // Overrides the ObjectType method to return the specific object type for DG_XLine.
+    virtual DG_ObjectType ObjectType() const override;
 
-    // Overrides the ObjectName method to return the name of the object (XLine).
+    // Overrides the ObjectName method to return the name of the object (DG_XLine).
     virtual CPL::String ObjectName() const override;
 
-    // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
+    // Overrides the SubclassMarker method to return the subclass marker associated with DG_XLine.
     virtual CPL::String SubclassMarker() const override;
 
-    // Getter for the first point of the XLine.
+    // Getter for the first point of the DG_XLine.
     XYZ FirstPoint() const;
 
-    // Setter for the first point of the XLine.
+    // Setter for the first point of the DG_XLine.
     void FirstPoint(const XYZ &);
 
-    // Getter for the direction of the XLine.
+    // Getter for the direction of the DG_XLine.
     XYZ Direction() const;
 
-    // Setter for the direction of the XLine.
+    // Setter for the direction of the DG_XLine.
     void Direction(const XYZ &);
 };
-CPL_SMARTER_PTR(XLine)
+CPL_SMARTER_PTR(DG_XLine)
 
 }// namespace dwg

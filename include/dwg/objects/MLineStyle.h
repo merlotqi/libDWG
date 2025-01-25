@@ -30,16 +30,16 @@
 
 namespace dwg {
 
-class MLineStyle : public NonGraphicalObject
+class MLineStyle : public DG_NonGraphicalObject
 {
 public:
     MLineStyle();
-    MLineStyle(const CPL::String &name) : NonGraphicalObject(name) {}
+    MLineStyle(const char *name) : NonGraphicalObject(name) {}
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle Default;
 
-    dwg::ObjectType ObjectType() const { return ObjectType::MLINESTYLE; }
+    DG_ObjectType ObjectType() const { return ObjectType::MLINESTYLE; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectMLineStyle; }
     CPL::String SubclassMarker() const { return DxfSubclassMarker::MLineStyle; }
 

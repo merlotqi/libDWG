@@ -29,15 +29,15 @@
 
 namespace dwg {
 
-class MLineStyle;
-CPL_SMARTER_PTR(MLineStyle);
+class DG_MLineStyle;
+CPL_SMARTER_PTR(DG_MLineStyle);
 
-class LIBDWG_API MLine : public Entity
+class LIBDWG_API DG_MLine : public DG_Entity
 {
-    MLineStyleWPtr _style;
+    DG_MLineStyleWPtr _style;
     double _scaleFactor;
-    MLineJustification _justification;
-    MLineFlags _flags;
+    DG_MLineJustification _justification;
+    DG_MLineFlags _flags;
     XYZ _startPoint;
     XYZ _normal;
 
@@ -57,11 +57,11 @@ public:
     };
 
 public:
-    MLine();
-    ~MLine();
+    DG_MLine();
+    ~DG_MLine();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -69,17 +69,17 @@ public:
     // Override to return the subclass marker associated with this object
     virtual CPL::String SubclassMarker() const override;
 
-    MLineStylePtr Style() const;
-    void Style(MLineStyle *);
+    DG_MLineStylePtr Style() const;
+    void Style(DG_MLineStyle *);
 
     double ScaleFactor() const;
     void ScaleFactor(double);
 
-    MLineJustification Justification() const;
-    void Justification(MLineJustification);
+    DG_MLineJustification Justification() const;
+    void Justification(DG_MLineJustification);
 
-    MLineFlags Flags() const;
-    void Flags(MLineFlags);
+    DG_MLineFlags Flags() const;
+    void Flags(DG_MLineFlags);
 
     XYZ StartPoint() const;
     void StartPoint(const XYZ &);
@@ -93,6 +93,6 @@ public:
 private:
     std::vector<Vertex> _vertices;
 };
-CPL_SMARTER_PTR(MLine)
+CPL_SMARTER_PTR(DG_MLine)
 
 }// namespace dwg

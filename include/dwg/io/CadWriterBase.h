@@ -56,7 +56,7 @@ public:
     }
 
 protected:
-    Encoding getListedEncoding(const CPL::String &codePage)
+    Encoding getListedEncoding(const char *codePage)
     {
         CodePage code = CadUtils::GetCodePage(codePage);
         return Encoding(code);

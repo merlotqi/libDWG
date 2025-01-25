@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Hatch pattern fill type.
-enum HatchPatternType
+enum DG_HatchPatternType
 {
     /// Pattern fill.
     PatternFill = 0,

@@ -22,14 +22,14 @@
 
 #pragma once
 
-#include <dwg/entities/Polyline.h>
+#include <dwg/entities/PolyLine.h>
 
 namespace dwg {
 
-class LIBDWG_API PolyfaceMesh : public Polyline
+class LIBDWG_API DG_PolyfaceMesh : public DG_Polyline
 {
 public:
 };
-CPL_SMARTER_PTR(PolyfaceMesh)
+CPL_SMARTER_PTR(DG_PolyfaceMesh)
 
 }// namespace dwg

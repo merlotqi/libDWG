@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum ColumnType : short
+enum DG_ColumnType : short
 {
     NoColumns,
     StaticColumns,

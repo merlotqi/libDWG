@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the shade plot mode
-enum ShadePlotMode
+enum DG_ShadePlotMode
 {
     /// As displayed.
     AsDisplayed = 0,

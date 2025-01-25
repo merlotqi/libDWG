@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class UnknownNonGraphicalObject : public NonGraphicalObject
+class DG_UnknownNonGraphicalObject : public DG_NonGraphicalObject
 {
 public:
 };

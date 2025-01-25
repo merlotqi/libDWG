@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Type of dxf reference
-enum DxfReferenceType : unsigned char
+enum DG_DxfReferenceType : unsigned char
 {
     /// No reference, the value is a primitive
     None = 0,

@@ -28,7 +28,7 @@ namespace dwg {
 
 /// Defines the boundary path type of the hatch.
 /// \remarks Bit flag
-enum BoundaryPathFlag
+enum DG_BoundaryPathFlag
 {
     /// Default.
     Default = 0,
@@ -61,6 +61,6 @@ enum BoundaryPathFlag
     /// Describes if the hatch is an annotative block.
     IsAnnotativeBlock = 8192,
 };
-CPL_DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
+CPL_DECLARE_FLAGS(DG_BoundaryPathFlags, DG_BoundaryPathFlag)
 
 }// namespace dwg

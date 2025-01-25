@@ -29,35 +29,35 @@
 
 namespace dwg {
 
-class ImageDefinition;
-CPL_SMARTER_PTR(ImageDefinition);
+class DG_ImageDefinition;
+CPL_SMARTER_PTR(DG_ImageDefinition);
 
-class ImageDefinitionReactor;
-CPL_SMARTER_PTR(ImageDefinitionReactor);
+class DG_ImageDefinitionReactor;
+CPL_SMARTER_PTR(DG_ImageDefinitionReactor);
 
-class LIBDWG_API CadImageBase : public Entity
+class LIBDWG_API DG_CadImageBase : public DG_Entity
 {
     int _classVersion;
     XYZ _insertPoint;
     XYZ _uvector;
     XYZ _vvector;
     XY _size;
-    ImageDisplayFlags _flags;
+    DG_ImageDisplayFlags _flags;
     bool _clippingState;
     unsigned char _brightness;
     unsigned char _contrast;
     unsigned char _fade;
 
-    ClipMode _clipMode;
-    ClipType _clipType;
+    DG_ClipMode _clipMode;
+    DG_ClipType _clipType;
     std::vector<XY> _clipBoundaryVertices;
-    ImageDefinitionWPtr _definition;
-    ImageDefinitionReactorWPtr _definitionReactor;
+    DG_ImageDefinitionWPtr _definition;
+    DG_ImageDefinitionReactorWPtr _definitionReactor;
 
 public:
-    CadImageBase();
+    DG_CadImageBase();
 
-    virtual ~CadImageBase();
+    virtual ~DG_CadImageBase();
 
     int ClassVersion() const;
     void ClassVersion(int);
@@ -74,8 +74,8 @@ public:
     XY Size() const;
     void Size(const XY &);
 
-    ImageDisplayFlags Flags() const;
-    void Flags(ImageDisplayFlags);
+    DG_ImageDisplayFlags Flags() const;
+    void Flags(DG_ImageDisplayFlags);
 
     bool ClippingState() const;
     void ClippingState(bool);
@@ -89,21 +89,21 @@ public:
     unsigned char Fade() const;
     void Fade(unsigned char);
 
-    dwg::ClipMode ClipMode() const;
-    void ClipMode(dwg::ClipMode);
+    DG_ClipMode ClipMode() const;
+    void ClipMode(DG_ClipMode);
 
-    dwg::ClipType ClipType() const;
-    void ClipType(dwg::ClipType);
+    DG_ClipType ClipType() const;
+    void ClipType(DG_ClipType);
 
     std::vector<XY> ClipBoundaryVertices() const;
     void ClipBoundaryVertices(const std::vector<XY> &);
 
-    ImageDefinitionPtr Definition() const;
-    void Definition(ImageDefinition *);
+    DG_ImageDefinitionPtr Definition() const;
+    void Definition(DG_ImageDefinition *);
 
-    ImageDefinitionReactorPtr DefinitionReactor() const;
-    void DefinitionReactor(ImageDefinitionReactor *);
+    DG_ImageDefinitionReactorPtr DefinitionReactor() const;
+    void DefinitionReactor(DG_ImageDefinitionReactor *);
 };
-CPL_SMARTER_PTR(CadImageBase)
+CPL_SMARTER_PTR(DG_CadImageBase)
 
 }// namespace dwg

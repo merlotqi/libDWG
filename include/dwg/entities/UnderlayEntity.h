@@ -24,11 +24,13 @@
 
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/UnderlayDisplayFlags.h>
-#include <dwg/objects/UnderlayDefinition.h>
 
 namespace dwg {
 
-class LIBDWG_API UnderlayEntity : public Entity
+class DG_UnderlayDefinition;
+CPL_SMARTER_PTR(DG_UnderlayDefinition)
+
+class LIBDWG_API DG_UnderlayEntity : public DG_Entity
 {
     XYZ _normal;
     XYZ _insertPoint;
@@ -36,14 +38,14 @@ class LIBDWG_API UnderlayEntity : public Entity
     double _yscale;
     double _zscale;
     double _rotation;
-    UnderlayDisplayFlags _flags;
+    DG_UnderlayDisplayFlags _flags;
     unsigned char _contrast;
     unsigned char _fade;
-    UnderlayDefinitionWPtr _definition;
+    DG_UnderlayDefinitionWPtr _definition;
 
 public:
-    UnderlayEntity();
-    ~UnderlayEntity();
+    DG_UnderlayEntity();
+    ~DG_UnderlayEntity();
 
     CPL::String SubclassMarker() const;
 
@@ -65,8 +67,8 @@ public:
     double Rotation() const;
     void Rotation(double);
 
-    UnderlayDisplayFlags Flags() const;
-    void Flags(UnderlayDisplayFlags);
+    DG_UnderlayDisplayFlags Flags() const;
+    void Flags(DG_UnderlayDisplayFlags);
 
     unsigned char Contrast() const;
     void Contrast(unsigned char);
@@ -74,9 +76,9 @@ public:
     unsigned char Fade() const;
     void Fade(unsigned char);
 
-    UnderlayDefinitionPtr Definition() const;
-    void Definition(UnderlayDefinition *);
+    DG_UnderlayDefinitionPtr Definition() const;
+    void Definition(DG_UnderlayDefinition *);
 };
-CPL_SMARTER_PTR(UnderlayEntity)
+CPL_SMARTER_PTR(DG_UnderlayEntity)
 
 }// namespace dwg

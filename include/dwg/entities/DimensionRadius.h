@@ -25,20 +25,20 @@
 #include <dwg/entities/Dimension.h>
 
 namespace dwg {
-class LIBDWG_API DimensionRadius : public Dimension
+class LIBDWG_API DG_DimensionRadius : public DG_Dimension
 {
     XYZ _angleVertex;// The vertex of the angle (used for radius dimension)
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:
     // Default constructor
-    DimensionRadius();
+    DG_DimensionRadius();
 
     // Destructor
-    ~DimensionRadius();
+    ~DG_DimensionRadius();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -61,6 +61,6 @@ public:
     // Override the Measurement method to calculate and return the radius measurement
     virtual double Measurement() const override;
 };
-CPL_SMARTER_PTR(DimensionRadius)
+CPL_SMARTER_PTR(DG_DimensionRadius)
 
 }// namespace dwg

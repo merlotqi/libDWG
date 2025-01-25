@@ -30,11 +30,11 @@
 
 namespace dwg {
 
-class LIBDWG_API Polyline : public Entity
+class LIBDWG_API DG_Polyline : public DG_Entity
 {
 public:
-    Polyline();
-    ~Polyline();
+    DG_Polyline();
+    ~DG_Polyline();
 
     virtual CPL::String ObjectName() const override;
 
@@ -47,8 +47,8 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 
-    PolylineFlags Flags() const;
-    void Flags(PolylineFlags);
+    DG_PolylineFlags Flags() const;
+    void Flags(DG_PolylineFlags);
 
     double StartWidth() const;
     void StartWidth(double);
@@ -56,19 +56,19 @@ public:
     double EndWidth() const;
     void EndWidth(double);
 
-    SmoothSurfaceType SmoothSurface() const;
-    void SmoothSurface(SmoothSurfaceType);
+    DG_SmoothSurfaceType SmoothSurface() const;
+    void SmoothSurface(DG_SmoothSurfaceType);
 };
-CPL_SMARTER_PTR(Polyline)
+CPL_SMARTER_PTR(DG_Polyline)
 
-class Polyline2D : public Polyline
+class Polyline2D : public DG_Polyline
 {
 public:
     Polyline2D();
     ~Polyline2D();
 };
 
-class Polyline3D : public Polyline
+class Polyline3D : public DG_Polyline
 {
 public:
     Polyline3D();

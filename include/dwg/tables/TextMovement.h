@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Text movement rules.
-enum TextMovement : short
+enum DG_TextMovement : short
 {
     /// Moves the dimension line with dimension text.
     MoveLineWithText,

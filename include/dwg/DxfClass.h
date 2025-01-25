@@ -31,13 +31,13 @@
 
 namespace dwg {
 
-class LIBDWG_API DxfClass
+class LIBDWG_API DG_DxfClass
 {
 public:
     CPL::String DxfName;
     CPL::String CppClassName;
     CPL::String ApplicationName = "ObjectDBX Classes";
-    dwg::ProxyFlags proxyFlags;
+    DG_ProxyFlags proxyFlags;
     int InstanceCount;
     bool WasZombie;
     bool IsAnEntity;
@@ -47,19 +47,18 @@ public:
     short MaintenanceVersion;
 
 
-    DxfClass(const CPL::String &_cppClassName, short _classNumber,
-             ACadVersion _version, const CPL::String &_dxfName,
-             short _itemClassId, short _maintenanceVersion,
-             ProxyFlags _proxyFlags, bool _wasZombie);
+    DxfClass(const char *_cppClassName, short _classNumber,
+             ACadVersion _version, const char *_dxfName, short _itemClassId,
+             short _maintenanceVersion, ProxyFlags _proxyFlags,
+             bool _wasZombie);
 
-    DxfClass(const CPL::String &_applicationName,
-             const CPL::String &_cppClassName, short _classNumber,
-             ACadVersion _version, const CPL::String &_dxfName,
+    DxfClass(const char *_applicationName, const char *_cppClassName,
+             short _classNumber, ACadVersion _version, const char *_dxfName,
              short _itemClassId, short _maintenanceVersion,
              ProxyFlags _proxyFlags, bool _wasZombie);
 };
 
-class LIBDWG_API DxfClassCollection
+class LIBDWG_API DG_DxfClassCollection
 {
     std::map<CPL::String, DxfClass> _entries;
 

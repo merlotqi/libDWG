@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Duplicate record cloning flag (determines how to merge duplicate entries).
-enum DictionaryCloningFlag : short
+enum DG_DictionaryCloningFlag : short
 {
     /// Not applicable.
     NotApplicable = 0,
@@ -42,6 +42,6 @@ enum DictionaryCloningFlag : short
     /// Unmangle name.
     UnmangleName = 16
 };
-CPL_DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag)
+CPL_DECLARE_FLAGS(DG_DictionaryCloningFlags, DG_DictionaryCloningFlag)
 
 }// namespace dwg

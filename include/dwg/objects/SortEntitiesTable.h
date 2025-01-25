@@ -46,7 +46,7 @@ public:
     static constexpr auto DictionaryEntryName = "ACAD_SORTENTS";
 
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectSortEntsTable; }
     CPL::String SubclassMarker() const
     {

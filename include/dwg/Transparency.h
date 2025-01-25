@@ -26,15 +26,15 @@
 
 namespace dwg {
 
-// The Transparency struct represents the transparency properties of an object in LIBDWG.
+// The DG_Transparency struct represents the transparency properties of an object in LIBDWG.
 // It provides methods to manage and convert transparency values.
-struct LIBDWG_API Transparency
+struct LIBDWG_API DG_Transparency
 {
     // Member variable to store the transparency value.
     short Value;
 
     // Constructor to initialize the transparency with a given value.
-    Transparency(short value);
+    DG_Transparency(short value);
 
     // Checks if the transparency is set to "ByLayer".
     bool IsByLayer() const;
@@ -48,20 +48,20 @@ struct LIBDWG_API Transparency
     // Setter method to update the transparency value.
     void Value(short value);
 
-    // Converts a Transparency object to an alpha value (integer).
-    static int ToAlphaValue(Transparency transparency);
+    // Converts a DG_Transparency object to an alpha value (integer).
+    static int ToAlphaValue(DG_Transparency transparency);
 
-    // Creates a Transparency object from an alpha value (integer).
-    static Transparency FromAlphaValue(int value);
+    // Creates a DG_Transparency object from an alpha value (integer).
+    static DG_Transparency FromAlphaValue(int value);
 
-    // Predefined Transparency object representing "ByLayer" transparency.
-    static Transparency ByLayer;
+    // Predefined DG_Transparency object representing "ByLayer" transparency.
+    static DG_Transparency ByLayer;
 
-    // Predefined Transparency object representing "ByBlock" transparency.
-    static Transparency ByBlock;
+    // Predefined DG_Transparency object representing "ByBlock" transparency.
+    static DG_Transparency ByBlock;
 
-    // Predefined Transparency object representing fully opaque transparency.
-    static Transparency Opaque;
+    // Predefined DG_Transparency object representing fully opaque transparency.
+    static DG_Transparency Opaque;
 };
 
 }// namespace dwg

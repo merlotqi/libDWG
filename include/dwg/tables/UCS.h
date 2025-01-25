@@ -22,46 +22,39 @@
 
 #pragma once
 
+#include <dwg/Coordinate.h>
+#include <dwg/OrthographicType.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
 
-class UCS : public TableEntry
+class LIBDWG_API DG_UCS : public DG_TableEntry
 {
 public:
-    UCS() {}
-    UCS(const CPL::String &name) : TableEntry(name) {}
+    DG_UCS();
+    DG_UCS(const char *name);
 
-    dwg::ObjectType ObjectType() const override { return dwg::ObjectType::UCS; }
-    CPL::String ObjectName() const override { return DxfFileToken::TableUcs; }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::Ucs;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     XYZ Origin = XYZ::Zero;
     XYZ XAxis = XYZ::AxisX;
     XYZ YAxis = XYZ::AxisY;
-    OrthographicType orthographicType;
-    OrthographicType OrthographicViewType;
+    DG_OrthographicType orthographicType;
+    DG_OrthographicType OrthographicViewType;
     double Elevation;
 };
 
-class UCSTable : public Table<UCS>
+class LIBDWG_API DG_UCSTable : public DG_Table
 {
 public:
-    UCSTable() = default;
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::UCS_CONTROL_OBJ;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableUcs; }
+    DG_UCSTable() = default;
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return std::vector<CPL::String>();
-    }
+    std::vector<CPL::String> defaultEntries() const override;
 };
 
 }// namespace dwg

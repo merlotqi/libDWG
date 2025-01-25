@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Enumeration for text alignment types.
-enum TextAlignmentType : short
+enum DG_TextAlignmentType : short
 {
     Left = 0,
     Center = 1,

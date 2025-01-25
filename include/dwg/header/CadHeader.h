@@ -57,33 +57,33 @@
 
 namespace dwg {
 
-class UCS;
-CPL_SMARTER_PTR(UCS);
-class Layer;
-CPL_SMARTER_PTR(Layer);
-class LineType;
-CPL_SMARTER_PTR(LineType);
-class TextStyle;
-CPL_SMARTER_PTR(TextStyle);
-class DimensionStyle;
-CPL_SMARTER_PTR(DimensionStyle);
+class DG_UCS;
+CPL_SMARTER_PTR(DG_UCS);
+class DG_Layer;
+CPL_SMARTER_PTR(DG_Layer);
+class DG_LineType;
+CPL_SMARTER_PTR(DG_LineType);
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle);
+class DG_DimensionStyle;
+CPL_SMARTER_PTR(DG_DimensionStyle);
 
-class CadDocument;
-class CadHeaderPrivate;
-class LIBDWG_API CadHeader : public CPL::RefObject
+class DG_CadDocument;
+class DG_CadHeaderPrivate;
+class LIBDWG_API DG_CadHeader : public CPL::RefObject
 {
-    CadHeaderPrivate *d;
+    DG_CadHeaderPrivate *d;
 
 public:
-    CadHeader();
-    CadHeader(CadDocument *document);
-    CadHeader(ACadVersion version);
+    DG_CadHeader();
+    DG_CadHeader(DG_CadDocument *document);
+    DG_CadHeader(DG_ACadVersion version);
 
     CPL::String VersionString() const;
     void VersionString(const char *);
 
-    ACadVersion Version() const;
-    void Version(ACadVersion);
+    DG_ACadVersion Version() const;
+    void Version(DG_ACadVersion);
 
     short MaintenanceVersion() const;
     void MaintenanceVersion(short);
@@ -91,7 +91,8 @@ public:
     CPL::String CodePage() const;
     void CodePage(const char *);
 
-    CPL::String LastSavedBy() const void LastSavedBy(const char *);
+    CPL::String LastSavedBy() const;
+    void LastSavedBy(const char *);
 
     bool AssociatedDimensions() const;
     void AssociatedDimensions(bool);
@@ -102,8 +103,8 @@ public:
     bool DIMSAV() const;
     void DIMSAV(bool);
 
-    dwg::MeasurementUnits MeasurementUnits() const;
-    void MeasurementUnits(dwg::MeasurementUnits);
+    DG_MeasurementUnits MeasurementUnits() const;
+    void MeasurementUnits(DG_MeasurementUnits);
 
     bool PolylineLineTypeGeneration() const;
     void PolylineLineTypeGeneration(bool);
@@ -120,8 +121,8 @@ public:
     bool QuickTextMode() const;
     void QuickTextMode(bool);
 
-    SpaceLineTypeScaling PaperSpaceLineTypeScaling() const;
-    void PaperSpaceLineTypeScaling(SpaceLineTypeScaling);
+    DG_SpaceLineTypeScaling PaperSpaceLineTypeScaling() const;
+    void PaperSpaceLineTypeScaling(DG_SpaceLineTypeScaling);
 
     bool LimitCheckingOn() const;
     void LimitCheckingOn(bool);
@@ -135,8 +136,8 @@ public:
     bool SketchPolylines() const;
     void SketchPolylines(bool);
 
-    dwg::AngularDirection AngularDirection() const;
-    void AngularDirection(dwg::AngularDirection);
+    DG_AngularDirection AngularDirection() const;
+    void AngularDirection(DG_AngularDirection);
 
     bool ShowSplineControlPoints() const;
     void ShowSplineControlPoints(bool);
@@ -168,23 +169,23 @@ public:
     short SpatialIndexMaxTreeDepth() const;
     void SpatialIndexMaxTreeDepth(short);
 
-    dwg::LinearUnitFormat LinearUnitFormat() const;
-    void LinearUnitFormat(dwg::LinearUnitFormat);
+    DG_LinearUnitFormat LinearUnitFormat() const;
+    void LinearUnitFormat(DG_LinearUnitFormat);
 
     short LinearUnitPrecision() const;
     void LinearUnitPrecision(short);
 
-    AngularUnitFormat AngularUnit() const;
-    void AngularUnit(AngularUnitFormat);
+    DG_AngularUnitFormat AngularUnit() const;
+    void AngularUnit(DG_AngularUnitFormat);
 
     short AngularUnitPrecision() const;
     void AngularUnitPrecision(short);
 
-    dwg::ObjectSnapMode ObjectSnapMode() const;
-    void ObjectSnapMode(dwg::ObjectSnapMode);
+    DG_ObjectSnapMode ObjectSnapMode() const;
+    void ObjectSnapMode(DG_ObjectSnapMode);
 
-    AttributeVisibilityMode AttributeVisibility() const;
-    void AttributeVisibility(AttributeVisibilityMode);
+    DG_AttributeVisibilityMode AttributeVisibility() const;
+    void AttributeVisibility(DG_AttributeVisibilityMode);
 
     short PointDisplayMode() const;
     void PointDisplayMode(short);
@@ -222,11 +223,11 @@ public:
     short SurfaceMeshTabulationCount2() const;
     void SurfaceMeshTabulationCount2(short);
 
-    dwg::SplineType SplineType() const;
-    void SplineType(dwg::SplineType);
+    DG_SplineType SplineType() const;
+    void SplineType(DG_SplineType);
 
-    ShadeEdgeType ShadeEdge() const;
-    void ShadeEdge(ShadeEdgeType);
+    DG_ShadeEdgeType ShadeEdge() const;
+    void ShadeEdge(DG_ShadeEdgeType);
 
     short ShadeDiffuseToAmbientPercentage() const;
     void ShadeDiffuseToAmbientPercentage(short);
@@ -240,8 +241,8 @@ public:
     short SurfaceIsolineCount() const;
     void SurfaceIsolineCount(short);
 
-    VerticalAlignmentType CurrentMultilineJustification() const;
-    void CurrentMultilineJustification(VerticalAlignmentType);
+    DG_VerticalAlignmentType CurrentMultilineJustification() const;
+    void CurrentMultilineJustification(DG_VerticalAlignmentType);
 
     short TextQuality() const;
     void TextQuality(short);
@@ -345,8 +346,8 @@ public:
     CPL::Timespan UserElapsedTimeSpan() const;
     void UserElapsedTimeSpan(CPL::Timespan);
 
-    Color CurrentEntityColor() const;
-    void CurrentEntityColor(const Color &);
+    DG_Color CurrentEntityColor() const;
+    void CurrentEntityColor(const DG_Color &);
 
     double ViewportDefaultViewScaleFactor() const;
     void ViewportDefaultViewScaleFactor(double);
@@ -474,8 +475,8 @@ public:
     CPL::String HyperLinkBase() const;
     void HyperLinkBase(const char *);
 
-    LineweightType CurrentEntityLineWeight() const;
-    void CurrentEntityLineWeight(LineweightType);
+    DG_LineweightType CurrentEntityLineWeight() const;
+    void CurrentEntityLineWeight(DG_LineweightType);
 
     short EndCaps() const;
     void EndCaps(short);
@@ -498,11 +499,11 @@ public:
     bool LoadOLEObject() const;
     void LoadOLEObject(bool);
 
-    UnitsType InsUnits() const;
-    void InsUnits(UnitsType);
+    DG_UnitsType InsUnits() const;
+    void InsUnits(DG_UnitsType);
 
-    EntityPlotStyleType CurrentEntityPlotStyle() const;
-    void CurrentEntityPlotStyle(EntityPlotStyleType);
+    DG_EntityPlotStyleType CurrentEntityPlotStyle() const;
+    void CurrentEntityPlotStyle(DG_EntityPlotStyleType);
 
     CPL::String FingerPrintGuid() const;
     void FingerPrintGuid(const char *);
@@ -510,11 +511,11 @@ public:
     CPL::String VersionGuid() const;
     void VersionGuid(const char *);
 
-    ObjectSortingFlags EntitySortingFlags() const;
-    void EntitySortingFlags(ObjectSortingFlags);
+    DG_ObjectSortingFlags EntitySortingFlags() const;
+    void EntitySortingFlags(DG_ObjectSortingFlags);
 
-    dwg::IndexCreationFlags IndexCreationFlags() const;
-    void IndexCreationFlags(dwg::IndexCreationFlags);
+    DG_IndexCreationFlags IndexCreationFlags() const;
+    void IndexCreationFlags(DG_IndexCreationFlags);
 
     unsigned char HideText() const;
     void HideText(unsigned char);
@@ -522,17 +523,17 @@ public:
     unsigned char ExternalReferenceClippingBoundaryType() const;
     void ExternalReferenceClippingBoundaryType(unsigned char);
 
-    DimensionAssociation DimensionAssociativity() const;
-    void DimensionAssociativity(DimensionAssociation);
+    DG_DimensionAssociation DimensionAssociativity() const;
+    void DimensionAssociativity(DG_DimensionAssociation);
 
     unsigned char HaloGapPercentage() const;
     void HaloGapPercentage(unsigned char);
 
-    Color ObscuredColor() const;
-    void ObscuredColor(const Color &);
+    DG_Color ObscuredColor() const;
+    void ObscuredColor(const DG_Color &);
 
-    Color InterfereColor() const;
-    void InterfereColor(const Color &);
+    DG_Color InterfereColor() const;
+    void InterfereColor(const DG_Color &);
 
     unsigned char ObscuredType() const;
     void ObscuredType(unsigned char);
@@ -612,8 +613,8 @@ public:
     char DgnUnderlayFramesVisibility() const;
     void DgnUnderlayFramesVisibility(char);
 
-    dwg::ShadowMode ShadowMode() const;
-    void ShadowMode(dwg::ShadowMode);
+    DG_ShadowMode ShadowMode() const;
+    void ShadowMode(DG_ShadowMode);
 
     double ShadowPlaneLocation() const;
     void ShadowPlaneLocation(double);
@@ -639,8 +640,8 @@ public:
     bool DimensionAlternateUnitDimensioning() const;
     void DimensionAlternateUnitDimensioning(bool);
 
-    LinearUnitFormat DimensionAlternateUnitFormat() const;
-    void DimensionAlternateUnitFormat(LinearUnitFormat);
+    DG_LinearUnitFormat DimensionAlternateUnitFormat() const;
+    void DimensionAlternateUnitFormat(DG_LinearUnitFormat);
 
     double DimensionAlternateUnitScaleFactor() const;
     void DimensionAlternateUnitScaleFactor(double);
@@ -657,25 +658,24 @@ public:
     short DimensionAlternateUnitToleranceDecimalPlaces() const;
     void DimensionAlternateUnitToleranceDecimalPlaces(short);
 
-    AngularUnitFormat DimensionAngularUnit() const;
-    void DimensionAngularUnit(AngularUnitFormat);
+    DG_AngularUnitFormat DimensionAngularUnit() const;
+    void DimensionAngularUnit(DG_AngularUnitFormat);
 
-    FractionFormat DimensionFractionFormat() const;
-    void DimensionFractionFormat(FractionFormat);
+    DG_FractionFormat DimensionFractionFormat() const;
+    void DimensionFractionFormat(DG_FractionFormat);
 
-    LinearUnitFormat DimensionLinearUnitFormat() const;
-    void DimensionLinearUnitFormat(LinearUnitFormat);
+    DG_LinearUnitFormat DimensionLinearUnitFormat() const;
+    void DimensionLinearUnitFormat(DG_LinearUnitFormat);
 
     char DimensionDecimalSeparator() const;
     void DimensionDecimalSeparator(char);
 
-    TextMovement DimensionTextMovement() const;
-    void DimensionTextMovement(TextMovement);
+    DG_TextMovement DimensionTextMovement() const;
+    void DimensionTextMovement(DG_TextMovement);
 
-    dwg::DimensionTextHorizontalAlignment
+    DG_DimensionTextHorizontalAlignment
     DimensionTextHorizontalAlignment() const;
-    void DimensionTextHorizontalAlignment(
-            dwg::DimensionTextHorizontalAlignment);
+    void DimensionTextHorizontalAlignment(DG_DimensionTextHorizontalAlignment);
 
     bool DimensionSuppressFirstDimensionLine() const;
     void DimensionSuppressFirstDimensionLine(bool);
@@ -686,29 +686,29 @@ public:
     bool DimensionGenerateTolerances() const;
     void DimensionGenerateTolerances(bool);
 
-    ToleranceAlignment DimensionToleranceAlignment() const;
-    void DimensionToleranceAlignment(ToleranceAlignment);
+    DG_ToleranceAlignment DimensionToleranceAlignment() const;
+    void DimensionToleranceAlignment(DG_ToleranceAlignment);
 
-    ZeroHandling DimensionZeroHandling() const;
-    void DimensionZeroHandling(ZeroHandling);
+    DG_ZeroHandling DimensionZeroHandling() const;
+    void DimensionZeroHandling(DG_ZeroHandling);
 
-    ZeroHandling DimensionToleranceZeroHandling() const;
-    void DimensionToleranceZeroHandling(ZeroHandling);
+    DG_ZeroHandling DimensionToleranceZeroHandling() const;
+    void DimensionToleranceZeroHandling(DG_ZeroHandling);
 
     short DimensionFit() const;
     void DimensionFit(short);
 
-    ZeroHandling DimensionAlternateUnitZeroHandling() const;
-    void DimensionAlternateUnitZeroHandling(ZeroHandling);
+    DG_ZeroHandling DimensionAlternateUnitZeroHandling() const;
+    void DimensionAlternateUnitZeroHandling(DG_ZeroHandling);
 
-    ZeroHandling DimensionAlternateUnitToleranceZeroHandling() const;
-    void DimensionAlternateUnitToleranceZeroHandling(ZeroHandling);
+    DG_ZeroHandling DimensionAlternateUnitToleranceZeroHandling() const;
+    void DimensionAlternateUnitToleranceZeroHandling(DG_ZeroHandling);
 
     bool DimensionCursorUpdate() const;
     void DimensionCursorUpdate(bool);
 
-    TextArrowFitType DimensionDimensionTextArrowFit() const;
-    void DimensionDimensionTextArrowFit(TextArrowFitType);
+    DG_TextArrowFitType DimensionDimensionTextArrowFit() const;
+    void DimensionDimensionTextArrowFit(DG_TextArrowFitType);
 
     double DimensionAlternateUnitRounding() const;
     void DimensionAlternateUnitRounding(double);
@@ -719,11 +719,11 @@ public:
     double DimensionArrowSize() const;
     void DimensionArrowSize(double);
 
-    ZeroHandling DimensionAngularZeroHandling() const;
-    void DimensionAngularZeroHandling(ZeroHandling);
+    DG_ZeroHandling DimensionAngularZeroHandling() const;
+    void DimensionAngularZeroHandling(DG_ZeroHandling);
 
-    ArcLengthSymbolPosition DimensionArcLengthSymbolPosition() const;
-    void DimensionArcLengthSymbolPosition(ArcLengthSymbolPosition);
+    DG_ArcLengthSymbolPosition DimensionArcLengthSymbolPosition() const;
+    void DimensionArcLengthSymbolPosition(DG_ArcLengthSymbolPosition);
 
     bool DimensionSeparateArrowBlocks() const;
     void DimensionSeparateArrowBlocks(bool);
@@ -734,14 +734,14 @@ public:
     double DimensionTickSize() const;
     void DimensionTickSize(double);
 
-    Color DimensionLineColor() const;
-    void DimensionLineColor(const Color &);
+    DG_Color DimensionLineColor() const;
+    void DimensionLineColor(const DG_Color &);
 
-    Color DimensionExtensionLineColor() const;
-    void DimensionExtensionLineColor(const Color &);
+    DG_Color DimensionExtensionLineColor() const;
+    void DimensionExtensionLineColor(const DG_Color &);
 
-    Color DimensionTextColor() const;
-    void DimensionTextColor(const Color &);
+    DG_Color DimensionTextColor() const;
+    void DimensionTextColor(const DG_Color &);
 
     double DimensionLineExtension() const;
     void DimensionLineExtension(double);
@@ -761,12 +761,11 @@ public:
     double DimensionJoggedRadiusDimensionTransverseSegmentAngle() const;
     void DimensionJoggedRadiusDimensionTransverseSegmentAngle(double);
 
-    dwg::DimensionTextBackgroundFillMode
-    DimensionTextBackgroundFillMode() const;
-    void DimensionTextBackgroundFillMode(dwg::DimensionTextBackgroundFillMode);
+    DG_DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode() const;
+    void DimensionTextBackgroundFillMode(DG_DimensionTextBackgroundFillMode);
 
-    Color DimensionTextBackgroundColor() const;
-    void DimensionTextBackgroundColor(const Color &);
+    DG_Color DimensionTextBackgroundColor() const;
+    void DimensionTextBackgroundColor(const DG_Color &);
 
     double DimensionLineGap() const;
     void DimensionLineGap(double);
@@ -777,11 +776,11 @@ public:
     double DimensionTextVerticalPosition() const;
     void DimensionTextVerticalPosition(double);
 
-    LineweightType DimensionLineWeight() const;
-    void DimensionLineWeight(LineweightType);
+    DG_LineweightType DimensionLineWeight() const;
+    void DimensionLineWeight(DG_LineweightType);
 
-    LineweightType ExtensionLineWeight() const;
-    void ExtensionLineWeight(LineweightType);
+    DG_LineweightType ExtensionLineWeight() const;
+    void ExtensionLineWeight(DG_LineweightType);
 
     CPL::String DimensionPostFix() const;
     void DimensionPostFix(const char *);
@@ -798,8 +797,8 @@ public:
     bool DimensionSuppressOutsideExtensions() const;
     void DimensionSuppressOutsideExtensions(bool);
 
-    dwg::DimensionTextVerticalAlignment DimensionTextVerticalAlignment() const;
-    void DimensionTextVerticalAlignment(dwg::DimensionTextVerticalAlignment);
+    DG_DimensionTextVerticalAlignment DimensionTextVerticalAlignment() const;
+    void DimensionTextVerticalAlignment(DG_DimensionTextVerticalAlignment);
 
     short DimensionUnit() const;
     void DimensionUnit(short);
@@ -831,8 +830,8 @@ public:
     double DimensionTextHeight() const;
     void DimensionTextHeight(double);
 
-    TextDirection DimensionTextDirection() const;
-    void DimensionTextDirection(TextDirection);
+    DG_TextDirection DimensionTextDirection() const;
+    void DimensionTextDirection(DG_TextDirection);
 
     double DimensionAltMzf() const;
     void DimensionAltMzf(double);
@@ -855,33 +854,33 @@ public:
     CPL::String DimensionTex2() const;
     void DimensionTex2(const char *);
 
-    LayerPtr CurrentLayer() const;
-    void CurrentLayer(Layer *);
+    DG_LayerPtr CurrentLayer() const;
+    void CurrentLayer(DG_Layer *);
 
-    LineTypePtr CurrentLineType() const;
-    void CurrentLineType(LineType *);
+    DG_LineTypePtr CurrentLineType() const;
+    void CurrentLineType(DG_LineType *);
 
-    TextStylePtr CurrentTextStyle() const;
-    void TextStyle(TextStyle *);
+    DG_TextStylePtr CurrentTextStyle() const;
+    void TextStyle(DG_TextStyle *);
 
-    TextStylePtr DimensionTextStyle() const;
-    void DimensionTextStyle(TextStyle *);
+    DG_TextStylePtr DimensionTextStyle() const;
+    void DimensionTextStyle(DG_TextStyle *);
 
-    DimensionStylePtr DimensionStyleOverrides() const;
-    void DimensionStyleOverrides(DimensionStyle *);
+    DG_DimensionStylePtr DimensionStyleOverrides() const;
+    void DimensionStyleOverrides(DG_DimensionStyle *);
 
-    UCSPtr ModelSpaceUcs() const;
-    void ModelSpaceUcs(UCS *);
+    DG_UCSPtr ModelSpaceUcs() const;
+    void ModelSpaceUcs(DG_UCS *);
 
-    UCSPtr ModelSpaceUcsBase() const;
-    void ModelSpaceUcsBase(UCS *);
+    DG_UCSPtr ModelSpaceUcsBase() const;
+    void ModelSpaceUcsBase(DG_UCS *);
 
-    UCSPtr PaperSpaceUcs() const;
-    void PaperSpaceUcs(UCS *);
+    DG_UCSPtr PaperSpaceUcs() const;
+    void PaperSpaceUcs(DG_UCS *);
 
-    UCSPtr PaperSpaceUcsBase() const;
-    void PaperSpaceUcsBase(UCS *);
+    DG_UCSPtr PaperSpaceUcsBase() const;
+    void PaperSpaceUcsBase(DG_UCS *);
 };
-CPL_SMARTER_PTR(CadHeader)
+CPL_SMARTER_PTR(DG_CadHeader)
 
 }// namespace dwg

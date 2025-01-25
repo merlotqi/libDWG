@@ -26,19 +26,19 @@
 
 namespace dwg {
 
-class LIBDWG_API DimensionLinear : public DimensionAligned
+class LIBDWG_API DG_DimensionLinear : public DG_DimensionAligned
 {
     double _rotation;// The rotation angle of the linear dimension (in degrees or radians)
 
 public:
     // Default constructor
-    DimensionLinear();
+    DG_DimensionLinear();
 
     // Destructor
-    ~DimensionLinear();
+    ~DG_DimensionLinear();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -52,7 +52,7 @@ public:
     // Set the rotation angle value
     void SetRotation(double rotation);
 };
-CPL_SMARTER_PTR(DimensionLinear)
+CPL_SMARTER_PTR(DG_DimensionLinear)
 
 
 }// namespace dwg

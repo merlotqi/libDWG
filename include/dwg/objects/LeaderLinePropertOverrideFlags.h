@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum LeaderLinePropertOverrideFlag : int
+enum DG_LeaderLinePropertOverrideFlag : int
 {
     None = 0,
     PathType = 1,
@@ -36,6 +36,7 @@ enum LeaderLinePropertOverrideFlag : int
     ArrowheadSize = 16,
     Arrowhead = 32,
 };
-CPL_DECLARE_FLAGS(LeaderLinePropertOverrideFlags, LeaderLinePropertOverrideFlag)
+CPL_DECLARE_FLAGS(DG_LeaderLinePropertOverrideFlags,
+                  DG_LeaderLinePropertOverrideFlag)
 
 }// namespace dwg

@@ -26,20 +26,20 @@
 
 namespace dwg {
 
-class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
+class LIBDWG_API DG_CadDictionaryWithDefault : public DG_CadDictionary
 {
-    CadObjectWPtr _default_entry;
+    DG_CadObjectWPtr _default_entry;
 
 public:
-    CadDictionaryWithDefault();
+    DG_CadDictionaryWithDefault();
 
-    dwg::ObjectType ObjectType() const;
+    DG_ObjectType ObjectType() const;
     CPL::String ObjectName() const;
     CPL::String SubclassMarker() const;
 
-    CadObjectPtr DefaultEntry() const;
-    void DefaultEntry(CadObject *);
+    DG_CadObjectPtr DefaultEntry() const;
+    void DefaultEntry(DG_CadObject *);
 };
-CPL_SMARTER_PTR(CadDictionaryWithDefault)
+CPL_SMARTER_PTR(DG_CadDictionaryWithDefault)
 
 }// namespace dwg

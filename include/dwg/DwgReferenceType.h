@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum class DwgReferenceType
+enum class DG_DwgReferenceType
 {
     Undefined = 0,
 

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents lighting type.
-enum LightingType : unsigned char
+enum DG_LightingType : unsigned char
 {
     /// One distant light.
     OneDistantLight,

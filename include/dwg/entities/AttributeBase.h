@@ -24,17 +24,17 @@
 
 #include <dwg/entities/AttributeFlags.h>
 #include <dwg/entities/TextEntity.h>
-#include <dwg/entities/TextVerticalAlignmentType.h>
+#include <dwg/entities/TextVerticalAlignment.h>
 
 namespace dwg {
 
-class MText;
-CPL_SMARTER_PTR(MText);
+class DG_MText;
+CPL_SMARTER_PTR(DG_MText);
 
-class LIBDWG_API AttributeBase : public TextEntity
+class LIBDWG_API DG_AttributeBase : public DG_TextEntity
 {
 public:
-    enum AttributeType
+    enum DG_AttributeType
     {
         SingleLine = 1,
         MultiLine = 2,
@@ -42,42 +42,41 @@ public:
     };
 
 public:
-    AttributeBase();
-    virtual ~AttributeBase();
+    DG_AttributeBase();
+    virtual ~DG_AttributeBase();
 
-    TextVerticalAlignmentType VerticalAlignment() const;
-    void VerticalAlignment(TextVerticalAlignmentType);
-    
+    DG_TextVerticalAlignment VerticalAlignment() const;
+    void VerticalAlignment(DG_TextVerticalAlignment);
+
     unsigned char Version() const;
     void Version(unsigned char);
-    
-    CPL::String Tag() const;
-    void Tag(const char*);
-    
-    AttributeFlags Flags() const;
-    void Flags(AttributeFlags);
 
-    AttributeType AttrType() const;
-    void AttrType(AttributeType);
+    CPL::String Tag() const;
+    void Tag(const char *);
+
+    DG_AttributeFlags Flags() const;
+    void Flags(DG_AttributeFlags);
+
+    DG_AttributeType AttributeType() const;
+    void AttributeType(DG_AttributeType);
 
     bool IsReallyLocked() const;
     void IsReallyLocked(bool value);
 
-    MTextPtr MText() const;
-    void MText(dwg::MText *);
+    DG_MTextPtr MText() const;
+    void MText(DG_MText *);
 
 protected:
-    void matchAttributeProperties(AttributeBase *src);
+    void matchAttributeProperties(DG_AttributeBase *src);
 
 protected:
     unsigned char _version;
     CPL::String _tag;
-    AttributeFlags _flags;
+    DG_AttributeFlags _flags;
     bool _isReallyLocked;
-    MTextWPtr _mtext;
-    AttributeType _attributeType;
-    MTextWPtr _mtext;
+    DG_MTextWPtr _mtext;
+    DG_AttributeType _attributeType;
 };
-CPL_SMARTER_PTR(AttributeBase)
+CPL_SMARTER_PTR(DG_AttributeBase)
 
 }// namespace dwg

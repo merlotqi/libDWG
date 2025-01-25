@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum LineweightType : short
+enum DG_LineweightType : short
 {
     ByDIPs = -4,
 

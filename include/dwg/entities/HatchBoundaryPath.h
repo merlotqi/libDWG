@@ -41,7 +41,7 @@ public:
     void flags(BoundaryPathFlags value);
 
 
-    enum EdgeType
+    enum DG_EdgeType
     {
         Polyline = 0,
         Line = 1,

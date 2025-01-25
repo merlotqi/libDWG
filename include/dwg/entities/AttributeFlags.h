@@ -27,7 +27,7 @@
 namespace dwg {
 
 ///Attribute flags.
-enum AttributeFlag
+enum DG_AttributeFlag
 {
     /// No flags.
     None = 0,
@@ -40,6 +40,6 @@ enum AttributeFlag
     /// Attribute is preset (no prompt during insertion).
     Preset = 8
 };
-CPL_DECLARE_FLAGS(AttributeFlags, AttributeFlag)
+CPL_DECLARE_FLAGS(DG_AttributeFlags, DG_AttributeFlag)
 
 }// namespace dwg

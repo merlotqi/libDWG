@@ -28,56 +28,40 @@
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TableEntry.h>
 
-
 namespace dwg {
 
-
-class Layer : public TableEntry
+class LIBDWG_API DG_Layer : public DG_TableEntry
 {
 public:
     static constexpr auto DefaultName = "0";
-    static Layer Default;
+    static CPL::SmarterPtr<DG_Layer> Default();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::LAYER;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableLayer; }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::Layer;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
-    LayerFlags Flags;
-    Color color;                     // 62, 420, 430
+    DG_LayerFlags Flags;
+    DG_Color color;                  // 62, 420, 430
     CPL::String LineTypeName;        // linetype Name
-    LineType lineType;               // 6
+    DG_LineType lineType;               // 6
     bool PlotFlag;                   // 200
     unsigned long long PlotStyleName;// 390
     // Material* material; // 347 handle
     bool IsOn;// Indicates if the Layer is visible in the model
 
-    Layer() = default;
-    Layer(const CPL::String &name) : TableEntry(name) {}
+    DG_Layer();
+    DG_Layer(const char *name);
 };
 
-class LayersTable : public Table<Layer>
+class LIBDWG_API DG_LayersTable : public DG_Table
 {
 public:
-    LayersTable() = default;
-    CPL::String ObjectName() const { return DxfFileToken::TableLayer; }
-
-public:
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::APPID_CONTROL_OBJ;
-    }
+    DG_LayersTable() = default;
+    CPL::String ObjectName() const override;
+    DG_ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {Layer::DefaultName};
-    }
+    std::vector<CPL::String> defaultEntries() const override;
 };
 
 }// namespace dwg

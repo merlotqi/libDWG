@@ -27,24 +27,24 @@
 namespace dwg {
 
 class ImageDefinition;
-class LIBDWG_API RasterImage : public CadImageBase
+class LIBDWG_API DG_RasterImage : public DG_CadImageBase
 {
 public:
-    RasterImage();
-    
-    RasterImage(ImageDefinition *definition);
+    DG_RasterImage();
 
-    ~RasterImage();
+    DG_RasterImage(ImageDefinition *definition);
+
+    ~DG_RasterImage();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override; 
+    virtual CPL::String SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(RasterImage)
+CPL_SMARTER_PTR(DG_RasterImage)
 
 }// namespace dwg

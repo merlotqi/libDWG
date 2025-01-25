@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Point : public Entity
+class LIBDWG_API DG_Point : public DG_Entity
 {
     XYZ _location;
     XYZ _normal;
@@ -34,11 +34,11 @@ class LIBDWG_API Point : public Entity
     double _rotation;
 
 public:
-    Point();
-    ~Point();
-    
+    DG_Point();
+    ~DG_Point();
+
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -58,6 +58,6 @@ public:
     double Rotation() const;
     void Rotation(double);
 };
-CPL_SMARTER_PTR(Point)
+CPL_SMARTER_PTR(DG_Point)
 
 }// namespace dwg

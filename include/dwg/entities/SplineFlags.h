@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Defines the spline flags
-enum SplineFlag : unsigned short
+enum DG_SplineFlag : unsigned short
 {
     /// None
     None = 0,
@@ -47,10 +47,10 @@ enum SplineFlag : unsigned short
     /// Linear (planar flag is also set)
     Linear = 16,
 };
-CPL_DECLARE_FLAGS(SplineFlags, SplineFlag)
+CPL_DECLARE_FLAGS(DG_SplineFlags, DG_SplineFlag)
 
 /// Defines the spline flags 1
-enum SplineFlag1 : unsigned short
+enum DG_SplineFlag1 : unsigned short
 {
     /// None
     None = 0,
@@ -67,6 +67,6 @@ enum SplineFlag1 : unsigned short
     /// Use knot parameter
     UseKnotParameter = 8,
 };
-CPL_DECLARE_FLAGS(SplineFlags1, SplineFlag1)
+CPL_DECLARE_FLAGS(DG_SplineFlags1, DG_SplineFlag1)
 
 }// namespace dwg

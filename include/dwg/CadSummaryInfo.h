@@ -22,9 +22,7 @@
 
 #pragma once
 
-#include <ctime>
-#include <map>
-
+#include <cpl_ports.h>
 
 namespace dwg {
 
@@ -37,8 +35,8 @@ struct CadSummaryInfo
     CPL::String Comments;
     CPL::String LastSavedBy;
     CPL::String HyperlinkBase;
-    time_t CreateDate;
-    time_t mModifiedDate;
+    CPL::DateTime CreateDate;
+    CPL::DateTime mModifiedDate;
     std::map<CPL::String, CPL::String> Properties;
 };
 

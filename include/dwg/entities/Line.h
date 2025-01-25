@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Line : public Entity
+class LIBDWG_API DG_Line : public DG_Entity
 {
     XYZ _normal = XYZ::AxisZ;
     XYZ _startPoint = XYZ::Zero;
@@ -34,11 +34,11 @@ class LIBDWG_API Line : public Entity
     double _thickness = 0.0;
 
 public:
-    Line();
-    
-    ~Line();
+    DG_Line();
 
-    dwg::ObjectType ObjectType() const override;
+    ~DG_Line();
+
+    DG_ObjectType ObjectType() const override;
 
     CPL::String ObjectName() const override;
 
@@ -60,6 +60,6 @@ public:
 
     void Thickness(double);
 };
-CPL_SMARTER_PTR(Line)
+CPL_SMARTER_PTR(DG_Line)
 
 }// namespace dwg

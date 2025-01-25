@@ -28,19 +28,13 @@
 
 namespace dwg {
 
-class ImageDefinition : public NonGraphicalObject
+class LIBDWG_API DG_ImageDefinition : public DG_NonGraphicalObject
 {
 public:
-    ImageDefinition();
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const
-    {
-        return DxfFileToken::ObjectImageDefinition;
-    }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::RasterImageDef;
-    }
+    DG_ImageDefinition();
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     int ClassVersion;         //90
     CPL::String FileName;     // 1

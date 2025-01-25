@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Orthographic type
-enum OrthographicType
+enum DG_OrthographicType
 {
     /// None
     None,

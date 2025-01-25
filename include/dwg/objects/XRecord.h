@@ -29,12 +29,12 @@
 
 namespace dwg {
 
-class XRecord : public NonGraphicalObject
+class DG_XRecord : public DG_NonGraphicalObject
 {
 public:
-    dwg::ObjectType ObjectType() const { return ObjectType::XRECORD; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectXRecord; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::XRecord; }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
 
     struct Entry
@@ -43,14 +43,9 @@ public:
 
 
     // 280)]
-    DictionaryCloningFlags CloningFlags
-    {
-        get;
-        set;
-    }
+    DG_DictionaryCloningFlags CloningFlags;
 
 private:
-    std::vector<XRecord::Entry> _entries;
 };
 
 }// namespace dwg

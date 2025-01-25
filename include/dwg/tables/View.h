@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
 #include <dwg/tables/TableEntry.h>
@@ -29,21 +30,21 @@
 
 namespace dwg {
 
-class View : public TableEntry
+class LIBDWG_API DG_View : public DG_TableEntry
 {
 public:
-    View() = default;
-    View(const CPL::String &name) : TableEntry(name) {}
+    DG_View() = default;
+    DG_View(const char *name);
     double Height;
     double Width;
     double LensLength;
     double FrontClipping;
     double BackClipping;
     double Angle;
-    ViewModeType ViewMode;
+    DG_ViewModeType ViewMode;
     bool IsUcsAssociated = false;
     bool IsPlottable;
-    RenderMode RenderMode;
+    DG_RenderMode RenderMode;
 
     XY Center;
     XYZ Direction;
@@ -56,25 +57,18 @@ public:
     XYZ UcsYAxis;
     double UcsElevation;
 
-    OrthographicType UcsOrthographicType;
+    DG_OrthographicType UcsOrthographicType;
 };
 
-class ViewsTable : public Table<View>
+class LIBDWG_API DG_ViewsTable : public DG_Table
 {
 public:
-    ViewsTable() = default;
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::VIEW_CONTROL_OBJ;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableView; }
+    DG_ViewsTable() = default;
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return std::vector<CPL::String>();
-    }
+    std::vector<CPL::String> defaultEntries() const override;
 };
-
 
 }// namespace dwg

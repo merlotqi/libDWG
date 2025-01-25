@@ -28,20 +28,20 @@
 
 namespace dwg {
 
-class Scale : public NonGraphicalObject
+class Scale : public DG_NonGraphicalObject
 {
 public:
     static Scale Default;
     Scale() = default;
-    Scale(const CPL::String &name);
-    Scale(const CPL::String &name, double paperUnits, double drawingUnits,
+    Scale(const char *name);
+    Scale(const char *name, double paperUnits, double drawingUnits,
           bool isUnitScale)
         : NonGraphicalObject(name), PaperUnits(paperUnits),
           DrawingUnits(drawingUnits), IsUnitScale(isUnitScale)
     {
     }
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectScale; }
     CPL::String SubclassMarker() const { return DxfSubclassMarker::Scale; }
 

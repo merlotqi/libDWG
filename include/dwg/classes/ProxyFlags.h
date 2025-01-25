@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum ProxyFlag : unsigned short
+enum DG_ProxyFlag : unsigned short
 {
     /// None.
     None = 0,
@@ -59,6 +59,6 @@ enum ProxyFlag : unsigned short
     /// R13 format proxy.
     R13FormatProxy = 32768,
 };
-CPL_DECLARE_FLAGS(ProxyFlags, ProxyFlag)
+CPL_DECLARE_FLAGS(DG_ProxyFlags, DG_ProxyFlag)
 
 }// namespace dwg

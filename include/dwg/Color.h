@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Color
+class LIBDWG_API DG_Color
 {
     static const std::vector<std::vector<unsigned char>> _indexRgb[][3];
 
@@ -38,17 +38,17 @@ class LIBDWG_API Color
 
     static unsigned int getInt24(const std::vector<unsigned char> &array);
     std::vector<unsigned char> getRgb() const;
-    Color(unsigned int trueColor);
+    DG_Color(unsigned int trueColor);
 
 public:
-    Color(short index);
-    Color(unsigned char r, unsigned char g, unsigned char b);
-    Color(const std::vector<unsigned char> &rgb);
+    DG_Color(short index);
+    DG_Color(unsigned char r, unsigned char g, unsigned char b);
+    DG_Color(const std::vector<unsigned char> &rgb);
 
-    static Color ByLayer;
-    static Color ByBlock;
-    static Color ByEntity;
-    static Color FromTrueColor(unsigned int color);
+    static DG_Color ByLayer;
+    static DG_Color ByBlock;
+    static DG_Color ByEntity;
+    static DG_Color FromTrueColor(unsigned int color);
     static unsigned char ApproxIndex(unsigned char r, unsigned char g,
                                      unsigned char b);
 
@@ -62,15 +62,15 @@ public:
     unsigned char B() const;
     unsigned char GetApproxIndex() const;
 
-    friend bool operator==(const Color &lhs, const Color &rhs);
-    friend bool operator!=(const Color &lhs, const Color &rhs);
+    friend bool operator==(const DG_Color &lhs, const DG_Color &rhs);
+    friend bool operator!=(const DG_Color &lhs, const DG_Color &rhs);
 };
 
-bool operator==(const Color &lhs, const Color &rhs)
+bool operator==(const DG_Color &lhs, const DG_Color &rhs)
 {
     return lhs._color == rhs._color;
 }
 
-bool operator!=(const Color &lhs, const Color &rhs) { return !(lhs == rhs); }
+bool operator!=(const DG_Color &lhs, const DG_Color &rhs) { return !(lhs == rhs); }
 
 }// namespace dwg

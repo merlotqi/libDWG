@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum FaceLightingModelType : short
+enum DG_FaceLightingModelType : short
 {
     Invisible = 0,
     Visible = 1,

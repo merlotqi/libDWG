@@ -26,7 +26,7 @@
 
 namespace dwg {
 /// Defines which edges are hidden.
-enum InvisibleEdgeFlag
+enum DG_InvisibleEdgeFlag
 {
     /// No flags equivalent to all edges are visible.
     None = 0,
@@ -39,6 +39,6 @@ enum InvisibleEdgeFlag
     /// Fourth edge is invisible.
     Fourth = 8
 };
-CPL_DECLARE_FLAGS(InvisibleEdgeFlags, InvisibleEdgeFlag)
+CPL_DECLARE_FLAGS(DG_InvisibleEdgeFlags, DG_InvisibleEdgeFlag)
 
 }// namespace dwg

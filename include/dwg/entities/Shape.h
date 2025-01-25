@@ -26,18 +26,18 @@
 
 namespace dwg {
 
-class TextStyle;
-CPL_SMARTER_PTR(TextStyle)
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
 
-class LIBDWG_API Shape : public Entity
+class LIBDWG_API DG_Shape : public DG_Entity
 {
 public:
-    Shape();
+    DG_Shape();
 
-    ~Shape();
+    ~DG_Shape();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -54,8 +54,8 @@ public:
     double Size() const;
     void Size(double);
 
-    TextStylePtr ShapeStyle() const;
-    void ShapeStyle(TextStyle *);
+    DG_TextStylePtr ShapeStyle() const;
+    void ShapeStyle(DG_TextStyle *);
 
     double Rotation() const;
     void Rotation(double);
@@ -72,6 +72,6 @@ public:
     unsigned short ShapeIndex() const;
     void ShapeIndex(unsigned short);
 };
-CPL_SMARTER_PTR(Shape)
+CPL_SMARTER_PTR(DG_Shape)
 
 }// namespace dwg

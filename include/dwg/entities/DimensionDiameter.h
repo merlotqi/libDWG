@@ -26,20 +26,20 @@
 
 namespace dwg {
 
-class LIBDWG_API DimensionDiameter : public Dimension
+class LIBDWG_API DG_DimensionDiameter : public DG_Dimension
 {
     XYZ _angleVertex;// The vertex of the angle (used for diameter dimension)
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:
     // Default constructor
-    DimensionDiameter();
+    DG_DimensionDiameter();
 
     // Destructor
-    ~DimensionDiameter();
+    ~DG_DimensionDiameter();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -62,6 +62,6 @@ public:
     // Override the Measurement method to calculate and return the diameter measurement
     virtual double Measurement() const override;
 };
-CPL_SMARTER_PTR(DimensionDiameter)
+CPL_SMARTER_PTR(DG_DimensionDiameter)
 
 }// namespace dwg

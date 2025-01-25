@@ -24,8 +24,8 @@
 
 namespace dwg {
 
-/// The values of this enum indicate how the multileader connects to the content block.
-enum BlockContentConnectionType : short
+/// The values of this enum DG_indicate how the multileader connects to the content block.
+enum DG_BlockContentConnectionType : short
 {
     /// MultiLeader connects to the block extents.
     BlockExtents = 0,

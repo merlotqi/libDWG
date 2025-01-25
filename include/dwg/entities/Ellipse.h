@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Ellipse : public Entity
+class LIBDWG_API DG_Ellipse : public DG_Entity
 {
     XYZ _normal =
             XYZ::AxisZ;// The normal vector of the ellipse (default is Z-axis)
@@ -42,13 +42,13 @@ class LIBDWG_API Ellipse : public Entity
 
 public:
     // Default constructor
-    Ellipse();
+    DG_Ellipse();
 
     // Destructor
-    ~Ellipse();
+    ~DG_Ellipse();
 
     // Get the object type of the ellipse
-    dwg::ObjectType ObjectType() const override;
+    DG_ObjectType ObjectType() const override;
 
     // Get the object name of the ellipse
     CPL::String ObjectName() const override;
@@ -98,6 +98,6 @@ public:
     // Set the end parameter of the ellipse
     void EndParameter(double);
 };
-CPL_SMARTER_PTR(Ellipse)
+CPL_SMARTER_PTR(DG_Ellipse)
 
 }// namespace dwg

@@ -26,23 +26,19 @@
 
 namespace dwg {
 
-class LIBDWG_API DictionaryVariable : public NonGraphicalObject
+class LIBDWG_API DG_DictionaryVariable : public DG_NonGraphicalObject
 {
 public:
-    DictionaryVariable();
-    ~DictionaryVariable();
+    DG_DictionaryVariable();
+    ~DG_DictionaryVariable();
 
-
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectDictionaryVar; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::DictionaryVariables;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
     CPL::String Value;     // 1
     int ObjectSchemaNumber;// 280
 };
-CPL_SMARTER_PTR(DictionaryVariable)
+CPL_SMARTER_PTR(DG_DictionaryVariable)
 
 }// namespace dwg

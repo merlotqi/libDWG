@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-class DxfSubclassMarker
+class DG_DxfSubclassMarker
 {
 public:
     static constexpr auto ApplicationId = "AcDbRegAppTableRecord";

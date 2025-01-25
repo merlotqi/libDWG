@@ -27,7 +27,7 @@
 namespace dwg {
 
 
-class Mesh : public Entity
+class Mesh : public DG_Entity
 {
 public:
     Mesh();

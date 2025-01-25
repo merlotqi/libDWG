@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Represents a background fill flags
-enum BackgroundFillFlag : unsigned char
+enum DG_BackgroundFillFlag : unsigned char
 {
     /// None
     None = 0,
@@ -41,6 +41,6 @@ enum BackgroundFillFlag : unsigned char
     /// Adds a text frame
     TextFrame = 16,// 0x10
 };
-CPL_DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
+CPL_DECLARE_FLAGS(DG_BackgroundFillFlags, DG_BackgroundFillFlag)
 
 }// namespace dwg

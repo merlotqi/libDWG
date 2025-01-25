@@ -22,10 +22,12 @@
 
 #pragma once
 
+#include <cpl_ports.h>
+
 namespace dwg {
 
 /// Block-type flags (bit-coded values, may be combined).
-enum BlockTypeFlags
+enum DG_BlockTypeFlag
 {
     /// None
     None = 0,
@@ -45,5 +47,6 @@ enum BlockTypeFlags
     /// This definition is a referenced external reference (ignored on input).
     Referenced = 64
 };
+CPL_DECLARE_FLAGS(DG_BlockTypeFlags, DG_BlockTypeFlag)
 
 }// namespace dwg

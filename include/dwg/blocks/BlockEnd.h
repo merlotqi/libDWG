@@ -27,24 +27,24 @@
 namespace dwg {
 
 class BlockRecord;
-class LIBDWG_API BlockEnd : public Entity
+class LIBDWG_API DG_BlockEnd : public DG_Entity
 {
 public:
     // Constructor accepting a BlockRecord pointer
-    BlockEnd(BlockRecord *record);
+    DG_BlockEnd(BlockRecord *record);
 
     // Default destructor (since no specific cleanup is needed)
-    ~BlockEnd() = default;
+    ~DG_BlockEnd() = default;
 
     // Overrides the ObjectName method to return the name of the object
     CPL::String ObjectName() const override;
 
     // Overrides the ObjectType method to return the type of object
-    dwg::ObjectType ObjectType() const override;
+    DG_ObjectType ObjectType() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker
     CPL::String SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(BlockEnd)
+CPL_SMARTER_PTR(DG_BlockEnd)
 
 }// namespace dwg

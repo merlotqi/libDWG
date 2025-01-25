@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Circle : public Entity
+class LIBDWG_API DG_Circle : public DG_Entity
 {
     // The center of the circle (in 3D space)
     XYZ _center = XYZ::Zero;
@@ -42,13 +42,13 @@ class LIBDWG_API Circle : public Entity
 
 public:
     // Default constructor
-    Circle();
+    DG_Circle();
 
     // Destructor
-    virtual ~Circle();
+    virtual ~DG_Circle();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -80,7 +80,6 @@ public:
     // Setter for the radius of the circle
     void Radius(double);
 };
-
-CPL_SMARTER_PTR(Circle)
+CPL_SMARTER_PTR(DG_Circle)
 
 }// namespace dwg

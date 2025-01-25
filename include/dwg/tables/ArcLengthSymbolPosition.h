@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the arc length symbol position in an arc length dimension.
-enum ArcLengthSymbolPosition : short
+enum DG_ArcLengthSymbolPosition : short
 {
     /// Before the dimension text (default).
     BeforeDimensionText,

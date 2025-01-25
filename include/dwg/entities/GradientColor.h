@@ -29,7 +29,7 @@ namespace dwg {
 struct GradientColor
 {
     double Value;
-    dwg::Color Color;
+    DG_Color Color;
 };
 
 }// namespace dwg

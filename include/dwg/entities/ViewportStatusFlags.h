@@ -26,7 +26,7 @@
 namespace dwg {
 
 /// viewport status flags
-enum ViewportStatusFlag
+enum DG_ViewportStatusFlag
 {
     /// Enables perspective mode.
     PerspectiveMode = 1,
@@ -92,6 +92,6 @@ enum ViewportStatusFlag
     SubdivisionGridBelowSpacing = 1048576
 };
 
-CPL_DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag)
+CPL_DECLARE_FLAGS(DG_ViewportStatusFlags, DG_ViewportStatusFlag)
 
 }// namespace dwg

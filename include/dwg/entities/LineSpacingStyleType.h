@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Line spacing style for Multiline text and Dimensions.
-enum LineSpacingStyleType : short
+enum DG_LineSpacingStyleType : short
 {
     /// None.
     None,

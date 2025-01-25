@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum ClipMode : unsigned char
+enum DG_ClipMode : unsigned char
 {
     Outside,
     Inside,

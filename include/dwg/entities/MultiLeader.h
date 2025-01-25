@@ -24,23 +24,24 @@
 
 #include <dwg/Color.h>
 #include <dwg/LineWeightType.h>
-#include <dwg/entities/AttributeDefinition.h>
-#include <dwg/entities/Entity.h>
-#include <dwg/entities/MultiLeaderPathType.h>
-#include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
-#include <dwg/entities/BlockContentConnectionType.h>
-#include <dwg/objects/LeaderContentType.h>
-#include <dwg/objects/MultiLeaderAnnotContext.h>
-#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
+#include <dwg/entities/AttributeDefinition.h>
+#include <dwg/entities/BlockContentConnectionType.h>
+#include <dwg/entities/Entity.h>
+#include <dwg/entities/MultiLeaderPathType.h>
+#include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
+#include <dwg/objects/LeaderContentType.h>
+#include <dwg/objects/MultiLeaderAnnotContext.h>
+#include <dwg/objects/MultiLeaderStyle.h>
+
 
 namespace dwg {
 
-class LIBDWG_API MultiLeader : public Entity
+class LIBDWG_API DG_MultiLeader : public DG_Entity
 {
 public:
     MultiLeader();
@@ -107,6 +108,6 @@ public:
 
     bool extendedToText;
 };
-CPL_SMARTER_PTR(MultiLeader)
+CPL_SMARTER_PTR(DG_MultiLeader)
 
 }// namespace dwg

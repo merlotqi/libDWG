@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents supression of zeros in displaying decimal numbers.
-enum ZeroHandling : unsigned char
+enum DG_ZeroHandling : unsigned char
 {
     /// Suppress zero feet and exactly zero inches.
     SuppressZeroFeetAndInches = 0,

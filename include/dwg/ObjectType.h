@@ -24,8 +24,8 @@
 
 namespace dwg {
 
-/// Some object types have fixed values, this enum contains the values for these objects.
-enum class ObjectType : short
+/// Some object types have fixed values, this enum DG_contains the values for these objects.
+enum class DG_ObjectType : short
 {
     UNLISTED = -999,
     INVALID = -1,

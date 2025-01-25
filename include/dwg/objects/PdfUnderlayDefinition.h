@@ -26,13 +26,13 @@
 
 namespace dwg {
 
-class PdfUnderlayDefinition : public UnderlayDefinition
+class LIBDWG_API DG_PdfUnderlayDefinition : public DG_UnderlayDefinition
 {
 public:
-    PdfUnderlayDefinition();
+    DG_PdfUnderlayDefinition();
     CPL::String Page;
 
-    CPL::String ObjectName() const { return DxfFileToken::ObjectPdfDefinition; }
+    CPL::String ObjectName() const override;
 };
 
 }// namespace dwg

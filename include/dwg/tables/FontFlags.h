@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Represent the font character formatting, such as italic, bold, or regular.
-enum FontFlag
+enum DG_FontFlag
 {
     /// Regular.
     Regular = 0,
@@ -36,6 +36,6 @@ enum FontFlag
     /// Bold.
     Bold = 2
 };
-CPL_DECLARE_FLAGS(FontFlags, FontFlag)
+CPL_DECLARE_FLAGS(DG_FontFlags, DG_FontFlag)
 
 }// namespace dwg

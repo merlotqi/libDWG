@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the portion of paper space to output to the media
-enum PlotType
+enum DG_PlotType
 {
     /// Last screen display
     LastScreenDisplay = 0,

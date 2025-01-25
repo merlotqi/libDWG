@@ -46,7 +46,7 @@ public:
     static MultiLeaderStyle
             Default;// { get { return new MultiLeaderStyle(DefaultName); } }
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
     CPL::String ObjectName() const { return DxfFileToken::ObjectMLeaderStyle; }
     CPL::String SubclassMarker() const
     {
@@ -141,7 +141,7 @@ public:
 
 public:
     MultiLeaderStyle() {}
-    MultiLeaderStyle(const CPL::String &name) : NonGraphicalObject(name) {}
+    MultiLeaderStyle(const char *name) : NonGraphicalObject(name) {}
 };
 
 

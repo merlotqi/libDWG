@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the vertical placement of dimension text in relation to the dimension line.
-enum DimensionTextHorizontalAlignment : unsigned char
+enum DG_DimensionTextHorizontalAlignment : unsigned char
 {
     /// Centers the dimension text along the dimension line between the extension lines.
     Centered = 0,

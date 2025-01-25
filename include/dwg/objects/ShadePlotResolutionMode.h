@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the shade plot resolution mode.
-enum ShadePlotResolutionMode : unsigned short
+enum DG_ShadePlotResolutionMode : unsigned short
 {
     /// Draft.
     Draft = 0,

@@ -26,17 +26,17 @@
 
 namespace dwg {
 
-class LIBDWG_API Wipeout : public CadImageBase
+class LIBDWG_API DG_Wipeout : public DG_CadImageBase
 {
 public:
-    // Constructor for Wipeout.
-    Wipeout();
+    // Constructor for DG_Wipeout.
+    DG_Wipeout();
 
-    // Destructor for Wipeout.
-    ~Wipeout();
+    // Destructor for DG_Wipeout.
+    ~DG_Wipeout();
 
     // Overrides the ObjectType method to return the specific object type for XLine.
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (XLine).
     virtual CPL::String ObjectName() const override;
@@ -44,6 +44,6 @@ public:
     // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
     virtual CPL::String SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(Wipeout)
+CPL_SMARTER_PTR(DG_Wipeout)
 
 }// namespace dwg

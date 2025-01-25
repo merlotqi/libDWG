@@ -28,10 +28,10 @@
 
 namespace dwg {
 
-class LIBDWG_API GroupCodeValue
+class LIBDWG_API DG_GroupCodeValue
 {
 public:
-    static GroupCodeValueType TransformValue(int code);
+    static DG_GroupCodeValueType TransformValue(int code);
 };
 
 }// namespace dwg

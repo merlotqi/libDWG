@@ -42,12 +42,12 @@
 
 namespace dwg {
 
-class MultiLeaderAnnotContext : public NonGraphicalObject
+class MultiLeaderAnnotContext : public DG_NonGraphicalObject
 {
 public:
     MultiLeaderAnnotContext();
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
+    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
     CPL::String ObjectName() const
     {
         return DxfFileToken::ObjectMLeaderContextData;

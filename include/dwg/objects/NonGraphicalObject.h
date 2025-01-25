@@ -25,27 +25,26 @@
 #include <dwg/CadObject.h>
 #include <dwg/INamedCadObject.h>
 
-
 namespace dwg {
 
-class LIBDWG_API NonGraphicalObject : public CadObject, INamedCadObject
+class LIBDWG_API DG_NonGraphicalObject : public DG_CadObject, DG_INamedCadObject
 {
 protected:
     CPL::String _name;
 
 public:
-    NonGraphicalObject();
+    DG_NonGraphicalObject();
 
-    NonGraphicalObject(const CPL::String &name);
+    DG_NonGraphicalObject(const char *name);
 
-    virtual ~NonGraphicalObject() override;
+    virtual ~DG_NonGraphicalObject() override;
 
     CPL::String Name() const override;
 
-    void Name(const CPL::String &value);
+    void Name(const char *value);
 
-    CPL::Delegate<void(const CPL::String &, const CPL::String &)> OnNameChanged;
+    CPL::Delegate<void(const char *, const char *)> OnNameChanged;
 };
-CPL_SMARTER_PTR(NonGraphicalObject)
+CPL_SMARTER_PTR(DG_NonGraphicalObject)
 
 }// namespace dwg

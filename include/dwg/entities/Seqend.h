@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class Seqend : public Entity
+class Seqend : public DG_Entity
 {
 public:
 };

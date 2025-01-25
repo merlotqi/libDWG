@@ -26,7 +26,7 @@ namespace dwg {
 
 /// Specifies the draw order of a <see cref="MultiLeaderAnnotContext.LeaderRoot"/>
 /// in a <see cref="Entities.MultiLeader"/> entity.
-enum LeaderDrawOrderType
+enum DG_LeaderDrawOrderType
 {
 
     /// 0 = draw leader head first

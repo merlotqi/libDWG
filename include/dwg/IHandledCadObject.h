@@ -26,13 +26,15 @@
 
 namespace dwg {
 
-class IHandledCadObject : public CPL::RefObject
+class DG_IHandledCadObject : public CPL::RefObject
 {
 public:
-    IHandledCadObject() = default;
-    virtual ~IHandledCadObject() noexcept {}
+    DG_IHandledCadObject() = default;
+
+    virtual ~DG_IHandledCadObject() noexcept {}
+
     virtual unsigned long long Handle() const = 0;
 };
-CPL_SMARTER_PTR(IHandledCadObject)
+CPL_SMARTER_PTR(DG_IHandledCadObject)
 
 }// namespace dwg

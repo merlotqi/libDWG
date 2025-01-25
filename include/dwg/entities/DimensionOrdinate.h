@@ -25,20 +25,21 @@
 #include <dwg/entities/Dimension.h>
 
 namespace dwg {
-class LIBDWG_API DimensionOrdinate : public Dimension
+
+class LIBDWG_API DG_DimensionOrdinate : public DG_Dimension
 {
     XYZ _featureLocation;// The location of the feature being dimensioned (typically a coordinate)
     XYZ _leaderEndpoint;// The endpoint of the leader line (connection point for the dimension)
 
 public:
     // Default constructor
-    DimensionOrdinate();
+    DG_DimensionOrdinate();
 
     // Destructor
-    ~DimensionOrdinate();
+    ~DG_DimensionOrdinate();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -67,6 +68,6 @@ public:
     // Set whether the ordinate type is X (for dimensioning along the X-axis)
     void IsOrdinateTypeX(bool value);
 };
-CPL_SMARTER_PTR(DimensionOrdinate)
+CPL_SMARTER_PTR(DG_DimensionOrdinate)
 
 }// namespace dwg

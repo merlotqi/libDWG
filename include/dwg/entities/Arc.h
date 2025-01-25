@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API Arc : public Circle
+class LIBDWG_API DG_Arc : public DG_Circle
 {
     // Start angle of the arc (in degrees)
     double _startangle;
@@ -36,13 +36,13 @@ class LIBDWG_API Arc : public Circle
 
 public:
     // Default constructor
-    Arc();
+    DG_Arc();
 
     // Destructor
-    ~Arc();
+    ~DG_Arc();
 
-    // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    // Override to return the object type of the DG_Arc
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -62,6 +62,6 @@ public:
     // Setter for the end angle
     void EndAngle(double);
 };
-CPL_SMARTER_PTR(Arc)
+CPL_SMARTER_PTR(DG_Arc)
 
 }// namespace dwg

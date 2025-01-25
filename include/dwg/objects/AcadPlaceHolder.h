@@ -26,17 +26,15 @@
 
 namespace dwg {
 
-class LIBDWG_API AcdbPlaceHolder : public NonGraphicalObject
+class LIBDWG_API DG_AcdbPlaceHolder : public DG_NonGraphicalObject
 {
 public:
-    AcdbPlaceHolder();
-    ~AcdbPlaceHolder();
-    dwg::ObjectType ObjectType() const { return ObjectType::ACDBPLACEHOLDER; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectPlaceholder; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::AcDbPlaceHolder;
-    }
+    DG_AcdbPlaceHolder();
+    ~DG_AcdbPlaceHolder();
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 };
+CPL_SMARTER_PTR(DG_AcdbPlaceHolder)
 
 }// namespace dwg

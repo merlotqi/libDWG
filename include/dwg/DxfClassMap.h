@@ -25,7 +25,6 @@
 #include <dwg/exports.h>
 #include <map>
 
-
 namespace dwg {
 
 

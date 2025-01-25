@@ -28,7 +28,7 @@
 namespace dwg {
 
 /// \brief Collection of CAD objects with support for adding, removing, and event handling.
-class LIBDWG_API CadObjectCollection
+class LIBDWG_API DG_CadObjectCollection
 {
 protected:
     /// \brief Internal storage of CAD objects as a vector of smart pointers.

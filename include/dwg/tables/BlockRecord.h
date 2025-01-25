@@ -23,77 +23,36 @@
 #pragma once
 
 #include <dwg/CadObjectCollection.h>
-#include <dwg/blocks/Block.h>
-#include <dwg/blocks/BlockEnd.h>
 #include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/entities/Viewport.h>
-#include <dwg/objects/Layout.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
 
 namespace dwg {
 
-class BlockRecord : public TableEntry
+class LIBDWG_API DG_BlockRecord : public DG_TableEntry
 {
 public:
-    BlockRecord(const CPL::String &name) : TableEntry(name) {}
+    DG_BlockRecord(const char *name) : DG_TableEntry(name) {}
 
     static constexpr auto ModelSpaceName = "*Model_Space";
     static constexpr auto PaperSpaceName = "*Paper_Space";
 
-    static BlockRecord *ModelSpace()
-    {
-        BlockRecord *record = new BlockRecord(ModelSpaceName);
-        // Layout *layout = new Layout();
-        // layout->Name = Layout::ModelLayoutName;
-        // layout->AssociatedBlock(record);
-        return record;
-    }
+    static CPL::SmarterPtr<DG_BlockRecord> ModelSpace();
 
-    static BlockRecord *PaperSpace()
-    {
-        BlockRecord *record = new BlockRecord(PaperSpaceName);
-        // Layout *layout = new Layout();
-        // layout->Name = Layout::PaperLayoutName;
-        // layot->AssociatedBlock(record);
-        return record;
-    }
+    static CPL::SmarterPtr<DG_BlockRecord> PaperSpace();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return ObjectType::BLOCK_HEADER;
-    }
-    CPL::String ObjectName() const override
-    {
-        return DxfFileToken::TableBlockRecord;
-    }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::BlockRecord;
-    }
+    DG_ObjectType ObjectType() const override;
 
-    UnitsType Units;
+    CPL::String ObjectName() const override;
 
-    BlockTypeFlags Flags;
-
-    bool IsExplodable;                 // 280
-    bool CanScale;                     // 281
-    std::vector<unsigned char> Preview;// 310
-    Layout *Layout;                    // handle 340
-    unsigned long long LayoutHandle;   // 340
-
-    bool HasAttributes;
-    std::vector<Viewport> Viewports;
-    CadObjectCollection<Entity *> Entities;
-
-    Block BlockEntity;
-    BlockEnd BlockEnd;
+    CPL::String SubclassMarker() const override;
 };
+CPL_SMARTER_PTR(DG_BlockRecord)
 
-class BlockRecordsTable : public Table
+class LIBDWG_API DG_BlockRecordsTable : public DG_Table
 {
 public:
-    dwg::ObjectType ObjectType() const override;
+    DG_ObjectType ObjectType() const override;
 
 protected:
     std::vector<CPL::String> defaultEntries() const;

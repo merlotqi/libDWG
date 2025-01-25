@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Controls whether layer and spatial indexes are created and saved in drawing files
-enum IndexCreationFlag : unsigned char
+enum DG_IndexCreationFlag : unsigned char
 {
     /// No indexes are created
     NoIndex = 0b0,
@@ -38,6 +38,6 @@ enum IndexCreationFlag : unsigned char
     /// Layer and spatial indexes are created
     LayerAndSpatialIndex = 0b11
 };
-CPL_DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag)
+CPL_DECLARE_FLAGS(DG_IndexCreationFlags, DG_IndexCreationFlag)
 
 }// namespace dwg

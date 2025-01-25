@@ -27,16 +27,14 @@
 
 namespace dwg {
 
-
-class EvaluationGraph : public NonGraphicalObject
+class LIBDWG_API DG_EvaluationGraph : public DG_NonGraphicalObject
 {
 public:
-    EvaluationGraph();
+    DG_EvaluationGraph();
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectEvalGraph; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::EvalGraph; }
-
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
     struct GraphNode
     {
         int Index;            // 91
@@ -47,7 +45,7 @@ public:
         int Data2;            // 92
         int Data3;            // 92
         int Data4;            // 92
-        CadObject *NodeObject;// 360
+        DG_CadObject *NodeObject;// 360
     };
 
     std::vector<GraphNode> Nodes;

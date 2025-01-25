@@ -28,15 +28,14 @@
 
 namespace dwg {
 
-
-class Group : public NonGraphicalObject
+class LIBDWG_API DG_Group : public DG_NonGraphicalObject
 {
 public:
-    Group();
-    dwg::ObjectType ObjectType() const { return ObjectType::GROUP; }
-    CPL::String ObjectName() const { return DxfFileToken::TableGroup; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::Group; }
-
+    DG_Group();
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
+    
     CPL::String Description;// 300
     bool IsUnnamed;         // 71
     bool Selectable;        // 71

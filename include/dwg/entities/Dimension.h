@@ -26,39 +26,42 @@
 #include <dwg/entities/DimensionType.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/LineSpacingStyleType.h>
-#include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
 
-class BlockRecord;
-CPL_SMARTER_PTR(BlockRecord)
-// The Dimension class represents a dimension entity in a CAD system,
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
+class DG_DimensionStyle;
+CPL_SMARTER_PTR(DG_DimensionStyle)
+
+// The DG_Dimension class represents a dimension entity in a CAD system,
 // providing properties and methods for dimension management and manipulation.
-class LIBDWG_API Dimension : public Entity
+class LIBDWG_API DG_Dimension : public DG_Entity
 {
     unsigned char _version;// The version of the dimension entity
-    BlockRecord *_block;   // Pointer to the block associated with the dimension
+    DG_BlockRecordWPtr
+            _block;// Pointer to the block associated with the dimension
     XYZ _definitionPoint;// The definition point (e.g., the base point) of the dimension
     XYZ _textMiddlePoint;// The middle point of the dimension text
     XYZ _insertionPoint; // The insertion point of the dimension entity
     XYZ _normal;// The normal vector for the dimension (usually related to the drawing plane)
-    DimensionType
+    DG_DimensionType
             _flags;// Flags indicating dimension-specific settings or properties
-    AttachmentPointType
+    DG_AttachmentPointType
             _attachmentPoint;// The attachment point type for the dimension text
-    LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
+    DG_LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
     double _lineSpacingFactor;// The factor affecting the line spacing for text
     bool _flipArrow1;    // Boolean indicating if the first arrow is flipped
     bool _flipArrow2;    // Boolean indicating if the second arrow is flipped
     CPL::String _text;   // The text displayed in the dimension
     double _textRotation;// Rotation angle for the dimension text
-    double _horizontalDirection;// Horizontal direction for text alignment
-    DimensionStyle *_dimStyle;  // Pointer to the associated dimension style
+    double _horizontalDirection;    // Horizontal direction for text alignment
+    DG_DimensionStyleWPtr _dimStyle;// Pointer to the associated dimension style
 
 public:
-    // Default constructor for the Dimension class
-    Dimension();
-    virtual ~Dimension();
+    // Default constructor for the DG_Dimension class
+    DG_Dimension();
+    virtual ~DG_Dimension();
 
 public:
     // Override to return the subclass marker associated with this object
@@ -69,8 +72,8 @@ public:
     void Version(unsigned char value);
 
     // Getter and setter for the associated block record
-    BlockRecordPtr Block() const;
-    void Block(BlockRecord *value);
+    DG_BlockRecordPtr Block() const;
+    void Block(DG_BlockRecord *value);
 
     // Getter and setter for the definition point of the dimension
     XYZ DefinitionPoint() const;
@@ -89,16 +92,16 @@ public:
     void Normal(const XYZ &value);
 
     // Getter and setter for the flags (dimension-specific properties)
-    DimensionType Flags() const;
-    void Flags(DimensionType value);
+    DG_DimensionType Flags() const;
+    void Flags(DG_DimensionType value);
 
     // Getter and setter for the attachment point type of the dimension text
-    AttachmentPointType AttachmentPoint() const;
-    void AttachmentPoint(AttachmentPointType value);
+    DG_AttachmentPointType AttachmentPoint() const;
+    void AttachmentPoint(DG_AttachmentPointType value);
 
     // Getter and setter for the line spacing style of the dimension text
-    LineSpacingStyleType LineSpacingStyle() const;
-    void LineSpacingStyle(LineSpacingStyleType value);
+    DG_LineSpacingStyleType LineSpacingStyle() const;
+    void LineSpacingStyle(DG_LineSpacingStyleType value);
 
     // Getter and setter for the line spacing factor (affects text spacing)
     double LineSpacingFactor() const;
@@ -113,8 +116,8 @@ public:
     void FlipArrow2(bool value);
 
     // Getter and setter for the dimension text
-    const CPL::String &Text() const;
-    void Text(const CPL::String &value);
+    const char *Text() const;
+    void Text(const char *value);
 
     // Getter and setter for the text rotation angle
     double TextRotation() const;
@@ -125,8 +128,8 @@ public:
     void HorizontalDirection(double value);
 
     // Getter and setter for the associated dimension style
-    DimensionStyle *DimStyle() const;
-    void DimStyle(DimensionStyle *value);
+    DG_DimensionStylePtr DimStyle() const;
+    void DimStyle(DG_DimensionStyle *value);
 
     // Pure virtual method that must be implemented by derived classes to calculate the dimension measurement
     virtual double Measurement() const = 0;
@@ -136,6 +139,6 @@ public:
     bool IsTextUserDefinedLocation() const;
     void IsTextUserDefinedLocation(bool value);
 };
-CPL_SMARTER_PTR(Dimension)
+CPL_SMARTER_PTR(DG_Dimension)
 
 }// namespace dwg

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Measurement units
-enum MeasurementUnits : short
+enum DG_MeasurementUnits : short
 {
     /// English
     English = 0,

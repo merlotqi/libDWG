@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum GridFlag : short
+enum DG_GridFlag : short
 {
     _0 = 0,
     _1 = 1,
@@ -34,6 +34,6 @@ enum GridFlag : short
     _3 = 4,
     _4 = 8,
 };
-CPL_DECLARE_FLAGS(GridFlags, GridFlag)
+CPL_DECLARE_FLAGS(DG_GridFlags, DG_GridFlag)
 
 }// namespace dwg

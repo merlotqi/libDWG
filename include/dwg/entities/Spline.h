@@ -28,13 +28,13 @@
 
 namespace dwg {
 
-class LIBDWG_API Spline : public Entity
+class LIBDWG_API DG_Spline : public DG_Entity
 {
-    SplineFlag1 _flags1;
-    KnotParameterization _knotParameterization;
+    DG_SplineFlag1 _flags1;
+    DG_KnotParameterization _knotParameterization;
 
     XYZ _normal;
-    SplineFlags _flags;
+    DG_SplineFlags _flags;
     int _degree;
     std::vector<double> _knots;
     std::vector<XYZ> _controlPoints;
@@ -47,12 +47,12 @@ class LIBDWG_API Spline : public Entity
     std::vector<double> _weights;
 
 public:
-    Spline();
+    DG_Spline();
 
-    virtual ~Spline();
+    virtual ~DG_Spline();
 
     // Override to return the object type of the Arc
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -63,8 +63,8 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 
-    SplineFlags Flags() const;
-    void Flags(SplineFlags);
+    DG_SplineFlags Flags() const;
+    void Flags(DG_SplineFlags);
 
     int Degree() const;
     void Degree(int);
@@ -97,12 +97,12 @@ public:
     void Weights(const std::vector<double> &);
 
 protected:
-    SplineFlag1 Flags1() const;
-    void Flags1(SplineFlag1);
+    DG_SplineFlag1 Flags1() const;
+    void Flags1(DG_SplineFlag1);
 
-    dwg::KnotParameterization KnotParameterization() const;
-    void KnotParameterization(dwg::KnotParameterization);
+    DG_KnotParameterization KnotParameterization() const;
+    void KnotParameterization(DG_KnotParameterization);
 };
-CPL_SMARTER_PTR(Spline)
+CPL_SMARTER_PTR(DG_Spline)
 
 }// namespace dwg

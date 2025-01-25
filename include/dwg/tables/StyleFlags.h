@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
-enum StyleFlag
+enum DG_StyleFlag
 {
     /// Default
     None = 0,
@@ -48,6 +48,6 @@ enum StyleFlag
     /// drawing was edited.
     Referenced = 64
 };
-CPL_DECLARE_FLAGS(StyleFlags, StyleFlag)
+CPL_DECLARE_FLAGS(DG_StyleFlags, DG_StyleFlag)
 
 }// namespace dwg

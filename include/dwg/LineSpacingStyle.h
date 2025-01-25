@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum LineSpacingStyle : short
+enum DG_LineSpacingStyle : short
 {
     AtLeast = 1,
     Exactly = 2,

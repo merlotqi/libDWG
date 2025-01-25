@@ -29,37 +29,20 @@
 
 namespace dwg {
 
-class LIBDWG_API TextStyle : public TableEntry
+class LIBDWG_API DG_TextStyle : public DG_TableEntry
 {
 public:
     static constexpr auto DefaultName = "Standard";
-    static TextStyle Default;
+    static DG_TextStyle Default;
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::STYLE;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableStyle; }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::TextStyle;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
+    bool IsShapeFile() const;
+    virtual CPL::String Name() const;
+    virtual void Name(const char *value);
 
-    bool IsShapeFile() const { return false; }
-
-    virtual CPL::String Name() const
-    {
-        if (IsShapeFile()) return Filename;
-        else
-            return _name;
-    }
-    virtual void Name(const CPL::String &value)
-    {
-        _name = value;
-        if (IsShapeFile()) Filename = value;
-    }
-
-    StyleFlags Flags;
+    DG_StyleFlags Flags;
 
     CPL::String Filename;       // 3
     CPL::String BigFontFilename;// 4
@@ -68,29 +51,22 @@ public:
 
     double LastHeight;        // 42
     double ObliqueAngle = 0.0;// 50
-    TextMirrorFlag MirrorFlag = TextMirrorFlag::None;
-    FontFlags TrueType = FontFlag::Regular;
+    DG_TextMirrorFlag MirrorFlag;
+    DG_FontFlags TrueType;
 
-    TextStyle() {}
-    TextStyle(const CPL::String &name) : TableEntry(name) {}
+    DG_TextStyle() {}
+    DG_TextStyle(const char *name);
 };
 
-TextStyle TextStyle::Default = TextStyle(TextStyle::DefaultName);
 
-class LIBDWG_API TextStylesTable : public Table
+class LIBDWG_API DG_TextStylesTable : public DG_Table
 {
 public:
-    TextStylesTable() = default;
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::APPID_CONTROL_OBJ;
-    }
+    DG_TextStylesTable() = default;
+    DG_ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {TextStyle::DefaultName};
-    }
+    std::vector<CPL::String> defaultEntries() const;
 };
 
 }// namespace dwg

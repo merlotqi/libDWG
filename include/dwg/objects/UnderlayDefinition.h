@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class UnderlayDefinition : public NonGraphicalObject
+class DG_UnderlayDefinition : public DG_NonGraphicalObject
 {
 public:
     CPL::String File;// 1

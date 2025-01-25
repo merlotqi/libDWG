@@ -26,23 +26,23 @@
 
 namespace dwg {
 
-// The DimensionAligned class represents an aligned dimension, where
+// The DG_DimensionAligned class represents an aligned dimension, where
 // the dimension is applied between two points with an extended line rotation.
-class LIBDWG_API DimensionAligned : public Dimension
+class LIBDWG_API DG_DimensionAligned : public DG_Dimension
 {
     XYZ _firstPoint; // The first point of the aligned dimension
     XYZ _secondPoint;// The second point of the aligned dimension
     double _extLineRotation;// Rotation angle for the extension lines of the aligned dimension
 
 public:
-    // Default constructor for the DimensionAligned class
-    DimensionAligned();
+    // Default constructor for the DG_DimensionAligned class
+    DG_DimensionAligned();
 
-    // Destructor for the DimensionAligned class
-    ~DimensionAligned();
+    // Destructor for the DG_DimensionAligned class
+    ~DG_DimensionAligned();
 
     // Override to return the object type of the Circle
-    virtual dwg::ObjectType ObjectType() const override;
+    virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
     virtual CPL::String ObjectName() const override;
@@ -66,6 +66,6 @@ public:
     // based on the two points and extension line rotation
     virtual double Measurement() const override;
 };
-CPL_SMARTER_PTR(DimensionAligned)
+CPL_SMARTER_PTR(DG_DimensionAligned)
 
 }// namespace dwg

@@ -24,9 +24,9 @@
 #pragma once
 
 #include <dwg/Color.h>
+#include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
-#include <dwg/base/Coordinate.h>
 #include <dwg/tables/DefaultLightingType.h>
 #include <dwg/tables/GridFlags.h>
 #include <dwg/tables/TableEntry.h>
@@ -36,24 +36,18 @@
 
 namespace dwg {
 
-class VPort : public TableEntry
+class LIBDWG_API DG_VPort : public DG_TableEntry
 {
 public:
-    VPort() {}
-    VPort(const CPL::String &name) : TableEntry(name) {}
+    DG_VPort();
+    DG_VPort(const char *name);
 
     static constexpr auto DefaultName = "*Active";
-    static VPort Default;
+    static CPL::SmarterPtr<DG_VPort> Default();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::VPORT;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableVport; }
-    CPL::String SubclassMarker() const override
-    {
-        return DxfSubclassMarker::VPort;
-    }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
 
     XY BottomLeft = XY::Zero;
@@ -73,9 +67,9 @@ public:
     double SnapRotation;
     double TwistAngle;
     short CircleZoomPercent = 1000;
-    RenderMode RenderMode = RenderMode::Optimized2D;
-    ViewModeType ViewMode = ViewModeType::FrontClippingZ;
-    UscIconType UcsIconDisplay = UscIconType::OnOrigin;
+    DG_RenderMode RenderMode;
+    DG_ViewModeType ViewMode;
+    DG_UscIconType UcsIconDisplay;
     bool SnapOn;
     bool ShowGrid = true;
     bool IsometricSnap;
@@ -85,37 +79,29 @@ public:
     XYZ YAxis = XYZ::AxisY;
     unsigned long long NamedUcsHandle;
     unsigned long long BaseUcsHandle;
-    OrthographicType OrthographicType = OrthographicType::None;
+    DG_OrthographicType OrthographicType;
     double Elevation;
-    GridFlags GridFlags;//= GridFlags._1 | GridFlags._2;
+    DG_GridFlags GridFlags;//= GridFlags._1 | GridFlags._2;
     short MinorGridLinesPerMajorGridLine = 5;
     unsigned long long VisualStyleHandle;
     bool UseDefaultLighting = true;
-    DefaultLightingType DefaultLighting = DefaultLightingType::TwoDistantLights;
+    DG_DefaultLightingType DefaultLighting;
     double Brightness;
     double Contrast;
-    Color AmbientColor;
+    DG_Color AmbientColor;
 };
 
-VPort VPort::Default = VPort(VPort::DefaultName);
 
-
-class VPortsTable : public Table<VPort>
+class LIBDWG_API DG_VPortsTable : public DG_Table
 {
 public:
-    VPortsTable() = default;
+    DG_VPortsTable();
 
-    dwg::ObjectType ObjectType() const override
-    {
-        return dwg::ObjectType::VPORT_CONTROL_OBJ;
-    }
-    CPL::String ObjectName() const override { return DxfFileToken::TableVport; }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const
-    {
-        return {VPort::DefaultName};
-    }
+    std::vector<CPL::String> defaultEntries() const override;
 };
 
 }// namespace dwg

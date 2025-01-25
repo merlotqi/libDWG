@@ -28,15 +28,17 @@
 
 namespace dwg {
 
-class LIBDWG_API BookColor : NonGraphicalObject
+class LIBDWG_API DG_BookColor : public DG_NonGraphicalObject
 {
 public:
-    BookColor();
-    BookColor(const CPL::String &name);
+    DG_BookColor();
+    DG_BookColor(const char *name);
 
-    dwg::ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectDBColor; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::DbColor; }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+
+    CPL::String SubclassMarker() const override;
+
 
     CPL::String Name() const;
 
