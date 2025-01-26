@@ -26,7 +26,6 @@
 
 namespace dwg {
 
-
 class LIBDWG_API DG_ImageDefinitionReactor : public DG_NonGraphicalObject
 {
 public:

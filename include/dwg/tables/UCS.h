@@ -32,6 +32,7 @@ class LIBDWG_API DG_UCS : public DG_TableEntry
 {
 public:
     DG_UCS();
+    
     DG_UCS(const char *name);
 
     DG_ObjectType ObjectType() const override;

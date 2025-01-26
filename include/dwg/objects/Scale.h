@@ -22,53 +22,45 @@
 
 #pragma once
 
-#include <dwg/base/Coordinate.h>
+#include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <type_traits>
 
 namespace dwg {
 
-class Scale : public DG_NonGraphicalObject
+class LIBDWG_API DG_Scale : public DG_NonGraphicalObject
 {
 public:
-    static Scale Default;
-    Scale() = default;
-    Scale(const char *name);
-    Scale(const char *name, double paperUnits, double drawingUnits,
-          bool isUnitScale)
-        : NonGraphicalObject(name), PaperUnits(paperUnits),
-          DrawingUnits(drawingUnits), IsUnitScale(isUnitScale)
-    {
-    }
+    DG_Scale() = default;
+    DG_Scale(const char *name);
+    DG_Scale(const char *name, double paperUnits, double drawingUnits,
+          bool isUnitScale);
 
-    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectScale; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::Scale; }
+    DG_ObjectType ObjectType() const override;
 
-    // 140)]
-    double PaperUnits;
-    // 141)]
-    double DrawingUnits;
-    // 290)]
-    bool IsUnitScale;
+    CPL::String ObjectName() const override;
 
-    double ScaleFactor() const { return PaperUnits / DrawingUnits; }
+    CPL::String SubclassMarker() const override;
 
+    double PaperUnits() const;
+    
+    void PaperUnits(double);
+    
+    double DrawingUnits() const;
 
-    double ApplyTo(double value) { return value * ScaleFactor(); }
+    void DrawingUnits(double);
+    
+    bool IsUnitScale() const;
 
-    template<class T>
-    T ApplyTo(T value)
-    {
-        T result;
-        static_assert(std::is_base_of<IVector>::value, "");
-        for (size_t i = 0; i < value.Dimension; ++i)
-        {
-            result[i] = ApplyTo(value[i]);
-        }
-        return result;
-    }
+    void IsUnitScale(bool);
+
+    double ScaleFactor() const;
+
+    double ApplyTo(double value);
+
+    XYZ ApplyTo(const XYZ &);
+
+    XY ApplyTo(const XY &);
 };
+CPL_SMARTER_PTR(SortEntitiesTable)
 
-Scale Scale::Default = Scale("1:1", 1.0, 1.0, true);
 }// namespace dwg

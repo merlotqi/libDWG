@@ -22,15 +22,21 @@
 
 #pragma once
 
-
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
 
-class DG_UnderlayDefinition : public DG_NonGraphicalObject
+class LIBDWG_API DG_UnderlayDefinition : public DG_NonGraphicalObject
 {
 public:
-    CPL::String File;// 1
+    DG_UnderlayDefinition();
+    
+    DG_ObjectType ObjectType() const override;
+    CPL::String SubclassMarker() const override;
+
+    CPL::String File() const;
+    void File(const char *); 
 };
+CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

@@ -27,9 +27,18 @@
 
 namespace dwg {
 
-class DG_UnknownNonGraphicalObject : public DG_NonGraphicalObject
+class LIBDWG_API DG_UnknownNonGraphicalObject : public DG_NonGraphicalObject
 {
 public:
+    DG_UnknownNonGraphicalObject();
+    DG_UnknownNonGraphicalObject(const DG_DxfClass &);
+
+    DG_DxfClass DxfClass() const;
+
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 };
+CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

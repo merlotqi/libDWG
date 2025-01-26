@@ -30,9 +30,14 @@ class LIBDWG_API DG_PdfUnderlayDefinition : public DG_UnderlayDefinition
 {
 public:
     DG_PdfUnderlayDefinition();
-    CPL::String Page;
 
     CPL::String ObjectName() const override;
+
+    CPL::String Page() const;
+    
+    void Page(const char *);
+
 };
+CPL_SMARTER_PTR(DG_PdfUnderlayDefinition)
 
 }// namespace dwg

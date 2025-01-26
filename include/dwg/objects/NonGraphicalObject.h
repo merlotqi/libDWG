@@ -39,11 +39,9 @@ public:
 
     virtual ~DG_NonGraphicalObject() override;
 
-    CPL::String Name() const override;
+    virtual CPL::String Name() const override;
 
-    void Name(const char *value);
-
-    CPL::Delegate<void(const char *, const char *)> OnNameChanged;
+    virtual void Name(const char *value);
 };
 CPL_SMARTER_PTR(DG_NonGraphicalObject)
 

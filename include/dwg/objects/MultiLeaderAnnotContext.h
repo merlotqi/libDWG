@@ -30,37 +30,30 @@
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
-#include <dwg/base/Coordinate.h>
-#include <dwg/base/Matrix.h>
+#include <dwg/Coordinate.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/objects/LeaderLinePropertOverrideFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/LineType.h>
-#include <dwg/tables/TextStyle.h>
 
 namespace dwg {
 
-class MultiLeaderAnnotContext : public DG_NonGraphicalObject
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
+
+class DG_LineType;
+CPL_SMARTER_PTR(DG_LineType)
+
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
+
+class LIBDWG_API DG_MultiLeaderAnnotContext : public DG_NonGraphicalObject
 {
 public:
-    MultiLeaderAnnotContext();
-
-    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const
-    {
-        return DxfFileToken::ObjectMLeaderContextData;
-    }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::MultiLeaderAnnotContext;
-    }
-
     struct StartEndPointPair
     {
-        XYZ StartPoint;// 12,22,32
-        XYZ EndPoint;  // 13,23,33
+        XYZ StartPoint;
+        XYZ EndPoint;
     };
 
     struct LeaderLine
@@ -69,100 +62,181 @@ public:
         int BreakInfoCount;
         int SegmentIndex;
         std::vector<StartEndPointPair> StartEndPoints;
-        int Index;                   // 91
-        MultiLeaderPathType PathType;// 170
-        Color LineColor;             // 92
-        LineType LineType;
-        LineweightType LineWeight;// 171
-        double ArrowheadSize;     // 40
-        BlockRecord ArrowHead;
-        LeaderLinePropertOverrideFlags OverrideFlags;
+        int Index;
+        DG_MultiLeaderPathType PathType;
+        DG_Color LineColor;
+        DG_LineType LineType;
+        DG_LineweightType LineWeight;
+        double ArrowheadSize;
+        DG_BlockRecordPtr ArrowHead;
+        DG_LeaderLinePropertOverrideFlags OverrideFlags;
     };
 
     struct LeaderRoot
     {
-        bool ContentValid;  // 290
-        bool Unknown;       // 291
-        XYZ ConnectionPoint;// 10, 20, 30
-        XYZ Direction;      // 11, 21, 31
+        bool ContentValid;
+        bool Unknown;
+        XYZ ConnectionPoint;
+        XYZ Direction;
         std::vector<StartEndPointPair> BreakStartEndPointsPairs;
-        int LeaderIndex;       // 90
-        double LandingDistance;// 40
+        int LeaderIndex;
+        double LandingDistance;
         std::vector<LeaderLine> Lines;
-        TextAttachmentDirectionType TextAttachmentDirection;// 271
+        DG_TextAttachmentDirectionType TextAttachmentDirection;
     };
 
-    std::vector<LeaderRoot> LeaderRoots;
-    double ScaleFactor;                               // 40
-    XYZ ContentBasePoint;                             // 10,20,30
-    double TextHeight;                                // 41
-    double ArrowheadSize;                             // 140
-    double LandingGap;                                // 145
-    TextAttachmentType TextLeftAttachment;            // 174
-    TextAttachmentType TextRightAttachment;           // 175
-    TextAlignmentType TextAlignment;                  // 176
-    BlockContentConnectionType BlockContentConnection;// 177
-    bool HasTextContents;                             // 290
-    CPL::String TextLabel;                            // 304
-    XYZ TextNormal;                                   // 11,21,31
-    TextStyle TextStyle;                              // 340
+public:
+    DG_MultiLeaderAnnotContext();
 
-    XYZ TextLocation;// 12,22,32
-    XYZ Direction;   // 13,23,33
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
-    double TextRotation;         // 42
-    double BoundaryHeight;       //44
-    double LineSpacingFactor;    // 45
-    LineSpacingStyle LineSpacing;// 170
+    std::vector<LeaderRoot> LeaderRoots() const;
 
-    Color TextColor;                            // 90
-    TextAttachmentPointType TextAttachmentPoint;// 171
-    FlowDirectionType FlowDirection;            // 172
-    Color BackgroundFillColor;                  // 91
-    double BackgroundScaleFactor;               // 141
-    int BackgroundTransparency;                 // 92
-    bool BackgroundFillEnabled;                 // 291
-    bool BackgroundMaskFillOn;                  // 292
-    short ColumnType;                           // 173
-    bool TextHeightAutomatic;                   // 293
-                                                // 142
-    double ColumnWidth;
-    // 143
-    double ColumnGutter;
-    // 294
-    bool ColumnFlowReversed;
-    // 144
-    std::vector<double> ColumnSizes;
-    // 295
-    bool WordBreak;
-    // 296
-    bool HasContentsBlock;
-    // 341
-    BlockRecord BlockContent;
-    // 14, 24, 34
-    XYZ BlockContentNormal;
-    // 15, 25, 35
-    XYZ BlockContentLocation;
-    // 16, 26, 36
-    XYZ BlockContentScale;
-    // 46
-    double BlockContentRotation;
-    // 93
-    Color BlockContentColor;
-    // 93
-    Matrix4 TransformationMatrix;
-    // 110, 120, 130
-    XYZ BasePoint;
-    // 111, 121, 131
-    XYZ BaseDirection;
-    // 112, 122, 132
-    XYZ BaseVertical;
-    // 297
-    bool NormalReversed;
-    // 273
-    TextAttachmentType TextTopAttachment;
-    // 272
-    TextAttachmentType TextBottomAttachment;
+    double ScaleFactor() const;
+    void ScaleFactor(double);
+
+    XYZ ContentBasePoint() const;
+    void ContentBasePoint(const XYZ &);
+
+    double TextHeight() const;
+    void TextHeight(double);
+
+    double ArrowheadSize() const;
+    void ArrowheadSize(double);
+
+    double LandingGap() const;
+    void LandingGap(double);
+
+    DG_TextAttachmentType TextLeftAttachment() const;
+    void TextLeftAttachment(DG_TextAttachmentType);
+
+    DG_TextAttachmentType TextRightAttachment() const;
+    void TextRightAttachment(DG_TextAttachmentType);
+
+    DG_TextAlignmentType TextAlignment() const;
+    void TextAlignment(DG_TextAlignmentType);
+
+    DG_BlockContentConnectionType BlockContentConnection() const;
+    void BlockContentConnection(DG_BlockContentConnectionType);
+
+    bool HasTextContents() const;
+    void HasTextContents(bool);
+
+    CPL::String TextLabel() const;
+    void TextLabel(const char *);
+
+    XYZ TextNormal() const;
+    void TextNormal(const XYZ &);
+    
+    DG_TextStylePtr TextStyle();
+    void TextStyle(DG_TextStyle *);
+    
+    XYZ TextLocation() const;
+    void TextLocation(const XYZ &);
+
+    XYZ Direction() const;
+    void Direction(const XYZ &);
+
+    double TextRotation() const;
+    void TextRotation(double);
+
+    double BoundaryHeight() const;
+    void BoundaryHeight(double);
+
+    double LineSpacingFactor() const;
+    void LineSpacingFactor(double);
+
+    DG_LineSpacingStyle LineSpacing() const;
+    void LineSpacing(DG_LineSpacingStyle);
+
+    DG_Color TextColor() const;
+    void TextColor(const DG_Color &);
+    
+    DG_TextAttachmentPointType TextAttachmentPoint() const;
+    void TextAttachmentPoint(DG_TextAttachmentPointType);
+
+    DG_FlowDirectionType FlowDirection() const;
+    void FlowDirection(DG_FlowDirectionType);
+
+    DG_Color BackgroundFillColor() const;
+    void BackgroundFillColor(const DG_Color &);
+
+    double BackgroundScaleFactor() const;
+    void BackgroundScaleFactor(double);
+
+    int BackgroundTransparency() const;
+    void BackgroundTransparency(int);
+
+    bool BackgroundFillEnabled() const;
+    void BackgroundFillEnabled(bool);
+
+    bool BackgroundMaskFillOn() const;
+    void BackgroundMaskFillOn(bool);
+
+    short ColumnType() const;
+    void ColumnType(short);
+
+    bool TextHeightAutomatic() const;
+    void TextHeightAutomatic(bool);
+
+    double ColumnWidth() const;
+    void ColumnWidth(double);
+    
+    double ColumnGutter() const;
+    void ColumnGutter(double);
+    
+    bool ColumnFlowReversed() const;
+    void ColumnFlowReversed(bool);
+    
+    std::vector<double> ColumnSizes() const;
+
+    bool WordBreak() const;
+    void WordBreak(bool);
+    
+    bool HasContentsBlock() const;
+    void HasContentsBlock(bool);
+    
+    DG_BlockRecordPtr BlockContent() const;
+    void BlockContent(DG_BlockRecord *);
+    
+    XYZ BlockContentNormal() const;
+    void BlockContentNormal(const XYZ &);
+    
+    XYZ BlockContentLocation() const;
+    void BlockContentLocation(const XYZ &);
+    
+    XYZ BlockContentScale() const;
+    void BlockContentScale(const XYZ &);
+    
+    double BlockContentRotation() const;
+    void BlockContentRotation(double);
+    
+    DG_Color BlockContentColor() const;
+    void BlockContentColor(const DG_Color &);
+    
+    Matrix4 TransformationMatrix() const;
+    void TransformationMatrix(cons Matrix4 &);
+    
+    XYZ BasePoint() const;
+    void BasePoint(const XYZ &);
+    
+    XYZ BaseDirection() const;
+    void BaseDirection(const XYZ &);
+    
+    XYZ BaseVertical() const;
+    void BaseVertical(const XYZ &);
+
+    bool NormalReversed() const;
+    void NormalReversed(bool);
+    
+    DG_TextAttachmentType TextTopAttachment() const;
+    void TextTopAttachment(DG_TextAttachmentType);
+    
+    DG_TextAttachmentType TextBottomAttachment() const;
+    void TextBottomAttachment(DG_TextAttachmentType);
 };
+CPL_SMARTER_PTR(DG_MultiLeaderAnnotContext)
 
 }// namespace dwg

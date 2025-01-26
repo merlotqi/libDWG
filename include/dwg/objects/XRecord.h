@@ -22,30 +22,43 @@
 
 #pragma once
 
-
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <vector>
 
 namespace dwg {
 
-class DG_XRecord : public DG_NonGraphicalObject
+class LIBDWG_API DG_XRecord : public DG_NonGraphicalObject
 {
 public:
-    DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
-
-
     struct Entry
     {
+        int Code;
+        CPL::Any Value;
+        DG_GroupCodeValueType GroupCode;
+        bool HasLinkedObject;
+        DG_XRecordPtr Owner;
     };
 
+public:
+    DG_XRecord();
 
-    // 280)]
-    DG_DictionaryCloningFlags CloningFlags;
+    DG_XRecord(const char *);
 
-private:
+    DG_ObjectType ObjectType() const override;
+
+    CPL::String ObjectName() const override;
+
+    CPL::String SubclassMarker() const override;
+
+    DG_DictionaryCloningFlags CloningFlags() const;
+
+    void CloningFlags(DG_DictionaryCloningFlags);
+
+    std::vector<Entry> Entries() const;
+
+    void CreateEntry(int code, CPL::Any value);
 };
+CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

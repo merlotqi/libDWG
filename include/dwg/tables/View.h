@@ -34,31 +34,73 @@ class LIBDWG_API DG_View : public DG_TableEntry
 {
 public:
     DG_View() = default;
+
     DG_View(const char *name);
-    double Height;
-    double Width;
-    double LensLength;
-    double FrontClipping;
-    double BackClipping;
-    double Angle;
-    DG_ViewModeType ViewMode;
-    bool IsUcsAssociated = false;
-    bool IsPlottable;
-    DG_RenderMode RenderMode;
+    
+    DG_ObjectType ObjectType() const override;
 
-    XY Center;
-    XYZ Direction;
-    XYZ Target;
+    CPL::String ObjectName() const override;
 
-    unsigned long long VisualStyleHandle;
+    CPL::String SubclassMarker() const override;
 
-    XYZ UcsOrigin;
-    XYZ UcsXAxis;
-    XYZ UcsYAxis;
-    double UcsElevation;
+    double Height() const;
+    void Height(double);
 
-    DG_OrthographicType UcsOrthographicType;
+    double Width() const;
+    void Width(double);
+
+    double LensLength() const;
+    void LensLength(double);
+
+    double FrontClipping() const;
+    void FrontClipping(double);
+
+    double BackClipping() const;
+    void BackClipping(double);
+
+    double Angle() const;
+    void Angle(double);
+
+    DG_ViewModeType ViewMode() const;
+    void ViewMode(DG_ViewModeType);
+
+    bool IsUcsAssociated() const;
+    void IsUcsAssociated(bool);
+
+    bool IsPlottable() const;
+    void IsPlottable(bool);
+
+    DG_RenderMode RenderMode() const;
+    void RenderMode(DG_RenderMode);
+
+    XY Center() const;
+    void Center(const XY &);
+
+    XYZ Direction() const;
+    void Direction(const XYZ &);
+
+    XYZ Target() const;
+    void Target(const XYZ &);
+
+    DG_VisualStylePtr VisualStyle() const;
+    void VisualStyle(DG_VisualStyle *);
+
+    XYZ UcsOrigin() const;
+    void UcsOrigin(const XYZ &);
+
+    XYZ UcsXAxis() const;
+    void UcsXAxis(const XYZ &);
+
+    XYZ UcsYAxis() const;
+    void UcsYAxis(const XYZ &);
+
+    double UcsElevation() const;
+    void UcsElevation(double);
+
+    DG_OrthographicType UcsOrthographicType() const;
+    void UcsOrthographicType(DG_OrthographicType);
 };
+CPL_SMARTER_PTR(DG_View)
 
 class LIBDWG_API DG_ViewsTable : public DG_Table
 {
@@ -70,5 +112,6 @@ public:
 protected:
     std::vector<CPL::String> defaultEntries() const override;
 };
+CPL_SMARTER_PTR(DG_ViewsTable)
 
 }// namespace dwg

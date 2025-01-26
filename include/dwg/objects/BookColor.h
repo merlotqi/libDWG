@@ -32,21 +32,25 @@ class LIBDWG_API DG_BookColor : public DG_NonGraphicalObject
 {
 public:
     DG_BookColor();
+
     DG_BookColor(const char *name);
 
     DG_ObjectType ObjectType() const override;
+
     CPL::String ObjectName() const override;
 
     CPL::String SubclassMarker() const override;
 
-
-    CPL::String Name() const;
+    CPL::String Name() const override;
 
     CPL::String ColorName() const;
+
     CPL::String BookName() const;
 
-    Color Color;// 62, 420
-};
+    DG_Color Color() const;
 
+    void Color(const DG_Color &);
+};
+CPL_SMARTER_PTR(DG_BookColor)
 
 }// namespace dwg

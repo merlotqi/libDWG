@@ -25,23 +25,21 @@
 #include <dwg/Color.h>
 #include <dwg/objects/MLineStyleFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/tables/LineType.h>
-
 
 namespace dwg {
 
-class MLineStyle : public DG_NonGraphicalObject
+class LIBDWG_API DG_MLineStyle : public DG_NonGraphicalObject
 {
 public:
-    MLineStyle();
-    MLineStyle(const char *name) : NonGraphicalObject(name) {}
+    DG_MLineStyle();
+    DG_MLineStyle(const char *name);
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle Default;
 
-    DG_ObjectType ObjectType() const { return ObjectType::MLINESTYLE; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectMLineStyle; }
-    CPL::String SubclassMarker() const { return DxfSubclassMarker::MLineStyle; }
+    DG_ObjectType ObjectType() const override;
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
 
 
     // 70

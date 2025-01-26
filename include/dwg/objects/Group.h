@@ -24,7 +24,6 @@
 
 #include <dwg/entities/Entity.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <map>
 
 namespace dwg {
 

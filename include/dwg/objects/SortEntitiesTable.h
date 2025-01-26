@@ -22,42 +22,48 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/tables/BlockRecord.h>
 #include <vector>
 
 namespace dwg {
 
-class SortEntitiesTable : NonGraphicalObject
+class DG_Entity;
+CPL_SMARTER_PTR(DG_Entity)
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
+
+class LIBDWG_API SortEntitiesTable : public NonGraphicalObject
 {
 public:
     struct Sorter
     {
-        Entity *Entity;
-        unsigned long long _handle;
-        Sorter(Entity *entity, unsigned long long handle)
-        {
-            Entity = entity;
-            _handle = handle;
-        }
+        DG_EntityPtr Entity;
+        unsigned long long Handle;
+        Sorter(Entity *entity, unsigned long long handle);
     };
 
     static constexpr auto DictionaryEntryName = "ACAD_SORTENTS";
 
+public:
+    SortEntitiesTable();
 
-    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectSortEntsTable; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::SortentsTable;
-    }
+    SortEntitiesTable(DG_BlockRecord * owner);
 
-    // (330)]
-    BlockRecord BlockOwner;
+    DG_ObjectType ObjectType() const override;
 
+    CPL::String ObjectName() const override;
 
-    std::vector<Sorter> Sorters;
+    CPL::String SubclassMarker() const override;
+
+    DG_BlockRecordPtr BlockOwner() const;
+
+    void BlockOwner(DG_BlockRecord *);
+    
+    std::vector<Sorter> Sorters() const;
+
+    void AddEntity(DG_Entity *, unsigned long long sorterHandle);
 };
+CPL_SMARTER_PTR(SortEntitiesTable)
 
 }// namespace dwg

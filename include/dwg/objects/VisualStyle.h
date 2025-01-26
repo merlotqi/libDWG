@@ -22,7 +22,6 @@
 
 #pragma once
 
-
 #include <dwg/Color.h>
 #include <dwg/objects/FaceColorMode.h>
 #include <dwg/objects/FaceLightingModelType.h>
@@ -32,121 +31,54 @@
 
 namespace dwg {
 
-class DG_VisualStyle : public DG_NonGraphicalObject
+class LIBDWG_API DG_VisualStyle : public DG_NonGraphicalObject
 {
 public:
+    VisualStyle();
+
     DG_ObjectType ObjectType() const override;
     CPL::String ObjectName() const override;
     CPL::String SubclassMarker() const override;
 
-    // 1
-    CPL::String RasterFile;
-    // 2
-    CPL::String Description;
-    // 70
-    int Type;
-    // 71
-    DG_FaceLightingModelType FaceLightingModel;
-    // 72
-    DG_FaceLightingQualityType FaceLightingQuality;
-    // 73
-    DG_FaceColorMode FaceColorMode;
-    // 90
-    DG_FaceModifierType FaceModifiers;
-    // 40
-    double FaceOpacityLevel;
-    // 41
-    double FaceSpecularLevel;
-    // 62, 63
-    DG_Color color;
-    // 421
-    DG_Color FaceStyleMonoColor;
+    CPL::String RasterFile() const;
+    void RasterFile(const char *);
 
-    //74
-    //Edge style model
-    //0 = No edges
-    //1 = Isolines
-    //2 = Facet edges
+    CPL::String Description() const;
+    void Description(const char *);
 
-    //91
+    int Type() const;
+    void Type(int);
 
-    //Edge style
+    DG_FaceLightingModelType FaceLightingModel() const;
+    void FaceLightingModel(DG_FaceLightingModelType);
 
-    //64
+    DG_FaceLightingQualityType FaceLightingQuality() const;
+    void FaceLightingQuality(DG_FaceLightingQualityType);
 
-    //Edge intersection color
+    DG_FaceColorMode FaceColorMode() const;
+    void FaceColorMode(DG_FaceColorMode);
 
-    //65
+    FaceModifierType FaceModifiers() const;
+    void FaceModifiers(FaceModifierType);
 
-    //Edge obscured color
+    double FaceOpacityLevel() const;
+    void FaceOpacityLevel(double);
 
-    //75
+    double FaceSpecularLevel() const;
+    void FaceSpecularLevel(double);
 
-    //Edge obscured linetype
+    DG_Color Color() const;
+    void Color(const DG_Color &);
 
-    //175
+    DG_Color FaceStyleMonoColor() const;
+    void FaceStyleMonoColor(const DG_Color &);
 
-    //Edge intersection linetype
+    bool PrecisionFlag() const;
+    void PrecisionFlag(bool);
 
-    //42
-
-    //Edge crease angle
-
-    //92
-
-    //Edge modifiers
-
-    //66
-
-    //Edge color
-
-    //43
-
-    //Edge opacity level
-
-    //76
-
-    //Edge width
-
-    //77
-
-    //Edge overhang
-
-    //78
-
-    //Edge jitter
-
-    //67
-
-    //Edge silhouette color
-
-    //79
-
-    //Edge silhouette width
-
-    //170
-
-    //Edge halo gap
-
-    //171
-
-    //Number of edge isolines
-
-    //174
-
-    //Edge style apply flag
-
-    //93
-
-    //Display style display settings
-
-    //44	Brightness
-
-    //173	Shadow type
-    // 290
-    bool PrecisionFlag;
-    // 291
-    bool InternalFlag;
+    bool InternalFlag() const;
+    void InternalFlag(bool);
 };
+CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

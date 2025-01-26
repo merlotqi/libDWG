@@ -26,9 +26,7 @@
 #include <dwg/objects/LayoutFlags.h>
 #include <dwg/objects/PlotSettings.h>
 
-
 namespace dwg {
-
 
 class DG_Layout : public DG_PlotSettings
 {

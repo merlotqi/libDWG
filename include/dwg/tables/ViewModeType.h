@@ -37,11 +37,9 @@ enum DG_ViewModeType
     ///
     Follow = 8,
     /// Front clipping not at the camera
-    /// <remarks>
     /// If turned on, FRONTZ determines the front clipping plane.
     /// If turned off, FRONTZ is ignored, and the front clipping plane passes through the camera point.
     /// This setting is ignored if the front-clipping bit 2 is turned off.
-    /// </remarks>
     FrontClippingZ = 16,
 };
 

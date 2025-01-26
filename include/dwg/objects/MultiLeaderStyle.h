@@ -28,124 +28,168 @@
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentType.h>
-#include <dwg/base/Coordinate.h>
+#include <dwg/Coordinate.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/objects/LeaderContentType.h>
 #include <dwg/objects/LeaderDrawOrderType.h>
 #include <dwg/objects/NonGraphicalObject.h>
 
-
 namespace dwg {
 
+class DG_LineType;
+CPL_SMARTER_PTR(DG_LineType)
 
-class MultiLeaderStyle : NonGraphicalObject
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
+
+class DG_TextStyle;
+CPL_SMARTER_PTR(DG_TextStyle)
+
+class DG_BlockRecord;
+CPL_SMARTER_PTR(DG_BlockRecord)
+
+class LIBDWG_API DG_MultiLeaderStyle : public DG_NonGraphicalObject
 {
 public:
     static constexpr auto DefaultName = "Standard";
-    static MultiLeaderStyle
-            Default;// { get { return new MultiLeaderStyle(DefaultName); } }
-
-    DG_ObjectType ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String ObjectName() const { return DxfFileToken::ObjectMLeaderStyle; }
-    CPL::String SubclassMarker() const
-    {
-        return DxfSubclassMarker::MLeaderStyle;
-    }
-
-
-    // 170
-    LeaderContentType ContentType;
-    // 171
-    MultiLeaderDrawOrderType MultiLeaderDrawOrder;
-    // 172
-    LeaderDrawOrderType LeaderDrawOrder;
-    // 90
-    int MaxLeaderSegmentsPoints;
-    // 40
-    double FirstSegmentAngleConstraint;
-    // 41
-    double SecondSegmentAngleConstraint;
-    // 173
-    MultiLeaderPathType PathType;
-    // 91
-    Color LineColor;
-    // DxfReferenceType.Handle, 340
-    unsigned long long LeaderLineTypeHandle;
-    // 92
-    LineweightType LeaderLineWeight;
-    // 290
-    bool EnableLanding;
-    // 42
-    double LandingGap;
-    // 291
-    bool EnableDogleg;
-    // 43
-    double LandingDistance;
-    // 3
-    CPL::String Description;
-    // DxfReferenceType.Handle, 341
-    unsigned long long ArrowheadHandle;
-    // 44
-    double ArrowheadSize;
-    // 300
-    CPL::String DefaultTextContents;
-    // DxfReferenceType.Handle, 342
-    unsigned long long TextStyleHandle;
-    // 174
-    TextAttachmentType TextLeftAttachment;
-    // 175
-    TextAngleType TextAngle;
-    // 176
-    TextAlignmentType TextAlignment;
-    // 178
-    TextAttachmentType TextRightAttachment;
-    // 93
-    Color TextColor;
-    // 45
-    double TextHeight;
-    // 292
-    bool TextFrame;
-    // 297
-    bool TextAlignAlwaysLeft;
-    // 46
-    double AlignSpace;
-    // DxfReferenceType.Handle, 343
-    unsigned long long BlockContentHandle;
-    // 94
-    Color BlockContentColor;
-    // 47, 49, 140
-    XYZ BlockContentScale;
-    // 293
-    bool EnableBlockContentScale;
-    // DxfReferenceType.IsAngle, 141
-    double BlockContentRotation;
-    // 294
-    bool EnableBlockContentRotation;
-    // 177
-    BlockContentConnectionType BlockContentConnection;
-    // 142
-    double ScaleFactor;
-    // 295
-    bool OverwritePropertyValue;
-    // 296
-    bool IsAnnotative;
-    // 143
-    double BreakGapSize;
-    // 271
-    TextAttachmentDirectionType TextAttachmentDirection;
-    // 272
-    TextAttachmentType TextBottomAttachment;
-    // 273
-    TextAttachmentType TextTopAttachment;
-
+    
+    static CPL::SmarterPtr<DG_MultiLeaderStyle> Default;
+    
 public:
-    MultiLeaderStyle() {}
-    MultiLeaderStyle(const char *name) : NonGraphicalObject(name) {}
+    DG_MultiLeaderStyle();
+    DG_MultiLeaderStyle(const char *name);
+
+    DG_ObjectType ObjectType() const override;    
+    CPL::String ObjectName() const override;
+    CPL::String SubclassMarker() const override;
+
+    DG_LeaderContentType ContentType() const;
+    void ContentType(DG_LeaderContentType);
+    
+    DG_MultiLeaderDrawOrderType MultiLeaderDrawOrder() const;
+    void MultiLeaderDrawOrder(DG_MultiLeaderDrawOrderType);
+
+    DG_LeaderDrawOrderType LeaderDrawOrder() const;
+    void LeaderDrawOrder(DG_LeaderDrawOrderType);
+
+    int MaxLeaderSegmentsPoints() const;
+    void MaxLeaderSegmentsPoints(int);
+    
+    double FirstSegmentAngleConstraint() const;
+    void FirstSegmentAngleConstraint(double);
+    
+    double SecondSegmentAngleConstraint() const;
+    void SecondSegmentAngleConstraint(double);
+    
+    DG_MultiLeaderPathType PathType() const;
+    void PathType(DG_MultiLeaderPathType);
+    
+    DG_Color LineColor() const;
+    void LineColor(const DG_Color &);
+
+    DG_LineTypePtr LeaderLineType() const;
+    void LeaderLineType(DG_LineType *);
+    
+    DG_LineweightType LeaderLineWeight() const;
+    void LeaderLineWeight(DG_LineweightType);
+    
+    bool EnableLanding() const;
+    void EnableLanding(bool);
+    
+    double LandingGap() const;
+    void LandingGap(double);
+    
+    bool EnableDogleg() const;
+    void EnableDogleg(bool);
+    
+    double LandingDistance() const;
+    void LandingDistance(double);
+    
+    CPL::String Description() const;
+    void Description(const char *);
+
+    DG_BlockRecordPtr Arrowhead() const;
+    void Arrowhead(DG_BlockRecord *);
+    
+    double ArrowheadSize() const;
+    void ArrowheadSize(double);
+    
+    CPL::String DefaultTextContents() const;
+    void DefaultTextContents(const char *);
+
+    DG_TextStylePtr TextStyle() const;
+    void TextStyle(DG_TextStyle *);
+    
+    DG_TextAttachmentType TextLeftAttachment() const;
+    void TextLeftAttachment(DG_TextAttachmentType);
+    
+    DG_TextAngleType TextAngle() const;
+    void TextAngle(DG_TextAngleType);
+    
+    DG_TextAlignmentType TextAlignment() const;
+    void TextAlignment(DG_TextAlignmentType);
+    
+    DG_TextAlignmentType TextRightAttachment() const;
+    void TextRightAttachment(DG_TextAlignmentType);
+    
+    DG_Color TextColor() const;
+    void TextColor(const DG_Color &);
+    
+    double TextHeight() const;
+    void TextHeight(double);
+    
+    bool TextFrame() const;
+    void TextFrame(bool);
+    
+    bool TextAlignAlwaysLeft() const;
+    void TextAlignAlwaysLeft(bool);
+    
+    double AlignSpace() const;
+    void AlignSpace(double);
+    
+    DG_BlockRecordPtr BlockContent() const;
+    void BlockContent(DG_BlockRecord *);
+    
+    DG_Color BlockContentColor() const;
+    void BlockContentColor(const DG_Color &);
+    
+    XYZ BlockContentScale() const;
+    void BlockContentScale(const XYZ &);
+    
+    bool EnableBlockContentScale() const;
+    void EnableBlockContentScale(bool);
+    
+    double BlockContentRotation() const;
+    void BlockContentRotation(double);
+    
+    bool EnableBlockContentRotation() const;
+    void EnableBlockContentRotation(bool);
+    
+    DG_BlockContentConnectionType BlockContentConnection() const;
+    void BlockContentConnection(DG_BlockContentConnectionType);
+    
+    double ScaleFactor() const;
+    void ScaleFactor(double);
+    
+    bool OverwritePropertyValue() const;
+    void OverwritePropertyValue(bool);
+    
+    bool IsAnnotative() const;
+    void IsAnnotative(bool);
+    
+    double BreakGapSize() const;
+    void BreakGapSize(double);
+    
+    DG_TextAttachmentDirectionType TextAttachmentDirection() const;
+    void TextAttachmentDirection(DG_TextAttachmentDirectionType);
+    
+    DG_TextAttachmentType TextBottomAttachment() const;
+    void TextBottomAttachment(DG_TextAttachmentType);
+
+    DG_TextAttachmentType TextTopAttachment() const;
+    void TextTopAttachment(DG_TextAttachmentType);
 };
-
-
-MultiLeaderStyle MultiLeaderStyle::Default =
-        MultiLeaderStyle(MultiLeaderStyle::DefaultName);
+CPL_SMARTER_PTR(DG_MultiLeaderStyle)
 
 }// namespace dwg

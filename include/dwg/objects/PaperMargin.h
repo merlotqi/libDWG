@@ -31,14 +31,9 @@ struct PaperMargin
     double Right;
     double Top;
 
-    PaperMargin() {}
-    PaperMargin(double left, double bottom, double right, double top)
-    {
-        Left = left;
-        Bottom = bottom;
-        Right = right;
-        Top = top;
-    }
+    PaperMargin();
+    
+    PaperMargin(double left, double bottom, double right, double top);
 };
 
 }// namespace dwg

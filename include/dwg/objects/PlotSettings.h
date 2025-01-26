@@ -41,71 +41,100 @@ public:
     DG_PlotSettings();
 
     DG_ObjectType ObjectType() const override;
+
     CPL::String ObjectName() const override;
+
     CPL::String SubclassMarker() const override;
-    // 1
-    CPL::String PageName = "none_device";
-    // 2
-    CPL::String SystemPrinterName;
-    // 4
-    CPL::String PaperSize = "ISO_A4_(210.00_x_297.00_MM)";
-    // 6
-    CPL::String PlotViewName;
-    // 40, 41, 42, 43
-    PaperMargin UnprintableMargin;
-    // 44
-    double PaperWidth;
-    // 45
-    double PaperHeight;
-    // 46
-    double PlotOriginX;
-    // 47
-    double PlotOriginY;
-    // 48
-    double WindowLowerLeftX;
-    // 49
-    double WindowLowerLeftY;
-    // 140
-    double WindowUpperLeftX;
-    // 141
-    double WindowUpperLeftY;
 
+    CPL::String PageName() const;
+    void PageName(const char *);
+    
+    CPL::String SystemPrinterName() const;
+    void SystemPrinterName(const char *);
+    
+    CPL::String PaperSize() const;
+    void PaperSize(const char *);
+    
+    CPL::String PlotViewName() const;
+    void PlotViewName(const char *);
+    
+    DG_PaperMargin UnprintableMargin() const;
+    void UnprintableMargin(DG_PaperMargin);
+    
+    double PaperWidth() const;
+    void PaperWidth(double);
+    
+    double PaperHeight() const;
+    void PaperHeight(double);
+    
+    double PlotOriginX() const;
+    void PlotOriginX(double);
+    
+    double PlotOriginY() const;
+    void PlotOriginY(double);
+    
+    double WindowLowerLeftX() const;
+    void WindowLowerLeftX(double);
+    
+    double WindowLowerLeftY() const;
+    void WindowLowerLeftY(double);
+    
+    double WindowUpperLeftX() const;
+    void WindowUpperLeftX(double);
+    
+    double WindowUpperLeftY() const;
+    void WindowUpperLeftY();
 
-    double PrintScale() const { return NumeratorScale / DenominatorScale; }
+    double PrintScale() const;
 
-    // 142
-    double NumeratorScale = 1.0;
+    double NumeratorScale() const;
+    void NumeratorScale(double);
 
-    // 143
-    double DenominatorScale = 1.0;
-    // 70
-    PlotFlags
-            Flags;// = PlotFlags.DrawViewportsFirst | PlotFlags.PrintLineweights | PlotFlags.PlotPlotStyles | PlotFlags.UseStandardScale;
-    // 72
-    PlotPaperUnits PaperUnits = PlotPaperUnits::Milimeters;
-    // 73
-    PlotRotation PaperRotation;
-    // 74
-    PlotType PlotType = PlotType::DrawingExtents;
-    // 7
-    CPL::String StyleSheet;
-    // 75
-    ScaledType ScaledFit;
-    // 76
-    ShadePlotMode ShadePlotMode;
-    // 77
-    ShadePlotResolutionMode ShadePlotResolutionMode;
-    // 78
-    short ShadePlotDPI = 300;
-    // 147
-    double StandardScale = 1.0;
+    double DenominatorScale() const;
+    void DenominatorScale(double);
+    
+    DG_PlotFlags Flags() const;
+    void Flags(DG_PlotFlags);
+    
+    DG_PlotPaperUnits PaperUnits() const;
+    void PaperUnits(DG_PlotPaperUnits);
 
-    XY PaperImageOrigin;
-    // 148
-    double PaperImageOriginX;
-    // 149
-    double PaperImageOriginY;
-    // 333
-    unsigned long long ShadePlotIDHandle;
+    DG_PlotRotation PaperRotation() const;
+    void PaperRotation(DG_PlotRotation);
+    
+    DG_PlotType PlotType() const;
+    void PlotType(DG_PlotType);
+    
+    CPL::String StyleSheet() const;
+    void StyleSheet(const char *);
+    
+    DG_ScaledType ScaledFit() const;
+    void ScaledFit(DG_ScaledType);
+    
+    DG_ShadePlotMode ShadePlotMode() const;
+    void ShadePlotMode(DG_ShadePlotMode);
+    
+    DG_ShadePlotResolutionMode ShadePlotResolutionMode() const;
+    void ShadePlotResolutionMode(DG_ShadePlotResolutionMode);
+    
+    short ShadePlotDPI() const;
+    void ShadePlotDPI(short);
+    
+    double StandardScale() const;
+    void StandardScale(double);
+
+    XY PaperImageOrigin() const;
+    void PaperImageOrigin(const XY &);
+    
+    double PaperImageOriginX() const;
+    void PaperImageOriginX(double);
+    
+    double PaperImageOriginY() const;
+    void PaperImageOriginY(double);
+    
+    unsigned long long ShadePlotIDHandle() const;
+    void ShadePlotIDHandle(unsigned long long);
 };
+CPL_SMARTER_PTR(DG_PlotSettings)
+
 }// namespace dwg
