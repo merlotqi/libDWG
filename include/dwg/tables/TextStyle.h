@@ -32,32 +32,61 @@ namespace dwg {
 class LIBDWG_API DG_TextStyle : public DG_TableEntry
 {
 public:
+    DG_TextStyle();
+
+    DG_TextStyle(const char *);
+
+    ~DG_TextStyle();
+
     static constexpr auto DefaultName = "Standard";
-    static DG_TextStyle Default;
+
+    static CPL::SmarterPtr<DG_TextStyle> Default();
 
     DG_ObjectType ObjectType() const override;
+
     CPL::String ObjectName() const override;
+
     CPL::String SubclassMarker() const override;
+
+    DG_StyleFlags Flags() const;
+
+    void Flags(DG_StyleFlags);
+
+    CPL::String Filename() const;
+    
+    void Filename(const char *);
+
+    CPL::String BigFontFilename() const;
+
+    void BigFontFilename(const char *);
+    
+    double Height() const;
+
+    void Height(double);
+
+    double Width() const;
+
+    void Width(double);
+
+    double LastHeight() const;
+
+    void LastHeight(double);
+
+    double ObliqueAngle() const;
+
+    void ObliqueAngle(double);
+
+    DG_TextMirrorFlag MirrorFlag() const;
+
+    void MirrorFlag(DG_TextMirrorFlag);
+
+    DG_FontFlags TrueType() const;
+
+    void TrueType(DG_FontFlags);
+
     bool IsShapeFile() const;
-    virtual CPL::String Name() const;
-    virtual void Name(const char *value);
-
-    DG_StyleFlags Flags;
-
-    CPL::String Filename;       // 3
-    CPL::String BigFontFilename;// 4
-    double Height;              // 40
-    double Width = 1.0;         // 41
-
-    double LastHeight;        // 42
-    double ObliqueAngle = 0.0;// 50
-    DG_TextMirrorFlag MirrorFlag;
-    DG_FontFlags TrueType;
-
-    DG_TextStyle() {}
-    DG_TextStyle(const char *name);
 };
-
+CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_TextStylesTable : public DG_Table
 {

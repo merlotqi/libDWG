@@ -35,22 +35,44 @@ public:
     DG_UCS(const char *name);
 
     DG_ObjectType ObjectType() const override;
+
     CPL::String ObjectName() const override;
+
     CPL::String SubclassMarker() const override;
 
-    XYZ Origin = XYZ::Zero;
-    XYZ XAxis = XYZ::AxisX;
-    XYZ YAxis = XYZ::AxisY;
-    DG_OrthographicType orthographicType;
-    DG_OrthographicType OrthographicViewType;
-    double Elevation;
+    XYZ Origin() const;
+
+    void Origin(const XYZ &);
+
+    XYZ XAxis() const;
+
+    void XAxis(const XYZ &);
+
+    XYZ YAxis() const;
+
+    void YAxis(const XYZ &);
+
+    DG_OrthographicType OrthographicType() const;
+
+    void OrthographicType(DG_OrthographicType);
+
+    DG_OrthographicType OrthographicViewType() const;
+
+    void OrthographicViewType(DG_OrthographicType);
+
+    double Elevation() const;
+
+    void Elevation(double);
 };
+CPL_SMARTER_PTR(DG_UCS)
 
 class LIBDWG_API DG_UCSTable : public DG_Table
 {
 public:
     DG_UCSTable() = default;
+
     DG_ObjectType ObjectType() const override;
+    
     CPL::String ObjectName() const override;
 
 protected:

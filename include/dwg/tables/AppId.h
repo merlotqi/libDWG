@@ -33,13 +33,16 @@ public:
     
     ~DG_AppId();
 
-    static CPL::String DefaultName;
-
     DG_ObjectType ObjectType() const override;
     
     CPL::String ObjectName() const override;
     
     CPL::String SubclassMarker() const override;
+
+public:
+    static CPL::String DefaultName;
+
+    static CPL::SmarterPtr<DG_AppId> Default;
 };
 CPL_SMARTER_PTR(DG_AppId)
 

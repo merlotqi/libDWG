@@ -36,12 +36,9 @@ CPL_SMARTER_PTR(DG_TextStyle)
 class LIBDWG_API DG_LineType : public DG_TableEntry
 {
 public:
-    DG_LineType();
-    DG_LineType(const char *name);
-
     struct Segment
     {
-        double Length;// 49
+        double Length;
         DG_LinetypeShapeFlags ShapeFlag;
         short ShapeNumber;
         XY Offset;
@@ -51,27 +48,46 @@ public:
         DG_TextStyleWPtr Style;
     };
 
+public:
+    DG_LineType();
+
+    DG_LineType(const char *name);
+
     static constexpr auto ByLayerName = "ByLayer";
+
     static constexpr auto ByBlockName = "ByBlock";
+
     static constexpr auto ContinuousName = "Continuous";
 
     static CPL::SmarterPtr<DG_LineType> ByLayer();
+
     static CPL::SmarterPtr<DG_LineType> ByBlock();
+
     static CPL::SmarterPtr<DG_LineType> Continuous();
 
     DG_ObjectType ObjectType() const override;
+    
     CPL::String ObjectName() const override;
+
     CPL::String SubclassMarker() const override;
 
-    CPL::String Description;  // 3
-    double PatternLen() const;// 40
-    char Alignment = 'A';     // 72
+    CPL::String Description() const;
 
-    void AddSegment(const Segment &segmnnt);
+    void Description(const char *);
 
-private:
-    std::vector<Segment> _segments;
+    double PatternLen() const;
+
+    char Alignment() const;
+
+    void Alignment(char);
+
+    std::vector<Segment> Segments() const;
+
+    void Segments(const std::vector<Segment> &);
+
+    void AddSegment(const Segment &);
 };
+CPL_SMARTER_PTR(DG_LineType)
 
 class LIBDWG_API DG_LineTypesTable : public DG_Table
 {

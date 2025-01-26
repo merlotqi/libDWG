@@ -48,185 +48,234 @@ public:
     static CPL::SmarterPtr<DG_DimensionStyle> Default();
 
 public:
+    DG_DimensionStyle();
     DG_DimensionStyle(const char *name);
+    ~DG_DimensionStyle();
 
     DG_ObjectType ObjectType() const override;
     CPL::String ObjectName() const override;
     CPL::String SubclassMarker() const override;
 
-    // 3
-    CPL::String PostFix = "<>";
-    // 3
-    CPL::String AlternateDimensioningSuffix = "[]";
-    // 71
-    bool GenerateTolerances = false;
-    // 72
-    bool LimitsGeneration = false;
-    // 73
-    bool TextInsideHorizontal = false;
-    // 74
-    bool TextOutsideHorizontal = false;
-    // 75
-    bool SuppressFirstExtensionLine = false;
-    // 76
-    bool SuppressSecondExtensionLine = false;
-    // 77
-    DimensionTextVerticalAlignment TextVerticalAlignment =
-            DimensionTextVerticalAlignment::Above;
-    // 78
-    ZeroHandling ZeroHandling = ZeroHandling::SuppressDecimalTrailingZeroes;
-    // 170
-    bool AlternateUnitDimensioning = false;
-    // 171
-    short AlternateUnitDecimalPlaces = 3;
-    // 172
-    bool TextOutsideExtensions = 0;
-    // 173
-    bool SeparateArrowBlocks = true;
-    // 174
-    bool TextInsideExtensions = false;
-    // 175
-    bool SuppressOutsideExtensions = false;
-    // 179
-    short AngularDimensionDecimalPlaces = 0;
-    // 280
-    DimensionTextHorizontalAlignment TextHorizontalAlignment =
-            DimensionTextHorizontalAlignment::Centered;
-    // 281
-    bool SuppressFirstDimensionLine = false;
-    // 282
-    bool SuppressSecondDimensionLine = false;
-    // 283
-    ToleranceAlignment ToleranceAlignment = ToleranceAlignment::Bottom;
-    // 284
-    ZeroHandling ToleranceZeroHandling =
-            ZeroHandling::SuppressDecimalTrailingZeroes;
-    // 285
-    ZeroHandling AlternateUnitZeroHandling =
-            ZeroHandling::SuppressZeroFeetAndInches;
-    // 287
-    short DimensionFit;
-    // 288
-    bool CursorUpdate = false;
-    // 286
-    ZeroHandling AlternateUnitToleranceZeroHandling =
-            ZeroHandling::SuppressZeroFeetAndInches;
-    // 270
-    short DimensionUnit = 2;
-    // 275
-    AngularUnitFormat AngularUnit = AngularUnitFormat::DecimalDegrees;
-    // 271
-    short DecimalPlaces = 2;
-    // 272
-    short ToleranceDecimalPlaces = 2;
-    // 273
-    LinearUnitFormat AlternateUnitFormat = LinearUnitFormat::Decimal;
-    // 274
-    short AlternateUnitToleranceDecimalPlaces = 3;
-    // 40
-    double ScaleFactor = 1.0;
-    // 41
-    double ArrowSize = 0.18;
-    // 42
-    double ExtensionLineOffset = 0.6250;
-    // 43
-    double DimensionLineIncrement = 3.75;
-    // 44
-    double ExtensionLineExtension = 1.2500;
-    // 45
-    double Rounding = 0.0;
-    // 46
-    double DimensionLineExtension = 0.0;
-    // 47
-    double PlusTolerance = 0.0;
-    // 48
-    double MinusTolerance = 0.0;
-    // 49
-    double FixedExtensionLineLength = 1.0;
-    // 50
-    double JoggedRadiusDimensionTransverseSegmentAngle = M_PI / 4.0;
-    // 69
-    DimensionTextBackgroundFillMode TextBackgroundFillMode =
-            DimensionTextBackgroundFillMode::NoBackground;
-    // 70
-    Color TextBackgroundColor = Color::ByBlock;
-    // 79
-    ZeroHandling AngularZeroHandling = ZeroHandling::SuppressZeroFeetAndInches;
-    // 90
-    ArcLengthSymbolPosition ArcLengthSymbolPosition =
-            ArcLengthSymbolPosition::BeforeDimensionText;
-    // 140
-    double TextHeight = 0.18;
-    // 141
-    double CenterMarkSize = 2.5;
-    // 142
-    double TickSize = 0.0;
-    // 143
-    double AlternateUnitScaleFactor = 25.4;
-    // 144
-    double LinearScaleFactor = 1.0;
-    // 145
-    double TextVerticalPosition = 0.0;
-    // 146
-    double ToleranceScaleFactor = 1.0;
-    // 147
-    double DimensionLineGap = 0.6250;
+    CPL::String PostFix() const;
+    void PostFix(const char *);
+    
+    CPL::String AlternateDimensioningSuffix() const;
+    void AlternateDimensioningSuffix(const char *);
+    
+    bool GenerateTolerances() const;
+    void GenerateTolerances(bool);
+    
+    bool LimitsGeneration() const;
+    void LimitsGeneration(bool);
+    
+    bool TextInsideHorizontal() const;
+    void TextInsideHorizontal(bool);
+    
+    bool TextOutsideHorizontal() const;
+    void TextOutsideHorizontal(bool);
+    
+    bool SuppressFirstExtensionLine() const;
+    void SuppressFirstExtensionLine(bool);
+    
+    bool SuppressSecondExtensionLine() const;
+    void SuppressSecondExtensionLine(bool);
 
-    // 148
-    double AlternateUnitRounding = 0.0;
-    // 176
-    Color DimensionLineColor = Color::ByBlock;
-    // 177
-    Color ExtensionLineColor = Color::ByBlock;
+    DG_DimensionTextVerticalAlignment TextVerticalAlignment() const;
+    void TextVerticalAlignment(DG_DimensionTextVerticalAlignment);
+    
+    DG_ZeroHandling ZeroHandling() const;
+    void ZeroHandling(DG_ZeroHandling);
 
-    // 178
-    Color TextColor = Color::ByBlock;
+    bool AlternateUnitDimensioning() const;
+    void AlternateUnitDimensioning(bool);
+    
+    short AlternateUnitDecimalPlaces() const;
+    void AlternateUnitDecimalPlaces(short);
 
-    // 176
-    FractionFormat FractionFormat = FractionFormat::Horizontal;
+    bool TextOutsideExtensions() const;
+    void TextOutsideExtensions(bool);
+    
+    bool SeparateArrowBlocks() const;
+    void SeparateArrowBlocks(bool);
+    
+    bool TextInsideExtensions() const;
+    void TextInsideExtensions(bool);
+    
+    bool SuppressOutsideExtensions() const;
+    void SuppressOutsideExtensions(bool);
 
-    // 277
-    LinearUnitFormat LinearUnitFormat = LinearUnitFormat::Decimal;
+    short AngularDimensionDecimalPlaces() const;
+    void AngularDimensionDecimalPlaces(short);
 
-    // 278
-    char DecimalSeparator = '.';
+    DG_DimensionTextHorizontalAlignment TextHorizontalAlignment() const;
+    void TextHorizontalAlignment(DG_DimensionTextHorizontalAlignment);
+    
+    bool SuppressFirstDimensionLine() const;
+    void SuppressFirstDimensionLine(bool);
+    
+    bool SuppressSecondDimensionLine() const;
+    void SuppressSecondDimensionLine(bool);
+    
+    DG_ToleranceAlignment ToleranceAlignment() const;
+    void ToleranceAlignment(DG_ToleranceAlignment);
 
-    // 279
-    TextMovement TextMovement = TextMovement::MoveLineWithText;
+    DG_ZeroHandling ToleranceZeroHandling() const;
+    void ToleranceZeroHandling(DG_ZeroHandling);
+    
+    DG_ZeroHandling AlternateUnitZeroHandling() const;
+    void AlternateUnitZeroHandling(DG_ZeroHandling);
 
-    // 290
-    bool IsExtensionLineLengthFixed = false;
+    short DimensionFit() const;
+    void DimensionFit(short);
 
-    // 295
-    TextDirection TextDirection = TextDirection::LeftToRight;
+    bool CursorUpdate() const;
+    void CursorUpdate(bool);
 
-    // 371
-    LineweightType DimensionLineWeight = LineweightType::ByBlock;
+    DG_ZeroHandling AlternateUnitToleranceZeroHandling() const;
+    void AlternateUnitToleranceZeroHandling(DG_ZeroHandling);
 
-    // 372
-    LineweightType ExtensionLineWeight = LineweightType::ByBlock;
+    short DimensionUnit() const;
+    void DimensionUnit(short);
+    
+    DG_AngularUnitFormat AngularUnit() const;
+    void AngularUnit(DG_AngularUnitFormat);
 
-    // 289
-    TextArrowFitType DimensionTextArrowFit = TextArrowFitType::BestFit;
+    short DecimalPlaces() const;
+    void DecimalPlaces(short);
 
-    // 340,Handle
-    unsigned long long TextStyleHandle;
-    // 341,Handle
-    unsigned long long LeaderArrow;
-    // 342, Handle
-    unsigned long long ArrowBlock;
-    // 343 Handle
-    unsigned long long DimArrow1;
-    // 344, Handle
-    unsigned long long DimArrow2;
+    short ToleranceDecimalPlaces() const;
+    void ToleranceDecimalPlaces(short);
 
+    DG_LinearUnitFormat AlternateUnitFormat() const;
+    void AlternateUnitFormat(DG_LinearUnitFormat);
 
-protected:
-    CPL::String AltMzs;
-    CPL::String Mzs;
-    double AltMzf;
-    double Mzf;
+    short AlternateUnitToleranceDecimalPlaces() const;
+    void AlternateUnitToleranceDecimalPlaces(short);
+    
+    double ScaleFactor() const;
+    void ScaleFactor(double);
+    
+    double ArrowSize() const;
+    void ArrowSize(double);
+
+    double ExtensionLineOffset() const;
+    void ExtensionLineOffset(double);
+    
+    double DimensionLineIncrement() const;
+    void DimensionLineIncrement(double);
+
+    double ExtensionLineExtension() const;
+    void ExtensionLineExtension(double);
+    
+    double Rounding() const;
+    void Rounding(double);
+
+    double DimensionLineExtension() const;
+    void DimensionLineExtension(double);
+    
+    double PlusTolerance() const;
+    void PlusTolerance(double);
+    
+    double MinusTolerance() const;
+    void MinusTolerance(double);
+
+    double FixedExtensionLineLength() const;
+    void FixedExtensionLineLength(double);
+
+    double JoggedRadiusDimensionTransverseSegmentAngle() const;
+    void JoggedRadiusDimensionTransverseSegmentAngle(double);
+    
+    DG_DimensionTextBackgroundFillMode TextBackgroundFillMode() const;
+    void TextBackgroundFillMode(DG_DimensionTextBackgroundFillMode);
+    
+    DG_Color TextBackgroundColor() const;
+    void TextBackgroundColor(const DG_Color &);
+    
+    DG_ZeroHandling AngularZeroHandling() const;
+    void AngularZeroHandling(DG_ZeroHandling);
+    
+    DG_ArcLengthSymbolPosition ArcLengthSymbolPosition() const;
+    void ArcLengthSymbolPosition(DG_ArcLengthSymbolPosition);
+    
+    double TextHeight() const;
+    void TextHeight(double);
+    
+    double CenterMarkSize() const;
+    void CenterMarkSize(double);
+    
+    double TickSize() const;
+    void TickSize(double);
+    
+    double AlternateUnitScaleFactor() const;
+    void AlternateUnitScaleFactor(double);
+    
+    double LinearScaleFactor() const;
+    void LinearScaleFactor(double);
+    
+    double TextVerticalPosition() const;
+    void TextVerticalPosition(double);
+    
+    double ToleranceScaleFactor() const;
+    void ToleranceScaleFactor(double);
+    
+    double DimensionLineGap() const;
+    void DimensionLineGap(double);
+    
+    double AlternateUnitRounding() const;
+    void AlternateUnitRounding(double);
+    
+    DG_Color DimensionLineColor() const;
+    void DimensionLineColor(const DG_Color &);
+    
+    DG_Color ExtensionLineColor() const;
+    void ExtensionLineColor(const DG_Color &);
+    
+    DG_Color TextColor() const;
+    void TextColor(const DG_Color &);
+    
+    DG_FractionFormat FractionFormat() const;
+    void FractionFormat(DG_FractionFormat);
+    
+    DG_LinearUnitFormat LinearUnitFormat() const;
+    void LinearUnitFormat(DG_LinearUnitFormat);
+    
+    char DecimalSeparator() const;
+    void DecimalSeparator(char);
+
+    DG_TextMovement TextMovement() const;
+    void TextMovement(DG_TextMovement);
+    
+    bool IsExtensionLineLengthFixed() const;
+    void IsExtensionLineLengthFixed(bool);
+    
+    DG_TextDirection TextDirection() const;
+    void TextDirection(DG_TextDirection);
+    
+    DG_LineweightType DimensionLineWeight() const;
+    void DimensionLineWeight(DG_LineweightType);
+    
+    DG_LineweightType ExtensionLineWeight() const;
+    void ExtensionLineWeight(DG_LineweightType);
+    
+    DG_TextArrowFitType DimensionTextArrowFit() const;
+    void DimensionTextArrowFit(DG_TextArrowFitType);
+    
+    DG_TextStylePtr Style() const;
+    void Style(TextStyle *);
+
+    DG_BlockRecordPtr LeaderArrow() const;
+    void LeaderArrow(DG_BlockRecord *);
+  
+    DG_BlockRecordPtr ArrowBlock() const;
+    void ArrowBlock(DG_BlockRecord *);  
+  
+    DG_BlockRecordPtr DimArrow1() const;
+    void DimArrow1(DG_BlockRecord *);  
+  
+    DG_BlockRecordPtr DimArrow2() const;
+    void DimArrow2(DG_BlockRecord *);  
 };
+CPL_SMARTER_PTR(DG_DimensionStyle)
 
 class LIBDWG_API DG_DimensionStylesTable : public DG_Table
 {
@@ -239,5 +288,6 @@ public:
 protected:
     std::vector<CPL::String> defaultEntries() const;
 };
+CPL_SMARTER_PTR(DG_DimensionStylesTable)
 
 }// namespace dwg

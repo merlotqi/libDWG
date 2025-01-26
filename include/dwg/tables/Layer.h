@@ -33,6 +33,10 @@ namespace dwg {
 class LIBDWG_API DG_Layer : public DG_TableEntry
 {
 public:
+    DG_Layer();
+
+    DG_Layer(const char *name);
+
     static constexpr auto DefaultName = "0";
     static CPL::SmarterPtr<DG_Layer> Default();
 
@@ -40,18 +44,31 @@ public:
     CPL::String ObjectName() const override;
     CPL::String SubclassMarker() const override;
 
-    DG_LayerFlags Flags;
-    DG_Color color;                  // 62, 420, 430
-    CPL::String LineTypeName;        // linetype Name
-    DG_LineType lineType;               // 6
-    bool PlotFlag;                   // 200
-    unsigned long long PlotStyleName;// 390
-    // Material* material; // 347 handle
-    bool IsOn;// Indicates if the Layer is visible in the model
+    DG_LayerFlags Flags() const;
+    void Flags(DG_LayerFlags);
 
-    DG_Layer();
-    DG_Layer(const char *name);
+    DG_Color Color() const;
+    void Color(const DG_Color &);
+
+    DG_LineTypePtr LineType() const;
+    void LineType(DG_LineType *);
+
+    bool PlotFlag() const;
+    void PlotFlag(bool);
+
+    DG_LineweightType LineWeight() const;
+    void LineWeight(LineweightType);
+    
+    unsigned long long PlotStyleName() const;
+    void PlotStyleName(unsigned long long);
+
+    DG_MaterialPtr Material() const;
+    void Material(DG_Material *);
+
+    bool IsOn() const;
+    void IsOn(bool);
 };
+CPL_SMARTER_PTR(DG_Layer)
 
 class LIBDWG_API DG_LayersTable : public DG_Table
 {

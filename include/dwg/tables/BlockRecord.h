@@ -29,6 +29,9 @@
 
 namespace dwg {
 
+class DG_Layout;
+CPL_SMARTER_PTR(DG_Layout)
+
 class LIBDWG_API DG_BlockRecord : public DG_TableEntry
 {
 public:
@@ -46,6 +49,30 @@ public:
     CPL::String ObjectName() const override;
 
     CPL::String SubclassMarker() const override;
+
+    DG_UnitsType Units() const;
+
+    void Units(DG_UnitsType);
+
+    DG_BlockTypeFlags Flags() const;
+
+    void Flags(DG_BlockTypeFlags);
+
+    bool IsExplodable() const;
+
+    void IsExplodable(bool);
+
+    bool CanScale() const;
+
+    void CanScale(bool);
+
+    std::vector<unsigned char> Preview() const;
+
+    void Preview(const std::vector<unsigned char> &);
+
+    DG_LayoutPtr Layout() const;
+
+    void Layout(DG_Layout *);
 };
 CPL_SMARTER_PTR(DG_BlockRecord)
 
