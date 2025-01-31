@@ -31,24 +31,24 @@ class LIBDWG_API DG_Scale : public DG_NonGraphicalObject
 {
 public:
     DG_Scale() = default;
-    DG_Scale(const char *name);
-    DG_Scale(const char *name, double paperUnits, double drawingUnits,
-          bool isUnitScale);
+    DG_Scale(const std::string &name);
+    DG_Scale(const std::string &name, double paperUnits, double drawingUnits,
+             bool isUnitScale);
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     double PaperUnits() const;
-    
+
     void PaperUnits(double);
-    
+
     double DrawingUnits() const;
 
     void DrawingUnits(double);
-    
+
     bool IsUnitScale() const;
 
     void IsUnitScale(bool);
@@ -61,6 +61,5 @@ public:
 
     XY ApplyTo(const XY &);
 };
-CPL_SMARTER_PTR(SortEntitiesTable)
 
 }// namespace dwg

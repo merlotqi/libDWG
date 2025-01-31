@@ -28,27 +28,32 @@
 
 namespace dwg {
 
-class HatchPattern
+class DG_HatchPattern
 {
 public:
-    HatchPattern();
-    static HatchPattern solid();
-
-
-    class Line
+    struct Line
     {
-    public:
-        double angle;// 53
-        XY basePoint;// 43, 44
-        XY offset;   // 45, 46
-        std::vector<double> dashLengths;
+        double Angle;
+        XY BasePoint;
+        XY Offset;
+        std::vector<double> DashLengths;
     };
 
-    CPL::String name;// 2
-    double angle;    // 53
+public:
+    DG_HatchPattern();
+    DG_HatchPattern(const std::string &name);
+    ~DG_HatchPattern();
 
-    double scale;
-    std::vector<HatchPattern::Line> lines;
+    static DG_HatchPattern *solid();
+
+    std::string Name() const;
+    void Name(const std::string &);
+
+    std::string Description() const;
+    void Description(const std::string &);
+
+    std::vector<DG_HatchPattern::Line> Lines() const;
+    void Lines(const std::vector<DG_HatchPattern::Line> &);
 };
 
 

@@ -33,7 +33,7 @@ class DG_AttributeEntity;
 class LIBDWG_API DG_AttributeDefinition : public DG_AttributeBase
 {
     // Private member to store the prompt string associated with the attribute definition.
-    CPL::String _prompt;
+    std::string _prompt;
 
 public:
     // Default constructor for DG_AttributeDefinition.
@@ -48,17 +48,16 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (DG_AttributeDefinition).
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeDefinition.
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     // Getter method to retrieve the prompt string.
-    CPL::String Prompt() const;
+    std::string Prompt() const;
 
     // Setter method to update the prompt string.
-    void Prompt(const char *);
+    void Prompt(const std::string &);
 };
-CPL_SMARTER_PTR(DG_AttributeDefinition)
 
 }// namespace dwg

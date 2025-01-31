@@ -23,10 +23,8 @@
 #pragma once
 
 #include <dwg/CadSummaryInfo.h>
-#include <dwg/DxfClass.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/header/CadHeader.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/ObjectDictionaryCollection.h>
 #include <dwg/tables/AppId.h>
@@ -42,44 +40,45 @@
 
 namespace dwg {
 
-class CadDocument : public IHandledCadObject
+class DG_CadHeader;
+
+class LIBDWG_API DG_CadDocument : public DG_IHandledCadObject
 {
 public:
-    CadDocument(bool createDefault);
+    DG_CadDocument(bool createDefault);
 
     unsigned long long Handle() const override;
-    CadHeader Header;
+    DG_CadHeader *Header;
     CadSummaryInfo SummaryInfo;
     DxfClassCollection Classes;
 
-    AppIdsTable AppIds;
-    BlockRecordsTable BlockRecords;
-    DimensionStylesTable DimensionStyles;
-    LayersTable Layers;
-    LineTypesTable LineTypes;
-    TextStylesTable TextStyles;
-    UCSTable UCSs;
-    ViewsTable Views;
-    VPortsTable VPorts;
+    DG_AppIdsTable AppIds;
+    DG_BlockRecordsTable BlockRecords;
+    DG_DimensionStylesTable DimensionStyles;
+    DG_LayersTable Layers;
+    DG_LineTypesTable LineTypes;
+    DG_TextStylesTable TextStyles;
+    DG_UCSTable UCSs;
+    DG_ViewsTable Views;
+    DG_VPortsTable VPorts;
 
-    ColorCollection Colors;
-    LayoutCollection Layouts;
-    GroupCollection Groups;
-    ScaleCollection Scales;
-    MLineStyleCollection MLineStyles;
-    ImageDefinitionCollection ImageDefinitions;
-    MLeaderStyleCollection MLeaderStyles;
+    DG_ColorCollection Colors;
+    DG_LayoutCollection Layouts;
+    DG_GroupCollection Groups;
+    DG_ScaleCollection Scales;
+    DG_MLineStyleCollection MLineStyles;
+    DG_ImageDefinitionCollection ImageDefinitions;
+    DG_MLeaderStyleCollection MLeaderStyles;
 
-    CadObjectCollection<Entity *> Entities;
-    BlockRecord &ModelSpace();
-    BlockRecord &PaperSpace();
+    DG_CadObjectCollection<Entity *> Entities;
+    DG_BlockRecord &ModelSpace();
+    DG_BlockRecord &PaperSpace();
 
-    CadDictionary _rootDictionary;
+    DG_CadDictionary _rootDictionary;
 
-    std::map<unsigned long long, IHandledCadObject *> _cadObjects;
+    std::map<unsigned long long, DG_IHandledCadObject *> _cadObjects;
 
     void CreateDefaults();
 };
-CPL_SMARTER_PTR(DG_CadDocument)
 
 }// namespace dwg

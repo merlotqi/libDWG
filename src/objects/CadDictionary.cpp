@@ -24,21 +24,21 @@
 
 namespace dwg {
 
-CPL::String CadDictionary::Root = "ROOT";
-CPL::String CadDictionary::AcadColor = "ACAD_COLOR";
-CPL::String CadDictionary::AcadGroup = "ACAD_GROUP";
-CPL::String CadDictionary::AcadLayout = "ACAD_LAYOUT";
-CPL::String CadDictionary::AcadMaterial = "ACAD_MATERIAL";
-CPL::String CadDictionary::AcadSortEnts = "ACAD_SORTENTS";
-CPL::String CadDictionary::AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
-CPL::String CadDictionary::AcadMLineStyle = "ACAD_MLINESTYLE";
-CPL::String CadDictionary::AcadTableStyle = "ACAD_TABLESTYLE";
-CPL::String CadDictionary::AcadPlotSettings = "ACAD_PLOTSETTINGS";
-CPL::String CadDictionary::VariableDictionary = "AcDbVariableDictionary";
-CPL::String CadDictionary::AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
-CPL::String CadDictionary::AcadScaleList = "ACAD_SCALELIST";
-CPL::String CadDictionary::AcadVisualStyle = "ACAD_VISUALSTYLE";
-CPL::String CadDictionary::AcadFieldList = "ACAD_FIELDLIST";
-CPL::String CadDictionary::AcadImageDict = "ACAD_IMAGE_DICT";
+std::string CadDictionary::Root = "ROOT";
+std::string CadDictionary::AcadColor = "ACAD_COLOR";
+std::string CadDictionary::AcadGroup = "ACAD_GROUP";
+std::string CadDictionary::AcadLayout = "ACAD_LAYOUT";
+std::string CadDictionary::AcadMaterial = "ACAD_MATERIAL";
+std::string CadDictionary::AcadSortEnts = "ACAD_SORTENTS";
+std::string CadDictionary::AcadMLeaderStyle = "ACAD_MLEADERSTYLE";
+std::string CadDictionary::AcadMLineStyle = "ACAD_MLINESTYLE";
+std::string CadDictionary::AcadTableStyle = "ACAD_TABLESTYLE";
+std::string CadDictionary::AcadPlotSettings = "ACAD_PLOTSETTINGS";
+std::string CadDictionary::VariableDictionary = "AcDbVariableDictionary";
+std::string CadDictionary::AcadPlotStyleName = "ACAD_PLOTSTYLENAME";
+std::string CadDictionary::AcadScaleList = "ACAD_SCALELIST";
+std::string CadDictionary::AcadVisualStyle = "ACAD_VISUALSTYLE";
+std::string CadDictionary::AcadFieldList = "ACAD_FIELDLIST";
+std::string CadDictionary::AcadImageDict = "ACAD_IMAGE_DICT";
 
-}
+}// namespace dwg

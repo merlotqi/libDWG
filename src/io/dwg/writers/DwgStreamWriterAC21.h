@@ -31,8 +31,8 @@ class DwgStreamWriterAC21 : public DwgStreamWriterAC18
 {
 public:
     DwgStreamWriterAC21(std::ostream *stream, Encoding encoding);
-    void WriteVariableText(const CPL::String &value) override;
-    void WriteTextUnicode(const CPL::String &value) override;
+    void WriteVariableText(const std::string &value) override;
+    void WriteTextUnicode(const std::string &value) override;
 };
 
 }// namespace io

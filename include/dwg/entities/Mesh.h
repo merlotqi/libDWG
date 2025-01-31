@@ -26,47 +26,38 @@
 
 namespace dwg {
 
-
-class Mesh : public DG_Entity
+class LIBDWG_API DG_Mesh : public DG_Entity
 {
 public:
-    Mesh();
-    virtual ~Mesh();
-
-    short version;       // 71
-    bool blendCrease;    // 72
-    int subdivisionLevel;// 91
-
-    std::vector<XYZ> vertices;// 92;10,20,30
-
-    /// @brief 93, count
-    /// 90
-    std::vector<std::vector<int>> faces;
-
     struct Edge
     {
         int Start;
         int End;
         double Crease;
-
-        Edge(int start, int end) : Start(start), End(end), Crease(0.0) {}
+        Edge(int start, int end);
     };
 
+public:
+    DG_Mesh();
+    virtual ~DG_Mesh();
 
-    std::vector<Mesh::Edge> edges;// 94, 90
+    short Version() const;
+    void Version(short);
 
-    //90	Count of sub-entity which property has been overridden
+    bool BlendCrease() const;
+    void BlendCrease(bool);
 
-    //91	Sub-entity marker
+    int SubdivisionLevel() const;
+    void SubdivisionLevel(int);
 
-    //92	Count of property was overridden
+    std::vector<XYZ> Vertices() const;
+    void Vertices(const std::vector<XYZ> &);
 
-    //90	Property type
-    //0 = Color
-    //1 = Material
-    //2 = Transparency
-    //3 = Material mapper
+    std::vector<std::vector<int>> Faces() const;
+    void Faces(const std::vector<std::vector<int>> &);
+
+    std::vector<DG_Mesh::Edge> Edges() const;
+    void Edges(const std::vector<DG_Mesh::Edge> &);
 };
-
 
 }// namespace dwg

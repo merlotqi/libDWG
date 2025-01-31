@@ -37,7 +37,7 @@ public:
 
 protected:
     CadReaderBase() = default;
-    CadReaderBase(const char *filename);
+    CadReaderBase(const std::string &filename);
     CadReaderBase(std::ifstream *stream);
 
 protected:

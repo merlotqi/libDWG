@@ -45,62 +45,62 @@ class LIBDWG_API DG_DimensionStyle : public DG_TableEntry
 {
 public:
     static constexpr auto DefaultName = "Standard";
-    static CPL::SmarterPtr<DG_DimensionStyle> Default();
+    static DG_DimensionStyle *Default();
 
 public:
     DG_DimensionStyle();
-    DG_DimensionStyle(const char *name);
+    DG_DimensionStyle(const std::string &name);
     ~DG_DimensionStyle();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
-    CPL::String PostFix() const;
-    void PostFix(const char *);
-    
-    CPL::String AlternateDimensioningSuffix() const;
-    void AlternateDimensioningSuffix(const char *);
-    
+    std::string PostFix() const;
+    void PostFix(const std::string &);
+
+    std::string AlternateDimensioningSuffix() const;
+    void AlternateDimensioningSuffix(const std::string &);
+
     bool GenerateTolerances() const;
     void GenerateTolerances(bool);
-    
+
     bool LimitsGeneration() const;
     void LimitsGeneration(bool);
-    
+
     bool TextInsideHorizontal() const;
     void TextInsideHorizontal(bool);
-    
+
     bool TextOutsideHorizontal() const;
     void TextOutsideHorizontal(bool);
-    
+
     bool SuppressFirstExtensionLine() const;
     void SuppressFirstExtensionLine(bool);
-    
+
     bool SuppressSecondExtensionLine() const;
     void SuppressSecondExtensionLine(bool);
 
     DG_DimensionTextVerticalAlignment TextVerticalAlignment() const;
     void TextVerticalAlignment(DG_DimensionTextVerticalAlignment);
-    
+
     DG_ZeroHandling ZeroHandling() const;
     void ZeroHandling(DG_ZeroHandling);
 
     bool AlternateUnitDimensioning() const;
     void AlternateUnitDimensioning(bool);
-    
+
     short AlternateUnitDecimalPlaces() const;
     void AlternateUnitDecimalPlaces(short);
 
     bool TextOutsideExtensions() const;
     void TextOutsideExtensions(bool);
-    
+
     bool SeparateArrowBlocks() const;
     void SeparateArrowBlocks(bool);
-    
+
     bool TextInsideExtensions() const;
     void TextInsideExtensions(bool);
-    
+
     bool SuppressOutsideExtensions() const;
     void SuppressOutsideExtensions(bool);
 
@@ -109,19 +109,19 @@ public:
 
     DG_DimensionTextHorizontalAlignment TextHorizontalAlignment() const;
     void TextHorizontalAlignment(DG_DimensionTextHorizontalAlignment);
-    
+
     bool SuppressFirstDimensionLine() const;
     void SuppressFirstDimensionLine(bool);
-    
+
     bool SuppressSecondDimensionLine() const;
     void SuppressSecondDimensionLine(bool);
-    
+
     DG_ToleranceAlignment ToleranceAlignment() const;
     void ToleranceAlignment(DG_ToleranceAlignment);
 
     DG_ZeroHandling ToleranceZeroHandling() const;
     void ToleranceZeroHandling(DG_ZeroHandling);
-    
+
     DG_ZeroHandling AlternateUnitZeroHandling() const;
     void AlternateUnitZeroHandling(DG_ZeroHandling);
 
@@ -136,7 +136,7 @@ public:
 
     short DimensionUnit() const;
     void DimensionUnit(short);
-    
+
     DG_AngularUnitFormat AngularUnit() const;
     void AngularUnit(DG_AngularUnitFormat);
 
@@ -151,31 +151,31 @@ public:
 
     short AlternateUnitToleranceDecimalPlaces() const;
     void AlternateUnitToleranceDecimalPlaces(short);
-    
+
     double ScaleFactor() const;
     void ScaleFactor(double);
-    
+
     double ArrowSize() const;
     void ArrowSize(double);
 
     double ExtensionLineOffset() const;
     void ExtensionLineOffset(double);
-    
+
     double DimensionLineIncrement() const;
     void DimensionLineIncrement(double);
 
     double ExtensionLineExtension() const;
     void ExtensionLineExtension(double);
-    
+
     double Rounding() const;
     void Rounding(double);
 
     double DimensionLineExtension() const;
     void DimensionLineExtension(double);
-    
+
     double PlusTolerance() const;
     void PlusTolerance(double);
-    
+
     double MinusTolerance() const;
     void MinusTolerance(double);
 
@@ -184,98 +184,97 @@ public:
 
     double JoggedRadiusDimensionTransverseSegmentAngle() const;
     void JoggedRadiusDimensionTransverseSegmentAngle(double);
-    
+
     DG_DimensionTextBackgroundFillMode TextBackgroundFillMode() const;
     void TextBackgroundFillMode(DG_DimensionTextBackgroundFillMode);
-    
+
     DG_Color TextBackgroundColor() const;
     void TextBackgroundColor(const DG_Color &);
-    
+
     DG_ZeroHandling AngularZeroHandling() const;
     void AngularZeroHandling(DG_ZeroHandling);
-    
+
     DG_ArcLengthSymbolPosition ArcLengthSymbolPosition() const;
     void ArcLengthSymbolPosition(DG_ArcLengthSymbolPosition);
-    
+
     double TextHeight() const;
     void TextHeight(double);
-    
+
     double CenterMarkSize() const;
     void CenterMarkSize(double);
-    
+
     double TickSize() const;
     void TickSize(double);
-    
+
     double AlternateUnitScaleFactor() const;
     void AlternateUnitScaleFactor(double);
-    
+
     double LinearScaleFactor() const;
     void LinearScaleFactor(double);
-    
+
     double TextVerticalPosition() const;
     void TextVerticalPosition(double);
-    
+
     double ToleranceScaleFactor() const;
     void ToleranceScaleFactor(double);
-    
+
     double DimensionLineGap() const;
     void DimensionLineGap(double);
-    
+
     double AlternateUnitRounding() const;
     void AlternateUnitRounding(double);
-    
+
     DG_Color DimensionLineColor() const;
     void DimensionLineColor(const DG_Color &);
-    
+
     DG_Color ExtensionLineColor() const;
     void ExtensionLineColor(const DG_Color &);
-    
+
     DG_Color TextColor() const;
     void TextColor(const DG_Color &);
-    
+
     DG_FractionFormat FractionFormat() const;
     void FractionFormat(DG_FractionFormat);
-    
+
     DG_LinearUnitFormat LinearUnitFormat() const;
     void LinearUnitFormat(DG_LinearUnitFormat);
-    
+
     char DecimalSeparator() const;
     void DecimalSeparator(char);
 
     DG_TextMovement TextMovement() const;
     void TextMovement(DG_TextMovement);
-    
+
     bool IsExtensionLineLengthFixed() const;
     void IsExtensionLineLengthFixed(bool);
-    
+
     DG_TextDirection TextDirection() const;
     void TextDirection(DG_TextDirection);
-    
+
     DG_LineweightType DimensionLineWeight() const;
     void DimensionLineWeight(DG_LineweightType);
-    
+
     DG_LineweightType ExtensionLineWeight() const;
     void ExtensionLineWeight(DG_LineweightType);
-    
+
     DG_TextArrowFitType DimensionTextArrowFit() const;
     void DimensionTextArrowFit(DG_TextArrowFitType);
-    
-    DG_TextStylePtr Style() const;
-    void Style(TextStyle *);
 
-    DG_BlockRecordPtr LeaderArrow() const;
+    DG_TextStyle *Style() const;
+    void Style(DG_TextStyle *);
+
+    DG_BlockRecord *LeaderArrow() const;
     void LeaderArrow(DG_BlockRecord *);
-  
-    DG_BlockRecordPtr ArrowBlock() const;
-    void ArrowBlock(DG_BlockRecord *);  
-  
-    DG_BlockRecordPtr DimArrow1() const;
-    void DimArrow1(DG_BlockRecord *);  
-  
-    DG_BlockRecordPtr DimArrow2() const;
-    void DimArrow2(DG_BlockRecord *);  
+
+    DG_BlockRecord *ArrowBlock() const;
+    void ArrowBlock(DG_BlockRecord *);
+
+    DG_BlockRecord *DimArrow1() const;
+    void DimArrow1(DG_BlockRecord *);
+
+    DG_BlockRecord *DimArrow2() const;
+    void DimArrow2(DG_BlockRecord *);
 };
-CPL_SMARTER_PTR(DG_DimensionStyle)
 
 class LIBDWG_API DG_DimensionStylesTable : public DG_Table
 {
@@ -283,11 +282,10 @@ public:
     DG_DimensionStylesTable();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const;
+    std::vector<std::string> defaultEntries() const;
 };
-CPL_SMARTER_PTR(DG_DimensionStylesTable)
 
 }// namespace dwg

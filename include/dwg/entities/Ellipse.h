@@ -51,10 +51,10 @@ public:
     DG_ObjectType ObjectType() const override;
 
     // Get the object name of the ellipse
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
     // Get the subclass marker of the ellipse
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     // Get the normal vector of the ellipse
     XYZ Normal() const;
@@ -98,6 +98,5 @@ public:
     // Set the end parameter of the ellipse
     void EndParameter(double);
 };
-CPL_SMARTER_PTR(DG_Ellipse)
 
 }// namespace dwg

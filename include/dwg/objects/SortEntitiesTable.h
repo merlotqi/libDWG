@@ -29,18 +29,16 @@
 namespace dwg {
 
 class DG_Entity;
-CPL_SMARTER_PTR(DG_Entity)
 class DG_BlockRecord;
-CPL_SMARTER_PTR(DG_BlockRecord)
 
-class LIBDWG_API SortEntitiesTable : public NonGraphicalObject
+class LIBDWG_API SortEntitiesTable : public DG_NonGraphicalObject
 {
 public:
     struct Sorter
     {
-        DG_EntityPtr Entity;
+        DG_Entity *Entity;
         unsigned long long Handle;
-        Sorter(Entity *entity, unsigned long long handle);
+        Sorter(DG_Entity *entity, unsigned long long handle);
     };
 
     static constexpr auto DictionaryEntryName = "ACAD_SORTENTS";
@@ -48,22 +46,21 @@ public:
 public:
     SortEntitiesTable();
 
-    SortEntitiesTable(DG_BlockRecord * owner);
+    SortEntitiesTable(DG_BlockRecord *owner);
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
-    DG_BlockRecordPtr BlockOwner() const;
+    DG_BlockRecord *BlockOwner() const;
 
     void BlockOwner(DG_BlockRecord *);
-    
+
     std::vector<Sorter> Sorters() const;
 
     void AddEntity(DG_Entity *, unsigned long long sorterHandle);
 };
-CPL_SMARTER_PTR(SortEntitiesTable)
 
 }// namespace dwg

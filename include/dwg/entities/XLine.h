@@ -42,10 +42,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (DG_XLine).
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker associated with DG_XLine.
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     // Getter for the first point of the DG_XLine.
     XYZ FirstPoint() const;
@@ -59,6 +59,5 @@ public:
     // Setter for the direction of the DG_XLine.
     void Direction(const XYZ &);
 };
-CPL_SMARTER_PTR(DG_XLine)
 
 }// namespace dwg

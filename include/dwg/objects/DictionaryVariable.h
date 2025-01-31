@@ -33,12 +33,11 @@ public:
     ~DG_DictionaryVariable();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
-    CPL::String Value;     // 1
+    std::string Value;     // 1
     int ObjectSchemaNumber;// 280
 };
-CPL_SMARTER_PTR(DG_DictionaryVariable)
 
 }// namespace dwg

@@ -24,16 +24,16 @@
 
 namespace dwg {
 
-struct PaperMargin
+struct DG_PaperMargin
 {
     double Left;
     double Bottom;
     double Right;
     double Top;
 
-    PaperMargin();
-    
-    PaperMargin(double left, double bottom, double right, double top);
+    DG_PaperMargin();
+
+    DG_PaperMargin(double left, double bottom, double right, double top);
 };
 
 }// namespace dwg

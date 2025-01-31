@@ -27,11 +27,11 @@ namespace dwg {
 
 BlockEnd::BlockEnd(BlockRecord *record) { _owner = record; }
 
-CPL::String BlockEnd::ObjectName() const { return DxfFileToken::EndBlock; }
+std::string BlockEnd::ObjectName() const { return DxfFileToken::EndBlock; }
 
-dwg::ObjectType BlockEnd::ObjectType() const { return dwg::ObjectType::ENDBLK; }
+DG_ObjectType BlockEnd::ObjectType() const { return DG_ObjectType::ENDBLK; }
 
-CPL::String BlockEnd::SubclassMarker() const
+std::string BlockEnd::SubclassMarker() const
 {
     return DxfSubclassMarker::BlockEnd;
 }

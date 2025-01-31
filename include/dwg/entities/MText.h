@@ -34,7 +34,6 @@
 namespace dwg {
 
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_MText : public DG_Entity
 {
@@ -51,7 +50,7 @@ class LIBDWG_API DG_MText : public DG_Entity
     double _backgroundScale;
     DG_AttachmentPointType _attachmentPoint;
     DG_DrawingDirectionType _drawingDirection;
-    DG_TextStyleWPtr _style;
+    DG_TextStyle *_style;
     DG_LineSpacingStyleType _lineSpacingStyle;
     DG_BackgroundFillFlags _backgroundFillFlags;
     DG_Color _backgroundColor;
@@ -80,10 +79,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     XYZ InsertPoint() const;
     void InsertPoint(const XYZ &);
@@ -106,10 +105,10 @@ public:
     DG_DrawingDirectionType DrawingDirection() const;
     void DrawingDirection(DG_DrawingDirectionType);
 
-    CPL::String Value() const;
-    void Value(const char *);
+    std::string Value() const;
+    void Value(const std::string &);
 
-    DG_TextStylePtr Style() const;
+    DG_TextStyle *Style() const;
     void Style(DG_TextStyle *);
 
     XYZ AlignmentPoint() const;
@@ -151,6 +150,5 @@ public:
 private:
     TextColumn _column;
 };
-CPL_SMARTER_PTR(DG_MText)
 
 }// namespace dwg

@@ -30,17 +30,14 @@
 namespace dwg {
 
 class DG_BlockRecord;
-CPL_SMARTER_PTR(DG_BlockRecord)
 class DG_DimensionStyle;
-CPL_SMARTER_PTR(DG_DimensionStyle)
 
 // The DG_Dimension class represents a dimension entity in a CAD system,
 // providing properties and methods for dimension management and manipulation.
 class LIBDWG_API DG_Dimension : public DG_Entity
 {
     unsigned char _version;// The version of the dimension entity
-    DG_BlockRecordWPtr
-            _block;// Pointer to the block associated with the dimension
+    DG_BlockRecord *_block;// Pointer to the block associated with the dimension
     XYZ _definitionPoint;// The definition point (e.g., the base point) of the dimension
     XYZ _textMiddlePoint;// The middle point of the dimension text
     XYZ _insertionPoint; // The insertion point of the dimension entity
@@ -53,10 +50,10 @@ class LIBDWG_API DG_Dimension : public DG_Entity
     double _lineSpacingFactor;// The factor affecting the line spacing for text
     bool _flipArrow1;    // Boolean indicating if the first arrow is flipped
     bool _flipArrow2;    // Boolean indicating if the second arrow is flipped
-    CPL::String _text;   // The text displayed in the dimension
+    std::string _text;   // The text displayed in the dimension
     double _textRotation;// Rotation angle for the dimension text
-    double _horizontalDirection;    // Horizontal direction for text alignment
-    DG_DimensionStyleWPtr _dimStyle;// Pointer to the associated dimension style
+    double _horizontalDirection; // Horizontal direction for text alignment
+    DG_DimensionStyle *_dimStyle;// Pointer to the associated dimension style
 
 public:
     // Default constructor for the DG_Dimension class
@@ -65,14 +62,14 @@ public:
 
 public:
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     // Getter and setter for the version of the dimension
     unsigned char Version() const;
     void Version(unsigned char value);
 
     // Getter and setter for the associated block record
-    DG_BlockRecordPtr Block() const;
+    DG_BlockRecord *Block() const;
     void Block(DG_BlockRecord *value);
 
     // Getter and setter for the definition point of the dimension
@@ -116,8 +113,8 @@ public:
     void FlipArrow2(bool value);
 
     // Getter and setter for the dimension text
-    const char *Text() const;
-    void Text(const char *value);
+    const std::string &Text() const;
+    void Text(const std::string &value);
 
     // Getter and setter for the text rotation angle
     double TextRotation() const;
@@ -128,7 +125,7 @@ public:
     void HorizontalDirection(double value);
 
     // Getter and setter for the associated dimension style
-    DG_DimensionStylePtr DimStyle() const;
+    DG_DimensionStyle *DimStyle() const;
     void DimStyle(DG_DimensionStyle *value);
 
     // Pure virtual method that must be implemented by derived classes to calculate the dimension measurement
@@ -139,6 +136,5 @@ public:
     bool IsTextUserDefinedLocation() const;
     void IsTextUserDefinedLocation(bool value);
 };
-CPL_SMARTER_PTR(DG_Dimension)
 
 }// namespace dwg

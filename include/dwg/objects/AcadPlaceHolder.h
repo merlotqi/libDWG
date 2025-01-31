@@ -30,15 +30,14 @@ class LIBDWG_API DG_AcdbPlaceHolder : public DG_NonGraphicalObject
 {
 public:
     DG_AcdbPlaceHolder();
-    
+
     ~DG_AcdbPlaceHolder();
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(DG_AcdbPlaceHolder)
 
 }// namespace dwg

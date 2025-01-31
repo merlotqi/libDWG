@@ -47,9 +47,9 @@ public:
 
     DG_ObjectType ObjectType() const;
 
-    CPL::String ObjectName() const;
+    std::string ObjectName() const;
 
-    CPL::String SubclassMarker() const;
+    std::string SubclassMarker() const;
 
     DG_LwPolylineFlags Flags() const;
     void Flags(DG_LwPolylineFlags);
@@ -72,6 +72,5 @@ public:
     bool IsClosed() const;
     void IsClosed(bool);
 };
-CPL_SMARTER_PTR(DG_LwPolyline)
 
 }// namespace dwg

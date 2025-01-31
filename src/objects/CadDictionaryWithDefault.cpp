@@ -24,29 +24,31 @@
 
 namespace dwg {
 
-    CadDictionaryWithDefault::CadDictionaryWithDefault() {}
+CadDictionaryWithDefault::CadDictionaryWithDefault() {}
 
-    dwg::ObjectType CadDictionaryWithDefault::ObjectType() const { return ObjectType::UNLISTED; }
-    CPL::String CadDictionaryWithDefault::ObjectName() const
-    {
-        return DxfFileToken::ObjectDictionaryWithDefault;
-    }
-    CPL::String CadDictionaryWithDefault::SubclassMarker() const
-    {
-        return DxfSubclassMarker::DictionaryWithDefault;
-    }
-
-    CadObjectPtr CadDictionaryWithDefault::DefaultEntry() const
-    {
-        if(!_default_entry.Expired())
-            return _default_entry.Lock();
-        
-        return NULL;
-    }
-
-    void CadDictionaryWithDefault::DefaultEntry(CadObject* obj)
-    {
-        _default_entry = obj;
-    }
-
+DG_ObjectType CadDictionaryWithDefault::ObjectType() const
+{
+    return ObjectType::UNLISTED;
 }
+std::string CadDictionaryWithDefault::ObjectName() const
+{
+    return DxfFileToken::ObjectDictionaryWithDefault;
+}
+std::string CadDictionaryWithDefault::SubclassMarker() const
+{
+    return DxfSubclassMarker::DictionaryWithDefault;
+}
+
+CadObjectPtr CadDictionaryWithDefault::DefaultEntry() const
+{
+    if (!_default_entry.Expired()) return _default_entry.Lock();
+
+    return NULL;
+}
+
+void CadDictionaryWithDefault::DefaultEntry(CadObject *obj)
+{
+    _default_entry = obj;
+}
+
+}// namespace dwg

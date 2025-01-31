@@ -31,33 +31,28 @@
 namespace dwg {
 
 class DG_Layer;
-CPL_SMARTER_PTR(DG_Layer)
-
 class DG_LineType;
-CPL_SMARTER_PTR(DG_LineType)
-
 class DG_BookColor;
-CPL_SMARTER_PTR(DG_BookColor)
 
 class LIBDWG_API DG_Entity : public DG_CadObject
 {
-    DG_LayerWPtr _layer;
+    DG_Layer *_layer;
     DG_Color _color;
     DG_LineweightType _lineweight;
     double _linetypeScale;
     bool _isInvisible;
     DG_Transparency _transparency;
-    DG_LineTypeWPtr _linetype;
-    DG_BookColorWPtr _bookColor;
+    DG_LineType *_linetype;
+    DG_BookColor *_bookColor;
 
 public:
     DG_Entity();
 
     virtual ~DG_Entity();
 
-    CPL::String SubclassMarker() const;
+    std::string SubclassMarker() const;
 
-    virtual DG_LayerPtr Layer() const;
+    virtual DG_Layer *Layer() const;
 
     virtual void Layer(DG_Layer *);
 
@@ -81,12 +76,11 @@ public:
 
     virtual void Transparency(DG_Transparency);
 
-    virtual DG_LineTypePtr LineType() const;
+    virtual DG_LineType *LineType() const;
 
     virtual void LineType(DG_LineType *) const;
 
     virtual void MatchProperties(DG_Entity *entity);
 };
-CPL_SMARTER_PTR(DG_Entity)
 
 }// namespace dwg

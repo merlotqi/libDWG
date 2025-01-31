@@ -35,21 +35,24 @@
 
 namespace dwg {
 
+class DG_VisualStyle;
+class DG_USC;
+
 class LIBDWG_API DG_VPort : public DG_TableEntry
 {
 public:
     DG_VPort();
-    DG_VPort(const char *name);
+    DG_VPort(const std::string &name);
 
     static constexpr auto DefaultName = "*Active";
-    
-    static CPL::SmarterPtr<DG_VPort> Default();
+
+    static DG_VPort *Default();
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
-    
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+
+    std::string SubclassMarker() const override;
 
     XY BottomLeft() const;
     void BottomLeft(const XY &);
@@ -129,12 +132,12 @@ public:
     XYZ YAxis() const;
     void YAxis(const XYZ &);
 
-    DG_UCSPtr NamedUcs() const;
+    DG_UCS *NamedUcs() const;
     void NamedUcs(DG_UCS *);
 
-    DG_UCSPtr BaseUcs() const;
-    void BaseUcs(BaseUcs *);
-    
+    DG_UCS *BaseUcs() const;
+    void BaseUcs(DG_UCS *);
+
     DG_OrthographicType OrthographicType() const;
     void OrthographicType(DG_OrthographicType);
 
@@ -143,13 +146,13 @@ public:
 
     DG_GridFlags GridFlags() const;
     void GridFlags(DG_GridFlags);
-    
+
     short MinorGridLinesPerMajorGridLine() const;
     void MinorGridLinesPerMajorGridLine(short);
 
-    DG_VisualStylePtr VisualStyle() const;
+    DG_VisualStyle *VisualStyle() const;
     void VisualStyle(DG_VisualStyle *);
-    
+
     bool UseDefaultLighting() const;
     void UseDefaultLighting(bool);
 
@@ -165,7 +168,6 @@ public:
     DG_Color AmbientColor() const;
     void AmbientColor(const DG_Color &);
 };
-CPL_SMARTER_PTR(DG_VPort)
 
 
 class LIBDWG_API DG_VPortsTable : public DG_Table
@@ -174,11 +176,10 @@ public:
     DG_VPortsTable();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const override;
+    std::vector<std::string> defaultEntries() const override;
 };
-CPL_SMARTER_PTR(DG_VPortsTable)
 
 }// namespace dwg

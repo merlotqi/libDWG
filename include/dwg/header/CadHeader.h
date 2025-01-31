@@ -58,17 +58,12 @@
 namespace dwg {
 
 class DG_UCS;
-CPL_SMARTER_PTR(DG_UCS);
 class DG_Layer;
-CPL_SMARTER_PTR(DG_Layer);
 class DG_LineType;
-CPL_SMARTER_PTR(DG_LineType);
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle);
 class DG_DimensionStyle;
-CPL_SMARTER_PTR(DG_DimensionStyle);
-
 class DG_CadDocument;
+
 class DG_CadHeaderPrivate;
 class LIBDWG_API DG_CadHeader : public CPL::RefObject
 {
@@ -79,8 +74,8 @@ public:
     DG_CadHeader(DG_CadDocument *document);
     DG_CadHeader(DG_ACadVersion version);
 
-    CPL::String VersionString() const;
-    void VersionString(const char *);
+    std::string VersionString() const;
+    void VersionString(const std::string &);
 
     DG_ACadVersion Version() const;
     void Version(DG_ACadVersion);
@@ -88,11 +83,11 @@ public:
     short MaintenanceVersion() const;
     void MaintenanceVersion(short);
 
-    CPL::String CodePage() const;
-    void CodePage(const char *);
+    std::string CodePage() const;
+    void CodePage(const std::string &);
 
-    CPL::String LastSavedBy() const;
-    void LastSavedBy(const char *);
+    std::string LastSavedBy() const;
+    void LastSavedBy(const std::string &);
 
     bool AssociatedDimensions() const;
     void AssociatedDimensions(bool);
@@ -253,17 +248,17 @@ public:
     double TextHeightDefault() const;
     void TextHeightDefault(double);
 
-    CPL::String TextStyleName() const;
-    void TextStyleName(const char *);
+    std::string TextStyleName() const;
+    void TextStyleName(const std::string &);
 
-    CPL::String CurrentLayerName() const;
-    void CurrentLayerName(const char *);
+    std::string CurrentLayerName() const;
+    void CurrentLayerName(const std::string &);
 
-    CPL::String CurrentLineTypeName() const;
-    void CurrentLineTypeName(const char *);
+    std::string CurrentLineTypeName() const;
+    void CurrentLineTypeName(const std::string &);
 
-    CPL::String MultiLineStyleName() const;
-    void MultiLineStyleName(const char *);
+    std::string MultiLineStyleName() const;
+    void MultiLineStyleName(const std::string &);
 
     double TraceWidthDefault() const;
     void TraceWidthDefault(double);
@@ -322,8 +317,8 @@ public:
     double CurrentEntityLinetypeScale() const;
     void CurrentEntityLinetypeScale(double);
 
-    CPL::String MenuFileName() const;
-    void MenuFileName(const char *);
+    std::string MenuFileName() const;
+    void MenuFileName(const std::string &);
 
     unsigned long long HandleSeed() const;
     void HandleSeed(unsigned long long);
@@ -340,11 +335,11 @@ public:
     CPL::DateTime UniversalUpdateDateTime() const;
     void UniversalUpdateDateTime(CPL::DateTime);
 
-    CPL::Timespan TotalEditingTime() const;
-    void TotalEditingTime(CPL::Timespan);
+    CPL::TimeSpan TotalEditingTime() const;
+    void TotalEditingTime(CPL::TimeSpan);
 
-    CPL::Timespan UserElapsedTimeSpan() const;
-    void UserElapsedTimeSpan(CPL::Timespan);
+    CPL::TimeSpan UserElapsedTimeSpan() const;
+    void UserElapsedTimeSpan(CPL::TimeSpan);
 
     DG_Color CurrentEntityColor() const;
     void CurrentEntityColor(const DG_Color &);
@@ -370,11 +365,11 @@ public:
     double PaperSpaceElevation() const;
     void PaperSpaceElevation(double);
 
-    CPL::String PaperSpaceBaseName() const;
-    void PaperSpaceBaseName(const char *);
+    std::string PaperSpaceBaseName() const;
+    void PaperSpaceBaseName(const std::string &);
 
-    CPL::String PaperSpaceName() const;
-    void PaperSpaceName(const char *);
+    std::string PaperSpaceName() const;
+    void PaperSpaceName(const std::string &);
 
     XYZ PaperSpaceUcsOrigin() const;
     void PaperSpaceUcsOrigin(const XYZ &);
@@ -436,11 +431,11 @@ public:
     XY ModelSpaceLimitsMax() const;
     void ModelSpaceLimitsMax(const XY &);
 
-    CPL::String UcsBaseName() const;
-    void UcsBaseName(const char *);
+    std::string UcsBaseName() const;
+    void UcsBaseName(const std::string &);
 
-    CPL::String UcsName() const;
-    void UcsName(const char *);
+    std::string UcsName() const;
+    void UcsName(const std::string &);
 
     double Elevation() const;
     void Elevation(double);
@@ -454,17 +449,17 @@ public:
     XYZ ModelSpaceYAxis() const;
     void ModelSpaceYAxis(const XYZ &);
 
-    CPL::String DimensionBlockName() const;
-    void DimensionBlockName(const char *);
+    std::string DimensionBlockName() const;
+    void DimensionBlockName(const std::string &);
 
-    CPL::String ArrowBlockName() const;
-    void ArrowBlockName(const char *);
+    std::string ArrowBlockName() const;
+    void ArrowBlockName(const std::string &);
 
-    CPL::String DimensionBlockNameFirst() const;
-    void DimensionBlockNameFirst(const char *);
+    std::string DimensionBlockNameFirst() const;
+    void DimensionBlockNameFirst(const std::string &);
 
-    CPL::String DimensionBlockNameSecond() const;
-    void DimensionBlockNameSecond(const char *);
+    std::string DimensionBlockNameSecond() const;
+    void DimensionBlockNameSecond(const std::string &);
 
     short StackedTextAlignment() const;
     void StackedTextAlignment(short);
@@ -472,8 +467,8 @@ public:
     short StackedTextSizePercentage() const;
     void StackedTextSizePercentage(short);
 
-    CPL::String HyperLinkBase() const;
-    void HyperLinkBase(const char *);
+    std::string HyperLinkBase() const;
+    void HyperLinkBase(const std::string &);
 
     DG_LineweightType CurrentEntityLineWeight() const;
     void CurrentEntityLineWeight(DG_LineweightType);
@@ -505,11 +500,11 @@ public:
     DG_EntityPlotStyleType CurrentEntityPlotStyle() const;
     void CurrentEntityPlotStyle(DG_EntityPlotStyleType);
 
-    CPL::String FingerPrintGuid() const;
-    void FingerPrintGuid(const char *);
+    std::string FingerPrintGuid() const;
+    void FingerPrintGuid(const std::string &);
 
-    CPL::String VersionGuid() const;
-    void VersionGuid(const char *);
+    std::string VersionGuid() const;
+    void VersionGuid(const std::string &);
 
     DG_ObjectSortingFlags EntitySortingFlags() const;
     void EntitySortingFlags(DG_ObjectSortingFlags);
@@ -541,8 +536,8 @@ public:
     unsigned char IntersectionDisplay() const;
     void IntersectionDisplay(unsigned char);
 
-    CPL::String ProjectName() const;
-    void ProjectName(const char *);
+    std::string ProjectName() const;
+    void ProjectName(const std::string &);
 
     bool CameraDisplayObjects() const;
     void CameraDisplayObjects(bool);
@@ -619,14 +614,14 @@ public:
     double ShadowPlaneLocation() const;
     void ShadowPlaneLocation(double);
 
-    CPL::String StyleSheetName() const;
-    void StyleSheetName(const char *);
+    std::string StyleSheetName() const;
+    void StyleSheetName(const std::string &);
 
-    CPL::String DimensionTextStyleName() const;
-    void DimensionTextStyleName(const char *);
+    std::string DimensionTextStyleName() const;
+    void DimensionTextStyleName(const std::string &);
 
-    CPL::String DimensionStyleOverridesName() const;
-    void DimensionStyleOverridesName(const char *);
+    std::string DimensionStyleOverridesName() const;
+    void DimensionStyleOverridesName(const std::string &);
 
     short DimensionAngularDimensionDecimalPlaces() const;
     void DimensionAngularDimensionDecimalPlaces(short);
@@ -713,8 +708,8 @@ public:
     double DimensionAlternateUnitRounding() const;
     void DimensionAlternateUnitRounding(double);
 
-    CPL::String DimensionAlternateDimensioningSuffix() const;
-    void DimensionAlternateDimensioningSuffix(const char *);
+    std::string DimensionAlternateDimensioningSuffix() const;
+    void DimensionAlternateDimensioningSuffix(const std::string &);
 
     double DimensionArrowSize() const;
     void DimensionArrowSize(double);
@@ -782,8 +777,8 @@ public:
     DG_LineweightType ExtensionLineWeight() const;
     void ExtensionLineWeight(DG_LineweightType);
 
-    CPL::String DimensionPostFix() const;
-    void DimensionPostFix(const char *);
+    std::string DimensionPostFix() const;
+    void DimensionPostFix(const std::string &);
 
     double DimensionRounding() const;
     void DimensionRounding(double);
@@ -836,51 +831,50 @@ public:
     double DimensionAltMzf() const;
     void DimensionAltMzf(double);
 
-    CPL::String DimensionAltMzs() const;
-    void DimensionAltMzs(const char *);
+    std::string DimensionAltMzs() const;
+    void DimensionAltMzs(const std::string &);
 
     double DimensionMzf() const;
     void DimensionMzf(double);
 
-    CPL::String DimensionMzs() const;
-    void DimensionMzs(const char *);
+    std::string DimensionMzs() const;
+    void DimensionMzs(const std::string &);
 
-    CPL::String DimensionLineType() const;
-    void DimensionLineType(const char *);
+    std::string DimensionLineType() const;
+    void DimensionLineType(const std::string &);
 
-    CPL::String DimensionTex1() const;
-    void DimensionTex1(const char *);
+    std::string DimensionTex1() const;
+    void DimensionTex1(const std::string &);
 
-    CPL::String DimensionTex2() const;
-    void DimensionTex2(const char *);
+    std::string DimensionTex2() const;
+    void DimensionTex2(const std::string &);
 
-    DG_LayerPtr CurrentLayer() const;
+    DG_Layer *CurrentLayer() const;
     void CurrentLayer(DG_Layer *);
 
-    DG_LineTypePtr CurrentLineType() const;
+    DG_LineType *CurrentLineType() const;
     void CurrentLineType(DG_LineType *);
 
-    DG_TextStylePtr CurrentTextStyle() const;
+    DG_TextStyle *CurrentTextStyle() const;
     void TextStyle(DG_TextStyle *);
 
-    DG_TextStylePtr DimensionTextStyle() const;
+    DG_TextStyle *DimensionTextStyle() const;
     void DimensionTextStyle(DG_TextStyle *);
 
-    DG_DimensionStylePtr DimensionStyleOverrides() const;
+    DG_DimensionStyle *DimensionStyleOverrides() const;
     void DimensionStyleOverrides(DG_DimensionStyle *);
 
-    DG_UCSPtr ModelSpaceUcs() const;
+    DG_UCS *ModelSpaceUcs() const;
     void ModelSpaceUcs(DG_UCS *);
 
-    DG_UCSPtr ModelSpaceUcsBase() const;
+    DG_UCS *ModelSpaceUcsBase() const;
     void ModelSpaceUcsBase(DG_UCS *);
 
-    DG_UCSPtr PaperSpaceUcs() const;
+    DG_UCS *PaperSpaceUcs() const;
     void PaperSpaceUcs(DG_UCS *);
 
-    DG_UCSPtr PaperSpaceUcsBase() const;
+    DG_UCS *PaperSpaceUcsBase() const;
     void PaperSpaceUcsBase(DG_UCS *);
 };
-CPL_SMARTER_PTR(DG_CadHeader)
 
 }// namespace dwg

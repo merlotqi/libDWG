@@ -29,35 +29,33 @@ namespace dwg {
 class LIBDWG_API DG_AppId : public DG_TableEntry
 {
 public:
-    DG_AppId(const char *name);
-    
+    DG_AppId(const std::string &name);
+
     ~DG_AppId();
 
     DG_ObjectType ObjectType() const override;
-    
-    CPL::String ObjectName() const override;
-    
-    CPL::String SubclassMarker() const override;
+
+    std::string ObjectName() const override;
+
+    std::string SubclassMarker() const override;
 
 public:
-    static CPL::String DefaultName;
+    static std::string DefaultName;
 
-    static CPL::SmarterPtr<DG_AppId> Default;
+    static DG_AppId *Default();
 };
-CPL_SMARTER_PTR(DG_AppId)
 
 class LIBDWG_API DG_AppIdsTable : public DG_Table
 {
 public:
     DG_AppIdsTable();
-    
+
     DG_ObjectType ObjectType() const override;
-    
-    CPL::String ObjectName() const override;
+
+    std::string ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const override;
+    std::vector<std::string> defaultEntries() const override;
 };
-CPL_SMARTER_PTR(DG_AppIdsTable)
 
 }// namespace dwg

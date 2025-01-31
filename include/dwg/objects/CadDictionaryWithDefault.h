@@ -28,18 +28,17 @@ namespace dwg {
 
 class LIBDWG_API DG_CadDictionaryWithDefault : public DG_CadDictionary
 {
-    DG_CadObjectWPtr _default_entry;
+    DG_CadObject *_default_entry;
 
 public:
     DG_CadDictionaryWithDefault();
 
     DG_ObjectType ObjectType() const;
-    CPL::String ObjectName() const;
-    CPL::String SubclassMarker() const;
+    std::string ObjectName() const;
+    std::string SubclassMarker() const;
 
-    DG_CadObjectPtr DefaultEntry() const;
+    DG_CadObject *DefaultEntry() const;
     void DefaultEntry(DG_CadObject *);
 };
-CPL_SMARTER_PTR(DG_CadDictionaryWithDefault)
 
 }// namespace dwg

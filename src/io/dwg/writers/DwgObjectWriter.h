@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/io/dwg/DwgSectionIO.h>
-#include <dwg/CadDocument.h>
 #include <base.h>
+#include <dwg/CadDocument.h>
+#include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/tables/TableEntry.h>
 #include <map>
 
@@ -46,7 +46,10 @@ public:
     }
 
     void Write();
-    CPL::String SectionName() const override { return DwgSectionDefinition::AcDbObjects; }
+    std::string SectionName() const override
+    {
+        return DwgSectionDefinition::AcDbObjects;
+    }
 
 private:
     void writeLTypeControlObject();

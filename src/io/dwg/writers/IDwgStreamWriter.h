@@ -22,12 +22,12 @@
 
 #pragma once
 
-#include <dwg/IHandledCadObject.h>
-#include <dwg/Transparency.h>
-#include <dwg/DwgReferenceType.h>
-#include <dwg/ObjectType.h>
-#include <dwg/Color.h>
 #include <base.h>
+#include <dwg/Color.h>
+#include <dwg/DwgReferenceType.h>
+#include <dwg/IHandledCadObject.h>
+#include <dwg/ObjectType.h>
+#include <dwg/Transparency.h>
 
 #include <iostream>
 #include <string>
@@ -54,14 +54,14 @@ public:
     virtual void WriteBitDouble(double value) = 0;
     virtual void WriteBitLong(int value) = 0;
     virtual void WriteBitLongLong(long long value) = 0;
-    virtual void WriteVariableText(const CPL::String &value) = 0;
-    virtual void WriteTextUnicode(const CPL::String &value) = 0;
+    virtual void WriteVariableText(const std::string &value) = 0;
+    virtual void WriteTextUnicode(const std::string &value) = 0;
     virtual void WriteBit(bool value) = 0;
     virtual void Write2Bits(unsigned char value) = 0;
     virtual void WriteBitShort(short value) = 0;
     virtual void WriteDateTime(DateTime value) = 0;
     virtual void Write8BitJulianDate(DateTime value) = 0;
-    virtual void WriteTimeSpan(Timespan value) = 0;
+    virtual void WriteTimeSpan(TimeSpan value) = 0;
     virtual void WriteCmColor(Color value) = 0;
     virtual void WriteEnColor(Color color, Transparency transparency) = 0;
     virtual void WriteEnColor(Color color, Transparency transparency,

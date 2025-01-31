@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include "IDwgStreamWriter.h"
 #include "DwgStream.h"
+#include "IDwgStreamWriter.h"
 #include <base.h>
 
 namespace dwg {
@@ -33,10 +33,10 @@ namespace io {
 class DwgStreamWriterBase : public OutputStream, IDwgStreamWriter
 {
 protected:
-    dwg::Encoding _encoding;
+    DG_Encoding _encoding;
 
 public:
-    DwgStreamWriterBase(std::ostream *stream, dwg::Encoding encoding)
+    DwgStreamWriterBase(std::ostream *stream, DG_Encoding encoding)
         : OutputStream(stream, false, false)
     {
         _encoding = encoding;
@@ -44,10 +44,10 @@ public:
 
     static IDwgStreamWriter *GetStreamWriter(ACadVersion version,
                                              std::ostream *stream,
-                                             dwg::Encoding encoding);
+                                             DG_Encoding encoding);
     static IDwgStreamWriter *GetMergedWriter(ACadVersion version,
                                              std::ostream *stream,
-                                             dwg::Encoding encoding);
+                                             DG_Encoding encoding);
     void Write(int value);
     virtual void WriteObjectType(short value) override;
     void WriteObjectType(ObjectType value) override;
@@ -59,13 +59,13 @@ public:
     void WriteBitDouble(double value) override;
     void WriteBitLong(int value) override;
     void WriteBitLongLong(long long value) override;
-    virtual void WriteVariableText(const CPL::String &value) override;
-    virtual void WriteTextUnicode(const CPL::String &value) override;
+    virtual void WriteVariableText(const std::string &value) override;
+    virtual void WriteTextUnicode(const std::string &value) override;
     void Write2Bits(unsigned char value) override;
     void WriteBit(bool value) override;
     void WriteByte(unsigned char value) override;
     void WriteDateTime(DateTime value) override;
-    void WriteTimeSpan(Timespan value) override;
+    void WriteTimeSpan(TimeSpan value) override;
     void Write8BitJulianDate(DateTime value) override;
     virtual void WriteCmColor(Color color) override;
     virtual void WriteEnColor(Color color, Transparency transparency) override;

@@ -25,24 +25,26 @@
 #include <dwg/Color.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/tables/LayerFlags.h>
-#include <dwg/tables/LineType.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
+
+class DG_Material;
+class DG_LineType;
 
 class LIBDWG_API DG_Layer : public DG_TableEntry
 {
 public:
     DG_Layer();
 
-    DG_Layer(const char *name);
+    DG_Layer(const std::string &name);
 
     static constexpr auto DefaultName = "0";
-    static CPL::SmarterPtr<DG_Layer> Default();
+    static DG_Layer *Default();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
     DG_LayerFlags Flags() const;
     void Flags(DG_LayerFlags);
@@ -50,35 +52,34 @@ public:
     DG_Color Color() const;
     void Color(const DG_Color &);
 
-    DG_LineTypePtr LineType() const;
+    DG_LineType *LineType() const;
     void LineType(DG_LineType *);
 
     bool PlotFlag() const;
     void PlotFlag(bool);
 
     DG_LineweightType LineWeight() const;
-    void LineWeight(LineweightType);
-    
+    void LineWeight(DG_LineweightType);
+
     unsigned long long PlotStyleName() const;
     void PlotStyleName(unsigned long long);
 
-    DG_MaterialPtr Material() const;
+    DG_Material *Material() const;
     void Material(DG_Material *);
 
     bool IsOn() const;
     void IsOn(bool);
 };
-CPL_SMARTER_PTR(DG_Layer)
 
 class LIBDWG_API DG_LayersTable : public DG_Table
 {
 public:
     DG_LayersTable() = default;
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
     DG_ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const override;
+    std::vector<std::string> defaultEntries() const override;
 };
 
 }// namespace dwg

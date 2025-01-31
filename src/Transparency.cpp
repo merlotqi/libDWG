@@ -20,32 +20,32 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <cpl_ports.h>
 #include <dwg/Transparency.h>
 #include <stdexcept>
 #include <vector>
-#include <dwg/EndianConverter.h>
 
 namespace dwg {
 
-Transparency Transparency::ByLayer = Transparency(-1);
+DG_Transparency DG_Transparency::ByLayer = DG_Transparency(-1);
 
-Transparency Transparency::ByBlock = Transparency(100);
+DG_Transparency DG_Transparency::ByBlock = DG_Transparency(100);
 
-Transparency Transparency::Opaque = Transparency(0);
+DG_Transparency DG_Transparency::Opaque = DG_Transparency(0);
 
-Transparency::Transparency(short value)
+DG_Transparency::DG_Transparency(short value)
 {
     _value = -1;
     Value(value);
 }
 
-bool Transparency::IsByLayer() const { return _value == -1; }
+bool DG_Transparency::IsByLayer() const { return _value == -1; }
 
-bool Transparency::IsByBlock() const { return _value == 100; }
+bool DG_Transparency::IsByBlock() const { return _value == 100; }
 
-short Transparency::Value() const {return _value;}
+short DG_Transparency::Value() const { return _value; }
 
-void Transparency::Value(short value)
+void DG_Transparency::Value(short value)
 {
     if (value == -1) _value = value;
 
@@ -53,36 +53,38 @@ void Transparency::Value(short value)
 
     if (value < 0 || value > 90)
         throw std::invalid_argument(
-                "Transparency must be in range from 0 to 90.");
+                "DG_Transparency must be in range from 0 to 90.");
 
     _value = value;
 }
 
-int Transparency::ToAlphaValue(Transparency transparency)
+int DG_Transparency::ToAlphaValue(DG_Transparency transparency)
 {
     unsigned char alpha =
             (unsigned char) (255 * (100 - transparency.Value()) / 100.0);
     std::vector<unsigned char> bytes =
-            transparency.IsByBlock() ? {0, 0, 0, 1} : {alpha, 0, 0, 2};
+            transparency.IsByBlock()
+                    ? std::vector<unsigned char>{0, 0, 0, 1}
+                    : std::vector<unsigned char>{alpha, 0, 0, 2};
 
-    return LittleEndianConverter::Instance()->ToInt32(&bytes[0]);
+    return CPL::LittleEndianConverter::Instance()->ToInt32(&bytes[0]);
 }
 
-Transparency Transparency::FromAlphaValue(int value)
+DG_Transparency DG_Transparency::FromAlphaValue(int value)
 {
     std::vector<unsigned char> bytes =
-            LittleEndianConverter::Instance()->GetBytes(value);
+            CPL::LittleEndianConverter::Instance()->GetBytes(value);
     short alpha = (short) (100 - (bytes[0] / 255.0) * 100);
 
-    if (alpha == -1) { return Transparency::ByLayer; }
+    if (alpha == -1) { return DG_Transparency::ByLayer; }
 
     if (alpha == 100) { return ByBlock; }
 
-    if (alpha < 0) { return Transparency(0); }
+    if (alpha < 0) { return DG_Transparency(0); }
 
-    if (alpha > 90) { return Transparency(90); }
+    if (alpha > 90) { return DG_Transparency(90); }
 
-    return Transparency(alpha);
+    return DG_Transparency(alpha);
 }
 
 }// namespace dwg

@@ -46,10 +46,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     // Getter and setter for the first point defining the angle
     XYZ FirstPoint() const;
@@ -70,6 +70,5 @@ public:
     // Override the Measurement method to calculate the angular dimension between the two lines
     virtual double Measurement() const override;
 };
-CPL_SMARTER_PTR(DG_DimensionAngular2Line)
 
 }// namespace dwg

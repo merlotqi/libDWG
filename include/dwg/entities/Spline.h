@@ -55,10 +55,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     XYZ Normal() const;
     void Normal(const XYZ &);
@@ -103,6 +103,5 @@ protected:
     DG_KnotParameterization KnotParameterization() const;
     void KnotParameterization(DG_KnotParameterization);
 };
-CPL_SMARTER_PTR(DG_Spline)
 
 }// namespace dwg

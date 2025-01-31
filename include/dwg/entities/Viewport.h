@@ -28,14 +28,13 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/LightingType.h>
 #include <dwg/entities/ViewportStatusFlags.h>
+#include <dwg/objects/ShadePlotMode.h>
 
 namespace dwg {
 
 class DG_Layer;
-CPL_SMARTER_PTR(DG_Layer)
-
 class DG_Scale;
-CPL_SMARTER_PTR(DG_Scale)
+class DG_VisualStyle;
 
 class LIBDWG_API DG_Viewport : public DG_Entity
 {
@@ -53,10 +52,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     XYZ Center() const;
     void Center(const XYZ &);
@@ -110,17 +109,17 @@ public:
     short CircleZoomPercent() const;
     void CircleZoomPercent(short);
 
-    std::vector<DG_LayerPtr> FrozenLayers() const;
-    void FrozenLayers(const std::vector<DG_LayerPtr> &);
+    std::vector<DG_Layer *> FrozenLayers() const;
+    void FrozenLayers(const std::vector<DG_Layer *> &);
 
     DG_ViewportStatusFlags Status() const;
     void Status(DG_ViewportStatusFlags);
 
-    CPL::SmarterPtr<DG_Entity> Boundary() const;
+    DG_Entity* Boundary() const;
     void Boundary(DG_Entity *);
 
-    CPL::String StyleSheetName() const;
-    void StyleSheetName(const char *);
+    std::string StyleSheetName() const;
+    void StyleSheetName(const std::string &);
 
     DG_RenderMode RenderMode() const;
     void RenderMode(DG_RenderMode);
@@ -152,8 +151,8 @@ public:
     short MajorGridLineFrequency() const;
     void MajorGridLineFrequency(short);
 
-    DG_VisualStyle VisualStyle() const;
-    void VisualStyle(DG_VisualStyle);
+    DG_VisualStyle *VisualStyle() const;
+    void VisualStyle(DG_VisualStyle *);
 
     bool UseDefaultLighting() const;
     void UseDefaultLighting(bool);
@@ -170,13 +169,12 @@ public:
     DG_Color AmbientLightColor() const;
     void AmbientLightColor(const DG_Color &);
 
-    DG_ScalePtr Scale() const;
+    DG_Scale *Scale() const;
     void Scale(DG_Scale *);
 
     double ScaleFactor() const;
 
     bool RepresentsPaper() const;
 };
-CPL_SMARTER_PTR(DG_Viewport)
 
 }// namespace dwg

@@ -29,7 +29,8 @@ namespace dwg {
 class LIBDWG_API DG_PolyfaceMesh : public DG_Polyline
 {
 public:
+    DG_PolyfaceMesh();
+    virtual ~DG_PolyfaceMesh();
 };
-CPL_SMARTER_PTR(DG_PolyfaceMesh)
 
 }// namespace dwg

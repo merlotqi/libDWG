@@ -23,24 +23,41 @@
 #pragma once
 
 #include <dwg/entities/GradientColor.h>
-
+#include <dwg/exports.h>
 #include <vector>
 
 namespace dwg {
 
-class HatchGradientPattern
+class LIBDWG_API DG_HatchGradientPattern
 {
 public:
-    bool enabled;              // 450
-    int reserved;              // 451
-    double angle;              // 460
-    double shift;              // 461
-    bool isSignleColorGradient;// 452
-    double colorTint;          // 462
+    DG_HatchGradientPattern();
+    DG_HatchGradientPattern(const std::string &name);
+    ~DG_HatchGradientPattern();
 
-    std::vector<GradientColor> colors;// 453
-    CPL::String name;                 // 470
+    bool Enabled() const;
+    void Enabled(bool);
+
+    int Reserved() const;
+    void Reserved(int);
+
+    double Angle() const;
+    void Angle(double);
+
+    double Shift() const;
+    void Shift(double);
+
+    bool IsSingleColorGradient() const;
+    void IsSingleColorGradient(bool);
+
+    double ColorTint() const;
+    void ColorTint(double);
+
+    const std::vector<GradientColor> &Colors() const;
+    void Colors(const std::vector<GradientColor> &);
+
+    std::string Name() const;
+    void Name(const std::string &);
 };
-
 
 }// namespace dwg

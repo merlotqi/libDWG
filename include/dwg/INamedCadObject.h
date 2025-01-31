@@ -24,20 +24,39 @@
 
 #include <cpl_ports.h>
 
-
 namespace dwg {
 
-class DG_INamedCadObject : public CPL::RefObject
+/**
+ * @brief Interface for CAD objects with a name property.
+ * 
+ * This class provides a mechanism to get the name of a CAD object
+ * and a delegate for name change notifications.
+ */
+class DG_INamedCadObject
 {
 public:
+    /**
+     * @brief Default constructor.
+     */
     DG_INamedCadObject() = default;
 
+    /**
+     * @brief Virtual destructor.
+     */
     virtual ~DG_INamedCadObject() {}
 
-    virtual CPL::String Name() const = 0;
+    /**
+     * @brief Gets the name of the CAD object.
+     * @return The name of the object as a string.
+     */
+    virtual std::string Name() const = 0;
 
-    CPL::Delegate<void(const char *, const char *)> OnNameChanged;
+    /**
+     * @brief Event triggered when the object's name changes.
+     * 
+     * This delegate is invoked with the old and new names when the name is updated.
+     */
+    CPL::Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 };
-CPL_SMARTER_PTR(DG_INamedCadObject)
 
 }// namespace dwg

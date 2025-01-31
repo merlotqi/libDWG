@@ -30,25 +30,24 @@
 namespace dwg {
 
 class DG_Layout;
-CPL_SMARTER_PTR(DG_Layout)
 
 class LIBDWG_API DG_BlockRecord : public DG_TableEntry
 {
 public:
-    DG_BlockRecord(const char *name) : DG_TableEntry(name) {}
+    DG_BlockRecord(const std::string &name) : DG_TableEntry(name) {}
 
     static constexpr auto ModelSpaceName = "*Model_Space";
     static constexpr auto PaperSpaceName = "*Paper_Space";
 
-    static CPL::SmarterPtr<DG_BlockRecord> ModelSpace();
+    static DG_BlockRecord *ModelSpace();
 
-    static CPL::SmarterPtr<DG_BlockRecord> PaperSpace();
+    static DG_BlockRecord *PaperSpace();
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     DG_UnitsType Units() const;
 
@@ -70,11 +69,10 @@ public:
 
     void Preview(const std::vector<unsigned char> &);
 
-    DG_LayoutPtr Layout() const;
+    DG_Layout *Layout() const;
 
     void Layout(DG_Layout *);
 };
-CPL_SMARTER_PTR(DG_BlockRecord)
 
 class LIBDWG_API DG_BlockRecordsTable : public DG_Table
 {
@@ -82,7 +80,7 @@ public:
     DG_ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

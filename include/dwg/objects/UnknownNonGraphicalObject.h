@@ -22,7 +22,7 @@
 
 #pragma once
 
-
+#include <dwg/classes/DxfClass.h>
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
@@ -36,9 +36,8 @@ public:
     DG_DxfClass DxfClass() const;
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

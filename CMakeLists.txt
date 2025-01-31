@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 project(libDWG LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_EXAMPLES "Build examples" OFF)
+
+set(LIBDWG_VERSION_MAJOR 1)
+set(LIBDWG_VERSION_MINOR 0)
+set(LIBDWG_VERSION_PATCH 1)
+set(LIBDWG_VERSION_STRING "${LIBDWG_VERSION_MAJOR}.${LIBDWG_VERSION_MINOR}.${LIBDWG_VERSION_PATCH}")
+
+include(GenerateExportHeader)
 
 add_subdirectory(external)
 add_library(dwg SHARED)
@@ -13,4 +24,11 @@ if(WIN32)
 endif()
 target_link_libraries(dwg CPL::cpl)
 
-add_subdirectory(examples)
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
+if(BUILD_TESTS)
+    include(CTest)
+    add_subdirectory(tests)
+endif()

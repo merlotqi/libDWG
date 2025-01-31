@@ -35,13 +35,13 @@ class LIBDWG_API DG_View : public DG_TableEntry
 public:
     DG_View() = default;
 
-    DG_View(const char *name);
-    
+    DG_View(const std::string &name);
+
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     double Height() const;
     void Height(double);
@@ -82,7 +82,7 @@ public:
     XYZ Target() const;
     void Target(const XYZ &);
 
-    DG_VisualStylePtr VisualStyle() const;
+    DG_VisualStyle *VisualStyle() const;
     void VisualStyle(DG_VisualStyle *);
 
     XYZ UcsOrigin() const;
@@ -100,18 +100,16 @@ public:
     DG_OrthographicType UcsOrthographicType() const;
     void UcsOrthographicType(DG_OrthographicType);
 };
-CPL_SMARTER_PTR(DG_View)
 
 class LIBDWG_API DG_ViewsTable : public DG_Table
 {
 public:
     DG_ViewsTable() = default;
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const override;
+    std::vector<std::string> defaultEntries() const override;
 };
-CPL_SMARTER_PTR(DG_ViewsTable)
 
 }// namespace dwg

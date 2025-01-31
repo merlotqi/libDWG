@@ -29,85 +29,293 @@
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
-#include <dwg/entities/AttributeDefinition.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/entities/MultiLeaderPropertyOverrideFlags.h>
 #include <dwg/objects/LeaderContentType.h>
-#include <dwg/objects/MultiLeaderAnnotContext.h>
-#include <dwg/objects/MultiLeaderStyle.h>
-
 
 namespace dwg {
 
+class DG_AttributeDefinition;
+class DG_MultiLeaderStyle;
+class DG_MultiLeaderAnnotContext;
+class DG_BlockRecord;
+class DG_TextStyle;
+
+/**
+ * @class DG_MultiLeader
+ * @brief Represents a MultiLeader entity in a DWG/DXF drawing.
+ *
+ * A MultiLeader consists of leader lines, arrowheads, and associated content, 
+ * such as text or block references, commonly used for annotations.
+ */
 class LIBDWG_API DG_MultiLeader : public DG_Entity
 {
 public:
-    MultiLeader();
-    virtual ~MultiLeader();
-
-    class BlockAttribute
+    /**
+     * @class DG_BlockAttribute
+     * @brief Represents an attribute within a block content of the MultiLeader.
+     */
+    class DG_BlockAttribute
     {
     public:
-        AttributeDefinition *attributeDefinition;// 330
-        short Index;                             // 177
-
-        double width;    // 44
-        CPL::String text;// 302
+        DG_AttributeDefinition *AttributeDefinition; ///< Pointer to the attribute definition.
+        short Index; ///< Index of the attribute within the block.
+        double Width; ///< Width of the attribute text.
+        std::string Text; ///< The actual text content of the attribute.
     };
 
-    MultiLeaderAnnotContext *contextData;
-    MultiLeaderStyle *style;
+public:
+    /**
+     * @brief Default constructor.
+     */
+    DG_MultiLeader();
 
-    MultiLeaderPropertyOverrideFlags propertyOverrideFlags;// 90
-    MultiLeaderPathType pathType;                          // 170
-    Color lineColoe;                                       // 91
+    /**
+     * @brief Destructor.
+     */
+    virtual ~DG_MultiLeader();
 
-    LineType leaderLineType;        // 341
-    LineweightType leaderLineWeight;// 171
+    /**
+     * @brief Gets the annotation context data associated with this MultiLeader.
+     * @return A pointer to the annotation context data.
+     */
+    DG_MultiLeaderAnnotContext *ContextData() const;
 
-    bool enableLanding;    // 290
-    bool enableDogleg;     // 291
-    double landingDistance;// 41
+    /**
+     * @brief Sets the annotation context data.
+     * @param context Pointer to the new annotation context data.
+     */
+    void ContextData(DG_MultiLeaderAnnotContext *context);
 
-    BlockRecord *arrowhead;// 342
+    /**
+     * @brief Gets the MultiLeader style.
+     * @return A pointer to the MultiLeader style.
+     */
+    DG_MultiLeaderStyle *Style() const;
 
-    double arrowheadSize;// 42
+    /**
+     * @brief Sets the MultiLeader style.
+     * @param style Pointer to the new MultiLeader style.
+     */
+    void Style(DG_MultiLeaderStyle *style);
 
-    LeaderContentType contentType;// 172
+    /**
+     * @brief Gets the property override flags for this MultiLeader.
+     * @return The override flags.
+     */
+    DG_MultiLeaderPropertyOverrideFlags PropertyOverrideFlags() const;
 
+    /**
+     * @brief Sets the property override flags.
+     * @param flags The new override flags.
+     */
+    void PropertyOverrideFlags(DG_MultiLeaderPropertyOverrideFlags flags);
 
-    TextStyle *textStyle;                  // 343
-    TextAttachmentType textLeftAttachment; // 173
-    TextAttachmentType textRightAttachment;// 95
-    TextAngleType textAngle;               // 174
-    TextAlignmentType textAlignment;       // 175
-    Color textColor;                       // 92
-    bool textFrame;                        // 292
+    /**
+     * @brief Gets the path type of the leader lines.
+     * @return The path type.
+     */
+    DG_MultiLeaderPathType PathType() const;
 
-    BlockRecord *blockContent;                        // 344
-    Color blockContentColor;                          // 93
-    XYZ blockContentScale;                            // 10, 20, 30
-    double blockContentRotation;                      // 43
-    BlockContentConnectionType blockContentConnection;// 176
+    /**
+     * @brief Sets the path type of the leader lines.
+     * @param pathType The new path type.
+     */
+    void PathType(DG_MultiLeaderPathType pathType);
 
+    /**
+     * @brief Gets the leader line color.
+     * @return The color of the leader line.
+     */
+    DG_Color LineColor() const;
 
-    bool enableAnnotationScale = 293;
+    /**
+     * @brief Sets the leader line color.
+     * @param color The new color.
+     */
+    void LineColor(const DG_Color &color);
 
-    std::vector<BlockAttribute> blockAttributes;
+    /**
+     * @brief Gets the leader line type.
+     * @return A pointer to the leader line type.
+     */
+    DG_LineType *LeaderLineType() const;
 
-    bool textDirectionNegative;                         // 294
-    short textAligninIPE;                               // 178
-    TextAttachmentPointType textAttachmentPoint;        // 179
-    double scaleFactor;                                 // 45
-    TextAttachmentDirectionType textAttachmentDirection;// 271
-    TextAttachmentType textBottomAttachment;            // 272
-    TextAttachmentType textTopAttachment;               // 273
+    /**
+     * @brief Sets the leader line type.
+     * @param lineType Pointer to the new leader line type.
+     */
+    void LeaderLineType(DG_LineType *lineType);
 
+    /**
+     * @brief Gets the leader line length.
+     * @return The leader line length.
+     */
+    DG_LineweightType LeaderLineLength() const;
 
-    bool extendedToText;
+    /**
+     * @brief Sets the leader line length.
+     * @param length The new leader line length.
+     */
+    void LeaderLineLength(DG_LineweightType length);
+
+    /**
+     * @brief Checks if landing is enabled.
+     * @return True if landing is enabled, false otherwise.
+     */
+    bool EnableLanding() const;
+
+    /**
+     * @brief Enables or disables landing.
+     * @param enable True to enable, false to disable.
+     */
+    void EnableLanding(bool enable);
+
+    /**
+     * @brief Checks if dogleg is enabled.
+     * @return True if dogleg is enabled, false otherwise.
+     */
+    bool EnableDogleg() const;
+
+    /**
+     * @brief Enables or disables dogleg.
+     * @param enable True to enable, false to disable.
+     */
+    void EnableDogleg(bool enable);
+
+    /**
+     * @brief Gets the landing distance.
+     * @return The landing distance.
+     */
+    double LandingDistance() const;
+
+    /**
+     * @brief Sets the landing distance.
+     * @param distance The new landing distance.
+     */
+    void LandingDistance(double distance);
+
+    /**
+     * @brief Gets the arrowhead block reference.
+     * @return A pointer to the arrowhead block record.
+     */
+    DG_BlockRecord *Arrowhead() const;
+
+    /**
+     * @brief Sets the arrowhead block reference.
+     * @param block Pointer to the new arrowhead block record.
+     */
+    void Arrowhead(DG_BlockRecord *block);
+
+    /**
+     * @brief Gets the arrowhead size.
+     * @return The size of the arrowhead.
+     */
+    double ArrowheadSize() const;
+
+    /**
+     * @brief Sets the arrowhead size.
+     * @param size The new arrowhead size.
+     */
+    void ArrowheadSize(double size);
+
+    /**
+     * @brief Gets the MultiLeader content type.
+     * @return The content type.
+     */
+    DG_LeaderContentType ContentType() const;
+
+    /**
+     * @brief Sets the MultiLeader content type.
+     * @param type The new content type.
+     */
+    void ContentType(DG_LeaderContentType type);
+
+    /**
+     * @brief Gets the text style.
+     * @return A pointer to the text style.
+     */
+    DG_TextStyle *TextStyle() const;
+
+    /**
+     * @brief Sets the text style.
+     * @param style Pointer to the new text style.
+     */
+    void TextStyle(DG_TextStyle *style);
+
+    /**
+     * @brief Gets the block content.
+     * @return A pointer to the block content.
+     */
+    DG_BlockRecord *BlockContent() const;
+
+    /**
+     * @brief Sets the block content.
+     * @param block Pointer to the new block content.
+     */
+    void BlockContent(DG_BlockRecord *block);
+
+    /**
+     * @brief Checks if annotation scale is enabled.
+     * @return True if annotation scale is enabled, false otherwise.
+     */
+    bool EnableAnnotationScale() const;
+
+    /**
+     * @brief Enables or disables annotation scale.
+     * @param enable True to enable, false to disable.
+     */
+    void EnableAnnotationScale(bool enable);
+
+    /**
+     * @brief Gets the block attributes.
+     * @return A vector containing the block attributes.
+     */
+    std::vector<DG_BlockAttribute> BlockAttributes() const;
+
+    /**
+     * @brief Sets the block attributes.
+     * @param attributes The new block attributes.
+     */
+    void BlockAttributes(const std::vector<DG_BlockAttribute> &attributes);
+
+    /**
+     * @brief Checks if text direction is negative.
+     * @return True if the text direction is negative, false otherwise.
+     */
+    bool TextDirectionNegative() const;
+
+    /**
+     * @brief Sets the text direction.
+     * @param negative True to set the direction as negative, false otherwise.
+     */
+    void TextDirectionNegative(bool negative);
+
+    /**
+     * @brief Gets the text alignment in IPE (Insertion Point Editing).
+     * @return The text alignment value.
+     */
+    short TextAligninIPE() const;
+
+    /**
+     * @brief Sets the text alignment in IPE.
+     * @param alignment The new text alignment value.
+     */
+    void TextAligninIPE(short alignment);
+
+    /**
+     * @brief Gets the text attachment point.
+     * @return The text attachment point type.
+     */
+    DG_TextAttachmentPointType TextAttachmentPoint() const;
+
+    /**
+     * @brief Sets the text attachment point.
+     * @param point The new text attachment point type.
+     */
+    void TextAttachmentPoint(DG_TextAttachmentPointType point);
 };
-CPL_SMARTER_PTR(DG_MultiLeader)
 
 }// namespace dwg

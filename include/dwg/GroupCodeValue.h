@@ -28,10 +28,26 @@
 
 namespace dwg {
 
+/**
+ * @brief Represents a value associated with a group code in the DWG format.
+ * 
+ * This class provides a static method to transform an integer code into a
+ * corresponding `DG_GroupCodeValueType`.
+ */
 class LIBDWG_API DG_GroupCodeValue
 {
 public:
+    /**
+     * @brief Transforms an integer group code into a corresponding `DG_GroupCodeValueType`.
+     * 
+     * This static method maps a given group code (integer) to the appropriate
+     * `DG_GroupCodeValueType`.
+     * 
+     * @param code The group code to be transformed.
+     * @return The corresponding `DG_GroupCodeValueType`.
+     */
     static DG_GroupCodeValueType TransformValue(int code);
 };
+
 
 }// namespace dwg

@@ -27,15 +27,14 @@
 namespace dwg {
 
 class DG_DimensionStyle;
-CPL_SMARTER_PTR(DG_DimensionStyle)
 
 class LIBDWG_API DG_Tolerance : public DG_Entity
 {
-    DG_DimensionStyleWPtr _style;
+    DG_DimensionStyle *_style;
     XYZ _insertionPoint;
     XYZ _direction;
     XYZ _normal;
-    CPL::String _text;
+    std::string _text;
 
 public:
     DG_Tolerance();
@@ -45,12 +44,12 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
-    DG_DimensionStylePtr Style() const;
+    DG_DimensionStyle *Style() const;
     void Style(DG_DimensionStyle *);
 
     XYZ InsertionPoint() const;
@@ -62,9 +61,8 @@ public:
     XYZ Normal() const;
     void Normal(const XYZ &);
 
-    CPL::String Text() const;
-    void Text(const char *);
+    std::string Text() const;
+    void Text(const std::string &);
 };
-CPL_SMARTER_PTR(DG_Tolerance)
 
 }// namespace dwg

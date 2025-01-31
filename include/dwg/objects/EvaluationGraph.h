@@ -33,18 +33,18 @@ public:
     DG_EvaluationGraph();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
     struct GraphNode
     {
-        int Index;            // 91
-        int NextNodeIndex;    // 95
-        GraphNode *Next;      // 95
-        int Flags;            // 93
-        int Data1;            // 92
-        int Data2;            // 92
-        int Data3;            // 92
-        int Data4;            // 92
+        int Index;               // 91
+        int NextNodeIndex;       // 95
+        GraphNode *Next;         // 95
+        int Flags;               // 93
+        int Data1;               // 92
+        int Data2;               // 92
+        int Data3;               // 92
+        int Data4;               // 92
         DG_CadObject *NodeObject;// 360
     };
 

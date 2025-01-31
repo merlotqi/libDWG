@@ -31,7 +31,6 @@
 namespace dwg {
 
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_LineType : public DG_TableEntry
 {
@@ -44,14 +43,14 @@ public:
         XY Offset;
         double Rotation;
         double Scale;
-        CPL::String Text;
-        DG_TextStyleWPtr Style;
+        std::string Text;
+        DG_TextStyle *Style;
     };
 
 public:
     DG_LineType();
 
-    DG_LineType(const char *name);
+    DG_LineType(const std::string &name);
 
     static constexpr auto ByLayerName = "ByLayer";
 
@@ -59,21 +58,21 @@ public:
 
     static constexpr auto ContinuousName = "Continuous";
 
-    static CPL::SmarterPtr<DG_LineType> ByLayer();
+    static DG_LineType *ByLayer();
 
-    static CPL::SmarterPtr<DG_LineType> ByBlock();
+    static DG_LineType *ByBlock();
 
-    static CPL::SmarterPtr<DG_LineType> Continuous();
+    static DG_LineType *Continuous();
 
     DG_ObjectType ObjectType() const override;
-    
-    CPL::String ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
 
-    CPL::String Description() const;
+    std::string SubclassMarker() const override;
 
-    void Description(const char *);
+    std::string Description() const;
+
+    void Description(const std::string &);
 
     double PatternLen() const;
 
@@ -87,21 +86,20 @@ public:
 
     void AddSegment(const Segment &);
 };
-CPL_SMARTER_PTR(DG_LineType)
 
 class LIBDWG_API DG_LineTypesTable : public DG_Table
 {
 public:
-    CPL::SmarterPtr<DG_LineType> ByLayer;
-    CPL::SmarterPtr<DG_LineType> ByBlock;
-    CPL::SmarterPtr<DG_LineType> Continuous;
+    DG_LineType *ByLayer;
+    DG_LineType *ByBlock;
+    DG_LineType *Continuous;
 
     DG_ObjectType ObjectType() const override;
 
     DG_LineTypesTable() = default;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

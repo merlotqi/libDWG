@@ -32,21 +32,25 @@ std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
         0xE0, 0xDA, 0x92, 0xF8, 0x2B, 0xC9, 0xD7, 0xD7,
         0x62, 0xA8, 0x35, 0xC0, 0x62, 0xBB, 0xEF, 0xD4};
 
-    CPL::String DwgPreviewWriter::SectionName() const { return DwgSectionDefinition::Preview; }
+std::string DwgPreviewWriter::SectionName() const
+{
+    return DwgSectionDefinition::Preview;
+}
 
-    DwgPreviewWriter::DwgPreviewWriter(ACadVersion version, std::ostream* stream) : DwgSectionIO(version)
-    {
-        _swriter = DwgStreamWriterBase::GetStreamWriter(version, stream,
-                                                       Encoding::Windows1252());
-    }
+DwgPreviewWriter::DwgPreviewWriter(ACadVersion version, std::ostream *stream)
+    : DwgSectionIO(version)
+{
+    _swriter = DwgStreamWriterBase::GetStreamWriter(version, stream,
+                                                    Encoding::Windows1252());
+}
 
-    void DwgPreviewWriter::Write()
-    {
-        _swriter->WriteBytes(_startSentinel);
-        _swriter->WriteRawLong(1);
-        _swriter->WriteByte(0);
-        _swriter->WriteBytes(_endSentinel);
-    }
-        
+void DwgPreviewWriter::Write()
+{
+    _swriter->WriteBytes(_startSentinel);
+    _swriter->WriteRawLong(1);
+    _swriter->WriteByte(0);
+    _swriter->WriteBytes(_endSentinel);
+}
+
 }// namespace io
 }// namespace dwg

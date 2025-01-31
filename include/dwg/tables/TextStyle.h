@@ -34,32 +34,32 @@ class LIBDWG_API DG_TextStyle : public DG_TableEntry
 public:
     DG_TextStyle();
 
-    DG_TextStyle(const char *);
+    DG_TextStyle(const std::string &);
 
     ~DG_TextStyle();
 
     static constexpr auto DefaultName = "Standard";
 
-    static CPL::SmarterPtr<DG_TextStyle> Default();
+    static DG_TextStyle* Default();
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     DG_StyleFlags Flags() const;
 
     void Flags(DG_StyleFlags);
 
-    CPL::String Filename() const;
-    
-    void Filename(const char *);
+    std::string Filename() const;
 
-    CPL::String BigFontFilename() const;
+    void Filename(const std::string &);
 
-    void BigFontFilename(const char *);
-    
+    std::string BigFontFilename() const;
+
+    void BigFontFilename(const std::string &);
+
     double Height() const;
 
     void Height(double);
@@ -86,7 +86,6 @@ public:
 
     bool IsShapeFile() const;
 };
-CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_TextStylesTable : public DG_Table
 {
@@ -95,7 +94,7 @@ public:
     DG_ObjectType ObjectType() const override;
 
 protected:
-    std::vector<CPL::String> defaultEntries() const;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

@@ -29,7 +29,6 @@
 namespace dwg {
 
 class DG_MText;
-CPL_SMARTER_PTR(DG_MText);
 
 class LIBDWG_API DG_AttributeBase : public DG_TextEntity
 {
@@ -51,8 +50,8 @@ public:
     unsigned char Version() const;
     void Version(unsigned char);
 
-    CPL::String Tag() const;
-    void Tag(const char *);
+    std::string Tag() const;
+    void Tag(const std::string &);
 
     DG_AttributeFlags Flags() const;
     void Flags(DG_AttributeFlags);
@@ -63,7 +62,7 @@ public:
     bool IsReallyLocked() const;
     void IsReallyLocked(bool value);
 
-    DG_MTextPtr MText() const;
+    DG_MText *MText() const;
     void MText(DG_MText *);
 
 protected:
@@ -71,12 +70,11 @@ protected:
 
 protected:
     unsigned char _version;
-    CPL::String _tag;
+    std::string _tag;
     DG_AttributeFlags _flags;
     bool _isReallyLocked;
-    DG_MTextWPtr _mtext;
+    DG_MText *_mtext;
     DG_AttributeType _attributeType;
 };
-CPL_SMARTER_PTR(DG_AttributeBase)
 
 }// namespace dwg

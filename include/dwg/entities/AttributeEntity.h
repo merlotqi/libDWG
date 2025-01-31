@@ -40,11 +40,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (DG_AttributeDefinition).
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeDefinition.
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 };
-CPL_SMARTER_PTR(DG_AttributeEntity)
 
 }// namespace dwg

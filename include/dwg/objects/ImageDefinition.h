@@ -33,11 +33,11 @@ class LIBDWG_API DG_ImageDefinition : public DG_NonGraphicalObject
 public:
     DG_ImageDefinition();
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
     int ClassVersion;         //90
-    CPL::String FileName;     // 1
+    std::string FileName;     // 1
     XY Size;                  // 10, 20
     XY DefaultSize = XY(1, 1);// 11, 21
     bool IsLoaded = 200;

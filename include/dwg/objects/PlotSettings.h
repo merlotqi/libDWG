@@ -42,46 +42,46 @@ public:
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
-    CPL::String PageName() const;
-    void PageName(const char *);
-    
-    CPL::String SystemPrinterName() const;
-    void SystemPrinterName(const char *);
-    
-    CPL::String PaperSize() const;
-    void PaperSize(const char *);
-    
-    CPL::String PlotViewName() const;
-    void PlotViewName(const char *);
-    
+    std::string PageName() const;
+    void PageName(const std::string &);
+
+    std::string SystemPrinterName() const;
+    void SystemPrinterName(const std::string &);
+
+    std::string PaperSize() const;
+    void PaperSize(const std::string &);
+
+    std::string PlotViewName() const;
+    void PlotViewName(const std::string &);
+
     DG_PaperMargin UnprintableMargin() const;
     void UnprintableMargin(DG_PaperMargin);
-    
+
     double PaperWidth() const;
     void PaperWidth(double);
-    
+
     double PaperHeight() const;
     void PaperHeight(double);
-    
+
     double PlotOriginX() const;
     void PlotOriginX(double);
-    
+
     double PlotOriginY() const;
     void PlotOriginY(double);
-    
+
     double WindowLowerLeftX() const;
     void WindowLowerLeftX(double);
-    
+
     double WindowLowerLeftY() const;
     void WindowLowerLeftY(double);
-    
+
     double WindowUpperLeftX() const;
     void WindowUpperLeftX(double);
-    
+
     double WindowUpperLeftY() const;
     void WindowUpperLeftY();
 
@@ -92,49 +92,48 @@ public:
 
     double DenominatorScale() const;
     void DenominatorScale(double);
-    
+
     DG_PlotFlags Flags() const;
     void Flags(DG_PlotFlags);
-    
+
     DG_PlotPaperUnits PaperUnits() const;
     void PaperUnits(DG_PlotPaperUnits);
 
     DG_PlotRotation PaperRotation() const;
     void PaperRotation(DG_PlotRotation);
-    
+
     DG_PlotType PlotType() const;
     void PlotType(DG_PlotType);
-    
-    CPL::String StyleSheet() const;
-    void StyleSheet(const char *);
-    
+
+    std::string StyleSheet() const;
+    void StyleSheet(const std::string &);
+
     DG_ScaledType ScaledFit() const;
     void ScaledFit(DG_ScaledType);
-    
+
     DG_ShadePlotMode ShadePlotMode() const;
     void ShadePlotMode(DG_ShadePlotMode);
-    
+
     DG_ShadePlotResolutionMode ShadePlotResolutionMode() const;
     void ShadePlotResolutionMode(DG_ShadePlotResolutionMode);
-    
+
     short ShadePlotDPI() const;
     void ShadePlotDPI(short);
-    
+
     double StandardScale() const;
     void StandardScale(double);
 
     XY PaperImageOrigin() const;
     void PaperImageOrigin(const XY &);
-    
+
     double PaperImageOriginX() const;
     void PaperImageOriginX(double);
-    
+
     double PaperImageOriginY() const;
     void PaperImageOriginY(double);
-    
+
     unsigned long long ShadePlotIDHandle() const;
     void ShadePlotIDHandle(unsigned long long);
 };
-CPL_SMARTER_PTR(DG_PlotSettings)
 
 }// namespace dwg

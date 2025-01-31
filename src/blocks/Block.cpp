@@ -25,44 +25,44 @@
 
 namespace dwg {
 
-Block::Block(BlockRecord *record) { _owner = record; }
+DG_Block::DG_Block(DG_BlockRecord *record) { _owner = record; }
 
-Block::Block() {}
+DG_Block::DG_Block() {}
 
-Block::~Block() {}
+DG_Block::~DG_Block() {}
 
-dwg::ObjectType Block::ObjectType() const { return dwg::ObjectType::BLOCK; }
+DG_ObjectType DG_Block::ObjectType() const { return DG_ObjectType::BLOCK; }
 
-CPL::String Block::ObjectName() const { return DxfFileToken::Block; }
+std::string DG_Block::ObjectName() const { return DG_DxfFileToken::Block; }
 
-CPL::String Block::SubclassMarker() const
+std::string DG_Block::SubclassMarker() const
 {
-    return DxfSubclassMarker::BlockBegin;
+    return DG_DxfSubclassMarker::BlockBegin;
 }
 
-BlockRecordPtr Block::BlockRecord() const
+DG_BlockRecord *DG_Block::BlockRecord() const
 {
-    return dynamic_cast<BlockRecord *>(_owner);
+    return dynamic_cast<DG_BlockRecord *>(_owner);
 }
 
-CPL::String Block::Name() const { return _name; }
+std::string DG_Block::Name() const { return _name; }
 
-void Block::Name(const CPL::String &name) { _name = name; }
+void DG_Block::Name(const std::string &name) { _name = name; }
 
-BlockTypeFlags Block::Flags() const { return _flags; }
+DG_BlockTypeFlags DG_Block::Flags() const { return _flags; }
 
-void Block::Flags(BlockTypeFlags flags) { _flags = flags; }
+void DG_Block::Flags(DG_BlockTypeFlags flags) { _flags = flags; }
 
-XYZ Block::BasePoint() const { return _base_point; }
+XYZ DG_Block::BasePoint() const { return _base_point; }
 
-void Block::BasePoint(XYZ p) { _base_point = p; }
+void DG_Block::BasePoint(const XYZ &value) { _base_point = value; }
 
-CPL::String Block::XrefPath() const { return _xrefPath; }
+std::string DG_Block::XrefPath() const { return _xrefPath; }
 
-void Block::XrefPath(const CPL::String &value) { _xrefPath = value; }
+void DG_Block::XrefPath(const std::string &value) { _xrefPath = value; }
 
-CPL::String Block::Comments() const { return _comments; }
+std::string DG_Block::Comments() const { return _comments; }
 
-void Block::Comments(const CPL::String &value) { _comments = value; }
+void DG_Block::Comments(const std::string &value) { _comments = value; }
 
 }// namespace dwg

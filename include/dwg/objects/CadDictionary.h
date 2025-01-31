@@ -32,41 +32,41 @@ namespace dwg {
 
 class LIBDWG_API DG_CadDictionary : public DG_NonGraphicalObject
 {
-    std::map<CPL::String, DG_NonGraphicalObjectWPtr> _entries;
+    std::map<std::string, DG_NonGraphicalObject *> _entries;
     bool _hard_owner_flag;
     DG_DictionaryCloningFlags _clonning_flags;
 
 public:
-    static CPL::String Root;
-    static CPL::String AcadColor;
-    static CPL::String AcadGroup;
-    static CPL::String AcadLayout;
-    static CPL::String AcadMaterial;
-    static CPL::String AcadSortEnts;
-    static CPL::String AcadMLeaderStyle;
-    static CPL::String AcadMLineStyle;
-    static CPL::String AcadTableStyle;
-    static CPL::String AcadPlotSettings;
-    static CPL::String VariableDictionary;
-    static CPL::String AcadPlotStyleName;
-    static CPL::String AcadScaleList;
-    static CPL::String AcadVisualStyle;
-    static CPL::String AcadFieldList;
-    static CPL::String AcadImageDict;
+    static std::string Root;
+    static std::string AcadColor;
+    static std::string AcadGroup;
+    static std::string AcadLayout;
+    static std::string AcadMaterial;
+    static std::string AcadSortEnts;
+    static std::string AcadMLeaderStyle;
+    static std::string AcadMLineStyle;
+    static std::string AcadTableStyle;
+    static std::string AcadPlotSettings;
+    static std::string VariableDictionary;
+    static std::string AcadPlotStyleName;
+    static std::string AcadScaleList;
+    static std::string AcadVisualStyle;
+    static std::string AcadFieldList;
+    static std::string AcadImageDict;
 
 
 public:
     DG_CadDictionary();
-    DG_CadDictionary(const char *name);
+    DG_CadDictionary(const std::string &name);
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
-    void Add(const char *key, DG_NonGraphicalObject *value);
+    void Add(const std::string &key, DG_NonGraphicalObject *value);
     void Add(DG_NonGraphicalObject *value);
     bool TryAdd(DG_NonGraphicalObject *value) const;
-    bool ContainsKey(const char *key) const;
-    DG_NonGraphicalObjectPtr Remove(const char *key);
+    bool ContainsKey(const std::string &key) const;
+    DG_NonGraphicalObject *Remove(const std::string &key);
     void Clear();
 
     bool HardOwnerFlag() const;
@@ -75,22 +75,20 @@ public:
     DG_DictionaryCloningFlags ClonningFlags() const;
     void ClonningFlags(DG_DictionaryCloningFlags);
 
-    std::vector<CPL::String> EntryName() const;
+    std::vector<std::string> EntryName() const;
     std::vector<unsigned long long> EntryHandles() const;
 
-    DG_CadObjectPtr operator[](const char *key);
+    DG_CadObject *operator[](const std::string &key) const;
 
-    static CPL::SmarterPtr<DG_CadDictionary> CreateRoot();
+    static DG_CadDictionary *CreateRoot();
     static void CreateDefaultEntries(DG_CadDictionary *root);
 
-    DG_NonGraphicalObjectPtr TryGetEntry(const char *name);
+    DG_NonGraphicalObject *TryGetEntry(const std::string &name);
 
 private:
-    CPL::SmarterPtr<DG_CadDictionary>
-    ensureCadDictionaryExist(const char *name);
-    void onEntryNameChanged(const char *olName, const char *newName);
+    DG_CadDictionary *ensureCadDictionaryExist(const std::string &name);
+    void onEntryNameChanged(const std::string &olName,
+                            const std::string &newName);
 };
-CPL_SMARTER_PTR(DG_CadDictionary)
-
 
 }// namespace dwg

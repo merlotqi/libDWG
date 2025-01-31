@@ -30,39 +30,57 @@
 namespace dwg {
 
 class DG_BlockRecord;
-CPL_SMARTER_PTR(DG_BlockRecord)
 
 class LIBDWG_API DG_Insert : public DG_Entity
 {
 public:
+    DG_Insert(DG_BlockRecord *);
+
     // Override to return the object type of the Arc
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
-    BlockRecord *block;
-    XYZ insertPoint;// 10, 20, 30
+    DG_BlockRecord *Block() const;
+    void Block(DG_BlockRecord *);
 
-    double XScale;// 41
-    double YScale;// 42
-    double ZScale;// 43
+    XYZ InsertPoint() const;
+    void InsertPoint(const XYZ &);
 
-    double rotation;// 50
-    XYZ normal;     // 210, 220, 230
+    double XScale() const;
+    void XScale(double);
 
-    unsigned short columnCount;// 70
-    unsigned short rowCount;   // 71
+    double YScale() const;
+    void YScale(double);
 
-    double columnSpacing;// 44
-    double rowSpacing;   // 45
+    double ZScale() const;
+    void ZScale(double);
 
-    bool hasAttributes;// 66
+    double Rotation() const;
+    void Rotation(double);
 
-    CadObjectCollection<AttributeEntity> attributes;
+    XYZ Normal() const;
+    void Normal(const XYZ &);
+
+    unsigned short ColumnCount() const;
+    void ColumnCount(unsigned short);
+
+    unsigned short RowCount() const;
+    void RowCount(unsigned short);
+
+    double ColumnSpacing() const;
+    void ColumnSpacing(double);
+
+    double RowSpacing() const;
+    void RowSpacing(double);
+
+    bool HasAttributes() const;
+
+    DG_CadObjectCollection<DG_AttributeEntity> attributes;
 };
 
 

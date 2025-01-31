@@ -35,15 +35,15 @@ namespace dwg {
 class LIBDWG_API DG_TableEntry : public DG_CadObject, DG_INamedCadObject
 {
 public:
-    DG_TableEntry(const char *name);
+    DG_TableEntry(const std::string &name);
 
     virtual ~DG_TableEntry();
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
-    virtual CPL::String Name() const;
+    virtual std::string Name() const;
 
-    virtual void Name(const char *value);
+    virtual void Name(const std::string &value);
 
     DG_StandardFlags Flags() const;
 
@@ -54,38 +54,36 @@ protected:
 
 protected:
     DG_StandardFlags _flags;
-    CPL::String _name;
+    std::string _name;
 };
-CPL_SMARTER_PTR(DG_TableEntry)
 
 class LIBDWG_API DG_Table : public DG_CadObject
 {
-    std::map<CPL::String, DG_TableEntryPtr> _entries;
+    std::map<std::string, DG_TableEntry *> _entries;
 
 public:
     DG_Table();
-    
-    CPL::String ObjectName() const override;
-    
-    CPL::String SubclassMarker() const override;
-    
-    DG_TableEntryPtr operator[](const char *key) const;
-    
+
+    std::string ObjectName() const override;
+
+    std::string SubclassMarker() const override;
+
+    DG_TableEntry *operator[](const std::string &key) const;
+
     void Add(DG_TableEntry *entry);
-    
-    bool Contains(const char *key);
-    
-    DG_TableEntryPtr GetValue(const char *key);
-    
+
+    bool Contains(const std::string &key);
+
+    DG_TableEntry *GetValue(const std::string &key);
+
     void CreateDefaultEntries();
 
 protected:
-    void add(const char *key, DG_TableEntry *item);
-    
+    void add(const std::string &key, DG_TableEntry *item);
+
     void addHandlePrefix(DG_TableEntry *item);
-    
-    virtual std::vector<CPL::String> defaultEntries() const = 0;
+
+    virtual std::vector<std::string> defaultEntries() const = 0;
 };
-CPL_SMARTER_PTR(DG_Table)
 
 }// namespace dwg

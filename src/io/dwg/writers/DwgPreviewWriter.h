@@ -24,8 +24,8 @@
 
 #include "../DwgSectionIO.h"
 #include "../fileheaders/DwgSectionDefinition.h"
-#include "IDwgStreamWriter.h"
 #include "DwgStreamWriterBase.h"
+#include "IDwgStreamWriter.h"
 
 namespace dwg {
 namespace io {
@@ -37,10 +37,10 @@ class DwgPreviewWriter : DwgSectionIO
     static std::vector<unsigned char> _endSentinel;
 
 public:
-    DwgPreviewWriter(ACadVersion version, std::ostream* stream);
-    CPL::String SectionName() const;
+    DwgPreviewWriter(ACadVersion version, std::ostream *stream);
+    std::string SectionName() const;
     void Write();
 };
-        
+
 }// namespace io
 }// namespace dwg

@@ -21,7 +21,6 @@
  */
 
 
-
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
 
 namespace dwg {
@@ -88,8 +87,8 @@ public:
     void WriteRawShort(unsigned short value);
     virtual void WriteSpearShift();
     void WriteTimeSpan(TimeSpan value);
-    void WriteVariableText(const CPL::String &value);
-    void WriteTextUnicode(const CPL::String &value);
+    void WriteVariableText(const std::string &value);
+    void WriteTextUnicode(const std::string &value);
     void SetPositionInBits(int64_t posInBits);
     void SetPositionByFlag(int64_t pos);
     void WriteShiftValue();

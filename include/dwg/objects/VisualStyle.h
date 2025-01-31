@@ -37,14 +37,14 @@ public:
     VisualStyle();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
-    CPL::String RasterFile() const;
-    void RasterFile(const char *);
+    std::string RasterFile() const;
+    void RasterFile(const std::string &);
 
-    CPL::String Description() const;
-    void Description(const char *);
+    std::string Description() const;
+    void Description(const std::string &);
 
     int Type() const;
     void Type(int);
@@ -79,6 +79,5 @@ public:
     bool InternalFlag() const;
     void InternalFlag(bool);
 };
-CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

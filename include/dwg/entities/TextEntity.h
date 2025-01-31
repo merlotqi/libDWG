@@ -31,18 +31,17 @@
 namespace dwg {
 
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_TextEntity : public DG_Entity
 {
     double _thickness;
     XYZ _insertPoint;
     double _height;
-    CPL::String _value;
+    std::string _value;
     double _rotation;
     double _widthFactor;
     double _obliqueAngle;
-    DG_TextStyleWPtr _style;
+    DG_TextStyle* _style;
     DG_TextMirrorFlag _mirror;
     DG_TextHorizontalAlignment _horizontalAlignment;
     XYZ _alignmentPoint;
@@ -57,10 +56,10 @@ public:
     virtual DG_ObjectType ObjectType() const;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const;
+    virtual std::string ObjectName() const;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const;
+    virtual std::string SubclassMarker() const;
 
     double Thickness() const;
     void Thickness(double);
@@ -71,8 +70,8 @@ public:
     double Height() const;
     void Height(double);
 
-    CPL::String Value() const;
-    void Value(const char *);
+    std::string Value() const;
+    void Value(const std::string &);
 
     double Rotation() const;
     void Rotation(double);
@@ -83,7 +82,7 @@ public:
     double ObliqueAngle() const;
     void ObliqueAngle(double);
 
-    DG_TextStylePtr Style() const;
+    DG_TextStyle *Style() const;
     void Style(DG_TextStyle *);
 
     DG_TextMirrorFlag Mirror() const;
@@ -101,6 +100,5 @@ public:
     DG_TextVerticalAlignment VerticalAlignment() const;
     void VerticalAlignment(DG_TextVerticalAlignment);
 };
-CPL_SMARTER_PTR(DG_TextEntity)
 
 }// namespace dwg

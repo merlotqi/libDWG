@@ -28,7 +28,6 @@
 namespace dwg {
 
 class DG_UnderlayDefinition;
-CPL_SMARTER_PTR(DG_UnderlayDefinition)
 
 class LIBDWG_API DG_UnderlayEntity : public DG_Entity
 {
@@ -41,13 +40,13 @@ class LIBDWG_API DG_UnderlayEntity : public DG_Entity
     DG_UnderlayDisplayFlags _flags;
     unsigned char _contrast;
     unsigned char _fade;
-    DG_UnderlayDefinitionWPtr _definition;
+    DG_UnderlayDefinition *_definition;
 
 public:
     DG_UnderlayEntity();
     ~DG_UnderlayEntity();
 
-    CPL::String SubclassMarker() const;
+    std::string SubclassMarker() const;
 
     XYZ Normal() const;
     void Normal(const XYZ &);
@@ -76,9 +75,8 @@ public:
     unsigned char Fade() const;
     void Fade(unsigned char);
 
-    DG_UnderlayDefinitionPtr Definition() const;
+    DG_UnderlayDefinition *Definition() const;
     void Definition(DG_UnderlayDefinition *);
 };
-CPL_SMARTER_PTR(DG_UnderlayEntity)
 
 }// namespace dwg

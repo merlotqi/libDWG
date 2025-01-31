@@ -22,19 +22,31 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
-class DG_IHandledCadObject : public CPL::RefObject
+/**
+ * @brief Interface for CAD objects that have a handle.
+ * 
+ * This class provides a mechanism to retrieve the handle of a CAD object.
+ */
+class DG_IHandledCadObject
 {
 public:
+    /**
+     * @brief Default constructor.
+     */
     DG_IHandledCadObject() = default;
 
+    /**
+     * @brief Virtual destructor with no exception guarantee.
+     */
     virtual ~DG_IHandledCadObject() noexcept {}
 
+    /**
+     * @brief Gets the handle of the CAD object.
+     * @return The handle of the object as an unsigned long long.
+     */
     virtual unsigned long long Handle() const = 0;
 };
-CPL_SMARTER_PTR(DG_IHandledCadObject)
 
 }// namespace dwg

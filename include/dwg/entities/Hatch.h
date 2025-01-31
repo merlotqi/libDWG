@@ -30,14 +30,13 @@
 #include <dwg/entities/HatchPatternType.h>
 #include <dwg/entities/HatchStyleType.h>
 
-
 namespace dwg {
 
-class Hatch : public DG_Entity
+class LIBDWG_API DG_Hatch : public DG_Entity
 {
 public:
-    Hatch();
-    ~Hatch();
+    DG_Hatch();
+    ~DG_Hatch();
 
     double elevation;// 30
     XYZ normal;      // 210, 220, 230

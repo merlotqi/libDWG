@@ -32,19 +32,19 @@ class LIBDWG_API DG_MLineStyle : public DG_NonGraphicalObject
 {
 public:
     DG_MLineStyle();
-    DG_MLineStyle(const char *name);
+    DG_MLineStyle(const std::string &name);
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle Default;
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
 
     // 70
     MLineStyleFlags Flags;
-    CPL::String Description;         // 3
+    std::string Description;         // 3
     Color FillColor = Color::ByLayer;// 62
     double StartAngle = M_PI / 2.0;  // 51
     double EndAngle = M_PI / 2.0;    // 52

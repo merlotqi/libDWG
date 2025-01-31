@@ -32,10 +32,10 @@ class LIBDWG_API DG_Group : public DG_NonGraphicalObject
 public:
     DG_Group();
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
-    
-    CPL::String Description;// 300
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
+
+    std::string Description;// 300
     bool IsUnnamed;         // 71
     bool Selectable;        // 71
     std::map<unsigned long long, Entity *> Entities;

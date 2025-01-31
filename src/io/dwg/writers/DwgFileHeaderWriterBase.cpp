@@ -21,15 +21,13 @@
  */
 
 
-
 #include "DwgFileHeaderWriterBase.h"
 #include "../DwgCheckSumCalculator.h"
 #include <assert.h>
+#include <base.h>
+#include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
-#include <dwg/ACadVersion.h>
-#include <base.h>
-#include <base.h>
 #include <fstream>
 #include <sstream>
 
@@ -100,7 +98,7 @@ void DwgFileHeaderWriterBase::writeMagicNumber()
 
 void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
 {
-    CPL::String buffer = stream->str();
+    std::string buffer = stream->str();
     for (size_t i = 0; i < buffer.size(); ++i)
     {
         buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];

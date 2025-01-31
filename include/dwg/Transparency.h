@@ -26,41 +26,75 @@
 
 namespace dwg {
 
-// The DG_Transparency struct represents the transparency properties of an object in LIBDWG.
-// It provides methods to manage and convert transparency values.
-struct LIBDWG_API DG_Transparency
+/**
+ * @class DG_Transparency
+ * @brief Represents the transparency properties of an object in LIBDWG.
+ */
+class LIBDWG_API DG_Transparency
 {
-    // Member variable to store the transparency value.
-    short Value;
+    /**
+     * @brief Stores the transparency value.
+     */
+    short _value;
 
-    // Constructor to initialize the transparency with a given value.
+public:
+    /**
+     * @brief Constructs a DG_Transparency object with a given transparency value.
+     * @param value The transparency value.
+     */
     DG_Transparency(short value);
 
-    // Checks if the transparency is set to "ByLayer".
+    /**
+     * @brief Checks if the transparency is set to "ByLayer".
+     * @return True if transparency is "ByLayer", otherwise false.
+     */
     bool IsByLayer() const;
 
-    // Checks if the transparency is set to "ByBlock".
+    /**
+     * @brief Checks if the transparency is set to "ByBlock".
+     * @return True if transparency is "ByBlock", otherwise false.
+     */
     bool IsByBlock() const;
 
-    // Getter method to retrieve the transparency value.
+    /**
+     * @brief Retrieves the transparency value.
+     * @return The transparency value.
+     */
     short Value() const;
 
-    // Setter method to update the transparency value.
+    /**
+     * @brief Sets the transparency value.
+     * @param value The new transparency value.
+     */
     void Value(short value);
 
-    // Converts a DG_Transparency object to an alpha value (integer).
+    /**
+     * @brief Converts a DG_Transparency object to an alpha value.
+     * @param transparency The DG_Transparency object.
+     * @return The corresponding alpha value as an integer.
+     */
     static int ToAlphaValue(DG_Transparency transparency);
 
-    // Creates a DG_Transparency object from an alpha value (integer).
+    /**
+     * @brief Creates a DG_Transparency object from an alpha value.
+     * @param value The alpha value.
+     * @return A DG_Transparency object representing the given alpha value.
+     */
     static DG_Transparency FromAlphaValue(int value);
 
-    // Predefined DG_Transparency object representing "ByLayer" transparency.
+    /**
+     * @brief Predefined DG_Transparency object representing "ByLayer" transparency.
+     */
     static DG_Transparency ByLayer;
 
-    // Predefined DG_Transparency object representing "ByBlock" transparency.
+    /**
+     * @brief Predefined DG_Transparency object representing "ByBlock" transparency.
+     */
     static DG_Transparency ByBlock;
 
-    // Predefined DG_Transparency object representing fully opaque transparency.
+    /**
+     * @brief Predefined DG_Transparency object representing fully opaque transparency.
+     */
     static DG_Transparency Opaque;
 };
 

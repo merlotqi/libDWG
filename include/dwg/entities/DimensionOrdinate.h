@@ -42,10 +42,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     // Get the feature location (coordinate point of the feature)
     XYZ FeatureLocation() const;
@@ -68,6 +68,5 @@ public:
     // Set whether the ordinate type is X (for dimensioning along the X-axis)
     void IsOrdinateTypeX(bool value);
 };
-CPL_SMARTER_PTR(DG_DimensionOrdinate)
 
 }// namespace dwg

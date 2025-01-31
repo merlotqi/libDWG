@@ -26,60 +26,100 @@
 
 namespace dwg {
 
+/**
+ * @class DG_Circle
+ * @brief Represents a circle entity in a DWG/DXF drawing.
+ */
 class LIBDWG_API DG_Circle : public DG_Entity
 {
-    // The center of the circle (in 3D space)
+    /// The center of the circle (in 3D space).
     XYZ _center = XYZ::Zero;
 
-    // The normal vector to the plane of the circle (default is the Z-axis)
+    /// The normal vector to the plane of the circle (default is the Z-axis).
     XYZ _normal = XYZ::AxisZ;
 
-    // The thickness of the circle (for 3D circles or discs)
+    /// The thickness of the circle (for 3D circles or discs).
     double _thickness = 0.0;
 
-    // The radius of the circle
+    /// The radius of the circle.
     double _radius = 1.0;
 
 public:
-    // Default constructor
+    /**
+     * @brief Default constructor.
+     */
     DG_Circle();
 
-    // Destructor
+    /**
+     * @brief Destructor.
+     */
     virtual ~DG_Circle();
 
-    // Override to return the object type of the Circle
+    /**
+     * @brief Gets the object type of the circle.
+     * @return The object type.
+     */
     virtual DG_ObjectType ObjectType() const override;
 
-    // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    /**
+     * @brief Gets the name of the object.
+     * @return The object name.
+     */
+    virtual std::string ObjectName() const override;
 
-    // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    /**
+     * @brief Gets the subclass marker associated with this object.
+     * @return The subclass marker.
+     */
+    virtual std::string SubclassMarker() const override;
 
-    // Getter for the normal vector
+    /**
+     * @brief Gets the normal vector of the circle's plane.
+     * @return The normal vector.
+     */
     XYZ Normal() const;
 
-    // Getter for the center of the circle
+    /**
+     * @brief Gets the center of the circle.
+     * @return The center point.
+     */
     XYZ Center() const;
 
-    // Getter for the thickness of the circle
+    /**
+     * @brief Gets the thickness of the circle.
+     * @return The thickness value.
+     */
     double Thickness() const;
 
-    // Getter for the radius of the circle
+    /**
+     * @brief Gets the radius of the circle.
+     * @return The radius value.
+     */
     double Radius() const;
 
-    // Setter for the normal vector
-    void Normal(const XYZ &);
+    /**
+     * @brief Sets the normal vector of the circle's plane.
+     * @param normal The new normal vector.
+     */
+    void Normal(const XYZ &normal);
 
-    // Setter for the center of the circle
-    void Center(const XYZ &);
+    /**
+     * @brief Sets the center of the circle.
+     * @param center The new center point.
+     */
+    void Center(const XYZ &center);
 
-    // Setter for the thickness of the circle
-    void Thickness(double);
+    /**
+     * @brief Sets the thickness of the circle.
+     * @param thickness The new thickness value.
+     */
+    void Thickness(double thickness);
 
-    // Setter for the radius of the circle
-    void Radius(double);
+    /**
+     * @brief Sets the radius of the circle.
+     * @param radius The new radius value.
+     */
+    void Radius(double radius);
 };
-CPL_SMARTER_PTR(DG_Circle)
 
 }// namespace dwg

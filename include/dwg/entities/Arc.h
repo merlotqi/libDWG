@@ -26,42 +26,73 @@
 
 namespace dwg {
 
+/**
+ * @class DG_Arc
+ * @brief Represents an arc entity in a DWG/DXF drawing.
+ *
+ * An arc is a portion of a circle defined by a start angle and an end angle.
+ * It inherits from DG_Circle, sharing properties such as center, radius, and normal.
+ */
 class LIBDWG_API DG_Arc : public DG_Circle
 {
-    // Start angle of the arc (in degrees)
+    /// Start angle of the arc (in degrees)
     double _startangle;
 
-    // End angle of the arc (in degrees)
+    /// End angle of the arc (in degrees)
     double _endangle;
 
 public:
-    // Default constructor
+    /**
+     * @brief Default constructor.
+     */
     DG_Arc();
 
-    // Destructor
+    /**
+     * @brief Destructor.
+     */
     ~DG_Arc();
 
-    // Override to return the object type of the DG_Arc
+    /**
+     * @brief Gets the object type of this entity.
+     * @return The object type identifier.
+     */
     virtual DG_ObjectType ObjectType() const override;
 
-    // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    /**
+     * @brief Gets the name of this object.
+     * @return The object name as a string.
+     */
+    virtual std::string ObjectName() const override;
 
-    // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    /**
+     * @brief Gets the subclass marker for this object.
+     * @return The subclass marker string.
+     */
+    virtual std::string SubclassMarker() const override;
 
-    // Getter for the start angle
+    /**
+     * @brief Gets the start angle of the arc.
+     * @return The start angle in degrees.
+     */
     double StartAngle() const;
 
-    // Getter for the end angle
+    /**
+     * @brief Gets the end angle of the arc.
+     * @return The end angle in degrees.
+     */
     double EndAngle() const;
 
-    // Setter for the start angle
-    void StartAngle(double);
+    /**
+     * @brief Sets the start angle of the arc.
+     * @param angle The new start angle in degrees.
+     */
+    void StartAngle(double angle);
 
-    // Setter for the end angle
-    void EndAngle(double);
+    /**
+     * @brief Sets the end angle of the arc.
+     * @param angle The new end angle in degrees.
+     */
+    void EndAngle(double angle);
 };
-CPL_SMARTER_PTR(DG_Arc)
 
 }// namespace dwg

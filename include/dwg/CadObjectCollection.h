@@ -32,26 +32,26 @@ class LIBDWG_API DG_CadObjectCollection
 {
 protected:
     /// \brief Internal storage of CAD objects as a vector of smart pointers.
-    std::vector<CadObjectPtr> _entries;
+    std::vector<DG_CadObject *> _entries;
 
     /// \brief Pointer to the owning CAD object of this collection.
-    CadObject *_owner;
+    DG_CadObject *_owner;
 
 public:
     /// \brief Constructor to initialize the collection with an owner.
     /// \param owner Pointer to the owning CAD object.
-    CadObjectCollection(CadObject *owner);
+    DG_CadObjectCollection(DG_CadObject *owner);
 
     /// \brief Destructor to clean up resources.
-    ~CadObjectCollection();
+    ~DG_CadObjectCollection();
 
     /// \brief Add a CAD object to the collection.
     /// \param item Pointer to the CAD object to add.
-    void Add(CadObject *item);
+    void Add(DG_CadObject *item);
 
     /// \brief Remove a CAD object from the collection.
     /// \param item Pointer to the CAD object to remove.
-    void Remove(CadObject *item);
+    void Remove(DG_CadObject *item);
 
     /// \brief Get the number of CAD objects in the collection.
     /// \return The count of objects in the collection.
@@ -59,20 +59,20 @@ public:
 
     /// \brief Get the owning CAD object of the collection.
     /// \return Pointer to the owning CAD object.
-    CadObject *Owner() const;
+    DG_CadObject *Owner() const;
 
     /// \brief Access a CAD object in the collection by its index.
     /// \param index The index of the CAD object to access.
     /// \return Smart pointer to the CAD object at the specified index.
-    CadObjectPtr operator[](int index);
+    DG_CadObject operator[](int index);
 
     /// \brief CPL::Delegate triggered when a CAD object is added to the collection.
     /// \details This allows registering custom callbacks that will execute when an object is added.
-    CPL::Delegate<void(CadObject *)> OnAdd;
+    CPL::Delegate<void(DG_CadObject *)> OnAdd;
 
     /// \brief CPL::Delegate triggered when a CAD object is removed from the collection.
     /// \details This allows registering custom callbacks that will execute when an object is removed.
-    CPL::Delegate<void(CadObject *)> OnRemove;
+    CPL::Delegate<void(DG_CadObject *)> OnRemove;
 };
 
 

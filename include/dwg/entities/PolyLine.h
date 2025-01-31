@@ -36,7 +36,7 @@ public:
     DG_Polyline();
     ~DG_Polyline();
 
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     double Elevation() const;
     void Elevation(double);
@@ -59,7 +59,6 @@ public:
     DG_SmoothSurfaceType SmoothSurface() const;
     void SmoothSurface(DG_SmoothSurfaceType);
 };
-CPL_SMARTER_PTR(DG_Polyline)
 
 class Polyline2D : public DG_Polyline
 {

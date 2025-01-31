@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/GroupCodeValueType.h>
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <vector>
@@ -37,19 +38,19 @@ public:
         CPL::Any Value;
         DG_GroupCodeValueType GroupCode;
         bool HasLinkedObject;
-        DG_XRecordPtr Owner;
+        DG_XRecord *Owner;
     };
 
 public:
     DG_XRecord();
 
-    DG_XRecord(const char *);
+    DG_XRecord(const std::string &);
 
     DG_ObjectType ObjectType() const override;
 
-    CPL::String ObjectName() const override;
+    std::string ObjectName() const override;
 
-    CPL::String SubclassMarker() const override;
+    std::string SubclassMarker() const override;
 
     DG_DictionaryCloningFlags CloningFlags() const;
 
@@ -59,6 +60,5 @@ public:
 
     void CreateEntry(int code, CPL::Any value);
 };
-CPL_SMARTER_PTR(DG_XRecord)
 
 }// namespace dwg

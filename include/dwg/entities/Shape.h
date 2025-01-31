@@ -27,7 +27,6 @@
 namespace dwg {
 
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle)
 
 class LIBDWG_API DG_Shape : public DG_Entity
 {
@@ -40,10 +39,10 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
     double Thickness() const;
     void Thickness(double);
@@ -54,7 +53,7 @@ public:
     double Size() const;
     void Size(double);
 
-    DG_TextStylePtr ShapeStyle() const;
+    DG_TextStyle *ShapeStyle() const;
     void ShapeStyle(DG_TextStyle *);
 
     double Rotation() const;
@@ -72,6 +71,5 @@ public:
     unsigned short ShapeIndex() const;
     void ShapeIndex(unsigned short);
 };
-CPL_SMARTER_PTR(DG_Shape)
 
 }// namespace dwg

@@ -1,4 +1,20 @@
 file(GLOB_RECURSE _headers ${CMAKE_CURRENT_LIST_DIR}/*.h  CONFIGURE_DEPEND)
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/dwg/dwg_version.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/dwg/dwg_version.h
+)
+
+generate_export_header(
+	dwg
+	EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/dwg/exports.h
+	EXPORT_MACRO_NAME LIBDWG_API
+)
+set(_headers ${_headers} 
+	${CMAKE_CURRENT_BINARY_DIR}/dwg/exports.h
+	${CMAKE_CURRENT_BINARY_DIR}/dwg/dwg_version.h
+)
+
 target_sources(dwg PRIVATE ${_headers})
 unset(_headers)
 

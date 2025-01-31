@@ -25,13 +25,14 @@
 namespace dwg {
 namespace io {
 
-    DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterAC18(stream, encoding)
-    {
-    }
+DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream,
+                                         Encoding encoding)
+    : DwgStreamWriterAC18(stream, encoding)
+{
+}
 
-    void DwgStreamWriterAC21::WriteVariableText(const CPL::String &value) {}
-    void DwgStreamWriterAC21::WriteTextUnicode(const CPL::String &value) {}
+void DwgStreamWriterAC21::WriteVariableText(const std::string &value) {}
+void DwgStreamWriterAC21::WriteTextUnicode(const std::string &value) {}
 
 }// namespace io
 }// namespace dwg

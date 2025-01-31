@@ -23,14 +23,14 @@
 #pragma once
 
 #include <dwg/Color.h>
+#include <dwg/Coordinate.h>
 #include <dwg/FlowDirectionType.h>
 #include <dwg/LineSpacingStyle.h>
-#include <dwg/LineweightType.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAttachmentDirectionType.h>
 #include <dwg/TextAttachmentPointType.h>
 #include <dwg/TextAttachmentType.h>
-#include <dwg/Coordinate.h>
 #include <dwg/entities/BlockContentConnectionType.h>
 #include <dwg/entities/MultiLeaderPathType.h>
 #include <dwg/objects/LeaderLinePropertOverrideFlags.h>
@@ -39,13 +39,8 @@
 namespace dwg {
 
 class DG_TextStyle;
-CPL_SMARTER_PTR(DG_TextStyle)
-
 class DG_LineType;
-CPL_SMARTER_PTR(DG_LineType)
-
 class DG_BlockRecord;
-CPL_SMARTER_PTR(DG_BlockRecord)
 
 class LIBDWG_API DG_MultiLeaderAnnotContext : public DG_NonGraphicalObject
 {
@@ -65,10 +60,10 @@ public:
         int Index;
         DG_MultiLeaderPathType PathType;
         DG_Color LineColor;
-        DG_LineType LineType;
+        DG_LineType *LineType;
         DG_LineweightType LineWeight;
         double ArrowheadSize;
-        DG_BlockRecordPtr ArrowHead;
+        DG_BlockRecord *ArrowHead;
         DG_LeaderLinePropertOverrideFlags OverrideFlags;
     };
 
@@ -89,8 +84,8 @@ public:
     DG_MultiLeaderAnnotContext();
 
     DG_ObjectType ObjectType() const override;
-    CPL::String ObjectName() const override;
-    CPL::String SubclassMarker() const override;
+    std::string ObjectName() const override;
+    std::string SubclassMarker() const override;
 
     std::vector<LeaderRoot> LeaderRoots() const;
 
@@ -124,15 +119,15 @@ public:
     bool HasTextContents() const;
     void HasTextContents(bool);
 
-    CPL::String TextLabel() const;
-    void TextLabel(const char *);
+    std::string TextLabel() const;
+    void TextLabel(const std::string &);
 
     XYZ TextNormal() const;
     void TextNormal(const XYZ &);
-    
-    DG_TextStylePtr TextStyle();
+
+    DG_TextStyle *TextStyle();
     void TextStyle(DG_TextStyle *);
-    
+
     XYZ TextLocation() const;
     void TextLocation(const XYZ &);
 
@@ -153,7 +148,7 @@ public:
 
     DG_Color TextColor() const;
     void TextColor(const DG_Color &);
-    
+
     DG_TextAttachmentPointType TextAttachmentPoint() const;
     void TextAttachmentPoint(DG_TextAttachmentPointType);
 
@@ -183,60 +178,59 @@ public:
 
     double ColumnWidth() const;
     void ColumnWidth(double);
-    
+
     double ColumnGutter() const;
     void ColumnGutter(double);
-    
+
     bool ColumnFlowReversed() const;
     void ColumnFlowReversed(bool);
-    
+
     std::vector<double> ColumnSizes() const;
 
     bool WordBreak() const;
     void WordBreak(bool);
-    
+
     bool HasContentsBlock() const;
     void HasContentsBlock(bool);
-    
-    DG_BlockRecordPtr BlockContent() const;
+
+    DG_BlockRecord *BlockContent() const;
     void BlockContent(DG_BlockRecord *);
-    
+
     XYZ BlockContentNormal() const;
     void BlockContentNormal(const XYZ &);
-    
+
     XYZ BlockContentLocation() const;
     void BlockContentLocation(const XYZ &);
-    
+
     XYZ BlockContentScale() const;
     void BlockContentScale(const XYZ &);
-    
+
     double BlockContentRotation() const;
     void BlockContentRotation(double);
-    
+
     DG_Color BlockContentColor() const;
     void BlockContentColor(const DG_Color &);
-    
+
     Matrix4 TransformationMatrix() const;
-    void TransformationMatrix(cons Matrix4 &);
-    
+    void TransformationMatrix(const Matrix4 &);
+
     XYZ BasePoint() const;
     void BasePoint(const XYZ &);
-    
+
     XYZ BaseDirection() const;
     void BaseDirection(const XYZ &);
-    
+
     XYZ BaseVertical() const;
     void BaseVertical(const XYZ &);
 
     bool NormalReversed() const;
     void NormalReversed(bool);
-    
+
     DG_TextAttachmentType TextTopAttachment() const;
     void TextTopAttachment(DG_TextAttachmentType);
-    
+
     DG_TextAttachmentType TextBottomAttachment() const;
     void TextBottomAttachment(DG_TextAttachmentType);
 };
-CPL_SMARTER_PTR(DG_MultiLeaderAnnotContext)
 
 }// namespace dwg

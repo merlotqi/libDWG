@@ -23,8 +23,6 @@
 #pragma once
 
 // clang-format off
-#include <dwg/DxfFileToken.h>
-#include <dwg/DxfSubclassMarker.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/ObjectType.h>
 #include <dwg/exports.h>
@@ -36,7 +34,6 @@
 namespace dwg {
 
 class DG_CadDocument;
-CPL_SMARTER_PTR(DG_CadDocument)
 
 /// \brief Base class representing a CAD object with support for handle-based identification
 /// and ownership hierarchy.
@@ -46,17 +43,16 @@ protected:
     /// \brief Unique handle identifying the CAD object.
     unsigned long long _handle;
 
-    /// \brief Weak pointer to the owning CAD object.
-    CPL::WeakSmarterPtr<DG_CadObject> _owner;
+    DG_CadObject *_owner;
 
-    DG_CadDocumentWPtr _document;
+    DG_CadDocument *_document;
 
 public:
     /// \brief Default constructor.
     DG_CadObject() = default;
 
     /// \brief Virtual destructor.
-    virtual ~DG_CadObject() noexcept override;
+    virtual ~DG_CadObject() override;
 
     /// \brief Get the type of the CAD object.
     /// \details This method must be implemented by derived classes to return the specific
@@ -68,13 +64,13 @@ public:
     /// \details This method must be implemented by derived classes to return the name
     /// associated with the object.
     /// \return A string representing the object's name.
-    virtual CPL::String ObjectName() const = 0;
+    virtual std::string ObjectName() const = 0;
 
     /// \brief Get the subclass marker of the CAD object.
     /// \details This method must be implemented by derived classes to return a marker
     /// indicating the object's subclass.
     /// \return A string representing the subclass marker.
-    virtual CPL::String SubclassMarker() const = 0;
+    virtual std::string SubclassMarker() const = 0;
 
     /// \brief Get the unique handle of the CAD object.
     /// \return The handle of the object as an unsigned long long value.
@@ -83,13 +79,13 @@ public:
     /// \brief Get the owning CAD object of this object.
     /// \details The ownership establishes a hierarchical relationship between CAD objects.
     /// \return A smart pointer to the owning CAD object, or nullptr if no owner is set.
-    CPL::SmarterPtr<DG_CadObject> Owner();
+    DG_CadObject *Owner() const;
 
-    DG_CadDocumentPtr Document();
+    DG_CadDocument *Document() const;
 
     void Document(DG_CadDocument *);
 
-    virtual CPL::SmarterPtr<DG_CadObject> Clone();
+    virtual DG_CadObject *Clone();
 
 protected:
     /// \brief Set the unique handle of the CAD object.
@@ -100,18 +96,9 @@ protected:
     /// \param obj Pointer to the new owning CAD object.
     void Owner(DG_CadObject *obj);
 
-    virtual void AssignDocument(DG_CadDocument *doc);
-    virtual void UnassignDocument();
-    DG_TableEntryPtr updateTable(DG_TableEntry *entity, DG_TablePtr table);
-
-    // template<class T>
-    // CPL::SmarterPtr<T>
-    // updateCollection(T *entity, ObjectDictionaryCollection<T> *collection)
-    // {
-    //     return NULL;
-    // }
+private:
+    DG_CadObject(const DG_CadObject &) = delete;
+    DG_CadObject &operator=(const DG_CadObject &) = delete;
 };
-CPL_SMARTER_PTR(DG_CadObject)
-
 
 }// namespace dwg

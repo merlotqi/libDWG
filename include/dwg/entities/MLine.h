@@ -30,11 +30,10 @@
 namespace dwg {
 
 class DG_MLineStyle;
-CPL_SMARTER_PTR(DG_MLineStyle);
 
 class LIBDWG_API DG_MLine : public DG_Entity
 {
-    DG_MLineStyleWPtr _style;
+    DG_MLineStyle *_style;
     double _scaleFactor;
     DG_MLineJustification _justification;
     DG_MLineFlags _flags;
@@ -64,12 +63,12 @@ public:
     virtual DG_ObjectType ObjectType() const override;
 
     // Override to return the name of the object
-    virtual CPL::String ObjectName() const override;
+    virtual std::string ObjectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual CPL::String SubclassMarker() const override;
+    virtual std::string SubclassMarker() const override;
 
-    DG_MLineStylePtr Style() const;
+    DG_MLineStyle *Style() const;
     void Style(DG_MLineStyle *);
 
     double ScaleFactor() const;
@@ -93,6 +92,5 @@ public:
 private:
     std::vector<Vertex> _vertices;
 };
-CPL_SMARTER_PTR(DG_MLine)
 
 }// namespace dwg

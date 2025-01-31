@@ -30,19 +30,18 @@ namespace dwg {
 class LIBDWG_API DG_NonGraphicalObject : public DG_CadObject, DG_INamedCadObject
 {
 protected:
-    CPL::String _name;
+    std::string _name;
 
 public:
     DG_NonGraphicalObject();
 
-    DG_NonGraphicalObject(const char *name);
+    DG_NonGraphicalObject(const std::string &name);
 
     virtual ~DG_NonGraphicalObject() override;
 
-    virtual CPL::String Name() const override;
+    virtual std::string Name() const override;
 
-    virtual void Name(const char *value);
+    virtual void Name(const std::string &value);
 };
-CPL_SMARTER_PTR(DG_NonGraphicalObject)
 
 }// namespace dwg
