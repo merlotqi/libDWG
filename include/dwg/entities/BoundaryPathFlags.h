@@ -26,41 +26,41 @@
 
 namespace dwg {
 
-/// Defines the boundary path type of the hatch.
-/// \remarks Bit flag
+/**
+ * @enum DG_BoundaryPathFlag
+ * @brief Defines the flags for boundary path types of a hatch in a DWG/DXF drawing.
+ *
+ * This enum specifies different properties and characteristics of a hatch boundary path.
+ * The flags can be combined to describe multiple attributes of the boundary, such as 
+ * whether it is external, a polyline, or self-intersecting, among others.
+ * \remarks Bit flag
+ */
 enum DG_BoundaryPathFlag
 {
-    /// Default.
-    Default = 0,
-    /// External.
-    External = 1,
-    /// Polyline.
-    Polyline = 2,
-    /// Derived.
-    Derived = 4,
-    /// Text box.
-    Textbox = 8,
-    /// Outermost.
-    Outermost = 16,
-    /// Loop is not closed.
-    NotClosed = 32,
-    /// Self-intersecting loop.
-    SelfIntersecting = 64,
-    /// Text loop surrounded by an even number of loops.
-    TextIsland = 128,
-    /// Duplicate loop.
-    Duplicate = 256,
-    /// The bounding area is an annotative block.
-    IsAnnotative = 512,
-    /// The bounding type does not support scaling.
-    DoesNotSupportScale = 1024,
-    /// Forces all annotatives to be visible.
-    ForceAnnoAllVisible = 2048,
-    /// Orients hatch loop to paper.
-    OrientToPaper = 4096,
-    /// Describes if the hatch is an annotative block.
-    IsAnnotativeBlock = 8192,
+    Default = 0,               ///< Default boundary path.
+    External = 1,              ///< External boundary path.
+    Polyline = 2,              ///< Polyline boundary path.
+    Derived = 4,               ///< Derived boundary path.
+    Textbox = 8,               ///< Text box boundary path.
+    Outermost = 16,            ///< Outermost boundary path.
+    NotClosed = 32,            ///< Loop is not closed.
+    SelfIntersecting = 64,     ///< Self-intersecting loop.
+    TextIsland = 128,          ///< Text island boundary path.
+    Duplicate = 256,           ///< Duplicate loop.
+    IsAnnotative = 512,        ///< Annotative bounding area.
+    DoesNotSupportScale = 1024,///< Bounding type does not support scaling.
+    ForceAnnoAllVisible = 2048,///< Forces all annotatives to be visible.
+    OrientToPaper = 4096,      ///< Orients hatch loop to paper.
+    IsAnnotativeBlock = 8192,  ///< Annotative block boundary path.
 };
+
+/**
+ * @typedef DG_BoundaryPathFlags
+ * @brief Represents a set of flags for boundary path types.
+ *
+ * This type is a bitmask, which allows for the efficient combination and manipulation of
+ * multiple `DG_BoundaryPathFlag` values to describe various attributes of a hatch boundary path.
+ */
 CPL_DECLARE_FLAGS(DG_BoundaryPathFlags, DG_BoundaryPathFlag)
 
 }// namespace dwg

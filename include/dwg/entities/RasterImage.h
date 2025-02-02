@@ -22,12 +22,12 @@
 
 #pragma once
 
-#include <dwg/entities/CadImageBase.h>
+#include <dwg/entities/CadWipeoutBase.h>
 
 namespace dwg {
 
 class ImageDefinition;
-class LIBDWG_API DG_RasterImage : public DG_CadImageBase
+class LIBDWG_API DG_RasterImage : public DG_CadWipeoutBase
 {
 public:
     DG_RasterImage();

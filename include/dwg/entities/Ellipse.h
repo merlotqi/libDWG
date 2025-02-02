@@ -26,77 +26,154 @@
 
 namespace dwg {
 
+/**
+ * @class DG_Ellipse
+ * @brief Represents an ellipse entity in a DWG/DXF drawing.
+ *
+ * The DG_Ellipse class defines an ellipse with properties such as center, normal vector, radius ratio,
+ * start and end parameters, and thickness. This class allows manipulation of ellipse geometries in a DWG/DXF drawing.
+ */
 class LIBDWG_API DG_Ellipse : public DG_Entity
 {
-    XYZ _normal =
-            XYZ::AxisZ;// The normal vector of the ellipse (default is Z-axis)
-    XYZ _center =
-            XYZ::Zero;// The center point of the ellipse (default is the origin)
-    XYZ _endPoint =
-            XYZ::AxisX;// A point on the ellipse (default is on the X-axis)
-    double _radiusRatio = 0.0;// The ratio of the radii (default is 0)
-    double _startParameter =
-            0.0;// The start parameter for the ellipse (default is 0)
-    double _endParameter =
-            2 * M_PI;// The end parameter for the ellipse (default is 2π)
+    XYZ _normal;           ///< The normal vector of the ellipse (default is Z-axis)
+    XYZ _center;           ///< The center point of the ellipse (default is the origin)
+    XYZ _endPoint;         ///< A point on the ellipse (default is on the X-axis)
+    double _radiusRatio;   ///< The ratio of the radii (default is 0)
+    double _startParameter;///< The start parameter for the ellipse (default is 0)
+    double _endParameter;  ///< The end parameter for the ellipse (default is 2π)
+    double _thickness;     ///< The thickness of the ellipse (default is 0)
 
 public:
-    // Default constructor
+    /**
+     * @brief Default constructor
+     *
+     * Initializes an ellipse with default values (center at origin, normal along Z-axis, and other default properties).
+     */
     DG_Ellipse();
 
-    // Destructor
+    /**
+     * @brief Destructor
+     */
     ~DG_Ellipse();
 
-    // Get the object type of the ellipse
+    /**
+     * @brief Get the object type of the ellipse
+     * 
+     * @return DG_ObjectType The object type of the ellipse.
+     */
     DG_ObjectType ObjectType() const override;
 
-    // Get the object name of the ellipse
+    /**
+     * @brief Get the object name of the ellipse
+     * 
+     * @return std::string The name of the ellipse object.
+     */
     std::string ObjectName() const override;
 
-    // Get the subclass marker of the ellipse
+    /**
+     * @brief Get the subclass marker of the ellipse
+     * 
+     * @return std::string The subclass marker associated with the ellipse.
+     */
     std::string SubclassMarker() const override;
 
-    // Get the normal vector of the ellipse
+    /**
+     * @brief Get the normal vector of the ellipse
+     * 
+     * @return XYZ The normal vector of the ellipse.
+     */
     XYZ Normal() const;
 
-    // Get the center of the ellipse
+    /**
+     * @brief Get the center of the ellipse
+     * 
+     * @return XYZ The center of the ellipse.
+     */
     XYZ Center() const;
 
-    // Get a point on the ellipse
+    /**
+     * @brief Get a point on the ellipse
+     * 
+     * @return XYZ A point on the ellipse.
+     */
     XYZ EndPoint() const;
 
-    // Get the thickness of the ellipse
+    /**
+     * @brief Get the thickness of the ellipse
+     * 
+     * @return double The thickness of the ellipse.
+     */
     double Thickness() const;
 
-    // Get the radius ratio of the ellipse
+    /**
+     * @brief Get the radius ratio of the ellipse
+     * 
+     * @return double The radius ratio of the ellipse.
+     */
     double RadiusRatio() const;
 
-    // Get the start parameter of the ellipse
+    /**
+     * @brief Get the start parameter of the ellipse
+     * 
+     * @return double The start parameter of the ellipse.
+     */
     double StartParameter() const;
 
-    // Get the end parameter of the ellipse
+    /**
+     * @brief Get the end parameter of the ellipse
+     * 
+     * @return double The end parameter of the ellipse.
+     */
     double EndParameter() const;
 
-    // Set the normal vector of the ellipse
-    void Normal(const XYZ &);
+    /**
+     * @brief Set the normal vector of the ellipse
+     * 
+     * @param normal The normal vector to set for the ellipse.
+     */
+    void Normal(const XYZ &normal);
 
-    // Set the center of the ellipse
-    void Center(const XYZ &);
+    /**
+     * @brief Set the center of the ellipse
+     * 
+     * @param center The center point to set for the ellipse.
+     */
+    void Center(const XYZ &center);
 
-    // Set a point on the ellipse
-    void EndPoint(const XYZ &);
+    /**
+     * @brief Set a point on the ellipse
+     * 
+     * @param endPoint The point to set on the ellipse.
+     */
+    void EndPoint(const XYZ &endPoint);
 
-    // Set the thickness of the ellipse
-    void Thickness(double);
+    /**
+     * @brief Set the thickness of the ellipse
+     * 
+     * @param thickness The thickness to set for the ellipse.
+     */
+    void Thickness(double thickness);
 
-    // Set the radius ratio of the ellipse
-    void RadiusRatio(double);
+    /**
+     * @brief Set the radius ratio of the ellipse
+     * 
+     * @param radiusRatio The radius ratio to set for the ellipse.
+     */
+    void RadiusRatio(double radiusRatio);
 
-    // Set the start parameter of the ellipse
-    void StartParameter(double);
+    /**
+     * @brief Set the start parameter of the ellipse
+     * 
+     * @param startParam The start parameter to set for the ellipse.
+     */
+    void StartParameter(double startParam);
 
-    // Set the end parameter of the ellipse
-    void EndParameter(double);
+    /**
+     * @brief Set the end parameter of the ellipse
+     * 
+     * @param endParam The end parameter to set for the ellipse.
+     */
+    void EndParameter(double endParam);
 };
 
 }// namespace dwg

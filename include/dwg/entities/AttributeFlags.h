@@ -26,20 +26,30 @@
 
 namespace dwg {
 
-///Attribute flags.
+/**
+ * @enum DG_AttributeFlag
+ * @brief Defines the flags for attributes in a DWG/DXF drawing.
+ *
+ * The flags specify various attributes of an attribute entity, such as visibility,
+ * constant value, verification requirements, and preset status.
+ */
 enum DG_AttributeFlag
 {
-    /// No flags.
-    None = 0,
-    /// Attribute is invisible (does not appear).
-    Hidden = 1,
-    /// This is a constant attribute.
-    Constant = 2,
-    /// Verification is required on input of this attribute.
-    Verify = 4,
-    /// Attribute is preset (no prompt during insertion).
-    Preset = 8
+    None = 0,    ///< No flags.
+    Hidden = 1,  ///< Attribute is hidden.
+    Constant = 2,///< Attribute is constant.
+    Verify = 4,  ///< Attribute requires verification on input.
+    Preset = 8   ///< Attribute is preset, no user prompt.
 };
+
+/**
+ * @typedef DG_AttributeFlags
+ * @brief Represents a set of flags that can be applied to an attribute entity.
+ *
+ * This type is a bitmask representing multiple `DG_AttributeFlag` values, allowing
+ * for efficient storage and manipulation of attribute properties in a single variable.
+ */
 CPL_DECLARE_FLAGS(DG_AttributeFlags, DG_AttributeFlag)
+
 
 }// namespace dwg

@@ -41,23 +41,79 @@
 
 namespace dwg {
 
+/**
+ * @class DG_DimensionStyle
+ * @brief Represents a dimension style in a DWG/DXF drawing.
+ *
+ * A dimension style defines the appearance and formatting of dimensions within a drawing. 
+ * It includes settings for units, tolerances, text formatting, arrow settings, and more.
+ */
 class LIBDWG_API DG_DimensionStyle : public DG_TableEntry
 {
 public:
+    /** Default name for the dimension style. */
     static constexpr auto DefaultName = "Standard";
+
+    /**
+     * @brief Retrieves the default dimension style.
+     * 
+     * @return A pointer to the default dimension style.
+     */
     static DG_DimensionStyle *Default();
 
 public:
+    /** 
+     * @brief Constructs a new DG_DimensionStyle object. 
+     */
     DG_DimensionStyle();
+
+    /**
+     * @brief Constructs a new DG_DimensionStyle object with the specified name.
+     * 
+     * @param name The name of the dimension style.
+     */
     DG_DimensionStyle(const std::string &name);
+
+    /**
+     * @brief Destroy the dg dimensionstyle object
+     * 
+     */
     ~DG_DimensionStyle();
 
+    /**
+     * @brief Retrieves the object type of this dimension style.
+     * 
+     * @return The object type.
+     */
     DG_ObjectType ObjectType() const override;
+
+    /**
+     * @brief Retrieves the name of this dimension style.
+     * 
+     * @return The name of the object.
+     */
     std::string ObjectName() const override;
+
+    /**
+     * @brief Retrieves the subclass marker for this dimension style.
+     * 
+     * @return The subclass marker as a string.
+     */
     std::string SubclassMarker() const override;
 
+    /**
+     * @brief Retrieves the post-fix for dimension style formatting.
+     * 
+     * @return The post-fix as a string.
+     */
     std::string PostFix() const;
-    void PostFix(const std::string &);
+
+    /**
+     * @brief Sets the post-fix for dimension style formatting.
+     * 
+     * @param postFix The new post-fix string.
+     */
+    void PostFix(const std::string &postFix);
 
     std::string AlternateDimensioningSuffix() const;
     void AlternateDimensioningSuffix(const std::string &);

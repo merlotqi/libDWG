@@ -24,14 +24,17 @@
 
 namespace dwg {
 
-/// The values of this enum DG_indicate how the multileader connects to the content block.
+/**
+ * @enum DG_BlockContentConnectionType
+ * @brief Defines how a multi-leader connects to a content block in a DWG/DXF drawing.
+ *
+ * This enum specifies the different connection points for a multi-leader that links to a block.
+ * It determines whether the leader connects to the block's extents or base point.
+ */
 enum DG_BlockContentConnectionType : short
 {
-    /// MultiLeader connects to the block extents.
-    BlockExtents = 0,
-
-    /// MultiLeader connects to the block base point.
-    BasePoint = 1,
+    BlockExtents = 0,///< Leader connects to the block's extents.
+    BasePoint = 1,   ///< Leader connects to the block's base point.
 };
 
 }// namespace dwg

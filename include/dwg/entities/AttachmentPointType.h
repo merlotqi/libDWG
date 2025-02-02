@@ -24,7 +24,13 @@
 
 namespace dwg {
 
-/// Attachment point for Multiline text.
+/**
+ * @enum DG_AttachmentPointType
+ * @brief Defines the attachment points for multiline text in a DWG/DXF drawing.
+ *
+ * The attachment points determine where the text is positioned relative to its insertion point.
+ * These points are used to control the alignment of text in both horizontal and vertical directions.
+ */
 enum DG_AttachmentPointType : short
 {
     /// Top left.

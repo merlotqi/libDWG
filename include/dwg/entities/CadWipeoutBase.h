@@ -32,27 +32,34 @@ namespace dwg {
 class DG_ImageDefinition;
 class DG_ImageDefinitionReactor;
 
+/**
+ * @class DG_CadWipeoutBase
+ * @brief Represents a wipeout entity in a DWG/DXF drawing.
+ *
+ * DG_CadWipeoutBase is a base class for wipeout entities in CAD drawings. 
+ * A wipeout is a drawing entity used to obscure or mask parts of the drawing by filling 
+ * a specified region with a solid fill, effectively "wiping out" or hiding the area behind it. 
+ * This class is derived from DG_Entity and provides the necessary functionality to handle 
+ * the specific properties of wipeout entities.
+ */
 class LIBDWG_API DG_CadWipeoutBase : public DG_Entity
 {
-    int _classVersion;///< Internal version of the class for compatibility.
-    XYZ _insertPoint; ///< Insertion point of the wipeout object.
-    XYZ _uvector;     ///< U-direction vector defining the orientation.
-    XYZ _vvector;     ///< V-direction vector defining the orientation.
-    XY _size;         ///< Size of the wipeout object.
+    int _classVersion;          ///< Internal version of the class for compatibility.
+    XYZ _insertPoint;           ///< Insertion point of the wipeout object.
+    XYZ _uvector;               ///< U-direction vector defining the orientation.
+    XYZ _vvector;               ///< V-direction vector defining the orientation.
+    XY _size;                   ///< Size of the wipeout object.
     DG_ImageDisplayFlags _flags;///< Display flags controlling image properties.
     bool _clippingState;        ///< Indicates whether clipping is enabled.
     unsigned char _brightness;  ///< Brightness level of the image.
     unsigned char _contrast;    ///< Contrast level of the image.
     unsigned char _fade;        ///< Fade level of the image.
 
-    DG_ClipMode _clipMode;///< Clipping mode used for the wipeout.
-    DG_ClipType _clipType;///< Type of clipping applied.
-    std::vector<XY>
-            _clipBoundaryVertices;///< Vertices defining the clipping boundary.
-    DG_ImageDefinition
-            *_definition;///< Reference to the associated image definition.
-    DG_ImageDefinitionReactor
-            *_definitionReactor;///< Reactor for image definition changes.
+    DG_ClipMode _clipMode;                        ///< Clipping mode used for the wipeout.
+    DG_ClipType _clipType;                        ///< Type of clipping applied.
+    std::vector<XY> _clipBoundaryVertices;        ///< Vertices defining the clipping boundary.
+    DG_ImageDefinition *_definition;              ///< Reference to the associated image definition.
+    DG_ImageDefinitionReactor *_definitionReactor;///< Reactor for image definition changes.
 
 public:
     /**

@@ -24,62 +24,69 @@
 
 #include <dwg/Color.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/entities/HatchBoundaryPath.h>
-#include <dwg/entities/HatchGradientPattern.h>
-#include <dwg/entities/HatchPattern.h>
 #include <dwg/entities/HatchPatternType.h>
 #include <dwg/entities/HatchStyleType.h>
 
 namespace dwg {
 
+class DG_HatchPattern;
+class DG_HatchBoundaryPath;
+class DG_HatchGradientPattern;
 class LIBDWG_API DG_Hatch : public DG_Entity
 {
 public:
     DG_Hatch();
     ~DG_Hatch();
+    // Override to return the object type of the Arc
+    virtual DG_ObjectType ObjectType() const override;
 
-    double elevation;// 30
-    XYZ normal;      // 210, 220, 230
+    // Override to return the name of the object
+    virtual std::string ObjectName() const override;
 
-    HatchPattern pattern;        // 2, name
-    bool isSolid;                // 70
-    bool isAssociative;          // 71
-    HatchStyleType style;        // 75
-    HatchPatternType patternType;// 76
+    // Override to return the subclass marker associated with this object
+    virtual std::string SubclassMarker() const override;
 
-    // 52
-    double patternAngle() const { return pattern.angle; }
-    void patternAngle(double angle) { pattern.angle = angle; }
+    double Elevation() const;
+    void Elevation(double elevation);
 
-    // 41
-    double patternScale() const { return pattern.scale; }
-    void patternScale(double scale) { pattern.scale = scale; }
+    XYZ Normal() const;
+    void Normal(const XYZ &);
 
-    //73	For MPolygon, boundary annotation flag:
-    //0 = boundary is not an annotated boundary
-    //1 = boundary is an annotated boundary
+    DG_HatchPattern *Pattern() const;
+    void Pattern(DG_HatchPattern *);
 
-    //78	Number of pattern definition lines
-    //varies
-    //Pattern line data.Repeats number of times specified by code 78. See Pattern Data
+    bool IsSolid() const;
+    void IsSolid(bool);
 
-    // 77
-    bool isDouble;
+    bool IsAssociative() const;
+    void IsAssociative(bool);
 
-    double pixelSize;//47
+    DG_HatchStyleType Style() const;
+    void Style(DG_HatchStyleType);
 
-    //11	For MPolygon, offset vector
+    DG_HatchPatternType PatternType() const;
+    void PatternType(DG_HatchPatternType);
 
-    //99	For MPolygon, number of degenerate boundary paths(loops), where a degenerate boundary path is a border that is ignored by the hatch
+    double PatternAngle() const;
+    void PatternAngle(double);
 
-    std::vector<XY> seedPoints;// 98 count, 10, 20
+    double PatternScale() const;
+    void PatternScale(double);
 
-    // 470, name
-    HatchGradientPattern gradientColor;
+    bool IsDouble() const;
+    void IsDouble(bool);
 
+    double PixelSize() const;
+    void PixelSize(double);
 
-    std::vector<HatchBoundaryPath> paths;// 91 count
+    std::vector<XY> SeedPoints() const;
+    void SeedPoints(const std::vector<XY> &);
+
+    DG_HatchGradientPattern *GradientColor() const;
+    void GradientColor(DG_HatchGradientPattern *);
+
+    std::vector<DG_HatchBoundaryPath *> Paths() const;
+    void Paths(const std::vector<DG_HatchBoundaryPath *> &);
 };
-
 
 }// namespace dwg

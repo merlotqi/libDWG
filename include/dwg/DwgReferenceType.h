@@ -24,20 +24,32 @@
 
 namespace dwg {
 
+/**
+ * @enum DG_DwgReferenceType
+ * @brief Specifies the types of references in a DWG file.
+ *
+ * This enumeration defines different types of references between CAD objects, 
+ * including ownership and pointer relationships.
+ */
 enum class DG_DwgReferenceType
 {
+    /// Undefined reference type.
     Undefined = 0,
 
-    /// Soft ownership reference: the owner does not need the owned object. The owned object cannot exist by itself.
+    /// Soft ownership reference: the owner does not need the owned object,
+    /// but the owned object cannot exist independently.
     SoftOwnership = 2,
 
-    /// Hard ownership reference: the owner needs the owned object. The owned object cannot exist by itself.
+    /// Hard ownership reference: the owner requires the owned object,
+    /// and the owned object cannot exist independently.
     HardOwnership = 3,
 
-    /// Soft pointer reference: the referencing object does not need the referenced object and vice versa.
+    /// Soft pointer reference: the referencing object does not need the referenced object,
+    /// and the referenced object does not depend on the referencing object.
     SoftPointer = 4,
 
-    /// Hard pointer reference: the referencing object needs the referenced object, but both are owned by another object.
+    /// Hard pointer reference: the referencing object requires the referenced object,
+    /// but both objects are owned by another entity.
     HardPointer = 5,
 };
 

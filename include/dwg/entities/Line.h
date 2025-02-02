@@ -26,39 +26,96 @@
 
 namespace dwg {
 
+/**
+ * @class DG_Line
+ * @brief Represents a line entity in a DWG/DXF drawing.
+ *
+ * A line is a straight segment defined by a start point and an end point.
+ * It can have a thickness and is positioned in 3D space with a normal vector.
+ */
 class LIBDWG_API DG_Line : public DG_Entity
 {
-    XYZ _normal = XYZ::AxisZ;
-    XYZ _startPoint = XYZ::Zero;
-    XYZ _endPoint = XYZ::Zero;
-    double _thickness = 0.0;
+    XYZ _normal = XYZ::AxisZ;   ///< Normal vector defining the plane of the line.
+    XYZ _startPoint = XYZ::Zero;///< Start point of the line.
+    XYZ _endPoint = XYZ::Zero;  ///< End point of the line.
+    double _thickness = 0.0;    ///< Thickness of the line.
 
 public:
+    /**
+     * @brief Constructs a DG_Line object.
+     */
     DG_Line();
 
+    /**
+     * @brief Destroys the DG_Line object.
+     */
     ~DG_Line();
 
+    /**
+     * @brief Returns the object type of the line.
+     * @return The object type as DG_ObjectType.
+     */
     DG_ObjectType ObjectType() const override;
 
+    /**
+     * @brief Returns the name of the object.
+     * @return The name as a string.
+     */
     std::string ObjectName() const override;
 
+    /**
+     * @brief Returns the subclass marker associated with this object.
+     * @return The subclass marker as a string.
+     */
     std::string SubclassMarker() const override;
 
+    /**
+     * @brief Gets the normal vector of the line.
+     * @return The normal vector as XYZ.
+     */
     XYZ Normal() const;
 
-    void Normal(const XYZ &);
+    /**
+     * @brief Sets the normal vector of the line.
+     * @param normal The normal vector as XYZ.
+     */
+    void Normal(const XYZ &normal);
 
+    /**
+     * @brief Gets the start point of the line.
+     * @return The start point as XYZ.
+     */
     XYZ StartPoint() const;
 
-    void StartPoint(const XYZ &);
+    /**
+     * @brief Sets the start point of the line.
+     * @param point The start point as XYZ.
+     */
+    void StartPoint(const XYZ &point);
 
+    /**
+     * @brief Gets the end point of the line.
+     * @return The end point as XYZ.
+     */
     XYZ EndPoint() const;
 
-    void EndPoint(const XYZ &);
+    /**
+     * @brief Sets the end point of the line.
+     * @param point The end point as XYZ.
+     */
+    void EndPoint(const XYZ &point);
 
+    /**
+     * @brief Gets the thickness of the line.
+     * @return The thickness as a double.
+     */
     double Thickness() const;
 
-    void Thickness(double);
+    /**
+     * @brief Sets the thickness of the line.
+     * @param thickness The thickness as a double.
+     */
+    void Thickness(double thickness);
 };
 
 }// namespace dwg

@@ -27,53 +27,109 @@
 
 namespace dwg {
 
-/// \brief Collection of CAD objects with support for adding, removing, and event handling.
-class LIBDWG_API DG_CadObjectCollection
+/**
+ * @class DG_CadObjectCollection
+ * @brief Manages a collection of DG_CadObject-derived entities.
+ *
+ * This template class provides storage and management for a collection of 
+ * objects that inherit from DG_CadObject. It ensures ownership consistency
+ * and provides mechanisms for adding and removing objects.
+ *
+ * @tparam T The type of objects stored in the collection, which must derive from DG_CadObject.
+ */
+template<class T>
+class DG_CadObjectCollection
 {
-protected:
-    /// \brief Internal storage of CAD objects as a vector of smart pointers.
-    std::vector<DG_CadObject *> _entries;
+    static_assert(std::is_base_of<DG_CadObject, T>::value, "T must be derived from DG_CadObject");
 
-    /// \brief Pointer to the owning CAD object of this collection.
-    DG_CadObject *_owner;
+protected:
+    std::vector<T *> _entries;///< List of objects in the collection.
+    DG_CadObject *_owner;     ///< The owner of this collection.
 
 public:
-    /// \brief Constructor to initialize the collection with an owner.
-    /// \param owner Pointer to the owning CAD object.
-    DG_CadObjectCollection(DG_CadObject *owner);
+    /**
+     * @brief Constructs a DG_CadObjectCollection with a specified owner.
+     * @param owner The owning DG_CadObject.
+     */
+    DG_CadObjectCollection(DG_CadObject *owner) : _owner(owner) {}
 
-    /// \brief Destructor to clean up resources.
-    ~DG_CadObjectCollection();
+    /**
+     * @brief Destructor for DG_CadObjectCollection.
+     */
+    virtual ~DG_CadObjectCollection() {}
 
-    /// \brief Add a CAD object to the collection.
-    /// \param item Pointer to the CAD object to add.
-    void Add(DG_CadObject *item);
+    /**
+     * @brief Adds an item to the collection.
+     * @param item The object to be added.
+     * @throws std::invalid_argument If the item is null.
+     * @throws std::runtime_error If the item already has an owner.
+     */
+    void Add(T *item)
+    {
+        if (!item) throw std::invalid_argument("item is null");
+        if (item->Owner()) throw std::runtime_error("item already has an owner");
 
-    /// \brief Remove a CAD object from the collection.
-    /// \param item Pointer to the CAD object to remove.
-    void Remove(DG_CadObject *item);
+        _entries.push_back(item);
+        item->Owner(_owner);
+        OnAdded(item);
+    }
 
-    /// \brief Get the number of CAD objects in the collection.
-    /// \return The count of objects in the collection.
-    size_t Count() const;
+    /**
+     * @brief Removes an item from the collection.
+     * @param item The object to be removed.
+     * @return A pointer to the removed object, or nullptr if not found.
+     */
+    T *Remove(T *item)
+    {
+        auto it = std::find(_entries.begin(), _entries.end(), item);
+        if (it == _entries.end()) return nullptr;
 
-    /// \brief Get the owning CAD object of the collection.
-    /// \return Pointer to the owning CAD object.
-    DG_CadObject *Owner() const;
+        item->Owner(nullptr);
+        OnRemoved(item);
+        return _entries.erase(it);
+    }
 
-    /// \brief Access a CAD object in the collection by its index.
-    /// \param index The index of the CAD object to access.
-    /// \return Smart pointer to the CAD object at the specified index.
-    DG_CadObject operator[](int index);
+    /**
+     * @brief Gets the number of objects in the collection.
+     * @return The number of objects.
+     */
+    size_t Count() const { return _entries.size(); }
 
-    /// \brief CPL::Delegate triggered when a CAD object is added to the collection.
-    /// \details This allows registering custom callbacks that will execute when an object is added.
-    CPL::Delegate<void(DG_CadObject *)> OnAdd;
+    /**
+     * @brief Accesses an object by index.
+     * @param index The index of the object.
+     * @return A pointer to the object at the given index.
+     */
+    T *operator[](size_t index) const { return _entries[index]; }
 
-    /// \brief CPL::Delegate triggered when a CAD object is removed from the collection.
-    /// \details This allows registering custom callbacks that will execute when an object is removed.
-    CPL::Delegate<void(DG_CadObject *)> OnRemove;
+    /**
+     * @brief Retrieves an object at a specified index.
+     * @param index The index of the object.
+     * @return A pointer to the object at the given index.
+     */
+    T *GetAt(size_t index) const { return _entries[index]; }
+
+    /**
+     * @brief Gets the owner of the collection.
+     * @return A pointer to the owner.
+     */
+    DG_Object *Owner() const { return _owner; }
+
+    /**
+     * @brief Sets the owner of the collection.
+     * @param owner A pointer to the new owner.
+     */
+    void Owner(DG_Object *owner) { _owner = owner; }
+
+    /**
+     * @brief Delegate triggered when an object is added.
+     */
+    CPL::Delegate<void(T *)> OnAdded;
+
+    /**
+     * @brief Delegate triggered when an object is removed.
+     */
+    CPL::Delegate<void(T *)> OnRemoved;
 };
-
 
 }// namespace dwg

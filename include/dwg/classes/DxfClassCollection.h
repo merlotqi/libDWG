@@ -36,9 +36,13 @@ class LIBDWG_API DG_DxfClassCollection
 
 public:
     DG_DxfClassCollection() = default;
-    static void UpdateDxfClasses(DG_CadDocument *doc);
-    void AddOrUpdate(DG_DxfClass *item);
+    static void UpdateDxfClasses(DG_CadDocument *);
+    void Add(DG_DxfClass *);
+    void AddOrUpdate(DG_DxfClass *);
+    DG_DxfClass *GetByName(const std::string &) const;
     size_t Count() const;
+    void Clear();
+    bool Contains(const std::string &) const;
 };
 
 }// namespace dwg

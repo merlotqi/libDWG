@@ -29,20 +29,25 @@ namespace dwg {
 /**
  * @class DG_Circle
  * @brief Represents a circle entity in a DWG/DXF drawing.
+ *
+ * DG_Circle is a class that represents a circle in a CAD drawing. It is derived from 
+ * DG_Entity and provides the necessary functionality to handle the properties of a circle, 
+ * such as its center, radius, and any transformations that may be applied. Circles are 
+ * fundamental geometric entities in CAD systems and are used to represent circular shapes.
  */
 class LIBDWG_API DG_Circle : public DG_Entity
 {
     /// The center of the circle (in 3D space).
-    XYZ _center = XYZ::Zero;
+    XYZ _center;
 
     /// The normal vector to the plane of the circle (default is the Z-axis).
-    XYZ _normal = XYZ::AxisZ;
+    XYZ _normal;
 
     /// The thickness of the circle (for 3D circles or discs).
-    double _thickness = 0.0;
+    double _thickness;
 
     /// The radius of the circle.
-    double _radius = 1.0;
+    double _radius;
 
 public:
     /**
