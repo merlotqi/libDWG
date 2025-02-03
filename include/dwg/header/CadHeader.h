@@ -65,7 +65,7 @@ class DG_DimensionStyle;
 class DG_CadDocument;
 
 class DG_CadHeaderPrivate;
-class LIBDWG_API DG_CadHeader : public CPL::RefObject
+class LIBDWG_API DG_CadHeader
 {
     DG_CadHeaderPrivate *d;
 
@@ -323,23 +323,23 @@ public:
     unsigned long long HandleSeed() const;
     void HandleSeed(unsigned long long);
 
-    CPL::DateTime CreateDateTime() const;
-    void CreateDateTime(CPL::DateTime);
+    time_t CreateDateTime() const;
+    void CreateDateTime(time_t);
 
-    CPL::DateTime UniversalCreateDateTime() const;
-    void UniversalCreateDateTime(CPL::DateTime);
+    time_t UniversalCreateDateTime() const;
+    void UniversalCreateDateTime(time_t);
 
-    CPL::DateTime UpdateDateTime() const;
-    void UpdateDateTime(CPL::DateTime);
+    time_t UpdateDateTime() const;
+    void UpdateDateTime(time_t);
 
-    CPL::DateTime UniversalUpdateDateTime() const;
-    void UniversalUpdateDateTime(CPL::DateTime);
+    time_t UniversalUpdateDateTime() const;
+    void UniversalUpdateDateTime(time_t);
 
-    CPL::TimeSpan TotalEditingTime() const;
-    void TotalEditingTime(CPL::TimeSpan);
+    double TotalEditingTime() const;
+    void TotalEditingTime(double);
 
-    CPL::TimeSpan UserElapsedTimeSpan() const;
-    void UserElapsedTimeSpan(CPL::TimeSpan);
+    double UserElapsedTimeSpan() const;
+    void UserElapsedTimeSpan(double);
 
     DG_Color CurrentEntityColor() const;
     void CurrentEntityColor(const DG_Color &);
@@ -668,8 +668,7 @@ public:
     DG_TextMovement DimensionTextMovement() const;
     void DimensionTextMovement(DG_TextMovement);
 
-    DG_DimensionTextHorizontalAlignment
-    DimensionTextHorizontalAlignment() const;
+    DG_DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment() const;
     void DimensionTextHorizontalAlignment(DG_DimensionTextHorizontalAlignment);
 
     bool DimensionSuppressFirstDimensionLine() const;

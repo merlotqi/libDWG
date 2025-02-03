@@ -51,29 +51,23 @@ void DG_Transparency::Value(short value)
 
     if (value == 100) _value = value;
 
-    if (value < 0 || value > 90)
-        throw std::invalid_argument(
-                "DG_Transparency must be in range from 0 to 90.");
+    if (value < 0 || value > 90) throw std::invalid_argument("DG_Transparency must be in range from 0 to 90.");
 
     _value = value;
 }
 
 int DG_Transparency::ToAlphaValue(DG_Transparency transparency)
 {
-    unsigned char alpha =
-            (unsigned char) (255 * (100 - transparency.Value()) / 100.0);
-    std::vector<unsigned char> bytes =
-            transparency.IsByBlock()
-                    ? std::vector<unsigned char>{0, 0, 0, 1}
-                    : std::vector<unsigned char>{alpha, 0, 0, 2};
+    unsigned char alpha = (unsigned char) (255 * (100 - transparency.Value()) / 100.0);
+    std::vector<unsigned char> bytes = transparency.IsByBlock() ? std::vector<unsigned char>{0, 0, 0, 1}
+                                                                : std::vector<unsigned char>{alpha, 0, 0, 2};
 
     return CPL::LittleEndianConverter::Instance()->ToInt32(&bytes[0]);
 }
 
 DG_Transparency DG_Transparency::FromAlphaValue(int value)
 {
-    std::vector<unsigned char> bytes =
-            CPL::LittleEndianConverter::Instance()->GetBytes(value);
+    std::vector<unsigned char> bytes = CPL::LittleEndianConverter::Instance()->GetBytes(value);
     short alpha = (short) (100 - (bytes[0] / 255.0) * 100);
 
     if (alpha == -1) { return DG_Transparency::ByLayer; }

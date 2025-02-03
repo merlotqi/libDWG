@@ -115,12 +115,12 @@ public:
     double _currentEntityLinetypeScale;
     std::string _menuFileName;
     unsigned long long _handleSeed;
-    CPL::DateTime _createDateTime;
-    CPL::DateTime _universalCreateDateTime;
-    CPL::DateTime _updateDateTime;
-    CPL::DateTime _universalUpdateDateTime;
-    CPL::TimeSpan _totalEditingTime;
-    CPL::TimeSpan _userElapsedTimeSpan;
+    time_t _createDateTime;
+    time_t _universalCreateDateTime;
+    time_t _updateDateTime;
+    time_t _universalUpdateDateTime;
+    double _totalEditingTime;
+    double _userElapsedTimeSpan;
     DG_Color _currentEntityColor;
     double _viewportDefaultViewScaleFactor;
     XYZ _paperSpaceInsertionBase;
@@ -643,29 +643,29 @@ unsigned long long DG_CadHeader::HandleSeed() const {}
 
 void DG_CadHeader::HandleSeed(unsigned long long) {}
 
-CPL::DateTime DG_CadHeader::CreateDateTime() const {}
+time_t DG_CadHeader::CreateDateTime() const {}
 
-void DG_CadHeader::CreateDateTime(CPL::DateTime) {}
+void DG_CadHeader::CreateDateTime(time_t) {}
 
-CPL::DateTime DG_CadHeader::UniversalCreateDateTime() const {}
+time_t DG_CadHeader::UniversalCreateDateTime() const {}
 
-void DG_CadHeader::UniversalCreateDateTime(CPL::DateTime) {}
+void DG_CadHeader::UniversalCreateDateTime(time_t) {}
 
-CPL::DateTime DG_CadHeader::UpdateDateTime() const {}
+time_t DG_CadHeader::UpdateDateTime() const {}
 
-void DG_CadHeader::UpdateDateTime(CPL::DateTime) {}
+void DG_CadHeader::UpdateDateTime(time_t) {}
 
-CPL::DateTime DG_CadHeader::UniversalUpdateDateTime() const {}
+time_t DG_CadHeader::UniversalUpdateDateTime() const {}
 
-void DG_CadHeader::UniversalUpdateDateTime(CPL::DateTime) {}
+void DG_CadHeader::UniversalUpdateDateTime(time_t) {}
 
-CPL::TimeSpan DG_CadHeader::TotalEditingTime() const {}
+double DG_CadHeader::TotalEditingTime() const {}
 
-void DG_CadHeader::TotalEditingTime(CPL::TimeSpan) {}
+void DG_CadHeader::TotalEditingTime(double) {}
 
-CPL::TimeSpan DG_CadHeader::UserElapsedTimeSpan() const {}
+double DG_CadHeader::UserElapsedTimeSpan() const {}
 
-void DG_CadHeader::UserElapsedTimeSpan(CPL::TimeSpan) {}
+void DG_CadHeader::UserElapsedTimeSpan(double) {}
 
 DG_Color DG_CadHeader::CurrentEntityColor() const {}
 
@@ -1103,15 +1103,9 @@ DG_TextMovement DG_CadHeader::DimensionTextMovement() const {}
 
 void DG_CadHeader::DimensionTextMovement(DG_TextMovement) {}
 
-DG_DimensionTextHorizontalAlignment
-DG_CadHeader::DimensionTextHorizontalAlignment() const
-{
-}
+DG_DimensionTextHorizontalAlignment DG_CadHeader::DimensionTextHorizontalAlignment() const {}
 
-void DG_CadHeader::DimensionTextHorizontalAlignment(
-        DG_DimensionTextHorizontalAlignment)
-{
-}
+void DG_CadHeader::DimensionTextHorizontalAlignment(DG_DimensionTextHorizontalAlignment) {}
 
 bool DG_CadHeader::DimensionSuppressFirstDimensionLine() const {}
 
@@ -1145,14 +1139,9 @@ DG_ZeroHandling DG_CadHeader::DimensionAlternateUnitZeroHandling() const {}
 
 void DG_CadHeader::DimensionAlternateUnitZeroHandling(DG_ZeroHandling) {}
 
-DG_ZeroHandling
-DG_CadHeader::DimensionAlternateUnitToleranceZeroHandling() const
-{
-}
+DG_ZeroHandling DG_CadHeader::DimensionAlternateUnitToleranceZeroHandling() const {}
 
-void DG_CadHeader::DimensionAlternateUnitToleranceZeroHandling(DG_ZeroHandling)
-{
-}
+void DG_CadHeader::DimensionAlternateUnitToleranceZeroHandling(DG_ZeroHandling) {}
 
 bool DG_CadHeader::DimensionCursorUpdate() const {}
 
@@ -1168,10 +1157,7 @@ void DG_CadHeader::DimensionAlternateUnitRounding(double) {}
 
 std::string DG_CadHeader::DimensionAlternateDimensioningSuffix() const {}
 
-void DG_CadHeader::DimensionAlternateDimensioningSuffix(
-        const std::string &value)
-{
-}
+void DG_CadHeader::DimensionAlternateDimensioningSuffix(const std::string &value) {}
 
 double DG_CadHeader::DimensionArrowSize() const {}
 
@@ -1181,14 +1167,9 @@ DG_ZeroHandling DG_CadHeader::DimensionAngularZeroHandling() const {}
 
 void DG_CadHeader::DimensionAngularZeroHandling(DG_ZeroHandling) {}
 
-DG_ArcLengthSymbolPosition
-DG_CadHeader::DimensionArcLengthSymbolPosition() const
-{
-}
+DG_ArcLengthSymbolPosition DG_CadHeader::DimensionArcLengthSymbolPosition() const {}
 
-void DG_CadHeader::DimensionArcLengthSymbolPosition(DG_ArcLengthSymbolPosition)
-{
-}
+void DG_CadHeader::DimensionArcLengthSymbolPosition(DG_ArcLengthSymbolPosition) {}
 
 bool DG_CadHeader::DimensionSeparateArrowBlocks() const {}
 
@@ -1234,24 +1215,13 @@ double DG_CadHeader::DimensionFixedExtensionLineLength() const {}
 
 void DG_CadHeader::DimensionFixedExtensionLineLength(double) {}
 
-double
-DG_CadHeader::DimensionJoggedRadiusDimensionTransverseSegmentAngle() const
-{
-}
+double DG_CadHeader::DimensionJoggedRadiusDimensionTransverseSegmentAngle() const {}
 
-void DG_CadHeader::DimensionJoggedRadiusDimensionTransverseSegmentAngle(double)
-{
-}
+void DG_CadHeader::DimensionJoggedRadiusDimensionTransverseSegmentAngle(double) {}
 
-DG_DimensionTextBackgroundFillMode
-DG_CadHeader::DimensionTextBackgroundFillMode() const
-{
-}
+DG_DimensionTextBackgroundFillMode DG_CadHeader::DimensionTextBackgroundFillMode() const {}
 
-void DG_CadHeader::DimensionTextBackgroundFillMode(
-        DG_DimensionTextBackgroundFillMode)
-{
-}
+void DG_CadHeader::DimensionTextBackgroundFillMode(DG_DimensionTextBackgroundFillMode) {}
 
 DG_Color DG_CadHeader::DimensionTextBackgroundColor() const {}
 
@@ -1297,15 +1267,9 @@ bool DG_CadHeader::DimensionSuppressOutsideExtensions() const {}
 
 void DG_CadHeader::DimensionSuppressOutsideExtensions(bool) {}
 
-DG_DimensionTextVerticalAlignment
-DG_CadHeader::DimensionTextVerticalAlignment() const
-{
-}
+DG_DimensionTextVerticalAlignment DG_CadHeader::DimensionTextVerticalAlignment() const {}
 
-void DG_CadHeader::DimensionTextVerticalAlignment(
-        DG_DimensionTextVerticalAlignment)
-{
-}
+void DG_CadHeader::DimensionTextVerticalAlignment(DG_DimensionTextVerticalAlignment) {}
 
 short DG_CadHeader::DimensionUnit() const {}
 

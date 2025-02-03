@@ -133,27 +133,27 @@ public:
 
     /**
      * @brief Get the creation date of the CAD document.
-     * @return A CPL::DateTime object representing the creation date.
+     * @return A time_t object representing the creation date.
      */
-    CPL::DateTime CreateDate() const;
+    time_t CreateDate() const;
 
     /**
      * @brief Set the creation date of the CAD document.
-     * @param createDate A CPL::DateTime object containing the new creation date.
+     * @param createDate A time_t object containing the new creation date.
      */
-    void CreateDate(const CPL::DateTime &createDate);
+    void CreateDate(const time_t &createDate);
 
     /**
      * @brief Get the last modification date of the CAD document.
-     * @return A CPL::DateTime object representing the modification date.
+     * @return A time_t object representing the modification date.
      */
-    CPL::DateTime ModifiedDate() const;
+    time_t ModifiedDate() const;
 
     /**
      * @brief Set the last modification date of the CAD document.
-     * @param modifiedDate A CPL::DateTime object containing the new modification date.
+     * @param modifiedDate A time_t object containing the new modification date.
      */
-    void ModifiedDate(const CPL::DateTime &modifiedDate);
+    void ModifiedDate(const time_t &modifiedDate);
 
     /**
      * @brief Get the custom properties associated with the CAD document.

@@ -55,13 +55,13 @@ public:
 
     static std::string GetNameFromVersion(DG_ACadVersion version);
 
-    static double ToJulianCalendar(CPL::DateTime date);
+    static double ToJulianCalendar(time_t date);
 
-    static CPL::DateTime FromJulianCalendar(double date);
+    static time_t FromJulianCalendar(double date);
 
-    static CPL::TimeSpan EditingTime(double elapsed);
+    static double EditingTime(double elapsed);
 
-    static void DateToJulian(CPL::DateTime date, int &jdate, int &miliseconds);
+    static void DateToJulian(time_t date, int &jdate, int &miliseconds);
 };
 
 }// namespace dwg
