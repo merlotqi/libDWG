@@ -26,7 +26,7 @@
 #include <vector>
 
 namespace dwg {
-namespace io {
+
 
 class CRC
 {
@@ -37,5 +37,5 @@ public:
                                     const std::vector<unsigned char> &arr);
 };
 
-}// namespace io
+
 }// namespace dwg

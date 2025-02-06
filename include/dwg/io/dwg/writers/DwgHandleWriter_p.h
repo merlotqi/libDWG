@@ -30,7 +30,7 @@
 #include <stdexcept>
 
 namespace dwg {
-namespace io {
+
 
 class DwgHandleWriter : public DwgSectionIO
 {
@@ -55,5 +55,5 @@ private:
 };
 
 
-}// namespace io
+
 }// namespace dwg

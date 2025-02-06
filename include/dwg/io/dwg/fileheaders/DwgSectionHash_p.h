@@ -23,9 +23,8 @@
 #pragma once
 
 namespace dwg {
-namespace io {
 
-enum DwgSectionHash
+enum DG_DwgSectionHash
 {
     AcDb_Unknown = 0x00000000,
     AcDb_Security = 0x4a0204ea,
@@ -45,5 +44,4 @@ enum DwgSectionHash
     AcDb_Signature = -0x00000001,
 };
 
-}// namespace io
 }// namespace dwg

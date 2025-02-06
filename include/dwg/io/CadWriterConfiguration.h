@@ -23,7 +23,6 @@
 #pragma once
 
 namespace dwg {
-namespace io {
 
 class CadWriterConfiguration
 {
@@ -31,9 +30,11 @@ public:
     CadWriterConfiguration() = default;
     virtual ~CadWriterConfiguration() = default;
 
-    bool CloseStream = true;
-    bool WriteXRords = false;
+    bool CloseStream() const;
+    void CloseStream(bool);
+
+    bool WriteXRords() const;
+    void WriteXRords(bool);
 };
 
-}// namespace io
 }// namespace dwg

@@ -27,7 +27,7 @@
 #include <vector>
 
 namespace dwg {
-namespace io {
+
 
 class DwgSectionIO
 {
@@ -49,8 +49,8 @@ protected:
     bool R2010Plus;
     bool R2013Plus;
     bool R2018Plus;
-    ACadVersion _version;
+    DG_ACadVersion _version;
 };
 
-}// namespace io
+
 }// namespace dwg

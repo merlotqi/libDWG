@@ -26,7 +26,7 @@
 #include "DwgFileHeaderAC18.h"
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderAC21 : public DwgFileHeaderAC18
 {
@@ -37,5 +37,5 @@ public:
     DwgFileHeaderAC21(ACadVersion version);
 };
 
-}// namespace io
+
 }// namespace dwg

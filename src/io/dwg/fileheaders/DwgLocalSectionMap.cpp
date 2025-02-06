@@ -20,20 +20,4 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-namespace dwg {
-
-class DG_CadDocument;
-class DG_CadHeader;
-
-class ICadReader
-{
-public:
-    ICadReader() = default;
-    virtual ~ICadReader() = default;
-    virtual DG_CadDocument *Read() = 0;
-    virtual DG_CadHeader *ReadHeader() = 0;
-};
-
-}// namespace dwg
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>

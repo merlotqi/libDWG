@@ -22,46 +22,56 @@
 
 #pragma once
 
-#include "DwgLocalSectionMap.h"
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
 #include <cstdint>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
 namespace dwg {
-namespace io {
 
 class DwgSectionDescriptor
 {
     int32_t _CompressedCode = 2;
 
 public:
-    int64_t PageType = 0x4163043B;
-    std::string Name;
-    uint64_t CompressedSize = 0;
-    int32_t PageCount = 0;
-    uint64_t DecompressedSize = 0x7400;
-    int32_t Compressed = 0;
-    int32_t SectionId = 0;
-    int32_t Encrypted = 0;
-    uint64_t HashCode = 0;
-    uint64_t Encoding = 0;
-    std::vector<DwgLocalSectionMap> LocalSections;
+    DwgSectionDescriptor();
 
-public:
-    DwgSectionDescriptor(const std::string &name = std::string()) : Name(name)
-    {
-    }
+    DwgSectionDescriptor(const std::string &name);
 
-    inline int32_t CompressedCode() const { return _CompressedCode; }
-    inline void CompressedCode(int32_t value)
-    {
-        if (value == 1 || value == 2) _CompressedCode = value;
-        else
-            throw new std::exception();
-    }
+    long PageType() const;
+
+    std::string Name() const;
+    void Name(const std::string& name);
+
+    unsigned long long CompressedSize() const;
+    void CompressedSize(unsigned long long);
+
+    int PageCount() const;
+    void PageCount(int);
+
+    unsigned long long DecompressedSize() const;
+    void DecompressedSize(unsigned long long);
+
+    int CompressedCode() const;
+    void CompressedCode(int);
+
+    bool IsCompressed() const;
+
+    int SectionId() const;
+    void SectionId(int);
+
+    int Encrypted() const;
+    void Encrypted(int);
+
+    unsigned long long HashCode(bool *ok = nullptr) const;
+    void HashCode(unsigned long long);
+
+    unsigned long long Encoding(bool *ok = nullptr) const;
+    void Encoding(unsigned long long);
+
+    std::vector<DwgLocalSectionMap> LocalSections() const;
+    void LocalSections(const std::vector<DwgLocalSectionMap> &);
 };
 
-
-}// namespace io
 }// namespace dwg

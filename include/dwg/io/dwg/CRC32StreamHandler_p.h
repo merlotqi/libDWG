@@ -27,7 +27,7 @@
 #include <dwg/utility/memorymanager.h>
 
 namespace dwg {
-namespace io {
+
 
 class CRC32StreamHandlerBase
 {

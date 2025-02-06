@@ -23,7 +23,7 @@
 #pragma once
 
 namespace dwg {
-namespace io {
+
 
 class CadReaderConfiguration
 {
@@ -36,6 +36,6 @@ public:
     bool KeepUnknownNonGraphicalObjects = false;
 };
 
-}// namespace io
+
 
 }// namespace dwg

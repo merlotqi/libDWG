@@ -29,9 +29,7 @@
 #include <dwg/io/ICadWriter.h>
 #include <fstream>
 
-
 namespace dwg {
-namespace io {
 
 class CadWriterConfiguration;
 
@@ -69,6 +67,4 @@ protected:
     Encoding _encoding;
 };
 
-
-}// namespace io
 }// namespace dwg

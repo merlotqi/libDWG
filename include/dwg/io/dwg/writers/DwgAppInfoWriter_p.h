@@ -22,12 +22,12 @@
 
 #pragma once
 
-#include "../DwgSectionIO.h"
-#include "IDwgStreamWriter.h"
+#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/version.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgAppInfoWriter : public DwgSectionIO
 {
@@ -41,5 +41,5 @@ public:
     void Write();
 };
 
-}// namespace io
+
 }// namespace dwg

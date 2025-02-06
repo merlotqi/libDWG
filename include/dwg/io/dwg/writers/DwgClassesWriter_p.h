@@ -29,7 +29,7 @@
 #include <dwg/utility/stringhelp.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgClassesWriter : public DwgSectionIO
 {
@@ -49,5 +49,5 @@ public:
     void writeSizeAndCrc();
 };
 
-}// namespace io
+
 }// namespace dwg

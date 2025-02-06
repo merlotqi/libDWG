@@ -25,7 +25,7 @@
 #include "ICompressor.h"
 
 namespace dwg {
-namespace io {
+
 
 class DwgLZ77AC21Compressor : public ICompressor
 {
@@ -35,5 +35,5 @@ public:
                   size_t totalSize, std::ostream *dest);
 };
 
-}// namespace io
+
 }// namespace dwg

@@ -25,7 +25,7 @@
 #include "DwgFileHeaderAC15.h"
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderAC18 : public DwgFileHeaderAC15
 {
@@ -59,5 +59,5 @@ public:
 };
 
 
-}// namespace io
+
 }// namespace dwg

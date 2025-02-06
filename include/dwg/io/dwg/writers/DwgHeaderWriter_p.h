@@ -31,7 +31,7 @@
 #include <sstream>
 
 namespace dwg {
-namespace io {
+
 
 class DwgHeaderWriter : DwgSectionIO
 {
@@ -54,5 +54,5 @@ private:
 };
 
 
-}// namespace io
+
 }// namespace dwg

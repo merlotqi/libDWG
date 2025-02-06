@@ -31,7 +31,7 @@
 #include <sstream>
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 {
@@ -78,5 +78,5 @@ protected:
     ICompressor *compressor;
 };
 
-}// namespace io
+
 }// namespace dwg

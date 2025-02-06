@@ -22,30 +22,53 @@
 
 #pragma once
 
-#include <cstdint>
 
 namespace dwg {
-namespace io {
 
-struct DwgLocalSectionMap
+class DwgLocalSectionMap
 {
 public:
-    int32_t Compression = 2;
-    bool IsEmpty;
-    uint64_t Offset;
-    uint64_t CompressedSize;
-    int32_t PageNumber;
-    uint64_t DecompressedSize;
-    int64_t Seeker;
-    int64_t Size;
-    uint64_t Checksum;
-    uint64_t CRC;
-    int64_t PageSize;
-    uint32_t ODA;
-    int32_t SectionMap;
+    DwgLocalSectionMap();
+    DwgLocalSectionMap(int value);
 
-    DwgLocalSectionMap(int value = 0) : SectionMap(value) {}
+    int Compression() const;
+    void Compression(int);
+
+    bool IsEmpty() const;
+    void IsEmpty(bool);
+
+    unsigned long long Offset() const;
+    void Offset(unsigned long long);
+
+    unsigned long long CompressedSize() const;
+    void CompressedSize(unsigned long long);
+
+    int PageNumber() const;
+    void PageNumber(int);
+
+    unsigned long long DecompressedSize() const;
+    void DecompressedSize(unsigned long long);
+
+    long long Seeker() const;
+    void Seeker(long long);
+
+    long long Size() const;
+    void Size(long long);
+
+    unsigned long long Checksum() const;
+    void Checksum(unsigned long long);
+
+    unsigned long long CRC() const;
+    void CRC(unsigned long long);
+
+    long long PageSize() const;
+    void PageSize(long long);
+
+    unsigned int ODA() const;
+    void ODA(unsigned int);
+
+    int SectionMap() const;
+    void SectionMap(int);
 };
 
-}// namespace io
 }// namespace dwg

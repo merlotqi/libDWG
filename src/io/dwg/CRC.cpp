@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "CRC.h"
+#include <dwg/io/dwg/CRC_p.h>
 
 namespace dwg {
 namespace io {

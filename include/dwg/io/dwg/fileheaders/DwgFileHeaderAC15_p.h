@@ -27,7 +27,7 @@
 #include <map>
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderAC15 : public DwgFileHeader
 {
@@ -42,5 +42,5 @@ public:
     DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
 };
 
-}// namespace io
+
 }// namespace dwg

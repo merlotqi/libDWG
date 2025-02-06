@@ -23,7 +23,6 @@
 #pragma once
 
 namespace dwg {
-namespace io {
 
 class ICadWriter
 {
@@ -31,5 +30,4 @@ public:
     virtual void Write() = 0;
 };
 
-}// namespace io
 }// namespace dwg

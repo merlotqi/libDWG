@@ -20,20 +20,32 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord_p.h>
 
 namespace dwg {
 
-class DG_CadDocument;
-class DG_CadHeader;
-
-class ICadReader
+DwgSectionLocatorRecord::DwgSectionLocatorRecord(int32_t number, int64_t seeker,
+                        int64_t size)
+    : _Number(number), _Seeker(seeker), _Size(size)
 {
-public:
-    ICadReader() = default;
-    virtual ~ICadReader() = default;
-    virtual DG_CadDocument *Read() = 0;
-    virtual DG_CadHeader *ReadHeader() = 0;
-};
+}
 
-}// namespace dwg
+bool DwgSectionLocatorRecord::IsInTheRecord(int32_t position) const
+{
+    return position >= _Seeker && position < _Seeker + _Size;
+}
+
+ int32_t DwgSectionLocatorRecord::Number() const { return _Number; }
+
+ int64_t DwgSectionLocatorRecord::Seeker() const { return _Seeker; }
+
+ int64_t DwgSectionLocatorRecord::Size() const { return _Size; }
+
+ void DwgSectionLocatorRecord::Number(int32_t number) { _Number = number; }
+
+ void DwgSectionLocatorRecord::Seeker(int64_t seeker) { _Seeker = seeker; }
+
+ void DwgSectionLocatorRecord::Size(int64_t size) { _Size = size; }
+
+}
+

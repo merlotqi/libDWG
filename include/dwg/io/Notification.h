@@ -24,16 +24,13 @@
 
 namespace dwg {
 
-class DG_CadDocument;
-class DG_CadHeader;
-
-class ICadReader
+enum DG_Notification
 {
-public:
-    ICadReader() = default;
-    virtual ~ICadReader() = default;
-    virtual DG_CadDocument *Read() = 0;
-    virtual DG_CadHeader *ReadHeader() = 0;
+	NotImplemented = -1,
+	None = 0,
+	NotSupported = 1,
+	Warning = 2,
+	Error = 3,
 };
 
 }// namespace dwg

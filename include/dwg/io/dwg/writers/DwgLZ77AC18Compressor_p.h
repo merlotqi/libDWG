@@ -26,7 +26,7 @@
 #include <sstream>
 
 namespace dwg {
-namespace io {
+
 
 class DwgLZ77AC18Compressor : public ICompressor
 {
@@ -52,5 +52,5 @@ private:
     bool compressChunk(int &offset, int &matchPos);
 };
 
-}// namespace io
+
 }// namespace dwg

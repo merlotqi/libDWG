@@ -25,7 +25,7 @@
 #include <dwg/io/ICadReader.h>
 
 namespace dwg {
-namespace io {
+
 
 template<class T>
 class CadReaderBase : public ICadReader
@@ -46,5 +46,5 @@ protected:
     InputStream *m_fileStream;
 };
 
-}// namespace io
+
 }// namespace dwg

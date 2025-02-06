@@ -23,9 +23,8 @@
 #pragma once
 
 namespace dwg {
-namespace io {
 
-struct Dwg21CompressedMetadata
+class Dwg21CompressedMetadata
 {
     unsigned long long HeaderSize = 0x70;
     unsigned long long FileSize = 0;
@@ -65,5 +64,5 @@ struct Dwg21CompressedMetadata
     Dwg21CompressedMetadata() {}
 };
 
-}// namespace io
+
 }// namespace dwg

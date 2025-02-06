@@ -25,7 +25,7 @@
 #include "DwgFileHeaderWriterAC18.h"
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderWriterAC21 : DwgFileHeaderWriterAC18
 {
@@ -41,5 +41,5 @@ public:
                             CadDocument *model);
 };
 
-}// namespace io
+
 }// namespace dwg

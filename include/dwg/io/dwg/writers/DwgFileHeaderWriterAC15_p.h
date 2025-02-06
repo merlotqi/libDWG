@@ -29,7 +29,7 @@
 #include <vector>
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {
@@ -57,5 +57,5 @@ private:
     void writeRecordStreams();
 };
 
-}// namespace io
+
 }// namespace dwg

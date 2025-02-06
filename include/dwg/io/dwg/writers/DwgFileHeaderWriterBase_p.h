@@ -31,7 +31,7 @@
 #include <sstream>
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 {
@@ -56,5 +56,5 @@ public:
     void applyMagicSequence(std::ostringstream *stream);
 };
 
-}// namespace io
+
 }// namespace dwg

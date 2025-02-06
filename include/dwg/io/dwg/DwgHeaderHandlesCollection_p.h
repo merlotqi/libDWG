@@ -25,7 +25,7 @@
 #include <map>
 
 namespace dwg {
-namespace io {
+
 
 class DwgHeaderHandlesCollection
 {
@@ -34,5 +34,5 @@ class DwgHeaderHandlesCollection
 public:
 };
 
-}// namespace io
+
 }// namespace dwg

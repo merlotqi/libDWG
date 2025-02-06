@@ -28,7 +28,7 @@
 #include <dwg/utility/stringhelp.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgAuxHeaderWriter : public DwgSectionIO
 {
@@ -46,5 +46,5 @@ public:
 };
 
 
-}// namespace io
+
 }// namespace dwg

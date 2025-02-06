@@ -27,7 +27,7 @@
 #include <dwg/io/CadWriterConfiguration.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgFileHeader;
 class IDwgFileHeaderWriter;
@@ -59,5 +59,5 @@ private:
 };
 
 
-}// namespace io
+
 }// namespace dwg

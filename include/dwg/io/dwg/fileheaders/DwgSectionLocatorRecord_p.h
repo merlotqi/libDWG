@@ -25,7 +25,6 @@
 #include <cstdint>
 
 namespace dwg {
-namespace io {
 
 class DwgSectionLocatorRecord
 {
@@ -35,28 +34,18 @@ class DwgSectionLocatorRecord
 
 public:
     DwgSectionLocatorRecord(int32_t number = 0, int64_t seeker = 0,
-                            int64_t size = 0)
-        : _Number(number), _Seeker(seeker), _Size(size)
-    {
-    }
+                            int64_t size = 0);
 
-    bool IsInTheRecord(int32_t position) const
-    {
-        return position >= _Seeker && position < _Seeker + _Size;
-    }
+    bool IsInTheRecord(int32_t position) const;
 
-    inline int32_t Number() const { return _Number; }
+    inline int32_t Number() const;
+    inline void Number(int32_t number);
     
-    inline int64_t Seeker() const { return _Seeker; }
+    inline int64_t Seeker() const;
+    inline void Seeker(int64_t seeker);
     
-    inline int64_t Size() const { return _Size; }
-    
-    inline void Number(int32_t number) { _Number = number; }
-    
-    inline void Seeker(int64_t seeker) { _Seeker = seeker; }
-    
-    inline void Size(int64_t size) { _Size = size; }
+    inline int64_t Size() const;
+    inline void Size(int64_t size);
 };
 
-}// namespace io
 }// namespace dwg

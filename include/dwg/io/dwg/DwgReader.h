@@ -25,16 +25,16 @@
 #include <dwg/io/ICadReader.h>
 
 namespace dwg {
-namespace io {
+
 class DwgDocumentBuilder;
 class DwgFileHeader;
 class IDwgStreamReader;
 class DwgFileHeaderAC15;
-}// namespace io
+
 }// namespace dwg
 
 namespace dwg {
-namespace io {
+
 
 class DwgReaderConfiguration : public CadReaderConfiguration
 {
@@ -80,5 +80,5 @@ private:
                            int64_t &compressionType, int64_t &checksum);
 };
 
-}// namespace io
+
 }// namespace dwg

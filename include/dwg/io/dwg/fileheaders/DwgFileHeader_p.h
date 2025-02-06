@@ -22,33 +22,38 @@
 
 #pragma once
 
-#include "DwgSectionDescriptor.h"
-#include <base.h>
-#include <cstdint>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 #include <dwg/ACadVersion.h>
 #include <string>
 
 namespace dwg {
-namespace io {
 
 class DwgFileHeader
 {
 public:
-    ACadVersion Version = ACadVersion::Unknown;
-    int64_t PreviewAddress = -1;
-    int32_t AcadMaintenanceVersion = 0;
-    CodePage DrawingCodePage = CodePage::Windows1251;
+    virtual ~DwgFileHeader();
 
+    DG_ACadVersion Version() const;
+
+    long long PreviewAddress() const;
+    void PreviewAddress(long long);
+
+    int AcadMaintenanceVersion() const;
+    void AcadMaintenanceVersion(int);
+    
+    CPL::CodePageID DrawingCodePage() const;
+    void DrawingCodePage(CPL::CodePageID);
+    
 public:
-    static DwgFileHeader *CreateFileHeader(ACadVersion version);
+    static DwgFileHeader *CreateFileHeader(DG_ACadVersion version);
 
     virtual void AddSection(const std::string &name) = 0;
+
     virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
 
 protected:
-    DwgFileHeader() = default;
-    DwgFileHeader(ACadVersion version);
+    DwgFileHeader();
+    DwgFileHeader(DG_ACadVersion version);
 };
 
-}// namespace io
 }// namespace dwg

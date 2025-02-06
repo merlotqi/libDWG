@@ -25,7 +25,7 @@
 #include <vector>
 
 namespace dwg {
-namespace io {
+
 
 class DwgCheckSumCalculator
 {
@@ -38,5 +38,5 @@ public:
 };
 
 
-}// namespace io
+
 }// namespace dwg

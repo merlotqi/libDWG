@@ -26,7 +26,7 @@
 #include <dwg/utility/memorymanager.h>
 
 namespace dwg {
-namespace io {
+
 
 
 class CRC8StreamHandlerBase
@@ -60,5 +60,5 @@ public:
     int RawWrite(const unsigned char *buff, int nLen) override;
 };
 
-}// namespace io
+
 }// namespace dwg
