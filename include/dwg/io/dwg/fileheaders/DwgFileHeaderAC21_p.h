@@ -22,20 +22,20 @@
 
 #pragma once
 
-#include "Dwg21CompressedMetadata.h"
-#include "DwgFileHeaderAC18.h"
+#include <dwg/io/dwg/fileheaders/Dwg21CompressedMetadata_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 
 namespace dwg {
 
-
 class DwgFileHeaderAC21 : public DwgFileHeaderAC18
 {
-public:
-    Dwg21CompressedMetadata CompressedMetadata;
-
+public:    
     DwgFileHeaderAC21();
-    DwgFileHeaderAC21(ACadVersion version);
-};
+    DwgFileHeaderAC21(DG_ACadVersion version);
+    ~DwgFileHeaderAC21();
 
+    Dwg21CompressedMetadata CompressedMetadata() const;
+    void CompressedMetadata(const Dwg21CompressedMetadata &);
+};
 
 }// namespace dwg

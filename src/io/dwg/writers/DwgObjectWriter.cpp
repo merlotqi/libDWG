@@ -26,7 +26,6 @@
 #include <dwg/io/dwg/DwgSectionIO.h>
 #include <dwg/tables/TableEntry.h>
 #include <map>
-
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 
 namespace dwg {

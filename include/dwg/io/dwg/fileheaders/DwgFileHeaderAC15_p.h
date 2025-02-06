@@ -22,23 +22,26 @@
 
 #pragma once
 
-#include "DwgFileHeader.h"
-#include "DwgSectionLocatorRecord.h"
+#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord_p.h>
 #include <map>
 
 namespace dwg {
-
 
 class DwgFileHeaderAC15 : public DwgFileHeader
 {
 public:
     static std::vector<unsigned char> EndSentinel;
-    std::map<int32_t, DwgSectionLocatorRecord> Records;
 
-public:
     DwgFileHeaderAC15();
-    DwgFileHeaderAC15(ACadVersion version);
+    DwgFileHeaderAC15(DG_ACadVersion version);
+    virtual ~DwgFileHeaderAC15();
+
+    std::map<int, DwgSectionLocatorRecord> Records() const;
+    void Records(const std::map<int, DwgSectionLocatorRecord> &);
+
     void AddSection(const std::string &name) override;
+
     DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
 };
 

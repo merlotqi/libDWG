@@ -26,38 +26,76 @@
 
 namespace dwg {
 
-
 class DwgFileHeaderAC18 : public DwgFileHeaderAC15
 {
 public:
-    uint8_t DwgVersion;
-    uint8_t AppReleaseVersion;
-    int64_t SummaryInfoAddr;
-    int64_t SecurityType;
-    int64_t VbaProjectAddr;
-    int32_t RootTreeNodeGap;
-    uint32_t GapArraySize;
-    uint32_t CRCSeed;
-    int32_t LastPageId;
-    int64_t LastSectionAddr;
-    int64_t SecondHeaderAddr;
-    uint32_t GapAmount;
-    uint32_t SectionAmount;
-    uint32_t SectionPageMapId;
-    int64_t PageMapAddress;
-    uint32_t SectionMapId;
-    uint32_t SectionArrayPageSize;
-    int32_t RigthGap;
-    int32_t LeftGap;
-    std::map<std::string, DwgSectionDescriptor> Descriptors;
-
     DwgFileHeaderAC18();
     DwgFileHeaderAC18(ACadVersion version);
+    virtual ~DwgFileHeaderAC18();
+    
     void AddSection(const std::string &name) override;
     void AddSection(const DwgSectionDescriptor &descriptor);
     DwgSectionDescriptor &GetDescriptor(const std::string &name) override;
+
+    unsigned char DwgVersion() const;
+    void DwgVersion(unsigned char);
+
+    unsigned char AppReleaseVersion() const;
+    void AppReleaseVersion(unsigned char);
+
+    long long SummaryInfoAddr() const;
+    void SummaryInfoAddr(long long);
+    
+    long long SecurityType() const;
+    void SecurityType(long long);
+
+    long long VbaProjectAddr() const;
+    void VbaProjectAddr(long long);
+
+    int RootTreeNodeGap() const;
+    void RootTreeNodeGap(int);
+
+    unsigned int GapArraySize() const;
+    void GapArraySize(unsigned int);
+
+    unsigned int CRCSeed() const;
+    void CRCSeed(unsigned int);
+
+    int LastPageId() const;
+    void LastPageId(int);
+
+    long long LastSectionAddr() const;
+    void LastSectionAddr(long long);
+
+    long long SecondHeaderAddr() const;
+    void SecondHeaderAddr(long long);
+
+    unsigned int GapAmount() const;
+    void GapAmount(unsigned int);
+
+    unsigned int SectionAmount() const;
+    void SectionAmount(unsigned int);
+
+    unsigned int SectionPageMapId() const;
+    void SectionPageMapId(unsigned int);
+
+    long long PageMapAddress() const;
+    void PageMapAddress(long long);
+
+    unsigned int SectionMapId() const;
+    void SectionMapId(unsigned int);
+
+    unsigned int SectionArrayPageSize() const;
+    void SectionArrayPageSize(unsigned int);
+
+    int RigthGap() const;
+    void RigthGap(int);
+
+    int LeftGap() const;
+    void LeftGap(int);
+
+    std::map<std::string, DwgSectionDescriptor> Descriptors() const;
+    void Descriptors(const std::map<std::string, DwgSectionDescriptor> &);
 };
-
-
 
 }// namespace dwg

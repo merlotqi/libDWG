@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-class Dwg21CompressedMetadata
+struct Dwg21CompressedMetadata
 {
     unsigned long long HeaderSize = 0x70;
     unsigned long long FileSize = 0;
@@ -61,8 +61,7 @@ class Dwg21CompressedMetadata
     unsigned long long RandomSeed = 0;
     unsigned long long HeaderCRC64 = 0;
 
-    Dwg21CompressedMetadata() {}
+    Dwg21CompressedMetadata();
 };
-
 
 }// namespace dwg

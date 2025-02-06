@@ -22,11 +22,10 @@
 
 #pragma once
 
-#include "ICompressor.h"
+#include <dwg/io/dwg/writers/ICompressor_p.h>
 #include <sstream>
 
 namespace dwg {
-
 
 class DwgLZ77AC18Compressor : public ICompressor
 {
