@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Defines the vertex flags.
-enum DG_VertexFlag
+enum VertexFlag
 {
     /// Default.
     Default = 0,
@@ -49,6 +49,6 @@ enum DG_VertexFlag
     /// Polyface mesh vertex.
     PolyfaceMeshVertex = 128
 };
-CPL_DECLARE_FLAGS(DG_VertexFlags, DG_VertexFlag)
+CPL_DECLARE_FLAGS(VertexFlags, VertexFlag)
 
 }// namespace dwg

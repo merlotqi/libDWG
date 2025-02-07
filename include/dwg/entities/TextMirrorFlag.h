@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_TextMirrorFlag : short
+enum TextMirrorFlag : short
 {
     None = 0,
     /// Mirrored in X

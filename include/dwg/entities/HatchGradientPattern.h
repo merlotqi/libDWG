@@ -29,126 +29,126 @@
 namespace dwg {
 
 /**
- * @class DG_HatchGradientPattern
+ * @class HatchGradientPattern
  * @brief Represents a gradient pattern used in hatches for DWG/DXF drawings.
  *
  * This class defines a gradient pattern that can be applied to hatches.
  * It supports multiple colors, angle adjustments, and color tinting.
  */
-class LIBDWG_API DG_HatchGradientPattern
+class LIBDWG_API HatchGradientPattern
 {
 public:
     /**
      * @brief Constructs a default gradient pattern.
      */
-    DG_HatchGradientPattern();
+    HatchGradientPattern();
 
     /**
      * @brief Constructs a gradient pattern with a given name.
      * @param name The name of the gradient pattern.
      */
-    DG_HatchGradientPattern(const std::string &name);
+    HatchGradientPattern(const std::string &name);
 
     /**
      * @brief Destroys the gradient pattern instance.
      */
-    ~DG_HatchGradientPattern();
+    ~HatchGradientPattern();
 
     /**
      * @brief Checks if the gradient pattern is enabled.
      * @return True if enabled, false otherwise.
      */
-    bool Enabled() const;
+    bool enabled() const;
 
     /**
      * @brief Enables or disables the gradient pattern.
      * @param enabled Set to true to enable, false to disable.
      */
-    void Enabled(bool enabled);
+    void setEnabled(bool enabled);
 
     /**
      * @brief Gets the reserved integer value.
      * @return The reserved integer value.
      */
-    int Reserved() const;
+    int reserved() const;
 
     /**
      * @brief Sets the reserved integer value.
      * @param reserved The reserved integer value.
      */
-    void Reserved(int reserved);
+    void setReserved(int reserved);
 
     /**
      * @brief Gets the angle of the gradient pattern.
      * @return The angle in degrees.
      */
-    double Angle() const;
+    double angle() const;
 
     /**
      * @brief Sets the angle of the gradient pattern.
      * @param angle The angle in degrees.
      */
-    void Angle(double angle);
+    void setAngle(double angle);
 
     /**
      * @brief Gets the shift value of the gradient pattern.
      * @return The shift value.
      */
-    double Shift() const;
+    double shift() const;
 
     /**
      * @brief Sets the shift value of the gradient pattern.
      * @param shift The shift value.
      */
-    void Shift(double shift);
+    void setShift(double shift);
 
     /**
      * @brief Checks if the gradient is a single-color gradient.
      * @return True if it is a single-color gradient, false otherwise.
      */
-    bool IsSingleColorGradient() const;
+    bool isSingleColorGradient() const;
 
     /**
      * @brief Sets whether the gradient should be a single-color gradient.
      * @param singleColor Set to true for single-color gradient.
      */
-    void IsSingleColorGradient(bool singleColor);
+    void setIsSingleColorGradient(bool singleColor);
 
     /**
      * @brief Gets the color tint factor of the gradient.
      * @return The color tint factor.
      */
-    double ColorTint() const;
+    double colorTint() const;
 
     /**
      * @brief Sets the color tint factor of the gradient.
      * @param tint The color tint factor.
      */
-    void ColorTint(double tint);
+    void setColorTint(double tint);
 
     /**
      * @brief Gets the list of gradient colors.
      * @return A reference to the vector of gradient colors.
      */
-    const std::vector<GradientColor> &Colors() const;
+    const std::vector<GradientColor> &colors() const;
 
     /**
      * @brief Sets the gradient colors.
      * @param colors A vector of gradient colors.
      */
-    void Colors(const std::vector<GradientColor> &colors);
+    void setColors(const std::vector<GradientColor> &colors);
 
     /**
      * @brief Gets the name of the gradient pattern.
      * @return The name of the gradient pattern.
      */
-    std::string Name() const;
+    std::string name() const;
 
     /**
      * @brief Sets the name of the gradient pattern.
      * @param name The name of the gradient pattern.
      */
-    void Name(const std::string &name);
+    void setName(const std::string &name);
 };
 
 }// namespace dwg

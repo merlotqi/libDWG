@@ -31,7 +31,7 @@ namespace dwg {
  * @brief Represents an arc entity in a DWG/DXF drawing.
  *
  * An arc is a portion of a circle defined by a start angle and an end angle.
- * It inherits from DG_Circle, sharing properties such as center, radius, and normal.
+ * It inherits from Circle, sharing properties such as center, radius, and normal.
  */
 class LIBDWG_API Arc : public Circle
 {
@@ -45,18 +45,18 @@ public:
     /**
      * @brief Default constructor.
      */
-    DG_Arc();
+    Arc();
 
     /**
      * @brief Destructor.
      */
-    ~DG_Arc();
+    ~Arc();
 
     /**
      * @brief Gets the object type of this entity.
      * @return The object type identifier.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of this object.

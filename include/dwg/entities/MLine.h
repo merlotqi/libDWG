@@ -29,21 +29,21 @@
 
 namespace dwg {
 
-class DG_MLineStyle;
+class MLineStyle;
 
 /**
- * @class DG_MLine
+ * @class MLine
  * @brief Represents a multiline entity in a DWG/DXF drawing.
  *
  * A multiline consists of multiple parallel lines, typically used for architectural 
  * and engineering drawings. It supports justification, scaling, and various styles.
  */
-class LIBDWG_API DG_MLine : public DG_Entity
+class LIBDWG_API MLine : public Entity
 {
-    DG_MLineStyle *_style;               ///< Pointer to the multiline style.
+    MLineStyle *_style;               ///< Pointer to the multiline style.
     double _scaleFactor;                 ///< Scale factor for the multiline.
-    DG_MLineJustification _justification;///< Justification of the multiline.
-    DG_MLineFlags _flags;                ///< Flags indicating properties of the multiline.
+    MLineJustification _justification;///< Justification of the multiline.
+    MLineFlags _flags;                ///< Flags indicating properties of the multiline.
     XYZ _startPoint;                     ///< Start point of the multiline.
     XYZ _normal;                         ///< Normal vector defining the plane of the multiline.
 
@@ -78,20 +78,20 @@ public:
 
 public:
     /**
-     * @brief Constructs a DG_MLine object.
+     * @brief Constructs a MLine object.
      */
-    DG_MLine();
+    MLine();
 
     /**
-     * @brief Destroys the DG_MLine object.
+     * @brief Destroys the MLine object.
      */
-    ~DG_MLine();
+    ~MLine();
 
     /**
      * @brief Returns the object type of the multiline.
-     * @return The object type as DG_ObjectType.
+     * @return The object type as ObjectType.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Returns the name of the object.
@@ -107,87 +107,87 @@ public:
 
     /**
      * @brief Gets the multiline style.
-     * @return Pointer to the DG_MLineStyle.
+     * @return Pointer to the MLineStyle.
      */
-    DG_MLineStyle *Style() const;
+    MLineStyle *style() const;
 
     /**
      * @brief Sets the multiline style.
-     * @param style Pointer to the DG_MLineStyle.
+     * @param style Pointer to the MLineStyle.
      */
-    void Style(DG_MLineStyle *style);
+    void setStyle(MLineStyle *style);
 
     /**
      * @brief Gets the scale factor of the multiline.
      * @return The scale factor as a double.
      */
-    double ScaleFactor() const;
+    double scaleFactor() const;
 
     /**
      * @brief Sets the scale factor of the multiline.
      * @param scale The scale factor as a double.
      */
-    void ScaleFactor(double scale);
+    void setScaleFactor(double scale);
 
     /**
      * @brief Gets the justification of the multiline.
-     * @return The justification as DG_MLineJustification.
+     * @return The justification as MLineJustification.
      */
-    DG_MLineJustification Justification() const;
+    MLineJustification justification() const;
 
     /**
      * @brief Sets the justification of the multiline.
-     * @param justification The justification as DG_MLineJustification.
+     * @param justification The justification as MLineJustification.
      */
-    void Justification(DG_MLineJustification justification);
+    void setJustification(MLineJustification justification);
 
     /**
      * @brief Gets the flags of the multiline.
-     * @return The flags as DG_MLineFlags.
+     * @return The flags as MLineFlags.
      */
-    DG_MLineFlags Flags() const;
+    MLineFlags flags() const;
 
     /**
      * @brief Sets the flags of the multiline.
-     * @param flags The flags as DG_MLineFlags.
+     * @param flags The flags as MLineFlags.
      */
-    void Flags(DG_MLineFlags flags);
+    void setFlags(MLineFlags flags);
 
     /**
      * @brief Gets the start point of the multiline.
      * @return The start point as XYZ.
      */
-    XYZ StartPoint() const;
+    XYZ startPoint() const;
 
     /**
      * @brief Sets the start point of the multiline.
      * @param point The start point as XYZ.
      */
-    void StartPoint(const XYZ &point);
+    void setStartPoint(const XYZ &point);
 
     /**
      * @brief Gets the normal vector of the multiline.
      * @return The normal vector as XYZ.
      */
-    XYZ Normal() const;
+    XYZ normal() const;
 
     /**
      * @brief Sets the normal vector of the multiline.
      * @param normal The normal vector as XYZ.
      */
-    void Normal(const XYZ &normal);
+    void setNormal(const XYZ &normal);
 
     /**
      * @brief Gets the vertices defining the multiline.
      * @return A vector of Vertex objects.
      */
-    std::vector<Vertex> Vertices() const;
+    std::vector<Vertex> vertices() const;
 
     /**
      * @brief Sets the vertices defining the multiline.
      * @param vertices A vector of Vertex objects.
      */
-    void Vertices(const std::vector<Vertex> &vertices);
+    void setVertices(const std::vector<Vertex> &vertices);
 
 private:
     std::vector<Vertex> _vertices;///< List of vertices defining the multiline.

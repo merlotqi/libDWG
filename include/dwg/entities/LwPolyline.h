@@ -27,12 +27,12 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_LwPolyline : public DG_Entity
+class LIBDWG_API LwPolyline : public Entity
 {
 public:
-    DG_LwPolyline();
+    LwPolyline();
 
-    virtual ~DG_LwPolyline();
+    virtual ~LwPolyline();
 
     struct Vertex
     {
@@ -40,37 +40,37 @@ public:
         double Bulge;
         double StartWidth;
         double EndWidth;
-        DG_VertexFlags Flags;
+        VertexFlags Flags;
         double CurveTangent;
         int Id;
     };
 
-    DG_ObjectType objectType() const;
+    ObjectType objectType() const;
 
     std::string objectName() const;
 
     std::string subclassMarker() const;
 
-    DG_LwPolylineFlags Flags() const;
-    void Flags(DG_LwPolylineFlags);
+    LwPolylineFlags flags() const;
+    void setFlags(LwPolylineFlags);
 
-    double ConstantWidth() const;
-    void ConstantWidth(double);
+    double constantWidth() const;
+    void setConstantWidth(double);
 
-    double Elevation() const;
-    void Elevation(double);
+    double elevation() const;
+    void setElevation(double);
 
-    double Thickness() const;
-    void Thickness();
+    double thickness() const;
+    void setThickness();
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    std::vector<Vertex> Vertices() const;
-    void Vertices(const std::vector<Vertex> &);
+    std::vector<Vertex> vertices() const;
+    void setVertices(const std::vector<Vertex> &);
 
-    bool IsClosed() const;
-    void IsClosed(bool);
+    bool isClosed() const;
+    void setIsClosed(bool);
 };
 
 }// namespace dwg

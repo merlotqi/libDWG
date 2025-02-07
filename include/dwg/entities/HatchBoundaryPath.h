@@ -29,15 +29,15 @@
 
 namespace dwg {
 
-class DG_Entity;
+class Entity;
 /**
- * @class DG_HatchBoundaryPath
+ * @class HatchBoundaryPath
  * @brief Represents a hatch boundary path in a DWG/DXF drawing.
  *
  * This class defines a hatch boundary, which consists of multiple edge types such as lines,
  * arcs, polylines, splines, and ellipses. These boundaries are used to define hatch areas.
  */
-class LIBDWG_API DG_HatchBoundaryPath
+class LIBDWG_API HatchBoundaryPath
 {
 public:
     /**
@@ -67,60 +67,60 @@ public:
          * @brief Gets the edge type.
          * @return The type of the edge.
          */
-        virtual HBP_EdgeType Type() const = 0;
+        virtual HBP_EdgeType type() const = 0;
 
         /**
          * @brief Clones the edge.
          * @return A pointer to the cloned edge.
          */
-        virtual HBP_Edge *Clone() const;
+        virtual HBP_Edge *clone() const;
     };
 
 public:
-    DG_HatchBoundaryPath();
-    ~DG_HatchBoundaryPath();
+    HatchBoundaryPath();
+    ~HatchBoundaryPath();
 
     /**
      * @brief Checks if the boundary path is a polyline.
      * @return True if the boundary path is a polyline, false otherwise.
      */
-    bool IsPolyline() const;
+    bool isPolyline() const;
 
     /**
      * @brief Gets the boundary path flags.
      * @return The boundary path flags.
      */
-    DG_BoundaryPathFlags Flags() const;
+    BoundaryPathFlags flags() const;
 
     /**
      * @brief Sets the boundary path flags.
      * @param flags The boundary path flags to set.
      */
-    void Flags(DG_BoundaryPathFlags);
+    void setFlags(BoundaryPathFlags);
 
     /**
      * @brief Gets the list of edges in the boundary path.
      * @return A vector of edge pointers.
      */
-    std::vector<HBP_Edge *> Edges() const;
+    std::vector<HBP_Edge *> edges() const;
 
     /**
      * @brief Sets the edges in the boundary path.
      * @param edges The vector of edge pointers to set.
      */
-    void Edges(const std::vector<HBP_Edge *> &edges);
+    void setEdges(const std::vector<HBP_Edge *> &edges);
 
     /**
      * @brief Gets the list of entities in the boundary path.
      * @return A vector of entity pointers.
      */
-    std::vector<DG_Entity *> Entities() const;
+    std::vector<Entity *> entities() const;
 
     /**
      * @brief Sets the entities in the boundary path.
      * @param entities The vector of entity pointers to set.
      */
-    void Entities(const std::vector<DG_Entity *> &entities);
+    void setEntities(const std::vector<Entity *> &entities);
 
 public:
     /**
@@ -138,22 +138,22 @@ public:
     public:
         HBP_Arc();
         ~HBP_Arc();
-        HBP_EdgeType Type() const;
+        HBP_EdgeType type() const;
 
-        XY Center() const;
-        void Center(const XY &);
+        XY center() const;
+        void setCenter(const XY &);
 
-        double Radius() const;
-        void Radius(double);
+        double radius() const;
+        void setRadius(double);
 
-        double StartAngle() const;
-        void StartAngle(double);
+        double startAngle() const;
+        void setStartAngle(double);
 
-        double EndAngle() const;
-        void EndAngle(double);
+        double endAngle() const;
+        void setEndAngle(double);
 
-        bool CounterClockWise() const;
-        void CounterClockWise(bool);
+        bool counterClockWise() const;
+        void setCounterClockWise(bool);
     };
 
     /**
@@ -173,25 +173,25 @@ public:
         HBP_Ellipse();
         ~HBP_Ellipse();
 
-        HBP_EdgeType Type() const;
+        HBP_EdgeType type() const;
 
-        XY Center() const;
-        void Center(const XY &);
+        XY center() const;
+        void setCenter(const XY &);
 
-        XY MajorAxisEndPoint() const;
-        void MajorAxisEndPoint(const XY &);
+        XY majorAxisEndPoint() const;
+        void setMajorAxisEndPoint(const XY &);
 
-        double MinorToMajorRatio() const;
-        void MinorToMajorRatio(double);
+        double minorToMajorRatio() const;
+        void setMinorToMajorRatio(double);
 
-        double StartAngle() const;
-        void StartAngle(double);
+        double startAngle() const;
+        void setStartAngle(double);
 
-        double EndAngle() const;
-        void EndAngle(double);
+        double endAngle() const;
+        void setEndAngle(double);
 
-        bool CounterClockWise() const;
-        void CounterClockWise(bool);
+        bool counterClockWise() const;
+        void setCounterClockWise(bool);
     };
 
     /**
@@ -206,13 +206,13 @@ public:
     public:
         HBP_Line();
         ~HBP_Line();
-        HBP_EdgeType Type() const;
+        HBP_EdgeType type() const;
 
-        XY Start() const;
-        void Start(const XY &);
+        XY start() const;
+        void setStart(const XY &);
 
-        XY End() const;
-        void End(const XY &);
+        XY end() const;
+        void setEnd(const XY &);
     };
 
     /**
@@ -228,18 +228,18 @@ public:
     public:
         HBP_Polyline();
         ~HBP_Polyline();
-        HBP_EdgeType Type() const;
+        HBP_EdgeType type() const;
 
-        bool HasBulge() const;
+        bool hasBulge() const;
 
-        bool IsClosed() const;
-        void IsClosed(bool);
+        bool isClosed() const;
+        void setIsClosed(bool);
 
-        std::vector<XYZ> Vertices() const;
-        void Vertices(const std::vector<XYZ> &);
+        std::vector<XYZ> vertices() const;
+        void setVertices(const std::vector<XYZ> &);
 
-        std::vector<double> Bulges() const;
-        void Bulges(const std::vector<double> &);
+        std::vector<double> bulges() const;
+        void setBulges(const std::vector<double> &);
     };
 
     /**
@@ -260,31 +260,31 @@ public:
     public:
         HBP_Spline();
         ~HBP_Spline();
-        HBP_EdgeType Type() const;
+        HBP_EdgeType type() const;
 
-        int Degree() const;
-        void Degree(int);
+        int degree() const;
+        void setDegree(int);
 
-        bool Rational() const;
-        void Rational(bool);
+        bool rational() const;
+        void setRational(bool);
 
-        bool Periodic() const;
-        void Periodic(bool);
+        bool periodic() const;
+        void setPeriodic(bool);
 
-        std::vector<double> Knots() const;
-        void Knots(const std::vector<double> &);
+        std::vector<double> knots() const;
+        void setKnots(const std::vector<double> &);
 
-        std::vector<XYZ> ControlPoints() const;
-        void ControlPoints(const std::vector<XYZ> &);
+        std::vector<XYZ> controlPoints() const;
+        void setControlPoints(const std::vector<XYZ> &);
 
-        std::vector<XY> FitPoints() const;
-        void FitPoints(const std::vector<XY> &);
+        std::vector<XY> fitPoints() const;
+        void setFitPoints(const std::vector<XY> &);
 
-        XY StartTangent() const;
-        void StartTangent(const XY &);
+        XY startTangent() const;
+        void settartTangent(const XY &);
 
-        XY EndTangent() const;
-        void EndTangent(const XY &);
+        XY endTangent() const;
+        void setEndTangent(const XY &);
     };
 };
 

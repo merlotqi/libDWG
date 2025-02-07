@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Point : public DG_Entity
+class LIBDWG_API Point : public Entity
 {
     XYZ _location;
     XYZ _normal;
@@ -34,11 +34,11 @@ class LIBDWG_API DG_Point : public DG_Entity
     double _rotation;
 
 public:
-    DG_Point();
-    ~DG_Point();
+    Point();
+    ~Point();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -46,17 +46,17 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    XYZ Location() const;
-    void Location(const XYZ &);
+    XYZ location() const;
+    void setLocation(const XYZ &);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    double Thickness() const;
-    void Thickness(double);
+    double thickness() const;
+    void setThickness(double);
 
-    double Rotation() const;
-    void Rotation(double);
+    double rotation() const;
+    void setRotation(double);
 };
 
 }// namespace dwg

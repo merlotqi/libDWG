@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Hatch pattern style.
-enum DG_HatchStyleType
+enum HatchStyleType
 {
     /// Hatch "odd parity" area.
     Normal = 0,

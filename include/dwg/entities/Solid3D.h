@@ -26,15 +26,15 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Solid3D : public DG_Entity
+class LIBDWG_API Solid3D : public Entity
 {
 public:
-    DG_Solid3D();
+    Solid3D();
 
-    virtual ~DG_Solid3D();
+    virtual ~Solid3D();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;

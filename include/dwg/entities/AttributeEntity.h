@@ -26,52 +26,52 @@
 
 namespace dwg {
 
-class DG_AttributeDefinition;
+class AttributeDefinition;
 /**
- * @class DG_AttributeEntity
- * @brief Represents an attribute entity in a DWG/DXF drawing, extending DG_AttributeBase.
+ * @class AttributeEntity
+ * @brief Represents an attribute entity in a DWG/DXF drawing, extending AttributeBase.
  *
- * DG_AttributeEntity is a class that represents an instance of an attribute in a DWG/DXF drawing.
- * It is derived from DG_AttributeBase and adds functionality related to specific object types 
+ * AttributeEntity is a class that represents an instance of an attribute in a DWG/DXF drawing.
+ * It is derived from AttributeBase and adds functionality related to specific object types 
  * and names for attribute entities. This class is used to handle individual attribute occurrences 
  * in the drawing, based on an attribute definition.
  */
-class LIBDWG_API DG_AttributeEntity : public DG_AttributeBase
+class LIBDWG_API AttributeEntity : public AttributeBase
 {
 public:
     /**
-     * @brief Default constructor for DG_AttributeEntity.
+     * @brief Default constructor for AttributeEntity.
      */
-    DG_AttributeEntity();
+    AttributeEntity();
 
     /**
-     * @brief Constructs a DG_AttributeEntity based on a given DG_AttributeDefinition.
+     * @brief Constructs a AttributeEntity based on a given AttributeDefinition.
      * 
-     * @param definition A pointer to a DG_AttributeDefinition object to initialize this entity.
+     * @param definition A pointer to a AttributeDefinition object to initialize this entity.
      */
-    DG_AttributeEntity(DG_AttributeDefinition *);
+    AttributeEntity(AttributeDefinition *);
 
     /**
-     * @brief Destructor for DG_AttributeEntity.
+     * @brief Destructor for AttributeEntity.
      */
-    ~DG_AttributeEntity();
+    ~AttributeEntity();
 
     /**
-     * @brief Overrides the ObjectType method to return the specific object type for DG_AttributeEntity.
+     * @brief Overrides the ObjectType method to return the specific object type for AttributeEntity.
      * 
-     * @return The object type (DG_ObjectType) of DG_AttributeEntity.
+     * @return The object type (ObjectType) of AttributeEntity.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
-     * @brief Overrides the ObjectName method to return the name of the object (DG_AttributeEntity).
+     * @brief Overrides the ObjectName method to return the name of the object (AttributeEntity).
      * 
      * @return The name of the object as a string.
      */
     virtual std::string objectName() const override;
 
     /**
-     * @brief Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeEntity.
+     * @brief Overrides the SubclassMarker method to return the subclass marker associated with AttributeEntity.
      * 
      * @return The subclass marker as a string.
      */

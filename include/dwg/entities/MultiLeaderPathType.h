@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the way the leader is drawn.
-enum DG_MultiLeaderPathType : short
+enum MultiLeaderPathType : short
 {
     /// Invisible leader
     Invisible = 0,

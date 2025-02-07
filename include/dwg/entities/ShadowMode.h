@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// This property is obsolete but still supported for backwards compatibility.
-enum DG_ShadowMode
+enum ShadowMode
 {
     CastsAndReceivesShadows = 0,
     CastsShadows = 1,

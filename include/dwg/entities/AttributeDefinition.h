@@ -26,18 +26,18 @@
 
 namespace dwg {
 
-class DG_AttributeEntity;
+class AttributeEntity;
 
 /**
- * @class DG_AttributeDefinition
- * @brief Represents an attribute definition in a DWG/DXF drawing, extending DG_AttributeBase.
+ * @class AttributeDefinition
+ * @brief Represents an attribute definition in a DWG/DXF drawing, extending AttributeBase.
  *
- * DG_AttributeDefinition is a specific type of attribute that includes additional information,
+ * AttributeDefinition is a specific type of attribute that includes additional information,
  * such as a prompt message that can be displayed in the drawing for user input.
- * It inherits from DG_AttributeBase, providing functionalities for versioning, tagging, 
+ * It inherits from AttributeBase, providing functionalities for versioning, tagging, 
  * flags, and text alignment, while adding specific behavior related to prompt handling.
  */
-class LIBDWG_API DG_AttributeDefinition : public DG_AttributeBase
+class LIBDWG_API AttributeDefinition : public AttributeBase
 {
     /**
      * @brief Private member to store the prompt string associated with the attribute definition.
@@ -46,38 +46,38 @@ class LIBDWG_API DG_AttributeDefinition : public DG_AttributeBase
 
 public:
     /**
-     * @brief Default constructor for DG_AttributeDefinition.
+     * @brief Default constructor for AttributeDefinition.
      */
-    DG_AttributeDefinition();
+    AttributeDefinition();
 
     /**
-     * @brief Constructor that initializes DG_AttributeDefinition from a given DG_AttributeEntity.
+     * @brief Constructor that initializes AttributeDefinition from a given AttributeEntity.
      * 
-     * @param entity A pointer to a DG_AttributeEntity that will be used to initialize this object.
+     * @param entity A pointer to a AttributeEntity that will be used to initialize this object.
      */
-    DG_AttributeDefinition(DG_AttributeEntity *);
+    AttributeDefinition(AttributeEntity *);
 
     /**
-     * @brief Destructor for DG_AttributeDefinition.
+     * @brief Destructor for AttributeDefinition.
      */
-    ~DG_AttributeDefinition();
+    ~AttributeDefinition();
 
     /**
-     * @brief Overrides the ObjectType method to return the specific object type for DG_AttributeDefinition.
+     * @brief Overrides the ObjectType method to return the specific object type for AttributeDefinition.
      * 
-     * @return The object type (DG_ObjectType) of DG_AttributeDefinition.
+     * @return The object type (ObjectType) of AttributeDefinition.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
-     * @brief Overrides the ObjectName method to return the name of the object (DG_AttributeDefinition).
+     * @brief Overrides the ObjectName method to return the name of the object (AttributeDefinition).
      * 
      * @return The name of the object as a string.
      */
     virtual std::string objectName() const override;
 
     /**
-     * @brief Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeDefinition.
+     * @brief Overrides the SubclassMarker method to return the subclass marker associated with AttributeDefinition.
      * 
      * @return The subclass marker as a string.
      */
@@ -88,14 +88,14 @@ public:
      * 
      * @return The prompt string.
      */
-    std::string Prompt() const;
+    std::string prompt() const;
 
     /**
      * @brief Sets the prompt string for the attribute definition.
      * 
      * @param prompt The new prompt string.
      */
-    void Prompt(const std::string &prompt);
+    void setPrompt(const std::string &prompt);
 };
 
 }// namespace dwg

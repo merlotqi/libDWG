@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Underlay display options.
-enum DG_UnderlayDisplayFlag : unsigned char
+enum UnderlayDisplayFlag : unsigned char
 {
     /// Clipping is on.
     ClippingOn = 1,
@@ -44,6 +44,6 @@ enum DG_UnderlayDisplayFlag : unsigned char
     /// Clip is inside mode.
     ClipInsideMode = 16
 };
-CPL_DECLARE_FLAGS(DG_UnderlayDisplayFlags, DG_UnderlayDisplayFlag)
+CPL_DECLARE_FLAGS(UnderlayDisplayFlags, UnderlayDisplayFlag)
 
 }// namespace dwg

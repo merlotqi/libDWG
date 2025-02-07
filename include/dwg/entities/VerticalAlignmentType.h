@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Text vertical justification.
-enum DG_VerticalAlignmentType : short
+enum VerticalAlignmentType : short
 {
     /// Top
     Top = 0,

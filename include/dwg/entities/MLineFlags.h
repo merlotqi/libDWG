@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Flags (bit-coded values)
-enum DG_MLineFlag
+enum MLineFlag
 {
     /// Has at least one vertex (code 72 is greater than 0)
     Has = 1,
@@ -38,6 +38,6 @@ enum DG_MLineFlag
     /// Suppress end caps
     NoEndCaps = 8
 };
-CPL_DECLARE_FLAGS(DG_MLineFlags, DG_MLineFlag)
+CPL_DECLARE_FLAGS(MLineFlags, MLineFlag)
 
 }// namespace dwg

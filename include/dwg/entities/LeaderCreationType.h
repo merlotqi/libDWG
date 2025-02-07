@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Leader creation type
-enum DG_LeaderCreationType : short
+enum LeaderCreationType : short
 {
     /// Created with text annotation
     CreatedWithTextAnnotation = 0,

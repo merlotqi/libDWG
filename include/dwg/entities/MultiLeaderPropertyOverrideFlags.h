@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum DG_MultiLeaderPropertyOverrideFlag : int
+enum MultiLeaderPropertyOverrideFlag : int
 {
     /// No Flag: No property to be overridden
     None = 0,
@@ -91,7 +91,7 @@ enum DG_MultiLeaderPropertyOverrideFlag : int
     /// Override <see cref="MultiLeaderStyle.TextBottomAttachment"/> property.
     TextBottomAttachment = 0x20000000
 };
-CPL_DECLARE_FLAGS(DG_MultiLeaderPropertyOverrideFlags,
-                  DG_MultiLeaderPropertyOverrideFlag)
+CPL_DECLARE_FLAGS(MultiLeaderPropertyOverrideFlags,
+                  MultiLeaderPropertyOverrideFlag)
 
 }// namespace dwg

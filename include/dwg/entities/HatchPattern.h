@@ -29,13 +29,13 @@
 namespace dwg {
 
 /**
- * @class DG_HatchPattern
+ * @class HatchPattern
  * @brief Represents a hatch pattern used in DWG/DXF drawings.
  *
  * A hatch pattern consists of multiple lines, each defined by an angle, 
  * base point, offset, and dash lengths.
  */
-class DG_HatchPattern
+class HatchPattern
 {
 public:
     /**
@@ -57,60 +57,60 @@ public:
     /**
      * @brief Constructs an empty hatch pattern.
      */
-    DG_HatchPattern();
+    HatchPattern();
 
     /**
      * @brief Constructs a hatch pattern with a specified name.
      * @param name The name of the hatch pattern.
      */
-    DG_HatchPattern(const std::string &name);
+    HatchPattern(const std::string &name);
 
     /**
      * @brief Destroys the hatch pattern instance.
      */
-    ~DG_HatchPattern();
+    ~HatchPattern();
 
     /**
      * @brief Returns a solid fill hatch pattern.
      * @return A pointer to a solid fill hatch pattern.
      */
-    static DG_HatchPattern *Solid();
+    static HatchPattern *Solid();
 
     /**
      * @brief Gets the name of the hatch pattern.
      * @return The name of the hatch pattern.
      */
-    std::string Name() const;
+    std::string name() const;
 
     /**
      * @brief Sets the name of the hatch pattern.
      * @param name The name to set.
      */
-    void Name(const std::string &name);
+    void setName(const std::string &name);
 
     /**
      * @brief Gets the description of the hatch pattern.
      * @return The description of the hatch pattern.
      */
-    std::string Description() const;
+    std::string description() const;
 
     /**
      * @brief Sets the description of the hatch pattern.
      * @param description The description to set.
      */
-    void Description(const std::string &description);
+    void setDescription(const std::string &description);
 
     /**
      * @brief Gets the list of hatch pattern lines.
      * @return A vector containing the hatch pattern lines.
      */
-    std::vector<DG_HatchPattern::Line> Lines() const;
+    std::vector<HatchPattern::Line> lines() const;
 
     /**
      * @brief Sets the lines of the hatch pattern.
      * @param lines A vector of hatch pattern lines.
      */
-    void Lines(const std::vector<DG_HatchPattern::Line> &lines);
+    void setLines(const std::vector<HatchPattern::Line> &lines);
 };
 
 }// namespace dwg

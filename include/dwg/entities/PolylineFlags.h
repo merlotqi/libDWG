@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Defines the polyline flags.
-enum DG_PolylineFlag
+enum PolylineFlag
 {
     /// Default, open polyline.
     Default = 0,
@@ -48,6 +48,6 @@ enum DG_PolylineFlag
     /// The line type pattern is generated continuously around the vertexes of this polyline.
     ContinuousLinetypePattern = 128
 };
-CPL_DECLARE_FLAGS(DG_PolylineFlags, DG_PolylineFlag)
+CPL_DECLARE_FLAGS(PolylineFlags, PolylineFlag)
 
 }// namespace dwg

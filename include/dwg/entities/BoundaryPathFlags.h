@@ -27,7 +27,7 @@
 namespace dwg {
 
 /**
- * @enum DG_BoundaryPathFlag
+ * @enum BoundaryPathFlag
  * @brief Defines the flags for boundary path types of a hatch in a DWG/DXF drawing.
  *
  * This enum specifies different properties and characteristics of a hatch boundary path.
@@ -35,7 +35,7 @@ namespace dwg {
  * whether it is external, a polyline, or self-intersecting, among others.
  * \remarks Bit flag
  */
-enum DG_BoundaryPathFlag
+enum BoundaryPathFlag
 {
     Default = 0,               ///< Default boundary path.
     External = 1,              ///< External boundary path.
@@ -55,12 +55,12 @@ enum DG_BoundaryPathFlag
 };
 
 /**
- * @typedef DG_BoundaryPathFlags
+ * @typedef BoundaryPathFlags
  * @brief Represents a set of flags for boundary path types.
  *
  * This type is a bitmask, which allows for the efficient combination and manipulation of
- * multiple `DG_BoundaryPathFlag` values to describe various attributes of a hatch boundary path.
+ * multiple `BoundaryPathFlag` values to describe various attributes of a hatch boundary path.
  */
-CPL_DECLARE_FLAGS(DG_BoundaryPathFlags, DG_BoundaryPathFlag)
+CPL_DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
 
 }// namespace dwg

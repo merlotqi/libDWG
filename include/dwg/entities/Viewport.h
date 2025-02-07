@@ -32,11 +32,11 @@
 
 namespace dwg {
 
-class DG_Layer;
-class DG_Scale;
-class DG_VisualStyle;
+class Layer;
+class Scale;
+class VisualStyle;
 
-class LIBDWG_API DG_Viewport : public DG_Entity
+class LIBDWG_API Viewport : public Entity
 {
 public:
     static constexpr int PaperViewId = 1;
@@ -44,12 +44,12 @@ public:
             "ASDK_XREC_ANNOTATION_SCALE_INFO";
 
 public:
-    DG_Viewport();
+    Viewport();
 
-    ~DG_Viewport();
+    ~Viewport();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -57,124 +57,124 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    XYZ Center() const;
-    void Center(const XYZ &);
+    XYZ center() const;
+    void setCenter(const XYZ &);
 
-    double Width() const;
-    void Width(double);
+    double width() const;
+    void setWidth(double);
 
-    double Height() const;
-    void Height(double) const;
+    double height() const;
+    void setHeight(double) const;
 
-    short Id() const;
+    short id() const;
 
-    XY ViewCenter() const;
-    void ViewCenter(const XY &);
+    XY viewCenter() const;
+    void setViewCenter(const XY &);
 
-    XY SnapBase() const;
-    void SnapBase(const XY &);
+    XY snapBase() const;
+    void setSnapBase(const XY &);
 
-    XY SnapSpacing() const;
-    void SnapSpacing(const XY &);
+    XY snapSpacing() const;
+    void setSnapSpacing(const XY &);
 
-    XY GridSpacing() const;
-    void GridSpacing(const XY &);
+    XY gridSpacing() const;
+    void setGridSpacing(const XY &);
 
-    XYZ ViewDirection() const;
-    void ViewDirection(const XYZ &);
+    XYZ viewDirection() const;
+    void setViewDirection(const XYZ &);
 
-    XY ViewTarget() const;
-    void ViewTarget(const XY &);
+    XY viewTarget() const;
+    void setViewTarget(const XY &);
 
-    double LensLength() const;
-    void LensLength(double);
+    double lensLength() const;
+    void setLensLength(double);
 
-    double FrontClipPlane() const;
-    void FrontClipPlane(double);
+    double frontClipPlane() const;
+    void setFrontClipPlane(double);
 
-    double BackClipPlane() const;
-    void BackClipPlane(double);
+    double backClipPlane() const;
+    void setBackClipPlane(double);
 
-    double ViewHeight() const;
-    void ViewHeight(double);
+    double viewHeight() const;
+    void setViewHeight(double);
 
-    double ViewWidth() const;
+    double viewWidth() const;
 
-    double SnapAngle() const;
-    void SnapAngle(double);
+    double snapAngle() const;
+    void setSnapAngle(double);
 
-    double TwistAngle() const;
-    void TwistAngle(double);
+    double twistAngle() const;
+    void setTwistAngle(double);
 
-    short CircleZoomPercent() const;
-    void CircleZoomPercent(short);
+    short circleZoomPercent() const;
+    void setCircleZoomPercent(short);
 
-    std::vector<DG_Layer *> FrozenLayers() const;
-    void FrozenLayers(const std::vector<DG_Layer *> &);
+    std::vector<Layer *> frozenLayers() const;
+    void setFrozenLayers(const std::vector<Layer *> &);
 
-    DG_ViewportStatusFlags Status() const;
-    void Status(DG_ViewportStatusFlags);
+    ViewportStatusFlags status() const;
+    void setStatus(ViewportStatusFlags);
 
-    DG_Entity* Boundary() const;
-    void Boundary(DG_Entity *);
+    Entity* boundary() const;
+    void setBoundary(Entity *);
 
-    std::string StyleSheetName() const;
-    void StyleSheetName(const std::string &);
+    std::string styleSheetName() const;
+    void setStyleSheetName(const std::string &);
 
-    DG_RenderMode RenderMode() const;
-    void RenderMode(DG_RenderMode);
+    RenderMode renderMode() const;
+    void setRenderMode(RenderMode);
 
-    bool UcsPerViewport() const;
-    void UcsPerViewport(bool);
+    bool ucsPerViewport() const;
+    void setUcsPerViewport(bool);
 
-    bool DisplayUcsIcon() const;
-    void DisplayUcsIcon(bool);
+    bool displayUcsIcon() const;
+    void setDisplayUcsIcon(bool);
 
-    XYZ UcsOrigin() const;
-    void UcsOrigin(const XYZ &);
+    XYZ ucsOrigin() const;
+    void setUcsOrigin(const XYZ &);
 
-    XYZ UcsXAxis() const;
-    void UcsXAxis(const XYZ &);
+    XYZ ucsXAxis() const;
+    void setUcsXAxis(const XYZ &);
 
-    XYZ UcsYAxis() const;
-    void UcsYAxis(const XYZ &);
+    XYZ ucsYAxis() const;
+    void setUcsYAxis(const XYZ &);
 
-    DG_OrthographicType UcsOrthographicType() const;
-    void UcsOrthographicType(DG_OrthographicType);
+    OrthographicType ucsOrthographicType() const;
+    void setUcsOrthographicType(OrthographicType);
 
-    double Elevation() const;
-    void Elevation(double);
+    double elevation() const;
+    void setElevation(double);
 
-    DG_ShadePlotMode ShadePlotMode() const;
-    void ShadePlotMode(DG_ShadePlotMode);
+    ShadePlotMode shadePlotMode() const;
+    void setShadePlotMode(ShadePlotMode);
 
-    short MajorGridLineFrequency() const;
-    void MajorGridLineFrequency(short);
+    short majorGridLineFrequency() const;
+    void setMajorGridLineFrequency(short);
 
-    DG_VisualStyle *VisualStyle() const;
-    void VisualStyle(DG_VisualStyle *);
+    VisualStyle *visualStyle() const;
+    void setVisualStyle(VisualStyle *);
 
-    bool UseDefaultLighting() const;
-    void UseDefaultLighting(bool);
+    bool useDefaultLighting() const;
+    void setUseDefaultLighting(bool);
 
-    DG_LightingType DefaultLightingType() const;
-    void DefaultLightingType(DG_LightingType);
+    LightingType defaultLightingType() const;
+    void setDefaultLightingType(LightingType);
 
-    double Brightness() const;
-    void Brightness(double);
+    double brightness() const;
+    void setBrightness(double);
 
-    double Contrast() const;
-    void Contrast(double);
+    double contrast() const;
+    void setContrast(double);
 
-    DG_Color AmbientLightColor() const;
-    void AmbientLightColor(const DG_Color &);
+    Color ambientLightColor() const;
+    void setAmbientLightColor(const Color &);
 
-    DG_Scale *Scale() const;
-    void Scale(DG_Scale *);
+    Scale *scale() const;
+    void setScale(Scale *);
 
-    double ScaleFactor() const;
+    double scaleFactor() const;
 
-    bool RepresentsPaper() const;
+    bool representsPaper() const;
 };
 
 }// namespace dwg

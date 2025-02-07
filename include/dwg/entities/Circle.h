@@ -31,11 +31,11 @@ namespace dwg {
  * @brief Represents a circle entity in a DWG/DXF drawing.
  *
  * Circle is a class that represents a circle in a CAD drawing. It is derived from 
- * DG_Entity and provides the necessary functionality to handle the properties of a circle, 
+ * Entity and provides the necessary functionality to handle the properties of a circle, 
  * such as its center, radius, and any transformations that may be applied. Circles are 
  * fundamental geometric entities in CAD systems and are used to represent circular shapes.
  */
-class LIBDWG_API Circle : public DG_Entity
+class LIBDWG_API Circle : public Entity
 {
     /// The center of the circle (in 3D space).
     XYZ _center;
@@ -64,7 +64,7 @@ public:
      * @brief Gets the object type of the circle.
      * @return The object type.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of the object.

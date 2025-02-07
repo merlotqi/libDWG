@@ -30,44 +30,44 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Polyline : public DG_Entity
+class LIBDWG_API Polyline : public Entity
 {
 public:
-    DG_Polyline();
-    ~DG_Polyline();
+    Polyline();
+    ~Polyline();
 
     virtual std::string objectName() const override;
 
-    double Elevation() const;
-    void Elevation(double);
+    double elevation() const;
+    void setElevation(double);
 
-    double Thickness() const;
-    void Thickness(double);
+    double thickness() const;
+    void setThickness(double);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    DG_PolylineFlags Flags() const;
-    void Flags(DG_PolylineFlags);
+    PolylineFlags flags() const;
+    void setFlags(PolylineFlags);
 
-    double StartWidth() const;
-    void StartWidth(double);
+    double startWidth() const;
+    void setStartWidth(double);
 
-    double EndWidth() const;
-    void EndWidth(double);
+    double endWidth() const;
+    void setEndWidth(double);
 
-    DG_SmoothSurfaceType SmoothSurface() const;
-    void SmoothSurface(DG_SmoothSurfaceType);
+    SmoothSurfaceType smoothSurface() const;
+    void setSmoothSurface(SmoothSurfaceType);
 };
 
-class Polyline2D : public DG_Polyline
+class Polyline2D : public Polyline
 {
 public:
     Polyline2D();
     ~Polyline2D();
 };
 
-class Polyline3D : public DG_Polyline
+class Polyline3D : public Polyline
 {
 public:
     Polyline3D();

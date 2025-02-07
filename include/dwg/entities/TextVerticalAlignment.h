@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Text vertical justification.
-enum DG_TextVerticalAlignment : short
+enum TextVerticalAlignment : short
 {
     /// Text aligned to baseline.
     Baseline = 0,

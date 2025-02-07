@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Justification
-enum DG_MLineJustification
+enum MLineJustification
 {
     /// Top
     Top = 0,

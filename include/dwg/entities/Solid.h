@@ -26,15 +26,15 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Solid : public DG_Entity
+class LIBDWG_API Solid : public Entity
 {
 public:
-    DG_Solid();
+    Solid();
 
-    virtual ~DG_Solid();
+    virtual ~Solid();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -42,23 +42,23 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    XYZ FirstCorner() const;
-    void FirstCorner(const XYZ &);
+    XYZ firstCorner() const;
+    void setFirstCorner(const XYZ &);
 
-    XYZ SecondCorner() const;
-    void SecondCorner(const XYZ &);
+    XYZ secondCorner() const;
+    void setSecondCorner(const XYZ &);
 
-    XYZ ThirdCorner() const;
-    void ThirdCorner(const XYZ &);
+    XYZ thirdCorner() const;
+    void setThirdCorner(const XYZ &);
 
-    XYZ FourthCorner() const;
-    void FourthCorner(const XYZ &);
+    XYZ fourthCorner() const;
+    void setFourthCorner(const XYZ &);
 
-    double Thickness() const;
-    void Thickness(double);
+    double thickness() const;
+    void setThickness(double);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 };
 
 }// namespace dwg

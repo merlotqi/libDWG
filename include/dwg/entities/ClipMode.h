@@ -25,14 +25,14 @@
 namespace dwg {
 
 /**
- * @enum DG_ClipMode
+ * @enum ClipMode
  * @brief Defines the clipping modes for clipping operations in a DWG/DXF drawing.
  *
  * This enum specifies the two modes of clipping: Outside and Inside. It determines
  * how the clipping operation is applied to an object, either keeping the content 
  * outside the clipping boundary or only the content inside the boundary.
  */
-enum DG_ClipMode : unsigned char
+enum ClipMode : unsigned char
 {
     Outside,///< Content outside the clipping boundary is kept.
     Inside, ///< Content inside the clipping boundary is kept.

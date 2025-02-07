@@ -26,17 +26,17 @@
 
 namespace dwg {
 
-class DG_TextStyle;
+class TextStyle;
 
-class LIBDWG_API DG_Shape : public DG_Entity
+class LIBDWG_API Shape : public Entity
 {
 public:
-    DG_Shape();
+    Shape();
 
-    ~DG_Shape();
+    ~Shape();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -44,32 +44,32 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    double Thickness() const;
-    void Thickness(double);
+    double thickness() const;
+    void setThickness(double);
 
-    XYZ InsertPoint() const;
-    void InsertPoint(const XYZ &);
+    XYZ insertPoint() const;
+    void setInsertPoint(const XYZ &);
 
-    double Size() const;
-    void Size(double);
+    double size() const;
+    void setSize(double);
 
-    DG_TextStyle *ShapeStyle() const;
-    void ShapeStyle(DG_TextStyle *);
+    TextStyle *shapeStyle() const;
+    void setShapeStyle(TextStyle *);
 
-    double Rotation() const;
-    void Rotation(double);
+    double rotation() const;
+    void setRotation(double);
 
-    double RelativeXScale() const;
-    void RelativeXScale(double);
+    double relativeXScale() const;
+    void setRelativeXScale(double);
 
-    double ObliqueAngle() const;
-    void ObliqueAngle(double);
+    double obliqueAngle() const;
+    void setObliqueAngle(double);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    unsigned short ShapeIndex() const;
-    void ShapeIndex(unsigned short);
+    unsigned short shapeIndex() const;
+    void setShapeIndex(unsigned short);
 };
 
 }// namespace dwg

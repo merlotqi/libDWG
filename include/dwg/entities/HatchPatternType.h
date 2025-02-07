@@ -25,13 +25,13 @@
 namespace dwg {
 
 /**
- * @enum DG_HatchPatternType
+ * @enum HatchPatternType
  * @brief Defines the fill type for a hatch pattern.
  *
  * This enumeration specifies different types of hatch pattern fills,
  * including predefined patterns, solid fills, and custom patterns.
  */
-enum DG_HatchPatternType
+enum HatchPatternType
 {
     /** Pattern fill using predefined hatch lines. */
     PatternFill = 0,

@@ -30,9 +30,9 @@
 
 namespace dwg {
 
-class DG_TextStyle;
+class TextStyle;
 
-class LIBDWG_API DG_TextEntity : public DG_Entity
+class LIBDWG_API TextEntity : public Entity
 {
     double _thickness;
     XYZ _insertPoint;
@@ -41,19 +41,19 @@ class LIBDWG_API DG_TextEntity : public DG_Entity
     double _rotation;
     double _widthFactor;
     double _obliqueAngle;
-    DG_TextStyle* _style;
-    DG_TextMirrorFlag _mirror;
-    DG_TextHorizontalAlignment _horizontalAlignment;
+    TextStyle* _style;
+    TextMirrorFlag _mirror;
+    TextHorizontalAlignment _horizontalAlignment;
     XYZ _alignmentPoint;
     XYZ _normal;
-    DG_TextVerticalAlignment _verticalAlignment;
+    TextVerticalAlignment _verticalAlignment;
 
 public:
-    DG_TextEntity();
-    virtual ~DG_TextEntity();
+    TextEntity();
+    virtual ~TextEntity();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const;
+    virtual ObjectType objectType() const;
 
     // Override to return the name of the object
     virtual std::string objectName() const;
@@ -61,44 +61,44 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const;
 
-    double Thickness() const;
-    void Thickness(double);
+    double thickness() const;
+    void setThickness(double);
 
-    XYZ InsertPoint() const;
-    void InsertPoint(XYZ);
+    XYZ insertPoint() const;
+    void setInsertPoint(XYZ);
 
-    double Height() const;
-    void Height(double);
+    double height() const;
+    void setHeight(double);
 
-    std::string Value() const;
-    void Value(const std::string &);
+    std::string value() const;
+    void setValue(const std::string &);
 
-    double Rotation() const;
-    void Rotation(double);
+    double rotation() const;
+    void setRotation(double);
 
-    double WidthFactor() const;
-    void WidthFactor(double);
+    double widthFactor() const;
+    void setWidthFactor(double);
 
-    double ObliqueAngle() const;
-    void ObliqueAngle(double);
+    double obliqueAngle() const;
+    void setObliqueAngle(double);
 
-    DG_TextStyle *Style() const;
-    void Style(DG_TextStyle *);
+    TextStyle *style() const;
+    void setStyle(TextStyle *);
 
-    DG_TextMirrorFlag Mirror() const;
-    void Mirror(DG_TextMirrorFlag);
+    TextMirrorFlag mirror() const;
+    void setMirror(TextMirrorFlag);
 
-    DG_TextHorizontalAlignment HorizontalAlignment() const;
-    void HorizontalAlignment(DG_TextHorizontalAlignment);
+    TextHorizontalAlignment horizontalAlignment() const;
+    void setHorizontalAlignment(TextHorizontalAlignment);
 
-    XYZ AlignmentPoint() const;
-    void AlignmentPoint(const XYZ &);
+    XYZ alignmentPoint() const;
+    void setAlignmentPoint(const XYZ &);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    DG_TextVerticalAlignment VerticalAlignment() const;
-    void VerticalAlignment(DG_TextVerticalAlignment);
+    TextVerticalAlignment verticalAlignment() const;
+    void setVerticalAlignment(TextVerticalAlignment);
 };
 
 }// namespace dwg

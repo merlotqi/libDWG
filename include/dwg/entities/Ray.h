@@ -27,33 +27,33 @@
 namespace dwg {
 
 /**
- * @class DG_Ray
+ * @class Ray
  * @brief Represents a ray entity in a DWG/DXF drawing.
  *
  * A ray is a linear infinite construction line that starts at a point and extends in a specified direction.
- * It inherits from DG_Entity and contains a start point and a direction vector.
+ * It inherits from Entity and contains a start point and a direction vector.
  */
-class LIBDWG_API DG_Ray : public DG_Entity
+class LIBDWG_API Ray : public Entity
 {
     XYZ _startPoint;///< The starting point of the ray.
     XYZ _direction; ///< The direction vector of the ray.
 
 public:
     /**
-     * @brief Constructs a DG_Ray object with default values.
+     * @brief Constructs a Ray object with default values.
      */
-    DG_Ray();
+    Ray();
 
     /**
-     * @brief Destroys the DG_Ray object.
+     * @brief Destroys the Ray object.
      */
-    ~DG_Ray();
+    ~Ray();
 
     /**
      * @brief Gets the object type of the ray.
-     * @return The object type as DG_ObjectType.
+     * @return The object type as ObjectType.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of the ray object.
@@ -71,25 +71,25 @@ public:
      * @brief Gets the start point of the ray.
      * @return The start point as an XYZ object.
      */
-    XYZ StartPoint() const;
+    XYZ startPoint() const;
 
     /**
      * @brief Sets the start point of the ray.
      * @param point The new start point.
      */
-    void StartPoint(const XYZ &point);
+    void setStartPoint(const XYZ &point);
 
     /**
      * @brief Gets the direction vector of the ray.
      * @return The direction vector as an XYZ object.
      */
-    XYZ Direction() const;
+    XYZ direction() const;
 
     /**
      * @brief Sets the direction vector of the ray.
      * @param direction The new direction vector.
      */
-    void Direction(const XYZ &direction);
+    void setDirection(const XYZ &direction);
 };
 
 }// namespace dwg

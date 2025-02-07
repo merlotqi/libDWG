@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_TextHorizontalAlignment : short
+enum TextHorizontalAlignment : short
 {
     Left = 0,
     Center = 1,

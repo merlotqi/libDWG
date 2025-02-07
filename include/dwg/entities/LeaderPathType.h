@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the way the leader is drawn.
-enum DG_LeaderPathType
+enum LeaderPathType
 {
     /// Draws the leader line as a set of straight line segments
     StraightLineSegments = 0,

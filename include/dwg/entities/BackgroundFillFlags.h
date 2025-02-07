@@ -27,13 +27,13 @@
 namespace dwg {
 
 /**
- * @enum DG_BackgroundFillFlag
+ * @enum BackgroundFillFlag
  * @brief Defines the flags for background fill options in a DWG/DXF drawing.
  *
  * These flags determine how the background of an entity or text is filled, 
  * including options for background color, drawing window color, and text framing.
  */
-enum DG_BackgroundFillFlag : unsigned char
+enum BackgroundFillFlag : unsigned char
 {
     None = 0,                  ///< No background fill.
     UseBackgroundFillColor = 1,///< Use the background fill color.
@@ -42,13 +42,13 @@ enum DG_BackgroundFillFlag : unsigned char
 };
 
 /**
- * @typedef DG_BackgroundFillFlags
+ * @typedef BackgroundFillFlags
  * @brief Represents a set of flags for background fill options.
  *
- * This type is a bitmask that can represent multiple `DG_BackgroundFillFlag` values,
+ * This type is a bitmask that can represent multiple `BackgroundFillFlag` values,
  * allowing for efficient storage and manipulation of background fill properties.
  */
-CPL_DECLARE_FLAGS(DG_BackgroundFillFlags, DG_BackgroundFillFlag)
+CPL_DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
 
 
 }// namespace dwg

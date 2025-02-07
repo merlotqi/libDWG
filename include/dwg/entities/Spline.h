@@ -28,13 +28,13 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Spline : public DG_Entity
+class LIBDWG_API Spline : public Entity
 {
-    DG_SplineFlag1 _flags1;
-    DG_KnotParameterization _knotParameterization;
+    SplineFlag1 _flags1;
+    KnotParameterization _knotParameterization;
 
     XYZ _normal;
-    DG_SplineFlags _flags;
+    SplineFlags _flags;
     int _degree;
     std::vector<double> _knots;
     std::vector<XYZ> _controlPoints;
@@ -47,12 +47,12 @@ class LIBDWG_API DG_Spline : public DG_Entity
     std::vector<double> _weights;
 
 public:
-    DG_Spline();
+    Spline();
 
-    virtual ~DG_Spline();
+    virtual ~Spline();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -60,48 +60,48 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    DG_SplineFlags Flags() const;
-    void Flags(DG_SplineFlags);
+    SplineFlags flags() const;
+    void setFlags(SplineFlags);
 
-    int Degree() const;
-    void Degree(int);
+    int degree() const;
+    void setDegree(int);
 
-    std::vector<double> Knots() const;
-    void Knots(const std::vector<double> &);
+    std::vector<double> knots() const;
+    void setKnots(const std::vector<double> &);
 
-    std::vector<XYZ> ControlPoints() const;
-    void ControlPoints(const std::vector<XYZ> &);
+    std::vector<XYZ> controlPoints() const;
+    void setControlPoints(const std::vector<XYZ> &);
 
-    std::vector<XYZ> FitPoints() const;
-    void FitPoints(const std::vector<XYZ> &);
+    std::vector<XYZ> fitPoints() const;
+    void setFitPoints(const std::vector<XYZ> &);
 
-    double KnotTolerance() const;
-    void KnotTolerance(double);
+    double knotTolerance() const;
+    void setKnotTolerance(double);
 
-    double ControlPointTolerance() const;
-    void ControlPointTolerance(double);
+    double controlPointTolerance() const;
+    void setControlPointTolerance(double);
 
-    double FitTolerance() const;
-    void FitTolerance(double);
+    double fitTolerance() const;
+    void setFitTolerance(double);
 
-    XYZ StartTangent() const;
-    void StartTangent(const XYZ &);
+    XYZ startTangent() const;
+    void setStartTangent(const XYZ &);
 
-    XYZ EndTangent() const;
-    void EndTangent(const XYZ &);
+    XYZ endTangent() const;
+    void setEndTangent(const XYZ &);
 
-    std::vector<double> Weights() const;
-    void Weights(const std::vector<double> &);
+    std::vector<double> weights() const;
+    void setWeights(const std::vector<double> &);
 
 protected:
-    DG_SplineFlag1 Flags1() const;
-    void Flags1(DG_SplineFlag1);
+    SplineFlag1 flags1() const;
+    void setFlags1(SplineFlag1);
 
-    DG_KnotParameterization KnotParameterization() const;
-    void KnotParameterization(DG_KnotParameterization);
+    KnotParameterization knotParameterization() const;
+    void setKnotParameterization(KnotParameterization);
 };
 
 }// namespace dwg

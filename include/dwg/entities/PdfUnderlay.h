@@ -27,30 +27,30 @@
 namespace dwg {
 
 /**
- * @class DG_PdfUnderlay
+ * @class PdfUnderlay
  * @brief Represents a PDF underlay entity in a DWG/DXF drawing.
  *
  * A PDF underlay allows embedding a PDF document as a reference within a drawing.
- * It inherits from DG_UnderlayEntity, sharing common underlay properties.
+ * It inherits from UnderlayEntity, sharing common underlay properties.
  */
-class LIBDWG_API DG_PdfUnderlay : public DG_UnderlayEntity
+class LIBDWG_API PdfUnderlay : public UnderlayEntity
 {
 public:
     /**
-     * @brief Constructs a DG_PdfUnderlay object.
+     * @brief Constructs a PdfUnderlay object.
      */
-    DG_PdfUnderlay();
+    PdfUnderlay();
 
     /**
-     * @brief Destroys the DG_PdfUnderlay object.
+     * @brief Destroys the PdfUnderlay object.
      */
-    ~DG_PdfUnderlay();
+    ~PdfUnderlay();
 
     /**
      * @brief Gets the object type of the PDF underlay.
-     * @return The object type as DG_ObjectType.
+     * @return The object type as ObjectType.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of the PDF underlay object.

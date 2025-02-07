@@ -27,17 +27,17 @@
 namespace dwg {
 
 class ImageDefinition;
-class LIBDWG_API DG_RasterImage : public DG_CadWipeoutBase
+class LIBDWG_API RasterImage : public CadWipeoutBase
 {
 public:
-    DG_RasterImage();
+    RasterImage();
 
-    DG_RasterImage(ImageDefinition *definition);
+    RasterImage(ImageDefinition *definition);
 
-    ~DG_RasterImage();
+    ~RasterImage();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;

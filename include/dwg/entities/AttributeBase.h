@@ -28,22 +28,22 @@
 
 namespace dwg {
 
-class DG_MText;
+class MText;
 
 /**
- * @class DG_AttributeBase
+ * @class AttributeBase
  * @brief Represents an attribute definition in a DWG/DXF drawing.
  *
- * DG_AttributeBase is a base class for defining attributes, which are text-based data objects
+ * AttributeBase is a base class for defining attributes, which are text-based data objects
  * attached to a drawing. It supports different types of attributes (single-line, multi-line),
  * provides properties for text alignment, versioning, flags, and locking status.
  * It also handles the creation and manipulation of multi-line text (MText) associated with attributes.
  */
-class LIBDWG_API DG_AttributeBase : public DG_TextEntity
+class LIBDWG_API AttributeBase : public TextEntity
 {
 public:
     /**
-     * @enum DG_AttributeType
+     * @enum AttributeType
      * @brief Defines the types of attributes in a drawing.
      *
      * The attribute types specify how the text is formatted:
@@ -51,7 +51,7 @@ public:
      * - MultiLine: Multi-line text.
      * - ConstantMultiLine: Multi-line text that remains constant.
      */
-    enum DG_AttributeType
+    enum AttributeType
     {
         SingleLine = 1,       ///< Single-line text.
         MultiLine = 2,        ///< Multi-line text.
@@ -60,112 +60,112 @@ public:
 
 public:
     /**
-     * @brief Default constructor for DG_AttributeBase.
+     * @brief Default constructor for AttributeBase.
      */
-    DG_AttributeBase();
+    AttributeBase();
 
     /**
-     * @brief Destructor for DG_AttributeBase.
+     * @brief Destructor for AttributeBase.
      */
-    virtual ~DG_AttributeBase();
+    virtual ~AttributeBase();
 
     /**
      * @brief Gets the vertical alignment of the text.
      * 
      * @return The vertical alignment.
      */
-    DG_TextVerticalAlignment VerticalAlignment() const;
+    TextVerticalAlignment verticalAlignment() const;
 
     /**
      * @brief Sets the vertical alignment of the text.
      * 
      * @param alignment The vertical alignment.
      */
-    void VerticalAlignment(DG_TextVerticalAlignment alignment);
+    void setVerticalAlignment(TextVerticalAlignment alignment);
 
     /**
      * @brief Gets the version of the attribute.
      * 
      * @return The version.
      */
-    unsigned char Version() const;
+    unsigned char version() const;
 
     /**
      * @brief Sets the version of the attribute.
      * 
      * @param version The new version.
      */
-    void Version(unsigned char version);
+    void setVersion(unsigned char version);
 
     /**
      * @brief Gets the tag associated with the attribute.
      * 
      * @return The tag.
      */
-    std::string Tag() const;
+    std::string tag() const;
 
     /**
      * @brief Sets the tag for the attribute.
      * 
      * @param tag The new tag.
      */
-    void Tag(const std::string &tag);
+    void setTag(const std::string &tag);
 
     /**
      * @brief Gets the flags associated with the attribute.
      * 
      * @return The flags.
      */
-    DG_AttributeFlags Flags() const;
+    AttributeFlags flags() const;
 
     /**
      * @brief Sets the flags for the attribute.
      * 
      * @param flags The new flags.
      */
-    void Flags(DG_AttributeFlags flags);
+    void setFlags(AttributeFlags flags);
 
     /**
      * @brief Gets the type of the attribute (e.g., single-line, multi-line).
      * 
      * @return The attribute type.
      */
-    DG_AttributeType AttributeType() const;
+    AttributeType attributeType() const;
 
     /**
      * @brief Sets the type of the attribute.
      * 
      * @param attributeType The new attribute type.
      */
-    void AttributeType(DG_AttributeType attributeType);
+    void setAttributeType(AttributeType attributeType);
 
     /**
      * @brief Checks if the attribute is locked.
      * 
      * @return True if the attribute is locked, false otherwise.
      */
-    bool IsReallyLocked() const;
+    bool isReallyLocked() const;
 
     /**
      * @brief Sets the locked status of the attribute.
      * 
      * @param value True to lock the attribute, false to unlock.
      */
-    void IsReallyLocked(bool value);
+    void setIsReallyLocked(bool value);
 
     /**
      * @brief Gets the multi-line text associated with this attribute.
      * 
-     * @return A pointer to the DG_MText object.
+     * @return A pointer to the MText object.
      */
-    DG_MText *MText() const;
+    MText *mtext() const;
 
     /**
      * @brief Sets the multi-line text for this attribute.
      * 
-     * @param mtext A pointer to the DG_MText object.
+     * @param mtext A pointer to the MText object.
      */
-    void MText(DG_MText *mtext);
+    void setMText(MText *mtext);
 
 protected:
     /**
@@ -175,15 +175,15 @@ protected:
      * 
      * @param src The source attribute to match properties from.
      */
-    void matchAttributeProperties(DG_AttributeBase *src);
+    void matchAttributeProperties(AttributeBase *src);
 
 protected:
     unsigned char _version;         ///< The version of the attribute.
     std::string _tag;               ///< The tag associated with the attribute.
-    DG_AttributeFlags _flags;       ///< The flags for the attribute.
+    AttributeFlags _flags;       ///< The flags for the attribute.
     bool _isReallyLocked;           ///< The locked status of the attribute.
-    DG_MText *_mtext;               ///< Pointer to multi-line text associated with the attribute.
-    DG_AttributeType _attributeType;///< The type of the attribute (single-line, multi-line, etc.).
+    MText *_mtext;               ///< Pointer to multi-line text associated with the attribute.
+    AttributeType _attributeType;///< The type of the attribute (single-line, multi-line, etc.).
 };
 
 }// namespace dwg

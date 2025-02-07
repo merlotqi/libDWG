@@ -26,22 +26,22 @@
 
 namespace dwg {
 
-class DG_DimensionStyle;
+class DimensionStyle;
 
-class LIBDWG_API DG_Tolerance : public DG_Entity
+class LIBDWG_API Tolerance : public Entity
 {
-    DG_DimensionStyle *_style;
+    DimensionStyle *_style;
     XYZ _insertionPoint;
     XYZ _direction;
     XYZ _normal;
     std::string _text;
 
 public:
-    DG_Tolerance();
-    virtual ~DG_Tolerance();
+    Tolerance();
+    virtual ~Tolerance();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
     virtual std::string objectName() const override;
@@ -49,20 +49,20 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    DG_DimensionStyle *Style() const;
-    void Style(DG_DimensionStyle *);
+    DimensionStyle *style() const;
+    void setStyle(DimensionStyle *);
 
-    XYZ InsertionPoint() const;
-    void InsertionPoint(const XYZ &);
+    XYZ insertionPoint() const;
+    void setInsertionPoint(const XYZ &);
 
-    XYZ Direction() const;
-    void Direction(const XYZ &);
+    XYZ direction() const;
+    void setDirection(const XYZ &);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    std::string Text() const;
-    void Text(const std::string &);
+    std::string text() const;
+    void setText(const std::string &);
 };
 
 }// namespace dwg

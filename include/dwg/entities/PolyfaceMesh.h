@@ -26,11 +26,11 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_PolyfaceMesh : public DG_Polyline
+class LIBDWG_API PolyfaceMesh : public Polyline
 {
 public:
-    DG_PolyfaceMesh();
-    virtual ~DG_PolyfaceMesh();
+    PolyfaceMesh();
+    virtual ~PolyfaceMesh();
 };
 
 }// namespace dwg

@@ -27,12 +27,12 @@
 namespace dwg {
 
 /// Polyline flag (bit-coded)
-enum DG_LwPolylineFlag
+enum LwPolylineFlag
 {
     Default = 0,
     Closed = 1,
     Plinegen = 128
 };
-CPL_DECLARE_FLAGS(DG_LwPolylineFlags, DG_LwPolylineFlag)
+CPL_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
 
 }// namespace dwg

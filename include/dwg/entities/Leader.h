@@ -28,27 +28,27 @@
 
 namespace dwg {
 
-class DG_DimensionStyle;
+class DimensionStyle;
 
 /**
- * @class DG_Leader
+ * @class Leader
  * @brief Represents a leader entity in a DWG/DXF drawing.
  *
  * A leader is an annotation object consisting of one or more line segments 
  * that visually connect text or symbols to a referenced location in the drawing.
  */
-class LIBDWG_API DG_Leader : public DG_Entity
+class LIBDWG_API Leader : public Entity
 {
-    DG_DimensionStyle *_style;          ///< Dimension style associated with the leader.
+    DimensionStyle *_style;          ///< Dimension style associated with the leader.
     bool _arrowHeadEnabled;             ///< Indicates whether the arrowhead is enabled.
-    DG_LeaderPathType _pathType;        ///< Path type of the leader (e.g., straight or spline).
-    DG_LeaderCreationType _creationType;///< Creation type of the leader.
+    LeaderPathType _pathType;        ///< Path type of the leader (e.g., straight or spline).
+    LeaderCreationType _creationType;///< Creation type of the leader.
     bool _hookLineDirection;            ///< Direction of the hook line, if applicable.
     bool _hasHookline;                  ///< Indicates whether the leader has a hook line.
     double _textHeight;                 ///< Height of the text associated with the leader.
     double _textWidth;                  ///< Width of the text associated with the leader.
     std::vector<XYZ> _vertices;         ///< List of vertex points defining the leader path.
-    DG_Entity *_associatedAnnotation;   ///< Associated annotation entity.
+    Entity *_associatedAnnotation;   ///< Associated annotation entity.
     XYZ _normal;                        ///< Normal vector defining the plane of the leader.
     XYZ _horizontalDirection;           ///< Horizontal direction vector.
     XYZ _blockOffset;                   ///< Offset of the block reference.
@@ -56,20 +56,20 @@ class LIBDWG_API DG_Leader : public DG_Entity
 
 public:
     /**
-     * @brief Constructs a DG_Leader object.
+     * @brief Constructs a Leader object.
      */
-    DG_Leader();
+    Leader();
 
     /**
-     * @brief Destroys the DG_Leader object.
+     * @brief Destroys the Leader object.
      */
-    ~DG_Leader();
+    ~Leader();
 
     /**
      * @brief Returns the object type of the leader.
-     * @return The object type as DG_ObjectType.
+     * @return The object type as ObjectType.
      */
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     /**
      * @brief Returns the name of the object.
@@ -85,171 +85,171 @@ public:
 
     /**
      * @brief Gets the dimension style of the leader.
-     * @return Pointer to the DG_DimensionStyle.
+     * @return Pointer to the DimensionStyle.
      */
-    DG_DimensionStyle *Style() const;
+    DimensionStyle *style() const;
 
     /**
      * @brief Sets the dimension style of the leader.
-     * @param style Pointer to the DG_DimensionStyle.
+     * @param style Pointer to the DimensionStyle.
      */
-    void Style(DG_DimensionStyle *style);
+    void setStyle(DimensionStyle *style);
 
     /**
      * @brief Checks whether the arrowhead is enabled.
      * @return True if the arrowhead is enabled, false otherwise.
      */
-    bool ArrowHeadEnabled() const;
+    bool arrowHeadEnabled() const;
 
     /**
      * @brief Enables or disables the arrowhead.
      * @param enabled True to enable, false to disable.
      */
-    void ArrowHeadEnabled(bool enabled);
+    void setArrowHeadEnabled(bool enabled);
 
     /**
      * @brief Gets the path type of the leader.
-     * @return The path type as DG_LeaderPathType.
+     * @return The path type as LeaderPathType.
      */
-    DG_LeaderPathType PathType() const;
+    LeaderPathType pathType() const;
 
     /**
      * @brief Sets the path type of the leader.
-     * @param type The path type as DG_LeaderPathType.
+     * @param type The path type as LeaderPathType.
      */
-    void PathType(DG_LeaderPathType type);
+    void setPathType(LeaderPathType type);
 
     /**
      * @brief Gets the creation type of the leader.
-     * @return The creation type as DG_LeaderCreationType.
+     * @return The creation type as LeaderCreationType.
      */
-    DG_LeaderCreationType CreationType() const;
+    LeaderCreationType creationType() const;
 
     /**
      * @brief Sets the creation type of the leader.
-     * @param type The creation type as DG_LeaderCreationType.
+     * @param type The creation type as LeaderCreationType.
      */
-    void CreationType(DG_LeaderCreationType type);
+    void setCreationType(LeaderCreationType type);
 
     /**
      * @brief Checks the hook line direction.
      * @return True if the hook line is in the default direction, false otherwise.
      */
-    bool HookLineDirection() const;
+    bool hookLineDirection() const;
 
     /**
      * @brief Sets the hook line direction.
      * @param direction True for the default direction, false otherwise.
      */
-    void HookLineDirection(bool direction);
+    void setHookLineDirection(bool direction);
 
     /**
      * @brief Checks whether the leader has a hook line.
      * @return True if the leader has a hook line, false otherwise.
      */
-    bool HasHookline() const;
+    bool hasHookline() const;
 
     /**
      * @brief Sets whether the leader has a hook line.
      * @param hasHookline True to enable, false to disable.
      */
-    void HasHookline(bool hasHookline);
+    void setHasHookline(bool hasHookline);
 
     /**
      * @brief Gets the text height associated with the leader.
      * @return The text height as a double.
      */
-    double TextHeight() const;
+    double textHeight() const;
 
     /**
      * @brief Sets the text height associated with the leader.
      * @param height The text height as a double.
      */
-    void TextHeight(double height);
+    void setTextHeight(double height);
 
     /**
      * @brief Gets the text width associated with the leader.
      * @return The text width as a double.
      */
-    double TextWidth() const;
+    double textWidth() const;
 
     /**
      * @brief Sets the text width associated with the leader.
      * @param width The text width as a double.
      */
-    void TextWidth(double width);
+    void setTextWidth(double width);
 
     /**
      * @brief Gets the vertices defining the leader path.
      * @return A vector of XYZ points.
      */
-    std::vector<XYZ> Vertices() const;
+    std::vector<XYZ> vertices() const;
 
     /**
      * @brief Sets the vertices defining the leader path.
      * @param vertices A vector of XYZ points.
      */
-    void Vertices(const std::vector<XYZ> &vertices);
+    void setVertices(const std::vector<XYZ> &vertices);
 
     /**
      * @brief Gets the associated annotation entity.
-     * @return Pointer to the associated DG_Entity.
+     * @return Pointer to the associated Entity.
      */
-    DG_Entity *AssociatedAnnotation() const;
+    Entity *associatedAnnotation() const;
 
     /**
      * @brief Sets the associated annotation entity.
-     * @param annotation Pointer to the DG_Entity.
+     * @param annotation Pointer to the Entity.
      */
-    void AssociatedAnnotation(DG_Entity *annotation);
+    void setAssociatedAnnotation(Entity *annotation);
 
     /**
      * @brief Gets the normal vector defining the leader's plane.
      * @return The normal vector as XYZ.
      */
-    XYZ Normal() const;
+    XYZ normal() const;
 
     /**
      * @brief Sets the normal vector defining the leader's plane.
      * @param normal The normal vector as XYZ.
      */
-    void Normal(const XYZ &normal);
+    void setNormal(const XYZ &normal);
 
     /**
      * @brief Gets the horizontal direction of the leader.
      * @return The horizontal direction as XYZ.
      */
-    XYZ HorizontalDirection() const;
+    XYZ horizontalDirection() const;
 
     /**
      * @brief Sets the horizontal direction of the leader.
      * @param direction The horizontal direction as XYZ.
      */
-    void HorizontalDirection(const XYZ &direction);
+    void setHorizontalDirection(const XYZ &direction);
 
     /**
      * @brief Gets the block offset of the leader.
      * @return The block offset as XYZ.
      */
-    XYZ BlockOffset() const;
+    XYZ blockOffset() const;
 
     /**
      * @brief Sets the block offset of the leader.
      * @param offset The block offset as XYZ.
      */
-    void BlockOffset(const XYZ &offset);
+    void setBlockOffset(const XYZ &offset);
 
     /**
      * @brief Gets the annotation offset of the leader.
      * @return The annotation offset as XYZ.
      */
-    XYZ AnnotationOffset() const;
+    XYZ annotationOffset() const;
 
     /**
      * @brief Sets the annotation offset of the leader.
      * @param offset The annotation offset as XYZ.
      */
-    void AnnotationOffset(const XYZ &offset);
+    void setAnnotationOffset(const XYZ &offset);
 };
 
 }// namespace dwg

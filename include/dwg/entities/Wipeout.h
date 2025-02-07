@@ -26,17 +26,17 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Wipeout : public DG_CadImageBase
+class LIBDWG_API Wipeout : public CadImageBase
 {
 public:
-    // Constructor for DG_Wipeout.
-    DG_Wipeout();
+    // Constructor for Wipeout.
+    Wipeout();
 
-    // Destructor for DG_Wipeout.
-    ~DG_Wipeout();
+    // Destructor for Wipeout.
+    ~Wipeout();
 
     // Overrides the ObjectType method to return the specific object type for XLine.
-    virtual DG_ObjectType objectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (XLine).
     virtual std::string objectName() const override;

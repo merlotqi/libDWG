@@ -29,72 +29,72 @@
 
 namespace dwg {
 
-class DG_ImageDefinition;
-class DG_ImageDefinitionReactor;
+class ImageDefinition;
+class ImageDefinitionReactor;
 
 /**
- * @class DG_CadWipeoutBase
+ * @class CadWipeoutBase
  * @brief Represents a wipeout entity in a DWG/DXF drawing.
  *
- * DG_CadWipeoutBase is a base class for wipeout entities in CAD drawings. 
+ * CadWipeoutBase is a base class for wipeout entities in CAD drawings. 
  * A wipeout is a drawing entity used to obscure or mask parts of the drawing by filling 
  * a specified region with a solid fill, effectively "wiping out" or hiding the area behind it. 
- * This class is derived from DG_Entity and provides the necessary functionality to handle 
+ * This class is derived from Entity and provides the necessary functionality to handle 
  * the specific properties of wipeout entities.
  */
-class LIBDWG_API DG_CadWipeoutBase : public DG_Entity
+class LIBDWG_API CadWipeoutBase : public Entity
 {
     int _classVersion;          ///< Internal version of the class for compatibility.
     XYZ _insertPoint;           ///< Insertion point of the wipeout object.
     XYZ _uvector;               ///< U-direction vector defining the orientation.
     XYZ _vvector;               ///< V-direction vector defining the orientation.
     XY _size;                   ///< Size of the wipeout object.
-    DG_ImageDisplayFlags _flags;///< Display flags controlling image properties.
+    ImageDisplayFlags _flags;///< Display flags controlling image properties.
     bool _clippingState;        ///< Indicates whether clipping is enabled.
     unsigned char _brightness;  ///< Brightness level of the image.
     unsigned char _contrast;    ///< Contrast level of the image.
     unsigned char _fade;        ///< Fade level of the image.
 
-    DG_ClipMode _clipMode;                        ///< Clipping mode used for the wipeout.
-    DG_ClipType _clipType;                        ///< Type of clipping applied.
+    ClipMode _clipMode;                        ///< Clipping mode used for the wipeout.
+    ClipType _clipType;                        ///< Type of clipping applied.
     std::vector<XY> _clipBoundaryVertices;        ///< Vertices defining the clipping boundary.
-    DG_ImageDefinition *_definition;              ///< Reference to the associated image definition.
-    DG_ImageDefinitionReactor *_definitionReactor;///< Reactor for image definition changes.
+    ImageDefinition *_definition;              ///< Reference to the associated image definition.
+    ImageDefinitionReactor *_definitionReactor;///< Reactor for image definition changes.
 
 public:
     /**
-     * @brief Constructs a DG_CadWipeoutBase object with default values.
+     * @brief Constructs a CadWipeoutBase object with default values.
      */
-    DG_CadWipeoutBase();
+    CadWipeoutBase();
 
     /**
-     * @brief Destroys the DG_CadWipeoutBase object.
+     * @brief Destroys the CadWipeoutBase object.
      */
-    virtual ~DG_CadWipeoutBase();
+    virtual ~CadWipeoutBase();
 
     /**
      * @brief Gets the internal class version.
      * @return The class version.
      */
-    int ClassVersion() const;
+    int classVersion() const;
 
     /**
      * @brief Sets the internal class version.
      * @param version The new class version.
      */
-    void ClassVersion(int version);
+    void setClassVersion(int version);
 
     /**
      * @brief Gets the insertion point of the wipeout.
      * @return The insertion point.
      */
-    XYZ InsertPoint() const;
+    XYZ insertPoint() const;
 
     /**
      * @brief Sets the insertion point of the wipeout.
      * @param point The new insertion point.
      */
-    void InsertPoint(const XYZ &point);
+    void setInsertPoint(const XYZ &point);
 
     /**
      * @brief Gets the U-direction vector.
@@ -106,7 +106,7 @@ public:
      * @brief Sets the U-direction vector.
      * @param vector The new U-direction vector.
      */
-    void UVector(const XYZ &vector);
+    void setUVector(const XYZ &vector);
 
     /**
      * @brief Gets the V-direction vector.
@@ -118,139 +118,139 @@ public:
      * @brief Sets the V-direction vector.
      * @param vector The new V-direction vector.
      */
-    void VVector(const XYZ &vector);
+    void setVVector(const XYZ &vector);
 
     /**
      * @brief Gets the size of the wipeout.
      * @return The size.
      */
-    XY Size() const;
+    XY size() const;
 
     /**
      * @brief Sets the size of the wipeout.
      * @param size The new size.
      */
-    void Size(const XY &size);
+    void setSize(const XY &size);
 
     /**
      * @brief Gets the display flags of the wipeout.
      * @return The display flags.
      */
-    DG_ImageDisplayFlags Flags() const;
+    ImageDisplayFlags flags() const;
 
     /**
      * @brief Sets the display flags of the wipeout.
      * @param flags The new display flags.
      */
-    void Flags(DG_ImageDisplayFlags flags);
+    void setFlags(ImageDisplayFlags flags);
 
     /**
      * @brief Checks if clipping is enabled.
      * @return True if clipping is enabled, false otherwise.
      */
-    bool ClippingState() const;
+    bool clippingState() const;
 
     /**
      * @brief Sets the clipping state.
      * @param state True to enable clipping, false to disable it.
      */
-    void ClippingState(bool state);
+    void setClippingState(bool state);
 
     /**
      * @brief Gets the brightness level.
      * @return The brightness value.
      */
-    unsigned char Brightness() const;
+    unsigned char brightness() const;
 
     /**
      * @brief Sets the brightness level.
      * @param value The new brightness value.
      */
-    void Brightness(unsigned char value);
+    void setBrightness(unsigned char value);
 
     /**
      * @brief Gets the contrast level.
      * @return The contrast value.
      */
-    unsigned char Contrast() const;
+    unsigned char contrast() const;
 
     /**
      * @brief Sets the contrast level.
      * @param value The new contrast value.
      */
-    void Contrast(unsigned char value);
+    void setContrast(unsigned char value);
 
     /**
      * @brief Gets the fade level.
      * @return The fade value.
      */
-    unsigned char Fade() const;
+    unsigned char fade() const;
 
     /**
      * @brief Sets the fade level.
      * @param value The new fade value.
      */
-    void Fade(unsigned char value);
+    void setFade(unsigned char value);
 
     /**
      * @brief Gets the clipping mode.
      * @return The clipping mode.
      */
-    DG_ClipMode ClipMode() const;
+    ClipMode clipMode() const;
 
     /**
      * @brief Sets the clipping mode.
      * @param mode The new clipping mode.
      */
-    void ClipMode(DG_ClipMode mode);
+    void setClipMode(ClipMode mode);
 
     /**
      * @brief Gets the clipping type.
      * @return The clipping type.
      */
-    DG_ClipType ClipType() const;
+    ClipType clipType() const;
 
     /**
      * @brief Sets the clipping type.
      * @param type The new clipping type.
      */
-    void ClipType(DG_ClipType type);
+    void setClipType(ClipType type);
 
     /**
      * @brief Gets the list of vertices defining the clipping boundary.
      * @return A vector containing the clipping boundary vertices.
      */
-    std::vector<XY> ClipBoundaryVertices() const;
+    std::vector<XY> clipBoundaryVertices() const;
 
     /**
      * @brief Sets the vertices defining the clipping boundary.
      * @param vertices The new clipping boundary vertices.
      */
-    void ClipBoundaryVertices(const std::vector<XY> &vertices);
+    void setClipBoundaryVertices(const std::vector<XY> &vertices);
 
     /**
      * @brief Gets the associated image definition.
      * @return A pointer to the image definition.
      */
-    DG_ImageDefinition *Definition() const;
+    ImageDefinition *definition() const;
 
     /**
      * @brief Sets the associated image definition.
      * @param definition A pointer to the new image definition.
      */
-    void Definition(DG_ImageDefinition *definition);
+    void setDefinition(ImageDefinition *definition);
 
     /**
      * @brief Gets the associated image definition reactor.
      * @return A pointer to the image definition reactor.
      */
-    DG_ImageDefinitionReactor *DefinitionReactor() const;
+    ImageDefinitionReactor *definitionReactor() const;
 
     /**
      * @brief Sets the associated image definition reactor.
      * @param reactor A pointer to the new image definition reactor.
      */
-    void DefinitionReactor(DG_ImageDefinitionReactor *reactor);
+    void setDefinitionReactor(ImageDefinitionReactor *reactor);
 };
 
 }// namespace dwg

@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_ClipType : short
+enum ClipType : short
 {
     Rectangular = 1,
     Polygonal = 2,

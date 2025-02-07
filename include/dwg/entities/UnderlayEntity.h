@@ -27,9 +27,9 @@
 
 namespace dwg {
 
-class DG_UnderlayDefinition;
+class UnderlayDefinition;
 
-class LIBDWG_API DG_UnderlayEntity : public DG_Entity
+class LIBDWG_API UnderlayEntity : public Entity
 {
     XYZ _normal;
     XYZ _insertPoint;
@@ -37,46 +37,46 @@ class LIBDWG_API DG_UnderlayEntity : public DG_Entity
     double _yscale;
     double _zscale;
     double _rotation;
-    DG_UnderlayDisplayFlags _flags;
+    UnderlayDisplayFlags _flags;
     unsigned char _contrast;
     unsigned char _fade;
-    DG_UnderlayDefinition *_definition;
+    UnderlayDefinition *_definition;
 
 public:
-    DG_UnderlayEntity();
-    ~DG_UnderlayEntity();
+    UnderlayEntity();
+    ~UnderlayEntity();
 
     std::string subclassMarker() const;
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    XYZ InsertPoint() const;
-    void InsertPoint(const XYZ &);
+    XYZ insertPoint() const;
+    void setInsertPoint(const XYZ &);
 
-    double XScale() const;
-    void XScale(double);
+    double xScale() const;
+    void setXScale(double);
 
-    double YScale() const;
-    void YScale(double);
+    double yScale() const;
+    void setYScale(double);
 
-    double ZScale() const;
-    void ZScale(double);
+    double zScale() const;
+    void setZScale(double);
 
-    double Rotation() const;
-    void Rotation(double);
+    double rotation() const;
+    void setRotation(double);
 
-    DG_UnderlayDisplayFlags Flags() const;
-    void Flags(DG_UnderlayDisplayFlags);
+    UnderlayDisplayFlags flags() const;
+    void setFlags(UnderlayDisplayFlags);
 
-    unsigned char Contrast() const;
-    void Contrast(unsigned char);
+    unsigned char contrast() const;
+    void setContrast(unsigned char);
 
-    unsigned char Fade() const;
-    void Fade(unsigned char);
+    unsigned char fade() const;
+    void setFade(unsigned char);
 
-    DG_UnderlayDefinition *Definition() const;
-    void Definition(DG_UnderlayDefinition *);
+    UnderlayDefinition *definition() const;
+    void setDefinition(UnderlayDefinition *);
 };
 
 }// namespace dwg
