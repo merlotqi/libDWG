@@ -36,7 +36,7 @@ namespace dwg {
  *
  * A table entry can store a name and flags associated with an object in the drawing.
  */
-class LIBDWG_API DG_TableEntry : public DG_CadObject, DG_INamedCadObject
+class LIBDWG_API DG_TableEntry : public DG_CadObject, INamedCadObject
 {
 public:
     /**
@@ -56,7 +56,7 @@ public:
      * 
      * @return A string representing the subclass marker.
      */
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     /**
      * @brief Gets the name of the table entry.
@@ -118,14 +118,14 @@ public:
      * 
      * @return The object name as a string.
      */
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     /**
      * @brief Retrieves the subclass marker for the table.
      * 
      * @return A string representing the subclass marker.
      */
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     /**
      * @brief Retrieves a table entry by its name.

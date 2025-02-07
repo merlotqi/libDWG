@@ -29,112 +29,112 @@
 
 namespace dwg {
 
-class DG_BlockRecord;
-class DG_DimensionStyle;
+class BlockRecord;
+class DimensionStyle;
 
-// The DG_Dimension class represents a dimension entity in a CAD system,
+// The Dimension class represents a dimension entity in a CAD system,
 // providing properties and methods for dimension management and manipulation.
-class LIBDWG_API DG_Dimension : public DG_Entity
+class LIBDWG_API Dimension : public Entity
 {
     unsigned char _version;// The version of the dimension entity
-    DG_BlockRecord *_block;// Pointer to the block associated with the dimension
+    BlockRecord *_block;// Pointer to the block associated with the dimension
     XYZ _definitionPoint;// The definition point (e.g., the base point) of the dimension
     XYZ _textMiddlePoint;// The middle point of the dimension text
     XYZ _insertionPoint; // The insertion point of the dimension entity
     XYZ _normal;// The normal vector for the dimension (usually related to the drawing plane)
-    DG_DimensionType
+    DimensionType
             _flags;// Flags indicating dimension-specific settings or properties
-    DG_AttachmentPointType
+    AttachmentPointType
             _attachmentPoint;// The attachment point type for the dimension text
-    DG_LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
+    LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
     double _lineSpacingFactor;// The factor affecting the line spacing for text
     bool _flipArrow1;    // Boolean indicating if the first arrow is flipped
     bool _flipArrow2;    // Boolean indicating if the second arrow is flipped
     std::string _text;   // The text displayed in the dimension
     double _textRotation;// Rotation angle for the dimension text
     double _horizontalDirection; // Horizontal direction for text alignment
-    DG_DimensionStyle *_dimStyle;// Pointer to the associated dimension style
+    DimensionStyle *_dimStyle;// Pointer to the associated dimension style
 
 public:
-    // Default constructor for the DG_Dimension class
-    DG_Dimension();
-    virtual ~DG_Dimension();
+    // Default constructor for the Dimension class
+    Dimension();
+    virtual ~Dimension();
 
 public:
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     // Getter and setter for the version of the dimension
-    unsigned char Version() const;
-    void Version(unsigned char value);
+    unsigned char version() const;
+    void setVersion(unsigned char value);
 
     // Getter and setter for the associated block record
-    DG_BlockRecord *Block() const;
-    void Block(DG_BlockRecord *value);
+    BlockRecord *block() const;
+    void setBlock(BlockRecord *value);
 
     // Getter and setter for the definition point of the dimension
-    XYZ DefinitionPoint() const;
-    void DefinitionPoint(const XYZ &value);
+    XYZ definitionPoint() const;
+    void setDefinitionPoint(const XYZ &value);
 
     // Getter and setter for the middle point of the dimension text
-    XYZ TextMiddlePoint() const;
-    void TextMiddlePoint(const XYZ &value);
+    XYZ textMiddlePoint() const;
+    void setTextMiddlePoint(const XYZ &value);
 
     // Getter and setter for the insertion point of the dimension
-    XYZ InsertionPoint() const;
-    void InsertionPoint(const XYZ &value);
+    XYZ insertionPoint() const;
+    void setInsertionPoint(const XYZ &value);
 
     // Getter and setter for the normal vector of the dimension
-    XYZ Normal() const;
-    void Normal(const XYZ &value);
+    XYZ normal() const;
+    void setNormal(const XYZ &value);
 
     // Getter and setter for the flags (dimension-specific properties)
-    DG_DimensionType Flags() const;
-    void Flags(DG_DimensionType value);
+    DimensionType flags() const;
+    void setFlags(DimensionType value);
 
     // Getter and setter for the attachment point type of the dimension text
-    DG_AttachmentPointType AttachmentPoint() const;
-    void AttachmentPoint(DG_AttachmentPointType value);
+    AttachmentPointType attachmentPoint() const;
+    void setAttachmentPoint(AttachmentPointType value);
 
     // Getter and setter for the line spacing style of the dimension text
-    DG_LineSpacingStyleType LineSpacingStyle() const;
-    void LineSpacingStyle(DG_LineSpacingStyleType value);
+    LineSpacingStyleType lineSpacingStyle() const;
+    void setLineSpacingStyle(LineSpacingStyleType value);
 
     // Getter and setter for the line spacing factor (affects text spacing)
-    double LineSpacingFactor() const;
-    void LineSpacingFactor(double value);
+    double lineSpacingFactor() const;
+    void setLineSpacingFactor(double value);
 
     // Getter and setter for flipping the first arrow of the dimension
-    bool FlipArrow1() const;
-    void FlipArrow1(bool value);
+    bool flipArrow1() const;
+    void setFlipArrow1(bool value);
 
     // Getter and setter for flipping the second arrow of the dimension
-    bool FlipArrow2() const;
-    void FlipArrow2(bool value);
+    bool flipArrow2() const;
+    void setFlipArrow2(bool value);
 
     // Getter and setter for the dimension text
-    const std::string &Text() const;
-    void Text(const std::string &value);
+    const std::string &text() const;
+    void setText(const std::string &value);
 
     // Getter and setter for the text rotation angle
-    double TextRotation() const;
-    void TextRotation(double value);
+    double textRotation() const;
+    void setTextRotation(double value);
 
     // Getter and setter for the horizontal direction of the text
-    double HorizontalDirection() const;
-    void HorizontalDirection(double value);
+    double horizontalDirection() const;
+    void setHorizontalDirection(double value);
 
     // Getter and setter for the associated dimension style
-    DG_DimensionStyle *DimStyle() const;
-    void DimStyle(DG_DimensionStyle *value);
+    DimensionStyle *dimStyle() const;
+    void setDimStyle(DimensionStyle *value);
 
     // Pure virtual method that must be implemented by derived classes to calculate the dimension measurement
-    virtual double Measurement() const = 0;
+    virtual double measurement() const = 0;
 
 public:
     // Determines if the text position is user-defined
-    bool IsTextUserDefinedLocation() const;
-    void IsTextUserDefinedLocation(bool value);
+    bool isTextUserDefinedLocation() const;
+    void isTextUserDefinedLocation(bool value);
 };
 
 }// namespace dwg

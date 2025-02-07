@@ -64,11 +64,11 @@ public:
 
     static DG_LineType *Continuous();
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     std::string Description() const;
 
@@ -94,7 +94,7 @@ public:
     DG_LineType *ByBlock;
     DG_LineType *Continuous;
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     DG_LineTypesTable() = default;
 

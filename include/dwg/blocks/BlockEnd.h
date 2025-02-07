@@ -37,13 +37,13 @@ public:
     ~DG_BlockEnd() = default;
 
     // Overrides the ObjectName method to return the name of the object
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     // Overrides the ObjectType method to return the type of object
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 };
 
 }// namespace dwg

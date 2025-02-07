@@ -28,8 +28,8 @@ namespace dwg {
 
 struct GradientColor
 {
-    double Value;
-    DG_Color Color;
+    double value;
+    Color color;
 };
 
 }// namespace dwg

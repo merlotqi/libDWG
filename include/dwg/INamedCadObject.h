@@ -32,24 +32,24 @@ namespace dwg {
  * This class provides a mechanism to get the name of a CAD object
  * and a delegate for name change notifications.
  */
-class DG_INamedCadObject
+class INamedCadObject
 {
 public:
     /**
      * @brief Default constructor.
      */
-    DG_INamedCadObject() = default;
+    INamedCadObject() = default;
 
     /**
      * @brief Virtual destructor.
      */
-    virtual ~DG_INamedCadObject() {}
+    virtual ~INamedCadObject() {}
 
     /**
      * @brief Gets the name of the CAD object.
      * @return The name of the object as a string.
      */
-    virtual std::string Name() const = 0;
+    virtual std::string name() const = 0;
 
     /**
      * @brief Event triggered when the object's name changes.

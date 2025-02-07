@@ -30,57 +30,57 @@
 
 namespace dwg {
 
-class DG_Layer;
-class DG_LineType;
-class DG_BookColor;
+class Layer;
+class LineType;
+class BookColor;
 
-class LIBDWG_API DG_Entity : public DG_CadObject
+class LIBDWG_API Entity : public CadObject
 {
-    DG_Layer *_layer;
-    DG_Color _color;
-    DG_LineweightType _lineweight;
+    Layer *_layer;
+    Color _color;
+    LineweightType _lineweight;
     double _linetypeScale;
     bool _isInvisible;
-    DG_Transparency _transparency;
-    DG_LineType *_linetype;
-    DG_BookColor *_bookColor;
+    Transparency _transparency;
+    LineType *_linetype;
+    BookColor *_bookColor;
 
 public:
-    DG_Entity();
+    Entity();
 
-    virtual ~DG_Entity();
+    virtual ~Entity();
 
-    std::string SubclassMarker() const;
+    std::string subclassMarker() const;
 
-    virtual DG_Layer *Layer() const;
+    virtual Layer *layer() const;
 
-    virtual void Layer(DG_Layer *);
+    virtual void setLayer(Layer *);
 
-    virtual DG_Color Color() const;
+    virtual Color color() const;
 
-    virtual void Color(const DG_Color &);
+    virtual void setColor(const Color &);
 
-    virtual DG_LineweightType Lineweight() const;
+    virtual LineweightType lineweight() const;
 
-    virtual void Lineweight(DG_LineweightType);
+    virtual void setLineweight(LineweightType);
 
-    virtual double LinetypeScale() const;
+    virtual double linetypeScale() const;
 
-    virtual void LinetypeScale(double);
+    virtual void setLinetypeScale(double);
 
-    virtual bool IsInvisible() const;
+    virtual bool isInvisible() const;
 
-    virtual void IsInvisible(bool);
+    virtual void setIsInvisible(bool);
 
-    virtual DG_Transparency Transparency() const;
+    virtual Transparency transparency() const;
 
-    virtual void Transparency(DG_Transparency);
+    virtual void setTransparency(Transparency);
 
-    virtual DG_LineType *LineType() const;
+    virtual LineType *lineType() const;
 
-    virtual void LineType(DG_LineType *) const;
+    virtual void setLineType(LineType *) const;
 
-    virtual void MatchProperties(DG_Entity *entity);
+    virtual void matchProperties(Entity *entity);
 };
 
 }// namespace dwg

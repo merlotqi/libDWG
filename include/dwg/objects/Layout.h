@@ -39,9 +39,9 @@ public:
     static constexpr auto ModelLayoutName = "Model";
     static constexpr auto PaperLayoutName = "Layout1";
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     // 70
     LayoutFlags LayoutFlags;

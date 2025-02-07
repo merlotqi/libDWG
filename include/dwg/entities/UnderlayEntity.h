@@ -46,7 +46,7 @@ public:
     DG_UnderlayEntity();
     ~DG_UnderlayEntity();
 
-    std::string SubclassMarker() const;
+    std::string subclassMarker() const;
 
     XYZ Normal() const;
     void Normal(const XYZ &);

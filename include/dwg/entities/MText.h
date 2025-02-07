@@ -103,19 +103,19 @@ public:
      * @brief Gets the object type of the multi-line text.
      * @return The object type as DG_ObjectType.
      */
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of the multi-line text object.
      * @return The object name as a string.
      */
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     /**
      * @brief Gets the subclass marker associated with this object.
      * @return The subclass marker as a string.
      */
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     /**
      * @brief Gets the insertion point of the text.

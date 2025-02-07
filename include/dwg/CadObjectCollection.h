@@ -67,7 +67,7 @@ public:
     void Add(T *item)
     {
         if (!item) throw std::invalid_argument("item is null");
-        if (item->Owner()) throw std::runtime_error("item already has an owner");
+        if (item->owner()) throw std::runtime_error("item already has an owner");
 
         _entries.push_back(item);
         item->Owner(_owner);
@@ -113,7 +113,7 @@ public:
      * @brief Gets the owner of the collection.
      * @return A pointer to the owner.
      */
-    DG_Object *Owner() const { return _owner; }
+    DG_Object *owner() const { return _owner; }
 
     /**
      * @brief Sets the owner of the collection.

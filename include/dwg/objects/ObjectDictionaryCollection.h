@@ -44,7 +44,7 @@ class ObjectDictionaryCollection : IHandledCadObject
     CadDictionary _dictionary;
 
 public:
-    unsigned long long Handle() const { return _dictionary.Handle(); }
+    unsigned long long handle() const { return _dictionary.handle(); }
 
     T operator[](const std::string &name) const { return (T) _dictionary[key]; }
 

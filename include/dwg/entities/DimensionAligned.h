@@ -26,45 +26,45 @@
 
 namespace dwg {
 
-// The DG_DimensionAligned class represents an aligned dimension, where
+// The DimensionAligned class represents an aligned dimension, where
 // the dimension is applied between two points with an extended line rotation.
-class LIBDWG_API DG_DimensionAligned : public DG_Dimension
+class LIBDWG_API DimensionAligned : public Dimension
 {
     XYZ _firstPoint; // The first point of the aligned dimension
     XYZ _secondPoint;// The second point of the aligned dimension
     double _extLineRotation;// Rotation angle for the extension lines of the aligned dimension
 
 public:
-    // Default constructor for the DG_DimensionAligned class
-    DG_DimensionAligned();
+    // Default constructor for the DimensionAligned class
+    DimensionAligned();
 
-    // Destructor for the DG_DimensionAligned class
-    ~DG_DimensionAligned();
+    // Destructor for the DimensionAligned class
+    ~DimensionAligned();
 
     // Override to return the object type of the Circle
-    virtual DG_ObjectType ObjectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     // Getter and setter for the first point of the aligned dimension
-    XYZ FirstPoint() const;
-    void FirstPoint(const XYZ &value);
+    XYZ firstPoint() const;
+    void setFirstPoint(const XYZ &value);
 
     // Getter and setter for the second point of the aligned dimension
-    XYZ SecondPoint() const;
-    void SecondPoint(const XYZ &value);
+    XYZ secondPoint() const;
+    void setSecondPoint(const XYZ &value);
 
     // Getter and setter for the extension line rotation angle
-    double ExtLineRotation() const;
-    void ExtLineRotation(double value);
+    double extLineRotation() const;
+    void setExtLineRotation(double value);
 
     // Override the Measurement method to calculate the dimension's measurement
     // based on the two points and extension line rotation
-    virtual double Measurement() const override;
+    virtual double measurement() const override;
 };
 
 }// namespace dwg

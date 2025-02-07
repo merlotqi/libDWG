@@ -54,13 +54,13 @@ public:
     ~DG_Block();
 
     // Overrides the ObjectType method to return the type of object
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     // Overrides the ObjectName method to return the object's name
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     // Returns the associated BlockRecord pointer
     DG_BlockRecord *BlockRecord() const;

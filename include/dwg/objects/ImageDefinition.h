@@ -32,9 +32,9 @@ class LIBDWG_API DG_ImageDefinition : public DG_NonGraphicalObject
 {
 public:
     DG_ImageDefinition();
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     int ClassVersion;         //90
     std::string FileName;     // 1

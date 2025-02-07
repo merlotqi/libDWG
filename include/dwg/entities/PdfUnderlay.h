@@ -50,13 +50,13 @@ public:
      * @brief Gets the object type of the PDF underlay.
      * @return The object type as DG_ObjectType.
      */
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of the PDF underlay object.
      * @return The object name as a string.
      */
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 };
 
 }// namespace dwg

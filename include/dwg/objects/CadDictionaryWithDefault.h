@@ -33,9 +33,9 @@ class LIBDWG_API DG_CadDictionaryWithDefault : public DG_CadDictionary
 public:
     DG_CadDictionaryWithDefault();
 
-    DG_ObjectType ObjectType() const;
-    std::string ObjectName() const;
-    std::string SubclassMarker() const;
+    DG_ObjectType objectType() const;
+    std::string objectName() const;
+    std::string subclassMarker() const;
 
     DG_CadObject *DefaultEntry() const;
     void DefaultEntry(DG_CadObject *);

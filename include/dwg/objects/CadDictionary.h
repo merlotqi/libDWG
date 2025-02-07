@@ -58,9 +58,9 @@ public:
 public:
     DG_CadDictionary();
     DG_CadDictionary(const std::string &name);
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     void Add(const std::string &key, DG_NonGraphicalObject *value);
     void Add(DG_NonGraphicalObject *value);

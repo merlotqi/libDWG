@@ -31,8 +31,8 @@ class LIBDWG_API DG_UnderlayDefinition : public DG_NonGraphicalObject
 public:
     DG_UnderlayDefinition();
 
-    DG_ObjectType ObjectType() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string subclassMarker() const override;
 
     std::string File() const;
     void File(const std::string &);

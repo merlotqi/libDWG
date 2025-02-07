@@ -36,9 +36,9 @@ class LIBDWG_API DG_VisualStyle : public DG_NonGraphicalObject
 public:
     VisualStyle();
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     std::string RasterFile() const;
     void RasterFile(const std::string &);

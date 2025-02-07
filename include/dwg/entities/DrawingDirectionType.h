@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Multiline text drawing direction.
-enum DG_DrawingDirectionType : short
+enum DrawingDirectionType : short
 {
     /// Left to right.
     LeftToRight = 1,

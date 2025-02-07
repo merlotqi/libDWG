@@ -67,21 +67,21 @@ public:
      * 
      * @return The object type (DG_ObjectType) of DG_AttributeDefinition.
      */
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     /**
      * @brief Overrides the ObjectName method to return the name of the object (DG_AttributeDefinition).
      * 
      * @return The name of the object as a string.
      */
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     /**
      * @brief Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeDefinition.
      * 
      * @return The subclass marker as a string.
      */
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     /**
      * @brief Gets the prompt string associated with the attribute definition.

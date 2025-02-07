@@ -28,10 +28,10 @@
 namespace dwg {
 
 /**
- * @class DG_Color
+ * @class Color
  * @brief Represents a color in the DWG/DXF format, supporting indexed and true colors.
  */
-class LIBDWG_API DG_Color
+class LIBDWG_API Color
 {
     /**
      * @brief Lookup table for indexed RGB colors.
@@ -67,53 +67,53 @@ class LIBDWG_API DG_Color
     std::vector<unsigned char> getRgb() const;
 
     /**
-     * @brief Constructs a DG_Color instance from a true color value.
+     * @brief Constructs a Color instance from a true color value.
      * @param trueColor The 24-bit true color value.
      */
-    DG_Color(unsigned int trueColor);
+    Color(unsigned int trueColor);
 
 public:
     /**
-     * @brief Constructs a DG_Color from an indexed color.
+     * @brief Constructs a Color from an indexed color.
      * @param index The color index.
      */
-    DG_Color(short index);
+    Color(short index);
 
     /**
-     * @brief Constructs a DG_Color from RGB values.
+     * @brief Constructs a Color from RGB values.
      * @param r Red component.
      * @param g Green component.
      * @param b Blue component.
      */
-    DG_Color(unsigned char r, unsigned char g, unsigned char b);
+    Color(unsigned char r, unsigned char g, unsigned char b);
 
     /**
-     * @brief Constructs a DG_Color from an RGB vector.
+     * @brief Constructs a Color from an RGB vector.
      * @param rgb A vector containing R, G, and B values.
      */
-    DG_Color(const std::vector<unsigned char> &rgb);
+    Color(const std::vector<unsigned char> &rgb);
 
     /**
      * @brief Predefined color representing ByLayer.
      */
-    static DG_Color ByLayer;
+    static Color ByLayer;
 
     /**
      * @brief Predefined color representing ByBlock.
      */
-    static DG_Color ByBlock;
+    static Color ByBlock;
 
     /**
      * @brief Predefined color representing ByEntity.
      */
-    static DG_Color ByEntity;
+    static Color ByEntity;
 
     /**
-     * @brief Creates a DG_Color from a true color integer value.
+     * @brief Creates a Color from a true color integer value.
      * @param color The 24-bit true color value.
-     * @return A DG_Color instance representing the true color.
+     * @return A Color instance representing the true color.
      */
-    static DG_Color FromTrueColor(unsigned int color);
+    static Color fromTrueColor(unsigned int color);
 
     /**
      * @brief Approximates the closest indexed color for given RGB values.
@@ -122,86 +122,86 @@ public:
      * @param b Blue component.
      * @return The closest indexed color.
      */
-    static unsigned char ApproxIndex(unsigned char r, unsigned char g,
+    static unsigned char approxIndex(unsigned char r, unsigned char g,
                                      unsigned char b);
 
     /**
      * @brief Checks if the color is ByLayer.
      * @return True if the color is ByLayer, otherwise false.
      */
-    bool IsByLayer() const;
+    bool isByLayer() const;
 
     /**
      * @brief Checks if the color is ByBlock.
      * @return True if the color is ByBlock, otherwise false.
      */
-    bool IsByBlock() const;
+    bool isByBlock() const;
 
     /**
      * @brief Retrieves the indexed color value.
      * @return The color index.
      */
-    short Index() const;
+    short index() const;
 
     /**
      * @brief Retrieves the true color value.
      * @return The 24-bit true color value.
      */
-    int TrueColor() const;
+    int trueColor() const;
 
     /**
      * @brief Checks if the color is a true color.
      * @return True if it is a true color, otherwise false.
      */
-    bool IsTrueColor() const;
+    bool isTrueColor() const;
 
     /**
      * @brief Retrieves the red component of the color.
      * @return The red component.
      */
-    unsigned char R() const;
+    unsigned char red() const;
 
     /**
      * @brief Retrieves the green component of the color.
      * @return The green component.
      */
-    unsigned char G() const;
+    unsigned char green() const;
 
     /**
      * @brief Retrieves the blue component of the color.
      * @return The blue component.
      */
-    unsigned char B() const;
+    unsigned char blue() const;
 
     /**
      * @brief Gets the approximate indexed color.
      * @return The closest indexed color.
      */
-    unsigned char GetApproxIndex() const;
+    unsigned char approxIndex() const;
 
     /**
-     * @brief Equality operator for DG_Color.
+     * @brief Equality operator for Color.
      * @param lhs Left-hand side color.
      * @param rhs Right-hand side color.
      * @return True if both colors are equal, otherwise false.
      */
-    friend bool operator==(const DG_Color &lhs, const DG_Color &rhs);
+    friend bool operator==(const Color &lhs, const Color &rhs);
 
     /**
-     * @brief Inequality operator for DG_Color.
+     * @brief Inequality operator for Color.
      * @param lhs Left-hand side color.
      * @param rhs Right-hand side color.
      * @return True if the colors are different, otherwise false.
      */
-    friend bool operator!=(const DG_Color &lhs, const DG_Color &rhs);
+    friend bool operator!=(const Color &lhs, const Color &rhs);
 };
 
-bool operator==(const DG_Color &lhs, const DG_Color &rhs)
+bool operator==(const Color &lhs, const Color &rhs)
 {
     return lhs._color == rhs._color;
 }
 
-bool operator!=(const DG_Color &lhs, const DG_Color &rhs)
+bool operator!=(const Color &lhs, const Color &rhs)
 {
     return !(lhs == rhs);
 }

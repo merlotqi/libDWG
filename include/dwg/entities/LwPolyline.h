@@ -45,11 +45,11 @@ public:
         int Id;
     };
 
-    DG_ObjectType ObjectType() const;
+    DG_ObjectType objectType() const;
 
-    std::string ObjectName() const;
+    std::string objectName() const;
 
-    std::string SubclassMarker() const;
+    std::string subclassMarker() const;
 
     DG_LwPolylineFlags Flags() const;
     void Flags(DG_LwPolylineFlags);

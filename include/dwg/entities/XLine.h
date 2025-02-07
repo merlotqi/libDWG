@@ -39,13 +39,13 @@ public:
     ~DG_XLine();
 
     // Overrides the ObjectType method to return the specific object type for DG_XLine.
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (DG_XLine).
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker associated with DG_XLine.
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     // Getter for the first point of the DG_XLine.
     XYZ FirstPoint() const;

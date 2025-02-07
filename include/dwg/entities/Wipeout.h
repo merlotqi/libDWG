@@ -36,13 +36,13 @@ public:
     ~DG_Wipeout();
 
     // Overrides the ObjectType method to return the specific object type for XLine.
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     // Overrides the ObjectName method to return the name of the object (XLine).
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 };
 
 }// namespace dwg

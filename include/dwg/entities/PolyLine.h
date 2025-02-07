@@ -36,7 +36,7 @@ public:
     DG_Polyline();
     ~DG_Polyline();
 
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     double Elevation() const;
     void Elevation(double);

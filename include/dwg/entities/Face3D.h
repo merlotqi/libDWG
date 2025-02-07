@@ -27,41 +27,41 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Face3D : public DG_Entity
+class LIBDWG_API Face3D : public Entity
 {
     XYZ _firstCorner;
     XYZ _secondCorner;
     XYZ _thirdCorner;
     XYZ _fourthCorner;
-    DG_InvisibleEdgeFlags _flags;// 70
+    InvisibleEdgeFlags _flags;// 70
 public:
-    DG_Face3D();
+    Face3D();
 
-    virtual ~DG_Face3D();
+    virtual ~Face3D();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType ObjectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
-    XYZ FirstCorner() const;
-    void FirstCorner(const XYZ &) const;
+    XYZ firstCorner() const;
+    void setFirstCorner(const XYZ &) const;
 
-    XYZ SecondCorner() const;
-    void SecondCorner(const XYZ &) const;
+    XYZ secondCorner() const;
+    void setSecondCorner(const XYZ &) const;
 
-    XYZ ThirdCorner() const;
-    void ThirdCorner(const XYZ &) const;
+    XYZ thirdCorner() const;
+    void setThirdCorner(const XYZ &) const;
 
-    XYZ FourthCorner() const;
-    void FourthCorner(const XYZ &) const;
+    XYZ fourthCorner() const;
+    void setFourthCorner(const XYZ &) const;
 
-    DG_InvisibleEdgeFlags Flags() const;
-    void Flags(DG_InvisibleEdgeFlags) const;
+    InvisibleEdgeFlags flags() const;
+    void setFlags(InvisibleEdgeFlags) const;
 };
 
 }// namespace dwg

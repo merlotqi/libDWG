@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-class DG_DxfFileToken
+class DxfFileToken
 {
 public:
     static constexpr auto Undefined = "";

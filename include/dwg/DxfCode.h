@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_DxfCode
+enum DxfCode
 {
     Invalid = -9999,
     XDictionary = -6,

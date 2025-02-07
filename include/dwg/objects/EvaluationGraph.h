@@ -32,9 +32,9 @@ class LIBDWG_API DG_EvaluationGraph : public DG_NonGraphicalObject
 public:
     DG_EvaluationGraph();
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
     struct GraphNode
     {
         int Index;               // 91

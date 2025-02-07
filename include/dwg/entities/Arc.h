@@ -27,13 +27,13 @@
 namespace dwg {
 
 /**
- * @class DG_Arc
+ * @class Arc
  * @brief Represents an arc entity in a DWG/DXF drawing.
  *
  * An arc is a portion of a circle defined by a start angle and an end angle.
  * It inherits from DG_Circle, sharing properties such as center, radius, and normal.
  */
-class LIBDWG_API DG_Arc : public DG_Circle
+class LIBDWG_API Arc : public Circle
 {
     /// Start angle of the arc (in degrees)
     double _startangle;
@@ -56,43 +56,43 @@ public:
      * @brief Gets the object type of this entity.
      * @return The object type identifier.
      */
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     /**
      * @brief Gets the name of this object.
      * @return The object name as a string.
      */
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     /**
      * @brief Gets the subclass marker for this object.
      * @return The subclass marker string.
      */
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     /**
      * @brief Gets the start angle of the arc.
      * @return The start angle in degrees.
      */
-    double StartAngle() const;
+    double startAngle() const;
 
     /**
      * @brief Gets the end angle of the arc.
      * @return The end angle in degrees.
      */
-    double EndAngle() const;
+    double endAngle() const;
 
     /**
      * @brief Sets the start angle of the arc.
      * @param angle The new start angle in degrees.
      */
-    void StartAngle(double angle);
+    void setStartAngle(double angle);
 
     /**
      * @brief Sets the end angle of the arc.
      * @param angle The new end angle in degrees.
      */
-    void EndAngle(double angle);
+    void setEndAngle(double angle);
 };
 
 }// namespace dwg

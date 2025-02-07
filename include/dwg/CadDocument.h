@@ -42,12 +42,12 @@ namespace dwg {
 
 class DG_CadHeader;
 
-class LIBDWG_API DG_CadDocument : public DG_IHandledCadObject
+class LIBDWG_API DG_CadDocument : public IHandledCadObject
 {
 public:
     DG_CadDocument(bool createDefault);
 
-    unsigned long long Handle() const override;
+    unsigned long long handle() const override;
     DG_CadHeader *Header;
     CadSummaryInfo SummaryInfo;
     DxfClassCollection Classes;
@@ -76,7 +76,7 @@ public:
 
     DG_CadDictionary _rootDictionary;
 
-    std::map<unsigned long long, DG_IHandledCadObject *> _cadObjects;
+    std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 
     void CreateDefaults();
 };

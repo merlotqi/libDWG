@@ -84,21 +84,21 @@ public:
      * 
      * @return The object type.
      */
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     /**
      * @brief Retrieves the name of this dimension style.
      * 
      * @return The name of the object.
      */
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     /**
      * @brief Retrieves the subclass marker for this dimension style.
      * 
      * @return The subclass marker as a string.
      */
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     /**
      * @brief Retrieves the post-fix for dimension style formatting.
@@ -336,8 +336,8 @@ class LIBDWG_API DG_DimensionStylesTable : public DG_Table
 public:
     DG_DimensionStylesTable();
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const;

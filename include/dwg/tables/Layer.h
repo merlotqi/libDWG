@@ -42,9 +42,9 @@ public:
     static constexpr auto DefaultName = "0";
     static DG_Layer *Default();
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     DG_LayerFlags Flags() const;
     void Flags(DG_LayerFlags);
@@ -75,8 +75,8 @@ class LIBDWG_API DG_LayersTable : public DG_Table
 {
 public:
     DG_LayersTable() = default;
-    std::string ObjectName() const override;
-    DG_ObjectType ObjectType() const override;
+    std::string objectName() const override;
+    DG_ObjectType objectType() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const override;

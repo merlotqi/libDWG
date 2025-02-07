@@ -55,19 +55,19 @@ public:
      * @brief Returns the object type of the line.
      * @return The object type as DG_ObjectType.
      */
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     /**
      * @brief Returns the name of the object.
      * @return The name as a string.
      */
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     /**
      * @brief Returns the subclass marker associated with this object.
      * @return The subclass marker as a string.
      */
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     /**
      * @brief Gets the normal vector of the line.

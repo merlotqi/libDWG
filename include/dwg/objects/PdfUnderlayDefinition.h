@@ -31,7 +31,7 @@ class LIBDWG_API DG_PdfUnderlayDefinition : public DG_UnderlayDefinition
 public:
     DG_PdfUnderlayDefinition();
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     std::string Page() const;
 

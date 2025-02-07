@@ -37,11 +37,11 @@ public:
 
     DG_View(const std::string &name);
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     double Height() const;
     void Height(double);
@@ -105,8 +105,8 @@ class LIBDWG_API DG_ViewsTable : public DG_Table
 {
 public:
     DG_ViewsTable() = default;
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const override;

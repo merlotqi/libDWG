@@ -34,7 +34,7 @@ namespace dwg {
  * This class provides a static method to transform an integer code into a
  * corresponding `DG_GroupCodeValueType`.
  */
-class LIBDWG_API DG_GroupCodeValue
+class LIBDWG_API GroupCodeValue
 {
 public:
     /**
@@ -46,7 +46,7 @@ public:
      * @param code The group code to be transformed.
      * @return The corresponding `DG_GroupCodeValueType`.
      */
-    static DG_GroupCodeValueType TransformValue(int code);
+    static GroupCodeValueType transformValue(int code);
 };
 
 

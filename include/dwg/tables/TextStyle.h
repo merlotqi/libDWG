@@ -42,11 +42,11 @@ public:
 
     static DG_TextStyle* Default();
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     DG_StyleFlags Flags() const;
 
@@ -91,7 +91,7 @@ class LIBDWG_API DG_TextStylesTable : public DG_Table
 {
 public:
     DG_TextStylesTable() = default;
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const;

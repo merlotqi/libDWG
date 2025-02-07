@@ -26,47 +26,47 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_DimensionOrdinate : public DG_Dimension
+class LIBDWG_API DimensionOrdinate : public Dimension
 {
     XYZ _featureLocation;// The location of the feature being dimensioned (typically a coordinate)
     XYZ _leaderEndpoint;// The endpoint of the leader line (connection point for the dimension)
 
 public:
     // Default constructor
-    DG_DimensionOrdinate();
+    DimensionOrdinate();
 
     // Destructor
-    ~DG_DimensionOrdinate();
+    ~DimensionOrdinate();
 
     // Override to return the object type of the Circle
-    virtual DG_ObjectType ObjectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     // Get the feature location (coordinate point of the feature)
-    XYZ FeatureLocation() const;
+    XYZ featureLocation() const;
 
     // Set the feature location (coordinate point of the feature)
-    void FeatureLocation(const XYZ &value);
+    void setFeatureLocation(const XYZ &value);
 
     // Get the leader endpoint location
-    XYZ LeaderEndpoint() const;
+    XYZ leaderEndpoint() const;
 
     // Set the leader endpoint location
-    void LeaderEndpoint(const XYZ &value);
+    void setLeaderEndpoint(const XYZ &value);
 
     // Override the Measurement method to calculate and return the ordinate measurement
-    virtual double Measurement() const override;
+    virtual double measurement() const override;
 
     // Check if the ordinate type is X (for dimensioning along the X-axis)
-    bool IsOrdinateTypeX() const;
+    bool isOrdinateTypeX() const;
 
     // Set whether the ordinate type is X (for dimensioning along the X-axis)
-    void IsOrdinateTypeX(bool value);
+    void setIsOrdinateTypeX(bool value);
 };
 
 }// namespace dwg

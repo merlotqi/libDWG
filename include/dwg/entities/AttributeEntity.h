@@ -61,21 +61,21 @@ public:
      * 
      * @return The object type (DG_ObjectType) of DG_AttributeEntity.
      */
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     /**
      * @brief Overrides the ObjectName method to return the name of the object (DG_AttributeEntity).
      * 
      * @return The name of the object as a string.
      */
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     /**
      * @brief Overrides the SubclassMarker method to return the subclass marker associated with DG_AttributeEntity.
      * 
      * @return The subclass marker as a string.
      */
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 };
 
 }// namespace dwg

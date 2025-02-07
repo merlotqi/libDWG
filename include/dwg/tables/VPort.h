@@ -48,11 +48,11 @@ public:
 
     static DG_VPort *Default();
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     XY BottomLeft() const;
     void BottomLeft(const XY &);
@@ -175,8 +175,8 @@ class LIBDWG_API DG_VPortsTable : public DG_Table
 public:
     DG_VPortsTable();
 
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const override;

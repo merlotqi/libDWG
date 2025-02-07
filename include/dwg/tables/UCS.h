@@ -35,11 +35,11 @@ public:
 
     DG_UCS(const std::string &name);
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     XYZ Origin() const;
 
@@ -71,9 +71,9 @@ class LIBDWG_API DG_UCSTable : public DG_Table
 public:
     DG_UCSTable() = default;
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const override;

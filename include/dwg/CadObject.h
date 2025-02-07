@@ -42,7 +42,7 @@ class DG_CadDocument;
  * This class serves as the foundation for all CAD entities, providing support for unique
  * identification through handles and ownership relationships within a CAD document.
  */
-class LIBDWG_API DG_CadObject : public DG_IHandledCadObject
+class LIBDWG_API DG_CadObject : public IHandledCadObject
 {
 protected:
     /// @brief Unique handle identifying the CAD object.
@@ -71,7 +71,7 @@ public:
      * type of the object.
      * @return The type of the object as a value from the `DG_ObjectType` enumeration.
      */
-    virtual DG_ObjectType ObjectType() const = 0;
+    virtual DG_ObjectType objectType() const = 0;
 
     /**
      * @brief Get the name of the CAD object.
@@ -79,7 +79,7 @@ public:
      * associated with the object.
      * @return A string representing the object's name.
      */
-    virtual std::string ObjectName() const = 0;
+    virtual std::string objectName() const = 0;
 
     /**
      * @brief Get the subclass marker of the CAD object.
@@ -87,52 +87,52 @@ public:
      * indicating the object's subclass.
      * @return A string representing the subclass marker.
      */
-    virtual std::string SubclassMarker() const = 0;
+    virtual std::string subclassMarker() const = 0;
 
     /**
      * @brief Get the unique handle of the CAD object.
      * @return The handle of the object as an unsigned long long value.
      */
-    unsigned long long Handle() const;
+    unsigned long long handle() const;
 
     /**
      * @brief Get the owning CAD object of this object.
      * @details The ownership establishes a hierarchical relationship between CAD objects.
      * @return A pointer to the owning CAD object, or nullptr if no owner is set.
      */
-    DG_CadObject *Owner() const;
+    DG_CadObject *owner() const;
 
     /**
      * @brief Get the CAD document that contains this object.
      * @return A pointer to the owning CAD document.
      */
-    DG_CadDocument *Document() const;
+    DG_CadDocument *document() const;
 
     /**
      * @brief Set the CAD document that contains this object.
      * @param doc Pointer to the CAD document.
      */
-    void Document(DG_CadDocument *doc);
+    void setDocument(DG_CadDocument *doc);
 
     /**
      * @brief Clone this CAD object.
      * @return A pointer to the newly created copy of this object.
      * @note Derived classes should override this method to provide proper deep copy behavior.
      */
-    virtual DG_CadObject *Clone();
+    virtual DG_CadObject *clone();
 
 protected:
     /**
      * @brief Set the unique handle of the CAD object.
      * @param value The handle value to assign.
      */
-    void Handle(unsigned long long value);
+    void setHandle(unsigned long long value);
 
     /**
      * @brief Set the owning CAD object for this object.
      * @param obj Pointer to the new owning CAD object.
      */
-    void Owner(DG_CadObject *obj);
+    void setOwner(DG_CadObject *obj);
 
 private:
     /// @brief Deleted copy constructor to prevent copying.

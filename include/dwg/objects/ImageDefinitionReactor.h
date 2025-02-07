@@ -30,9 +30,9 @@ class LIBDWG_API DG_ImageDefinitionReactor : public DG_NonGraphicalObject
 {
 public:
     DG_ImageDefinitionReactor();
-    DG_ObjectType ObjectType() const override;
-    std::string ObjectName() const override;
-    std::string SubclassMarker() const override;
+    DG_ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
     int RasterImageDefReactor;               //90
     unsigned long long ImageDefinitionHandle;// 330;
 };

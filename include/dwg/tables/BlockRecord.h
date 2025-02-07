@@ -72,21 +72,21 @@ public:
      * 
      * @return The object type.
      */
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
     /**
      * @brief Retrieves the object name for the block record.
      * 
      * @return The object name as a string.
      */
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
     /**
      * @brief Retrieves the subclass marker for the block record.
      * 
      * @return A string representing the subclass marker.
      */
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     /**
      * @brief Retrieves the units type for the block record.
@@ -187,7 +187,7 @@ public:
      * 
      * @return The object type.
      */
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
 protected:
     /**

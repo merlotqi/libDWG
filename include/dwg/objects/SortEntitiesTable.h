@@ -48,11 +48,11 @@ public:
 
     SortEntitiesTable(DG_BlockRecord *owner);
 
-    DG_ObjectType ObjectType() const override;
+    DG_ObjectType objectType() const override;
 
-    std::string ObjectName() const override;
+    std::string objectName() const override;
 
-    std::string SubclassMarker() const override;
+    std::string subclassMarker() const override;
 
     DG_BlockRecord *BlockOwner() const;
 

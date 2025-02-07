@@ -29,64 +29,64 @@
 
 namespace dwg {
 
-class DG_HatchPattern;
-class DG_HatchBoundaryPath;
-class DG_HatchGradientPattern;
-class LIBDWG_API DG_Hatch : public DG_Entity
+class HatchPattern;
+class HatchBoundaryPath;
+class HatchGradientPattern;
+class LIBDWG_API Hatch : public Entity
 {
 public:
-    DG_Hatch();
-    ~DG_Hatch();
+    Hatch();
+    ~Hatch();
     // Override to return the object type of the Arc
-    virtual DG_ObjectType ObjectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
-    double Elevation() const;
-    void Elevation(double elevation);
+    double elevation() const;
+    void setElevation(double elevation);
 
-    XYZ Normal() const;
-    void Normal(const XYZ &);
+    XYZ normal() const;
+    void setNormal(const XYZ &);
 
-    DG_HatchPattern *Pattern() const;
-    void Pattern(DG_HatchPattern *);
+    HatchPattern *pattern() const;
+    void setPattern(HatchPattern *);
 
-    bool IsSolid() const;
-    void IsSolid(bool);
+    bool isSolid() const;
+    void setIsSolid(bool);
 
-    bool IsAssociative() const;
-    void IsAssociative(bool);
+    bool isAssociative() const;
+    void setIsAssociative(bool);
 
-    DG_HatchStyleType Style() const;
-    void Style(DG_HatchStyleType);
+    HatchStyleType style() const;
+    void setStyle(HatchStyleType);
 
-    DG_HatchPatternType PatternType() const;
-    void PatternType(DG_HatchPatternType);
+    HatchPatternType patternType() const;
+    void setPatternType(HatchPatternType);
 
-    double PatternAngle() const;
-    void PatternAngle(double);
+    double patternAngle() const;
+    void setPatternAngle(double);
 
-    double PatternScale() const;
-    void PatternScale(double);
+    double patternScale() const;
+    void setPatternScale(double);
 
-    bool IsDouble() const;
-    void IsDouble(bool);
+    bool isDouble() const;
+    void setIsDouble(bool);
 
-    double PixelSize() const;
-    void PixelSize(double);
+    double pixelSize() const;
+    void setPixelSize(double);
 
-    std::vector<XY> SeedPoints() const;
-    void SeedPoints(const std::vector<XY> &);
+    std::vector<XY> seedPoints() const;
+    void setSeedPoints(const std::vector<XY> &);
 
-    DG_HatchGradientPattern *GradientColor() const;
-    void GradientColor(DG_HatchGradientPattern *);
+    HatchGradientPattern *gradientColor() const;
+    void setGradientColor(HatchGradientPattern *);
 
-    std::vector<DG_HatchBoundaryPath *> Paths() const;
-    void Paths(const std::vector<DG_HatchBoundaryPath *> &);
+    std::vector<HatchBoundaryPath *> paths() const;
+    void setPaths(const std::vector<HatchBoundaryPath *> &);
 };
 
 }// namespace dwg

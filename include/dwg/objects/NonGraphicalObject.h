@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_NonGraphicalObject : public DG_CadObject, DG_INamedCadObject
+class LIBDWG_API DG_NonGraphicalObject : public DG_CadObject, INamedCadObject
 {
 protected:
     std::string _name;

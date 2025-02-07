@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_FlowDirectionType : short
+enum FlowDirectionType : short
 {
     Horizontal = 1,
     Vertical = 3,

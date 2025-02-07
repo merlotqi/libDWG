@@ -36,13 +36,13 @@ public:
     ~DG_Shape();
 
     // Override to return the object type of the Arc
-    virtual DG_ObjectType ObjectType() const override;
+    virtual DG_ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     double Thickness() const;
     void Thickness(double);

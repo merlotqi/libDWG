@@ -29,24 +29,24 @@ namespace dwg {
  * 
  * This class provides a mechanism to retrieve the handle of a CAD object.
  */
-class DG_IHandledCadObject
+class IHandledCadObject
 {
 public:
     /**
      * @brief Default constructor.
      */
-    DG_IHandledCadObject() = default;
+    IHandledCadObject() = default;
 
     /**
      * @brief Virtual destructor with no exception guarantee.
      */
-    virtual ~DG_IHandledCadObject() noexcept {}
+    virtual ~IHandledCadObject() noexcept {}
 
     /**
      * @brief Gets the handle of the CAD object.
      * @return The handle of the object as an unsigned long long.
      */
-    virtual unsigned long long Handle() const = 0;
+    virtual unsigned long long handle() const = 0;
 };
 
 }// namespace dwg

@@ -25,41 +25,41 @@
 #include <dwg/entities/Dimension.h>
 
 namespace dwg {
-class LIBDWG_API DG_DimensionRadius : public DG_Dimension
+class LIBDWG_API DimensionRadius : public Dimension
 {
     XYZ _angleVertex;// The vertex of the angle (used for radius dimension)
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:
     // Default constructor
-    DG_DimensionRadius();
+    DimensionRadius();
 
     // Destructor
-    ~DG_DimensionRadius();
+    ~DimensionRadius();
 
     // Override to return the object type of the Circle
-    virtual DG_ObjectType ObjectType() const override;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string ObjectName() const override;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string SubclassMarker() const override;
+    virtual std::string subclassMarker() const override;
 
     // Get the angle vertex value
-    XYZ AngleVertex() const;
+    XYZ angleVertex() const;
 
     // Set the angle vertex value
-    void AngleVertex(const XYZ &value);
+    void setAngleVertex(const XYZ &value);
 
     // Get the leader length value
-    double LeaderLength() const;
+    double leaderLength() const;
 
     // Set the leader length value
-    void LeaderLength(double value);
+    void setLeaderLength(double value);
 
     // Override the Measurement method to calculate and return the radius measurement
-    virtual double Measurement() const override;
+    virtual double measurement() const override;
 };
 
 }// namespace dwg
