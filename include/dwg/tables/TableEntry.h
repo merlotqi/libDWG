@@ -24,8 +24,6 @@
 
 #include <assert.h>
 #include <dwg/CadObject.h>
-#include <dwg/DxfFileToken.h>
-#include <dwg/DxfSubclassMarker.h>
 #include <dwg/INamedCadObject.h>
 #include <dwg/exports.h>
 #include <dwg/tables/StandardFlags.h>

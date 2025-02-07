@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/Color.h>
-#include <dwg/DxfSubclassMarker.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/tables/ArcLengthSymbolPosition.h>
 #include <dwg/tables/DimensionTextBackgroundFillMode.h>
