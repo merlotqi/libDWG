@@ -27,22 +27,22 @@
 
 namespace dwg {
 
-class DG_DxfClass;
-class DG_CadDocument;
+class DxfClass;
+class CadDocument;
 
-class LIBDWG_API DG_DxfClassCollection
+class LIBDWG_API DxfClassCollection
 {
-    std::map<std::string, DG_DxfClass *> _entries;
+    std::map<std::string, DxfClass *> _entries;
 
 public:
-    DG_DxfClassCollection() = default;
-    static void UpdateDxfClasses(DG_CadDocument *);
-    void Add(DG_DxfClass *);
-    void AddOrUpdate(DG_DxfClass *);
-    DG_DxfClass *GetByName(const std::string &) const;
-    size_t Count() const;
-    void Clear();
-    bool Contains(const std::string &) const;
+    DxfClassCollection() = default;
+    static void UpdateDxfClasses(CadDocument *);
+    void add(DxfClass *);
+    void addOrUpdate(DxfClass *);
+    DxfClass *getByName(const std::string &) const;
+    size_t count() const;
+    void clear();
+    bool contains(const std::string &) const;
 };
 
 }// namespace dwg

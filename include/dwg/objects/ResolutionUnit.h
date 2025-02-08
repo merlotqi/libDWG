@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Resolution units for images.
-enum DG_ResolutionUnit : unsigned char
+enum ResolutionUnit : unsigned char
 {
     /// None.
     None = 0,

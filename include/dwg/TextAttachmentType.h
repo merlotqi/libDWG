@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Enumeration for text attachment types.
-enum DG_TextAttachmentType : short
+enum TextAttachmentType : short
 {
     /// Top of top text line.
     TopOfTopLine = 0,

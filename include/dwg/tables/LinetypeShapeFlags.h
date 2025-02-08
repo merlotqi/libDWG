@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Represents a line type complex element type.
-enum DG_LinetypeShapeFlag : short
+enum LinetypeShapeFlag : short
 {
     /// None.
     None = 0,
@@ -41,6 +41,6 @@ enum DG_LinetypeShapeFlag : short
     /// Complex shape code holds the index into the text area of the string to be drawn.
     Shape = 4,
 };
-CPL_DECLARE_FLAGS(DG_LinetypeShapeFlags, DG_LinetypeShapeFlag)
+CPL_DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag)
 
 }// namespace dwg

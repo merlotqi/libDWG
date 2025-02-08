@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Units format for decimal numbers
-enum DG_LinearUnitFormat : short
+enum LinearUnitFormat : short
 {
     /// None
     None = 0,

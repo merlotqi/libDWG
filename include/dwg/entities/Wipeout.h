@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <dwg/entities/CadImageBase.h>
+#include <dwg/entities/CadWipeoutBase.h>
 
 namespace dwg {
 
-class LIBDWG_API Wipeout : public CadImageBase
+class LIBDWG_API Wipeout : public CadWipeoutBase
 {
 public:
     // Constructor for Wipeout.

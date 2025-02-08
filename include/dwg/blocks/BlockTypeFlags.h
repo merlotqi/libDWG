@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Block-type flags (bit-coded values, may be combined).
-enum DG_BlockTypeFlag
+enum BlockTypeFlag
 {
     /// None
     None = 0,
@@ -47,6 +47,6 @@ enum DG_BlockTypeFlag
     /// This definition is a referenced external reference (ignored on input).
     Referenced = 64
 };
-CPL_DECLARE_FLAGS(DG_BlockTypeFlags, DG_BlockTypeFlag)
+CPL_DECLARE_FLAGS(BlockTypeFlags, BlockTypeFlag)
 
 }// namespace dwg

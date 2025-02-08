@@ -27,15 +27,14 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Scale : public DG_NonGraphicalObject
+class LIBDWG_API Scale : public NonGraphicalObject
 {
 public:
-    DG_Scale() = default;
-    DG_Scale(const std::string &name);
-    DG_Scale(const std::string &name, double paperUnits, double drawingUnits,
-             bool isUnitScale);
+    Scale() = default;
+    Scale(const std::string &name);
+    Scale(const std::string &name, double paperUnits, double drawingUnits, bool isUnitScale);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 

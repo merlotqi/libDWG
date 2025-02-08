@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// \brief Enumeration for text attachment direction types.
-enum DG_TextAttachmentDirectionType : short
+enum TextAttachmentDirectionType : short
 {
     Horizontal = 0,
     Vertical = 1,

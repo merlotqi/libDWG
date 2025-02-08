@@ -57,823 +57,823 @@
 
 namespace dwg {
 
-class DG_UCS;
-class DG_Layer;
-class DG_LineType;
-class DG_TextStyle;
-class DG_DimensionStyle;
-class DG_CadDocument;
+class UCS;
+class Layer;
+class LineType;
+class TextStyle;
+class DimensionStyle;
+class CadDocument;
 
-class DG_CadHeaderPrivate;
-class LIBDWG_API DG_CadHeader
+class CadHeaderPrivate;
+class LIBDWG_API CadHeader
 {
-    DG_CadHeaderPrivate *d;
+    CadHeaderPrivate *d;
 
 public:
-    DG_CadHeader();
-    DG_CadHeader(DG_CadDocument *document);
-    DG_CadHeader(DG_ACadVersion version);
+    CadHeader();
+    CadHeader(CadDocument *document);
+    CadHeader(ACadVersion version);
 
-    std::string VersionString() const;
-    void VersionString(const std::string &);
+    std::string versionString() const;
+    void setVersionString(const std::string &);
 
-    DG_ACadVersion Version() const;
-    void Version(DG_ACadVersion);
+    ACadVersion version() const;
+    void setVersion(ACadVersion);
 
-    short MaintenanceVersion() const;
-    void MaintenanceVersion(short);
+    short maintenanceVersion() const;
+    void setMaintenanceVersion(short);
 
-    std::string CodePage() const;
-    void CodePage(const std::string &);
+    std::string codePage() const;
+    void setCodePage(const std::string &);
 
-    std::string LastSavedBy() const;
-    void LastSavedBy(const std::string &);
+    std::string lastSavedBy() const;
+    void setLastSavedBy(const std::string &);
 
-    bool AssociatedDimensions() const;
-    void AssociatedDimensions(bool);
+    bool associatedDimensions() const;
+    void setAssociatedDimensions(bool);
 
-    bool UpdateDimensionsWhileDragging() const;
-    void UpdateDimensionsWhileDragging(bool);
+    bool updateDimensionsWhileDragging() const;
+    void setUpdateDimensionsWhileDragging(bool);
 
-    bool DIMSAV() const;
-    void DIMSAV(bool);
+    bool dIMSAV() const;
+    void setDIMSAV(bool);
 
-    DG_MeasurementUnits MeasurementUnits() const;
-    void MeasurementUnits(DG_MeasurementUnits);
+    MeasurementUnits measurementUnits() const;
+    void setMeasurementUnits(MeasurementUnits);
 
-    bool PolylineLineTypeGeneration() const;
-    void PolylineLineTypeGeneration(bool);
+    bool polylineLineTypeGeneration() const;
+    void setPolylineLineTypeGeneration(bool);
 
-    bool OrthoMode() const;
-    void OrthoMode(bool);
+    bool orthoMode() const;
+    void setOrthoMode(bool);
 
-    bool RegenerationMode() const;
-    void RegenerationMode(bool);
+    bool regenerationMode() const;
+    void setRegenerationMode(bool);
 
-    bool FillMode() const;
-    void FillMode(bool);
+    bool fillMode() const;
+    void setFillMode(bool);
 
-    bool QuickTextMode() const;
-    void QuickTextMode(bool);
+    bool quickTextMode() const;
+    void setQuickTextMode(bool);
 
-    DG_SpaceLineTypeScaling PaperSpaceLineTypeScaling() const;
-    void PaperSpaceLineTypeScaling(DG_SpaceLineTypeScaling);
+    SpaceLineTypeScaling paperSpaceLineTypeScaling() const;
+    void setPaperSpaceLineTypeScaling(SpaceLineTypeScaling);
 
-    bool LimitCheckingOn() const;
-    void LimitCheckingOn(bool);
+    bool limitCheckingOn() const;
+    void setLimitCheckingOn(bool);
 
-    bool BlipMode() const;
-    void BlipMode(bool);
+    bool blipMode() const;
+    void setBlipMode(bool);
 
-    bool UserTimer() const;
-    void UserTimer(bool);
+    bool userTimer() const;
+    void setUserTimer(bool);
 
-    bool SketchPolylines() const;
-    void SketchPolylines(bool);
+    bool sketchPolylines() const;
+    void setSketchPolylines(bool);
 
-    DG_AngularDirection AngularDirection() const;
-    void AngularDirection(DG_AngularDirection);
+    AngularDirection angularDirection() const;
+    void setAngularDirection(AngularDirection);
 
-    bool ShowSplineControlPoints() const;
-    void ShowSplineControlPoints(bool);
+    bool showSplineControlPoints() const;
+    void setShowSplineControlPoints(bool);
 
-    bool MirrorText() const;
-    void MirrorText(bool);
+    bool mirrorText() const;
+    void setMirrorText(bool);
 
-    bool WorldView() const;
-    void WorldView(bool);
+    bool worldView() const;
+    void setWorldView(bool);
 
-    bool ShowModelSpace() const;
-    void ShowModelSpace(bool);
+    bool showModelSpace() const;
+    void setShowModelSpace(bool);
 
-    bool PaperSpaceLimitsChecking() const;
-    void PaperSpaceLimitsChecking(bool);
+    bool paperSpaceLimitsChecking() const;
+    void setPaperSpaceLimitsChecking(bool);
 
-    bool RetainXRefDependentVisibilitySettings() const;
-    void RetainXRefDependentVisibilitySettings(bool);
+    bool retainXRefDependentVisibilitySettings() const;
+    void setRetainXRefDependentVisibilitySettings(bool);
 
-    bool DisplaySilhouetteCurves() const;
-    void DisplaySilhouetteCurves(bool);
+    bool displaySilhouetteCurves() const;
+    void setDisplaySilhouetteCurves(bool);
 
-    bool CreateEllipseAsPolyline() const;
-    void CreateEllipseAsPolyline(bool);
+    bool createEllipseAsPolyline() const;
+    void setCreateEllipseAsPolyline(bool);
 
-    bool ProxyGraphics() const;
-    void ProxyGraphics(bool);
+    bool proxyGraphics() const;
+    void setProxyGraphics(bool);
 
-    short SpatialIndexMaxTreeDepth() const;
-    void SpatialIndexMaxTreeDepth(short);
+    short spatialIndexMaxTreeDepth() const;
+    void setSpatialIndexMaxTreeDepth(short);
 
-    DG_LinearUnitFormat LinearUnitFormat() const;
-    void LinearUnitFormat(DG_LinearUnitFormat);
+    LinearUnitFormat linearUnitFormat() const;
+    void setLinearUnitFormat(LinearUnitFormat);
 
-    short LinearUnitPrecision() const;
-    void LinearUnitPrecision(short);
+    short linearUnitPrecision() const;
+    void setLinearUnitPrecision(short);
 
-    DG_AngularUnitFormat AngularUnit() const;
-    void AngularUnit(DG_AngularUnitFormat);
+    AngularUnitFormat angularUnit() const;
+    void setAngularUnit(AngularUnitFormat);
 
-    short AngularUnitPrecision() const;
-    void AngularUnitPrecision(short);
+    short angularUnitPrecision() const;
+    void setAngularUnitPrecision(short);
 
-    DG_ObjectSnapMode ObjectSnapMode() const;
-    void ObjectSnapMode(DG_ObjectSnapMode);
+    ObjectSnapMode objectSnapMode() const;
+    void setObjectSnapMode(ObjectSnapMode);
 
-    DG_AttributeVisibilityMode AttributeVisibility() const;
-    void AttributeVisibility(DG_AttributeVisibilityMode);
+    AttributeVisibilityMode attributeVisibility() const;
+    void setAttributeVisibility(AttributeVisibilityMode);
 
-    short PointDisplayMode() const;
-    void PointDisplayMode(short);
+    short pointDisplayMode() const;
+    void setPointDisplayMode(short);
 
-    short UserShort1() const;
-    void UserShort1(short);
+    short userShort1() const;
+    void setUserShort1(short);
 
-    short UserShort2() const;
-    void UserShort2(short);
+    short userShort2() const;
+    void setUserShort2(short);
 
-    short UserShort3() const;
-    void UserShort3(short);
+    short userShort3() const;
+    void setUserShort3(short);
 
-    short UserShort4() const;
-    void UserShort4(short);
+    short userShort4() const;
+    void setUserShort4(short);
 
-    short UserShort5() const;
-    void UserShort5(short);
+    short userShort5() const;
+    void setUserShort5(short);
 
-    short NumberOfSplineSegments() const;
-    void NumberOfSplineSegments(short);
+    short numberOfSplineSegments() const;
+    void setNumberOfSplineSegments(short);
 
-    short SurfaceDensityU() const;
-    void SurfaceDensityU(short);
+    short surfaceDensityU() const;
+    void setSurfaceDensityU(short);
 
-    short SurfaceDensityV() const;
-    void SurfaceDensityV(short);
+    short surfaceDensityV() const;
+    void setSurfaceDensityV(short);
 
-    short SurfaceType() const;
-    void SurfaceType(short);
+    short surfaceType() const;
+    void setSurfaceType(short);
 
-    short SurfaceMeshTabulationCount1() const;
-    void SurfaceMeshTabulationCount1(short);
+    short surfaceMeshTabulationCount1() const;
+    void setSurfaceMeshTabulationCount1(short);
 
-    short SurfaceMeshTabulationCount2() const;
-    void SurfaceMeshTabulationCount2(short);
+    short surfaceMeshTabulationCount2() const;
+    void setSurfaceMeshTabulationCount2(short);
 
-    DG_SplineType SplineType() const;
-    void SplineType(DG_SplineType);
+    SplineType splineType() const;
+    void setSplineType(SplineType);
 
-    DG_ShadeEdgeType ShadeEdge() const;
-    void ShadeEdge(DG_ShadeEdgeType);
+    ShadeEdgeType shadeEdge() const;
+    void setShadeEdge(ShadeEdgeType);
 
-    short ShadeDiffuseToAmbientPercentage() const;
-    void ShadeDiffuseToAmbientPercentage(short);
+    short shadeDiffuseToAmbientPercentage() const;
+    void setShadeDiffuseToAmbientPercentage(short);
 
-    short UnitMode() const;
-    void UnitMode(short);
+    short unitMode() const;
+    void setUnitMode(short);
 
-    short MaxViewportCount() const;
-    void MaxViewportCount(short);
+    short maxViewportCount() const;
+    void setMaxViewportCount(short);
 
-    short SurfaceIsolineCount() const;
-    void SurfaceIsolineCount(short);
+    short surfaceIsolineCount() const;
+    void setSurfaceIsolineCount(short);
 
-    DG_VerticalAlignmentType CurrentMultilineJustification() const;
-    void CurrentMultilineJustification(DG_VerticalAlignmentType);
+    VerticalAlignmentType currentMultilineJustification() const;
+    void setCurrentMultilineJustification(VerticalAlignmentType);
 
-    short TextQuality() const;
-    void TextQuality(short);
+    short textQuality() const;
+    void setTextQuality(short);
 
-    double LineTypeScale() const;
-    void LineTypeScale(double);
+    double lineTypeScale() const;
+    void setLineTypeScale(double);
 
-    double TextHeightDefault() const;
-    void TextHeightDefault(double);
+    double textHeightDefault() const;
+    void setTextHeightDefault(double);
 
-    std::string TextStyleName() const;
-    void TextStyleName(const std::string &);
+    std::string textStyleName() const;
+    void setTextStyleName(const std::string &);
 
-    std::string CurrentLayerName() const;
-    void CurrentLayerName(const std::string &);
+    std::string currentLayerName() const;
+    void setCurrentLayerName(const std::string &);
 
-    std::string CurrentLineTypeName() const;
-    void CurrentLineTypeName(const std::string &);
+    std::string currentLineTypeName() const;
+    void setCurrentLineTypeName(const std::string &);
 
-    std::string MultiLineStyleName() const;
-    void MultiLineStyleName(const std::string &);
+    std::string multiLineStyleName() const;
+    void setMultiLineStyleName(const std::string &);
 
-    double TraceWidthDefault() const;
-    void TraceWidthDefault(double);
+    double traceWidthDefault() const;
+    void setTraceWidthDefault(double);
 
-    double SketchIncrement() const;
-    void SketchIncrement(double);
+    double sketchIncrement() const;
+    void setSketchIncrement(double);
 
-    double FilletRadius() const;
-    void FilletRadius(double);
+    double filletRadius() const;
+    void setFilletRadius(double);
 
-    double ThicknessDefault() const;
-    void ThicknessDefault(double);
+    double thicknessDefault() const;
+    void setThicknessDefault(double);
 
-    double AngleBase() const;
-    void AngleBase(double);
+    double angleBase() const;
+    void setAngleBase(double);
 
-    double PointDisplaySize() const;
-    void PointDisplaySize(double);
+    double pointDisplaySize() const;
+    void setPointDisplaySize(double);
 
-    double PolylineWidthDefault() const;
-    void PolylineWidthDefault(double);
+    double polylineWidthDefault() const;
+    void setPolylineWidthDefault(double);
 
-    double UserDouble1() const;
-    void UserDouble1(double);
+    double userDouble1() const;
+    void setUserDouble1(double);
 
-    double UserDouble2() const;
-    void UserDouble2(double);
+    double userDouble2() const;
+    void setUserDouble2(double);
 
-    double UserDouble3() const;
-    void UserDouble3(double);
+    double userDouble3() const;
+    void setUserDouble3(double);
 
-    double UserDouble4() const;
-    void UserDouble4(double);
+    double userDouble4() const;
+    void setUserDouble4(double);
 
-    double UserDouble5() const;
-    void UserDouble5(double);
+    double userDouble5() const;
+    void setUserDouble5(double);
 
-    double ChamferDistance1() const;
-    void ChamferDistance1(double);
+    double chamferDistance1() const;
+    void setChamferDistance1(double);
 
-    double ChamferDistance2() const;
-    void ChamferDistance2(double);
+    double chamferDistance2() const;
+    void setChamferDistance2(double);
 
-    double ChamferLength() const;
-    void ChamferLength(double);
+    double chamferLength() const;
+    void setChamferLength(double);
 
-    double ChamferAngle() const;
-    void ChamferAngle(double);
+    double chamferAngle() const;
+    void setChamferAngle(double);
 
-    double FacetResolution() const;
-    void FacetResolution(double);
+    double facetResolution() const;
+    void setFacetResolution(double);
 
-    double CurrentMultilineScale() const;
-    void CurrentMultilineScale(double);
+    double currentMultilineScale() const;
+    void setCurrentMultilineScale(double);
 
-    double CurrentEntityLinetypeScale() const;
-    void CurrentEntityLinetypeScale(double);
+    double currentEntityLinetypeScale() const;
+    void setCurrentEntityLinetypeScale(double);
 
-    std::string MenuFileName() const;
-    void MenuFileName(const std::string &);
+    std::string menuFileName() const;
+    void setMenuFileName(const std::string &);
 
-    unsigned long long HandleSeed() const;
-    void HandleSeed(unsigned long long);
+    unsigned long long handleSeed() const;
+    void setHandleSeed(unsigned long long);
 
-    time_t CreateDateTime() const;
-    void CreateDateTime(time_t);
+    time_t createDateTime() const;
+    void setCreateDateTime(time_t);
 
-    time_t UniversalCreateDateTime() const;
-    void UniversalCreateDateTime(time_t);
+    time_t universalCreateDateTime() const;
+    void setUniversalCreateDateTime(time_t);
 
-    time_t UpdateDateTime() const;
-    void UpdateDateTime(time_t);
+    time_t updateDateTime() const;
+    void setUpdateDateTime(time_t);
 
-    time_t UniversalUpdateDateTime() const;
-    void UniversalUpdateDateTime(time_t);
+    time_t universalUpdateDateTime() const;
+    void setUniversalUpdateDateTime(time_t);
 
-    double TotalEditingTime() const;
-    void TotalEditingTime(double);
+    double totalEditingTime() const;
+    void setTotalEditingTime(double);
 
-    double UserElapsedTimeSpan() const;
-    void UserElapsedTimeSpan(double);
+    double userElapsedTimeSpan() const;
+    void setUserElapsedTimeSpan(double);
 
-    DG_Color CurrentEntityColor() const;
-    void CurrentEntityColor(const DG_Color &);
+    Color currentEntityColor() const;
+    void setCurrentEntityColor(const Color &);
 
-    double ViewportDefaultViewScaleFactor() const;
-    void ViewportDefaultViewScaleFactor(double);
+    double viewportDefaultViewScaleFactor() const;
+    void setViewportDefaultViewScaleFactor(double);
 
-    XYZ PaperSpaceInsertionBase() const;
-    void PaperSpaceInsertionBase(const XYZ &);
+    XYZ paperSpaceInsertionBase() const;
+    void setPaperSpaceInsertionBase(const XYZ &);
 
-    XYZ PaperSpaceExtMin() const;
-    void PaperSpaceExtMin(const XYZ &);
+    XYZ paperSpaceExtMin() const;
+    void setPaperSpaceExtMin(const XYZ &);
 
-    XYZ PaperSpaceExtMax() const;
-    void PaperSpaceExtMax(const XYZ &);
+    XYZ paperSpaceExtMax() const;
+    void setPaperSpaceExtMax(const XYZ &);
 
-    XY PaperSpaceLimitsMin() const;
-    void PaperSpaceLimitsMin(const XYZ &);
+    XY paperSpaceLimitsMin() const;
+    void setPaperSpaceLimitsMin(const XYZ &);
 
-    XY PaperSpaceLimitsMax() const;
-    void PaperSpaceLimitsMax(const XY &);
+    XY paperSpaceLimitsMax() const;
+    void setPaperSpaceLimitsMax(const XY &);
 
-    double PaperSpaceElevation() const;
-    void PaperSpaceElevation(double);
+    double paperSpaceElevation() const;
+    void setPaperSpaceElevation(double);
 
-    std::string PaperSpaceBaseName() const;
-    void PaperSpaceBaseName(const std::string &);
+    std::string paperSpaceBaseName() const;
+    void setPaperSpaceBaseName(const std::string &);
 
-    std::string PaperSpaceName() const;
-    void PaperSpaceName(const std::string &);
+    std::string paperSpaceName() const;
+    void setPaperSpaceName(const std::string &);
 
-    XYZ PaperSpaceUcsOrigin() const;
-    void PaperSpaceUcsOrigin(const XYZ &);
+    XYZ paperSpaceUcsOrigin() const;
+    void setPaperSpaceUcsOrigin(const XYZ &);
 
-    XYZ PaperSpaceUcsXAxis() const;
-    void PaperSpaceUcsXAxis(const XYZ &);
+    XYZ paperSpaceUcsXAxis() const;
+    void setPaperSpaceUcsXAxis(const XYZ &);
 
-    XYZ PaperSpaceUcsYAxis() const;
-    void PaperSpaceUcsYAxis(const XYZ &);
+    XYZ paperSpaceUcsYAxis() const;
+    void setPaperSpaceUcsYAxis(const XYZ &);
 
-    XYZ PaperSpaceOrthographicTopDOrigin() const;
-    void PaperSpaceOrthographicTopDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicTopDOrigin() const;
+    void setPaperSpaceOrthographicTopDOrigin(const XYZ &);
 
-    XYZ PaperSpaceOrthographicBottomDOrigin() const;
-    void PaperSpaceOrthographicBottomDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicBottomDOrigin() const;
+    void setPaperSpaceOrthographicBottomDOrigin(const XYZ &);
 
-    XYZ PaperSpaceOrthographicLeftDOrigin() const;
-    void PaperSpaceOrthographicLeftDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicLeftDOrigin() const;
+    void setPaperSpaceOrthographicLeftDOrigin(const XYZ &);
 
-    XYZ PaperSpaceOrthographicRightDOrigin() const;
-    void PaperSpaceOrthographicRightDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicRightDOrigin() const;
+    void setPaperSpaceOrthographicRightDOrigin(const XYZ &);
 
-    XYZ PaperSpaceOrthographicFrontDOrigin() const;
-    void PaperSpaceOrthographicFrontDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicFrontDOrigin() const;
+    void setPaperSpaceOrthographicFrontDOrigin(const XYZ &);
 
-    XYZ PaperSpaceOrthographicBackDOrigin() const;
-    void PaperSpaceOrthographicBackDOrigin(const XYZ &);
+    XYZ paperSpaceOrthographicBackDOrigin() const;
+    void setPaperSpaceOrthographicBackDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicTopDOrigin() const;
-    void ModelSpaceOrthographicTopDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicTopDOrigin() const;
+    void setModelSpaceOrthographicTopDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicBottomDOrigin() const;
-    void ModelSpaceOrthographicBottomDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicBottomDOrigin() const;
+    void setModelSpaceOrthographicBottomDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicLeftDOrigin() const;
-    void ModelSpaceOrthographicLeftDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicLeftDOrigin() const;
+    void setModelSpaceOrthographicLeftDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicRightDOrigin() const;
-    void ModelSpaceOrthographicRightDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicRightDOrigin() const;
+    void setModelSpaceOrthographicRightDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicFrontDOrigin() const;
-    void ModelSpaceOrthographicFrontDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicFrontDOrigin() const;
+    void setModelSpaceOrthographicFrontDOrigin(const XYZ &);
 
-    XYZ ModelSpaceOrthographicBackDOrigin() const;
-    void ModelSpaceOrthographicBackDOrigin(const XYZ &);
+    XYZ modelSpaceOrthographicBackDOrigin() const;
+    void setModelSpaceOrthographicBackDOrigin(const XYZ &);
 
-    XYZ ModelSpaceInsertionBase() const;
-    void ModelSpaceInsertionBase(const XYZ &);
+    XYZ modelSpaceInsertionBase() const;
+    void setModelSpaceInsertionBase(const XYZ &);
 
-    XYZ ModelSpaceExtMin() const;
-    void ModelSpaceExtMin(const XYZ &);
+    XYZ modelSpaceExtMin() const;
+    void setModelSpaceExtMin(const XYZ &);
 
-    XYZ ModelSpaceExtMax() const;
-    void ModelSpaceExtMax(const XYZ &);
+    XYZ modelSpaceExtMax() const;
+    void setModelSpaceExtMax(const XYZ &);
 
-    XY ModelSpaceLimitsMin() const;
-    void ModelSpaceLimitsMin(const XY &);
+    XY modelSpaceLimitsMin() const;
+    void setModelSpaceLimitsMin(const XY &);
 
-    XY ModelSpaceLimitsMax() const;
-    void ModelSpaceLimitsMax(const XY &);
+    XY modelSpaceLimitsMax() const;
+    void setModelSpaceLimitsMax(const XY &);
 
-    std::string UcsBaseName() const;
-    void UcsBaseName(const std::string &);
+    std::string ucsBaseName() const;
+    void setUcsBaseName(const std::string &);
 
-    std::string UcsName() const;
-    void UcsName(const std::string &);
+    std::string ucsName() const;
+    void setUcsName(const std::string &);
 
-    double Elevation() const;
-    void Elevation(double);
+    double elevation() const;
+    void setElevation(double);
 
-    XYZ ModelSpaceOrigin() const;
-    void ModelSpaceOrigin(const XYZ &);
+    XYZ modelSpaceOrigin() const;
+    void setModelSpaceOrigin(const XYZ &);
 
-    XYZ ModelSpaceXAxis() const;
-    void ModelSpaceXAxis(const XYZ &);
+    XYZ modelSpaceXAxis() const;
+    void setModelSpaceXAxis(const XYZ &);
 
-    XYZ ModelSpaceYAxis() const;
-    void ModelSpaceYAxis(const XYZ &);
+    XYZ modelSpaceYAxis() const;
+    void setModelSpaceYAxis(const XYZ &);
 
-    std::string DimensionBlockName() const;
-    void DimensionBlockName(const std::string &);
+    std::string dimensionBlockName() const;
+    void setDimensionBlockName(const std::string &);
 
-    std::string ArrowBlockName() const;
-    void ArrowBlockName(const std::string &);
+    std::string arrowBlockName() const;
+    void setArrowBlockName(const std::string &);
 
-    std::string DimensionBlockNameFirst() const;
-    void DimensionBlockNameFirst(const std::string &);
+    std::string dimensionBlockNameFirst() const;
+    void setDimensionBlockNameFirst(const std::string &);
 
-    std::string DimensionBlockNameSecond() const;
-    void DimensionBlockNameSecond(const std::string &);
+    std::string dimensionBlockNameSecond() const;
+    void setDimensionBlockNameSecond(const std::string &);
 
-    short StackedTextAlignment() const;
-    void StackedTextAlignment(short);
+    short stackedTextAlignment() const;
+    void setStackedTextAlignment(short);
 
-    short StackedTextSizePercentage() const;
-    void StackedTextSizePercentage(short);
+    short stackedTextSizePercentage() const;
+    void setStackedTextSizePercentage(short);
 
-    std::string HyperLinkBase() const;
-    void HyperLinkBase(const std::string &);
+    std::string hyperLinkBase() const;
+    void setHyperLinkBase(const std::string &);
 
-    DG_LineweightType CurrentEntityLineWeight() const;
-    void CurrentEntityLineWeight(DG_LineweightType);
+    LineweightType currentEntityLineWeight() const;
+    void setCurrentEntityLineWeight(LineweightType);
 
-    short EndCaps() const;
-    void EndCaps(short);
+    short endCaps() const;
+    void setEndCaps(short);
 
-    short JoinStyle() const;
-    void JoinStyle(short);
+    short joinStyle() const;
+    void setJoinStyle(short);
 
-    bool DisplayLineWeight() const;
-    void DisplayLineWeight(bool);
+    bool displayLineWeight() const;
+    void setDisplayLineWeight(bool);
 
-    bool XEdit() const;
-    void XEdit(bool);
+    bool xEdit() const;
+    void setXEdit(bool);
 
-    bool ExtendedNames() const;
-    void ExtendedNames(bool);
+    bool extendedNames() const;
+    void setExtendedNames(bool);
 
-    short PlotStyleMode() const;
-    void PlotStyleMode(short);
+    short plotStyleMode() const;
+    void setPlotStyleMode(short);
 
-    bool LoadOLEObject() const;
-    void LoadOLEObject(bool);
+    bool loadOLEObject() const;
+    void setLoadOLEObject(bool);
 
-    DG_UnitsType InsUnits() const;
-    void InsUnits(DG_UnitsType);
+    UnitsType insUnits() const;
+    void setInsUnits(UnitsType);
 
-    DG_EntityPlotStyleType CurrentEntityPlotStyle() const;
-    void CurrentEntityPlotStyle(DG_EntityPlotStyleType);
+    EntityPlotStyleType currentEntityPlotStyle() const;
+    void setCurrentEntityPlotStyle(EntityPlotStyleType);
 
-    std::string FingerPrintGuid() const;
-    void FingerPrintGuid(const std::string &);
+    std::string fingerPrintGuid() const;
+    void setFingerPrintGuid(const std::string &);
 
-    std::string VersionGuid() const;
-    void VersionGuid(const std::string &);
+    std::string versionGuid() const;
+    void setVersionGuid(const std::string &);
 
-    DG_ObjectSortingFlags EntitySortingFlags() const;
-    void EntitySortingFlags(DG_ObjectSortingFlags);
+    ObjectSortingFlags entitySortingFlags() const;
+    void setEntitySortingFlags(ObjectSortingFlags);
 
-    DG_IndexCreationFlags IndexCreationFlags() const;
-    void IndexCreationFlags(DG_IndexCreationFlags);
+    IndexCreationFlags indexCreationFlags() const;
+    void setIndexCreationFlags(IndexCreationFlags);
 
-    unsigned char HideText() const;
-    void HideText(unsigned char);
+    unsigned char hideText() const;
+    void setHideText(unsigned char);
 
-    unsigned char ExternalReferenceClippingBoundaryType() const;
-    void ExternalReferenceClippingBoundaryType(unsigned char);
+    unsigned char externalReferenceClippingBoundaryType() const;
+    void setExternalReferenceClippingBoundaryType(unsigned char);
 
-    DG_DimensionAssociation DimensionAssociativity() const;
-    void DimensionAssociativity(DG_DimensionAssociation);
+    DimensionAssociation dimensionAssociativity() const;
+    void setDimensionAssociativity(DimensionAssociation);
 
-    unsigned char HaloGapPercentage() const;
-    void HaloGapPercentage(unsigned char);
+    unsigned char haloGapPercentage() const;
+    void setHaloGapPercentage(unsigned char);
 
-    DG_Color ObscuredColor() const;
-    void ObscuredColor(const DG_Color &);
+    Color obscuredColor() const;
+    void setObscuredColor(const Color &);
 
-    DG_Color InterfereColor() const;
-    void InterfereColor(const DG_Color &);
+    Color interfereColor() const;
+    void setInterfereColor(const Color &);
 
-    unsigned char ObscuredType() const;
-    void ObscuredType(unsigned char);
+    unsigned char obscuredType() const;
+    void setObscuredType(unsigned char);
 
-    unsigned char IntersectionDisplay() const;
-    void IntersectionDisplay(unsigned char);
+    unsigned char intersectionDisplay() const;
+    void setIntersectionDisplay(unsigned char);
 
-    std::string ProjectName() const;
-    void ProjectName(const std::string &);
+    std::string projectName() const;
+    void setProjectName(const std::string &);
 
-    bool CameraDisplayObjects() const;
-    void CameraDisplayObjects(bool);
+    bool cameraDisplayObjects() const;
+    void setCameraDisplayObjects(bool);
 
-    double StepsPerSecond() const;
-    void StepsPerSecond(double);
+    double stepsPerSecond() const;
+    void setStepsPerSecond(double);
 
-    double StepSize() const;
-    void StepSize(double);
+    double stepSize() const;
+    void setStepSize(double);
 
-    double Dw3DPrecision() const;
-    void Dw3DPrecision(double);
+    double dw3DPrecision() const;
+    void setDw3DPrecision(double);
 
-    double LensLength() const;
-    void LensLength(double);
+    double lensLength() const;
+    void setLensLength(double);
 
-    double CameraHeight() const;
-    void CameraHeight(double);
+    double cameraHeight() const;
+    void setCameraHeight(double);
 
-    char SolidsRetainHistory() const;
-    void SolidsRetainHistory(char);
+    char solidsRetainHistory() const;
+    void setSolidsRetainHistory(char);
 
-    char ShowSolidsHistory() const;
-    void ShowSolidsHistory(char);
+    char showSolidsHistory() const;
+    void setShowSolidsHistory(char);
 
-    double SweptSolidWidth() const;
-    void SweptSolidWidth(double);
+    double sweptSolidWidth() const;
+    void setSweptSolidWidth(double);
 
-    double SweptSolidHeight() const;
-    void SweptSolidHeight(double);
+    double sweptSolidHeight() const;
+    void setSweptSolidHeight(double);
 
-    double DraftAngleFirstCrossSection() const;
-    void DraftAngleFirstCrossSection(double);
+    double draftAngleFirstCrossSection() const;
+    void setDraftAngleFirstCrossSection(double);
 
-    double DraftAngleSecondCrossSection() const;
-    void DraftAngleSecondCrossSection(double);
+    double draftAngleSecondCrossSection() const;
+    void setDraftAngleSecondCrossSection(double);
 
-    double DraftMagnitudeFirstCrossSection() const;
-    void DraftMagnitudeFirstCrossSection(double);
+    double draftMagnitudeFirstCrossSection() const;
+    void setDraftMagnitudeFirstCrossSection(double);
 
-    double DraftMagnitudeSecondCrossSection() const;
-    void DraftMagnitudeSecondCrossSection(double);
+    double draftMagnitudeSecondCrossSection() const;
+    void setDraftMagnitudeSecondCrossSection(double);
 
-    short SolidLoftedShape() const;
-    void SolidLoftedShape(short);
+    short solidLoftedShape() const;
+    void setSolidLoftedShape(short);
 
-    char LoftedObjectNormals() const;
-    void LoftedObjectNormals(char);
+    char loftedObjectNormals() const;
+    void setLoftedObjectNormals(char);
 
-    double Latitude() const;
-    void Latitude(double);
+    double latitude() const;
+    void setLatitude(double);
 
-    double Longitude() const;
-    void Longitude(double);
+    double longitude() const;
+    void setLongitude(double);
 
-    double NorthDirection() const;
-    void NorthDirection(double);
+    double northDirection() const;
+    void setNorthDirection(double);
 
-    int TimeZone() const;
-    void TimeZone(int);
+    int timeZone() const;
+    void setTimeZone(int);
 
-    char DisplayLightGlyphs() const;
-    void DisplayLightGlyphs(char);
+    char displayLightGlyphs() const;
+    void setDisplayLightGlyphs(char);
 
-    char DwgUnderlayFramesVisibility() const;
-    void DwgUnderlayFramesVisibility(char);
+    char dwgUnderlayFramesVisibility() const;
+    void setDwgUnderlayFramesVisibility(char);
 
-    char DgnUnderlayFramesVisibility() const;
-    void DgnUnderlayFramesVisibility(char);
+    char dgnUnderlayFramesVisibility() const;
+    void setDgnUnderlayFramesVisibility(char);
 
-    DG_ShadowMode ShadowMode() const;
-    void ShadowMode(DG_ShadowMode);
+    ShadowMode shadowMode() const;
+    void setShadowMode(ShadowMode);
 
-    double ShadowPlaneLocation() const;
-    void ShadowPlaneLocation(double);
+    double shadowPlaneLocation() const;
+    void setShadowPlaneLocation(double);
 
-    std::string StyleSheetName() const;
-    void StyleSheetName(const std::string &);
+    std::string styleSheetName() const;
+    void setStyleSheetName(const std::string &);
 
-    std::string DimensionTextStyleName() const;
-    void DimensionTextStyleName(const std::string &);
+    std::string dimensionTextStyleName() const;
+    void setDimensionTextStyleName(const std::string &);
 
-    std::string DimensionStyleOverridesName() const;
-    void DimensionStyleOverridesName(const std::string &);
+    std::string dimensionStyleOverridesName() const;
+    void setDimensionStyleOverridesName(const std::string &);
 
-    short DimensionAngularDimensionDecimalPlaces() const;
-    void DimensionAngularDimensionDecimalPlaces(short);
+    short dimensionAngularDimensionDecimalPlaces() const;
+    void setDimensionAngularDimensionDecimalPlaces(short);
 
-    short DimensionDecimalPlaces() const;
-    void DimensionDecimalPlaces(short);
+    short dimensionDecimalPlaces() const;
+    void setDimensionDecimalPlaces(short);
 
-    short DimensionToleranceDecimalPlaces() const;
-    void DimensionToleranceDecimalPlaces(short);
+    short dimensionToleranceDecimalPlaces() const;
+    void setDimensionToleranceDecimalPlaces(short);
 
-    bool DimensionAlternateUnitDimensioning() const;
-    void DimensionAlternateUnitDimensioning(bool);
+    bool dimensionAlternateUnitDimensioning() const;
+    void setDimensionAlternateUnitDimensioning(bool);
 
-    DG_LinearUnitFormat DimensionAlternateUnitFormat() const;
-    void DimensionAlternateUnitFormat(DG_LinearUnitFormat);
+    LinearUnitFormat dimensionAlternateUnitFormat() const;
+    void setDimensionAlternateUnitFormat(LinearUnitFormat);
 
-    double DimensionAlternateUnitScaleFactor() const;
-    void DimensionAlternateUnitScaleFactor(double);
+    double dimensionAlternateUnitScaleFactor() const;
+    void setDimensionAlternateUnitScaleFactor(double);
 
-    double DimensionExtensionLineOffset() const;
-    void DimensionExtensionLineOffset(double);
+    double dimensionExtensionLineOffset() const;
+    void setDimensionExtensionLineOffset(double);
 
-    double DimensionScaleFactor() const;
-    void DimensionScaleFactor(double);
+    double dimensionScaleFactor() const;
+    void setDimensionScaleFactor(double);
 
-    short DimensionAlternateUnitDecimalPlaces() const;
-    void DimensionAlternateUnitDecimalPlaces(short);
+    short dimensionAlternateUnitDecimalPlaces() const;
+    void setDimensionAlternateUnitDecimalPlaces(short);
 
-    short DimensionAlternateUnitToleranceDecimalPlaces() const;
-    void DimensionAlternateUnitToleranceDecimalPlaces(short);
+    short dimensionAlternateUnitToleranceDecimalPlaces() const;
+    void setDimensionAlternateUnitToleranceDecimalPlaces(short);
 
-    DG_AngularUnitFormat DimensionAngularUnit() const;
-    void DimensionAngularUnit(DG_AngularUnitFormat);
+    AngularUnitFormat dimensionAngularUnit() const;
+    void setDimensionAngularUnit(AngularUnitFormat);
 
-    DG_FractionFormat DimensionFractionFormat() const;
-    void DimensionFractionFormat(DG_FractionFormat);
+    FractionFormat dimensionFractionFormat() const;
+    void setDimensionFractionFormat(FractionFormat);
 
-    DG_LinearUnitFormat DimensionLinearUnitFormat() const;
-    void DimensionLinearUnitFormat(DG_LinearUnitFormat);
+    LinearUnitFormat dimensionLinearUnitFormat() const;
+    void setDimensionLinearUnitFormat(LinearUnitFormat);
 
-    char DimensionDecimalSeparator() const;
-    void DimensionDecimalSeparator(char);
+    char dimensionDecimalSeparator() const;
+    void setDimensionDecimalSeparator(char);
 
-    DG_TextMovement DimensionTextMovement() const;
-    void DimensionTextMovement(DG_TextMovement);
+    TextMovement dimensionTextMovement() const;
+    void setDimensionTextMovement(TextMovement);
 
-    DG_DimensionTextHorizontalAlignment DimensionTextHorizontalAlignment() const;
-    void DimensionTextHorizontalAlignment(DG_DimensionTextHorizontalAlignment);
+    DimensionTextHorizontalAlignment dimensionTextHorizontalAlignment() const;
+    void setDimensionTextHorizontalAlignment(DimensionTextHorizontalAlignment);
 
-    bool DimensionSuppressFirstDimensionLine() const;
-    void DimensionSuppressFirstDimensionLine(bool);
+    bool dimensionSuppressFirstDimensionLine() const;
+    void setDimensionSuppressFirstDimensionLine(bool);
 
-    bool DimensionSuppressSecondDimensionLine() const;
-    void DimensionSuppressSecondDimensionLine(bool);
+    bool dimensionSuppressSecondDimensionLine() const;
+    void setDimensionSuppressSecondDimensionLine(bool);
 
-    bool DimensionGenerateTolerances() const;
-    void DimensionGenerateTolerances(bool);
+    bool dimensionGenerateTolerances() const;
+    void setDimensionGenerateTolerances(bool);
 
-    DG_ToleranceAlignment DimensionToleranceAlignment() const;
-    void DimensionToleranceAlignment(DG_ToleranceAlignment);
+    ToleranceAlignment dimensionToleranceAlignment() const;
+    void setDimensionToleranceAlignment(ToleranceAlignment);
 
-    DG_ZeroHandling DimensionZeroHandling() const;
-    void DimensionZeroHandling(DG_ZeroHandling);
+    ZeroHandling dimensionZeroHandling() const;
+    void setDimensionZeroHandling(ZeroHandling);
 
-    DG_ZeroHandling DimensionToleranceZeroHandling() const;
-    void DimensionToleranceZeroHandling(DG_ZeroHandling);
+    ZeroHandling dimensionToleranceZeroHandling() const;
+    void setDimensionToleranceZeroHandling(ZeroHandling);
 
-    short DimensionFit() const;
-    void DimensionFit(short);
+    short dimensionFit() const;
+    void setDimensionFit(short);
 
-    DG_ZeroHandling DimensionAlternateUnitZeroHandling() const;
-    void DimensionAlternateUnitZeroHandling(DG_ZeroHandling);
+    ZeroHandling dimensionAlternateUnitZeroHandling() const;
+    void setDimensionAlternateUnitZeroHandling(ZeroHandling);
 
-    DG_ZeroHandling DimensionAlternateUnitToleranceZeroHandling() const;
-    void DimensionAlternateUnitToleranceZeroHandling(DG_ZeroHandling);
+    ZeroHandling dimensionAlternateUnitToleranceZeroHandling() const;
+    void setDimensionAlternateUnitToleranceZeroHandling(ZeroHandling);
 
-    bool DimensionCursorUpdate() const;
-    void DimensionCursorUpdate(bool);
+    bool dimensionCursorUpdate() const;
+    void setDimensionCursorUpdate(bool);
 
-    DG_TextArrowFitType DimensionDimensionTextArrowFit() const;
-    void DimensionDimensionTextArrowFit(DG_TextArrowFitType);
+    TextArrowFitType dimensionDimensionTextArrowFit() const;
+    void setDimensionDimensionTextArrowFit(TextArrowFitType);
 
-    double DimensionAlternateUnitRounding() const;
-    void DimensionAlternateUnitRounding(double);
+    double dimensionAlternateUnitRounding() const;
+    void setDimensionAlternateUnitRounding(double);
 
-    std::string DimensionAlternateDimensioningSuffix() const;
-    void DimensionAlternateDimensioningSuffix(const std::string &);
+    std::string dimensionAlternateDimensioningSuffix() const;
+    void setDimensionAlternateDimensioningSuffix(const std::string &);
 
-    double DimensionArrowSize() const;
-    void DimensionArrowSize(double);
+    double dimensionArrowSize() const;
+    void setDimensionArrowSize(double);
 
-    DG_ZeroHandling DimensionAngularZeroHandling() const;
-    void DimensionAngularZeroHandling(DG_ZeroHandling);
+    ZeroHandling dimensionAngularZeroHandling() const;
+    void setDimensionAngularZeroHandling(ZeroHandling);
 
-    DG_ArcLengthSymbolPosition DimensionArcLengthSymbolPosition() const;
-    void DimensionArcLengthSymbolPosition(DG_ArcLengthSymbolPosition);
+    ArcLengthSymbolPosition dimensionArcLengthSymbolPosition() const;
+    void setDimensionArcLengthSymbolPosition(ArcLengthSymbolPosition);
 
-    bool DimensionSeparateArrowBlocks() const;
-    void DimensionSeparateArrowBlocks(bool);
+    bool dimensionSeparateArrowBlocks() const;
+    void setDimensionSeparateArrowBlocks(bool);
 
-    double DimensionCenterMarkSize() const;
-    void DimensionCenterMarkSize(double);
+    double dimensionCenterMarkSize() const;
+    void setDimensionCenterMarkSize(double);
 
-    double DimensionTickSize() const;
-    void DimensionTickSize(double);
+    double dimensionTickSize() const;
+    void setDimensionTickSize(double);
 
-    DG_Color DimensionLineColor() const;
-    void DimensionLineColor(const DG_Color &);
+    Color dimensionLineColor() const;
+    void setDimensionLineColor(const Color &);
 
-    DG_Color DimensionExtensionLineColor() const;
-    void DimensionExtensionLineColor(const DG_Color &);
+    Color dimensionExtensionLineColor() const;
+    void setDimensionExtensionLineColor(const Color &);
 
-    DG_Color DimensionTextColor() const;
-    void DimensionTextColor(const DG_Color &);
+    Color dimensionTextColor() const;
+    void setDimensionTextColor(const Color &);
 
-    double DimensionLineExtension() const;
-    void DimensionLineExtension(double);
+    double dimensionLineExtension() const;
+    void setDimensionLineExtension(double);
 
-    double DimensionLineIncrement() const;
-    void DimensionLineIncrement(double);
+    double dimensionLineIncrement() const;
+    void setDimensionLineIncrement(double);
 
-    double DimensionExtensionLineExtension() const;
-    void DimensionExtensionLineExtension(double);
+    double dimensionExtensionLineExtension() const;
+    void setDimensionExtensionLineExtension(double);
 
-    bool DimensionIsExtensionLineLengthFixed() const;
-    void DimensionIsExtensionLineLengthFixed(bool);
+    bool dimensionIsExtensionLineLengthFixed() const;
+    void setDimensionIsExtensionLineLengthFixed(bool);
 
-    double DimensionFixedExtensionLineLength() const;
-    void DimensionFixedExtensionLineLength(double);
+    double dimensionFixedExtensionLineLength() const;
+    void setDimensionFixedExtensionLineLength(double);
 
-    double DimensionJoggedRadiusDimensionTransverseSegmentAngle() const;
-    void DimensionJoggedRadiusDimensionTransverseSegmentAngle(double);
+    double dimensionJoggedRadiusDimensionTransverseSegmentAngle() const;
+    void setDimensionJoggedRadiusDimensionTransverseSegmentAngle(double);
 
-    DG_DimensionTextBackgroundFillMode DimensionTextBackgroundFillMode() const;
-    void DimensionTextBackgroundFillMode(DG_DimensionTextBackgroundFillMode);
+    DimensionTextBackgroundFillMode dimensionTextBackgroundFillMode() const;
+    void setDimensionTextBackgroundFillMode(DimensionTextBackgroundFillMode);
 
-    DG_Color DimensionTextBackgroundColor() const;
-    void DimensionTextBackgroundColor(const DG_Color &);
+    Color dimensionTextBackgroundColor() const;
+    void setDimensionTextBackgroundColor(const Color &);
 
-    double DimensionLineGap() const;
-    void DimensionLineGap(double);
+    double dimensionLineGap() const;
+    void setDimensionLineGap(double);
 
-    double DimensionLinearScaleFactor() const;
-    void DimensionLinearScaleFactor(double);
+    double dimensionLinearScaleFactor() const;
+    void setDimensionLinearScaleFactor(double);
 
-    double DimensionTextVerticalPosition() const;
-    void DimensionTextVerticalPosition(double);
+    double dimensionTextVerticalPosition() const;
+    void setDimensionTextVerticalPosition(double);
 
-    DG_LineweightType DimensionLineWeight() const;
-    void DimensionLineWeight(DG_LineweightType);
+    LineweightType dimensionLineWeight() const;
+    void setDimensionLineWeight(LineweightType);
 
-    DG_LineweightType ExtensionLineWeight() const;
-    void ExtensionLineWeight(DG_LineweightType);
+    LineweightType extensionLineWeight() const;
+    void setExtensionLineWeight(LineweightType);
 
-    std::string DimensionPostFix() const;
-    void DimensionPostFix(const std::string &);
+    std::string dimensionPostFix() const;
+    void setDimensionPostFix(const std::string &);
 
-    double DimensionRounding() const;
-    void DimensionRounding(double);
+    double dimensionRounding() const;
+    void setDimensionRounding(double);
 
-    bool DimensionSuppressFirstExtensionLine() const;
-    void DimensionSuppressFirstExtensionLine(bool);
+    bool dimensionSuppressFirstExtensionLine() const;
+    void setDimensionSuppressFirstExtensionLine(bool);
 
-    bool DimensionSuppressSecondExtensionLine() const;
-    void DimensionSuppressSecondExtensionLine(bool);
+    bool dimensionSuppressSecondExtensionLine() const;
+    void setDimensionSuppressSecondExtensionLine(bool);
 
-    bool DimensionSuppressOutsideExtensions() const;
-    void DimensionSuppressOutsideExtensions(bool);
+    bool dimensionSuppressOutsideExtensions() const;
+    void setDimensionSuppressOutsideExtensions(bool);
 
-    DG_DimensionTextVerticalAlignment DimensionTextVerticalAlignment() const;
-    void DimensionTextVerticalAlignment(DG_DimensionTextVerticalAlignment);
+    DimensionTextVerticalAlignment dimensionTextVerticalAlignment() const;
+    void setDimensionTextVerticalAlignment(DimensionTextVerticalAlignment);
 
-    short DimensionUnit() const;
-    void DimensionUnit(short);
+    short dimensionUnit() const;
+    void setDimensionUnit(short);
 
-    double DimensionToleranceScaleFactor() const;
-    void DimensionToleranceScaleFactor(double);
+    double dimensionToleranceScaleFactor() const;
+    void setDimensionToleranceScaleFactor(double);
 
-    bool DimensionTextInsideHorizontal() const;
-    void DimensionTextInsideHorizontal(bool);
+    bool dimensionTextInsideHorizontal() const;
+    void setDimensionTextInsideHorizontal(bool);
 
-    bool DimensionTextInsideExtensions() const;
-    void DimensionTextInsideExtensions(bool);
+    bool dimensionTextInsideExtensions() const;
+    void setDimensionTextInsideExtensions(bool);
 
-    double DimensionMinusTolerance() const;
-    void DimensionMinusTolerance(double);
+    double dimensionMinusTolerance() const;
+    void setDimensionMinusTolerance(double);
 
-    bool DimensionTextOutsideExtensions() const;
-    void DimensionTextOutsideExtensions(bool);
+    bool dimensionTextOutsideExtensions() const;
+    void setDimensionTextOutsideExtensions(bool);
 
-    bool DimensionTextOutsideHorizontal() const;
-    void DimensionTextOutsideHorizontal(bool);
+    bool dimensionTextOutsideHorizontal() const;
+    void setDimensionTextOutsideHorizontal(bool);
 
-    bool DimensionLimitsGeneration() const;
-    void DimensionLimitsGeneration();
+    bool dimensionLimitsGeneration() const;
+    void setDimensionLimitsGeneration();
 
-    double DimensionPlusTolerance() const;
-    void DimensionPlusTolerance(double);
+    double dimensionPlusTolerance() const;
+    void setDimensionPlusTolerance(double);
 
-    double DimensionTextHeight() const;
-    void DimensionTextHeight(double);
+    double dimensionTextHeight() const;
+    void setDimensionTextHeight(double);
 
-    DG_TextDirection DimensionTextDirection() const;
-    void DimensionTextDirection(DG_TextDirection);
+    TextDirection dimensionTextDirection() const;
+    void setDimensionTextDirection(TextDirection);
 
-    double DimensionAltMzf() const;
-    void DimensionAltMzf(double);
+    double dimensionAltMzf() const;
+    void setDimensionAltMzf(double);
 
-    std::string DimensionAltMzs() const;
-    void DimensionAltMzs(const std::string &);
+    std::string dimensionAltMzs() const;
+    void setDimensionAltMzs(const std::string &);
 
-    double DimensionMzf() const;
-    void DimensionMzf(double);
+    double dimensionMzf() const;
+    void setDimensionMzf(double);
 
-    std::string DimensionMzs() const;
-    void DimensionMzs(const std::string &);
+    std::string dimensionMzs() const;
+    void setDimensionMzs(const std::string &);
 
-    std::string DimensionLineType() const;
-    void DimensionLineType(const std::string &);
+    std::string dimensionLineType() const;
+    void setDimensionLineType(const std::string &);
 
-    std::string DimensionTex1() const;
-    void DimensionTex1(const std::string &);
+    std::string dimensionTex1() const;
+    void setDimensionTex1(const std::string &);
 
-    std::string DimensionTex2() const;
-    void DimensionTex2(const std::string &);
+    std::string dimensionTex2() const;
+    void setDimensionTex2(const std::string &);
 
-    DG_Layer *CurrentLayer() const;
-    void CurrentLayer(DG_Layer *);
+    Layer *currentLayer() const;
+    void setCurrentLayer(Layer *);
 
-    DG_LineType *CurrentLineType() const;
-    void CurrentLineType(DG_LineType *);
+    LineType *currentLineType() const;
+    void setCurrentLineType(LineType *);
 
-    DG_TextStyle *CurrentTextStyle() const;
-    void TextStyle(DG_TextStyle *);
+    TextStyle *currentTextStyle() const;
+    void setTextStyle(TextStyle *);
 
-    DG_TextStyle *DimensionTextStyle() const;
-    void DimensionTextStyle(DG_TextStyle *);
+    TextStyle *dimensionTextStyle() const;
+    void setDimensionTextStyle(TextStyle *);
 
-    DG_DimensionStyle *DimensionStyleOverrides() const;
-    void DimensionStyleOverrides(DG_DimensionStyle *);
+    DimensionStyle *dimensionStyleOverrides() const;
+    void setDimensionStyleOverrides(DimensionStyle *);
 
-    DG_UCS *ModelSpaceUcs() const;
-    void ModelSpaceUcs(DG_UCS *);
+    UCS *modelSpaceUcs() const;
+    void setModelSpaceUcs(UCS *);
 
-    DG_UCS *ModelSpaceUcsBase() const;
-    void ModelSpaceUcsBase(DG_UCS *);
+    UCS *modelSpaceUcsBase() const;
+    void setModelSpaceUcsBase(UCS *);
 
-    DG_UCS *PaperSpaceUcs() const;
-    void PaperSpaceUcs(DG_UCS *);
+    UCS *paperSpaceUcs() const;
+    void setPaperSpaceUcs(UCS *);
 
-    DG_UCS *PaperSpaceUcsBase() const;
-    void PaperSpaceUcsBase(DG_UCS *);
+    UCS *paperSpaceUcsBase() const;
+    void setPaperSpaceUcsBase(UCS *);
 };
 
 }// namespace dwg

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Tolerance alignment.
-enum DG_ToleranceAlignment : unsigned char
+enum ToleranceAlignment : unsigned char
 {
     /// Aligns the tolerance text with the bottom of the main dimension text.
     Bottom = 0,

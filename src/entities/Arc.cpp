@@ -24,22 +24,22 @@
 
 namespace dwg {
 
-DG_Arc::DG_Arc() : _startangle(0.0), _endangle(2 * M_PI) {}
+Arc::Arc() : _startangle(0.0), _endangle(2 * M_PI) {}
 
-DG_Arc::~DG_Arc() {}
+Arc::~Arc() {}
 
-DG_ObjectType DG_Arc::ObjectType() const { return DG_ObjectType::ARC; }
+ObjectType Arc::ObjectType() const { return ObjectType::ARC; }
 
-std::string DG_Arc::ObjectName() const { return DG_DxfFileToken::EntityArc; }
+std::string Arc::ObjectName() const { return DxfFileToken::EntityArc; }
 
-std::string DG_Arc::SubclassMarker() const { return DG_DxfSubclassMarker::Arc; }
+std::string Arc::SubclassMarker() const { return DxfSubclassMarker::Arc; }
 
-double DG_Arc::StartAngle() const { return _startangle; }
+double Arc::StartAngle() const { return _startangle; }
 
-double DG_Arc::EndAngle() const { return _endangle; }
+double Arc::EndAngle() const { return _endangle; }
 
-void DG_Arc::StartAngle(double value) { _startangle = value; }
+void Arc::StartAngle(double value) { _startangle = value; }
 
-void DG_Arc::EndAngle(double value) { _endangle = value; }
+void Arc::EndAngle(double value) { _endangle = value; }
 
 }// namespace dwg

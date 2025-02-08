@@ -24,16 +24,16 @@
 
 namespace dwg {
 
-class DG_CadDocument;
-class DG_CadHeader;
+class CadDocument;
+class CadHeader;
 
 class ICadReader
 {
 public:
     ICadReader() = default;
     virtual ~ICadReader() = default;
-    virtual DG_CadDocument *Read() = 0;
-    virtual DG_CadHeader *ReadHeader() = 0;
+    virtual CadDocument *Read() = 0;
+    virtual CadHeader *ReadHeader() = 0;
 };
 
 }// namespace dwg

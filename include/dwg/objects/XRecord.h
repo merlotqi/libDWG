@@ -29,32 +29,32 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_XRecord : public DG_NonGraphicalObject
+class LIBDWG_API XRecord : public NonGraphicalObject
 {
 public:
     struct Entry
     {
         int Code;
         CPL::Any Value;
-        DG_GroupCodeValueType GroupCode;
+        GroupCodeValueType GroupCode;
         bool HasLinkedObject;
-        DG_XRecord *Owner;
+        XRecord *Owner;
     };
 
 public:
-    DG_XRecord();
+    XRecord();
 
-    DG_XRecord(const std::string &);
+    XRecord(const std::string &);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    DG_DictionaryCloningFlags CloningFlags() const;
+    DictionaryCloningFlags CloningFlags() const;
 
-    void CloningFlags(DG_DictionaryCloningFlags);
+    void CloningFlags(DictionaryCloningFlags);
 
     std::vector<Entry> Entries() const;
 

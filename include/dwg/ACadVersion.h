@@ -27,7 +27,7 @@ namespace dwg {
 /// \brief Enum representing AutoCAD version identifiers.
 /// \details Each value corresponds to a specific release of AutoCAD,
 /// allowing identification of the file format version.
-enum DG_ACadVersion : short
+enum ACadVersion : short
 {
     /// Unknown or unsupported version
     Unknown = -1,

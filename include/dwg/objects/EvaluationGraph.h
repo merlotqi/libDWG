@@ -27,25 +27,25 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_EvaluationGraph : public DG_NonGraphicalObject
+class LIBDWG_API EvaluationGraph : public NonGraphicalObject
 {
 public:
-    DG_EvaluationGraph();
+    EvaluationGraph();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
     struct GraphNode
     {
-        int Index;               // 91
-        int NextNodeIndex;       // 95
-        GraphNode *Next;         // 95
-        int Flags;               // 93
-        int Data1;               // 92
-        int Data2;               // 92
-        int Data3;               // 92
-        int Data4;               // 92
-        DG_CadObject *NodeObject;// 360
+        int Index;            // 91
+        int NextNodeIndex;    // 95
+        GraphNode *Next;      // 95
+        int Flags;            // 93
+        int Data1;            // 92
+        int Data2;            // 92
+        int Data3;            // 92
+        int Data4;            // 92
+        CadObject *NodeObject;// 360
     };
 
     std::vector<GraphNode> Nodes;

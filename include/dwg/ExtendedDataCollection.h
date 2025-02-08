@@ -33,10 +33,10 @@ class ExtendedData;
 
 class ExtendedDataRecord
 {
-    DG_DxfCode _code;
+    DxfCode _code;
 };
 
-typedef std::map<DG_AppId, ExtendedData> ExtendedDataDictionary;
+typedef std::map<AppId, ExtendedData> ExtendedDataDictionary;
 
 
 }// namespace dwg

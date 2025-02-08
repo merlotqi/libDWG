@@ -40,41 +40,41 @@
 
 namespace dwg {
 
-class DG_CadHeader;
+class CadHeader;
 
-class LIBDWG_API DG_CadDocument : public IHandledCadObject
+class LIBDWG_API CadDocument : public IHandledCadObject
 {
 public:
-    DG_CadDocument(bool createDefault);
+    CadDocument(bool createDefault);
 
     unsigned long long handle() const override;
-    DG_CadHeader *Header;
+    CadHeader *Header;
     CadSummaryInfo SummaryInfo;
     DxfClassCollection Classes;
 
-    DG_AppIdsTable AppIds;
-    DG_BlockRecordsTable BlockRecords;
-    DG_DimensionStylesTable DimensionStyles;
-    DG_LayersTable Layers;
-    DG_LineTypesTable LineTypes;
-    DG_TextStylesTable TextStyles;
-    DG_UCSTable UCSs;
-    DG_ViewsTable Views;
-    DG_VPortsTable VPorts;
+    AppIdsTable AppIds;
+    BlockRecordsTable BlockRecords;
+    DimensionStylesTable DimensionStyles;
+    LayersTable Layers;
+    LineTypesTable LineTypes;
+    TextStylesTable TextStyles;
+    UCSTable UCSs;
+    ViewsTable Views;
+    VPortsTable VPorts;
 
-    DG_ColorCollection Colors;
-    DG_LayoutCollection Layouts;
-    DG_GroupCollection Groups;
-    DG_ScaleCollection Scales;
-    DG_MLineStyleCollection MLineStyles;
-    DG_ImageDefinitionCollection ImageDefinitions;
-    DG_MLeaderStyleCollection MLeaderStyles;
+    ColorCollection Colors;
+    LayoutCollection Layouts;
+    GroupCollection Groups;
+    ScaleCollection Scales;
+    MLineStyleCollection MLineStyles;
+    ImageDefinitionCollection ImageDefinitions;
+    MLeaderStyleCollection MLeaderStyles;
 
-    DG_CadObjectCollection<Entity *> Entities;
-    DG_BlockRecord &ModelSpace();
-    DG_BlockRecord &PaperSpace();
+    CadObjectCollection<Entity *> Entities;
+    BlockRecord &ModelSpace();
+    BlockRecord &PaperSpace();
 
-    DG_CadDictionary _rootDictionary;
+    CadDictionary _rootDictionary;
 
     std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 

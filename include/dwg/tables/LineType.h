@@ -30,27 +30,27 @@
 
 namespace dwg {
 
-class DG_TextStyle;
+class TextStyle;
 
-class LIBDWG_API DG_LineType : public DG_TableEntry
+class LIBDWG_API LineType : public TableEntry
 {
 public:
     struct Segment
     {
         double Length;
-        DG_LinetypeShapeFlags ShapeFlag;
+        LinetypeShapeFlags ShapeFlag;
         short ShapeNumber;
         XY Offset;
         double Rotation;
         double Scale;
         std::string Text;
-        DG_TextStyle *Style;
+        TextStyle *Style;
     };
 
 public:
-    DG_LineType();
+    LineType();
 
-    DG_LineType(const std::string &name);
+    LineType(const std::string &name);
 
     static constexpr auto ByLayerName = "ByLayer";
 
@@ -58,13 +58,13 @@ public:
 
     static constexpr auto ContinuousName = "Continuous";
 
-    static DG_LineType *ByLayer();
+    static LineType *ByLayer();
 
-    static DG_LineType *ByBlock();
+    static LineType *ByBlock();
 
-    static DG_LineType *Continuous();
+    static LineType *Continuous();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
@@ -72,31 +72,31 @@ public:
 
     std::string Description() const;
 
-    void Description(const std::string &);
+    void description(const std::string &);
 
-    double PatternLen() const;
+    double patternLen() const;
 
-    char Alignment() const;
+    char alignment() const;
 
-    void Alignment(char);
+    void alignment(char);
 
-    std::vector<Segment> Segments() const;
+    std::vector<Segment> segments() const;
 
-    void Segments(const std::vector<Segment> &);
+    void segments(const std::vector<Segment> &);
 
-    void AddSegment(const Segment &);
+    void addSegment(const Segment &);
 };
 
-class LIBDWG_API DG_LineTypesTable : public DG_Table
+class LIBDWG_API LineTypesTable : public Table
 {
 public:
-    DG_LineType *ByLayer;
-    DG_LineType *ByBlock;
-    DG_LineType *Continuous;
+    LineType *ByLayer;
+    LineType *ByBlock;
+    LineType *Continuous;
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
-    DG_LineTypesTable() = default;
+    LineTypesTable() = default;
 
 protected:
     std::vector<std::string> defaultEntries() const;

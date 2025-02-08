@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_LeaderContentType : short
+enum LeaderContentType : short
 {
     /// None
     None = 0,

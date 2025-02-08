@@ -35,12 +35,12 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_PlotSettings : public DG_NonGraphicalObject
+class LIBDWG_API PlotSettings : public NonGraphicalObject
 {
 public:
-    DG_PlotSettings();
+    PlotSettings();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
@@ -58,8 +58,8 @@ public:
     std::string PlotViewName() const;
     void PlotViewName(const std::string &);
 
-    DG_PaperMargin UnprintableMargin() const;
-    void UnprintableMargin(DG_PaperMargin);
+    PaperMargin UnprintableMargin() const;
+    void UnprintableMargin(PaperMargin);
 
     double PaperWidth() const;
     void PaperWidth(double);
@@ -93,29 +93,29 @@ public:
     double DenominatorScale() const;
     void DenominatorScale(double);
 
-    DG_PlotFlags Flags() const;
-    void Flags(DG_PlotFlags);
+    PlotFlags Flags() const;
+    void Flags(PlotFlags);
 
-    DG_PlotPaperUnits PaperUnits() const;
-    void PaperUnits(DG_PlotPaperUnits);
+    PlotPaperUnits PaperUnits() const;
+    void PaperUnits(PlotPaperUnits);
 
-    DG_PlotRotation PaperRotation() const;
-    void PaperRotation(DG_PlotRotation);
+    PlotRotation PaperRotation() const;
+    void PaperRotation(PlotRotation);
 
-    DG_PlotType PlotType() const;
-    void PlotType(DG_PlotType);
+    PlotType PlotType() const;
+    void PlotType(PlotType);
 
     std::string StyleSheet() const;
     void StyleSheet(const std::string &);
 
-    DG_ScaledType ScaledFit() const;
-    void ScaledFit(DG_ScaledType);
+    ScaledType ScaledFit() const;
+    void ScaledFit(ScaledType);
 
-    DG_ShadePlotMode ShadePlotMode() const;
-    void ShadePlotMode(DG_ShadePlotMode);
+    ShadePlotMode ShadePlotMode() const;
+    void ShadePlotMode(ShadePlotMode);
 
-    DG_ShadePlotResolutionMode ShadePlotResolutionMode() const;
-    void ShadePlotResolutionMode(DG_ShadePlotResolutionMode);
+    ShadePlotResolutionMode ShadePlotResolutionMode() const;
+    void ShadePlotResolutionMode(ShadePlotResolutionMode);
 
     short ShadePlotDPI() const;
     void ShadePlotDPI(short);

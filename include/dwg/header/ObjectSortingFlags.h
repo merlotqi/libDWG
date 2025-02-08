@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Bitmask flags to set the various object sorting types.
-enum DG_ObjectSortingFlags : unsigned char
+enum ObjectSortingFlags : unsigned char
 {
     /// Disables SORTENTS.
     Disabled = 0,
@@ -44,8 +44,7 @@ enum DG_ObjectSortingFlags : unsigned char
     /// Sorts for PostScript output.
     Postscript = 64,// 0x40
     /// Enable all sorting methods.
-    All = Postscript | Plotting | Regen | Slide | Redraw | Snap |
-          Selection,// 0x7F
+    All = Postscript | Plotting | Regen | Slide | Redraw | Snap | Selection,// 0x7F
 };
 
 }// namespace dwg

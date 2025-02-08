@@ -27,11 +27,11 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_Group : public DG_NonGraphicalObject
+class LIBDWG_API Group : public NonGraphicalObject
 {
 public:
-    DG_Group();
-    DG_ObjectType objectType() const override;
+    Group();
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 

@@ -38,34 +38,34 @@
 
 namespace dwg {
 
-class DG_LineType;
-class DG_BlockRecord;
-class DG_TextStyle;
-class DG_BlockRecord;
+class LineType;
+class BlockRecord;
+class TextStyle;
+class BlockRecord;
 
-class LIBDWG_API DG_MultiLeaderStyle : public DG_NonGraphicalObject
+class LIBDWG_API MultiLeaderStyle : public NonGraphicalObject
 {
 public:
     static constexpr auto DefaultName = "Standard";
 
-    static DG_MultiLeaderStyle *Default;
+    static MultiLeaderStyle *Default;
 
 public:
-    DG_MultiLeaderStyle();
-    DG_MultiLeaderStyle(const std::string &name);
+    MultiLeaderStyle();
+    MultiLeaderStyle(const std::string &name);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    DG_LeaderContentType ContentType() const;
-    void ContentType(DG_LeaderContentType);
+    LeaderContentType ContentType() const;
+    void ContentType(LeaderContentType);
 
-    DG_MultiLeaderDrawOrderType MultiLeaderDrawOrder() const;
-    void MultiLeaderDrawOrder(DG_MultiLeaderDrawOrderType);
+    MultiLeaderDrawOrderType MultiLeaderDrawOrder() const;
+    void MultiLeaderDrawOrder(MultiLeaderDrawOrderType);
 
-    DG_LeaderDrawOrderType LeaderDrawOrder() const;
-    void LeaderDrawOrder(DG_LeaderDrawOrderType);
+    LeaderDrawOrderType LeaderDrawOrder() const;
+    void LeaderDrawOrder(LeaderDrawOrderType);
 
     int MaxLeaderSegmentsPoints() const;
     void MaxLeaderSegmentsPoints(int);
@@ -76,17 +76,17 @@ public:
     double SecondSegmentAngleConstraint() const;
     void SecondSegmentAngleConstraint(double);
 
-    DG_MultiLeaderPathType PathType() const;
-    void PathType(DG_MultiLeaderPathType);
+    MultiLeaderPathType PathType() const;
+    void PathType(MultiLeaderPathType);
 
-    DG_Color LineColor() const;
-    void LineColor(const DG_Color &);
+    Color LineColor() const;
+    void LineColor(const Color &);
 
-    DG_LineType *LeaderLineType() const;
-    void LeaderLineType(DG_LineType *);
+    LineType *LeaderLineType() const;
+    void LeaderLineType(LineType *);
 
-    DG_LineweightType LeaderLineWeight() const;
-    void LeaderLineWeight(DG_LineweightType);
+    LineweightType LeaderLineWeight() const;
+    void LeaderLineWeight(LineweightType);
 
     bool EnableLanding() const;
     void EnableLanding(bool);
@@ -103,8 +103,8 @@ public:
     std::string Description() const;
     void Description(const std::string &);
 
-    DG_BlockRecord *Arrowhead() const;
-    void Arrowhead(DG_BlockRecord *);
+    BlockRecord *Arrowhead() const;
+    void Arrowhead(BlockRecord *);
 
     double ArrowheadSize() const;
     void ArrowheadSize(double);
@@ -112,23 +112,23 @@ public:
     std::string DefaultTextContents() const;
     void DefaultTextContents(const std::string &);
 
-    DG_TextStyle *TextStyle() const;
-    void TextStyle(DG_TextStyle *);
+    TextStyle *TextStyle() const;
+    void TextStyle(TextStyle *);
 
-    DG_TextAttachmentType TextLeftAttachment() const;
-    void TextLeftAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextLeftAttachment() const;
+    void TextLeftAttachment(TextAttachmentType);
 
-    DG_TextAngleType TextAngle() const;
-    void TextAngle(DG_TextAngleType);
+    TextAngleType TextAngle() const;
+    void TextAngle(TextAngleType);
 
-    DG_TextAlignmentType TextAlignment() const;
-    void TextAlignment(DG_TextAlignmentType);
+    TextAlignmentType TextAlignment() const;
+    void TextAlignment(TextAlignmentType);
 
-    DG_TextAlignmentType TextRightAttachment() const;
-    void TextRightAttachment(DG_TextAlignmentType);
+    TextAlignmentType TextRightAttachment() const;
+    void TextRightAttachment(TextAlignmentType);
 
-    DG_Color TextColor() const;
-    void TextColor(const DG_Color &);
+    Color TextColor() const;
+    void TextColor(const Color &);
 
     double TextHeight() const;
     void TextHeight(double);
@@ -142,11 +142,11 @@ public:
     double AlignSpace() const;
     void AlignSpace(double);
 
-    DG_BlockRecord *BlockContent() const;
-    void BlockContent(DG_BlockRecord *);
+    BlockRecord *BlockContent() const;
+    void BlockContent(BlockRecord *);
 
-    DG_Color BlockContentColor() const;
-    void BlockContentColor(const DG_Color &);
+    Color BlockContentColor() const;
+    void BlockContentColor(const Color &);
 
     XYZ BlockContentScale() const;
     void BlockContentScale(const XYZ &);
@@ -160,8 +160,8 @@ public:
     bool EnableBlockContentRotation() const;
     void EnableBlockContentRotation(bool);
 
-    DG_BlockContentConnectionType BlockContentConnection() const;
-    void BlockContentConnection(DG_BlockContentConnectionType);
+    BlockContentConnectionType BlockContentConnection() const;
+    void BlockContentConnection(BlockContentConnectionType);
 
     double ScaleFactor() const;
     void ScaleFactor(double);
@@ -175,14 +175,14 @@ public:
     double BreakGapSize() const;
     void BreakGapSize(double);
 
-    DG_TextAttachmentDirectionType TextAttachmentDirection() const;
-    void TextAttachmentDirection(DG_TextAttachmentDirectionType);
+    TextAttachmentDirectionType TextAttachmentDirection() const;
+    void TextAttachmentDirection(TextAttachmentDirectionType);
 
-    DG_TextAttachmentType TextBottomAttachment() const;
-    void TextBottomAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextBottomAttachment() const;
+    void TextBottomAttachment(TextAttachmentType);
 
-    DG_TextAttachmentType TextTopAttachment() const;
-    void TextTopAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextTopAttachment() const;
+    void TextTopAttachment(TextAttachmentType);
 };
 
 }// namespace dwg

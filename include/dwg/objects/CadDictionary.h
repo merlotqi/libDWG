@@ -30,11 +30,11 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_CadDictionary : public DG_NonGraphicalObject
+class LIBDWG_API CadDictionary : public NonGraphicalObject
 {
-    std::map<std::string, DG_NonGraphicalObject *> _entries;
+    std::map<std::string, NonGraphicalObject *> _entries;
     bool _hard_owner_flag;
-    DG_DictionaryCloningFlags _clonning_flags;
+    DictionaryCloningFlags _clonning_flags;
 
 public:
     static std::string Root;
@@ -56,39 +56,38 @@ public:
 
 
 public:
-    DG_CadDictionary();
-    DG_CadDictionary(const std::string &name);
-    DG_ObjectType objectType() const override;
+    CadDictionary();
+    CadDictionary(const std::string &name);
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    void Add(const std::string &key, DG_NonGraphicalObject *value);
-    void Add(DG_NonGraphicalObject *value);
-    bool TryAdd(DG_NonGraphicalObject *value) const;
+    void Add(const std::string &key, NonGraphicalObject *value);
+    void Add(NonGraphicalObject *value);
+    bool TryAdd(NonGraphicalObject *value) const;
     bool ContainsKey(const std::string &key) const;
-    DG_NonGraphicalObject *Remove(const std::string &key);
+    NonGraphicalObject *Remove(const std::string &key);
     void Clear();
 
     bool HardOwnerFlag() const;
     void HardOwnerFlag(bool);
 
-    DG_DictionaryCloningFlags ClonningFlags() const;
-    void ClonningFlags(DG_DictionaryCloningFlags);
+    DictionaryCloningFlags ClonningFlags() const;
+    void ClonningFlags(DictionaryCloningFlags);
 
     std::vector<std::string> EntryName() const;
     std::vector<unsigned long long> EntryHandles() const;
 
-    DG_CadObject *operator[](const std::string &key) const;
+    CadObject *operator[](const std::string &key) const;
 
-    static DG_CadDictionary *CreateRoot();
-    static void CreateDefaultEntries(DG_CadDictionary *root);
+    static CadDictionary *CreateRoot();
+    static void CreateDefaultEntries(CadDictionary *root);
 
-    DG_NonGraphicalObject *TryGetEntry(const std::string &name);
+    NonGraphicalObject *TryGetEntry(const std::string &name);
 
 private:
-    DG_CadDictionary *ensureCadDictionaryExist(const std::string &name);
-    void onEntryNameChanged(const std::string &olName,
-                            const std::string &newName);
+    CadDictionary *ensureCadDictionaryExist(const std::string &name);
+    void onEntryNameChanged(const std::string &olName, const std::string &newName);
 };
 
 }// namespace dwg

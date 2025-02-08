@@ -27,15 +27,15 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_UnknownNonGraphicalObject : public DG_NonGraphicalObject
+class LIBDWG_API UnknownNonGraphicalObject : public NonGraphicalObject
 {
 public:
-    DG_UnknownNonGraphicalObject();
-    DG_UnknownNonGraphicalObject(const DG_DxfClass &);
+    UnknownNonGraphicalObject();
+    UnknownNonGraphicalObject(const DxfClass &);
 
-    DG_DxfClass DxfClass() const;
+    DxfClass DxfClass() const;
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 };

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Spline type
-enum DG_SplineType : short
+enum SplineType : short
 {
     /// None
     None = 0,

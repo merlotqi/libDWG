@@ -28,14 +28,14 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_BookColor : public DG_NonGraphicalObject
+class LIBDWG_API BookColor : public NonGraphicalObject
 {
 public:
-    DG_BookColor();
+    BookColor();
 
-    DG_BookColor(const std::string &name);
+    BookColor(const std::string &name);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
@@ -47,9 +47,9 @@ public:
 
     std::string BookName() const;
 
-    DG_Color Color() const;
+    Color Color() const;
 
-    void Color(const DG_Color &);
+    void Color(const Color &);
 };
 
 }// namespace dwg

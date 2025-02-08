@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents angular direction.
-enum DG_AngularDirection : short
+enum AngularDirection : short
 {
     /// Counterclockwise angles
     CounterClockWise = 0,

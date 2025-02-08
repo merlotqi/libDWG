@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Standard entry flags (bit-coded values).
-enum DG_EntryFlag
+enum EntryFlag
 {
     /// Default
     None = 0,
@@ -40,6 +40,6 @@ enum DG_EntryFlag
     Referenced = 64
 };
 
-CPL_DECLARE_FLAGS(DG_EntryFlags, DG_EntryFlag)
+CPL_DECLARE_FLAGS(EntryFlags, EntryFlag)
 
 }// namespace dwg

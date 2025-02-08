@@ -29,54 +29,54 @@
 
 namespace dwg {
 
-class DG_Material;
-class DG_LineType;
+class Material;
+class LineType;
 
-class LIBDWG_API DG_Layer : public DG_TableEntry
+class LIBDWG_API Layer : public TableEntry
 {
 public:
-    DG_Layer();
+    Layer();
 
-    DG_Layer(const std::string &name);
+    Layer(const std::string &name);
 
     static constexpr auto DefaultName = "0";
-    static DG_Layer *Default();
+    static Layer *Default();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    DG_LayerFlags Flags() const;
-    void Flags(DG_LayerFlags);
+    LayerFlags flags() const;
+    void setFlags(LayerFlags);
 
-    DG_Color Color() const;
-    void Color(const DG_Color &);
+    Color color() const;
+    void setColor(const Color &);
 
-    DG_LineType *LineType() const;
-    void LineType(DG_LineType *);
+    LineType *lineType() const;
+    void setLineType(LineType *);
 
-    bool PlotFlag() const;
-    void PlotFlag(bool);
+    bool plotFlag() const;
+    void setPlotFlag(bool);
 
-    DG_LineweightType LineWeight() const;
-    void LineWeight(DG_LineweightType);
+    LineweightType lineWeight() const;
+    void setLineWeight(LineweightType);
 
-    unsigned long long PlotStyleName() const;
-    void PlotStyleName(unsigned long long);
+    unsigned long long plotStyleName() const;
+    void setPlotStyleName(unsigned long long);
 
-    DG_Material *Material() const;
-    void Material(DG_Material *);
+    Material *material() const;
+    void setMaterial(Material *);
 
-    bool IsOn() const;
-    void IsOn(bool);
+    bool isOn() const;
+    void setIsOn(bool);
 };
 
-class LIBDWG_API DG_LayersTable : public DG_Table
+class LIBDWG_API LayersTable : public Table
 {
 public:
-    DG_LayersTable() = default;
+    LayersTable() = default;
     std::string objectName() const override;
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const override;

@@ -26,11 +26,11 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_ImageDefinitionReactor : public DG_NonGraphicalObject
+class LIBDWG_API ImageDefinitionReactor : public NonGraphicalObject
 {
 public:
-    DG_ImageDefinitionReactor();
-    DG_ObjectType objectType() const override;
+    ImageDefinitionReactor();
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
     int RasterImageDefReactor;               //90

@@ -25,70 +25,70 @@
 
 namespace dwg {
 
-DG_Leader::DG_Leader() {}
+Leader::Leader() {}
 
-DG_Leader::~DG_Leader() {}
+Leader::~Leader() {}
 
-DG_ObjectType DG_Leader::ObjectType() const { return DG_ObjectType::LEADER; }
+ObjectType Leader::ObjectType() const { return ObjectType::LEADER; }
 
-std::string DG_Leader::ObjectName() const { return DG_DxfFileToken::EntityLeader; }
+std::string Leader::ObjectName() const { return DxfFileToken::EntityLeader; }
 
-std::string DG_Leader::SubclassMarker() const { return DG_DxfSubclassMarker::Leader; }
+std::string Leader::SubclassMarker() const { return DxfSubclassMarker::Leader; }
 
-DG_DimensionStyle *DG_Leader::Style() const { return _style; }
+DimensionStyle *Leader::Style() const { return _style; }
 
-void DG_Leader::Style(DG_DimensionStyle *style) { _style = style; }
+void Leader::Style(DimensionStyle *style) { _style = style; }
 
-bool DG_Leader::ArrowHeadEnabled() const { return _arrowHeadEnabled; }
+bool Leader::ArrowHeadEnabled() const { return _arrowHeadEnabled; }
 
-void DG_Leader::ArrowHeadEnabled(bool arrowHeadEnabled) { _arrowHeadEnabled = arrowHeadEnabled; }
+void Leader::ArrowHeadEnabled(bool arrowHeadEnabled) { _arrowHeadEnabled = arrowHeadEnabled; }
 
-DG_LeaderPathType DG_Leader::PathType() const { return _pathType; }
+LeaderPathType Leader::PathType() const { return _pathType; }
 
-void DG_Leader::PathType(DG_LeaderPathType pathType) { _pathType = pathType; }
+void Leader::PathType(LeaderPathType pathType) { _pathType = pathType; }
 
-DG_LeaderCreationType DG_Leader::CreationType() const { return _creationType; }
+LeaderCreationType Leader::CreationType() const { return _creationType; }
 
-void DG_Leader::CreationType(DG_LeaderCreationType creationType) { _creationType = creationType; }
+void Leader::CreationType(LeaderCreationType creationType) { _creationType = creationType; }
 
-bool DG_Leader::HookLineDirection() const { return _hookLineDirection; }
+bool Leader::HookLineDirection() const { return _hookLineDirection; }
 
-void DG_Leader::HookLineDirection(bool hookLineDirection) { _hookLineDirection = hookLineDirection; }
+void Leader::HookLineDirection(bool hookLineDirection) { _hookLineDirection = hookLineDirection; }
 
-bool DG_Leader::HasHookline() const { return _hasHookline; }
+bool Leader::HasHookline() const { return _hasHookline; }
 
-void DG_Leader::HasHookline(bool hasHookline) { _hasHookline = hasHookline; }
+void Leader::HasHookline(bool hasHookline) { _hasHookline = hasHookline; }
 
-double DG_Leader::TextHeight() const { return _textHeight; }
+double Leader::TextHeight() const { return _textHeight; }
 
-void DG_Leader::TextHeight(double textHeight) { _textHeight = textHeight; }
+void Leader::TextHeight(double textHeight) { _textHeight = textHeight; }
 
-double DG_Leader::TextWidth() const { return _textWidth; }
+double Leader::TextWidth() const { return _textWidth; }
 
-void DG_Leader::TextWidth(double textWidth) { _textWidth = textWidth; }
+void Leader::TextWidth(double textWidth) { _textWidth = textWidth; }
 
-std::vector<XYZ> DG_Leader::Vertices() const { return _vertices; }
+std::vector<XYZ> Leader::Vertices() const { return _vertices; }
 
-void DG_Leader::Vertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
+void Leader::Vertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
 
-DG_Entity *DG_Leader::AssociatedAnnotation() const { return _associatedAnnotation; }
+Entity *Leader::AssociatedAnnotation() const { return _associatedAnnotation; }
 
-void DG_Leader::AssociatedAnnotation(DG_Entity *associatedAnnotation) { _associatedAnnotation = associatedAnnotation; }
+void Leader::AssociatedAnnotation(Entity *associatedAnnotation) { _associatedAnnotation = associatedAnnotation; }
 
-XYZ DG_Leader::Normal() const { return _normal; }
+XYZ Leader::Normal() const { return _normal; }
 
-void DG_Leader::Normal(const XYZ &normal) { _normal = normal; }
+void Leader::Normal(const XYZ &normal) { _normal = normal; }
 
-XYZ DG_Leader::HorizontalDirection() const { return _horizontalDirection; }
+XYZ Leader::HorizontalDirection() const { return _horizontalDirection; }
 
-void DG_Leader::HorizontalDirection(const XYZ &horizontalDirection) { _horizontalDirection = horizontalDirection; }
+void Leader::HorizontalDirection(const XYZ &horizontalDirection) { _horizontalDirection = horizontalDirection; }
 
-XYZ DG_Leader::BlockOffset() const { return _blockOffset; }
+XYZ Leader::BlockOffset() const { return _blockOffset; }
 
-void DG_Leader::BlockOffset(const XYZ &blockOffset) { _blockOffset = blockOffset; }
+void Leader::BlockOffset(const XYZ &blockOffset) { _blockOffset = blockOffset; }
 
-XYZ DG_Leader::AnnotationOffset() const { return _annotationOffset; }
+XYZ Leader::AnnotationOffset() const { return _annotationOffset; }
 
-void DG_Leader::AnnotationOffset(const XYZ &annotationOffset) { _annotationOffset = annotationOffset; }
+void Leader::AnnotationOffset(const XYZ &annotationOffset) { _annotationOffset = annotationOffset; }
 
 }// namespace dwg

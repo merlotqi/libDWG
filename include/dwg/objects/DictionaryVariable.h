@@ -26,13 +26,13 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_DictionaryVariable : public DG_NonGraphicalObject
+class LIBDWG_API DictionaryVariable : public NonGraphicalObject
 {
 public:
-    DG_DictionaryVariable();
-    ~DG_DictionaryVariable();
+    DictionaryVariable();
+    ~DictionaryVariable();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 

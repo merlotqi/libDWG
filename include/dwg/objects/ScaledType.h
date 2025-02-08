@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_ScaledType
+enum ScaledType
 {
     ScaledToFit = 0,// Scaled to Fit
     _1 = 1,         //1/128"=1';

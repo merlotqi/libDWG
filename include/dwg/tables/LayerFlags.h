@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
-enum DG_LayerFlag : short
+enum LayerFlag : short
 {
     /// None
     None = 0,
@@ -51,6 +51,6 @@ enum DG_LayerFlag : short
     /// drawing was edited.
     Referenced = 64
 };
-CPL_DECLARE_FLAGS(DG_LayerFlags, DG_LayerFlag)
+CPL_DECLARE_FLAGS(LayerFlags, LayerFlag)
 
 }// namespace dwg

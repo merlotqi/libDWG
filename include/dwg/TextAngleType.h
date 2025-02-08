@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// \brief Enumeration for text angle types.
-enum DG_TextAngleType : short
+enum TextAngleType : short
 {
     /// \brief Text angle is equal to last leader line segment angle
     ParllelToLastLeaderLine = 0,

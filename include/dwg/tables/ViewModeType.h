@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_ViewModeType
+enum ViewModeType
 {
     /// Off
     Off = 0,

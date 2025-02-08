@@ -38,11 +38,11 @@
 
 namespace dwg {
 
-class DG_TextStyle;
-class DG_LineType;
-class DG_BlockRecord;
+class TextStyle;
+class LineType;
+class BlockRecord;
 
-class LIBDWG_API DG_MultiLeaderAnnotContext : public DG_NonGraphicalObject
+class LIBDWG_API MultiLeaderAnnotContext : public NonGraphicalObject
 {
 public:
     struct StartEndPointPair
@@ -58,13 +58,13 @@ public:
         int SegmentIndex;
         std::vector<StartEndPointPair> StartEndPoints;
         int Index;
-        DG_MultiLeaderPathType PathType;
-        DG_Color LineColor;
-        DG_LineType *LineType;
-        DG_LineweightType LineWeight;
+        MultiLeaderPathType PathType;
+        Color LineColor;
+        LineType *LineType;
+        LineweightType LineWeight;
         double ArrowheadSize;
-        DG_BlockRecord *ArrowHead;
-        DG_LeaderLinePropertOverrideFlags OverrideFlags;
+        BlockRecord *ArrowHead;
+        LeaderLinePropertOverrideFlags OverrideFlags;
     };
 
     struct LeaderRoot
@@ -77,13 +77,13 @@ public:
         int LeaderIndex;
         double LandingDistance;
         std::vector<LeaderLine> Lines;
-        DG_TextAttachmentDirectionType TextAttachmentDirection;
+        TextAttachmentDirectionType TextAttachmentDirection;
     };
 
 public:
-    DG_MultiLeaderAnnotContext();
+    MultiLeaderAnnotContext();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
@@ -104,17 +104,17 @@ public:
     double LandingGap() const;
     void LandingGap(double);
 
-    DG_TextAttachmentType TextLeftAttachment() const;
-    void TextLeftAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextLeftAttachment() const;
+    void TextLeftAttachment(TextAttachmentType);
 
-    DG_TextAttachmentType TextRightAttachment() const;
-    void TextRightAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextRightAttachment() const;
+    void TextRightAttachment(TextAttachmentType);
 
-    DG_TextAlignmentType TextAlignment() const;
-    void TextAlignment(DG_TextAlignmentType);
+    TextAlignmentType TextAlignment() const;
+    void TextAlignment(TextAlignmentType);
 
-    DG_BlockContentConnectionType BlockContentConnection() const;
-    void BlockContentConnection(DG_BlockContentConnectionType);
+    BlockContentConnectionType BlockContentConnection() const;
+    void BlockContentConnection(BlockContentConnectionType);
 
     bool HasTextContents() const;
     void HasTextContents(bool);
@@ -125,8 +125,8 @@ public:
     XYZ TextNormal() const;
     void TextNormal(const XYZ &);
 
-    DG_TextStyle *TextStyle();
-    void TextStyle(DG_TextStyle *);
+    TextStyle *TextStyle();
+    void TextStyle(TextStyle *);
 
     XYZ TextLocation() const;
     void TextLocation(const XYZ &);
@@ -143,20 +143,20 @@ public:
     double LineSpacingFactor() const;
     void LineSpacingFactor(double);
 
-    DG_LineSpacingStyle LineSpacing() const;
-    void LineSpacing(DG_LineSpacingStyle);
+    LineSpacingStyle LineSpacing() const;
+    void LineSpacing(LineSpacingStyle);
 
-    DG_Color TextColor() const;
-    void TextColor(const DG_Color &);
+    Color TextColor() const;
+    void TextColor(const Color &);
 
-    DG_TextAttachmentPointType TextAttachmentPoint() const;
-    void TextAttachmentPoint(DG_TextAttachmentPointType);
+    TextAttachmentPointType TextAttachmentPoint() const;
+    void TextAttachmentPoint(TextAttachmentPointType);
 
-    DG_FlowDirectionType FlowDirection() const;
-    void FlowDirection(DG_FlowDirectionType);
+    FlowDirectionType FlowDirection() const;
+    void FlowDirection(FlowDirectionType);
 
-    DG_Color BackgroundFillColor() const;
-    void BackgroundFillColor(const DG_Color &);
+    Color BackgroundFillColor() const;
+    void BackgroundFillColor(const Color &);
 
     double BackgroundScaleFactor() const;
     void BackgroundScaleFactor(double);
@@ -193,8 +193,8 @@ public:
     bool HasContentsBlock() const;
     void HasContentsBlock(bool);
 
-    DG_BlockRecord *BlockContent() const;
-    void BlockContent(DG_BlockRecord *);
+    BlockRecord *BlockContent() const;
+    void BlockContent(BlockRecord *);
 
     XYZ BlockContentNormal() const;
     void BlockContentNormal(const XYZ &);
@@ -208,8 +208,8 @@ public:
     double BlockContentRotation() const;
     void BlockContentRotation(double);
 
-    DG_Color BlockContentColor() const;
-    void BlockContentColor(const DG_Color &);
+    Color BlockContentColor() const;
+    void BlockContentColor(const Color &);
 
     Matrix4 TransformationMatrix() const;
     void TransformationMatrix(const Matrix4 &);
@@ -226,11 +226,11 @@ public:
     bool NormalReversed() const;
     void NormalReversed(bool);
 
-    DG_TextAttachmentType TextTopAttachment() const;
-    void TextTopAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextTopAttachment() const;
+    void TextTopAttachment(TextAttachmentType);
 
-    DG_TextAttachmentType TextBottomAttachment() const;
-    void TextBottomAttachment(DG_TextAttachmentType);
+    TextAttachmentType TextBottomAttachment() const;
+    void TextBottomAttachment(TextAttachmentType);
 };
 
 }// namespace dwg

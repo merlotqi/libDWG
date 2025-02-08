@@ -29,24 +29,24 @@
 
 namespace dwg {
 
-class DG_Layout;
+class Layout;
 
 /**
- * @class DG_BlockRecord
+ * @class BlockRecord
  * @brief Represents a block record in a DWG/DXF drawing.
  *
  * A block record stores information about a block definition, including its properties, layout, and preview data.
  * Block records are essential for handling blocks, which are reusable collections of entities.
  */
-class LIBDWG_API DG_BlockRecord : public DG_TableEntry
+class LIBDWG_API BlockRecord : public TableEntry
 {
 public:
     /**
-     * @brief Constructs a DG_BlockRecord with a given name.
+     * @brief Constructs a BlockRecord with a given name.
      * 
      * @param name The name of the block record.
      */
-    DG_BlockRecord(const std::string &name) : DG_TableEntry(name) {}
+    BlockRecord(const std::string &name) : TableEntry(name) {}
 
     /** @brief The name representing the model space block record. */
     static constexpr auto ModelSpaceName = "*Model_Space";
@@ -58,21 +58,21 @@ public:
      * 
      * @return A pointer to the model space block record.
      */
-    static DG_BlockRecord *ModelSpace();
+    static BlockRecord *ModelSpace();
 
     /**
      * @brief Retrieves the paper space block record.
      * 
      * @return A pointer to the paper space block record.
      */
-    static DG_BlockRecord *PaperSpace();
+    static BlockRecord *PaperSpace();
 
     /**
      * @brief Retrieves the object type for the block record.
      * 
      * @return The object type.
      */
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     /**
      * @brief Retrieves the object name for the block record.
@@ -93,93 +93,93 @@ public:
      * 
      * @return The units type.
      */
-    DG_UnitsType Units() const;
+    UnitsType units() const;
 
     /**
      * @brief Sets the units type for the block record.
      * 
      * @param units The units type to set.
      */
-    void Units(DG_UnitsType units);
+    void setUnits(UnitsType units);
 
     /**
      * @brief Retrieves the flags associated with the block record.
      * 
      * @return The block record flags.
      */
-    DG_BlockTypeFlags Flags() const;
+    BlockTypeFlags flags() const;
 
     /**
      * @brief Sets the flags for the block record.
      * 
      * @param flags The flags to set.
      */
-    void Flags(DG_BlockTypeFlags flags);
+    void setFlags(BlockTypeFlags flags);
 
     /**
      * @brief Checks if the block record is explodable.
      * 
      * @return True if the block is explodable, false otherwise.
      */
-    bool IsExplodable() const;
+    bool isExplodable() const;
 
     /**
      * @brief Sets whether the block record is explodable.
      * 
      * @param explodable True to mark as explodable, false otherwise.
      */
-    void IsExplodable(bool explodable);
+    void setIsExplodable(bool explodable);
 
     /**
      * @brief Checks if the block record can be scaled.
      * 
      * @return True if the block can be scaled, false otherwise.
      */
-    bool CanScale() const;
+    bool canScale() const;
 
     /**
      * @brief Sets whether the block record can be scaled.
      * 
      * @param scaleable True to allow scaling, false otherwise.
      */
-    void CanScale(bool scaleable);
+    void setCanScale(bool scaleable);
 
     /**
      * @brief Retrieves the preview data for the block record.
      * 
      * @return A vector of unsigned chars representing the preview data.
      */
-    std::vector<unsigned char> Preview() const;
+    std::vector<unsigned char> preview() const;
 
     /**
      * @brief Sets the preview data for the block record.
      * 
      * @param preview A vector of unsigned chars representing the preview data.
      */
-    void Preview(const std::vector<unsigned char> &preview);
+    void setPreview(const std::vector<unsigned char> &preview);
 
     /**
      * @brief Retrieves the layout associated with the block record.
      * 
-     * @return A pointer to the DG_Layout for the block record.
+     * @return A pointer to the Layout for the block record.
      */
-    DG_Layout *Layout() const;
+    Layout *layout() const;
 
     /**
      * @brief Sets the layout for the block record.
      * 
-     * @param layout A pointer to the DG_Layout to set.
+     * @param layout A pointer to the Layout to set.
      */
-    void Layout(DG_Layout *layout);
+    void setLayout(Layout *layout);
 };
 
 /**
- * @class DG_BlockRecordsTable
+ * @class BlockRecordsTable
  * @brief Represents a table of block records in a DWG/DXF drawing.
  *
  * This table holds multiple block records, each representing a block definition that can be reused in the drawing.
  */
-class LIBDWG_API DG_BlockRecordsTable : public DG_Table
+class LIBDWG_API BlockRecordsTable : public Table
 {
 public:
     /**
@@ -187,7 +187,7 @@ public:
      * 
      * @return The object type.
      */
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
 protected:
     /**

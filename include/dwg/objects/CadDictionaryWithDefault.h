@@ -26,19 +26,19 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_CadDictionaryWithDefault : public DG_CadDictionary
+class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
 {
-    DG_CadObject *_default_entry;
+    CadObject *_default_entry;
 
 public:
-    DG_CadDictionaryWithDefault();
+    CadDictionaryWithDefault();
 
-    DG_ObjectType objectType() const;
+    ObjectType objectType() const;
     std::string objectName() const;
     std::string subclassMarker() const;
 
-    DG_CadObject *DefaultEntry() const;
-    void DefaultEntry(DG_CadObject *);
+    CadObject *DefaultEntry() const;
+    void DefaultEntry(CadObject *);
 };
 
 }// namespace dwg

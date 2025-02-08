@@ -26,10 +26,10 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_PdfUnderlayDefinition : public DG_UnderlayDefinition
+class LIBDWG_API PdfUnderlayDefinition : public UnderlayDefinition
 {
 public:
-    DG_PdfUnderlayDefinition();
+    PdfUnderlayDefinition();
 
     std::string objectName() const override;
 

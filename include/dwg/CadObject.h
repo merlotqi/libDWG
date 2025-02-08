@@ -33,45 +33,45 @@
 
 namespace dwg {
 
-class DG_CadDocument;
+class CadDocument;
 
 /**
- * @class DG_CadObject
+ * @class CadObject
  * @brief Base class representing a CAD object with handle-based identification and ownership hierarchy.
  *
  * This class serves as the foundation for all CAD entities, providing support for unique
  * identification through handles and ownership relationships within a CAD document.
  */
-class LIBDWG_API DG_CadObject : public IHandledCadObject
+class LIBDWG_API CadObject : public IHandledCadObject
 {
 protected:
     /// @brief Unique handle identifying the CAD object.
     unsigned long long _handle;
 
     /// @brief Pointer to the owning CAD object.
-    DG_CadObject *_owner;
+    CadObject *_owner;
 
     /// @brief Pointer to the CAD document this object belongs to.
-    DG_CadDocument *_document;
+    CadDocument *_document;
 
 public:
     /**
      * @brief Default constructor.
      */
-    DG_CadObject() = default;
+    CadObject() = default;
 
     /**
      * @brief Virtual destructor.
      */
-    virtual ~DG_CadObject() override;
+    virtual ~CadObject() override;
 
     /**
      * @brief Get the type of the CAD object.
      * @details This method must be implemented by derived classes to return the specific
      * type of the object.
-     * @return The type of the object as a value from the `DG_ObjectType` enumeration.
+     * @return The type of the object as a value from the `ObjectType` enumeration.
      */
-    virtual DG_ObjectType objectType() const = 0;
+    virtual ObjectType objectType() const = 0;
 
     /**
      * @brief Get the name of the CAD object.
@@ -100,26 +100,26 @@ public:
      * @details The ownership establishes a hierarchical relationship between CAD objects.
      * @return A pointer to the owning CAD object, or nullptr if no owner is set.
      */
-    DG_CadObject *owner() const;
+    CadObject *owner() const;
 
     /**
      * @brief Get the CAD document that contains this object.
      * @return A pointer to the owning CAD document.
      */
-    DG_CadDocument *document() const;
+    CadDocument *document() const;
 
     /**
      * @brief Set the CAD document that contains this object.
      * @param doc Pointer to the CAD document.
      */
-    void setDocument(DG_CadDocument *doc);
+    void setDocument(CadDocument *doc);
 
     /**
      * @brief Clone this CAD object.
      * @return A pointer to the newly created copy of this object.
      * @note Derived classes should override this method to provide proper deep copy behavior.
      */
-    virtual DG_CadObject *clone();
+    virtual CadObject *clone();
 
 protected:
     /**
@@ -132,14 +132,14 @@ protected:
      * @brief Set the owning CAD object for this object.
      * @param obj Pointer to the new owning CAD object.
      */
-    void setOwner(DG_CadObject *obj);
+    void setOwner(CadObject *obj);
 
 private:
     /// @brief Deleted copy constructor to prevent copying.
-    DG_CadObject(const DG_CadObject &) = delete;
+    CadObject(const CadObject &) = delete;
 
     /// @brief Deleted assignment operator to prevent copying.
-    DG_CadObject &operator=(const DG_CadObject &) = delete;
+    CadObject &operator=(const CadObject &) = delete;
 };
 
 }// namespace dwg

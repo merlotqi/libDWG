@@ -35,147 +35,147 @@
 
 namespace dwg {
 
-class DG_VisualStyle;
-class DG_USC;
+class VisualStyle;
+class USC;
 
-class LIBDWG_API DG_VPort : public DG_TableEntry
+class LIBDWG_API VPort : public TableEntry
 {
 public:
-    DG_VPort();
-    DG_VPort(const std::string &name);
+    VPort();
+    VPort(const std::string &name);
 
     static constexpr auto DefaultName = "*Active";
 
-    static DG_VPort *Default();
+    static VPort *Default();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    XY BottomLeft() const;
-    void BottomLeft(const XY &);
+    XY bottomLeft() const;
+    void setBottomLeft(const XY &);
 
-    XY TopRight() const;
-    void TopRight(const XY &);
+    XY topRight() const;
+    void setTopRight(const XY &);
 
-    XY Center() const;
-    void Center(const XY &);
+    XY center() const;
+    void setCenter(const XY &);
 
-    XY SnapBasePoint() const;
-    void SnapBasePoint(const XY &);
+    XY snapBasePoint() const;
+    void setSnapBasePoint(const XY &);
 
-    XY SnapSpacing() const;
-    void SnapSpacing(const XY &);
+    XY snapSpacing() const;
+    void setSnapSpacing(const XY &);
 
-    XY GridSpacing() const;
-    void GridSpacing(const XY &);
+    XY gridSpacing() const;
+    void setGridSpacing(const XY &);
 
-    XYZ Direction() const;
-    void Direction(const XYZ &);
+    XYZ direction() const;
+    void setDirection(const XYZ &);
 
-    XYZ Target() const;
-    void Target(const XYZ &);
+    XYZ target() const;
+    void setTarget(const XYZ &);
 
-    double ViewHeight() const;
-    void ViewHeight(double);
+    double viewHeight() const;
+    void setViewHeight(double);
 
-    double AspectRatio() const;
-    void AspectRatio(double);
+    double aspectRatio() const;
+    void setAspectRatio(double);
 
-    double LensLength() const;
-    void LensLength(double);
+    double lensLength() const;
+    void setLensLength(double);
 
-    double FrontClippingPlane() const;
-    void FrontClippingPlane(double);
+    double frontClippingPlane() const;
+    void setFrontClippingPlane(double);
 
-    double BackClippingPlane() const;
-    void BackClippingPlane(double);
+    double backClippingPlane() const;
+    void setBackClippingPlane(double);
 
-    double SnapRotation() const;
-    void SnapRotation(double);
+    double snapRotation() const;
+    void setSnapRotation(double);
 
-    double TwistAngle() const;
-    void TwistAngle(double);
+    double twistAngle() const;
+    void setTwistAngle(double);
 
-    short CircleZoomPercent() const;
-    void CircleZoomPercent(short);
+    short circleZoomPercent() const;
+    void setCircleZoomPercent(short);
 
-    DG_RenderMode RenderMode() const;
-    void RenderMode(DG_RenderMode);
+    RenderMode renderMode() const;
+    void setRenderMode(RenderMode);
 
-    DG_ViewModeType ViewMode() const;
-    void ViewMode(DG_ViewModeType);
+    ViewModeType viewMode() const;
+    void setViewMode(ViewModeType);
 
-    DG_UscIconType UcsIconDisplay() const;
-    void UcsIconDisplay(DG_UscIconType);
+    UscIconType ucsIconDisplay() const;
+    void setUcsIconDisplay(UscIconType);
 
-    bool SnapOn() const;
-    void SnapOn(bool);
+    bool snapOn() const;
+    void setSnapOn(bool);
 
-    bool ShowGrid() const;
-    void ShowGrid(bool);
+    bool showGrid() const;
+    void setShowGrid(bool);
 
-    bool IsometricSnap() const;
-    void IsometricSnap(bool);
+    bool isometricSnap() const;
+    void setIsometricSnap(bool);
 
-    short SnapIsoPair() const;
-    void SnapIsoPair(short);
+    short snapIsoPair() const;
+    void setSnapIsoPair(short);
 
-    XYZ Origin() const;
-    void Origin(const XYZ &);
+    XYZ origin() const;
+    void setOrigin(const XYZ &);
 
-    XYZ XAxis() const;
-    void XAxis(const XYZ &);
+    XYZ xAxis() const;
+    void setXAxis(const XYZ &);
 
-    XYZ YAxis() const;
-    void YAxis(const XYZ &);
+    XYZ yAxis() const;
+    void setYAxis(const XYZ &);
 
-    DG_UCS *NamedUcs() const;
-    void NamedUcs(DG_UCS *);
+    UCS *namedUcs() const;
+    void setNamedUcs(UCS *);
 
-    DG_UCS *BaseUcs() const;
-    void BaseUcs(DG_UCS *);
+    UCS *baseUcs() const;
+    void setBaseUcs(UCS *);
 
-    DG_OrthographicType OrthographicType() const;
-    void OrthographicType(DG_OrthographicType);
+    OrthographicType orthographicType() const;
+    void setOrthographicType(OrthographicType);
 
-    double Elevation() const;
-    void Elevation(double);
+    double elevation() const;
+    void setElevation(double);
 
-    DG_GridFlags GridFlags() const;
-    void GridFlags(DG_GridFlags);
+    GridFlags gridFlags() const;
+    void setGridFlags(GridFlags);
 
-    short MinorGridLinesPerMajorGridLine() const;
-    void MinorGridLinesPerMajorGridLine(short);
+    short minorGridLinesPerMajorGridLine() const;
+    void setMinorGridLinesPerMajorGridLine(short);
 
-    DG_VisualStyle *VisualStyle() const;
-    void VisualStyle(DG_VisualStyle *);
+    VisualStyle *visualStyle() const;
+    void setVisualStyle(VisualStyle *);
 
-    bool UseDefaultLighting() const;
-    void UseDefaultLighting(bool);
+    bool useDefaultLighting() const;
+    void setUseDefaultLighting(bool);
 
-    DG_DefaultLightingType DefaultLighting() const;
-    void DefaultLighting(DG_DefaultLightingType);
+    DefaultLightingType defaultLighting() const;
+    void setDefaultLighting(DefaultLightingType);
 
-    double Brightness() const;
-    void Brightness(double);
+    double brightness() const;
+    void setBrightness(double);
 
-    double Contrast() const;
-    void Contrast(double);
+    double contrast() const;
+    void setContrast(double);
 
-    DG_Color AmbientColor() const;
-    void AmbientColor(const DG_Color &);
+    Color ambientColor() const;
+    void setAmbientColor(const Color &);
 };
 
 
-class LIBDWG_API DG_VPortsTable : public DG_Table
+class LIBDWG_API VPortsTable : public Table
 {
 public:
-    DG_VPortsTable();
+    VPortsTable();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
 
 protected:

@@ -29,11 +29,8 @@ BlockEnd::BlockEnd(BlockRecord *record) { _owner = record; }
 
 std::string BlockEnd::ObjectName() const { return DxfFileToken::EndBlock; }
 
-DG_ObjectType BlockEnd::ObjectType() const { return DG_ObjectType::ENDBLK; }
+ObjectType BlockEnd::ObjectType() const { return ObjectType::ENDBLK; }
 
-std::string BlockEnd::SubclassMarker() const
-{
-    return DxfSubclassMarker::BlockEnd;
-}
+std::string BlockEnd::SubclassMarker() const { return DxfSubclassMarker::BlockEnd; }
 
 }// namespace dwg

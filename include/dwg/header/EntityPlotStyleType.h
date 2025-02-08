@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Plot style type of new objects
-enum DG_EntityPlotStyleType : short
+enum EntityPlotStyleType : short
 {
     /// Plot style by layer
     ByLayer = 0,

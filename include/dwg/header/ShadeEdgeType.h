@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Edge shape type
-enum DG_ShadeEdgeType : short
+enum ShadeEdgeType : short
 {
     /// Faces shaded, edges not highlighted
     FacesShadedEdgesNotHighlighted,

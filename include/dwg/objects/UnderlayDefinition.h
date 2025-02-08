@@ -26,12 +26,12 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_UnderlayDefinition : public DG_NonGraphicalObject
+class LIBDWG_API UnderlayDefinition : public NonGraphicalObject
 {
 public:
-    DG_UnderlayDefinition();
+    UnderlayDefinition();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string subclassMarker() const override;
 
     std::string File() const;

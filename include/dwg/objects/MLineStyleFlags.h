@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Flags (bit-coded).
-enum DG_MLineStyleFlag
+enum MLineStyleFlag
 {
     /// None
     None = 0,
@@ -48,6 +48,6 @@ enum DG_MLineStyleFlag
     /// End round (outer arcs) cap
     EndRoundCap = 1024
 };
-CPL_DECLARE_FLAGS(DG_MLineStyleFlags, DG_MLineStyleFlag)
+CPL_DECLARE_FLAGS(MLineStyleFlags, MLineStyleFlag)
 
 }// namespace dwg

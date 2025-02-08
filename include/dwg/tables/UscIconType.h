@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Display Ucs icon
-enum DG_UscIconType : short
+enum UscIconType : short
 {
     /// Off; No icon is displayed
     Off,

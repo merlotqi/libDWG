@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-const std::vector<std::vector<unsigned char>> DG_Color::_indexRgb[][3] = {
+const std::vector<std::vector<unsigned char>> Color::_indexRgb[][3] = {
         {  0,   0,   0}, //Dummy entry
         {255,   0,   0},
         {255, 255,   0},
@@ -285,13 +285,13 @@ const std::vector<std::vector<unsigned char>> DG_Color::_indexRgb[][3] = {
         {255, 255, 255}
 };
 
-DG_Color DG_Color::ByBlock = DG_Color((short) 0);
+Color Color::ByBlock = Color((short) 0);
 
-DG_Color DG_Color::ByLayer = DG_Color((short) 256);
+Color Color::ByLayer = Color((short) 256);
 
-DG_Color DG_Color::ByEntity = DG_Color((short) 257);
+Color Color::ByEntity = Color((short) 257);
 
-unsigned int DG_Color::getInt24(const std::vector<unsigned char> &array)
+unsigned int Color::getInt24(const std::vector<unsigned char> &array)
 {
 #ifdef CPL_LITTLE_ENDIAN
     return (unsigned int) (array[0] | array[1] << 8 | array[2] << 16);
@@ -300,7 +300,7 @@ unsigned int DG_Color::getInt24(const std::vector<unsigned char> &array)
 #endif
 }
 
-std::vector<unsigned char> DG_Color::getRgb() const
+std::vector<unsigned char> Color::getRgb() const
 {
     std::vector<unsigned char> rgb(3);
     if (IsTrueColor())
@@ -312,7 +312,7 @@ std::vector<unsigned char> DG_Color::getRgb() const
     else { return _indexRgb[_color]; }
 }
 
-DG_Color::DG_Color(unsigned int trueColor)
+Color::Color(unsigned int trueColor)
 {
     if (trueColor < 0 || trueColor > _maxTrueColor)
         throw new std::invalid_argument("True color must be a 24 bit color.");
@@ -321,35 +321,25 @@ DG_Color::DG_Color(unsigned int trueColor)
     _color = (unsigned int) (trueColor | _trueColorFlag);
 }
 
-DG_Color::DG_Color(short index)
+Color::Color(short index)
 {
-    if (index < 0 || index > 257)
-        throw new std::invalid_argument(
-                "True index must be a value between 0 and 257.");
+    if (index < 0 || index > 257) throw new std::invalid_argument("True index must be a value between 0 and 257.");
 
     _color = (unsigned int) index;
 }
 
-DG_Color::DG_Color(unsigned char r, unsigned char g, unsigned char b)
-    : DG_Color(std::vector<unsigned char>{r, g, b})
-{
-}
+Color::Color(unsigned char r, unsigned char g, unsigned char b) : Color(std::vector<unsigned char>{r, g, b}) {}
 
-DG_Color::DG_Color(const std::vector<unsigned char> &rgb)
-{
-    _color = getInt24(rgb);
-}
+Color::Color(const std::vector<unsigned char> &rgb) { _color = getInt24(rgb); }
 
-DG_Color DG_Color::FromTrueColor(unsigned int color) { return DG_Color(color); }
+Color Color::FromTrueColor(unsigned int color) { return Color(color); }
 
-unsigned char DG_Color::ApproxIndex(unsigned char r, unsigned char g,
-                                    unsigned char b)
+unsigned char Color::ApproxIndex(unsigned char r, unsigned char g, unsigned char b)
 {
     int prevDist = -1;
     for (int i = 0; i < _indexRgb.size(); i++)
     {
-        int dist = (r - _indexRgb[i][0]) + (g - _indexRgb[i][1]) +
-                   (b - _indexRgb[i][2]);
+        int dist = (r - _indexRgb[i][0]) + (g - _indexRgb[i][1]) + (b - _indexRgb[i][2]);
         if (dist == 0) return (unsigned char) i;
 
         if (dist < prevDist)
@@ -362,26 +352,23 @@ unsigned char DG_Color::ApproxIndex(unsigned char r, unsigned char g,
     return 0;
 }
 
-bool DG_Color::IsByLayer() const { return Index() == 256; }
+bool Color::IsByLayer() const { return Index() == 256; }
 
-bool DG_Color::IsByBlock() const { return Index() == 0; }
+bool Color::IsByBlock() const { return Index() == 0; }
 
-short DG_Color::Index() const { IsTrueColor() ? (short) -1 : (short) _color; }
+short Color::Index() const { IsTrueColor() ? (short) -1 : (short) _color; }
 
-int DG_Color::TrueColor() const
-{
-    IsTrueColor() ? (int) (_color ^ (1 << 30)) : -1;
-}
+int Color::TrueColor() const { IsTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
 
-bool DG_Color::IsTrueColor() const { return _color > 257 || _color < 0; }
+bool Color::IsTrueColor() const { return _color > 257 || _color < 0; }
 
-unsigned char DG_Color::R() const { return getRgb()[0]; }
+unsigned char Color::R() const { return getRgb()[0]; }
 
-unsigned char DG_Color::G() const { return getRgb()[1]; }
+unsigned char Color::G() const { return getRgb()[1]; }
 
-unsigned char DG_Color::B() const { return getRgb()[2]; }
+unsigned char Color::B() const { return getRgb()[2]; }
 
-unsigned char DG_Color::GetApproxIndex() const
+unsigned char Color::GetApproxIndex() const
 {
     if (IsTrueColor()) { return ApproxIndex(R(), G(), B()); }
     else { return (unsigned char) Index(); }

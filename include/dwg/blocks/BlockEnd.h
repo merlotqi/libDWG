@@ -27,20 +27,20 @@
 namespace dwg {
 
 class BlockRecord;
-class LIBDWG_API DG_BlockEnd : public DG_Entity
+class LIBDWG_API BlockEnd : public Entity
 {
 public:
     // Constructor accepting a BlockRecord pointer
-    DG_BlockEnd(BlockRecord *record);
+    BlockEnd(BlockRecord *record);
 
     // Default destructor (since no specific cleanup is needed)
-    ~DG_BlockEnd() = default;
+    ~BlockEnd() = default;
 
     // Overrides the ObjectName method to return the name of the object
     std::string objectName() const override;
 
     // Overrides the ObjectType method to return the type of object
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     // Overrides the SubclassMarker method to return the subclass marker
     std::string subclassMarker() const override;

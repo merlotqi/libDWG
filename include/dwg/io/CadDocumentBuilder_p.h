@@ -22,46 +22,47 @@
 
 #pragma once
 
-#include <map>
 #include <cpl_ports.h>
 #include <dwg/io/Notification.h>
+#include <map>
+
 
 namespace dwg {
 
-class DG_CadDocumentBuilder
+class CadDocumentBuilder
 {
 public:
-    DG_CadDocumentBuilder(DG_ACadVersion version, DG_CadDocument *document);
+    CadDocumentBuilder(ACadVersion version, CadDocument *document);
 
-    DG_ACadVersion Version() const;
-    DG_CadDocument* DocumentToBuild() const;
-    
-    DG_AppIdsTable* AppIds() const;
-    void AppIds(DG_AppIdsTable *tables);
-    
-    DG_BlockRecordsTable* BlockRecords() const;
-    void BlockRecords(DG_BlockRecordsTable *tables);
+    ACadVersion Version() const;
+    CadDocument *DocumentToBuild() const;
 
-    DG_DimensionStylesTable *DimensionStyles() const;
-    void DimensionStyles(DG_DimensionStylesTable *table);
+    AppIdsTable *AppIds() const;
+    void AppIds(AppIdsTable *tables);
 
-    DG_LayersTable *Layers() const;
-    void Layers(DG_LayersTable *table);
+    BlockRecordsTable *BlockRecords() const;
+    void BlockRecords(BlockRecordsTable *tables);
 
-    DG_LineTypesTable* LineTypesTable() const;
-    void LineTypesTable(DG_LineTypesTable *);
+    DimensionStylesTable *DimensionStyles() const;
+    void DimensionStyles(DimensionStylesTable *table);
 
-    DG_TextStylesTable* TextStyles() const;
-    void TextStyles(DG_TextStylesTable *);
+    LayersTable *Layers() const;
+    void Layers(LayersTable *table);
 
-    DG_UCSTable* UCSs() const;
-    void UCSs(DG_UCSTable *);
+    LineTypesTable *LineTypesTable() const;
+    void LineTypesTable(LineTypesTable *);
 
-    DG_ViewsTable *Views() const;
-    void Views(DG_ViewsTable *);
+    TextStylesTable *TextStyles() const;
+    void TextStyles(TextStylesTable *);
 
-    DG_VPortsTable* VPorts() const;
-    void VPorts(DG_VPortsTable *);
+    UCSTable *UCSs() const;
+    void UCSs(UCSTable *);
+
+    ViewsTable *Views() const;
+    void Views(ViewsTable *);
+
+    VPortsTable *VPorts() const;
+    void VPorts(VPortsTable *);
 
     virtual bool KeepUnknownEntities() const = 0;
 
@@ -71,16 +72,16 @@ public:
     void InitialHandSeed(unsigned long long);
 
     virtual void BuildDocument();
-    void AppTemplate(CadTemplate * tmpl);
+    void AppTemplate(CadTemplate *tmpl);
 
     void RegisterTables();
     void BuildTables();
 
-    CPL::Delegate<void(const std::string&, DG_Notification)> OnNotification;
+    CPL::Delegate<void(const std::string &, Notification)> OnNotification;
 
 
 protected:
-    std::map<unsigned long long, CadTemplate*> _cadObjectsTemplates;
+    std::map<unsigned long long, CadTemplate *> _cadObjectsTemplates;
     std::map<unsigned long long, ICadObjectTemplate *> _templatesMap;
     std::map<unsigned long long, CadObject *> _cadObjects;
     std::map<unsigned long long, ICadTableEntryTemplate *> _tableEntryTemplates;
@@ -88,4 +89,4 @@ protected:
     std::map<unsigned long long, ICadDictionaryTemplate *> _dictionaryTemplates;
 };
 
-}
+}// namespace dwg

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// How dimension text and arrows are arranged when space is not sufficient to place both within the extension lines.
-enum DG_TextArrowFitType : unsigned char
+enum TextArrowFitType : unsigned char
 {
     /// Places both text and arrows outside extension lines
     Both = 0,

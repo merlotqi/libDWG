@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Standard flags for tables
-enum DG_StandardFlag : short
+enum StandardFlag : short
 {
     /// None
     None = 0,
@@ -42,6 +42,6 @@ enum DG_StandardFlag : short
     /// drawing was edited.
     Referenced = 64,
 };
-CPL_DECLARE_FLAGS(DG_StandardFlags, DG_StandardFlag)
+CPL_DECLARE_FLAGS(StandardFlags, StandardFlag)
 
 }// namespace dwg

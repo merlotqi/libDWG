@@ -28,17 +28,17 @@
 
 namespace dwg {
 
-class DG_Entity;
-class DG_BlockRecord;
+class Entity;
+class BlockRecord;
 
-class LIBDWG_API SortEntitiesTable : public DG_NonGraphicalObject
+class LIBDWG_API SortEntitiesTable : public NonGraphicalObject
 {
 public:
     struct Sorter
     {
-        DG_Entity *Entity;
+        Entity *Entity;
         unsigned long long Handle;
-        Sorter(DG_Entity *entity, unsigned long long handle);
+        Sorter(Entity *entity, unsigned long long handle);
     };
 
     static constexpr auto DictionaryEntryName = "ACAD_SORTENTS";
@@ -46,21 +46,21 @@ public:
 public:
     SortEntitiesTable();
 
-    SortEntitiesTable(DG_BlockRecord *owner);
+    SortEntitiesTable(BlockRecord *owner);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    DG_BlockRecord *BlockOwner() const;
+    BlockRecord *BlockOwner() const;
 
-    void BlockOwner(DG_BlockRecord *);
+    void BlockOwner(BlockRecord *);
 
     std::vector<Sorter> Sorters() const;
 
-    void AddEntity(DG_Entity *, unsigned long long sorterHandle);
+    void AddEntity(Entity *, unsigned long long sorterHandle);
 };
 
 }// namespace dwg

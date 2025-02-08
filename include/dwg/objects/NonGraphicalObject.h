@@ -27,17 +27,17 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_NonGraphicalObject : public DG_CadObject, INamedCadObject
+class LIBDWG_API NonGraphicalObject : public CadObject, INamedCadObject
 {
 protected:
     std::string _name;
 
 public:
-    DG_NonGraphicalObject();
+    NonGraphicalObject();
 
-    DG_NonGraphicalObject(const std::string &name);
+    NonGraphicalObject(const std::string &name);
 
-    virtual ~DG_NonGraphicalObject() override;
+    virtual ~NonGraphicalObject() override;
 
     virtual std::string Name() const override;
 

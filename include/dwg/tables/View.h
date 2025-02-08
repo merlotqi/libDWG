@@ -30,82 +30,82 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_View : public DG_TableEntry
+class LIBDWG_API View : public TableEntry
 {
 public:
-    DG_View() = default;
+    View() = default;
 
-    DG_View(const std::string &name);
+    View(const std::string &name);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    double Height() const;
-    void Height(double);
+    double height() const;
+    void setHeight(double);
 
-    double Width() const;
-    void Width(double);
+    double width() const;
+    void setWidth(double);
 
-    double LensLength() const;
-    void LensLength(double);
+    double lensLength() const;
+    void setLensLength(double);
 
-    double FrontClipping() const;
-    void FrontClipping(double);
+    double frontClipping() const;
+    void setFrontClipping(double);
 
-    double BackClipping() const;
-    void BackClipping(double);
+    double backClipping() const;
+    void setBackClipping(double);
 
-    double Angle() const;
-    void Angle(double);
+    double angle() const;
+    void setAngle(double);
 
-    DG_ViewModeType ViewMode() const;
-    void ViewMode(DG_ViewModeType);
+    ViewModeType viewMode() const;
+    void setViewMode(ViewModeType);
 
-    bool IsUcsAssociated() const;
-    void IsUcsAssociated(bool);
+    bool isUcsAssociated() const;
+    void setIsUcsAssociated(bool);
 
-    bool IsPlottable() const;
-    void IsPlottable(bool);
+    bool isPlottable() const;
+    void setIsPlottable(bool);
 
-    DG_RenderMode RenderMode() const;
-    void RenderMode(DG_RenderMode);
+    RenderMode renderMode() const;
+    void setRenderMode(RenderMode);
 
-    XY Center() const;
-    void Center(const XY &);
+    XY center() const;
+    void setCenter(const XY &);
 
-    XYZ Direction() const;
-    void Direction(const XYZ &);
+    XYZ direction() const;
+    void setDirection(const XYZ &);
 
-    XYZ Target() const;
-    void Target(const XYZ &);
+    XYZ target() const;
+    void setTarget(const XYZ &);
 
-    DG_VisualStyle *VisualStyle() const;
-    void VisualStyle(DG_VisualStyle *);
+    VisualStyle *visualStyle() const;
+    void setVisualStyle(VisualStyle *);
 
-    XYZ UcsOrigin() const;
-    void UcsOrigin(const XYZ &);
+    XYZ ucsOrigin() const;
+    void setUcsOrigin(const XYZ &);
 
-    XYZ UcsXAxis() const;
-    void UcsXAxis(const XYZ &);
+    XYZ ucsXAxis() const;
+    void setUcsXAxis(const XYZ &);
 
-    XYZ UcsYAxis() const;
-    void UcsYAxis(const XYZ &);
+    XYZ ucsYAxis() const;
+    void setUcsYAxis(const XYZ &);
 
-    double UcsElevation() const;
-    void UcsElevation(double);
+    double ucsElevation() const;
+    void setUcsElevation(double);
 
-    DG_OrthographicType UcsOrthographicType() const;
-    void UcsOrthographicType(DG_OrthographicType);
+    OrthographicType ucsOrthographicType() const;
+    void setUcsOrthographicType(OrthographicType);
 };
 
-class LIBDWG_API DG_ViewsTable : public DG_Table
+class LIBDWG_API ViewsTable : public Table
 {
 public:
-    DG_ViewsTable() = default;
-    DG_ObjectType objectType() const override;
+    ViewsTable() = default;
+    ObjectType objectType() const override;
     std::string objectName() const override;
 
 protected:

@@ -29,9 +29,9 @@ namespace dwg {
 
 class DwgFileHeaderAC21 : public DwgFileHeaderAC18
 {
-public:    
+public:
     DwgFileHeaderAC21();
-    DwgFileHeaderAC21(DG_ACadVersion version);
+    DwgFileHeaderAC21(ACadVersion version);
     ~DwgFileHeaderAC21();
 
     Dwg21CompressedMetadata CompressedMetadata() const;

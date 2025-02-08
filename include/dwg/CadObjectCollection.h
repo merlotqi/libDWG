@@ -28,35 +28,35 @@
 namespace dwg {
 
 /**
- * @class DG_CadObjectCollection
- * @brief Manages a collection of DG_CadObject-derived entities.
+ * @class CadObjectCollection
+ * @brief Manages a collection of CadObject-derived entities.
  *
  * This template class provides storage and management for a collection of 
- * objects that inherit from DG_CadObject. It ensures ownership consistency
+ * objects that inherit from CadObject. It ensures ownership consistency
  * and provides mechanisms for adding and removing objects.
  *
- * @tparam T The type of objects stored in the collection, which must derive from DG_CadObject.
+ * @tparam T The type of objects stored in the collection, which must derive from CadObject.
  */
 template<class T>
-class DG_CadObjectCollection
+class CadObjectCollection
 {
-    static_assert(std::is_base_of<DG_CadObject, T>::value, "T must be derived from DG_CadObject");
+    static_assert(std::is_base_of<CadObject, T>::value, "T must be derived from CadObject");
 
 protected:
     std::vector<T *> _entries;///< List of objects in the collection.
-    DG_CadObject *_owner;     ///< The owner of this collection.
+    CadObject *_owner;        ///< The owner of this collection.
 
 public:
     /**
-     * @brief Constructs a DG_CadObjectCollection with a specified owner.
-     * @param owner The owning DG_CadObject.
+     * @brief Constructs a CadObjectCollection with a specified owner.
+     * @param owner The owning CadObject.
      */
-    DG_CadObjectCollection(DG_CadObject *owner) : _owner(owner) {}
+    CadObjectCollection(CadObject *owner) : _owner(owner) {}
 
     /**
-     * @brief Destructor for DG_CadObjectCollection.
+     * @brief Destructor for CadObjectCollection.
      */
-    virtual ~DG_CadObjectCollection() {}
+    virtual ~CadObjectCollection() {}
 
     /**
      * @brief Adds an item to the collection.
@@ -113,13 +113,13 @@ public:
      * @brief Gets the owner of the collection.
      * @return A pointer to the owner.
      */
-    DG_Object *owner() const { return _owner; }
+    Object *owner() const { return _owner; }
 
     /**
      * @brief Sets the owner of the collection.
      * @param owner A pointer to the new owner.
      */
-    void Owner(DG_Object *owner) { _owner = owner; }
+    void Owner(Object *owner) { _owner = owner; }
 
     /**
      * @brief Delegate triggered when an object is added.

@@ -29,69 +29,69 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_TextStyle : public DG_TableEntry
+class LIBDWG_API TextStyle : public TableEntry
 {
 public:
-    DG_TextStyle();
+    TextStyle();
 
-    DG_TextStyle(const std::string &);
+    TextStyle(const std::string &);
 
-    ~DG_TextStyle();
+    ~TextStyle();
 
     static constexpr auto DefaultName = "Standard";
 
-    static DG_TextStyle* Default();
+    static TextStyle *Default();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    DG_StyleFlags Flags() const;
+    StyleFlags flags() const;
 
-    void Flags(DG_StyleFlags);
+    void setFlags(StyleFlags);
 
-    std::string Filename() const;
+    std::string filename() const;
 
-    void Filename(const std::string &);
+    void setFilename(const std::string &);
 
-    std::string BigFontFilename() const;
+    std::string bigFontFilename() const;
 
-    void BigFontFilename(const std::string &);
+    void setBigFontFilename(const std::string &);
 
-    double Height() const;
+    double height() const;
 
-    void Height(double);
+    void setHeight(double);
 
-    double Width() const;
+    double width() const;
 
-    void Width(double);
+    void setWidth(double);
 
-    double LastHeight() const;
+    double lastHeight() const;
 
-    void LastHeight(double);
+    void setLastHeight(double);
 
-    double ObliqueAngle() const;
+    double obliqueAngle() const;
 
-    void ObliqueAngle(double);
+    void setObliqueAngle(double);
 
-    DG_TextMirrorFlag MirrorFlag() const;
+    TextMirrorFlag mirrorFlag() const;
 
-    void MirrorFlag(DG_TextMirrorFlag);
+    void setMirrorFlag(TextMirrorFlag);
 
-    DG_FontFlags TrueType() const;
+    FontFlags trueType() const;
 
-    void TrueType(DG_FontFlags);
+    void setTrueType(FontFlags);
 
-    bool IsShapeFile() const;
+    bool isShapeFile() const;
 };
 
-class LIBDWG_API DG_TextStylesTable : public DG_Table
+class LIBDWG_API TextStylesTable : public Table
 {
 public:
-    DG_TextStylesTable() = default;
-    DG_ObjectType objectType() const override;
+    TextStylesTable() = default;
+    ObjectType objectType() const override;
 
 protected:
     std::vector<std::string> defaultEntries() const;

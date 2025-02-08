@@ -28,50 +28,50 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_UCS : public DG_TableEntry
+class LIBDWG_API UCS : public TableEntry
 {
 public:
-    DG_UCS();
+    UCS();
 
-    DG_UCS(const std::string &name);
+    UCS(const std::string &name);
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    XYZ Origin() const;
+    XYZ origin() const;
 
-    void Origin(const XYZ &);
+    void setOrigin(const XYZ &);
 
-    XYZ XAxis() const;
+    XYZ xAxis() const;
 
-    void XAxis(const XYZ &);
+    void setXAxis(const XYZ &);
 
-    XYZ YAxis() const;
+    XYZ yAxis() const;
 
-    void YAxis(const XYZ &);
+    void setYAxis(const XYZ &);
 
-    DG_OrthographicType OrthographicType() const;
+    OrthographicType orthographicType() const;
 
-    void OrthographicType(DG_OrthographicType);
+    void setOrthographicType(OrthographicType);
 
-    DG_OrthographicType OrthographicViewType() const;
+    OrthographicType orthographicViewType() const;
 
-    void OrthographicViewType(DG_OrthographicType);
+    void setOrthographicViewType(OrthographicType);
 
-    double Elevation() const;
+    double elevation() const;
 
-    void Elevation(double);
+    void setElevation(double);
 };
 
-class LIBDWG_API DG_UCSTable : public DG_Table
+class LIBDWG_API UCSTable : public Table
 {
 public:
-    DG_UCSTable() = default;
+    UCSTable() = default;
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 

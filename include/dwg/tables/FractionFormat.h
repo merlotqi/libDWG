@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents the fraction format when the linear unit format is set to architectural or fractional.
-enum DG_FractionFormat : short
+enum FractionFormat : short
 {
     /// Horizontal stacking.
     Horizontal,

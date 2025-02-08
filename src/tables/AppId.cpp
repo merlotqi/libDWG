@@ -25,46 +25,34 @@
 
 namespace dwg {
 
-/* ----------------------------- DG_AppId impls ----------------------------- */
+/* ----------------------------- AppId impls ----------------------------- */
 
-std::string DG_AppId::DefaultName = "libDWG";
+std::string AppId::DefaultName = "libDWG";
 
-DG_AppId::DG_AppId(const std::string &name) : DG_TableEntry(name)
+AppId::AppId(const std::string &name) : TableEntry(name)
 {
     if (CPL::StringHelp::IsNullOrEmpty(name.c_str()))
         throw new std::invalid_argument("Application id must have a name.");
 }
 
-DG_AppId::~DG_AppId() {}
+AppId::~AppId() {}
 
-DG_ObjectType DG_AppId::ObjectType() const { return DG_ObjectType::APPID; }
+ObjectType AppId::ObjectType() const { return ObjectType::APPID; }
 
-std::string DG_AppId::ObjectName() const { return DG_DxfFileToken::TableAppId; }
+std::string AppId::ObjectName() const { return DxfFileToken::TableAppId; }
 
-std::string DG_AppId::SubclassMarker() const
-{
-    return DG_DxfSubclassMarker::ApplicationId;
-}
+std::string AppId::SubclassMarker() const { return DxfSubclassMarker::ApplicationId; }
 
-DG_AppId *DG_AppId::Default() { return new DG_AppId(DefaultName); }
+AppId *AppId::Default() { return new AppId(DefaultName); }
 
-/* -------------------------- DG_AppIdsTable impls -------------------------- */
+/* -------------------------- AppIdsTable impls -------------------------- */
 
-DG_AppIdsTable::DG_AppIdsTable() {}
+AppIdsTable::AppIdsTable() {}
 
-DG_ObjectType DG_AppIdsTable::ObjectType() const
-{
-    return DG_ObjectType::APPID_CONTROL_OBJ;
-}
+ObjectType AppIdsTable::ObjectType() const { return ObjectType::APPID_CONTROL_OBJ; }
 
-std::string DG_AppIdsTable::ObjectName() const
-{
-    return DG_DxfFileToken::TableAppId;
-}
+std::string AppIdsTable::ObjectName() const { return DxfFileToken::TableAppId; }
 
-std::vector<std::string> DG_AppIdsTable::defaultEntries() const
-{
-    return {DG_AppId::DefaultName};
-}
+std::vector<std::string> AppIdsTable::defaultEntries() const { return {AppId::DefaultName}; }
 
 }// namespace dwg

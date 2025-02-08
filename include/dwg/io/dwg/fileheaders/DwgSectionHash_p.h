@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_DwgSectionHash
+enum DwgSectionHash
 {
     AcDb_Unknown = 0x00000000,
     AcDb_Security = 0x4a0204ea,

@@ -24,13 +24,13 @@
 
 namespace dwg {
 
-enum DG_Notification
+enum Notification
 {
-	NotImplemented = -1,
-	None = 0,
-	NotSupported = 1,
-	Warning = 2,
-	Error = 3,
+    NotImplemented = -1,
+    None = 0,
+    NotSupported = 1,
+    Warning = 2,
+    Error = 3,
 };
 
 }// namespace dwg

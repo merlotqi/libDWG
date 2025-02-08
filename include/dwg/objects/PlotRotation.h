@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Plot rotation
-enum DG_PlotRotation
+enum PlotRotation
 {
     /// No rotation.
     NoRotation = 0,

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls paper space linetype scaling.
-enum DG_SpaceLineTypeScaling : short
+enum SpaceLineTypeScaling : short
 {
     /// Viewport scaling governs linetype scaling.
     Viewport = 0,

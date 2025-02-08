@@ -27,15 +27,15 @@
 
 namespace dwg {
 
-class DG_BlockRecord;
+class BlockRecord;
 
-class LIBDWG_API DG_Block : public DG_Entity
+class LIBDWG_API Block : public Entity
 {
     // Block's name (string representation)
     std::string _name;
 
     // Flags associated with the block type
-    DG_BlockTypeFlags _flags;
+    BlockTypeFlags _flags;
 
     // Base point of the block, default initialized to zero
     XYZ _base_point = XYZ::Zero;
@@ -48,13 +48,13 @@ class LIBDWG_API DG_Block : public DG_Entity
 
 public:
     // Constructor accepting a BlockRecord pointer
-    DG_Block(DG_BlockRecord *record);
+    Block(BlockRecord *record);
 
     // Destructor
-    ~DG_Block();
+    ~Block();
 
     // Overrides the ObjectType method to return the type of object
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     // Overrides the ObjectName method to return the object's name
     std::string objectName() const override;
@@ -63,41 +63,41 @@ public:
     std::string subclassMarker() const override;
 
     // Returns the associated BlockRecord pointer
-    DG_BlockRecord *BlockRecord() const;
+    BlockRecord *BlockRecord() const;
 
     // Getter for the block's name
-    std::string Name() const;
+    std::string name() const;
 
     // Setter for the block's name
-    void Name(const std::string &name);
+    void setName(const std::string &name);
 
     // Getter for the block's flags
-    DG_BlockTypeFlags Flags() const;
+    BlockTypeFlags flags() const;
 
     // Setter for the block's flags
-    void Flags(DG_BlockTypeFlags flags);
+    void setFlags(BlockTypeFlags flags);
 
     // Getter for the block's base point
-    XYZ BasePoint() const;
+    XYZ basePoint() const;
 
     // Setter for the block's base point
-    void BasePoint(const XYZ &);
+    void setBasePoint(const XYZ &);
 
     // Getter for the block's xref path
-    std::string XrefPath() const;
+    std::string xrefPath() const;
 
     // Setter for the block's xref path
-    void XrefPath(const std::string &);
+    void setXrefPath(const std::string &);
 
     // Getter for the block's comments
-    std::string Comments() const;
+    std::string comments() const;
 
     // Setter for the block's comments
-    void Comments(const std::string &);
+    void setComments(const std::string &);
 
 protected:
     // Protected default constructor
-    DG_Block();
+    Block();
 };
 
 }// namespace dwg

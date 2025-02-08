@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DG_FaceLightingQualityType : short
+enum FaceLightingQualityType : short
 {
     NoLighting = 0,
     PerFaceLighting = 1,

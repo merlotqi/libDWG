@@ -25,195 +25,186 @@
 
 namespace dwg {
 
-DG_HatchBoundaryPath::HBP_Edge::HBP_Edge() {}
+HatchBoundaryPath::HBP_Edge::HBP_Edge() {}
 
-DG_HatchBoundaryPath::HBP_Edge::~HBP_Edge() {}
+HatchBoundaryPath::HBP_Edge::~HBP_Edge() {}
 
-DG_HatchBoundaryPath::HBP_Edge *DG_HatchBoundaryPath::HBP_Edge::Clone() const { return nullptr; }
+HatchBoundaryPath::HBP_Edge *HatchBoundaryPath::HBP_Edge::Clone() const { return nullptr; }
 
-DG_HatchBoundaryPath::DG_HatchBoundaryPath() {}
+HatchBoundaryPath::HatchBoundaryPath() {}
 
-DG_HatchBoundaryPath::~DG_HatchBoundaryPath() {}
+HatchBoundaryPath::~HatchBoundaryPath() {}
 
-bool DG_HatchBoundaryPath::IsPolyline() const { return false; }
+bool HatchBoundaryPath::IsPolyline() const { return false; }
 
-DG_BoundaryPathFlags DG_HatchBoundaryPath::Flags() const { return DG_BoundaryPathFlags(); }
+BoundaryPathFlags HatchBoundaryPath::Flags() const { return BoundaryPathFlags(); }
 
-void DG_HatchBoundaryPath::Flags(DG_BoundaryPathFlags) {}
+void HatchBoundaryPath::Flags(BoundaryPathFlags) {}
 
-std::vector<DG_HatchBoundaryPath::HBP_Edge *> DG_HatchBoundaryPath::Edges() const { return std::vector<HBP_Edge *>(); }
+std::vector<HatchBoundaryPath::HBP_Edge *> HatchBoundaryPath::Edges() const { return std::vector<HBP_Edge *>(); }
 
-void DG_HatchBoundaryPath::Edges(const std::vector<HBP_Edge *> &edges) {}
+void HatchBoundaryPath::Edges(const std::vector<HBP_Edge *> &edges) {}
 
-std::vector<DG_Entity *> DG_HatchBoundaryPath::Entities() const { return std::vector<DG_Entity *>(); }
+std::vector<Entity *> HatchBoundaryPath::Entities() const { return std::vector<Entity *>(); }
 
-void DG_HatchBoundaryPath::Entities(const std::vector<DG_Entity *> &entities) {}
+void HatchBoundaryPath::Entities(const std::vector<Entity *> &entities) {}
 
 /* --------------------------------- HBP_Arc -------------------------------- */
 
-DG_HatchBoundaryPath::HBP_Arc::HBP_Arc()
+HatchBoundaryPath::HBP_Arc::HBP_Arc()
     : _center(XY::Zero), _radius(0.0), _startAngle(0.0), _endAngle(2 * M_PI), _counterClockWise(false)
 {
 }
 
-DG_HatchBoundaryPath::HBP_Arc::~HBP_Arc() {}
+HatchBoundaryPath::HBP_Arc::~HBP_Arc() {}
 
-DG_HatchBoundaryPath::HBP_EdgeType DG_HatchBoundaryPath::HBP_Arc::Type() const { return HBP_EdgeType::HBP_CircularArc; }
+HatchBoundaryPath::HBP_EdgeType HatchBoundaryPath::HBP_Arc::Type() const { return HBP_EdgeType::HBP_CircularArc; }
 
-XY DG_HatchBoundaryPath::HBP_Arc::Center() const { return _center; }
+XY HatchBoundaryPath::HBP_Arc::Center() const { return _center; }
 
-void DG_HatchBoundaryPath::HBP_Arc::Center(const XY &center) { _center = center; }
+void HatchBoundaryPath::HBP_Arc::Center(const XY &center) { _center = center; }
 
-double DG_HatchBoundaryPath::HBP_Arc::Radius() const { return _radius; }
+double HatchBoundaryPath::HBP_Arc::Radius() const { return _radius; }
 
-void DG_HatchBoundaryPath::HBP_Arc::Radius(double radius) { _radius = radius; }
+void HatchBoundaryPath::HBP_Arc::Radius(double radius) { _radius = radius; }
 
-double dwg::DG_HatchBoundaryPath::HBP_Arc::StartAngle() const { return _startAngle; }
+double dwg::HatchBoundaryPath::HBP_Arc::StartAngle() const { return _startAngle; }
 
-void dwg::DG_HatchBoundaryPath::HBP_Arc::StartAngle(double startAngle) { _startAngle = startAngle; }
+void dwg::HatchBoundaryPath::HBP_Arc::StartAngle(double startAngle) { _startAngle = startAngle; }
 
-double DG_HatchBoundaryPath::HBP_Arc::EndAngle() const { return _endAngle; }
+double HatchBoundaryPath::HBP_Arc::EndAngle() const { return _endAngle; }
 
-void DG_HatchBoundaryPath::HBP_Arc::EndAngle(double endAngle) { _endAngle = endAngle; }
+void HatchBoundaryPath::HBP_Arc::EndAngle(double endAngle) { _endAngle = endAngle; }
 
-bool DG_HatchBoundaryPath::HBP_Arc::CounterClockWise() const { return _counterClockWise; }
+bool HatchBoundaryPath::HBP_Arc::CounterClockWise() const { return _counterClockWise; }
 
-void DG_HatchBoundaryPath::HBP_Arc::CounterClockWise(bool counterClockWise) { _counterClockWise = counterClockWise; }
+void HatchBoundaryPath::HBP_Arc::CounterClockWise(bool counterClockWise) { _counterClockWise = counterClockWise; }
 
 /* ------------------------------- HBP_Ellipse ------------------------------ */
 
-DG_HatchBoundaryPath::HBP_Ellipse::HBP_Ellipse()
+HatchBoundaryPath::HBP_Ellipse::HBP_Ellipse()
     : _center(XY::Zero), _majorAxisEndPoint(XY::Zero), _minorToMajorRatio(0.0), _startAngle(0.0), _endAngle(2 * M_PI),
       _counterClockWise(false)
 {
 }
 
-DG_HatchBoundaryPath::HBP_Ellipse::~HBP_Ellipse() {}
+HatchBoundaryPath::HBP_Ellipse::~HBP_Ellipse() {}
 
-DG_HatchBoundaryPath::HBP_EdgeType DG_HatchBoundaryPath::HBP_Ellipse::Type() const
-{
-    return HBP_EdgeType::HBP_EllipticArc;
-}
+HatchBoundaryPath::HBP_EdgeType HatchBoundaryPath::HBP_Ellipse::Type() const { return HBP_EdgeType::HBP_EllipticArc; }
 
-XY DG_HatchBoundaryPath::HBP_Ellipse::Center() const { return _center; }
+XY HatchBoundaryPath::HBP_Ellipse::Center() const { return _center; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::Center(const XY &center) { _center = center; }
+void HatchBoundaryPath::HBP_Ellipse::Center(const XY &center) { _center = center; }
 
-XY DG_HatchBoundaryPath::HBP_Ellipse::MajorAxisEndPoint() const { return _majorAxisEndPoint; }
+XY HatchBoundaryPath::HBP_Ellipse::MajorAxisEndPoint() const { return _majorAxisEndPoint; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::MajorAxisEndPoint(const XY &majorAxisEndPoint)
+void HatchBoundaryPath::HBP_Ellipse::MajorAxisEndPoint(const XY &majorAxisEndPoint)
 {
     _majorAxisEndPoint = majorAxisEndPoint;
 }
 
-double DG_HatchBoundaryPath::HBP_Ellipse::MinorToMajorRatio() const { return _minorToMajorRatio; }
+double HatchBoundaryPath::HBP_Ellipse::MinorToMajorRatio() const { return _minorToMajorRatio; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::MinorToMajorRatio(double minorToMajorRatio)
+void HatchBoundaryPath::HBP_Ellipse::MinorToMajorRatio(double minorToMajorRatio)
 {
     _minorToMajorRatio = minorToMajorRatio;
 }
 
-double DG_HatchBoundaryPath::HBP_Ellipse::StartAngle() const { return _startAngle; }
+double HatchBoundaryPath::HBP_Ellipse::StartAngle() const { return _startAngle; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::StartAngle(double startAngle) { _startAngle = startAngle; }
+void HatchBoundaryPath::HBP_Ellipse::StartAngle(double startAngle) { _startAngle = startAngle; }
 
-double DG_HatchBoundaryPath::HBP_Ellipse::EndAngle() const { return _endAngle; }
+double HatchBoundaryPath::HBP_Ellipse::EndAngle() const { return _endAngle; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::EndAngle(double endAngle) { _endAngle = endAngle; }
+void HatchBoundaryPath::HBP_Ellipse::EndAngle(double endAngle) { _endAngle = endAngle; }
 
-bool DG_HatchBoundaryPath::HBP_Ellipse::CounterClockWise() const { return _counterClockWise; }
+bool HatchBoundaryPath::HBP_Ellipse::CounterClockWise() const { return _counterClockWise; }
 
-void DG_HatchBoundaryPath::HBP_Ellipse::CounterClockWise(bool counterClockWise)
-{
-    _counterClockWise = counterClockWise;
-}
+void HatchBoundaryPath::HBP_Ellipse::CounterClockWise(bool counterClockWise) { _counterClockWise = counterClockWise; }
 
 /* -------------------------------- HBP_Line -------------------------------- */
 
-DG_HatchBoundaryPath::HBP_Line::HBP_Line() : _start(XY::Zero), _end(XY::Zero) {}
+HatchBoundaryPath::HBP_Line::HBP_Line() : _start(XY::Zero), _end(XY::Zero) {}
 
-DG_HatchBoundaryPath::HBP_Line::~HBP_Line() {}
+HatchBoundaryPath::HBP_Line::~HBP_Line() {}
 
-DG_HatchBoundaryPath::HBP_EdgeType DG_HatchBoundaryPath::HBP_Line::Type() const { return HBP_EdgeType::HBP_Line; }
+HatchBoundaryPath::HBP_EdgeType HatchBoundaryPath::HBP_Line::Type() const { return HBP_EdgeType::HBP_Line; }
 
-XY DG_HatchBoundaryPath::HBP_Line::Start() const { return _start; }
+XY HatchBoundaryPath::HBP_Line::Start() const { return _start; }
 
-void DG_HatchBoundaryPath::HBP_Line::Start(const XY &start) { _start = start; }
+void HatchBoundaryPath::HBP_Line::Start(const XY &start) { _start = start; }
 
-XY DG_HatchBoundaryPath::HBP_Line::End() const { return _end; }
+XY HatchBoundaryPath::HBP_Line::End() const { return _end; }
 
-void DG_HatchBoundaryPath::HBP_Line::End(const XY &end) { _end = end; }
+void HatchBoundaryPath::HBP_Line::End(const XY &end) { _end = end; }
 
 /* ------------------------------ HBP_Polyline ------------------------------ */
 
-DG_HatchBoundaryPath::HBP_Polyline::HBP_Polyline() {}
+HatchBoundaryPath::HBP_Polyline::HBP_Polyline() {}
 
-DG_HatchBoundaryPath::HBP_Polyline::~HBP_Polyline() {}
+HatchBoundaryPath::HBP_Polyline::~HBP_Polyline() {}
 
-DG_HatchBoundaryPath::HBP_EdgeType DG_HatchBoundaryPath::HBP_Polyline::Type() const
-{
-    return HBP_EdgeType::HBP_Polyline;
-}
+HatchBoundaryPath::HBP_EdgeType HatchBoundaryPath::HBP_Polyline::Type() const { return HBP_EdgeType::HBP_Polyline; }
 
-bool DG_HatchBoundaryPath::HBP_Polyline::HasBulge() const
+bool HatchBoundaryPath::HBP_Polyline::HasBulge() const
 {
     auto itFind = std::find_if(_bulges.begin(), _bulges.end(), [](double bulge) { return bulge != 0.0; });
     return itFind != _bulges.end();
 }
 
-bool DG_HatchBoundaryPath::HBP_Polyline::IsClosed() const { return _closed; }
+bool HatchBoundaryPath::HBP_Polyline::IsClosed() const { return _closed; }
 
-void DG_HatchBoundaryPath::HBP_Polyline::IsClosed(bool isClosed) { _closed = isClosed; }
+void HatchBoundaryPath::HBP_Polyline::IsClosed(bool isClosed) { _closed = isClosed; }
 
-std::vector<XYZ> DG_HatchBoundaryPath::HBP_Polyline::Vertices() const { return _vertices; }
+std::vector<XYZ> HatchBoundaryPath::HBP_Polyline::Vertices() const { return _vertices; }
 
-void DG_HatchBoundaryPath::HBP_Polyline::Vertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
+void HatchBoundaryPath::HBP_Polyline::Vertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
 
-std::vector<double> DG_HatchBoundaryPath::HBP_Polyline::Bulges() const { return _bulges; }
+std::vector<double> HatchBoundaryPath::HBP_Polyline::Bulges() const { return _bulges; }
 
-void DG_HatchBoundaryPath::HBP_Polyline::Bulges(const std::vector<double> &bulges) { _bulges = bulges; }
+void HatchBoundaryPath::HBP_Polyline::Bulges(const std::vector<double> &bulges) { _bulges = bulges; }
 
 /* ------------------------------- HBP_Spline ------------------------------- */
 
-DG_HatchBoundaryPath::HBP_Spline::HBP_Spline() {}
+HatchBoundaryPath::HBP_Spline::HBP_Spline() {}
 
-DG_HatchBoundaryPath::HBP_Spline::~HBP_Spline() {}
+HatchBoundaryPath::HBP_Spline::~HBP_Spline() {}
 
-DG_HatchBoundaryPath::HBP_EdgeType DG_HatchBoundaryPath::HBP_Spline::Type() const { return HBP_EdgeType::HBP_Spline; }
+HatchBoundaryPath::HBP_EdgeType HatchBoundaryPath::HBP_Spline::Type() const { return HBP_EdgeType::HBP_Spline; }
 
-int DG_HatchBoundaryPath::HBP_Spline::Degree() const { return _degree; }
+int HatchBoundaryPath::HBP_Spline::Degree() const { return _degree; }
 
-void DG_HatchBoundaryPath::HBP_Spline::Degree(int degree) { _degree = degree; }
+void HatchBoundaryPath::HBP_Spline::Degree(int degree) { _degree = degree; }
 
-bool DG_HatchBoundaryPath::HBP_Spline::Rational() const { return _rational; }
+bool HatchBoundaryPath::HBP_Spline::Rational() const { return _rational; }
 
-void DG_HatchBoundaryPath::HBP_Spline::Rational(bool rational) { _rational = rational; }
+void HatchBoundaryPath::HBP_Spline::Rational(bool rational) { _rational = rational; }
 
-bool DG_HatchBoundaryPath::HBP_Spline::Periodic() const { return _periodic; }
+bool HatchBoundaryPath::HBP_Spline::Periodic() const { return _periodic; }
 
-void DG_HatchBoundaryPath::HBP_Spline::Periodic(bool periodic) { _periodic = periodic; }
+void HatchBoundaryPath::HBP_Spline::Periodic(bool periodic) { _periodic = periodic; }
 
-std::vector<double> DG_HatchBoundaryPath::HBP_Spline::Knots() const { return _knots; }
+std::vector<double> HatchBoundaryPath::HBP_Spline::Knots() const { return _knots; }
 
-void DG_HatchBoundaryPath::HBP_Spline::Knots(const std::vector<double> &knots) { _knots = knots; }
+void HatchBoundaryPath::HBP_Spline::Knots(const std::vector<double> &knots) { _knots = knots; }
 
-std::vector<XYZ> DG_HatchBoundaryPath::HBP_Spline::ControlPoints() const { return _controlPoints; }
+std::vector<XYZ> HatchBoundaryPath::HBP_Spline::ControlPoints() const { return _controlPoints; }
 
-void DG_HatchBoundaryPath::HBP_Spline::ControlPoints(const std::vector<XYZ> &controlPoints)
+void HatchBoundaryPath::HBP_Spline::ControlPoints(const std::vector<XYZ> &controlPoints)
 {
     _controlPoints = controlPoints;
 }
 
-std::vector<XY> DG_HatchBoundaryPath::HBP_Spline::FitPoints() const { return _fitPoints; }
+std::vector<XY> HatchBoundaryPath::HBP_Spline::FitPoints() const { return _fitPoints; }
 
-void DG_HatchBoundaryPath::HBP_Spline::FitPoints(const std::vector<XY> &fitPoints) { _fitPoints = fitPoints; }
+void HatchBoundaryPath::HBP_Spline::FitPoints(const std::vector<XY> &fitPoints) { _fitPoints = fitPoints; }
 
-XY DG_HatchBoundaryPath::HBP_Spline::StartTangent() const { return _startTangent; }
+XY HatchBoundaryPath::HBP_Spline::StartTangent() const { return _startTangent; }
 
-void DG_HatchBoundaryPath::HBP_Spline::StartTangent(const XY &startTangent) { _startTangent = startTangent; }
+void HatchBoundaryPath::HBP_Spline::StartTangent(const XY &startTangent) { _startTangent = startTangent; }
 
-XY DG_HatchBoundaryPath::HBP_Spline::EndTangent() const { return _endTangent; }
+XY HatchBoundaryPath::HBP_Spline::EndTangent() const { return _endTangent; }
 
-void DG_HatchBoundaryPath::HBP_Spline::EndTangent(const XY &endTangent) { _endTangent = endTangent; }
+void HatchBoundaryPath::HBP_Spline::EndTangent(const XY &endTangent) { _endTangent = endTangent; }
 
 }// namespace dwg

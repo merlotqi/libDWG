@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Object snap mode AcDb::OsnapMask
-enum DG_ObjectSnapMode : unsigned short
+enum ObjectSnapMode : unsigned short
 {
     /// Switch off all snapping modes
     None = 0,
@@ -58,10 +58,8 @@ enum DG_ObjectSnapMode : unsigned short
     /// Parallel lines
     Parallel = 8192,// 0x2000
     /// All snapping modes on
-    AllModes = Parallel | Extension | ApparentIntersection |
-               ClearsAllObjectSnaps | Nearest | Tangent | Perpendicular |
-               Insertion | Intersection | Quadrant | Node | Center | MidPoint |
-               EndPoint,// 0x3FFF
+    AllModes = Parallel | Extension | ApparentIntersection | ClearsAllObjectSnaps | Nearest | Tangent | Perpendicular |
+               Insertion | Intersection | Quadrant | Node | Center | MidPoint | EndPoint,// 0x3FFF
     /// Switch off snapping
     SwitchedOff = 16384,// 0x4000
 };

@@ -28,16 +28,16 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_MLineStyle : public DG_NonGraphicalObject
+class LIBDWG_API MLineStyle : public NonGraphicalObject
 {
 public:
-    DG_MLineStyle();
-    DG_MLineStyle(const std::string &name);
+    MLineStyle();
+    MLineStyle(const std::string &name);
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle Default;
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 

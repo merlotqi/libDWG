@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the placement of dimension text.
-enum DG_DimensionTextVerticalAlignment
+enum DimensionTextVerticalAlignment
 {
     /// Centers the dimension text between the two parts of the dimension line.
     Centered = 0,

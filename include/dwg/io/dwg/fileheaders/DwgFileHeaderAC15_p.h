@@ -34,7 +34,7 @@ public:
     static std::vector<unsigned char> EndSentinel;
 
     DwgFileHeaderAC15();
-    DwgFileHeaderAC15(DG_ACadVersion version);
+    DwgFileHeaderAC15(ACadVersion version);
     virtual ~DwgFileHeaderAC15();
 
     std::map<int, DwgSectionLocatorRecord> Records() const;

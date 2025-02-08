@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Layout flags
-enum DG_LayoutFlag : short
+enum LayoutFlag : short
 {
     /// None
     None = 0,
@@ -36,6 +36,6 @@ enum DG_LayoutFlag : short
     /// Indicates the LIMCHECK value for this layout when this layout is current
     LimitsChecking = 2,
 };
-CPL_DECLARE_FLAGS(DG_LayoutFlags, DG_LayoutFlag)
+CPL_DECLARE_FLAGS(LayoutFlags, LayoutFlag)
 
 }// namespace dwg

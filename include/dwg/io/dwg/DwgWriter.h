@@ -31,7 +31,7 @@ namespace dwg {
 
 class DwgFileHeader;
 class IDwgFileHeaderWriter;
-class LIBDWG_API DG_DwgWriter : public CadWriterBase<CadWriterConfiguration>
+class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
 {
 private:
     ACadVersion _version;
@@ -57,7 +57,6 @@ private:
     void writeTemplate();
     void writeHandles();
 };
-
 
 
 }// namespace dwg

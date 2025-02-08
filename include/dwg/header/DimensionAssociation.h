@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls the associativity of dimension objects.
-enum DG_DimensionAssociation : short
+enum DimensionAssociation : short
 {
     /// Creates exploded dimensions; there is no association between elements of the dimension, and the lines, arcs, arrowheads, and text of a dimension are drawn as separate objects
     CreateExplodedDimensions = 0,

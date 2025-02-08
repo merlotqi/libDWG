@@ -31,12 +31,12 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_VisualStyle : public DG_NonGraphicalObject
+class LIBDWG_API VisualStyle : public NonGraphicalObject
 {
 public:
     VisualStyle();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
@@ -49,14 +49,14 @@ public:
     int Type() const;
     void Type(int);
 
-    DG_FaceLightingModelType FaceLightingModel() const;
-    void FaceLightingModel(DG_FaceLightingModelType);
+    FaceLightingModelType FaceLightingModel() const;
+    void FaceLightingModel(FaceLightingModelType);
 
-    DG_FaceLightingQualityType FaceLightingQuality() const;
-    void FaceLightingQuality(DG_FaceLightingQualityType);
+    FaceLightingQualityType FaceLightingQuality() const;
+    void FaceLightingQuality(FaceLightingQualityType);
 
-    DG_FaceColorMode FaceColorMode() const;
-    void FaceColorMode(DG_FaceColorMode);
+    FaceColorMode FaceColorMode() const;
+    void FaceColorMode(FaceColorMode);
 
     FaceModifierType FaceModifiers() const;
     void FaceModifiers(FaceModifierType);
@@ -67,11 +67,11 @@ public:
     double FaceSpecularLevel() const;
     void FaceSpecularLevel(double);
 
-    DG_Color Color() const;
-    void Color(const DG_Color &);
+    Color Color() const;
+    void Color(const Color &);
 
-    DG_Color FaceStyleMonoColor() const;
-    void FaceStyleMonoColor(const DG_Color &);
+    Color FaceStyleMonoColor() const;
+    void FaceStyleMonoColor(const Color &);
 
     bool PrecisionFlag() const;
     void PrecisionFlag(bool);

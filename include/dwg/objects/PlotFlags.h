@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Defines the plot settings flag.
-enum DG_PlotFlag
+enum PlotFlag
 {
     /// None
     None = 0,
@@ -75,6 +75,6 @@ enum DG_PlotFlag
     PrevPlotInit = 16384
 };
 
-CPL_DECLARE_FLAGS(DG_PlotFlags, DG_PlotFlag)
+CPL_DECLARE_FLAGS(PlotFlags, PlotFlag)
 
 }// namespace dwg

@@ -26,14 +26,14 @@
 
 namespace dwg {
 
-class LIBDWG_API DG_AcdbPlaceHolder : public DG_NonGraphicalObject
+class LIBDWG_API AcdbPlaceHolder : public NonGraphicalObject
 {
 public:
-    DG_AcdbPlaceHolder();
+    AcdbPlaceHolder();
 
-    ~DG_AcdbPlaceHolder();
+    ~AcdbPlaceHolder();
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     std::string objectName() const override;
 

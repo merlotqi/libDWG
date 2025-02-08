@@ -32,19 +32,19 @@ namespace dwg {
  * @brief Represents a value associated with a group code in the DWG format.
  * 
  * This class provides a static method to transform an integer code into a
- * corresponding `DG_GroupCodeValueType`.
+ * corresponding `GroupCodeValueType`.
  */
 class LIBDWG_API GroupCodeValue
 {
 public:
     /**
-     * @brief Transforms an integer group code into a corresponding `DG_GroupCodeValueType`.
+     * @brief Transforms an integer group code into a corresponding `GroupCodeValueType`.
      * 
      * This static method maps a given group code (integer) to the appropriate
-     * `DG_GroupCodeValueType`.
+     * `GroupCodeValueType`.
      * 
      * @param code The group code to be transformed.
-     * @return The corresponding `DG_GroupCodeValueType`.
+     * @return The corresponding `GroupCodeValueType`.
      */
     static GroupCodeValueType transformValue(int code);
 };

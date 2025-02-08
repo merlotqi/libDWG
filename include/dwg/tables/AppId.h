@@ -27,32 +27,32 @@
 namespace dwg {
 
 /**
- * @class DG_AppId
+ * @class AppId
  * @brief Represents an application ID in a DWG/DXF drawing.
  *
  * An application ID associates an external application or database with the drawing.
  */
-class LIBDWG_API DG_AppId : public DG_TableEntry
+class LIBDWG_API AppId : public TableEntry
 {
 public:
     /**
-     * @brief Constructs a DG_AppId with a given name.
+     * @brief Constructs a AppId with a given name.
      * 
      * @param name The name of the application ID.
      */
-    DG_AppId(const std::string &name);
+    AppId(const std::string &name);
 
     /**
-     * @brief Destructor for DG_AppId.
+     * @brief Destructor for AppId.
      */
-    ~DG_AppId();
+    ~AppId();
 
     /**
      * @brief Retrieves the object type for the application ID.
      * 
      * @return The object type.
      */
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     /**
      * @brief Retrieves the object name for the application ID.
@@ -77,31 +77,31 @@ public:
     /**
      * @brief Retrieves the default application ID.
      * 
-     * @return A pointer to the default DG_AppId.
+     * @return A pointer to the default AppId.
      */
-    static DG_AppId *Default();
+    static AppId *Default();
 };
 
 /**
- * @class DG_AppIdsTable
+ * @class AppIdsTable
  * @brief Represents a table of application IDs in a DWG/DXF drawing.
  *
  * This table holds multiple application IDs that associate external applications with the drawing.
  */
-class LIBDWG_API DG_AppIdsTable : public DG_Table
+class LIBDWG_API AppIdsTable : public Table
 {
 public:
     /**
-     * @brief Constructs a DG_AppIdsTable object.
+     * @brief Constructs a AppIdsTable object.
      */
-    DG_AppIdsTable();
+    AppIdsTable();
 
     /**
      * @brief Retrieves the object type for the application IDs table.
      * 
      * @return The object type.
      */
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
 
     /**
      * @brief Retrieves the object name for the application IDs table.

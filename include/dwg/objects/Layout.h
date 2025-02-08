@@ -28,18 +28,15 @@
 
 namespace dwg {
 
-class DG_Layout : public DG_PlotSettings
+class Layout : public PlotSettings
 {
 public:
-    DG_Layout(const std::string &name,
-              const std::string &blockName = std::string())
-    {
-    }
+    Layout(const std::string &name, const std::string &blockName = std::string()) {}
 
     static constexpr auto ModelLayoutName = "Model";
     static constexpr auto PaperLayoutName = "Layout1";
 
-    DG_ObjectType objectType() const override;
+    ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
