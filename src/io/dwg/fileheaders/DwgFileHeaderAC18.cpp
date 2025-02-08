@@ -23,7 +23,7 @@
 #include "DwgFileHeaderAC18.h"
 
 namespace dwg {
-namespace io {
+
 
 DwgFileHeaderAC18::DwgFileHeaderAC18() {}
 
@@ -48,5 +48,5 @@ DwgSectionDescriptor &DwgFileHeaderAC18::GetDescriptor(const std::string &name)
 }
 
 
-}// namespace io
+
 }// namespace dwg

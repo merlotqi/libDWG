@@ -31,9 +31,12 @@ class ICadReader
 {
 public:
     ICadReader() = default;
+
     virtual ~ICadReader() = default;
-    virtual CadDocument *Read() = 0;
-    virtual CadHeader *ReadHeader() = 0;
+
+    virtual CadDocument *read() = 0;
+
+    virtual CadHeader *readHeader() = 0;
 };
 
 }// namespace dwg

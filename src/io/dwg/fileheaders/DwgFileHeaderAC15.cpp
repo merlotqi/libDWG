@@ -24,7 +24,7 @@
 #include <stdexcept>
 
 namespace dwg {
-namespace io {
+
 
 std::vector<unsigned char> DwgFileHeaderAC15::EndSentinel = {
         0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
@@ -47,5 +47,5 @@ DwgSectionDescriptor &DwgFileHeaderAC15::GetDescriptor(const std::string &name)
     throw new std::exception("not implemented");
 }
 
-}// namespace io
+
 }// namespace dwg

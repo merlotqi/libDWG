@@ -24,10 +24,8 @@
 #pragma once
 
 #include <dwg/io/dwg/CRC.h>
-#include <dwg/utility/memorymanager.h>
 
 namespace dwg {
-
 
 class CRC32StreamHandlerBase
 {
@@ -54,5 +52,4 @@ public:
     int RawWrite(const unsigned char *buff, int nLen) override;
 };
 
-}
 }

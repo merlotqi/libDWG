@@ -22,16 +22,13 @@
 
 #pragma once
 
-
-#include <dwg/CadDocument.h>
-#include <dwg/Encoding.h>
 #include <dwg/io/CadWriterConfiguration.h>
 #include <dwg/io/ICadWriter.h>
 #include <fstream>
 
 namespace dwg {
 
-class CadWriterConfiguration;
+class CadDocument;
 
 template<class T>
 class CadWriterBase : public ICadWriter, protected T
@@ -40,28 +37,16 @@ class CadWriterBase : public ICadWriter, protected T
                   "T must is base CadWriterConfiguration");
 
 public:
-    CadWriterBase() = default;
+    CadWriterBase();
 
-    CadWriterBase(std::ofstream *stream, CadDocument *document)
-        : _stream(stream), _document(document)
-    {
-    }
+    CadWriterBase(std::ofstream *stream, CadDocument *document);
 
-    virtual void Write() override
-    {
-        DxfClassCollection::UpdateDxfClasses(_document);
-        _encoding = getListedEncoding(_document->Header.CodePage);
-    }
+    virtual void write() override;
 
 protected:
-    Encoding getListedEncoding(const std::string &codePage)
-    {
-        CodePage code = CadUtils::GetCodePage(codePage);
-        return Encoding(code);
-    }
+    Encoding getListedEncoding(const std::string &codePage);
 
 protected:
-    T _configuration;
     std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;

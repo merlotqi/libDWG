@@ -24,7 +24,7 @@
 #include "DwgStreamWriterAC15.h"
 
 namespace dwg {
-namespace io {
+
 
     DwgStreamWriterAC15::DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC12(stream, encoding)
@@ -41,5 +41,5 @@ namespace io {
         
     }
 
-}// namespace io
+
 }// namespace dwg

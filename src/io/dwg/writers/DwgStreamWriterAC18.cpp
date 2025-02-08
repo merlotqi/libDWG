@@ -25,7 +25,7 @@
 #include "DwgStreamWriterAC18.h"
 
 namespace dwg {
-namespace io {
+
 
     DwgStreamWriterAC18::DwgStreamWriterAC18(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC15(stream, encoding)
@@ -37,5 +37,5 @@ namespace io {
     void DwgStreamWriterAC18::WriteEnColor(Color color, Transparency transparency,
                       bool isBookColor) {}
 
-}// namespace io
+
 }// namespace dwg

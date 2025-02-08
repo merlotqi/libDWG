@@ -23,7 +23,7 @@
 #include "DwgCheckSumCalculator.h"
 
 namespace dwg {
-namespace io {
+
 
 unsigned char DwgCheckSumCalculator::MagicSequence[] = {
         0x29, 0x23, 0xbe, 0x84, 0xe1, 0x6c, 0xd6, 0xae, 0x52, 0x90, 0x49, 0xf1,
@@ -80,5 +80,5 @@ DwgCheckSumCalculator::Calculate(unsigned int seed,
     return (sum2 << 0x10) | (sum1 & 0xFFFF);
 }
 
-}// namespace io
+
 }// namespace dwg

@@ -22,63 +22,84 @@
 
 #pragma once
 
-#include <dwg/io/ICadReader.h>
+#include <dwg/io/CadReaderBase.h>
+#include <dwg/io/dwg/DwgReaderConfiguration.h>
 
 namespace dwg {
 
+class DwgPreview;
 class DwgDocumentBuilder;
 class DwgFileHeader;
 class IDwgStreamReader;
 class DwgFileHeaderAC15;
+class DwgFileHeaderAC18;
+class DwgFileHeaderAC21;
+class DwgLocalSectionMap;
 
-}// namespace dwg
-
-namespace dwg {
-
-
-class DwgReaderConfiguration : public CadReaderConfiguration
+class LIBDWG_API DwgReader : public CadReaderBase<DwgReaderConfiguration>
 {
-    bool m_crcCheck;
-
-public:
-    DwgReaderConfiguration() : CadReaderConfiguration() { m_crcCheck = false; }
-
-    bool CrcCheck() const { return m_crcCheck; }
-    void CrcCheck(bool value) { m_crcCheck = value; }
-};
-
-
-class DwgReader : public CadReaderBase<DwgReaderConfiguration>
-{
-    DwgDocumentBuilder *m_builder;
-    DwgFileHeader *m_fileHeader;
+    DwgDocumentBuilder *_builder;
+    DwgFileHeader *_fileHeader;
 
 public:
     DwgReader(const std::string &name);
+    
+    DwgReader(std::ifsteam *stream);
+    
+    ~DwgReader();
+    
+    CadDoument *read() override;
+    
+    CadHeader *readHander() override;
+    
+    CadSummaryInfo *readSummaryInfo();
 
-    CadDoument *Read();
-    CadSummaryInfo *ReadSummaryInfo();
-    CadHeader *ReadHander();
+    DwgPreview* readPreview();
+
 
 private:
     DwgFileHeader *readFileHeader();
-    std::map<uint64_t, int64_t> readHandles();
-    uint32_t readObjFreeSpace();
+
+    DxfClassCollection readClasses();
+
+    std::map<unsigned long long, unsigned long long> readHandles();
+
+    unsigned int readObjFreeSpace();
+
     void readTemplate();
+
     void readObjects();
+
     void readFileHeaderAC15(DwgFileHeaderAC15 *fileheader,
                             IDwgStreamReader *sender);
+    
     void readFileHeaderAC18(DwgFileHeaderAC18 *fileheader,
                             IDwgStreamReader *sender);
+    
     void readFileHeaderAC21(DwgFileHeaderAC21 *fileheader,
                             IDwgStreamReader *sreader);
+    
     void readFileMetaData(DwgFileHeaderAC18 *fileheader,
                           IDwgStreamReader *sreader);
+    
     IDwgStreamReader *getSectionStream(const std::string &sectionName);
+    
     void getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType,
                            int64_t &decompressedSize, int64_t &compressedSize,
                            int64_t &compressionType, int64_t &checksum);
-};
 
+    std::ifstream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &section_name); 
+    
+    std::ifstream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &section_name); 
+    
+    void decryptDataSection(const DwgLocalSectionMap &section, IDwgStreamReader *sreader);
+    
+    std::istringstream getSectionBuffer21(DwgFileHeaderAC21* fileheader, const std::string &sectionName);
+    
+    void reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor, int blockSize);
+    
+    std::vector<unsigned char> getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize, 
+                unsigned long long uncompressedSize, unsigned long long correctionFactor, int blockSize, std::istream* stream);
+};
 
 }// namespace dwg

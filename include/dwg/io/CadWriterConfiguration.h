@@ -22,19 +22,33 @@
 
 #pragma once
 
+#include <dwg/exports.h>
+
 namespace dwg {
 
-class CadWriterConfiguration
+class LIBDWG_API CadWriterConfiguration
 {
 public:
-    CadWriterConfiguration() = default;
-    virtual ~CadWriterConfiguration() = default;
+    CadWriterConfiguration();
 
-    bool CloseStream() const;
-    void CloseStream(bool);
+    virtual ~CadWriterConfiguration();
 
-    bool WriteXRords() const;
-    void WriteXRords(bool);
+    bool closeStream() const;
+
+    void setCloseStream(bool value);
+
+    bool writeXRecords() const;
+
+    void setWriteXRecords(bool value);
+
+    bool writeXData() const;
+
+    void setWriteXData(bool value);
+
+private:
+    bool _closeStream;
+    bool _writeXRecords;
+    bool _writeXData;
 };
 
 }// namespace dwg

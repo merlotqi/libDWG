@@ -23,7 +23,7 @@
 #include "CRC8StreamHandler.h"
 
 namespace dwg {
-namespace io {
+
 
     unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed,
                                       const std::vector<unsigned char> &buffer,
@@ -59,5 +59,5 @@ namespace io {
         return key;
     }
 
-}// namespace io
+
 }// namespace dwg

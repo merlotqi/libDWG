@@ -31,7 +31,7 @@
 #include "ICompressor.h"
 
 namespace dwg {
-namespace io {
+
 
 int DwgFileHeaderWriterAC18::HandleSectionOffset() const { return 0; }
 
@@ -532,5 +532,5 @@ void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream,
     writer.Write(map.ODA);
 }
 
-}// namespace io
+
 }// namespace dwg

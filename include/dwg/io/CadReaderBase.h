@@ -23,27 +23,27 @@
 #pragma once
 
 #include <dwg/io/ICadReader.h>
+#include <dwg/io/CadReaderConfiguration.h>
 
 namespace dwg {
 
-
 template<class T>
-class CadReaderBase : public ICadReader
+class CadReaderBase : public ICadReader, protected T
 {
-    static_assert(std::is_base_of_v<CadReaderConfiguration, T>, "");
+    static_assert(std::is_base_of<CadReaderConfiguration, T>::value,
+                  "T must is base CadReaderConfiguration");
 
 public:
     virtual ~CadReaderBase();
 
 protected:
-    CadReaderBase() = default;
+    CadReaderBase();
     CadReaderBase(const std::string &filename);
     CadReaderBase(std::ifstream *stream);
 
 protected:
-    T m_configuration;
-    CadDocument *m_document;
-    InputStream *m_fileStream;
+    CadDocument *_document;
+    std::ifstream *_fileStream;
 };
 
 

@@ -23,7 +23,7 @@
 #include "DwgStreamWriterAC21.h"
 
 namespace dwg {
-namespace io {
+
 
 DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream,
                                          Encoding encoding)
@@ -34,5 +34,5 @@ DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream,
 void DwgStreamWriterAC21::WriteVariableText(const std::string &value) {}
 void DwgStreamWriterAC21::WriteTextUnicode(const std::string &value) {}
 
-}// namespace io
+
 }// namespace dwg

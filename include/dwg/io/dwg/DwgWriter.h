@@ -28,7 +28,6 @@
 
 namespace dwg {
 
-
 class DwgFileHeader;
 class IDwgFileHeaderWriter;
 class LIBDWG_API DwgWriter : public CadWriterBase<CadWriterConfiguration>
@@ -39,24 +38,38 @@ private:
     IDwgFileHeaderWriter *_fileHeaderWriter;
 
 public:
+    DwgWriter(const std::string &filename, CadDocument *document);
+    
     DwgWriter(std::ofstream *stream, CadDocument *document);
-    void Write() override;
+
+    void write() override;
 
 private:
     void getFileHeaderWriter();
+
     void writeHeader();
+
     void writeClasses();
+
     void writeSummaryInfo();
+
     void writePreview();
+
     void writeAppInfo();
+
     void writeFileDepList();
+
     void writeRevHistory();
+
     void writeAuxHeader();
+
     void writeObjects();
+
     void writeObjFreeSpace();
+
     void writeTemplate();
+
     void writeHandles();
 };
-
 
 }// namespace dwg

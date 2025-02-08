@@ -25,7 +25,7 @@
 #include "DwgStreamWriterAC24.h"
 
 namespace dwg {
-namespace io {
+
 
     DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterAC21(stream, encoding)
@@ -34,5 +34,5 @@ namespace io {
 
     void DwgStreamWriterAC24::WriteObjectType(short value) {}
 
-}// namespace io
+
 }// namespace dwg

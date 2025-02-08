@@ -22,7 +22,6 @@
 
 #pragma once
 
-
 namespace dwg {
 
 class DwgLocalSectionMap
@@ -31,44 +30,44 @@ public:
     DwgLocalSectionMap();
     DwgLocalSectionMap(int value);
 
-    int Compression() const;
-    void Compression(int);
+    int compression() const;
+    void setCompression(int);
 
-    bool IsEmpty() const;
-    void IsEmpty(bool);
+    bool isEmpty() const;
+    void setIsEmpty(bool);
 
-    unsigned long long Offset() const;
-    void Offset(unsigned long long);
+    unsigned long long offset() const;
+    void setOffset(unsigned long long);
 
-    unsigned long long CompressedSize() const;
-    void CompressedSize(unsigned long long);
+    unsigned long long compressedSize() const;
+    void setCompressedSize(unsigned long long);
 
-    int PageNumber() const;
-    void PageNumber(int);
+    int pageNumber() const;
+    void setPageNumber(int);
 
-    unsigned long long DecompressedSize() const;
-    void DecompressedSize(unsigned long long);
+    unsigned long long decompressedSize() const;
+    void setDecompressedSize(unsigned long long);
 
-    long long Seeker() const;
-    void Seeker(long long);
+    long long seeker() const;
+    void setSeeker(long long);
 
-    long long Size() const;
-    void Size(long long);
+    long long size() const;
+    void setSize(long long);
 
-    unsigned long long Checksum() const;
-    void Checksum(unsigned long long);
+    unsigned long long checksum() const;
+    void setChecksum(unsigned long long);
 
     unsigned long long CRC() const;
-    void CRC(unsigned long long);
+    void setCRC(unsigned long long);
 
-    long long PageSize() const;
-    void PageSize(long long);
+    long long pageSize() const;
+    void setPageSize(long long);
 
     unsigned int ODA() const;
-    void ODA(unsigned int);
+    void setODA(unsigned int);
 
-    int SectionMap() const;
-    void SectionMap(int);
+    int sectionMap() const;
+    void setSectionMap(int);
 };
 
 }// namespace dwg

@@ -23,12 +23,12 @@
 #include "DwgStreamWriterAC12.h"
 
 namespace dwg {
-namespace io {
+
 
     DwgStreamWriterAC12::DwgStreamWriterAC12(std::ostream *stream, Encoding encoding)
         : DwgStreamWriterBase(stream, encoding)
     {
     }
 
-}// namespace io
+
 }// namespace dwg

@@ -23,25 +23,6 @@
 #include <dwg/io/dwg/CRC_p.h>
 
 namespace dwg {
-namespace io {
-
-    unsigned short CRC::ApplyCrc8(unsigned short dx,
-                                    const std::vector<unsigned char> &arr)
-    {
-        unsigned short retval = dx;
-        for (size_t i = 0; i < arr.size(); ++i)
-        {
-            unsigned char al =
-                    (unsigned char) (arr[i] ^
-                                     (unsigned int) (unsigned char) (retval &
-                                                                     (unsigned int)
-                                                                             UCHAR_MAX));
-            retval = (unsigned short) ((unsigned short) (retval >> 8 &
-                                                         UCHAR_MAX) ^
-                                       (unsigned int) CrcTable[al & UCHAR_MAX]);
-        }
-        return retval;
-    }
 
 std::vector<unsigned short> CRC::CrcTable = {
         0x0000, 0xC0C1, 0xC181, 0x0140, 0xC301, 0x03C0, 0x0280, 0xC241, 0xC601,
@@ -119,5 +100,22 @@ std::vector<unsigned int> CRC::Crc32Table = {
         0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,
         0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-}// namespace io
+unsigned short CRC::applyCrc8(unsigned short dx,
+                                const std::vector<unsigned char> &arr)
+{
+    unsigned short retval = dx;
+    for (size_t i = 0; i < arr.size(); ++i)
+    {
+        unsigned char al =
+                (unsigned char) (arr[i] ^
+                                 (unsigned int) (unsigned char) (retval &
+                                                                 (unsigned int)
+                                                                         UCHAR_MAX));
+        retval = (unsigned short) ((unsigned short) (retval >> 8 &
+                                                     UCHAR_MAX) ^
+                                   (unsigned int) CrcTable[al & UCHAR_MAX]);
+    }
+    return retval;
+}
+
 }// namespace dwg

@@ -21,3 +21,22 @@
  */
 
 #pragma once
+
+#include <dwg/io/CadReaderConfiguration.h>
+
+namespace dwg {
+
+class LIBDWG_API DwgReaderConfiguration : public CadReaderConfiguration
+{
+public:
+    DwgReaderConfiguration();
+    virtual ~DwgReaderConfiguration() = default;
+
+    bool crcCheck() const;
+    void setCrcCheck(bool value);
+
+private:
+    bool _crcCheck;
+};
+
+}// namespace dwg

@@ -25,7 +25,7 @@
 #include <dwg/io/dwg/writers/DwgMergedStreamWriter.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgmMergedStreamWriterAC14 : public DwgMergedStreamWriter
 {
@@ -57,5 +57,5 @@ public
     }
 };
 
-}// namespace io
+
 }// namespace dwg

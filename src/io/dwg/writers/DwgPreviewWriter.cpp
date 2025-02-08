@@ -23,7 +23,7 @@
 #include "DwgPreviewWriter.h"
 
 namespace dwg {
-namespace io {
+
 
 std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
         0x1F, 0x25, 0x6D, 0x07, 0xD4, 0x36, 0x28, 0x28,
@@ -52,5 +52,5 @@ void DwgPreviewWriter::Write()
     _swriter->WriteBytes(_endSentinel);
 }
 
-}// namespace io
+
 }// namespace dwg

@@ -20,16 +20,27 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/io/CadWriterConfiguration.h>
 
 namespace dwg {
 
-class ICompressor
-{
-public:
-    virtual ~ICompressor() = default;
+CadWriterConfiguration::CadWriterConfiguration()
+    : _closeStream(true), _writeXRecords(false), _writeXData(true)
+{}
 
-    virtual void compress(std::vector<unsigned char>& source, int offset, int totalSize, std::ostream* dest) = 0;
-};
+CadWriterConfiguration::~CadWriterConfiguration()
+{}
+
+bool CadWriterConfiguration::closeStream() const { return _closeStream; }
+
+void CadWriterConfiguration::setCloseStream(bool value) { _closeStream = value; }
+
+bool CadWriterConfiguration::writeXRecords() const { return _writeXRecords; }
+
+void CadWriterConfiguration::setWriteXRecords(bool value) { _writeXRecords = value; }
+
+bool CadWriterConfiguration::writeXData() const { return _writeXData; }
+
+void CadWriterConfiguration::setWriteXData(bool value) { _writeXData = value; }
 
 }

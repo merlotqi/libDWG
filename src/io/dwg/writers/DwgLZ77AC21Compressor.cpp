@@ -25,7 +25,7 @@
 #include "DwgLZ77AC21Compressor.h"
 
 namespace dwg {
-namespace io {
+
 
 DwgLZ77AC21Compressor::DwgLZ77AC21Compressor() {}
 
@@ -35,5 +35,5 @@ void DwgLZ77AC21Compressor::Compress(const std::vector<unsigned char> &source,
 {
 }
 
-}// namespace io
+
 }// namespace dwg

@@ -29,26 +29,26 @@ Circle::Circle() : _center(XYZ::Zero), _normal(XYZ::AxisZ), _thickness(0.0), _ra
 
 Circle::~Circle() {}
 
-ObjectType Circle::ObjectType() const { return ObjectType::CIRCLE; }
+ObjectType Circle::objectType() const { return ObjectType::CIRCLE; }
 
-std::string Circle::ObjectName() const { return DxfFileToken::EntityCircle; }
+std::string Circle::objectName() const { return DxfFileToken::EntityCircle; }
 
-std::string Circle::SubclassMarker() const { return DxfSubclassMarker::Circle; }
+std::string Circle::subclassMarker() const { return DxfSubclassMarker::Circle; }
 
-XYZ Circle::Normal() const { return _normal; }
+XYZ Circle::normal() const { return _normal; }
 
-XYZ Circle::Center() const { return _center; }
+XYZ Circle::center() const { return _center; }
 
-double Circle::Thickness() const { return _thickness; }
+double Circle::thickness() const { return _thickness; }
 
-double Circle::Radius() const { return _radius; }
+double Circle::radius() const { return _radius; }
 
-void Circle::Normal(const XYZ &normal) { _normal = normal; }
+void Circle::setNormal(const XYZ &normal) { _normal = normal; }
 
-void Circle::Center(const XYZ &center) { _center = center; }
+void Circle::setCenter(const XYZ &center) { _center = center; }
 
-void Circle::Thickness(double thickness) { _thickness = thickness; }
+void Circle::setThickness(double thickness) { _thickness = thickness; }
 
-void Circle::Radius(double radius) { _radius = radius; }
+void Circle::setRadius(double radius) { _radius = radius; }
 
 }// namespace dwg

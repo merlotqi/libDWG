@@ -39,7 +39,7 @@
 #include <stdexcept>
 
 namespace dwg {
-namespace io {
+
 
 DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document)
     : CadWriterBase(stream, document)
@@ -303,5 +303,5 @@ void DwgWriter::writeHandles()
                                       true);
 }
 
-}// namespace io
+
 }// namespace dwg

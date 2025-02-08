@@ -29,7 +29,7 @@
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition.h>
 
 namespace dwg {
-namespace io {
+
 
 
 class DwgObjectWriter : public DwgSectionIO
@@ -137,5 +137,5 @@ private:
     void writeXRecord(XRecord xrecord);
 };
 
-}// namespace io
+
 }// namespace dwg

@@ -26,7 +26,6 @@
 
 namespace dwg {
 
-
 class DwgCheckSumCalculator
 {
 public:
@@ -36,7 +35,5 @@ public:
                                   const std::vector<unsigned char> &buffer,
                                   int offset, int size);
 };
-
-
 
 }// namespace dwg

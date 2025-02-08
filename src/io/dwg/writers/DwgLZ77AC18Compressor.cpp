@@ -25,7 +25,7 @@
 #include "DwgLZ77AC18Compressor.h"
 
 namespace dwg {
-namespace io {
+
 
 DwgLZ77AC18Compressor::DwgLZ77AC18Compressor() {}
 
@@ -53,5 +53,5 @@ void DwgLZ77AC18Compressor::applyMask(int matchPosition, int compressionOffset,
 
 bool DwgLZ77AC18Compressor::compressChunk(int &offset, int &matchPos) {}
 
-}// namespace io
+
 }// namespace dwg

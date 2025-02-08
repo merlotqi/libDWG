@@ -33,23 +33,23 @@ class DwgFileHeader
 public:
     virtual ~DwgFileHeader();
 
-    ACadVersion Version() const;
+    ACadVersion version() const;
 
-    long long PreviewAddress() const;
-    void PreviewAddress(long long);
+    long long previewAddress() const;
+    void setPreviewAddress(long long);
 
-    int AcadMaintenanceVersion() const;
-    void AcadMaintenanceVersion(int);
+    int acadMaintenanceVersion() const;
+    void setAcadMaintenanceVersion(int);
 
-    CPL::CodePageID DrawingCodePage() const;
-    void DrawingCodePage(CPL::CodePageID);
+    CPL::CodePageID drawingCodePage() const;
+    void setDrawingCodePage(CPL::CodePageID);
 
 public:
     static DwgFileHeader *CreateFileHeader(ACadVersion version);
 
-    virtual void AddSection(const std::string &name) = 0;
+    virtual void addSection(const std::string &name) = 0;
 
-    virtual DwgSectionDescriptor &GetDescriptor(const std::string &name) = 0;
+    virtual DwgSectionDescriptor &getDescriptor(const std::string &name) = 0;
 
 protected:
     DwgFileHeader();

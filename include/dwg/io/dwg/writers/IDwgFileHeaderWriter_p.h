@@ -21,3 +21,19 @@
  */
 
 #pragma once
+
+namespace dwg {
+
+class IDwgFileHeaderWriter
+{
+public:
+    virtual ~IDwgFileHeaderWriter() = default;
+
+    virtual int handleSectionOffset() const = 0;
+
+    virtual void addSection(const std::string &name, std::ostream *stream, bool isCompressed, int decompsize = 0x7400) = 0;
+
+    virtual void writeFile() = 0;
+};
+
+}

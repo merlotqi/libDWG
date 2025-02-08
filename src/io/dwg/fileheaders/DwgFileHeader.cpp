@@ -27,7 +27,7 @@
 #include <stdexcept>
 
 namespace dwg {
-namespace io {
+
 
 
 DwgFileHeader::DwgFileHeader(ACadVersion version) : Version(version) {}
@@ -69,5 +69,5 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
     return nullptr;
 }
 
-}// namespace io
+
 }// namespace dwg

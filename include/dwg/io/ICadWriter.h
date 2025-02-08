@@ -27,7 +27,7 @@ namespace dwg {
 class ICadWriter
 {
 public:
-    virtual void Write() = 0;
+    virtual void write() = 0;
 };
 
 }// namespace dwg

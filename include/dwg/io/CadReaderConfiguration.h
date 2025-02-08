@@ -22,20 +22,33 @@
 
 #pragma once
 
+#include <dwg/exports.h>
+
 namespace dwg {
 
-
-class CadReaderConfiguration
+class LIBDWG_API CadReaderConfiguration
 {
 public:
-    CadReaderConfiguration() = default;
-    virtual ~CadReaderConfiguration() = default;
+    CadReaderConfiguration();
 
-    bool Failsafe = true;
-    bool KeepUnknownEntities = false;
-    bool KeepUnknownNonGraphicalObjects = false;
+    virtual ~CadReaderConfiguration();
+
+    bool failsafe() const;
+
+    void setFailsafe(bool value);
+
+    bool keepUnknownEntities() const;
+
+    void setKeepUnknownEntities(bool value);
+
+    bool keepUnknownNonGraphicalObjects() const;
+
+    void setKeepUnknownNonGraphicalObjects(bool value);
+
+private:
+    bool _failsafe;
+    bool _keepUnknownEntities;
+    bool _keepUnknownNonGraphicalObjects;
 };
-
-
 
 }// namespace dwg

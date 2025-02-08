@@ -24,4 +24,78 @@
 
 namespace dwg {
 
+Dimension::Dimension() {}
+
+Dimension::~Dimension() {}
+
+std::string Dimension::subclassMarker() const { return DxfSubclassMarker::Dimension; }
+
+unsigned char Dimension::version() const { return _version; }
+
+void Dimension::setVersion(unsigned char value) { _version = value; }
+
+BlockRecord *Dimension::block() const { return _block; }
+
+void Dimension::setBlock(BlockRecord *value) { _block = value; }
+
+XYZ Dimension::definitionPoint() const { return _definitionPoint; }
+
+void Dimension::setDefinitionPoint(const XYZ &value) { _definitionPoint = value; }
+
+XYZ Dimension::textMiddlePoint() const { return _textMiddlePoint; }
+
+void Dimension::setTextMiddlePoint(const XYZ &value) { _textMiddlePoint = value; }
+
+XYZ Dimension::insertionPoint() const { return _insertionPoint; }
+
+void Dimension::setInsertionPoint(const XYZ &value) { _insertionPoint = value; }
+
+XYZ Dimension::normal() const { return _normal; }
+
+void Dimension::setNormal(const XYZ &value) { _normal = value; }
+
+DimensionType Dimension::flags() const { return _flags; }
+
+void Dimension::setFlags(DimensionType value) { _flags = value; }
+
+AttachmentPointType Dimension::attachmentPoint() const { return _attachmentPoint; }
+
+void Dimension::setAttachmentPoint(AttachmentPointType value) { _attachmentPoint = value; }
+
+LineSpacingStyleType Dimension::lineSpacingStyle() const { return _lineSpacingStyle; }
+
+void Dimension::setLineSpacingStyle(LineSpacingStyleType value) { _lineSpacingStyle = value; }
+
+double Dimension::lineSpacingFactor() const { return _lineSpacingFactor; }
+
+void Dimension::setLineSpacingFactor(double value) { _lineSpacingFactor = value; }
+
+bool Dimension::flipArrow1() const { return _flipArrow1; }
+
+void Dimension::setFlipArrow1(bool value) { _flipArrow1 = value;}
+
+bool Dimension::flipArrow2() const { return _flipArrow2; }
+
+void Dimension::setFlipArrow2(bool value) { _flipArrow2 = value; }
+
+const std::string &Dimension::text() const { return _text; }
+
+void Dimension::setText(const std::string &value) { _text = value; }
+
+double Dimension::textRotation() const { return _textRotation; }
+
+void Dimension::setTextRotation(double value) { _textRotation = value; }
+
+double Dimension::horizontalDirection() const { return _horizontalDirection; }
+
+void Dimension::setHorizontalDirection(double value) { _horizontalDirection = value; }
+
+DimensionStyle *Dimension::dimStyle() const { return _dimStyle; }
+
+void Dimension::setDimStyle(DimensionStyle *value) {  }
+
+bool Dimension::isTextUserDefinedLocation() const { _flags.TestFlag(DimensionType::TextUserDefinedLocation); }
+
+void Dimension::setIsTextUserDefinedLocation(bool value) { }
+
 }// namespace dwg

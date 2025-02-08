@@ -20,16 +20,28 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/io/CadReaderConfiguration.h>
 
 namespace dwg {
 
-class ICompressor
+CadReaderConfiguration::CadReaderConfiguration() 
+    : _failsafe(true), _keepUnknownEntities(false), _keepUnknownNonGraphicalObjects(false)
 {
-public:
-    virtual ~ICompressor() = default;
+}
 
-    virtual void compress(std::vector<unsigned char>& source, int offset, int totalSize, std::ostream* dest) = 0;
-};
+CadReaderConfiguration::~CadReaderConfiguration()
+{}
+
+bool CadReaderConfiguration::failsafe() const { return _failsafe; }
+
+void CadReaderConfiguration::setFailsafe(bool value) { _failsafe = value; }
+
+bool CadReaderConfiguration::keepUnknownEntities() const { return _keepUnknownEntities; }
+
+void CadReaderConfiguration::setKeepUnknownEntities(bool value) { _keepUnknownEntities = value; }
+
+bool CadReaderConfiguration::keepUnknownNonGraphicalObjects() const { return _keepUnknownNonGraphicalObjects; }
+
+void CadReaderConfiguration::setKeepUnknownNonGraphicalObjects(bool value) { _keepUnknownNonGraphicalObjects = value; }
 
 }

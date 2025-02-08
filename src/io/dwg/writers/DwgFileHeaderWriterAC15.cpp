@@ -27,7 +27,7 @@
 #include <dwg/base/DwgStream.h>
 
 namespace dwg {
-namespace io {
+
 
 std::vector<unsigned char> DwgFileHeaderWriterAC15::_endSentinel = {
         0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
@@ -167,5 +167,5 @@ void DwgFileHeaderWriterAC15::writeRecordStreams()
         }
     }
 }
-}// namespace io
+
 }// namespace dwg

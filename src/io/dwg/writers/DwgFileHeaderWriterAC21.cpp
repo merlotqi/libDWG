@@ -26,7 +26,7 @@
 #include "DwgLZ77AC21Compressor.h"
 
 namespace dwg {
-namespace io {
+
 
 DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream,
                                                  Encoding encoding,
@@ -48,5 +48,5 @@ void DwgFileHeaderWriterAC21::craeteLocalSection(
     writeMagicNumber();
 }
 
-}// namespace io
+
 }// namespace dwg

@@ -23,11 +23,8 @@
 #pragma once
 
 #include <dwg/io/dwg/CRC.h>
-#include <dwg/utility/memorymanager.h>
 
 namespace dwg {
-
-
 
 class CRC8StreamHandlerBase
 {

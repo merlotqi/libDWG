@@ -30,7 +30,7 @@
 #include <fmt/core.h>
 
 namespace dwg {
-namespace io {
+
 
 std::string DwgAppInfoWriter::SectionName() const
 {
@@ -73,5 +73,5 @@ void DwgAppInfoWriter::Write()
     _writer->WriteTextUnicode(productInfo);
 }
 
-}// namespace io
+
 }// namespace dwg

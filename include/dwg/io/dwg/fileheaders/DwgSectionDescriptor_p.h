@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
-#include <cstdint>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -32,46 +31,46 @@ namespace dwg {
 
 class DwgSectionDescriptor
 {
-    int32_t _CompressedCode = 2;
+    int _CompressedCode = 2;
 
 public:
     DwgSectionDescriptor();
 
     DwgSectionDescriptor(const std::string &name);
 
-    long PageType() const;
+    long pageType() const;
 
-    std::string Name() const;
-    void Name(const std::string& name);
+    std::string name() const;
+    void setName(const std::string& name);
 
-    unsigned long long CompressedSize() const;
-    void CompressedSize(unsigned long long);
+    unsigned long long compressedSize() const;
+    void setCompressedSize(unsigned long long);
 
-    int PageCount() const;
-    void PageCount(int);
+    int pageCount() const;
+    void setPageCount(int);
 
-    unsigned long long DecompressedSize() const;
-    void DecompressedSize(unsigned long long);
+    unsigned long long decompressedSize() const;
+    void setDecompressedSize(unsigned long long);
 
-    int CompressedCode() const;
-    void CompressedCode(int);
+    int compressedCode() const;
+    void setCompressedCode(int);
 
-    bool IsCompressed() const;
+    bool isCompressed() const;
 
-    int SectionId() const;
-    void SectionId(int);
+    int sectionId() const;
+    void setSectionId(int);
 
-    int Encrypted() const;
-    void Encrypted(int);
+    int encrypted() const;
+    void setEncrypted(int);
 
-    unsigned long long HashCode(bool *ok = nullptr) const;
-    void HashCode(unsigned long long);
+    unsigned long long hashCode(bool *ok = nullptr) const;
+    void setHashCode(unsigned long long);
 
-    unsigned long long Encoding(bool *ok = nullptr) const;
-    void Encoding(unsigned long long);
+    unsigned long long encoding(bool *ok = nullptr) const;
+    void setEncoding(unsigned long long);
 
-    std::vector<DwgLocalSectionMap> LocalSections() const;
-    void LocalSections(const std::vector<DwgLocalSectionMap> &);
+    std::vector<DwgLocalSectionMap> localSections() const;
+    void setLocalSections(const std::vector<DwgLocalSectionMap> &);
 };
 
 }// namespace dwg

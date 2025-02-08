@@ -26,7 +26,7 @@
 #include <base.h>
 
 namespace dwg {
-namespace io {
+
 
 
 class DwgStreamWriterBase : public OutputStream, IDwgStreamWriter
@@ -97,5 +97,5 @@ private:
     void write3Bits(unsigned char value);
 };
 
-}// namespace io
+
 }// namespace dwg

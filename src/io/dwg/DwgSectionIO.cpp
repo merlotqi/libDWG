@@ -20,12 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/ACadVersion.h>
+#include <dwg/io/dwg/DwgSectionIO_p.h>
 #include <string>
 #include <vector>
 
 namespace dwg {
-namespace io {
 
 DwgSectionIO::DwgSectionIO(ACadVersion version)
 {
@@ -58,5 +57,5 @@ bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual,
     return true;
 }
 
-}// namespace io
+
 }// namespace dwg

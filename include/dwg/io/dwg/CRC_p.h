@@ -27,15 +27,13 @@
 
 namespace dwg {
 
-
 class CRC
 {
 public:
     static std::vector<unsigned short> CrcTable;
     static std::vector<unsigned int> Crc32Table;
-    static unsigned short ApplyCrc8(unsigned short dx,
+    static unsigned short applyCrc8(unsigned short dx,
                                     const std::vector<unsigned char> &arr);
 };
-
 
 }// namespace dwg

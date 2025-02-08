@@ -32,7 +32,7 @@
 #include <sstream>
 
 namespace dwg {
-namespace io {
+
 
 DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream,
                                                  Encoding encoding,
@@ -109,5 +109,5 @@ void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
 }
 
 
-}// namespace io
+
 }// namespace dwg

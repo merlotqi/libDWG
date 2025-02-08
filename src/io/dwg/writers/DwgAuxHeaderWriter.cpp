@@ -25,7 +25,7 @@
 #include "DwgStreamWriterBase.h"
 
 namespace dwg {
-namespace io {
+
 
 std::string DwgAuxHeaderWriter::SectionName() const
 {
@@ -168,5 +168,5 @@ void DwgAuxHeaderWriter::Write()
     }
 }
 
-}// namespace io
+
 }// namespace dwg

@@ -22,30 +22,28 @@
 
 #pragma once
 
-#include <cstdint>
-
 namespace dwg {
 
 class DwgSectionLocatorRecord
 {
-    int32_t _Number;
-    int64_t _Seeker;
-    int64_t _Size;
+    int _Number;
+    long long _Seeker;
+    long long _Size;
 
 public:
-    DwgSectionLocatorRecord(int32_t number = 0, int64_t seeker = 0,
-                            int64_t size = 0);
+    DwgSectionLocatorRecord(int number = 0, long long seeker = 0,
+                            long long size = 0);
 
-    bool IsInTheRecord(int32_t position) const;
+    bool isInTheRecord(int position) const;
 
-    inline int32_t Number() const;
-    inline void Number(int32_t number);
+    int number() const;
+    void setNumber(int number);
     
-    inline int64_t Seeker() const;
-    inline void Seeker(int64_t seeker);
+    long long seeker() const;
+    void setSeeker(long long seeker);
     
-    inline int64_t Size() const;
-    inline void Size(int64_t size);
+    long long size() const;
+    void setSize(long long size);
 };
 
 }// namespace dwg

@@ -34,8 +34,8 @@ public:
     DwgFileHeaderAC21(ACadVersion version);
     ~DwgFileHeaderAC21();
 
-    Dwg21CompressedMetadata CompressedMetadata() const;
-    void CompressedMetadata(const Dwg21CompressedMetadata &);
+    Dwg21CompressedMetadata compressedMetadata() const;
+    void setCompressedMetadata(const Dwg21CompressedMetadata &);
 };
 
 }// namespace dwg

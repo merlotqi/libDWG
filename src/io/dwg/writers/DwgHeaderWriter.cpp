@@ -23,7 +23,7 @@
 #include "DwgHeaderWriter.h"
 
 namespace dwg {
-namespace io {
+
 
 std::string DwgHeaderWriter::SectionName() const
 {
@@ -1197,5 +1197,5 @@ void DwgHeaderWriter::writeSizeAndCrc()
     _startWriter->WriteBytes(DwgSectionDefinition::EndSentinels[SectionName()]);
 }
 
-}// namespace io
+
 }// namespace dwg

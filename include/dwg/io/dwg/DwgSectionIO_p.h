@@ -28,13 +28,13 @@
 
 namespace dwg {
 
-
 class DwgSectionIO
 {
 public:
-    virtual std::string SectionName() const = 0;
+    virtual std::string sectionName() const = 0;
 
     DwgSectionIO(ACadVersion version);
+    
     static bool CheckSentinel(const std::vector<unsigned char> &actual, const std::vector<unsigned char> &expected);
 
 protected:
@@ -50,6 +50,5 @@ protected:
     bool R2018Plus;
     ACadVersion _version;
 };
-
 
 }// namespace dwg

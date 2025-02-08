@@ -24,7 +24,7 @@
 #include <dwg/io/dwg/writers/IDwgStreamWriter.h>
 
 namespace dwg {
-namespace io {
+
 
 class DwgMergedStreamWriter : public IDwgStreamWriter
 {
@@ -97,5 +97,5 @@ public:
     void WriteEnColor(Color color, Transparency transparency, bool isBookColor);
 };
 
-}// namespace io
+
 }// namespace dwg

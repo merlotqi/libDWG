@@ -134,7 +134,7 @@ public:
 public:
     // Determines if the text position is user-defined
     bool isTextUserDefinedLocation() const;
-    void isTextUserDefinedLocation(bool value);
+    void setIsTextUserDefinedLocation(bool value);
 };
 
 }// namespace dwg

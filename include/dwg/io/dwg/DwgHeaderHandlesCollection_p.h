@@ -26,7 +26,6 @@
 
 namespace dwg {
 
-
 class DwgHeaderHandlesCollection
 {
     std::map<std::string, unsigned long long> _handles;

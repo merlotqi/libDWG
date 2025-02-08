@@ -24,7 +24,7 @@
 #include "DwgClassesWriter.h"
 
 namespace dwg {
-namespace io {
+
 
 
 std::string DwgClassesWriter::SectionName() const
@@ -144,5 +144,5 @@ void DwgClassesWriter::writeSizeAndCrc()
 }
 
 
-}// namespace io
+
 }// namespace dwg
