@@ -20,76 +20,43 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/DimensionAngular2Line.h>
 
 namespace dwg {
 
-DimensionAngular2Line::DimensionAngular2Line()
-{}
+DimensionAngular2Line::DimensionAngular2Line() : Dimension(DimensionType::Angular) {}
 
-DimensionAngular2Line::~DimensionAngular2Line()
-{}
+DimensionAngular2Line::~DimensionAngular2Line() {}
 
-ObjectType DimensionAngular2Line::objectType() const
-{
-    return ObjectType::DIMENSION_ANG_2_Ln;
-}
+ObjectType DimensionAngular2Line::objectType() const { return ObjectType::DIMENSION_ANG_2_Ln; }
 
-std::string DimensionAngular2Line::objectName() const
-{
-    return DxfFileToken::EntityDimension;
-}
+std::string DimensionAngular2Line::objectName() const { return DxfFileToken::EntityDimension; }
 
-std::string DimensionAngular2Line::subclassMarker() const
-{
-    return DxfSubclassMarker::Angular2LineDimension;
-}
+std::string DimensionAngular2Line::subclassMarker() const { return DxfSubclassMarker::Angular2LineDimension; }
 
-XYZ DimensionAngular2Line::firstPoint() const
-{
-    return _firstPoint;
-}
+XYZ DimensionAngular2Line::firstPoint() const { return _firstPoint; }
 
-void DimensionAngular2Line::setFirstPoint(const XYZ &value)
-{
-    _firstPoint = value;
-}
+void DimensionAngular2Line::setFirstPoint(const XYZ &value) { _firstPoint = value; }
 
-XYZ DimensionAngular2Line::secondPoint() const
-{
-    return _secondPoint;
-}
+XYZ DimensionAngular2Line::secondPoint() const { return _secondPoint; }
 
-void DimensionAngular2Line::setSecondPoint(const XYZ &value)
-{
-    _secondPoint = value;
-}
+void DimensionAngular2Line::setSecondPoint(const XYZ &value) { _secondPoint = value; }
 
-XYZ DimensionAngular2Line::angleVertex() const
-{
-    return _angleVertex;
-}
+XYZ DimensionAngular2Line::angleVertex() const { return _angleVertex; }
 
-void DimensionAngular2Line::setAngleVertex(const XYZ &value)
-{
-    _angleVertex = value;
-}
+void DimensionAngular2Line::setAngleVertex(const XYZ &value) { _angleVertex = value; }
 
-XYZ DimensionAngular2Line::dimensionArc() const
-{
-    return _dimensionArc;
-}
+XYZ DimensionAngular2Line::dimensionArc() const { return _dimensionArc; }
 
-void DimensionAngular2Line::setDimensionArc(const XYZ &value)
-{
-    _dimensionArc = value;
-}
+void DimensionAngular2Line::setDimensionArc(const XYZ &value) { _dimensionArc = value; }
 
 double DimensionAngular2Line::measurement() const
 {
     XY v1 = (_firstPoint - _secondPoint).to2D();
     XY v2 = (_angleVertex - _dimensionArc).to2D();
-    return v1.angleFrom(v2);
+    return v1.angleTo(v2);
 }
 
 }// namespace dwg

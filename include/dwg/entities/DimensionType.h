@@ -57,5 +57,6 @@ enum DimensionType
     /// Indicates if the dimension text has been positioned at a user-defined location rather than at the default location
     TextUserDefinedLocation = 128
 };
+typedef int DimensionTypes;
 
 }// namespace dwg

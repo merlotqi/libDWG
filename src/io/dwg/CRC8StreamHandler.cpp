@@ -20,44 +20,35 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "CRC8StreamHandler.h"
+#include <dwg/io/dwg/CRC8StreamHandler_p.h>
 
 namespace dwg {
 
+unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer,
+                                                  long startPos, long endPos)
+{
+    unsigned short currValue = seed;
+    int index = (int) startPos;
 
-    unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed,
-                                      const std::vector<unsigned char> &buffer,
-                                      long startPos, long endPos)
+    while (endPos-- > 0)
     {
-        unsigned short currValue = seed;
-        int index = (int) startPos;
-
-        while (endPos-- > 0)
-        {
-            currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
-            index++;
-        }
-
-        return currValue;
-    }
-    
-    unsigned short CRC8StreamHandlerBase::Seed() const
-    {
-        return _seed;
+        currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
+        index++;
     }
 
-    void CRC8StreamHandlerBase::Seed(unsigned short seed)
-    {
-        _seed = seed;
-    }
+    return currValue;
+}
+
+unsigned short CRC8StreamHandlerBase::Seed() const { return _seed; }
+
+void CRC8StreamHandlerBase::Seed(unsigned short seed) { _seed = seed; }
 
 
-    unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
-    {
-        int index = value ^ (unsigned char) key;
-        key = (unsigned short) ((unsigned int) key >> 8 ^ CRC::CrcTable[index]);
-        return key;
-    }
-
+unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
+{
+    int index = value ^ (unsigned char) key;
+    key = (unsigned short) ((unsigned int) key >> 8 ^ CRC::CrcTable[index]);
+    return key;
+}
 
 }// namespace dwg

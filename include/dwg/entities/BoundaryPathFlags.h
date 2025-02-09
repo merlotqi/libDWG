@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /**
@@ -53,14 +51,6 @@ enum BoundaryPathFlag
     OrientToPaper = 4096,      ///< Orients hatch loop to paper.
     IsAnnotativeBlock = 8192,  ///< Annotative block boundary path.
 };
-
-/**
- * @typedef BoundaryPathFlags
- * @brief Represents a set of flags for boundary path types.
- *
- * This type is a bitmask, which allows for the efficient combination and manipulation of
- * multiple `BoundaryPathFlag` values to describe various attributes of a hatch boundary path.
- */
-CPL_DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag)
+typedef int BoundaryPathFlags;
 
 }// namespace dwg

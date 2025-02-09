@@ -22,7 +22,8 @@
 
 #pragma once
 
-#include <dwg/io/dwg/CRC.h>
+#include <dwg/io/dwg/CRC_p.h>
+#include <dwg/utils/StreamWrapper_p.h>
 
 namespace dwg {
 
@@ -33,9 +34,8 @@ class CRC8StreamHandlerBase
 public:
     CRC8StreamHandlerBase();
     virtual ~CRC8StreamHandlerBase();
-    static unsigned short GetCRCValue(unsigned short seed,
-                                      const std::vector<unsigned char> &buffer,
-                                      long startPos, long endPos);  
+    static unsigned short GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer, long startPos,
+                                      long endPos);
     unsigned short Seed() const;
     void Seed(unsigned short);
 
@@ -43,19 +43,21 @@ protected:
     unsigned short _seed;
 };
 
-class CRC8InputStreamHandler : public MemoryInputStream, CRC8StreamHandlerBase
+class CRC8InputStreamHandler : public InputStreamWrapper, CRC8StreamHandlerBase
 {
 public:
     CRC8InputStreamHandler();
-    int RawRead(unsigned char *buff, int nLen) override;
+    CRC8InputStreamHandler(std::istream *stream);
+    ~CRC8InputStreamHandler();
 };
 
-class CRC8OutputStreamHandler : public MemoryOutputStream, CRC8StreamHandlerBase
+
+class CRC8OutputStreamHandler : public OutputStreamWrapper, CRC8StreamHandlerBase
 {
 public:
-    CRC8InputStreamHandler();
-    int RawWrite(const unsigned char *buff, int nLen) override;
+    CRC8OutputStreamHandler();
+    CRC8OutputStreamHandler(std::ostream *stream);
+    ~CRC8OutputStreamHandler();
 };
-
 
 }// namespace dwg

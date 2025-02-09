@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Controls whether layer and spatial indexes are created and saved in drawing files
@@ -38,6 +36,6 @@ enum IndexCreationFlag : unsigned char
     /// Layer and spatial indexes are created
     LayerAndSpatialIndex = 0b11
 };
-CPL_DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag)
+typedef int IndexCreationFlags;
 
 }// namespace dwg

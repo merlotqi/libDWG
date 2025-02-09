@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Layout flags
@@ -36,6 +34,6 @@ enum LayoutFlag : short
     /// Indicates the LIMCHECK value for this layout when this layout is current
     LimitsChecking = 2,
 };
-CPL_DECLARE_FLAGS(LayoutFlags, LayoutFlag)
+typedef int LayoutFlags;
 
 }// namespace dwg

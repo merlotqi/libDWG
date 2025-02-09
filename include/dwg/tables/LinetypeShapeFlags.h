@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Represents a line type complex element type.
@@ -41,6 +39,6 @@ enum LinetypeShapeFlag : short
     /// Complex shape code holds the index into the text area of the string to be drawn.
     Shape = 4,
 };
-CPL_DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag)
+typedef int LinetypeShapeFlags;
 
 }// namespace dwg

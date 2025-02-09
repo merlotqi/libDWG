@@ -19,3 +19,31 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/DimensionRadius.h>
+
+namespace dwg {
+
+DimensionRadius::DimensionRadius() : Dimension(DimensionType::Radius) {}
+
+DimensionRadius::~DimensionRadius() {}
+
+ObjectType DimensionRadius::objectType() const { return ObjectType::DIMENSION_RADIUS; }
+
+std::string DimensionRadius::objectName() const { return DxfFileToken::EntityDimension; }
+
+std::string DimensionRadius::subclassMarker() const { return DxfSubclassMarker::RadialDimension; }
+
+XYZ DimensionRadius::angleVertex() const { return _angleVertex; }
+
+void DimensionRadius::setAngleVertex(const XYZ &value) { _angleVertex = value; }
+
+double DimensionRadius::leaderLength() const { return _leaderLength; }
+
+void DimensionRadius::setLeaderLength(double value) { _leaderLength = value; }
+
+double DimensionRadius::measurement() const { _insertionPoint.distanceTo(_angleVertex); }
+
+}// namespace dwg

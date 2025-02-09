@@ -26,22 +26,21 @@ namespace dwg {
 
 class DwgSectionLocatorRecord
 {
-    int _Number;
-    long long _Seeker;
-    long long _Size;
+    int _number;
+    long long _seeker;
+    long long _size;
 
 public:
-    DwgSectionLocatorRecord(int number = 0, long long seeker = 0,
-                            long long size = 0);
+    DwgSectionLocatorRecord(int number = 0, long long seeker = 0, long long size = 0);
 
     bool isInTheRecord(int position) const;
 
     int number() const;
     void setNumber(int number);
-    
+
     long long seeker() const;
     void setSeeker(long long seeker);
-    
+
     long long size() const;
     void setSize(long long size);
 };

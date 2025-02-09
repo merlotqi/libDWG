@@ -20,33 +20,22 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgFileHeaderAC18.h"
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 
 namespace dwg {
 
-
 DwgFileHeaderAC18::DwgFileHeaderAC18() {}
 
-DwgFileHeaderAC18::DwgFileHeaderAC18(ACadVersion version)
-    : DwgFileHeaderAC15(version)
-{
-}
+DwgFileHeaderAC18::DwgFileHeaderAC18(ACadVersion version) : DwgFileHeaderAC15(version) {}
 
-void DwgFileHeaderAC18::AddSection(const std::string &name)
-{
-    Descriptors.insert({name, DwgSectionDescriptor(name)});
-}
+void DwgFileHeaderAC18::addSection(const std::string &name) { Descriptors.insert({name, DwgSectionDescriptor(name)}); }
 
-void DwgFileHeaderAC18::AddSection(const DwgSectionDescriptor &descriptor)
+void DwgFileHeaderAC18::addSection(const DwgSectionDescriptor &descriptor)
 {
     Descriptors.insert({descriptor.Name, descriptor});
 }
 
-DwgSectionDescriptor &DwgFileHeaderAC18::GetDescriptor(const std::string &name)
-{
-    return Descriptors.at(name);
-}
-
+DwgSectionDescriptor &DwgFileHeaderAC18::getDescriptor(const std::string &name) { return Descriptors.at(name); }
 
 
 }// namespace dwg

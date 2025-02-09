@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Standard flags for tables
@@ -42,6 +40,6 @@ enum StandardFlag : short
     /// drawing was edited.
     Referenced = 64,
 };
-CPL_DECLARE_FLAGS(StandardFlags, StandardFlag)
+typedef int StandardFlags;
 
 }// namespace dwg

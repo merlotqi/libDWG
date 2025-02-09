@@ -36,28 +36,28 @@ class DimensionStyle;
 // providing properties and methods for dimension management and manipulation.
 class LIBDWG_API Dimension : public Entity
 {
-    unsigned char _version;// The version of the dimension entity
-    BlockRecord *_block;// Pointer to the block associated with the dimension
-    XYZ _definitionPoint;// The definition point (e.g., the base point) of the dimension
-    XYZ _textMiddlePoint;// The middle point of the dimension text
-    XYZ _insertionPoint; // The insertion point of the dimension entity
-    XYZ _normal;// The normal vector for the dimension (usually related to the drawing plane)
-    DimensionType
-            _flags;// Flags indicating dimension-specific settings or properties
-    AttachmentPointType
-            _attachmentPoint;// The attachment point type for the dimension text
+protected:
+    unsigned char _version;                // The version of the dimension entity
+    BlockRecord *_block;                   // Pointer to the block associated with the dimension
+    XYZ _definitionPoint;                  // The definition point (e.g., the base point) of the dimension
+    XYZ _textMiddlePoint;                  // The middle point of the dimension text
+    XYZ _insertionPoint;                   // The insertion point of the dimension entity
+    XYZ _normal;                           // The normal vector for the dimension (usually related to the drawing plane)
+    DimensionTypes _flags;                 // Flags indicating dimension-specific settings or properties
+    AttachmentPointType _attachmentPoint;  // The attachment point type for the dimension text
     LineSpacingStyleType _lineSpacingStyle;// The line spacing style for text
-    double _lineSpacingFactor;// The factor affecting the line spacing for text
-    bool _flipArrow1;    // Boolean indicating if the first arrow is flipped
-    bool _flipArrow2;    // Boolean indicating if the second arrow is flipped
-    std::string _text;   // The text displayed in the dimension
-    double _textRotation;// Rotation angle for the dimension text
-    double _horizontalDirection; // Horizontal direction for text alignment
-    DimensionStyle *_dimStyle;// Pointer to the associated dimension style
+    double _lineSpacingFactor;             // The factor affecting the line spacing for text
+    bool _flipArrow1;                      // Boolean indicating if the first arrow is flipped
+    bool _flipArrow2;                      // Boolean indicating if the second arrow is flipped
+    std::string _text;                     // The text displayed in the dimension
+    double _textRotation;                  // Rotation angle for the dimension text
+    double _horizontalDirection;           // Horizontal direction for text alignment
+    DimensionStyle *_dimStyle;             // Pointer to the associated dimension style
 
 public:
     // Default constructor for the Dimension class
     Dimension();
+    Dimension(DimensionType type);
     virtual ~Dimension();
 
 public:
@@ -89,8 +89,8 @@ public:
     void setNormal(const XYZ &value);
 
     // Getter and setter for the flags (dimension-specific properties)
-    DimensionType flags() const;
-    void setFlags(DimensionType value);
+    DimensionTypes flags() const;
+    void setFlags(DimensionTypes value);
 
     // Getter and setter for the attachment point type of the dimension text
     AttachmentPointType attachmentPoint() const;

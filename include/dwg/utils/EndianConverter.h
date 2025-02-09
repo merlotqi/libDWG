@@ -21,31 +21,3 @@
  */
 
 #pragma once
-
-#include <dwg/io/CadReaderConfiguration.h>
-#include <dwg/io/ICadReader.h>
-#include <string>
-#include <type_traits>
-
-namespace dwg {
-
-template<class T>
-class CadReaderBase : public ICadReader, protected T
-{
-    static_assert(std::is_base_of<CadReaderConfiguration, T>::value, "T must is base CadReaderConfiguration");
-
-public:
-    virtual ~CadReaderBase();
-
-protected:
-    CadReaderBase();
-    CadReaderBase(const std::string &filename);
-    CadReaderBase(std::ifstream *stream);
-
-protected:
-    CadDocument *_document;
-    std::ifstream *_fileStream;
-};
-
-
-}// namespace dwg

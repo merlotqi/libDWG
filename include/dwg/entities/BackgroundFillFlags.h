@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /**
@@ -40,15 +38,6 @@ enum BackgroundFillFlag : unsigned char
     UseDrawingWindowColor = 2, ///< Use the drawing window color for fill.
     TextFrame = 16,            ///< Adds a text frame around the entity.
 };
-
-/**
- * @typedef BackgroundFillFlags
- * @brief Represents a set of flags for background fill options.
- *
- * This type is a bitmask that can represent multiple `BackgroundFillFlag` values,
- * allowing for efficient storage and manipulation of background fill properties.
- */
-CPL_DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag)
-
+typedef int BackgroundFillFlags;
 
 }// namespace dwg

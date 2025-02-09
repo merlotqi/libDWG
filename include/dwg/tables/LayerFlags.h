@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
@@ -51,6 +49,6 @@ enum LayerFlag : short
     /// drawing was edited.
     Referenced = 64
 };
-CPL_DECLARE_FLAGS(LayerFlags, LayerFlag)
+typedef int LayerFlags;
 
 }// namespace dwg

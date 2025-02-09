@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Flags (bit-coded).
@@ -48,6 +46,6 @@ enum MLineStyleFlag
     /// End round (outer arcs) cap
     EndRoundCap = 1024
 };
-CPL_DECLARE_FLAGS(MLineStyleFlags, MLineStyleFlag)
+typedef int MLineStyleFlags;
 
 }// namespace dwg

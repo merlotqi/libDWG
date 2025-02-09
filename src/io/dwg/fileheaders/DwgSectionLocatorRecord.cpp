@@ -24,28 +24,26 @@
 
 namespace dwg {
 
-DwgSectionLocatorRecord::DwgSectionLocatorRecord(int32_t number, int64_t seeker,
-                        int64_t size)
-    : _Number(number), _Seeker(seeker), _Size(size)
+DwgSectionLocatorRecord::DwgSectionLocatorRecord(int number, long long seeker, long long size)
+    : _number(number), _seeker(seeker), _size(size)
 {
 }
 
-bool DwgSectionLocatorRecord::IsInTheRecord(int32_t position) const
+bool DwgSectionLocatorRecord::isInTheRecord(int position) const
 {
-    return position >= _Seeker && position < _Seeker + _Size;
+    return position >= _seeker && position < _seeker + _size;
 }
 
- int32_t DwgSectionLocatorRecord::Number() const { return _Number; }
+int DwgSectionLocatorRecord::number() const { return _number; }
 
- int64_t DwgSectionLocatorRecord::Seeker() const { return _Seeker; }
+long long DwgSectionLocatorRecord::seeker() const { return _seeker; }
 
- int64_t DwgSectionLocatorRecord::Size() const { return _Size; }
+long long DwgSectionLocatorRecord::size() const { return _size; }
 
- void DwgSectionLocatorRecord::Number(int32_t number) { _Number = number; }
+void DwgSectionLocatorRecord::setNumber(int number) { _number = number; }
 
- void DwgSectionLocatorRecord::Seeker(int64_t seeker) { _Seeker = seeker; }
+void DwgSectionLocatorRecord::setSeeker(long long seeker) { _seeker = seeker; }
 
- void DwgSectionLocatorRecord::Size(int64_t size) { _Size = size; }
+void DwgSectionLocatorRecord::setSize(long long size) { _size = size; }
 
-}
-
+}// namespace dwg

@@ -20,19 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-
-#include "DwgFileHeaderAC21.h"
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC21_p.h>
 
 namespace dwg {
 
-
 DwgFileHeaderAC21::DwgFileHeaderAC21() {}
 
-DwgFileHeaderAC21::DwgFileHeaderAC21(ACadVersion version)
-    : DwgFileHeaderAC18(version)
-{
-}
-
+DwgFileHeaderAC21::DwgFileHeaderAC21(ACadVersion version) : DwgFileHeaderAC18(version) {}
 
 }// namespace dwg

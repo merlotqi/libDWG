@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Polyline flag (bit-coded)
@@ -33,6 +31,6 @@ enum LwPolylineFlag
     Closed = 1,
     Plinegen = 128
 };
-CPL_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag)
+typedef int LwPolylineFlags;
 
 }// namespace dwg

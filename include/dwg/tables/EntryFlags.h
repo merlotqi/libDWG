@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Standard entry flags (bit-coded values).
@@ -39,7 +37,6 @@ enum EntryFlag
     /// drawing was edited.
     Referenced = 64
 };
-
-CPL_DECLARE_FLAGS(EntryFlags, EntryFlag)
+typedef int EntryFlags;
 
 }// namespace dwg

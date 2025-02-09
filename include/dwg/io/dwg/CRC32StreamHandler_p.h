@@ -23,7 +23,8 @@
 
 #pragma once
 
-#include <dwg/io/dwg/CRC.h>
+#include <dwg/io/dwg/CRC_p.h>
+#include <dwg/utils/StreamWrapper_p.h>
 
 namespace dwg {
 
@@ -36,20 +37,17 @@ protected:
     unsigned int _seed;
 };
 
-class CRC32InputStreamHandler : public MemoryInputStream, CRC32StreamHandlerBase
+class CRC32InputStreamHandler : public InputStreamWrapper, CRC32StreamHandlerBase
 {
 public:
-    CRC32InputStreamHandler(std::vector<unsigned char>& arr, unsigned int seed);
-    CRC32InputStreamHandler(const MemoryInputStream& rhs);
-    int RawRead(unsigned char *buff, int nLen) override;
+    CRC32InputStreamHandler(std::vector<unsigned char> &arr, unsigned int seed);
+    int RawRead(unsigned char *buff, int nLen);
 };
 
-class CRC32OutputStreamHandler : public MemoryOutputStream, CRC32StreamHandlerBase
+class CRC32OutputStreamHandler : public OutputStreamWrapper, CRC32StreamHandlerBase
 {
 public:
-    CRC32OutputStreamHandler(std::vector<unsigned char>& arr, unsigned int seed);
-    CRC32OutputStreamHandler(const MemoryOutputStream& rhs);
-    int RawWrite(const unsigned char *buff, int nLen) override;
+    CRC32OutputStreamHandler(std::vector<unsigned char> &arr, unsigned int seed);
 };
 
-}
+}// namespace dwg

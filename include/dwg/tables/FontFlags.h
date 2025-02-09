@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Represent the font character formatting, such as italic, bold, or regular.
@@ -36,6 +34,6 @@ enum FontFlag
     /// Bold.
     Bold = 2
 };
-CPL_DECLARE_FLAGS(FontFlags, FontFlag)
+typedef int FontFlags;
 
 }// namespace dwg

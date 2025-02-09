@@ -20,24 +20,44 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgFileHeader.h"
-#include "DwgFileHeaderAC15.h"
-#include "DwgFileHeaderAC18.h"
-#include "DwgFileHeaderAC21.h"
+#include "DwgFileHeader_p.h"
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC15_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC21_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
 #include <stdexcept>
 
 namespace dwg {
 
+DwgFileHeader::DwgFileHeader() : DwgFileHeader(ACadVersion::Unknown) {}
 
+DwgFileHeader::DwgFileHeader(ACadVersion version)
+    : _version(version), _previewAddress(-1), _acadMaintenanceVersion(0), _drawingCodePage(CodePage::Utf8)
+{
+}
 
-DwgFileHeader::DwgFileHeader(ACadVersion version) : Version(version) {}
+DwgFileHeader::~DwgFileHeader() {}
+
+ACadVersion DwgFileHeader::version() const { return _version; }
+
+long long DwgFileHeader::previewAddress() const { return _previewAddress; }
+
+void DwgFileHeader::setPreviewAddress(long long value) { _previewAddress = value; }
+
+int DwgFileHeader::acadMaintenanceVersion() const { return _acadMaintenanceVersion; }
+
+void DwgFileHeader::setAcadMaintenanceVersion(int value) { _acadMaintenanceVersion = value; }
+
+CodePage DwgFileHeader::drawingCodePage() const { return _drawingCodePage; }
+
+void DwgFileHeader::setDrawingCodePage(CodePage value) { _drawingCodePage = value; }
 
 DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
 {
     switch (version)
     {
         case ACadVersion::Unknown:
-            throw new std::exception("not cupported");
+            throw new std::runtime_error("not cupported");
         case ACadVersion::MC0_0:
         case ACadVersion::AC1_2:
         case ACadVersion::AC1_4:
@@ -48,7 +68,7 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
         case ACadVersion::AC1004:
         case ACadVersion::AC1006:
         case ACadVersion::AC1009:
-            throw new std::exception("not cupported");// version
+            throw new std::runtime_error("not cupported");
         case ACadVersion::AC1012:
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
@@ -60,7 +80,6 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
-            //Check if it works...
             return new DwgFileHeaderAC18(version);
         default:
             break;
@@ -68,6 +87,5 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
 
     return nullptr;
 }
-
 
 }// namespace dwg

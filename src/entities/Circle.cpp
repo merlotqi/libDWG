@@ -20,7 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "Circle.h"
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Circle.h>
 
 namespace dwg {

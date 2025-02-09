@@ -26,6 +26,20 @@ namespace dwg {
 
 class DwgLocalSectionMap
 {
+    int _compression;
+    bool _isEmpty;
+    unsigned long long _offset;
+    unsigned long long _compressedSize;
+    int _pageNumber;
+    unsigned long long _decompressedSize;
+    long long _seeker;
+    long long _size;
+    unsigned long long _checksum;
+    unsigned long long _CRC;
+    long long _pageSize;
+    unsigned int _ODA;
+    int _sectionMap;
+
 public:
     DwgLocalSectionMap();
     DwgLocalSectionMap(int value);

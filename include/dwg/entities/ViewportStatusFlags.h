@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
 namespace dwg {
 
 /// viewport status flags
@@ -91,7 +90,6 @@ enum ViewportStatusFlag
     /// Enables subdivision of the grid below the set grid spacing when the grid display is adaptive.
     SubdivisionGridBelowSpacing = 1048576
 };
-
-CPL_DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag)
+typedef int ViewportStatusFlags;
 
 }// namespace dwg

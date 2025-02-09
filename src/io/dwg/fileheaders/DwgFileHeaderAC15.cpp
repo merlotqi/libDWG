@@ -20,32 +20,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgFileHeaderAC15.h"
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC15_p.h>
 #include <stdexcept>
 
 namespace dwg {
 
-
-std::vector<unsigned char> DwgFileHeaderAC15::EndSentinel = {
-        0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
-        0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
+std::vector<unsigned char> DwgFileHeaderAC15::EndSentinel = {0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
+                                                             0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
 
 DwgFileHeaderAC15::DwgFileHeaderAC15() {}
 
-DwgFileHeaderAC15::DwgFileHeaderAC15(ACadVersion version)
-    : DwgFileHeader(version)
-{
-}
+DwgFileHeaderAC15::DwgFileHeaderAC15(ACadVersion version) : DwgFileHeader(version) {}
 
-void DwgFileHeaderAC15::AddSection(const std::string &name)
-{
-    throw new std::exception("not implemented");
-}
+void DwgFileHeaderAC15::addSection(const std::string &name) { throw new std::runtime_error("not implemented"); }
 
-DwgSectionDescriptor &DwgFileHeaderAC15::GetDescriptor(const std::string &name)
+DwgSectionDescriptor &DwgFileHeaderAC15::getDescriptor(const std::string &name)
 {
-    throw new std::exception("not implemented");
+    throw new std::runtime_error("not implemented");
 }
-
 
 }// namespace dwg

@@ -20,11 +20,19 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Dimension.h>
 
 namespace dwg {
 
 Dimension::Dimension() {}
+
+Dimension::Dimension(DimensionType type)
+{
+    _flags = type;
+    _flags |= DimensionType::BlockReference;
+}
 
 Dimension::~Dimension() {}
 
@@ -54,9 +62,9 @@ XYZ Dimension::normal() const { return _normal; }
 
 void Dimension::setNormal(const XYZ &value) { _normal = value; }
 
-DimensionType Dimension::flags() const { return _flags; }
+DimensionTypes Dimension::flags() const { return _flags; }
 
-void Dimension::setFlags(DimensionType value) { _flags = value; }
+void Dimension::setFlags(DimensionTypes value) { _flags = value; }
 
 AttachmentPointType Dimension::attachmentPoint() const { return _attachmentPoint; }
 
@@ -72,7 +80,7 @@ void Dimension::setLineSpacingFactor(double value) { _lineSpacingFactor = value;
 
 bool Dimension::flipArrow1() const { return _flipArrow1; }
 
-void Dimension::setFlipArrow1(bool value) { _flipArrow1 = value;}
+void Dimension::setFlipArrow1(bool value) { _flipArrow1 = value; }
 
 bool Dimension::flipArrow2() const { return _flipArrow2; }
 
@@ -92,10 +100,10 @@ void Dimension::setHorizontalDirection(double value) { _horizontalDirection = va
 
 DimensionStyle *Dimension::dimStyle() const { return _dimStyle; }
 
-void Dimension::setDimStyle(DimensionStyle *value) {  }
+void Dimension::setDimStyle(DimensionStyle *value) {}
 
-bool Dimension::isTextUserDefinedLocation() const { _flags.TestFlag(DimensionType::TextUserDefinedLocation); }
+bool Dimension::isTextUserDefinedLocation() const { return _flags & DimensionType::TextUserDefinedLocation; }
 
-void Dimension::setIsTextUserDefinedLocation(bool value) { }
+void Dimension::setIsTextUserDefinedLocation(bool value) {}
 
 }// namespace dwg

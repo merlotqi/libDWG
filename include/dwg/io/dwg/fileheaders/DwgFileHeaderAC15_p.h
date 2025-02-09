@@ -34,10 +34,13 @@ public:
     static std::vector<unsigned char> EndSentinel;
 
     DwgFileHeaderAC15();
+    
     DwgFileHeaderAC15(ACadVersion version);
+    
     virtual ~DwgFileHeaderAC15();
 
     std::map<int, DwgSectionLocatorRecord> records() const;
+
     void setRecords(const std::map<int, DwgSectionLocatorRecord> &);
 
     virtual void addSection(const std::string &name) override;

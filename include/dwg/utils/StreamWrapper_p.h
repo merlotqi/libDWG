@@ -1,4 +1,4 @@
-﻿/**
+/**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
  *
  * This file is part of libDWG.
@@ -22,56 +22,37 @@
 
 #pragma once
 
+#include <iostream>
+#include <vector>
+
 namespace dwg {
 
-/// Defines the plot settings flag.
-enum PlotFlag
+class InputStreamWrapper
 {
-    /// None
-    None = 0,
+    std::istream *_stream;
 
-    /// Plot viewport borders.
-    PlotViewportBorders = 1,
+public:
+    InputStreamWrapper(std::istream *stream);
+    virtual ~InputStreamWrapper();
 
-    /// Show plot styles.
-    ShowPlotStyles = 2,
-
-    /// Plot centered.
-    PlotCentered = 4,
-
-    /// Plot hidden.
-    PlotHidden = 8,
-
-    /// Use standard scale.
-    UseStandardScale = 16,
-
-    /// Plot styles.
-    PlotPlotStyles = 32,
-
-    /// Scale line weights.
-    ScaleLineweights = 64,
-
-    /// Print line weights.
-    PrintLineweights = 128,
-
-    /// Draw viewports first.
-    DrawViewportsFirst = 512,
-
-    /// Model type.
-    ModelType = 1024,
-
-    /// Update paper.
-    UpdatePaper = 2048,
-
-    /// Soon to paper on update.
-    ZoomToPaperOnUpdate = 4096,
-
-    /// Initializing.
-    Initializing = 8192,
-
-    /// Preview plot initialization.
-    PrevPlotInit = 16384
+    std::istream *stream();
 };
-typedef int PlotFlags;
+
+class OutputStreamWrapper
+{
+    std::ostream *_stream;
+
+public:
+    OutputStreamWrapper(std::ostream *stream);
+    virtual ~OutputStreamWrapper();
+    std::ostream *stream();
+
+    virtual void write(const std::vector<unsigned char> &buffer, int offset, int length);
+
+    template<class T>
+    void write(const T &value)
+    {
+    }
+};
 
 }// namespace dwg

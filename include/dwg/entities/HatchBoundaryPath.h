@@ -281,7 +281,7 @@ public:
         void setFitPoints(const std::vector<XY> &);
 
         XY startTangent() const;
-        void settartTangent(const XY &);
+        void setStartTangent(const XY &);
 
         XY endTangent() const;
         void setEndTangent(const XY &);

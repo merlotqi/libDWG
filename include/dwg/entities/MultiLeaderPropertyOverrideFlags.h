@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 enum MultiLeaderPropertyOverrideFlag : int
@@ -91,7 +89,6 @@ enum MultiLeaderPropertyOverrideFlag : int
     /// Override <see cref="MultiLeaderStyle.TextBottomAttachment"/> property.
     TextBottomAttachment = 0x20000000
 };
-CPL_DECLARE_FLAGS(MultiLeaderPropertyOverrideFlags,
-                  MultiLeaderPropertyOverrideFlag)
+typedef int MultiLeaderPropertyOverrideFlags;
 
 }// namespace dwg

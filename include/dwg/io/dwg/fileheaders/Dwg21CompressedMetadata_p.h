@@ -24,44 +24,148 @@
 
 namespace dwg {
 
-struct Dwg21CompressedMetadata
+class Dwg21CompressedMetadata
 {
-    unsigned long long HeaderSize = 0x70;
-    unsigned long long FileSize = 0;
-    unsigned long long PagesMapCrcCompressed = 0;
-    unsigned long long PagesMapCorrectionFactor = 0;
-    unsigned long long PagesMapCrcSeed = 0;
-    unsigned long long Map2Offset = 0;
-    unsigned long long Map2Id = 0;
-    unsigned long long PagesMapOffset = 0;
-    unsigned long long Header2offset = 0;
-    unsigned long long PagesMapSizeCompressed = 0;
-    unsigned long long PagesMapSizeUncompressed = 0;
-    unsigned long long PagesAmount = 0;
-    unsigned long long PagesMaxId = 0;
-    unsigned long long SectionsMap2Id = 0;
-    unsigned long long PagesMapId = 0;
-    unsigned long long Unknow0x20 = 32;
-    unsigned long long Unknow0x40 = 64;
-    unsigned long long PagesMapCrcUncompressed = 0;
-    unsigned long long Unknown0xF800 = 0xF800;
-    unsigned long long Unknown4 = 4;
-    unsigned long long Unknown1 = 1;
-    unsigned long long SectionsAmount = 0;
-    unsigned long long SectionsMapCrcUncompressed = 0;
-    unsigned long long SectionsMapSizeCompressed = 0;
-    unsigned long long SectionsMapId = 0;
-    unsigned long long SectionsMapSizeUncompressed = 0;
-    unsigned long long SectionsMapCrcCompressed = 0;
-    unsigned long long SectionsMapCorrectionFactor = 0;
-    unsigned long long SectionsMapCrcSeed = 0;
-    unsigned long long StreamVersion = 393472;
-    unsigned long long CrcSeed = 0;
-    unsigned long long CrcSeedEncoded = 0;
-    unsigned long long RandomSeed = 0;
-    unsigned long long HeaderCRC64 = 0;
-
+public:
     Dwg21CompressedMetadata();
+
+    unsigned long long headerSize() const;
+    void setHeaderSize(unsigned long long headerSize);
+
+    unsigned long long fileSize() const;
+    void setFileSize(unsigned long long fileSize);
+
+    unsigned long long pagesMapCrcCompressed() const;
+    void setPagesMapCrcCompressed(unsigned long long pagesMapCrcCompressed);
+
+    unsigned long long pagesMapCorrectionFactor() const;
+    void setPagesMapCorrectionFactor(unsigned long long pagesMapCorrectionFactor);
+
+    unsigned long long pagesMapCrcSeed() const;
+    void setPagesMapCrcSeed(unsigned long long pagesMapCrcSeed);
+
+    unsigned long long map2Offset() const;
+    void setMap2Offset(unsigned long long map2Offset);
+
+    unsigned long long map2Id() const;
+    void setMap2Id(unsigned long long map2Id);
+
+    unsigned long long pagesMapOffset() const;
+    void setPagesMapOffset(unsigned long long pagesMapOffset);
+
+    unsigned long long header2Offset() const;
+    void setHeader2Offset(unsigned long long header2Offset);
+
+    unsigned long long pagesMapSizeCompressed() const;
+    void setPagesMapSizeCompressed(unsigned long long pagesMapSizeCompressed);
+
+    unsigned long long pagesMapSizeUncompressed() const;
+    void setPagesMapSizeUncompressed(unsigned long long pagesMapSizeUncompressed);
+
+    unsigned long long pagesAmount() const;
+    void setPagesAmount(unsigned long long pagesAmount);
+
+    unsigned long long pagesMaxId() const;
+    void setPagesMaxId(unsigned long long pagesMaxId);
+
+    unsigned long long sectionsMap2Id() const;
+    void setSectionsMap2Id(unsigned long long sectionsMap2Id);
+
+    unsigned long long pagesMapId() const;
+    void setPagesMapId(unsigned long long pagesMapId);
+
+    unsigned long long unknow0x20() const;
+    void setUnknow0x20(unsigned long long unknow0x20);
+
+    unsigned long long unknow0x40() const;
+    void setUnknow0x40(unsigned long long unknow0x40);
+
+    unsigned long long pagesMapCrcUncompressed() const;
+    void setPagesMapCrcUncompressed(unsigned long long pagesMapCrcUncompressed);
+
+    unsigned long long unknown0xF800() const;
+    void setUnknown0xF800(unsigned long long unknown0xF800);
+
+    unsigned long long unknown4() const;
+    void setUnknown4(unsigned long long unknown4);
+
+    unsigned long long unknown1() const;
+    void setUnknown1(unsigned long long unknown1);
+
+    unsigned long long sectionsAmount() const;
+    void setSectionsAmount(unsigned long long sectionsAmount);
+
+    unsigned long long sectionsMapCrcUncompressed() const;
+    void setSectionsMapCrcUncompressed(unsigned long long sectionsMapCrcUncompressed);
+
+    unsigned long long sectionsMapSizeCompressed() const;
+    void setSectionsMapSizeCompressed(unsigned long long sectionsMapSizeCompressed);
+
+    unsigned long long sectionsMapId() const;
+    void setSectionsMapId(unsigned long long sectionsMapId);
+
+    unsigned long long sectionsMapSizeUncompressed() const;
+    void setSectionsMapSizeUncompressed(unsigned long long sectionsMapSizeUncompressed);
+
+    unsigned long long sectionsMapCrcCompressed() const;
+    void setSectionsMapCrcCompressed(unsigned long long sectionsMapCrcCompressed);
+
+    unsigned long long sectionsMapCorrectionFactor() const;
+    void setSectionsMapCorrectionFactor(unsigned long long sectionsMapCorrectionFactor);
+
+    unsigned long long sectionsMapCrcSeed() const;
+    void setSectionsMapCrcSeed(unsigned long long sectionsMapCrcSeed);
+
+    unsigned long long streamVersion() const;
+    void setStreamVersion(unsigned long long streamVersion);
+
+    unsigned long long crcSeed() const;
+    void setCrcSeed(unsigned long long crcSeed);
+
+    unsigned long long crcSeedEncoded() const;
+    void setCrcSeedEncoded(unsigned long long crcSeedEncoded);
+
+    unsigned long long randomSeed() const;
+    void setRandomSeed(unsigned long long randomSeed);
+
+    unsigned long long headerCRC64() const;
+    void setHeaderCRC64(unsigned long long headerCRC64);
+
+private:
+    unsigned long long _headerSize;
+    unsigned long long _fileSize;
+    unsigned long long _pagesMapCrcCompressed;
+    unsigned long long _pagesMapCorrectionFactor;
+    unsigned long long _pagesMapCrcSeed;
+    unsigned long long _map2Offset;
+    unsigned long long _map2Id;
+    unsigned long long _pagesMapOffset;
+    unsigned long long _header2Offset;
+    unsigned long long _pagesMapSizeCompressed;
+    unsigned long long _pagesMapSizeUncompressed;
+    unsigned long long _pagesAmount;
+    unsigned long long _pagesMaxId;
+    unsigned long long _sectionsMap2Id;
+    unsigned long long _pagesMapId;
+    unsigned long long _unknow0x20;
+    unsigned long long _unknow0x40;
+    unsigned long long _pagesMapCrcUncompressed;
+    unsigned long long _unknown0xF800;
+    unsigned long long _unknown4;
+    unsigned long long _unknown1;
+    unsigned long long _sectionsAmount;
+    unsigned long long _sectionsMapCrcUncompressed;
+    unsigned long long _sectionsMapSizeCompressed;
+    unsigned long long _sectionsMapId;
+    unsigned long long _sectionsMapSizeUncompressed;
+    unsigned long long _sectionsMapCrcCompressed;
+    unsigned long long _sectionsMapCorrectionFactor;
+    unsigned long long _sectionsMapCrcSeed;
+    unsigned long long _streamVersion;
+    unsigned long long _crcSeed;
+    unsigned long long _crcSeedEncoded;
+    unsigned long long _randomSeed;
+    unsigned long long _headerCRC64;
 };
 
 }// namespace dwg

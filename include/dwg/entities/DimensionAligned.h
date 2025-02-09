@@ -30,8 +30,8 @@ namespace dwg {
 // the dimension is applied between two points with an extended line rotation.
 class LIBDWG_API DimensionAligned : public Dimension
 {
-    XYZ _firstPoint; // The first point of the aligned dimension
-    XYZ _secondPoint;// The second point of the aligned dimension
+    XYZ _firstPoint;        // The first point of the aligned dimension
+    XYZ _secondPoint;       // The second point of the aligned dimension
     double _extLineRotation;// Rotation angle for the extension lines of the aligned dimension
 
 public:
@@ -65,6 +65,9 @@ public:
     // Override the Measurement method to calculate the dimension's measurement
     // based on the two points and extension line rotation
     virtual double measurement() const override;
+
+protected:
+    DimensionAligned(DimensionType type);
 };
 
 }// namespace dwg

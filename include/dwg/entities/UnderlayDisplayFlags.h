@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Underlay display options.
@@ -44,6 +42,6 @@ enum UnderlayDisplayFlag : unsigned char
     /// Clip is inside mode.
     ClipInsideMode = 16
 };
-CPL_DECLARE_FLAGS(UnderlayDisplayFlags, UnderlayDisplayFlag)
+typedef int UnderlayDisplayFlags;
 
 }// namespace dwg

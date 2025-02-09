@@ -19,3 +19,25 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/DimensionLinear.h>
+
+namespace dwg {
+
+DimensionLinear::DimensionLinear() : DimensionAligned(DimensionType::Linear) {}
+
+DimensionLinear::~DimensionLinear() {}
+
+ObjectType DimensionLinear::objectType() const { return ObjectType::DIMENSION_LINEAR; }
+
+std::string DimensionLinear::objectName() const { return DxfFileToken::EntityDimension; }
+
+std::string DimensionLinear::subclassMarker() const { return DxfSubclassMarker::LinearDimension; }
+
+double DimensionLinear::rotation() const { return _rotation; }
+
+void DimensionLinear::setRotation(double value) { _rotation = value; }
+
+}// namespace dwg

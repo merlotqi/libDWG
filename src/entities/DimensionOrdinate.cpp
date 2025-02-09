@@ -19,3 +19,40 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/DimensionOrdinate.h>
+
+namespace dwg {
+
+
+DimensionOrdinate::DimensionOrdinate() : Dimension(DimensionType::Ordinate) {}
+
+DimensionOrdinate::~DimensionOrdinate() {}
+
+ObjectType DimensionOrdinate::objectType() const { return ObjectType::DIMENSION_ORDINATE; }
+
+std::string DimensionOrdinate::objectName() const { return DxfFileToken::EntityDimension; }
+
+std::string DimensionOrdinate::subclassMarker() const { return DxfSubclassMarker::OrdinateDimension; }
+
+XYZ DimensionOrdinate::featureLocation() const { return _featureLocation; }
+
+void DimensionOrdinate::setFeatureLocation(const XYZ &value) { _featureLocation = value; }
+
+XYZ DimensionOrdinate::leaderEndpoint() const { return _leaderEndpoint; }
+
+void DimensionOrdinate::setLeaderEndpoint(const XYZ &value) { _leaderEndpoint = value; }
+
+double DimensionOrdinate::measurement() const { return 0.0; }
+
+bool DimensionOrdinate::isOrdinateTypeX() const { return _flags & DimensionType::OrdinateTypeX; }
+
+void DimensionOrdinate::setIsOrdinateTypeX(bool value)
+{
+    if (value) { _flags |= DimensionType::OrdinateTypeX; }
+    else { _flags &= ~DimensionType::OrdinateTypeX; }
+}
+
+}// namespace dwg

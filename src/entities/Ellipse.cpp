@@ -20,7 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "Ellipse.h"
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Ellipse.h>
 
 namespace dwg {
@@ -33,38 +34,38 @@ Ellipse::Ellipse()
 
 Ellipse::~Ellipse() {}
 
-ObjectType Ellipse::ObjectType() const { return ObjectType::ELLIPSE; }
+ObjectType Ellipse::objectType() const { return ObjectType::ELLIPSE; }
 
-std::string Ellipse::ObjectName() const { return DxfFileToken::EntityEllipse; }
+std::string Ellipse::objectName() const { return DxfFileToken::EntityEllipse; }
 
-std::string Ellipse::SubclassMarker() const { return DxfSubclassMarker::Ellipse; }
+std::string Ellipse::subclassMarker() const { return DxfSubclassMarker::Ellipse; }
 
-XYZ Ellipse::Normal() const { return _normal; }
+XYZ Ellipse::normal() const { return _normal; }
 
-XYZ Ellipse::Center() const { return _center; }
+XYZ Ellipse::center() const { return _center; }
 
-XYZ Ellipse::EndPoint() const { return _endPoint; }
+XYZ Ellipse::endPoint() const { return _endPoint; }
 
-double Ellipse::Thickness() const { return _thickness; }
+double Ellipse::thickness() const { return _thickness; }
 
-double Ellipse::RadiusRatio() const { return _radiusRatio; }
+double Ellipse::radiusRatio() const { return _radiusRatio; }
 
-double Ellipse::StartParameter() const { return _startParameter; }
+double Ellipse::startParameter() const { return _startParameter; }
 
-double Ellipse::EndParameter() const { return _endParameter; }
+double Ellipse::endParameter() const { return _endParameter; }
 
-void Ellipse::Normal(const XYZ &normal) { _normal = normal; }
+void Ellipse::setNormal(const XYZ &normal) { _normal = normal; }
 
-void Ellipse::Center(const XYZ &center) { _center = center; }
+void Ellipse::setCenter(const XYZ &center) { _center = center; }
 
-void Ellipse::EndPoint(const XYZ &endPoint) { _endPoint = endPoint; }
+void Ellipse::setEndPoint(const XYZ &endPoint) { _endPoint = endPoint; }
 
-void Ellipse::Thickness(double thickness) { _thickness = thickness; }
+void Ellipse::setThickness(double thickness) { _thickness = thickness; }
 
-void Ellipse::RadiusRatio(double radiusRatio) { _radiusRatio = radiusRatio; }
+void Ellipse::setRadiusRatio(double radiusRatio) { _radiusRatio = radiusRatio; }
 
-void Ellipse::StartParameter(double startParam) { _startParameter = startParam; }
+void Ellipse::setStartParameter(double startParam) { _startParameter = startParam; }
 
-void Ellipse::EndParameter(double endParam) { _endParameter = endParam; }
+void Ellipse::setEndParameter(double endParam) { _endParameter = endParam; }
 
 }// namespace dwg

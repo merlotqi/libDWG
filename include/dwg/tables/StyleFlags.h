@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
@@ -48,6 +46,6 @@ enum StyleFlag
     /// drawing was edited.
     Referenced = 64
 };
-CPL_DECLARE_FLAGS(StyleFlags, StyleFlag)
+typedef int StyleFlags;
 
 }// namespace dwg

@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Duplicate record cloning flag (determines how to merge duplicate entries).
@@ -42,6 +40,6 @@ enum DictionaryCloningFlag : short
     /// Unmangle name.
     UnmangleName = 16
 };
-CPL_DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag)
+typedef int DictionaryCloningFlags;
 
 }// namespace dwg

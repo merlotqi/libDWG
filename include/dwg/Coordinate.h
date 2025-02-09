@@ -24,6 +24,32 @@
 
 namespace dwg {
 
+struct XY
+{
+    union
+    {
+        struct
+        {
+            double X;
+            double Y;
+        };
+        double u[2];
+    };
+    static XY Zero;
+    XY() : X(0), Y(0) {}
+    XY(double x, double y) : X(x), Y(y) {}
+    double operator[](int index) const;
+    double &operator[](int index);
+    double distanceTo(const XY &rhs) const;
+    XY operator+(const XY &rhs) const;
+    XY operator-(const XY &rhs) const;
+    XY operator*(double rhs) const;
+    XY operator/(double rhs) const;
+    double angleTo(const XY &rhs) const;
+    bool fuzzyEqual(const XY &rhs) const;
+    bool isParallel(const XY &rhs) const;
+};
+
 struct XYZ
 {
     union
@@ -44,24 +70,15 @@ struct XYZ
     XYZ(double x, double y, double z) : X(x), Y(y), Z(z) {}
     double operator[](int index) const;
     double &operator[](int index);
+    double distanceTo(const XYZ &rhs) const;
+    XYZ operator+(const XYZ &rhs) const;
+    XYZ operator-(const XYZ &rhs) const;
+    XYZ operator*(double rhs) const;
+    XYZ operator/(double rhs) const;
+    double angleTo(const XYZ &rhs) const;
+    XY to2D() const;
 };
-struct XY
-{
-    union
-    {
-        struct
-        {
-            double X;
-            double Y;
-        };
-        double u[2];
-    };
-    static XY Zero;
-    XY() : X(0), Y(0) {}
-    XY(double x, double y) : X(x), Y(y) {}
-    double operator[](int index) const;
-    double &operator[](int index);
-};
+
 struct Matrix4
 {
     double m00, m01, m02, m03;

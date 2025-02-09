@@ -34,7 +34,7 @@ public:
     virtual std::string sectionName() const = 0;
 
     DwgSectionIO(ACadVersion version);
-    
+
     static bool CheckSentinel(const std::vector<unsigned char> &actual, const std::vector<unsigned char> &expected);
 
 protected:

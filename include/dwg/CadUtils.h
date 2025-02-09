@@ -34,22 +34,22 @@ namespace dwg {
 
 class LIBDWG_API CadUtils
 {
-    static std::map<std::string, CPL::CodePageID> _dxfEncodingMap;
+    static std::map<std::string, CodePage> _dxfEncodingMap;
     static std::vector<LineweightType> _indexedValue;
-    static std::vector<CPL::CodePageID> _pageCodes;
+    static std::vector<CodePage> _pageCodes;
 
 public:
     static LineweightType ToValue(unsigned char b);
 
     static unsigned char ToIndex(LineweightType value);
 
-    static CPL::CodePageID GetCodePage(std::string &value);
+    static CodePage GetCodePage(std::string &value);
 
-    static std::string GetCodePageName(CPL::CodePageID value);
+    static std::string GetCodePageName(CodePage value);
 
-    static CPL::CodePageID GetCodePage(int value);
+    static CodePage GetCodePage(int value);
 
-    static int GetCodeIndex(CPL::CodePageID code);
+    static int GetCodeIndex(CodePage code);
 
     static ACadVersion GetVersionFromName(const std::string &name);
 

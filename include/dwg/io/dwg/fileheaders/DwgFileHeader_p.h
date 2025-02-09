@@ -24,6 +24,7 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
+#include <dwg/utils/Encoding.h>
 #include <string>
 
 namespace dwg {
@@ -31,29 +32,37 @@ namespace dwg {
 class DwgFileHeader
 {
 public:
+    DwgFileHeader();
+
+    DwgFileHeader(ACadVersion version);
+
     virtual ~DwgFileHeader();
 
     ACadVersion version() const;
 
     long long previewAddress() const;
+
     void setPreviewAddress(long long);
 
     int acadMaintenanceVersion() const;
+
     void setAcadMaintenanceVersion(int);
 
-    CPL::CodePageID drawingCodePage() const;
-    void setDrawingCodePage(CPL::CodePageID);
+    CodePage drawingCodePage() const;
 
-public:
+    void setDrawingCodePage(CodePage);
+
     static DwgFileHeader *CreateFileHeader(ACadVersion version);
 
     virtual void addSection(const std::string &name) = 0;
 
     virtual DwgSectionDescriptor &getDescriptor(const std::string &name) = 0;
 
-protected:
-    DwgFileHeader();
-    DwgFileHeader(ACadVersion version);
+private:
+    ACadVersion _version;
+    long long _previewAddress;
+    int _acadMaintenanceVersion;
+    CodePage _drawingCodePage;
 };
 
 }// namespace dwg

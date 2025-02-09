@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 enum ImageDisplayFlag : short
@@ -39,6 +37,6 @@ enum ImageDisplayFlag : short
     /// Transparency is on
     TransparencyIsOn = 8
 };
-CPL_DECLARE_FLAGS(ImageDisplayFlags, ImageDisplayFlag)
+typedef int ImageDisplayFlags;
 
 }// namespace dwg

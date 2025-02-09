@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
-#include <stdexcept>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -31,7 +31,18 @@ namespace dwg {
 
 class DwgSectionDescriptor
 {
-    int _CompressedCode = 2;
+    int _pageType;
+    std::string _name;
+    unsigned long long _compressedSize;
+    int _pageCount;
+    unsigned long long _decompressedSize;
+    int _compressedCode;
+    int _compressed;
+    int _sectionId;
+    int _encrypted;
+    std::vector<DwgLocalSectionMap> _localSections;
+    std::optional<unsigned long long> _hashCode;
+    std::optional<unsigned long long> _encoding;
 
 public:
     DwgSectionDescriptor();
@@ -41,7 +52,7 @@ public:
     long pageType() const;
 
     std::string name() const;
-    void setName(const std::string& name);
+    void setName(const std::string &name);
 
     unsigned long long compressedSize() const;
     void setCompressedSize(unsigned long long);

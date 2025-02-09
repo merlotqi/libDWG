@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /**
@@ -41,15 +39,6 @@ enum AttributeFlag
     Verify = 4,  ///< Attribute requires verification on input.
     Preset = 8   ///< Attribute is preset, no user prompt.
 };
-
-/**
- * @typedef AttributeFlags
- * @brief Represents a set of flags that can be applied to an attribute entity.
- *
- * This type is a bitmask representing multiple `AttributeFlag` values, allowing
- * for efficient storage and manipulation of attribute properties in a single variable.
- */
-CPL_DECLARE_FLAGS(AttributeFlags, AttributeFlag)
-
+typedef int AttributeFlags;
 
 }// namespace dwg

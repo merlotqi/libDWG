@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 /// Flags (bit-coded values)
@@ -38,6 +36,6 @@ enum MLineFlag
     /// Suppress end caps
     NoEndCaps = 8
 };
-CPL_DECLARE_FLAGS(MLineFlags, MLineFlag)
+typedef int MLineFlags;
 
 }// namespace dwg

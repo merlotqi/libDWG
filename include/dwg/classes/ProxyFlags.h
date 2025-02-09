@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
-
 namespace dwg {
 
 enum ProxyFlag : unsigned short
@@ -59,6 +57,6 @@ enum ProxyFlag : unsigned short
     /// R13 format proxy.
     R13FormatProxy = 32768,
 };
-CPL_DECLARE_FLAGS(ProxyFlags, ProxyFlag)
+typedef int ProxyFlags;
 
 }// namespace dwg

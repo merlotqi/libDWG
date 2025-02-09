@@ -20,20 +20,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgStreamWriterBase.h"
-#include "DwgAppInfoWriter.h"
-#include "DwgAuxHeaderWriter.h"
-#include "DwgClassesWriter.h"
-#include "DwgFileHeaderWriterAC15.h"
-#include "DwgFileHeaderWriterAC18.h"
-#include "DwgHeaderWriter.h"
-#include "DwgObjectWriter.h"
-#include "DwgPreviewWriter.h"
-#include "IDwgFileHeaderWriter.h"
-#include "../fileheaders/DwgFileHeader.h"
-#include "../fileheaders/DwgSectionDefinition.h"
 #include <dwg/io/dwg/DwgWriter.h>
-#include "../../../DwgStream.h"
+#include <dwg/io/dwg/fileheaders/DwgHeaderWriter_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgAppInfoWriter_p.h>
+#include <dwg/io/dwg/writers/DwgAuxHeaderWriter_p.h>
+#include <dwg/io/dwg/writers/DwgClassesWriter_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
+#include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
+#include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
 
 #include <sstream>
 #include <stdexcept>
@@ -41,8 +39,7 @@
 namespace dwg {
 
 
-DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document)
-    : CadWriterBase(stream, document)
+DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document) : CadWriterBase(stream, document)
 {
     _version = document->Header.Version;
     _fileHeader = DwgFileHeader::CreateFileHeader(_version);
@@ -94,20 +91,17 @@ void DwgWriter::getFileHeaderWriter()
             throw new std::runtime_error("");
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
-            _fileHeaderWriter =
-                    new DwgFileHeaderWriterAC15(_stream, _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC15(_stream, _encoding, _document);
             break;
         case ACadVersion::AC1018:
-            _fileHeaderWriter =
-                    new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
             break;
         case ACadVersion::AC1021:
             throw new std::runtime_error("");
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
-            _fileHeaderWriter =
-                    new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
             break;
         default:
             throw new std::runtime_error("");
@@ -126,8 +120,7 @@ void DwgWriter::writeHeader()
 void DwgWriter::writeClasses()
 {
     std::ostringstream *stream = new std::ostringstream();
-    DwgClassesWriter *writer =
-            new DwgClassesWriter(stream, _document, _encoding);
+    DwgClassesWriter *writer = new DwgClassesWriter(stream, _document, _encoding);
     writer->Write();
     _fileHeaderWriter->AddSection(DwgSectionDefinition::Classes, stream, false);
 }
@@ -135,12 +128,10 @@ void DwgWriter::writeClasses()
 void DwgWriter::writeSummaryInfo()
 {
     std::ostringstream *stream = new std::ostringstream();
-    IDwgStreamWriter *writer =
-            DwgStreamWriterBase::GetStreamWriter(_version, stream, _encoding);
+    IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, stream, _encoding);
     CadSummaryInfo info = _document->SummaryInfo;
     writer->WriteTextUnicode(info.getTitle());
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::SummaryInfo, stream,
-                                  false, 0x100);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::SummaryInfo, stream, false, 0x100);
 }
 
 void DwgWriter::writePreview()
@@ -148,8 +139,7 @@ void DwgWriter::writePreview()
     std::ostringstream *stream = new std::ostringstream();
     DwgPreviewWriter *writer = new DwgPreviewWriter(_version, stream);
     writer->Write();
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::Preview, stream, false,
-                                  0x400);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::Preview, stream, false, 0x400);
 }
 
 void DwgWriter::writeAppInfo()
@@ -191,8 +181,7 @@ void DwgWriter::writeFileDepList()
     //Int16	2	Affects graphics(1 = true, 0 = false)
     //Int32	4	Reference count
 
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::FileDepList, stream,
-                                  false, 0x80);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::FileDepList, stream, false, 0x80);
 }
 void DwgWriter::writeRevHistory()
 {
@@ -202,31 +191,27 @@ void DwgWriter::writeRevHistory()
     stream->write((char *) &v, sizeof(v));
     stream->write((char *) &v, sizeof(v));
     stream->write((char *) &v, sizeof(v));
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::RevHistory, stream,
-                                  true);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::RevHistory, stream, true);
 }
 void DwgWriter::writeAuxHeader()
 {
     std::ostringstream *stream = new std::ostringstream();
-    DwgAuxHeaderWriter *writer =
-            new DwgAuxHeaderWriter(stream, _encoding, _document->Header);
+    DwgAuxHeaderWriter *writer = new DwgAuxHeaderWriter(stream, _encoding, _document->Header);
     writer->Write();
 
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::AuxHeader, stream,
-                                  true);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::AuxHeader, stream, true);
 }
 void DwgWriter::writeObjects()
 {
     std::ostringstream *stream = new std::ostringstream();
-    DwgObjectWriter *writer =
-            new DwgObjectWriter(stream, _document, _encoding, false);
+    DwgObjectWriter *writer = new DwgObjectWriter(stream, _document, _encoding, false);
     writer->Write();
 
     _handlesMap = writer->Map();
 
-    _fileHeaderWriter->AddSection(DwgSectionDefinition::AcDbObjects, stream,
-                                  true);
+    _fileHeaderWriter->AddSection(DwgSectionDefinition::AcDbObjects, stream, true);
 }
+
 void DwgWriter::writeObjFreeSpace()
 {
     std::ostringstream *stream = new std::ostringstream();
@@ -241,15 +226,13 @@ void DwgWriter::writeObjFreeSpace()
     //Julian datetime	8	If version > R14 then system variable TDUPDATE otherwise TDUUPDATE.
     if (this._version >= ACadVersion.AC1015)
     {
-        CadUtils.DateToJulian(this._document.Header.UniversalUpdateDateTime,
-                              out int jdate, out int mili);
+        CadUtils.DateToJulian(this._document.Header.UniversalUpdateDateTime, out int jdate, out int mili);
         writer.Write<int>(jdate);
         writer.Write<int>(mili);
     }
     else
     {
-        CadUtils.DateToJulian(this._document.Header.UpdateDateTime,
-                              out int jdate, out int mili);
+        CadUtils.DateToJulian(this._document.Header.UpdateDateTime, out int jdate, out int mili);
         writer.Write<int>(jdate);
         writer.Write<int>(mili);
     }
@@ -276,9 +259,9 @@ void DwgWriter::writeObjFreeSpace()
     //UInt32	4	ODA writes 0x00000000
     writer.Write<uint>(0x00000000);
 
-    this._fileHeaderWriter.AddSection(DwgSectionDefinition.ObjFreeSpace, stream,
-                                      true);
+    this._fileHeaderWriter.AddSection(DwgSectionDefinition.ObjFreeSpace, stream, true);
 }
+
 void DwgWriter::writeTemplate()
 {
     MemoryStream stream = new MemoryStream();
@@ -289,18 +272,16 @@ void DwgWriter::writeTemplate()
     //UInt16	2	MEASUREMENT system variable(0 = English, 1 = Metric).
     writer.Write<ushort>((ushort) 1);
 
-    this._fileHeaderWriter.AddSection(DwgSectionDefinition.Template, stream,
-                                      true);
+    this._fileHeaderWriter.AddSection(DwgSectionDefinition.Template, stream, true);
 }
+
 void DwgWriter::writeHandles()
 {
     MemoryStream stream = new MemoryStream();
-    DwgHandleWriter writer =
-            new DwgHandleWriter(this._version, stream, this._handlesMap);
+    DwgHandleWriter writer = new DwgHandleWriter(this._version, stream, this._handlesMap);
     writer.Write(this._fileHeaderWriter.HandleSectionOffset);
 
-    this._fileHeaderWriter.AddSection(DwgSectionDefinition.Handles, stream,
-                                      true);
+    this._fileHeaderWriter.AddSection(DwgSectionDefinition.Handles, stream, true);
 }
 
 
