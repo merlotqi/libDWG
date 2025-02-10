@@ -169,4 +169,19 @@ enum CodePage
     Utf8 = 65001,                 /// Unicode (UTF-8)
 };
 
+class Encoding
+{
+    CodePage cp;
+
+public:
+    Encoding();
+    Encoding(CodePage codePage);
+
+    std::string toUtf8(const std::string& str);
+    std::string fromUtf8(const std::string &str);
+    std::wstring toUnicode(const std::string &wstr);
+    std::string fromUnicode(const std::wstring &wstr);
+    CodePage codePage() const;
+};
+
 }// namespace dwg

@@ -22,25 +22,21 @@
 
 #pragma once
 
-#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <stdexcept>
 
 namespace dwg {
 
-class IDwgStreamReader;
-
-class DwgHandleReader : public DwgSectionIO
+class DwgException : std::exception
 {
 public:
-    DwgHandleReader(ACadVersion version, IDwgStreamReader *sreader);
+    DwgException();
+    DwgException(const std::string &);
+};
 
-    ~DwgHandleReader();
-
-    std::string sectionName() const;
-
-    std::map<unsigned long long, long long> read();
-
-private:
-    IDwgStreamReader *_sreader;
+class DwgNotImplementedException : public DwgException
+{
+public:
+    DwgNotImplementedException();
 };
 
 }

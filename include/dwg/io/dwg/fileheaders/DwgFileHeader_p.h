@@ -24,7 +24,7 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
-#include <dwg/utils/Encoding.h>
+#include <dwg/utils/Encoding_p.h>
 #include <string>
 
 namespace dwg {

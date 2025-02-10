@@ -21,3 +21,12 @@
  */
 
 #pragma once
+
+namespace dwg {
+
+class EndianConverter
+{
+
+};
+
+}

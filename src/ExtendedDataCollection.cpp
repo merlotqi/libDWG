@@ -20,27 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/ExtendedDataCollection.h>
 
 namespace dwg {
 
-class IDwgStreamReader;
-
-class DwgHandleReader : public DwgSectionIO
-{
-public:
-    DwgHandleReader(ACadVersion version, IDwgStreamReader *sreader);
-
-    ~DwgHandleReader();
-
-    std::string sectionName() const;
-
-    std::map<unsigned long long, long long> read();
-
-private:
-    IDwgStreamReader *_sreader;
-};
 
 }

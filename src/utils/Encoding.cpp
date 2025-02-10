@@ -20,26 +20,69 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/utils/Encoding_p.h>
+#include <iconv.h>
+#include <map>
 
-#include <dwg/io/dwg/DwgSectionIO_p.h>
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 
 namespace dwg {
 
-class IDwgStreamReader;
-class DwgSummaryInfoReader : public DwgSectionIO
+static std::map<CodePage, std::string> s_codepage_iconvid_mapping;
+
+Encoding::Encoding()
+    : cp(Utf8)
+{}
+
+Encoding::Encoding(CodePage codePage)
+    : cp(codePage)
+{}
+
+std::string Encoding::toUtf8(const std::string& str)
 {
-public:
-    DwgAppInfoReader(ACadVersion version, IDwgStreamReader* reader);
-    
-    ~DwgAppInfoReader();
+    if(cp == Utf8)
+    {
+        return str;
+    }
+    else
+    {
+        return std::string();
+    }
+}
 
-    std::string sectionName() const;
-    
-    void read();
+std::string Encoding::fromUtf8(const std::string &str)
+{
+    if(cp == Utf8)
+    {
+        return str;
+    }
+    else
+    {
+        return std::string();
+    }
+}
 
-private:
-    void readUtf8String();
-};
+std::wstring Encoding::toUnicode(const std::string &wstr)
+{
+#ifdef _WIN32
+#else
+#endif
+    return std::wstring();
+}
+
+std::string Encoding::fromUnicode(const std::wstring &wstr)
+{
+#ifdef _WIN32
+#else
+#endif
+    return std::wstring();
+}
+
+CodePage Encoding::codePage() const
+{
+    return cp;
+}
 
 }// namespace dwg

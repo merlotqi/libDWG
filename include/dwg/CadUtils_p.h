@@ -22,17 +22,16 @@
 
 #pragma once
 
-#include <dwg/utils/Encoding.h>
+#include <dwg/utils/Encoding_p.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
-#include <dwg/exports.h>
 #include <map>
 
 #include <vector>
 
 namespace dwg {
 
-class LIBDWG_API CadUtils
+class CadUtils
 {
     static std::map<std::string, CodePage> _dxfEncodingMap;
     static std::vector<LineweightType> _indexedValue;
