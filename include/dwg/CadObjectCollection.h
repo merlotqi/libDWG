@@ -24,6 +24,7 @@
 
 #include <dwg/CadObject.h>
 #include <vector>
+#include <functional>
 
 namespace dwg {
 
@@ -124,12 +125,12 @@ public:
     /**
      * @brief Delegate triggered when an object is added.
      */
-    CPL::Delegate<void(T *)> OnAdded;
+    std::function<void(T *)> OnAdded;
 
     /**
      * @brief Delegate triggered when an object is removed.
      */
-    CPL::Delegate<void(T *)> OnRemoved;
+    std::function<void(T *)> OnRemoved;
 };
 
 }// namespace dwg

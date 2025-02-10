@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <cpl_ports.h>
+#include <functional>
 #include <dwg/io/Notification.h>
 #include <map>
 
@@ -77,7 +77,7 @@ public:
     void RegisterTables();
     void BuildTables();
 
-    CPL::Delegate<void(const std::string &, Notification)> OnNotification;
+    std::function<void(const std::string &, Notification)> OnNotification;
 
 
 protected:

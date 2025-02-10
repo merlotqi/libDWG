@@ -22,41 +22,36 @@
 
 #pragma once
 
-#include <functional>
+#include <dwg/Coordinate.h>
+#include <variant>
+#include <string>
+#include <vector>
 
 namespace dwg {
 
-/**
- * @brief Interface for CAD objects with a name property.
- * 
- * This class provides a mechanism to get the name of a CAD object
- * and a delegate for name change notifications.
- */
-class INamedCadObject
+enum DwgVariantType
 {
-public:
-    /**
-     * @brief Default constructor.
-     */
-    INamedCadObject() = default;
-
-    /**
-     * @brief Virtual destructor.
-     */
-    virtual ~INamedCadObject() {}
-
-    /**
-     * @brief Gets the name of the CAD object.
-     * @return The name of the object as a string.
-     */
-    virtual std::string name() const = 0;
-
-    /**
-     * @brief Event triggered when the object's name changes.
-     * 
-     * This delegate is invoked with the old and new names when the name is updated.
-     */
-    std::function<void(const std::string &, const std::string &)> OnNameChanged;
+    I8,
+    UI8,
+    I16,
+    UI16,
+    I32,
+    UI32,
+    I64,
+    UI64,
+    F32,
+    F64,
+    STRING,
+    COORD,
+    BLOB,
 };
 
-}// namespace dwg
+typedef std::variant<char, unsigned char, short, unsigned short, int, unsigned int, long long, 
+        unsigned long long, float, double, std::string, XYZ, std::vector<unsigned char>> DwgVariant;
+
+inline static bool dwg_variant_valid(const DwgVariant& val)
+{
+	return !(std::holds_alternative<std::monostate>(val));
+}
+
+}

@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/classes/ProxyFlags.h>
 #include <dwg/exports.h>

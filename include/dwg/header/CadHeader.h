@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/Color.h>
 #include <dwg/Coordinate.h>

@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <cpl_ports.h>
+#include <dwg/utils/Encoding.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/exports.h>

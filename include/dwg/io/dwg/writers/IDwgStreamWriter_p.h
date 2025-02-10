@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
 #include <dwg/Color.h>
 #include <dwg/Transparency.h>
 #include <dwg/DwgReference.h>
@@ -36,7 +35,7 @@ class IDwgStreamWriter
 public:
     virtual IDwgStreamWriter() = default;
 
-    virtual CPL::Encoding encoding() = 0;
+    virtual Encoding encoding() = 0;
 
     virtual IDwgStreamWriter* main() const = 0;
 

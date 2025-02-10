@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <cpl_ports.h>
 #include <dwg/Coordinate.h>
 #include <vector>
 

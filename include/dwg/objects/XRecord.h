@@ -25,6 +25,7 @@
 #include <dwg/GroupCodeValueType.h>
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/DwgVariant.h>
 #include <vector>
 
 namespace dwg {
@@ -35,7 +36,7 @@ public:
     struct Entry
     {
         int Code;
-        CPL::Any Value;
+        DwgVariant Value;
         GroupCodeValueType GroupCode;
         bool HasLinkedObject;
         XRecord *Owner;
@@ -52,13 +53,13 @@ public:
 
     std::string subclassMarker() const override;
 
-    DictionaryCloningFlags CloningFlags() const;
+    DictionaryCloningFlags cloningFlags() const;
 
-    void CloningFlags(DictionaryCloningFlags);
+    void setCloningFlags(DictionaryCloningFlags);
 
-    std::vector<Entry> Entries() const;
+    std::vector<Entry> entries() const;
 
-    void CreateEntry(int code, CPL::Any value);
+    void createEntry(int code, DwgVariant value);
 };
 
 }// namespace dwg
