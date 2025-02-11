@@ -22,14 +22,12 @@
 
 #pragma once
 
-#include "../DwgSectionIO.h"
-#include "../fileheaders/DwgSectionDefinition.h"
-#include "IDwgStreamWriter.h"
 #include <dwg/CadDocument.h>
-#include <dwg/utility/stringhelp.h>
+#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
 namespace dwg {
-
 
 class DwgClassesWriter : public DwgSectionIO
 {
@@ -42,12 +40,13 @@ class DwgClassesWriter : public DwgSectionIO
     std::vector<unsigned char> _endSentinel;
 
 public:
-    std::string SectionName() const;
-    DwgClassesWriter(std::ostream *stream, CadDocument *document,
-                     Encoding encoding);
-    void Write();
+    DwgClassesWriter(std::ostream *stream, CadDocument *document, Encoding encoding);
+
+    std::string sectionName() const override;
+
+    void write();
+
     void writeSizeAndCrc();
 };
-
 
 }// namespace dwg

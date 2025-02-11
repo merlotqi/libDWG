@@ -22,16 +22,14 @@
 
 #pragma once
 
-#include "IDwgFileHeaderWriter.h"
 #include <assert.h>
-#include <dwg/CadDocument.h>
 #include <dwg/ACadVersion.h>
-#include <base.h>
+#include <dwg/CadDocument.h>
+#include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
 #include <fstream>
 #include <sstream>
 
 namespace dwg {
-
 
 class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 {
@@ -41,18 +39,22 @@ protected:
     std::ofstream *_stream;
     CadDocument *_document;
 
-    virtual int HandleSectionOffset() const = 0;
-    virtual int _fileHeaderSize() const = 0;
+    virtual int handleSectionOffset() const = 0;
+
+    virtual int fileHeaderSize() const = 0;
 
 public:
-    DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model);
+    DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding, CadDocument *model);
+
     unsigned short getFileCodePage();
+
     void applyMask(std::vector<unsigned char> &buffer, int offset, int length);
-    bool checkEmptyBytes(const std::vector<unsigned char> &buffer,
-                         unsigned long long offset,
+
+    bool checkEmptyBytes(const std::vector<unsigned char> &buffer, unsigned long long offset,
                          unsigned long long spearBytes) const;
+
     void writeMagicNumber();
+
     void applyMagicSequence(std::ostringstream *stream);
 };
 

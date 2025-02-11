@@ -22,12 +22,11 @@
 
 #pragma once
 
+#include <dwg/dwg_version.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
-#include <dwg/version.h>
 
 namespace dwg {
-
 
 class DwgAppInfoWriter : public DwgSectionIO
 {
@@ -35,11 +34,11 @@ class DwgAppInfoWriter : public DwgSectionIO
     std::vector<unsigned char> _emptyArr;
 
 public:
-    std::string SectionName() const;
-
     DwgAppInfoWriter(ACadVersion version, std::ostream *stream);
-    void Write();
-};
 
+    std::string sectionName() const override;
+
+    void write();
+};
 
 }// namespace dwg

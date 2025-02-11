@@ -24,7 +24,6 @@
 
 #include <dwg/Color.h>
 #include <dwg/Transparency.h>
-#include <dwg/DwgReference.h>
 
 namespace dwg {
 
@@ -37,7 +36,7 @@ public:
 
     virtual Encoding encoding() = 0;
 
-    virtual IDwgStreamWriter* main() const = 0;
+    virtual IDwgStreamWriter *main() const = 0;
 
     virtual long long positionInBits() const = 0;
 
@@ -93,9 +92,9 @@ public:
 
     virtual void writeByte(unsigned char value) = 0;
 
-    virtual void handleReference(IHandledCadObject* cadObject) = 0;
+    virtual void handleReference(IHandledCadObject *cadObject) = 0;
 
-    virtual void handleReference(DwgReferenceType type, IHandledCadObject* cadObject) = 0;
+    virtual void handleReference(DwgReferenceType type, IHandledCadObject *cadObject) = 0;
 
     virtual void handleReference(unsigned long long handle) = 0;
 
@@ -130,4 +129,4 @@ public:
     virtual void writeShiftValue() = 0;
 };
 
-}
+}// namespace dwg

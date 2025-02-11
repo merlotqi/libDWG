@@ -22,40 +22,34 @@
 
 #pragma once
 
-#include "../fileheaders/DwgSectionDefinition.h"
-#include "../fileheaders/DwgSectionLocatorRecord.h"
-#include "DwgFileHeaderWriterBase.h"
-#include "IDwgStreamWriter.h"
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <vector>
 
 namespace dwg {
 
-
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {
-    std::map<std::string,
-             std::pair<DwgSectionLocatorRecord, std::ostringstream *>>
-            _records;
+    std::map<std::string, std::pair<DwgSectionLocatorRecord, std::ostringstream *>> _records;
     static std::vector<unsigned char> _endSentinel;
 
 public:
-    DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model);
-    void AddSection(const std::string &name, std::ostringstream *stream,
-                    bool isCompressed, int decompsize = 0x7400) override;
-    void WriteFile() override;
+    DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model);
+    void addSection(const std::string &name, std::ostringstream *stream, bool isCompressed,
+                    int decompsize = 0x7400) override;
+    void writeFile() override;
 
 protected:
-    int HandleSectionOffset() const override;
-    int _fileHeaderSize() const override;
+    int handleSectionOffset() const override;
+    int fileHeaderSize() const override;
 
 private:
     void setRecordSeekers();
     void writeFileHeader();
-    void writeRecord(IDwgStreamWriter *writer,
-                     const DwgSectionLocatorRecord &record);
+    void writeRecord(IDwgStreamWriter *writer, const DwgSectionLocatorRecord &record);
     void writeRecordStreams();
 };
-
 
 }// namespace dwg

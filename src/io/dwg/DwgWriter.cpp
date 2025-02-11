@@ -21,7 +21,7 @@
  */
 
 #include <dwg/io/dwg/DwgWriter.h>
-#include <dwg/io/dwg/fileheaders/DwgHeaderWriter_p.h>
+#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgAppInfoWriter_p.h>
 #include <dwg/io/dwg/writers/DwgAuxHeaderWriter_p.h>
