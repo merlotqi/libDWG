@@ -21,8 +21,127 @@
  */
 
 #include <dwg/utils/StreamWrapper_p.h>
+#include <stdexcept>
 
 namespace dwg {
 
+InputStreamWrapper::InputStreamWrapper(std::istream *stream)
+    : _stream(stream), _encoding(Encoding::Utf8())
+{
+    if(!_stream || !_stream->is_good())
+    {
+        throw new std::bad_alloc();
+    }
+}
+
+InputStreamWrapper::~InputStreamWrapper()
+{}
+
+std::istream InputStreamWrapper::stream()
+{
+    return _stream;
+}
+
+std::size_t InputStreamWrapper::length() const
+{
+    return 0;
+}
+
+std::size_t InputStreamWrapper::pos() const
+{
+    return 0;
+}
+
+void InputStreamWrapper::seek(std::size_t pos)
+{
+
+}
+
+Encoding InputStreamWrapper::encoding() const
+{
+    return _encoding;
+}
+
+void InputStreamWrapper::setEncoding(Encoding encoding)
+{
+    _encoding = encoding;
+}
+
+char InputStreamWrapper::readChar()
+{
+    char ch;
+    _stream->read(&ch, sizeof(ch));
+    return ch;   
+}
+
+unsigned char InputStreamWrapper::readByte()
+{
+    unsigned char ch;
+    _stream->read(reinterpret_cast<char*>(&ch), sizeof(unsigned char));
+    return ch;
+}
+
+std::vector<unsigned char> InputStreamWrapper::readBytes(int length)
+{
+    std::vector<unsigned char> buffer(length, 0);
+    _stream->read(reinterpret_cast<char*>(buffer.data()), length);
+    return buffer;
+}
+
+short InputStreamWrapper::readShort()
+{
+    return readT<short, LittleEndianConverter>();
+}
+
+unsigned short InputStreamWrapper::readUShort()
+{
+    return readT<unsigned short, LittleEndianConverter>();
+}
+
+int InputStreamWrapper::readInt()
+{
+    return readT<int, LittleEndianConverter>();
+}
+
+unsigned int InputStreamWrapper::readUInt()
+{
+    return readT<unsigned int, LittleEndianConverter>();
+}
+
+long long InputStreamWrapper::readLong()
+{
+    return readT<long long, LittleEndianConverter>();
+}
+
+unsigned long long InputStreamWrapper::readULong()
+{
+    return readT<unsigned long long, LittleEndianConverter>();
+}
+
+float InputStreamWrapper::readFloat()
+{
+    return readT<float, LittleEndianConverter>();
+}
+
+double InputStreamWrapper::readDouble()
+{
+    return readT<double, LittleEndianConverter>();
+}
+
+std::string InputStreamWrapper::readString(int length)
+{
+    return readString(length, _encoding);
+}
+
+std::string InputStreamWrapper::readString(int length, Encoding encoding)
+{
+    std::vector<unsigned char> buffer = readBytes(length);
+    return encoding.toUtf8(reinterpret_cast<const char*>(buffer.data()));
+}
+
+std::string InputStreamWrapper::readUntil(char match)
+{
+    return std::string();
+}
 
 }

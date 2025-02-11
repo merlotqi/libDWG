@@ -30,29 +30,83 @@ namespace dwg {
 class InputStreamWrapper
 {
     std::istream *_stream;
+    Encoding _encoding;
 
 public:
     InputStreamWrapper(std::istream *stream);
     virtual ~InputStreamWrapper();
 
     std::istream *stream();
+    
+    std::size_t length() const;
+    std::size_t pos() const;
+    void seek(std::size_t pos);
+    
+    Encoding encoding() const;
+    void setEncoding(Encoding encoding);
+
+    char readChar();
+    unsigned char readByte();
+    std::vector<unsigned char> readBytes(int length);
+    short readShort();
+    unsigned short readUShort();
+    int readInt();
+    unsigned int readUInt();
+    long long readLong();
+    unsigned long long readULong();
+    float readFloat();
+    double readDouble();
+    std::string readString(int length);
+    std::string readString(int length, Encoding encoding);
+
+    template<class T, class E>
+    T readT()
+    {
+        T t = 0;
+        size_t sz = sizeof(T);
+        std::vector<unsigned int> buffer = readBytes(sz);
+        auto converter = E::instance();
+        return converter->fromBytesT<T>(buffer.data());
+    }
+
+    std::string readUntil(char match);
 };
 
 class OutputStreamWrapper
 {
     std::ostream *_stream;
+    Encoding _encoding;
 
 public:
     OutputStreamWrapper(std::ostream *stream);
     virtual ~OutputStreamWrapper();
-    std::ostream *stream();
 
-    virtual void write(const std::vector<unsigned char> &buffer, int offset, int length);
+    std::ostream *stream();
+    
+    std::size_t length() const;
+    std::size_t pos() const;
+    void seek(std::size_t pos);
+    
+    Encoding encoding() const;
+    void setEncoding(Encoding encoding);
 
     template<class T>
     void write(const T &value)
     {
+        write<T, LittleEndianConverter>(value);
     }
+
+    template<class T, class E>
+    void write(const T& value)
+    {
+        auto convert = E::instance();
+        std::vector<unsigned char> buffer = converter->bytesT<T>(value);
+        write(buffer, 0, buffer.size());
+    }
+
+    virtual void write(const std::vector<unsigned char> &buffer, int offset, int length);
+    virtual void write(const std::string &);
+    virtual void write(const std::string &, Encoding);
 };
 
 }// namespace dwg

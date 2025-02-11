@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace dwg {
 
 /// Source: https://docs.microsoft.com/en-us/dotnet/api/system.text.encoding?view=net-5.0
@@ -177,11 +179,13 @@ public:
     Encoding();
     Encoding(CodePage codePage);
 
-    std::string toUtf8(const std::string& str);
+    std::string toUtf8(const char *str);
+    std::string toUtf8(const std::string &str);
     std::string fromUtf8(const std::string &str);
     std::wstring toUnicode(const std::string &wstr);
     std::string fromUnicode(const std::wstring &wstr);
     CodePage codePage() const;
+
 };
 
 }// namespace dwg
