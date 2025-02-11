@@ -22,23 +22,32 @@
 
 #pragma once
 
-#include <dwg/entities/Entity.h>
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
 
+class Entity;
 class LIBDWG_API Group : public NonGraphicalObject
 {
 public:
     Group();
+    ~Group();
+
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::string Description;// 300
-    bool IsUnnamed;         // 71
-    bool Selectable;        // 71
-    std::map<unsigned long long, Entity *> Entities;
+    std::string description() const;
+    void setDescription(const std::string &);
+
+    bool isUnnamed() const;
+    void setIsUnnamed(bool);
+
+    bool selectable() const;
+    void setSelectable(bool value);
+
+    std::map<unsigned long long, Entity *> entities() const;
+    void setEntities(const std::map<unsigned long long, Entity *> &);
 };
 
 }// namespace dwg

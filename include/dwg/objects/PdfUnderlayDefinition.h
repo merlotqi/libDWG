@@ -33,9 +33,9 @@ public:
 
     std::string objectName() const override;
 
-    std::string Page() const;
+    std::string page() const;
 
-    void Page(const std::string &);
+    void setPage(const std::string &);
 };
 
 }// namespace dwg

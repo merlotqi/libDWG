@@ -58,131 +58,131 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    LeaderContentType ContentType() const;
-    void ContentType(LeaderContentType);
+    LeaderContentType contentType() const;
+    void setContentType(LeaderContentType);
 
-    MultiLeaderDrawOrderType MultiLeaderDrawOrder() const;
-    void MultiLeaderDrawOrder(MultiLeaderDrawOrderType);
+    MultiLeaderDrawOrderType multiLeaderDrawOrder() const;
+    void setMultiLeaderDrawOrder(MultiLeaderDrawOrderType);
 
-    LeaderDrawOrderType LeaderDrawOrder() const;
-    void LeaderDrawOrder(LeaderDrawOrderType);
+    LeaderDrawOrderType leaderDrawOrder() const;
+    void setLeaderDrawOrder(LeaderDrawOrderType);
 
-    int MaxLeaderSegmentsPoints() const;
-    void MaxLeaderSegmentsPoints(int);
+    int maxLeaderSegmentsPoints() const;
+    void setMaxLeaderSegmentsPoints(int);
 
-    double FirstSegmentAngleConstraint() const;
-    void FirstSegmentAngleConstraint(double);
+    double firstSegmentAngleConstraint() const;
+    void setFirstSegmentAngleConstraint(double);
 
-    double SecondSegmentAngleConstraint() const;
-    void SecondSegmentAngleConstraint(double);
+    double secondSegmentAngleConstraint() const;
+    void setSecondSegmentAngleConstraint(double);
 
-    MultiLeaderPathType PathType() const;
-    void PathType(MultiLeaderPathType);
+    MultiLeaderPathType pathType() const;
+    void setPathType(MultiLeaderPathType);
 
-    Color LineColor() const;
-    void LineColor(const Color &);
+    Color lineColor() const;
+    void setLineColor(const Color &);
 
-    LineType *LeaderLineType() const;
-    void LeaderLineType(LineType *);
+    LineType *leaderLineType() const;
+    void setLeaderLineType(LineType *);
 
-    LineweightType LeaderLineWeight() const;
-    void LeaderLineWeight(LineweightType);
+    LineweightType leaderLineWeight() const;
+    void setLeaderLineWeight(LineweightType);
 
-    bool EnableLanding() const;
-    void EnableLanding(bool);
+    bool enableLanding() const;
+    void setEnableLanding(bool);
 
-    double LandingGap() const;
-    void LandingGap(double);
+    double landingGap() const;
+    void setLandingGap(double);
 
-    bool EnableDogleg() const;
-    void EnableDogleg(bool);
+    bool enableDogleg() const;
+    void setEnableDogleg(bool);
 
-    double LandingDistance() const;
-    void LandingDistance(double);
+    double landingDistance() const;
+    void setLandingDistance(double);
 
-    std::string Description() const;
-    void Description(const std::string &);
+    std::string description() const;
+    void setDescription(const std::string &);
 
-    BlockRecord *Arrowhead() const;
-    void Arrowhead(BlockRecord *);
+    BlockRecord *arrowhead() const;
+    void setArrowhead(BlockRecord *);
 
-    double ArrowheadSize() const;
-    void ArrowheadSize(double);
+    double arrowheadSize() const;
+    void setArrowheadSize(double);
 
-    std::string DefaultTextContents() const;
-    void DefaultTextContents(const std::string &);
+    std::string defaultTextContents() const;
+    void setDefaultTextContents(const std::string &);
 
-    TextStyle *TextStyle() const;
-    void TextStyle(TextStyle *);
+    TextStyle *textStyle() const;
+    void setTextStyle(TextStyle *);
 
-    TextAttachmentType TextLeftAttachment() const;
-    void TextLeftAttachment(TextAttachmentType);
+    TextAttachmentType textLeftAttachment() const;
+    void setTextLeftAttachment(TextAttachmentType);
 
-    TextAngleType TextAngle() const;
-    void TextAngle(TextAngleType);
+    TextAngleType textAngle() const;
+    void setTextAngle(TextAngleType);
 
-    TextAlignmentType TextAlignment() const;
-    void TextAlignment(TextAlignmentType);
+    TextAlignmentType textAlignment() const;
+    void setTextAlignment(TextAlignmentType);
 
-    TextAlignmentType TextRightAttachment() const;
-    void TextRightAttachment(TextAlignmentType);
+    TextAlignmentType textRightAttachment() const;
+    void setTextRightAttachment(TextAlignmentType);
 
-    Color TextColor() const;
-    void TextColor(const Color &);
+    Color textColor() const;
+    void setTextColor(const Color &);
 
-    double TextHeight() const;
-    void TextHeight(double);
+    double textHeight() const;
+    void setTextHeight(double);
 
-    bool TextFrame() const;
-    void TextFrame(bool);
+    bool textFrame() const;
+    void setTextFrame(bool);
 
-    bool TextAlignAlwaysLeft() const;
-    void TextAlignAlwaysLeft(bool);
+    bool textAlignAlwaysLeft() const;
+    void setTextAlignAlwaysLeft(bool);
 
-    double AlignSpace() const;
-    void AlignSpace(double);
+    double alignSpace() const;
+    void setAlignSpace(double);
 
-    BlockRecord *BlockContent() const;
-    void BlockContent(BlockRecord *);
+    BlockRecord *blockContent() const;
+    void setBlockContent(BlockRecord *);
 
-    Color BlockContentColor() const;
-    void BlockContentColor(const Color &);
+    Color blockContentColor() const;
+    void setBlockContentColor(const Color &);
 
-    XYZ BlockContentScale() const;
-    void BlockContentScale(const XYZ &);
+    XYZ blockContentScale() const;
+    void setBlockContentScale(const XYZ &);
 
-    bool EnableBlockContentScale() const;
-    void EnableBlockContentScale(bool);
+    bool enableBlockContentScale() const;
+    void setEnableBlockContentScale(bool);
 
-    double BlockContentRotation() const;
-    void BlockContentRotation(double);
+    double blockContentRotation() const;
+    void setBlockContentRotation(double);
 
-    bool EnableBlockContentRotation() const;
-    void EnableBlockContentRotation(bool);
+    bool enableBlockContentRotation() const;
+    void setEnableBlockContentRotation(bool);
 
-    BlockContentConnectionType BlockContentConnection() const;
-    void BlockContentConnection(BlockContentConnectionType);
+    BlockContentConnectionType blockContentConnection() const;
+    void setBlockContentConnection(BlockContentConnectionType);
 
-    double ScaleFactor() const;
-    void ScaleFactor(double);
+    double scaleFactor() const;
+    void setScaleFactor(double);
 
-    bool OverwritePropertyValue() const;
-    void OverwritePropertyValue(bool);
+    bool overwritePropertyValue() const;
+    void setOverwritePropertyValue(bool);
 
-    bool IsAnnotative() const;
-    void IsAnnotative(bool);
+    bool isAnnotative() const;
+    void setIsAnnotative(bool);
 
-    double BreakGapSize() const;
-    void BreakGapSize(double);
+    double breakGapSize() const;
+    void setBreakGapSize(double);
 
-    TextAttachmentDirectionType TextAttachmentDirection() const;
-    void TextAttachmentDirection(TextAttachmentDirectionType);
+    TextAttachmentDirectionType textAttachmentDirection() const;
+    void setTextAttachmentDirection(TextAttachmentDirectionType);
 
-    TextAttachmentType TextBottomAttachment() const;
-    void TextBottomAttachment(TextAttachmentType);
+    TextAttachmentType textBottomAttachment() const;
+    void setTextBottomAttachment(TextAttachmentType);
 
-    TextAttachmentType TextTopAttachment() const;
-    void TextTopAttachment(TextAttachmentType);
+    TextAttachmentType textTopAttachment() const;
+    void setTextTopAttachment(TextAttachmentType);
 };
 
 }// namespace dwg

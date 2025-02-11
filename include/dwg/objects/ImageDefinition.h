@@ -32,16 +32,29 @@ class LIBDWG_API ImageDefinition : public NonGraphicalObject
 {
 public:
     ImageDefinition();
+    ~ImageDefinition();
+
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    int ClassVersion;         //90
-    std::string FileName;     // 1
-    XY Size;                  // 10, 20
-    XY DefaultSize = XY(1, 1);// 11, 21
-    bool IsLoaded = 200;
-    ResolutionUnit Units;// 281
+    int classVersion() const;
+    void setClassVersion(int);
+
+    std::string fileName() const;
+    void setFileName(const std::string &);
+
+    XY size() const;
+    void setSize(const XY &);
+
+    XY defaultSize() const;
+    void setDefaultSize(const XY &);
+
+    bool isLoaded() const;
+    void setIsLoaded(bool);
+
+    ResolutionUnit units() const;
+    void setUnits(ResolutionUnit);
 };
 
 }// namespace dwg

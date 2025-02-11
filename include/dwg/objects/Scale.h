@@ -40,25 +40,25 @@ public:
 
     std::string subclassMarker() const override;
 
-    double PaperUnits() const;
+    double paperUnits() const;
 
-    void PaperUnits(double);
+    void setPaperUnits(double);
 
-    double DrawingUnits() const;
+    double drawingUnits() const;
 
-    void DrawingUnits(double);
+    void setDrawingUnits(double);
 
-    bool IsUnitScale() const;
+    bool isUnitScale() const;
 
-    void IsUnitScale(bool);
+    void setIsUnitScale(bool);
 
-    double ScaleFactor() const;
+    double scaleFactor() const;
 
-    double ApplyTo(double value);
+    double applyTo(double value);
 
-    XYZ ApplyTo(const XYZ &);
+    XYZ applyTo(const XYZ &);
 
-    XY ApplyTo(const XY &);
+    XY applyTo(const XY &);
 };
 
 }// namespace dwg

@@ -22,13 +22,19 @@
 
 #pragma once
 
+#include <dwg/objects/NonGraphicalObject.h>
+
 namespace dwg {
 
-class Material
+class Material : public NonGraphicalObject
 {
 public:
-    Material() = default;
-    ~Material() = default;
+    Material();
+    ~Material();
+
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 };
 
 }// namespace dwg

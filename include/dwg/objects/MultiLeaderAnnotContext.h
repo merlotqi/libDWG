@@ -87,150 +87,150 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::vector<LeaderRoot> LeaderRoots() const;
+    std::vector<LeaderRoot> leaderRoots() const;
 
-    double ScaleFactor() const;
-    void ScaleFactor(double);
+    double scaleFactor() const;
+    void setScaleFactor(double);
 
-    XYZ ContentBasePoint() const;
-    void ContentBasePoint(const XYZ &);
+    XYZ contentBasePoint() const;
+    void setContentBasePoint(const XYZ &);
 
-    double TextHeight() const;
-    void TextHeight(double);
+    double textHeight() const;
+    void setTextHeight(double);
 
-    double ArrowheadSize() const;
-    void ArrowheadSize(double);
+    double arrowheadSize() const;
+    void setArrowheadSize(double);
 
-    double LandingGap() const;
-    void LandingGap(double);
+    double landingGap() const;
+    void setLandingGap(double);
 
-    TextAttachmentType TextLeftAttachment() const;
-    void TextLeftAttachment(TextAttachmentType);
+    TextAttachmentType textLeftAttachment() const;
+    void setTextLeftAttachment(TextAttachmentType);
 
-    TextAttachmentType TextRightAttachment() const;
-    void TextRightAttachment(TextAttachmentType);
+    TextAttachmentType textRightAttachment() const;
+    void setTextRightAttachment(TextAttachmentType);
 
-    TextAlignmentType TextAlignment() const;
-    void TextAlignment(TextAlignmentType);
+    TextAlignmentType textAlignment() const;
+    void setTextAlignment(TextAlignmentType);
 
-    BlockContentConnectionType BlockContentConnection() const;
-    void BlockContentConnection(BlockContentConnectionType);
+    BlockContentConnectionType blockContentConnection() const;
+    void setBlockContentConnection(BlockContentConnectionType);
 
-    bool HasTextContents() const;
-    void HasTextContents(bool);
+    bool hasTextContents() const;
+    void setHasTextContents(bool);
 
-    std::string TextLabel() const;
-    void TextLabel(const std::string &);
+    std::string textLabel() const;
+    void setTextLabel(const std::string &);
 
-    XYZ TextNormal() const;
-    void TextNormal(const XYZ &);
+    XYZ textNormal() const;
+    void setTextNormal(const XYZ &);
 
-    TextStyle *TextStyle();
-    void TextStyle(TextStyle *);
+    TextStyle *textStyle();
+    void setTextStyle(TextStyle *);
 
-    XYZ TextLocation() const;
-    void TextLocation(const XYZ &);
+    XYZ textLocation() const;
+    void setTextLocation(const XYZ &);
 
-    XYZ Direction() const;
-    void Direction(const XYZ &);
+    XYZ direction() const;
+    void setDirection(const XYZ &);
 
-    double TextRotation() const;
-    void TextRotation(double);
+    double textRotation() const;
+    void setTextRotation(double);
 
-    double BoundaryHeight() const;
-    void BoundaryHeight(double);
+    double boundaryHeight() const;
+    void setBoundaryHeight(double);
 
-    double LineSpacingFactor() const;
-    void LineSpacingFactor(double);
+    double lineSpacingFactor() const;
+    void setLineSpacingFactor(double);
 
-    LineSpacingStyle LineSpacing() const;
-    void LineSpacing(LineSpacingStyle);
+    LineSpacingStyle lineSpacing() const;
+    void setLineSpacing(LineSpacingStyle);
 
-    Color TextColor() const;
-    void TextColor(const Color &);
+    Color textColor() const;
+    void setTextColor(const Color &);
 
-    TextAttachmentPointType TextAttachmentPoint() const;
-    void TextAttachmentPoint(TextAttachmentPointType);
+    TextAttachmentPointType textAttachmentPoint() const;
+    void setTextAttachmentPoint(TextAttachmentPointType);
 
-    FlowDirectionType FlowDirection() const;
-    void FlowDirection(FlowDirectionType);
+    FlowDirectionType flowDirection() const;
+    void setFlowDirection(FlowDirectionType);
 
-    Color BackgroundFillColor() const;
-    void BackgroundFillColor(const Color &);
+    Color backgroundFillColor() const;
+    void setBackgroundFillColor(const Color &);
 
-    double BackgroundScaleFactor() const;
-    void BackgroundScaleFactor(double);
+    double backgroundScaleFactor() const;
+    void setBackgroundScaleFactor(double);
 
-    int BackgroundTransparency() const;
-    void BackgroundTransparency(int);
+    int backgroundTransparency() const;
+    void setBackgroundTransparency(int);
 
-    bool BackgroundFillEnabled() const;
-    void BackgroundFillEnabled(bool);
+    bool backgroundFillEnabled() const;
+    void setBackgroundFillEnabled(bool);
 
-    bool BackgroundMaskFillOn() const;
-    void BackgroundMaskFillOn(bool);
+    bool backgroundMaskFillOn() const;
+    void setBackgroundMaskFillOn(bool);
 
-    short ColumnType() const;
-    void ColumnType(short);
+    short columnType() const;
+    void setColumnType(short);
 
-    bool TextHeightAutomatic() const;
-    void TextHeightAutomatic(bool);
+    bool textHeightAutomatic() const;
+    void setTextHeightAutomatic(bool);
 
-    double ColumnWidth() const;
-    void ColumnWidth(double);
+    double columnWidth() const;
+    void setColumnWidth(double);
 
-    double ColumnGutter() const;
-    void ColumnGutter(double);
+    double columnGutter() const;
+    void setColumnGutter(double);
 
-    bool ColumnFlowReversed() const;
-    void ColumnFlowReversed(bool);
+    bool columnFlowReversed() const;
+    void setColumnFlowReversed(bool);
 
-    std::vector<double> ColumnSizes() const;
+    std::vector<double> columnSizes() const;
 
-    bool WordBreak() const;
-    void WordBreak(bool);
+    bool wordBreak() const;
+    void setWordBreak(bool);
 
-    bool HasContentsBlock() const;
-    void HasContentsBlock(bool);
+    bool hasContentsBlock() const;
+    void setHasContentsBlock(bool);
 
-    BlockRecord *BlockContent() const;
-    void BlockContent(BlockRecord *);
+    BlockRecord *blockContent() const;
+    void setBlockContent(BlockRecord *);
 
-    XYZ BlockContentNormal() const;
-    void BlockContentNormal(const XYZ &);
+    XYZ blockContentNormal() const;
+    void setBlockContentNormal(const XYZ &);
 
-    XYZ BlockContentLocation() const;
-    void BlockContentLocation(const XYZ &);
+    XYZ blockContentLocation() const;
+    void setBlockContentLocation(const XYZ &);
 
-    XYZ BlockContentScale() const;
-    void BlockContentScale(const XYZ &);
+    XYZ blockContentScale() const;
+    void setBlockContentScale(const XYZ &);
 
-    double BlockContentRotation() const;
-    void BlockContentRotation(double);
+    double blockContentRotation() const;
+    void setBlockContentRotation(double);
 
-    Color BlockContentColor() const;
-    void BlockContentColor(const Color &);
+    Color blockContentColor() const;
+    void setBlockContentColor(const Color &);
 
-    Matrix4 TransformationMatrix() const;
-    void TransformationMatrix(const Matrix4 &);
+    Matrix4 transformationMatrix() const;
+    void setTransformationMatrix(const Matrix4 &);
 
-    XYZ BasePoint() const;
-    void BasePoint(const XYZ &);
+    XYZ basePoint() const;
+    void setBasePoint(const XYZ &);
 
-    XYZ BaseDirection() const;
-    void BaseDirection(const XYZ &);
+    XYZ baseDirection() const;
+    void setBaseDirection(const XYZ &);
 
-    XYZ BaseVertical() const;
-    void BaseVertical(const XYZ &);
+    XYZ baseVertical() const;
+    void setBaseVertical(const XYZ &);
 
-    bool NormalReversed() const;
-    void NormalReversed(bool);
+    bool normalReversed() const;
+    void setNormalReversed(bool);
 
-    TextAttachmentType TextTopAttachment() const;
-    void TextTopAttachment(TextAttachmentType);
+    TextAttachmentType textTopAttachment() const;
+    void setTextTopAttachment(TextAttachmentType);
 
-    TextAttachmentType TextBottomAttachment() const;
-    void TextBottomAttachment(TextAttachmentType);
+    TextAttachmentType textBottomAttachment() const;
+    void setTextBottomAttachment(TextAttachmentType);
 };
 
 }// namespace dwg

@@ -54,13 +54,13 @@ public:
 
     std::string subclassMarker() const override;
 
-    BlockRecord *BlockOwner() const;
+    BlockRecord *blockOwner() const;
 
-    void BlockOwner(BlockRecord *);
+    void setBlockOwner(BlockRecord *);
 
-    std::vector<Sorter> Sorters() const;
+    std::vector<Sorter> sorters() const;
 
-    void AddEntity(Entity *, unsigned long long sorterHandle);
+    void setAddEntity(Entity *, unsigned long long sorterHandle);
 };
 
 }// namespace dwg

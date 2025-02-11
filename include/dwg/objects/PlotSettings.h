@@ -46,94 +46,94 @@ public:
 
     std::string subclassMarker() const override;
 
-    std::string PageName() const;
-    void PageName(const std::string &);
+    std::string pageName() const;
+    void setPageName(const std::string &);
 
-    std::string SystemPrinterName() const;
-    void SystemPrinterName(const std::string &);
+    std::string systemPrinterName() const;
+    void setSystemPrinterName(const std::string &);
 
-    std::string PaperSize() const;
-    void PaperSize(const std::string &);
+    std::string paperSize() const;
+    void setPaperSize(const std::string &);
 
-    std::string PlotViewName() const;
-    void PlotViewName(const std::string &);
+    std::string plotViewName() const;
+    void setPlotViewName(const std::string &);
 
-    PaperMargin UnprintableMargin() const;
-    void UnprintableMargin(PaperMargin);
+    PaperMargin unprintableMargin() const;
+    void setUnprintableMargin(PaperMargin);
 
-    double PaperWidth() const;
-    void PaperWidth(double);
+    double paperWidth() const;
+    void setPaperWidth(double);
 
-    double PaperHeight() const;
-    void PaperHeight(double);
+    double paperHeight() const;
+    void setPaperHeight(double);
 
-    double PlotOriginX() const;
-    void PlotOriginX(double);
+    double plotOriginX() const;
+    void setPlotOriginX(double);
 
-    double PlotOriginY() const;
-    void PlotOriginY(double);
+    double plotOriginY() const;
+    void setPlotOriginY(double);
 
-    double WindowLowerLeftX() const;
-    void WindowLowerLeftX(double);
+    double windowLowerLeftX() const;
+    void setWindowLowerLeftX(double);
 
-    double WindowLowerLeftY() const;
-    void WindowLowerLeftY(double);
+    double windowLowerLeftY() const;
+    void setWindowLowerLeftY(double);
 
-    double WindowUpperLeftX() const;
-    void WindowUpperLeftX(double);
+    double windowUpperLeftX() const;
+    void setWindowUpperLeftX(double);
 
-    double WindowUpperLeftY() const;
-    void WindowUpperLeftY();
+    double windowUpperLeftY() const;
+    void setWindowUpperLeftY();
 
-    double PrintScale() const;
+    double printScale() const;
 
-    double NumeratorScale() const;
-    void NumeratorScale(double);
+    double numeratorScale() const;
+    void setNumeratorScale(double);
 
-    double DenominatorScale() const;
-    void DenominatorScale(double);
+    double denominatorScale() const;
+    void setDenominatorScale(double);
 
-    PlotFlags Flags() const;
-    void Flags(PlotFlags);
+    PlotFlags flags() const;
+    void setFlags(PlotFlags);
 
-    PlotPaperUnits PaperUnits() const;
-    void PaperUnits(PlotPaperUnits);
+    PlotPaperUnits paperUnits() const;
+    void setPaperUnits(PlotPaperUnits);
 
-    PlotRotation PaperRotation() const;
-    void PaperRotation(PlotRotation);
+    PlotRotation paperRotation() const;
+    void setPaperRotation(PlotRotation);
 
-    PlotType PlotType() const;
-    void PlotType(PlotType);
+    PlotType plotType() const;
+    void setPlotType(PlotType);
 
-    std::string StyleSheet() const;
-    void StyleSheet(const std::string &);
+    std::string styleSheet() const;
+    void setStyleSheet(const std::string &);
 
-    ScaledType ScaledFit() const;
-    void ScaledFit(ScaledType);
+    ScaledType scaledFit() const;
+    void setScaledFit(ScaledType);
 
-    ShadePlotMode ShadePlotMode() const;
-    void ShadePlotMode(ShadePlotMode);
+    ShadePlotMode shadePlotMode() const;
+    void setShadePlotMode(ShadePlotMode);
 
-    ShadePlotResolutionMode ShadePlotResolutionMode() const;
-    void ShadePlotResolutionMode(ShadePlotResolutionMode);
+    ShadePlotResolutionMode shadePlotResolutionMode() const;
+    void setShadePlotResolutionMode(ShadePlotResolutionMode);
 
-    short ShadePlotDPI() const;
-    void ShadePlotDPI(short);
+    short shadePlotDPI() const;
+    void setShadePlotDPI(short);
 
-    double StandardScale() const;
-    void StandardScale(double);
+    double standardScale() const;
+    void setStandardScale(double);
 
-    XY PaperImageOrigin() const;
-    void PaperImageOrigin(const XY &);
+    XY paperImageOrigin() const;
+    void setPaperImageOrigin(const XY &);
 
-    double PaperImageOriginX() const;
-    void PaperImageOriginX(double);
+    double paperImageOriginX() const;
+    void setPaperImageOriginX(double);
 
-    double PaperImageOriginY() const;
-    void PaperImageOriginY(double);
+    double paperImageOriginY() const;
+    void setPaperImageOriginY(double);
 
-    unsigned long long ShadePlotIDHandle() const;
-    void ShadePlotIDHandle(unsigned long long);
+    unsigned long long shadePlotIDHandle() const;
+    void setShadePlotIDHandle(unsigned long long);
 };
 
 }// namespace dwg

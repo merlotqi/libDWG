@@ -27,28 +27,50 @@
 
 namespace dwg {
 
+class EvaluationExpression;
 class LIBDWG_API EvaluationGraph : public NonGraphicalObject
 {
 public:
+    struct Node
+    {
+        int Index;            
+        int NextNodeIndex;    
+        Node *Next;      
+        int Flags;            
+        int Data1;            
+        int Data2;            
+        int Data3;            
+        int Data4;            
+        CadObject *NodeObject;
+        EvaluationExpression *Expression;
+    };
+
+    struct Edge
+    {
+
+    };
+
+public:
+    static constexpr auto DictionaryEntryName = "ACAD_ENHANCEDBLOCK";
+
     EvaluationGraph();
+    ~EvaluationGraph();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
-    struct GraphNode
-    {
-        int Index;            // 91
-        int NextNodeIndex;    // 95
-        GraphNode *Next;      // 95
-        int Flags;            // 93
-        int Data1;            // 92
-        int Data2;            // 92
-        int Data3;            // 92
-        int Data4;            // 92
-        CadObject *NodeObject;// 360
-    };
 
-    std::vector<GraphNode> Nodes;
+    int value96() const;
+    void setValue96(int);
+
+    int value97() const;
+    void setValue97(int);
+
+    std::vector<Node> nodes() const;
+    void setNodes(const std::vector<Node> &);
+
+    std::vector<Edge> edges() const;
+    void setEdges(const std::vector<Edge> &);
 };
 
 }// namespace dwg

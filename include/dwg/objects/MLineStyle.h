@@ -31,35 +31,41 @@ namespace dwg {
 class LIBDWG_API MLineStyle : public NonGraphicalObject
 {
 public:
+    struct Element
+    {
+        double offset;
+        Color color;
+        LineType* lineType;
+    };
+
+public:
     MLineStyle();
     MLineStyle(const std::string &name);
 
     static constexpr auto DefaultName = "Standard";
-    static MLineStyle Default;
+    static MLineStyle* Default();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
+    MLineStyleFlags flags() const;
+    void setFlags(MLineStyleFlags);
 
-    // 70
-    MLineStyleFlags Flags;
-    std::string Description;         // 3
-    Color FillColor = Color::ByLayer;// 62
-    double StartAngle = M_PI / 2.0;  // 51
-    double EndAngle = M_PI / 2.0;    // 52
+    std::string description() const;
+    void setDescription(const std::string &);
 
+    Color fillColor() const;
+    void setFillColor(const Color &);
+    
+    double startAngle() const;
+    void setStartAngle(double);
 
-    struct Element
-    {
-        double Offset;               // 49
-        Color Color = Color::ByBlock;// 62
-        LineType LineType = LineType::ByLayer;
-    };
+    double endAngle() const;
+    void setStartAngle(double);
 
-    std::vector<Element> Elements;// count 71
+    std::vector<Element> elements() const;
+    void setElements(const std::vector<Element> &);
 };
-
-MLineStyle MLineStyle::Default = MLineStyle(MLineStyle::DefaultName);
 
 }// namespace dwg

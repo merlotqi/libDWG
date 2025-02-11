@@ -35,21 +35,25 @@ public:
 
     BookColor(const std::string &name);
 
+    ~BookColor();
+
     ObjectType objectType() const override;
 
     std::string objectName() const override;
 
     std::string subclassMarker() const override;
 
-    std::string Name() const override;
+    std::string name() const override;
 
-    std::string ColorName() const;
+    void setName(const std::string &) override;
 
-    std::string BookName() const;
+    std::string colorName() const;
 
-    Color Color() const;
+    std::string bookName() const;
 
-    void Color(const Color &);
+    Color color() const;
+    
+    void setColor(const Color &);
 };
 
 }// namespace dwg

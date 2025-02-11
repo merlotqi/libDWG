@@ -26,15 +26,26 @@
 
 namespace dwg {
 
+class ImageDefinition;
 class LIBDWG_API ImageDefinitionReactor : public NonGraphicalObject
 {
 public:
     ImageDefinitionReactor();
+    ~ImageDefinitionReactor();
+    
     ObjectType objectType() const override;
+    
     std::string objectName() const override;
+    
     std::string subclassMarker() const override;
-    int RasterImageDefReactor;               //90
-    unsigned long long ImageDefinitionHandle;// 330;
+
+    int rasterImageDefReactor() const;
+    
+    void setRasterImageDefReactor(int);
+
+    ImageDefinition *definition() const;
+
+    void setDefinition(ImageDefinition *);
 };
 
 }// namespace dwg

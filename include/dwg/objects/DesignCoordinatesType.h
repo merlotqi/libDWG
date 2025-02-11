@@ -24,12 +24,15 @@
 
 namespace dwg {
 
-enum ScaleEstimationType
+enum DesignCoordinatesType
 {
-	None = 1,
-	UserSpecifiedScaleFactor = 2,
-	GridScaleAtReferencePoint = 3,
-	Prismodial = 4
+	Unknown = 0,
+	/// Local grid.
+	LocalGrid = 1,
+	/// Projected grid.
+	ProjectedGrid = 2,
+	/// Geographic (latitude/longitude).
+	Geographic = 3,
 };
 
-}
+}// namespace dwg
