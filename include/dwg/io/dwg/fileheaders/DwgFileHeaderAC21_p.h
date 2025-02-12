@@ -31,13 +31,13 @@ class DwgFileHeaderAC21 : public DwgFileHeaderAC18
 {
 public:
     DwgFileHeaderAC21();
-    
+
     DwgFileHeaderAC21(ACadVersion version);
-    
+
     ~DwgFileHeaderAC21();
 
     Dwg21CompressedMetadata compressedMetadata() const;
-    
+
     void setCompressedMetadata(const Dwg21CompressedMetadata &);
 };
 

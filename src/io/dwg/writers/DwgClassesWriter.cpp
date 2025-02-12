@@ -20,95 +20,88 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgClassesWriter_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <dwg/CadDocument.h>
+#include <dwg/header/CadHeader.h>
 
 namespace dwg {
 
-std::string DwgClassesWriter::sectionName() const
-{
-    return DwgSectionDefinition::Classes;
-}
-
-DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document,
-                                   Encoding encoding)
-    : DwgSectionIO(document->Header().Version)
+DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document, Encoding encoding)
+    : DwgSectionIO(document->header()->version())
 {
     _document = document;
-    _startWriter =
-            DwgStreamWriterBase.GetStreamWriter(_version, stream, encoding);
+    _startWriter = DwgStreamWriterBase::GetStreamWriter(_version, stream, encoding);
 
-    _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_sectionStream,
-                                                   encoding);
+    _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_sectionStream, encoding);
 
-    _startSentinel = {0x8D, 0xA1, 0xC4, 0xB8, 0xC4, 0xA9, 0xF8, 0xC5,
-                      0xC0, 0xDC, 0xF4, 0x5F, 0xE7, 0xCF, 0xB6, 0x8A};
-    _endSentinel = {0x72, 0x5E, 0x3B, 0x47, 0x3B, 0x56, 0x07, 0x3A,
-                    0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
+    _startSentinel = {0x8D, 0xA1, 0xC4, 0xB8, 0xC4, 0xA9, 0xF8, 0xC5, 0xC0, 0xDC, 0xF4, 0x5F, 0xE7, 0xCF, 0xB6, 0x8A};
+    _endSentinel = {0x72, 0x5E, 0x3B, 0x47, 0x3B, 0x56, 0x07, 0x3A, 0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
 }
+
+std::string DwgClassesWriter::sectionName() const { return DwgSectionDefinition::Classes; }
 
 void DwgClassesWriter::write()
 {
-    if (R2007Plus) { _writer->SavePositonForSize(); }
+    if (R2007Plus) { _writer->savePositonForSize(); }
 
     short maxClassNumber = 0;
-    if (_document.Classes.Any())
-    {
-        maxClassNumber = _document.Classes.Max(c = > c.ClassNumber);
-    }
+    if (_document.Classes.Any()) { maxClassNumber = _document.Classes.Max(c = > c.ClassNumber); }
 
     if (R2004Plus)
     {
         //BS : Maxiumum class number
-        _writer->WriteBitShort(maxClassNumber);
+        _writer->writeBitShort(maxClassNumber);
         //RC: 0x00
-        _writer->WriteByte(0);
+        _writer->writeByte(0);
         //RC: 0x00
-        _writer->WriteByte(0);
+        _writer->writeByte(0);
         //B : true
-        _writer->WriteBit(true);
+        _writer->writeBit(true);
     }
 
-    foreach (var c in _document.Classes)
+    for (auto&& c : _document->Classes)
     {
         //BS : classnum
-        _writer->WriteBitShort(c.ClassNumber);
+        _writer->writeBitShort(c.ClassNumber);
         //BS : version – in R14, becomes a flag indicating whether objects can be moved, edited, etc.
-        _writer->WriteBitShort((short) c.ProxyFlags);
+        _writer->writeBitShort((short) c.ProxyFlags);
         //TV : appname
-        _writer->WriteVariableText(c.ApplicationName);
+        _writer->writeVariableText(c.ApplicationName);
         //TV: cplusplusclassname
-        _writer->WriteVariableText(c.CppClassName);
+        _writer->writeVariableText(c.CppClassName);
         //TV : classdxfname
-        _writer->WriteVariableText(c.DxfName);
+        _writer->writeVariableText(c.DxfName);
         //B : wasazombie
-        _writer->WriteBit(c.WasZombie);
+        _writer->writeBit(c.WasZombie);
         //BS : itemclassid -- 0x1F2 for classes which produce entities, 0x1F3 for classes which produce objects.
-        _writer->WriteBitShort(c.ItemClassId);
+        _writer->writeBitShort(c.ItemClassId);
 
         if (R2004Plus)
         {
             //BL : Number of objects created of this type in the current DB(DXF 91).
-            _writer->WriteBitLong(c.InstanceCount);
+            _writer->writeBitLong(c.InstanceCount);
             //BS : Dwg Version
-            _writer->WriteBitShort((short) _document.Header.Version);
+            _writer->writeBitShort((short) _document.Header.Version);
             //BS : Maintenance release version.
-            _writer->WriteBitShort(_document.Header.MaintenanceVersion);
+            _writer->writeBitShort(_document.Header.MaintenanceVersion);
             //BL : Unknown(normally 0L)
-            _writer->WriteBitLong(0);
+            _writer->writeBitLong(0);
             //BL : Unknown(normally 0L)
-            _writer->WriteBitLong(0);
+            _writer->writeBitLong(0);
         }
     }
 
-    _writer->WriteSpearShift();
+    _writer->writeSpearShift();
 
     writeSizeAndCrc();
 }
 void DwgClassesWriter::writeSizeAndCrc()
 {
     //SN : 0x8D 0xA1 0xC4 0xB8 0xC4 0xA9 0xF8 0xC5 0xC0 0xDC 0xF4 0x5F 0xE7 0xCF 0xB6 0x8A
-    _startWriter.WriteBytes(_startSentinel);
+    _startWriter->writeBytes(_startSentinel);
 
     CRC8StreamHandler crc = new CRC8StreamHandler(_startWriter.Stream, 0xC0C1);
     StreamIO swriter = new StreamIO(crc);
@@ -116,8 +109,7 @@ void DwgClassesWriter::writeSizeAndCrc()
     //RL : size of class data area.
     swriter.Write((int) _sectionStream.Length);
 
-    if (_document.Header.Version >= ACadVersion.AC1024 &&
-                _document.Header.MaintenanceVersion > 3 ||
+    if (_document.Header.Version >= ACadVersion.AC1024 && _document.Header.MaintenanceVersion > 3 ||
         _document.Header.Version > ACadVersion.AC1027)
     {
         //RL : unknown, possibly the high 32 bits of a 64-bit size?
@@ -125,19 +117,18 @@ void DwgClassesWriter::writeSizeAndCrc()
     }
 
     //Write the section
-    swriter.Stream.Write(_sectionStream.GetBuffer(), 0,
-                         (int) _sectionStream.Length);
+    swriter.Stream.Write(_sectionStream.GetBuffer(), 0, (int) _sectionStream.Length);
 
     //RS: CRC
-    _startWriter.WriteRawShort(crc.Seed);
+    _startWriter->writeRawShort(crc.Seed);
 
-    _startWriter.WriteBytes(_endSentinel);
+    _startWriter->writeBytes(_endSentinel);
 
     if (R2004Plus)
     {
         //For R18 and later 8 unknown bytes follow. The ODA writes 0 bytes.
-        _startWriter.WriteRawLong(0);
-        _startWriter.WriteRawLong(0);
+        _startWriter->writeRawLong(0);
+        _startWriter->writeRawLong(0);
     }
 }
 

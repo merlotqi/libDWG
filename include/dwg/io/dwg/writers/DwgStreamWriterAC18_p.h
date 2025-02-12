@@ -37,4 +37,4 @@ public:
     void writeEnColor(const Color &value, const Transparency &transparency, bool isBookColor) override;
 };
 
-}
+}// namespace dwg

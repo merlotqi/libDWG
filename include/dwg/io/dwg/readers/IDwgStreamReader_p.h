@@ -44,7 +44,7 @@ public:
     virtual long long setPositionByFlag(long long) = 0;
 
     virtual int readInt() = 0;
-    
+
     virtual unsigned int readUInt() = 0;
 
     virtual double readDouble() = 0;
@@ -65,9 +65,9 @@ public:
 
     virtual long long readBitLongLong() = 0;
 
-    virtual double readBitDouble() = 0;  
+    virtual double readBitDouble() = 0;
 
-    virtual XY read2BitDouble() = 0; 
+    virtual XY read2BitDouble() = 0;
 
     virtual XYZ read3BitDouble() = 0;
 
@@ -89,7 +89,7 @@ public:
 
     virtual unsigned long long handleReference(unsigned long long referenceHandle) = 0;
 
-    virtual unsigned long long handleReference(unsigned long long referenceHandle, DwgReferenceType& reference) = 0;
+    virtual unsigned long long handleReference(unsigned long long referenceHandle, DwgReferenceType &reference) = 0;
 
     virtual std::string readTextUtf8() = 0;
 
@@ -132,4 +132,4 @@ public:
     virtual unsigned short resetShit() = 0;
 };
 
-}
+}// namespace dwg

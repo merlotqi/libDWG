@@ -22,14 +22,10 @@
 
 #pragma once
 
-// clang-format off
 #include <dwg/IHandledCadObject.h>
 #include <dwg/ObjectType.h>
 #include <dwg/exports.h>
-#include <dwg/objects/CadDictionary.h>
-#include <dwg/tables/TableEntry.h>
-#include <dwg/CadObjectCollection.h>
-// clang-format on
+#include <string>
 
 namespace dwg {
 

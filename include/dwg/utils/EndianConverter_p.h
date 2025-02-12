@@ -104,4 +104,4 @@ public:
     static std::unique_ptr<EndianConverter> instance();
 };
 
-}
+}// namespace dwg

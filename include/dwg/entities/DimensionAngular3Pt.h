@@ -30,7 +30,7 @@ namespace dwg {
 // two points on the dimension lines and the vertex where the angle is formed.
 class LIBDWG_API DimensionAngular3Pt : public Dimension
 {
-    XYZ _firstPoint;// The first point on the first line that defines the angle
+    XYZ _firstPoint; // The first point on the first line that defines the angle
     XYZ _secondPoint;// The second point on the second line that defines the angle
     XYZ _angleVertex;// The vertex where the two lines meet (angle vertex)
 

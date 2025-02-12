@@ -33,4 +33,4 @@ public:
     virtual ~DwgStreamWriterAC12();
 };
 
-}
+}// namespace dwg

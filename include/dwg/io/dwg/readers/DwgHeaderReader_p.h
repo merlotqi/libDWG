@@ -45,4 +45,4 @@ private:
     CadHeader *_header;
 };
 
-}
+}// namespace dwg

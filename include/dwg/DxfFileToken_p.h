@@ -133,8 +133,7 @@ public:
     static constexpr auto ObjectXRecord = "XRECORD";
     static constexpr auto ObjectMLeaderContextData = "CONTEXT_DATA";
     static constexpr auto ObjectEvalGraph = "ACAD_EVALUATION_GRAPH";
-    static constexpr auto ObjectBlockVisibilityParameter =
-            "BLOCKVISIBILITYPARAMETER";
+    static constexpr auto ObjectBlockVisibilityParameter = "BLOCKVISIBILITYPARAMETER";
 };
 
 }// namespace dwg

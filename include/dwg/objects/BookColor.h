@@ -52,7 +52,7 @@ public:
     std::string bookName() const;
 
     Color color() const;
-    
+
     void setColor(const Color &);
 };
 

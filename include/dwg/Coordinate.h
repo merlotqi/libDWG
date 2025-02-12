@@ -41,6 +41,10 @@ struct XY
         };
     };
 
+    static XY Zero;
+    static XY AxisX;
+    static XY AxisY;
+
     constexpr XY() noexcept;
     constexpr XY(double xpos, double ypos) noexcept;
 
@@ -113,6 +117,11 @@ struct XYZ
             double Z;
         };
     };
+
+    static XYZ Zero;
+    static XYZ AxisX;
+    static XYZ AxisY;
+    static XYZ AxisZ;
 
     constexpr XYZ() noexcept;
     constexpr XYZ(double xpos, double ypos, double zpos) noexcept : v{xpos, ypos, zpos} {}
@@ -206,13 +215,13 @@ constexpr inline XY::XY(double xpos, double ypos) noexcept : v{xpos, ypos} {}
 
 constexpr inline double &XY::operator[](int i)
 {
-    assert(unsigned int(i) < 2u);
+    assert((unsigned int) (i) < 2u);
     return v[i];
 }
 
 constexpr inline double XY::operator[](int i) const
 {
-    assert(unsigned int(i) < 2u);
+    assert((unsigned int) (i) < 2u);
     return v[i];
 }
 
@@ -290,13 +299,13 @@ constexpr inline XYZ::XYZ() noexcept : v{0.0f, 0.0f, 0.0f} {}
 
 constexpr inline double &XYZ::operator[](int i)
 {
-    assert(unsigned int(i) < 3u);
+    assert((unsigned int) (i) < 3u);
     return v[i];
 }
 
 constexpr inline double XYZ::operator[](int i) const
 {
-    assert(unsigned int(i) < 3u);
+    assert((unsigned int) (i) < 3u);
     return v[i];
 }
 

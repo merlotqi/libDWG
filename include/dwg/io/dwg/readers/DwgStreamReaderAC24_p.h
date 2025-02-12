@@ -30,10 +30,10 @@ class DwgStreamReaderAC24 : public DwgStreamReaderAC21
 {
 public:
     DwgStreamReaderAC24(std::istream *stream, bool resetPosition);
-    
+
     virtual ~DwgStreamReaderAC24();
 
     ObjectType readObjectType() override;
 };
 
-}
+}// namespace dwg

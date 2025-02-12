@@ -20,15 +20,16 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
+#include <array>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
-#include <array>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/CadDocument.h>
+
 namespace dwg {
 
-std::vector<unsigned char> DwgFileHeaderWriterAC15::_endSentinel = {
-        0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
-        0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
+std::vector<unsigned char> DwgFileHeaderWriterAC15::_endSentinel = {0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
+                                                                    0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
 
 int DwgFileHeaderWriterAC15::handleSectionOffset() const
 {
@@ -46,35 +47,23 @@ int DwgFileHeaderWriterAC15::handleSectionOffset() const
 
 int DwgFileHeaderWriterAC15::fileHeaderSize() const { return 0x61; }
 
-DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream,
-                                                 Encoding encoding,
-                                                 CadDocument *model)
+DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterBase(stream, encoding, model)
 {
     _records = {
-            {      DwgSectionDefinition::Header,
-             {DwgSectionLocatorRecord(0), nullptr}   },
-            {     DwgSectionDefinition::Classes,
-             {DwgSectionLocatorRecord(1), nullptr}   },
-            {DwgSectionDefinition::ObjFreeSpace,
-             {DwgSectionLocatorRecord(3), nullptr}   },
-            {    DwgSectionDefinition::Template,
-             {DwgSectionLocatorRecord(4), nullptr}   },
-            {   DwgSectionDefinition::AuxHeader,
-             {DwgSectionLocatorRecord(5), nullptr}   },
-            { DwgSectionDefinition::AcDbObjects,
-             {DwgSectionLocatorRecord(NULL), nullptr}},
-            {     DwgSectionDefinition::Handles,
-             {DwgSectionLocatorRecord(2), nullptr}   },
-            {     DwgSectionDefinition::Preview,
-             {DwgSectionLocatorRecord(NULL), nullptr}},
+            {      DwgSectionDefinition::Header,    {DwgSectionLocatorRecord(0), nullptr}},
+            {     DwgSectionDefinition::Classes,    {DwgSectionLocatorRecord(1), nullptr}},
+            {DwgSectionDefinition::ObjFreeSpace,    {DwgSectionLocatorRecord(3), nullptr}},
+            {    DwgSectionDefinition::Template,    {DwgSectionLocatorRecord(4), nullptr}},
+            {   DwgSectionDefinition::AuxHeader,    {DwgSectionLocatorRecord(5), nullptr}},
+            { DwgSectionDefinition::AcDbObjects, {DwgSectionLocatorRecord(NULL), nullptr}},
+            {     DwgSectionDefinition::Handles,    {DwgSectionLocatorRecord(2), nullptr}},
+            {     DwgSectionDefinition::Preview, {DwgSectionLocatorRecord(NULL), nullptr}},
     };
 }
 
-void DwgFileHeaderWriterAC15::addSection(const std::string &name,
-                                         std::ostringstream *stream,
-                                         bool isCompressed,
-                                         int decompsize = 0x7400)
+void DwgFileHeaderWriterAC15::addSection(const std::string &name, std::ostream *stream, bool isCompressed,
+                                         int decompsize)
 {
     _records[name].first.Size = ostream_length(stream);
     _records[name] = {_records[name].first, stream};
@@ -89,10 +78,10 @@ void DwgFileHeaderWriterAC15::writeFile()
 
 void DwgFileHeaderWriterAC15::setRecordSeekers()
 {
-    long currOffset = _fileHeaderSize();
+    long currOffset = fileHeaderSize();
     for (auto it = _records.begin(); it != _records.end(); ++it)
     {
-        it->second.first.Seeker(currOffset);
+        it->second.first.setSeeker(currOffset);
         currOffset += ostream_length(it->second.second);
     }
 }
@@ -142,8 +131,7 @@ void DwgFileHeaderWriterAC15::writeFileHeader()
      // delete writer;
 }
 
-void DwgFileHeaderWriterAC15::writeRecord(IDwgStreamWriter *writer,
-                                          const DwgSectionLocatorRecord &record)
+void DwgFileHeaderWriterAC15::writeRecord(IDwgStreamWriter *writer, const DwgSectionLocatorRecord &record)
 {
     //Record number (raw byte) | Seeker (raw long) | Size (raw long)
     // writer->WriteByte((unsigned char) record.Number.Value);

@@ -24,17 +24,19 @@
 
 namespace dwg {
 
+NonGraphicalObject::NonGraphicalObject() {}
+
 NonGraphicalObject::NonGraphicalObject(const std::string &name) : _name(name) {}
 
 NonGraphicalObject::~NonGraphicalObject() {}
 
-std::string Name() const override { return _name; }
+std::string NonGraphicalObject::name() const { return _name; }
 
-void Name(const std::string &value)
+void NonGraphicalObject::setName(const std::string &value)
 {
-    OnNameChanged(_name, value);
+    if (OnNameChanged)
+        OnNameChanged(_name, value);
     _name = value;
 }
-
 
 }// namespace dwg

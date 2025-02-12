@@ -32,15 +32,15 @@ class LIBDWG_API ImageDefinitionReactor : public NonGraphicalObject
 public:
     ImageDefinitionReactor();
     ~ImageDefinitionReactor();
-    
+
     ObjectType objectType() const override;
-    
+
     std::string objectName() const override;
-    
+
     std::string subclassMarker() const override;
 
     int rasterImageDefReactor() const;
-    
+
     void setRasterImageDefReactor(int);
 
     ImageDefinition *definition() const;

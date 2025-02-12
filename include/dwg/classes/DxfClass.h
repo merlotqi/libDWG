@@ -25,6 +25,7 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/classes/ProxyFlags.h>
 #include <dwg/exports.h>
+#include <string>
 
 namespace dwg {
 
@@ -43,38 +44,34 @@ public:
     /**
      * @brief Constructs a DxfClass with the specified parameters.
      * 
-     * @param _cppClassName The C++ class name.
-     * @param _classNumber The class number.
-     * @param _version The AutoCAD version.
-     * @param _dxfName The DXF name associated with this class.
-     * @param _itemClassId The item class identifier.
-     * @param _maintenanceVersion The maintenance version.
-     * @param _proxyFlags Flags representing proxy status.
-     * @param _wasZombie Whether the class was previously a zombie object.
+     * @param cppClassName The C++ class name.
+     * @param classNumber The class number.
+     * @param version The AutoCAD version.
+     * @param dxfName The DXF name associated with this class.
+     * @param itemClassId The item class identifier.
+     * @param maintenanceVersion The maintenance version.
+     * @param proxyFlags Flags representing proxy status.
+     * @param wasZombie Whether the class was previously a zombie object.
      */
-    DxfClass(const std::string &_cppClassName, short _classNumber,
-                ACadVersion _version, const std::string &_dxfName,
-                short _itemClassId, short _maintenanceVersion,
-                ProxyFlags _proxyFlags, bool _wasZombie);
+    DxfClass(const std::string &cppClassName, short classNumber, ACadVersion version, const std::string &dxfName,
+             short itemClassId, short maintenanceVersion, ProxyFlags proxyFlags, bool wasZombie);
 
     /**
      * @brief Constructs a DxfClass for a specific application.
      * 
-     * @param _applicationName The name of the application.
-     * @param _cppClassName The C++ class name.
-     * @param _classNumber The class number.
-     * @param _version The AutoCAD version.
-     * @param _dxfName The DXF name associated with this class.
-     * @param _itemClassId The item class identifier.
-     * @param _maintenanceVersion The maintenance version.
-     * @param _proxyFlags Flags representing proxy status.
-     * @param _wasZombie Whether the class was previously a zombie object.
+     * @param applicationName The name of the application.
+     * @param cppClassName The C++ class name.
+     * @param classNumber The class number.
+     * @param version The AutoCAD version.
+     * @param dxfName The DXF name associated with this class.
+     * @param itemClassId The item class identifier.
+     * @param maintenanceVersion The maintenance version.
+     * @param proxyFlags Flags representing proxy status.
+     * @param wasZombie Whether the class was previously a zombie object.
      */
-    DxfClass(const std::string &_applicationName,
-                const std::string &_cppClassName, short _classNumber,
-                ACadVersion _version, const std::string &_dxfName,
-                short _itemClassId, short _maintenanceVersion,
-                ProxyFlags _proxyFlags, bool _wasZombie);
+    DxfClass(const std::string &applicationName, const std::string &cppClassName, short classNumber,
+             ACadVersion version, const std::string &dxfName, short itemClassId, short maintenanceVersion,
+             ProxyFlags proxyFlags, bool wasZombie);
 
     /**
      * @brief Gets the DXF name of this class.
@@ -86,23 +83,23 @@ public:
     /**
      * @brief Sets the DXF name of this class.
      * 
-     * @param _dxfName The new DXF name.
+     * @param dxfName The new DXF name.
      */
-    void setDxfName(const std::string &_dxfName);
+    void setDxfName(const std::string &dxfName);
 
     /**
      * @brief Gets the C++ class name.
      * 
      * @return The C++ class name.
      */
-    std::string className() const;
+    std::string cppClassName() const;
 
     /**
      * @brief Sets the C++ class name.
      * 
-     * @param _className The new C++ class name.
+     * @param name The new C++ class name.
      */
-    void setClassName(const std::string &_className);
+    void setCppClassName(const std::string &name);
 
     /**
      * @brief Gets the application name associated with this class.
@@ -114,9 +111,9 @@ public:
     /**
      * @brief Sets the application name associated with this class.
      * 
-     * @param _applicationName The new application name.
+     * @param applicationName The new application name.
      */
-    void setApplicationName(const std::string &_applicationName);
+    void setApplicationName(const std::string &applicationName);
 
     /**
      * @brief Gets the proxy flags for this class.
@@ -128,9 +125,9 @@ public:
     /**
      * @brief Sets the proxy flags for this class.
      * 
-     * @param _proxyFlags The new proxy flags.
+     * @param proxyFlags The new proxy flags.
      */
-    void setProxyFlags(ProxyFlags _proxyFlags);
+    void setProxyFlags(ProxyFlags proxyFlags);
 
     /**
      * @brief Gets the instance count of this class.
@@ -142,9 +139,9 @@ public:
     /**
      * @brief Sets the instance count of this class.
      * 
-     * @param _instanceCount The new instance count.
+     * @param instanceCount The new instance count.
      */
-    void setInstanceCount(int _instanceCount);
+    void setInstanceCount(int instanceCount);
 
     /**
      * @brief Checks if this class was a zombie object.
@@ -156,9 +153,9 @@ public:
     /**
      * @brief Sets the zombie status for this class.
      * 
-     * @param _wasZombie True if the class was a zombie object.
+     * @param wasZombie True if the class was a zombie object.
      */
-    void setWasZombie(bool _wasZombie);
+    void setWasZombie(bool wasZombie);
 
     /**
      * @brief Checks if this class is an entity.
@@ -170,9 +167,9 @@ public:
     /**
      * @brief Sets whether this class is an entity.
      * 
-     * @param _isAnEntity True if the class is an entity, false otherwise.
+     * @param isAnEntity True if the class is an entity, false otherwise.
      */
-    void setIsAnEntity(bool _isAnEntity) const;
+    void setIsAnEntity(bool isAnEntity);
 
     /**
      * @brief Gets the class number of this class.
@@ -184,9 +181,9 @@ public:
     /**
      * @brief Sets the class number for this class.
      * 
-     * @param _classNumber The new class number.
+     * @param classNumber The new class number.
      */
-    void setClassNumber(short _classNumber);
+    void setClassNumber(short classNumber);
 
     /**
      * @brief Gets the item class identifier.
@@ -198,9 +195,9 @@ public:
     /**
      * @brief Sets the item class identifier.
      * 
-     * @param _itemClassId The new item class identifier.
+     * @param itemClassId The new item class identifier.
      */
-    void setItemClassId(short _itemClassId);
+    void setItemClassId(short itemClassId);
 
     /**
      * @brief Gets the AutoCAD version this class is associated with.
@@ -212,9 +209,9 @@ public:
     /**
      * @brief Sets the AutoCAD version for this class.
      * 
-     * @param _dwgVersion The new AutoCAD version.
+     * @param dwgVersion The new AutoCAD version.
      */
-    void setDwgVersion(ACadVersion _dwgVersion);
+    void setDwgVersion(ACadVersion dwgVersion);
 
     /**
      * @brief Gets the maintenance version of this class.
@@ -226,9 +223,23 @@ public:
     /**
      * @brief Sets the maintenance version of this class.
      * 
-     * @param _maintenanceVersion The new maintenance version.
+     * @param maintenanceVersion The new maintenance version.
      */
-    void setMaintenanceVersion(short _maintenanceVersion);
+    void setMaintenanceVersion(short maintenanceVersion);
+
+private:
+    std::string _dxfName;
+    std::string _cppClassName;
+    std::string _applicationName;
+    ProxyFlags _proxyFlags;
+    int _instanceCount;
+    bool _wasZombie;
+    bool _isAnEntity;
+    short _classNumber;
+    short _itemClassId;
+    ACadVersion _dwgVersion;
+    short _maintenanceVersion;
+
 };
 
 }// namespace dwg

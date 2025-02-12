@@ -122,8 +122,7 @@ public:
      * @param b Blue component.
      * @return The closest indexed color.
      */
-    static unsigned char approxIndex(unsigned char r, unsigned char g,
-                                     unsigned char b);
+    static unsigned char approxIndex(unsigned char r, unsigned char g, unsigned char b);
 
     /**
      * @brief Checks if the color is ByLayer.
@@ -196,14 +195,8 @@ public:
     friend bool operator!=(const Color &lhs, const Color &rhs);
 };
 
-bool operator==(const Color &lhs, const Color &rhs)
-{
-    return lhs._color == rhs._color;
-}
+bool operator==(const Color &lhs, const Color &rhs) { return lhs._color == rhs._color; }
 
-bool operator!=(const Color &lhs, const Color &rhs)
-{
-    return !(lhs == rhs);
-}
+bool operator!=(const Color &lhs, const Color &rhs) { return !(lhs == rhs); }
 
 }// namespace dwg

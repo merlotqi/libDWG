@@ -20,14 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/writers/DwgFileHeaderWriterAC21_p.h>
-#include <dwg/io/writers/DwgLZ77AC21Compressor_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC21_p.h>
+#include <dwg/io/dwg/writers/DwgLZ77AC21Compressor_p.h>
+#include <dwg/CadDocument.h>
 
 namespace dwg {
 
-DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream,
-                                                 Encoding encoding,
-                                                 CadDocument *model)
+DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterAC18(stream, encoding, model)
 {
     compressor = new DwgLZ77AC21Compressor();
@@ -35,13 +34,11 @@ DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream,
 
 int DwgFileHeaderWriterAC21::fileHeaderSize() const { return 0x480; }
 
-void DwgFileHeaderWriterAC21::craeteLocalSection(
-        DwgSectionDescriptor descriptor,
-        const std::vector<unsigned char> &buffer, int decompressedSize,
-        unsigned long long offset, int totalSize, bool isCompressed)
+void DwgFileHeaderWriterAC21::craeteLocalSection(DwgSectionDescriptor descriptor,
+                                                 const std::vector<unsigned char> &buffer, int decompressedSize,
+                                                 unsigned long long offset, int totalSize, bool isCompressed)
 {
-    std::ostringstream descriptorStream = applyCompression(
-            buffer, decompressedSize, offset, totalSize, isCompressed);
+    std::ostringstream descriptorStream = applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
     writeMagicNumber();
 }
 

@@ -44,17 +44,17 @@ class TextStyle;
  */
 class LIBDWG_API MText : public Entity
 {
-    XYZ _insertPoint;                           ///< The insertion point of the text.
-    XYZ _normal;                                ///< The normal vector defining the text plane.
-    XYZ _alignmentPoint;                        ///< The alignment point of the text.
-    double _height;                             ///< The text height.
-    double _rectangleWidth;                     ///< The width of the bounding rectangle.
-    double _rectangleHeight;                    ///< The height of the bounding rectangle.
-    double _horizontalWidth;                    ///< The actual horizontal width of the text.
-    double _verticalHeight;                     ///< The actual vertical height of the text.
-    double _rotation;                           ///< The rotation angle of the text in degrees.
-    double _lineSpacing;                        ///< The spacing between lines.
-    double _backgroundScale;                    ///< The scale factor for the background fill.
+    XYZ _insertPoint;                        ///< The insertion point of the text.
+    XYZ _normal;                             ///< The normal vector defining the text plane.
+    XYZ _alignmentPoint;                     ///< The alignment point of the text.
+    double _height;                          ///< The text height.
+    double _rectangleWidth;                  ///< The width of the bounding rectangle.
+    double _rectangleHeight;                 ///< The height of the bounding rectangle.
+    double _horizontalWidth;                 ///< The actual horizontal width of the text.
+    double _verticalHeight;                  ///< The actual vertical height of the text.
+    double _rotation;                        ///< The rotation angle of the text in degrees.
+    double _lineSpacing;                     ///< The spacing between lines.
+    double _backgroundScale;                 ///< The scale factor for the background fill.
     AttachmentPointType _attachmentPoint;    ///< Defines how the text is attached.
     DrawingDirectionType _drawingDirection;  ///< The direction in which the text is drawn.
     TextStyle *_style;                       ///< Pointer to the text style.
@@ -62,7 +62,7 @@ class LIBDWG_API MText : public Entity
     BackgroundFillFlags _backgroundFillFlags;///< Flags for background fill options.
     Color _backgroundColor;                  ///< The background color of the text.
     Transparency _backgroundTransparency;    ///< The background transparency level.
-    bool _isAnnotative;                         ///< Indicates whether the text is annotative.
+    bool _isAnnotative;                      ///< Indicates whether the text is annotative.
 
 public:
     /**
@@ -74,7 +74,7 @@ public:
      */
     struct LIBDWG_API TextColumn
     {
-        ColumnType ColumnType;         ///< Type of column layout.
+        ColumnType ColumnType;            ///< Type of column layout.
         int ColumnCount;                  ///< The number of columns.
         bool ColumnFlowReversed;          ///< Whether the column flow is reversed.
         bool ColumnAutoHeight;            ///< Whether the column height is automatically adjusted.

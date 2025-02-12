@@ -21,24 +21,21 @@
  */
 
 #include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 
 namespace dwg {
 
-std::string DwgHandleWriter::sectionName() const
-{
-    return DwgSectionDefinition::Handles;
-}
-
-DwgHandleWriter::DwgHandleWriter(
-        ACadVersion version, std::ostringstream *stream,
-        const std::map<unsigned long long, long long> &handlemap)
+DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostream *stream,
+                                 const std::map<unsigned long long, long long> &handlemap)
     : DwgSectionIO(version)
 {
     _stream = stream;
     _handleMap = handlemap;
 }
 
-void DwgHandleWriter::Write(int sectionOffset)
+std::string DwgHandleWriter::sectionName() const { return DwgSectionDefinition::Handles; }
+
+void DwgHandleWriter::write(int sectionOffset)
 {
     std::vector<unsigned char> array(10, 0);
     std::vector<unsigned char> array2(5, 0);
@@ -49,10 +46,8 @@ void DwgHandleWriter::Write(int sectionOffset)
     std::streampos lastPosition = _stream->tellp();
 
     unsigned char buf_ch = 0;
-    _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                   sizeof(unsigned char));
-    _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                   sizeof(unsigned char));
+    _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
+    _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
 
 
     for (auto pair: _handleMap)
@@ -70,10 +65,8 @@ void DwgHandleWriter::Write(int sectionOffset)
             offset = 0uL;
             initialLoc = 0L;
             lastPosition = _stream->tellp();
-            _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                           sizeof(unsigned char));
-            _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                           sizeof(unsigned char));
+            _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
+            _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
             offset = 0uL;
             initialLoc = 0L;
             handleOff = pair.first - offset;
@@ -85,8 +78,7 @@ void DwgHandleWriter::Write(int sectionOffset)
             locSize = signedModularShortToValue((int) locDiff, array2);
         }
 
-        _stream->write(reinterpret_cast<const char *>(array.data()),
-                       offsetSize);
+        _stream->write(reinterpret_cast<const char *>(array.data()), offsetSize);
         _stream->write(reinterpret_cast<const char *>(array2.data()), locSize);
         offset = pair.first;
         initialLoc = lastLoc;
@@ -94,15 +86,12 @@ void DwgHandleWriter::Write(int sectionOffset)
 
     processPosition(lastPosition);
     lastPosition = _stream->tellp();
-    _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                   sizeof(unsigned char));
-    _stream->write(reinterpret_cast<const char *>(&buf_ch),
-                   sizeof(unsigned char));
+    _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
+    _stream->write(reinterpret_cast<const char *>(&buf_ch), sizeof(unsigned char));
     processPosition(lastPosition);
 }
 
-int DwgHandleWriter::modularShortToValue(unsigned long long value,
-                                         std::vector<unsigned char> &arr)
+int DwgHandleWriter::modularShortToValue(unsigned long long value, std::vector<unsigned char> &arr)
 {
     int i = 0;
     while (value >= 0b10000000)
@@ -115,8 +104,7 @@ int DwgHandleWriter::modularShortToValue(unsigned long long value,
     return i + 1;
 }
 
-int DwgHandleWriter::signedModularShortToValue(int value,
-                                               std::vector<unsigned char> &arr)
+int DwgHandleWriter::signedModularShortToValue(int value, std::vector<unsigned char> &arr)
 {
     int i = 0;
     if (value < 0)
@@ -152,8 +140,7 @@ void DwgHandleWriter::processPosition(std::streampos pos)
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));
     _stream->seekp(streamPos);
 
-    unsigned short crc = CRC8StreamHandler::GetCRCValue(
-            0xC0C1, _stream->str().data(), pos, _stream->tellp() - pos);
+    unsigned short crc = CRC8StreamHandler::GetCRCValue(0xC0C1, _stream->str().data(), pos, _stream->tellp() - pos);
 
     ch = (unsigned char) (crc >> 8);
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));

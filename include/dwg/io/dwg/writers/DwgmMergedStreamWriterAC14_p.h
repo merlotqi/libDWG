@@ -33,4 +33,4 @@ public:
     void writeSpearShift() override;
 };
 
-}
+}// namespace dwg

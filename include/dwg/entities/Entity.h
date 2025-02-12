@@ -74,7 +74,7 @@ public:
 
     virtual Transparency transparency() const;
 
-    virtual void setTransparency(Transparency);
+    virtual void setTransparency(const Transparency &);
 
     virtual LineType *lineType() const;
 

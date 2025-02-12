@@ -39,9 +39,9 @@ public:
 
     virtual ~NonGraphicalObject() override;
 
-    virtual std::string Name() const override;
+    virtual std::string name() const override;
 
-    virtual void Name(const std::string &value);
+    virtual void setName(const std::string &value);
 };
 
 }// namespace dwg

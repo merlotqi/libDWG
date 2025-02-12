@@ -40,8 +40,7 @@ class LIBDWG_API Viewport : public Entity
 {
 public:
     static constexpr int PaperViewId = 1;
-    static constexpr auto ASDK_XREC_ANNOTATION_SCALE_INFO =
-            "ASDK_XREC_ANNOTATION_SCALE_INFO";
+    static constexpr auto ASDK_XREC_ANNOTATION_SCALE_INFO = "ASDK_XREC_ANNOTATION_SCALE_INFO";
 
 public:
     Viewport();
@@ -115,7 +114,7 @@ public:
     ViewportStatusFlags status() const;
     void setStatus(ViewportStatusFlags);
 
-    Entity* boundary() const;
+    Entity *boundary() const;
     void setBoundary(Entity *);
 
     std::string styleSheetName() const;

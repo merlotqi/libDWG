@@ -30,12 +30,12 @@ class DwgStreamReaderAC18 : public DwgStreamReaderAC15
 {
 public:
     DwgStreamReaderAC18(std::istream *stream, bool resetPosition);
-    
+
     virtual ~DwgStreamReaderAC18();
 
     Color readCmColor() override;
 
-    Color readEnColor(Transparency &, bool& isBookColor);
+    Color readEnColor(Transparency &, bool &isBookColor);
 };
 
-}
+}// namespace dwg

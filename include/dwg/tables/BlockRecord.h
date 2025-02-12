@@ -26,6 +26,7 @@
 #include <dwg/blocks/BlockTypeFlags.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
+#include <string>
 
 namespace dwg {
 

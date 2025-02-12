@@ -23,9 +23,10 @@
 #pragma once
 
 #include <dwg/Coordinate.h>
-#include <variant>
 #include <string>
+#include <variant>
 #include <vector>
+
 
 namespace dwg {
 
@@ -46,12 +47,10 @@ enum DwgVariantType
     BLOB,
 };
 
-typedef std::variant<char, unsigned char, short, unsigned short, int, unsigned int, long long, 
-        unsigned long long, float, double, std::string, XYZ, std::vector<unsigned char>> DwgVariant;
+typedef std::variant<char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long,
+                     float, double, std::string, XYZ, std::vector<unsigned char>>
+        DwgVariant;
 
-inline static bool dwg_variant_valid(const DwgVariant& val)
-{
-	return !(std::holds_alternative<std::monostate>(val));
-}
+inline static bool dwg_variant_valid(const DwgVariant &val) { return !(std::holds_alternative<std::monostate>(val)); }
 
-}
+}// namespace dwg

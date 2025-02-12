@@ -32,6 +32,7 @@ class DwgPreviewWriter : public DwgSectionIO
     IDwgStreamWriter *_swriter;
     std::vector<unsigned char> _startSentinel;
     std::vector<unsigned char> _endSentinel;
+
 public:
     DwgPreviewWriter(ACadVersion version, std::ostream *stream);
 
@@ -40,4 +41,4 @@ public:
     void write();
 };
 
-}
+}// namespace dwg

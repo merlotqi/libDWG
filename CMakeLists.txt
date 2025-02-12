@@ -12,6 +12,7 @@ set(LIBDWG_VERSION_PATCH 1)
 set(LIBDWG_VERSION_STRING "${LIBDWG_VERSION_MAJOR}.${LIBDWG_VERSION_MINOR}.${LIBDWG_VERSION_PATCH}")
 
 find_package(Iconv REQUIRED)
+find_package(fmt REQUIRED)
 
 include(GenerateExportHeader)
 
@@ -21,9 +22,9 @@ add_subdirectory(include)
 add_subdirectory(src)
 
 if(WIN32)
-    target_compile_definitions(dwg PRIVATE LIBDWG_EXPORTS)
+    target_compile_definitions(dwg PRIVATE _USE_MATH_DEFINES)
 endif()
-target_link_libraries(dwg Iconv::Iconv)
+target_link_libraries(dwg Iconv::Iconv fmt::fmt)
 
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)

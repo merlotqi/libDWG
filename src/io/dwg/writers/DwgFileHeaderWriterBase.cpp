@@ -20,20 +20,19 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <assert.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils_p.h>
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <dwg/utils/EndianConverter_p.h>
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
-#include <assert.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <fstream>
 #include <sstream>
 
 namespace dwg {
 
-DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream,
-                                                 Encoding encoding,
-                                                 CadDocument *model)
+DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding, CadDocument *model)
 {
     assert(stream);
     assert(model);
@@ -45,17 +44,14 @@ DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream,
 
 unsigned short DwgFileHeaderWriterBase::getFileCodePage()
 {
-    unsigned short codePage = CadUtils::GetCodeIndex(
-            CadUtils::GetCodePage(_document->Header.CodePage));
+    unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->Header.CodePage));
     if (codePage < 1) { return 30; }
     else { return codePage; }
 }
 
-void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer,
-                                        int offset, int length)
+void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer, int offset, int length)
 {
-    auto &&bytes = LittleEndianConverter::Instance()->GetBytes(
-            0x4164536B ^ (int) _stream->tellp());
+    auto &&bytes = LittleEndianConverter::instance()->bytes(0x4164536B ^ (int) _stream->tellp());
     int diff = offset + length;
     while (offset < diff)
     {
@@ -65,9 +61,8 @@ void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer,
     }
 }
 
-bool DwgFileHeaderWriterBase::checkEmptyBytes(
-        const std::vector<unsigned char> &buffer, unsigned long long offset,
-        unsigned long long spearBytes) const
+bool DwgFileHeaderWriterBase::checkEmptyBytes(const std::vector<unsigned char> &buffer, unsigned long long offset,
+                                              unsigned long long spearBytes) const
 {
     bool result = true;
     unsigned long long num = offset + spearBytes;
@@ -96,10 +91,7 @@ void DwgFileHeaderWriterBase::writeMagicNumber()
 void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
 {
     std::string buffer = stream->str();
-    for (size_t i = 0; i < buffer.size(); ++i)
-    {
-        buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];
-    }
+    for (size_t i = 0; i < buffer.size(); ++i) { buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i]; }
     stream->str("");
     stream->clear();
     *stream << buffer;

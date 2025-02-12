@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <sstream>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <map>
+#include <sstream>
 
 namespace dwg {
 
@@ -42,8 +43,7 @@ public:
     void write(int sectionOffset = 0);
 
 private:
-    int modularShortToValue(unsigned long long value,
-                            std::vector<unsigned char> &arr);
+    int modularShortToValue(unsigned long long value, std::vector<unsigned char> &arr);
     int signedModularShortToValue(int value, std::vector<unsigned char> &arr);
     void processPosition(std::streampos pos);
 };

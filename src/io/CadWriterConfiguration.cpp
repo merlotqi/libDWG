@@ -24,12 +24,9 @@
 
 namespace dwg {
 
-CadWriterConfiguration::CadWriterConfiguration()
-    : _closeStream(true), _writeXRecords(false), _writeXData(true)
-{}
+CadWriterConfiguration::CadWriterConfiguration() : _closeStream(true), _writeXRecords(false), _writeXData(true) {}
 
-CadWriterConfiguration::~CadWriterConfiguration()
-{}
+CadWriterConfiguration::~CadWriterConfiguration() {}
 
 bool CadWriterConfiguration::closeStream() const { return _closeStream; }
 
@@ -43,4 +40,4 @@ bool CadWriterConfiguration::writeXData() const { return _writeXData; }
 
 void CadWriterConfiguration::setWriteXData(bool value) { _writeXData = value; }
 
-}
+}// namespace dwg

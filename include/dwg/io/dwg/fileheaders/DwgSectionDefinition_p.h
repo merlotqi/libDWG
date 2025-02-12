@@ -23,9 +23,9 @@
 #pragma once
 
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
-#include <optional>
 
 namespace dwg {
 
@@ -48,7 +48,7 @@ public:
     static std::map<std::string, std::vector<unsigned char>> StartSentinels;
     static std::map<std::string, std::vector<unsigned char>> EndSentinels;
 
-    static std::optional<int> GetSectionLocatorByName(const std::string& name);
+    static std::optional<int> GetSectionLocatorByName(const std::string &name);
 };
 
 }// namespace dwg

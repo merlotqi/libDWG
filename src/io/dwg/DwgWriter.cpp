@@ -21,13 +21,13 @@
  */
 
 #include <dwg/io/dwg/DwgWriter.h>
-#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgAppInfoWriter_p.h>
 #include <dwg/io/dwg/writers/DwgAuxHeaderWriter_p.h>
 #include <dwg/io/dwg/writers/DwgClassesWriter_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
+#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>

@@ -29,14 +29,12 @@ namespace dwg {
 class DwgFileHeaderWriterAC21 : public DwgFileHeaderWriterAC18
 {
 public:
-    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model);
+    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding, CadDocument *model);
+
 protected:
     int fileHeaderSize() const override;
-    void craeteLocalSection(DwgSectionDescriptor descriptor,
-                            const std::vector<unsigned char> &buffer,
-                            int decompressedSize, unsigned long long offset,
-                            int totalSize, bool isCompressed) override;
+    void craeteLocalSection(DwgSectionDescriptor descriptor, const std::vector<unsigned char> &buffer,
+                            int decompressedSize, unsigned long long offset, int totalSize, bool isCompressed) override;
 };
 
 }// namespace dwg

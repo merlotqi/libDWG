@@ -30,7 +30,6 @@ class DwgMergedReader : public IDwgStreamReader
 {
 public:
     DwgMergedReader(IDwgStreamReader *mainReader, IDwgStreamReader *textReader, IDwgStreamReader *handleReader);
-    
 };
 
-}
+}// namespace dwg

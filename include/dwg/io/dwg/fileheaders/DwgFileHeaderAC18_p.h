@@ -32,7 +32,7 @@ public:
     DwgFileHeaderAC18();
     DwgFileHeaderAC18(ACadVersion version);
     virtual ~DwgFileHeaderAC18();
-    
+
     void addSection(const std::string &name) override;
     void addSection(const DwgSectionDescriptor &descriptor);
     DwgSectionDescriptor &getDescriptor(const std::string &name) override;
@@ -45,7 +45,7 @@ public:
 
     long long summaryInfoAddr() const;
     void setSummaryInfoAddr(long long);
-    
+
     long long securityType() const;
     void setSecurityType(long long);
 

@@ -32,8 +32,7 @@ class CRC
 public:
     static std::vector<unsigned short> CrcTable;
     static std::vector<unsigned int> Crc32Table;
-    static unsigned short applyCrc8(unsigned short dx,
-                                    const std::vector<unsigned char> &arr);
+    static unsigned short applyCrc8(unsigned short dx, const std::vector<unsigned char> &arr);
 };
 
 }// namespace dwg

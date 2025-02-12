@@ -29,11 +29,11 @@ Leader::Leader() {}
 
 Leader::~Leader() {}
 
-ObjectType Leader::ObjectType() const { return ObjectType::LEADER; }
+ObjectType Leader::objectType() const { return ObjectType::LEADER; }
 
-std::string Leader::ObjectName() const { return DxfFileToken::EntityLeader; }
+std::string Leader::objectName() const { return DxfFileToken::EntityLeader; }
 
-std::string Leader::SubclassMarker() const { return DxfSubclassMarker::Leader; }
+std::string Leader::subclassMarker() const { return DxfSubclassMarker::Leader; }
 
 DimensionStyle *Leader::Style() const { return _style; }
 

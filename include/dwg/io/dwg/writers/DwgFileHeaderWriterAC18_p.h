@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 
 namespace dwg {
 
@@ -32,26 +32,19 @@ class ICompressor;
 class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 {
 public:
-    DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding,
-                            CadDocument *document);
+    DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding, CadDocument *document);
 
     int handleSectionOffset() const;
     void writeFile() override;
-    void addSection(const std::string &name, std::ostream *stream,
-                    bool isCompressed, int decompsize = 0x7400) override;
+    void addSection(const std::string &name, std::ostream *stream, bool isCompressed, int decompsize = 0x7400) override;
 
 
 protected:
     int fileHeaderSize() const override;
-    virtual void craeteLocalSection(DwgSectionDescriptor descriptor,
-                                    const std::vector<unsigned char> &buffer,
-                                    int decompressedSize,
-                                    unsigned long long offset, int totalSize,
-                                    bool isCompressed);
-    std::ostringstream
-    applyCompression(const std::vector<unsigned char> &buffer,
-                     int decompressedSize, unsigned long long offset,
-                     int totalSize, bool isCompressed);
+    virtual void craeteLocalSection(DwgSectionDescriptor descriptor, const std::vector<unsigned char> &buffer,
+                                    int decompressedSize, unsigned long long offset, int totalSize, bool isCompressed);
+    std::ostringstream applyCompression(const std::vector<unsigned char> &buffer, int decompressedSize,
+                                        unsigned long long offset, int totalSize, bool isCompressed);
 
 private:
     void writeRecords();
@@ -60,11 +53,9 @@ private:
     void writeFileHeader(std::ostringstream *stream);
     void addSection(DwgLocalSectionMap section);
     DwgLocalSectionMap setSeeker(int map, std::ostringstream *stream);
-    void compressChecksum(DwgLocalSectionMap section,
-                          std::ostringstream *stream);
+    void compressChecksum(DwgLocalSectionMap section, std::ostringstream *stream);
     void writePageHeaderData(DwgLocalSectionMap section, std::ostream *stream);
-    void writeDataSection(std::ostream *stream, DwgSectionDescriptor descriptor,
-                          DwgLocalSectionMap map, int size);
+    void writeDataSection(std::ostream *stream, DwgSectionDescriptor descriptor, DwgLocalSectionMap map, int size);
 
     std::vector<DwgLocalSectionMap> _localSectionsMaps;
     std::map<std::string, DwgSectionDescriptor> _descriptors;

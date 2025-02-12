@@ -140,31 +140,25 @@ std::map<std::string, CodePage> CadUtils::_dxfEncodingMap = {
 };
 
 std::vector<LineweightType> CadUtils::_indexedValue = {
-        LineweightType::W0,   LineweightType::W5,   LineweightType::W9,
-        LineweightType::W13,  LineweightType::W15,  LineweightType::W18,
-        LineweightType::W20,  LineweightType::W25,  LineweightType::W30,
-        LineweightType::W35,  LineweightType::W40,  LineweightType::W50,
-        LineweightType::W53,  LineweightType::W60,  LineweightType::W70,
-        LineweightType::W80,  LineweightType::W90,  LineweightType::W100,
-        LineweightType::W106, LineweightType::W120, LineweightType::W140,
-        LineweightType::W158, LineweightType::W200, LineweightType::W211};
+        LineweightType::W0,   LineweightType::W5,   LineweightType::W9,   LineweightType::W13,  LineweightType::W15,
+        LineweightType::W18,  LineweightType::W20,  LineweightType::W25,  LineweightType::W30,  LineweightType::W35,
+        LineweightType::W40,  LineweightType::W50,  LineweightType::W53,  LineweightType::W60,  LineweightType::W70,
+        LineweightType::W80,  LineweightType::W90,  LineweightType::W100, LineweightType::W106, LineweightType::W120,
+        LineweightType::W140, LineweightType::W158, LineweightType::W200, LineweightType::W211};
 
 std::vector<CodePage> CadUtils::_pageCodes = {
-        CodePage::Unknown,     CodePage::Usascii,     CodePage::Iso88591,
-        CodePage::Iso88592,    CodePage::Iso88593,    CodePage::Iso88594,
-        CodePage::Iso88595,    CodePage::Iso88596,    CodePage::Iso88597,
-        CodePage::Iso88598,    CodePage::Iso88599,    CodePage::Ibm437,
-        CodePage::Ibm850,      CodePage::Ibm852,      CodePage::Ibm855,
-        CodePage::Ibm857,      CodePage::Ibm860,      CodePage::Ibm861,
-        CodePage::Ibm863,      CodePage::Ibm864,      CodePage::Ibm865,
-        CodePage::Ibm869,      CodePage::Shift_jis,   CodePage::Macintosh,
-        CodePage::big5,        CodePage::Ksc5601,     CodePage::Johab,
-        CodePage::Cp866,       CodePage::Windows1250, CodePage::Windows1251,
-        CodePage::Windows1252, CodePage::Gb2312,      CodePage::Windows1253,
-        CodePage::Windows1254, CodePage::Windows1255, CodePage::Windows1256,
-        CodePage::Windows1257, CodePage::Windows874,  CodePage::Shift_jis,
-        CodePage::Gb2312,      CodePage::Ksc5601,     CodePage::big5,
-        CodePage::Johab,       CodePage::Utf16,       CodePage::Windows1258};
+        CodePage::Unknown,     CodePage::Usascii,     CodePage::Iso88591,    CodePage::Iso88592,
+        CodePage::Iso88593,    CodePage::Iso88594,    CodePage::Iso88595,    CodePage::Iso88596,
+        CodePage::Iso88597,    CodePage::Iso88598,    CodePage::Iso88599,    CodePage::Ibm437,
+        CodePage::Ibm850,      CodePage::Ibm852,      CodePage::Ibm855,      CodePage::Ibm857,
+        CodePage::Ibm860,      CodePage::Ibm861,      CodePage::Ibm863,      CodePage::Ibm864,
+        CodePage::Ibm865,      CodePage::Ibm869,      CodePage::Shift_jis,   CodePage::Macintosh,
+        CodePage::big5,        CodePage::Ksc5601,     CodePage::Johab,       CodePage::Cp866,
+        CodePage::Windows1250, CodePage::Windows1251, CodePage::Windows1252, CodePage::Gb2312,
+        CodePage::Windows1253, CodePage::Windows1254, CodePage::Windows1255, CodePage::Windows1256,
+        CodePage::Windows1257, CodePage::Windows874,  CodePage::Shift_jis,   CodePage::Gb2312,
+        CodePage::Ksc5601,     CodePage::big5,        CodePage::Johab,       CodePage::Utf16,
+        CodePage::Windows1258};
 
 
 LineweightType CadUtils::ToValue(unsigned char b)
@@ -179,10 +173,7 @@ LineweightType CadUtils::ToValue(unsigned char b)
         case 31:
             return LineweightType::Default;
         default:
-            if (b < 0 || b >= _indexedValue.size())
-            {
-                return LineweightType::Default;
-            }
+            if (b < 0 || b >= _indexedValue.size()) { return LineweightType::Default; }
             return _indexedValue[b];
     }
 }
@@ -268,8 +259,7 @@ double CadUtils::ToJulianCalendar(DateTime date)
     double minute = date.minute();
     double second = date.second();
     double millisecond = date.millisecond();
-    double fraction = day + hour / 24.0 + minute / 1440.0 +
-                      (second + millisecond / 1000) / 86400.0;
+    double fraction = day + hour / 24.0 + minute / 1440.0 + (second + millisecond / 1000) / 86400.0;
 
     if (month < 3)
     {
@@ -356,14 +346,10 @@ void CadUtils::DateToJulian(DateTime date, int &jdate, int &miliseconds)
     int day = (int) std::floor((14.0 - date.month()) / 12.0);
     int year = date.year() + 4800 - day;
     int month = date.month();
-    jdate = date.day() +
-            (int) std::floor((153.0 * (double) (month + 12 * day - 3) + 2.0) /
-                             5.0) +
-            365 * year + (int) std::floor((double) year / 4.0) -
-            (int) std::floor((double) year / 100.0) +
+    jdate = date.day() + (int) std::floor((153.0 * (double) (month + 12 * day - 3) + 2.0) / 5.0) + 365 * year +
+            (int) std::floor((double) year / 4.0) - (int) std::floor((double) year / 100.0) +
             (int) std::floor((double) year / 400.0) - 32045;
-    miliseconds = date.millisecond() + date.second() * 1000 +
-                  date.minute() * 60000 + date.hour() * 3600000;
+    miliseconds = date.millisecond() + date.second() * 1000 + date.minute() * 60000 + date.hour() * 3600000;
 }
 
 }// namespace dwg

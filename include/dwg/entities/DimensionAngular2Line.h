@@ -30,8 +30,8 @@ namespace dwg {
 // defined by three points: two points on the lines and the vertex at the angle.
 class LIBDWG_API DimensionAngular2Line : public Dimension
 {
-    XYZ _firstPoint;// The first point on the first line that defines the angle
-    XYZ _secondPoint;// The second point on the second line that defines the angle
+    XYZ _firstPoint;  // The first point on the first line that defines the angle
+    XYZ _secondPoint; // The second point on the second line that defines the angle
     XYZ _angleVertex; // The vertex where the two lines meet (angle vertex)
     XYZ _dimensionArc;// The arc that represents the angular dimension
 

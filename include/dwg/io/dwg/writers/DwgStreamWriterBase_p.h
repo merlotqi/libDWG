@@ -128,4 +128,4 @@ public:
     void writeShiftValue() override;
 };
 
-}
+}// namespace dwg

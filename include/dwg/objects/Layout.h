@@ -45,7 +45,7 @@ public:
 
     int tabOrder() const;
     void setTabOrder(int);
-    
+
     XY minLimits() const;
     void setMinLimits(const XY &);
 
@@ -79,7 +79,7 @@ public:
     BlockRecord *associatedBlock() const;
     void setAssociatedBlock(BlockRecord *);
 
-    Viewport* viewport() const;
+    Viewport *viewport() const;
     void setViewport(Viewport *);
 
     UCS *ucs() const;

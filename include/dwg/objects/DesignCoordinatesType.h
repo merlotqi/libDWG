@@ -26,13 +26,13 @@ namespace dwg {
 
 enum DesignCoordinatesType
 {
-	Unknown = 0,
-	/// Local grid.
-	LocalGrid = 1,
-	/// Projected grid.
-	ProjectedGrid = 2,
-	/// Geographic (latitude/longitude).
-	Geographic = 3,
+    Unknown = 0,
+    /// Local grid.
+    LocalGrid = 1,
+    /// Projected grid.
+    ProjectedGrid = 2,
+    /// Geographic (latitude/longitude).
+    Geographic = 3,
 };
 
 }// namespace dwg

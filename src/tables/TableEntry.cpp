@@ -26,19 +26,13 @@ namespace dwg {
 
 TableEntry::TableEntry(const std::string &name) : _name(name) {}
 
-std::string TableEntry::SubclassMarker() const
-{
-    return DxfSubclassMarker::TableRecord;
-}
+std::string TableEntry::subclassMarker() const { return DxfSubclassMarker::TableRecord; }
 
 std::string TableEntry::Name() const { return _name; }
 
 void TableEntry::Name(const std::string &value)
 {
-    if (StringHelp::IsNullOrEmpty(value))
-    {
-        throw new std::invalid_argument("The Table Entry must have a name");
-    }
+    if (StringHelp::IsNullOrEmpty(value)) { throw new std::invalid_argument("The Table Entry must have a name"); }
     OnNameChanged(_name, value);
     _name = value;
 }

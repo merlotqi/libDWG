@@ -185,7 +185,6 @@ public:
     std::wstring toUnicode(const std::string &wstr);
     std::string fromUnicode(const std::wstring &wstr);
     CodePage codePage() const;
-
 };
 
 }// namespace dwg

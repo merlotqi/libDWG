@@ -30,7 +30,7 @@ class DwgStreamReaderAC21 : public DwgStreamReaderAC18
 {
 public:
     DwgStreamReaderAC21(std::istream *stream, bool resetPosition);
-    
+
     virtual ~DwgStreamReaderAC21();
 
     std::string readUtf8String() override;
@@ -38,4 +38,4 @@ public:
     std::string readVariableText() override;
 };
 
-}
+}// namespace dwg

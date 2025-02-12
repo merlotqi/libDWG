@@ -60,10 +60,10 @@ public:
     class BlockAttribute
     {
     public:
-        AttributeDefinition *AttributeDefinition; ///< Pointer to the attribute definition.
-        short Index; ///< Index of the attribute within the block.
-        double Width; ///< Width of the attribute text.
-        std::string Text; ///< The actual text content of the attribute.
+        AttributeDefinition *AttributeDefinition;///< Pointer to the attribute definition.
+        short Index;                             ///< Index of the attribute within the block.
+        double Width;                            ///< Width of the attribute text.
+        std::string Text;                        ///< The actual text content of the attribute.
     };
 
 public:

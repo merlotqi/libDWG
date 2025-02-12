@@ -23,5 +23,5 @@
 #include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 
 namespace dwg {
-    
+
 }

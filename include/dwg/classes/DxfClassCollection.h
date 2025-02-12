@@ -24,12 +24,12 @@
 
 #include <dwg/exports.h>
 #include <map>
+#include <string>
 
 namespace dwg {
 
 class DxfClass;
 class CadDocument;
-
 class LIBDWG_API DxfClassCollection
 {
     std::map<std::string, DxfClass *> _entries;

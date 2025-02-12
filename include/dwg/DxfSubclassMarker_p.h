@@ -71,8 +71,7 @@ public:
     static constexpr auto Material = "AcDbMaterial";
     static constexpr auto MultiLeader = "AcDbMLeader";
     static constexpr auto MLeaderStyle = "AcDbMLeaderStyle";
-    static constexpr auto MultiLeaderAnnotContext =
-            "AcDbMultiLeaderAnnotContext";
+    static constexpr auto MultiLeaderAnnotContext = "AcDbMultiLeaderAnnotContext";
     static constexpr auto LwPolyline = "AcDbPolyline";
     static constexpr auto PolylineVertex = "AcDb2dVertex";
     static constexpr auto Polyline3d = "AcDb3dPolyline";
@@ -109,8 +108,7 @@ public:
     static constexpr auto DictionaryVariables = "DictionaryVariables";
     static constexpr auto Scale = "AcDbScale";
     static constexpr auto EvalGraph = "AcDbEvalGraph";
-    static constexpr auto BlockVisibilityParameter =
-            "AcDbBlockVisibilityParameter";
+    static constexpr auto BlockVisibilityParameter = "AcDbBlockVisibilityParameter";
     static constexpr auto DbColor = "AcDbColor";
 };
 

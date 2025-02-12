@@ -41,11 +41,11 @@ class MLineStyle;
 class LIBDWG_API MLine : public Entity
 {
     MLineStyle *_style;               ///< Pointer to the multiline style.
-    double _scaleFactor;                 ///< Scale factor for the multiline.
+    double _scaleFactor;              ///< Scale factor for the multiline.
     MLineJustification _justification;///< Justification of the multiline.
     MLineFlags _flags;                ///< Flags indicating properties of the multiline.
-    XYZ _startPoint;                     ///< Start point of the multiline.
-    XYZ _normal;                         ///< Normal vector defining the plane of the multiline.
+    XYZ _startPoint;                  ///< Start point of the multiline.
+    XYZ _normal;                      ///< Normal vector defining the plane of the multiline.
 
 public:
     /**

@@ -41,7 +41,7 @@ class LIBDWG_API TextEntity : public Entity
     double _rotation;
     double _widthFactor;
     double _obliqueAngle;
-    TextStyle* _style;
+    TextStyle *_style;
     TextMirrorFlag _mirror;
     TextHorizontalAlignment _horizontalAlignment;
     XYZ _alignmentPoint;

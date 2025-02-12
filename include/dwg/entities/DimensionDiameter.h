@@ -28,7 +28,7 @@ namespace dwg {
 
 class LIBDWG_API DimensionDiameter : public Dimension
 {
-    XYZ _angleVertex;// The vertex of the angle (used for diameter dimension)
+    XYZ _angleVertex;    // The vertex of the angle (used for diameter dimension)
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:

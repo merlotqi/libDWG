@@ -43,4 +43,4 @@ private:
     IDwgStreamReader *_sreader;
 };
 
-}
+}// namespace dwg

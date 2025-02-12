@@ -27,7 +27,7 @@
 namespace dwg {
 class LIBDWG_API DimensionRadius : public Dimension
 {
-    XYZ _angleVertex;// The vertex of the angle (used for radius dimension)
+    XYZ _angleVertex;    // The vertex of the angle (used for radius dimension)
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:

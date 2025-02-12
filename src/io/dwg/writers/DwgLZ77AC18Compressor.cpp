@@ -27,8 +27,7 @@ namespace dwg {
 
 DwgLZ77AC18Compressor::DwgLZ77AC18Compressor() {}
 
-void DwgLZ77AC18Compressor::Compress(const std::vector<unsigned char> &source,
-                                     size_t offset, size_t totalSize,
+void DwgLZ77AC18Compressor::compress(std::vector<unsigned char> &source, size_t offset, size_t totalSize,
                                      std::ostream *dest)
 {
 }
@@ -37,17 +36,11 @@ void DwgLZ77AC18Compressor::restartBlock() {}
 
 void DwgLZ77AC18Compressor::writeLen(int len) {}
 
-void DwgLZ77AC18Compressor::writeOpCode(int opCode, int compressionOffset,
-                                        int value)
-{
-}
+void DwgLZ77AC18Compressor::writeOpCode(int opCode, int compressionOffset, int value) {}
 
 void DwgLZ77AC18Compressor::writeLiteralLength(int length) {}
 
-void DwgLZ77AC18Compressor::applyMask(int matchPosition, int compressionOffset,
-                                      int mask)
-{
-}
+void DwgLZ77AC18Compressor::applyMask(int matchPosition, int compressionOffset, int mask) {}
 
 bool DwgLZ77AC18Compressor::compressChunk(int &offset, int &matchPos) {}
 

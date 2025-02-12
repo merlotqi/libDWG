@@ -20,259 +20,82 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/DxfClass.h>
+#include <dwg/classes/DxfClass.h>
 
 namespace dwg {
 
 /* -------------------------------- DxfClass -------------------------------- */
 
-DxfClass::DxfClass(const std::string &_cppClassName, short _classNumber,
-                   ACadVersion _version, const std::string &_dxfName,
-                   short _itemClassId, short _maintenanceVersion,
-                   ProxyFlags _proxyFlags, bool _wasZombie)
+DxfClass::DxfClass(const std::string &cppClassName, short classNumber, ACadVersion version,
+                   const std::string &dxfName, short itemClassId, short maintenanceVersion, ProxyFlags proxyFlags,
+                   bool wasZombie)
 {
-    CppClassName = _cppClassName;
-    ClassNumber = _classNumber;
-    DwgVersion = _version;
-    DxfName = _dxfName;
-    ItemClassId = _itemClassId;
-    MaintenanceVersion = _maintenanceVersion;
-    proxyFlags = _proxyFlags;
-    WasZombie = _wasZombie;
+    _cppClassName = cppClassName;
+    _classNumber = classNumber;
+    _dwgVersion = version;
+    _dxfName = dxfName;
+    _itemClassId = itemClassId;
+    _maintenanceVersion = maintenanceVersion;
+    _proxyFlags = proxyFlags;
+    _wasZombie = wasZombie;
 }
 
-DxfClass::DxfClass(const std::string &_applicationName,
-                   const std::string &_cppClassName, short _classNumber,
-                   ACadVersion _version, const std::string &_dxfName,
-                   short _itemClassId, short _maintenanceVersion,
-                   ProxyFlags _proxyFlags, bool _wasZombie)
+DxfClass::DxfClass(const std::string &applicationName, const std::string &cppClassName, short classNumber,
+                   ACadVersion version, const std::string &dxfName, short itemClassId, short maintenanceVersion,
+                   ProxyFlags proxyFlags, bool wasZombie)
 {
-    CppClassName = _cppClassName;
-    ClassNumber = _classNumber;
-    DwgVersion = _version;
-    DxfName = _dxfName;
-    ItemClassId = _itemClassId;
-    MaintenanceVersion = _maintenanceVersion;
-    proxyFlags = _proxyFlags;
-    WasZombie = _wasZombie;
+    _cppClassName = cppClassName;
+    _classNumber = classNumber;
+    _dwgVersion = version;
+    _dxfName = dxfName;
+    _itemClassId = itemClassId;
+    _maintenanceVersion = maintenanceVersion;
+    proxyFlags = proxyFlags;
+    _wasZombie = wasZombie;
 }
 
+std::string DxfClass::dxfName() const { return _dxfName; }
 
-/* --------------------------- DxfClassCollection --------------------------- */
+void DxfClass::setDxfName(const std::string &dxfName) { _dxfName = dxfName; }
 
-void DxfClassCollection::UpdateDxfClasses(CadDocument *doc)
-{
-    //AcDbDictionaryWithDefault
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbDictionaryWithDefault", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 22, "ACDBDICTIONARYWDFLT", 499, 42,
-            ProxyFlag::R13FormatProxy, false));
+std::string DxfClass::cppClassName() const { return _cppClassName; }
 
-    //AcDbPlaceHolder
-    doc->Classes.AddOrUpdate(DxfClass("AcDbPlaceHolder",
-                                      (short) (500 + doc->Classes.Count()),
-                                      (ACadVersion) 0, "ACDBPLACEHOLDER", 499,
-                                      0, ProxyFlag::None, false));
+void DxfClass::setCppClassName(const std::string &className) { _cppClassName = className; }
 
-    //AcDbLayout
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbLayout", (short) (500 + doc->Classes.Count()), (ACadVersion) 0,
-            "LAYOUT", 499, 0, ProxyFlag::None, false));
+std::string DxfClass::applicationName() const { return _applicationName; }
 
-    //AcDbDictionaryVar
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbDictionaryVar", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 20, "DICTIONARYVAR", 499, 0, ProxyFlag::None, false));
+void DxfClass::setApplicationName(const std::string &applicationName) { _applicationName = applicationName; }
 
-    //AcDbTableStyle
-    doc->Classes.AddOrUpdate(DxfClass("AcDbTableStyle",
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1018, "TABLESTYLE", 499, 0,
-                                      (ProxyFlags) 4095, false));
+ProxyFlags DxfClass::proxyFlags() const { return _proxyFlags; }
 
-    //AcDbMaterial
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbMaterial", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "MATERIAL", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+void DxfClass::setProxyFlags(ProxyFlags proxyFlags) { _proxyFlags = proxyFlags; }
 
-    //AcDbVisualStyle
-    doc->Classes.AddOrUpdate(DxfClass("AcDbVisualStyle",
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1021, "VISUALSTYLE", 499,
-                                      0, (ProxyFlags) 4095, false));
+int DxfClass::instanceCount() const { return _instanceCount; }
 
-    //AcDbScale
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbScale", (short) (500 + doc->Classes.Count()),
-            ACadVersion::AC1021, "SCALE", 499, 1,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+void DxfClass::setInstanceCount(int instanceCount) { _instanceCount = instanceCount; }
 
-    //AcDbMLeaderStyle
-    doc->Classes.AddOrUpdate(DxfClass("AcDbMLeaderStyle",
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1021, "MLEADERSTYLE", 499,
-                                      25, (ProxyFlags) 4095, false));
+bool DxfClass::wasZombie() const { return _wasZombie; }
 
-    //AcDbCellStyleMap
-    doc->Classes.AddOrUpdate(
-            DxfClass("AcDbCellStyleMap", (short) (500 + doc->Classes.Count()),
-                     ACadVersion::AC1021, "CELLSTYLEMAP", 499, 25,
-                     ProxyFlags(ProxyFlag::CloningAllowed |
-                                ProxyFlag::DisablesProxyWarningDialog),
-                     false));
+void DxfClass::setWasZombie(bool wasZombie) { _wasZombie = wasZombie; }
 
-    //ExAcXREFPanelObject
-    doc->Classes.AddOrUpdate(DxfClass(
-            "ExAcXREFPanelObject", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "EXACXREFPANELOBJECT", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+bool DxfClass::isAnEntity() const { return _isAnEntity; }
 
-    //AcDbImpNonPersistentObjectsCollection
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbImpNonPersistentObjectsCollection",
-            (short) (500 + doc->Classes.Count()), (ACadVersion) 0,
-            "NPOCOLLECTION", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+void DxfClass::setIsAnEntity(bool isAnEntity) { _isAnEntity = isAnEntity; }
 
-    //AcDbLayerIndex
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbLayerIndex", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "LAYER_INDEX", 499, 0, ProxyFlag::None, false));
+short DxfClass::classNumber() const { return _classNumber; }
 
-    //AcDbSpatialIndex
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbSpatialIndex", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "SPATIAL_INDEX", 499, 0, ProxyFlag::None, false));
+void DxfClass::setClassNumber(short classNumber) { _classNumber = classNumber; }
 
-    //AcDbIdBuffer
-    doc->Classes.AddOrUpdate(DxfClass("AcDbIdBuffer",
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1014, "IDBUFFER", 499, 0,
-                                      ProxyFlag::R13FormatProxy, false));
+short DxfClass::itemClassId() const { return _itemClassId; }
 
-    //AcDbSectionViewStyle
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbSectionViewStyle", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "ACDBSECTIONVIEWSTYLE", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+void DxfClass::setItemClassId(short itemClassId) { _itemClassId = itemClassId; }
 
-    //AcDbDetailViewStyle
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbDetailViewStyle", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "ACDBDETAILVIEWSTYLE", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
+ACadVersion DxfClass::dwgVersion() const { return _dwgVersion; }
 
-    //AcDbSubDMesh
-    doc->Classes.AddOrUpdate(
-            DxfClass("AcDbSubDMesh", (short) (500 + doc->Classes.Count()),
-                     (ACadVersion) 0, "MESH", 498, 0, ProxyFlag::None, false));
+void DxfClass::setDwgVersion(ACadVersion dwgVersion) { _dwgVersion = dwgVersion; }
 
-    //AcDbSortentsTable
-    doc->Classes.AddOrUpdate(DxfClass("AcDbSortentsTable",
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1014, "SORTENTSTABLE", 499,
-                                      0, ProxyFlag::None, false));
+short DxfClass::maintenanceVersion() const { return _maintenanceVersion; }
 
-    //AcDbTextObjectContextData
-    doc->Classes.AddOrUpdate(DxfClass(
-            "AcDbTextObjectContextData", (short) (500 + doc->Classes.Count()),
-            (ACadVersion) 0, "ACDB_TEXTOBJECTCONTEXTDATA_CLASS", 499, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed |
-                       ProxyFlag::DisablesProxyWarningDialog),
-            false));
-
-    //AcDbWipeout
-    doc->Classes.AddOrUpdate(DxfClass(
-            "WipeOut", "AcDbWipeout", (short) (500 + doc->Classes.Count()),
-            ACadVersion::AC1015, "WIPEOUT", 498, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::TransformAllowed |
-                       ProxyFlag::ColorChangeAllowed |
-                       ProxyFlag::LayerChangeAllowed |
-                       ProxyFlag::LinetypeChangeAllowed |
-                       ProxyFlag::LinetypeScaleChangeAllowed |
-                       ProxyFlag::VisibilityChangeAllowed |
-                       ProxyFlag::R13FormatProxy),
-            false));
-
-    //AcDbWipeoutVariables
-    doc->Classes.AddOrUpdate(DxfClass(
-            "WipeOut", "AcDbWipeoutVariables",
-            (short) (500 + doc->Classes.Count()), ACadVersion::AC1015,
-            "WIPEOUTVARIABLES", 499, 0, ProxyFlag::R13FormatProxy, false));
-
-    //AcDbDimAssoc
-    doc->Classes.AddOrUpdate(DxfClass("AcDbDimAssoc", "AcDbDimAssoc",
-                                      (short) (500 + doc->Classes.Count()),
-                                      (ACadVersion) 0, "DIMASSOC", 499, 0,
-                                      ProxyFlag::None, false));
-
-    //AcDbTable
-    doc->Classes.AddOrUpdate(
-            DxfClass("AcDbTable", (short) (500 + doc->Classes.Count()),
-                     ACadVersion::AC1018, "ACAD_TABLE", 498, 0,
-                     ProxyFlags(ProxyFlag::EraseAllowed |
-                                ProxyFlag::DisablesProxyWarningDialog),
-                     false));
-
-    //AcDbTableContent
-    doc->Classes.AddOrUpdate(
-            DxfClass("AcDbTableContent", (short) (500 + doc->Classes.Count()),
-                     ACadVersion::AC1018, "TABLECONTENT", 499, 21,
-                     ProxyFlags(ProxyFlag::CloningAllowed |
-                                ProxyFlag::DisablesProxyWarningDialog),
-                     false));
-
-    //AcDbTableGeometry
-    doc->Classes.AddOrUpdate(
-            DxfClass("AcDbTableGeometry", (short) (500 + doc->Classes.Count()),
-                     (ACadVersion) 0, "TABLEGEOMETRY", 499, 0,
-                     ProxyFlags(ProxyFlag::CloningAllowed |
-                                ProxyFlag::DisablesProxyWarningDialog),
-                     false));
-
-    //AcDbRasterImage
-    doc->Classes.AddOrUpdate(DxfClass(
-            DxfSubclassMarker::RasterImage,
-            (short) (500 + doc->Classes.Count()), ACadVersion::AC1014,
-            DxfFileToken::EntityImage, 498, 0,
-            ProxyFlags(ProxyFlag::EraseAllowed | ProxyFlag::TransformAllowed |
-                       ProxyFlag::ColorChangeAllowed |
-                       ProxyFlag::LayerChangeAllowed |
-                       ProxyFlag::LinetypeChangeAllowed |
-                       ProxyFlag::LinetypeScaleChangeAllowed |
-                       ProxyFlag::VisibilityChangeAllowed |
-                       ProxyFlag::R13FormatProxy),
-            false));
-
-    //AcDbRasterImageDef
-    doc->Classes.AddOrUpdate(DxfClass(DxfSubclassMarker::RasterImageDef,
-                                      (short) (500 + doc->Classes.Count()),
-                                      ACadVersion::AC1014,
-                                      DxfFileToken::ObjectImageDefinition, 499,
-                                      0, ProxyFlag::R13FormatProxy, false));
-
-    //AcDbColor
-    doc->Classes.AddOrUpdate(DxfClass(
-            DxfSubclassMarker::DbColor, (short) (500 + doc->Classes.Count()),
-            ACadVersion::AC1015, DxfFileToken::ObjectDBColor, 499, 14,
-            ProxyFlag::None, false));
-};
-
-void DxfClassCollection::AddOrUpdate(DxfClass item) {}
-
-size_t DxfClassCollection::Count() const { return _entries.size(); }
+void DxfClass::setMaintenanceVersion(short maintenanceVersion) { _maintenanceVersion = maintenanceVersion; }
 
 }// namespace dwg

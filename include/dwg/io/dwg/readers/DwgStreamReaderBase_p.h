@@ -29,7 +29,6 @@ namespace dwg {
 class DwgStreamReaderBase : public IDwgStreamReader
 {
 public:
-    
 };
 
-}
+}// namespace dwg

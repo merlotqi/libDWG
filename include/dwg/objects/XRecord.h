@@ -22,10 +22,10 @@
 
 #pragma once
 
+#include <dwg/DwgVariant.h>
 #include <dwg/GroupCodeValueType.h>
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/DwgVariant.h>
 #include <vector>
 
 namespace dwg {

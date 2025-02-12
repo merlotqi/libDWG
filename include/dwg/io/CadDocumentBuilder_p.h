@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <functional>
 #include <dwg/io/Notification.h>
+#include <functional>
 #include <map>
 
 

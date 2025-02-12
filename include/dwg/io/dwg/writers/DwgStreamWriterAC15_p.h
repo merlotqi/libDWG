@@ -36,4 +36,4 @@ public:
     void writeBitThickness(double thickness) override;
 };
 
-}
+}// namespace dwg

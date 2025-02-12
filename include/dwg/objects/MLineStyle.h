@@ -35,7 +35,7 @@ public:
     {
         double offset;
         Color color;
-        LineType* lineType;
+        LineType *lineType;
     };
 
 public:
@@ -43,7 +43,7 @@ public:
     MLineStyle(const std::string &name);
 
     static constexpr auto DefaultName = "Standard";
-    static MLineStyle* Default();
+    static MLineStyle *Default();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
@@ -57,7 +57,7 @@ public:
 
     Color fillColor() const;
     void setFillColor(const Color &);
-    
+
     double startAngle() const;
     void setStartAngle(double);
 

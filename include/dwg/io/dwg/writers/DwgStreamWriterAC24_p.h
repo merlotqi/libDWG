@@ -35,4 +35,4 @@ public:
     void writeObjectType(short value) override;
 };
 
-}
+}// namespace dwg

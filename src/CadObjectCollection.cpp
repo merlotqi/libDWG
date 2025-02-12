@@ -32,20 +32,16 @@ void CadObjectCollection::Add(CadObject *item)
 {
     if (!item) throw new std::invalid_argument("Item is null");
 
-    if (item->Owner() != nullptr)
-        throw new std::invalid_argument("Item is already has an owner");
+    if (item->Owner() != nullptr) throw new std::invalid_argument("Item is already has an owner");
 
     auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-    if (itFind != _entries.end())
-    {
-        throw new std::invalid_argument("Item is already in the collection");
-    }
+    if (itFind != _entries.end()) { throw new std::invalid_argument("Item is already in the collection"); }
 
     _entries.push_back(item);
     item->Owner(_owner);
 }
 
-void CadObjectCollection::Remove(CadObject *item) 
+void CadObjectCollection::Remove(CadObject *item)
 {
     auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
     if (itFind != _entries.end())
@@ -60,9 +56,6 @@ size_t CadObjectCollection::Count() const { return _entries.size(); }
 
 CadObject *CadObjectCollection::Owner() const { return _owner; }
 
-CadObjectPtr CadObjectCollection::operator[](int index)
-{
-    return _entries.at(index);
-}
+CadObjectPtr CadObjectCollection::operator[](int index) { return _entries.at(index); }
 
 }// namespace dwg

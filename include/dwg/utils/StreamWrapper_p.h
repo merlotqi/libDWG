@@ -37,11 +37,11 @@ public:
     virtual ~InputStreamWrapper();
 
     std::istream *stream();
-    
+
     std::size_t length() const;
     std::size_t pos() const;
     void seek(std::size_t pos);
-    
+
     Encoding encoding() const;
     void setEncoding(Encoding encoding);
 
@@ -82,11 +82,11 @@ public:
     virtual ~OutputStreamWrapper();
 
     std::ostream *stream();
-    
+
     std::size_t length() const;
     std::size_t pos() const;
     void seek(std::size_t pos);
-    
+
     Encoding encoding() const;
     void setEncoding(Encoding encoding);
 
@@ -97,7 +97,7 @@ public:
     }
 
     template<class T, class E>
-    void write(const T& value)
+    void write(const T &value)
     {
         auto convert = E::instance();
         std::vector<unsigned char> buffer = converter->bytesT<T>(value);

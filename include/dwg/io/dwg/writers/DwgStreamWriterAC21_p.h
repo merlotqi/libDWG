@@ -36,4 +36,4 @@ public:
     void writeTextUtf8(const std::string &value) override;
 };
 
-}
+}// namespace dwg

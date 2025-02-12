@@ -23,5 +23,5 @@
 #include <dwg/io/dwg/readers/DwgLZ77AC21Decompressor_p.h>
 
 namespace dwg {
-    
+
 }

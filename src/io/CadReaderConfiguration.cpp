@@ -24,13 +24,12 @@
 
 namespace dwg {
 
-CadReaderConfiguration::CadReaderConfiguration() 
+CadReaderConfiguration::CadReaderConfiguration()
     : _failsafe(true), _keepUnknownEntities(false), _keepUnknownNonGraphicalObjects(false)
 {
 }
 
-CadReaderConfiguration::~CadReaderConfiguration()
-{}
+CadReaderConfiguration::~CadReaderConfiguration() {}
 
 bool CadReaderConfiguration::failsafe() const { return _failsafe; }
 
@@ -44,4 +43,4 @@ bool CadReaderConfiguration::keepUnknownNonGraphicalObjects() const { return _ke
 
 void CadReaderConfiguration::setKeepUnknownNonGraphicalObjects(bool value) { _keepUnknownNonGraphicalObjects = value; }
 
-}
+}// namespace dwg

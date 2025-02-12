@@ -24,6 +24,7 @@
 
 #include <dwg/blocks/BlockTypeFlags.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/Coordinate.h>
 
 namespace dwg {
 
@@ -63,7 +64,7 @@ public:
     std::string subclassMarker() const override;
 
     // Returns the associated BlockRecord pointer
-    BlockRecord *BlockRecord() const;
+    BlockRecord *blockRecord() const;
 
     // Getter for the block's name
     std::string name() const;

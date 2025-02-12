@@ -146,11 +146,11 @@ public:
     ~BlockVisibilityParameter();
 
     std::string subclassMarker() const override;
-    std::string subclassMarker() const override; 
-    
+    std::string subclassMarker() const override;
+
     std::vector<Entity *> entities() const;
     void setEntities(const std::vector<Entity *> &);
-    
+
     std::vector<State> states() const;
     void setStates(const std::vector<State> &);
 

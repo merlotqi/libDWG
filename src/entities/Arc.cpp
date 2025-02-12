@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Arc.h>
+#include <math.h>
 
 namespace dwg {
 

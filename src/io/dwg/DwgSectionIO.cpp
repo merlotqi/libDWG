@@ -30,10 +30,8 @@ DwgSectionIO::DwgSectionIO(ACadVersion version)
 {
     _version = version;
 
-    R13_14Only = version == ACadVersion::AC1014 ||
-                 version == ACadVersion::AC1012;
-    R13_15Only = version >= ACadVersion::AC1012 &&
-                 version <= ACadVersion::AC1015;
+    R13_14Only = version == ACadVersion::AC1014 || version == ACadVersion::AC1012;
+    R13_15Only = version >= ACadVersion::AC1012 && version <= ACadVersion::AC1015;
     R2000Plus = version >= ACadVersion::AC1015;
     R2004Pre = version < ACadVersion::AC1018;
     R2007Pre = version <= ACadVersion::AC1021;
@@ -44,8 +42,7 @@ DwgSectionIO::DwgSectionIO(ACadVersion version)
     R2018Plus = version >= ACadVersion::AC1032;
 }
 
-bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual,
-                    const std::vector<unsigned char> &expected)
+bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual, const std::vector<unsigned char> &expected)
 {
     if (expected.size() != actual.size()) return false;
 

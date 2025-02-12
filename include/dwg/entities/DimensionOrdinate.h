@@ -29,7 +29,7 @@ namespace dwg {
 class LIBDWG_API DimensionOrdinate : public Dimension
 {
     XYZ _featureLocation;// The location of the feature being dimensioned (typically a coordinate)
-    XYZ _leaderEndpoint;// The endpoint of the leader line (connection point for the dimension)
+    XYZ _leaderEndpoint; // The endpoint of the leader line (connection point for the dimension)
 
 public:
     // Default constructor

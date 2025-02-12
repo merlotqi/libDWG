@@ -22,6 +22,8 @@
 
 #include <dwg/blocks/Block.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
 
@@ -31,32 +33,32 @@ Block::Block() {}
 
 Block::~Block() {}
 
-ObjectType Block::ObjectType() const { return ObjectType::BLOCK; }
+ObjectType Block::objectType() const { return ObjectType::BLOCK; }
 
-std::string Block::ObjectName() const { return DxfFileToken::Block; }
+std::string Block::objectName() const { return DxfFileToken::Block; }
 
-std::string Block::SubclassMarker() const { return DxfSubclassMarker::BlockBegin; }
+std::string Block::subclassMarker() const { return DxfSubclassMarker::BlockBegin; }
 
-BlockRecord *Block::BlockRecord() const { return dynamic_cast<BlockRecord *>(_owner); }
+BlockRecord *Block::blockRecord() const { return dynamic_cast<BlockRecord *>(_owner); }
 
-std::string Block::Name() const { return _name; }
+std::string Block::name() const { return _name; }
 
-void Block::Name(const std::string &name) { _name = name; }
+void Block::setName(const std::string &name) { _name = name; }
 
-BlockTypeFlags Block::Flags() const { return _flags; }
+BlockTypeFlags Block::flags() const { return _flags; }
 
-void Block::Flags(BlockTypeFlags flags) { _flags = flags; }
+void Block::setFlags(BlockTypeFlags flags) { _flags = flags; }
 
-XYZ Block::BasePoint() const { return _base_point; }
+XYZ Block::basePoint() const { return _base_point; }
 
-void Block::BasePoint(const XYZ &value) { _base_point = value; }
+void Block::setBasePoint(const XYZ &value) { _base_point = value; }
 
-std::string Block::XrefPath() const { return _xrefPath; }
+std::string Block::xrefPath() const { return _xrefPath; }
 
-void Block::XrefPath(const std::string &value) { _xrefPath = value; }
+void Block::setXrefPath(const std::string &value) { _xrefPath = value; }
 
-std::string Block::Comments() const { return _comments; }
+std::string Block::comments() const { return _comments; }
 
-void Block::Comments(const std::string &value) { _comments = value; }
+void Block::setComments(const std::string &value) { _comments = value; }
 
 }// namespace dwg

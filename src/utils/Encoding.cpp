@@ -32,36 +32,20 @@ namespace dwg {
 
 static std::map<CodePage, std::string> s_codepage_iconvid_mapping;
 
-Encoding::Encoding()
-    : cp(Utf8)
-{}
+Encoding::Encoding() : cp(Utf8) {}
 
-Encoding::Encoding(CodePage codePage)
-    : cp(codePage)
-{}
+Encoding::Encoding(CodePage codePage) : cp(codePage) {}
 
-std::string Encoding::toUtf8(const std::string& str)
+std::string Encoding::toUtf8(const std::string &str)
 {
-    if(cp == Utf8)
-    {
-        return str;
-    }
-    else
-    {
-        return std::string();
-    }
+    if (cp == Utf8) { return str; }
+    else { return std::string(); }
 }
 
 std::string Encoding::fromUtf8(const std::string &str)
 {
-    if(cp == Utf8)
-    {
-        return str;
-    }
-    else
-    {
-        return std::string();
-    }
+    if (cp == Utf8) { return str; }
+    else { return std::string(); }
 }
 
 std::wstring Encoding::toUnicode(const std::string &wstr)
@@ -80,9 +64,6 @@ std::string Encoding::fromUnicode(const std::wstring &wstr)
     return std::wstring();
 }
 
-CodePage Encoding::codePage() const
-{
-    return cp;
-}
+CodePage Encoding::codePage() const { return cp; }
 
 }// namespace dwg

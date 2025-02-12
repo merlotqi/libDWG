@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/utils/Encoding_p.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
+#include <dwg/utils/Encoding_p.h>
 #include <map>
 
 #include <vector>

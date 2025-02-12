@@ -21,7 +21,22 @@
  */
 
 #include <dwg/entities/AttributeEntity.h>
+#include <dwg/entities/AttributeDefinition.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
+
+AttributeEntity::AttributeEntity() {}
+
+AttributeEntity::~AttributeEntity() {}
+
+AttributeEntity::AttributeEntity(AttributeDefinition *definition) { matchAttributeProperties(definition); }
+
+ObjectType AttributeEntity::objectType() const { return ObjectType::ATTRIB; }
+
+std::string AttributeEntity::objectName() const { return DxfFileToken::EntityAttribute; }
+
+std::string AttributeEntity::subclassMarker() const { return DxfSubclassMarker::Attribute; }
 
 }// namespace dwg

@@ -178,10 +178,11 @@ protected:
     void matchAttributeProperties(AttributeBase *src);
 
 protected:
-    unsigned char _version;         ///< The version of the attribute.
-    std::string _tag;               ///< The tag associated with the attribute.
+    TextVerticalAlignment _verticalAlignment;
+    unsigned char _version;      ///< The version of the attribute.
+    std::string _tag;            ///< The tag associated with the attribute.
     AttributeFlags _flags;       ///< The flags for the attribute.
-    bool _isReallyLocked;           ///< The locked status of the attribute.
+    bool _isReallyLocked;        ///< The locked status of the attribute.
     MText *_mtext;               ///< Pointer to multi-line text associated with the attribute.
     AttributeType _attributeType;///< The type of the attribute (single-line, multi-line, etc.).
 };

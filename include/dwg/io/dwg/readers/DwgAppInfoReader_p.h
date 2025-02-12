@@ -30,12 +30,12 @@ class IDwgStreamReader;
 class DwgAppInfoReader : public DwgSectionIO
 {
 public:
-    DwgAppInfoReader(ACadVersion version, IDwgStreamReader* reader);
-    
+    DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader);
+
     ~DwgAppInfoReader();
 
     std::string sectionName() const;
-    
+
     void read();
 
     void readR18();

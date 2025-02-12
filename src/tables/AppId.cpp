@@ -22,6 +22,8 @@
 
 #include <dwg/tables/AppId.h>
 #include <stdexcept>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
 
@@ -31,17 +33,17 @@ std::string AppId::DefaultName = "libDWG";
 
 AppId::AppId(const std::string &name) : TableEntry(name)
 {
-    if (CPL::StringHelp::IsNullOrEmpty(name.c_str()))
+    if (name.empty())
         throw new std::invalid_argument("Application id must have a name.");
 }
 
 AppId::~AppId() {}
 
-ObjectType AppId::ObjectType() const { return ObjectType::APPID; }
+ObjectType AppId::objectType() const { return ObjectType::APPID; }
 
-std::string AppId::ObjectName() const { return DxfFileToken::TableAppId; }
+std::string AppId::objectName() const { return DxfFileToken::TableAppId; }
 
-std::string AppId::SubclassMarker() const { return DxfSubclassMarker::ApplicationId; }
+std::string AppId::subclassMarker() const { return DxfSubclassMarker::ApplicationId; }
 
 AppId *AppId::Default() { return new AppId(DefaultName); }
 
@@ -49,9 +51,9 @@ AppId *AppId::Default() { return new AppId(DefaultName); }
 
 AppIdsTable::AppIdsTable() {}
 
-ObjectType AppIdsTable::ObjectType() const { return ObjectType::APPID_CONTROL_OBJ; }
+ObjectType AppIdsTable::objectType() const { return ObjectType::APPID_CONTROL_OBJ; }
 
-std::string AppIdsTable::ObjectName() const { return DxfFileToken::TableAppId; }
+std::string AppIdsTable::objectName() const { return DxfFileToken::TableAppId; }
 
 std::vector<std::string> AppIdsTable::defaultEntries() const { return {AppId::DefaultName}; }
 

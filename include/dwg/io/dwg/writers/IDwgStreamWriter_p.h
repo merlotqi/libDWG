@@ -23,11 +23,12 @@
 #pragma once
 
 #include <dwg/Color.h>
-#include <dwg/Transparency.h>
-#include <dwg/DwgReferenceType.h>
 #include <dwg/Coordinate.h>
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
+#include <dwg/Transparency.h>
+#include <dwg/utils/Encoding_p.h>
+
 
 namespace dwg {
 
@@ -108,7 +109,7 @@ public:
 
     virtual void writeRawShort(short value) = 0;
 
-    virtual void writeRawShort(unsigned short value) = 0;
+    virtual void writeRawUShort(unsigned short value) = 0;
 
     virtual void writeRawDouble(double value) = 0;
 

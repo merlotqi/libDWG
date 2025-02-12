@@ -52,7 +52,8 @@ class Arc;
 class DwgObjectWriter : public DwgSectionIO
 {
 public:
-    DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true, bool writeXData = true);
+    DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true,
+                    bool writeXData = true);
     ~DwgObjectWriter();
     void write();
 
@@ -63,7 +64,7 @@ public:
 private:
     void registerObject(CadObject *cadObject);
     void writeSize(std::ostream stream, unsigned int size);
-    void writeSizeInBits(std::ostream* stream, unsigned long long size);
+    void writeSizeInBits(std::ostream *stream, unsigned long long size);
     void writeXrefDependantBit(TableEntry *entry);
     void writeCommonData(CadObject *cadObject);
     void writeCommonNonEntityData(CadObject *cadObject);
@@ -173,4 +174,4 @@ private:
     std::ostream *_stream;
 };
 
-}
+}// namespace dwg

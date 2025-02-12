@@ -35,8 +35,9 @@ class DxfClassCollection;
 class DwgObjectReader : public DwgSectionIO
 {
 public:
-    DwgObjectReader(ACadVersion version, DwgDocumentBuilder* builder, IDwgStreamReader *reader, const std::queue<unsigned long long> &handles, 
-        const std::map<unsigned long long, long long> &handleMap, DxfClassCollection *classes);
+    DwgObjectReader(ACadVersion version, DwgDocumentBuilder *builder, IDwgStreamReader *reader,
+                    const std::queue<unsigned long long> &handles,
+                    const std::map<unsigned long long, long long> &handleMap, DxfClassCollection *classes);
 
     ~DwgObjectReader();
 
@@ -48,11 +49,11 @@ private:
     ObjectType getEntityType(long long offset);
     unsigned long long handleReference();
     unsigned long long handleReference(unsigned long long);
-    
+
 
 private:
     IDwgStreamReader *_sreader;
     CadHeader *_header;
 };
 
-}
+}// namespace dwg

@@ -33,8 +33,7 @@ class CadDocument;
 template<class T>
 class CadWriterBase : public ICadWriter, protected T
 {
-    static_assert(std::is_base_of<CadWriterConfiguration, T>::value,
-                  "T must is base CadWriterConfiguration");
+    static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
 
 public:
     CadWriterBase();

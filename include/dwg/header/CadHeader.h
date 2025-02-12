@@ -53,6 +53,7 @@
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
 #include <dwg/units/UnitsType.h>
+#include <string>
 
 namespace dwg {
 
@@ -481,7 +482,7 @@ public:
     bool displayLineWeight() const;
     void setDisplayLineWeight(bool);
 
-    bool xEdit() const;
+    bool xedit() const;
     void setXEdit(bool);
 
     bool extendedNames() const;

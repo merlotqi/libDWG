@@ -33,21 +33,20 @@ class LIBDWG_API EvaluationGraph : public NonGraphicalObject
 public:
     struct Node
     {
-        int Index;            
-        int NextNodeIndex;    
-        Node *Next;      
-        int Flags;            
-        int Data1;            
-        int Data2;            
-        int Data3;            
-        int Data4;            
+        int Index;
+        int NextNodeIndex;
+        Node *Next;
+        int Flags;
+        int Data1;
+        int Data2;
+        int Data3;
+        int Data4;
         CadObject *NodeObject;
         EvaluationExpression *Expression;
     };
 
     struct Edge
     {
-
     };
 
 public:
