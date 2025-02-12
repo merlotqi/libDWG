@@ -19,3 +19,9 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/io/dwg/readers/DwgStreamReaderAC21_p.h>
+
+namespace dwg {
+    
+}

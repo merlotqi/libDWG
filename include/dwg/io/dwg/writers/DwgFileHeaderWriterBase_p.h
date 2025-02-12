@@ -22,12 +22,9 @@
 
 #pragma once
 
-#include <assert.h>
 #include <dwg/ACadVersion.h>
-#include <dwg/CadDocument.h>
 #include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
-#include <fstream>
-#include <sstream>
+#include <dwg/utils/Encoding_p.h>
 
 namespace dwg {
 

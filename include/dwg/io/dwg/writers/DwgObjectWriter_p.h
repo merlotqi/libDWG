@@ -21,3 +21,156 @@
  */
 
 #pragma once
+
+#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/utils/Encoding_p.h>
+
+namespace dwg {
+
+class IDwgStreamWriter;
+class CadDocument;
+class CadHeader;
+class CadObject;
+class TableEntry;
+class Entity;
+class ExtendedDataDictionary;
+class AppId;
+class ExtendedData;
+class BlockRecord;
+class Block;
+class BlockEnd;
+class Layer;
+class LineType;
+class TextStyle;
+class UCS;
+class View;
+class VPort;
+class DimensionStyle;
+
+class Arc;
+
+class DwgObjectWriter : public DwgSectionIO
+{
+public:
+    DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true, bool writeXData = true);
+    ~DwgObjectWriter();
+    void write();
+
+    std::map<unsigned long long, long long> handleMap() const;
+    bool writeXRecords() const;
+    bool writeXData() const;
+
+private:
+    void registerObject(CadObject *cadObject);
+    void writeSize(std::ostream stream, unsigned int size);
+    void writeSizeInBits(std::ostream* stream, unsigned long long size);
+    void writeXrefDependantBit(TableEntry *entry);
+    void writeCommonData(CadObject *cadObject);
+    void writeCommonNonEntityData(CadObject *cadObject);
+    void writeCommonEntityData(Entity *entity);
+    void writeEntityMode(Entity *entity);
+    void writeExtendedData(ExtendedDataDictionary *data);
+    void writeExtendedDataEntry(AppId *app, ExtendedData *entry);
+    void writeReactorsAndDictionaryHandle(CadObject *cadObject);
+    unsigned char getEntMode(Entity *entity);
+
+private:
+    void writeLTypeControlObject();
+    void writeBlockControl();
+    void writeTable();
+    void writeEntries();
+    void writeBlockEntities();
+    void writeAppId(AppId *app);
+    void writeBlockRecord(BlockRecord *blkRecord);
+    void writeBlockHeader(BlockRecord *record);
+    void writeBlockBegin(Block *block);
+    void writeBlockEnd(BlockEnd *blkEnd);
+    void writeLayer(Layer *layer);
+    void writeLineType(LineType *ltype);
+    void writeTextStyle(TextStyle *style);
+    void writeUCS(UCS *ucs);
+    void writeView(View *view);
+    void writeDimensionStyle(DimensionStyle *dimStyle);
+    void writeVPort(VPort *vport);
+
+private:
+    void writeEntity(Entity *entity);
+    void writeArc(Arc *arc);
+    void writeAttribute(AttributeEntity *att);
+    void writeAttDefinition(AttributeDefinition *attdef);
+    void writeCommonAttData(AttributeBase *att);
+    void writeCircle(Circle *circle);
+    void writeCommonDimensionData(Dimension *dimension);
+    void writeDimensionLinear(DimensionLinear *dimension);
+    void writeDimensionAligned(DimensionAligned *dimension);
+    void writeDimensionRadius(DimensionRadius *dimension);
+    void writeDimensionAngular2Line(DimensionAngular2Line *dimension);
+    void writeDimensionAngular3Pt(DimensionAngular3Pt *dimension);
+    void writeDimensionDiameter(DimensionDiameter *dimension);
+    void writeDimensionOrdinate(DimensionOrdinate *dimension);
+    void writeEllipse(Ellipse *ellipse);
+    void writeInsert(Insert *insert);
+    void writeFace3D(Face3D *face);
+    void writeMLine(MLine *mline);
+    void writeLwPolyline(LwPolyline *lwPolyline);
+    void writeHatch(Hatch *hatch);
+    void writeLeader(Leader *leader);
+    void writeMultiLeader(MultiLeader *multiLeader);
+    void writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *annotContext);
+    void writeLeaderRoot(MultiLeaderAnnotContext::LeaderRoot *leaderRoot);
+    void writeLeaderLine(MultiLeaderAnnotContext::LeaderLine *leaderLine);
+    void writeLine(Line *line);
+    void writePoint(Point *point);
+    void writePolyfaceMesh(PolyfaceMesh *fm);
+    void writePolyline2D(Polyline2D *pline);
+    void writePolyline3D(Polyline3D *pline);
+    void writeSeqend(Seqend *seqend);
+    void writeShape(Shape *shape);
+    void writeSolid(Solid *solid);
+    void writeSolid3D(Solid3D *solid);
+    void writeCadImage(CadWipeoutBase *image);
+    void writeSpline(Spline *spline);
+    void writeRay(Ray *ray);
+    void writeTextEntity(TextEntity *text);
+    void writeMText(MText *mtext);
+    void writeFaceRecord(VertexFaceRecord *face);
+    void writeVertex2D(Vertex2D *vertex);
+    void writeVertex(Vertex *vertex);
+    void writeTolerance(Tolerance *tolerance);
+    void writeViewport(Viewport *viewport);
+    void writeXLine(XLine *xline);
+    void writeChildEntities(const std::vector<Entity *> &entities, Seqend *seqend);
+
+private:
+    void writeObjects();
+    void writeObject(CadObject *obj);
+    void writeAcdbPlaceHolder(AcdbPlaceHolder *acdbPlaceHolder);
+    void writeBookColor(BookColor *color);
+    void writeCadDictionaryWithDefault(CadDictionaryWithDefault *dictionary);
+    void writeDictionary(CadDictionary *dictionary);
+    void addEntriesToWriter(CadDictionary *dictionary);
+    void writeDictionaryVariable(DictionaryVariable *dictionaryVariable);
+    void writeGeoData(GeoData *geodata);
+    void writeGroup(Group *group);
+    void writeImageDefinitionReactor(ImageDefinitionReactor *definitionReactor);
+    void writeImageDefinition(ImageDefinition *definition);
+    void writeLayout(Layout *layout);
+    void writeMLineStyle(MLineStyle *mlineStyle);
+    void writeMultiLeaderStyle(MultiLeaderStyle *mLeaderStyle);
+    void writePlotSettings(PlotSettings *plot);
+    void writeScale(Scale *scale);
+    void writeSortEntitiesTable(SortEntitiesTable *sortEntitiesTable);
+    void writeXRecord(XRecord *xrecord);
+
+private:
+    std::map<unsigned long long, CadDictionary *> _dictionaries;
+    std::queue<CadObject *> _objects;
+    std::ostringstream _msmain;
+    IDwgStreamWriter *_writers;
+    CadDocument *_document;
+    Entity *_prev;
+    Entity *_next;
+    std::ostream *_stream;
+};
+
+}

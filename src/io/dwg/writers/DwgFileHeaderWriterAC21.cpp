@@ -20,13 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-
-#include "DwgFileHeaderWriterAC21.h"
-#include "DwgLZ77AC21Compressor.h"
+#include <dwg/io/writers/DwgFileHeaderWriterAC21_p.h>
+#include <dwg/io/writers/DwgLZ77AC21Compressor_p.h>
 
 namespace dwg {
-
 
 DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream,
                                                  Encoding encoding,
@@ -36,7 +33,7 @@ DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream,
     compressor = new DwgLZ77AC21Compressor();
 }
 
-int DwgFileHeaderWriterAC21::_fileHeaderSize() const { return 0x480; }
+int DwgFileHeaderWriterAC21::fileHeaderSize() const { return 0x480; }
 
 void DwgFileHeaderWriterAC21::craeteLocalSection(
         DwgSectionDescriptor descriptor,
@@ -47,6 +44,5 @@ void DwgFileHeaderWriterAC21::craeteLocalSection(
             buffer, decompressedSize, offset, totalSize, isCompressed);
     writeMagicNumber();
 }
-
 
 }// namespace dwg

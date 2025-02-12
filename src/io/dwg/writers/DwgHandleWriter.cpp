@@ -20,13 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgHandleWriter.h"
+#include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
 
 namespace dwg {
 
-
-
-std::string DwgHandleWriter::SectionName() const
+std::string DwgHandleWriter::sectionName() const
 {
     return DwgSectionDefinition::Handles;
 }

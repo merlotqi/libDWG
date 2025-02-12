@@ -20,15 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgStreamWriterAC12.h"
+#include <dwg/io/dwg/writers/DwgStreamWriterAC12_p.h>
 
 namespace dwg {
-
-
-    DwgStreamWriterAC12::DwgStreamWriterAC12(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterBase(stream, encoding)
-    {
-    }
 
 
 }// namespace dwg

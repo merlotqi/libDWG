@@ -22,31 +22,27 @@
 
 #pragma once
 
-#include "../fileheaders/DwgFileHeaderAC18.h"
-#include "../fileheaders/DwgLocalSectionMap.h"
-#include "../fileheaders/DwgSectionDescriptor.h"
-#include "DwgFileHeaderWriterBase.h"
-#include "ICompressor.h"
-#include <iostream>
-#include <sstream>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 
 namespace dwg {
 
-
+class ICompressor;
 class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 {
 public:
     DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding,
                             CadDocument *document);
 
-    int HandleSectionOffset() const;
-    void WriteFile() override;
-    void AddSection(const std::string &name, std::ostringstream *stream,
+    int handleSectionOffset() const;
+    void writeFile() override;
+    void addSection(const std::string &name, std::ostream *stream,
                     bool isCompressed, int decompsize = 0x7400) override;
 
 
 protected:
-    int _fileHeaderSize() const override;
+    int fileHeaderSize() const override;
     virtual void craeteLocalSection(DwgSectionDescriptor descriptor,
                                     const std::vector<unsigned char> &buffer,
                                     int decompressedSize,
@@ -77,6 +73,5 @@ protected:
     DwgFileHeaderAC18 *_fileHeader;
     ICompressor *compressor;
 };
-
 
 }// namespace dwg

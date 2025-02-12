@@ -20,19 +20,16 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-#include "DwgFileHeaderWriterBase.h"
-#include "../DwgCheckSumCalculator.h"
-#include <assert.h>
-#include <base.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
-#include <dwg/CadUtils.h>
+#include <dwg/CadUtils_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
+#include <assert.h>
 #include <fstream>
 #include <sstream>
 
 namespace dwg {
-
 
 DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream,
                                                  Encoding encoding,
@@ -107,7 +104,5 @@ void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
     stream->clear();
     *stream << buffer;
 }
-
-
 
 }// namespace dwg

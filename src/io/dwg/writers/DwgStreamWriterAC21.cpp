@@ -20,19 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgStreamWriterAC21.h"
+#include <dwg/io/dwg/writers/DwgStreamWriterAC21_p.h>
 
 namespace dwg {
-
-
-DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream,
-                                         Encoding encoding)
-    : DwgStreamWriterAC18(stream, encoding)
-{
-}
-
-void DwgStreamWriterAC21::WriteVariableText(const std::string &value) {}
-void DwgStreamWriterAC21::WriteTextUnicode(const std::string &value) {}
 
 
 }// namespace dwg

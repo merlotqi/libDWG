@@ -21,3 +21,23 @@
  */
 
 #pragma once
+
+#include <dwg/io/dwg/DwgSectionIO_p.h>
+
+namespace dwg {
+
+class IDwgStreamWriter;
+class DwgPreviewWriter : public DwgSectionIO
+{
+    IDwgStreamWriter *_swriter;
+    std::vector<unsigned char> _startSentinel;
+    std::vector<unsigned char> _endSentinel;
+public:
+    DwgPreviewWriter(ACadVersion version, std::ostream *stream);
+
+    std::string sectionName() const override;
+
+    void write();
+};
+
+}

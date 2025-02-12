@@ -20,42 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-
-#include <dwg/io/dwg/writers/DwgMergedStreamWriter.h>
+#include <dwg/io/dwg/writers/DwgmMergedStreamWriterAC14_p.h>
 
 namespace dwg {
-
-
-class DwgmMergedStreamWriterAC14 : public DwgMergedStreamWriter
-{
-public
-    DwgmMergedStreamWriterAC14(std::ostream *stream, IDwgStreamWriter *main,
-                               IDwgStreamWriter *handle)
-        : DwgMergedStreamWriter(stream, main, main, handle)
-    {
-    }
-
-    void WriteSpearShift() override
-    {
-        int pos = (int) this.Main.PositionInBits;
-
-        if (this._savedPosition)
-        {
-            this.Main.WriteSpearShift();
-            this.Main.SetPositionInBits(this.PositionInBits);
-            this.Main.WriteRawLong(pos);
-            this.Main.WriteShiftValue();
-            this.Main.SetPositionInBits(pos);
-        }
-
-        this.HandleWriter.WriteSpearShift();
-        this.Main.WriteBytes(
-                ((MemoryStream) this.HandleWriter.Stream).GetBuffer(), 0,
-                (int) this.HandleWriter.Stream.Length);
-        this.Main.WriteSpearShift();
-    }
-};
 
 
 }// namespace dwg

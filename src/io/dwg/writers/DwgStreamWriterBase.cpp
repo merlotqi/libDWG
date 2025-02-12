@@ -20,82 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-#include "../../../DwgStream.h"
-#include "IDwgStreamWriter.h"
-#include <base.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 
 namespace dwg {
-
-
-
-class DwgStreamWriterBase : public OutputStream, IDwgStreamWriter
-{
-protected:
-    Encoding _encoding;
-
-public:
-    DwgStreamWriterBase(std::ostream *stream, Encoding encoding)
-        : OutputStream(stream)
-    {
-        _encoding = encoding;
-    }
-
-    static IDwgStreamWriter *GetStreamWriter(ACadVersion version,
-                                             std::ostream *stream,
-                                             Encoding encoding);
-    static IDwgStreamWriter *GetMergedWriter(ACadVersion version,
-                                             std::ostream *stream,
-                                             Encoding encoding);
-    void Write(int value);
-    virtual void WriteObjectType(short value);
-    void WriteObjectType(ObjectType value);
-    void WriteRawLong(long long value);
-    void WriteBytes(const std::vector<unsigned char> &arr) override;
-    void WriteBytes(const std::vector<unsigned char> &arr, size_t initialIndex,
-                    size_t length);
-    void WriteBitShort(short value);
-    void WriteBitDouble(double value);
-    void WriteBitLong(int value);
-    void WriteBitLongLong(long long value);
-    virtual void WriteVariableText(const std::string &value);
-    virtual void WriteTextUnicode(const std::string &value);
-    void Write2Bits(unsigned char value);
-    void WriteBit(bool value);
-    void WriteByte(unsigned char value);
-    void WriteDateTime(DateTime value);
-    void WriteTimeSpan(TimeSpan value);
-    void Write8BitJulianDate(DateTime value);
-    virtual void WriteCmColor(Color color);
-    virtual void WriteEnColor(Color color, Transparency transparency);
-    virtual void WriteEnColor(Color color, Transparency transparency,
-                              bool isBookColor);
-    void Write2BitDouble(XY value);
-    void Write3BitDouble(XYZ value);
-    void Write2RawDouble(XY value);
-    void WriteRawShort(short value);
-    void WriteRawShort(ushort value);
-    void WriteRawDouble(double value);
-    void HandleReference(IHandledCadObject *cadObject);
-    void HandleReference(DwgReferenceType type, IHandledCadObject *cadObject);
-    void HandleReference(unsigned long long handle);
-    void HandleReference(DwgReferenceType type, unsigned long long handle);
-    void WriteSpearShift();
-    virtual void WriteBitThickness(double thickness);
-    virtual void WriteBitExtrusion(XYZ normal);
-    void Write2BitDoubleWithDefault(XY def, XY value);
-    void Write3BitDoubleWithDefault(XYZ def, XYZ value);
-    void WriteBitDoubleWithDefault(double def, double value);
-    void ResetStream();
-    void SavePositonForSize();
-    void SetPositionByFlag(long long pos);
-    void SetPositionInBits(long long posInBits);
-    void WriteShiftValue();
-
-private:
-    void resetShift();
-    void write3Bits(unsigned char value);
-};
 
 
 }// namespace dwg

@@ -20,37 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgPreviewWriter.h"
+#include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
 
 namespace dwg {
-
-
-std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
-        0x1F, 0x25, 0x6D, 0x07, 0xD4, 0x36, 0x28, 0x28,
-        0x9D, 0x57, 0xCA, 0x3F, 0x9D, 0x44, 0x10, 0x2B};
-std::vector<unsigned char> DwgPreviewWriter::_startSentinel = {
-        0xE0, 0xDA, 0x92, 0xF8, 0x2B, 0xC9, 0xD7, 0xD7,
-        0x62, 0xA8, 0x35, 0xC0, 0x62, 0xBB, 0xEF, 0xD4};
-
-std::string DwgPreviewWriter::SectionName() const
-{
-    return DwgSectionDefinition::Preview;
-}
-
-DwgPreviewWriter::DwgPreviewWriter(ACadVersion version, std::ostream *stream)
-    : DwgSectionIO(version)
-{
-    _swriter = DwgStreamWriterBase::GetStreamWriter(version, stream,
-                                                    Encoding::Windows1252());
-}
-
-void DwgPreviewWriter::Write()
-{
-    _swriter->WriteBytes(_startSentinel);
-    _swriter->WriteRawLong(1);
-    _swriter->WriteByte(0);
-    _swriter->WriteBytes(_endSentinel);
-}
 
 
 }// namespace dwg

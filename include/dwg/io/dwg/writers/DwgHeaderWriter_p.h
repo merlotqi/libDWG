@@ -22,37 +22,30 @@
 
 #pragma once
 
-#include "../CRC8StreamHandler.h"
-#include "../DwgSectionIO.h"
-#include <../fileheaders/DwgSectionDefinition.h"
-#include <IDwgStreamWriter.h"
-#include <dwg/CadDocument.h>
-#include <dwg/header/CadHeader.h>
-#include <sstream>
+#include <dwg/io/dwg/DwgSectionIO_p.h>
 
 namespace dwg {
 
-
-class DwgHeaderWriter : DwgSectionIO
+class CadHeader;
+class CadDocument;
+class IDwgStreamWriter;
+class DwgHeaderWriter : public DwgSectionIO
 {
-private:
     std::ostringstream _msmain;
     IDwgStreamWriter *_startWriter;
     IDwgStreamWriter *_writer;
     CadDocument *_document;
+    CadHeader *_header;
     Encoding _encoding;
 
 public:
-    std::string SectionName() const override;
+    DwgHeaderWriter(std::ostream *stream, CadDocument *document, Encoding encoding);
 
-    DwgHeaderWriter(std::ostream *stream, CadDocument *document,
-                    Encoding encoding);
-    void Write();
+    std::string sectionName() const override;
 
-private:
+    void write();
+
     void writeSizeAndCrc();
 };
-
-
 
 }// namespace dwg

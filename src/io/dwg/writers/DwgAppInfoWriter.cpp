@@ -20,17 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgAppInfoWriter.h"
-#include "../DwgSectionIO.h"
-#include "../fileheaders/DwgSectionDefinition.h"
-#include "DwgStreamWriterBase.h"
-#include "IDwgStreamWriter.h"
-#include <dwg/utility/stringhelp.h>
-#include <dwg/version.h>
+#include <dwg/io/dwg/writers/DwgAppInfoWriter_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <dwg/dwg_version.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <fmt/core.h>
 
 namespace dwg {
-
 
 std::string DwgAppInfoWriter::SectionName() const
 {
@@ -48,21 +45,21 @@ void DwgAppInfoWriter::Write()
 {
     std::string version = LIBDWG_VERSION;
     //UInt32	4	class_version (default: 3)
-    _writer->WriteInt(3);
+    _writer->writeInt(3);
     //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
-    _writer->WriteTextUnicode("AppInfoDataList");
+    _writer->writeTextUnicode("AppInfoDataList");
     //UInt32	4	num strings (default: 3)
-    _writer->WriteInt(3);
+    _writer->writeInt(3);
     //Byte[]	16	Version data(checksum, ODA writes zeroes)
-    _writer->WriteBytes(_emptyArr);
+    _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Version
-    _writer->WriteTextUnicode(version);
+    _writer->writeTextUnicode(version);
     //Byte[]	16	Comment data(checksum, ODA writes zeroes)
-    _writer->WriteBytes(_emptyArr);
+    _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Comment
-    _writer->WriteTextUnicode("This is a comment from libDWG");
+    _writer->writeTextUnicode("This is a comment from libDWG");
     //Byte[]	16	Product data(checksum, ODA writes zeroes)
-    _writer->WriteBytes(_emptyArr);
+    _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Product
     std::string productInfo = fmt::format(
             "<ProductInformation name =\"libDWG\" build_version=\"{}\" "
@@ -70,8 +67,7 @@ void DwgAppInfoWriter::Write()
             "registry_localeID=\"1033\"/>",
             version, version);
 
-    _writer->WriteTextUnicode(productInfo);
+    _writer->writeTextUnicode(productInfo);
 }
-
 
 }// namespace dwg

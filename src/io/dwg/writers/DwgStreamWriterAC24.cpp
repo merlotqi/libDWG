@@ -20,19 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-
-#include "DwgStreamWriterAC24.h"
+#include <dwg/io/dwg/writers/DwgStreamWriterAC24_p.h>
 
 namespace dwg {
-
-
-    DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterAC21(stream, encoding)
-    {
-    }
-
-    void DwgStreamWriterAC24::WriteObjectType(short value) {}
 
 
 }// namespace dwg

@@ -21,13 +21,11 @@
  */
 
 
-#include "DwgClassesWriter.h"
+#include <dwg/io/dwg/writers/DwgClassesWriter_p.h>
 
 namespace dwg {
 
-
-
-std::string DwgClassesWriter::SectionName() const
+std::string DwgClassesWriter::sectionName() const
 {
     return DwgSectionDefinition::Classes;
 }
@@ -49,7 +47,7 @@ DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document,
                     0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
 }
 
-void DwgClassesWriter::Write()
+void DwgClassesWriter::write()
 {
     if (R2007Plus) { _writer->SavePositonForSize(); }
 
@@ -142,7 +140,5 @@ void DwgClassesWriter::writeSizeAndCrc()
         _startWriter.WriteRawLong(0);
     }
 }
-
-
 
 }// namespace dwg

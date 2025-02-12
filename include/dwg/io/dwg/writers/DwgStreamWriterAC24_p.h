@@ -21,3 +21,18 @@
  */
 
 #pragma once
+
+#include <dwg/io/dwg/writers/DwgStreamWriterAC21_p.h>
+
+namespace dwg {
+
+class DwgStreamWriterAC24 : public DwgStreamWriterAC21
+{
+public:
+    DwgStreamWriterAC24(std::ostream *stream, Encoding encoding);
+    virtual ~DwgStreamWriterAC24();
+
+    void writeObjectType(short value) override;
+};
+
+}

@@ -21,21 +21,18 @@
  */
 
 
-#include "DwgFileHeaderWriterAC15.h"
-#include "DwgStreamWriterBase.h"
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <array>
-#include <dwg/base/DwgStream.h>
-
 namespace dwg {
-
 
 std::vector<unsigned char> DwgFileHeaderWriterAC15::_endSentinel = {
         0x95, 0xA0, 0x4E, 0x28, 0x99, 0x82, 0x1A, 0xE5,
         0x5E, 0x41, 0xE0, 0x5F, 0x9D, 0x3A, 0x4D, 0x00};
 
-int DwgFileHeaderWriterAC15::HandleSectionOffset() const
+int DwgFileHeaderWriterAC15::handleSectionOffset() const
 {
-    size_t offset = _fileHeaderSize();
+    size_t offset = fileHeaderSize();
 
     for (auto &&item: _records)
     {
@@ -47,7 +44,7 @@ int DwgFileHeaderWriterAC15::HandleSectionOffset() const
     return (int) offset;
 }
 
-int DwgFileHeaderWriterAC15::_fileHeaderSize() const { return 0x61; }
+int DwgFileHeaderWriterAC15::fileHeaderSize() const { return 0x61; }
 
 DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream,
                                                  Encoding encoding,
@@ -74,7 +71,7 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream,
     };
 }
 
-void DwgFileHeaderWriterAC15::AddSection(const std::string &name,
+void DwgFileHeaderWriterAC15::addSection(const std::string &name,
                                          std::ostringstream *stream,
                                          bool isCompressed,
                                          int decompsize = 0x7400)
@@ -83,7 +80,7 @@ void DwgFileHeaderWriterAC15::AddSection(const std::string &name,
     _records[name] = {_records[name].first, stream};
 }
 
-void DwgFileHeaderWriterAC15::WriteFile()
+void DwgFileHeaderWriterAC15::writeFile()
 {
     setRecordSeekers();
     writeFileHeader();

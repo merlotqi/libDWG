@@ -20,12 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgHeaderWriter.h"
+#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 
 namespace dwg {
 
-
-std::string DwgHeaderWriter::SectionName() const
+std::string DwgHeaderWriter::sectionName() const
 {
     return DwgSectionDefinition::Header;
 }
@@ -1196,6 +1195,5 @@ void DwgHeaderWriter::writeSizeAndCrc()
     //Ending sentinel: 0x30,0x84,0xE0,0xDC,0x02,0x21,0xC7,0x56,0xA0,0x83,0x97,0x47,0xB1,0x92,0xCC,0xA0
     _startWriter->WriteBytes(DwgSectionDefinition::EndSentinels[SectionName()]);
 }
-
 
 }// namespace dwg

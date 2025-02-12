@@ -22,24 +22,21 @@
 
 #pragma once
 
-#include "DwgFileHeaderWriterAC18.h"
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 
 namespace dwg {
 
-
-class DwgFileHeaderWriterAC21 : DwgFileHeaderWriterAC18
+class DwgFileHeaderWriterAC21 : public DwgFileHeaderWriterAC18
 {
+public:
+    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding,
+                            CadDocument *model);
 protected:
-    int _fileHeaderSize() const override;
+    int fileHeaderSize() const override;
     void craeteLocalSection(DwgSectionDescriptor descriptor,
                             const std::vector<unsigned char> &buffer,
                             int decompressedSize, unsigned long long offset,
                             int totalSize, bool isCompressed) override;
-
-public:
-    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding,
-                            CadDocument *model);
 };
-
 
 }// namespace dwg

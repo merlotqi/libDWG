@@ -22,21 +22,20 @@
 
 #pragma once
 
-#include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/utils/Encoding_p.h>
 
 namespace dwg {
 
+class IDwgStreamWriter;
+class CadHeader;
 class DwgAuxHeaderWriter : public DwgSectionIO
 {
     IDwgStreamWriter *_writer;
-    std::ostringstream *_stream;
-    Encoding _encoding;
-    CadHeader _header;
+    CadHeader *_header;
 
 public:
-    DwgAuxHeaderWriter(std::ostringstream *stream, Encoding encoding, const CadHeader &header);
+    DwgAuxHeaderWriter(std::ostream *stream, Encoding encoding, CadHeader *header);
 
     std::string sectionName() const override;
 

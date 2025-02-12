@@ -21,3 +21,16 @@
  */
 
 #pragma once
+
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+
+namespace dwg {
+
+class DwgStreamWriterAC12 : public DwgStreamWriterBase
+{
+public:
+    DwgStreamWriterAC12(std::ostream *stream, Encoding encoding);
+    virtual ~DwgStreamWriterAC12();
+};
+
+}

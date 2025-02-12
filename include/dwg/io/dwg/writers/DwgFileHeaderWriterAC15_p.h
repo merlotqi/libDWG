@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <vector>
 
 namespace dwg {
 
+class IDwgStreamWriter;
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {
     std::map<std::string, std::pair<DwgSectionLocatorRecord, std::ostringstream *>> _records;
@@ -37,7 +36,7 @@ class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 
 public:
     DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model);
-    void addSection(const std::string &name, std::ostringstream *stream, bool isCompressed,
+    void addSection(const std::string &name, std::ostream *stream, bool isCompressed,
                     int decompsize = 0x7400) override;
     void writeFile() override;
 

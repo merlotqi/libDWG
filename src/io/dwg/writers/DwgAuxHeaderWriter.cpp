@@ -20,12 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgAuxHeaderWriter.h"
-#include "../fileheaders/DwgSectionDefinition.h"
-#include "DwgStreamWriterBase.h"
+#include <dwg/io/dwg/writers/DwgAuxHeaderWriter_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 
 namespace dwg {
-
 
 std::string DwgAuxHeaderWriter::SectionName() const
 {
@@ -40,9 +39,7 @@ DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::ostringstream *stream,
     _stream = stream;
     _encoding = encoding;
     _header = header;
-
-    _writer =
-            DwgStreamWriterBase::GetStreamWriter(_version, _stream, Encoding());
+    _writer = DwgStreamWriterBase::GetStreamWriter(_version, _stream, Encoding());
 }
 
 void DwgAuxHeaderWriter::Write()

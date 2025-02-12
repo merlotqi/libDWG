@@ -22,10 +22,9 @@
 
 #pragma once
 
-#include "ICompressor.h"
+#include <dwg/io/dwg/writers/ICompressor_p.h>
 
 namespace dwg {
-
 
 class DwgLZ77AC21Compressor : public ICompressor
 {
@@ -34,6 +33,5 @@ public:
     void Compress(const std::vector<unsigned char> &source, size_t offset,
                   size_t totalSize, std::ostream *dest);
 };
-
 
 }// namespace dwg

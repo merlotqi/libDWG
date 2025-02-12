@@ -20,12 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-
-#include "DwgLZ77AC21Compressor.h"
+#include <dwg/io/dwg/writers/DwgLZ77AC21Compressor_p.h>
 
 namespace dwg {
-
 
 DwgLZ77AC21Compressor::DwgLZ77AC21Compressor() {}
 
@@ -34,6 +31,5 @@ void DwgLZ77AC21Compressor::Compress(const std::vector<unsigned char> &source,
                                      std::ostream *dest)
 {
 }
-
 
 }// namespace dwg

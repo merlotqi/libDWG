@@ -24,6 +24,10 @@
 
 #include <dwg/Color.h>
 #include <dwg/Transparency.h>
+#include <dwg/DwgReferenceType.h>
+#include <dwg/Coordinate.h>
+#include <dwg/utils/Encoding_p.h>
+#include <dwg/ObjectType.h>
 
 namespace dwg {
 
@@ -32,7 +36,7 @@ class IHandledCadObject;
 class IDwgStreamWriter
 {
 public:
-    virtual IDwgStreamWriter() = default;
+    virtual ~IDwgStreamWriter() = default;
 
     virtual Encoding encoding() = 0;
 
@@ -62,9 +66,9 @@ public:
 
     virtual void writeBitLongLong(long long value) = 0;
 
-    virtual void writeVariableText(string value) = 0;
+    virtual void writeVariableText(const std::string &value) = 0;
 
-    virtual void writeTextUnicode(string value) = 0;
+    virtual void writeTextUnicode(const std::string &value) = 0;
 
     virtual void writeBit(bool value) = 0;
 

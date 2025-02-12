@@ -22,13 +22,13 @@
 
 #pragma once
 
-#include <dwg/CadDocument.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <sstream>
 
 namespace dwg {
 
+class CadDocument;
+class IDwgStreamWriter;
 class DwgClassesWriter : public DwgSectionIO
 {
     CadDocument *_document;

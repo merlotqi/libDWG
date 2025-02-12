@@ -20,26 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
-#include "DwgStreamWriterAC15.h"
+#include <dwg/io/dwg/writers/DwgStreamWriterAC15_p.h>
 
 namespace dwg {
-
-
-    DwgStreamWriterAC15::DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
-        : DwgStreamWriterAC12(stream, encoding)
-    {
-    }
-
-    void DwgStreamWriterAC15::WriteBitExtrusion(XYZ normal) 
-    {
-
-    }
-
-    void DwgStreamWriterAC15::WriteBitThickness(double thickness)
-    {
-        
-    }
 
 
 }// namespace dwg

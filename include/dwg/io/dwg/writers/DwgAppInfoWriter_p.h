@@ -22,12 +22,11 @@
 
 #pragma once
 
-#include <dwg/dwg_version.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
 namespace dwg {
 
+class IDwgStreamWriter;
 class DwgAppInfoWriter : public DwgSectionIO
 {
     IDwgStreamWriter *_writer;

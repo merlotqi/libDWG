@@ -22,30 +22,24 @@
 
 #pragma once
 
-#include "../CRC8StreamHandler.h"
-#include "../DwgSectionIO.h"
-#include "../fileheaders/DwgSectionDefinition.h"
-#include "IDwgStreamWriter.h"
 #include <sstream>
-#include <stdexcept>
+#include <dwg/io/dwg/DwgSectionIO_p.h>
 
 namespace dwg {
 
-
 class DwgHandleWriter : public DwgSectionIO
 {
-    IDwgStreamWriter *_writer;
     std::vector<unsigned char> _emptyArr;
-    std::ostringstream *_stream;
+    std::ostream *_stream;
     std::map<unsigned long long, long long> _handleMap;
 
 public:
-    std::string SectionName() const;
-
-    DwgHandleWriter(ACadVersion version, std::ostringstream *stream,
+    DwgHandleWriter(ACadVersion version, std::ostream *stream,
                     const std::map<unsigned long long, long long> &handlemap);
 
-    void Write(int sectionOffset = 0);
+    std::string sectionName() const override;
+
+    void write(int sectionOffset = 0);
 
 private:
     int modularShortToValue(unsigned long long value,
@@ -53,7 +47,5 @@ private:
     int signedModularShortToValue(int value, std::vector<unsigned char> &arr);
     void processPosition(std::streampos pos);
 };
-
-
 
 }// namespace dwg

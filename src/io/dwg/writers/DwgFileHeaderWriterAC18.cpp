@@ -22,21 +22,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgFileHeaderWriterAC18.h"
-#include "../fileheaders/DwgFileHeaderAC18.h"
-#include "../fileheaders/DwgLocalSectionMap.h"
-#include "../fileheaders/DwgSectionDescriptor.h"
-#include "DwgFileHeaderWriterBase.h"
-#include "DwgLZ77AC18Compressor.h"
-#include "ICompressor.h"
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
+#include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
+#include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
 
 namespace dwg {
 
+int DwgFileHeaderWriterAC18::handleSectionOffset() const { return 0; }
 
-int DwgFileHeaderWriterAC18::HandleSectionOffset() const { return 0; }
-
-int DwgFileHeaderWriterAC18::_fileHeaderSize() const { return 0x100; }
-
+int DwgFileHeaderWriterAC18::fileHeaderSize() const { return 0x100; }
 
 DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream,
                                                  Encoding encoding,
@@ -53,7 +50,7 @@ DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream,
     }
 }
 
-void DwgFileHeaderWriterAC18::WriteFile()
+void DwgFileHeaderWriterAC18::writeFile()
 {
     _fileHeader->SectionArrayPageSize =
             (unsigned int) (_localSectionsMaps.size() + 2);
@@ -65,7 +62,7 @@ void DwgFileHeaderWriterAC18::WriteFile()
     writeFileMetaData();
 }
 
-void DwgFileHeaderWriterAC18::AddSection(const std::string &name,
+void DwgFileHeaderWriterAC18::addSection(const std::string &name,
                                          std::ostringstream *stream,
                                          bool isCompressed,
                                          int decompsize = 0x7400)
