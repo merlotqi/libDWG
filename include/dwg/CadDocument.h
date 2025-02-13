@@ -22,63 +22,86 @@
 
 #pragma once
 
-#include <dwg/CadSummaryInfo.h>
 #include <dwg/IHandledCadObject.h>
-#include <dwg/entities/Entity.h>
-#include <dwg/objects/CadDictionary.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
-#include <dwg/tables/AppId.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/DimensionStyle.h>
-#include <dwg/tables/Layer.h>
-#include <dwg/tables/LineType.h>
-#include <dwg/tables/TextStyle.h>
-#include <dwg/tables/UCS.h>
-#include <dwg/tables/VPort.h>
-#include <dwg/tables/View.h>
-
 
 namespace dwg {
 
 class CadHeader;
+class CadSummaryInfo;
+class DxfClassCollection;
+class AppIdsTable;
+class BlockRecordsTable;
+class DimensionStylesTable;
+class LayersTable;
+class LineTypesTable;
+class TextStylesTable;
+class UCSTable;
+class ViewsTable;
+class VPortsTable;
 
 class LIBDWG_API CadDocument : public IHandledCadObject
 {
 public:
-    CadDocument(bool createDefault);
+    CadDocument();
+    CadDocument(ACadVersion version);
+    ~CadDocument();
+
+    void createDefaults();
+    void updateCollections(bool createDictionaries);
 
     unsigned long long handle() const override;
-    CadHeader *Header;
-    CadSummaryInfo SummaryInfo;
-    DxfClassCollection Classes;
+    
+    CadHeader *header() const;
+    void setHeader(CadHeader *);
 
-    AppIdsTable AppIds;
-    BlockRecordsTable BlockRecords;
-    DimensionStylesTable DimensionStyles;
-    LayersTable Layers;
-    LineTypesTable LineTypes;
-    TextStylesTable TextStyles;
-    UCSTable UCSs;
-    ViewsTable Views;
-    VPortsTable VPorts;
+    CadSummaryInfo *summaryInfo() const;
+    void setSummaryInfo(CadSummaryInfo *);
+    
+    DxfClassCollection *classes() const;
+    void setClasses(DxfClassCollection *);
+    
+    AppIdsTable *appIds() const;   
+    BlockRecordsTable* blockRecords() const;
+    DimensionStylesTable *dimensionStyles() const;
+    LayersTable *layers() const;
+    LineTypesTable *lineTypes() const;
+    TextStylesTable *textStyles() const;
+    UCSTable *UCSs() const;
+    ViewsTable *views() const;
+    VPortsTable *vports() const;
 
-    ColorCollection Colors;
-    LayoutCollection Layouts;
-    GroupCollection Groups;
-    ScaleCollection Scales;
-    MLineStyleCollection MLineStyles;
-    ImageDefinitionCollection ImageDefinitions;
-    MLeaderStyleCollection MLeaderStyles;
+    ColorCollection *colors() const;
+    LayoutCollection *layouts() const;
+    GroupCollection *groups() const;
+    ScaleCollection *scales() const;
+    MLineStyleCollection *mlineStyles() const;
+    ImageDefinitionCollection *imageDefinitions() const;
+    MLeaderStyleCollection *mleaderStyles() const;
 
-    CadObjectCollection<Entity *> Entities;
-    BlockRecord &ModelSpace();
-    BlockRecord &PaperSpace();
+    CadDictionary *rootDictionary() const;
+    CadObjectCollection<Entity *> entities() const;
 
-    CadDictionary _rootDictionary;
+    BlockRecord *modelSpace() const;
+    BlockRecord *paperSpace() const;
 
-    std::map<unsigned long long, IHandledCadObject *> _cadObjects;
+protected:
+    CadDocument(bool createDefaults);
+    void setRootDictionary(CadDictionary *dic);
 
-    void CreateDefaults();
+private:
+    void setAppIds(AppIdsTable *);
+    void setBlockRecords(BlockRecordsTable *);
+    void setDimensionStyles(DimensionStylesTable *);
+    void setLayers(LayersTable *);
+    void setLineTypes(LineTypesTable *);
+    void setTextStyles(TextStylesTable *);
+    void setUCSs(UCSTable *);
+    void setViews(ViewsTable *);
+    void setVPorts(VPortsTable *);
+
+    bool updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary);
+    void addCadObject(CadObject *cadObject);
+    void removeCadObject(CadObject *cadObject);
 };
 
 }// namespace dwg

@@ -27,7 +27,6 @@
 #include <variant>
 #include <vector>
 
-
 namespace dwg {
 
 enum DwgVariantType
@@ -43,12 +42,13 @@ enum DwgVariantType
     F32,
     F64,
     STRING,
-    COORD,
+    COORD2D,
+    COORD3D,
     BLOB,
 };
 
 typedef std::variant<char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long,
-                     float, double, std::string, XYZ, std::vector<unsigned char>>
+                     float, double, std::string, XY, XYZ, std::vector<unsigned char>>
         DwgVariant;
 
 inline static bool dwg_variant_valid(const DwgVariant &val) { return !(std::holds_alternative<std::monostate>(val)); }

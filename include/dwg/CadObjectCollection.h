@@ -65,7 +65,7 @@ public:
      * @throws std::invalid_argument If the item is null.
      * @throws std::runtime_error If the item already has an owner.
      */
-    void Add(T *item)
+    void add(T *item)
     {
         if (!item) throw std::invalid_argument("item is null");
         if (item->owner()) throw std::runtime_error("item already has an owner");
@@ -80,7 +80,7 @@ public:
      * @param item The object to be removed.
      * @return A pointer to the removed object, or nullptr if not found.
      */
-    T *Remove(T *item)
+    T *remove(T *item)
     {
         auto it = std::find(_entries.begin(), _entries.end(), item);
         if (it == _entries.end()) return nullptr;
@@ -94,7 +94,7 @@ public:
      * @brief Gets the number of objects in the collection.
      * @return The number of objects.
      */
-    size_t Count() const { return _entries.size(); }
+    size_t count() const { return _entries.size(); }
 
     /**
      * @brief Accesses an object by index.
@@ -108,7 +108,7 @@ public:
      * @param index The index of the object.
      * @return A pointer to the object at the given index.
      */
-    T *GetAt(size_t index) const { return _entries[index]; }
+    T *at(size_t index) const { return _entries[index]; }
 
     /**
      * @brief Gets the owner of the collection.
@@ -120,7 +120,7 @@ public:
      * @brief Sets the owner of the collection.
      * @param owner A pointer to the new owner.
      */
-    void Owner(Object *owner) { _owner = owner; }
+    void setOwner(Object *owner) { _owner = owner; }
 
     /**
      * @brief Delegate triggered when an object is added.

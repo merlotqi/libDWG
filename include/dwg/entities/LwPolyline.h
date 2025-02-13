@@ -45,11 +45,11 @@ public:
         int Id;
     };
 
-    ObjectType objectType() const;
+    ObjectType objectType() const override;
 
-    std::string objectName() const;
+    std::string objectName() const override;
 
-    std::string subclassMarker() const;
+    std::string subclassMarker() const override;
 
     LwPolylineFlags flags() const;
     void setFlags(LwPolylineFlags);

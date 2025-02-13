@@ -28,17 +28,21 @@ namespace dwg {
 
 class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
 {
-    CadObject *_default_entry;
+    CadObject *_defaultEntry;
 
 public:
     CadDictionaryWithDefault();
+    virtual ~CadDictionaryWithDefault();
 
-    ObjectType objectType() const;
-    std::string objectName() const;
-    std::string subclassMarker() const;
+    ObjectType objectType() const override;
 
-    CadObject *DefaultEntry() const;
-    void DefaultEntry(CadObject *);
+    std::string objectName() const override;
+
+    std::string subclassMarker() const override;
+
+    CadObject *defaultEntry() const;
+
+    void setDefaultEntry(CadObject *);
 };
 
 }// namespace dwg

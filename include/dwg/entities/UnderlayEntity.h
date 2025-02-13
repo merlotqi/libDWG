@@ -46,7 +46,7 @@ public:
     UnderlayEntity();
     ~UnderlayEntity();
 
-    std::string subclassMarker() const;
+    std::string subclassMarker() const override;
 
     XYZ normal() const;
     void setNormal(const XYZ &);

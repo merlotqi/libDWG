@@ -53,13 +53,13 @@ public:
     virtual ~TextEntity();
 
     // Override to return the object type of the Arc
-    virtual ObjectType objectType() const;
+    virtual ObjectType objectType() const override;
 
     // Override to return the name of the object
-    virtual std::string objectName() const;
+    virtual std::string objectName() const override;
 
     // Override to return the subclass marker associated with this object
-    virtual std::string subclassMarker() const;
+    virtual std::string subclassMarker() const override;
 
     double thickness() const;
     void setThickness(double);

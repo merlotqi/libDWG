@@ -32,8 +32,8 @@ public:
     EvaluationExpression();
     virtual ~EvaluationExpression();
 
-    ObjectType objectType() const;
-    std::string subclassMarker() const;
+    ObjectType objectType() const override;
+    std::string subclassMarker() const override;
 
     int value90() const;
     void setValue90(int value) const;
@@ -51,7 +51,7 @@ public:
     BlockElement();
     virtual ~BlockElement();
 
-    std::string subclassMarker() const;
+    std::string subclassMarker() const override;
 
     std::string elementName() const;
     void setElementName(const std::string &name);

@@ -54,39 +54,61 @@ public:
     static std::string AcadFieldList;
     static std::string AcadImageDict;
 
-
 public:
+    static CadDictionary *CreateRoot();  
+    static void CreateDefaultEntries(CadDictionary *root);
+
     CadDictionary();
     CadDictionary(const std::string &name);
+    virtual ~CadDictionary();
+
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    void Add(const std::string &key, NonGraphicalObject *value);
-    void Add(NonGraphicalObject *value);
-    bool TryAdd(NonGraphicalObject *value) const;
-    bool ContainsKey(const std::string &key) const;
-    NonGraphicalObject *Remove(const std::string &key);
-    void Clear();
+    bool hardOwnerFlag() const;
 
-    bool HardOwnerFlag() const;
-    void HardOwnerFlag(bool);
+    void setHardOwnerFlag(bool);
 
-    DictionaryCloningFlags ClonningFlags() const;
-    void ClonningFlags(DictionaryCloningFlags);
+    DictionaryCloningFlags clonningFlags() const;
 
-    std::vector<std::string> EntryName() const;
-    std::vector<unsigned long long> EntryHandles() const;
+    void setClonningFlags(DictionaryCloningFlags);
+
+    std::vector<std::string> entryName() const;
+
+    std::vector<unsigned long long> entryHandles() const;
 
     CadObject *operator[](const std::string &key) const;
 
-    static CadDictionary *CreateRoot();
-    static void CreateDefaultEntries(CadDictionary *root);
+    NonGraphicalObject *tryGetEntry(const std::string &name);
 
-    NonGraphicalObject *TryGetEntry(const std::string &name);
+    void add(const std::string &key, NonGraphicalObject *value);
+
+    void add(NonGraphicalObject *value);
+
+    bool tryAdd(NonGraphicalObject *value) const;
+    
+    bool containsKey(const std::string &key) const;
+
+    bool remove(const std::string &key, NonGraphicalObject **item);
+    
+    void clear();
+
+    template<T>
+    bool tryGetEntryT(const std::string &name, T **value)
+    {
+        auto it = _entries.find(name);
+        if(it != _entries.end())
+        {
+            *value = dynamic_cast<T *>(it->second);
+            return true;
+        }
+        return false;
+    }
 
 private:
     CadDictionary *ensureCadDictionaryExist(const std::string &name);
+
     void onEntryNameChanged(const std::string &olName, const std::string &newName);
 };
 

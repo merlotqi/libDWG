@@ -50,7 +50,7 @@ public:
 
     virtual ~Entity();
 
-    std::string subclassMarker() const;
+    std::string subclassMarker() const override;
 
     virtual Layer *layer() const;
 
