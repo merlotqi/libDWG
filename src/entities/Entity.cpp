@@ -20,9 +20,60 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
-
+Entity::Entity()
+    : _layer(Layer::Default()), _color(Color::ByLayer), _lineweight(LineweightType::ByLayer), _linetypeScale(1.0),
+      _isInvisible(false), _transparency(Transparency::ByLayer), _linetype(LineType::ByLayer()), _material(nullptr),
+      _bookColor(nullptr)
+{
 }
+
+Entity::~Entity() {}
+
+std::string Entity::subclassMarker() const { return DxfSubclassMarker::Entity; }
+
+Layer *Entity::layer() const { return _layer; }
+
+void Entity::setLayer(Layer *value) { _layer = value; }
+
+Color Entity::color() const { return _color; }
+
+void Entity::setColor(const Color &value) { _color = value; }
+
+LineweightType Entity::lineweight() const { return _lineweight; }
+
+void Entity::setLineweight(LineweightType value) { _lineweight = value; }
+
+double Entity::linetypeScale() const { return _linetypeScale; }
+
+void Entity::setLinetypeScale(double value) { _linetypeScale = value; }
+
+bool Entity::isInvisible() const { return _isInvisible; }
+
+void Entity::setIsInvisible(bool value) { _isInvisible = value; }
+
+Transparency Entity::transparency() const { return _transparency; }
+
+void Entity::setTransparency(const Transparency &value) { _transparency = value; }
+
+LineType *Entity::lineType() const { return _linetype; }
+
+void Entity::setLineType(LineType *value) { _linetype = value; }
+
+Material *Entity::material() const { return _material; }
+
+void Entity::setMaterial(Material *value) { _material = value; }
+
+BookColor *Entity::bookColor() const { return _bookColor; }
+
+void Entity::setBookColor(BookColor *value) { _bookColor = value; }
+
+void Entity::matchProperties(Entity *entity) {}
+
+}// namespace dwg

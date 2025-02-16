@@ -19,3 +19,21 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Wipeout.h>
+
+namespace dwg {
+
+Wipeout::Wipeout() {}
+
+Wipeout::~Wipeout() {}
+
+ObjectType Wipeout::objectType() const { return ObjectType::UNLISTED; }
+
+std::string Wipeout::objectName() const { return DxfFileToken::EntityWipeout; }
+
+std::string Wipeout::subclassMarker() const { return DxfSubclassMarker::Wipeout; }
+
+}// namespace dwg

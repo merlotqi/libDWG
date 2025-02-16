@@ -42,7 +42,7 @@ void DwgAppInfoWriter::write()
     std::string version = LIBDWG_VERSION_STRING;
     //UInt32	4	class_version (default: 3)
     _writer->writeInt(3);
-    //String	2 + 2 * n + 2	App info name, ODA writes “AppInfoDataList”
+    //String	2 + 2 * n + 2	App info name, ODA writes "AppInfoDataList"
     _writer->writeTextUnicode("AppInfoDataList");
     //UInt32	4	num strings (default: 3)
     _writer->writeInt(3);

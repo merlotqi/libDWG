@@ -26,13 +26,13 @@ namespace dwg {
 
 enum LeaderLinePropertOverrideFlag : int
 {
-    None = 0,
-    PathType = 1,
-    LineColor = 2,
-    LineType = 4,
-    LineWeight = 8,
-    ArrowheadSize = 16,
-    Arrowhead = 32,
+    eNone = 0,
+    ePathType = 1,
+    eLineColor = 2,
+    eLineType = 4,
+    eLineWeight = 8,
+    eArrowheadSize = 16,
+    eArrowhead = 32,
 };
 typedef int LeaderLinePropertOverrideFlags;
 

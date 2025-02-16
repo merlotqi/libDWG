@@ -24,6 +24,7 @@
 
 #include <dwg/CadObjectCollection.h>
 #include <dwg/blocks/BlockTypeFlags.h>
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
 #include <string>
@@ -180,9 +181,11 @@ public:
  *
  * This table holds multiple block records, each representing a block definition that can be reused in the drawing.
  */
-class LIBDWG_API BlockRecordsTable : public Table
+class LIBDWG_API BlockRecordsTable : public Table<BlockRecord>
 {
 public:
+    BlockRecordsTable();
+    virtual ~BlockRecordsTable();
     /**
      * @brief Retrieves the object type for the block records table.
      * 

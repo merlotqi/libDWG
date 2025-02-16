@@ -179,11 +179,11 @@ public:
     Encoding();
     Encoding(CodePage codePage);
 
-    std::string toUtf8(const char *str);
-    std::string toUtf8(const std::string &str);
-    std::string fromUtf8(const std::string &str);
-    std::wstring toUnicode(const std::string &wstr);
-    std::string fromUnicode(const std::wstring &wstr);
+    std::string toUtf8(const char *str) noexcept(false);
+    std::string toUtf8(const std::string &str) noexcept(false);
+    std::string fromUtf8(const std::string &str) noexcept(false);
+    std::wstring toUnicode(const std::string &wstr) noexcept(false);
+    std::string fromUnicode(const std::wstring &wstr) noexcept(false);
     CodePage codePage() const;
 };
 

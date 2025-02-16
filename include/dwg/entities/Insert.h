@@ -207,6 +207,9 @@ public:
      * @brief Collection of attribute entities associated with this insert.
      */
     CadObjectCollection *attributes;
+
+private:
+    Insert();
 };
 
 }// namespace dwg

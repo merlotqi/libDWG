@@ -20,12 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "Leader.h"
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Leader.h>
+#include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
 
-Leader::Leader() {}
+Leader::Leader()
+    : _style(DimensionStyle::Default()), _arrowHeadEnabled(false), _pathType(LeaderPathType::Spline),
+      _creationType(LeaderCreationType::CreatedWithBlockReferenceAnnotation), _hookLineDirection(false),
+      _hasHookline(false), _textHeight(0.0), _textWidth(0.0), _associatedAnnotation(nullptr), _normal(XYZ::AxisZ),
+      _horizontalDirection(XYZ::AxisX), _blockOffset(XYZ::Zero), _annotationOffset(XYZ::Zero)
+{
+}
 
 Leader::~Leader() {}
 
@@ -35,60 +43,60 @@ std::string Leader::objectName() const { return DxfFileToken::EntityLeader; }
 
 std::string Leader::subclassMarker() const { return DxfSubclassMarker::Leader; }
 
-DimensionStyle *Leader::Style() const { return _style; }
+DimensionStyle *Leader::style() const { return _style; }
 
-void Leader::Style(DimensionStyle *style) { _style = style; }
+void Leader::setStyle(DimensionStyle *style) { _style = style; }
 
-bool Leader::ArrowHeadEnabled() const { return _arrowHeadEnabled; }
+bool Leader::arrowHeadEnabled() const { return _arrowHeadEnabled; }
 
-void Leader::ArrowHeadEnabled(bool arrowHeadEnabled) { _arrowHeadEnabled = arrowHeadEnabled; }
+void Leader::setArrowHeadEnabled(bool arrowHeadEnabled) { _arrowHeadEnabled = arrowHeadEnabled; }
 
-LeaderPathType Leader::PathType() const { return _pathType; }
+LeaderPathType Leader::pathType() const { return _pathType; }
 
-void Leader::PathType(LeaderPathType pathType) { _pathType = pathType; }
+void Leader::setPathType(LeaderPathType pathType) { _pathType = pathType; }
 
-LeaderCreationType Leader::CreationType() const { return _creationType; }
+LeaderCreationType Leader::creationType() const { return _creationType; }
 
-void Leader::CreationType(LeaderCreationType creationType) { _creationType = creationType; }
+void Leader::setCreationType(LeaderCreationType creationType) { _creationType = creationType; }
 
-bool Leader::HookLineDirection() const { return _hookLineDirection; }
+bool Leader::hookLineDirection() const { return _hookLineDirection; }
 
-void Leader::HookLineDirection(bool hookLineDirection) { _hookLineDirection = hookLineDirection; }
+void Leader::setHookLineDirection(bool hookLineDirection) { _hookLineDirection = hookLineDirection; }
 
-bool Leader::HasHookline() const { return _hasHookline; }
+bool Leader::hasHookline() const { return _hasHookline; }
 
-void Leader::HasHookline(bool hasHookline) { _hasHookline = hasHookline; }
+void Leader::setHasHookline(bool hasHookline) { _hasHookline = hasHookline; }
 
-double Leader::TextHeight() const { return _textHeight; }
+double Leader::textHeight() const { return _textHeight; }
 
-void Leader::TextHeight(double textHeight) { _textHeight = textHeight; }
+void Leader::setTextHeight(double textHeight) { _textHeight = textHeight; }
 
-double Leader::TextWidth() const { return _textWidth; }
+double Leader::textWidth() const { return _textWidth; }
 
-void Leader::TextWidth(double textWidth) { _textWidth = textWidth; }
+void Leader::setTextWidth(double textWidth) { _textWidth = textWidth; }
 
-std::vector<XYZ> Leader::Vertices() const { return _vertices; }
+std::vector<XYZ> Leader::vertices() const { return _vertices; }
 
-void Leader::Vertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
+void Leader::setVertices(const std::vector<XYZ> &vertices) { _vertices = vertices; }
 
-Entity *Leader::AssociatedAnnotation() const { return _associatedAnnotation; }
+Entity *Leader::associatedAnnotation() const { return _associatedAnnotation; }
 
-void Leader::AssociatedAnnotation(Entity *associatedAnnotation) { _associatedAnnotation = associatedAnnotation; }
+void Leader::setAssociatedAnnotation(Entity *associatedAnnotation) { _associatedAnnotation = associatedAnnotation; }
 
-XYZ Leader::Normal() const { return _normal; }
+XYZ Leader::normal() const { return _normal; }
 
-void Leader::Normal(const XYZ &normal) { _normal = normal; }
+void Leader::setNormal(const XYZ &normal) { _normal = normal; }
 
-XYZ Leader::HorizontalDirection() const { return _horizontalDirection; }
+XYZ Leader::horizontalDirection() const { return _horizontalDirection; }
 
-void Leader::HorizontalDirection(const XYZ &horizontalDirection) { _horizontalDirection = horizontalDirection; }
+void Leader::setHorizontalDirection(const XYZ &horizontalDirection) { _horizontalDirection = horizontalDirection; }
 
-XYZ Leader::BlockOffset() const { return _blockOffset; }
+XYZ Leader::blockOffset() const { return _blockOffset; }
 
-void Leader::BlockOffset(const XYZ &blockOffset) { _blockOffset = blockOffset; }
+void Leader::setBlockOffset(const XYZ &blockOffset) { _blockOffset = blockOffset; }
 
-XYZ Leader::AnnotationOffset() const { return _annotationOffset; }
+XYZ Leader::annotationOffset() const { return _annotationOffset; }
 
-void Leader::AnnotationOffset(const XYZ &annotationOffset) { _annotationOffset = annotationOffset; }
+void Leader::setAnnotationOffset(const XYZ &annotationOffset) { _annotationOffset = annotationOffset; }
 
 }// namespace dwg

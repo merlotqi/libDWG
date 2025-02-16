@@ -20,25 +20,33 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <assert.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/TableEntry.h>
+#include <fmt/core.h>
 
 namespace dwg {
 
-TableEntry::TableEntry(const std::string &name) : _name(name) {}
+TableEntry::TableEntry(const std::string &name) : _name(name), _flags(StandardFlag::None) {}
+
+TableEntry::~TableEntry() {}
 
 std::string TableEntry::subclassMarker() const { return DxfSubclassMarker::TableRecord; }
 
-std::string TableEntry::Name() const { return _name; }
+std::string TableEntry::name() const { return _name; }
 
-void TableEntry::Name(const std::string &value)
+void TableEntry::setName(const std::string &value)
 {
-    if (StringHelp::IsNullOrEmpty(value)) { throw new std::invalid_argument("The Table Entry must have a name"); }
-    OnNameChanged(_name, value);
+    if (value.empty()) { throw new std::invalid_argument("The Table Entry must have a name"); }
+    if (OnNameChanged) OnNameChanged(_name, value);
     _name = value;
 }
 
-StandardFlags TableEntry::Flags() const { return _flags; }
+StandardFlags TableEntry::flags() const { return _flags; }
 
-void TableEntry::Flags(StandardFlags flags) { _flags = flags; }
+void TableEntry::setFlags(StandardFlags flags) { _flags = flags; }
+
+TableEntry::TableEntry() : _name(""), _flags(StandardFlag::None) {}
 
 }// namespace dwg

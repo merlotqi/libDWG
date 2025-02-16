@@ -36,14 +36,14 @@ public:
     virtual ~CRC8StreamHandlerBase();
     static unsigned short GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer, long startPos,
                                       long endPos);
-    unsigned short Seed() const;
-    void Seed(unsigned short);
+    unsigned short seed() const;
+    void setSeed(unsigned short);
 
 protected:
     unsigned short _seed;
 };
 
-class CRC8InputStreamHandler : public InputStreamWrapper, CRC8StreamHandlerBase
+class CRC8InputStreamHandler : public InputStreamWrapper, public CRC8StreamHandlerBase
 {
 public:
     CRC8InputStreamHandler();
@@ -52,11 +52,11 @@ public:
 };
 
 
-class CRC8OutputStreamHandler : public OutputStreamWrapper, CRC8StreamHandlerBase
+class CRC8OutputStreamHandler : public OutputStreamWrapper, public CRC8StreamHandlerBase
 {
 public:
     CRC8OutputStreamHandler();
-    CRC8OutputStreamHandler(std::ostream *stream);
+    CRC8OutputStreamHandler(std::ostream *stream, unsigned short seed);
     ~CRC8OutputStreamHandler();
 };
 

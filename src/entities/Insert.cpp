@@ -19,3 +19,11 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/entities/Insert.h>
+
+namespace dwg {
+
+Insert::Insert() {}
+
+}// namespace dwg

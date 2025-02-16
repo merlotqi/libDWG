@@ -19,3 +19,29 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/XLine.h>
+
+namespace dwg {
+
+XLine::XLine() : Entity() {}
+
+XLine::~XLine() {}
+
+ObjectType XLine::objectType() const { return ObjectType::XLINE; }
+
+std::string XLine::objectName() const { return DxfFileToken::EntityXline; }
+
+std::string XLine::subclassMarker() const { return DxfSubclassMarker::XLine; }
+
+XYZ XLine::firstPoint() const { return _firstPoint; }
+
+void XLine::setFirstPoint(const XYZ &value) { _firstPoint = value; }
+
+XYZ XLine::direction() const { return _direction; }
+
+void XLine::setDirection(const XYZ &value) { _direction = value; }
+
+}// namespace dwg

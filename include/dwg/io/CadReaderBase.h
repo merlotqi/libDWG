@@ -30,7 +30,7 @@
 namespace dwg {
 
 template<class T>
-class CadReaderBase : public ICadReader, protected T
+class LIBDWG_API CadReaderBase : public ICadReader, protected T
 {
     static_assert(std::is_base_of<CadReaderConfiguration, T>::value, "T must is base CadReaderConfiguration");
 

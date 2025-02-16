@@ -25,14 +25,14 @@
 
 namespace dwg {
 
-InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), _encoding(Encoding::Utf8())
+InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))
 {
-    if (!_stream || !_stream->is_good()) { throw new std::bad_alloc(); }
+    if (!_stream || !_stream->good()) { throw new std::bad_alloc(); }
 }
 
 InputStreamWrapper::~InputStreamWrapper() {}
 
-std::istream InputStreamWrapper::stream() { return _stream; }
+std::istream *InputStreamWrapper::stream() { return _stream; }
 
 std::size_t InputStreamWrapper::length() const { return 0; }
 

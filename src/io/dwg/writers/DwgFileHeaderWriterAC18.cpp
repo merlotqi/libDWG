@@ -41,7 +41,7 @@ DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding
     _descriptors = _fileHeader->Descriptors;
     compressor = new DwgLZ77AC18Compressor();
     // File header info
-    for (int i = 0; i < _fileHeaderSize(); i++)
+    for (int i = 0; i < fileHeaderSize(); i++)
     {
         char b = 0;
         _stream->write(&b, sizeof(char));
@@ -50,9 +50,9 @@ DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding
 
 void DwgFileHeaderWriterAC18::writeFile()
 {
-    _fileHeader->SectionArrayPageSize = (unsigned int) (_localSectionsMaps.size() + 2);
-    _fileHeader->SectionPageMapId = _fileHeader->SectionArrayPageSize;
-    _fileHeader->SectionMapId = _fileHeader->SectionArrayPageSize - 1;
+    _fileHeader->setSectionArrayPageSize((unsigned int) (_localSectionsMaps.size() + 2));
+    _fileHeader->setSectionPageMapId(_fileHeader->sectionArrayPageSize());
+    _fileHeader->setSectionMapId(_fileHeader->sectionArrayPageSize() - 1);
 
     writeDescriptors();
     writeRecords();
@@ -63,8 +63,8 @@ void DwgFileHeaderWriterAC18::addSection(const std::string &name, std::ostream *
                                          int decompsize)
 {
     DwgSectionDescriptor descriptor(name);
-    _fileHeader->AddSection(descriptor);
-    descriptor.DecompressedSize = (unsigned long long) decompsize;
+    _fileHeader->addSection(descriptor);
+    descriptor.setDecompressedSize((unsigned long long) decompsize);
 
     descriptor.CompressedSize = (unsigned long long) ostream_length(stream);
     descriptor.CompressedCode = ((!isCompressed) ? 1 : 2);

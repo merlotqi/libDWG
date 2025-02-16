@@ -22,7 +22,11 @@
 
 #pragma once
 
+#include <dwg/ACadVersion.h>
+#include <dwg/CadObjectCollection.h>
 #include <dwg/IHandledCadObject.h>
+#include <dwg/exports.h>
+#include <string>
 
 namespace dwg {
 
@@ -38,6 +42,17 @@ class TextStylesTable;
 class UCSTable;
 class ViewsTable;
 class VPortsTable;
+class ColorCollection;
+class LayoutCollection;
+class GroupCollection;
+class ScaleCollection;
+class MLineStyleCollection;
+class ImageDefinitionCollection;
+class MLeaderStyleCollection;
+class CadDictionary;
+class Entity;
+class BlockRecord;
+class CadObject;
 
 class LIBDWG_API CadDocument : public IHandledCadObject
 {
@@ -50,18 +65,18 @@ public:
     void updateCollections(bool createDictionaries);
 
     unsigned long long handle() const override;
-    
+
     CadHeader *header() const;
     void setHeader(CadHeader *);
 
     CadSummaryInfo *summaryInfo() const;
     void setSummaryInfo(CadSummaryInfo *);
-    
+
     DxfClassCollection *classes() const;
     void setClasses(DxfClassCollection *);
-    
-    AppIdsTable *appIds() const;   
-    BlockRecordsTable* blockRecords() const;
+
+    AppIdsTable *appIds() const;
+    BlockRecordsTable *blockRecords() const;
     DimensionStylesTable *dimensionStyles() const;
     LayersTable *layers() const;
     LineTypesTable *lineTypes() const;

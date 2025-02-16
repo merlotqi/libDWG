@@ -19,3 +19,34 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/classes/DxfClass.h>
+#include <dwg/entities/UnknownEntity.h>
+
+namespace dwg {
+
+UnknownEntity::UnknownEntity() : _dxfclass(nullptr) {}
+
+UnknownEntity::~UnknownEntity() {}
+
+ObjectType UnknownEntity::objectType() const { return ObjectType::UNDEFINED; }
+
+std::string UnknownEntity::objectName() const
+{
+    if (!_dxfclass) return "UNKNOWN";
+    else
+        return _dxfclass->dxfName();
+}
+
+std::string UnknownEntity::subclassMarker() const
+{
+    if (!_dxfclass) return DxfSubclassMarker::Entity;
+    else
+        return _dxfclass->cppClassName();
+}
+
+UnknownEntity::UnknownEntity(DxfClass *dxfclass) : _dxfclass(dxfclass) {}
+
+}// namespace dwg

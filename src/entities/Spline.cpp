@@ -19,3 +19,10 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/entities/Spline.h>
+
+namespace dwg {
+
+
+}// namespace dwg

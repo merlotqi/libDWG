@@ -90,7 +90,7 @@ public:
      * @brief Gets the boundary path flags.
      * @return The boundary path flags.
      */
-    BoundaryPathFlags flags() const;
+    BoundaryPathFlags flags();
 
     /**
      * @brief Sets the boundary path flags.
@@ -286,6 +286,11 @@ public:
         XY endTangent() const;
         void setEndTangent(const XY &);
     };
+
+private:
+    std::vector<HBP_Edge *> _edges;
+    BoundaryPathFlags _flags;
+    std::vector<Entity *> _entities;
 };
 
 }// namespace dwg

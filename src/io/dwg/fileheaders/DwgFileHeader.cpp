@@ -20,7 +20,6 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "DwgFileHeader_p.h"
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC15_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC21_p.h>

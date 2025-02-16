@@ -20,7 +20,6 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "HatchBoundaryPath.h"
 #include <dwg/entities/HatchBoundaryPath.h>
 
 namespace dwg {
@@ -31,15 +30,27 @@ HatchBoundaryPath::HBP_Edge::~HBP_Edge() {}
 
 HatchBoundaryPath::HBP_Edge *HatchBoundaryPath::HBP_Edge::clone() const { return nullptr; }
 
-HatchBoundaryPath::HatchBoundaryPath() {}
+HatchBoundaryPath::HatchBoundaryPath() : _flags(BoundaryPathFlag::Default) {}
 
 HatchBoundaryPath::~HatchBoundaryPath() {}
 
-bool HatchBoundaryPath::isPolyline() const { return false; }
+bool HatchBoundaryPath::isPolyline() const
+{
+    for (auto it = _edges.begin(); it != _edges.end(); ++it)
+    {
+        if ((*it)->type() != HBP_EdgeType::HBP_Polyline) { return false; }
+    }
+    return true;
+}
 
-BoundaryPathFlags HatchBoundaryPath::flags() const { return BoundaryPathFlags(); }
+BoundaryPathFlags HatchBoundaryPath::flags()
+{
+    if (isPolyline()) { _flags |= BoundaryPathFlag::Polyline; }
+    else { _flags &= ~BoundaryPathFlag::Polyline; }
+    return _flags;
+}
 
-void HatchBoundaryPath::setFlags(BoundaryPathFlags) {}
+void HatchBoundaryPath::setFlags(BoundaryPathFlags value) { _flags = value; }
 
 std::vector<HatchBoundaryPath::HBP_Edge *> HatchBoundaryPath::edges() const { return std::vector<HBP_Edge *>(); }
 

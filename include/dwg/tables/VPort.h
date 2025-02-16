@@ -29,14 +29,16 @@
 #include <dwg/RenderMode.h>
 #include <dwg/tables/DefaultLightingType.h>
 #include <dwg/tables/GridFlags.h>
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/UscIconType.h>
 #include <dwg/tables/ViewModeType.h>
 
+
 namespace dwg {
 
 class VisualStyle;
-class USC;
+class UCS;
 
 class LIBDWG_API VPort : public TableEntry
 {
@@ -170,7 +172,7 @@ public:
 };
 
 
-class LIBDWG_API VPortsTable : public Table
+class LIBDWG_API VPortsTable : public Table<VPort>
 {
 public:
     VPortsTable();

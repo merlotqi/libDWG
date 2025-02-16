@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -88,7 +89,7 @@ public:
  *
  * This table holds multiple application IDs that associate external applications with the drawing.
  */
-class LIBDWG_API AppIdsTable : public Table
+class LIBDWG_API AppIdsTable : public Table<AppId>
 {
 public:
     /**

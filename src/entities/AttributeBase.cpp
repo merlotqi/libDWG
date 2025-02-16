@@ -24,7 +24,11 @@
 
 namespace dwg {
 
-AttributeBase::AttributeBase() {}
+AttributeBase::AttributeBase()
+    : _verticalAlignment(TextVerticalAlignment::Baseline), _version(0), _tag(""), _flags(AttributeFlag::None),
+      _isReallyLocked(false), _mtext(nullptr), _attributeType(AttributeType::SingleLine)
+{
+}
 
 AttributeBase::~AttributeBase() {}
 

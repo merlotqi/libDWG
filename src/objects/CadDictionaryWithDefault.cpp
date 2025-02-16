@@ -20,23 +20,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/CadDictionaryWithDefault.h>
+
 
 namespace dwg {
 
 CadDictionaryWithDefault::CadDictionaryWithDefault() {}
 
 ObjectType CadDictionaryWithDefault::objectType() const { return ObjectType::UNLISTED; }
+
 std::string CadDictionaryWithDefault::objectName() const { return DxfFileToken::ObjectDictionaryWithDefault; }
+
 std::string CadDictionaryWithDefault::subclassMarker() const { return DxfSubclassMarker::DictionaryWithDefault; }
 
-CadObjectPtr CadDictionaryWithDefault::DefaultEntry() const
-{
-    if (!_default_entry.Expired()) return _default_entry.Lock();
+CadObject *CadDictionaryWithDefault::defaultEntry() const { return _defaultEntry; }
 
-    return NULL;
-}
-
-void CadDictionaryWithDefault::DefaultEntry(CadObject *obj) { _default_entry = obj; }
+void CadDictionaryWithDefault::setDefaultEntry(CadObject *obj) { _defaultEntry = obj; }
 
 }// namespace dwg

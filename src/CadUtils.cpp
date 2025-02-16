@@ -250,7 +250,7 @@ std::string CadUtils::GetNameFromVersion(ACadVersion version)
     return std::string();//version.ToString().Replace('_', '.');
 }
 
-double CadUtils::ToJulianCalendar(DateTime date)
+double CadUtils::toJulianCalendar(DateTime date)
 {
     int year = date.year();
     int month = date.month();

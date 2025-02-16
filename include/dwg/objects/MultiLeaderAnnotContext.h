@@ -47,24 +47,24 @@ class LIBDWG_API MultiLeaderAnnotContext : public NonGraphicalObject
 public:
     struct StartEndPointPair
     {
-        XYZ StartPoint;
-        XYZ EndPoint;
+        XYZ startPoint;
+        XYZ endPoint;
     };
 
     struct LeaderLine
     {
-        std::vector<XYZ> Points;
-        int BreakInfoCount;
-        int SegmentIndex;
-        std::vector<StartEndPointPair> StartEndPoints;
-        int Index;
-        MultiLeaderPathType PathType;
-        Color LineColor;
-        LineType *LineType;
-        LineweightType LineWeight;
-        double ArrowheadSize;
-        BlockRecord *ArrowHead;
-        LeaderLinePropertOverrideFlags OverrideFlags;
+        std::vector<XYZ> points;
+        int breakInfoCount;
+        int segmentIndex;
+        std::vector<StartEndPointPair> startEndPoints;
+        int index;
+        MultiLeaderPathType pathType;
+        Color lineColor;
+        LineType *lineType;
+        LineweightType lineWeight;
+        double arrowheadSize;
+        BlockRecord *arrowHead;
+        LeaderLinePropertOverrideFlags overrideFlags;
     };
 
     struct LeaderRoot

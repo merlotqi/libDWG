@@ -31,7 +31,7 @@ namespace dwg {
 class CadDocument;
 
 template<class T>
-class CadWriterBase : public ICadWriter, protected T
+class LIBDWG_API CadWriterBase : public ICadWriter, protected T
 {
     static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
 
@@ -46,7 +46,7 @@ protected:
     Encoding getListedEncoding(const std::string &codePage);
 
 protected:
-    std::ofstream *_stream;
+    std::unique_ptr<std::ofstream> _stream;
     CadDocument *_document;
     Encoding _encoding;
 };

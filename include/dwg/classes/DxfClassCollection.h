@@ -36,6 +36,7 @@ class LIBDWG_API DxfClassCollection
 
 public:
     DxfClassCollection() = default;
+    ~DxfClassCollection();
     static void UpdateDxfClasses(CadDocument *);
     void add(DxfClass *);
     void addOrUpdate(DxfClass *);
@@ -43,6 +44,9 @@ public:
     size_t count() const;
     void clear();
     bool contains(const std::string &) const;
+
+    std::map<std::string, DxfClass *>::const_iterator begin() const;
+    std::map<std::string, DxfClass *>::const_iterator end() const;
 };
 
 }// namespace dwg

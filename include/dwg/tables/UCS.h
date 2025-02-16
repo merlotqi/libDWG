@@ -25,6 +25,7 @@
 #include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/tables/TableCollection.h>
 
 namespace dwg {
 
@@ -66,7 +67,7 @@ public:
     void setElevation(double);
 };
 
-class LIBDWG_API UCSTable : public Table
+class LIBDWG_API UCSTable : public Table<UCS>
 {
 public:
     UCSTable() = default;

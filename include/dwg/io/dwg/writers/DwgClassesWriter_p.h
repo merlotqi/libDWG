@@ -33,7 +33,7 @@ class IDwgStreamWriter;
 class DwgClassesWriter : public DwgSectionIO
 {
     CadDocument *_document;
-    std::ostringstream _sectionStream;
+    std::unique_ptr<std::stringstream> _sectionStream;
     IDwgStreamWriter *_startWriter;
     IDwgStreamWriter *_writer;
 

@@ -25,11 +25,13 @@
 #include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/ViewModeType.h>
 
 namespace dwg {
 
+class VisualStyle;
 class LIBDWG_API View : public TableEntry
 {
 public:
@@ -101,7 +103,7 @@ public:
     void setUcsOrthographicType(OrthographicType);
 };
 
-class LIBDWG_API ViewsTable : public Table
+class LIBDWG_API ViewsTable : public Table<View>
 {
 public:
     ViewsTable() = default;

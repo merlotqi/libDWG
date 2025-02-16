@@ -95,7 +95,7 @@ public:
     bool updateDimensionsWhileDragging() const;
     void setUpdateDimensionsWhileDragging(bool);
 
-    bool dIMSAV() const;
+    bool DIMSAV() const;
     void setDIMSAV(bool);
 
     MeasurementUnits measurementUnits() const;

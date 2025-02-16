@@ -24,7 +24,7 @@
 
 #include <dwg/Color.h>
 #include <dwg/Coordinate.h>
-#include <dwg/LineweightType.h>
+#include <dwg/LineWeightType.h>
 #include <dwg/TextAlignmentType.h>
 #include <dwg/TextAngleType.h>
 #include <dwg/TextAttachmentDirectionType.h>

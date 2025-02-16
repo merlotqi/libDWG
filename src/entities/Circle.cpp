@@ -50,6 +50,10 @@ void Circle::setCenter(const XYZ &center) { _center = center; }
 
 void Circle::setThickness(double thickness) { _thickness = thickness; }
 
-void Circle::setRadius(double radius) { _radius = radius; }
+void Circle::setRadius(double radius)
+{
+    if (radius <= 0) throw new std::invalid_argument("Radius must be greater than 0");
+    _radius = radius;
+}
 
 }// namespace dwg

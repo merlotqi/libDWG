@@ -26,7 +26,6 @@
 
 namespace dwg {
 
-
 DimensionOrdinate::DimensionOrdinate() : Dimension(DimensionType::Ordinate) {}
 
 DimensionOrdinate::~DimensionOrdinate() {}

@@ -35,10 +35,10 @@ namespace dwg {
  */
 class LIBDWG_API Line : public Entity
 {
-    XYZ _normal = XYZ::AxisZ;   ///< Normal vector defining the plane of the line.
-    XYZ _startPoint = XYZ::Zero;///< Start point of the line.
-    XYZ _endPoint = XYZ::Zero;  ///< End point of the line.
-    double _thickness = 0.0;    ///< Thickness of the line.
+    XYZ _normal;      ///< Normal vector defining the plane of the line.
+    XYZ _startPoint;  ///< Start point of the line.
+    XYZ _endPoint;    ///< End point of the line.
+    double _thickness;///< Thickness of the line.
 
 public:
     /**

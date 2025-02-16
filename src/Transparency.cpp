@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <cpl_ports.h>
 #include <dwg/Transparency.h>
+#include <dwg/utils/EndianConverter_p.h>
 #include <stdexcept>
 #include <vector>
 
@@ -36,16 +36,16 @@ Transparency Transparency::Opaque = Transparency(0);
 Transparency::Transparency(short value)
 {
     _value = -1;
-    Value(value);
+    setValue(value);
 }
 
-bool Transparency::IsByLayer() const { return _value == -1; }
+bool Transparency::isByLayer() const { return _value == -1; }
 
-bool Transparency::IsByBlock() const { return _value == 100; }
+bool Transparency::isByBlock() const { return _value == 100; }
 
-short Transparency::Value() const { return _value; }
+short Transparency::value() const { return _value; }
 
-void Transparency::Value(short value)
+void Transparency::setValue(short value)
 {
     if (value == -1) _value = value;
 
@@ -58,16 +58,16 @@ void Transparency::Value(short value)
 
 int Transparency::ToAlphaValue(Transparency transparency)
 {
-    unsigned char alpha = (unsigned char) (255 * (100 - transparency.Value()) / 100.0);
-    std::vector<unsigned char> bytes = transparency.IsByBlock() ? std::vector<unsigned char>{0, 0, 0, 1}
+    unsigned char alpha = (unsigned char) (255 * (100 - transparency.value()) / 100.0);
+    std::vector<unsigned char> bytes = transparency.isByBlock() ? std::vector<unsigned char>{0, 0, 0, 1}
                                                                 : std::vector<unsigned char>{alpha, 0, 0, 2};
 
-    return CPL::LittleEndianConverter::Instance()->ToInt32(&bytes[0]);
+    return LittleEndianConverter::instance()->toInt32(&bytes[0]);
 }
 
 Transparency Transparency::FromAlphaValue(int value)
 {
-    std::vector<unsigned char> bytes = CPL::LittleEndianConverter::Instance()->GetBytes(value);
+    std::vector<unsigned char> bytes = LittleEndianConverter::instance()->bytes(value);
     short alpha = (short) (100 - (bytes[0] / 255.0) * 100);
 
     if (alpha == -1) { return Transparency::ByLayer; }

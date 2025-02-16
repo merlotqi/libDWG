@@ -73,6 +73,9 @@ class LIBDWG_API Color
     Color(unsigned int trueColor);
 
 public:
+    Color(const Color &rhs);
+    Color &operator=(const Color &rhs);
+
     /**
      * @brief Constructs a Color from an indexed color.
      * @param index The color index.

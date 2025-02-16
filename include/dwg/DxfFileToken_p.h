@@ -46,7 +46,7 @@ public:
     static constexpr auto BlkRefToken = "{BLKREFS";
 
     static constexpr auto TablesSection = "TABLES";
-    static constexpr auto TableEntry = "TABLE";
+    static constexpr auto TableEntry_ = "TABLE";
     static constexpr auto EndTable = "ENDTAB";
     static constexpr auto TableAppId = "APPID";
     static constexpr auto TableBlockRecord = "BLOCK_RECORD";

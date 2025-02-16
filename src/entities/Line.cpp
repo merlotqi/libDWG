@@ -19,3 +19,37 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Line.h>
+
+namespace dwg {
+
+Line::Line() : _normal(XYZ::AxisZ), _startPoint(XYZ::Zero), _endPoint(XYZ::Zero), _thickness(0.0) {}
+
+Line::~Line() {}
+
+ObjectType Line::objectType() const { return ObjectType::LINE; }
+
+std::string Line::objectName() const { return DxfFileToken::EntityLine; }
+
+std::string Line::subclassMarker() const { return DxfSubclassMarker::Line; }
+
+XYZ Line::normal() const { return _normal; }
+
+void Line::setNormal(const XYZ &normal) { _normal = normal; }
+
+XYZ Line::startPoint() const { return _startPoint; }
+
+void Line::setStartPoint(const XYZ &point) { _startPoint = point; }
+
+XYZ Line::endPoint() const { return _endPoint; }
+
+void Line::setEndPoint(const XYZ &point) { _endPoint = point; }
+
+double Line::thickness() const { return _thickness; }
+
+void Line::setThickness(double thickness) { _thickness = thickness; }
+
+}// namespace dwg

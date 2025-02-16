@@ -29,6 +29,7 @@
 #include <dwg/tables/DimensionTextHorizontalAlignment.h>
 #include <dwg/tables/DimensionTextVerticalAlignment.h>
 #include <dwg/tables/FractionFormat.h>
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextArrowFitType.h>
 #include <dwg/tables/TextDirection.h>
@@ -37,16 +38,12 @@
 #include <dwg/tables/ZeroHandling.h>
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
+#include <string>
 
 namespace dwg {
 
-/**
- * @class DimensionStyle
- * @brief Represents a dimension style in a DWG/DXF drawing.
- *
- * A dimension style defines the appearance and formatting of dimensions within a drawing. 
- * It includes settings for units, tolerances, text formatting, arrow settings, and more.
- */
+class BlockRecord;
+class TextStyle;
 class LIBDWG_API DimensionStyle : public TableEntry
 {
 public:
@@ -331,7 +328,7 @@ public:
     void setDimArrow2(BlockRecord *);
 };
 
-class LIBDWG_API DimensionStylesTable : public Table
+class LIBDWG_API DimensionStylesTable : public Table<DimensionStyle>
 {
 public:
     DimensionStylesTable();

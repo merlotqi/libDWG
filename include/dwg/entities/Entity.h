@@ -33,6 +33,7 @@ namespace dwg {
 class Layer;
 class LineType;
 class BookColor;
+class Material;
 
 class LIBDWG_API Entity : public CadObject
 {
@@ -44,6 +45,7 @@ class LIBDWG_API Entity : public CadObject
     Transparency _transparency;
     LineType *_linetype;
     BookColor *_bookColor;
+    Material *_material;
 
 public:
     Entity();
@@ -78,7 +80,15 @@ public:
 
     virtual LineType *lineType() const;
 
-    virtual void setLineType(LineType *) const;
+    virtual void setLineType(LineType *);
+
+    virtual Material *material() const;
+
+    virtual void setMaterial(Material *);
+
+    virtual BookColor *bookColor() const;
+
+    virtual void setBookColor(BookColor *);
 
     virtual void matchProperties(Entity *entity);
 };

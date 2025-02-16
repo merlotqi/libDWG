@@ -26,6 +26,7 @@
 #include <dwg/LineWeightType.h>
 #include <dwg/tables/LayerFlags.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/tables/TableCollection.h>
 
 namespace dwg {
 
@@ -71,7 +72,7 @@ public:
     void setIsOn(bool);
 };
 
-class LIBDWG_API LayersTable : public Table
+class LIBDWG_API LayersTable : public Table<Layer>
 {
 public:
     LayersTable() = default;

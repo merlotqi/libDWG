@@ -20,12 +20,15 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
+#include <dwg/classes/DxfClass.h>
+#include <dwg/classes/DxfClassCollection.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/CRC8StreamHandler_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgClassesWriter_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
-#include <dwg/CadDocument.h>
-#include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
 namespace dwg {
 
@@ -35,7 +38,8 @@ DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document, 
     _document = document;
     _startWriter = DwgStreamWriterBase::GetStreamWriter(_version, stream, encoding);
 
-    _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_sectionStream, encoding);
+    _sectionStream = std::make_unique<std::stringstream>();
+    _writer = DwgStreamWriterBase::GetStreamWriter(_version, _sectionStream.get(), encoding);
 
     _startSentinel = {0x8D, 0xA1, 0xC4, 0xB8, 0xC4, 0xA9, 0xF8, 0xC5, 0xC0, 0xDC, 0xF4, 0x5F, 0xE7, 0xCF, 0xB6, 0x8A};
     _endSentinel = {0x72, 0x5E, 0x3B, 0x47, 0x3B, 0x56, 0x07, 0x3A, 0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
@@ -48,7 +52,14 @@ void DwgClassesWriter::write()
     if (R2007Plus) { _writer->savePositonForSize(); }
 
     short maxClassNumber = 0;
-    if (_document.Classes.Any()) { maxClassNumber = _document.Classes.Max(c = > c.ClassNumber); }
+    auto classes = _document->classes();
+    if (classes)
+    {
+        for (auto it = classes->begin(); it != classes->end(); ++it)
+        {
+            if (it->second->classNumber() >= maxClassNumber) { maxClassNumber = it->second->classNumber(); }
+        }
+    }
 
     if (R2004Plus)
     {
@@ -62,31 +73,31 @@ void DwgClassesWriter::write()
         _writer->writeBit(true);
     }
 
-    for (auto&& c : _document->Classes)
+    for (auto it = classes->begin(); it != classes->end(); ++it)
     {
         //BS : classnum
-        _writer->writeBitShort(c.ClassNumber);
-        //BS : version – in R14, becomes a flag indicating whether objects can be moved, edited, etc.
-        _writer->writeBitShort((short) c.ProxyFlags);
+        _writer->writeBitShort(it->second->classNumber());
+        //BS : version - in R14, becomes a flag indicating whether objects can be moved, edited, etc.
+        _writer->writeBitShort((short) it->second->proxyFlags());
         //TV : appname
-        _writer->writeVariableText(c.ApplicationName);
+        _writer->writeVariableText(it->second->applicationName());
         //TV: cplusplusclassname
-        _writer->writeVariableText(c.CppClassName);
+        _writer->writeVariableText(it->second->cppClassName());
         //TV : classdxfname
-        _writer->writeVariableText(c.DxfName);
+        _writer->writeVariableText(it->second->dxfName());
         //B : wasazombie
-        _writer->writeBit(c.WasZombie);
+        _writer->writeBit(it->second->wasZombie());
         //BS : itemclassid -- 0x1F2 for classes which produce entities, 0x1F3 for classes which produce objects.
-        _writer->writeBitShort(c.ItemClassId);
+        _writer->writeBitShort(it->second->itemClassId());
 
         if (R2004Plus)
         {
             //BL : Number of objects created of this type in the current DB(DXF 91).
-            _writer->writeBitLong(c.InstanceCount);
+            _writer->writeBitLong(it->second->instanceCount());
             //BS : Dwg Version
-            _writer->writeBitShort((short) _document.Header.Version);
+            _writer->writeBitShort((short) _document->header()->version());
             //BS : Maintenance release version.
-            _writer->writeBitShort(_document.Header.MaintenanceVersion);
+            _writer->writeBitShort(_document->header()->maintenanceVersion());
             //BL : Unknown(normally 0L)
             _writer->writeBitLong(0);
             //BL : Unknown(normally 0L)
@@ -103,24 +114,24 @@ void DwgClassesWriter::writeSizeAndCrc()
     //SN : 0x8D 0xA1 0xC4 0xB8 0xC4 0xA9 0xF8 0xC5 0xC0 0xDC 0xF4 0x5F 0xE7 0xCF 0xB6 0x8A
     _startWriter->writeBytes(_startSentinel);
 
-    CRC8StreamHandler crc = new CRC8StreamHandler(_startWriter.Stream, 0xC0C1);
-    StreamIO swriter = new StreamIO(crc);
+    CRC8OutputStreamHandler swriter(_startWriter->stream(), 0xC0C1);
 
     //RL : size of class data area.
-    swriter.Write((int) _sectionStream.Length);
+    swriter.write((int) _sectionStream->str().length());
 
-    if (_document.Header.Version >= ACadVersion.AC1024 && _document.Header.MaintenanceVersion > 3 ||
-        _document.Header.Version > ACadVersion.AC1027)
+    if (_document->header()->version() >= ACadVersion::AC1024 && _document->header()->maintenanceVersion() > 3 ||
+        _document->header()->version() > ACadVersion::AC1027)
     {
         //RL : unknown, possibly the high 32 bits of a 64-bit size?
-        swriter.Write((int) 0);//TODO: Define endian order!!!
+        swriter.write((int) 0);//TODO: Define endian order!!!
     }
 
     //Write the section
-    swriter.Stream.Write(_sectionStream.GetBuffer(), 0, (int) _sectionStream.Length);
+    std::string buf = _sectionStream->str();
+    swriter.write(std::vector<unsigned char>(buf.begin(), buf.end()), 0, (int) buf.length());
 
     //RS: CRC
-    _startWriter->writeRawShort(crc.Seed);
+    _startWriter->writeRawShort(swriter.seed());
 
     _startWriter->writeBytes(_endSentinel);
 

@@ -22,14 +22,14 @@
 
 #pragma once
 
-#include <dwg/classes/DxfClass.h>
 #include <dwg/entities/Entity.h>
 
 namespace dwg {
 
+class DxfClass;
 class LIBDWG_API UnknownEntity : public Entity
 {
-    DxfClass _dxfclass;
+    DxfClass *_dxfclass;
 
 public:
     UnknownEntity();
@@ -44,10 +44,10 @@ public:
     // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    DxfClass dxfClass() const;
+    DxfClass *dxfClass() const;
 
 protected:
-    UnknownEntity(const DxfClass &);
+    UnknownEntity(DxfClass *);
 };
 
 }// namespace dwg

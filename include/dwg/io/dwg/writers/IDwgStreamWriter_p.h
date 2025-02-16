@@ -28,7 +28,7 @@
 #include <dwg/ObjectType.h>
 #include <dwg/Transparency.h>
 #include <dwg/utils/Encoding_p.h>
-
+#include <iostream>
 
 namespace dwg {
 
@@ -38,6 +38,8 @@ class IDwgStreamWriter
 {
 public:
     virtual ~IDwgStreamWriter() = default;
+
+    virtual std::ostream *stream() = 0;
 
     virtual Encoding encoding() = 0;
 

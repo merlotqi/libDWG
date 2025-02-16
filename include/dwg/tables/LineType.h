@@ -24,6 +24,7 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/tables/LinetypeShapeFlags.h>
+#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextStyle.h>
 
@@ -87,7 +88,7 @@ public:
     void addSegment(const Segment &);
 };
 
-class LIBDWG_API LineTypesTable : public Table
+class LIBDWG_API LineTypesTable : public Table<LineType>
 {
 public:
     LineType *ByLayer;

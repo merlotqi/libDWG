@@ -39,6 +39,9 @@ public:
     Dwg21CompressedMetadata compressedMetadata() const;
 
     void setCompressedMetadata(const Dwg21CompressedMetadata &);
+
+private:
+    Dwg21CompressedMetadata _compressedMetadata;
 };
 
 }// namespace dwg

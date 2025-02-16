@@ -22,7 +22,10 @@
 
 #pragma once
 
+#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/EndianConverter_p.h>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 namespace dwg {
@@ -108,5 +111,12 @@ public:
     virtual void write(const std::string &);
     virtual void write(const std::string &, Encoding);
 };
+
+static int stringstream_length(const std::stringstream &ss) { return ss.str().length(); }
+
+static std::vector<unsigned char> stringstream_buffer(const std::stringstream &ss)
+{
+    return std::vector<unsigned char>(ss.str().begin(), ss.str().end());
+}
 
 }// namespace dwg

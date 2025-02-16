@@ -149,6 +149,16 @@ public:
      * @param name The name of the gradient pattern.
      */
     void setName(const std::string &name);
+
+private:
+    bool _enabled;
+    int _reserved;
+    double _angle;
+    double _shift;
+    bool _singleColorGradient;
+    double _colorTint;
+    std::vector<GradientColor> _colors;
+    std::string _name;
 };
 
 }// namespace dwg

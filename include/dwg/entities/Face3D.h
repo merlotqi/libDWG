@@ -33,7 +33,8 @@ class LIBDWG_API Face3D : public Entity
     XYZ _secondCorner;
     XYZ _thirdCorner;
     XYZ _fourthCorner;
-    InvisibleEdgeFlags _flags;// 70
+    InvisibleEdgeFlags _flags;
+
 public:
     Face3D();
 
@@ -49,19 +50,19 @@ public:
     virtual std::string subclassMarker() const override;
 
     XYZ firstCorner() const;
-    void setFirstCorner(const XYZ &) const;
+    void setFirstCorner(const XYZ &);
 
     XYZ secondCorner() const;
-    void setSecondCorner(const XYZ &) const;
+    void setSecondCorner(const XYZ &);
 
     XYZ thirdCorner() const;
-    void setThirdCorner(const XYZ &) const;
+    void setThirdCorner(const XYZ &);
 
     XYZ fourthCorner() const;
-    void setFourthCorner(const XYZ &) const;
+    void setFourthCorner(const XYZ &);
 
     InvisibleEdgeFlags flags() const;
-    void setFlags(InvisibleEdgeFlags) const;
+    void setFlags(InvisibleEdgeFlags);
 };
 
 }// namespace dwg

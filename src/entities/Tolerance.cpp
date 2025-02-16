@@ -19,3 +19,33 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/CadDocument.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Tolerance.h>
+#include <dwg/tables/DimensionStyle.h>
+
+namespace dwg {
+
+Tolerance::Tolerance() {}
+
+Tolerance::~Tolerance() {}
+
+ObjectType Tolerance::objectType() const { return ObjectType::TOLERANCE; }
+
+std::string Tolerance::objectName() const { return DxfFileToken::EntityTolerance; }
+
+std::string Tolerance::subclassMarker() const { return DxfSubclassMarker::Tolerance; }
+
+DimensionStyle *Tolerance::style() const { return _style; }
+
+void Tolerance::setStyle(DimensionStyle *value)
+{
+    if (!value) throw std::runtime_error("Tolerance::setStyle: style is null");
+
+    if (document()) { _style = updateTable(value, document->dimensionStyles()); }
+    else { _style = value; }
+}
+
+}// namespace dwg

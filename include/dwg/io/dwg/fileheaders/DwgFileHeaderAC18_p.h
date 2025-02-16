@@ -64,11 +64,11 @@ public:
     int lastPageId() const;
     void setLastPageId(int);
 
-    long long lastSectionAddr() const;
-    void setLastSectionAddr(long long);
+    unsigned long long lastSectionAddr() const;
+    void setLastSectionAddr(unsigned long long);
 
-    long long secondHeaderAddr() const;
-    void setSecondHeaderAddr(long long);
+    unsigned long long secondHeaderAddr() const;
+    void setSecondHeaderAddr(unsigned long long);
 
     unsigned int gapAmount() const;
     void setGapAmount(unsigned int);
@@ -79,8 +79,8 @@ public:
     unsigned int sectionPageMapId() const;
     void setSectionPageMapId(unsigned int);
 
-    long long pageMapAddress() const;
-    void setPageMapAddress(long long);
+    unsigned long long pageMapAddress() const;
+    void setPageMapAddress(long long unsigned);
 
     unsigned int sectionMapId() const;
     void setSectionMapId(unsigned int);
@@ -96,6 +96,28 @@ public:
 
     std::map<std::string, DwgSectionDescriptor> descriptors() const;
     void setDescriptors(const std::map<std::string, DwgSectionDescriptor> &);
+
+private:
+    unsigned char _dwgVersion;
+    unsigned char _appReleaseVersion;
+    long long _summaryInfoAddr;
+    long long _securityType;
+    long long _vbaProjectAddr;
+    int _rootTreeNodeGap;
+    unsigned int _gapArraySize;
+    unsigned int _CRCSeed;
+    int _lastPageId;
+    unsigned long long _lastSectionAddr;
+    unsigned long long _secondHeaderAddr;
+    unsigned int _gapAmount;
+    unsigned int _sectionAmount;
+    unsigned int _sectionPageMapId;
+    unsigned long long _pageMapAddress;
+    unsigned int _sectionMapId;
+    unsigned int _sectionArrayPageSize;
+    int _rigthGap;
+    int _leftGap;
+    std::map<std::string, DwgSectionDescriptor> _descriptors;
 };
 
 }// namespace dwg

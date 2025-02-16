@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-GroupCodeValueType GroupCodeValue::TransformValue(int code)
+GroupCodeValueType GroupCodeValue::transformValue(int code)
 {
     if (code >= 0 && code <= 4) return GroupCodeValueType::String;
     if (code == 5) return GroupCodeValueType::Handle;

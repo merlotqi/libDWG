@@ -41,6 +41,7 @@ namespace dwg {
 class LIBDWG_API DxfClass
 {
 public:
+    DxfClass();
     /**
      * @brief Constructs a DxfClass with the specified parameters.
      * 
@@ -239,7 +240,6 @@ private:
     short _itemClassId;
     ACadVersion _dwgVersion;
     short _maintenanceVersion;
-
 };
 
 }// namespace dwg

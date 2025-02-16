@@ -73,7 +73,10 @@ public:
      * @brief Returns a solid fill hatch pattern.
      * @return A pointer to a solid fill hatch pattern.
      */
-    static HatchPattern *Solid();
+    static HatchPattern Solid();
+
+    static std::vector<HatchPattern> LoadFrom(const std::string &filepath);
+    static void SavePatterns(const std::string &filepath, const std::vector<HatchPattern> &patterns);
 
     /**
      * @brief Gets the name of the hatch pattern.
@@ -110,6 +113,11 @@ public:
      * @param lines A vector of hatch pattern lines.
      */
     void setLines(const std::vector<HatchPattern::Line> &lines);
+
+private:
+    std::string _name;
+    std::string _description;
+    std::vector<HatchPattern::Line> _lines;
 };
 
 }// namespace dwg

@@ -20,16 +20,17 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/CadDocument.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
 namespace dwg {
 
 DwgHeaderWriter::DwgHeaderWriter(std::ostream *stream, CadDocument *document, Encoding encoding)
-    : DwgSectionIO(document->Header.Version)
+    : DwgSectionIO(document->header()->version())
 {
     _document = document;
     _encoding = encoding;
@@ -92,42 +93,42 @@ void DwgHeaderWriter::write()
     if (R2004Pre)
     {
         //H : Handle of the current viewport entity header (hard pointer)
-        _writer->handleReference(DwgReferenceType::Undefined, 0);
+        _writer->handleReference(0ULL);
     }
 
     //Common:
     //B: DIMASO
-    _writer->writeBit(_document->Header.AssociatedDimensions);
+    _writer->writeBit(_document->header()->associatedDimensions());
     //B: DIMSHO
-    _writer->writeBit(_document->Header.UpdateDimensionsWhileDragging);
+    _writer->writeBit(_document->header()->updateDimensionsWhileDragging());
 
     //R13-R14 Only:
     if (R13_14Only)
     {
         //B : DIMSAV Undocumented.
-        _writer->writeBit(_document->Header.DIMSAV);
+        _writer->writeBit(_document->header()->dIMSAV());
     }
 
     //Common:
     //B: PLINEGEN
-    _writer->writeBit(_document->Header.PolylineLineTypeGeneration);
+    _writer->writeBit(_document->header()->polylineLineTypeGeneration());
     //B : ORTHOMODE
-    _writer->writeBit(_document->Header.OrthoMode);
+    _writer->writeBit(_document->header()->orthoMode());
     //B: REGENMODE
-    _writer->writeBit(_document->Header.RegenerationMode);
+    _writer->writeBit(_document->header()->regenerationMode());
     //B : FILLMODE
-    _writer->writeBit(_document->Header.FillMode);
+    _writer->writeBit(_document->header()->fillMode());
     //B : QTEXTMODE
-    _writer->writeBit(_document->Header.QuickTextMode);
+    _writer->writeBit(_document->header()->quickTextMode());
     //B : PSLTSCALE
-    _writer->writeBit(_document->Header.PaperSpaceLineTypeScaling == header::SpaceLineTypeScaling::Normal);
+    _writer->writeBit(_document->header()->paperSpaceLineTypeScaling() == SpaceLineTypeScaling::Normal);
     //B : LIMCHECK
-    _writer->writeBit(_document->Header.LimitCheckingOn);
+    _writer->writeBit(_document->header()->limitCheckingOn());
 
     //R13-R14 Only (stored in registry from R15 onwards):
     if (R13_14Only)
         //B : BLIPMODE
-        _writer->writeBit(_document->Header.BlipMode);
+        _writer->writeBit(_document->header()->blipMode());
 
     //R2004+:
     if (R2004Plus)
@@ -136,13 +137,13 @@ void DwgHeaderWriter::write()
 
     //Common:
     //B: USRTIMER(User timer on / off).
-    _writer->writeBit(_document->Header.UserTimer);
+    _writer->writeBit(_document->header()->userTimer());
     //B : SKPOLY
-    _writer->writeBit(_document->Header.SketchPolylines);
+    _writer->writeBit(_document->header()->sketchPolylines());
     //B : ANGDIR
-    _writer->writeBit(_document->Header.AngularDirection != units::AngularDirection::CounterClockWise);
+    _writer->writeBit(_document->header()->angularDirection() != AngularDirection::CounterClockWise);
     //B : SPLFRAME
-    _writer->writeBit(_document->Header.ShowSplineControlPoints);
+    _writer->writeBit(_document->header()->showSplineControlPoints());
 
     //R13-R14 Only (stored in registry from R15 onwards):
     if (R13_14Only)
@@ -155,9 +156,9 @@ void DwgHeaderWriter::write()
 
     //Common:
     //B: MIRRTEXT
-    _writer->writeBit(_document->Header.MirrorText);
+    _writer->writeBit(_document->header()->mirrorText());
     //B : WORLDVIEW
-    _writer->writeBit(_document->Header.WorldView);
+    _writer->writeBit(_document->header()->worldView());
 
     //R13 - R14 Only:
     if (R13_14Only)
@@ -168,11 +169,11 @@ void DwgHeaderWriter::write()
 
     //Common:
     //B: TILEMODE
-    _writer->writeBit(_document->Header.ShowModelSpace);
+    _writer->writeBit(_document->header()->showModelSpace());
     //B : PLIMCHECK
-    _writer->writeBit(_document->Header.PaperSpaceLimitsChecking);
+    _writer->writeBit(_document->header()->paperSpaceLimitsChecking());
     //B : VISRETAIN
-    _writer->writeBit(_document->Header.RetainXRefDependentVisibilitySettings);
+    _writer->writeBit(_document->header()->retainXRefDependentVisibilitySettings());
 
     //R13 - R14 Only(stored in registry from R15 onwards):
     if (R13_14Only)
@@ -183,11 +184,11 @@ void DwgHeaderWriter::write()
 
     //Common:
     //B: DISPSILH
-    _writer->writeBit(_document->Header.DisplaySilhouetteCurves);
+    _writer->writeBit(_document->header()->displaySilhouetteCurves());
     //B : PELLIPSE(not present in DXF)
-    _writer->writeBit(_document->Header.CreateEllipseAsPolyline);
+    _writer->writeBit(_document->header()->createEllipseAsPolyline());
     //BS: PROXYGRAPHICS
-    _writer->writeBitShort((short) (_document->Header.ProxyGraphics ? 1 : 0));
+    _writer->writeBitShort((short) (_document->header()->proxyGraphics() ? 1 : 0));
 
     //R13-R14 Only (stored in registry from R15 onwards):
     if (R13_14Only)
@@ -198,24 +199,24 @@ void DwgHeaderWriter::write()
 
     //Common:
     //BS: TREEDEPTH
-    _writer->writeBitShort(_document->Header.SpatialIndexMaxTreeDepth);
+    _writer->writeBitShort(_document->header()->spatialIndexMaxTreeDepth());
     //BS : LUNITS
-    _writer->writeBitShort((short) _document->Header.LinearUnitFormat);
+    _writer->writeBitShort((short) _document->header()->linearUnitFormat());
     //BS : LUPREC
-    _writer->writeBitShort(_document->Header.LinearUnitPrecision);
+    _writer->writeBitShort(_document->header()->linearUnitPrecision());
     //BS : AUNITS
-    _writer->writeBitShort((short) _document->Header.AngularUnit);
+    _writer->writeBitShort((short) _document->header()->angularUnit());
     //BS : AUPREC
-    _writer->writeBitShort(_document->Header.AngularUnitPrecision);
+    _writer->writeBitShort(_document->header()->angularUnitPrecision());
 
     //R13 - R14 Only Only(stored in registry from R15 onwards):
     if (R13_14Only)
         //BS: OSMODE
-        _writer->writeBitShort((short) _document->Header.ObjectSnapMode);
+        _writer->writeBitShort((short) _document->header()->objectSnapMode());
 
     //Common:
     //BS: ATTMODE
-    _writer->writeBitShort((short) _document->Header.AttributeVisibility);
+    _writer->writeBitShort((short) _document->header()->attributeVisibility());
 
     //R13 - R14 Only Only(stored in registry from R15 onwards):
     if (R13_14Only)
@@ -226,7 +227,7 @@ void DwgHeaderWriter::write()
 
     //Common:
     //BS: PDMODE
-    _writer->writeBitShort(_document->Header.PointDisplayMode);
+    _writer->writeBitShort(_document->header()->pointDisplayMode());
 
     //R13 - R14 Only Only(stored in registry from R15 onwards):
     if (R13_14Only)
@@ -248,97 +249,97 @@ void DwgHeaderWriter::write()
 
     //Common:
     //BS : USERI1
-    _writer->writeBitShort(_document->Header.UserShort1);
+    _writer->writeBitShort(_document->header()->userShort1());
     //BS : USERI2
-    _writer->writeBitShort(_document->Header.UserShort2);
+    _writer->writeBitShort(_document->header()->userShort2());
     //BS : USERI3
-    _writer->writeBitShort(_document->Header.UserShort3);
+    _writer->writeBitShort(_document->header()->userShort3());
     //BS : USERI4
-    _writer->writeBitShort(_document->Header.UserShort4);
+    _writer->writeBitShort(_document->header()->userShort4());
     //BS : USERI5
-    _writer->writeBitShort(_document->Header.UserShort5);
+    _writer->writeBitShort(_document->header()->userShort5());
 
     //BS: SPLINESEGS
-    _writer->writeBitShort(_document->Header.NumberOfSplineSegments);
+    _writer->writeBitShort(_document->header()->numberOfSplineSegments());
     //BS : SURFU
-    _writer->writeBitShort(_document->Header.SurfaceDensityU);
+    _writer->writeBitShort(_document->header()->surfaceDensityU());
     //BS : SURFV
-    _writer->writeBitShort(_document->Header.SurfaceDensityV);
+    _writer->writeBitShort(_document->header()->surfaceDensityV());
     //BS : SURFTYPE
-    _writer->writeBitShort(_document->Header.SurfaceType);
+    _writer->writeBitShort(_document->header()->surfaceType());
     //BS : SURFTAB1
-    _writer->writeBitShort(_document->Header.SurfaceMeshTabulationCount1);
+    _writer->writeBitShort(_document->header()->surfaceMeshTabulationCount1());
     //BS : SURFTAB2
-    _writer->writeBitShort(_document->Header.SurfaceMeshTabulationCount2);
+    _writer->writeBitShort(_document->header()->surfaceMeshTabulationCount2());
     //BS : SPLINETYPE
-    _writer->writeBitShort((short) _document->Header.SplineType);
+    _writer->writeBitShort((short) _document->header()->splineType());
     //BS : SHADEDGE
-    _writer->writeBitShort((short) _document->Header.ShadeEdge);
+    _writer->writeBitShort((short) _document->header()->shadeEdge());
     //BS : SHADEDIF
-    _writer->writeBitShort(_document->Header.ShadeDiffuseToAmbientPercentage);
+    _writer->writeBitShort(_document->header()->shadeDiffuseToAmbientPercentage());
     //BS: UNITMODE
-    _writer->writeBitShort(_document->Header.UnitMode);
+    _writer->writeBitShort(_document->header()->unitMode());
     //BS : MAXACTVP
-    _writer->writeBitShort(_document->Header.MaxViewportCount);
+    _writer->writeBitShort(_document->header()->maxViewportCount());
     //BS : ISOLINES
-    _writer->writeBitShort(_document->Header.SurfaceIsolineCount);
+    _writer->writeBitShort(_document->header()->surfaceIsolineCount());
     //BS : CMLJUST
-    _writer->writeBitShort((short) _document->Header.CurrentMultilineJustification);
+    _writer->writeBitShort((short) _document->header()->currentMultilineJustification());
     //BS : TEXTQLTY
-    _writer->writeBitShort(_document->Header.TextQuality);
+    _writer->writeBitShort(_document->header()->textQuality());
     //BD : LTSCALE
-    _writer->writeBitDouble(_document->Header.LineTypeScale);
+    _writer->writeBitDouble(_document->header()->lineTypeScale());
     //BD : TEXTSIZE
-    _writer->writeBitDouble(_document->Header.TextHeightDefault);
+    _writer->writeBitDouble(_document->header()->textHeightDefault());
     //BD : TRACEWID
-    _writer->writeBitDouble(_document->Header.TraceWidthDefault);
+    _writer->writeBitDouble(_document->header()->traceWidthDefault());
     //BD : SKETCHINC
-    _writer->writeBitDouble(_document->Header.SketchIncrement);
+    _writer->writeBitDouble(_document->header()->sketchIncrement());
     //BD : FILLETRAD
-    _writer->writeBitDouble(_document->Header.FilletRadius);
+    _writer->writeBitDouble(_document->header()->filletRadius());
     //BD : THICKNESS
-    _writer->writeBitDouble(_document->Header.ThicknessDefault);
+    _writer->writeBitDouble(_document->header()->thicknessDefault());
     //BD : ANGBASE
-    _writer->writeBitDouble(_document->Header.AngleBase);
+    _writer->writeBitDouble(_document->header()->angleBase());
     //BD : PDSIZE
-    _writer->writeBitDouble(_document->Header.PointDisplaySize);
+    _writer->writeBitDouble(_document->header()->pointDisplaySize());
     //BD : PLINEWID
-    _writer->writeBitDouble(_document->Header.PolylineWidthDefault);
+    _writer->writeBitDouble(_document->header()->polylineWidthDefault());
     //BD : USERR1
-    _writer->writeBitDouble(_document->Header.UserDouble1);
+    _writer->writeBitDouble(_document->header()->userDouble1());
     //BD : USERR2
-    _writer->writeBitDouble(_document->Header.UserDouble2);
+    _writer->writeBitDouble(_document->header()->userDouble2());
     //BD : USERR3
-    _writer->writeBitDouble(_document->Header.UserDouble3);
+    _writer->writeBitDouble(_document->header()->userDouble3());
     //BD : USERR4
-    _writer->writeBitDouble(_document->Header.UserDouble4);
+    _writer->writeBitDouble(_document->header()->userDouble4());
     //BD : USERR5
-    _writer->writeBitDouble(_document->Header.UserDouble5);
+    _writer->writeBitDouble(_document->header()->userDouble5());
     //BD : CHAMFERA
-    _writer->writeBitDouble(_document->Header.ChamferDistance1);
+    _writer->writeBitDouble(_document->header()->chamferDistance1());
     //BD : CHAMFERB
-    _writer->writeBitDouble(_document->Header.ChamferDistance2);
+    _writer->writeBitDouble(_document->header()->chamferDistance2());
     //BD : CHAMFERC
-    _writer->writeBitDouble(_document->Header.ChamferLength);
+    _writer->writeBitDouble(_document->header()->chamferLength());
     //BD : CHAMFERD
-    _writer->writeBitDouble(_document->Header.ChamferAngle);
+    _writer->writeBitDouble(_document->header()->chamferAngle());
     //BD : FACETRES
-    _writer->writeBitDouble(_document->Header.FacetResolution);
+    _writer->writeBitDouble(_document->header()->facetResolution());
     //BD : CMLSCALE
-    _writer->writeBitDouble(_document->Header.CurrentMultilineScale);
+    _writer->writeBitDouble(_document->header()->currentMultilineScale());
     //BD : CELTSCALE
-    _writer->writeBitDouble(_document->Header.CurrentEntityLinetypeScale);
+    _writer->writeBitDouble(_document->header()->currentEntityLinetypeScale());
 
     //TV: MENUNAME
-    _writer->writeVariableText(_document->Header.MenuFileName);
+    _writer->writeVariableText(_document->header()->menuFileName());
 
     //Common:
     //BL: TDCREATE(Julian day)
     //BL: TDCREATE(Milliseconds into the day)
-    _writer->writeDateTime(_document->Header.CreateDateTime);
+    _writer->writeDateTime(_document->header()->createDateTime());
     //BL: TDUPDATE(Julian day)
     //BL: TDUPDATE(Milliseconds into the day)
-    _writer->writeDateTime(_document->Header.UpdateDateTime);
+    _writer->writeDateTime(_document->header()->updateDateTime());
 
     //R2004 +:
     if (R2004Plus)
@@ -354,517 +355,517 @@ void DwgHeaderWriter::write()
     //Common:
     //BL: TDINDWG(Days)
     //BL: TDINDWG(Milliseconds into the day)
-    _writer->writeTimeSpan(_document->Header.TotalEditingTime);
+    _writer->writeTimeSpan(_document->header()->totalEditingTime());
     //BL: TDUSRTIMER(Days)
     //BL: TDUSRTIMER(Milliseconds into the day)
-    _writer->writeTimeSpan(_document->Header.UserElapsedTimeSpan);
+    _writer->writeTimeSpan(_document->header()->userElapsedTimeSpan());
 
     //CMC : CECOLOR
-    _writer->writeCmColor(_document->Header.CurrentEntityColor);
+    _writer->writeCmColor(_document->header()->currentEntityColor());
 
     //H : HANDSEED The next handle, with an 8-bit length specifier preceding the handle
     //bytes (standard hex handle form) (code 0). The HANDSEED is not part of the handle
     //stream, but of the normal data stream (relevant for R21 and later).
-    _writer->Main()->HandleReference(_document->Header.HandleSeed);
+    _writer->main()->handleReference(_document->header()->handleSeed());
 
     //H : CLAYER (hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.CurrentLayer.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->currentLayer()->handle());
 
     //H: TEXTSTYLE(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.CurrentTextStyle.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->currentTextStyle()->handle());
 
     //H: CELTYPE(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.CurrentLineType.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->currentLineType()->handle());
 
     //R2007 + Only:
     if (R2007Plus)
     {
         //H: CMATERIAL(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
     }
 
     //Common:
     //H: DIMSTYLE (hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.DimensionStyleOverrides.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->dimensionStyleOverrides()->handle());
 
     //H: CMLSTYLE (hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+    _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
     //R2000+ Only:
     if (R2000Plus)
     {
         //BD: PSVPSCALE
-        _writer->writeBitDouble(_document->Header.ViewportDefaultViewScaleFactor);
+        _writer->writeBitDouble(_document->header()->viewportDefaultViewScaleFactor());
     }
 
     //Common:
     //3BD: INSBASE(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceInsertionBase);
+    _writer->write3BitDouble(_document->header()->paperSpaceInsertionBase());
     //3BD: EXTMIN(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceExtMin);
+    _writer->write3BitDouble(_document->header()->paperSpaceExtMin());
     //3BD: EXTMAX(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceExtMax);
+    _writer->write3BitDouble(_document->header()->paperSpaceExtMax());
     //2RD: LIMMIN(PSPACE)
-    _writer->write2RawDouble(_document->Header.PaperSpaceLimitsMin);
+    _writer->write2RawDouble(_document->header()->paperSpaceLimitsMin());
     //2RD: LIMMAX(PSPACE)
-    _writer->write2RawDouble(_document->Header.PaperSpaceLimitsMax);
+    _writer->write2RawDouble(_document->header()->paperSpaceLimitsMax());
     //BD: ELEVATION(PSPACE)
-    _writer->writeBitDouble(_document->Header.PaperSpaceElevation);
+    _writer->writeBitDouble(_document->header()->paperSpaceElevation());
     //3BD: UCSORG(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceUcsOrigin);
+    _writer->write3BitDouble(_document->header()->paperSpaceUcsOrigin());
     //3BD: UCSXDIR(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceUcsXAxis);
+    _writer->write3BitDouble(_document->header()->paperSpaceUcsXAxis());
     //3BD: UCSYDIR(PSPACE)
-    _writer->write3BitDouble(_document->Header.PaperSpaceUcsYAxis);
+    _writer->write3BitDouble(_document->header()->paperSpaceUcsYAxis());
 
     //H: UCSNAME (PSPACE) (hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.PaperSpaceUcs.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->paperSpaceUcs()->handle());
 
     //R2000+ Only:
     if (R2000Plus)
     {
         //H : PUCSORTHOREF (hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
         //BS : PUCSORTHOVIEW	??
         _writer->writeBitShort(0);
 
         //H: PUCSBASE(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
         //3BD: PUCSORGTOP
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicTopDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicTopDOrigin());
         //3BD: PUCSORGBOTTOM
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicBottomDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicBottomDOrigin());
         //3BD: PUCSORGLEFT
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicLeftDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicLeftDOrigin());
         //3BD: PUCSORGRIGHT
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicRightDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicRightDOrigin());
         //3BD: PUCSORGFRONT
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicFrontDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicFrontDOrigin());
         //3BD: PUCSORGBACK
-        _writer->write3BitDouble(_document->Header.PaperSpaceOrthographicBackDOrigin);
+        _writer->write3BitDouble(_document->header()->paperSpaceOrthographicBackDOrigin());
     }
 
     //Common:
     //3BD: INSBASE(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceInsertionBase);
+    _writer->write3BitDouble(_document->header()->modelSpaceInsertionBase());
     //3BD: EXTMIN(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceExtMin);
+    _writer->write3BitDouble(_document->header()->modelSpaceExtMin());
     //3BD: EXTMAX(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceExtMax);
+    _writer->write3BitDouble(_document->header()->modelSpaceExtMax());
     //2RD: LIMMIN(MSPACE)
-    _writer->write2RawDouble(_document->Header.ModelSpaceLimitsMin);
+    _writer->write2RawDouble(_document->header()->modelSpaceLimitsMin());
     //2RD: LIMMAX(MSPACE)
-    _writer->write2RawDouble(_document->Header.ModelSpaceLimitsMax);
+    _writer->write2RawDouble(_document->header()->modelSpaceLimitsMax());
     //BD: ELEVATION(MSPACE)
-    _writer->writeBitDouble(_document->Header.Elevation);
+    _writer->writeBitDouble(_document->header()->elevation());
     //3BD: UCSORG(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceOrigin);
+    _writer->write3BitDouble(_document->header()->modelSpaceOrigin());
     //3BD: UCSXDIR(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceXAxis);
+    _writer->write3BitDouble(_document->header()->modelSpaceXAxis());
     //3BD: UCSYDIR(MSPACE)
-    _writer->write3BitDouble(_document->Header.ModelSpaceYAxis);
+    _writer->write3BitDouble(_document->header()->modelSpaceYAxis());
 
     //H: UCSNAME(MSPACE)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.ModelSpaceUcs.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->modelSpaceUcs->handle());
 
     //R2000 + Only:
     if (R2000Plus)
     {
         //H: UCSORTHOREF(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
         //BS: UCSORTHOVIEW	??
         _writer->writeBitShort(0);
 
         //H : UCSBASE(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
         //3BD: UCSORGTOP
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicTopDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicTopDOrigin());
         //3BD: UCSORGBOTTOM
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicBottomDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicBottomDOrigin());
         //3BD: UCSORGLEFT
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicLeftDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicLeftDOrigin());
         //3BD: UCSORGRIGHT
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicRightDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicRightDOrigin());
         //3BD: UCSORGFRONT
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicFrontDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicFrontDOrigin());
         //3BD: UCSORGBACK
-        _writer->write3BitDouble(_document->Header.ModelSpaceOrthographicBackDOrigin);
+        _writer->write3BitDouble(_document->header()->modelSpaceOrthographicBackDOrigin());
 
         //TV : DIMPOST
-        _writer->writeVariableText(_document->Header.DimensionPostFix);
+        _writer->writeVariableText(_document->header()->dimensionPostFix);
         //TV : DIMAPOST
-        _writer->writeVariableText(_document->Header.DimensionAlternateDimensioningSuffix);
+        _writer->writeVariableText(_document->header()->dimensionAlternateDimensioningSuffix);
     }
 
     //R13-R14 Only:
     if (R13_14Only)
     {
         //B: DIMTOL
-        _writer->writeBit(_document->Header.DimensionGenerateTolerances);
+        _writer->writeBit(_document->header()->dimensionGenerateTolerances());
         //B : DIMLIM
-        _writer->writeBit(_document->Header.DimensionLimitsGeneration);
+        _writer->writeBit(_document->header()->dimensionLimitsGeneration());
         //B : DIMTIH
-        _writer->writeBit(_document->Header.DimensionTextInsideHorizontal);
+        _writer->writeBit(_document->header()->dimensionTextInsideHorizontal());
         //B : DIMTOH
-        _writer->writeBit(_document->Header.DimensionTextOutsideHorizontal);
+        _writer->writeBit(_document->header()->dimensionTextOutsideHorizontal());
         //B : DIMSE1
-        _writer->writeBit(_document->Header.DimensionSuppressFirstExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressFirstExtensionLine());
         //B : DIMSE2
-        _writer->writeBit(_document->Header.DimensionSuppressSecondExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressSecondExtensionLine());
         //B : DIMALT
-        _writer->writeBit(_document->Header.DimensionAlternateUnitDimensioning);
+        _writer->writeBit(_document->header()->dimensionAlternateUnitDimensioning());
         //B : DIMTOFL
-        _writer->writeBit(_document->Header.DimensionTextOutsideExtensions);
+        _writer->writeBit(_document->header()->dimensionTextOutsideExtensions());
         //B : DIMSAH
-        _writer->writeBit(_document->Header.DimensionSeparateArrowBlocks);
+        _writer->writeBit(_document->header()->dimensionSeparateArrowBlocks());
         //B : DIMTIX
-        _writer->writeBit(_document->Header.DimensionTextInsideExtensions);
+        _writer->writeBit(_document->header()->dimensionTextInsideExtensions());
         //B : DIMSOXD
-        _writer->writeBit(_document->Header.DimensionSuppressOutsideExtensions);
+        _writer->writeBit(_document->header()->dimensionSuppressOutsideExtensions());
         //RC : DIMALTD
-        _writer->writeByte((unsigned char) _document->Header.DimensionAlternateUnitDecimalPlaces);
+        _writer->writeByte((unsigned char) _document->header()->dimensionAlternateUnitDecimalPlaces());
         //RC : DIMZIN
-        _writer->writeByte((unsigned char) _document->Header.DimensionZeroHandling);
+        _writer->writeByte((unsigned char) _document->header()->dimensionZeroHandling());
         //B : DIMSD1
-        _writer->writeBit(_document->Header.DimensionSuppressFirstDimensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressFirstDimensionLine());
         //B : DIMSD2
-        _writer->writeBit(_document->Header.DimensionSuppressSecondDimensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressSecondDimensionLine());
         //RC : DIMTOLJ
-        _writer->writeByte((unsigned char) _document->Header.DimensionToleranceAlignment);
+        _writer->writeByte((unsigned char) _document->header()->dimensionToleranceAlignment());
         //RC : DIMJUST
-        _writer->writeByte((unsigned char) _document->Header.DimensionTextHorizontalAlignment);
+        _writer->writeByte((unsigned char) _document->header()->dimensionTextHorizontalAlignment());
         //RC : DIMFIT
-        _writer->writeByte((unsigned char) _document->Header.DimensionFit);
+        _writer->writeByte((unsigned char) _document->header()->dimensionFit());
         //B : DIMUPT
-        _writer->writeBit(_document->Header.DimensionCursorUpdate);
+        _writer->writeBit(_document->header()->dimensionCursorUpdate());
         //RC : DIMTZIN
-        _writer->writeByte((unsigned char) _document->Header.DimensionToleranceZeroHandling);
+        _writer->writeByte((unsigned char) _document->header()->dimensionToleranceZeroHandling());
         //RC: DIMALTZ
-        _writer->writeByte((unsigned char) _document->Header.DimensionAlternateUnitZeroHandling);
+        _writer->writeByte((unsigned char) _document->header()->dimensionAlternateUnitZeroHandling());
         //RC : DIMALTTZ
-        _writer->writeByte((unsigned char) _document->Header.DimensionAlternateUnitToleranceZeroHandling);
+        _writer->writeByte((unsigned char) _document->header()->dimensionAlternateUnitToleranceZeroHandling());
         //RC : DIMTAD
-        _writer->writeByte((unsigned char) _document->Header.DimensionTextVerticalAlignment);
+        _writer->writeByte((unsigned char) _document->header()->dimensionTextVerticalAlignment());
         //BS : DIMUNIT
-        _writer->writeBitShort(_document->Header.DimensionUnit);
+        _writer->writeBitShort(_document->header()->dimensionUnit());
         //BS : DIMAUNIT
-        _writer->writeBitShort(_document->Header.DimensionAngularDimensionDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionAngularDimensionDecimalPlaces());
         //BS : DIMDEC
-        _writer->writeBitShort(_document->Header.DimensionDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionDecimalPlaces());
         //BS : DIMTDEC
-        _writer->writeBitShort(_document->Header.DimensionToleranceDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionToleranceDecimalPlaces());
         //BS : DIMALTU
-        _writer->writeBitShort((short) _document->Header.DimensionAlternateUnitFormat);
+        _writer->writeBitShort((short) _document->header()->dimensionAlternateUnitFormat());
         //BS : DIMALTTD
-        _writer->writeBitShort(_document->Header.DimensionAlternateUnitToleranceDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionAlternateUnitToleranceDecimalPlaces());
 
         //H : DIMTXSTY(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, _document->Header.DimensionStyleOverrides.Handle());
+        _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->dimensionStyleOverrides()->handle());
     }
 
     //Common:
     //BD: DIMSCALE
-    _writer->writeBitDouble(_document->Header.DimensionScaleFactor);
+    _writer->writeBitDouble(_document->header()->dimensionScaleFactor());
     //BD : DIMASZ
-    _writer->writeBitDouble(_document->Header.DimensionArrowSize);
+    _writer->writeBitDouble(_document->header()->dimensionArrowSize());
     //BD : DIMEXO
-    _writer->writeBitDouble(_document->Header.DimensionExtensionLineOffset);
+    _writer->writeBitDouble(_document->header()->dimensionExtensionLineOffset());
     //BD : DIMDLI
-    _writer->writeBitDouble(_document->Header.DimensionLineIncrement);
+    _writer->writeBitDouble(_document->header()->dimensionLineIncrement());
     //BD : DIMEXE
-    _writer->writeBitDouble(_document->Header.DimensionExtensionLineExtension);
+    _writer->writeBitDouble(_document->header()->dimensionExtensionLineExtension());
     //BD : DIMRND
-    _writer->writeBitDouble(_document->Header.DimensionRounding);
+    _writer->writeBitDouble(_document->header()->dimensionRounding());
     //BD : DIMDLE
-    _writer->writeBitDouble(_document->Header.DimensionLineExtension);
+    _writer->writeBitDouble(_document->header()->dimensionLineExtension());
     //BD : DIMTP
-    _writer->writeBitDouble(_document->Header.DimensionPlusTolerance);
+    _writer->writeBitDouble(_document->header()->dimensionPlusTolerance());
     //BD : DIMTM
-    _writer->writeBitDouble(_document->Header.DimensionMinusTolerance);
+    _writer->writeBitDouble(_document->header()->dimensionMinusTolerance());
 
     //R2007 + Only:
     if (R2007Plus)
     {
         //BD: DIMFXL
-        _writer->writeBitDouble(_document->Header.DimensionFixedExtensionLineLength);
+        _writer->writeBitDouble(_document->header()->dimensionFixedExtensionLineLength());
         //BD : DIMJOGANG
-        _writer->writeBitDouble(_document->Header.DimensionJoggedRadiusDimensionTransverseSegmentAngle);
+        _writer->writeBitDouble(_document->header()->dimensionJoggedRadiusDimensionTransverseSegmentAngle());
         //BS : DIMTFILL
-        _writer->writeBitShort((short) _document->Header.DimensionTextBackgroundFillMode);
+        _writer->writeBitShort((short) _document->header()->dimensionTextBackgroundFillMode());
         //CMC : DIMTFILLCLR
-        _writer->writeCmColor(_document->Header.DimensionTextBackgroundColor);
+        _writer->writeCmColor(_document->header()->dimensionTextBackgroundColor());
     }
 
     //R2000 + Only:
     if (R2000Plus)
     {
         //B: DIMTOL
-        _writer->writeBit(_document->Header.DimensionGenerateTolerances);
+        _writer->writeBit(_document->header()->dimensionGenerateTolerances());
         //B : DIMLIM
-        _writer->writeBit(_document->Header.DimensionLimitsGeneration);
+        _writer->writeBit(_document->header()->dimensionLimitsGeneration());
         //B : DIMTIH
-        _writer->writeBit(_document->Header.DimensionTextInsideHorizontal);
+        _writer->writeBit(_document->header()->dimensionTextInsideHorizontal());
         //B : DIMTOH
-        _writer->writeBit(_document->Header.DimensionTextOutsideHorizontal);
+        _writer->writeBit(_document->header()->dimensionTextOutsideHorizontal());
         //B : DIMSE1
-        _writer->writeBit(_document->Header.DimensionSuppressFirstExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressFirstExtensionLine());
         //B : DIMSE2
-        _writer->writeBit(_document->Header.DimensionSuppressSecondExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressSecondExtensionLine());
         //BS : DIMTAD
-        _writer->writeBitShort((short) _document->Header.DimensionTextVerticalAlignment);
+        _writer->writeBitShort((short) _document->header()->dimensionTextVerticalAlignment());
         //BS : DIMZIN
-        _writer->writeBitShort((short) _document->Header.DimensionZeroHandling);
+        _writer->writeBitShort((short) _document->header()->dimensionZeroHandling());
         //BS : DIMAZIN
-        _writer->writeBitShort((short) _document->Header.DimensionAngularZeroHandling);
+        _writer->writeBitShort((short) _document->header()->dimensionAngularZeroHandling());
     }
 
     //R2007 + Only:
     if (R2007Plus)
     {
         //BS: DIMARCSYM
-        _writer->writeBitShort((short) _document->Header.DimensionArcLengthSymbolPosition);
+        _writer->writeBitShort((short) _document->header()->dimensionArcLengthSymbolPosition());
     }
 
     //Common:
     //BD: DIMTXT
-    _writer->writeBitDouble(_document->Header.DimensionTextHeight);
+    _writer->writeBitDouble(_document->header()->dimensionTextHeight);
     //BD : DIMCEN
-    _writer->writeBitDouble(_document->Header.DimensionCenterMarkSize);
+    _writer->writeBitDouble(_document->header()->dimensionCenterMarkSize);
     //BD: DIMTSZ
-    _writer->writeBitDouble(_document->Header.DimensionTickSize);
+    _writer->writeBitDouble(_document->header()->dimensionTickSize);
     //BD : DIMALTF
-    _writer->writeBitDouble(_document->Header.DimensionAlternateUnitScaleFactor);
+    _writer->writeBitDouble(_document->header()->dimensionAlternateUnitScaleFactor);
     //BD : DIMLFAC
-    _writer->writeBitDouble(_document->Header.DimensionLinearScaleFactor);
+    _writer->writeBitDouble(_document->header()->dimensionLinearScaleFactor);
     //BD : DIMTVP
-    _writer->writeBitDouble(_document->Header.DimensionTextVerticalPosition);
+    _writer->writeBitDouble(_document->header()->dimensionTextVerticalPosition);
     //BD : DIMTFAC
-    _writer->writeBitDouble(_document->Header.DimensionToleranceScaleFactor);
+    _writer->writeBitDouble(_document->header()->dimensionToleranceScaleFactor);
     //BD : DIMGAP
-    _writer->writeBitDouble(_document->Header.DimensionLineGap);
+    _writer->writeBitDouble(_document->header()->dimensionLineGap);
 
     //R13 - R14 Only:
     if (R13_14Only)
     {
         //T: DIMPOST
-        _writer->writeVariableText(_document->Header.DimensionPostFix);
+        _writer->writeVariableText(_document->header()->dimensionPostFix);
         //T : DIMAPOST
-        _writer->writeVariableText(_document->Header.DimensionAlternateDimensioningSuffix);
+        _writer->writeVariableText(_document->header()->dimensionAlternateDimensioningSuffix);
         //T : DIMBLK
-        _writer->writeVariableText(_document->Header.DimensionBlockName);
+        _writer->writeVariableText(_document->header()->dimensionBlockName);
         //T : DIMBLK1
-        _writer->writeVariableText(_document->Header.DimensionBlockNameFirst);
+        _writer->writeVariableText(_document->header()->dimensionBlockNameFirst);
         //T : DIMBLK2
-        _writer->writeVariableText(_document->Header.DimensionBlockNameSecond);
+        _writer->writeVariableText(_document->header()->dimensionBlockNameSecond);
     }
 
     //R2000 + Only:
     if (R2000Plus)
     {
         //BD: DIMALTRND
-        _writer->writeBitDouble(_document->Header.DimensionAlternateUnitRounding);
+        _writer->writeBitDouble(_document->header()->dimensionAlternateUnitRounding);
         //B : DIMALT
-        _writer->writeBit(_document->Header.DimensionAlternateUnitDimensioning);
+        _writer->writeBit(_document->header()->dimensionAlternateUnitDimensioning);
         //BS : DIMALTD
-        _writer->writeBitShort(_document->Header.DimensionAlternateUnitDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionAlternateUnitDecimalPlaces);
         //B : DIMTOFL
-        _writer->writeBit(_document->Header.DimensionTextOutsideExtensions);
+        _writer->writeBit(_document->header()->dimensionTextOutsideExtensions);
         //B : DIMSAH
-        _writer->writeBit(_document->Header.DimensionSeparateArrowBlocks);
+        _writer->writeBit(_document->header()->dimensionSeparateArrowBlocks);
         //B : DIMTIX
-        _writer->writeBit(_document->Header.DimensionTextInsideExtensions);
+        _writer->writeBit(_document->header()->dimensionTextInsideExtensions);
         //B : DIMSOXD
-        _writer->writeBit(_document->Header.DimensionSuppressOutsideExtensions);
+        _writer->writeBit(_document->header()->dimensionSuppressOutsideExtensions);
     }
 
     //Common:
     //CMC: DIMCLRD
-    _writer->writeCmColor(_document->Header.DimensionLineColor);
+    _writer->writeCmColor(_document->header()->dimensionLineColor);
     //CMC : DIMCLRE
-    _writer->writeCmColor(_document->Header.DimensionExtensionLineColor);
+    _writer->writeCmColor(_document->header()->dimensionExtensionLineColor);
     //CMC : DIMCLRT
-    _writer->writeCmColor(_document->Header.DimensionTextColor);
+    _writer->writeCmColor(_document->header()->dimensionTextColor);
 
     //R2000 + Only:
     if (R2000Plus)
     {
         //BS: DIMADEC
-        _writer->writeBitShort(_document->Header.DimensionAngularDimensionDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionAngularDimensionDecimalPlaces);
         //BS : DIMDEC
-        _writer->writeBitShort(_document->Header.DimensionDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionDecimalPlaces);
         //BS : DIMTDEC
-        _writer->writeBitShort(_document->Header.DimensionToleranceDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionToleranceDecimalPlaces);
         //BS : DIMALTU
-        _writer->writeBitShort((short) _document->Header.DimensionAlternateUnitFormat);
+        _writer->writeBitShort((short) _document->header()->dimensionAlternateUnitFormat);
         //BS : DIMALTTD
-        _writer->writeBitShort(_document->Header.DimensionAlternateUnitToleranceDecimalPlaces);
+        _writer->writeBitShort(_document->header()->dimensionAlternateUnitToleranceDecimalPlaces);
         //BS : DIMAUNIT
-        _writer->writeBitShort((short) _document->Header.DimensionAngularUnit);
+        _writer->writeBitShort((short) _document->header()->dimensionAngularUnit);
         //BS : DIMFRAC
-        _writer->writeBitShort((short) _document->Header.DimensionFractionFormat);
+        _writer->writeBitShort((short) _document->header()->dimensionFractionFormat);
         //BS : DIMLUNIT
-        _writer->writeBitShort((short) _document->Header.DimensionLinearUnitFormat);
+        _writer->writeBitShort((short) _document->header()->dimensionLinearUnitFormat);
         //BS : DIMDSEP
-        _writer->writeBitShort((short) _document->Header.DimensionDecimalSeparator);
+        _writer->writeBitShort((short) _document->header()->dimensionDecimalSeparator);
         //BS : DIMTMOVE
-        _writer->writeBitShort((short) _document->Header.DimensionTextMovement);
+        _writer->writeBitShort((short) _document->header()->dimensionTextMovement);
         //BS : DIMJUST
-        _writer->writeBitShort((short) _document->Header.DimensionTextHorizontalAlignment);
+        _writer->writeBitShort((short) _document->header()->dimensionTextHorizontalAlignment);
         //B : DIMSD1
-        _writer->writeBit(_document->Header.DimensionSuppressFirstExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressFirstExtensionLine);
         //B : DIMSD2
-        _writer->writeBit(_document->Header.DimensionSuppressSecondExtensionLine);
+        _writer->writeBit(_document->header()->dimensionSuppressSecondExtensionLine);
         //BS : DIMTOLJ
-        _writer->writeBitShort((short) _document->Header.DimensionToleranceAlignment);
+        _writer->writeBitShort((short) _document->header()->dimensionToleranceAlignment);
         //BS : DIMTZIN
-        _writer->writeBitShort((short) _document->Header.DimensionToleranceZeroHandling);
+        _writer->writeBitShort((short) _document->header()->dimensionToleranceZeroHandling);
         //BS: DIMALTZ
-        _writer->writeBitShort((short) _document->Header.DimensionAlternateUnitZeroHandling);
+        _writer->writeBitShort((short) _document->header()->dimensionAlternateUnitZeroHandling);
         //BS : DIMALTTZ
-        _writer->writeBitShort((short) _document->Header.DimensionAlternateUnitToleranceZeroHandling);
+        _writer->writeBitShort((short) _document->header()->dimensionAlternateUnitToleranceZeroHandling);
         //B : DIMUPT
-        _writer->writeBit(_document->Header.DimensionCursorUpdate);
+        _writer->writeBit(_document->header()->dimensionCursorUpdate);
         //BS : DIMATFIT
-        _writer->writeBitShort((short) _document->Header.DimensionDimensionTextArrowFit);
+        _writer->writeBitShort((short) _document->header()->dimensionDimensionTextArrowFit);
     }
 
     //R2007 + Only:
     if (R2007Plus)
     {
         //B: DIMFXLON
-        _writer->writeBit(_document->Header.DimensionIsExtensionLineLengthFixed);
+        _writer->writeBit(_document->header()->dimensionIsExtensionLineLengthFixed);
     }
 
     //R2010 + Only:
     if (R2010Plus)
     {
         //B: DIMTXTDIRECTION
-        _writer->writeBit(_document->Header.DimensionTextDirection == tables::TextDirection::RightToLeft);
+        _writer->writeBit(_document->header()->dimensionTextDirection == tables::TextDirection::RightToLeft);
         //BD : DIMALTMZF
-        _writer->writeBitDouble(_document->Header.DimensionAltMzf);
+        _writer->writeBitDouble(_document->header()->dimensionAltMzf);
         //T : DIMALTMZS
-        _writer->writeVariableText(_document->Header.DimensionAltMzs);
+        _writer->writeVariableText(_document->header()->dimensionAltMzs);
         //BD : DIMMZF
-        _writer->writeBitDouble(_document->Header.DimensionMzf);
+        _writer->writeBitDouble(_document->header()->dimensionMzf);
         //T : DIMMZS
-        _writer->writeVariableText(_document->Header.DimensionMzs);
+        _writer->writeVariableText(_document->header()->dimensionMzs);
     }
 
     //R2000 + Only:
     if (R2000Plus)
     {
         //H: DIMTXSTY(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMLDRBLK(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMBLK(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMBLK1(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMBLK2(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
     }
 
     //R2007+ Only:
     if (R2007Plus)
     {
         //H : DIMLTYPE (hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMLTEX1(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DIMLTEX2(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
     }
 
     //R2000+ Only:
     if (R2000Plus)
     {
         //BS: DIMLWD
-        _writer->writeBitShort((short) _document->Header.DimensionLineWeight);
+        _writer->writeBitShort((short) _document->header()->dimensionLineWeight);
         //BS : DIMLWE
-        _writer->writeBitShort((short) _document->Header.ExtensionLineWeight);
+        _writer->writeBitShort((short) _document->header()->ExtensionLineWeight);
     }
 
     //H: BLOCK CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->BlockRecords.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->BlockRecords.Handle());
     //H: LAYER CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->Layers.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->Layers.Handle());
     //H: STYLE CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->TextStyles.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->TextStyles.Handle());
     //H: LINETYPE CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->LineTypes.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->LineTypes.Handle());
     //H: VIEW CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->Views.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->Views.Handle());
     //H: UCS CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->UCSs.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->UCSs.Handle());
     //H: VPORT CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->VPorts.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->VPorts.Handle());
     //H: APPID CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->AppIds.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->AppIds.Handle());
     //H: DIMSTYLE CONTROL OBJECT(hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->DimensionStyles.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->DimensionStyles.Handle());
 
     //R13 - R15 Only:
     if (R13_15Only)
     {
         //H: VIEWPORT ENTITY HEADER CONTROL OBJECT(hard owner)
-        _writer->HandleReference(DwgReferenceType::HardOwnership, 0);
+        _writer->handleReference(DwgReferenceType::HardOwnership, 0);
     }
 
     //Common:
     //H: DICTIONARY(ACAD_GROUP)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->Groups.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->Groups.Handle());
     //H: DICTIONARY(ACAD_MLINESTYLE)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->MLineStyles.Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->MLineStyles.Handle());
 
     //H : DICTIONARY (NAMED OBJECTS) (hard owner)
-    _writer->HandleReference(DwgReferenceType::HardOwnership, _document->_rootDictionary.Handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->_rootDictionary.Handle());
 
     //R2000+ Only:
     if (R2000Plus)
     {
         //BS: TSTACKALIGN, default = 1(not present in DXF)
-        _writer->writeBitShort(_document->Header.StackedTextAlignment);
+        _writer->writeBitShort(_document->header()->stackedTextAlignment());
         //BS: TSTACKSIZE, default = 70(not present in DXF)
-        _writer->writeBitShort(_document->Header.StackedTextSizePercentage);
+        _writer->writeBitShort(_document->header()->stackedTextSizePercentage());
 
         //TV: HYPERLINKBASE
-        _writer->writeVariableText(_document->Header.HyperLinkBase);
+        _writer->writeVariableText(_document->header()->hyperLinkBase());
         //TV : STYLESHEET
-        _writer->writeVariableText(_document->Header.StyleSheetName);
+        _writer->writeVariableText(_document->header()->styleSheetName);
 
         //H : DICTIONARY(LAYOUTS)(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, _document->Layouts.Handle());
+        _writer->handleReference(DwgReferenceType::HardPointer, _document->Layouts.Handle());
         //H: DICTIONARY(PLOTSETTINGS)(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DICTIONARY(PLOTSTYLES)(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
     }
 
     //R2004 +:
     if (R2004Plus)
     {
         //H: DICTIONARY (MATERIALS) (hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DICTIONARY (COLORS) (hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
     }
 
     //R2007 +:
     if (R2007Plus)
     {
         //H: DICTIONARY(VISUALSTYLE)(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
 
         //R2013+:
         if (R2013Plus)
         {
             //H : UNKNOWN (hard pointer)	//DICTIONARY_VISUALSTYLE
-            _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+            _writer->handleReference(DwgReferenceType::HardPointer, 0);
         }
     }
 
@@ -874,87 +875,87 @@ void DwgHeaderWriter::write()
         //BL: Flags:
 
         //CELWEIGHT Flags & 0x001F
-        int flags = ((int) _document->Header.CurrentEntityLineWeight & 0x1F) |
+        int flags = ((int) _document->header()->currentEntityLineWeight & 0x1F) |
                     //ENDCAPS Flags & 0x0060
-                    (_document->Header.EndCaps << 0x5) |
+                    (_document->header()->EndCaps << 0x5) |
                     //JOINSTYLE Flags & 0x0180
-                    (_document->Header.JoinStyle << 0x7);
+                    (_document->header()->JoinStyle << 0x7);
 
         //LWDISPLAY!(Flags & 0x0200)
-        if (!_document->Header.DisplayLineWeight) { flags |= 0x200; }
+        if (!_document->header()->displayLineWeight) { flags |= 0x200; }
         //XEDIT!(Flags & 0x0400)
-        if (!_document->Header.XEdit) { flags |= 0x400; }
+        if (!_document->header()->XEdit) { flags |= 0x400; }
         //EXTNAMES Flags & 0x0800
-        if (_document->Header.ExtendedNames) { flags |= 0x800; }
+        if (_document->header()->ExtendedNames) { flags |= 0x800; }
         //PSTYLEMODE Flags & 0x2000
-        if (_document->Header.PlotStyleMode == 1) { flags |= 0x2000; }
+        if (_document->header()->plotStyleMode == 1) { flags |= 0x2000; }
         //OLESTARTUP Flags & 0x4000
-        if (_document->Header.LoadOLEObject) { flags |= 0x4000; }
+        if (_document->header()->loadOLEObject) { flags |= 0x4000; }
 
         _writer->writeBitLong(flags);
 
         //BS: INSUNITS
-        _writer->writeBitShort((short) _document->Header.InsUnits);
+        _writer->writeBitShort((short) _document->header()->InsUnits);
         //BS : CEPSNTYPE
-        _writer->writeBitShort((short) _document->Header.CurrentEntityPlotStyle);
+        _writer->writeBitShort((short) _document->header()->currentEntityPlotStyle);
 
-        if (_document->Header.CurrentEntityPlotStyle == header::EntityPlotStyleType::ByObjectId)
+        if (_document->header()->currentEntityPlotStyle == header::EntityPlotStyleType::ByObjectId)
         {
             //H: CPSNID(present only if CEPSNTYPE == 3) (hard pointer)
-            _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+            _writer->handleReference(DwgReferenceType::HardPointer, 0);
         }
 
         //TV: FINGERPRINTGUID
-        _writer->writeVariableText(_document->Header.FingerPrintGuid);
+        _writer->writeVariableText(_document->header()->fingerPrintGuid);
         //TV : VERSIONGUID
-        _writer->writeVariableText(_document->Header.VersionGuid);
+        _writer->writeVariableText(_document->header()->VersionGuid);
     }
 
     //R2004 +:
     if (R2004Plus)
     {
         //RC: SORTENTS
-        _writer->writeByte((unsigned char) _document->Header.EntitySortingFlags);
+        _writer->writeByte((unsigned char) _document->header()->EntitySortingFlags);
         //RC : INDEXCTL
-        _writer->writeByte((unsigned char) _document->Header.IndexCreationFlags);
+        _writer->writeByte((unsigned char) _document->header()->IndexCreationFlags);
         //RC : HIDETEXT
-        _writer->writeByte(_document->Header.HideText);
+        _writer->writeByte(_document->header()->hideText);
         //RC : XCLIPFRAME, before R2010 the value can be 0 or 1 only.
-        _writer->writeByte(_document->Header.ExternalReferenceClippingBoundaryType);
+        _writer->writeByte(_document->header()->ExternalReferenceClippingBoundaryType);
         //RC : DIMASSOC
-        _writer->writeByte((unsigned char) _document->Header.DimensionAssociativity);
+        _writer->writeByte((unsigned char) _document->header()->dimensionAssociativity);
         //RC : HALOGAP
-        _writer->writeByte(_document->Header.HaloGapPercentage);
+        _writer->writeByte(_document->header()->haloGapPercentage);
         //BS : OBSCUREDCOLOR
-        _writer->writeBitShort(_document->Header.ObscuredColor.Index());
+        _writer->writeBitShort(_document->header()->ObscuredColor.Index());
         //BS : INTERSECTIONCOLOR
-        _writer->writeBitShort(_document->Header.InterfereColor.Index());
+        _writer->writeBitShort(_document->header()->InterfereColor.Index());
         //RC : OBSCUREDLTYPE
-        _writer->writeByte(_document->Header.ObscuredType);
+        _writer->writeByte(_document->header()->ObscuredType);
         //RC: INTERSECTIONDISPLAY
-        _writer->writeByte(_document->Header.IntersectionDisplay);
+        _writer->writeByte(_document->header()->IntersectionDisplay);
 
         //TV : PROJECTNAME
-        _writer->writeVariableText(_document->Header.ProjectName);
+        _writer->writeVariableText(_document->header()->projectName);
     }
 
     //Common:
     //H: BLOCK_RECORD(*PAPER_SPACE)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->PaperSpace().Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->PaperSpace().Handle());
     //H: BLOCK_RECORD(*MODEL_SPACE)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->ModelSpace().Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->ModelSpace().Handle());
     //H: LTYPE(BYLAYER)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByLayer"].Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByLayer"].Handle());
     //H: LTYPE(BYBLOCK)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByBlock"].Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByBlock"].Handle());
     //H: LTYPE(CONTINUOUS)(hard pointer)
-    _writer->HandleReference(DwgReferenceType::HardPointer, _document->LineTypes["Continuous"].Handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["Continuous"].Handle());
 
     //R2007 +:
     if (R2007Plus)
     {
         //B: CAMERADISPLAY
-        _writer->writeBit(_document->Header.CameraDisplayObjects);
+        _writer->writeBit(_document->header()->cameraDisplayObjects);
 
         //BL : unknown
         _writer->writeBitLong(0);
@@ -964,73 +965,73 @@ void DwgHeaderWriter::write()
         _writer->writeBitDouble(0);
 
         //BD : STEPSPERSEC
-        _writer->writeBitDouble(_document->Header.StepsPerSecond);
+        _writer->writeBitDouble(_document->header()->stepsPerSecond);
         //BD : STEPSIZE
-        _writer->writeBitDouble(_document->Header.StepSize);
+        _writer->writeBitDouble(_document->header()->stepSize);
         //BD : 3DDWFPREC
-        _writer->writeBitDouble(_document->Header.Dw3DPrecision);
+        _writer->writeBitDouble(_document->header()->dw3DPrecision);
         //BD : LENSLENGTH
-        _writer->writeBitDouble(_document->Header.LensLength);
+        _writer->writeBitDouble(_document->header()->lensLength);
         //BD : CAMERAHEIGHT
-        _writer->writeBitDouble(_document->Header.CameraHeight);
+        _writer->writeBitDouble(_document->header()->cameraHeight);
         //RC : SOLIDHIST
-        _writer->writeByte((unsigned char) _document->Header.SolidsRetainHistory);
+        _writer->writeByte((unsigned char) _document->header()->solidsRetainHistory);
         //RC : SHOWHIST
-        _writer->writeByte((unsigned char) _document->Header.ShowSolidsHistory);
+        _writer->writeByte((unsigned char) _document->header()->showSolidsHistory);
         //BD : PSOLWIDTH
-        _writer->writeBitDouble(_document->Header.SweptSolidWidth);
+        _writer->writeBitDouble(_document->header()->sweptSolidWidth);
         //BD : PSOLHEIGHT
-        _writer->writeBitDouble(_document->Header.SweptSolidHeight);
+        _writer->writeBitDouble(_document->header()->sweptSolidHeight);
         //BD : LOFTANG1
-        _writer->writeBitDouble(_document->Header.DraftAngleFirstCrossSection);
+        _writer->writeBitDouble(_document->header()->draftAngleFirstCrossSection);
         //BD : LOFTANG2
-        _writer->writeBitDouble(_document->Header.DraftAngleSecondCrossSection);
+        _writer->writeBitDouble(_document->header()->draftAngleSecondCrossSection);
         //BD : LOFTMAG1
-        _writer->writeBitDouble(_document->Header.DraftMagnitudeFirstCrossSection);
+        _writer->writeBitDouble(_document->header()->draftMagnitudeFirstCrossSection);
         //BD : LOFTMAG2
-        _writer->writeBitDouble(_document->Header.DraftMagnitudeSecondCrossSection);
+        _writer->writeBitDouble(_document->header()->draftMagnitudeSecondCrossSection);
         //BS : LOFTPARAM
-        _writer->writeBitShort(_document->Header.SolidLoftedShape);
+        _writer->writeBitShort(_document->header()->solidLoftedShape);
         //RC : LOFTNORMALS
-        _writer->writeByte((unsigned char) _document->Header.LoftedObjectNormals);
+        _writer->writeByte((unsigned char) _document->header()->loftedObjectNormals);
         //BD : LATITUDE
-        _writer->writeBitDouble(_document->Header.Latitude);
+        _writer->writeBitDouble(_document->header()->latitude);
         //BD : LONGITUDE
-        _writer->writeBitDouble(_document->Header.Longitude);
+        _writer->writeBitDouble(_document->header()->longitude);
         //BD : NORTHDIRECTION
-        _writer->writeBitDouble(_document->Header.NorthDirection);
+        _writer->writeBitDouble(_document->header()->northDirection);
         //BL : TIMEZONE
-        _writer->writeBitLong(_document->Header.TimeZone);
+        _writer->writeBitLong(_document->header()->timeZone);
         //RC : LIGHTGLYPHDISPLAY
-        _writer->writeByte((unsigned char) _document->Header.DisplayLightGlyphs);
+        _writer->writeByte((unsigned char) _document->header()->displayLightGlyphs);
         //RC : TILEMODELIGHTSYNCH	??
         _writer->writeByte((unsigned char) '0');
         //RC : DWFFRAME
-        _writer->writeByte((unsigned char) _document->Header.DwgUnderlayFramesVisibility);
+        _writer->writeByte((unsigned char) _document->header()->dwgUnderlayFramesVisibility);
         //RC : DGNFRAME
-        _writer->writeByte((unsigned char) _document->Header.DgnUnderlayFramesVisibility);
+        _writer->writeByte((unsigned char) _document->header()->dgnUnderlayFramesVisibility);
 
         //B : unknown
         _writer->writeBit(false);
 
         //CMC : INTERFERECOLOR
-        _writer->writeCmColor(_document->Header.InterfereColor);
+        _writer->writeCmColor(_document->header()->InterfereColor);
 
         //H : INTERFEREOBJVS(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: INTERFEREVPVS(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
         //H: DRAGVS(hard pointer)
-        _writer->HandleReference(DwgReferenceType::HardPointer, 0);
+        _writer->handleReference(DwgReferenceType::HardPointer, 0);
 
         //RC: CSHADOW
-        _writer->writeByte((unsigned char) _document->Header.ShadowMode);
+        _writer->writeByte((unsigned char) _document->header()->shadowMode);
         //BD : unknown
-        _writer->writeBitDouble(_document->Header.ShadowPlaneLocation);
+        _writer->writeBitDouble(_document->header()->shadowPlaneLocation);
     }
 
     //R14 +:
-    if (_document->Header.Version >= ACadVersion::AC1014)
+    if (_document->header()->Version >= ACadVersion::AC1014)
     {
         //BS : unknown short(type 5 / 6 only) these do not seem to be required,
         _writer->writeBitShort(-1);
@@ -1059,7 +1060,7 @@ void DwgHeaderWriter::write()
 void DwgHeaderWriter::writeSizeAndCrc()
 {
     //0xCF,0x7B,0x1F,0x23,0xFD,0xDE,0x38,0xA9,0x5F,0x7C,0x68,0xB8,0x4E,0x6D,0x33,0x5F
-    _startWriter->WriteBytes(DwgSectionDefinition::StartSentinels[SectionName()]);
+    _startWriter->writeBytes(DwgSectionDefinition::StartSentinels[sectionName()]);
 
     CRC8StreamHandler *crc = new CRC8StreamHandler(_startWriter->Stream(), 0xC0C1);
     StreamIO swriter = new StreamIO(crc);
@@ -1068,7 +1069,7 @@ void DwgHeaderWriter::writeSizeAndCrc()
     swriter.Write((int) _msmain.Length);
 
     //R2010/R2013 (only present if the maintenance version is greater than 3!) or R2018+:
-    if (R2010Plus && _document->Header.MaintenanceVersion > 3 || R2018Plus)
+    if (R2010Plus && _document->header()->maintenanceVersion > 3 || R2018Plus)
     {
         //Unknown (4 unsigned char long), might be part of a 64-bit size.
         swriter.Write<int>(0);

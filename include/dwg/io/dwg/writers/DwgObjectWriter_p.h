@@ -24,6 +24,9 @@
 
 #include <dwg/io/dwg/DwgSectionIO_p.h>
 #include <dwg/utils/Encoding_p.h>
+#include <map>
+#include <queue>
+#include <sstream>
 
 namespace dwg {
 
@@ -46,8 +49,67 @@ class UCS;
 class View;
 class VPort;
 class DimensionStyle;
-
 class Arc;
+class AttributeEntity;
+class AttributeDefinition;
+class AttributeBase;
+class Circle;
+class Dimension;
+class DimensionLinear;
+class DimensionAligned;
+class DimensionRadius;
+class DimensionAngular2Line;
+class DimensionAngular3Pt;
+class DimensionDiameter;
+class DimensionOrdinate;
+class Ellipse;
+class Insert;
+class Face3D;
+class MLine;
+class LwPolyline;
+class Hatch;
+class Leader;
+class MultiLeader;
+class MultiLeaderAnnotContext;
+class LeaderRoot;
+class LeaderLine;
+class Line;
+class Point;
+class PolyfaceMesh;
+class Polyline2D;
+class Polyline3D;
+class Seqend;
+class Shape;
+class Solid;
+class Solid3D;
+class CadWipeoutBase;
+class Spline;
+class Ray;
+class TextEntity;
+class MText;
+class VertexFaceRecord;
+class Vertex2D;
+class Vertex;
+class Tolerance;
+class Viewport;
+class XLine;
+class AcdbPlaceHolder;
+class BookColor;
+class CadDictionaryWithDefault;
+class Dictionary;
+class DictionaryVariable;
+class GeoData;
+class Group;
+class ImageDefinitionReactor;
+class ImageDefinition;
+class Layout;
+class MLineStyle;
+class MultiLeaderStyle;
+class PlotSettings;
+class Scale;
+class SortEntitiesTable;
+class XRecord;
+class CadDictionary;
 
 class DwgObjectWriter : public DwgSectionIO
 {
@@ -55,6 +117,7 @@ public:
     DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true,
                     bool writeXData = true);
     ~DwgObjectWriter();
+    std::string sectionName() const;
     void write();
 
     std::map<unsigned long long, long long> handleMap() const;
@@ -95,6 +158,8 @@ private:
     void writeVPort(VPort *vport);
 
 private:
+    /*
+ */
     void writeEntity(Entity *entity);
     void writeArc(Arc *arc);
     void writeAttribute(AttributeEntity *att);
@@ -118,8 +183,6 @@ private:
     void writeLeader(Leader *leader);
     void writeMultiLeader(MultiLeader *multiLeader);
     void writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *annotContext);
-    void writeLeaderRoot(MultiLeaderAnnotContext::LeaderRoot *leaderRoot);
-    void writeLeaderLine(MultiLeaderAnnotContext::LeaderLine *leaderLine);
     void writeLine(Line *line);
     void writePoint(Point *point);
     void writePolyfaceMesh(PolyfaceMesh *fm);

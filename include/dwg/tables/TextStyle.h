@@ -26,6 +26,7 @@
 #include <dwg/tables/FontFlags.h>
 #include <dwg/tables/StyleFlags.h>
 #include <dwg/tables/TableEntry.h>
+#include <dwg/tables/TableCollection.h>
 
 namespace dwg {
 
@@ -87,7 +88,7 @@ public:
     bool isShapeFile() const;
 };
 
-class LIBDWG_API TextStylesTable : public Table
+class LIBDWG_API TextStylesTable : public Table<TextStyle>
 {
 public:
     TextStylesTable() = default;

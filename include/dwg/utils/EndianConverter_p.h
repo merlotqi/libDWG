@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <vector>
+
 namespace dwg {
 
 struct byte_order

@@ -25,6 +25,7 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/io/CadWriterBase.h>
 #include <dwg/io/CadWriterConfiguration.h>
+#include <map>
 
 namespace dwg {
 
@@ -36,39 +37,27 @@ private:
     ACadVersion _version;
     DwgFileHeader *_fileHeader;
     IDwgFileHeaderWriter *_fileHeaderWriter;
+    std::map<unsigned long long, long long> _handlesMap;
 
 public:
     DwgWriter(const std::string &filename, CadDocument *document);
-
     DwgWriter(std::ofstream *stream, CadDocument *document);
-
+    ~DwgWriter();
     void write() override;
 
 private:
     void getFileHeaderWriter();
-
     void writeHeader();
-
     void writeClasses();
-
     void writeSummaryInfo();
-
     void writePreview();
-
     void writeAppInfo();
-
     void writeFileDepList();
-
     void writeRevHistory();
-
     void writeAuxHeader();
-
     void writeObjects();
-
     void writeObjFreeSpace();
-
     void writeTemplate();
-
     void writeHandles();
 };
 

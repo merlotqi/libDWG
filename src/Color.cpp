@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <cpl_ports.h>
 #include <dwg/Color.h>
+#include <dwg/utils/EndianConverter_p.h>
 #include <stdexcept>
 
 namespace dwg {
@@ -293,23 +293,28 @@ Color Color::ByEntity = Color((short) 257);
 
 unsigned int Color::getInt24(const std::vector<unsigned char> &array)
 {
-#ifdef CPL_LITTLE_ENDIAN
-    return (unsigned int) (array[0] | array[1] << 8 | array[2] << 16);
-#else
-    return (unsigned int) (array[0] << 16 | array[1] << 8 | array[2]);
-#endif
+    if constexpr (is_little_endian) { return (unsigned int) (array[0] | array[1] << 8 | array[2] << 16); }
+    else { return (unsigned int) (array[0] << 16 | array[1] << 8 | array[2]); }
 }
 
 std::vector<unsigned char> Color::getRgb() const
 {
     std::vector<unsigned char> rgb(3);
-    if (IsTrueColor())
+    if (isTrueColor())
     {
         rgb[0] = (unsigned char) (_color >> 16);
         rgb[1] = (unsigned char) (_color >> 8);
         rgb[2] = (unsigned char) _color;
     }
     else { return _indexRgb[_color]; }
+}
+
+Color::Color(const Color &rhs) { _color = rhs._color; }
+
+Color &Color::operator=(const Color &rhs)
+{
+    _color = rhs._color;
+    return *this;
 }
 
 Color::Color(unsigned int trueColor)
@@ -332,9 +337,9 @@ Color::Color(unsigned char r, unsigned char g, unsigned char b) : Color(std::vec
 
 Color::Color(const std::vector<unsigned char> &rgb) { _color = getInt24(rgb); }
 
-Color Color::FromTrueColor(unsigned int color) { return Color(color); }
+Color Color::fromTrueColor(unsigned int color) { return Color(color); }
 
-unsigned char Color::ApproxIndex(unsigned char r, unsigned char g, unsigned char b)
+unsigned char Color::approxIndex(unsigned char r, unsigned char g, unsigned char b)
 {
     int prevDist = -1;
     for (int i = 0; i < _indexRgb.size(); i++)
@@ -352,26 +357,26 @@ unsigned char Color::ApproxIndex(unsigned char r, unsigned char g, unsigned char
     return 0;
 }
 
-bool Color::IsByLayer() const { return Index() == 256; }
+bool Color::isByLayer() const { return index() == 256; }
 
-bool Color::IsByBlock() const { return Index() == 0; }
+bool Color::isByBlock() const { return index() == 0; }
 
-short Color::Index() const { IsTrueColor() ? (short) -1 : (short) _color; }
+short Color::index() const { isTrueColor() ? (short) -1 : (short) _color; }
 
-int Color::TrueColor() const { IsTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
+int Color::trueColor() const { isTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
 
-bool Color::IsTrueColor() const { return _color > 257 || _color < 0; }
+bool Color::isTrueColor() const { return _color > 257 || _color < 0; }
 
-unsigned char Color::R() const { return getRgb()[0]; }
+unsigned char Color::red() const { return getRgb()[0]; }
 
-unsigned char Color::G() const { return getRgb()[1]; }
+unsigned char Color::green() const { return getRgb()[1]; }
 
-unsigned char Color::B() const { return getRgb()[2]; }
+unsigned char Color::blue() const { return getRgb()[2]; }
 
-unsigned char Color::GetApproxIndex() const
+unsigned char Color::approxIndex() const
 {
-    if (IsTrueColor()) { return ApproxIndex(R(), G(), B()); }
-    else { return (unsigned char) Index(); }
+    if (isTrueColor()) { return approxIndex(red(), green(), blue()); }
+    else { return (unsigned char) index(); }
 }
 
 }// namespace dwg

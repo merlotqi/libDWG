@@ -19,3 +19,29 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Ray.h>
+
+namespace dwg {
+
+Ray::Ray() : _startPoint(XYZ::Zero), _direction(XYZ::Zero) {}
+
+Ray::~Ray() {}
+
+ObjectType Ray::objectType() const { return ObjectType::RAY; }
+
+std::string Ray::objectName() const { return DxfFileToken::EntityRay; }
+
+std::string Ray::subclassMarker() const { return DxfSubclassMarker::Ray; }
+
+XYZ Ray::startPoint() const { return _startPoint; }
+
+void Ray::setStartPoint(const XYZ &point) { _startPoint = point; }
+
+XYZ Ray::direction() const { return _direction; }
+
+void Ray::setDirection(const XYZ &direction) { _direction = direction; }
+
+}// namespace dwg

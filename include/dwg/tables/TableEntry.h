@@ -22,11 +22,10 @@
 
 #pragma once
 
-#include <assert.h>
 #include <dwg/CadObject.h>
 #include <dwg/INamedCadObject.h>
-#include <dwg/exports.h>
 #include <dwg/tables/StandardFlags.h>
+#include <map>
 
 namespace dwg {
 
@@ -95,96 +94,6 @@ protected:
 protected:
     StandardFlags _flags; /**< Flags associated with the table entry. */
     std::string _name;    /**< The name of the table entry. */
-};
-
-/**
- * @class Table
- * @brief Represents a table that holds entries in a DWG/DXF drawing.
- *
- * The table contains a collection of table entries, which can be added, retrieved, and modified.
- */
-class LIBDWG_API Table : public CadObject
-{
-    std::map<std::string, TableEntry *> _entries; /**< Map of table entries, keyed by name. */
-
-public:
-    /**
-     * @brief Constructs a Table object.
-     */
-    Table();
-
-    /**
-     * @brief Retrieves the object name for the table.
-     * 
-     * @return The object name as a string.
-     */
-    std::string objectName() const override;
-
-    /**
-     * @brief Retrieves the subclass marker for the table.
-     * 
-     * @return A string representing the subclass marker.
-     */
-    std::string subclassMarker() const override;
-
-    /**
-     * @brief Retrieves a table entry by its name.
-     * 
-     * @param key The name of the table entry.
-     * @return A pointer to the corresponding TableEntry.
-     */
-    TableEntry *operator[](const std::string &key) const;
-
-    /**
-     * @brief Adds a new table entry to the table.
-     * 
-     * @param entry The table entry to add.
-     */
-    void ddd(TableEntry *entry);
-
-    /**
-     * @brief Checks if a table entry with the given name exists.
-     * 
-     * @param key The name of the table entry.
-     * @return True if the entry exists, false otherwise.
-     */
-    bool contains(const std::string &key);
-
-    /**
-     * @brief Retrieves a table entry by its name.
-     * 
-     * @param key The name of the table entry.
-     * @return A pointer to the corresponding TableEntry.
-     */
-    TableEntry *getValue(const std::string &key);
-
-    /**
-     * @brief Creates default entries in the table.
-     */
-    void createDefaultEntries();
-
-protected:
-    /**
-     * @brief Adds a new table entry with a specified key.
-     * 
-     * @param key The key (name) for the table entry.
-     * @param item The table entry to add.
-     */
-    void add(const std::string &key, TableEntry *item);
-
-    /**
-     * @brief Adds a handle prefix to the specified table entry.
-     * 
-     * @param item The table entry to modify.
-     */
-    void addHandlePrefix(TableEntry *item);
-
-    /**
-     * @brief Retrieves the default entries for the table.
-     * 
-     * @return A vector of strings representing the default entries.
-     */
-    virtual std::vector<std::string> defaultEntries() const = 0;
 };
 
 }// namespace dwg

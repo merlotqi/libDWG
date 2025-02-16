@@ -339,7 +339,7 @@ bool CadHeader::updateDimensionsWhileDragging() const {}
 
 void CadHeader::setUpdateDimensionsWhileDragging(bool) {}
 
-bool CadHeader::dIMSAV() const {}
+bool CadHeader::DIMSAV() const {}
 
 void CadHeader::setDIMSAV(bool) {}
 
