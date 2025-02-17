@@ -31,6 +31,7 @@ class LIBDWG_API ImageDefinitionReactor : public NonGraphicalObject
 {
 public:
     ImageDefinitionReactor();
+    ImageDefinitionReactor(ImageDefinition *definition);
     ~ImageDefinitionReactor();
 
     ObjectType objectType() const override;
@@ -39,13 +40,17 @@ public:
 
     std::string subclassMarker() const override;
 
-    int rasterImageDefReactor() const;
+    int classVersion() const;
 
-    void setRasterImageDefReactor(int);
+    void setClassVersion(int);
 
     ImageDefinition *definition() const;
 
     void setDefinition(ImageDefinition *);
+
+private:
+    ImageDefinition *_definition;
+    int _classVersion;
 };
 
 }// namespace dwg

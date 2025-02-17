@@ -48,6 +48,12 @@ public:
 
     std::map<unsigned long long, Entity *> entities() const;
     void setEntities(const std::map<unsigned long long, Entity *> &);
+
+private:
+    std::string _description;
+    bool _isUnnamed;
+    bool _selectable;
+    std::map<unsigned long long, Entity *> _entities;
 };
 
 }// namespace dwg

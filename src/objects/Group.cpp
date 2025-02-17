@@ -20,8 +20,36 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/Group.h>
 
 namespace dwg {
+
+Group::Group() {}
+
+Group::~Group() {}
+
+ObjectType Group::objectType() const { return ObjectType::GROUP; }
+
+std::string Group::objectName() const { return DxfFileToken::TableGroup; }
+
+std::string Group::subclassMarker() const { return DxfSubclassMarker::Group; }
+
+std::string Group::description() const { return _description; }
+
+void Group::setDescription(const std::string & value) { _description = value; }
+
+bool Group::isUnnamed() const { return _isUnnamed; }
+
+void Group::setIsUnnamed(bool value) { _isUnnamed = value; }
+
+bool Group::selectable() const { return _selectable; }
+
+void Group::setSelectable(bool value) { _selectable = value; }
+
+std::map<unsigned long long, Entity *> Group::entities() const { return _entities; }
+
+void Group::setEntities(const std::map<unsigned long long, Entity *> & value) { _entites = value; }
 
 }// namespace dwg

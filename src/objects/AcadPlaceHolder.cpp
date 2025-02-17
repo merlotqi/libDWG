@@ -20,8 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/AcadPlaceHolder.h>
 
 namespace dwg {
+
+AcdbPlaceHolder::AcdbPlaceHolder() {}
+
+AcdbPlaceHolder::~AcdbPlaceHolder() {}
+
+ObjectType AcdbPlaceHolder::objectType() const { return ObjectType::ACDBPLACEHOLDER; }
+
+std::string AcdbPlaceHolder::objectName() const { return DxfFileToken::ObjectPlaceholder; }
+
+std::string AcdbPlaceHolder::subclassMarker() const { return DxfSubclassMarker::AcDbPlaceHolder; }
 
 }// namespace dwg

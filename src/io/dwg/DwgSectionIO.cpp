@@ -54,5 +54,4 @@ bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual, const
     return true;
 }
 
-
 }// namespace dwg

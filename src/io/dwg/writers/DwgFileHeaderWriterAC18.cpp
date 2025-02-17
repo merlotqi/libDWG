@@ -485,5 +485,4 @@ void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream, DwgSectionD
     writer.Write(map.ODA);
 }
 
-
 }// namespace dwg

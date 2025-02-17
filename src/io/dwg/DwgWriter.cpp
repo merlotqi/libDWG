@@ -300,5 +300,4 @@ void DwgWriter::writeHandles()
     _fileHeaderWriter->addSection(DwgSectionDefinition::Handles, stream.release(), true);
 }
 
-
 }// namespace dwg

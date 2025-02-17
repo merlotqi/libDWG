@@ -55,6 +55,13 @@ public:
 
     ResolutionUnit units() const;
     void setUnits(ResolutionUnit);
+
+private:
+    int _classVersion;
+    XY _size;
+    XY _defaultSize;
+    bool _isLoaded;
+    ResolutionUnit _units;
 };
 
 }// namespace dwg

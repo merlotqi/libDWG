@@ -148,5 +148,4 @@ void DwgHandleWriter::processPosition(std::streampos pos)
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));
 }
 
-
 }// namespace dwg

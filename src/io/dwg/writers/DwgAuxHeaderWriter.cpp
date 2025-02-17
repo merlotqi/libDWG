@@ -156,5 +156,4 @@ void DwgAuxHeaderWriter::write()
     }
 }
 
-
 }// namespace dwg
