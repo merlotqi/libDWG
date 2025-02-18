@@ -23,12 +23,94 @@
 #pragma once
 
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/GeoDataVersion.h>
 
 namespace dwg {
 
-class GeoData
+class BlockRecord;
+class LIBDWG_API GeoData : public NonGraphicalObject
 {
+public:
+    struct GeoMeshFace
+    {
+        int index1;
+        int index2;
+        int index3;
+    };
 
+    struct GeoMeshPoint
+    {
+        XY source;
+        XY destination;
+    };
+
+public:
+    GeoData();
+    ~GeoData();
+
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
+
+    GeoDataVersion version() const;
+    void setVersion(GeoDataVersion);
+
+    DesignCoordinatesType coordinatesType() const;
+    void setCoordinatesType(DesignCoordinatesType);
+
+    BlockRecord *hostBlock() const;
+    void setHostBlock(BlockRecord *);
+
+    XYZ designPoint() const;
+    void setDesignPoint(const XYZ &);
+
+    XYZ referencePoint() const;
+    void setReferencePoint(const XYZ &);
+
+    XY northDirection() const;
+    void setNorthDirection(const XY &);
+
+    double horizontalUnitScale() const;
+    void setHorizontalUnitScale(double);
+
+    double verticalUnitScale() const;
+    void setVerticalUnitScale(double);
+
+    UnitsType horizontalUnits() const;
+    void setHorizontalUnits(UnitsType);
+
+    UnitsType verticalUnits() const;
+    void setVerticalUnits(UnitsType);
+
+    XYZ upDirection() const;
+    void setUpDirection(const XYZ &);
+
+    ScaleEstimationType scaleEstimationMethod() const;
+    void setScaleEstimationMethod(ScaleEstimationType);
+
+    bool enableSeaLevelCorrection() const;
+    void setEnableSeaLevelCorrection(bool);
+
+    double userSpecifiedScaleFactor() const;
+    void setUserSpecifiedScaleFactor(double);
+
+    double seaLevelElevation() const;
+    void setSeaLevelElevation(double);
+
+    double coordinateProjectionRadius() const;
+    void setCoordinateProjectionRadius(double);
+
+    std::string coordinateSystemDefinition() const;
+    void setCoordinateSystemDefinition(const std::string &);
+
+    std::string geoRssTag() const;
+    void setGeoRssTag(const std::string &);
+
+    std::string observationFromTag() const;
+    void setObservationFromTag(const std::string &);
+
+    std::string observationToTag() const;
+    void setObservationToTag(const std::string &);
 };
 
 }

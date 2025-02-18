@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-class Material : public NonGraphicalObject
+class LIBDWG_API Material : public NonGraphicalObject
 {
 public:
     Material();

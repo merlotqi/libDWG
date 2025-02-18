@@ -28,10 +28,11 @@
 
 namespace dwg {
 
-class Layout : public PlotSettings
+class LIBDWG_API Layout : public PlotSettings
 {
 public:
-    Layout(const std::string &name, const std::string &blockName = std::string());
+    Layout(const std::string &name);
+    ~Layout();
 
     static constexpr auto ModelLayoutName = "Model";
     static constexpr auto PaperLayoutName = "Layout1";
@@ -85,10 +86,28 @@ public:
     UCS *ucs() const;
     void setUCS(UCS *);
 
-    UCS *baseUCS() cnst;
+    UCS *baseUCS() const;
     void setBaseUCS(UCS *);
 
     bool isPaperSpace() const;
+
+private:
+    LayoutFlags _layoutFlags;
+    int _tabOrder;
+    XY _minLimits;
+    XY _maxLimits;
+    XYZ _insertionBasePoint;
+    XYZ _minExtents;
+    XYZ _maxExtents;
+    double _elevation;
+    XYZ _origin;
+    XYZ _xaxis;
+    XYZ _yaxis;
+    OrthographicType _ucsOrthographicType;
+    BlockRecord *_associatedBlock;
+    Viewport *_viewport;
+    UCS *_ucs;
+    UCS *_baseUCS;
 };
 
 }// namespace dwg

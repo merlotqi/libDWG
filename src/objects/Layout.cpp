@@ -20,8 +20,110 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/Layout.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
+    LayoutFlags _layoutFlags;
+    int _tabOrder;
+    XY _minLimits;
+    XY _maxLimits;
+    XYZ _insertionBasePoint;
+    XYZ _minExtents;
+    XYZ _maxExtents;
+    double _elevation;
+    XYZ _origin;
+    XYZ _xaxis;
+    XYZ _yaxis;
+    OrthographicType _ucsOrthographicType;
+    BlockRecord *_associatedBlock;
+    Viewport *_viewport;
+    UCS *_ucs;
+    UCS *_baseUCS;
+
+Layout::Layout(const std::string &name)  : _layoutFlags(LayoutFlag::None), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
+    , _maxLimits(XY(277.0, 202.5)), _insertionBasePoint(XYZ::Zero), _minExtents(XYZ(25.7, 19.5, 0.0)), _maxExtents(XYZ(231.3, 175.5, 0.0)),
+    _elevation(0.0), _origin(XYZ::Zero), _xaxis(XYZ::AxisX), _yaxis(XYZ::AxisY), _ucsOrthographicType(0), _associatedBlock(nullptr), 
+    _viewport(nullptr), _ucs(nullptr), _baseUCS(nullptr)
+{
+    _name = name;
+}
+
+ObjectType Layout::objectType() const { return ObjectType::LAYOUT; }
+
+std::string Layout::objectName() const { return DxfFileToken::ObjectLayout; }
+
+std::string Layout::subclassMarker() const { return DxfSubclassMarker::Layout; }
+
+LayoutFlags Layout::layoutFlags() const { return _layoutFlags; }
+
+void Layout::setLayoutFlags(LayoutFlags value) { _layoutFlags = value; }
+
+int Layout::tabOrder() const { return _tabOrder; }
+
+void Layout::setTabOrder(int value) { return _tabOrder = value; } 
+
+XY Layout::minLimits() const { return _minLimits; }
+
+void Layout::setMinLimits(const XY & value) { _minLimits = value; }
+
+XY Layout::maxLimits() const { return _maxLimits; }
+
+void Layout::setMaxLimits(const XY & value) { _maxLimits = value; }
+
+XYZ Layout::insertionBasePoint() const { return _insertionBasePoint; }
+
+void Layout::setInsertionBasePoint(const XYZ & value) { _insertionBasePoint = value; }
+
+XYZ Layout::minExtents() const { return _minExtents; }
+
+void Layout::setMinExtents(const XYZ & value) { _minExtents = value; }
+
+XYZ Layout::maxExtents() const { return _maxExtents; }
+
+void Layout::setMaxExtents(const XYZ & value) { _maxExtents = value; }
+
+double Layout::elevation() const { return _elevation; }
+
+void Layout::setElevation(double value) { _elevation = value; }
+
+XYZ Layout::origin() const { return _origin; }
+
+void Layout::setOrigin(const XYZ & value) { _origin = value; }
+
+XYZ Layout::xAxis() const { return _xaxis; }
+
+void Layout::setXAxis(const XYZ & value) { _xaxis = value; }
+
+XYZ Layout::yAxis() const { return _yaxis; }
+
+void Layout::setYAxis(const XYZ & value) { _yaxis = value; }
+
+OrthographicType Layout::ucsOrthographicType() const { return _ucsOrthographicType; }
+
+void Layout::setUcsOrthographicType(OrthographicType value) { _ucsOrthographicType = value; }
+
+BlockRecord *Layout::associatedBlock() const { return _associatedBlock; }
+
+void Layout::setAssociatedBlock(BlockRecord *value) { _associatedBlock = value; }
+
+Viewport *Layout::viewport() const { return _viewport; }
+
+void Layout::setViewport(Viewport *value) { _viewport = value; }
+
+UCS *Layout::ucs() const { return _ucs; }
+
+void Layout::setUCS(UCS *value) { _ucs = value; }
+
+UCS *Layout::baseUCS() const { return _baseUCS; }
+
+void Layout::setBaseUCS(UCS *value) { _baseUCS = value; }
+
+bool Layout::isPaperSpace() const 
+{  
+    return false;
+}
 
 }// namespace dwg

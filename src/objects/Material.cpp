@@ -20,8 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/Material.h>
 
 namespace dwg {
+
+Material::Material() {}
+
+Material::~Material() {}
+
+ObjectType Material::objectType() const { return ObjectType::UNLISTED; }
+
+std::string Material::objectName() const { return DxfFileToken::ObjectMaterial; }
+
+std::string Material::subclassMarker() const { return DxfSubclassMarker::Material; }
 
 }// namespace dwg
