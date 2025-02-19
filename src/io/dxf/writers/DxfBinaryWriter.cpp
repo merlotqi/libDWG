@@ -19,3 +19,9 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/io/dxf/writers/DxfBinaryWriter_p.h>
+
+namespace dwg {
+
+}// namespace dwg

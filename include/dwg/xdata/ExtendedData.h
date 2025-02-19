@@ -22,25 +22,13 @@
 
 #pragma once
 
+#include <dwg/DwgVariant.h>
+
 namespace dwg {
 
-class DxfSectionWriterBase
+class ExtendedData
 {
-public:
-    DxfSectionWriterBase(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *holder, DxfWriterConfiguration configuration); 
-    virtual ~DxfSectionWriterBase();
-    virtual std::string sectionName() const = 0;
 
-    void write();
-    ACadVersion version() const;
-    CadObjectHolder *holder();
-
-protected:
-    virtual void writeSection() = 0;
-    void writeCommonObjectData(CadObject *object);
-    void writeExtendedData(ExtendedDataDictionary xdata);
-    void writeCommonEntityData(Entity *entity);
-    void writeLongTextValue(int code, int subcode, const std::string &text);
 };
 
-}// namespace dwg
+}

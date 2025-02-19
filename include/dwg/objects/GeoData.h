@@ -111,6 +111,9 @@ public:
 
     std::string observationToTag() const;
     void setObservationToTag(const std::string &);
+
+    std::vector<GeoMeshPoint> points() const;
+    std::vector<GeoMashFace> faces() const;
 };
 
 }

@@ -20,4 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include "CRC32StreamHandler.h"
+#include <dwg/io/dwg/CRC32StreamHandler_p.h>
+
+namespace dwg {
+
+}// namespace dwg

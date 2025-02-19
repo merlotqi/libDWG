@@ -31,6 +31,7 @@ namespace dwg {
 
 enum DwgVariantType
 {
+    None,
     I8,
     UI8,
     I16,
@@ -47,7 +48,7 @@ enum DwgVariantType
     BLOB,
 };
 
-typedef std::variant<char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long,
+typedef std::variant<std::monostate, char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long,
                      float, double, std::string, XY, XYZ, std::vector<unsigned char>>
         DwgVariant;
 

@@ -43,7 +43,6 @@ unsigned short CRC8StreamHandlerBase::Seed() const { return _seed; }
 
 void CRC8StreamHandlerBase::Seed(unsigned short seed) { _seed = seed; }
 
-
 unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
 {
     int index = value ^ (unsigned char) key;

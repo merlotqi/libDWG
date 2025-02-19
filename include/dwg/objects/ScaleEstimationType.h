@@ -32,4 +32,4 @@ enum ScaleEstimationType
     Prismodial = 4
 };
 
-}
+}// namespace dwg
