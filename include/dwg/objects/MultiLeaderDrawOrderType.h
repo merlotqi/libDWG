@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Flags (bit-coded).
-enum MultiLeaderDrawOrderType
+enum class MultiLeaderDrawOrderType
 {
     /// draw content first,
     ContentFirst = 0,

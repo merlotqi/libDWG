@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/GeoDataVersion.h>
+#include <dwg/objects/NonGraphicalObject.h>
+
 
 namespace dwg {
 
@@ -116,4 +117,4 @@ public:
     std::vector<GeoMashFace> faces() const;
 };
 
-}
+}// namespace dwg

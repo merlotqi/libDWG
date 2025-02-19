@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Block-type flags (bit-coded values, may be combined).
-enum BlockTypeFlag
+enum class BlockTypeFlag
 {
     /// None
     None = 0,

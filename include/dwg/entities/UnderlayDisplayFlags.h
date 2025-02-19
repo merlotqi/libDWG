@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Underlay display options.
-enum UnderlayDisplayFlag : unsigned char
+enum class UnderlayDisplayFlag : unsigned char
 {
     /// Clipping is on.
     ClippingOn = 1,

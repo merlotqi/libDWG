@@ -24,26 +24,26 @@
 
 #include <dwg/io/CadReaderConfiguration.h>
 #include <set>
-#include <vector>
 #include <string>
- 
+#include <vector>
+
 namespace dwg {
- 
+
 class LIBDWG_API DxfWriterConfiguration : public CadWriterConfiguration
 {
     std::set<std::string> _headerVariables;
 
     DxfWriterConfiguration();
- 
+
     ~DxfWriterConfiguration();
- 
+
     bool writeAllHeaderVariables() const;
- 
+
     void setWriteAllHeaderVariables(bool value);
 
     void addHeaderVariable(const std::string &name);
 
     bool removeHeaderVariable(const std::string &name);
 };
- 
-}
+
+}// namespace dwg

@@ -86,7 +86,7 @@ public:
     {
         for (const auto &name: defaultEntries())
         {
-            if (contains(entry)) continue;
+            if (contains(name)) continue;
             add(name, new T());
         }
     }

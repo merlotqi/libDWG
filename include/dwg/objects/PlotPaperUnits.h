@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Plot paper units
-enum PlotPaperUnits
+enum class PlotPaperUnits
 {
     /// Inches
     Inches = 0,

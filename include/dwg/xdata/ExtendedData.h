@@ -28,7 +28,6 @@ namespace dwg {
 
 class ExtendedData
 {
-
 };
 
-}
+}// namespace dwg

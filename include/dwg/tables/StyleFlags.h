@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
-enum StyleFlag
+enum class StyleFlag
 {
     /// Default
     None = 0,

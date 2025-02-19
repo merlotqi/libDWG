@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum DesignCoordinatesType
+enum class DesignCoordinatesType
 {
     Unknown = 0,
     /// Local grid.

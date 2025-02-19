@@ -29,7 +29,7 @@ namespace dwg {
 class LIBDWG_API DxfReaderConfiguration : public CadReaderConfiguration
 {
     bool _clearCache;
-    
+
 public:
     DxfReaderConfiguration();
 
@@ -40,4 +40,4 @@ public:
     void setClearCache(bool value);
 };
 
-}
+}// namespace dwg

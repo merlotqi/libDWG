@@ -47,4 +47,4 @@ private:
     void writeACDSData();
 };
 
-}
+}// namespace dwg

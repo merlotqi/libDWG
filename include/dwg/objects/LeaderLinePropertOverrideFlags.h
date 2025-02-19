@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum LeaderLinePropertOverrideFlag : int
+enum class LeaderLinePropertOverrideFlag : int
 {
     eNone = 0,
     ePathType = 1,

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Flags (bit-coded values)
-enum MLineFlag
+enum class MLineFlag
 {
     /// Has at least one vertex (code 72 is greater than 0)
     Has = 1,

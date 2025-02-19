@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the spline flags
-enum SplineFlag : unsigned short
+enum class SplineFlag : unsigned short
 {
     /// None
     None = 0,
@@ -48,7 +48,7 @@ enum SplineFlag : unsigned short
 typedef int SplineFlags;
 
 /// Defines the spline flags 1
-enum SplineFlag1 : unsigned short
+enum class SplineFlag1 : unsigned short
 {
     /// None
     None = 0,

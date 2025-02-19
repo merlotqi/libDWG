@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum Notification
+enum class Notification
 {
     NotImplemented = -1,
     None = 0,

@@ -51,7 +51,7 @@ public:
      * - MultiLine: Multi-line text.
      * - ConstantMultiLine: Multi-line text that remains constant.
      */
-    enum AttributeType
+    enum class AttributeType
     {
         SingleLine = 1,       ///< Single-line text.
         MultiLine = 2,        ///< Multi-line text.

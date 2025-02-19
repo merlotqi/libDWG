@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Shadow mode for a 3D object
-enum ShadowMode : unsigned char
+enum class ShadowMode : unsigned char
 {
     /// Casts and receives shadows
     CastsAndReceives = 0,

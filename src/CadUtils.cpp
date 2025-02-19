@@ -26,47 +26,47 @@
 namespace dwg {
 
 static std::map<ACadVersion, std::string> AcadVersionToString = {
-        {Unknown, "Unknown"},
-        {  MC0_0,   "MC0_0"},
-        {  AC1_2,   "AC1_2"},
-        {  AC1_4,   "AC1_4"},
-        { AC1_50,  "AC1_50"},
-        { AC2_10,  "AC2_10"},
-        { AC1002,  "AC1002"},
-        { AC1003,  "AC1003"},
-        { AC1004,  "AC1004"},
-        { AC1006,  "AC1006"},
-        { AC1009,  "AC1009"},
-        { AC1012,  "AC1012"},
-        { AC1014,  "AC1014"},
-        { AC1015,  "AC1015"},
-        { AC1018,  "AC1018"},
-        { AC1021,  "AC1021"},
-        { AC1024,  "AC1024"},
-        { AC1027,  "AC1027"},
-        { AC1032,  "AC1032"}
+        {ACadVersion::Unknown, "Unknown"},
+        {  ACadVersion::MC0_0,   "MC0_0"},
+        {  ACadVersion::AC1_2,   "AC1_2"},
+        {  ACadVersion::AC1_4,   "AC1_4"},
+        { ACadVersion::AC1_50,  "AC1_50"},
+        { ACadVersion::AC2_10,  "AC2_10"},
+        { ACadVersion::AC1002,  "AC1002"},
+        { ACadVersion::AC1003,  "AC1003"},
+        { ACadVersion::AC1004,  "AC1004"},
+        { ACadVersion::AC1006,  "AC1006"},
+        { ACadVersion::AC1009,  "AC1009"},
+        { ACadVersion::AC1012,  "AC1012"},
+        { ACadVersion::AC1014,  "AC1014"},
+        { ACadVersion::AC1015,  "AC1015"},
+        { ACadVersion::AC1018,  "AC1018"},
+        { ACadVersion::AC1021,  "AC1021"},
+        { ACadVersion::AC1024,  "AC1024"},
+        { ACadVersion::AC1027,  "AC1027"},
+        { ACadVersion::AC1032,  "AC1032"}
 };
 
 static std::map<std::string, ACadVersion> stringToAcadVersion = {
-        {"Unknown", Unknown},
-        {  "MC0_0",   MC0_0},
-        {  "AC1_2",   AC1_2},
-        {  "AC1_4",   AC1_4},
-        { "AC1_50",  AC1_50},
-        { "AC2_10",  AC2_10},
-        { "AC1002",  AC1002},
-        { "AC1003",  AC1003},
-        { "AC1004",  AC1004},
-        { "AC1006",  AC1006},
-        { "AC1009",  AC1009},
-        { "AC1012",  AC1012},
-        { "AC1014",  AC1014},
-        { "AC1015",  AC1015},
-        { "AC1018",  AC1018},
-        { "AC1021",  AC1021},
-        { "AC1024",  AC1024},
-        { "AC1027",  AC1027},
-        { "AC1032",  AC1032}
+        {"Unknown", ACadVersion::Unknown},
+        {  "MC0_0",   ACadVersion::MC0_0},
+        {  "AC1_2",   ACadVersion::AC1_2},
+        {  "AC1_4",   ACadVersion::AC1_4},
+        { "AC1_50",  ACadVersion::AC1_50},
+        { "AC2_10",  ACadVersion::AC2_10},
+        { "AC1002",  ACadVersion::AC1002},
+        { "AC1003",  ACadVersion::AC1003},
+        { "AC1004",  ACadVersion::AC1004},
+        { "AC1006",  ACadVersion::AC1006},
+        { "AC1009",  ACadVersion::AC1009},
+        { "AC1012",  ACadVersion::AC1012},
+        { "AC1014",  ACadVersion::AC1014},
+        { "AC1015",  ACadVersion::AC1015},
+        { "AC1018",  ACadVersion::AC1018},
+        { "AC1021",  ACadVersion::AC1021},
+        { "AC1024",  ACadVersion::AC1024},
+        { "AC1027",  ACadVersion::AC1027},
+        { "AC1032",  ACadVersion::AC1032}
 };
 
 std::map<std::string, CodePage> CadUtils::_dxfEncodingMap = {
@@ -246,38 +246,41 @@ ACadVersion CadUtils::GetVersionFromName(const std::string &name)
 
 std::string CadUtils::GetNameFromVersion(ACadVersion version)
 {
-    return acadVersionToString[version];
+    //return acadVersionToString[version];
     return std::string();//version.ToString().Replace('_', '.');
 }
 
-double CadUtils::toJulianCalendar(DateTime date)
+double CadUtils::ToJulianCalendar(time_t date)
 {
-    int year = date.year();
-    int month = date.month();
-    int day = date.day();
-    double hour = date.hour();
-    double minute = date.minute();
-    double second = date.second();
-    double millisecond = date.millisecond();
-    double fraction = day + hour / 24.0 + minute / 1440.0 + (second + millisecond / 1000) / 86400.0;
+    // TODO
+    return 0.0;// date.ToOADate();
 
-    if (month < 3)
-    {
-        year -= 1;
-        month += 12;
-    }
+    // int year = date.year();
+    // int month = date.month();
+    // int day = date.day();
+    // double hour = date.hour();
+    // double minute = date.minute();
+    // double second = date.second();
+    // double millisecond = date.millisecond();
+    // double fraction = day + hour / 24.0 + minute / 1440.0 + (second + millisecond / 1000) / 86400.0;
 
-    int a = year / 100;
-    int b = 2 - a + a / 4;
-    int c;
-    if (year < 0) { c = (int) (365.25 * year - 0.75); }
-    else { c = (int) (365.25 * year); }
+    // if (month < 3)
+    // {
+    //     year -= 1;
+    //     month += 12;
+    // }
 
-    int d = (int) (30.6001 * (month + 1));
-    return b + c + d + 1720995 + fraction;
+    // int a = year / 100;
+    // int b = 2 - a + a / 4;
+    // int c;
+    // if (year < 0) { c = (int) (365.25 * year - 0.75); }
+    // else { c = (int) (365.25 * year); }
+
+    // int d = (int) (30.6001 * (month + 1));
+    // return b + c + d + 1720995 + fraction;
 }
 
-DateTime CadUtils::FromJulianCalendar(double date)
+time_t CadUtils::FromJulianCalendar(double date)
 {
     if (date < 1721426 || date > 5373484)
     {
@@ -310,10 +313,10 @@ DateTime CadUtils::FromJulianCalendar(double date)
     int seconds = (int) decimalSeconds;
     int milliseconds = (int) ((decimalSeconds - seconds) * 1000);
 
-    return DateTime(years, months, days, hours, minutes, seconds, milliseconds);
+    return 0.0;// DateTime(years, months, days, hours, minutes, seconds, milliseconds);
 }
 
-TimeSpan CadUtils::EditingTime(double elapsed)
+double CadUtils::EditingTime(double elapsed)
 {
     int days = (int) elapsed;
     double fraction = elapsed - days;
@@ -328,28 +331,28 @@ TimeSpan CadUtils::EditingTime(double elapsed)
     int seconds = (int) decimalSeconds;
     int milliseconds = (int) ((decimalSeconds - seconds) * 1000);
 
-    return TimeSpan(days, hours, minutes, seconds, milliseconds);
+    return 0.0;// TimeSpan(days, hours, minutes, seconds, milliseconds);
 }
 
-void CadUtils::DateToJulian(DateTime date, int &jdate, int &miliseconds)
+void CadUtils::DateToJulian(time_t date, int &jdate, int &miliseconds)
 {
-    if (date < DateTime(1, 1, 1, 12, 0, 0))
-    {
-        jdate = 0;
-        miliseconds = 0;
-        return;
-    }
+    // if (date < DateTime(1, 1, 1, 12, 0, 0))
+    // {
+    //     jdate = 0;
+    //     miliseconds = 0;
+    //     return;
+    // }
 
-    TimeSpan twelveHours(12, 0, 0, 0, 0);
+    // TimeSpan twelveHours(12, 0, 0, 0, 0);
 
-    date = date - twelveHours;
-    int day = (int) std::floor((14.0 - date.month()) / 12.0);
-    int year = date.year() + 4800 - day;
-    int month = date.month();
-    jdate = date.day() + (int) std::floor((153.0 * (double) (month + 12 * day - 3) + 2.0) / 5.0) + 365 * year +
-            (int) std::floor((double) year / 4.0) - (int) std::floor((double) year / 100.0) +
-            (int) std::floor((double) year / 400.0) - 32045;
-    miliseconds = date.millisecond() + date.second() * 1000 + date.minute() * 60000 + date.hour() * 3600000;
+    // date = date - twelveHours;
+    // int day = (int) std::floor((14.0 - date.month()) / 12.0);
+    // int year = date.year() + 4800 - day;
+    // int month = date.month();
+    // jdate = date.day() + (int) std::floor((153.0 * (double) (month + 12 * day - 3) + 2.0) / 5.0) + 365 * year +
+    //         (int) std::floor((double) year / 4.0) - (int) std::floor((double) year / 100.0) +
+    //         (int) std::floor((double) year / 400.0) - 32045;
+    // miliseconds = date.millisecond() + date.second() * 1000 + date.minute() * 60000 + date.hour() * 3600000;
 }
 
 }// namespace dwg

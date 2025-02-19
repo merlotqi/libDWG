@@ -1,3 +1,4 @@
+
 /**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
  *
@@ -22,11 +23,15 @@
 
 #pragma once
 
-#include <dwg/DxfCode.h>
 #include <dwg/DwgVariant.h>
+#include <dwg/DxfCode.h>
+
 
 namespace dwg {
 
+class DxfClassMap;
+class IHandledCadObject;
+class INamedCadObject;
 class DxfClassMap;
 class IHandledCadObject;
 class INamedCadObject;
@@ -34,22 +39,23 @@ class IDxfStreamWriter
 {
 public:
     virtual ~IDxfStreamWriter() = default;
-    
+
     virtual void write(DxfCode code, DwgVariant value, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void write(int code, DwgVariant value, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void writeTrueColor(int code, const Color &color, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void writeCmColor(int code, const Color &color, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void writeHandle(int code, IHandledCadObject *value, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void writeName(int code, INamedCadObject *value, DxfClassMap *clsmap = nullptr) = 0;
-    
+
     virtual void flush() = 0;
-    
+
     virtual void close() = 0;
 };
 
+}// namespace dwg
 }// namespace dwg

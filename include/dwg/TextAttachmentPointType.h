@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// \brief Enumeration for text attachment point types.
-enum TextAttachmentPointType : short
+enum class TextAttachmentPointType : short
 {
     Left = 1,
     Center = 2,

@@ -32,7 +32,7 @@ namespace dwg {
  * how the clipping operation is applied to an object, either keeping the content 
  * outside the clipping boundary or only the content inside the boundary.
  */
-enum ClipMode : unsigned char
+enum class ClipMode : unsigned char
 {
     Outside,///< Content outside the clipping boundary is kept.
     Inside, ///< Content inside the clipping boundary is kept.

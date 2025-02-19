@@ -25,8 +25,9 @@
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/tables/FontFlags.h>
 #include <dwg/tables/StyleFlags.h>
-#include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TableCollection.h>
+#include <dwg/tables/TableEntry.h>
+
 
 namespace dwg {
 

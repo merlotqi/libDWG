@@ -32,6 +32,7 @@ namespace dwg {
 enum DwgVariantType
 {
     None,
+    None,
     I8,
     UI8,
     I16,
@@ -48,8 +49,8 @@ enum DwgVariantType
     BLOB,
 };
 
-typedef std::variant<std::monostate, char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long,
-                     float, double, std::string, XY, XYZ, std::vector<unsigned char>>
+typedef std::variant<std::monostate, char, unsigned char, short, unsigned short, int, unsigned int, long long,
+                     unsigned long long, float, double, std::string, XY, XYZ, std::vector<unsigned char>>
         DwgVariant;
 
 inline static bool dwg_variant_valid(const DwgVariant &val) { return !(std::holds_alternative<std::monostate>(val)); }

@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum GeoDataVersion
+enum class GeoDataVersion
 {
     R2009 = 1,
     R2010 = 2,

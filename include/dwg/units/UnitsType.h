@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum UnitsType : short
+enum class UnitsType : short
 {
     /// Unitless.
     Unitless = 0,

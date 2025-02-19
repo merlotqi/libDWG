@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum GroupCodeValueType
+enum class GroupCodeValueType
 {
     None,
 

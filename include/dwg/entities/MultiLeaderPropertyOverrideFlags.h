@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum MultiLeaderPropertyOverrideFlag : int
+enum class MultiLeaderPropertyOverrideFlag : int
 {
     /// No Flag: No property to be overridden
     None = 0,

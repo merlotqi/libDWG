@@ -25,8 +25,9 @@
 #include <dwg/Color.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/tables/LayerFlags.h>
-#include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TableCollection.h>
+#include <dwg/tables/TableEntry.h>
+
 
 namespace dwg {
 

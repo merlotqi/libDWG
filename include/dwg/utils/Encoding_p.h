@@ -27,7 +27,7 @@
 namespace dwg {
 
 /// Source: https://docs.microsoft.com/en-us/dotnet/api/system.text.encoding?view=net-5.0
-enum CodePage
+enum class CodePage
 {
     Unknown = 0x00000000,         /// Unknown code page
     Ibm037 = 37,                  /// IBM EBCDIC (US-Canada)

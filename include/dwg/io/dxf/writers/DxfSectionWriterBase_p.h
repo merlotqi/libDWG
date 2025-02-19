@@ -27,7 +27,8 @@ namespace dwg {
 class DxfSectionWriterBase
 {
 public:
-    DxfSectionWriterBase(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *holder, DxfWriterConfiguration configuration); 
+    DxfSectionWriterBase(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *holder,
+                         DxfWriterConfiguration configuration);
     virtual ~DxfSectionWriterBase();
     virtual std::string sectionName() const = 0;
 

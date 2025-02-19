@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum AttributeVisibilityMode
+enum class AttributeVisibilityMode
 {
     None = 0,
     Normal = 1,

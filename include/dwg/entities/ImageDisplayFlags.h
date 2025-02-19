@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum ImageDisplayFlag : short
+enum class ImageDisplayFlag : short
 {
     /// None
     None = 0,

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Flags (bit-coded).
-enum MLineStyleFlag
+enum class MLineStyleFlag
 {
     /// None
     None = 0,

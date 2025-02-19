@@ -32,37 +32,37 @@ public:
     TableEntity();
     virtual ~TableEntity();
 
-    enum TableBorderPropertyFlag
+    enum class TableBorderPropertyFlag
     {
-		/// None.
-		None = 0x0,
-		/// Border type.
-		BorderType = 0x1,
-		/// Line weight.
-		LineWeight = 0x2,
-		/// Line type.
-		LineType = 0x4,
-		/// Color.
-		Color = 0x8,
-		/// Invisibility.
-		Invisibility = 0x10,
-		/// Double line spacing.
-		DoubleLineSpacing = 0x20,
-		/// All.
-		All = 0x3F
+        /// None.
+        None = 0x0,
+        /// Border type.
+        BorderType = 0x1,
+        /// Line weight.
+        LineWeight = 0x2,
+        /// Line type.
+        LineType = 0x4,
+        /// Color.
+        Color = 0x8,
+        /// Invisibility.
+        Invisibility = 0x10,
+        /// Double line spacing.
+        DoubleLineSpacing = 0x20,
+        /// All.
+        All = 0x3F
     };
     typedef int TableBorderPropertyFlags;
 
-    enum TableCellContentLayoutFlag
+    enum class TableCellContentLayoutFlag
     {
         None = 0,
         Flow = 1,
         StackedHorizontal = 2,
-        StackedVertical = 4   
+        StackedVertical = 4
     };
     typedef int TableCellContentLayoutFlags;
 
-    enum TableCellContentType
+    enum class TableCellContentType
     {
         Unknown = 0,
         Value = 0x1,
@@ -70,28 +70,28 @@ public:
         Block = 0x4,
     };
 
-    enum TableCellStateFlag
+    enum class TableCellStateFlag
     {
-		/// None
-		None = 0x0,
-		/// Content  locked
-		ContentLocked = 0x1,
-		/// Content read only
-		ContentReadOnly = 0x2,
-		/// Linked.
-		Linked = 0x4,
-		/// Content modifed after update
-		ContentModifiedAfterUpdate = 0x8,
-		/// Format locked
-		FormatLocked = 0x10,
-		/// Format readonly
-		FormatReadOnly = 0x20,
-		/// Format was modified after update
-		FormatModifiedAfterUpdate = 0x40,
+        /// None
+        None = 0x0,
+        /// Content  locked
+        ContentLocked = 0x1,
+        /// Content read only
+        ContentReadOnly = 0x2,
+        /// Linked.
+        Linked = 0x4,
+        /// Content modifed after update
+        ContentModifiedAfterUpdate = 0x8,
+        /// Format locked
+        FormatLocked = 0x10,
+        /// Format readonly
+        FormatReadOnly = 0x20,
+        /// Format was modified after update
+        FormatModifiedAfterUpdate = 0x40,
     };
     typedef int TableCellStateFlags;
 
-    enum TableCellStylePropertyFlag
+    enum class TableCellStylePropertyFlag
     {
         None = 0x0,
         //Content format properties:
@@ -121,42 +121,42 @@ public:
     typedef int TableCellStylePropertyFlag;
 
 
-    enum BorderType
+    enum class BorderType
     {
-		/// Single border line.
-		Single = 1,
-		/// Double border line.
-		Double = 2
+        /// Single border line.
+        Single = 1,
+        /// Double border line.
+        Double = 2
     };
 
-    enum BreakFlowDirection
+    enum class BreakFlowDirection
     {
-		/// Right
-		Right = 1,
-		/// Vertical
-		Vertical = 2,
-		/// Left
-		Left = 4
+        /// Right
+        Right = 1,
+        /// Vertical
+        Vertical = 2,
+        /// Left
+        Left = 4
     };
 
-    enum BreakOptionFlag
+    enum class BreakOptionFlag
     {
-		/// None
-		None = 0,
-		/// Enable breaks
-		EnableBreaks = 1,
-		/// Repeat top labels
-		RepeatTopLabels = 2,
-		/// Repeat bottom labels
-		RepeatBottomLabels = 4,
-		/// Allow manual positions
-		AllowManualPositions = 8,
-		/// Allow manual heights
-		AllowManualHeights = 16
+        /// None
+        None = 0,
+        /// Enable breaks
+        EnableBreaks = 1,
+        /// Repeat top labels
+        RepeatTopLabels = 2,
+        /// Repeat bottom labels
+        RepeatBottomLabels = 4,
+        /// Allow manual positions
+        AllowManualPositions = 8,
+        /// Allow manual heights
+        AllowManualHeights = 16
     };
     typedef int BreakOptionFlags;
 
-    enum CellEdgeFlag
+    enum class CellEdgeFlag
     {
         Unknown = 0,
         Top = 1,
@@ -168,7 +168,7 @@ public:
     };
     typedef int CellEdgeFlags;
 
-    enum CellStyleTypeType
+    enum class CellStyleTypeType
     {
         Cell = 1,
         Row = 2,
@@ -177,57 +177,57 @@ public:
         Table = 5
     };
 
-    enum CellType
+    enum class CellType
     {
         Text = 1,
         Block = 2
     };
 
-    enum ValueUnitType
+    enum class ValueUnitType
     {
-		/// No units.
-		NoUnits = 0,
-		/// Distance.
-		Distance = 1,
-		/// Angle.
-		Angle = 2,
-		/// Area.
-		Area = 4,
-		/// Volumne.
-		Volume = 8,
-		/// Currency.
-		Currency = 0x10,
-		/// Percentage.
-		Percentage = 0x20
+        /// No units.
+        NoUnits = 0,
+        /// Distance.
+        Distance = 1,
+        /// Angle.
+        Angle = 2,
+        /// Area.
+        Area = 4,
+        /// Volumne.
+        Volume = 8,
+        /// Currency.
+        Currency = 0x10,
+        /// Percentage.
+        Percentage = 0x20
     };
 
-    enum CellValueType
+    enum class CellValueType
     {
-		/// Unknown
-		Unknown = 0,
-		/// 32 bit Long value
-		Long = 1,
-		/// Double value
-		Double = 2,
-		/// String value
-		String = 4,
-		/// Date value
-		Date = 8,
-		/// 2D point value
-		Point2D = 0x10,
-		/// 3D point value
-		Point3D = 0x20,
-		/// Object handle value
-		Handle = 0x40,
-		/// Buffer value
-		Buffer = 0x80,
-		/// Result buffer value
-		ResultBuffer = 0x100,
-		/// General
-		General = 0x200
+        /// Unknown
+        Unknown = 0,
+        /// 32 bit Long value
+        Long = 1,
+        /// Double value
+        Double = 2,
+        /// String value
+        String = 4,
+        /// Date value
+        Date = 8,
+        /// 2D point value
+        Point2D = 0x10,
+        /// 3D point value
+        Point3D = 0x20,
+        /// Object handle value
+        Handle = 0x40,
+        /// Buffer value
+        Buffer = 0x80,
+        /// Result buffer value
+        ResultBuffer = 0x100,
+        /// General
+        General = 0x200
     };
 
-    enum MarginFlag
+    enum class MarginFlag
     {
         None = 0,
         Override = 1,
@@ -284,7 +284,7 @@ public:
         double height;
         int flags;
     }
-    
+
     struct CellRange
     {
         int topRowIndex;
@@ -345,7 +345,7 @@ public:
         std::vector<CustomDataEntry> customDataCollection;
         std::vector<CellContent> contents;
         CellContentGeometry geometry;
-        
+
         bool hasMultipleContent() const;
         CellContent content() const;
     };
@@ -358,7 +358,7 @@ public:
         CellStyle styleOverride;
         std::vector<CustomDataEntry> customDataCollection;
     }
-    
+
     struct ContentFormat
     {
         bool hasData;
@@ -382,14 +382,14 @@ public:
         std::vector<Cell> cells;
         std::vector<CustomDataEntry> cstomDataCollection;
     }
-    
+
     struct TableAttribute
     {
         std::string value;
-    }
+}
 
-public:
-    ObjectType objectType() const override;
+public : ObjectType
+         objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
@@ -416,7 +416,7 @@ public:
 
     bool overrideBorderLineWeight() const;
     void setOverrideBorderLineWeight(bool oblw);
-    
+
     bool overrideBorderVisibility() const;
     void setOverrideBorderVisibility(bool obv);
 
@@ -432,7 +432,7 @@ public:
     BreakData tableBreakData() const;
     void setTableBreakData(const BreakData &);
 
-	std::vector<BreakRowRange> breakRowRanges() const;
+    std::vector<BreakRowRange> breakRowRanges() const;
     void setBreakRowRanges(const std::vector<BreakRowRange> &);
 
     Cell cellAt(int row, int column) const;

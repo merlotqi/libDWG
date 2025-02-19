@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum TextMirrorFlag : short
+enum class TextMirrorFlag : short
 {
     None = 0,
     /// Mirrored in X
@@ -33,5 +33,6 @@ enum TextMirrorFlag : short
     /// Mirrored in Y
     UpsideDown = 4,
 };
+typedef int TextMirrorFlags;
 
 }// namespace dwg

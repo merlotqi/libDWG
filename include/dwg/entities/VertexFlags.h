@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the vertex flags.
-enum VertexFlag
+enum class VertexFlag
 {
     /// Default.
     Default = 0,

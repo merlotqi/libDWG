@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Default lighting type
-enum DefaultLightingType : short
+enum class DefaultLightingType : short
 {
     /// One distant light
     OneDistantLight,

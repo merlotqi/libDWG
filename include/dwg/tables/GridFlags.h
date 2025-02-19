@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum GridFlag : short
+enum class GridFlag : short
 {
     _0 = 0,
     _1 = 1,

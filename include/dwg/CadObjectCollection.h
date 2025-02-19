@@ -114,13 +114,13 @@ public:
      * @brief Gets the owner of the collection.
      * @return A pointer to the owner.
      */
-    Object *owner() const { return _owner; }
+    CadObject *owner() const { return _owner; }
 
     /**
      * @brief Sets the owner of the collection.
      * @param owner A pointer to the new owner.
      */
-    void setOwner(Object *owner) { _owner = owner; }
+    void setOwner(CadObject *owner) { _owner = owner; }
 
     /**
      * @brief Delegate triggered when an object is added.

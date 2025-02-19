@@ -38,7 +38,6 @@ class CadDocument;
  * This class serves as the foundation for all CAD entities, providing support for unique
  * identification through handles and ownership relationships within a CAD document.
  */
-class Table;
 class LIBDWG_API CadObject : public IHandledCadObject
 {
 protected:
@@ -90,7 +89,7 @@ public:
      * @brief Get the unique handle of the CAD object.
      * @return The handle of the object as an unsigned long long value.
      */
-    unsigned long long handle() const;
+    unsigned long long handle() const override;
 
     /**
      * @brief Get the owning CAD object of this object.
@@ -137,8 +136,6 @@ private:
 
     /// @brief Deleted assignment operator to prevent copying.
     CadObject &operator=(const CadObject &) = delete;
-
-    friend class Table;
 };
 
 }// namespace dwg

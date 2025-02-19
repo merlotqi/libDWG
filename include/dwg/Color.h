@@ -36,7 +36,7 @@ class LIBDWG_API Color
     /**
      * @brief Lookup table for indexed RGB colors.
      */
-    static const std::vector<std::vector<unsigned char>> _indexRgb[][3];
+    static const std::vector<std::vector<unsigned char>> _indexRgb;
 
     /**
      * @brief Maximum value for true color representation.

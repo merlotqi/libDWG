@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents the text direction (left-to-right or right-to-left).
-enum TextDirection : unsigned char
+enum class TextDirection : unsigned char
 {
     /// Display text left-to-right.
     LeftToRight = 0,

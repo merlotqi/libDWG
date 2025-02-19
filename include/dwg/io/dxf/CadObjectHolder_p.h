@@ -41,4 +41,4 @@ public:
     std::queue<CadObject *> objects() const;
 };
 
-}
+}// namespace dwg

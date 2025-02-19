@@ -22,9 +22,10 @@
 
 #pragma once
 
+#include <dwg/Coordinate.h>
 #include <dwg/blocks/BlockTypeFlags.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/Coordinate.h>
+
 
 namespace dwg {
 

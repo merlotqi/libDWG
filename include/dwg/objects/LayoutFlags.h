@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Layout flags
-enum LayoutFlag : short
+enum class LayoutFlag : short
 {
     /// None
     None = 0,

@@ -31,7 +31,7 @@ namespace dwg {
  * This enum specifies the different connection points for a multi-leader that links to a block.
  * It determines whether the leader connects to the block's extents or base point.
  */
-enum BlockContentConnectionType : short
+enum class BlockContentConnectionType : short
 {
     BlockExtents = 0,///< Leader connects to the block's extents.
     BasePoint = 1,   ///< Leader connects to the block's base point.

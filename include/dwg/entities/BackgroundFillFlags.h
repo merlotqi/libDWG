@@ -31,7 +31,7 @@ namespace dwg {
  * These flags determine how the background of an entity or text is filled, 
  * including options for background color, drawing window color, and text framing.
  */
-enum BackgroundFillFlag : unsigned char
+enum class BackgroundFillFlag : unsigned char
 {
     None = 0,                  ///< No background fill.
     UseBackgroundFillColor = 1,///< Use the background fill color.

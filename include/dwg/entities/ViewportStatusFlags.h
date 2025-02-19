@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// viewport status flags
-enum ViewportStatusFlag
+enum class ViewportStatusFlag
 {
     /// Enables perspective mode.
     PerspectiveMode = 1,

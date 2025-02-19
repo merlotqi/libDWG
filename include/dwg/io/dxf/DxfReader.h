@@ -33,8 +33,8 @@ public:
     DxfReader(const std::string &filename);
     DxfReader(std::ifstream *stream);
     bool isBinary() const;
-    CadDocument* read() override;
-    CadHeader *readHeader() override;    
+    CadDocument *read() override;
+    CadHeader *readHeader() override;
     CadDocument *readTables();
     std::vector<Entity *> readEntities();
 
@@ -48,4 +48,4 @@ private:
     IDxfStreamReader *createReader(bool isBinary, bool isAC1009Format);
 };
 
-}
+}// namespace dwg

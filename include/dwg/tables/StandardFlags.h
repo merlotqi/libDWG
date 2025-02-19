@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Standard flags for tables
-enum StandardFlag : short
+enum class StandardFlag : short
 {
     /// None
     None = 0,

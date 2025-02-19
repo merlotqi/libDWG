@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents the dimension text background color.
-enum DimensionTextBackgroundFillMode : short
+enum class DimensionTextBackgroundFillMode : short
 {
     /// No background color is used.
     NoBackground,

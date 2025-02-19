@@ -55,7 +55,7 @@ public:
     static std::string AcadImageDict;
 
 public:
-    static CadDictionary *CreateRoot();  
+    static CadDictionary *CreateRoot();
     static void CreateDefaultEntries(CadDictionary *root);
 
     CadDictionary();
@@ -87,18 +87,18 @@ public:
     void add(NonGraphicalObject *value);
 
     bool tryAdd(NonGraphicalObject *value) const;
-    
+
     bool containsKey(const std::string &key) const;
 
     bool remove(const std::string &key, NonGraphicalObject **item);
-    
+
     void clear();
 
     template<T>
     bool tryGetEntryT(const std::string &name, T **value)
     {
         auto it = _entries.find(name);
-        if(it != _entries.end())
+        if (it != _entries.end())
         {
             *value = dynamic_cast<T *>(it->second);
             return true;

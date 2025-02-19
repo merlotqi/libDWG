@@ -31,7 +31,7 @@ namespace dwg {
  * The flags specify various attributes of an attribute entity, such as visibility,
  * constant value, verification requirements, and preset status.
  */
-enum AttributeFlag
+enum class AttributeFlag
 {
     None = 0,    ///< No flags.
     Hidden = 1,  ///< Attribute is hidden.

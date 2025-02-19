@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Polyline flag (bit-coded)
-enum LwPolylineFlag
+enum class LwPolylineFlag
 {
     Default = 0,
     Closed = 1,

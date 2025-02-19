@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the polyline flags.
-enum PolylineFlag
+enum class PolylineFlag
 {
     /// Default, open polyline.
     Default = 0,

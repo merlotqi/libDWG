@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Standard entry flags (bit-coded values).
-enum EntryFlag
+enum class EntryFlag
 {
     /// Default
     None = 0,

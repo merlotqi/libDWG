@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
-enum LayerFlag : short
+enum class LayerFlag : short
 {
     /// None
     None = 0,

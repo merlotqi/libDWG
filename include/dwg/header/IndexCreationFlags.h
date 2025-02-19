@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Controls whether layer and spatial indexes are created and saved in drawing files
-enum IndexCreationFlag : unsigned char
+enum class IndexCreationFlag : unsigned char
 {
     /// No indexes are created
     NoIndex = 0b0,

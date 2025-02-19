@@ -33,7 +33,7 @@ namespace dwg {
  * whether it is external, a polyline, or self-intersecting, among others.
  * \remarks Bit flag
  */
-enum BoundaryPathFlag
+enum class BoundaryPathFlag
 {
     Default = 0,               ///< Default boundary path.
     External = 1,              ///< External boundary path.

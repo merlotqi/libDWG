@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum FaceModifierType : short
+enum class FaceModifierType : short
 {
     None = 0,
     Opacity = 1,

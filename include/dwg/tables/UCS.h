@@ -24,8 +24,9 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
-#include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TableCollection.h>
+#include <dwg/tables/TableEntry.h>
+
 
 namespace dwg {
 

@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum ScaleEstimationType
+enum class ScaleEstimationType
 {
     None = 1,
     UserSpecifiedScaleFactor = 2,

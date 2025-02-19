@@ -34,17 +34,17 @@ public:
     virtual ~DxfStreamWriterBase();
 
     bool writeOptional() const;
-    
+
     void write(DxfCode code, DwgVariant value, DxfClassMap *clsmap = nullptr) override;
-    
+
     void write(int code, DwgVariant value, DxfClassMap *clsmap = nullptr) override;
-    
+
     void writeTrueColor(int code, const Color &color, DxfClassMap *clsmap = nullptr) override;
-    
+
     void writeCmColor(int code, const Color &color, DxfClassMap *clsmap = nullptr) override;
-    
+
     void writeHandle(int code, IHandledCadObject *value, DxfClassMap *clsmap = nullptr) override;
-    
+
     void writeName(int code, INamedCadObject *value, DxfClassMap *clsmap = nullptr) override;
 
 protected:
@@ -52,4 +52,4 @@ protected:
     virtual void writeValue(int code, DwgVariant value) = 0;
 };
 
-}
+}// namespace dwg

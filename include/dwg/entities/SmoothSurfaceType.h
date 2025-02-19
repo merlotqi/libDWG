@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Curves and smooth surface type.
-enum SmoothSurfaceType : short
+enum class SmoothSurfaceType : short
 {
     /// No smooth surface fitted.
     NoSmooth = 0,

@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Represents a line type complex element type.
-enum LinetypeShapeFlag : short
+enum class LinetypeShapeFlag : short
 {
     /// None.
     None = 0,

@@ -38,7 +38,7 @@ public:
 
     std::string description() const;
     void setDescription(const std::string &);
-    
+
     // table's
 };
 

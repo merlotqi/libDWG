@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-const std::vector<std::vector<unsigned char>> Color::_indexRgb[][3] = {
+const std::vector<std::vector<unsigned char>> Color::_indexRgb = {
         {  0,   0,   0}, //Dummy entry
         {255,   0,   0},
         {255, 255,   0},

@@ -31,7 +31,7 @@ namespace dwg {
  * The attachment points determine where the text is positioned relative to its insertion point.
  * These points are used to control the alignment of text in both horizontal and vertical directions.
  */
-enum AttachmentPointType : short
+enum class AttachmentPointType : short
 {
     /// Top left.
     TopLeft = 1,

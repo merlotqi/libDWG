@@ -24,7 +24,7 @@
 
 namespace dwg {
 /// Defines which edges are hidden.
-enum InvisibleEdgeFlag
+enum class InvisibleEdgeFlag
 {
     /// No flags equivalent to all edges are visible.
     None = 0,

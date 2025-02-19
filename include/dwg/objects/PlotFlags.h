@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Defines the plot settings flag.
-enum PlotFlag
+enum class PlotFlag
 {
     /// None
     None = 0,

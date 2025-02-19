@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Angular unit format
-enum AngularUnitFormat : short
+enum class AngularUnitFormat : short
 {
     /// Decimal degrees
     DecimalDegrees,
