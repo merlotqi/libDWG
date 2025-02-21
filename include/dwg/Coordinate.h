@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-constexpr bool fuzzyIsNull(double d) noexcept { return std::fabs(d) <= 0.000000000001; }
+bool fuzzyIsNull(double d) noexcept { return std::fabs(d) <= 0.000000000001; }
 
 struct XY
 {

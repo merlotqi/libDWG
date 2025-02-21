@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-enum class ProxyFlag : unsigned short
+enum ProxyFlag : unsigned short
 {
     /// None.
     None = 0,

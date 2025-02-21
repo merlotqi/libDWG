@@ -116,7 +116,10 @@ void CadWipeoutBase::setDefinition(ImageDefinition *definition)
 {
     assert(definition);
 
-    if (document()) { _definition = updateCollection(definition, document()->imageDefinitions()); }
+    if (document()) 
+    { 
+        // _definition = updateCollection(definition, document()->imageDefinitions()); 
+    }
 
     _definition = definition;
 }

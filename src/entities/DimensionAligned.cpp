@@ -48,7 +48,7 @@ double DimensionAligned::extLineRotation() const { return _extLineRotation; }
 
 void DimensionAligned::setExtLineRotation(double value) { _extLineRotation = value; }
 
-double DimensionAligned::measurement() const { return _firstPoint.distanceTo(_secondPoint); }
+double DimensionAligned::measurement() const { return _firstPoint.distanceToPoint(_secondPoint); }
 
 DimensionAligned::DimensionAligned(DimensionType type) : Dimension(type) {}
 

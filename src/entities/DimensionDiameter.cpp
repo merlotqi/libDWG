@@ -44,6 +44,6 @@ double DimensionDiameter::leaderLength() const { return _leaderLength; }
 
 void DimensionDiameter::setLeaderLength(double value) { _leaderLength = value; }
 
-double DimensionDiameter::measurement() const { return insertionPoint().distanceTo(_angleVertex) * 2.0; }
+double DimensionDiameter::measurement() const { return insertionPoint().distanceToPoint(_angleVertex) * 2.0; }
 
 }// namespace dwg

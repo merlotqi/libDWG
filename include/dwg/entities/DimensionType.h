@@ -25,7 +25,7 @@
 namespace dwg {
 
 /// Dimension type
-enum class DimensionType
+enum DimensionType
 {
     /// Rotated, horizontal, or vertical
     Linear = 0,

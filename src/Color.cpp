@@ -361,9 +361,9 @@ bool Color::isByLayer() const { return index() == 256; }
 
 bool Color::isByBlock() const { return index() == 0; }
 
-short Color::index() const { isTrueColor() ? (short) -1 : (short) _color; }
+short Color::index() const { return isTrueColor() ? (short) -1 : (short) _color; }
 
-int Color::trueColor() const { isTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
+int Color::trueColor() const { return isTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
 
 bool Color::isTrueColor() const { return _color > 257 || _color < 0; }
 

@@ -36,6 +36,7 @@ namespace dwg {
 class LIBDWG_API AppId : public TableEntry
 {
 public:
+    AppId() = default;
     /**
      * @brief Constructs a AppId with a given name.
      * 
@@ -117,7 +118,7 @@ protected:
      * 
      * @return A vector of strings representing the default entries.
      */
-    std::vector<std::string> defaultEntries() const override;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

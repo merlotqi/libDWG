@@ -117,7 +117,6 @@ public:
      */
     virtual CadObject *clone();
 
-protected:
     /**
      * @brief Set the unique handle of the CAD object.
      * @param value The handle value to assign.

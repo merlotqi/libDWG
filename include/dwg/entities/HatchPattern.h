@@ -24,6 +24,7 @@
 
 #include <dwg/Coordinate.h>
 #include <vector>
+#include <string>
 
 namespace dwg {
 

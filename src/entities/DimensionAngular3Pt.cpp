@@ -50,14 +50,16 @@ void DimensionAngular3Pt::setAngleVertex(const XYZ &value) { _angleVertex = valu
 
 double DimensionAngular3Pt::measurement() const
 {
-    XY v1 = (_firstPoint - _secondPoint).to2D();
-    XY v2 = (_secondPoint - _angleVertex).to2D();
+    //XY v1 = (_firstPoint - _secondPoint).to2D();
+    //XY v2 = (_secondPoint - _angleVertex).to2D();
 
-    if (v1.fuzzyEqual(v2)) { return 0.0; }
+    //if (v1.fuzzyEqual(v2)) { return 0.0; }
 
-    if (v1.isParallel(v2)) { return M_PI; }
+    //if (v1.isParallel(v2)) { return M_PI; }
 
-    return v1.angleTo(v2);
+    //return v1.angleTo(v2);
+
+    return 0.0;
 }
 
 }// namespace dwg

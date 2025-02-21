@@ -26,6 +26,7 @@
 #include <fmt/core.h>
 #include <map>
 #include <string>
+#include <vector>
 #include <type_traits>
 
 namespace dwg {
@@ -51,11 +52,11 @@ public:
         _entries.clear();
     }
 
-    size_t count() const { return this->size(); }
+    size_t count() const { return _entries.size(); }
     std::string objectName() const override { return "TableEntry"; }
     std::string subclassMarker() const override { return "TABLE"; }
 
-    T operator[](const std::string &key)
+    T* operator[](const std::string &key)
     {
         auto it = _entries.find(key);
         if (it != _entries.end()) return it->second;
@@ -99,7 +100,7 @@ protected:
         item->setOwner(this);
     }
 
-    virtual std::vector<std::string> defaultEntries() const = 0;
+    virtual std::vector<std::string> defaultEntries() const { return std::vector<std::string>(); }
 
 private:
     std::string createName() const

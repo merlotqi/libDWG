@@ -56,7 +56,8 @@ double DimensionAngular2Line::measurement() const
 {
     XY v1 = (_firstPoint - _secondPoint).to2D();
     XY v2 = (_angleVertex - _dimensionArc).to2D();
-    return v1.angleTo(v2);
+    return 0.0;
+    //return v1.angleTo(v2);
 }
 
 }// namespace dwg

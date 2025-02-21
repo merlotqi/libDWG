@@ -34,7 +34,7 @@ UnderlayEntity::UnderlayEntity()
 
 UnderlayEntity::~UnderlayEntity() {}
 
-std::string UnderlayEntity::subclassMarker() const { DxfSubclassMarker::Underlay; }
+std::string UnderlayEntity::subclassMarker() const { return  DxfSubclassMarker::Underlay; }
 
 XYZ UnderlayEntity::normal() const { return _normal; }
 

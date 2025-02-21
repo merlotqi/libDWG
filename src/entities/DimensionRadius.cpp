@@ -44,6 +44,6 @@ double DimensionRadius::leaderLength() const { return _leaderLength; }
 
 void DimensionRadius::setLeaderLength(double value) { _leaderLength = value; }
 
-double DimensionRadius::measurement() const { _insertionPoint.distanceTo(_angleVertex); }
+double DimensionRadius::measurement() const { return _insertionPoint.distanceToPoint(_angleVertex); }
 
 }// namespace dwg

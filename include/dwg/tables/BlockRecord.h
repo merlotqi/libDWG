@@ -43,6 +43,7 @@ class Layout;
 class LIBDWG_API BlockRecord : public TableEntry
 {
 public:
+    BlockRecord() = default;
     /**
      * @brief Constructs a BlockRecord with a given name.
      * 
