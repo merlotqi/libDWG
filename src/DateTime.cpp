@@ -24,45 +24,71 @@
 
 namespace dwg {
 
-TimeSpan::TimeSpan() {}
-TimeSpan::TimeSpan(const TimeSpan &rhs){}
-TimeSpan::TimeSpan(long long span){}
-TimeSpan::TimeSpan(int day, int hour, int min, int sec){}
+TimeSpan::TimeSpan() : _timeSpan(0) {}
 
-int TimeSpan::days() const {return 0;}
-int TimeSpan::totalHours() const{return 0;}
+TimeSpan::TimeSpan(const TimeSpan &rhs) : _timeSpan(rhs._timeSpan) {}
 
-int TimeSpan::hours() const{return 0;}
+TimeSpan::TimeSpan(long long span) : _timeSpan(span) {}
 
-int TimeSpan::totalMinutes() const{return 0;}
+TimeSpan::TimeSpan(int day, int hour, int min, int sec)
+{
+    _timeSpan = (day * 86400LL) + (hour * 3600LL) + (min * 60LL) + sec;
+}
 
-int TimeSpan::minutes() const {return 0;}
+int TimeSpan::days() const { return static_cast<int>(_timeSpan / 86400LL); }
 
-/**
- * @brief Gets the total number of seconds in the time span.
- * @return The total number of seconds.
- */
-int totalSeconds() const;
+int TimeSpan::totalHours() const { return static_cast<int>(_timeSpan / 3600LL); }
 
-/**
- * @brief Gets the number of seconds in the time span (excluding whole minutes).
- * @return The number of seconds.
- */
-int seconds() const;
+int TimeSpan::hours() const { return static_cast<int>((_timeSpan % 86400LL) / 3600LL); }
 
-operator long long() const;
+int TimeSpan::totalMinutes() const { return static_cast<int>(_timeSpan / 60LL); }
 
-TimeSpan &operator=(const TimeSpan &rhs);
-TimeSpan &operator=(const long long span);
-bool operator==(const TimeSpan &rhs) const;
-bool operator!=(const TimeSpan &rhs) const;
-bool operator>(const TimeSpan &rhs) const;
-bool operator<(const TimeSpan &rhs) const;
-bool operator<=(const TimeSpan &rhs) const;
-bool operator>=(const TimeSpan &rhs) const;
-TimeSpan operator+(const TimeSpan &rhs) const;
-TimeSpan operator-(const TimeSpan &rhs) const;
-TimeSpan &operator+=(const TimeSpan &rhs);
-TimeSpan &operator-=(const TimeSpan &rhs);
+int TimeSpan::minutes() const { return static_cast<int>((_timeSpan % 3600LL) / 60LL); }
+
+int TimeSpan::totalSeconds() const { return static_cast<int>(_timeSpan); }
+
+int TimeSpan::seconds() const { return static_cast<int>(_timeSpan % 60LL); }
+
+TimeSpan::operator long long() const { return _timeSpan; }
+
+TimeSpan &TimeSpan::operator=(const TimeSpan &rhs)
+{
+    if (this != &rhs) { _timeSpan = rhs._timeSpan; }
+    return *this;
+}
+
+TimeSpan &TimeSpan::operator=(const long long span)
+{
+    _timeSpan = span;
+    return *this;
+}
+
+bool TimeSpan::operator==(const TimeSpan &rhs) const { return _timeSpan == rhs._timeSpan; }
+
+bool TimeSpan::operator!=(const TimeSpan &rhs) const { return _timeSpan != rhs._timeSpan; }
+
+bool TimeSpan::operator>(const TimeSpan &rhs) const { return _timeSpan > rhs._timeSpan; }
+
+bool TimeSpan::operator<(const TimeSpan &rhs) const { return _timeSpan < rhs._timeSpan; }
+
+bool TimeSpan::operator<=(const TimeSpan &rhs) const { return _timeSpan <= rhs._timeSpan; }
+
+bool TimeSpan::operator>=(const TimeSpan &rhs) const { return _timeSpan >= rhs._timeSpan; }
+
+TimeSpan TimeSpan::operator+(const TimeSpan &rhs) const { return TimeSpan(_timeSpan + rhs._timeSpan); }
+
+TimeSpan TimeSpan::operator-(const TimeSpan &rhs) const { return TimeSpan(_timeSpan - rhs._timeSpan); }
+
+TimeSpan &TimeSpan::operator+=(const TimeSpan &rhs)
+{
+    _timeSpan += rhs._timeSpan;
+    return *this;
+}
+
+TimeSpan &TimeSpan::operator-=(const TimeSpan &rhs)
+{
+    _timeSpan -= rhs._timeSpan;
+    return *this;
+}
 
 }// namespace dwg
