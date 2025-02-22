@@ -21,8 +21,8 @@
  */
 
 #include <cmath>
-#include <stdexcept>
 #include <dwg/CadUtils_p.h>
+#include <stdexcept>
 
 namespace dwg {
 
