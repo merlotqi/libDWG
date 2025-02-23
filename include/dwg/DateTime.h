@@ -295,13 +295,6 @@ public:
      * @return std::string 
      */
     std::string toString(const char *format) const;
-
-    /**
-     * @brief Gets the current CPU clock cycle count.
-     * 
-     * @return unsigned long long 
-     */
-    static unsigned long long tickCount();
 };
 
 }// namespace dwg
