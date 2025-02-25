@@ -27,7 +27,9 @@
 
 namespace dwg {
 
-class DxfReader : public CadReaderBase<DxfReaderConfiguration>
+class IDxfStreamReader;
+class Entity;
+class LIBDWG_API DxfReader : public CadReaderBase<DxfReaderConfiguration>
 {
 public:
     DxfReader(const std::string &filename);
@@ -40,11 +42,11 @@ public:
 
 private:
     void readBlocks();
-    void readEntities();
+    void readEntitiesPrivate();
     void readObjects();
     void readThumbnailImage();
     IDxfStreamReader *getReader();
-    IDxfStreamReader *goToSection(const string &sectionName);
+    IDxfStreamReader *goToSection(const std::string &sectionName);
     IDxfStreamReader *createReader(bool isBinary, bool isAC1009Format);
 };
 

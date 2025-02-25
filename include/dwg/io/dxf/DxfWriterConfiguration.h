@@ -22,17 +22,15 @@
 
 #pragma once
 
-#include <dwg/io/CadReaderConfiguration.h>
+#include <dwg/io/CadWriterConfiguration.h>
 #include <set>
 #include <string>
-#include <vector>
 
 namespace dwg {
 
 class LIBDWG_API DxfWriterConfiguration : public CadWriterConfiguration
 {
-    std::set<std::string> _headerVariables;
-
+public:
     DxfWriterConfiguration();
 
     ~DxfWriterConfiguration();
@@ -44,6 +42,10 @@ class LIBDWG_API DxfWriterConfiguration : public CadWriterConfiguration
     void addHeaderVariable(const std::string &name);
 
     bool removeHeaderVariable(const std::string &name);
+
+private:
+    bool _writeAllHeaderVariables;
+    std::set<std::string> _headerVariables;
 };
 
 }// namespace dwg

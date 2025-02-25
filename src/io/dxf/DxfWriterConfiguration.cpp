@@ -20,8 +20,33 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/header/CadHeader.h>
 #include <dwg/io/dxf/DxfWriterConfiguration.h>
+#include <vector>
 
 namespace dwg {
+
+DxfWriterConfiguration::DxfWriterConfiguration()
+{
+    static std::vector<std::string> Variables = {
+            "$ACADVER",  "$DWGCODEPAGE", "$LASTSAVEDBY", "$HANDSEED",  "$ANGBASE",    "$ANGDIR",    "$ATTMODE",
+            "$AUNITS",   "$AUPREC",      "$CECOLOR",     "$CELTSCALE", "$CELTYPE",    "$CELWEIGHT", "$CLAYER",
+            "$CMLJUST",  "$CMLSCALE",    "$CMLSTYLE",    "$DIMSTYLE",  "$TEXTSIZE",   "$TEXTSTYLE", "$LUNITS",
+            "$LUPREC",   "$MIRRTEXT",    "$EXTNAMES",    "$INSBASE",   "$INSUNITS",   "$LTSCALE",   "$LWDISPLAY",
+            "$PDMODE",   "$PDSIZE",      "$PLINEGEN",    "$PSLTSCALE", "$SPLINESEGS", "$SURFU",     "$SURFV",
+            "$TDCREATE", "$TDUCREATE",   "$TDUPDATE",    "$TDUUPDATE", "$TDINDWG",
+    };
+    _headerVariables.insert(Variables.begin(), Variables.end());
+}
+
+DxfWriterConfiguration::~DxfWriterConfiguration() {}
+
+bool DxfWriterConfiguration::writeAllHeaderVariables() const { return _writeAllHeaderVariables; }
+
+void DxfWriterConfiguration::setWriteAllHeaderVariables(bool value) { _writeAllHeaderVariables = value; }
+
+void DxfWriterConfiguration::addHeaderVariable(const std::string &name) {}
+
+bool DxfWriterConfiguration::removeHeaderVariable(const std::string &name) {}
 
 }// namespace dwg
