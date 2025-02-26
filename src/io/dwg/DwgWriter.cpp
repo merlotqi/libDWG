@@ -286,7 +286,7 @@ void DwgWriter::writeTemplate()
     //Int16	2	Template description string length in bytes(the ODA always writes 0 here).
     writer.write<short>(0);
     //UInt16	2	MEASUREMENT system variable(0 = English, 1 = Metric).
-    writer.write<unsigned short>((ushort) 1);
+    writer.write<unsigned short>((unsigned short) 1);
 
     _fileHeaderWriter->addSection(DwgSectionDefinition::Template, stream.release(), true);
 }

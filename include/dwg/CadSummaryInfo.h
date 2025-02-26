@@ -23,6 +23,8 @@
 #pragma once
 
 #include <dwg/exports.h>
+#include <map>
+#include <string>
 
 namespace dwg {
 

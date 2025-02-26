@@ -33,7 +33,7 @@ public:
 
     virtual ~DwgStreamReaderAC21();
 
-    std::string readUtf8String() override;
+    std::string readTextUtf8() override;
 
     std::string readVariableText() override;
 };

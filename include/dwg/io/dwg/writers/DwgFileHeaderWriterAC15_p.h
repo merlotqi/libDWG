@@ -25,9 +25,11 @@
 #include <dwg/io/dwg/fileheaders/DwgSectionLocatorRecord_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <vector>
+#include <map>
 
 namespace dwg {
 
+class CadDocument;
 class IDwgStreamWriter;
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {

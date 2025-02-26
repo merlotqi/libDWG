@@ -22,6 +22,14 @@
 
 #pragma once
 
+#include <dwg/utils/Encoding_p.h>
+#include <vector>
+#include <dwg/Coordinate.h>
+#include <dwg/Color.h>
+#include <dwg/ObjectType.h>
+#include <dwg/Transparency.h>
+#include <dwg/DwgReferenceType.h>
+
 namespace dwg {
 
 class IDwgStreamReader

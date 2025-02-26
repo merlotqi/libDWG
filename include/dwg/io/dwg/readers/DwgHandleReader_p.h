@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <map>
 
 namespace dwg {
 

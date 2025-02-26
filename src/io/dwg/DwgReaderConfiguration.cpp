@@ -26,7 +26,7 @@ namespace dwg {
 
 DwgReaderConfiguration::DwgReaderConfiguration() : _crcCheck(false) {}
 
-bool DwgReaderConfiguration::CrcCheck() const { return _crcCheck; }
+bool DwgReaderConfiguration::crcCheck() const { return _crcCheck; }
 
 void DwgReaderConfiguration::setCrcCheck(bool value) { _crcCheck = value; }
 

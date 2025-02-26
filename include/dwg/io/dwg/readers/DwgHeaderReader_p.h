@@ -26,6 +26,7 @@
 
 namespace dwg {
 
+class CadHeader;
 class IDwgStreamReader;
 class DwgHeaderHandlesCollection;
 

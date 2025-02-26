@@ -24,6 +24,10 @@
 
 namespace dwg {
 
+CRC8StreamHandlerBase::CRC8StreamHandlerBase() {}
+
+CRC8StreamHandlerBase::~CRC8StreamHandlerBase() {}
+
 unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer,
                                                   long startPos, long endPos)
 {
@@ -32,16 +36,16 @@ unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed, const std
 
     while (endPos-- > 0)
     {
-        currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
+        currValue = CRC8StreamHandlerBase::decode(currValue, buffer[index]);
         index++;
     }
 
     return currValue;
 }
 
-unsigned short CRC8StreamHandlerBase::Seed() const { return _seed; }
+unsigned short CRC8StreamHandlerBase::seed() const { return _seed; }
 
-void CRC8StreamHandlerBase::Seed(unsigned short seed) { _seed = seed; }
+void CRC8StreamHandlerBase::setSeed(unsigned short seed) { _seed = seed; }
 
 unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
 {

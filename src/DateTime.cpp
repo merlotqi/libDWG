@@ -23,6 +23,9 @@
 #include <dwg/DateTime.h>
 #include <fmt/core.h>
 #include <time.h>
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 
 namespace dwg {
 
@@ -122,9 +125,19 @@ DateTime::DateTime(int year, int mon, int day, int hour, int min, int sec)
 
 long long DateTime::timeZone()
 {
+#ifdef _WIN32
+    TIME_ZONE_INFORMATION tzInfo;
+    GetTimeZoneInformation(&tzInfo);
+    long long offset = static_cast<long long>(tzInfo.Bias) * 60;
+    if (tzInfo.DaylightDate.wYear != 0) {
+        offset -= static_cast<long long>(tzInfo.DaylightBias) * 60;
+    }
+    return offset; 
+#else
     time_t t = time(nullptr);
     struct tm tm_time = *localtime(&t);
     return tm_time.tm_gmtoff;
+#endif
 }
 
 DateTime DateTime::now() { return DateTime(); }
@@ -133,7 +146,7 @@ DateTime DateTime::toUTC() const
 {
     time_t time_copy = static_cast<time_t>(_time);
     struct tm tm_time = *localtime(&time_copy);
-    tm_time.tm_sec -= tm_time.tm_gmtoff;
+    tm_time.tm_sec -= timeZone();
     return DateTime(mktime(&tm_time), true);
 }
 
@@ -141,7 +154,7 @@ DateTime DateTime::toLocal() const
 {
     time_t time_copy = static_cast<time_t>(_time);
     struct tm tm_time = *gmtime(&time_copy);
-    tm_time.tm_sec += tm_time.tm_gmtoff;
+    tm_time.tm_sec += timeZone();
     return DateTime(mktime(&tm_time), false);
 }
 

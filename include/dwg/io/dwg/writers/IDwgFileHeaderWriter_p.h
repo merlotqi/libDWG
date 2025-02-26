@@ -22,6 +22,9 @@
 
 #pragma once
 
+#include <string>
+#include <iostream>
+
 namespace dwg {
 
 class IDwgFileHeaderWriter

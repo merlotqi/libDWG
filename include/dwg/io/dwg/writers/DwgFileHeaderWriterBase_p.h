@@ -22,12 +22,15 @@
 
 #pragma once
 
+#include <vector>
+#include <fstream>
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
 #include <dwg/utils/Encoding_p.h>
 
 namespace dwg {
 
+class CadDocument;
 class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 {
 protected:

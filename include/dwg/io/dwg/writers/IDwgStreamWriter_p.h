@@ -65,8 +65,6 @@ public:
 
     virtual void writeBitLong(int value) = 0;
 
-    virtual void writeBitLong(int value) = 0;
-
     virtual void writeBitLongLong(long long value) = 0;
 
     virtual void writeVariableText(const std::string &value) = 0;

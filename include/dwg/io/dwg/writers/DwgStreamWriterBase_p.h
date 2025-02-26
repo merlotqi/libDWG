@@ -57,8 +57,6 @@ public:
 
     void writeBitLong(int value) override;
 
-    void writeBitLong(int value) override;
-
     void writeBitLongLong(long long value) override;
 
     void writeVariableText(const std::string &value) override;
@@ -103,7 +101,7 @@ public:
 
     void writeRawShort(short value) override;
 
-    void writeRawShort(unsigned short value) override;
+    void writeRawUShort(unsigned short value) override;
 
     void writeRawDouble(double value) override;
 

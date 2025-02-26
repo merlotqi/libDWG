@@ -22,11 +22,14 @@
 
 #pragma once
 
+#include <dwg/ObjectType.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
 #include <queue>
+#include <map>
 
 namespace dwg {
 
+class CadHeader;
 class IDwgStreamReader;
 class DwgHeaderHandlesCollection;
 class DwgDocumentBuilder;
@@ -41,7 +44,7 @@ public:
 
     ~DwgObjectReader();
 
-    std::string sectionName() const;
+    std::string sectionName() const override;
 
     void read();
 

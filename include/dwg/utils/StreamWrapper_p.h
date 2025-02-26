@@ -103,7 +103,7 @@ public:
     void write(const T &value)
     {
         auto convert = E::instance();
-        std::vector<unsigned char> buffer = converter->bytesT<T>(value);
+        std::vector<unsigned char> buffer = convert->bytesT<T>(value);
         write(buffer, 0, buffer.size());
     }
 

@@ -29,6 +29,7 @@
 namespace dwg {
 
 class ICompressor;
+class DwgFileHeaderAC18;
 class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 {
 public:

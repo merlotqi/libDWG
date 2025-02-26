@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/ACadVersion.h>
 
 namespace dwg {
 
@@ -30,9 +31,9 @@ class IDwgStreamReader;
 class DwgSummaryInfoReader : public DwgSectionIO
 {
 public:
-    DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader);
+    DwgSummaryInfoReader(ACadVersion version, IDwgStreamReader *reader);
 
-    ~DwgAppInfoReader();
+    ~DwgSummaryInfoReader();
 
     std::string sectionName() const;
 
