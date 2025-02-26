@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <string>
 
 namespace dwg {
@@ -171,7 +172,7 @@ enum class CodePage
     Utf8 = 65001,                 /// Unicode (UTF-8)
 };
 
-class Encoding
+class LIBDWG_API Encoding
 {
     CodePage cp;
 

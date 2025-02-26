@@ -24,7 +24,7 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 #include <map>
 
 #include <vector>

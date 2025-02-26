@@ -24,8 +24,8 @@
 
 #include <dwg/entities/GradientColor.h>
 #include <dwg/exports.h>
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace dwg {
 

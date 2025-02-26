@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/writers/DwgStreamWriterAC18_p.h>
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 
 namespace dwg {
 

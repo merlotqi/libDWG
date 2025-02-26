@@ -27,7 +27,7 @@
 #include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
 #include <dwg/Transparency.h>
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 #include <iostream>
 
 namespace dwg {

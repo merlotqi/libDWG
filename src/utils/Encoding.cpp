@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 #include <iconv.h>
 #include <map>
 

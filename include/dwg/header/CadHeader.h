@@ -907,7 +907,7 @@ private:
     short _linearUnitPrecision = 4;
     AngularUnitFormat _angularUnit = AngularUnitFormat::DecimalDegrees;
     short _angularUnitPrecision = 0;
-    ObjectSnapMode _objectSnapMode = (ObjectSnapMode)4133;
+    ObjectSnapMode _objectSnapMode = (ObjectSnapMode) 4133;
     AttributeVisibilityMode _attributeVisibility = AttributeVisibilityMode::Normal;
     short _pointDisplayMode = 0;
     short _userShort1 = 0;

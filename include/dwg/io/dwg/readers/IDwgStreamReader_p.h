@@ -22,13 +22,14 @@
 
 #pragma once
 
-#include <dwg/utils/Encoding_p.h>
-#include <vector>
-#include <dwg/Coordinate.h>
 #include <dwg/Color.h>
+#include <dwg/Coordinate.h>
+#include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
 #include <dwg/Transparency.h>
-#include <dwg/DwgReferenceType.h>
+#include <dwg/utils/Encoding.h>
+#include <vector>
+
 
 namespace dwg {
 

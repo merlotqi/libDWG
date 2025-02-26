@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 #include <dwg/utils/EndianConverter_p.h>
 #include <iostream>
 #include <sstream>

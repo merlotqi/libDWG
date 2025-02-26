@@ -24,8 +24,9 @@
 
 #include <dwg/ObjectType.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-#include <queue>
 #include <map>
+#include <queue>
+
 
 namespace dwg {
 

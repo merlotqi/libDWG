@@ -26,8 +26,8 @@
 #include <fmt/core.h>
 #include <map>
 #include <string>
-#include <vector>
 #include <type_traits>
+#include <vector>
 
 namespace dwg {
 
@@ -56,7 +56,7 @@ public:
     std::string objectName() const override { return "TableEntry"; }
     std::string subclassMarker() const override { return "TABLE"; }
 
-    T* operator[](const std::string &key)
+    T *operator[](const std::string &key)
     {
         auto it = _entries.find(key);
         if (it != _entries.end()) return it->second;

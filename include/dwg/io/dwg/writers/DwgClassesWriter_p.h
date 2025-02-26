@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-#include <dwg/utils/Encoding_p.h>
+#include <dwg/utils/Encoding.h>
 #include <sstream>
 
 namespace dwg {
