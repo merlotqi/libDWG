@@ -24,7 +24,10 @@
 
 #include <dwg/objects/GeoDataVersion.h>
 #include <dwg/objects/NonGraphicalObject.h>
-
+#include <dwg/Coordinate.h>
+#include <dwg/objects/DesignCoordinatesType.h>
+#include <dwg/units/UnitsType.h>
+#include <dwg/objects/ScaleEstimationType.h>
 
 namespace dwg {
 
@@ -114,7 +117,7 @@ public:
     void setObservationToTag(const std::string &);
 
     std::vector<GeoMeshPoint> points() const;
-    std::vector<GeoMashFace> faces() const;
+    std::vector<GeoMeshFace> faces() const;
 };
 
 }// namespace dwg

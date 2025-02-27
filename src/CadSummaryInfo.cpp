@@ -19,3 +19,59 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/CadSummaryInfo.h>
+
+namespace dwg {
+
+CadSummaryInfo::CadSummaryInfo() {}
+
+CadSummaryInfo::~CadSummaryInfo() {}
+
+std::string CadSummaryInfo::title() const { return _title; }
+
+void CadSummaryInfo::setTitle(const std::string &value) { _title = value; }
+
+std::string CadSummaryInfo::subject() const { return _subject; }
+
+void CadSummaryInfo::setSubject(const std::string &value) { _subject = value; }
+
+std::string CadSummaryInfo::author() const { return _author; }
+
+void CadSummaryInfo::setAuthor(const std::string &value) { _author = value; }
+
+std::string CadSummaryInfo::keywords() const { return _keywords; }
+
+void CadSummaryInfo::setKeywords(const std::string &value) { _keywords = value; }
+
+std::string CadSummaryInfo::comments() const { return _comments; }
+
+void CadSummaryInfo::setComments(const std::string &value) { _comments = value; }
+
+std::string CadSummaryInfo::revisionNumber() const { return _revisionNumber; }
+
+void CadSummaryInfo::setRevisionNumber(const std::string &value) { _revisionNumber = value; }
+
+std::string CadSummaryInfo::lastSavedBy() const { return _lastSavedBy; }
+
+void CadSummaryInfo::setLastSavedBy(const std::string &value) { _lastSavedBy = value; }
+
+std::string CadSummaryInfo::hyperlinkBase() const { return _hyperlinkBase; }
+
+void CadSummaryInfo::setHyperlinkBase(const std::string &value) { _hyperlinkBase = value; }
+
+time_t CadSummaryInfo::createdDate() const { return _createdDate; }
+
+void CadSummaryInfo::setCreatedDate(const time_t &value) { _createdDate = value; }
+
+time_t CadSummaryInfo::modifiedDate() const { return _modifiedDate; }
+
+void CadSummaryInfo::setModifiedDate(const time_t &value) { _modifiedDate = value; }
+
+std::map<std::string, std::string> CadSummaryInfo::properties() const { return _properties; }
+
+std::map<std::string, std::string> &CadSummaryInfo::properties() { return _properties; }
+
+void CadSummaryInfo::setProperties(const std::map<std::string, std::string> &value) { _properties = value; }
+
+}// namespace dwg

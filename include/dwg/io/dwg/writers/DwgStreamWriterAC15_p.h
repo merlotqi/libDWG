@@ -29,7 +29,7 @@ namespace dwg {
 class DwgStreamWriterAC15 : public DwgStreamWriterAC12
 {
 public:
-    DwgStreamWriterAC12(std::ostream *stream, Encoding encoding);
+DwgStreamWriterAC15(std::ostream *stream, Encoding encoding);
     virtual ~DwgStreamWriterAC15();
 
     void writeBitExtrusion(const XYZ &normal) override;

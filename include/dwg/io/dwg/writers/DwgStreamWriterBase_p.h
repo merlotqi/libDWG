@@ -23,14 +23,15 @@
 #pragma once
 
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/ACadVersion.h>
 
 namespace dwg {
 
 class DwgStreamWriterBase : public IDwgStreamWriter
 {
 public:
-    static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
-    static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
+    static std::unique_ptr<IDwgStreamWriter> GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
+    static std::unique_ptr<IDwgStreamWriter> GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
 
 public:
     Encoding encoding() override;
@@ -61,7 +62,7 @@ public:
 
     void writeVariableText(const std::string &value) override;
 
-    void writeTextUnicode(const std::string &value) override;
+    void writeTextUtf8(const std::string &value) override;
 
     void writeBit(bool value) override;
 

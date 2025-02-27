@@ -194,8 +194,12 @@ unsigned char CadUtils::ToIndex(LineweightType value)
             result = 29;
             break;
         default:
-            //result = (unsigned char) Array.IndexOf(_indexedValue, value);
-            //if (result < 0) { result = 31; }
+            {
+                auto it = std::find_if(_indexedValue.begin(), _indexedValue.end(), value);
+                if (it != _indexedValue.end()) result = (unsigned char) *it;
+                else
+                    result = 31;
+            }
             break;
     }
 
@@ -204,21 +208,20 @@ unsigned char CadUtils::ToIndex(LineweightType value)
 
 CodePage CadUtils::GetCodePage(std::string &value)
 {
-    // if (_dxfEncodingMap.TryGetValue(value.ToLower(), out CodePage code))
-    // {
-    //     return code;
-    // }
-    // else
-    {
-        return CodePage::Unknown;
-    }
+    std::string v = value;
+    std::transform(v.begin(), v.end(), v.begin(), std::tolower);
+    auto it = _dxfEncodingMap.find(v);
+    if (it != _dxfEncodingMap.end()) { return it->second; }
+    else { return CodePage::Unknown; }
 }
 
 std::string CadUtils::GetCodePageName(CodePage value)
 {
-
-    return std::string();
-    //return _dxfEncodingMap.FirstOrDefault(o = > o.Value == value).Key;
+    for (auto it = _dxfEncodingMap.begin(); it != _dxfEncodingMap.end(); ++it)
+    {
+        if (it->second == value) return it->first;
+    }
+    return "gb2312";
 }
 
 CodePage CadUtils::GetCodePage(int value)

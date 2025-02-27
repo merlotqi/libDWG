@@ -28,6 +28,8 @@
 
 namespace dwg {
 
+class UCS;
+class Viewport;
 class LIBDWG_API Layout : public PlotSettings
 {
 public:

@@ -23,6 +23,8 @@
 #include <dwg/utils/Encoding.h>
 #include <iconv.h>
 #include <map>
+#include <vector>
+#include <stdexcept>
 
 #ifdef _WIN32
 #include <Windows.h>

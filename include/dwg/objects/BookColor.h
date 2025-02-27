@@ -30,6 +30,8 @@ namespace dwg {
 
 class LIBDWG_API BookColor : public NonGraphicalObject
 {
+    std::string _name;
+    
 public:
     BookColor();
 

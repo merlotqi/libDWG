@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/DxfBlockSectionReader_p.h>
+#include <dwg/io/dxf/readers/DxfBlockSectionReader_p.h>
 
 namespace dwg {
 

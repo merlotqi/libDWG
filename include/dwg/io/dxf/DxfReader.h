@@ -24,6 +24,7 @@
 
 #include <dwg/io/CadReaderBase.h>
 #include <dwg/io/dxf/DxfReaderConfiguration.h>
+#include <vector>
 
 namespace dwg {
 

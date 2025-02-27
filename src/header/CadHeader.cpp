@@ -21,6 +21,8 @@
  */
 
 #include <dwg/header/CadHeader.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/CadUtils_p.h>
 #include <stdexcept>
 
 namespace dwg {
@@ -457,7 +459,7 @@ void CadHeader::setPaperSpaceExtMax(const XYZ &value) { _paperSpaceExtMax = valu
 
 XY CadHeader::paperSpaceLimitsMin() const { return _paperSpaceLimitsMin; }
 
-void CadHeader::setPaperSpaceLimitsMin(const XYZ &value) { _paperSpaceLimitsMin = value; }
+void CadHeader::setPaperSpaceLimitsMin(const XY &value) { _paperSpaceLimitsMin = value; }
 
 XY CadHeader::paperSpaceLimitsMax() const { return _paperSpaceLimitsMax; }
 

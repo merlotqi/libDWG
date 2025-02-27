@@ -69,7 +69,7 @@ public:
 
     virtual void writeVariableText(const std::string &value) = 0;
 
-    virtual void writeTextUnicode(const std::string &value) = 0;
+    virtual void writeTextUtf8(const std::string &value) = 0;
 
     virtual void writeBit(bool value) = 0;
 

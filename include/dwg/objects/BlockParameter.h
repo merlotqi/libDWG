@@ -23,9 +23,12 @@
 #pragma once
 
 #include <dwg/CadObject.h>
+#include <dwg/Coordinate.h>
+#include <vector>
 
 namespace dwg {
 
+class Entity;
 class LIBDWG_API EvaluationExpression : public CadObject
 {
 public:

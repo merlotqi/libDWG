@@ -24,6 +24,7 @@
 
 #include <dwg/io/CadWriterConfiguration.h>
 #include <dwg/io/ICadWriter.h>
+#include <dwg/utils/Encoding.h>
 #include <fstream>
 
 namespace dwg {

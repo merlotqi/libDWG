@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/DxfTextReader_p.h>
+#include <dwg/io/dxf/readers/DxfTextReader_p.h>
 
 namespace dwg {
 

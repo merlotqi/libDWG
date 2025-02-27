@@ -42,6 +42,7 @@
 #include <dwg/utils/StreamWrapper_p.h>
 #include <sstream>
 #include <stdexcept>
+#include <fmt/core.h>
 
 namespace dwg {
 
@@ -88,7 +89,8 @@ void DwgWriter::write()
 
 void DwgWriter::getFileHeaderWriter()
 {
-    switch (_document->header()->version())
+    auto &&version = _document->header()->version();
+    switch (version)
     {
         case ACadVersion::MC0_0:
         case ACadVersion::AC1_2:
@@ -101,7 +103,7 @@ void DwgWriter::getFileHeaderWriter()
         case ACadVersion::AC1006:
         case ACadVersion::AC1009:
         case ACadVersion::AC1012:
-            throw new std::runtime_error("");
+            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
             _fileHeaderWriter = new DwgFileHeaderWriterAC15(_stream.get(), _encoding, _document);
@@ -110,57 +112,89 @@ void DwgWriter::getFileHeaderWriter()
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         case ACadVersion::AC1021:
-            throw new std::runtime_error("");
+            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         default:
-            throw new std::runtime_error("");
+            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
     };
 }
 
 void DwgWriter::writeHeader()
 {
-    std::ostringstream *stream = new std::ostringstream();
-    DwgHeaderWriter *writer = new DwgHeaderWriter(stream, _document, _encoding);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<DwgHeaderWriter> writer = std::make_unique<DwgHeaderWriter>(stream.get(), _document, _encoding);
     writer->write();
 
-    _fileHeaderWriter->addSection(DwgSectionDefinition::Header, stream, true);
+    _fileHeaderWriter->addSection(DwgSectionDefinition::Header, stream.release(), true);
 }
 
 void DwgWriter::writeClasses()
 {
-    std::ostringstream *stream = new std::ostringstream();
-    DwgClassesWriter *writer = new DwgClassesWriter(stream, _document, _encoding);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<DwgClassesWriter> writer = std::make_unique<DwgClassesWriter>(stream.get(), _document, _encoding);
     writer->write();
-    _fileHeaderWriter->addSection(DwgSectionDefinition::Classes, stream, false);
+
+    _fileHeaderWriter->addSection(DwgSectionDefinition::Classes, stream.release(), false);
 }
 
 void DwgWriter::writeSummaryInfo()
 {
-    std::ostringstream *stream = new std::ostringstream();
-    IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, stream, _encoding);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    auto &&writer = DwgStreamWriterBase::GetStreamWriter(_version, stream.get(), _encoding);
     CadSummaryInfo *info = _document->summaryInfo();
-    writer->writeTextUnicode(info->title());
-    _fileHeaderWriter->addSection(DwgSectionDefinition::SummaryInfo, stream, false, 0x100);
+    writer->writeTextUtf8(info->title());
+    writer->writeTextUtf8(info->subject());
+    writer->writeTextUtf8(info->author());
+    writer->writeTextUtf8(info->keywords());
+    writer->writeTextUtf8(info->comments());
+    writer->writeTextUtf8(info->lastSavedBy());
+    writer->writeTextUtf8(info->revisionNumber());
+    writer->writeTextUtf8(info->hyperlinkBase());
+
+    //?	8	Total editing time(ODA writes two zero Int32’s)
+    writer->writeInt(0);
+    writer->writeInt(0);
+
+    writer->write8BitJulianDate(info->createdDate());
+    writer->write8BitJulianDate(info->modifiedDate());
+
+    //Int16	2 + 2 * (2 + n)	Property count, followed by PropertyCount key/value string pairs.
+    auto&& properties = info->properties();
+    writer->writeRawShort((unsigned short)properties.size());
+    for(auto it = properties.begin(); it != properties.end(); ++it)
+    {
+        writer->writeTextUtf8(it->first);
+        writer->writeTextUtf8(it->second);
+    }
+
+    writer->writeInt(0);
+    writer->writeInt(0);
+
+    _fileHeaderWriter->addSection(DwgSectionDefinition::SummaryInfo, stream.release(), false, 0x100);
 }
 
 void DwgWriter::writePreview()
 {
-    std::ostringstream *stream = new std::ostringstream();
-    DwgPreviewWriter *writer = new DwgPreviewWriter(_version, stream);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<DwgPreviewWriter> writer = std::make_unique<DwgPreviewWriter>(_version, stream.get());
     writer->write();
-    _fileHeaderWriter->addSection(DwgSectionDefinition::Preview, stream, false, 0x400);
+
+    _fileHeaderWriter->addSection(DwgSectionDefinition::Preview, stream.release(), false, 0x400);
 }
 
 void DwgWriter::writeAppInfo()
 {
     if (_fileHeader->version() < ACadVersion::AC1018) return;
 
-    std::ostringstream *stream = new std::ostringstream();
-    DwgAppInfoWriter *writer = new DwgAppInfoWriter(_version, stream);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<DwgAppInfoWriter> writer = std::make_unique<DwgAppInfoWriter>(_version, stream.get());
+    writer->write();
+
+    _fileHeaderWriter->addSection(DwgSectionDefinition::AppInfo, stream.release(), false, 0x80);
 }
 
 void DwgWriter::writeFileDepList()
@@ -209,20 +243,20 @@ void DwgWriter::writeRevHistory()
 void DwgWriter::writeAuxHeader()
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    DwgAuxHeaderWriter *writer = new DwgAuxHeaderWriter(stream.get(), _encoding, _document->header());
+    std::unique_ptr<DwgAuxHeaderWriter> writer = std::make_unique<DwgAuxHeaderWriter>(stream.get(), _encoding, _document->header());
     writer->write();
 
     _fileHeaderWriter->addSection(DwgSectionDefinition::AuxHeader, stream.release(), true);
 }
 void DwgWriter::writeObjects()
 {
-    std::ostringstream *stream = new std::ostringstream();
-    DwgObjectWriter *writer = new DwgObjectWriter(stream, _document, _encoding, false);
+    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<DwgObjectWriter> writer = std::make_unique<DwgObjectWriter>(stream.get(), _document, _encoding, false);
     writer->write();
 
     _handlesMap = writer->handleMap();
 
-    _fileHeaderWriter->addSection(DwgSectionDefinition::AcDbObjects, stream, true);
+    _fileHeaderWriter->addSection(DwgSectionDefinition::AcDbObjects, stream.release(), true);
 }
 
 void DwgWriter::writeObjFreeSpace()
@@ -294,7 +328,7 @@ void DwgWriter::writeTemplate()
 void DwgWriter::writeHandles()
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    DwgHandleWriter *writer = new DwgHandleWriter(_version, stream.get(), _handlesMap);
+    std::unique_ptr<DwgHandleWriter> writer = std::make_unique<DwgHandleWriter>(_version, stream.get(), _handlesMap);
     writer->write(_fileHeaderWriter->handleSectionOffset());
 
     _fileHeaderWriter->addSection(DwgSectionDefinition::Handles, stream.release(), true);

@@ -31,8 +31,7 @@ namespace dwg {
 
 enum DwgVariantType
 {
-    None,
-    None,
+    None,=
     I8,
     UI8,
     I16,

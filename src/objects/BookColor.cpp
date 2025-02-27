@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/BookColor.h>
+#include <stdexcept>
 
 namespace dwg {
 
@@ -42,7 +43,7 @@ std::string BookColor::name() const { return _name; }
 
 void BookColor::setName(const std::string &value)
 {
-    if(str.find('$') == std::string::npos)
+    if(value.find('$') == std::string::npos)
     {
         throw new std::invalid_argument(fmt::format("Invalid BookColor name: ({}), a book color name has to separate the book name and the color name by the character '$'", value));
     }

@@ -43,17 +43,17 @@ void DwgAppInfoWriter::write()
     //UInt32	4	class_version (default: 3)
     _writer->writeInt(3);
     //String	2 + 2 * n + 2	App info name, ODA writes "AppInfoDataList"
-    _writer->writeTextUnicode("AppInfoDataList");
+    _writer->writeTextUtf8("AppInfoDataList");
     //UInt32	4	num strings (default: 3)
     _writer->writeInt(3);
     //Byte[]	16	Version data(checksum, ODA writes zeroes)
     _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Version
-    _writer->writeTextUnicode(version);
+    _writer->writeTextUtf8(version);
     //Byte[]	16	Comment data(checksum, ODA writes zeroes)
     _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Comment
-    _writer->writeTextUnicode("This is a comment from libDWG");
+    _writer->writeTextUtf8("This is a comment from libDWG");
     //Byte[]	16	Product data(checksum, ODA writes zeroes)
     _writer->writeBytes(_emptyArr);
     //String	2 + 2 * n + 2	Product
@@ -62,7 +62,7 @@ void DwgAppInfoWriter::write()
                                           "registry_localeID=\"1033\"/>",
                                           version, version);
 
-    _writer->writeTextUnicode(productInfo);
+    _writer->writeTextUtf8(productInfo);
 }
 
 }// namespace dwg

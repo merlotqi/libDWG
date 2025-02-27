@@ -354,7 +354,7 @@ public:
     void setPaperSpaceExtMax(const XYZ &);
 
     XY paperSpaceLimitsMin() const;
-    void setPaperSpaceLimitsMin(const XYZ &);
+    void setPaperSpaceLimitsMin(const XY &);
 
     XY paperSpaceLimitsMax() const;
     void setPaperSpaceLimitsMax(const XY &);
@@ -949,7 +949,7 @@ private:
     double _chamferAngle = 0.0;
     double _facetResolution = 0.5;
     double _currentMultilineScale = 20.0;
-    double _currentEntityLinetypeScale 1.0;
+    double _currentEntityLinetypeScale = 1.0;
     std::string _menuFileName = ".";
     unsigned long long _handleSeed = 0x0;
     time_t _createDateTime;

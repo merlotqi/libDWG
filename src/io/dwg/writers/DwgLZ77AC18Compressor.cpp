@@ -42,6 +42,6 @@ void DwgLZ77AC18Compressor::writeLiteralLength(int length) {}
 
 void DwgLZ77AC18Compressor::applyMask(int matchPosition, int compressionOffset, int mask) {}
 
-bool DwgLZ77AC18Compressor::compressChunk(int &offset, int &matchPos) {}
+bool DwgLZ77AC18Compressor::compressChunk(int &offset, int &matchPos) { return false; }
 
 }// namespace dwg

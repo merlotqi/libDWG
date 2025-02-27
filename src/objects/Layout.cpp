@@ -24,26 +24,12 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/entities/Viewport.h>
 
 namespace dwg {
-    LayoutFlags _layoutFlags;
-    int _tabOrder;
-    XY _minLimits;
-    XY _maxLimits;
-    XYZ _insertionBasePoint;
-    XYZ _minExtents;
-    XYZ _maxExtents;
-    double _elevation;
-    XYZ _origin;
-    XYZ _xaxis;
-    XYZ _yaxis;
-    OrthographicType _ucsOrthographicType;
-    BlockRecord *_associatedBlock;
-    Viewport *_viewport;
-    UCS *_ucs;
-    UCS *_baseUCS;
 
-Layout::Layout(const std::string &name)  : _layoutFlags(LayoutFlag::None), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
+Layout::Layout(const std::string &name)  : _layoutFlags(static_cast<int>(LayoutFlag::None)), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
     , _maxLimits(XY(277.0, 202.5)), _insertionBasePoint(XYZ::Zero), _minExtents(XYZ(25.7, 19.5, 0.0)), _maxExtents(XYZ(231.3, 175.5, 0.0)),
     _elevation(0.0), _origin(XYZ::Zero), _xaxis(XYZ::AxisX), _yaxis(XYZ::AxisY), _ucsOrthographicType(0), _associatedBlock(nullptr), 
     _viewport(nullptr), _ucs(nullptr), _baseUCS(nullptr)
@@ -63,7 +49,7 @@ void Layout::setLayoutFlags(LayoutFlags value) { _layoutFlags = value; }
 
 int Layout::tabOrder() const { return _tabOrder; }
 
-void Layout::setTabOrder(int value) { return _tabOrder = value; } 
+void Layout::setTabOrder(int value) { _tabOrder = value; } 
 
 XY Layout::minLimits() const { return _minLimits; }
 

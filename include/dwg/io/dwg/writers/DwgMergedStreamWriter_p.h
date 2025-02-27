@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/IDwgStreamWriter.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
 namespace dwg {
 
@@ -70,7 +70,7 @@ public:
 
     void writeVariableText(const std::string &value) override;
 
-    void writeTextUnicode(const std::string &value) override;
+    void writeTextUtf8(const std::string &value) override;
 
     void writeBit(bool value) override;
 
@@ -110,7 +110,7 @@ public:
 
     void writeRawShort(short value) override;
 
-    void writeRawShort(unsigned short value) override;
+    void writeRawUShort(unsigned short value) override;
 
     void writeRawDouble(double value) override;
 

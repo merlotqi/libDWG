@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/objects/NonGraphicalObject.h>
+#include <map>
 
 namespace dwg {
 
