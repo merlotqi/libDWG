@@ -43,6 +43,8 @@ class DwgClassesWriter : public DwgSectionIO
 public:
     DwgClassesWriter(std::ostream *stream, CadDocument *document, Encoding encoding);
 
+    ~DwgClassesWriter();
+
     std::string sectionName() const override;
 
     void write();

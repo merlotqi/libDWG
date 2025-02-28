@@ -93,6 +93,8 @@ public:
     Encoding encoding() const;
     void setEncoding(Encoding encoding);
 
+    std::vector<unsigned char> buffer();
+
     template<class T>
     void write(const T &value)
     {

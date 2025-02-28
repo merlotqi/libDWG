@@ -36,6 +36,8 @@ class DwgPreviewWriter : public DwgSectionIO
 public:
     DwgPreviewWriter(ACadVersion version, std::ostream *stream);
 
+    ~DwgPreviewWriter();
+
     std::string sectionName() const override;
 
     void write();

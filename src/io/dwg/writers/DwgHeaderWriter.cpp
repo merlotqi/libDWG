@@ -46,6 +46,15 @@ DwgHeaderWriter::DwgHeaderWriter(std::ostream *stream, CadDocument *document, En
     _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_msmain, _encoding);
 }
 
+DwgHeaderWriter::~DwgHeaderWriter() 
+{
+    delete _startWriter;
+    _startWriter = nullptr;
+
+    delete _writer;
+    _writer = nullptr;
+}
+
 std::string DwgHeaderWriter::sectionName() const { return DwgSectionDefinition::Header; }
 
 void DwgHeaderWriter::write()

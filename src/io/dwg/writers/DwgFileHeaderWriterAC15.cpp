@@ -92,8 +92,7 @@ void DwgFileHeaderWriterAC15::writeFileHeader()
     // std::ostringstream memoryStream;
 
     // //0x00	6	“ACXXXX” version string
-     IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(
-     //         _version, &memoryStream, _encoding);
+     IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, &memoryStream, _encoding);
      // writer->WriteBytes(
      //         Encoding::ASCII.GetBytes(_document.Header.VersionString));
      // //The next 7 starting at offset 0x06 are to be six bytes of 0

@@ -35,6 +35,12 @@ DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::ostream *stream) : 
     _writer = DwgStreamWriterBase::GetStreamWriter(version, stream, Encoding());
 }
 
+DwgAppInfoWriter::~DwgAppInfoWriter()
+{
+    delete _writer;
+    _writer = nullptr;
+}
+
 std::string DwgAppInfoWriter::sectionName() const { return DwgSectionDefinition::AppInfo; }
 
 void DwgAppInfoWriter::write()

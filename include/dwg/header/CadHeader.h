@@ -1019,8 +1019,8 @@ private:
     unsigned char _externalReferenceClippingBoundaryType;
     DimensionAssociation _dimensionAssociativity;
     unsigned char _haloGapPercentage;
-    Color _obscuredColor;
-    Color _interfereColor;
+    Color _obscuredColor = Color::ByBlock;
+    Color _interfereColor = Color((short)1);
     unsigned char _obscuredType;
     unsigned char _intersectionDisplay;
     std::string _projectName;

@@ -22,6 +22,8 @@
 
 #include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/CRC8StreamHandler_p.h>
+#include <dwg/utils/StreamWrapper_p.h>
 
 namespace dwg {
 
@@ -31,6 +33,11 @@ DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostream *stream,
 {
     _stream = stream;
     _handleMap = handlemap;
+}
+
+DwgHandleWriter::~DwgHandleWriter()
+{
+
 }
 
 std::string DwgHandleWriter::sectionName() const { return DwgSectionDefinition::Handles; }
@@ -140,7 +147,8 @@ void DwgHandleWriter::processPosition(std::streampos pos)
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));
     _stream->seekp(streamPos);
 
-    unsigned short crc = CRC8StreamHandler::GetCRCValue(0xC0C1, _stream->str().data(), pos, _stream->tellp() - pos);
+    OutputStreamWrapper wrapper(_stream);
+    unsigned short crc = CRC8OutputStreamHandler::GetCRCValue(0xC0C1, wrapper.buffer(), pos, wrapper.length() - pos);
 
     ch = (unsigned char) (crc >> 8);
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));

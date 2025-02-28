@@ -30,8 +30,8 @@ namespace dwg {
 class DwgStreamWriterBase : public IDwgStreamWriter
 {
 public:
-    static std::unique_ptr<IDwgStreamWriter> GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
-    static std::unique_ptr<IDwgStreamWriter> GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
+    static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
+    static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
 
 public:
     Encoding encoding() override;

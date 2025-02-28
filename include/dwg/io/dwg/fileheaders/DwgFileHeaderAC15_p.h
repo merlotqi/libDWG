@@ -39,10 +39,6 @@ public:
 
     virtual ~DwgFileHeaderAC15();
 
-    std::map<int, DwgSectionLocatorRecord> records() const;
-
-    void setRecords(const std::map<int, DwgSectionLocatorRecord> &);
-
     virtual void addSection(const std::string &name) override;
 
     DwgSectionDescriptor &getDescriptor(const std::string &name) override;

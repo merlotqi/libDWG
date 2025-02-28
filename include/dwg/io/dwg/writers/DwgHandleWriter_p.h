@@ -37,7 +37,7 @@ class DwgHandleWriter : public DwgSectionIO
 public:
     DwgHandleWriter(ACadVersion version, std::ostream *stream,
                     const std::map<unsigned long long, long long> &handlemap);
-
+    ~DwgHandleWriter();
     std::string sectionName() const override;
 
     void write(int sectionOffset = 0);

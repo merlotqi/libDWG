@@ -98,6 +98,8 @@ void DwgSectionDescriptor::setEncoding(unsigned long long value) { _encoding = v
 
 std::vector<DwgLocalSectionMap> DwgSectionDescriptor::localSections() const { return _localSections; }
 
+std::vector<DwgLocalSectionMap> &DwgSectionDescriptor::localSections() { return _localSections; }
+
 void DwgSectionDescriptor::setLocalSections(const std::vector<DwgLocalSectionMap> &value) { _localSections = value; }
 
 }// namespace dwg

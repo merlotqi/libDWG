@@ -81,6 +81,7 @@ public:
     void setEncoding(unsigned long long);
 
     std::vector<DwgLocalSectionMap> localSections() const;
+    std::vector<DwgLocalSectionMap> &localSections();
     void setLocalSections(const std::vector<DwgLocalSectionMap> &);
 };
 

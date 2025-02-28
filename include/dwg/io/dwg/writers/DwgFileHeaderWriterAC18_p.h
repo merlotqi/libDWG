@@ -63,7 +63,7 @@ private:
 
 protected:
     DwgFileHeaderAC18 *_fileHeader;
-    ICompressor *compressor;
+    ICompressor *_compressor;
 };
 
 }// namespace dwg

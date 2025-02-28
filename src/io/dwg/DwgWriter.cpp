@@ -144,7 +144,7 @@ void DwgWriter::writeClasses()
 void DwgWriter::writeSummaryInfo()
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    auto &&writer = DwgStreamWriterBase::GetStreamWriter(_version, stream.get(), _encoding);
+    IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, stream.get(), _encoding);
     CadSummaryInfo *info = _document->summaryInfo();
     writer->writeTextUtf8(info->title());
     writer->writeTextUtf8(info->subject());
@@ -175,6 +175,8 @@ void DwgWriter::writeSummaryInfo()
     writer->writeInt(0);
 
     _fileHeaderWriter->addSection(DwgSectionDefinition::SummaryInfo, stream.release(), false, 0x100);
+    delete writer;
+    writer = nullptr;
 }
 
 void DwgWriter::writePreview()

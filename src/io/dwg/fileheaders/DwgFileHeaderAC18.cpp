@@ -23,7 +23,7 @@
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 
 namespace dwg {
-
+    
 DwgFileHeaderAC18::DwgFileHeaderAC18() {}
 
 DwgFileHeaderAC18::DwgFileHeaderAC18(ACadVersion version) : DwgFileHeaderAC15(version) {}
@@ -116,6 +116,8 @@ int DwgFileHeaderAC18::leftGap() const { return _leftGap; }
 void DwgFileHeaderAC18::setLeftGap(int value) { _leftGap = value; }
 
 std::map<std::string, DwgSectionDescriptor> DwgFileHeaderAC18::descriptors() const { return _descriptors; }
+
+std::map<std::string, DwgSectionDescriptor> &DwgFileHeaderAC18::descriptors() { return _descriptors; }
 
 void DwgFileHeaderAC18::setDescriptors(const std::map<std::string, DwgSectionDescriptor> &value)
 {

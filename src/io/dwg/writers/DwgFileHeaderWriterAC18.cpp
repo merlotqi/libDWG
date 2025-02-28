@@ -28,6 +28,8 @@
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
+#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 
 namespace dwg {
 
@@ -38,8 +40,8 @@ int DwgFileHeaderWriterAC18::fileHeaderSize() const { return 0x100; }
 DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding, CadDocument *document)
     : DwgFileHeaderWriterBase(stream, encoding, document)
 {
-    _descriptors = _fileHeader->Descriptors;
-    compressor = new DwgLZ77AC18Compressor();
+    _descriptors = _fileHeader->descriptors();
+    _compressor = new DwgLZ77AC18Compressor();
     // File header info
     for (int i = 0; i < fileHeaderSize(); i++)
     {
@@ -66,24 +68,26 @@ void DwgFileHeaderWriterAC18::addSection(const std::string &name, std::ostream *
     _fileHeader->addSection(descriptor);
     descriptor.setDecompressedSize((unsigned long long) decompsize);
 
-    descriptor.CompressedSize = (unsigned long long) ostream_length(stream);
-    descriptor.CompressedCode = ((!isCompressed) ? 1 : 2);
+    OutputStreamWrapper stwrapper(stream);
 
-    int nlocalSections = (int) (ostream_length(stream) / (int) descriptor.DecompressedSize);
+    descriptor.setCompressedSize(stwrapper.length());
+    descriptor.setCompressedCode (((!isCompressed) ? 1 : 2));
 
-    std::string buffer = stream->str();
-    unsigned long long offset = 0uL;
+    int nlocalSections = (int) (stwrapper.length() / (int) descriptor.decompressedSize());
+
+    std::vector<unsigned char> buffer = stwrapper.buffer();
+    unsigned long long offset = 0ULL;
     for (int i = 0; i < nlocalSections; i++)
     {
-        craeteLocalSection(descriptor, buffer, (int) descriptor.DecompressedSize, offset,
-                           (int) descriptor.DecompressedSize, isCompressed);
-        offset += (unsigned long long) descriptor.DecompressedSize;
+        craeteLocalSection(descriptor, buffer, (int) descriptor.decompressedSize(), offset,
+                           (int) descriptor.decompressedSize(), isCompressed);
+        offset += (unsigned long long) descriptor.decompressedSize();
     }
 
-    int spearBytes = (int) (stream.Length % (int) descriptor.DecompressedSize);
+    int spearBytes = (int) (stwrapper.length() % (int) descriptor.decompressedSize());
     if (spearBytes > 0 && !checkEmptyBytes(buffer, offset, (unsigned long long) spearBytes))
     {
-        craeteLocalSection(descriptor, buffer, (int) descriptor.DecompressedSize, offset, spearBytes, isCompressed);
+        craeteLocalSection(descriptor, buffer, (int) descriptor.decompressedSize(), offset, spearBytes, isCompressed);
     }
 }
 
@@ -92,35 +96,38 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
                                                  const std::vector<unsigned char> &buffer, int decompressedSize,
                                                  unsigned long long offset, int totalSize, bool isCompressed)
 {
-    MemoryStream descriptorStream = applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
+    std::ostringstream descriptorStream = applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
+    OutputStreamWrapper descriptorStream_wrapper(&descriptorStream);
 
     writeMagicNumber();
 
     //Save position for the local section
-    long position = _stream.Position;
+    long position = descriptorStream.tellp();
 
-    DwgLocalSectionMap localMap = new DwgLocalSectionMap();
-    localMap.Offset = offset;
-    localMap.Seeker = position;
-    localMap.PageNumber = _localSectionsMaps.Count + 1;
-    localMap.ODA = DwgCheckSumCalculator.Calculate(0u, descriptorStream.GetBuffer(), 0, (int) descriptorStream.Length);
+    DwgLocalSectionMap localMap;
+    localMap.setOffset(offset);
+    localMap.setSeeker(position);
+    localMap.setPageNumber(_localSectionsMaps.size() + 1);
+    localMap.setODA(DwgCheckSumCalculator::Calculate(0U, descriptorStream_wrapper.buffer(), 0,
+                                                     (int) descriptorStream_wrapper.length()));
 
-    int compressDiff = DwgCheckSumCalculator.CompressionCalculator((int) descriptorStream.Length);
-    localMap.CompressedSize = (unsigned long long) descriptorStream.Length;
-    localMap.DecompressedSize = (unsigned long long) totalSize;
-    localMap.PageSize = (long) localMap.CompressedSize + 32 + compressDiff;
-    localMap.Checksum = 0u;
+    int compressDiff = DwgCheckSumCalculator::CompressionCalculator((int) descriptorStream_wrapper.length());
+    localMap.setCompressedSize(descriptorStream_wrapper.length());
+    localMap.setDecompressedSize((unsigned long long) totalSize);
+    localMap.setPageSize((long) localMap.compressedSize() + 32 + compressDiff);
+    localMap.setChecksum(0u);
 
-    MemoryStream checkSumStream = new MemoryStream(32);
-    writeDataSection(checkSumStream, descriptor, localMap, (int) descriptor.PageType);
-    localMap.Checksum =
-            DwgCheckSumCalculator.Calculate(localMap.ODA, checkSumStream.GetBuffer(), 0, (int) checkSumStream.Length);
-    checkSumStream.SetLength(0L);
-    checkSumStream.Position = 0L;
+    std::ostringstream checkSumStream(std::string(32, '\0'));
+    OutputStreamWrapper checkSumStream_wrapper(&checkSumStream);
+    writeDataSection(&checkSumStream, descriptor, localMap, (int) descriptor.pageType());
+    localMap.setChecksum(DwgCheckSumCalculator::Calculate(localMap.ODA(), checkSumStream_wrapper.buffer(), 0, 
+                                                          (int) checkSumStream_wrapper.length()));
+    checkSumStream.clear();
+    checkSumStream.seekp(std::ios::beg);
 
-    writeDataSection(checkSumStream, descriptor, localMap, (int) descriptor.PageType);
+    writeDataSection(&checkSumStream, descriptor, localMap, (int) descriptor.pageType());
 
-    applyMask(checkSumStream.GetBuffer(), 0, (int) checkSumStream.Length);
+    applyMask(checkSumStream_wrapper.buffer(), 0, (int) checkSumStream_wrapper.length());
 
     _stream.Write(checkSumStream.GetBuffer(), 0, (int) checkSumStream.Length);
     _stream.Write(descriptorStream.GetBuffer(), 0, (int) descriptorStream.Length);
@@ -131,8 +138,8 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     if (localMap.PageNumber > 0) { descriptor.PageCount++; }
 
     localMap.Size = _stream.Position - position;
-    descriptor.LocalSections.Add(localMap);
-    _localSectionsMaps.Add(localMap);
+    descriptor.localSections().push_back(localMap);
+    _localSectionsMaps.push_back(localMap);
 }
 
 std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<unsigned char> &buffer,
@@ -140,24 +147,27 @@ std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<u
                                                              int totalSize, bool isCompressed)
 {
     std::ostringstream stream;
+    OutputStreamWrapper stream_wrapper(&stream);
     if (isCompressed)
     {
-        MemoryStream holder = new MemoryStream(decompressedSize);
-        holder.Write(buffer, (int) offset, totalSize);
-        int diff = decompressedSize - totalSize;
-        for (int i = 0; i < diff; i++) { holder.WriteByte(0); }
+        std::ostringstream holder(std::string(decompressedSize, '\0'));
+        OutputStreamWrapper holder_wrapper(&holder);
+        holder_wrapper.write(buffer, offset, totalSize);
 
-        compressor.Compress(holder.GetBuffer(), 0, decompressedSize, stream);
+        int diff = decompressedSize - totalSize;
+        for (int i = 0; i < diff; i++) { holder_wrapper.writeByte((unsigned char) 0); }
+
+        _compressor->compress(holder_wrapper.buffer(), 0, decompressedSize, &stream);
     }
     else
     {
         stream.seekp(offset);
-        stream.write(buffer.data(), totalSize);
+        stream.write(reinterpret_cast<const char *>(buffer.data()), totalSize);
         int diff = decompressedSize - totalSize;
-        for (int j = 0; j < diff; j++) { stream.WriteByte(0); }
+        for (int j = 0; j < diff; j++) { stream_wrapper.writeByte((unsigned char) 0); }
     }
 
-    return stream;
+    return stream; 
 }
 
 void DwgFileHeaderWriterAC18::writeDescriptors()

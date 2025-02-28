@@ -21,6 +21,7 @@
  */
 
 #include <assert.h>
+#include <dwg/header/CadHeader.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils_p.h>
@@ -38,13 +39,13 @@ DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream, Encoding
     assert(model);
     _document = model;
     _stream = stream;
-    _version = model->Header.Version;
+    _version = model->header()->version();
     _encoding = encoding;
 }
 
 unsigned short DwgFileHeaderWriterBase::getFileCodePage()
 {
-    unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->Header.CodePage));
+    unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->header()->codePage()));
     if (codePage < 1) { return 30; }
     else { return codePage; }
 }

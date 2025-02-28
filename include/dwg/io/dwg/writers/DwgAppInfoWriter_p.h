@@ -35,6 +35,8 @@ class DwgAppInfoWriter : public DwgSectionIO
 public:
     DwgAppInfoWriter(ACadVersion version, std::ostream *stream);
 
+    ~DwgAppInfoWriter();
+
     std::string sectionName() const override;
 
     void write();

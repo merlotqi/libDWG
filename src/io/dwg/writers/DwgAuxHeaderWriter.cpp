@@ -34,6 +34,13 @@ DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::ostream *stream, Encoding encoding, 
     _writer = DwgStreamWriterBase::GetStreamWriter(_version, stream, encoding);
 }
 
+DwgAuxHeaderWriter::~DwgAuxHeaderWriter()
+{
+    delete _writer;
+    _writer = nullptr;
+    _header = nullptr;
+}
+
 std::string DwgAuxHeaderWriter::sectionName() const { return DwgSectionDefinition::AuxHeader; }
 
 void DwgAuxHeaderWriter::write()

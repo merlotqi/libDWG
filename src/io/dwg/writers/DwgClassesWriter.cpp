@@ -45,6 +45,15 @@ DwgClassesWriter::DwgClassesWriter(std::ostream *stream, CadDocument *document, 
     _endSentinel = {0x72, 0x5E, 0x3B, 0x47, 0x3B, 0x56, 0x07, 0x3A, 0x3F, 0x23, 0x0B, 0xA0, 0x18, 0x30, 0x49, 0x75};
 }
 
+DwgClassesWriter::~DwgClassesWriter()
+{
+    delete _startWriter;
+    _startWriter = nullptr;
+
+    delete _writer;
+    _writer = nullptr;
+}
+
 std::string DwgClassesWriter::sectionName() const { return DwgSectionDefinition::Classes; }
 
 void DwgClassesWriter::write()
