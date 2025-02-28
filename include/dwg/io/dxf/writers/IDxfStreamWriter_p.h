@@ -25,7 +25,7 @@
 
 #include <dwg/DwgVariant.h>
 #include <dwg/DxfCode.h>
-
+#include <dwg/Color.h>
 
 namespace dwg {
 
@@ -57,5 +57,4 @@ public:
     virtual void close() = 0;
 };
 
-}// namespace dwg
 }// namespace dwg

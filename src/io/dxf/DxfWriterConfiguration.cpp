@@ -47,6 +47,6 @@ void DxfWriterConfiguration::setWriteAllHeaderVariables(bool value) { _writeAllH
 
 void DxfWriterConfiguration::addHeaderVariable(const std::string &name) {}
 
-bool DxfWriterConfiguration::removeHeaderVariable(const std::string &name) {}
+bool DxfWriterConfiguration::removeHeaderVariable(const std::string &name) { return false; }
 
 }// namespace dwg

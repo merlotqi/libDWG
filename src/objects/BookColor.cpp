@@ -24,12 +24,13 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/BookColor.h>
 #include <stdexcept>
+#include <fmt/core.h>
 
 namespace dwg {
 
-BookColor::BookColor() {}
+BookColor::BookColor() : _color((short)0) {}
 
-BookColor::BookColor(const std::string &name) : _name(name) {}
+BookColor::BookColor(const std::string &name) : _name(name), _color((short) 0) {}
 
 BookColor::~BookColor() {}
 

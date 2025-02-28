@@ -30,6 +30,7 @@ namespace dwg {
 
 class UCS;
 class Viewport;
+class BlockRecord;
 class LIBDWG_API Layout : public PlotSettings
 {
 public:

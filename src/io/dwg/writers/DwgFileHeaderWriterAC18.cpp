@@ -251,14 +251,15 @@ void DwgFileHeaderWriterAC18::writeRecords()
     writeMagicNumber();
 
     //Section page map: 0x41630e3b
-    DwgLocalSectionMap section = new DwgLocalSectionMap{SectionMap = 0x41630E3B};
+    DwgLocalSectionMap section;
+    section.setSectionMap(0x41630E3B);
 
     addSection(section);
 
-    int counter = _localSectionsMaps.Count * 8;
-    section.Seeker = _stream.Position;
-    int size = counter + DwgCheckSumCalculator.CompressionCalculator(counter);
-    section.Size = size;
+    int counter = _localSectionsMaps.size() * 8;
+    section.setSeeker(_stream->tellp());
+    int size = counter + DwgCheckSumCalculator::CompressionCalculator(counter);
+    section.setSize(size);
 
     MemoryStream stream = new MemoryStream();
     StreamIO writer = new StreamIO(stream);

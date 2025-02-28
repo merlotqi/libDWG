@@ -23,13 +23,14 @@
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC21_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC21Compressor_p.h>
 #include <dwg/CadDocument.h>
+#include <sstream>
 
 namespace dwg {
 
 DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterAC18(stream, encoding, model)
 {
-    compressor = new DwgLZ77AC21Compressor();
+    _compressor = new DwgLZ77AC21Compressor();
 }
 
 int DwgFileHeaderWriterAC21::fileHeaderSize() const { return 0x480; }

@@ -36,8 +36,8 @@ class LIBDWG_API SortEntitiesTable : public NonGraphicalObject
 public:
     struct Sorter
     {
-        Entity *Entity;
-        unsigned long long Handle;
+        Entity *entity;
+        unsigned long long handle;
         Sorter(Entity *entity, unsigned long long handle);
     };
 

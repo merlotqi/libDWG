@@ -67,7 +67,7 @@ public:
     {
         T t = 0;
         size_t sz = sizeof(T);
-        std::vector<unsigned int> buffer = readBytes(sz);
+        std::vector<unsigned char> buffer = readBytes(sz);
         auto converter = E::instance();
         return converter->fromBytesT<T>(buffer.data());
     }

@@ -29,10 +29,12 @@
 
 namespace dwg {
 
-Layout::Layout(const std::string &name)  : _layoutFlags(static_cast<int>(LayoutFlag::None)), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
-    , _maxLimits(XY(277.0, 202.5)), _insertionBasePoint(XYZ::Zero), _minExtents(XYZ(25.7, 19.5, 0.0)), _maxExtents(XYZ(231.3, 175.5, 0.0)),
-    _elevation(0.0), _origin(XYZ::Zero), _xaxis(XYZ::AxisX), _yaxis(XYZ::AxisY), _ucsOrthographicType(0), _associatedBlock(nullptr), 
-    _viewport(nullptr), _ucs(nullptr), _baseUCS(nullptr)
+    Layout::Layout(const std::string &name)
+    : _layoutFlags(static_cast<int>(LayoutFlag::None)), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
+      _maxLimits(XY(277.0, 202.5)), _insertionBasePoint(XYZ::Zero), _minExtents(XYZ(25.7, 19.5, 0.0)),
+      _maxExtents(XYZ(231.3, 175.5, 0.0)), _elevation(0.0), _origin(XYZ::Zero), _xaxis(XYZ::AxisX), _yaxis(XYZ::AxisY),
+      _ucsOrthographicType(OrthographicType::None), _associatedBlock(nullptr), _viewport(nullptr), _ucs(nullptr),
+      _baseUCS(nullptr)
 {
     _name = name;
 }

@@ -28,7 +28,7 @@
 
 namespace dwg {
 
-TableEntry::TableEntry(const std::string &name) : _name(name), _flags(StandardFlag::None) {}
+TableEntry::TableEntry(const std::string &name) : _name(name), _flags(static_cast<int>(StandardFlag::None)) {}
 
 TableEntry::~TableEntry() {}
 
@@ -47,6 +47,6 @@ StandardFlags TableEntry::flags() const { return _flags; }
 
 void TableEntry::setFlags(StandardFlags flags) { _flags = flags; }
 
-TableEntry::TableEntry() : _name(""), _flags(StandardFlag::None) {}
+TableEntry::TableEntry() : _name(""), _flags(static_cast<int>(StandardFlag::None)) {}
 
 }// namespace dwg

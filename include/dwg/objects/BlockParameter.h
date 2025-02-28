@@ -122,7 +122,6 @@ public:
 
     ObjectType objectType() const override;
     std::string subclassMarker() const override;
-    std::string subclassMarker() const override;
 
     std::string label() const;
     void setLabel(const std::string &);
@@ -148,7 +147,6 @@ public:
     BlockVisibilityParameter();
     ~BlockVisibilityParameter();
 
-    std::string subclassMarker() const override;
     std::string subclassMarker() const override;
 
     std::vector<Entity *> entities() const;

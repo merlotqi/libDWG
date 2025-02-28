@@ -22,8 +22,17 @@
 
 #pragma once
 
+#include <dwg/io/dxf/DxfWriterConfiguration.h>
+#include <dwg/ACadVersion.h>
+
 namespace dwg {
 
+class IDxfStreamWriter;
+class CadDocument;
+class CadObjectHolder;
+class CadObject;
+class Entity;
+class ExtendedDataDictionary;
 class DxfSectionWriterBase
 {
 public:

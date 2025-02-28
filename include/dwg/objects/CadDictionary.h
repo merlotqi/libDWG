@@ -94,7 +94,7 @@ public:
 
     void clear();
 
-    template<T>
+    template<class T>
     bool tryGetEntryT(const std::string &name, T **value)
     {
         auto it = _entries.find(name);

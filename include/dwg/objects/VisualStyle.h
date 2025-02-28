@@ -40,44 +40,44 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::string RasterFile() const;
-    void RasterFile(const std::string &);
+    std::string rasterFile() const;
+    void setRasterFile(const std::string &);
 
-    std::string Description() const;
-    void Description(const std::string &);
+    std::string description() const;
+    void setDescription(const std::string &);
 
-    int Type() const;
-    void Type(int);
+    int type() const;
+    void setType(int);
 
-    FaceLightingModelType FaceLightingModel() const;
-    void FaceLightingModel(FaceLightingModelType);
+    FaceLightingModelType faceLightingModel() const;
+    void setFaceLightingModel(FaceLightingModelType);
 
-    FaceLightingQualityType FaceLightingQuality() const;
-    void FaceLightingQuality(FaceLightingQualityType);
+    FaceLightingQualityType faceLightingQuality() const;
+    void setFaceLightingQuality(FaceLightingQualityType);
 
-    FaceColorMode FaceColorMode() const;
-    void FaceColorMode(FaceColorMode);
+    FaceColorMode faceColorMode() const;
+    void setFaceColorMode(FaceColorMode);
 
-    FaceModifierType FaceModifiers() const;
-    void FaceModifiers(FaceModifierType);
+    FaceModifierType faceModifiers() const;
+    void setFaceModifiers(FaceModifierType);
 
-    double FaceOpacityLevel() const;
-    void FaceOpacityLevel(double);
+    double faceOpacityLevel() const;
+    void setFaceOpacityLevel(double);
 
-    double FaceSpecularLevel() const;
-    void FaceSpecularLevel(double);
+    double faceSpecularLevel() const;
+    void setFaceSpecularLevel(double);
 
-    Color Color() const;
-    void Color(const Color &);
+    Color color() const;
+    void setColor(const Color &);
 
-    Color FaceStyleMonoColor() const;
-    void FaceStyleMonoColor(const Color &);
+    Color faceStyleMonoColor() const;
+    void setFaceStyleMonoColor(const Color &);
 
-    bool PrecisionFlag() const;
-    void PrecisionFlag(bool);
+    bool precisionFlag() const;
+    void setPrecisionFlag(bool);
 
-    bool InternalFlag() const;
-    void InternalFlag(bool);
+    bool internalFlag() const;
+    void setInternalFlag(bool);
 };
 
 }// namespace dwg

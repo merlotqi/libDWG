@@ -26,13 +26,20 @@
 #include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/tables/AppId.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/TextStyle.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/View.h>
+#include <dwg/tables/VPort.h>
 #include <dwg/io/dwg/CRC8StreamHandler_p.h>
+#include <dwg/objects/Group.h>
+#include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/Layout.h>
 
 namespace dwg {
 
@@ -807,23 +814,23 @@ void DwgHeaderWriter::write()
     }
 
     //H: BLOCK CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->BlockRecords.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->blockRecords()->handle());
     //H: LAYER CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->Layers.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->layers()->handle());
     //H: STYLE CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->TextStyles.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->textStyles()->handle());
     //H: LINETYPE CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->LineTypes.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->lineTypes()->handle());
     //H: VIEW CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->Views.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->views()->handle());
     //H: UCS CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->UCSs.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->UCSs()->handle());
     //H: VPORT CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->VPorts.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->VPorts()->handle());
     //H: APPID CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->AppIds.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->appIds()->handle());
     //H: DIMSTYLE CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->DimensionStyles.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->dimensionStyles()->handle());
 
     //R13 - R15 Only:
     if (R13_15Only)
@@ -834,12 +841,12 @@ void DwgHeaderWriter::write()
 
     //Common:
     //H: DICTIONARY(ACAD_GROUP)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->Groups.handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->groups()->handle());
     //H: DICTIONARY(ACAD_MLINESTYLE)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->MLineStyles.handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->mlineStyles()->handle());
 
     //H : DICTIONARY (NAMED OBJECTS) (hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->_rootDictionary.handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->rootDictionary()->handle());
 
     //R2000+ Only:
     if (R2000Plus)
@@ -855,7 +862,7 @@ void DwgHeaderWriter::write()
         _writer->writeVariableText(_document->header()->styleSheetName());
 
         //H : DICTIONARY(LAYOUTS)(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, _document->Layouts.handle());
+        _writer->handleReference(DwgReferenceType::HardPointer, _document->layouts()->handle());
         //H: DICTIONARY(PLOTSETTINGS)(hard pointer)
         _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
         //H: DICTIONARY(PLOTSTYLES)(hard pointer)
@@ -961,11 +968,11 @@ void DwgHeaderWriter::write()
     //H: BLOCK_RECORD(*MODEL_SPACE)(hard pointer)
     _writer->handleReference(DwgReferenceType::HardPointer, _document->modelSpace()->handle());
     //H: LTYPE(BYLAYER)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByLayer"].handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("ByLayer")->handle());
     //H: LTYPE(BYBLOCK)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["ByBlock"].handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("ByBlock")->handle());
     //H: LTYPE(CONTINUOUS)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->LineTypes["Continuous"].handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("Continuous")->handle());
 
     //R2007 +:
     if (R2007Plus)

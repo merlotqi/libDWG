@@ -28,6 +28,7 @@
 
 namespace dwg {
 
+class LineType;
 class LIBDWG_API MLineStyle : public NonGraphicalObject
 {
 public:
@@ -62,7 +63,7 @@ public:
     void setStartAngle(double);
 
     double endAngle() const;
-    void setStartAngle(double);
+    void setEndAngle(double);
 
     std::vector<Element> elements() const;
     void setElements(const std::vector<Element> &);
