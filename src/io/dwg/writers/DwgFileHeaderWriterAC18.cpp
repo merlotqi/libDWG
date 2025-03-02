@@ -28,8 +28,12 @@
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
+#include <dwg/io/dwg/CRC32StreamHandler_p.h>
+#include <dwg/utils/EndianConverter.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <algorithm>
 
 namespace dwg {
 
@@ -102,7 +106,7 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     writeMagicNumber();
 
     //Save position for the local section
-    long position = descriptorStream.tellp();
+    unsigned long long position = descriptorStream.tellp();
 
     DwgLocalSectionMap localMap;
     localMap.setOffset(offset);
@@ -120,7 +124,7 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     std::ostringstream checkSumStream(std::string(32, '\0'));
     OutputStreamWrapper checkSumStream_wrapper(&checkSumStream);
     writeDataSection(&checkSumStream, descriptor, localMap, (int) descriptor.pageType());
-    localMap.setChecksum(DwgCheckSumCalculator::Calculate(localMap.ODA(), checkSumStream_wrapper.buffer(), 0, 
+    localMap.setChecksum(DwgCheckSumCalculator::Calculate(localMap.ODA(), checkSumStream_wrapper.buffer(), 0,
                                                           (int) checkSumStream_wrapper.length()));
     checkSumStream.clear();
     checkSumStream.seekp(std::ios::beg);
@@ -129,15 +133,15 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
 
     applyMask(checkSumStream_wrapper.buffer(), 0, (int) checkSumStream_wrapper.length());
 
-    _stream.Write(checkSumStream.GetBuffer(), 0, (int) checkSumStream.Length);
-    _stream.Write(descriptorStream.GetBuffer(), 0, (int) descriptorStream.Length);
+    _stream->write(checkSumStream.str().c_str(), checkSumStream.str().length());
+    _stream->write(descriptorStream.str().c_str(), descriptorStream.str().length());
 
-    if (isCompressed) { _stream.Write(DwgCheckSumCalculator.MagicSequence, 0, compressDiff); }
-    else if (compressDiff != 0) { throw new Exception(); }
+    if (isCompressed) { _stream->write(reinterpret_cast<const char*>(&DwgCheckSumCalculator::MagicSequence), compressDiff); }
+    else if (compressDiff != 0) { throw new std::exception(); }
 
-    if (localMap.PageNumber > 0) { descriptor.PageCount++; }
+    if (localMap.pageNumber() > 0) { descriptor.setPageCount(descriptor.pageCount() + 1); }
 
-    localMap.Size = _stream.Position - position;
+    localMap.setSize((unsigned long long) _stream->tellp() - position);
     descriptor.localSections().push_back(localMap);
     _localSectionsMaps.push_back(localMap);
 }
@@ -172,25 +176,26 @@ std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<u
 
 void DwgFileHeaderWriterAC18::writeDescriptors()
 {
-    MemoryStream stream = new MemoryStream();
-    var swriter = DwgStreamWriterBase.GetStreamWriter(_version, stream, _encoding);
+    std::ostringstream stream;
+    IDwgStreamWriter* swriter = DwgStreamWriterBase::GetStreamWriter(_version, &stream, _encoding);
 
     //0x00	4	Number of section descriptions(NumDescriptions)
-    swriter.WriteInt(_descriptors.Count);
+    swriter->writeInt(_descriptors.size());
 
     //0x04	4	0x02 (long)
-    swriter.WriteInt(2);
+    swriter->writeInt(2);
     //0x08	4	0x00007400 (long)
-    swriter.WriteInt(0x7400);
+    swriter->writeInt(0x7400);
     //0x0C	4	0x00 (long)
-    swriter.WriteInt(0);
+    swriter->writeInt(0);
 
     //0x10	4	Unknown (long), ODA writes NumDescriptions here.
-    swriter.WriteInt(_descriptors.Count);
-    for (var descriptors in _descriptors.Values)
+    swriter->writeInt(_descriptors.size());
+    for (auto it = _descriptors.begin(); it != _descriptors.end(); ++it)
     {
+        auto &&descriptors = it->second;
         //0x00	8	Size of section(OdUInt64)
-        swriter.WriteBytes(LittleEndianConverter.Instance.GetBytes(descriptors.CompressedSize));
+        swriter->writeBytes(LittleEndianConverter::instance()->bytes(descriptors.compressedSize()));
         /*0x08	4	Page count(PageCount). Note that there can be more pages than PageCount,
 							as PageCount is just the number of pages written to file.
 							If a page contains zeroes only, that page is not written to file.
@@ -200,48 +205,48 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
 							decompressed size of the pages is not equal to the section’s size, add more zero 
 							pages to the section until this condition is met.
 				*/
-        swriter.WriteInt(descriptors.PageCount);
+        swriter->writeInt(descriptors.pageCount());
         //0x0C	4	Max Decompressed Size of a section page of this type(normally 0x7400)
-        swriter.WriteInt((int) descriptors.DecompressedSize);
-        //0x10	4	Unknown(long)
-        swriter.WriteInt(1);
+        swriter->writeInt((int) descriptors.decompressedSize());
+        //0x10	4	Unknown(long)  
+        swriter->writeInt(1);
         //0x14	4	Compressed(1 = no, 2 = yes, normally 2)
-        swriter.WriteInt(descriptors.CompressedCode);
+        swriter->writeInt(descriptors.compressedCode());
         //0x18	4	Section Id(starts at 0). The first section(empty section) is numbered 0, consecutive sections are numbered descending from(the number of sections – 1) down to 1.
-        swriter.WriteInt(descriptors.SectionId);
+        swriter->writeInt(descriptors.sectionId());
         //0x1C	4	Encrypted(0 = no, 1 = yes, 2 = unknown)
-        swriter.WriteInt(descriptors.Encrypted);
+        swriter->writeInt(descriptors.encrypted());
 
         //0x20	64	Section Name(string)
-        byte[] nameArr = new byte[64];
-        if (!string.IsNullOrEmpty(descriptors.Name))
+        std::vector<unsigned char> nameArr(64, 0);
+        if (!descriptors.name().empty())
         {
-            byte[] bytes = TextEncoding.Windows1252().GetBytes(descriptors.Name);
-            int length = Math.Min(bytes.Length, nameArr.Length);
+            std::vector<unsigned char> bytes = Encoding(CodePage::Windows1252).bytes(descriptors.name());
+            int length = std::min(bytes.size(), nameArr.size());
             for (int i = 0; i < length; i++) { nameArr[i] = bytes[i]; }
         }
-        stream.Write(nameArr, 0, nameArr.Length);
+        stream.write(reinterpret_cast<const char *>(nameArr.data()), nameArr.size());
 
-        foreach (DwgLocalSectionMap localMap in descriptors.LocalSections)
+        for (auto&& localMap : descriptors.localSections())
         {
-            if (localMap.PageNumber > 0)
+            if (localMap.pageNumber() > 0)
             {
                 //0x00	4	Page number(index into SectionPageMap), starts at 1
-                swriter.WriteInt(localMap.PageNumber);
+                swriter->writeInt(localMap.pageNumber());
                 //0x04	4	Data size for this page(compressed size).
-                swriter.WriteInt((int) localMap.CompressedSize);
+                swriter->writeInt((int) localMap.compressedSize());
                 //0x08	8	Start offset for this page(OdUInt64).If this start offset is smaller than the sum of the decompressed size of all previous pages, then this page is to be preceded by zero pages until this condition is met.
-                swriter.WriteBytes(LittleEndianConverter.Instance.GetBytes(localMap.Offset));
+                swriter->writeBytes(LittleEndianConverter::instance()->bytes(localMap.offset()));
             }
         }
     }
 
     //Section map: 0x4163003b
-    DwgLocalSectionMap sectionHolder = setSeeker(0x4163003B, stream);
-    int count = DwgCheckSumCalculator.CompressionCalculator((int) (_stream.Position - sectionHolder.Seeker));
+    DwgLocalSectionMap sectionHolder = setSeeker(0x4163003B, &stream);
+    int count = DwgCheckSumCalculator::CompressionCalculator((int) (_stream->tellp() - sectionHolder.seeker()));
     // Fill the gap
-    _stream.Write(DwgCheckSumCalculator.MagicSequence, 0, count);
-    sectionHolder.Size = _stream.Position - sectionHolder.Seeker;
+    _stream->write(reinterpret_cast<const char*>(&DwgCheckSumCalculator::MagicSequence), count);
+    sectionHolder.setSize(_stream->tellp() - sectionHolder.seeker());
 
     addSection(sectionHolder);
 }
@@ -261,44 +266,41 @@ void DwgFileHeaderWriterAC18::writeRecords()
     int size = counter + DwgCheckSumCalculator::CompressionCalculator(counter);
     section.setSize(size);
 
-    MemoryStream stream = new MemoryStream();
-    StreamIO writer = new StreamIO(stream);
+    std::ostringstream stream;
+    OutputStreamWrapper writer(&stream);
 
-    foreach (DwgLocalSectionMap item in _localSectionsMaps)
+    for (auto &&item: _localSectionsMaps)
     {
-        if (item != null)
-        {
-            //0x00	4	Section page number, starts at 1, page numbers are unique per file.
-            writer.Write(item.PageNumber);
-            //0x04	4	Section size
-            writer.Write((int) item.Size);
-        }
+        //0x00	4	Section page number, starts at 1, page numbers are unique per file.
+        writer.write(item.pageNumber());
+        //0x04	4	Section size
+        writer.write((int) item.size());
     }
 
-    compressChecksum(section, stream);
+    compressChecksum(section, &stream);
 
-    DwgLocalSectionMap last = _localSectionsMaps[_localSectionsMaps.Count - 1];
-    _fileHeader.GapAmount = 0u;
-    _fileHeader.LastPageId = last.PageNumber;
-    _fileHeader.LastSectionAddr = (unsigned long long) (last.Seeker + size - 256);
-    _fileHeader.SectionAmount = (uint) (_localSectionsMaps.Count - 1);
-    _fileHeader.PageMapAddress = (unsigned long long) section.Seeker;
+    DwgLocalSectionMap last = _localSectionsMaps[_localSectionsMaps.size() - 1];
+    _fileHeader->setGapAmount(0U);
+    _fileHeader->setLastPageId(last.pageNumber());
+    _fileHeader->setLastSectionAddr((unsigned long long) (last.seeker() + size - 256));
+    _fileHeader->setSectionAmount((unsigned int) (_localSectionsMaps.size() - 1));
+    _fileHeader->setPageMapAddress((unsigned long long) section.seeker());
 }
 
 void DwgFileHeaderWriterAC18::writeFileMetaData()
 {
-    StreamIO writer = new StreamIO(_stream);
+    OutputStreamWrapper writer(_stream);
 
-    _fileHeader.SecondHeaderAddr = (unsigned long long) _stream.Position;
+    _fileHeader->setSecondHeaderAddr((unsigned long long) _stream->tellp());
 
-    MemoryStream stream = new MemoryStream();
-    writeFileHeader(stream);
+    std::ostringstream stream;
+    writeFileHeader(&stream);
 
-    _stream.Write(stream.GetBuffer(), 0, (int) stream.Length);
+    _stream->write(reinterpret_cast<const char *>(stream.str().c_str()), stream.str().length());
 
     ////0x00	6	“ACXXXX” version string
-    _stream.Position = 0L;
-    _stream.Write(Encoding.ASCII.GetBytes(_document.Header.VersionString), 0, 6);
+    _stream->seekp(std::ios::beg);
+    _stream->write(Encoding(CodePage::Windows1251).bytes(_document->header()->versionString()), 6);
 
     //5 bytes of 0x00
     _stream.Write(new byte[5], 0, 5);
@@ -310,12 +312,12 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
     _stream.WriteByte(3);
 
     //0x0D	4	Preview address(long), points to the image page + page header size(0x20).
-    writer.Write((uint) ((int) _descriptors[DwgSectionDefinition.Preview].LocalSections[0].Seeker + 0x20));
+    writer.Write((unsigned int) ((int) _descriptors[DwgSectionDefinition.Preview].LocalSections[0].Seeker + 0x20));
 
     //0x11	1	Dwg version (Acad version that writes the file)
     _stream.WriteByte((byte) 33);
     //0x12	1	Application maintenance release version(Acad maintenance version that writes the file)
-    _stream.WriteByte((byte) _document.Header.MaintenanceVersion);
+    _stream.WriteByte((byte) -_document.Header.MaintenanceVersion);
 
     //0x13	2	Codepage
     writer.Write<ushort>(getFileCodePage());
@@ -324,95 +326,94 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
 
     //TODO: Write SecurityType
     //0x18	4	SecurityType (long), see R2004 meta data, the definition is the same, paragraph 4.1.
-    writer.Write((int) 0);
+    writer.write((int) 0);
     //0x1C	4	Unknown long
-    writer.Write(0);
+    writer.write(0);
 
     //0x20	4	Summary info Address in stream
-    writer.Write((uint) ((int) _descriptors[DwgSectionDefinition.SummaryInfo].LocalSections[0].Seeker + 0x20));
+    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition.SummaryInfo].LocalSections[0].Seeker + 0x20));
 
     //0x24	4	VBA Project Addr(0 if not present)
-    writer.Write(0u);
+    writer.write(0u);
 
     //0x28	4	0x00000080
-    writer.Write<int>(0x00000080);
+    writer.write<int>(0x00000080);
 
     //0x2C	4	App info Address in stream
-    writer.Write((uint) ((int) _descriptors[DwgSectionDefinition.AppInfo].LocalSections[0].Seeker + 0x20));
+    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition.AppInfo].LocalSections[0].Seeker + 0x20));
 
     //0x30	0x80	0x00 bytes
     byte[] array = new byte[80];
 
     _stream.Write(array, 0, 80);
     _stream.Write(stream.GetBuffer(), 0, (int) stream.Length);
-    _stream.Write(DwgCheckSumCalculator.MagicSequence, 236, 20);
+    _stream.Write(DwgCheckSumCalculator::MagicSequence, 236, 20);
 }
 
 void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
 {
-    CRC32StreamHandler crcStream = new CRC32StreamHandler(stream, 0u);
-    StreamIO swriter = new StreamIO(crcStream);
+    CRC32OutputStreamHandler swriter(stream);
 
     //0x00	12	“AcFssFcAJMB” file ID string
-    crcStream.Write(TextEncoding.Windows1252().GetBytes("AcFssFcAJMB"), 0, 11);
-    crcStream.WriteByte(0);
+    swriter.write(Encoding(CodePage::Windows1252).fromUtf8("AcFssFcAJMB"), 0, 11);
+    swriter.writeByte(0);
 
     //0x0C	4	0x00(long)
-    swriter.Write<int>(0);
+    swriter.write<int>(0);
     //0x10	4	0x6c(long)
-    swriter.Write<int>(0x6C);
+    swriter.write<int>(0x6C);
     //0x14	4	0x04(long)
-    swriter.Write<int>(0x04);
+    swriter.write<int>(0x04);
     //0x18	4	Root tree node gap
-    swriter.Write<int>(_fileHeader.RootTreeNodeGap);
+    swriter.write<int>(_fileHeader->rootTreeNodeGap());
     //0x1C	4	Lowermost left tree node gap
-    swriter.Write<int>(_fileHeader.LeftGap);
+    swriter.write<int>(_fileHeader->leftGap());
     //0x20	4	Lowermost right tree node gap
-    swriter.Write<int>(_fileHeader.RigthGap);
+    swriter.write<int>(_fileHeader->rigthGap());
     //0x24	4	Unknown long(ODA writes 1)
-    swriter.Write<int>(1);
+    swriter.write<int>(1);
     //0x28	4	Last section page Id
-    swriter.Write<int>(_fileHeader.LastPageId);
+    swriter.write<int>(_fileHeader->lastPageId());
 
     //0x2C	8	Last section page end address
-    swriter.Write<unsigned long long>(_fileHeader.LastSectionAddr);
+    swriter.write<unsigned long long>(_fileHeader->lastSectionAddr());
     //0x34	8	Second header data address pointing to the repeated header data at the end of the file
-    swriter.Write<unsigned long long>(_fileHeader.SecondHeaderAddr);
+    swriter.write<unsigned long long>(_fileHeader->secondHeaderAddr());
 
     //0x3C	4	Gap amount
-    swriter.Write<uint>(_fileHeader.GapAmount);
+    swriter.write<unsigned int>(_fileHeader->gapAmount());
     //0x40	4	Section page amount
-    swriter.Write<uint>(_fileHeader.SectionAmount);
+    swriter.write<unsigned int>(_fileHeader->sectionAmount());
 
     //0x44	4	0x20(long)
-    swriter.Write<int>(0x20);
+    swriter.write<int>(0x20);
     //0x48	4	0x80(long)
-    swriter.Write<int>(0x80);
+    swriter.write<int>(0x80);
     //0x4C	4	0x40(long)
-    swriter.Write<int>(0x40);
+    swriter.write<int>(0x40);
 
     //0x50	4	Section Page Map Id
-    swriter.Write(_fileHeader.SectionPageMapId);
+    swriter.write(_fileHeader->sectionPageMapId());
     //0x54	8	Section Page Map address(add 0x100 to this value)
-    swriter.Write<unsigned long long>(_fileHeader.PageMapAddress - 256);
+    swriter.write<unsigned long long>(_fileHeader->pageMapAddress() - 256);
     //0x5C	4	Section Map Id
-    swriter.Write<uint>(_fileHeader.SectionMapId);
+    swriter.write<unsigned int>(_fileHeader->sectionMapId());
     //0x60	4	Section page array size
-    swriter.Write<uint>(_fileHeader.SectionArrayPageSize);
+    swriter.write<unsigned int>(_fileHeader->sectionArrayPageSize());
     //0x64	4	Gap array size
-    swriter.Write<uint>(_fileHeader.GapArraySize);
+    swriter.write<unsigned int>(_fileHeader->gapArraySize());
 
     long position = crcStream.Position;
-    swriter.Write<uint>(0u);
+    swriter.write<unsigned int>(0u);
 
-    uint seed = crcStream.Seed;
+    unsigned int seed = crcStream.Seed;
     crcStream.Position = position;
     //0x68	4	CRC32(long).See paragraph 2.14.2 for the 32 - bit CRC calculation,
     //			the seed is zero. Note that the CRC
     //			calculation is done including the 4 CRC bytes that are
     //			initially zero! So the CRC calculation takes into account
     //			all of the 0x6c bytes of the data in this table.
-    swriter.Write<uint>(seed);
+    swriter.write<unsigned int>(seed);
 
     crcStream.Flush();
 
@@ -421,17 +422,18 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
 
 void DwgFileHeaderWriterAC18::addSection(DwgLocalSectionMap section)
 {
-    section.PageNumber = _localSectionsMaps.Count + 1;
-    _localSectionsMaps.Add(section);
+    section.setPageNumber(_localSectionsMaps.size() + 1);
+    _localSectionsMaps.push_back(section);
 }
 
 DwgLocalSectionMap DwgFileHeaderWriterAC18::setSeeker(int map, std::ostringstream *stream)
 {
-    DwgLocalSectionMap holder = new DwgLocalSectionMap{SectionMap = map};
+    DwgLocalSectionMap holder;
+    holder.setSectionMap(map);
 
     writeMagicNumber();
 
-    holder.Seeker = _stream.Position;
+    holder.setSeeker(_stream->tellp());
 
     compressChecksum(holder, stream);
 
@@ -451,7 +453,7 @@ void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap section, std::
     MemoryStream checkSumHolder = new MemoryStream();
     writePageHeaderData(section, checkSumHolder);
     section.Checksum = DwgCheckSumCalculator.Calculate(0u, checkSumHolder.GetBuffer(), 0, (int) checkSumHolder.Length);
-    section.Checksum = DwgCheckSumCalculator.Calculate((uint) section.Checksum, main.GetBuffer(), 0, (int) main.Length);
+    section.Checksum = DwgCheckSumCalculator.Calculate((unsigned int) section.Checksum, main.GetBuffer(), 0, (int) main.Length);
 
     writePageHeaderData(section, _stream);
     _stream.Write(main.GetBuffer(), 0, (int) main.Length);
@@ -459,41 +461,41 @@ void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap section, std::
 
 void DwgFileHeaderWriterAC18::writePageHeaderData(DwgLocalSectionMap section, std::ostream *stream)
 {
-    StreamIO writer = new StreamIO(stream);
+    OutputStreamWrapper writer(stream);
 
     //0x00	4	Section page type:
     //Section page map: 0x41630e3b
     //Section map: 0x4163003b
-    writer.Write<int>(section.SectionMap);
+    writer.write<int>(section.sectionMap());
     //0x04	4	Decompressed size of the data that follows
-    writer.Write<int>((int) section.DecompressedSize);
+    writer.write<int>((int) section.decompressedSize());
     //0x08	4	Compressed size of the data that follows(CompDataSize)
-    writer.Write<int>((int) section.CompressedSize);
+    writer.write<int>((int) section.compressedSize());
     //0x0C	4	Compression type(0x02)
-    writer.Write<int>(section.Compression);
+    writer.write<int>(section.compression());
     //0x10	4	Section page checksum
-    writer.Write<uint>((uint) section.Checksum);
+    writer.write<unsigned int>((unsigned int) section.checksum());
 }
 
 void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream, DwgSectionDescriptor descriptor,
                                                DwgLocalSectionMap map, int size)
 {
-    StreamIO writer = new StreamIO(stream);
+    OutputStreamWrapper writer(stream);
 
     //0x00	4	Section page type, since it’s always a data section: 0x4163043b
-    writer.Write(size);
+    writer.write(size);
     //0x04	4	Section number
-    writer.Write(descriptor.SectionId);
+    writer.write(descriptor.sectionId());
     //0x08	4	Data size (compressed)
-    writer.Write((int) map.CompressedSize);
+    writer.write((int) map.compressedSize());
     //0x0C	4	Page Size (decompressed)
-    writer.Write((int) map.PageSize);
+    writer.write((int) map.pageSize());
     //0x10	4	Start Offset (in the decompressed buffer)
-    writer.Write((long) map.Offset);
+    writer.write((long) map.offset());
     //0x18	4	Data Checksum (section page checksum calculated from compressed data bytes, with seed 0)
-    writer.Write((uint) map.Checksum);
+    writer.write((unsigned int) map.checksum());
     //0x1C	4	Unknown (ODA writes a 0)
-    writer.Write(map.ODA);
+    writer.write(map.ODA());
 }
 
 }// namespace dwg

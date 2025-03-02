@@ -22,15 +22,16 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <dwg/utils/Encoding.h>
-#include <dwg/utils/EndianConverter_p.h>
+#include <dwg/utils/EndianConverter.h>
 #include <iostream>
 #include <sstream>
 #include <vector>
 
 namespace dwg {
 
-class InputStreamWrapper
+class LIBDWG_API InputStreamWrapper
 {
     std::istream *_stream;
     Encoding _encoding;
@@ -75,7 +76,7 @@ public:
     std::string readUntil(char match);
 };
 
-class OutputStreamWrapper
+class LIBDWG_API OutputStreamWrapper
 {
     std::ostream *_stream;
     Encoding _encoding;
@@ -112,6 +113,7 @@ public:
     virtual void write(const std::vector<unsigned char> &buffer, int offset, int length);
     virtual void write(const std::string &);
     virtual void write(const std::string &, Encoding);
+    void writeByte(unsigned char b);
 };
 
 static int stringstream_length(const std::stringstream &ss) { return ss.str().length(); }

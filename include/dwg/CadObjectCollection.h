@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/CadObject.h>
-#include <functional>
+#include <dwg/utils/Delegate.h>
 #include <vector>
 
 namespace dwg {
@@ -125,12 +125,12 @@ public:
     /**
      * @brief Delegate triggered when an object is added.
      */
-    std::function<void(T *)> OnAdded;
+    Delegate<void(T *)> OnAdded;
 
     /**
      * @brief Delegate triggered when an object is removed.
      */
-    std::function<void(T *)> OnRemoved;
+    Delegate<void(T *)> OnRemoved;
 };
 
 }// namespace dwg

@@ -24,12 +24,13 @@
 
 #include <assert.h>
 #include <cmath>
+#include <dwg/exports.h>
 
 namespace dwg {
 
 bool fuzzyIsNull(double d) noexcept { return std::fabs(d) <= 0.000000000001; }
 
-struct XY
+struct LIBDWG_API XY
 {
     union
     {
@@ -105,7 +106,7 @@ struct XY
 };
 
 
-struct XYZ
+struct LIBDWG_API XYZ
 {
     union
     {

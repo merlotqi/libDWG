@@ -21,7 +21,7 @@
  */
 
 #include <dwg/Color.h>
-#include <dwg/utils/EndianConverter_p.h>
+#include <dwg/utils/EndianConverter.h>
 #include <stdexcept>
 
 namespace dwg {

@@ -22,12 +22,13 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <memory>
 #include <vector>
 
 namespace dwg {
 
-struct byte_order
+struct LIBDWG_API byte_order
 {
     static constexpr unsigned short value = 0x0102;
     static constexpr auto is_little_endian = (value & 0xFF) == 0x02;
@@ -36,7 +37,7 @@ struct byte_order
 constexpr bool is_little_endian = byte_order::is_little_endian;
 constexpr bool is_big_endian = !byte_order::is_little_endian;
 
-class EndianConverter
+class LIBDWG_API EndianConverter
 {
 public:
     EndianConverter() = default;
@@ -91,7 +92,7 @@ protected:
     virtual void byteswap(unsigned char *buffer, size_t length) = 0;
 };
 
-class BigEndianConverter : public EndianConverter
+class LIBDWG_API BigEndianConverter : public EndianConverter
 {
 public:
     BigEndianConverter() = default;
@@ -99,7 +100,7 @@ public:
     static std::unique_ptr<EndianConverter> instance();
 };
 
-class LittleEndianConverter : public EndianConverter
+class LIBDWG_API LittleEndianConverter : public EndianConverter
 {
 public:
     LittleEndianConverter() = default;

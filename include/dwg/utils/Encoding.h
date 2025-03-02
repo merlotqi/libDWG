@@ -24,6 +24,7 @@
 
 #include <dwg/exports.h>
 #include <string>
+#include <vector>
 
 namespace dwg {
 
@@ -180,6 +181,7 @@ public:
     Encoding();
     Encoding(CodePage codePage);
 
+    std::vector<unsigned char> bytes(const std::string &str) const;
     std::string toUtf8(const char *str) noexcept(false);
     std::string toUtf8(const std::string &str) noexcept(false);
     std::string fromUtf8(const std::string &str) noexcept(false);

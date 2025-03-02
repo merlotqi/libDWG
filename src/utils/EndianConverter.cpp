@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/utils/EndianConverter_p.h>
+#include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
 

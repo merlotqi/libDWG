@@ -23,7 +23,6 @@
 #include <dwg/utils/Encoding.h>
 #include <iconv.h>
 #include <map>
-#include <vector>
 #include <stdexcept>
 
 #ifdef _WIN32
@@ -178,6 +177,8 @@ static std::map<CodePage, std::string> s_codepage_iconvid_mapping = {
 Encoding::Encoding() : cp(CodePage::Utf8) {}
 
 Encoding::Encoding(CodePage codePage) : cp(codePage) {}
+
+std::vector<unsigned char> Encoding::bytes(const std::string &str) const { return std::vector<unsigned char>(); }
 
 std::string Encoding::toUtf8(const char *str) noexcept(false)
 {

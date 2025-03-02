@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <dwg/Coordinate.h>
 #include <string>
 #include <variant>
@@ -29,29 +30,136 @@
 
 namespace dwg {
 
-enum DwgVariantType
+class LIBDWG_API DwgVariant
 {
-    None,
-    I8,
-    UI8,
-    I16,
-    UI16,
-    I32,
-    UI32,
-    I64,
-    UI64,
-    F32,
-    F64,
-    STRING,
-    COORD2D,
-    COORD3D,
-    BLOB,
+public:
+    enum VarType
+    {
+        None,
+        I8,
+        U8,
+        I16,
+        U16,
+        I32,
+        U32,
+        I64,
+        U64,
+        F32,
+        F64,
+        STRING,
+        COORD2D,
+        COORD3D,
+        BLOB,
+    };
+
+    DwgVariant() = default;
+
+    VarType Type;
+
+    union {
+        char i8;
+        unsigned char u8;
+        short i16;
+        unsigned short u16;
+        int i32;
+        unsigned int u32;
+        long long i64;
+        unsigned long long u64;
+        float f32;
+        double f64;
+        std::string str;
+        XY xy;
+        XYZ xyz;
+        std::vector<unsigned char> blob;
+    };
+
+    virtual ~DwgVariant();
+
+    DwgVariant();
+    DwgVariant(char v);
+    DwgVariant(unsigned char v);
+    DwgVariant(short v);
+    DwgVariant(unsigned short v);
+    DwgVariant(int v);
+    DwgVariant(unsigned int v);
+    DwgVariant(long long v);
+    DwgVariant(unsigned long long v);
+    DwgVariant(float v);
+    DwgVariant(double v);
+    DwgVariant(bool v);
+    DwgVariant(const char *v);
+    DwgVariant(const std::string &str);
+    DwgVariant(const XY &v);
+    DwgVariant(const XYZ &v);
+    DwgVariant(const std::vector<unsigned char> &blob);
+
+    DwgVariant(const DwgVariant &rhs);
+    DwgVariant(DwgVariant &&rhs) noexcept;
+    DwgVariant(VarType type);
+
+
+    DwgVariant &operator=(const DwgVariant &rhs);
+    DwgVariant &operator=(char v);
+    DwgVariant &operator=(unsigned char v);
+    DwgVariant &operator=(short v);
+    DwgVariant &operator=(unsigned short v);
+    DwgVariant &operator=(int v);
+    DwgVariant &operator=(unsigned int v);
+    DwgVariant &operator=(long long v);
+    DwgVariant &operator=(unsigned long long v);
+    DwgVariant &operator=(float v);
+    DwgVariant &operator=(double v);
+    DwgVariant &operator=(bool v);
+    DwgVariant &operator=(const std::string &str);
+    DwgVariant &operator=(const XY &v);
+    DwgVariant &operator=(const XYZ &v);
+    DwgVariant &operator=(const std::vector<unsigned char> &blob);
+    DwgVariant &operator=(std::vector<unsigned char> &&blob) noexcept;
+
+    DwgVariant &operator=(DwgVariant &&v) noexcept;
+
+    bool operator==(const DwgVariant &o) const;
+    bool operator!=(const DwgVariant &o) const;
+
+    void clear();
+
+    char asChar() const;
+    unsigned char asUChar() const;
+    short asShort() const;
+    unsigned short asUShort() const;
+    int asInt() const;
+    unsigned int asUInt() const;
+    long long asLongLong() const;
+    unsigned long long asULongLong() const;
+    float asFloat() const;
+    double asDouble() const;
+    bool asBool() const;
+    std::string asString() const;
+    int asBlob(unsigned char *bBlob) const;
+    XY asCoord2D() const;
+    XYZ asCoord3D() const;
+    const std::vector<unsigned char> &asBlob() const;
+
+    operator char() const;
+    operator unsigned char() const;
+    operator short() const;
+    operator unsigned short() const;
+    operator int() const;
+    operator unsigned int() const;
+    operator long long() const;
+    operator unsigned long long() const;
+    operator bool() const;
+    operator float() const;
+    operator double() const;
+    operator const std::string &() const;
+    operator const XY &() const;
+    operator const XYZ &() const;
+    operator const std::vector<unsigned char> &() const;
+
+    void swap(DwgVariant &rhs);
+
+    static const DwgVariant &Empty();
 };
 
-typedef std::variant<std::monostate, char, unsigned char, short, unsigned short, int, unsigned int, long long,
-                     unsigned long long, float, double, std::string, XY, XYZ, std::vector<unsigned char>>
-        DwgVariant;
-
-inline static bool dwg_variant_valid(const DwgVariant &val) { return !(std::holds_alternative<std::monostate>(val)); }
 
 }// namespace dwg

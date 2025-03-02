@@ -23,7 +23,7 @@
 #include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/CRC8StreamHandler_p.h>
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 

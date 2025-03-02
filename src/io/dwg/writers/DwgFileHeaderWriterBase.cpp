@@ -25,7 +25,7 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils_p.h>
-#include <dwg/utils/EndianConverter_p.h>
+#include <dwg/utils/EndianConverter.h>
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <fstream>

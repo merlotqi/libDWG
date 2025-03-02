@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <functional>
+#include <dwg/utils/Delegate.h>
 #include <string>
 
 namespace dwg {
@@ -57,7 +57,7 @@ public:
      * 
      * This delegate is invoked with the old and new names when the name is updated.
      */
-    std::function<void(const std::string &, const std::string &)> OnNameChanged;
+    Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 };
 
 }// namespace dwg

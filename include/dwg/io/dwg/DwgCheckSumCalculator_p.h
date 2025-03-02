@@ -29,7 +29,7 @@ namespace dwg {
 class DwgCheckSumCalculator
 {
 public:
-    static unsigned char MagicSequence[];
+    static std::vector<unsigned char> MagicSequence;
     static int CompressionCalculator(int length);
     static unsigned int Calculate(unsigned int seed, const std::vector<unsigned char> &buffer, int offset, int size);
 };

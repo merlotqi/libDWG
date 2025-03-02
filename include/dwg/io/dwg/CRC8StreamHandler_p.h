@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/CRC_p.h>
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 

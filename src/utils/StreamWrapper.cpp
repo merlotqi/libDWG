@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 #include <stdexcept>
 
 namespace dwg {

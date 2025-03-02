@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/Notification.h>
-#include <functional>
+#include <dwg/utils/Delegate.h>
 #include <map>
 
 
@@ -77,7 +77,7 @@ public:
     void RegisterTables();
     void BuildTables();
 
-    std::function<void(const std::string &, Notification)> OnNotification;
+    Delegate<void(const std::string &, Notification)> OnNotification;
 
 
 protected:

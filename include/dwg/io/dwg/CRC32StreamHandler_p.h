@@ -24,7 +24,7 @@
 #pragma once
 
 #include <dwg/io/dwg/CRC_p.h>
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -40,6 +40,7 @@ protected:
 class CRC32InputStreamHandler : public InputStreamWrapper, CRC32StreamHandlerBase
 {
 public:
+    CRC32InputStreamHandler(std::istream *stream);
     CRC32InputStreamHandler(std::vector<unsigned char> &arr, unsigned int seed);
     int RawRead(unsigned char *buff, int nLen);
 };
@@ -47,6 +48,7 @@ public:
 class CRC32OutputStreamHandler : public OutputStreamWrapper, CRC32StreamHandlerBase
 {
 public:
+    CRC32OutputStreamHandler(std::ostream *stream);
     CRC32OutputStreamHandler(std::vector<unsigned char> &arr, unsigned int seed);
 };
 

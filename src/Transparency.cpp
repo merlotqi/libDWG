@@ -21,7 +21,7 @@
  */
 
 #include <dwg/Transparency.h>
-#include <dwg/utils/EndianConverter_p.h>
+#include <dwg/utils/EndianConverter.h>
 #include <stdexcept>
 #include <vector>
 

@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/exports.h>
+
 namespace dwg {
 
 /**
@@ -29,7 +31,7 @@ namespace dwg {
  * 
  * This class provides a mechanism to retrieve the handle of a CAD object.
  */
-class IHandledCadObject
+class LIBDWG_API IHandledCadObject
 {
 public:
     /**
@@ -40,7 +42,7 @@ public:
     /**
      * @brief Virtual destructor with no exception guarantee.
      */
-    virtual ~IHandledCadObject() noexcept {}
+    virtual ~IHandledCadObject() {}
 
     /**
      * @brief Gets the handle of the CAD object.

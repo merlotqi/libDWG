@@ -39,7 +39,7 @@
 #include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
-#include <dwg/utils/StreamWrapper_p.h>
+#include <dwg/utils/StreamWrapper.h>
 #include <sstream>
 #include <stdexcept>
 #include <fmt/core.h>
