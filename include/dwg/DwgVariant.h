@@ -74,8 +74,6 @@ public:
     };
 
     virtual ~DwgVariant();
-
-    DwgVariant();
     DwgVariant(char v);
     DwgVariant(unsigned char v);
     DwgVariant(short v);

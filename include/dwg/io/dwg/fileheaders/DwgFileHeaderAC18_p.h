@@ -95,7 +95,7 @@ public:
     void setLeftGap(int);
 
     std::map<std::string, DwgSectionDescriptor> descriptors() const;
-    std::map<std::string, DwgSectionDescriptor> descriptors();
+    std::map<std::string, DwgSectionDescriptor> &descriptors();
     void setDescriptors(const std::map<std::string, DwgSectionDescriptor> &);
 
 private:
