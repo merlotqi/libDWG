@@ -24,9 +24,11 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
+class CadDictionary;
 class LIBDWG_API Scale : public NonGraphicalObject
 {
 public:
@@ -59,6 +61,12 @@ public:
     XYZ applyTo(const XYZ &);
 
     XY applyTo(const XY &);
+};
+
+class LIBDWG_API ScaleCollection : ObjectDictionaryCollection<Scale>
+{
+public:
+    ScaleCollection(CadDictionary *);
 };
 
 }// namespace dwg

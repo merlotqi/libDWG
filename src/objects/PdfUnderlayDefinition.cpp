@@ -21,7 +21,16 @@
  */
 
 #include <dwg/objects/PdfUnderlayDefinition.h>
+#include <dwg/DxfFileToken_p.h>
 
 namespace dwg {
 
+PdfUnderlayDefinition::PdfUnderlayDefinition() {}
+
+std::string PdfUnderlayDefinition::objectName() const { return DxfFileToken::ObjectPdfDefinition; }
+
+std::string PdfUnderlayDefinition::page() const { return _page;}
+
+void PdfUnderlayDefinition::setPage(const std::string &value) { _page = value; }
+    
 }// namespace dwg

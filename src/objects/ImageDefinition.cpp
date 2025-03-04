@@ -21,7 +21,43 @@
  */
 
 #include <dwg/objects/ImageDefinition.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
+    
+ImageDefinition::ImageDefinition() {}
+
+ImageDefinition::~ImageDefinition() {}
+
+ObjectType ImageDefinition::objectType() const { return ObjecType::UNLISTED; }
+
+std::string ImageDefinition::objectName() const { return DxfFileToken::ObjectImageDefinition; }
+
+std::string ImageDefinition::subclassMarker() const { return DxfSubclassMarker::RasterImageDef; }
+
+int ImageDefinition::classVersion() const { return _classVersion; }
+
+void ImageDefinition::setClassVersion(int value) { _classVersion = value; }
+
+std::string ImageDefinition::fileName() const { return _fileName; }
+
+void ImageDefinition::setFileName(const std::string &value) { _fileName = value; }
+
+XY ImageDefinition::size() const { return _size; }
+
+void ImageDefinition::setSize(const XY &value) { _size =value; }
+
+XY ImageDefinition::defaultSize() const { return _defaultSize; }
+
+void ImageDefinition::setDefaultSize(const XY &value) { _defaultSize = value; }
+
+bool ImageDefinition::isLoaded() const { return _isLoaded; }
+
+void ImageDefinition::setIsLoaded(bool value) { _isLoaded = value; }
+
+ResolutionUnit ImageDefinition::units() const { return _units; }
+
+void ImageDefinition::setUnits(ResolutionUnit value) { _units = value; }
 
 }// namespace dwg

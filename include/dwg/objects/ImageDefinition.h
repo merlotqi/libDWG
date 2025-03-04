@@ -25,9 +25,11 @@
 #include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/ResolutionUnit.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
+class CadDictionary;
 class LIBDWG_API ImageDefinition : public NonGraphicalObject
 {
 public:
@@ -58,10 +60,17 @@ public:
 
 private:
     int _classVersion;
+    std::string _fileName;
     XY _size;
     XY _defaultSize;
     bool _isLoaded;
     ResolutionUnit _units;
+};
+
+class LIBDWG_API ImageDefinitionCollection : ObjectDictionaryCollection<ImageDefinition>
+{
+public:
+    ImageDefinitionCollection(CadDictionary *);
 };
 
 }// namespace dwg

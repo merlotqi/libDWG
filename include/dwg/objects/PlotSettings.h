@@ -39,11 +39,10 @@ class LIBDWG_API PlotSettings : public NonGraphicalObject
 {
 public:
     PlotSettings();
+    ~PlotSettings();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     std::string pageName() const;
@@ -83,7 +82,7 @@ public:
     void setWindowUpperLeftX(double);
 
     double windowUpperLeftY() const;
-    void setWindowUpperLeftY();
+    void setWindowUpperLeftY(double);
 
     double printScale() const;
 
@@ -134,6 +133,37 @@ public:
 
     unsigned long long shadePlotIDHandle() const;
     void setShadePlotIDHandle(unsigned long long);
+
+private:
+    std::string _pageName;
+    std::string _systemPrinterName;
+    std::string _paperSize;
+    std::string _plotViewName;
+    PaperMargin _unprintableMargin;
+    double _paperWidth;
+    double _paperHeight;
+    double _plotOriginX;
+    double _plotOriginY;
+    double _windowLowerLeftX;
+    double _windowLowerLeftY;
+    double _windowUpperLeftX;
+    double _windowUpperLeftY;
+    double _numeratorScale;
+    double _denominatorScale;
+    PlotFlags _flags;
+    PlotPaperUnits _paperUnits;
+    PlotRotation _paperRotation;
+    PlotType _plotType;
+    std::string _styleSheet;
+    ScaledType _scaledFit;
+    ShadePlotMode _shadePlotMode;
+    ShadePlotResolutionMode _shadePlotResolutionMode;
+    short _shadePlotDPI = 300;
+    double _standardScale = 1.0;
+    XY _paperImageOrigin = XY::Zero;
+    double _paperImageOriginX = 0.0;
+    double _paperImageOriginY = 0.0;
+    unsigned long long _shadePlotIDHandle = 0ULL;
 };
 
 }// namespace dwg

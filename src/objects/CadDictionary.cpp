@@ -21,6 +21,8 @@
  */
 
 #include <dwg/objects/CadDictionary.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
 
@@ -40,5 +42,35 @@ std::string CadDictionary::AcadScaleList = "ACAD_SCALELIST";
 std::string CadDictionary::AcadVisualStyle = "ACAD_VISUALSTYLE";
 std::string CadDictionary::AcadFieldList = "ACAD_FIELDLIST";
 std::string CadDictionary::AcadImageDict = "ACAD_IMAGE_DICT";
+std::string CadDictionary::GeographicData = "ACAD_GEOGRAPHICDATA";
+
+CadDictionary *CadDictionary::CreateRoot()
+{
+    return nullptr;
+}
+
+void CadDictionary::CreateDefaultEntries(CadDictionary *root)
+{
+    return nullptr;
+}
+
+CadDictionary::CadDictionary() {}
+
+CadDictionary::CadDictionary(const std::string &name) : _name(name)
+{}
+
+ObjectType CadDictionary::objectType() const { return ObjectType::DICTIONARY; }
+
+std::string CadDictionary::objectName() const { return DxfFileToken::ObjectDictionary; }
+
+std::string CadDictionary::subclassMarker() const { return DxfSubclassMarker::Dictionary; }
+
+bool CadDictionary::hardOwnerFlag() const { return _hardOwnerFlag; }
+
+void CadDictionary::setHardOwnerFlag(bool value) { _hardOwnerFlag = value; }
+
+DictionaryCloningFlags CadDictionary::clonningFlags() const { return _clonningFlags; }
+
+void CadDictionary::setCloningFlags(DictionaryCloningFlags value) { _clonningFlags = value; }
 
 }// namespace dwg

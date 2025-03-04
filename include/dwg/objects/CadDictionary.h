@@ -32,9 +32,14 @@ namespace dwg {
 
 class LIBDWG_API CadDictionary : public NonGraphicalObject
 {
-    std::map<std::string, NonGraphicalObject *> _entries;
-    bool _hard_owner_flag;
-    DictionaryCloningFlags _clonning_flags;
+    struct StringComparerOrdinalIgnoreCase
+    {
+        bool operator()(const std::string &lhs, const std::string &rhs);
+    };
+
+    std::map<std::string, NonGraphicalObject *, StringComparerOrdinalIgnoreCase> _entries;
+    bool _hardOwnerFlag;
+    DictionaryCloningFlags _clonningFlags;
 
 public:
     static std::string Root;
@@ -53,6 +58,8 @@ public:
     static std::string AcadVisualStyle;
     static std::string AcadFieldList;
     static std::string AcadImageDict;
+
+    static std::string GeographicData;
 
 public:
     static CadDictionary *CreateRoot();
@@ -73,10 +80,6 @@ public:
     DictionaryCloningFlags clonningFlags() const;
 
     void setClonningFlags(DictionaryCloningFlags);
-
-    std::vector<std::string> entryName() const;
-
-    std::vector<unsigned long long> entryHandles() const;
 
     CadObject *operator[](const std::string &key) const;
 

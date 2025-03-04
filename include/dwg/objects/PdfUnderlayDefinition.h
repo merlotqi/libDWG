@@ -36,6 +36,9 @@ public:
     std::string page() const;
 
     void setPage(const std::string &);
+
+private:
+    std::string _page;
 };
 
 }// namespace dwg

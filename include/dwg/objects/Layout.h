@@ -25,12 +25,15 @@
 #include <dwg/OrthographicType.h>
 #include <dwg/objects/LayoutFlags.h>
 #include <dwg/objects/PlotSettings.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
 class UCS;
 class Viewport;
 class BlockRecord;
+class CadDictionary;
+
 class LIBDWG_API Layout : public PlotSettings
 {
 public:
@@ -111,6 +114,12 @@ private:
     Viewport *_viewport;
     UCS *_ucs;
     UCS *_baseUCS;
+};
+
+class LIBDWG_API LayoutCollection : ObjectDictionaryCollection<Layout>
+{
+public:
+    ImageDefinitionCollection(CadDictionary *);
 };
 
 }// namespace dwg

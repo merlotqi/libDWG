@@ -21,7 +21,29 @@
  */
 
 #include <dwg/objects/ImageDefinitionReactor.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 
 namespace dwg {
+
+ImageDefinitionReactor::ImageDefinitionReactor() : _definition(nullptr) {}
+
+ImageDefinitionReactor::ImageDefinitionReactor(ImageDefinition *definition) : _definition(definition) {}
+
+ImageDefinitionReactor::~ImageDefinitionReactor() {}
+
+ObjectType ImageDefinitionReactor::objectType() const { return ObjectType::UNLISTED; }
+
+std::string ImageDefinitionReactor::objectName() const { return DxfFileToken::ObjectImageDefinitionReactor; }
+
+std::string ImageDefinitionReactor::subclassMarker() const { return DxfSubclassMarker::RasterImageDefReactor; }
+
+int ImageDefinitionReactor::classVersion() const { return _classVersion; }
+
+void ImageDefinitionReactor::setClassVersion(int value) { _classVersion = value; }
+
+ImageDefinition *ImageDefinitionReactor::definition() const { return _definition; }
+
+void ImageDefinitionReactor::setDefinition(ImageDefinition *value) { _definition = value; }
 
 }// namespace dwg

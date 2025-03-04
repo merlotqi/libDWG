@@ -20,14 +20,15 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-
 #pragma once
 
 #include <dwg/Color.h>
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
+class CadDictionary;
 class LIBDWG_API BookColor : public NonGraphicalObject
 {
     std::string _name;
@@ -57,6 +58,12 @@ public:
     Color color() const;
 
     void setColor(const Color &);
+};
+
+class LIBDWG_API ColorCollection : public ObjectDictionaryCollection<BookColor>
+{
+public:
+    ColorCollection(CadDictionary *dictionary);
 };
 
 }// namespace dwg

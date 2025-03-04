@@ -28,7 +28,6 @@
 #include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
-
 namespace dwg {
 
 class Material;

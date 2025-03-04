@@ -25,10 +25,13 @@
 #include <dwg/Color.h>
 #include <dwg/objects/MLineStyleFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
 class LineType;
+class CadDictionary;
+
 class LIBDWG_API MLineStyle : public NonGraphicalObject
 {
 public:
@@ -66,7 +69,22 @@ public:
     void setEndAngle(double);
 
     std::vector<Element> elements() const;
+    std::vector<Element> &elements();
     void setElements(const std::vector<Element> &);
+
+private:
+    MLineStyleFlags _flags;
+    std::string _description;
+    Color _fillColor = Color::ByLayer;
+    double _startAngle;
+    double _endAngle;
+    std::vector<Element> _elements;
+};
+
+class LIBDWG_API MLineStyleCollection : ObjectDictionaryCollection<MLineStyle>
+{
+public:
+    MLeaderStyleCollection(CadDictionary *);
 };
 
 }// namespace dwg

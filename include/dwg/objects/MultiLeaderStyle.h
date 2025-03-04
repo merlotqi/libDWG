@@ -35,6 +35,7 @@
 #include <dwg/objects/LeaderDrawOrderType.h>
 #include <dwg/objects/MultiLeaderDrawOrderType.h>
 #include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
@@ -42,7 +43,7 @@ class LineType;
 class BlockRecord;
 class TextStyle;
 class BlockRecord;
-
+class CadDictionary;
 class LIBDWG_API MultiLeaderStyle : public NonGraphicalObject
 {
 public:
@@ -184,5 +185,12 @@ public:
     TextAttachmentType textTopAttachment() const;
     void setTextTopAttachment(TextAttachmentType);
 };
+
+class LIBDWG_API MLeaderStyleCollection : ObjectDictionaryCollection<MultiLeaderStyle>
+{
+public:
+    MLeaderStyleCollection(CadDictionary *);
+};
+
 
 }// namespace dwg
