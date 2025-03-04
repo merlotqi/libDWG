@@ -20,15 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
-#include <dwg/utils/Encoding.h>
-#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgPreviewWriter_p.h>
+#include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <dwg/utils/Encoding.h>
 
 namespace dwg {
 
-DwgPreviewWriter::DwgPreviewWriter(ACadVersion version, std::ostream *stream)
-    : DwgSectionIO(version)
+DwgPreviewWriter::DwgPreviewWriter(ACadVersion version, std::ostream *stream) : DwgSectionIO(version)
 {
     _swriter = DwgStreamWriterBase::GetStreamWriter(version, stream, Encoding(CodePage::Windows1252));
     _startSentinel = {0x1F, 0x25, 0x6D, 0x07, 0xD4, 0x36, 0x28, 0x28, 0x9D, 0x57, 0xCA, 0x3F, 0x9D, 0x44, 0x10, 0x2B};

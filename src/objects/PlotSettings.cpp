@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/PlotSettings.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/objects/PlotSettings.h>
 #include <stdexcept>
 
 namespace dwg {
@@ -75,7 +75,7 @@ void PlotSettings::setPlotOriginY(double value) { _plotOriginY = value; }
 
 double PlotSettings::windowLowerLeftX() const { return _windowLowerLeftX; }
 
-void PlotSettings::setWindowLowerLeftX(double value) { return _windowLowerLeftX = value; }
+void PlotSettings::setWindowLowerLeftX(double value) { _windowLowerLeftX = value; }
 
 double PlotSettings::windowLowerLeftY() const { return _windowLowerLeftY; }
 
@@ -93,11 +93,19 @@ double PlotSettings::printScale() const { return _numeratorScale / _denominatorS
 
 double PlotSettings::numeratorScale() const { return _numeratorScale; }
 
-void PlotSettings::setNumeratorScale(double value) { if(value <= 0.0) throw new std::out_of_range("Value must be greater than zero"); _numeratorScale = value; }
+void PlotSettings::setNumeratorScale(double value)
+{
+    if (value <= 0.0) throw new std::out_of_range("Value must be greater than zero");
+    _numeratorScale = value;
+}
 
-double PlotSettings::denominatorScale() const { return _denominatorScale;}
+double PlotSettings::denominatorScale() const { return _denominatorScale; }
 
-void PlotSettings::setDenominatorScale(double value) {if(value <= 0.0) throw new std::out_of_range("Value must be greater than zero"); _denominatorScale = value; }
+void PlotSettings::setDenominatorScale(double value)
+{
+    if (value <= 0.0) throw new std::out_of_range("Value must be greater than zero");
+    _denominatorScale = value;
+}
 
 PlotFlags PlotSettings::flags() const { return _flags; }
 
@@ -121,7 +129,7 @@ void PlotSettings::setStyleSheet(const std::string &value) { _styleSheet = value
 
 ScaledType PlotSettings::scaledFit() const { return _scaledFit; }
 
-void PlotSettings::setScaledFit(ScaledType value) { _scaledFit = scaledFit; }
+void PlotSettings::setScaledFit(ScaledType value) { _scaledFit = value; }
 
 ShadePlotMode PlotSettings::shadePlotMode() const { return _shadePlotMode; }
 

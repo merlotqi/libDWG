@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/CadDictionary.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/objects/CadDictionary.h>
+
 
 namespace dwg {
 
@@ -44,20 +45,13 @@ std::string CadDictionary::AcadFieldList = "ACAD_FIELDLIST";
 std::string CadDictionary::AcadImageDict = "ACAD_IMAGE_DICT";
 std::string CadDictionary::GeographicData = "ACAD_GEOGRAPHICDATA";
 
-CadDictionary *CadDictionary::CreateRoot()
-{
-    return nullptr;
-}
+CadDictionary *CadDictionary::CreateRoot() { return nullptr; }
 
-void CadDictionary::CreateDefaultEntries(CadDictionary *root)
-{
-    return nullptr;
-}
+void CadDictionary::CreateDefaultEntries(CadDictionary *root) { return nullptr; }
 
 CadDictionary::CadDictionary() {}
 
-CadDictionary::CadDictionary(const std::string &name) : _name(name)
-{}
+CadDictionary::CadDictionary(const std::string &name) : _name(name) {}
 
 ObjectType CadDictionary::objectType() const { return ObjectType::DICTIONARY; }
 

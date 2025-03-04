@@ -72,7 +72,7 @@ public:
     void setModifiedDate(const time_t &value);
 
     std::map<std::string, std::string> properties() const;
-    std::map<std::string, std::string>& properties();
+    std::map<std::string, std::string> &properties();
     void setProperties(const std::map<std::string, std::string> &value);
 
 private:

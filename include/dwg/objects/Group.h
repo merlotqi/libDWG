@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <map>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/ObjectDictionaryCollection.h>
+#include <map>
 
 namespace dwg {
 

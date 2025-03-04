@@ -22,24 +22,24 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/CRC8StreamHandler_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgHeaderWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
-#include <dwg/tables/AppId.h>
-#include <dwg/tables/Layer.h>
-#include <dwg/tables/TextStyle.h>
-#include <dwg/tables/LineType.h>
-#include <dwg/tables/DimensionStyle.h>
-#include <dwg/tables/UCS.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/View.h>
-#include <dwg/tables/VPort.h>
-#include <dwg/io/dwg/CRC8StreamHandler_p.h>
-#include <dwg/objects/Group.h>
-#include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/Group.h>
 #include <dwg/objects/Layout.h>
+#include <dwg/objects/MLineStyle.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/tables/VPort.h>
+#include <dwg/tables/View.h>
 
 namespace dwg {
 
@@ -53,7 +53,7 @@ DwgHeaderWriter::DwgHeaderWriter(std::ostream *stream, CadDocument *document, En
     _writer = DwgStreamWriterBase::GetStreamWriter(_version, &_msmain, _encoding);
 }
 
-DwgHeaderWriter::~DwgHeaderWriter() 
+DwgHeaderWriter::~DwgHeaderWriter()
 {
     delete _startWriter;
     _startWriter = nullptr;
@@ -587,7 +587,8 @@ void DwgHeaderWriter::write()
         _writer->writeBitShort(_document->header()->dimensionAlternateUnitToleranceDecimalPlaces());
 
         //H : DIMTXSTY(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, _document->header()->dimensionStyleOverrides()->handle());
+        _writer->handleReference(DwgReferenceType::HardPointer,
+                                 _document->header()->dimensionStyleOverrides()->handle());
     }
 
     //Common:

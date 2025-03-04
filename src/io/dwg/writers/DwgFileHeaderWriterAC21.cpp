@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC21_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC21Compressor_p.h>
-#include <dwg/CadDocument.h>
 #include <sstream>
 
 namespace dwg {

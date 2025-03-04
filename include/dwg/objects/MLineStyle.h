@@ -84,7 +84,7 @@ private:
 class LIBDWG_API MLineStyleCollection : ObjectDictionaryCollection<MLineStyle>
 {
 public:
-    MLeaderStyleCollection(CadDictionary *);
+    MLineStyleCollection(CadDictionary *);
 };
 
 }// namespace dwg

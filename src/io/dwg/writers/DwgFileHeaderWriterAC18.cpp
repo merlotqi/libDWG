@@ -22,18 +22,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <algorithm>
+#include <dwg/io/dwg/CRC32StreamHandler_p.h>
+#include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
-#include <dwg/utils/StreamWrapper.h>
-#include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
-#include <dwg/io/dwg/CRC32StreamHandler_p.h>
-#include <dwg/utils/EndianConverter.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
-#include <algorithm>
+#include <dwg/utils/EndianConverter.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -75,7 +75,7 @@ void DwgFileHeaderWriterAC18::addSection(const std::string &name, std::ostream *
     OutputStreamWrapper stwrapper(stream);
 
     descriptor.setCompressedSize(stwrapper.length());
-    descriptor.setCompressedCode (((!isCompressed) ? 1 : 2));
+    descriptor.setCompressedCode(((!isCompressed) ? 1 : 2));
 
     int nlocalSections = (int) (stwrapper.length() / (int) descriptor.decompressedSize());
 
@@ -136,7 +136,10 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     _stream->write(checkSumStream.str().c_str(), checkSumStream.str().length());
     _stream->write(descriptorStream.str().c_str(), descriptorStream.str().length());
 
-    if (isCompressed) { _stream->write(reinterpret_cast<const char*>(&DwgCheckSumCalculator::MagicSequence), compressDiff); }
+    if (isCompressed)
+    {
+        _stream->write(reinterpret_cast<const char *>(&DwgCheckSumCalculator::MagicSequence), compressDiff);
+    }
     else if (compressDiff != 0) { throw new std::exception(); }
 
     if (localMap.pageNumber() > 0) { descriptor.setPageCount(descriptor.pageCount() + 1); }
@@ -171,13 +174,13 @@ std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<u
         for (int j = 0; j < diff; j++) { stream_wrapper.writeByte((unsigned char) 0); }
     }
 
-    return stream; 
+    return stream;
 }
 
 void DwgFileHeaderWriterAC18::writeDescriptors()
 {
     std::ostringstream stream;
-    IDwgStreamWriter* swriter = DwgStreamWriterBase::GetStreamWriter(_version, &stream, _encoding);
+    IDwgStreamWriter *swriter = DwgStreamWriterBase::GetStreamWriter(_version, &stream, _encoding);
 
     //0x00	4	Number of section descriptions(NumDescriptions)
     swriter->writeInt(_descriptors.size());
@@ -208,7 +211,7 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
         swriter->writeInt(descriptors.pageCount());
         //0x0C	4	Max Decompressed Size of a section page of this type(normally 0x7400)
         swriter->writeInt((int) descriptors.decompressedSize());
-        //0x10	4	Unknown(long)  
+        //0x10	4	Unknown(long)
         swriter->writeInt(1);
         //0x14	4	Compressed(1 = no, 2 = yes, normally 2)
         swriter->writeInt(descriptors.compressedCode());
@@ -227,7 +230,7 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
         }
         stream.write(reinterpret_cast<const char *>(nameArr.data()), nameArr.size());
 
-        for (auto&& localMap : descriptors.localSections())
+        for (auto &&localMap: descriptors.localSections())
         {
             if (localMap.pageNumber() > 0)
             {
@@ -245,7 +248,7 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
     DwgLocalSectionMap sectionHolder = setSeeker(0x4163003B, &stream);
     int count = DwgCheckSumCalculator::CompressionCalculator((int) (_stream->tellp() - sectionHolder.seeker()));
     // Fill the gap
-    _stream->write(reinterpret_cast<const char*>(&DwgCheckSumCalculator::MagicSequence), count);
+    _stream->write(reinterpret_cast<const char *>(&DwgCheckSumCalculator::MagicSequence), count);
     sectionHolder.setSize(_stream->tellp() - sectionHolder.seeker());
 
     addSection(sectionHolder);
@@ -453,7 +456,8 @@ void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap section, std::
     MemoryStream checkSumHolder = new MemoryStream();
     writePageHeaderData(section, checkSumHolder);
     section.Checksum = DwgCheckSumCalculator.Calculate(0u, checkSumHolder.GetBuffer(), 0, (int) checkSumHolder.Length);
-    section.Checksum = DwgCheckSumCalculator.Calculate((unsigned int) section.Checksum, main.GetBuffer(), 0, (int) main.Length);
+    section.Checksum =
+            DwgCheckSumCalculator.Calculate((unsigned int) section.Checksum, main.GetBuffer(), 0, (int) main.Length);
 
     writePageHeaderData(section, _stream);
     _stream.Write(main.GetBuffer(), 0, (int) main.Length);

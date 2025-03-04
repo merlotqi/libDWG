@@ -23,7 +23,7 @@
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 
 namespace dwg {
-    
+
 DwgFileHeaderAC18::DwgFileHeaderAC18() {}
 
 DwgFileHeaderAC18::DwgFileHeaderAC18(ACadVersion version) : DwgFileHeaderAC15(version) {}

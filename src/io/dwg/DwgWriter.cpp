@@ -40,9 +40,9 @@
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/io/dwg/writers/IDwgFileHeaderWriter_p.h>
 #include <dwg/utils/StreamWrapper.h>
+#include <fmt/core.h>
 #include <sstream>
 #include <stdexcept>
-#include <fmt/core.h>
 
 namespace dwg {
 
@@ -103,7 +103,8 @@ void DwgWriter::getFileHeaderWriter()
         case ACadVersion::AC1006:
         case ACadVersion::AC1009:
         case ACadVersion::AC1012:
-            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
+            throw new std::runtime_error(
+                    fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
             _fileHeaderWriter = new DwgFileHeaderWriterAC15(_stream.get(), _encoding, _document);
@@ -112,14 +113,16 @@ void DwgWriter::getFileHeaderWriter()
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         case ACadVersion::AC1021:
-            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
+            throw new std::runtime_error(
+                    fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         default:
-            throw new std::runtime_error(fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
+            throw new std::runtime_error(
+                    fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
     };
 }
 
@@ -163,9 +166,9 @@ void DwgWriter::writeSummaryInfo()
     writer->write8BitJulianDate(info->modifiedDate());
 
     //Int16	2 + 2 * (2 + n)	Property count, followed by PropertyCount key/value string pairs.
-    auto&& properties = info->properties();
-    writer->writeRawShort((unsigned short)properties.size());
-    for(auto it = properties.begin(); it != properties.end(); ++it)
+    auto &&properties = info->properties();
+    writer->writeRawShort((unsigned short) properties.size());
+    for (auto it = properties.begin(); it != properties.end(); ++it)
     {
         writer->writeTextUtf8(it->first);
         writer->writeTextUtf8(it->second);
@@ -245,7 +248,8 @@ void DwgWriter::writeRevHistory()
 void DwgWriter::writeAuxHeader()
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    std::unique_ptr<DwgAuxHeaderWriter> writer = std::make_unique<DwgAuxHeaderWriter>(stream.get(), _encoding, _document->header());
+    std::unique_ptr<DwgAuxHeaderWriter> writer =
+            std::make_unique<DwgAuxHeaderWriter>(stream.get(), _encoding, _document->header());
     writer->write();
 
     _fileHeaderWriter->addSection(DwgSectionDefinition::AuxHeader, stream.release(), true);
@@ -253,7 +257,8 @@ void DwgWriter::writeAuxHeader()
 void DwgWriter::writeObjects()
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    std::unique_ptr<DwgObjectWriter> writer = std::make_unique<DwgObjectWriter>(stream.get(), _document, _encoding, false);
+    std::unique_ptr<DwgObjectWriter> writer =
+            std::make_unique<DwgObjectWriter>(stream.get(), _document, _encoding, false);
     writer->write();
 
     _handlesMap = writer->handleMap();

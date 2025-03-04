@@ -1009,7 +1009,7 @@ private:
     bool _extendedNames = true;
     short _plotStyleMode = 0;
     bool _loadOLEObject = false;
-    UnitsType _dinsUnits = UnitsType::Unitless;
+    UnitsType _insUnits = UnitsType::Unitless;
     EntityPlotStyleType _currentEntityPlotStyle = EntityPlotStyleType::ByLayer;
     std::string _fingerPrintGuid;
     std::string _versionGuid;
@@ -1020,7 +1020,7 @@ private:
     DimensionAssociation _dimensionAssociativity = DimensionAssociation::CreateExplodedDimensions;
     unsigned char _haloGapPercentage;
     Color _obscuredColor = Color::ByBlock;
-    Color _interfereColor = Color((short)1);
+    Color _interfereColor = Color((short) 1);
     unsigned char _obscuredType;
     unsigned char _intersectionDisplay;
     std::string _projectName;

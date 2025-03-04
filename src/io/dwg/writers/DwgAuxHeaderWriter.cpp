@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgAuxHeaderWriter_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
-#include <dwg/header/CadHeader.h>
 
 namespace dwg {
 
@@ -88,11 +88,11 @@ void DwgAuxHeaderWriter::write()
     //RS: DWG version string
     _writer->writeRawShort((short) _version);
     //RS : Maintenance version
-    _writer->writeRawShort((short)_header->maintenanceVersion());
+    _writer->writeRawShort((short) _header->maintenanceVersion());
     //RS: DWG version string
     _writer->writeRawShort((short) _version);
     //RS : Maintenance version
-    _writer->writeRawShort((short)_header->maintenanceVersion());
+    _writer->writeRawShort((short) _header->maintenanceVersion());
 
     //RS: 0x0005
     _writer->writeRawShort(0x5);

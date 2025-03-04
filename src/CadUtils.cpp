@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <algorithm>
 #include <cmath>
 #include <dwg/CadUtils_p.h>
 #include <stdexcept>
-#include <algorithm>
 
 namespace dwg {
 

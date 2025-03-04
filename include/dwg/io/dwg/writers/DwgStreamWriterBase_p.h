@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/ACadVersion.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+
 
 namespace dwg {
 

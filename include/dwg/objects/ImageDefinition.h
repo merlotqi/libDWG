@@ -24,8 +24,8 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ResolutionUnit.h>
 #include <dwg/objects/ObjectDictionaryCollection.h>
+#include <dwg/objects/ResolutionUnit.h>
 
 namespace dwg {
 

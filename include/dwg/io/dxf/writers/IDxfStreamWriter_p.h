@@ -23,9 +23,10 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/DwgVariant.h>
 #include <dwg/DxfCode.h>
-#include <dwg/Color.h>
+
 
 namespace dwg {
 

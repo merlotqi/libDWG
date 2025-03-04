@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/CRC8StreamHandler_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgHandleWriter_p.h>
 #include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
@@ -35,10 +35,7 @@ DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostream *stream,
     _handleMap = handlemap;
 }
 
-DwgHandleWriter::~DwgHandleWriter()
-{
-
-}
+DwgHandleWriter::~DwgHandleWriter() {}
 
 std::string DwgHandleWriter::sectionName() const { return DwgSectionDefinition::Handles; }
 

@@ -22,14 +22,14 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Viewport.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/UCS.h>
-#include <dwg/entities/Viewport.h>
 
 namespace dwg {
 
-    Layout::Layout(const std::string &name)
+Layout::Layout(const std::string &name)
     : _layoutFlags(static_cast<int>(LayoutFlag::None)), _tabOrder(0), _minLimits(XY(-20.0, -7.5)),
       _maxLimits(XY(277.0, 202.5)), _insertionBasePoint(XYZ::Zero), _minExtents(XYZ(25.7, 19.5, 0.0)),
       _maxExtents(XYZ(231.3, 175.5, 0.0)), _elevation(0.0), _origin(XYZ::Zero), _xaxis(XYZ::AxisX), _yaxis(XYZ::AxisY),
@@ -51,27 +51,27 @@ void Layout::setLayoutFlags(LayoutFlags value) { _layoutFlags = value; }
 
 int Layout::tabOrder() const { return _tabOrder; }
 
-void Layout::setTabOrder(int value) { _tabOrder = value; } 
+void Layout::setTabOrder(int value) { _tabOrder = value; }
 
 XY Layout::minLimits() const { return _minLimits; }
 
-void Layout::setMinLimits(const XY & value) { _minLimits = value; }
+void Layout::setMinLimits(const XY &value) { _minLimits = value; }
 
 XY Layout::maxLimits() const { return _maxLimits; }
 
-void Layout::setMaxLimits(const XY & value) { _maxLimits = value; }
+void Layout::setMaxLimits(const XY &value) { _maxLimits = value; }
 
 XYZ Layout::insertionBasePoint() const { return _insertionBasePoint; }
 
-void Layout::setInsertionBasePoint(const XYZ & value) { _insertionBasePoint = value; }
+void Layout::setInsertionBasePoint(const XYZ &value) { _insertionBasePoint = value; }
 
 XYZ Layout::minExtents() const { return _minExtents; }
 
-void Layout::setMinExtents(const XYZ & value) { _minExtents = value; }
+void Layout::setMinExtents(const XYZ &value) { _minExtents = value; }
 
 XYZ Layout::maxExtents() const { return _maxExtents; }
 
-void Layout::setMaxExtents(const XYZ & value) { _maxExtents = value; }
+void Layout::setMaxExtents(const XYZ &value) { _maxExtents = value; }
 
 double Layout::elevation() const { return _elevation; }
 
@@ -79,15 +79,15 @@ void Layout::setElevation(double value) { _elevation = value; }
 
 XYZ Layout::origin() const { return _origin; }
 
-void Layout::setOrigin(const XYZ & value) { _origin = value; }
+void Layout::setOrigin(const XYZ &value) { _origin = value; }
 
 XYZ Layout::xAxis() const { return _xaxis; }
 
-void Layout::setXAxis(const XYZ & value) { _xaxis = value; }
+void Layout::setXAxis(const XYZ &value) { _xaxis = value; }
 
 XYZ Layout::yAxis() const { return _yaxis; }
 
-void Layout::setYAxis(const XYZ & value) { _yaxis = value; }
+void Layout::setYAxis(const XYZ &value) { _yaxis = value; }
 
 OrthographicType Layout::ucsOrthographicType() const { return _ucsOrthographicType; }
 
@@ -109,9 +109,6 @@ UCS *Layout::baseUCS() const { return _baseUCS; }
 
 void Layout::setBaseUCS(UCS *value) { _baseUCS = value; }
 
-bool Layout::isPaperSpace() const 
-{  
-    return false;
-}
+bool Layout::isPaperSpace() const { return false; }
 
 }// namespace dwg

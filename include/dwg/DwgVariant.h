@@ -22,11 +22,12 @@
 
 #pragma once
 
-#include <dwg/exports.h>
 #include <dwg/Coordinate.h>
+#include <dwg/exports.h>
 #include <string>
 #include <variant>
 #include <vector>
+
 
 namespace dwg {
 
@@ -56,7 +57,8 @@ public:
 
     VarType Type;
 
-    union {
+    union
+    {
         char i8;
         unsigned char u8;
         short i16;

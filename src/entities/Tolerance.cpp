@@ -44,9 +44,9 @@ void Tolerance::setStyle(DimensionStyle *value)
 {
     if (!value) throw std::runtime_error("Tolerance::setStyle: style is null");
 
-    if (document()) 
-    { 
-        //_style = updateTable(value, document->dimensionStyles()); 
+    if (document())
+    {
+        //_style = updateTable(value, document->dimensionStyles());
     }
     else { _style = value; }
 }

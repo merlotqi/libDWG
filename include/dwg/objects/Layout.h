@@ -24,8 +24,8 @@
 
 #include <dwg/OrthographicType.h>
 #include <dwg/objects/LayoutFlags.h>
-#include <dwg/objects/PlotSettings.h>
 #include <dwg/objects/ObjectDictionaryCollection.h>
+#include <dwg/objects/PlotSettings.h>
 
 namespace dwg {
 

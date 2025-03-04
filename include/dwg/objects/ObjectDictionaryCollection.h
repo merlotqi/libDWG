@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/CadDictionary.h>
 #include <dwg/IHandledCadObject.h>
+#include <dwg/objects/CadDictionary.h>
+
 
 namespace dwg {
 
@@ -33,10 +34,8 @@ class ObjectDictionaryCollection : public IHandledCadObject
     CadDictionary *_dictionary;
 
 public:
-    ObjectDictionaryCollection(CadDictionary *dictionary)
-        : _dictionary(dictionary)
-    {}
-    
+    ObjectDictionaryCollection(CadDictionary *dictionary) : _dictionary(dictionary) {}
+
     ~ObjectDictionaryCollection()
     {
         delete _dictionary;
@@ -45,10 +44,7 @@ public:
 
     unsigned long long handle() const { return _dictionary->handle(); }
 
-    void add(T *entry)
-    {
-        _dictionary->add(entry);
-    }
+    void add(T *entry) { _dictionary->add(entry); }
 };
 
-}
+}// namespace dwg

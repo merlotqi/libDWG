@@ -20,10 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/AppId.h>
-#include <stdexcept>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/tables/AppId.h>
+#include <stdexcept>
+
 
 namespace dwg {
 
@@ -33,8 +34,7 @@ std::string AppId::DefaultName = "libDWG";
 
 AppId::AppId(const std::string &name) : TableEntry(name)
 {
-    if (name.empty())
-        throw new std::invalid_argument("Application id must have a name.");
+    if (name.empty()) throw new std::invalid_argument("Application id must have a name.");
 }
 
 AppId::~AppId() {}

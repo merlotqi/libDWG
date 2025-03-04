@@ -129,10 +129,8 @@ long long DateTime::timeZone()
     TIME_ZONE_INFORMATION tzInfo;
     GetTimeZoneInformation(&tzInfo);
     long long offset = static_cast<long long>(tzInfo.Bias) * 60;
-    if (tzInfo.DaylightDate.wYear != 0) {
-        offset -= static_cast<long long>(tzInfo.DaylightBias) * 60;
-    }
-    return offset; 
+    if (tzInfo.DaylightDate.wYear != 0) { offset -= static_cast<long long>(tzInfo.DaylightBias) * 60; }
+    return offset;
 #else
     time_t t = time(nullptr);
     struct tm tm_time = *localtime(&t);

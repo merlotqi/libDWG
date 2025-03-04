@@ -22,12 +22,13 @@
 
 #pragma once
 
-#include <dwg/objects/GeoDataVersion.h>
-#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/Coordinate.h>
 #include <dwg/objects/DesignCoordinatesType.h>
-#include <dwg/units/UnitsType.h>
+#include <dwg/objects/GeoDataVersion.h>
+#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/objects/ScaleEstimationType.h>
+#include <dwg/units/UnitsType.h>
+
 
 namespace dwg {
 

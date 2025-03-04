@@ -20,20 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/MLineStyle.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/objects/MLineStyle.h>
 
 namespace dwg {
 
-MLineStyle *MLineStyle::Default()
-{
-    return new MLineStyle(DefaultName);
-}
+MLineStyle *MLineStyle::Default() { return new MLineStyle(DefaultName); }
 
 MLineStyle::MLineStyle() : _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0) {}
 
-MLineStyle::MLineStyle(const std::string &name) : _name(name) {}
+MLineStyle::MLineStyle(const std::string &name) : _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0)
+{
+    setName(name);
+}
 
 ObjectType MLineStyle::objectType() const { return ObjectType::MLINESTYLE; }
 
@@ -61,10 +61,10 @@ double MLineStyle::endAngle() const { return _endAngle; }
 
 void MLineStyle::setEndAngle(double value) { _endAngle = value; }
 
-std::vector<Element> MLineStyle::elements() const { return _elements; }
+std::vector<MLineStyle::Element> MLineStyle::elements() const { return _elements; }
 
-std::vector<Element> &MLineStyle::elements() { return _elements; }
+std::vector<MLineStyle::Element> &MLineStyle::elements() { return _elements; }
 
 void MLineStyle::setElements(const std::vector<Element> &value) { _elements = value; }
-    
+
 }// namespace dwg

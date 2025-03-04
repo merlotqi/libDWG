@@ -33,7 +33,7 @@ class LIBDWG_API BookColor : public NonGraphicalObject
 {
     std::string _name;
     Color _color;
-    
+
 public:
     BookColor();
 

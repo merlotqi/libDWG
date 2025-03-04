@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/PdfUnderlayDefinition.h>
 #include <dwg/DxfFileToken_p.h>
+#include <dwg/objects/PdfUnderlayDefinition.h>
 
 namespace dwg {
 
@@ -29,8 +29,8 @@ PdfUnderlayDefinition::PdfUnderlayDefinition() {}
 
 std::string PdfUnderlayDefinition::objectName() const { return DxfFileToken::ObjectPdfDefinition; }
 
-std::string PdfUnderlayDefinition::page() const { return _page;}
+std::string PdfUnderlayDefinition::page() const { return _page; }
 
 void PdfUnderlayDefinition::setPage(const std::string &value) { _page = value; }
-    
+
 }// namespace dwg

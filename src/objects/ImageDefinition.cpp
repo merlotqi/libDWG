@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/ImageDefinition.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/objects/ImageDefinition.h>
 
 namespace dwg {
-    
+
 ImageDefinition::ImageDefinition() {}
 
 ImageDefinition::~ImageDefinition() {}
@@ -46,7 +46,7 @@ void ImageDefinition::setFileName(const std::string &value) { _fileName = value;
 
 XY ImageDefinition::size() const { return _size; }
 
-void ImageDefinition::setSize(const XY &value) { _size =value; }
+void ImageDefinition::setSize(const XY &value) { _size = value; }
 
 XY ImageDefinition::defaultSize() const { return _defaultSize; }
 
