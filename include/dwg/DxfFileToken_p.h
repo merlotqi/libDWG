@@ -28,11 +28,14 @@ class DxfFileToken
 {
 public:
     static constexpr auto Undefined = "";
+
     static constexpr auto BeginSection = "SECTION";
     static constexpr auto EndSection = "ENDSEC";
     static constexpr auto EndSequence = "SEQEND";
     static constexpr auto EndOfFile = "EOF";
+
     static constexpr auto HeaderSection = "HEADER";
+
     static constexpr auto ClassesSection = "CLASSES";
     static constexpr auto ClassEntry = "CLASS";
 
@@ -67,6 +70,7 @@ public:
     static constexpr auto Entity3DFace = "3DFACE";
     static constexpr auto Entity3DSolid = "3DSOLID";
     static constexpr auto EntityProxyEntity = "ACAD_PROXY_ENTITY";
+    static constexpr auto EntityTable = "ACAD_TABLE";
     static constexpr auto EntityArc = "ARC";
     static constexpr auto EntityAttributeDefinition = "ATTDEF";
     static constexpr auto EntityAttribute = "ATTRIB";
@@ -102,7 +106,6 @@ public:
     static constexpr auto EntitySpline = "SPLINE";
     static constexpr auto EntitySun = "SUN";
     static constexpr auto EntitySurface = "SURFACE";
-    static constexpr auto EntityTable = "TABLE";
     static constexpr auto EntityText = "TEXT";
     static constexpr auto EntityTolerance = "TOLERANCE";
     static constexpr auto EntityTrace = "TRACE";
@@ -133,7 +136,10 @@ public:
     static constexpr auto ObjectXRecord = "XRECORD";
     static constexpr auto ObjectMLeaderContextData = "CONTEXT_DATA";
     static constexpr auto ObjectEvalGraph = "ACAD_EVALUATION_GRAPH";
+    static constexpr auto ObjectBlockLinearParameter = "BLOCKLINEARPARAMETER";
     static constexpr auto ObjectBlockVisibilityParameter = "BLOCKVISIBILITYPARAMETER";
+    static constexpr auto ObjectTableContent = "TABLECONTENT";
+    static constexpr auto ObjectGeoData = "GEODATA";
 };
 
 }// namespace dwg

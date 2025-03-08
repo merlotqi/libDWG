@@ -59,6 +59,7 @@ public:
     static constexpr auto Face3d = "AcDbFace";
     static constexpr auto Helix = "AcDbHelix";
     static constexpr auto Insert = "AcDbBlockReference";
+    static constexpr auto MInsert = "AcDbMInsertBlock";
     static constexpr auto Line = "AcDbLine";
     static constexpr auto Ray = "AcDbRay";
     static constexpr auto XLine = "AcDbXline";
@@ -81,6 +82,7 @@ public:
     static constexpr auto PolyfaceMeshFace = "AcDbFaceRecord";
     static constexpr auto Shape = "AcDbShape";
     static constexpr auto Solid = "AcDbTrace";
+    static constexpr auto TableEntity = "AcDbTable";
     static constexpr auto Trace = "AcDbTrace";
     static constexpr auto Text = "AcDbText";
     static constexpr auto Tolerance = "AcDbFcf";
@@ -107,9 +109,20 @@ public:
     static constexpr auto PlotSettings = "AcDbPlotSettings";
     static constexpr auto DictionaryVariables = "DictionaryVariables";
     static constexpr auto Scale = "AcDbScale";
+    static constexpr auto GeoData = "AcDbGeoData";
+
+    //Dynamic block constants
     static constexpr auto EvalGraph = "AcDbEvalGraph";
+    static constexpr auto EvalGraphExpr = "AcDbEvalExpr";
+    static constexpr auto BlockElement = "AcDbBlockElement";
+    static constexpr auto BlockParameter = "AcDbBlockParameter";
+    static constexpr auto Block1PtParameter = "AcDbBlock1PtParameter";
+    static constexpr auto Block2PtParameter = "AcDbBlock2PtParameter";
+    static constexpr auto BlockLinearParameter = "AcDbBlockLinearParameter";
+
     static constexpr auto BlockVisibilityParameter = "AcDbBlockVisibilityParameter";
     static constexpr auto DbColor = "AcDbColor";
+    static constexpr auto TableContent = "AcDbTableContent";
 };
 
 }// namespace dwg
