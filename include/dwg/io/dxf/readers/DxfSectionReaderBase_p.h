@@ -21,3 +21,21 @@
  */
 
 #pragma once
+
+namespace dwg {
+
+class IDxfStreamReader;
+class DxfDocumentBuilder;
+class DxfSectionReaderBase
+{
+public:
+    DxfSectionReaderBase(IDxfStreamReader *reader, DxfDocumentBuilder *builder);
+
+    virtual void read() = 0;
+
+protected:
+    IDxfStreamReader *_reader;
+    DxfDocumentBuilder *_builder;
+};
+
+}

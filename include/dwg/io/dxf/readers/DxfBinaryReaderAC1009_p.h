@@ -21,3 +21,14 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfBinaryReader_p.h>
+
+namespace dwg {
+
+class DxfBinaryReaderAC1009 : public DxfBinaryReader
+{
+
+};
+
+}// namespace dwg

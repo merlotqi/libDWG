@@ -21,3 +21,15 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
+
+namespace dwg {
+
+class DxfAsciiWriter : public DxfStreamWriterBase
+{
+public:
+    
+};
+
+}// namespace dwg

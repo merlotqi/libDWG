@@ -34,48 +34,48 @@ class CadDocumentBuilder
 public:
     CadDocumentBuilder(ACadVersion version, CadDocument *document);
 
-    ACadVersion Version() const;
-    CadDocument *DocumentToBuild() const;
+    ACadVersion version() const;
+    CadDocument *documentToBuild() const;
 
-    AppIdsTable *AppIds() const;
-    void AppIds(AppIdsTable *tables);
+    AppIdsTable *appIds() const;
+    void setAppIds(AppIdsTable *tables);
 
-    BlockRecordsTable *BlockRecords() const;
-    void BlockRecords(BlockRecordsTable *tables);
+    BlockRecordsTable *blockRecords() const;
+    void setBlockRecords(BlockRecordsTable *tables);
 
-    DimensionStylesTable *DimensionStyles() const;
-    void DimensionStyles(DimensionStylesTable *table);
+    DimensionStylesTable *dimensionStyles() const;
+    void setDimensionStyles(DimensionStylesTable *table);
 
-    LayersTable *Layers() const;
-    void Layers(LayersTable *table);
+    LayersTable *layers() const;
+    void setLayers(LayersTable *table);
 
-    LineTypesTable *LineTypesTable() const;
-    void LineTypesTable(LineTypesTable *);
+    LineTypesTable *lineTypesTable() const;
+    void setLineTypesTable(LineTypesTable *);
 
-    TextStylesTable *TextStyles() const;
-    void TextStyles(TextStylesTable *);
+    TextStylesTable *textStyles() const;
+    void setTextStyles(TextStylesTable *);
 
     UCSTable *UCSs() const;
-    void UCSs(UCSTable *);
+    void setUCSs(UCSTable *);
 
-    ViewsTable *Views() const;
-    void Views(ViewsTable *);
+    ViewsTable *views() const;
+    void setViews(ViewsTable *);
 
-    VPortsTable *VPorts() const;
-    void VPorts(VPortsTable *);
+    VPortsTable *vports() const;
+    void setVPorts(VPortsTable *);
 
-    virtual bool KeepUnknownEntities() const = 0;
+    virtual bool keepUnknownEntities() const = 0;
 
-    virtual bool KeepUnknownNonGraphicalObjects() const = 0;
+    virtual bool keepUnknownNonGraphicalObjects() const = 0;
 
-    unsigned long long InitialHandSeed() const;
-    void InitialHandSeed(unsigned long long);
+    unsigned long long initialHandSeed() const;
+    void setInitialHandSeed(unsigned long long);
 
-    virtual void BuildDocument();
-    void AppTemplate(CadTemplate *tmpl);
+    virtual void buildDocument();
+    void setAppTemplate(CadTemplate *tmpl);
 
-    void RegisterTables();
-    void BuildTables();
+    void setRegisterTables();
+    void setBuildTables();
 
     Delegate<void(const std::string &, Notification)> OnNotification;
 

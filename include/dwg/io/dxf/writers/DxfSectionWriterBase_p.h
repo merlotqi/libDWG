@@ -25,7 +25,6 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dxf/DxfWriterConfiguration.h>
 
-
 namespace dwg {
 
 class IDxfStreamWriter;

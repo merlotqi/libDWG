@@ -21,3 +21,35 @@
  */
 
 #pragma once
+
+#include <dwg/io/CadDocumentBuilder_p.h>
+#include <dwg/io/dxf/DxfReaderConfiguration.h>
+#include <set>
+#include <vector>
+
+namespace dwg {
+
+class Entity;
+
+class DxfDocumentBuilder : public CadDocumentBuilder
+{
+    std::set<unsigned long long> _modelSpaceEntities;
+    DxfReaderConfiguration _configuration;
+
+public:
+    DxfDocumentBuilder(ACadVersion version, CadDocument *document, const DxfReaderConfiguration &configuration);
+    ~DxfDocumentBuilder();
+
+    DxfReaderConfiguration configuration() const;
+    bool keepUnknownEntities() const override;
+    bool keepUnknownNonGraphicalObjects() const override;
+
+    std::set<unsigned long long> modelSpaceEntities() const;
+    std::set<unsigned long long> &modelSpaceEntities();
+
+    void buildDocument() override;
+    std::vector<Entity *>buildEntities();
+    void assignOwner();
+};
+
+}

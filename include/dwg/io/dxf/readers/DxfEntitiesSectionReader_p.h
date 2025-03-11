@@ -21,3 +21,18 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfSectionReaderBase_p.h>
+
+namespace dwg {
+
+class DxfEntitiesSectionReader : public DxfSectionReaderBase
+{
+public:
+    DxfEntitiesSectionReader(IDxfStreamReader *reader, DxfDocumentBuilder *builder);
+    ~DxfEntitiesSectionReader();
+
+    void read() override;
+};
+
+}// namespace dwg

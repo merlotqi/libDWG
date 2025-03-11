@@ -21,3 +21,17 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
+ 
+namespace dwg {
+ 
+class DxfBinaryReader : public DxfStreamReaderBase
+{
+public:
+   static constexpr auto Sentinel = "AutoCAD Binary DXF\r\n\u001a\0";
+    DxfBinaryReader();
+    virtual ~DxfBinaryReader();
+};
+ 
+}// namespace

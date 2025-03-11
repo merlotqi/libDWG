@@ -21,3 +21,16 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
+
+namespace dwg {
+
+class DxfTextReader : public DxfStreamReaderBase
+{
+public:
+    DxfTextReader();
+    virtual ~DxfTextReader();
+};
+
+}// namespace

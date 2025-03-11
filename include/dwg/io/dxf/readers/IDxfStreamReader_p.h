@@ -21,3 +21,44 @@
  */
 
 #pragma once
+
+#include <dwg/DxfCode.h>
+#include <dwg/GroupCodeValueType.h>
+#include <dwg/DwgVariant.h>
+
+namespace dwg {
+
+class IDxfStreamReader
+{
+public:
+    virtual ~IDxfStreamReader() = default;
+
+    virtual DxfCode dxfCode() const = 0;
+    virtual GroupCodeValueType groupCodeValue() const = 0;
+
+    virtual int code() const = 0;
+    virtual DwgVariant value() const = 0;
+
+    virtual int position() const = 0;
+
+    virtual std::string valueAsString() const = 0;
+    virtual std::string valueRaw() const = 0;
+    virtual bool valueAsBool() const = 0;
+    virtual short valueAsShort() const = 0;
+    virtual unsigned short valueAsUShort() const = 0;
+    virtual int valueAsInt() const = 0;
+    virtual unsigned int valueAsUInt() const = 0;
+    virtual long long valueAsLongLong() const = 0;
+    virtual unsigned long long valueAsHandle() const = 0;
+    virtual double valueAsDouble() const = 0;
+    virtual double valueAsAngle() const = 0;
+    virtual std::vector<unsigned char> valueAsBinaryChunk() const = 0;
+    
+    virtual bool find(const std::string &dxfEntry) const = 0;
+
+    virtual void start() = 0;
+    virtual void readNext() = 0;
+    virtual void expectedCode(int code) = 0;
+};
+
+}// namespace dwg

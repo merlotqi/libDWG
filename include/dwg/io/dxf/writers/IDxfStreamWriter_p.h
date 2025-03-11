@@ -27,7 +27,6 @@
 #include <dwg/DwgVariant.h>
 #include <dwg/DxfCode.h>
 
-
 namespace dwg {
 
 class DxfClassMap;

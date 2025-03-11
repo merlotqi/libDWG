@@ -21,3 +21,21 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfSectionReaderBase_p.h>
+
+namespace dwg {
+
+class DxfTablesSectionReader : public DxfSectionReaderBase
+{
+public:
+    DxfTablesSectionReader(IDxfStreamReader *reader, DxfDocumentBuilder *builder);
+    ~DxfTablesSectionReader();
+
+    void read() override;
+
+private:
+    void readTable();
+};
+
+}// namespace dwg

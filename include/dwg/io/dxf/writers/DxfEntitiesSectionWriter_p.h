@@ -21,3 +21,16 @@
  */
 
 #pragma once
+
+#include <dwg/io/dxf/readers/DxfSectionWriterBase_p.h>
+
+namespace dwg {
+
+class DxfEntitiesSectionWriter : public DxfSectionWriterBase
+{
+public:
+    DxfEntitiesSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder, const DxfWriterConfiguration &configuration);
+    ~DxfEntitiesSectionWriter();
+};
+
+}// namespace dwg
