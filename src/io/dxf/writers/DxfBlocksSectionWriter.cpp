@@ -21,7 +21,60 @@
  */
 
 #include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/DxfCode.h>
+#include <dwg/tables/Layer.h>
 
 namespace dwg {
+
+DxfBlocksSectionWriter::DxfBlocksSectionWriter() {}
+
+DxfBlocksSectionWriter::~DxfBlocksSectionWriter() {}
+
+std::string DxfBlocksSectionWriter::sectionName() const { return DxfFileToken::BlocksSection; }
+
+void DxfBlocksSectionWriter::writeSection()
+{
+    auto&& brs = _document->blockRecords();
+    for(auto &&b : brs)
+    {
+        writeBlock(b->blockEntity());
+        processEntities(b);
+        writeBlockEnd(b->blockEnd());
+    }
+}
+
+void DxfBlocksSectionWriter::writeBlock(Block *block)
+{
+
+}
+
+void DxfBlocksSectionWriter::processEntities(BlockRecord *b)
+{
+    if(b->name() == BlockRecord::ModelSpaceName || b->name() == BlockRecord::PaperSpaceName)
+    {
+        for(auto &&e : b->entities())
+        {
+            _holder->entities().enqueue(e);
+        }
+    }
+    else
+    {
+        for (auto &&e : b->entities())
+        {
+            writeEntity(e);
+        }
+    }
+}
+
+void DxfBlocksSectionWriter::writeBlockEnd(BlockEnd *block)
+{
+    _writer->write(DxfCode::Start, block->objectName());
+    writeCommonObjectData(block);
+    _writer->write(DxfCode::Subclass, DxfSubclassMarker::Entity);
+    _writer->write(8, block->layer()->name());
+    _writer->write(DxfCode::Subclass, DxfSubclassMarker::BlockEnd);
+}
 
 }// namespace dwg

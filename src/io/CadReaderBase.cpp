@@ -20,27 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <queue>
+#include <dwg/io/CadReaderBase.h>
 
 namespace dwg {
 
-class Entity;
-class CadObject;
-
-class CadObjectHolder
-{
-public:
-    CadObjectHolder();
-
-    virtual ~CadObjectHolder();
-
-    std::queue<Entity *> entities() const;
-    std::queue<Entity *> &entities();
-
-    std::queue<CadObject *> objects() const;
-    std::queue<CadObject *> &objects();
-};
-
-}// namespace dwg
+    
+}

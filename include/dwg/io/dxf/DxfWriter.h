@@ -27,13 +27,16 @@
 
 namespace dwg {
 
+class IDxfStreamWriter;
+class CadObjectHolder;
 class LIBDWG_API DxfWriter : public CadWriterBase<DxfWriterConfiguration>
 {
 public:
     DxfWriter(const std::string &filename, CadDocument *document, bool binary);
     DxfWriter(std::ofstream *stream, CadDocument *document, bool binary);
-    void write() override;
+    ~DxfWriter();
 
+    void write() override;
     bool isBinaray() const;
 
 private:
@@ -45,6 +48,11 @@ private:
     void writeEntities();
     void writeObjects();
     void writeACDSData();
+
+private:
+    bool _binary = false;
+    IDxfStreamWriter *_writer;
+    CadObjectHolder *_objectHolder;
 };
 
 }// namespace dwg
