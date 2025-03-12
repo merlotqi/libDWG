@@ -187,7 +187,8 @@ void DxfClassCollection::UpdateDxfClasses(CadDocument *doc)
 
 void DxfClassCollection::add(DxfClass *cls)
 {
-    if (!cls) return;
+    if (!cls)
+        return;
     _entries.insert({cls->dxfName(), cls});
 }
 
@@ -196,8 +197,14 @@ void DxfClassCollection::addOrUpdate(DxfClass *item) {}
 DxfClass *DxfClassCollection::getByName(const std::string &name) const
 {
     auto it = _entries.find(name);
-    if (it != _entries.end()) { return it->second; }
-    else { return nullptr; }
+    if (it != _entries.end())
+    {
+        return it->second;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 size_t DxfClassCollection::count() const { return _entries.size(); }

@@ -22,18 +22,35 @@
 
 #pragma once
 
-#ifndef LIBDWG_VERSION_MAJOR
-#define LIBDWG_VERSION_MAJOR @LIBDWG_VERSION_MAJOR @
-#endif
+namespace dwg {
 
-#ifndef LIBDWG_VERSION_MINOR
-#define LIBDWG_VERSION_MINOR @LIBDWG_VERSION_MINOR @
-#endif
+enum class DxfReferenceType : unsigned char
+{
+    /// No reference, the value is a primitive
+    None = 0,
 
-#ifndef LIBDWG_VERSION_PATCH
-#define LIBDWG_VERSION_PATCH @LIBDWG_VERSION_PATCH @
-#endif
+    /// Handle reference, the value is a handle pointing to an object
+    Handle = 1,
 
-#ifndef LIBDWG_VERSION_STRING
-#define LIBDWG_VERSION_STRING "@LIBDWG_VERSION_STRING@"
-#endif
+    /// Name reference, the value is a name pointing to an object
+    Name = 2,
+
+    /// Counter reference, the value is a list with multiple elements referenced to it
+    Count = 4,
+
+    /// Optional value
+    Optional = 8,
+
+    /// Value will be ignored by the reader and writer
+    Ignored = 16,
+
+    /// Value is an angle and must be converted when convinient
+    IsAngle = 32,
+
+    Unprocess = 64
+};
+
+typedef int DxfReferenceTypes;
+
+
+}// namespace dwg

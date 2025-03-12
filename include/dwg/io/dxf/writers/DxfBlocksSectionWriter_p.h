@@ -29,7 +29,8 @@ namespace dwg {
 class DxfBlocksSectionWriter : public DxfSectionWriterBase
 {
 public:
-    DxfBlocksSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder, const DxfWriterConfiguration &configuration);
+    DxfBlocksSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
+                           const DxfWriterConfiguration &configuration);
     ~DxfBlocksSectionWriter();
 };
 

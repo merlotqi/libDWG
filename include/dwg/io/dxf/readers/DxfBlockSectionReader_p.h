@@ -33,7 +33,6 @@ public:
     ~DxfBlockSectionReader();
 
     void read() override;
-
 };
 
 }// namespace dwg

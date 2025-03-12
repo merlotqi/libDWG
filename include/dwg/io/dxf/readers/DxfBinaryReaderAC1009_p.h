@@ -28,7 +28,6 @@ namespace dwg {
 
 class DxfBinaryReaderAC1009 : public DxfBinaryReader
 {
-
 };
 
 }// namespace dwg

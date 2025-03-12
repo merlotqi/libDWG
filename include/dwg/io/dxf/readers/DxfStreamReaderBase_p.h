@@ -20,17 +20,17 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
- #pragma once
+#pragma once
 
- #include <dwg/io/dxf/readers/IDxfStreamReader_p.h>
- 
- namespace dwg {
- 
- class DxfStreamReaderBase : public IDxfStreamReader
- {
- public:
-     DxfStreamReaderBase();
-     virtual ~DxfStreamReaderBase();
- };
- 
- }// namespace
+#include <dwg/io/dxf/readers/IDxfStreamReader_p.h>
+
+namespace dwg {
+
+class DxfStreamReaderBase : public IDxfStreamReader
+{
+public:
+    DxfStreamReaderBase();
+    virtual ~DxfStreamReaderBase();
+};
+
+}// namespace dwg

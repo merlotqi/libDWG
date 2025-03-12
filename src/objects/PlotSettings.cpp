@@ -95,7 +95,8 @@ double PlotSettings::numeratorScale() const { return _numeratorScale; }
 
 void PlotSettings::setNumeratorScale(double value)
 {
-    if (value <= 0.0) throw new std::out_of_range("Value must be greater than zero");
+    if (value <= 0.0)
+        throw new std::out_of_range("Value must be greater than zero");
     _numeratorScale = value;
 }
 
@@ -103,7 +104,8 @@ double PlotSettings::denominatorScale() const { return _denominatorScale; }
 
 void PlotSettings::setDenominatorScale(double value)
 {
-    if (value <= 0.0) throw new std::out_of_range("Value must be greater than zero");
+    if (value <= 0.0)
+        throw new std::out_of_range("Value must be greater than zero");
     _denominatorScale = value;
 }
 

@@ -38,15 +38,24 @@ bool HatchBoundaryPath::isPolyline() const
 {
     for (auto it = _edges.begin(); it != _edges.end(); ++it)
     {
-        if ((*it)->type() != HBP_EdgeType::HBP_Polyline) { return false; }
+        if ((*it)->type() != HBP_EdgeType::HBP_Polyline)
+        {
+            return false;
+        }
     }
     return true;
 }
 
 BoundaryPathFlags HatchBoundaryPath::flags()
 {
-    if (isPolyline()) { _flags |= BoundaryPathFlag::Polyline; }
-    else { _flags &= ~BoundaryPathFlag::Polyline; }
+    if (isPolyline())
+    {
+        _flags |= BoundaryPathFlag::Polyline;
+    }
+    else
+    {
+        _flags &= ~BoundaryPathFlag::Polyline;
+    }
     return _flags;
 }
 

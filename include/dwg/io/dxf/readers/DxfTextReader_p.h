@@ -33,4 +33,4 @@ public:
     virtual ~DxfTextReader();
 };
 
-}// namespace
+}// namespace dwg

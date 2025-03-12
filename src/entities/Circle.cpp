@@ -53,7 +53,8 @@ void Circle::setThickness(double thickness) { _thickness = thickness; }
 
 void Circle::setRadius(double radius)
 {
-    if (radius <= 0) throw new std::invalid_argument("Radius must be greater than 0");
+    if (radius <= 0)
+        throw new std::invalid_argument("Radius must be greater than 0");
     _radius = radius;
 }
 

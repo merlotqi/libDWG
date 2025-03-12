@@ -50,8 +50,14 @@ bool DimensionOrdinate::isOrdinateTypeX() const { return _flags & DimensionType:
 
 void DimensionOrdinate::setIsOrdinateTypeX(bool value)
 {
-    if (value) { _flags |= DimensionType::OrdinateTypeX; }
-    else { _flags &= ~DimensionType::OrdinateTypeX; }
+    if (value)
+    {
+        _flags |= DimensionType::OrdinateTypeX;
+    }
+    else
+    {
+        _flags &= ~DimensionType::OrdinateTypeX;
+    }
 }
 
 }// namespace dwg

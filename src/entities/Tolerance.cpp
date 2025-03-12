@@ -42,13 +42,17 @@ DimensionStyle *Tolerance::style() const { return _style; }
 
 void Tolerance::setStyle(DimensionStyle *value)
 {
-    if (!value) throw std::runtime_error("Tolerance::setStyle: style is null");
+    if (!value)
+        throw std::runtime_error("Tolerance::setStyle: style is null");
 
     if (document())
     {
         //_style = updateTable(value, document->dimensionStyles());
     }
-    else { _style = value; }
+    else
+    {
+        _style = value;
+    }
 }
 
 }// namespace dwg

@@ -24,5 +24,8 @@
 
 namespace dwg {
 
-    
-}
+DxfNameAttribute::DxfNameAttribute(const std::string &className) : _className(className) {}
+
+std::string DxfNameAttribute::className() const { return _className; }
+
+}// namespace dwg

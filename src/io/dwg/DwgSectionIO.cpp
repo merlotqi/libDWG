@@ -44,11 +44,15 @@ DwgSectionIO::DwgSectionIO(ACadVersion version)
 
 bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual, const std::vector<unsigned char> &expected)
 {
-    if (expected.size() != actual.size()) return false;
+    if (expected.size() != actual.size())
+        return false;
 
     for (int i = 0; i < expected.size(); i++)
     {
-        if (actual[i] != expected[i]) { return false; }
+        if (actual[i] != expected[i])
+        {
+            return false;
+        }
     }
 
     return true;

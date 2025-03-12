@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <dwg/DxfReferenceType.h>
 #include <dwg/DxfCode.h>
-#include <vector>
+#include <dwg/DxfReferenceType.h>
 #include <string>
- 
+#include <vector>
+
 namespace dwg {
 
 class CadSystemVariableAttribute
@@ -38,18 +38,18 @@ class CadSystemVariableAttribute
 
 public:
     CadSystemVariableAttribute(const std::string &variable, bool isName, const std::vector<int> &codes);
-    
+
     CadSystemVariableAttribute(const std::string &variable, const std::vector<int> &codes);
 
     CadSystemVariableAttribute(const std::string &variable, const std::vector<DxfCode> &codes);
 
-    CadSystemVariableAttribute(DxfReferenceType rf, const std::string &variable, const std::vector<DxfCode> &codes);
+    CadSystemVariableAttribute(DxfReferenceType rf, const std::string &variable, const std::vector<int> &codes);
 
     std::vector<DxfCode> valueCodes() const;
 
     DxfReferenceType referenceType() const;
 
-    std::strng name() const;
+    std::string name() const;
 
     bool isName() const;
 };

@@ -56,7 +56,8 @@ void BookColor::setName(const std::string &value)
 std::string BookColor::colorName() const
 {
     auto pos = _name.find('$');
-    if (pos == std::string::npos) return _name;
+    if (pos == std::string::npos)
+        return _name;
     else
         return _name.substr(0, pos);
 }
@@ -64,7 +65,8 @@ std::string BookColor::colorName() const
 std::string BookColor::bookName() const
 {
     auto pos = _name.find('$');
-    if (pos == std::string::npos) return _name;
+    if (pos == std::string::npos)
+        return _name;
     else
         return _name.substr(pos + 1);
 }

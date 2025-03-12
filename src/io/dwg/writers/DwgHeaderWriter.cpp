@@ -906,15 +906,30 @@ void DwgHeaderWriter::write()
                     (_document->header()->joinStyle() << 0x7);
 
         //LWDISPLAY!(Flags & 0x0200)
-        if (!_document->header()->displayLineWeight()) { flags |= 0x200; }
+        if (!_document->header()->displayLineWeight())
+        {
+            flags |= 0x200;
+        }
         //XEDIT!(Flags & 0x0400)
-        if (!_document->header()->xedit()) { flags |= 0x400; }
+        if (!_document->header()->xedit())
+        {
+            flags |= 0x400;
+        }
         //EXTNAMES Flags & 0x0800
-        if (_document->header()->extendedNames()) { flags |= 0x800; }
+        if (_document->header()->extendedNames())
+        {
+            flags |= 0x800;
+        }
         //PSTYLEMODE Flags & 0x2000
-        if (_document->header()->plotStyleMode() == 1) { flags |= 0x2000; }
+        if (_document->header()->plotStyleMode() == 1)
+        {
+            flags |= 0x2000;
+        }
         //OLESTARTUP Flags & 0x4000
-        if (_document->header()->loadOLEObject()) { flags |= 0x4000; }
+        if (_document->header()->loadOLEObject())
+        {
+            flags |= 0x4000;
+        }
 
         _writer->writeBitLong(flags);
 

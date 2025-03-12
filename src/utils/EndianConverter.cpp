@@ -83,7 +83,10 @@ protected:
     void byteswap(unsigned char *buffer, size_t length) override
     {
         unsigned char *swap = new unsigned char[length];
-        for (size_t i = 0; i < length; ++i) { swap[i] = buffer[length - 1 - i]; }
+        for (size_t i = 0; i < length; ++i)
+        {
+            swap[i] = buffer[length - 1 - i];
+        }
         std::memcpy(buffer, swap, length);
         delete[] swap;
     }
@@ -91,14 +94,26 @@ protected:
 
 std::unique_ptr<EndianConverter> BigEndianConverter::instance()
 {
-    if constexpr (is_little_endian) { return std::unique_ptr<EndianConverter>(new InverseConverter()); }
-    else { return std::unique_ptr<EndianConverter>(new DefaultEndianConverter()); }
+    if constexpr (is_little_endian)
+    {
+        return std::unique_ptr<EndianConverter>(new InverseConverter());
+    }
+    else
+    {
+        return std::unique_ptr<EndianConverter>(new DefaultEndianConverter());
+    }
 }
 
 std::unique_ptr<EndianConverter> LittleEndianConverter::instance()
 {
-    if constexpr (is_little_endian) { return std::unique_ptr<EndianConverter>(new DefaultEndianConverter()); }
-    else { return std::unique_ptr<EndianConverter>(new InverseConverter()); }
+    if constexpr (is_little_endian)
+    {
+        return std::unique_ptr<EndianConverter>(new DefaultEndianConverter());
+    }
+    else
+    {
+        return std::unique_ptr<EndianConverter>(new InverseConverter());
+    }
 }
 
 }// namespace dwg

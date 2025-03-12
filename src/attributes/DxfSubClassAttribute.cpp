@@ -24,5 +24,15 @@
 
 namespace dwg {
 
-    
+DxfSubClassAttribute::DxfSubClassAttribute(const std::string &className) : DxfSubClassAttribute(className, false) {}
+
+DxfSubClassAttribute::DxfSubClassAttribute(const std::string &className, bool isEmpty)
+    : _className(className), _isEmpty(isEmpty)
+{
 }
+
+std::string DxfSubClassAttribute::className() const { return _className; }
+
+bool DxfSubClassAttribute::isEmpty() const { return _isEmpty; }
+
+}// namespace dwg

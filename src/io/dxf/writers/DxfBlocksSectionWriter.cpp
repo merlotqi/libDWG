@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
+#include <dwg/DxfCode.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/DxfCode.h>
+#include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
 #include <dwg/tables/Layer.h>
 
 namespace dwg {
@@ -36,8 +36,8 @@ std::string DxfBlocksSectionWriter::sectionName() const { return DxfFileToken::B
 
 void DxfBlocksSectionWriter::writeSection()
 {
-    auto&& brs = _document->blockRecords();
-    for(auto &&b : brs)
+    auto &&brs = _document->blockRecords();
+    for (auto &&b: brs)
     {
         writeBlock(b->blockEntity());
         processEntities(b);
@@ -45,23 +45,20 @@ void DxfBlocksSectionWriter::writeSection()
     }
 }
 
-void DxfBlocksSectionWriter::writeBlock(Block *block)
-{
-
-}
+void DxfBlocksSectionWriter::writeBlock(Block *block) {}
 
 void DxfBlocksSectionWriter::processEntities(BlockRecord *b)
 {
-    if(b->name() == BlockRecord::ModelSpaceName || b->name() == BlockRecord::PaperSpaceName)
+    if (b->name() == BlockRecord::ModelSpaceName || b->name() == BlockRecord::PaperSpaceName)
     {
-        for(auto &&e : b->entities())
+        for (auto &&e: b->entities())
         {
             _holder->entities().enqueue(e);
         }
     }
     else
     {
-        for (auto &&e : b->entities())
+        for (auto &&e: b->entities())
         {
             writeEntity(e);
         }

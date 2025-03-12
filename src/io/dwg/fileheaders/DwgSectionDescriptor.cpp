@@ -68,12 +68,14 @@ unsigned long long DwgSectionDescriptor::hashCode(bool *ok) const
 {
     if (_hashCode.has_value())
     {
-        if (ok) *ok = true;
+        if (ok)
+            *ok = true;
         return _hashCode.value();
     }
     else
     {
-        if (ok) *ok = false;
+        if (ok)
+            *ok = false;
         return 0;
     }
 }
@@ -84,12 +86,14 @@ unsigned long long DwgSectionDescriptor::encoding(bool *ok) const
 {
     if (_encoding.has_value())
     {
-        if (ok) *ok = true;
+        if (ok)
+            *ok = true;
         return _encoding.value();
     }
     else
     {
-        if (ok) *ok = false;
+        if (ok)
+            *ok = false;
         return 0;
     }
 }

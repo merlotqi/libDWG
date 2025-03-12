@@ -34,7 +34,8 @@ std::string NonGraphicalObject::name() const { return _name; }
 
 void NonGraphicalObject::setName(const std::string &value)
 {
-    if (OnNameChanged) OnNameChanged(_name, value);
+    if (OnNameChanged)
+        OnNameChanged(_name, value);
     _name = value;
 }
 

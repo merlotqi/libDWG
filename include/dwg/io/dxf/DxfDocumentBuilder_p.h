@@ -48,8 +48,8 @@ public:
     std::set<unsigned long long> &modelSpaceEntities();
 
     void buildDocument() override;
-    std::vector<Entity *>buildEntities();
+    std::vector<Entity *> buildEntities();
     void assignOwner();
 };
 
-}
+}// namespace dwg

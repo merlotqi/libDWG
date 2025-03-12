@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <dwg/DxfReferenceType.h>
 #include <dwg/DxfCode.h>
+#include <dwg/DxfReferenceType.h>
 #include <vector>
- 
+
 namespace dwg {
 
 class DxfCollectionCodeValueAttribute

@@ -30,7 +30,8 @@ namespace dwg {
 class DxfObjectsSectionWriter : public DxfSectionWriterBase
 {
 public:
-    DxfObjectsSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder, const DxfWriterConfiguration &configuration);
+    DxfObjectsSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
+                            const DxfWriterConfiguration &configuration);
     ~DxfObjectsSectionWriter();
 };
 

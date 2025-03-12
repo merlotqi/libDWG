@@ -23,7 +23,7 @@
 #pragma once
 
 #include <string>
- 
+
 namespace dwg {
 
 class DxfSubClassAttribute

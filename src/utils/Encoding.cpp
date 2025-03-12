@@ -182,12 +182,18 @@ std::vector<unsigned char> Encoding::bytes(const std::string &str) const { retur
 
 std::string Encoding::toUtf8(const char *str) noexcept(false)
 {
-    if (cp == CodePage::Utf8) { return str; }
+    if (cp == CodePage::Utf8)
+    {
+        return str;
+    }
 
     std::string to = s_codepage_iconvid_mapping[cp];
 
     iconv_t cd = iconv_open("UTF-8", to.c_str());
-    if (cd == (iconv_t) -1) { throw std::runtime_error("iconv_open failed"); }
+    if (cd == (iconv_t) -1)
+    {
+        throw std::runtime_error("iconv_open failed");
+    }
 
     size_t inBytesLeft = strlen(str);
     size_t outBytesLeft = inBytesLeft * 4 + 4;
@@ -209,18 +215,27 @@ std::string Encoding::toUtf8(const char *str) noexcept(false)
 
 std::string Encoding::toUtf8(const std::string &str) noexcept(false)
 {
-    if (cp == CodePage::Utf8) { return str; }
+    if (cp == CodePage::Utf8)
+    {
+        return str;
+    }
 
     return toUtf8(str.c_str());
 }
 
 std::string Encoding::fromUtf8(const std::string &str) noexcept(false)
 {
-    if (cp == CodePage::Utf8) { return str; }
+    if (cp == CodePage::Utf8)
+    {
+        return str;
+    }
 
     std::string to = s_codepage_iconvid_mapping[cp];
     iconv_t cd = iconv_open(to.c_str(), "UTF-8");
-    if (cd == (iconv_t) -1) { throw std::runtime_error("iconv_open failed"); }
+    if (cd == (iconv_t) -1)
+    {
+        throw std::runtime_error("iconv_open failed");
+    }
 
     size_t inSize = str.size();
     size_t outSize = inSize * 4;
@@ -243,11 +258,17 @@ std::string Encoding::fromUtf8(const std::string &str) noexcept(false)
 
 std::wstring Encoding::toUnicode(const std::string &str) noexcept(false)
 {
-    if (str.empty()) { return std::wstring(); }
+    if (str.empty())
+    {
+        return std::wstring();
+    }
 
 #ifdef _WIN32
     int len = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, nullptr, 0);
-    if (len == 0) { throw std::runtime_error("Failed to convert UTF-8 to Unicode (MultiByteToWideChar failed)"); }
+    if (len == 0)
+    {
+        throw std::runtime_error("Failed to convert UTF-8 to Unicode (MultiByteToWideChar failed)");
+    }
 
     std::vector<wchar_t> buffer(len);
     if (MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, buffer.data(), len) == 0)
@@ -259,7 +280,10 @@ std::wstring Encoding::toUnicode(const std::string &str) noexcept(false)
 
 #else
     iconv_t cd = iconv_open("WCHAR_T", "UTF-8");
-    if (cd == (iconv_t) -1) { throw std::runtime_error("Failed to initialize iconv"); }
+    if (cd == (iconv_t) -1)
+    {
+        throw std::runtime_error("Failed to initialize iconv");
+    }
 
     size_t inSize = str.size();
     size_t outSize = inSize * sizeof(wchar_t);
@@ -283,11 +307,17 @@ std::wstring Encoding::toUnicode(const std::string &str) noexcept(false)
 
 std::string Encoding::fromUnicode(const std::wstring &wstr) noexcept(false)
 {
-    if (wstr.empty()) { return std::string(); }
+    if (wstr.empty())
+    {
+        return std::string();
+    }
 
 #ifdef _WIN32
     int len = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
-    if (len == 0) { throw std::runtime_error("Failed to convert Unicode to UTF-8 (WideCharToMultiByte failed)"); }
+    if (len == 0)
+    {
+        throw std::runtime_error("Failed to convert Unicode to UTF-8 (WideCharToMultiByte failed)");
+    }
 
     std::vector<char> buffer(len);
     if (WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, buffer.data(), len, nullptr, nullptr) == 0)
@@ -299,7 +329,10 @@ std::string Encoding::fromUnicode(const std::wstring &wstr) noexcept(false)
 
 #else
     iconv_t cd = iconv_open("UTF-8", "WCHAR_T");
-    if (cd == (iconv_t) -1) { throw std::runtime_error("Failed to initialize iconv"); }
+    if (cd == (iconv_t) -1)
+    {
+        throw std::runtime_error("Failed to initialize iconv");
+    }
 
     size_t inSize = wstr.size() * sizeof(wchar_t);
     size_t outSize = inSize * 4;

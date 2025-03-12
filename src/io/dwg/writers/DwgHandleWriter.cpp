@@ -75,7 +75,10 @@ void DwgHandleWriter::write(int sectionOffset)
             initialLoc = 0L;
             handleOff = pair.first - offset;
 
-            if (handleOff == 0) { throw new std::runtime_error(""); }
+            if (handleOff == 0)
+            {
+                throw new std::runtime_error("");
+            }
 
             locDiff = lastLoc - initialLoc;
             offsetSize = modularShortToValue(handleOff, array);

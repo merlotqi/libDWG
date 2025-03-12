@@ -38,8 +38,12 @@ std::string TableEntry::name() const { return _name; }
 
 void TableEntry::setName(const std::string &value)
 {
-    if (value.empty()) { throw new std::invalid_argument("The Table Entry must have a name"); }
-    if (OnNameChanged) OnNameChanged(_name, value);
+    if (value.empty())
+    {
+        throw new std::invalid_argument("The Table Entry must have a name");
+    }
+    if (OnNameChanged)
+        OnNameChanged(_name, value);
     _name = value;
 }
 

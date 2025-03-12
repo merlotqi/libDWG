@@ -35,14 +35,16 @@ ObjectType UnknownEntity::objectType() const { return ObjectType::UNDEFINED; }
 
 std::string UnknownEntity::objectName() const
 {
-    if (!_dxfclass) return "UNKNOWN";
+    if (!_dxfclass)
+        return "UNKNOWN";
     else
         return _dxfclass->dxfName();
 }
 
 std::string UnknownEntity::subclassMarker() const
 {
-    if (!_dxfclass) return DxfSubclassMarker::Entity;
+    if (!_dxfclass)
+        return DxfSubclassMarker::Entity;
     else
         return _dxfclass->cppClassName();
 }

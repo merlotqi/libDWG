@@ -48,7 +48,10 @@ public:
     Table() = default;
     virtual ~Table()
     {
-        for (auto &&entry: _entries) { delete entry.second; }
+        for (auto &&entry: _entries)
+        {
+            delete entry.second;
+        }
         _entries.clear();
     }
 
@@ -59,14 +62,17 @@ public:
     T *operator[](const std::string &key)
     {
         auto it = _entries.find(key);
-        if (it != _entries.end()) return it->second;
+        if (it != _entries.end())
+            return it->second;
         return nullptr;
     }
 
     void add(T *entry)
     {
-        if (!entry) return;
-        if (entry->name().empty()) entry->setName(createName());
+        if (!entry)
+            return;
+        if (entry->name().empty())
+            entry->setName(createName());
         add(entry->name(), entry);
     }
 
@@ -79,7 +85,8 @@ public:
     T *getValue(const std::string &key) const
     {
         auto it = _entries.find(key);
-        if (it != _entries.end()) return it->second;
+        if (it != _entries.end())
+            return it->second;
         return nullptr;
     }
 
@@ -87,7 +94,8 @@ public:
     {
         for (const auto &name: defaultEntries())
         {
-            if (contains(name)) continue;
+            if (contains(name))
+                continue;
             add(name, new T());
         }
     }
@@ -95,7 +103,8 @@ public:
 protected:
     void add(const std::string &key, T *item)
     {
-        if (!item) return;
+        if (!item)
+            return;
         _entries[key] = item;
         item->setOwner(this);
     }
@@ -107,7 +116,10 @@ private:
     {
         std::string name = "unamed";
         int i = 0;
-        while (contains(fmt::format("{}_{}", name, i))) { i++; }
+        while (contains(fmt::format("{}_{}", name, i)))
+        {
+            i++;
+        }
 
         return fmt::format("{}_{}", name, i);
     }

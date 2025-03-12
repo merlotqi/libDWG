@@ -73,7 +73,10 @@ public:
             // Check if this delegate is already in the list.
             for (auto &_invokeObj: invoke_delegates)
             {
-                if (oneDelegate->compare(_invokeObj.get())) { return; }
+                if (oneDelegate->compare(_invokeObj.get()))
+                {
+                    return;
+                }
             }
             // Add the delegate to the list.
             invoke_delegates.emplace_back(oneDelegate);
@@ -96,7 +99,10 @@ public:
             // Check if this delegate is already in the list.
             for (auto &_invokeObj: invoke_delegates)
             {
-                if (oneDelegate->compare(_invokeObj.get())) { return; }
+                if (oneDelegate->compare(_invokeObj.get()))
+                {
+                    return;
+                }
             }
             // Add the delegate to the list.
             invoke_delegates.emplace_back(oneDelegate);

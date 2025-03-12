@@ -140,9 +140,15 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     {
         _stream->write(reinterpret_cast<const char *>(&DwgCheckSumCalculator::MagicSequence), compressDiff);
     }
-    else if (compressDiff != 0) { throw new std::exception(); }
+    else if (compressDiff != 0)
+    {
+        throw new std::exception();
+    }
 
-    if (localMap.pageNumber() > 0) { descriptor.setPageCount(descriptor.pageCount() + 1); }
+    if (localMap.pageNumber() > 0)
+    {
+        descriptor.setPageCount(descriptor.pageCount() + 1);
+    }
 
     localMap.setSize((unsigned long long) _stream->tellp() - position);
     descriptor.localSections().push_back(localMap);
@@ -162,7 +168,10 @@ std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<u
         holder_wrapper.write(buffer, offset, totalSize);
 
         int diff = decompressedSize - totalSize;
-        for (int i = 0; i < diff; i++) { holder_wrapper.writeByte((unsigned char) 0); }
+        for (int i = 0; i < diff; i++)
+        {
+            holder_wrapper.writeByte((unsigned char) 0);
+        }
 
         _compressor->compress(holder_wrapper.buffer(), 0, decompressedSize, &stream);
     }
@@ -171,7 +180,10 @@ std::ostringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<u
         stream.seekp(offset);
         stream.write(reinterpret_cast<const char *>(buffer.data()), totalSize);
         int diff = decompressedSize - totalSize;
-        for (int j = 0; j < diff; j++) { stream_wrapper.writeByte((unsigned char) 0); }
+        for (int j = 0; j < diff; j++)
+        {
+            stream_wrapper.writeByte((unsigned char) 0);
+        }
     }
 
     return stream;
@@ -226,7 +238,10 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
         {
             std::vector<unsigned char> bytes = Encoding(CodePage::Windows1252).bytes(descriptors.name());
             int length = std::min(bytes.size(), nameArr.size());
-            for (int i = 0; i < length; i++) { nameArr[i] = bytes[i]; }
+            for (int i = 0; i < length; i++)
+            {
+                nameArr[i] = bytes[i];
+            }
         }
         stream.write(reinterpret_cast<const char *>(nameArr.data()), nameArr.size());
 

@@ -29,7 +29,9 @@ namespace dwg {
 
 class DwgLZ77AC21Decompressor
 {
-    typedef std::function<void(const std::vector<unsigned char> &, unsigned int, std::vector<unsigned char> &, unsigned int)> copyDelegate;
+    typedef std::function<void(const std::vector<unsigned char> &, unsigned int, std::vector<unsigned char> &,
+                               unsigned int)>
+            copyDelegate;
 
     static unsigned int _sourceOffset = 0;
     static unsigned int _length = 0;
@@ -37,19 +39,27 @@ class DwgLZ77AC21Decompressor
     static unsigned int _opCode = 0;
 
 public:
-    static void Decompress(const std::vector<unsigned char> &source, unsigned int initialOffset, unsigned int length, std::vector<unsigned char> &buffer);
+    static void Decompress(const std::vector<unsigned char> &source, unsigned int initialOffset, unsigned int length,
+                           std::vector<unsigned char> &buffer);
 
 private:
-    static unsigned int copyDecompressedChunks(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
+    static unsigned int copyDecompressedChunks(const std::vector<unsigned char> &src, unsigned int endIndex,
+                                               std::vector<unsigned char> &det, unsigned int destIndex);
     static void readInstructions(std::vector<unsigned char> &buffer);
     static void readLiteralLength(std::vector<unsigned char> &buffer);
 
-    static void copy1b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
-    static void copy2b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
-    static void copy3b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
-    static void copy4b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
-    static void copy8b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
-    static void copy16b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det, unsigned int destIndex);
+    static void copy1b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                       unsigned int destIndex);
+    static void copy2b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                       unsigned int destIndex);
+    static void copy3b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                       unsigned int destIndex);
+    static void copy4b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                       unsigned int destIndex);
+    static void copy8b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                       unsigned int destIndex);
+    static void copy16b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                        unsigned int destIndex);
 };
 
 }// namespace dwg

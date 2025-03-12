@@ -58,7 +58,10 @@ std::string DwgClassesWriter::sectionName() const { return DwgSectionDefinition:
 
 void DwgClassesWriter::write()
 {
-    if (R2007Plus) { _writer->savePositonForSize(); }
+    if (R2007Plus)
+    {
+        _writer->savePositonForSize();
+    }
 
     short maxClassNumber = 0;
     auto classes = _document->classes();
@@ -66,7 +69,10 @@ void DwgClassesWriter::write()
     {
         for (auto it = classes->begin(); it != classes->end(); ++it)
         {
-            if (it->second->classNumber() >= maxClassNumber) { maxClassNumber = it->second->classNumber(); }
+            if (it->second->classNumber() >= maxClassNumber)
+            {
+                maxClassNumber = it->second->classNumber();
+            }
         }
     }
 

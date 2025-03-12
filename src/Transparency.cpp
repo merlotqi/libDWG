@@ -47,11 +47,14 @@ short Transparency::value() const { return _value; }
 
 void Transparency::setValue(short value)
 {
-    if (value == -1) _value = value;
+    if (value == -1)
+        _value = value;
 
-    if (value == 100) _value = value;
+    if (value == 100)
+        _value = value;
 
-    if (value < 0 || value > 90) throw std::invalid_argument("Transparency must be in range from 0 to 90.");
+    if (value < 0 || value > 90)
+        throw std::invalid_argument("Transparency must be in range from 0 to 90.");
 
     _value = value;
 }
@@ -70,13 +73,25 @@ Transparency Transparency::FromAlphaValue(int value)
     std::vector<unsigned char> bytes = LittleEndianConverter::instance()->bytes(value);
     short alpha = (short) (100 - (bytes[0] / 255.0) * 100);
 
-    if (alpha == -1) { return Transparency::ByLayer; }
+    if (alpha == -1)
+    {
+        return Transparency::ByLayer;
+    }
 
-    if (alpha == 100) { return ByBlock; }
+    if (alpha == 100)
+    {
+        return ByBlock;
+    }
 
-    if (alpha < 0) { return Transparency(0); }
+    if (alpha < 0)
+    {
+        return Transparency(0);
+    }
 
-    if (alpha > 90) { return Transparency(90); }
+    if (alpha > 90)
+    {
+        return Transparency(90);
+    }
 
     return Transparency(alpha);
 }

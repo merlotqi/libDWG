@@ -20,38 +20,38 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/CadDictionary.h>
 #include <dwg/CadDocument.h>
-#include <dwg/io/dxf/DxfWriter.h>
-#include <dwg/io/dxf/CadObjectHolder_p.h>
-#include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfCode.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/io/dxf/CadObjectHolder_p.h>
+#include <dwg/io/dxf/DxfWriter.h>
 #include <dwg/io/dxf/writers/DxfAsciiWriter_p.h>
 #include <dwg/io/dxf/writers/DxfBinaryWriter_p.h>
-#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
-#include <dwg/io/dxf/writers/DxfClassesSectionWriter_p.h>
-#include <dwg/io/dxf/writers/DxfTablesSectionWriter_p.h>
 #include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
+#include <dwg/io/dxf/writers/DxfClassesSectionWriter_p.h>
 #include <dwg/io/dxf/writers/DxfEntitiesSectionWriter_p.h>
+#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
 #include <dwg/io/dxf/writers/DxfObjectsSectionWriter_p.h>
+#include <dwg/io/dxf/writers/DxfTablesSectionWriter_p.h>
+#include <dwg/objects/CadDictionary.h>
 
 namespace dwg {
 
-    DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary)
+DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary)
     : DxfWriter(new std::ofstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document,
                 binary)
 {
 }
 
-DxfWriter::DxfWriter(std::ofstream *stream, CadDocument *document, bool binary) 
+DxfWriter::DxfWriter(std::ofstream *stream, CadDocument *document, bool binary)
     : CadWriterBase<DxfWriterConfiguration>(stream, document), _binary(binary)
 {
     _objectHolder = new CadObjectHolder();
 }
 
 DxfWriter::~DxfWriter() {}
-    
-void DxfWriter::write() 
+
+void DxfWriter::write()
 {
     CadWriterBase::write();
     createStreamWriter();
@@ -73,43 +73,49 @@ void DxfWriter::write()
 
 bool DxfWriter::isBinaray() const { return _binary; }
 
-void DxfWriter::createStreamWriter() 
+void DxfWriter::createStreamWriter()
 {
-    if (_binary) { _writer = new DxfBinaryWriter(_stream.get(), Encoding(CodePage::Utf8)); }
-    else { _writer = new DxfAsciiWriter(_stream.get(), Encoding(CodePage::Utf8)); }
+    if (_binary)
+    {
+        _writer = new DxfBinaryWriter(_stream.get(), Encoding(CodePage::Utf8));
+    }
+    else
+    {
+        _writer = new DxfAsciiWriter(_stream.get(), Encoding(CodePage::Utf8));
+    }
 }
 
-void DxfWriter::writeHeader() 
+void DxfWriter::writeHeader()
 {
     auto &&writer = std::make_unique<DxfHeaderSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
-void DxfWriter::writeDxfClasses() 
+void DxfWriter::writeDxfClasses()
 {
     auto &&writer = std::make_unique<DxfClassesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
-void DxfWriter::writeTables() 
+void DxfWriter::writeTables()
 {
     auto &&writer = std::make_unique<DxfTablesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
-void DxfWriter::writeBlocks() 
+void DxfWriter::writeBlocks()
 {
     auto &&writer = std::make_unique<DxfBlocksSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
-void DxfWriter::writeEntities() 
+void DxfWriter::writeEntities()
 {
     auto &&writer = std::make_unique<DxfEntitiesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
-void DxfWriter::writeObjects() 
+void DxfWriter::writeObjects()
 {
     auto &&writer = std::make_unique<DxfObjectsSectionWriter>(_writer, _document, _objectHolder);
     writer->write();

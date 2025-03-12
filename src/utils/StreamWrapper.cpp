@@ -27,7 +27,10 @@ namespace dwg {
 
 InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))
 {
-    if (!_stream || !_stream->good()) { throw new std::bad_alloc(); }
+    if (!_stream || !_stream->good())
+    {
+        throw new std::bad_alloc();
+    }
 }
 
 InputStreamWrapper::~InputStreamWrapper() {}

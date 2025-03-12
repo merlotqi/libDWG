@@ -46,8 +46,14 @@ DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream, Encoding
 unsigned short DwgFileHeaderWriterBase::getFileCodePage()
 {
     unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->header()->codePage()));
-    if (codePage < 1) { return 30; }
-    else { return codePage; }
+    if (codePage < 1)
+    {
+        return 30;
+    }
+    else
+    {
+        return codePage;
+    }
 }
 
 void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer, int offset, int length)
@@ -56,7 +62,10 @@ void DwgFileHeaderWriterBase::applyMask(std::vector<unsigned char> &buffer, int 
     int diff = offset + length;
     while (offset < diff)
     {
-        for (int i = 0; i < 4; i++) { buffer[offset + i] ^= bytes[i]; }
+        for (int i = 0; i < 4; i++)
+        {
+            buffer[offset + i] ^= bytes[i];
+        }
 
         offset += 4;
     }
@@ -92,7 +101,10 @@ void DwgFileHeaderWriterBase::writeMagicNumber()
 void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
 {
     std::string buffer = stream->str();
-    for (size_t i = 0; i < buffer.size(); ++i) { buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i]; }
+    for (size_t i = 0; i < buffer.size(); ++i)
+    {
+        buffer[i] ^= DwgCheckSumCalculator::MagicSequence[i];
+    }
     stream->str("");
     stream->clear();
     *stream << buffer;

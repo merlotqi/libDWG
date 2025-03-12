@@ -48,7 +48,8 @@ namespace dwg {
 
 DwgWriter::DwgWriter(const std::string &filename, CadDocument *document)
 {
-    if (!document) throw std::invalid_argument("document is null");
+    if (!document)
+        throw std::invalid_argument("document is null");
     _stream = std::make_unique<std::ofstream>(filename, std::ios::binary);
     _document = document;
 }
@@ -83,7 +84,10 @@ void DwgWriter::write()
     _fileHeaderWriter->writeFile();
 
     _stream->flush();
-    if (closeStream()) { _stream->clear(); }
+    if (closeStream())
+    {
+        _stream->clear();
+    }
 }
 
 
@@ -193,7 +197,8 @@ void DwgWriter::writePreview()
 
 void DwgWriter::writeAppInfo()
 {
-    if (_fileHeader->version() < ACadVersion::AC1018) return;
+    if (_fileHeader->version() < ACadVersion::AC1018)
+        return;
 
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
     std::unique_ptr<DwgAppInfoWriter> writer = std::make_unique<DwgAppInfoWriter>(_version, stream.get());
@@ -204,7 +209,8 @@ void DwgWriter::writeAppInfo()
 
 void DwgWriter::writeFileDepList()
 {
-    if (_fileHeader->version() < ACadVersion::AC1018) return;
+    if (_fileHeader->version() < ACadVersion::AC1018)
+        return;
 
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
     OutputStreamWrapper swriter(stream.get());
@@ -237,7 +243,8 @@ void DwgWriter::writeFileDepList()
 }
 void DwgWriter::writeRevHistory()
 {
-    if (_fileHeader->version() < ACadVersion::AC1018) return;
+    if (_fileHeader->version() < ACadVersion::AC1018)
+        return;
     std::ostringstream *stream = new std::ostringstream();
     unsigned int v = 0;
     stream->write((char *) &v, sizeof(v));

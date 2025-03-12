@@ -60,7 +60,10 @@ TimeSpan::operator long long() const { return _timeSpan; }
 
 TimeSpan &TimeSpan::operator=(const TimeSpan &rhs)
 {
-    if (this != &rhs) { _timeSpan = rhs._timeSpan; }
+    if (this != &rhs)
+    {
+        _timeSpan = rhs._timeSpan;
+    }
     return *this;
 }
 
@@ -107,7 +110,10 @@ DateTime::DateTime(const DateTime &rhs) : _time(rhs._time) {}
 DateTime::DateTime(long long tm, bool bUTC)
 {
     _time = tm;
-    if (!bUTC) { _time -= timeZone(); }
+    if (!bUTC)
+    {
+        _time -= timeZone();
+    }
 }
 
 DateTime::DateTime(int year, int mon, int day, int hour, int min, int sec)
@@ -129,7 +135,10 @@ long long DateTime::timeZone()
     TIME_ZONE_INFORMATION tzInfo;
     GetTimeZoneInformation(&tzInfo);
     long long offset = static_cast<long long>(tzInfo.Bias) * 60;
-    if (tzInfo.DaylightDate.wYear != 0) { offset -= static_cast<long long>(tzInfo.DaylightBias) * 60; }
+    if (tzInfo.DaylightDate.wYear != 0)
+    {
+        offset -= static_cast<long long>(tzInfo.DaylightBias) * 60;
+    }
     return offset;
 #else
     time_t t = time(nullptr);
@@ -247,7 +256,10 @@ DateTime &DateTime::operator=(const long long tim)
 
 DateTime &DateTime::operator=(const DateTime &rhs)
 {
-    if (this != &rhs) { _time = rhs._time; }
+    if (this != &rhs)
+    {
+        _time = rhs._time;
+    }
     return *this;
 }
 

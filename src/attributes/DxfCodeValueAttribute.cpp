@@ -23,6 +23,21 @@
 #include <dwg/attributes/DxfCodeValueAttribute_p.h>
 
 namespace dwg {
-
-    
+DxfCodeValueAttribute::DxfCodeValueAttribute(const std::vector<int> &codes)
+    : DxfCodeValueAttribute(DxfReferenceType::None, codes)
+{
 }
+
+DxfCodeValueAttribute::DxfCodeValueAttribute(DxfReferenceType rf, const std::vector<int> &codes) : _referenceType(rf)
+{
+    for (const auto &code: codes)
+    {
+        _valueCodes.push_back(static_cast<DxfCode>(code));
+    }
+}
+
+std::vector<DxfCode> DxfCodeValueAttribute::valueCodes() const { return _valueCodes; }
+
+DxfReferenceType DxfCodeValueAttribute::referenceType() const { return _referenceType; }
+
+}// namespace dwg

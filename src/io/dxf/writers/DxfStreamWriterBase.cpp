@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
-#include <dwg/INamedCadObject.h>
-#include <dwg/IHandledCadObject.h>
 #include <dwg/GroupCodeValue.h>
+#include <dwg/IHandledCadObject.h>
+#include <dwg/INamedCadObject.h>
+#include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
 #include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
@@ -34,24 +34,18 @@ DxfStreamWriterBase::~DxfStreamWriterBase() {}
 
 bool DxfStreamWriterBase::writeOptional() const { return _writeOptional; }
 
-void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap)
-{
-    
-}
+void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap) {}
 
-void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
-{
+void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap) {}
 
-}
-
-void DxfStreamWriterBase::writeTrueColor(int code, const Color &color, DxfClassMap *clsmap)
-{
-    
-}
+void DxfStreamWriterBase::writeTrueColor(int code, const Color &color, DxfClassMap *clsmap) {}
 
 void DxfStreamWriterBase::writeCmColor(int code, const Color &color, DxfClassMap *clsmap)
 {
-    if (GroupCodeValue::transformValue(code) == GroupCodeValueType::Int16) { write(code, (short) color.approxIndex()); }
+    if (GroupCodeValue::transformValue(code) == GroupCodeValueType::Int16)
+    {
+        write(code, (short) color.approxIndex());
+    }
     else
     {
         std::vector<unsigned char> arr(4, 0);
@@ -73,12 +67,18 @@ void DxfStreamWriterBase::writeCmColor(int code, const Color &color, DxfClassMap
 
 void DxfStreamWriterBase::writeHandle(int code, IHandledCadObject *value, DxfClassMap *clsmap)
 {
-    if (value) { write(code, value->handle(), clsmap); }
+    if (value)
+    {
+        write(code, value->handle(), clsmap);
+    }
 }
 
 void DxfStreamWriterBase::writeName(int code, INamedCadObject *value, DxfClassMap *clsmap)
 {
-    if (value) { write(code, value->name(), clsmap); }
+    if (value)
+    {
+        write(code, value->name(), clsmap);
+    }
 }
 
 }// namespace dwg

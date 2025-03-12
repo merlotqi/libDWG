@@ -23,6 +23,43 @@
 #include <dwg/attributes/CadSystemVariableAttribute_p.h>
 
 namespace dwg {
-
-    
+CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variable, bool isName,
+                                                       const std::vector<int> &codes)
+    : _isName(isName), _name(variable)
+{
+    for (const auto &code: codes)
+    {
+        _valueCodes.push_back(static_cast<DxfCode>(code));
+    }
 }
+
+CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variable, const std::vector<int> &codes)
+    : _name(variable), _isName(isName), _referenceType(DxfReferenceType::None)
+{
+    for (const auto &code: codes)
+    {
+        _valueCodes.push_back(static_cast<DxfCode>(code));
+    }
+}
+
+CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variable, const std::vector<DxfCode> &codes)
+    : _name(variable), _valueCodes(codes), _isName(false), _referenceType(DxfReferenceType::None)
+{
+}
+
+CadSystemVariableAttribute::CadSystemVariableAttribute(DxfReferenceType rf, const std::string &variable,
+                                                       const std::vector<int> &codes)
+    : CadSystemVariableAttribute(variable, codes)
+{
+    _referenceType = rf;
+}
+
+std::vector<DxfCode> CadSystemVariableAttribute::valueCodes() const { return _valueCodes; }
+
+DxfReferenceType CadSystemVariableAttribute::referenceType() const { return _referenceType; }
+
+std::string CadSystemVariableAttribute::name() const { return _name; }
+
+bool CadSystemVariableAttribute::isName() const { return _isName; }
+
+}// namespace dwg

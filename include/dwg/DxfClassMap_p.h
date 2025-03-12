@@ -23,8 +23,9 @@
 #pragma once
 
 #include <dwg/DxfProperty_p.h>
-#include <string>
 #include <map>
+#include <string>
+
 
 namespace dwg {
 

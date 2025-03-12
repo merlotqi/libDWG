@@ -24,5 +24,22 @@
 
 namespace dwg {
 
-    
+DxfCollectionCodeValueAttribute::DxfCollectionCodeValueAttribute(const std::vector<int> &codes)
+    : DxfCollectionCodeValueAttribute(DxfReferenceType::None, codes)
+{
 }
+
+DxfCollectionCodeValueAttribute::DxfCollectionCodeValueAttribute(DxfReferenceType rf, const std::vector<int> &codes)
+    : _referenceType(rf)
+{
+    for (int code: codes)
+    {
+        _valueCodes.push_back(static_cast<DxfCode>(code));
+    }
+}
+
+std::vector<DxfCode> DxfCollectionCodeValueAttribute::valueCodes() const { return _valueCodes; }
+
+DxfReferenceType DxfCollectionCodeValueAttribute::referenceType() const { return _referenceType; }
+
+}// namespace dwg

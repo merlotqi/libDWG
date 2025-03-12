@@ -62,7 +62,8 @@ bool CadWipeoutBase::showImage() const { return _flags & ImageDisplayFlag::ShowI
 
 void CadWipeoutBase::setShowImage(bool value)
 {
-    if (value) _flags |= ImageDisplayFlag::ShowImage;
+    if (value)
+        _flags |= ImageDisplayFlag::ShowImage;
     else
         _flags &= ~ImageDisplayFlag::ShowImage;
 }

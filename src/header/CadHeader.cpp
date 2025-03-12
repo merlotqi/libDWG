@@ -289,7 +289,8 @@ short CadHeader::surfaceIsolineCount() const { return _surfaceIsolineCount; }
 
 void CadHeader::setSurfaceIsolineCount(short value)
 {
-    if (value < 0 || value > 2047) throw new std::out_of_range("ISOLINES valid values are from 0 to 2047");
+    if (value < 0 || value > 2047)
+        throw new std::out_of_range("ISOLINES valid values are from 0 to 2047");
     _surfaceIsolineCount = value;
 }
 
@@ -304,7 +305,8 @@ short CadHeader::textQuality() const { return _textQuality; }
 
 void CadHeader::setTextQuality(short value)
 {
-    if (value < 0 || value > 100) throw new std::out_of_range("TEXTQLTY valid values are from 0 to 100");
+    if (value < 0 || value > 100)
+        throw new std::out_of_range("TEXTQLTY valid values are from 0 to 100");
     _textQuality = value;
 }
 
@@ -403,7 +405,8 @@ double CadHeader::facetResolution() const { return _facetResolution; }
 
 void CadHeader::setFacetResolution(double value)
 {
-    if (value < 0.01 || value > 10) throw new std::out_of_range("FACETRES valid values are from 0.01 to 10.0");
+    if (value < 0.01 || value > 10)
+        throw new std::out_of_range("FACETRES valid values are from 0.01 to 10.0");
     _facetResolution = value;
 }
 
@@ -477,68 +480,104 @@ void CadHeader::setPaperSpaceLimitsMax(const XY &value) { _paperSpaceLimitsMax =
 
 double CadHeader::paperSpaceElevation() const
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->elevation(); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->elevation();
+    }
     return 0.0;
 }
 
 void CadHeader::setPaperSpaceElevation(double value)
 {
-    if (_paperSpaceUcs) { _paperSpaceUcs->setElevation(value); }
+    if (_paperSpaceUcs)
+    {
+        _paperSpaceUcs->setElevation(value);
+    }
 }
 
 std::string CadHeader::paperSpaceBaseName() const
 {
-    if (_paperSpaceUcsBase) { return _paperSpaceUcsBase->name(); }
+    if (_paperSpaceUcsBase)
+    {
+        return _paperSpaceUcsBase->name();
+    }
     return std::string();
 }
 
 void CadHeader::setPaperSpaceBaseName(const std::string &value)
 {
-    if (_paperSpaceUcsBase) { _paperSpaceUcsBase->setName(value); }
+    if (_paperSpaceUcsBase)
+    {
+        _paperSpaceUcsBase->setName(value);
+    }
 }
 
 std::string CadHeader::paperSpaceName() const
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->name(); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->name();
+    }
     return std::string();
 }
 
 void CadHeader::setPaperSpaceName(const std::string &value)
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->setName(value); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->setName(value);
+    }
 }
 
 XYZ CadHeader::paperSpaceUcsOrigin() const
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->origin(); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->origin();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setPaperSpaceUcsOrigin(const XYZ &value)
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->setOrigin(value); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->setOrigin(value);
+    }
 }
 
 XYZ CadHeader::paperSpaceUcsXAxis() const
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->xAxis(); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->xAxis();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setPaperSpaceUcsXAxis(const XYZ &value)
 {
-    if (_paperSpaceUcs) { _paperSpaceUcs->setXAxis(value); }
+    if (_paperSpaceUcs)
+    {
+        _paperSpaceUcs->setXAxis(value);
+    }
 }
 
 XYZ CadHeader::paperSpaceUcsYAxis() const
 {
-    if (_paperSpaceUcs) { return _paperSpaceUcs->yAxis(); }
+    if (_paperSpaceUcs)
+    {
+        return _paperSpaceUcs->yAxis();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setPaperSpaceUcsYAxis(const XYZ &value)
 {
-    if (_paperSpaceUcs) { _paperSpaceUcs->setXAxis(value); }
+    if (_paperSpaceUcs)
+    {
+        _paperSpaceUcs->setXAxis(value);
+    }
 }
 
 XYZ CadHeader::paperSpaceOrthographicTopDOrigin() const { return _paperSpaceOrthographicTopDOrigin; }
@@ -617,68 +656,104 @@ void CadHeader::setModelSpaceLimitsMax(const XY &value) { _modelSpaceLimitsMax =
 
 std::string CadHeader::ucsBaseName() const
 {
-    if (_modelSpaceUcsBase) { return _modelSpaceUcsBase->name(); }
+    if (_modelSpaceUcsBase)
+    {
+        return _modelSpaceUcsBase->name();
+    }
     return std::string();
 }
 
 void CadHeader::setUcsBaseName(const std::string &value)
 {
-    if (_modelSpaceUcsBase) { _modelSpaceUcsBase->setName(value); }
+    if (_modelSpaceUcsBase)
+    {
+        _modelSpaceUcsBase->setName(value);
+    }
 }
 
 std::string CadHeader::ucsName() const
 {
-    if (_modelSpaceUcs) { return _modelSpaceUcs->name(); }
+    if (_modelSpaceUcs)
+    {
+        return _modelSpaceUcs->name();
+    }
     return std::string();
 }
 
 void CadHeader::setUcsName(const std::string &value)
 {
-    if (_modelSpaceUcs) { _modelSpaceUcs->setName(value); }
+    if (_modelSpaceUcs)
+    {
+        _modelSpaceUcs->setName(value);
+    }
 }
 
 double CadHeader::elevation() const
 {
-    if (_modelSpaceUcs) { return _modelSpaceUcs->elevation(); }
+    if (_modelSpaceUcs)
+    {
+        return _modelSpaceUcs->elevation();
+    }
     return 0.0;
 }
 
 void CadHeader::setElevation(double value)
 {
-    if (_modelSpaceUcs) { _modelSpaceUcs->setElevation(value); }
+    if (_modelSpaceUcs)
+    {
+        _modelSpaceUcs->setElevation(value);
+    }
 }
 
 XYZ CadHeader::modelSpaceOrigin() const
 {
-    if (_modelSpaceUcs) { return _modelSpaceUcs->origin(); }
+    if (_modelSpaceUcs)
+    {
+        return _modelSpaceUcs->origin();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setModelSpaceOrigin(const XYZ &value)
 {
-    if (_modelSpaceUcs) { _modelSpaceUcs->setOrigin(value); }
+    if (_modelSpaceUcs)
+    {
+        _modelSpaceUcs->setOrigin(value);
+    }
 }
 
 XYZ CadHeader::modelSpaceXAxis() const
 {
-    if (_modelSpaceUcs) { return _modelSpaceUcs->xAxis(); }
+    if (_modelSpaceUcs)
+    {
+        return _modelSpaceUcs->xAxis();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setModelSpaceXAxis(const XYZ &value)
 {
-    if (_modelSpaceUcs) { _modelSpaceUcs->setXAxis(value); }
+    if (_modelSpaceUcs)
+    {
+        _modelSpaceUcs->setXAxis(value);
+    }
 }
 
 XYZ CadHeader::modelSpaceYAxis() const
 {
-    if (_modelSpaceUcs) { return _modelSpaceUcs->yAxis(); }
+    if (_modelSpaceUcs)
+    {
+        return _modelSpaceUcs->yAxis();
+    }
     return XYZ::Zero;
 }
 
 void CadHeader::setModelSpaceYAxis(const XYZ &value)
 {
-    if (_modelSpaceUcs) { _modelSpaceUcs->setYAxis(value); }
+    if (_modelSpaceUcs)
+    {
+        _modelSpaceUcs->setYAxis(value);
+    }
 }
 
 std::string CadHeader::dimensionBlockName() const { return _dimensionBlockName; }
@@ -815,7 +890,8 @@ double CadHeader::stepsPerSecond() const { return _stepsPerSecond; }
 
 void CadHeader::setStepsPerSecond(double value)
 {
-    if (value < 1 || value > 30) throw new std::out_of_range("FACETRES valid values are from 1 to 30");
+    if (value < 1 || value > 30)
+        throw new std::out_of_range("FACETRES valid values are from 1 to 30");
     _stepsPerSecond = value;
 }
 

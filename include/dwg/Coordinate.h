@@ -239,7 +239,8 @@ inline XY XY::normalized() const noexcept
 inline void XY::normalize() noexcept
 {
     const double len = length();
-    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len)) return;
+    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len))
+        return;
 
     v[0] /= len;
     v[1] /= len;
@@ -321,7 +322,8 @@ inline XYZ XYZ::normalized() const noexcept
 inline void XYZ::normalize() noexcept
 {
     const double len = length();
-    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len)) return;
+    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len))
+        return;
 
     v[0] /= len;
     v[1] /= len;

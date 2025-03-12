@@ -67,8 +67,10 @@ public:
      */
     void add(T *item)
     {
-        if (!item) throw std::invalid_argument("item is null");
-        if (item->owner()) throw std::runtime_error("item already has an owner");
+        if (!item)
+            throw std::invalid_argument("item is null");
+        if (item->owner())
+            throw std::runtime_error("item already has an owner");
 
         _entries.push_back(item);
         item->Owner(_owner);
@@ -83,7 +85,8 @@ public:
     T *remove(T *item)
     {
         auto it = std::find(_entries.begin(), _entries.end(), item);
-        if (it == _entries.end()) return nullptr;
+        if (it == _entries.end())
+            return nullptr;
 
         item->Owner(nullptr);
         OnRemoved(item);

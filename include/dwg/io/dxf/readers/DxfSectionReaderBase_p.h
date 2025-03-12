@@ -38,4 +38,4 @@ protected:
     DxfDocumentBuilder *_builder;
 };
 
-}
+}// namespace dwg

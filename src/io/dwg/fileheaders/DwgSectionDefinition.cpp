@@ -38,12 +38,18 @@ std::map<std::string, std::vector<unsigned char>> DwgSectionDefinition::EndSenti
 
 std::optional<int> DwgSectionDefinition::GetSectionLocatorByName(const std::string &name)
 {
-    if (0 == name.compare(Header)) return 0;
-    if (0 == name.compare(Classes)) return 1;
-    if (0 == name.compare(Handles)) return 2;
-    if (0 == name.compare(ObjFreeSpace)) return 3;
-    if (0 == name.compare(Template)) return 4;
-    if (0 == name.compare(AuxHeader)) return 5;
+    if (0 == name.compare(Header))
+        return 0;
+    if (0 == name.compare(Classes))
+        return 1;
+    if (0 == name.compare(Handles))
+        return 2;
+    if (0 == name.compare(ObjFreeSpace))
+        return 3;
+    if (0 == name.compare(Template))
+        return 4;
+    if (0 == name.compare(AuxHeader))
+        return 5;
     return std::nullopt;
 }
 

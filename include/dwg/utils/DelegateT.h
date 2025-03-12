@@ -78,7 +78,10 @@ public:
     // Compare this delegate with another for equality.
     bool compare(DelegateT<Return, Args...> *_delegate) const override
     {
-        if (!_delegate || !_delegate->isType(typeid(StaticDelegateT<Return (*)(Args...)>))) { return false; }
+        if (!_delegate || !_delegate->isType(typeid(StaticDelegateT<Return (*)(Args...)>)))
+        {
+            return false;
+        }
 
         auto *cast = dynamic_cast<StaticDelegateT<Return (*)(Args...)> *>(_delegate);
 
@@ -116,7 +119,10 @@ public:
     // Compare this delegate with another for equality.
     bool compare(DelegateT<Return, Args...> *_delegate) const override
     {
-        if (!_delegate || !_delegate->isType(typeid(ClassMemberDelegateT<T, Return (T::*)(Args...)>))) { return false; }
+        if (!_delegate || !_delegate->isType(typeid(ClassMemberDelegateT<T, Return (T::*)(Args...)>)))
+        {
+            return false;
+        }
 
         auto *cast = dynamic_cast<ClassMemberDelegateT<T, Return (T::*)(Args...)> *>(_delegate);
         return invoke_fun_ == cast->invoke_fun_ && obj == cast->obj;

@@ -22,9 +22,10 @@
 
 #pragma once
 
+#include <dwg/DwgVariant.h>
 #include <dwg/DxfCode.h>
 #include <dwg/GroupCodeValueType.h>
-#include <dwg/DwgVariant.h>
+
 
 namespace dwg {
 
@@ -53,7 +54,7 @@ public:
     virtual double valueAsDouble() const = 0;
     virtual double valueAsAngle() const = 0;
     virtual std::vector<unsigned char> valueAsBinaryChunk() const = 0;
-    
+
     virtual bool find(const std::string &dxfEntry) const = 0;
 
     virtual void start() = 0;

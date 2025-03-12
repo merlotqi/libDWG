@@ -124,7 +124,10 @@ void DwgAuxHeaderWriter::write()
     _writer->write8BitJulianDate(_header->updateDateTime());
 
     int handseed = -1;
-    if (_header->handleSeed() <= 0x7FFFFFFF) { handseed = (int) _header->handleSeed(); }
+    if (_header->handleSeed() <= 0x7FFFFFFF)
+    {
+        handseed = (int) _header->handleSeed();
+    }
 
     //RL: HANDSEED(Handle seed) if < 0x7fffffff, otherwise - 1.
     _writer->writeRawLong(handseed);

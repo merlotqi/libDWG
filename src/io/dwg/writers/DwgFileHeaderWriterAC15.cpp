@@ -37,7 +37,8 @@ int DwgFileHeaderWriterAC15::handleSectionOffset() const
 
     for (auto &&item: _records)
     {
-        if (item.first == DwgSectionDefinition::AcDbObjects) break;
+        if (item.first == DwgSectionDefinition::AcDbObjects)
+            break;
 
         offset += istream_length(item.second.second);
     }

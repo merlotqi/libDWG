@@ -293,8 +293,14 @@ Color Color::ByEntity = Color((short) 257);
 
 unsigned int Color::getInt24(const std::vector<unsigned char> &array)
 {
-    if constexpr (is_little_endian) { return (unsigned int) (array[0] | array[1] << 8 | array[2] << 16); }
-    else { return (unsigned int) (array[0] << 16 | array[1] << 8 | array[2]); }
+    if constexpr (is_little_endian)
+    {
+        return (unsigned int) (array[0] | array[1] << 8 | array[2] << 16);
+    }
+    else
+    {
+        return (unsigned int) (array[0] << 16 | array[1] << 8 | array[2]);
+    }
 }
 
 std::vector<unsigned char> Color::getRgb() const
@@ -306,7 +312,10 @@ std::vector<unsigned char> Color::getRgb() const
         rgb[1] = (unsigned char) (_color >> 8);
         rgb[2] = (unsigned char) _color;
     }
-    else { return _indexRgb[_color]; }
+    else
+    {
+        return _indexRgb[_color];
+    }
 }
 
 Color::Color(const Color &rhs) { _color = rhs._color; }
@@ -328,7 +337,8 @@ Color::Color(unsigned int trueColor)
 
 Color::Color(short index)
 {
-    if (index < 0 || index > 257) throw new std::invalid_argument("True index must be a value between 0 and 257.");
+    if (index < 0 || index > 257)
+        throw new std::invalid_argument("True index must be a value between 0 and 257.");
 
     _color = (unsigned int) index;
 }
@@ -345,7 +355,8 @@ unsigned char Color::approxIndex(unsigned char r, unsigned char g, unsigned char
     for (int i = 0; i < _indexRgb.size(); i++)
     {
         int dist = (r - _indexRgb[i][0]) + (g - _indexRgb[i][1]) + (b - _indexRgb[i][2]);
-        if (dist == 0) return (unsigned char) i;
+        if (dist == 0)
+            return (unsigned char) i;
 
         if (dist < prevDist)
         {
@@ -375,8 +386,14 @@ unsigned char Color::blue() const { return getRgb()[2]; }
 
 unsigned char Color::approxIndex() const
 {
-    if (isTrueColor()) { return approxIndex(red(), green(), blue()); }
-    else { return (unsigned char) index(); }
+    if (isTrueColor())
+    {
+        return approxIndex(red(), green(), blue());
+    }
+    else
+    {
+        return (unsigned char) index();
+    }
 }
 
 }// namespace dwg
