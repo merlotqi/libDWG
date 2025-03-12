@@ -29,7 +29,12 @@ namespace dwg {
 class DxfBinaryWriter : public DxfStreamWriterBase
 {
 public:
-    
+    DxfBinaryWriter(std::ofstream *stream, Encoding encoding);
+
+    void flush() override;
+    void close() override;
+    void writeDxfCode(int code) override;
+    void writeValue(int code, DwgVariant value) override;
 };
 
 }// namespace dwg

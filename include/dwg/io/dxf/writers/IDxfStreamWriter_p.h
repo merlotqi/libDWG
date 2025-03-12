@@ -32,7 +32,6 @@ namespace dwg {
 class DxfClassMap;
 class IHandledCadObject;
 class INamedCadObject;
-class DxfClassMap;
 class IHandledCadObject;
 class INamedCadObject;
 class IDxfStreamWriter

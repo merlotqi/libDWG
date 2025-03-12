@@ -1,4 +1,3 @@
-
 /**
  * libDWG - A C++ library for reading and writing DWG and DXF files in CAD.
  *
@@ -23,15 +22,6 @@
 
 #pragma once
 
-#include <dwg/io/dxf/writers/DxfSectionWriterBase_p.h>
+#include <dwg/DxfReferenceType.h>
+#include <dwg/DxfCode.h>
 
-namespace dwg {
-
-class DxfObjectsSectionWriter : public DxfSectionWriterBase
-{
-public:
-    DxfObjectsSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder, const DxfWriterConfiguration &configuration);
-    ~DxfObjectsSectionWriter();
-};
-
-}// namespace dwg

@@ -20,6 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/CadDocument.h>
 #include <dwg/io/dxf/DxfWriter.h>
 #include <dwg/io/dxf/CadObjectHolder_p.h>
 #include <dwg/DxfFileToken_p.h>
@@ -35,7 +37,9 @@
 
 namespace dwg {
 
-DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary) : DxfWriter(new std::ofstream(filename, std::ios::out), document, binary)
+    DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary)
+    : DxfWriter(new std::ofstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document,
+                binary)
 {
 }
 
@@ -71,49 +75,43 @@ bool DxfWriter::isBinaray() const { return _binary; }
 
 void DxfWriter::createStreamWriter() 
 {
-    if(_binary)
-    {
-        _writer = new DxfBinaryWriter(_stream, Encoding(CodePage::Utf8));
-    }
-    else
-    {
-        _writer = new DxfAsciiWriter(_stream, Encoding(CodePage::Utf8));
-    }
+    if (_binary) { _writer = new DxfBinaryWriter(_stream.get(), Encoding(CodePage::Utf8)); }
+    else { _writer = new DxfAsciiWriter(_stream.get(), Encoding(CodePage::Utf8)); }
 }
 
 void DxfWriter::writeHeader() 
 {
-    auto &&writer = std::make_unqiue<DxfHeaderSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfHeaderSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
 void DxfWriter::writeDxfClasses() 
 {
-    auto &&writer = std::make_unqiue<DxfClassesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfClassesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
 void DxfWriter::writeTables() 
 {
-    auto &&writer = std::make_unqiue<DxfTablesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfTablesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
 void DxfWriter::writeBlocks() 
 {
-    auto &&writer = std::make_unqiue<DxfBlocksSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfBlocksSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
 void DxfWriter::writeEntities() 
 {
-    auto &&writer = std::make_unqiue<DxfEntitiesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfEntitiesSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 
 void DxfWriter::writeObjects() 
 {
-    auto &&writer = std::make_unqiue<DxfObjectsSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfObjectsSectionWriter>(_writer, _document, _objectHolder);
     writer->write();
 }
 

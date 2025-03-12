@@ -50,6 +50,9 @@ public:
 protected:
     virtual void writeDxfCode(int code) = 0;
     virtual void writeValue(int code, DwgVariant value) = 0;
+
+private:
+    bool _writeOptional = false;
 };
 
 }// namespace dwg

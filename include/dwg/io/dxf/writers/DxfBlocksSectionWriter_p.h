@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/io/dxf/readers/DxfSectionWriterBase_p.h>
+#include <dwg/io/dxf/writers/DxfSectionWriterBase_p.h>
 
 namespace dwg {
 

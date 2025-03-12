@@ -21,7 +21,64 @@
  */
 
 #include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
+#include <dwg/INamedCadObject.h>
+#include <dwg/IHandledCadObject.h>
+#include <dwg/GroupCodeValue.h>
+#include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
+
+DxfStreamWriterBase::DxfStreamWriterBase() {}
+
+DxfStreamWriterBase::~DxfStreamWriterBase() {}
+
+bool DxfStreamWriterBase::writeOptional() const { return _writeOptional; }
+
+void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap)
+{
+    
+}
+
+void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
+{
+
+}
+
+void DxfStreamWriterBase::writeTrueColor(int code, const Color &color, DxfClassMap *clsmap)
+{
+    
+}
+
+void DxfStreamWriterBase::writeCmColor(int code, const Color &color, DxfClassMap *clsmap)
+{
+    if (GroupCodeValue::transformValue(code) == GroupCodeValueType::Int16) { write(code, (short) color.approxIndex()); }
+    else
+    {
+        std::vector<unsigned char> arr(4, 0);
+        if (color.isTrueColor())
+        {
+            arr[0] = (unsigned char) color.blue();
+            arr[1] = (unsigned char) color.green();
+            arr[2] = (unsigned char) color.red();
+            arr[3] = 0b11000010;// 0xC2
+        }
+        else
+        {
+            arr[3] = 0b11000001;
+            arr[0] = (unsigned char) color.index();
+        }
+        write(code, LittleEndianConverter::instance()->toInt32(arr.data()), clsmap);
+    }
+}
+
+void DxfStreamWriterBase::writeHandle(int code, IHandledCadObject *value, DxfClassMap *clsmap)
+{
+    if (value) { write(code, value->handle(), clsmap); }
+}
+
+void DxfStreamWriterBase::writeName(int code, INamedCadObject *value, DxfClassMap *clsmap)
+{
+    if (value) { write(code, value->name(), clsmap); }
+}
 
 }// namespace dwg
