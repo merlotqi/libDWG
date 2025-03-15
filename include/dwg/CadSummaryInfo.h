@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/exports.h>
+#include <dwg/utils/DateTime.h>
 #include <map>
 #include <string>
 
@@ -65,11 +66,11 @@ public:
     std::string hyperlinkBase() const;
     void setHyperlinkBase(const std::string &value);
 
-    time_t createdDate() const;
-    void setCreatedDate(const time_t &value);
+    DateTime createdDate() const;
+    void setCreatedDate(const DateTime &value);
 
-    time_t modifiedDate() const;
-    void setModifiedDate(const time_t &value);
+    DateTime modifiedDate() const;
+    void setModifiedDate(const DateTime &value);
 
     std::map<std::string, std::string> properties() const;
     std::map<std::string, std::string> &properties();
@@ -84,8 +85,8 @@ private:
     std::string _lastSavedBy;
     std::string _revisionNumber;
     std::string _hyperlinkBase;
-    time_t _createdDate;
-    time_t _modifiedDate;
+    DateTime _createdDate;
+    DateTime _modifiedDate;
     std::map<std::string, std::string> _properties;
 };
 

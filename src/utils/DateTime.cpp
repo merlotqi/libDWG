@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/DateTime.h>
+#include <dwg/utils/DateTime.h>
 #include <fmt/core.h>
 #include <time.h>
 #ifdef _WIN32

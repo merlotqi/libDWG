@@ -27,6 +27,7 @@
 #include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
 #include <dwg/Transparency.h>
+#include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
 #include <iostream>
 
@@ -77,9 +78,9 @@ public:
 
     virtual void writeBitShort(short value) = 0;
 
-    virtual void writeDateTime(time_t value) = 0;
+    virtual void writeDateTime(const DateTime &value) = 0;
 
-    virtual void write8BitJulianDate(time_t value) = 0;
+    virtual void write8BitJulianDate(const DateTime &value) = 0;
 
     virtual void writeTimeSpan(double value) = 0;
 

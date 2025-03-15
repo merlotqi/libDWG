@@ -426,21 +426,21 @@ unsigned long long CadHeader::handleSeed() const { return _handleSeed; }
 
 void CadHeader::setHandleSeed(unsigned long long value) { _handleSeed = value; }
 
-time_t CadHeader::createDateTime() const { return _createDateTime; }
+DateTime CadHeader::createDateTime() const { return _createDateTime; }
 
-void CadHeader::setCreateDateTime(time_t value) { _createDateTime = value; }
+void CadHeader::setCreateDateTime(const DateTime &value) { _createDateTime = value; }
 
-time_t CadHeader::universalCreateDateTime() const { return _universalCreateDateTime; }
+DateTime CadHeader::universalCreateDateTime() const { return _universalCreateDateTime; }
 
-void CadHeader::setUniversalCreateDateTime(time_t value) { _universalCreateDateTime = value; }
+void CadHeader::setUniversalCreateDateTime(const DateTime &value) { _universalCreateDateTime = value; }
 
-time_t CadHeader::updateDateTime() const { return _updateDateTime; }
+DateTime CadHeader::updateDateTime() const { return _updateDateTime; }
 
-void CadHeader::setUpdateDateTime(time_t value) { _updateDateTime = value; }
+void CadHeader::setUpdateDateTime(const DateTime &value) { _updateDateTime = value; }
 
-time_t CadHeader::universalUpdateDateTime() const { return _universalUpdateDateTime; }
+DateTime CadHeader::universalUpdateDateTime() const { return _universalUpdateDateTime; }
 
-void CadHeader::setUniversalUpdateDateTime(time_t value) { _universalUpdateDateTime = value; }
+void CadHeader::setUniversalUpdateDateTime(const DateTime &value) { _universalUpdateDateTime = value; }
 
 double CadHeader::totalEditingTime() const { return _totalEditingTime; }
 

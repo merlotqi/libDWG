@@ -71,9 +71,9 @@ public:
 
     void writeBitShort(short value) override;
 
-    void writeDateTime(time_t value) override;
+    void writeDateTime(const DateTime &value) override;
 
-    void write8BitJulianDate(time_t value) override;
+    void write8BitJulianDate(const DateTime &value) override;
 
     void writeTimeSpan(double value) override;
 

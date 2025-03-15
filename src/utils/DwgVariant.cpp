@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/DwgVariant.h>
+#include <dwg/utils/DwgVariant.h>
 
 namespace dwg {
 

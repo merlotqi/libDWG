@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/DwgVariant.h>
+#include <dwg/utils/DwgVariant.h>
 
 namespace dwg {
 

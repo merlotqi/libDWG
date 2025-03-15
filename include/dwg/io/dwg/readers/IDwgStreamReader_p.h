@@ -27,9 +27,9 @@
 #include <dwg/DwgReferenceType.h>
 #include <dwg/ObjectType.h>
 #include <dwg/Transparency.h>
+#include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
 #include <vector>
-
 
 namespace dwg {
 
@@ -124,9 +124,9 @@ public:
 
     virtual double readBitThickness() = 0;
 
-    virtual time_t read8BitJulianDate() = 0;
+    virtual DateTime read8BitJulianDate() = 0;
 
-    virtual time_t readDateTime() = 0;
+    virtual DateTime readDateTime() = 0;
 
     virtual double readTimeSpan() = 0;
 

@@ -214,7 +214,7 @@ unsigned char CadUtils::ToIndex(LineweightType value)
 CodePage CadUtils::GetCodePage(std::string &value)
 {
     std::string v = value;
-    std::transform(v.begin(), v.end(), v.begin(), std::tolower);
+    std::transform(v.begin(), v.end(), v.begin(), [](unsigned char c) { return std::tolower(c); });
     auto it = _dxfEncodingMap.find(v);
     if (it != _dxfEncodingMap.end())
     {
@@ -266,7 +266,7 @@ std::string CadUtils::GetNameFromVersion(ACadVersion version)
     return std::string();//version.ToString().Replace('_', '.');
 }
 
-double CadUtils::ToJulianCalendar(time_t date)
+double CadUtils::ToJulianCalendar(const DateTime &date)
 {
     // TODO
     return 0.0;// date.ToOADate();
@@ -296,7 +296,7 @@ double CadUtils::ToJulianCalendar(time_t date)
     // return b + c + d + 1720995 + fraction;
 }
 
-time_t CadUtils::FromJulianCalendar(double date)
+DateTime CadUtils::FromJulianCalendar(double date)
 {
     if (date < 1721426 || date > 5373484)
     {
@@ -350,7 +350,7 @@ double CadUtils::EditingTime(double elapsed)
     return 0.0;// TimeSpan(days, hours, minutes, seconds, milliseconds);
 }
 
-void CadUtils::DateToJulian(time_t date, int &jdate, int &miliseconds)
+void CadUtils::DateToJulian(const DateTime &date, int &jdate, int &miliseconds)
 {
     // if (date < DateTime(1, 1, 1, 12, 0, 0))
     // {

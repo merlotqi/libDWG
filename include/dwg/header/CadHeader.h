@@ -53,6 +53,7 @@
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
 #include <dwg/units/UnitsType.h>
+#include <dwg/utils/DateTime.h>
 #include <string>
 
 namespace dwg {
@@ -320,17 +321,17 @@ public:
     unsigned long long handleSeed() const;
     void setHandleSeed(unsigned long long);
 
-    time_t createDateTime() const;
-    void setCreateDateTime(time_t);
+    DateTime createDateTime() const;
+    void setCreateDateTime(const DateTime &);
 
-    time_t universalCreateDateTime() const;
-    void setUniversalCreateDateTime(time_t);
+    DateTime universalCreateDateTime() const;
+    void setUniversalCreateDateTime(const DateTime &);
 
-    time_t updateDateTime() const;
-    void setUpdateDateTime(time_t);
+    DateTime updateDateTime() const;
+    void setUpdateDateTime(const DateTime &);
 
-    time_t universalUpdateDateTime() const;
-    void setUniversalUpdateDateTime(time_t);
+    DateTime universalUpdateDateTime() const;
+    void setUniversalUpdateDateTime(const DateTime &);
 
     double totalEditingTime() const;
     void setTotalEditingTime(double);
@@ -952,10 +953,10 @@ private:
     double _currentEntityLinetypeScale = 1.0;
     std::string _menuFileName = ".";
     unsigned long long _handleSeed = 0x0;
-    time_t _createDateTime;
-    time_t _universalCreateDateTime;
-    time_t _updateDateTime;
-    time_t _universalUpdateDateTime;
+    DateTime _createDateTime;
+    DateTime _universalCreateDateTime;
+    DateTime _updateDateTime;
+    DateTime _universalUpdateDateTime;
     double _totalEditingTime;
     double _userElapsedTimeSpan;
     Color _currentEntityColor = Color::ByLayer;

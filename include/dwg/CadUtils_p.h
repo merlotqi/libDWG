@@ -24,9 +24,9 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/LineWeightType.h>
+#include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
 #include <map>
-
 #include <vector>
 
 namespace dwg {
@@ -54,13 +54,13 @@ public:
 
     static std::string GetNameFromVersion(ACadVersion version);
 
-    static double ToJulianCalendar(time_t date);
+    static double ToJulianCalendar(const DateTime &date);
 
-    static time_t FromJulianCalendar(double date);
+    static DateTime FromJulianCalendar(double date);
 
     static double EditingTime(double elapsed);
 
-    static void DateToJulian(time_t date, int &jdate, int &miliseconds);
+    static void DateToJulian(const DateTime &date, int &jdate, int &miliseconds);
 };
 
 }// namespace dwg

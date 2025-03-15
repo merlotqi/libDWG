@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/utils/DateTime.h>
 
 namespace dwg {
 
@@ -76,9 +77,9 @@ public:
 
     void writeBitShort(short value) override;
 
-    void writeDateTime(time_t value) override;
+    void writeDateTime(const DateTime &value) override;
 
-    void write8BitJulianDate(time_t value) override;
+    void write8BitJulianDate(const DateTime &value) override;
 
     void writeTimeSpan(double value) override;
 
