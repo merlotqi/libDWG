@@ -26,7 +26,6 @@
 #include <map>
 #include <string>
 
-
 namespace dwg {
 
 class DxfMap

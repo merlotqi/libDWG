@@ -34,7 +34,7 @@ CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variab
 }
 
 CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variable, const std::vector<int> &codes)
-    : _name(variable), _isName(isName), _referenceType(DxfReferenceType::None)
+    : _name(variable), _referenceType(DxfReferenceType::None)
 {
     for (const auto &code: codes)
     {

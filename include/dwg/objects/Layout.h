@@ -116,10 +116,10 @@ private:
     UCS *_baseUCS;
 };
 
-class LIBDWG_API LayoutCollection : ObjectDictionaryCollection<Layout>
+class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection<Layout>
 {
 public:
-    ImageDefinitionCollection(CadDictionary *);
+    LayoutCollection(CadDictionary *);
 };
 
 }// namespace dwg

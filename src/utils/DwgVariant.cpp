@@ -26,8 +26,6 @@ namespace dwg {
 
 DwgVariant::~DwgVariant() {}
 
-DwgVariant::DwgVariant() {}
-
 DwgVariant::DwgVariant(char v)
 {
     Type = VarType::I8;

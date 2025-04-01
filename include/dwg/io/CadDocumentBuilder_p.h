@@ -24,10 +24,27 @@
 
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
+#include <dwg/ACadVersion.h>
 #include <map>
 
-
 namespace dwg {
+
+class CadDocument;
+class AppIdsTable;
+class BlockRecordsTable;
+class DimensionStylesTable;
+class LayersTable;
+class LineTypesTable;
+class TextStylesTable;
+class UCSTable;
+class ViewsTable;
+class VPortsTable;
+class CadTemplate;
+class ICadObjectTemplate;
+class CadObject;
+class ICadTableEntryTemplate;
+class ICadTableTemplate;
+class ICadDictionaryTemplate;
 
 class CadDocumentBuilder
 {

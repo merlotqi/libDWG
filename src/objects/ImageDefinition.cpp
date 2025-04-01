@@ -30,7 +30,7 @@ ImageDefinition::ImageDefinition() {}
 
 ImageDefinition::~ImageDefinition() {}
 
-ObjectType ImageDefinition::objectType() const { return ObjecType::UNLISTED; }
+ObjectType ImageDefinition::objectType() const { return ObjectType::UNLISTED; }
 
 std::string ImageDefinition::objectName() const { return DxfFileToken::ObjectImageDefinition; }
 

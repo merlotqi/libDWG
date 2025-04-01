@@ -33,10 +33,10 @@ class DwgLZ77AC21Decompressor
                                unsigned int)>
             copyDelegate;
 
-    static unsigned int _sourceOffset = 0;
-    static unsigned int _length = 0;
-    static unsigned int _sourceIndex = 0;
-    static unsigned int _opCode = 0;
+    static unsigned int _sourceOffset;
+    static unsigned int _length;
+    static unsigned int _sourceIndex;
+    static unsigned int _opCode;
 
 public:
     static void Decompress(const std::vector<unsigned char> &source, unsigned int initialOffset, unsigned int length,

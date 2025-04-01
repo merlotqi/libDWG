@@ -67,7 +67,7 @@ private:
     ResolutionUnit _units;
 };
 
-class LIBDWG_API ImageDefinitionCollection : ObjectDictionaryCollection<ImageDefinition>
+class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection<ImageDefinition>
 {
 public:
     ImageDefinitionCollection(CadDictionary *);

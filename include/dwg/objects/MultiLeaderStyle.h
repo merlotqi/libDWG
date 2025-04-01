@@ -186,7 +186,7 @@ public:
     void setTextTopAttachment(TextAttachmentType);
 };
 
-class LIBDWG_API MLeaderStyleCollection : ObjectDictionaryCollection<MultiLeaderStyle>
+class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection<MultiLeaderStyle>
 {
 public:
     MLeaderStyleCollection(CadDictionary *);

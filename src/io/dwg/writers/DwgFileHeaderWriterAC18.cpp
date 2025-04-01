@@ -23,11 +23,14 @@
  */
 
 #include <algorithm>
+#include <dwg/CadDocument.h>
+#include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/CRC32StreamHandler_p.h>
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
@@ -318,29 +321,30 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
 
     ////0x00	6	“ACXXXX” version string
     _stream->seekp(std::ios::beg);
-    _stream->write(Encoding(CodePage::Windows1251).bytes(_document->header()->versionString()), 6);
+    Encoding encoding(CodePage::Windows1251);
+    writer.write(encoding.bytes(_document->header()->versionString()), 0, 6);
 
     //5 bytes of 0x00
-    _stream.Write(new byte[5], 0, 5);
+    writer.write({0x00, 0x00, 0x00, 0x00, 0x00}, 0, 5);
 
     //0x0B	1	Maintenance release version
-    _stream.WriteByte((byte) _document.Header.MaintenanceVersion);
+    writer.write<unsigned char>(_document->header()->maintenanceVersion());
 
     //0x0C	1	Byte 0x00, 0x01, or 0x03
-    _stream.WriteByte(3);
+    writer.write<unsigned char>(3);
 
     //0x0D	4	Preview address(long), points to the image page + page header size(0x20).
-    writer.Write((unsigned int) ((int) _descriptors[DwgSectionDefinition.Preview].LocalSections[0].Seeker + 0x20));
+    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition::Preview].localSections().at(0).seeker() + 0x20));
 
     //0x11	1	Dwg version (Acad version that writes the file)
-    _stream.WriteByte((byte) 33);
+    writer.write<unsigned char>(33);
     //0x12	1	Application maintenance release version(Acad maintenance version that writes the file)
-    _stream.WriteByte((byte) -_document.Header.MaintenanceVersion);
+    writer.write<unsigned char>(-_document->header()->maintenanceVersion());
 
     //0x13	2	Codepage
-    writer.Write<ushort>(getFileCodePage());
+    writer.write<unsigned short>(getFileCodePage());
     //0x15	3	3 0x00 bytes
-    _stream.Write(new byte[3], 0, 3);
+    writer.write({0x00, 0x00, 0x00}, 0, 3);
 
     //TODO: Write SecurityType
     //0x18	4	SecurityType (long), see R2004 meta data, the definition is the same, paragraph 4.1.
@@ -349,7 +353,8 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
     writer.write(0);
 
     //0x20	4	Summary info Address in stream
-    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition.SummaryInfo].LocalSections[0].Seeker + 0x20));
+    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition::SummaryInfo].localSections().at(0).seeker() +
+                                 0x20));
 
     //0x24	4	VBA Project Addr(0 if not present)
     writer.write(0u);
@@ -358,13 +363,14 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
     writer.write<int>(0x00000080);
 
     //0x2C	4	App info Address in stream
-    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition.AppInfo].LocalSections[0].Seeker + 0x20));
+    writer.write(
+            (unsigned int) ((int) _descriptors[DwgSectionDefinition::AppInfo].localSections().at(0).seeker() + 0x20));
 
     //0x30	0x80	0x00 bytes
-    byte[] array = new byte[80];
+    std::vector<unsigned char> arr(80, 0);
 
-    _stream.Write(array, 0, 80);
-    _stream.Write(stream.GetBuffer(), 0, (int) stream.Length);
+    writer.write(arr, 0, 80);
+    writer.write(stream.str());
     _stream.Write(DwgCheckSumCalculator::MagicSequence, 236, 20);
 }
 
@@ -373,7 +379,8 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
     CRC32OutputStreamHandler swriter(stream);
 
     //0x00	12	“AcFssFcAJMB” file ID string
-    swriter.write(Encoding(CodePage::Windows1252).fromUtf8("AcFssFcAJMB"), 0, 11);
+    Encoding encoding(CodePage::Windows1252);
+    swriter.write(encoding.fromUtf8("AcFssFcAJMB"));
     swriter.writeByte(0);
 
     //0x0C	4	0x00(long)
@@ -421,11 +428,11 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
     //0x64	4	Gap array size
     swriter.write<unsigned int>(_fileHeader->gapArraySize());
 
-    long position = crcStream.Position;
+    long position = swriter.pos();
     swriter.write<unsigned int>(0u);
 
-    unsigned int seed = crcStream.Seed;
-    crcStream.Position = position;
+    unsigned int seed = swriter.seed();
+    swriter.seek(position);
     //0x68	4	CRC32(long).See paragraph 2.14.2 for the 32 - bit CRC calculation,
     //			the seed is zero. Note that the CRC
     //			calculation is done including the 4 CRC bytes that are
@@ -433,7 +440,7 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
     //			all of the 0x6c bytes of the data in this table.
     swriter.write<unsigned int>(seed);
 
-    crcStream.Flush();
+    swriter.flush();
 
     applyMagicSequence(stream);
 }
@@ -458,27 +465,29 @@ DwgLocalSectionMap DwgFileHeaderWriterAC18::setSeeker(int map, std::ostringstrea
     return holder;
 }
 
-void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap section, std::ostringstream *stream)
+void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap &section, std::ostringstream *stream)
 {
+    OutputStreamWrapper wrapper(stream);
     //Compress the local map section and write the checksum once is done
-    section.DecompressedSize = (unsigned long long) stream.Length;
+    section.setDecompressedSize(wrapper.length());
 
-    MemoryStream main = new MemoryStream();
-    compressor.Compress(stream.GetBuffer(), 0, (int) stream.Length, main);
+    std::ostringstream main;
+    OutputStreamWrapper main_wrapper(&main);
+    _compressor->compress(main_wrapper.buffer(), 0, wrapper.length(), &main);
 
-    section.CompressedSize = (unsigned long long) main.Length;
+    section.setCompressedSize(main_wrapper.length());
 
-    MemoryStream checkSumHolder = new MemoryStream();
-    writePageHeaderData(section, checkSumHolder);
-    section.Checksum = DwgCheckSumCalculator.Calculate(0u, checkSumHolder.GetBuffer(), 0, (int) checkSumHolder.Length);
-    section.Checksum =
-            DwgCheckSumCalculator.Calculate((unsigned int) section.Checksum, main.GetBuffer(), 0, (int) main.Length);
+    std::ostringstream checkSumHolder;
+    writePageHeaderData(section, &checkSumHolder);
+    OutputStreamWrapper checkSumHolder_wrapper(&checkSumHolder);
+    section.setChecksum(DwgCheckSumCalculator::Calculate(0u, checkSumHolder_wrapper.buffer(), 0, (int) checkSumHolder_wrapper.length()));
+    section.setChecksum(DwgCheckSumCalculator::Calculate((unsigned int) section.checksum(), main_wrapper.buffer(), 0, (int) main_wrapper.length()));
 
     writePageHeaderData(section, _stream);
-    _stream.Write(main.GetBuffer(), 0, (int) main.Length);
+    _stream->write(reinterpret_cast<const char *>(main.str().data()), main.str().length());
 }
 
-void DwgFileHeaderWriterAC18::writePageHeaderData(DwgLocalSectionMap section, std::ostream *stream)
+void DwgFileHeaderWriterAC18::writePageHeaderData(const DwgLocalSectionMap &section, std::ostream *stream)
 {
     OutputStreamWrapper writer(stream);
 
@@ -496,8 +505,8 @@ void DwgFileHeaderWriterAC18::writePageHeaderData(DwgLocalSectionMap section, st
     writer.write<unsigned int>((unsigned int) section.checksum());
 }
 
-void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream, DwgSectionDescriptor descriptor,
-                                               DwgLocalSectionMap map, int size)
+void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream, const DwgSectionDescriptor &descriptor,
+                                               const DwgLocalSectionMap &map, int size)
 {
     OutputStreamWrapper writer(stream);
 

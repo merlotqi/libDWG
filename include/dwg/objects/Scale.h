@@ -63,7 +63,7 @@ public:
     XY applyTo(const XY &);
 };
 
-class LIBDWG_API ScaleCollection : ObjectDictionaryCollection<Scale>
+class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection<Scale>
 {
 public:
     ScaleCollection(CadDictionary *);

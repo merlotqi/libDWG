@@ -90,6 +90,7 @@ public:
     std::size_t length() const;
     std::size_t pos() const;
     void seek(std::size_t pos);
+    void flush();
 
     Encoding encoding() const;
     void setEncoding(Encoding encoding);

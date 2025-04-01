@@ -94,4 +94,48 @@ std::string InputStreamWrapper::readString(int length, Encoding encoding)
 
 std::string InputStreamWrapper::readUntil(char match) { return std::string(); }
 
+
+/* --------------------------- OutputStreamWrapper -------------------------- */
+
+OutputStreamWrapper::OutputStreamWrapper(std::ostream *stream) : _stream(stream) {}
+
+OutputStreamWrapper ::~OutputStreamWrapper() {}
+
+std::ostream *OutputStreamWrapper::stream() { return _stream; }
+
+std::size_t OutputStreamWrapper::length() const
+{
+    assert(_stream);
+    std::streampos cur = _stream->tellp();
+    _stream->seekp(0, std::ios::end);
+    std::streampos len = _stream->tellp();
+    _stream->seekp(cur);
+    return len;
+}
+
+std::size_t OutputStreamWrapper::pos() const { return _stream->tellp(); }
+
+void OutputStreamWrapper::seek(std::size_t pos) { _stream->seekp(pos); }
+
+void OutputStreamWrapper::flush() {}
+
+Encoding OutputStreamWrapper::encoding() const { return _encoding; }
+
+void OutputStreamWrapper::setEncoding(Encoding encoding) { _encoding = encoding; }
+
+std::vector<unsigned char> OutputStreamWrapper::buffer() { return std::vector<unsigned char>(); }
+
+void OutputStreamWrapper::write(const std::vector<unsigned char> &buffer, int offset, int length)
+{
+    assert(offset >= 0 && length >= 0);
+    assert(offset + length <= static_cast<int>(buffer.size()));
+    _stream->write(reinterpret_cast<const char *>(buffer.data() + offset), length);
+}
+
+void OutputStreamWrapper::write(const std::string &) {}
+
+void OutputStreamWrapper::write(const std::string &, Encoding) {}
+
+void OutputStreamWrapper::writeByte(unsigned char b) { _stream->write(reinterpret_cast<const char *>(&b), 1); }
+
 }// namespace dwg

@@ -60,7 +60,7 @@ private:
     std::map<unsigned long long, Entity *> _entities;
 };
 
-class LIBDWG_API GroupCollection : ObjectDictionaryCollection<Group>
+class LIBDWG_API GroupCollection : public ObjectDictionaryCollection<Group>
 {
 public:
     GroupCollection(CadDictionary *);

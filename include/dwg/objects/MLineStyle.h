@@ -81,7 +81,7 @@ private:
     std::vector<Element> _elements;
 };
 
-class LIBDWG_API MLineStyleCollection : ObjectDictionaryCollection<MLineStyle>
+class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection<MLineStyle>
 {
 public:
     MLineStyleCollection(CadDictionary *);

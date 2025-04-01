@@ -827,7 +827,7 @@ void DwgHeaderWriter::write()
     //H: UCS CONTROL OBJECT(hard owner)
     _writer->handleReference(DwgReferenceType::HardOwnership, _document->UCSs()->handle());
     //H: VPORT CONTROL OBJECT(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, _document->VPorts()->handle());
+    _writer->handleReference(DwgReferenceType::HardOwnership, _document->vports()->handle());
     //H: APPID CONTROL OBJECT(hard owner)
     _writer->handleReference(DwgReferenceType::HardOwnership, _document->appIds()->handle());
     //H: DIMSTYLE CONTROL OBJECT(hard owner)
