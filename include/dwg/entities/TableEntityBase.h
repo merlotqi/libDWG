@@ -22,9 +22,10 @@
 
  #pragma once
 
- #include <dwg/entities/Insert.h>
+#include <dwg/utils/DwgVariant.h>
+#include <dwg/Color.h>
  
- namespace dwg {
+namespace dwg {
     enum class TableBorderPropertyFlag
     {
         /// None.
@@ -111,7 +112,7 @@
         //Table properties:
         FlowDirectionBottomToTop = 0x10000
     };
-    typedef int TableCellStylePropertyFlag;
+    typedef int TableCellStylePropertyFlags;
 
 
     enum class TableBorderType
@@ -233,12 +234,24 @@
         double height;
     };
 
+    struct TableCellValue
+    {
+        TableCellValueType valueType;
+        TableValueUnitType units;
+        int flags;
+        bool isEmpty;
+        std::string text;
+        std::string format;
+        std::string formatedValue;
+        DwgVariant value;
+    };
+    
     struct TableBreakData
     {
-        BreakOptionFlags flags;
-        BreakFlowDirection flowDirection;
+        TableBreakOptionFlags flags;
+        TableBreakFlowDirection flowDirection;
         double breakSpacing;
-        std::vector<BreakHeight> heights;
+        std::vector<TableBreakHeight> heights;
     };
 
     struct TableBreakRowRange
@@ -252,11 +265,26 @@
     {
         TableCellEdgeFlags edgeFlags;
         TableBorderPropertyFlags propertyOverrideFlags;
-        BorderType type;
+        TableBorderType type;
         Color color;
         short lineWeight;
         bool isInvisible;
         double doubleLineSpacing;
+    };
+
+    struct TableContentFormat
+    {
+        bool hasData;
+        double rotation;
+        double scale;
+        int alignment;
+        TableCellStylePropertyFlags propertyOverrideFlags;
+        int propertyFlags;
+        int valueDataType;
+        int valueUnitType;
+        std::string valueFormatString;
+        Color color;
+        double textHeight;
     };
 
     struct TableCellContent
@@ -291,7 +319,7 @@
         TableCellStylePropertyFlags tableCellStylePropertyFlags;
         Color backgroundColor;
         TableCellContentLayoutFlags contentLayoutFlags;
-        MarginFlags marginOverrideFlags;
+        TableMarginFlags marginOverrideFlags;
         double verticalMargin;
         double horizontalMargin;
         double bottomMargin;
@@ -301,17 +329,6 @@
         std::vector<TableCellBorder> borders;
     };
 
-    struct TableCellValue
-    {
-        TableCellValueType valueType;
-        TableValueUnitType units;
-        int flags;
-        bool isEmpty;
-        string text;
-        string format;
-        string formatedValue;
-        object value;
-    };
 
     struct TableCustomDataEntry
     {
@@ -336,7 +353,7 @@
         int customData;
         std::vector<TableCustomDataEntry> customDataCollection;
         std::vector<TableCellContent> contents;
-        CellContentGeometry geometry;
+        TableCellContentGeometry geometry;
 
         bool hasMultipleContent() const;
         TableCellContent content() const;
@@ -351,26 +368,11 @@
         std::vector<TableCustomDataEntry> customDataCollection;
     };
 
-    struct ContentFormat
-    {
-        bool hasData;
-        double rotation;
-        double scale;
-        int alignment;
-        TableCellStylePropertyFlags propertyOverrideFlags;
-        int propertyFlags;
-        int valueDataType;
-        int valueUnitType;
-        string valueFormatString;
-        Color color;
-        double textHeight;
-    };
-
     struct TableRow
     {
         double height;
         int customData;
-        CellStyle cellStyleOverride;
+        TableCellStyle cellStyleOverride;
         std::vector<TableCell> cells;
         std::vector<TableCustomDataEntry> cstomDataCollection;
     };

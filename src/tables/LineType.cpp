@@ -53,7 +53,7 @@ double LineType::patternLen() const
     double len = 0.0;
     for(auto &&seg : _segments)
     {
-        len += seg->length;
+        len += seg.length;
     }
     return len;
 }
@@ -68,7 +68,7 @@ std::vector<LineType::Segment> &LineType::segments() { return _segments; }
 
 void LineType::setSegments(const std::vector<LineType::Segment> &value) { _segments = value; }
 
-void LineType::addSegment(const LineType::Segment &value) 
+void LineType::addSegment(LineType::Segment value) 
 {
     if(value.lineType)
     {
@@ -78,7 +78,7 @@ void LineType::addSegment(const LineType::Segment &value)
      _segments.push_back(value); 
 }
 
-LineType::Segment::Segment() : length(0.0), shapeFlag(0), shapeNumber(0), XY(XY::Zero), rotation(0.0), scale(1.0), style(nullptr)
+LineType::Segment::Segment() : length(0.0), shapeFlag(0), shapeNumber(0), offset(XY::Zero), rotation(0.0), scale(1.0), style(nullptr), lineType(nullptr)
 {}
 
 }// namespace dwg

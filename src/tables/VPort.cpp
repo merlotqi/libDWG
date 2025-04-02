@@ -26,9 +26,9 @@
 
 namespace dwg {
 
-VPort::VPort() {}
+VPort::VPort() : _ambientColor(Color((short)0)) {}
 
-VPort::VPort(const std::string &name) : TableEntry(name) {}
+VPort::VPort(const std::string &name) : TableEntry(name), _ambientColor(Color((short)0)) {}
 
 VPort::~VPort() {}
 
@@ -182,7 +182,7 @@ void VPort::setDefaultLighting(DefaultLightingType value) { _defaultLighting = v
 
 double VPort::brightness() const { return _brightness; }
 
-void VPort::setBrightness(double value) { return _brightness; }
+void VPort::setBrightness(double value) { _brightness = value; }
 
 double VPort::contrast() const { return _contrast; }
 

@@ -40,10 +40,11 @@ public:
     std::string description() const;
     void setDescription(const std::string &);
 
-    CellStyle cellStyleOverride() const;
-    void setCellStyleOverride(CellStyle);
+    TableCellStyle cellStyleOverride() const;
+    void setCellStyleOverride(TableCellStyle);
 
-    std::vector<CellRange> MergedCellRanges() const;
-    void setMergedCellRanges(const std::vector<CellRange> &);
-}
+    std::vector<TableCellRange> MergedCellRanges() const;
+    void setMergedCellRanges(const std::vector<TableCellRange> &);
+};
+
 }// namespace dwg

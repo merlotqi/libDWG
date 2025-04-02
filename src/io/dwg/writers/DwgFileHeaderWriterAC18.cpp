@@ -371,7 +371,7 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
 
     writer.write(arr, 0, 80);
     writer.write(stream.str());
-    _stream.Write(DwgCheckSumCalculator::MagicSequence, 236, 20);
+    writer.write(DwgCheckSumCalculator::MagicSequence, 236, 20);
 }
 
 void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)

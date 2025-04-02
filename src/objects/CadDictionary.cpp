@@ -47,11 +47,11 @@ std::string CadDictionary::GeographicData = "ACAD_GEOGRAPHICDATA";
 
 CadDictionary *CadDictionary::CreateRoot() { return nullptr; }
 
-void CadDictionary::CreateDefaultEntries(CadDictionary *root) { return nullptr; }
+void CadDictionary::CreateDefaultEntries(CadDictionary *root) { }
 
 CadDictionary::CadDictionary() {}
 
-CadDictionary::CadDictionary(const std::string &name) : _name(name) {}
+CadDictionary::CadDictionary(const std::string &name) : NonGraphicalObject(name) {}
 
 ObjectType CadDictionary::objectType() const { return ObjectType::DICTIONARY; }
 
@@ -65,6 +65,6 @@ void CadDictionary::setHardOwnerFlag(bool value) { _hardOwnerFlag = value; }
 
 DictionaryCloningFlags CadDictionary::clonningFlags() const { return _clonningFlags; }
 
-void CadDictionary::setCloningFlags(DictionaryCloningFlags value) { _clonningFlags = value; }
+void CadDictionary::setClonningFlags(DictionaryCloningFlags value) { _clonningFlags = value; }
 
 }// namespace dwg

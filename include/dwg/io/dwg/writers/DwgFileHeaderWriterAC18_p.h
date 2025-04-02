@@ -25,6 +25,7 @@
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
+#include <map>
 
 namespace dwg {
 

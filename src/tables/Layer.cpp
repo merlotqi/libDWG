@@ -23,14 +23,15 @@
 #include <dwg/tables/Layer.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
-Layer::Layer() : _flags(0), _color(Color(7)), _lineType(LineType::Continuous), 
+Layer::Layer() : _flags(0), _color(Color((short)7)), _lineType(LineType::Continuous()), 
     _plotFlag(true), _lineweight(LineweightType::Default), _plotStyleName(0ULL), _material(nullptr), _isOn(true) 
 {}
 
-Layer::Layer(const std::string &name) : TableEntry(name), _flags(0), _color(Color(7)), _lineType(LineType::Continuous), 
+Layer::Layer(const std::string &name) : TableEntry(name), _flags(0), _color(Color((short)7)), _lineType(LineType::Continuous()), 
     _plotFlag(true), _lineweight(LineweightType::Default), _plotStyleName(0ULL), _material(nullptr), _isOn(true) 
 {}
 
@@ -67,9 +68,9 @@ bool Layer::plotFlag() const { return _plotFlag; }
 
 void Layer::setPlotFlag(bool value) { _plotFlag = value; }
 
-LineweightType Layer::lineweight() const { return _lineweight; }
+LineweightType Layer::lineWeight() const { return _lineweight; }
 
-void Layer::setLineweight(LineweightType value) { _lineweight = value; }
+void Layer::setLineWeight(LineweightType value) { _lineweight = value; }
 
 unsigned long long Layer::plotStyleName() const { return _plotStyleName; }
 

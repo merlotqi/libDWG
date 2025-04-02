@@ -32,6 +32,9 @@ public:
     DxfTablesSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
                            const DxfWriterConfiguration &configuration);
     ~DxfTablesSectionWriter();
+
+    std::string sectionName() const override;
+    void writeSection() override;
 };
 
 }// namespace dwg

@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
+#include <dwg/utils/Encoding.h>
 
 namespace dwg {
 

@@ -32,19 +32,18 @@
 namespace dwg {
 
 class TableEntry;
-/**
- * @class Table
- * @brief Represents a table that holds entries in a DWG/DXF drawing.
- *
- * The table contains a collection of table entries, which can be added, retrieved, and modified.
- */
+
 template<class T>
 class Table : public CadObject
 {
-    std::map<std::string, T *> _entries;
     static_assert(std::is_base_of_v<TableEntry, T>, "T must inherit from TableEntry.");
 
 public:
+    using pointer = T*;
+    using const_pointer = T *;
+    using iterator = typename std::map<std::string, pointer>::iterator;
+    using const_iterator = typename std::map<std::string, pointer>::const_iterator;
+
     Table() = default;
     virtual ~Table()
     {
@@ -59,7 +58,7 @@ public:
     std::string objectName() const override { return "TableEntry"; }
     std::string subclassMarker() const override { return "TABLE"; }
 
-    T *operator[](const std::string &key)
+    pointer operator[](const std::string &key) const
     {
         auto it = _entries.find(key);
         if (it != _entries.end())
@@ -67,7 +66,7 @@ public:
         return nullptr;
     }
 
-    void add(T *entry)
+    void add(pointer entry)
     {
         if (!entry)
             return;
@@ -82,7 +81,7 @@ public:
         return it != _entries.end();
     }
 
-    T *getValue(const std::string &key) const
+    pointer getValue(const std::string &key) const
     {
         auto it = _entries.find(key);
         if (it != _entries.end())
@@ -100,8 +99,14 @@ public:
         }
     }
 
+    iterator begin() { return _entries.begin(); }
+    iterator end() { return _entries.end(); }
+
+    const_iterator begin() const { return _entries.cbegin(); }
+    const_iterator end() const { return _entries.cend(); }
+
 protected:
-    void add(const std::string &key, T *item)
+    void add(const std::string &key, pointer item)
     {
         if (!item)
             return;
@@ -123,6 +128,9 @@ private:
 
         return fmt::format("{}_{}", name, i);
     }
+
+private:
+    std::map<std::string, pointer> _entries;
 };
 
 }// namespace dwg

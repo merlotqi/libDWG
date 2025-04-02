@@ -42,44 +42,16 @@ class TextStyle;
 class LineType;
 class BlockRecord;
 
+class StartEndPointPair
+{
+    XYZ startPoint;
+    XYZ endPoint;
+};
+
+class MultiLeaderAnnotContextLeaderLine;
+class MultiLeaderAnnotContextLeaderRoot;
 class LIBDWG_API MultiLeaderAnnotContext : public NonGraphicalObject
 {
-public:
-    struct StartEndPointPair
-    {
-        XYZ startPoint;
-        XYZ endPoint;
-    };
-
-    struct LeaderLine
-    {
-        std::vector<XYZ> points;
-        int breakInfoCount;
-        int segmentIndex;
-        std::vector<StartEndPointPair> startEndPoints;
-        int index;
-        MultiLeaderPathType pathType;
-        Color lineColor;
-        LineType *lineType;
-        LineweightType lineWeight;
-        double arrowheadSize;
-        BlockRecord *arrowHead;
-        LeaderLinePropertOverrideFlags overrideFlags;
-    };
-
-    struct LeaderRoot
-    {
-        bool contentValid;
-        bool unknown;
-        XYZ connectionPoint;
-        XYZ direction;
-        std::vector<StartEndPointPair> breakStartEndPointsPairs;
-        int leaderIndex;
-        double landingDistance;
-        std::vector<LeaderLine> lines;
-        TextAttachmentDirectionType textAttachmentDirection;
-    };
-
 public:
     MultiLeaderAnnotContext();
     ~MultiLeaderAnnotContext();
@@ -88,7 +60,7 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::vector<LeaderRoot> leaderRoots() const;
+    std::vector<MultiLeaderAnnotContextLeaderRoot> leaderRoots() const;
 
     double scaleFactor() const;
     void setScaleFactor(double);
@@ -232,6 +204,35 @@ public:
 
     TextAttachmentType textBottomAttachment() const;
     void setTextBottomAttachment(TextAttachmentType);
+};
+
+class LIBDWG_API MultiLeaderAnnotContextLeaderLine
+{
+    std::vector<XYZ> points;
+    int breakInfoCount;
+    int segmentIndex;
+    std::vector<StartEndPointPair> startEndPoints;
+    int index;
+    MultiLeaderPathType pathType;
+    Color lineColor;
+    LineType *lineType;
+    LineweightType lineWeight;
+    double arrowheadSize;
+    BlockRecord *arrowHead;
+    LeaderLinePropertOverrideFlags overrideFlags;
+};
+
+class LIBDWG_API MultiLeaderAnnotContextLeaderRoot
+{
+    bool contentValid;
+    bool unknown;
+    XYZ connectionPoint;
+    XYZ direction;
+    std::vector<StartEndPointPair> breakStartEndPointsPairs;
+    int leaderIndex;
+    double landingDistance;
+    std::vector<LeaderLine> lines;
+    TextAttachmentDirectionType textAttachmentDirection;
 };
 
 }// namespace dwg

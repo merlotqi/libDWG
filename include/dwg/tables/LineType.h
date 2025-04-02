@@ -46,7 +46,7 @@ public:
         double scale;
         std::string text;
         TextStyle *style;
-
+        LineType *lineType;
         Segment();
     };
 
@@ -78,7 +78,7 @@ public:
     std::vector<Segment> segments() const;
     std::vector<Segment> &segments();
     void setSegments(const std::vector<Segment> &);
-    void addSegment(const Segment &);
+    void addSegment(Segment);
 
 private:
     std::string _description;

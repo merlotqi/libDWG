@@ -55,7 +55,7 @@ void DxfWriter::write()
 {
     CadWriterBase::write();
     createStreamWriter();
-    _objectHolder->objects().pop(_document->rootDictionary());
+    _objectHolder->objects().push(_document->rootDictionary());
     writeHeader();
     writeDxfClasses();
     writeTables();

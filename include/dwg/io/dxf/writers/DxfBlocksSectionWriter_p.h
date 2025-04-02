@@ -26,12 +26,21 @@
 
 namespace dwg {
 
+class Block;
+class BlockRecord;
+class BlockEnd;
 class DxfBlocksSectionWriter : public DxfSectionWriterBase
 {
 public:
     DxfBlocksSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
                            const DxfWriterConfiguration &configuration);
     ~DxfBlocksSectionWriter();
+
+    std::string sectionName() const override;
+    void writeSection() override;
+    void writeBlock(Block *block);
+    void processEntities(BlockRecord *b);
+    void writeBlockEnd(BlockEnd *block);
 };
 
 }// namespace dwg

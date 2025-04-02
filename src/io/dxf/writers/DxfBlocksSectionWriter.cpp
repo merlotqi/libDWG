@@ -25,10 +25,21 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
 #include <dwg/tables/Layer.h>
+#include <dwg/CadDocument.h>
+#include <dwg/blocks/Block.h>
+#include <dwg/blocks/BlockEnd.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
+#include <dwg/io/dxf/CadObjectHolder_p.h>
 
 namespace dwg {
 
-DxfBlocksSectionWriter::DxfBlocksSectionWriter() {}
+DxfBlocksSectionWriter::DxfBlocksSectionWriter(IDxfStreamWriter *writer, CadDocument *document,
+                                               CadObjectHolder *objectHolder,
+                                               const DxfWriterConfiguration &configuration)
+    : DxfSectionWriterBase(writer,document, objectHolder, configuration)
+{
+}
 
 DxfBlocksSectionWriter::~DxfBlocksSectionWriter() {}
 
@@ -37,12 +48,12 @@ std::string DxfBlocksSectionWriter::sectionName() const { return DxfFileToken::B
 void DxfBlocksSectionWriter::writeSection()
 {
     auto &&brs = _document->blockRecords();
-    for (auto &&b: brs)
-    {
-        writeBlock(b->blockEntity());
-        processEntities(b);
-        writeBlockEnd(b->blockEnd());
-    }
+    // for (auto &&b: brs)
+    // {
+    //     writeBlock(b->blockEntity());
+    //     processEntities(b);
+    //     writeBlockEnd(b->blockEnd());
+    // }
 }
 
 void DxfBlocksSectionWriter::writeBlock(Block *block) {}
@@ -53,7 +64,7 @@ void DxfBlocksSectionWriter::processEntities(BlockRecord *b)
     {
         for (auto &&e: b->entities())
         {
-            _holder->entities().enqueue(e);
+            _holder->entities().push(e);
         }
     }
     else

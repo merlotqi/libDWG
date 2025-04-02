@@ -20,12 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
- #include <dwg/CadDocument.h>
- #include <dwg/CadUtils_p.h>
- #include <dwg/header/CadHeader.h>
- #include <dwg/tables/DimensionStyle.h>
- #include <dwg/tables/TextStyle.h>
- #include <dwg/tables/UCS.h>
+#include <dwg/CadDocument.h>
+#include <dwg/CadUtils_p.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/tables/Layer.h>
 #include <stdexcept>
 
 #ifdef _WIN32
@@ -1029,32 +1030,31 @@ std::string CadHeader::dimensionStyleOverridesName() const
 
 void CadHeader::setDimensionStyleOverridesName(const std::string &value)
 {
-    return _dimensionStyleOverrides->angularDimensionDecimalPlaces();
 }
 
 short CadHeader::dimensionAngularDimensionDecimalPlaces() const
 {
-    _dimensionStyleOverrides->setAngularDimensionDecimalPlaces(value);
+    return _dimensionStyleOverrides->angularDimensionDecimalPlaces();
 }
 
 void CadHeader::setDimensionAngularDimensionDecimalPlaces(short value)
 {
-    return _dimensionStyleOverrides->decimalPlaces();
+    _dimensionStyleOverrides->setAngularDimensionDecimalPlaces(value);
 }
 
 short CadHeader::dimensionDecimalPlaces() const
 {
-    _dimensionStyleOverrides->setDecimalPlaces(value);
+    return _dimensionStyleOverrides->decimalPlaces();
 }
 
 void CadHeader::setDimensionDecimalPlaces(short value)
 {
-    return _dimensionStyleOverrides->toleranceDecimalPlaces();
+    _dimensionStyleOverrides->setDecimalPlaces(value);
 }
 
 short CadHeader::dimensionToleranceDecimalPlaces() const
 {
-    _dimensionStyleOverrides->setToleranceDecimalPlaces(value);
+    return _dimensionStyleOverrides->toleranceDecimalPlaces();
 }
 
 void CadHeader::setDimensionToleranceDecimalPlaces(short value)
@@ -1272,7 +1272,7 @@ void CadHeader::setDimensionTextVerticalPosition(double value) { _dimensionStyle
 
 LineweightType CadHeader::dimensionLineWeight() const { return _dimensionStyleOverrides->dimensionLineWeight(); }
 
-void CadHeader::setDimensionLineWeight(LineweightType value) { _dimensionStyleOverrides->setimensionLineWeight(value); }
+void CadHeader::setDimensionLineWeight(LineweightType value) { _dimensionStyleOverrides->setDimensionLineWeight(value); }
 
 LineweightType CadHeader::extensionLineWeight() const { return _dimensionStyleOverrides->extensionLineWeight(); }
 
@@ -1343,11 +1343,11 @@ void CadHeader::setDimensionPlusTolerance(double value) { _dimensionStyleOverrid
 
 double CadHeader::dimensionTextHeight() const { return _dimensionStyleOverrides->textHeight(); }
 
-void CadHeader::setDimensionTextHeight(double value) { _dimensionStyleOverrides->textHeight(value); }
+void CadHeader::setDimensionTextHeight(double value) { _dimensionStyleOverrides->setTextHeight(value); }
 
 TextDirection CadHeader::dimensionTextDirection() const { return _dimensionStyleOverrides->textDirection(); }
 
-void CadHeader::setDimensionTextDirection(TextDirection value) { _dimensionStyleOverrides->textDirection(value); }
+void CadHeader::setDimensionTextDirection(TextDirection value) { _dimensionStyleOverrides->setTextDirection(value); }
 
 double CadHeader::dimensionAltMzf() const { return _dimensionStyleOverrides->altMzf(); }
 

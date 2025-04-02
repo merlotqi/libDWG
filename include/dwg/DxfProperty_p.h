@@ -24,3 +24,12 @@
 
 #include <dwg/DxfCode.h>
 #include <dwg/DxfReferenceType.h>
+
+namespace dwg {
+
+class DxfProperty
+{
+
+};
+
+}// namespace dwg

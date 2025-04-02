@@ -79,9 +79,10 @@ private:
     std::string _bigFontFilename;
     double _height = 0.0;
     double _width = 1.0;
+    double _lastHeight = 0.0;
     double _obliqueAngle = 0.0;
     TextMirrorFlag _mirrorFlag = TextMirrorFlag::None;
-    FontFlags _trueType = FontFlag::Regular;
+    FontFlags _trueType = (int)FontFlag::Regular;
 };
 
 class LIBDWG_API TextStylesTable : public Table<TextStyle>

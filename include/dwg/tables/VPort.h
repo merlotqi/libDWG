@@ -188,7 +188,7 @@ private:
     RenderMode _renderMode;
     ViewModeType _viewMode;
     UscIconType _ucsIconDisplay;
-    bool _spanOn;
+    bool _snapOn;
     bool _showGrid;
     bool _isometricSnap;
     short _snapIsoPair;

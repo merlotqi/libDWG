@@ -20,6 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <sstream>
 #include <array>
 #include <dwg/CadDocument.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
@@ -35,13 +36,13 @@ int DwgFileHeaderWriterAC15::handleSectionOffset() const
 {
     size_t offset = fileHeaderSize();
 
-    for (auto &&item: _records)
-    {
-        if (item.first == DwgSectionDefinition::AcDbObjects)
-            break;
+    // for (auto &&item: _records)
+    // {
+    //     if (item.first == DwgSectionDefinition::AcDbObjects)
+    //         break;
 
-        offset += istream_length(item.second.second);
-    }
+    //     offset += istream_length(item.second.second);
+    // }
 
     return (int) offset;
 }
@@ -66,8 +67,8 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding
 void DwgFileHeaderWriterAC15::addSection(const std::string &name, std::ostream *stream, bool isCompressed,
                                          int decompsize)
 {
-    _records[name].first.Size = ostream_length(stream);
-    _records[name] = {_records[name].first, stream};
+    // _records[name].first.Size = ostream_length(stream);
+    // _records[name] = {_records[name].first, stream};
 }
 
 void DwgFileHeaderWriterAC15::writeFile()
@@ -79,12 +80,12 @@ void DwgFileHeaderWriterAC15::writeFile()
 
 void DwgFileHeaderWriterAC15::setRecordSeekers()
 {
-    long currOffset = fileHeaderSize();
-    for (auto it = _records.begin(); it != _records.end(); ++it)
-    {
-        it->second.first.setSeeker(currOffset);
-        currOffset += ostream_length(it->second.second);
-    }
+    // long currOffset = fileHeaderSize();
+    // for (auto it = _records.begin(); it != _records.end(); ++it)
+    // {
+    //     it->second.first.setSeeker(currOffset);
+    //     currOffset += ostream_length(it->second.second);
+    // }
 }
 
 
@@ -93,7 +94,7 @@ void DwgFileHeaderWriterAC15::writeFileHeader()
     // std::ostringstream memoryStream;
 
     // //0x00	6	“ACXXXX” version string
-    IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, &memoryStream, _encoding);
+    // IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, &memoryStream, _encoding);
     // writer->WriteBytes(
     //         Encoding::ASCII.GetBytes(_document.Header.VersionString));
     // //The next 7 starting at offset 0x06 are to be six bytes of 0
@@ -143,7 +144,7 @@ void DwgFileHeaderWriterAC15::writeRecordStreams()
 {
     for (auto it = _records.begin(); it != _records.end(); ++it)
     {
-        auto &&ss = it->second.second;
+        auto ss = it->second.second;
         if (ss)
         {
             std::string data = ss->str();

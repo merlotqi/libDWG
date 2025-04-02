@@ -51,6 +51,55 @@ protected:
     void writeExtendedData(ExtendedDataDictionary xdata);
     void writeCommonEntityData(Entity *entity);
     void writeLongTextValue(int code, int subcode, const std::string &text);
+    void writeEntity(Entity *entity);
+
+private:
+    void writeArc(Arc *arc);
+    void writeCircle(Arc *circle);
+    void writeDimension(Dimension *dim);
+    void writeDimensionAligned(DimensionAligned *aligned);
+    void writeDimensionLinear(DimensionLinear *linear);
+    void writeDimensionRadius(DimensionRadius *radius);
+    void writeDimensionDiameter(DimensionDiameter *diameter);
+    void writeDimensionAngular2Line(DimensionAngular2Line *angular2Line);
+    void writeDimensionAngular3Pt(DimensionAngular3Pt *angular3Pt);
+    void writeDimensionOrdinate(DimensionOrdinate *ordinate);
+    void writeHatch(Hatch *hatch);
+    void writeBoundaryPath(HatchBoundaryPath *path);
+    void writeHatchBoundaryPathEdge(HatchBoundaryPathEdge *edge);
+    void writeHatchPattern(Hatch *hatch, HatchPattern *pattern);
+    void writeEllipse(Ellipse *ellipse);
+    void writeFace3D(Face3D *face);
+    void writeInsert(Insert *insert);
+    void writeLeader(Leader *leader);
+    void writeLine(Line *line);
+    void writeLwPolyline(LwPolyline *polyline);
+    void writeMesh(Mesh *mesh);
+    void writeMLine(MLine *mLine);
+    void writeMText(MText *mtext, bool writeSubclass = true);
+    void writeMultiLeader(MultiLeader *multiLeader);
+    void writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *contextData);
+    void writeLeaderRoot(MultiLeaderAnnotContextLeaderRoot *leaderRoot);
+    void writeLeaderLine(MultiLeaderAnnotContextLeaderLine *leaderLine);
+    void writePoint(Point *line);
+    void writePolyline(Polyline *polyline);
+    void writeSeqend(Seqend *seqend);
+    void writeRay(Ray *ray);
+    void writeShape(Shape *shape);
+    void writeSolid(Solid *solid);
+    void writeSpline(Spline *spline);
+    void writeTextEntity(TextEntity *text);
+    void writeTolerance(Tolerance *tolerance);
+    void writeAttributeBase(AttributeBase *att);
+    void writeVertex(Vertex *v);
+    void writeViewport(Viewport *vp);
+    void writeCadImage(CadWipeoutBase *image);
+    void writeXLine(XLine xline);
+
+protected:
+    IDxfStreamWriter *_writer;
+    CadDocument *_document;
+    CadObjectHolder *_holder;
 };
 
 }// namespace dwg

@@ -32,6 +32,7 @@
 namespace dwg {
 
 class Layout;
+class Entity;
 
 class LIBDWG_API BlockRecord : public TableEntry
 {
@@ -58,6 +59,9 @@ public:
     bool isExplodable() const;
     void setIsExplodable(bool explodable);
 
+    bool isDynamic() const;
+    bool hasAttribute() const;
+
     bool canScale() const;
     void setCanScale(bool scaleable);
 
@@ -66,6 +70,10 @@ public:
 
     Layout *layout() const;
     void setLayout(Layout *layout);
+
+    std::vector<Entity *> entities() const;
+    std::vector<Entity *> &entities();
+    void setEntities(const std::vector<Entity *> &);
 };
 
 class LIBDWG_API BlockRecordsTable : public Table<BlockRecord>

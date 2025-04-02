@@ -42,8 +42,7 @@ void TableEntry::setName(const std::string &value)
     {
         throw new std::invalid_argument("The Table Entry must have a name");
     }
-    if (OnNameChanged)
-        OnNameChanged(_name, value);
+    OnNameChanged(_name, value);
     _name = value;
 }
 

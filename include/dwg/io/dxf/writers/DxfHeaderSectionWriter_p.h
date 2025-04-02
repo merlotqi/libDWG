@@ -32,6 +32,9 @@ public:
     DxfHeaderSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
                            const DxfWriterConfiguration &configuration);
     ~DxfHeaderSectionWriter();
+
+    std::string sectionName() const override;
+    void writeSection() override;
 };
 
 }// namespace dwg
