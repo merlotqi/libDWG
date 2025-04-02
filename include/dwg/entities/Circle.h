@@ -26,15 +26,6 @@
 
 namespace dwg {
 
-/**
- * @class Circle
- * @brief Represents a circle entity in a DWG/DXF drawing.
- *
- * Circle is a class that represents a circle in a CAD drawing. It is derived from 
- * Entity and provides the necessary functionality to handle the properties of a circle, 
- * such as its center, radius, and any transformations that may be applied. Circles are 
- * fundamental geometric entities in CAD systems and are used to represent circular shapes.
- */
 class LIBDWG_API Circle : public Entity
 {
     /// The center of the circle (in 3D space).
@@ -50,80 +41,23 @@ class LIBDWG_API Circle : public Entity
     double _radius;
 
 public:
-    /**
-     * @brief Default constructor.
-     */
     Circle();
-
-    /**
-     * @brief Destructor.
-     */
     virtual ~Circle();
 
-    /**
-     * @brief Gets the object type of the circle.
-     * @return The object type.
-     */
     virtual ObjectType objectType() const override;
-
-    /**
-     * @brief Gets the name of the object.
-     * @return The object name.
-     */
     virtual std::string objectName() const override;
-
-    /**
-     * @brief Gets the subclass marker associated with this object.
-     * @return The subclass marker.
-     */
     virtual std::string subclassMarker() const override;
 
-    /**
-     * @brief Gets the normal vector of the circle's plane.
-     * @return The normal vector.
-     */
     XYZ normal() const;
-
-    /**
-     * @brief Gets the center of the circle.
-     * @return The center point.
-     */
-    XYZ center() const;
-
-    /**
-     * @brief Gets the thickness of the circle.
-     * @return The thickness value.
-     */
-    double thickness() const;
-
-    /**
-     * @brief Gets the radius of the circle.
-     * @return The radius value.
-     */
-    double radius() const;
-
-    /**
-     * @brief Sets the normal vector of the circle's plane.
-     * @param normal The new normal vector.
-     */
     void setNormal(const XYZ &normal);
 
-    /**
-     * @brief Sets the center of the circle.
-     * @param center The new center point.
-     */
+    XYZ center() const;
     void setCenter(const XYZ &center);
 
-    /**
-     * @brief Sets the thickness of the circle.
-     * @param thickness The new thickness value.
-     */
+    double thickness() const;
     void setThickness(double thickness);
 
-    /**
-     * @brief Sets the radius of the circle.
-     * @param radius The new radius value.
-     */
+    double radius() const;
     void setRadius(double radius);
 };
 

@@ -27,54 +27,15 @@
 namespace dwg {
 
 class AttributeDefinition;
-/**
- * @class AttributeEntity
- * @brief Represents an attribute entity in a DWG/DXF drawing, extending AttributeBase.
- *
- * AttributeEntity is a class that represents an instance of an attribute in a DWG/DXF drawing.
- * It is derived from AttributeBase and adds functionality related to specific object types 
- * and names for attribute entities. This class is used to handle individual attribute occurrences 
- * in the drawing, based on an attribute definition.
- */
 class LIBDWG_API AttributeEntity : public AttributeBase
 {
 public:
-    /**
-     * @brief Default constructor for AttributeEntity.
-     */
     AttributeEntity();
-
-    /**
-     * @brief Constructs a AttributeEntity based on a given AttributeDefinition.
-     * 
-     * @param definition A pointer to a AttributeDefinition object to initialize this entity.
-     */
     AttributeEntity(AttributeDefinition *);
-
-    /**
-     * @brief Destructor for AttributeEntity.
-     */
     ~AttributeEntity();
 
-    /**
-     * @brief Overrides the ObjectType method to return the specific object type for AttributeEntity.
-     * 
-     * @return The object type (ObjectType) of AttributeEntity.
-     */
     virtual ObjectType objectType() const override;
-
-    /**
-     * @brief Overrides the ObjectName method to return the name of the object (AttributeEntity).
-     * 
-     * @return The name of the object as a string.
-     */
     virtual std::string objectName() const override;
-
-    /**
-     * @brief Overrides the SubclassMarker method to return the subclass marker associated with AttributeEntity.
-     * 
-     * @return The subclass marker as a string.
-     */
     virtual std::string subclassMarker() const override;
 };
 

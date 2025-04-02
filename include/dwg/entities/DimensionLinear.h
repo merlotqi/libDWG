@@ -31,25 +31,14 @@ class LIBDWG_API DimensionLinear : public DimensionAligned
     double _rotation;// The rotation angle of the linear dimension (in degrees or radians)
 
 public:
-    // Default constructor
     DimensionLinear();
-
-    // Destructor
     ~DimensionLinear();
 
-    // Override to return the object type of the Circle
     virtual ObjectType objectType() const override;
-
-    // Override to return the name of the object
     virtual std::string objectName() const override;
-
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Get the rotation angle value
     double rotation() const;
-
-    // Set the rotation angle value
     void setRotation(double rotation);
 };
 

@@ -54,6 +54,7 @@ public:
 public:
     MultiLeaderStyle();
     MultiLeaderStyle(const std::string &name);
+    ~MultiLeaderStyle();
 
     ObjectType objectType() const override;
     std::string objectName() const override;

@@ -42,56 +42,17 @@ class LIBDWG_API Arc : public Circle
     double _endangle;
 
 public:
-    /**
-     * @brief Default constructor.
-     */
     Arc();
-
-    /**
-     * @brief Destructor.
-     */
     ~Arc();
 
-    /**
-     * @brief Gets the object type of this entity.
-     * @return The object type identifier.
-     */
     virtual ObjectType objectType() const override;
-
-    /**
-     * @brief Gets the name of this object.
-     * @return The object name as a string.
-     */
     virtual std::string objectName() const override;
-
-    /**
-     * @brief Gets the subclass marker for this object.
-     * @return The subclass marker string.
-     */
     virtual std::string subclassMarker() const override;
 
-    /**
-     * @brief Gets the start angle of the arc.
-     * @return The start angle in degrees.
-     */
     double startAngle() const;
-
-    /**
-     * @brief Gets the end angle of the arc.
-     * @return The end angle in degrees.
-     */
-    double endAngle() const;
-
-    /**
-     * @brief Sets the start angle of the arc.
-     * @param angle The new start angle in degrees.
-     */
     void setStartAngle(double angle);
 
-    /**
-     * @brief Sets the end angle of the arc.
-     * @param angle The new end angle in degrees.
-     */
+    double endAngle() const;
     void setEndAngle(double angle);
 };
 

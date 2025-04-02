@@ -29,66 +29,21 @@
 
 namespace dwg {
 
-/**
- * @class TableEntry
- * @brief Represents a table entry in a DWG/DXF drawing.
- *
- * A table entry can store a name and flags associated with an object in the drawing.
- */
 class LIBDWG_API TableEntry : public CadObject, INamedCadObject
 {
 public:
-    /**
-     * @brief Constructs a TableEntry with a given name.
-     * 
-     * @param name The name of the table entry.
-     */
     TableEntry(const std::string &name);
-
-    /**
-     * @brief Destructor for TableEntry.
-     */
     virtual ~TableEntry();
 
-    /**
-     * @brief Retrieves the subclass marker for the table entry.
-     * 
-     * @return A string representing the subclass marker.
-     */
     std::string subclassMarker() const override;
 
-    /**
-     * @brief Gets the name of the table entry.
-     * 
-     * @return The name of the table entry.
-     */
     virtual std::string name() const;
-
-    /**
-     * @brief Sets the name of the table entry.
-     * 
-     * @param value The new name to set.
-     */
     virtual void setName(const std::string &value);
 
-    /**
-     * @brief Retrieves the flags associated with the table entry.
-     * 
-     * @return The flags for the table entry.
-     */
     StandardFlags flags() const;
-
-    /**
-     * @brief Sets the flags for the table entry.
-     * 
-     * @param flags The flags to set.
-     */
     void setFlags(StandardFlags flags);
 
 protected:
-    /**
-     * @brief Default constructor for TableEntry.
-     */
     TableEntry();
 
 protected:

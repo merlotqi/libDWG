@@ -814,7 +814,7 @@ public:
     void setDimensionTextOutsideHorizontal(bool);
 
     bool dimensionLimitsGeneration() const;
-    void setDimensionLimitsGeneration();
+    void setDimensionLimitsGeneration(bool);
 
     double dimensionPlusTolerance() const;
     void setDimensionPlusTolerance(double);
@@ -859,7 +859,6 @@ public:
     void setDimensionTextStyle(TextStyle *);
 
     DimensionStyle *dimensionStyleOverrides() const;
-    void setDimensionStyleOverrides(DimensionStyle *);
 
     UCS *modelSpaceUcs() const;
     void setModelSpaceUcs(UCS *);
@@ -874,6 +873,7 @@ public:
     void setPaperSpaceUcsBase(UCS *);
 
 private:
+    CadDocument *_document;
     std::string _versionString;
     ACadVersion _version;
     short _maintenanceVersion;
@@ -1117,9 +1117,7 @@ private:
     double _dimensionPlusTolerance;
     double _dimensionTextHeight;
     TextDirection _dimensionTextDirection;
-    double _dimensionAltMzf;
-    std::string _dimensionAltMzs;
-    double _dimensionMzf;
+
     std::string _dimensionMzs;
     std::string _dimensionLineType;
     std::string _dimensionTex1;

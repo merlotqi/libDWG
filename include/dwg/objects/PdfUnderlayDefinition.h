@@ -30,11 +30,11 @@ class LIBDWG_API PdfUnderlayDefinition : public UnderlayDefinition
 {
 public:
     PdfUnderlayDefinition();
+    ~PdfUnderlayDefinition();
 
     std::string objectName() const override;
 
     std::string page() const;
-
     void setPage(const std::string &);
 
 private:

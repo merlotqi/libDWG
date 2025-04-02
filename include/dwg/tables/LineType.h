@@ -50,41 +50,29 @@ public:
 
 public:
     LineType();
-
     LineType(const std::string &name);
 
     static constexpr auto ByLayerName = "ByLayer";
-
     static constexpr auto ByBlockName = "ByBlock";
-
     static constexpr auto ContinuousName = "Continuous";
 
     static LineType *ByLayer();
-
     static LineType *ByBlock();
-
     static LineType *Continuous();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     std::string Description() const;
-
     void description(const std::string &);
 
     double patternLen() const;
-
     char alignment() const;
 
     void alignment(char);
-
     std::vector<Segment> segments() const;
-
     void segments(const std::vector<Segment> &);
-
     void addSegment(const Segment &);
 };
 
@@ -98,6 +86,7 @@ public:
     ObjectType objectType() const override;
 
     LineTypesTable() = default;
+    ~LineTypesTable();
 
 protected:
     std::vector<std::string> defaultEntries() const;

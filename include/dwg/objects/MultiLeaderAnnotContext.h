@@ -69,19 +69,20 @@ public:
 
     struct LeaderRoot
     {
-        bool ContentValid;
-        bool Unknown;
-        XYZ ConnectionPoint;
-        XYZ Direction;
-        std::vector<StartEndPointPair> BreakStartEndPointsPairs;
-        int LeaderIndex;
-        double LandingDistance;
-        std::vector<LeaderLine> Lines;
-        TextAttachmentDirectionType TextAttachmentDirection;
+        bool contentValid;
+        bool unknown;
+        XYZ connectionPoint;
+        XYZ direction;
+        std::vector<StartEndPointPair> breakStartEndPointsPairs;
+        int leaderIndex;
+        double landingDistance;
+        std::vector<LeaderLine> lines;
+        TextAttachmentDirectionType textAttachmentDirection;
     };
 
 public:
     MultiLeaderAnnotContext();
+    ~MultiLeaderAnnotContext();
 
     ObjectType objectType() const override;
     std::string objectName() const override;

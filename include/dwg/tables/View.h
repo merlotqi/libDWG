@@ -40,9 +40,7 @@ public:
     View(const std::string &name);
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     double height() const;

@@ -26,13 +26,6 @@
 
 namespace dwg {
 
-/**
- * @class Ellipse
- * @brief Represents an ellipse entity in a DWG/DXF drawing.
- *
- * The Ellipse class defines an ellipse with properties such as center, normal vector, radius ratio,
- * start and end parameters, and thickness. This class allows manipulation of ellipse geometries in a DWG/DXF drawing.
- */
 class LIBDWG_API Ellipse : public Entity
 {
     XYZ _normal;           ///< The normal vector of the ellipse (default is Z-axis)
@@ -44,135 +37,32 @@ class LIBDWG_API Ellipse : public Entity
     double _thickness;     ///< The thickness of the ellipse (default is 0)
 
 public:
-    /**
-     * @brief Default constructor
-     *
-     * Initializes an ellipse with default values (center at origin, normal along Z-axis, and other default properties).
-     */
     Ellipse();
-
-    /**
-     * @brief Destructor
-     */
     ~Ellipse();
 
-    /**
-     * @brief Get the object type of the ellipse
-     * 
-     * @return ObjectType The object type of the ellipse.
-     */
     ObjectType objectType() const override;
-
-    /**
-     * @brief Get the object name of the ellipse
-     * 
-     * @return std::string The name of the ellipse object.
-     */
     std::string objectName() const override;
-
-    /**
-     * @brief Get the subclass marker of the ellipse
-     * 
-     * @return std::string The subclass marker associated with the ellipse.
-     */
     std::string subclassMarker() const override;
 
-    /**
-     * @brief Get the normal vector of the ellipse
-     * 
-     * @return XYZ The normal vector of the ellipse.
-     */
     XYZ normal() const;
-
-    /**
-     * @brief Get the center of the ellipse
-     * 
-     * @return XYZ The center of the ellipse.
-     */
-    XYZ center() const;
-
-    /**
-     * @brief Get a point on the ellipse
-     * 
-     * @return XYZ A point on the ellipse.
-     */
-    XYZ endPoint() const;
-
-    /**
-     * @brief Get the thickness of the ellipse
-     * 
-     * @return double The thickness of the ellipse.
-     */
-    double thickness() const;
-
-    /**
-     * @brief Get the radius ratio of the ellipse
-     * 
-     * @return double The radius ratio of the ellipse.
-     */
-    double radiusRatio() const;
-
-    /**
-     * @brief Get the start parameter of the ellipse
-     * 
-     * @return double The start parameter of the ellipse.
-     */
-    double startParameter() const;
-
-    /**
-     * @brief Get the end parameter of the ellipse
-     * 
-     * @return double The end parameter of the ellipse.
-     */
-    double endParameter() const;
-
-    /**
-     * @brief Set the normal vector of the ellipse
-     * 
-     * @param normal The normal vector to set for the ellipse.
-     */
     void setNormal(const XYZ &normal);
 
-    /**
-     * @brief Set the center of the ellipse
-     * 
-     * @param center The center point to set for the ellipse.
-     */
+    XYZ center() const;
     void setCenter(const XYZ &center);
 
-    /**
-     * @brief Set a point on the ellipse
-     * 
-     * @param endPoint The point to set on the ellipse.
-     */
+    XYZ endPoint() const;
     void setEndPoint(const XYZ &endPoint);
 
-    /**
-     * @brief Set the thickness of the ellipse
-     * 
-     * @param thickness The thickness to set for the ellipse.
-     */
+    double thickness() const;
     void setThickness(double thickness);
 
-    /**
-     * @brief Set the radius ratio of the ellipse
-     * 
-     * @param radiusRatio The radius ratio to set for the ellipse.
-     */
+    double radiusRatio() const;
     void setRadiusRatio(double radiusRatio);
 
-    /**
-     * @brief Set the start parameter of the ellipse
-     * 
-     * @param startParam The start parameter to set for the ellipse.
-     */
+    double startParameter() const;
     void setStartParameter(double startParam);
 
-    /**
-     * @brief Set the end parameter of the ellipse
-     * 
-     * @param endParam The end parameter to set for the ellipse.
-     */
+    double endParameter() const;
     void setEndParameter(double endParam);
 };
 

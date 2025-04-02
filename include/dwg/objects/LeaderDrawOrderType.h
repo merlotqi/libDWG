@@ -28,7 +28,6 @@ namespace dwg {
 /// in a <see cref="Entities.MultiLeader"/> entity.
 enum class LeaderDrawOrderType
 {
-
     /// 0 = draw leader head first
     LeaderHeadFirst = 0,
 

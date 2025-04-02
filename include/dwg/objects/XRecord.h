@@ -35,30 +35,26 @@ class LIBDWG_API XRecord : public NonGraphicalObject
 public:
     struct Entry
     {
-        int Code;
-        DwgVariant Value;
-        GroupCodeValueType GroupCode;
-        bool HasLinkedObject;
-        XRecord *Owner;
+        int code;
+        DwgVariant value;
+        GroupCodeValueType groupCode;
+        bool hasLinkedObject;
+        XRecord *owner;
     };
 
 public:
     XRecord();
-
     XRecord(const std::string &);
+    ~XRecord();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     DictionaryCloningFlags cloningFlags() const;
-
     void setCloningFlags(DictionaryCloningFlags);
 
     std::vector<Entry> entries() const;
-
     void createEntry(int code, DwgVariant value);
 };
 

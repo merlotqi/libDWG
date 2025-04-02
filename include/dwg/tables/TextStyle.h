@@ -35,55 +35,41 @@ class LIBDWG_API TextStyle : public TableEntry
 {
 public:
     TextStyle();
-
     TextStyle(const std::string &);
-
     ~TextStyle();
 
     static constexpr auto DefaultName = "Standard";
-
     static TextStyle *Default();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     StyleFlags flags() const;
-
     void setFlags(StyleFlags);
 
     std::string filename() const;
-
     void setFilename(const std::string &);
 
     std::string bigFontFilename() const;
-
     void setBigFontFilename(const std::string &);
 
     double height() const;
-
     void setHeight(double);
 
     double width() const;
-
     void setWidth(double);
 
     double lastHeight() const;
-
     void setLastHeight(double);
 
     double obliqueAngle() const;
-
     void setObliqueAngle(double);
 
     TextMirrorFlag mirrorFlag() const;
-
     void setMirrorFlag(TextMirrorFlag);
 
     FontFlags trueType() const;
-
     void setTrueType(FontFlags);
 
     bool isShapeFile() const;

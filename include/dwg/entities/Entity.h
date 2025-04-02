@@ -49,45 +49,35 @@ class LIBDWG_API Entity : public CadObject
 
 public:
     Entity();
-
     virtual ~Entity();
 
     std::string subclassMarker() const override;
 
     virtual Layer *layer() const;
-
     virtual void setLayer(Layer *);
 
     virtual Color color() const;
-
     virtual void setColor(const Color &);
 
     virtual LineweightType lineweight() const;
-
     virtual void setLineweight(LineweightType);
 
     virtual double linetypeScale() const;
-
     virtual void setLinetypeScale(double);
 
     virtual bool isInvisible() const;
-
     virtual void setIsInvisible(bool);
 
     virtual Transparency transparency() const;
-
     virtual void setTransparency(const Transparency &);
 
     virtual LineType *lineType() const;
-
     virtual void setLineType(LineType *);
 
     virtual Material *material() const;
-
     virtual void setMaterial(Material *);
 
     virtual BookColor *bookColor() const;
-
     virtual void setBookColor(BookColor *);
 
     virtual void matchProperties(Entity *entity);

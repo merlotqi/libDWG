@@ -51,9 +51,7 @@ public:
     static VPort *Default();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     XY bottomLeft() const;

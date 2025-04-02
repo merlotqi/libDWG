@@ -46,9 +46,7 @@ public:
     };
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     LwPolylineFlags flags() const;

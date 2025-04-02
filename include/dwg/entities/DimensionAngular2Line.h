@@ -26,8 +26,6 @@
 
 namespace dwg {
 
-// The DimensionAngular2Line class represents an angular dimension between two lines
-// defined by three points: two points on the lines and the vertex at the angle.
 class LIBDWG_API DimensionAngular2Line : public Dimension
 {
     XYZ _firstPoint;  // The first point on the first line that defines the angle
@@ -36,38 +34,25 @@ class LIBDWG_API DimensionAngular2Line : public Dimension
     XYZ _dimensionArc;// The arc that represents the angular dimension
 
 public:
-    // Default constructor for the DimensionAngular2Line class
     DimensionAngular2Line();
-
-    // Destructor for the DimensionAngular2Line class
     ~DimensionAngular2Line();
 
-    // Override to return the object type of the Circle
     virtual ObjectType objectType() const override;
-
-    // Override to return the name of the object
     virtual std::string objectName() const override;
-
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Getter and setter for the first point defining the angle
     XYZ firstPoint() const;
     void setFirstPoint(const XYZ &value);
 
-    // Getter and setter for the second point defining the angle
     XYZ secondPoint() const;
     void setSecondPoint(const XYZ &value);
 
-    // Getter and setter for the angle vertex (the point where the lines meet)
     XYZ angleVertex() const;
     void setAngleVertex(const XYZ &value);
 
-    // Getter and setter for the dimension arc (the arc showing the angle)
     XYZ dimensionArc() const;
     void setDimensionArc(const XYZ &value);
 
-    // Override the Measurement method to calculate the angular dimension between the two lines
     virtual double measurement() const override;
 };
 

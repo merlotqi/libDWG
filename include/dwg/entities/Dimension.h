@@ -55,84 +55,64 @@ protected:
     DimensionStyle *_dimStyle;             // Pointer to the associated dimension style
 
 public:
-    // Default constructor for the Dimension class
     Dimension();
     Dimension(DimensionType type);
     virtual ~Dimension();
 
 public:
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Getter and setter for the version of the dimension
     unsigned char version() const;
     void setVersion(unsigned char value);
 
-    // Getter and setter for the associated block record
     BlockRecord *block() const;
     void setBlock(BlockRecord *value);
 
-    // Getter and setter for the definition point of the dimension
     XYZ definitionPoint() const;
     void setDefinitionPoint(const XYZ &value);
 
-    // Getter and setter for the middle point of the dimension text
     XYZ textMiddlePoint() const;
     void setTextMiddlePoint(const XYZ &value);
 
-    // Getter and setter for the insertion point of the dimension
     XYZ insertionPoint() const;
     void setInsertionPoint(const XYZ &value);
 
-    // Getter and setter for the normal vector of the dimension
     XYZ normal() const;
     void setNormal(const XYZ &value);
 
-    // Getter and setter for the flags (dimension-specific properties)
     DimensionTypes flags() const;
     void setFlags(DimensionTypes value);
 
-    // Getter and setter for the attachment point type of the dimension text
     AttachmentPointType attachmentPoint() const;
     void setAttachmentPoint(AttachmentPointType value);
 
-    // Getter and setter for the line spacing style of the dimension text
     LineSpacingStyleType lineSpacingStyle() const;
     void setLineSpacingStyle(LineSpacingStyleType value);
 
-    // Getter and setter for the line spacing factor (affects text spacing)
     double lineSpacingFactor() const;
     void setLineSpacingFactor(double value);
 
-    // Getter and setter for flipping the first arrow of the dimension
     bool flipArrow1() const;
     void setFlipArrow1(bool value);
 
-    // Getter and setter for flipping the second arrow of the dimension
     bool flipArrow2() const;
     void setFlipArrow2(bool value);
 
-    // Getter and setter for the dimension text
     const std::string &text() const;
     void setText(const std::string &value);
 
-    // Getter and setter for the text rotation angle
     double textRotation() const;
     void setTextRotation(double value);
 
-    // Getter and setter for the horizontal direction of the text
     double horizontalDirection() const;
     void setHorizontalDirection(double value);
 
-    // Getter and setter for the associated dimension style
     DimensionStyle *dimStyle() const;
     void setDimStyle(DimensionStyle *value);
 
-    // Pure virtual method that must be implemented by derived classes to calculate the dimension measurement
     virtual double measurement() const = 0;
 
 public:
-    // Determines if the text position is user-defined
     bool isTextUserDefinedLocation() const;
     void setIsTextUserDefinedLocation(bool value);
 };

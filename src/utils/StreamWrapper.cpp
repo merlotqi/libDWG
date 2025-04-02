@@ -22,6 +22,7 @@
 
 #include <dwg/utils/StreamWrapper.h>
 #include <stdexcept>
+#include <assert.h>
 
 namespace dwg {
 

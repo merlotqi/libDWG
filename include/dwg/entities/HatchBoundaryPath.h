@@ -30,20 +30,10 @@
 namespace dwg {
 
 class Entity;
-/**
- * @class HatchBoundaryPath
- * @brief Represents a hatch boundary path in a DWG/DXF drawing.
- *
- * This class defines a hatch boundary, which consists of multiple edge types such as lines,
- * arcs, polylines, splines, and ellipses. These boundaries are used to define hatch areas.
- */
+
 class LIBDWG_API HatchBoundaryPath
 {
 public:
-    /**
-     * @enum HBP_EdgeType
-     * @brief Defines the types of edges in a hatch boundary path.
-     */
     enum class HBP_EdgeType
     {
         HBP_Polyline,   ///< A polyline edge.
@@ -53,26 +43,12 @@ public:
         HBP_Spline      ///< A spline edge.
     };
 
-    /**
-     * @class HBP_Edge
-     * @brief Base class representing an edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Edge
     {
     public:
         HBP_Edge();
         virtual ~HBP_Edge();
-
-        /**
-         * @brief Gets the edge type.
-         * @return The type of the edge.
-         */
         virtual HBP_EdgeType type() const = 0;
-
-        /**
-         * @brief Clones the edge.
-         * @return A pointer to the cloned edge.
-         */
         virtual HBP_Edge *clone() const;
     };
 
@@ -80,53 +56,18 @@ public:
     HatchBoundaryPath();
     ~HatchBoundaryPath();
 
-    /**
-     * @brief Checks if the boundary path is a polyline.
-     * @return True if the boundary path is a polyline, false otherwise.
-     */
     bool isPolyline() const;
 
-    /**
-     * @brief Gets the boundary path flags.
-     * @return The boundary path flags.
-     */
     BoundaryPathFlags flags();
-
-    /**
-     * @brief Sets the boundary path flags.
-     * @param flags The boundary path flags to set.
-     */
     void setFlags(BoundaryPathFlags);
 
-    /**
-     * @brief Gets the list of edges in the boundary path.
-     * @return A vector of edge pointers.
-     */
     std::vector<HBP_Edge *> edges() const;
-
-    /**
-     * @brief Sets the edges in the boundary path.
-     * @param edges The vector of edge pointers to set.
-     */
     void setEdges(const std::vector<HBP_Edge *> &edges);
-
-    /**
-     * @brief Gets the list of entities in the boundary path.
-     * @return A vector of entity pointers.
-     */
+    
     std::vector<Entity *> entities() const;
-
-    /**
-     * @brief Sets the entities in the boundary path.
-     * @param entities The vector of entity pointers to set.
-     */
     void setEntities(const std::vector<Entity *> &entities);
 
 public:
-    /**
-     * @class HBP_Arc
-     * @brief Represents an arc edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Arc : public HBP_Edge
     {
         XY _center;
@@ -156,10 +97,6 @@ public:
         void setCounterClockWise(bool);
     };
 
-    /**
-     * @class HBP_Ellipse
-     * @brief Represents an elliptical arc edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Ellipse : public HBP_Edge
     {
         XY _center;
@@ -194,10 +131,6 @@ public:
         void setCounterClockWise(bool);
     };
 
-    /**
-     * @class HBP_Line
-     * @brief Represents a line edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Line : public HBP_Edge
     {
         XY _start;
@@ -215,10 +148,6 @@ public:
         void setEnd(const XY &);
     };
 
-    /**
-     * @class HBP_Polyline
-     * @brief Represents a polyline edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Polyline : public HBP_Edge
     {
         bool _closed;
@@ -242,10 +171,6 @@ public:
         void setBulges(const std::vector<double> &);
     };
 
-    /**
-     * @class HBP_Spline
-     * @brief Represents a spline edge in a hatch boundary path.
-     */
     class LIBDWG_API HBP_Spline : public HBP_Edge
     {
         int _degree;

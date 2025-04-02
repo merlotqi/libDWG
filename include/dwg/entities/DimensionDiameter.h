@@ -32,34 +32,19 @@ class LIBDWG_API DimensionDiameter : public Dimension
     double _leaderLength;// The length of the leader line (connection to the dimension line)
 
 public:
-    // Default constructor
     DimensionDiameter();
-
-    // Destructor
     ~DimensionDiameter();
 
-    // Override to return the object type of the Circle
     virtual ObjectType objectType() const override;
-
-    // Override to return the name of the object
     virtual std::string objectName() const override;
-
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Get the angle vertex value
     XYZ angleVertex() const;
-
-    // Set the angle vertex value
     void setAngleVertex(const XYZ &value);
 
-    // Get the leader length value
     double leaderLength() const;
-
-    // Set the leader length value
     void setLeaderLength(double value);
 
-    // Override the Measurement method to calculate and return the diameter measurement
     virtual double measurement() const override;
 };
 

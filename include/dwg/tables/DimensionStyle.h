@@ -49,66 +49,18 @@ class LIBDWG_API DimensionStyle : public TableEntry
 public:
     /** Default name for the dimension style. */
     static constexpr auto DefaultName = "Standard";
-
-    /**
-     * @brief Retrieves the default dimension style.
-     * 
-     * @return A pointer to the default dimension style.
-     */
     static DimensionStyle *Default();
 
 public:
-    /** 
-     * @brief Constructs a new DimensionStyle object. 
-     */
     DimensionStyle();
-
-    /**
-     * @brief Constructs a new DimensionStyle object with the specified name.
-     * 
-     * @param name The name of the dimension style.
-     */
     DimensionStyle(const std::string &name);
-
-    /**
-     * @brief Destroy the dg dimensionstyle object
-     * 
-     */
     ~DimensionStyle();
 
-    /**
-     * @brief Retrieves the object type of this dimension style.
-     * 
-     * @return The object type.
-     */
     ObjectType objectType() const override;
-
-    /**
-     * @brief Retrieves the name of this dimension style.
-     * 
-     * @return The name of the object.
-     */
     std::string objectName() const override;
-
-    /**
-     * @brief Retrieves the subclass marker for this dimension style.
-     * 
-     * @return The subclass marker as a string.
-     */
     std::string subclassMarker() const override;
 
-    /**
-     * @brief Retrieves the post-fix for dimension style formatting.
-     * 
-     * @return The post-fix as a string.
-     */
     std::string postFix() const;
-
-    /**
-     * @brief Sets the post-fix for dimension style formatting.
-     * 
-     * @param postFix The new post-fix string.
-     */
     void setPostFix(const std::string &postFix);
 
     std::string alternateDimensioningSuffix() const;
@@ -180,10 +132,10 @@ public:
     short dimensionFit() const;
     void setDimensionFit(short);
 
-    bool CursorUpdate() const;
+    bool cursorUpdate() const;
     void setCursorUpdate(bool);
 
-    ZeroHandling AlternateUnitToleranceZeroHandling() const;
+    ZeroHandling alternateUnitToleranceZeroHandling() const;
     void setAlternateUnitToleranceZeroHandling(ZeroHandling);
 
     short dimensionUnit() const;
@@ -326,6 +278,18 @@ public:
 
     BlockRecord *dimArrow2() const;
     void setDimArrow2(BlockRecord *);
+
+    std::string altMzs() const;
+    void setAltMzs(const std::string &);
+
+    std::string mzs() const;
+    void setMzs(const std::string &);
+
+    double altMzf() const;
+    void setAltMzf(double);
+
+    double mzf() const;
+    void setMzf(double);
 };
 
 class LIBDWG_API DimensionStylesTable : public Table<DimensionStyle>

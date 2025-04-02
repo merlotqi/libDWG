@@ -32,41 +32,23 @@ class LIBDWG_API DimensionOrdinate : public Dimension
     XYZ _leaderEndpoint; // The endpoint of the leader line (connection point for the dimension)
 
 public:
-    // Default constructor
     DimensionOrdinate();
-
-    // Destructor
     ~DimensionOrdinate();
 
-    // Override to return the object type of the Circle
     virtual ObjectType objectType() const override;
-
-    // Override to return the name of the object
     virtual std::string objectName() const override;
-
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Get the feature location (coordinate point of the feature)
     XYZ featureLocation() const;
-
-    // Set the feature location (coordinate point of the feature)
     void setFeatureLocation(const XYZ &value);
 
-    // Get the leader endpoint location
     XYZ leaderEndpoint() const;
-
-    // Set the leader endpoint location
     void setLeaderEndpoint(const XYZ &value);
 
-    // Override the Measurement method to calculate and return the ordinate measurement
-    virtual double measurement() const override;
-
-    // Check if the ordinate type is X (for dimensioning along the X-axis)
     bool isOrdinateTypeX() const;
-
-    // Set whether the ordinate type is X (for dimensioning along the X-axis)
     void setIsOrdinateTypeX(bool value);
+
+    virtual double measurement() const override;
 };
 
 }// namespace dwg

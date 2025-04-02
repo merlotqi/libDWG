@@ -26,8 +26,6 @@
 
 namespace dwg {
 
-// The DimensionAngular3Pt class represents an angular dimension defined by three points:
-// two points on the dimension lines and the vertex where the angle is formed.
 class LIBDWG_API DimensionAngular3Pt : public Dimension
 {
     XYZ _firstPoint; // The first point on the first line that defines the angle
@@ -35,34 +33,22 @@ class LIBDWG_API DimensionAngular3Pt : public Dimension
     XYZ _angleVertex;// The vertex where the two lines meet (angle vertex)
 
 public:
-    // Default constructor for the DimensionAngular3Pt class
     DimensionAngular3Pt();
-
-    // Destructor for the DimensionAngular3Pt class
     ~DimensionAngular3Pt();
 
-    // Override to return the object type of the Circle
     virtual ObjectType objectType() const override;
-
-    // Override to return the name of the object
     virtual std::string objectName() const override;
-
-    // Override to return the subclass marker associated with this object
     virtual std::string subclassMarker() const override;
 
-    // Getter and setter for the first point defining the angle
     XYZ firstPoint() const;
     void setFirstPoint(const XYZ &value);
 
-    // Getter and setter for the second point defining the angle
     XYZ secondPoint() const;
     void setSecondPoint(const XYZ &value);
 
-    // Getter and setter for the angle vertex (the point where the lines meet)
     XYZ angleVertex() const;
     void setAngleVertex(const XYZ &value);
 
-    // Override the Measurement method to calculate the angular dimension between the two lines
     virtual double measurement() const override;
 };
 

@@ -34,13 +34,10 @@ protected:
 
 public:
     NonGraphicalObject();
-
     NonGraphicalObject(const std::string &name);
-
     virtual ~NonGraphicalObject() override;
 
     virtual std::string name() const override;
-
     virtual void setName(const std::string &value);
 };
 

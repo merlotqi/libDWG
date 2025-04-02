@@ -30,13 +30,10 @@ class LIBDWG_API AcdbPlaceHolder : public NonGraphicalObject
 {
 public:
     AcdbPlaceHolder();
-
     ~AcdbPlaceHolder();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 };
 

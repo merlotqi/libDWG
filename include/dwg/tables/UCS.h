@@ -34,37 +34,29 @@ class LIBDWG_API UCS : public TableEntry
 {
 public:
     UCS();
-
     UCS(const std::string &name);
+    ~UCS();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     XYZ origin() const;
-
     void setOrigin(const XYZ &);
 
     XYZ xAxis() const;
-
     void setXAxis(const XYZ &);
 
     XYZ yAxis() const;
-
     void setYAxis(const XYZ &);
 
     OrthographicType orthographicType() const;
-
     void setOrthographicType(OrthographicType);
 
     OrthographicType orthographicViewType() const;
-
     void setOrthographicViewType(OrthographicType);
 
     double elevation() const;
-
     void setElevation(double);
 };
 
@@ -74,7 +66,6 @@ public:
     UCSTable() = default;
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
 
 protected:

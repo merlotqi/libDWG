@@ -20,11 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/CadUtils_p.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/tables/UCS.h>
+ #include <dwg/CadDocument.h>
+ #include <dwg/CadUtils_p.h>
+ #include <dwg/header/CadHeader.h>
+ #include <dwg/tables/DimensionStyle.h>
+ #include <dwg/tables/TextStyle.h>
+ #include <dwg/tables/UCS.h>
 #include <stdexcept>
-
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -993,12 +995,20 @@ void CadHeader::setStyleSheetName(const std::string &value) { _styleSheetName = 
 
 std::string CadHeader::dimensionTextStyleName() const
 {
-    return std::string();// TODO
+    return _dimensionTextStyle->name();
 }
 
 void CadHeader::setDimensionTextStyleName(const std::string &value)
 {
-    // TODO
+    if (_document)
+    {
+        _dimensionTextStyle = _document->textStyles()->getValue(value);
+    }
+    else
+    {
+        delete _dimensionTextStyle;
+        _dimensionTextStyle = new TextStyle(value);
+    }
 }
 
 std::string CadHeader::dimensionStyleOverridesName() const
@@ -1009,339 +1019,345 @@ std::string CadHeader::dimensionStyleOverridesName() const
 
 void CadHeader::setDimensionStyleOverridesName(const std::string &value)
 {
-    // TODO
+    return _dimensionStyleOverrides->angularDimensionDecimalPlaces();
 }
 
 short CadHeader::dimensionAngularDimensionDecimalPlaces() const
 {
-    // TODO
-    return 0;
+    _dimensionStyleOverrides->setAngularDimensionDecimalPlaces(value);
 }
 
-void CadHeader::setDimensionAngularDimensionDecimalPlaces(short)
+void CadHeader::setDimensionAngularDimensionDecimalPlaces(short value)
 {
-    // TODO
+    return _dimensionStyleOverrides->decimalPlaces();
 }
 
 short CadHeader::dimensionDecimalPlaces() const
 {
-    // TODO
-    return 0;
+    _dimensionStyleOverrides->setDecimalPlaces(value);
 }
 
-void CadHeader::setDimensionDecimalPlaces(short)
+void CadHeader::setDimensionDecimalPlaces(short value)
 {
-    // TODO
+    return _dimensionStyleOverrides->toleranceDecimalPlaces();
 }
 
 short CadHeader::dimensionToleranceDecimalPlaces() const
 {
-    // TODO
-    return 0;
+    _dimensionStyleOverrides->setToleranceDecimalPlaces(value);
 }
 
-void CadHeader::setDimensionToleranceDecimalPlaces(short)
+void CadHeader::setDimensionToleranceDecimalPlaces(short value)
 {
-    // TODO
+    _dimensionStyleOverrides->setToleranceDecimalPlaces(value);
 }
 
 bool CadHeader::dimensionAlternateUnitDimensioning() const
 {
-    // TODO
-    return false;
+    return _dimensionStyleOverrides->alternateUnitDimensioning();
 }
 
-void CadHeader::setDimensionAlternateUnitDimensioning(bool)
+void CadHeader::setDimensionAlternateUnitDimensioning(bool value)
 {
-    // TODO
+    _dimensionStyleOverrides->setAlternateUnitDimensioning(value);
 }
 
 LinearUnitFormat CadHeader::dimensionAlternateUnitFormat() const
 {
-    // TODO
-    return LinearUnitFormat::None;
+    return _dimensionStyleOverrides->alternateUnitFormat();
 }
 
-void CadHeader::setDimensionAlternateUnitFormat(LinearUnitFormat value) {}
+void CadHeader::setDimensionAlternateUnitFormat(LinearUnitFormat value) 
+{
+    _dimensionStyleOverrides->setAlternateUnitFormat(value);
+}
 
 double CadHeader::dimensionAlternateUnitScaleFactor() const
 {
-    // TODO
-    return 0.0;
+    return _dimensionStyleOverrides->alternateUnitScaleFactor();
 }
 
-void CadHeader::setDimensionAlternateUnitScaleFactor(double) {}
+void CadHeader::setDimensionAlternateUnitScaleFactor(double value) 
+{
+    _dimensionStyleOverrides->setAlternateUnitScaleFactor(value);
+}
 
-double CadHeader::dimensionExtensionLineOffset() const { return 0.0; }
+double CadHeader::dimensionExtensionLineOffset() const 
+{    
+    return _dimensionStyleOverrides->extensionLineOffset(); 
+}
 
-void CadHeader::setDimensionExtensionLineOffset(double) {}
+void CadHeader::setDimensionExtensionLineOffset(double value) 
+{
+    _dimensionStyleOverrides->setExtensionLineOffset(value); 
+}
 
-double CadHeader::dimensionScaleFactor() const { return 0.0; }
+double CadHeader::dimensionScaleFactor() const { return _dimensionStyleOverrides->scaleFactor(); }
 
-void CadHeader::setDimensionScaleFactor(double) {}
+void CadHeader::setDimensionScaleFactor(double value) { _dimensionStyleOverrides->setScaleFactor(value); }
 
-short CadHeader::dimensionAlternateUnitDecimalPlaces() const { return 0; }
+short CadHeader::dimensionAlternateUnitDecimalPlaces() const { return _dimensionStyleOverrides->alternateUnitDecimalPlaces(); }
 
-void CadHeader::setDimensionAlternateUnitDecimalPlaces(short) {}
+void CadHeader::setDimensionAlternateUnitDecimalPlaces(short value) { _dimensionStyleOverrides->setAlternateUnitDecimalPlaces(value); }
 
-short CadHeader::dimensionAlternateUnitToleranceDecimalPlaces() const { return 0; }
+short CadHeader::dimensionAlternateUnitToleranceDecimalPlaces() const { return _dimensionStyleOverrides->alternateUnitToleranceDecimalPlaces(); }
 
-void CadHeader::setDimensionAlternateUnitToleranceDecimalPlaces(short) {}
+void CadHeader::setDimensionAlternateUnitToleranceDecimalPlaces(short value) { _dimensionStyleOverrides->setAlternateUnitToleranceDecimalPlaces(value); }
 
-AngularUnitFormat CadHeader::dimensionAngularUnit() const { return AngularUnitFormat::DecimalDegrees; }
+AngularUnitFormat CadHeader::dimensionAngularUnit() const { return _dimensionStyleOverrides->angularUnit(); }
 
-void CadHeader::setDimensionAngularUnit(AngularUnitFormat) {}
+void CadHeader::setDimensionAngularUnit(AngularUnitFormat value) { _dimensionStyleOverrides->setAngularUnit(value); }
 
-FractionFormat CadHeader::dimensionFractionFormat() const { return FractionFormat::Horizontal; }
+FractionFormat CadHeader::dimensionFractionFormat() const { return _dimensionStyleOverrides->fractionFormat(); }
 
-void CadHeader::setDimensionFractionFormat(FractionFormat) {}
+void CadHeader::setDimensionFractionFormat(FractionFormat value) { _dimensionStyleOverrides->setFractionFormat(value); }
 
-LinearUnitFormat CadHeader::dimensionLinearUnitFormat() const {}
+LinearUnitFormat CadHeader::dimensionLinearUnitFormat() const { return _dimensionStyleOverrides->linearUnitFormat(); }
 
-void CadHeader::setDimensionLinearUnitFormat(LinearUnitFormat) {}
+void CadHeader::setDimensionLinearUnitFormat(LinearUnitFormat value) { _dimensionStyleOverrides->setLinearUnitFormat(value); }
 
-char CadHeader::dimensionDecimalSeparator() const {}
+char CadHeader::dimensionDecimalSeparator() const { return _dimensionStyleOverrides->decimalSeparator(); }
 
-void CadHeader::setDimensionDecimalSeparator(char) {}
+void CadHeader::setDimensionDecimalSeparator(char value) { _dimensionStyleOverrides->setDecimalSeparator(value); }
 
-TextMovement CadHeader::dimensionTextMovement() const {}
+TextMovement CadHeader::dimensionTextMovement() const { return _dimensionStyleOverrides->textMovement(); }
 
-void CadHeader::setDimensionTextMovement(TextMovement) {}
+void CadHeader::setDimensionTextMovement(TextMovement value) { _dimensionStyleOverrides->setTextMovement(value); }
 
-DimensionTextHorizontalAlignment CadHeader::dimensionTextHorizontalAlignment() const {}
+DimensionTextHorizontalAlignment CadHeader::dimensionTextHorizontalAlignment() const { return _dimensionStyleOverrides->textHorizontalAlignment(); }
 
-void CadHeader::setDimensionTextHorizontalAlignment(DimensionTextHorizontalAlignment) {}
+void CadHeader::setDimensionTextHorizontalAlignment(DimensionTextHorizontalAlignment value) { _dimensionStyleOverrides->setTextHorizontalAlignment(value); }
 
-bool CadHeader::dimensionSuppressFirstDimensionLine() const { return false; }
+bool CadHeader::dimensionSuppressFirstDimensionLine() const { return _dimensionStyleOverrides->suppressFirstDimensionLine(); }
 
-void CadHeader::setDimensionSuppressFirstDimensionLine(bool) {}
+void CadHeader::setDimensionSuppressFirstDimensionLine(bool value) { _dimensionStyleOverrides->setSuppressFirstDimensionLine(value); }
 
-bool CadHeader::dimensionSuppressSecondDimensionLine() const { return false; }
+bool CadHeader::dimensionSuppressSecondDimensionLine() const { return _dimensionStyleOverrides->suppressSecondDimensionLine(); }
 
-void CadHeader::setDimensionSuppressSecondDimensionLine(bool) {}
+void CadHeader::setDimensionSuppressSecondDimensionLine(bool value) { _dimensionStyleOverrides->setSuppressSecondDimensionLine(value); }
 
-bool CadHeader::dimensionGenerateTolerances() const { return false; }
+bool CadHeader::dimensionGenerateTolerances() const { return _dimensionStyleOverrides->generateTolerances(); }
 
-void CadHeader::setDimensionGenerateTolerances(bool) {}
+void CadHeader::setDimensionGenerateTolerances(bool value) { _dimensionStyleOverrides->setGenerateTolerances(value); }
 
-ToleranceAlignment CadHeader::dimensionToleranceAlignment() const {}
+ToleranceAlignment CadHeader::dimensionToleranceAlignment() const { return _dimensionStyleOverrides->toleranceAlignment(); }
 
-void CadHeader::setDimensionToleranceAlignment(ToleranceAlignment) {}
+void CadHeader::setDimensionToleranceAlignment(ToleranceAlignment value) { _dimensionStyleOverrides->setToleranceAlignment(value); }
 
-ZeroHandling CadHeader::dimensionZeroHandling() const {}
+ZeroHandling CadHeader::dimensionZeroHandling() const { return _dimensionStyleOverrides->zeroHandling(); }
 
-void CadHeader::setDimensionZeroHandling(ZeroHandling) {}
+void CadHeader::setDimensionZeroHandling(ZeroHandling value) { _dimensionStyleOverrides->setZeroHandling(value); }
 
-ZeroHandling CadHeader::dimensionToleranceZeroHandling() const {}
+ZeroHandling CadHeader::dimensionToleranceZeroHandling() const { return _dimensionStyleOverrides->toleranceZeroHandling(); }
 
-void CadHeader::setDimensionToleranceZeroHandling(ZeroHandling) {}
+void CadHeader::setDimensionToleranceZeroHandling(ZeroHandling value) { _dimensionStyleOverrides->setToleranceZeroHandling(value); }
 
-short CadHeader::dimensionFit() const {}
+short CadHeader::dimensionFit() const { return _dimensionStyleOverrides->dimensionFit(); }
 
-void CadHeader::setDimensionFit(short) {}
+void CadHeader::setDimensionFit(short value) { _dimensionStyleOverrides->setDimensionFit(value); }
 
-ZeroHandling CadHeader::dimensionAlternateUnitZeroHandling() const {}
+ZeroHandling CadHeader::dimensionAlternateUnitZeroHandling() const { return _dimensionStyleOverrides->alternateUnitZeroHandling(); }
 
-void CadHeader::setDimensionAlternateUnitZeroHandling(ZeroHandling) {}
+void CadHeader::setDimensionAlternateUnitZeroHandling(ZeroHandling value) { _dimensionStyleOverrides->setAlternateUnitZeroHandling(value); }
 
-ZeroHandling CadHeader::dimensionAlternateUnitToleranceZeroHandling() const {}
+ZeroHandling CadHeader::dimensionAlternateUnitToleranceZeroHandling() const { return _dimensionStyleOverrides->alternateUnitToleranceZeroHandling(); }
 
-void CadHeader::setDimensionAlternateUnitToleranceZeroHandling(ZeroHandling) {}
+void CadHeader::setDimensionAlternateUnitToleranceZeroHandling(ZeroHandling value) { _dimensionStyleOverrides->setAlternateUnitToleranceZeroHandling(value); }
 
-bool CadHeader::dimensionCursorUpdate() const { return false; }
+bool CadHeader::dimensionCursorUpdate() const { return _dimensionStyleOverrides->cursorUpdate(); }
 
-void CadHeader::setDimensionCursorUpdate(bool) {}
+void CadHeader::setDimensionCursorUpdate(bool value) { _dimensionStyleOverrides->setCursorUpdate(value); }
 
-TextArrowFitType CadHeader::dimensionDimensionTextArrowFit() const {}
+TextArrowFitType CadHeader::dimensionDimensionTextArrowFit() const { return _dimensionStyleOverrides->dimensionTextArrowFit(); }
 
-void CadHeader::setDimensionDimensionTextArrowFit(TextArrowFitType) {}
+void CadHeader::setDimensionDimensionTextArrowFit(TextArrowFitType value) { _dimensionStyleOverrides->setDimensionTextArrowFit(value); }
 
-double CadHeader::dimensionAlternateUnitRounding() const { return 0.0; }
+double CadHeader::dimensionAlternateUnitRounding() const { return _dimensionStyleOverrides->alternateUnitRounding(); }
 
-void CadHeader::setDimensionAlternateUnitRounding(double) {}
+void CadHeader::setDimensionAlternateUnitRounding(double value) { _dimensionStyleOverrides->setAlternateUnitRounding(value); }
 
-std::string CadHeader::dimensionAlternateDimensioningSuffix() const {}
+std::string CadHeader::dimensionAlternateDimensioningSuffix() const { return _dimensionStyleOverrides->alternateDimensioningSuffix(); }
 
-void CadHeader::setDimensionAlternateDimensioningSuffix(const std::string &value) {}
+void CadHeader::setDimensionAlternateDimensioningSuffix(const std::string &value) { _dimensionStyleOverrides->setAlternateDimensioningSuffix(value); }
 
-double CadHeader::dimensionArrowSize() const { return 0.0; }
+double CadHeader::dimensionArrowSize() const { return _dimensionStyleOverrides->arrowSize(); }
 
-void CadHeader::setDimensionArrowSize(double) {}
+void CadHeader::setDimensionArrowSize(double value) { _dimensionStyleOverrides->setArrowSize(value); }
 
-ZeroHandling CadHeader::dimensionAngularZeroHandling() const {}
+ZeroHandling CadHeader::dimensionAngularZeroHandling() const { return _dimensionStyleOverrides->angularZeroHandling(); }
 
-void CadHeader::setDimensionAngularZeroHandling(ZeroHandling) {}
+void CadHeader::setDimensionAngularZeroHandling(ZeroHandling value) { _dimensionStyleOverrides->setAngularZeroHandling(value); }
 
-ArcLengthSymbolPosition CadHeader::dimensionArcLengthSymbolPosition() const {}
+ArcLengthSymbolPosition CadHeader::dimensionArcLengthSymbolPosition() const { return _dimensionStyleOverrides->arcLengthSymbolPosition(); }
 
-void CadHeader::setDimensionArcLengthSymbolPosition(ArcLengthSymbolPosition) {}
+void CadHeader::setDimensionArcLengthSymbolPosition(ArcLengthSymbolPosition value) { _dimensionStyleOverrides->setArcLengthSymbolPosition(value); }
 
-bool CadHeader::dimensionSeparateArrowBlocks() const { return false; }
+bool CadHeader::dimensionSeparateArrowBlocks() const { return _dimensionStyleOverrides->separateArrowBlocks(); }
 
-void CadHeader::setDimensionSeparateArrowBlocks(bool) {}
+void CadHeader::setDimensionSeparateArrowBlocks(bool value) { _dimensionStyleOverrides->setSeparateArrowBlocks(value); }
 
-double CadHeader::dimensionCenterMarkSize() const { return 0.0; }
+double CadHeader::dimensionCenterMarkSize() const { return _dimensionStyleOverrides->centerMarkSize(); }
 
-void CadHeader::setDimensionCenterMarkSize(double) {}
+void CadHeader::setDimensionCenterMarkSize(double value) { _dimensionStyleOverrides->setCenterMarkSize(value); }
 
-double CadHeader::dimensionTickSize() const { return 0.0; }
+double CadHeader::dimensionTickSize() const { return _dimensionStyleOverrides->tickSize(); }
 
-void CadHeader::setDimensionTickSize(double) {}
+void CadHeader::setDimensionTickSize(double value) { _dimensionStyleOverrides->setTickSize(value); }
 
-Color CadHeader::dimensionLineColor() const { return Color::ByLayer; }
+Color CadHeader::dimensionLineColor() const { return _dimensionStyleOverrides->dimensionLineColor(); }
 
-void CadHeader::setDimensionLineColor(const Color &) {}
+void CadHeader::setDimensionLineColor(const Color &value) { _dimensionStyleOverrides->setDimensionLineColor(value); }
 
-Color CadHeader::dimensionExtensionLineColor() const { return Color::ByLayer; }
+Color CadHeader::dimensionExtensionLineColor() const { return _dimensionStyleOverrides->extensionLineColor(); }
 
-void CadHeader::setDimensionExtensionLineColor(const Color &) {}
+void CadHeader::setDimensionExtensionLineColor(const Color &value) { _dimensionStyleOverrides->setExtensionLineColor(value); }
 
-Color CadHeader::dimensionTextColor() const { return Color::ByLayer; }
+Color CadHeader::dimensionTextColor() const { return _dimensionStyleOverrides->textColor(); }
 
-void CadHeader::setDimensionTextColor(const Color &) {}
+void CadHeader::setDimensionTextColor(const Color &value) { _dimensionStyleOverrides->setTextColor(value); }
 
-double CadHeader::dimensionLineExtension() const { return 0.0; }
+double CadHeader::dimensionLineExtension() const { return _dimensionStyleOverrides->dimensionLineExtension(); }
 
-void CadHeader::setDimensionLineExtension(double) {}
+void CadHeader::setDimensionLineExtension(double value) { _dimensionStyleOverrides->setDimensionLineExtension(value); }
 
-double CadHeader::dimensionLineIncrement() const { return 0.0; }
+double CadHeader::dimensionLineIncrement() const { return _dimensionStyleOverrides->dimensionLineIncrement(); }
 
-void CadHeader::setDimensionLineIncrement(double) {}
+void CadHeader::setDimensionLineIncrement(double value) { _dimensionStyleOverrides->setDimensionLineIncrement(value); }
 
-double CadHeader::dimensionExtensionLineExtension() const {}
+double CadHeader::dimensionExtensionLineExtension() const { return _dimensionStyleOverrides->extensionLineExtension(); }
 
-void CadHeader::setDimensionExtensionLineExtension(double) {}
+void CadHeader::setDimensionExtensionLineExtension(double value) { _dimensionStyleOverrides->setExtensionLineExtension(value); }
 
-bool CadHeader::dimensionIsExtensionLineLengthFixed() const {}
+bool CadHeader::dimensionIsExtensionLineLengthFixed() const { return _dimensionStyleOverrides->isExtensionLineLengthFixed(); }
 
-void CadHeader::setDimensionIsExtensionLineLengthFixed(bool) {}
+void CadHeader::setDimensionIsExtensionLineLengthFixed(bool value) { _dimensionStyleOverrides->setIsExtensionLineLengthFixed(value); }
 
-double CadHeader::dimensionFixedExtensionLineLength() const {}
+double CadHeader::dimensionFixedExtensionLineLength() const { return _dimensionStyleOverrides->fixedExtensionLineLength(); }
 
-void CadHeader::setDimensionFixedExtensionLineLength(double) {}
+void CadHeader::setDimensionFixedExtensionLineLength(double value) { _dimensionStyleOverrides->setFixedExtensionLineLength(value); }
 
-double CadHeader::dimensionJoggedRadiusDimensionTransverseSegmentAngle() const {}
+double CadHeader::dimensionJoggedRadiusDimensionTransverseSegmentAngle() const { return _dimensionStyleOverrides->joggedRadiusDimensionTransverseSegmentAngle(); }
 
-void CadHeader::setDimensionJoggedRadiusDimensionTransverseSegmentAngle(double) {}
+void CadHeader::setDimensionJoggedRadiusDimensionTransverseSegmentAngle(double value) { _dimensionStyleOverrides->setJoggedRadiusDimensionTransverseSegmentAngle(value); }
 
-DimensionTextBackgroundFillMode CadHeader::dimensionTextBackgroundFillMode() const {}
+DimensionTextBackgroundFillMode CadHeader::dimensionTextBackgroundFillMode() const { return _dimensionStyleOverrides->textBackgroundFillMode(); }
 
-void CadHeader::setDimensionTextBackgroundFillMode(DimensionTextBackgroundFillMode) {}
+void CadHeader::setDimensionTextBackgroundFillMode(DimensionTextBackgroundFillMode value) { _dimensionStyleOverrides->setTextBackgroundFillMode(value); }
 
-Color CadHeader::dimensionTextBackgroundColor() const {}
+Color CadHeader::dimensionTextBackgroundColor() const { return _dimensionStyleOverrides->textBackgroundColor(); }
 
-void CadHeader::setDimensionTextBackgroundColor(const Color &) {}
+void CadHeader::setDimensionTextBackgroundColor(const Color &value) { _dimensionStyleOverrides->setTextBackgroundColor(value); }
 
-double CadHeader::dimensionLineGap() const { return 0.0; }
+double CadHeader::dimensionLineGap() const { return _dimensionStyleOverrides->dimensionLineGap(); }
 
-void CadHeader::setDimensionLineGap(double) {}
+void CadHeader::setDimensionLineGap(double value) { _dimensionStyleOverrides->setDimensionLineGap(value); }
 
-double CadHeader::dimensionLinearScaleFactor() const { return 0.0; }
+double CadHeader::dimensionLinearScaleFactor() const { return _dimensionStyleOverrides->linearScaleFactor(); }
 
-void CadHeader::setDimensionLinearScaleFactor(double) {}
+void CadHeader::setDimensionLinearScaleFactor(double value) { _dimensionStyleOverrides->setLinearScaleFactor(value); }
 
-double CadHeader::dimensionTextVerticalPosition() const { return 0.0; }
+double CadHeader::dimensionTextVerticalPosition() const { return _dimensionStyleOverrides->textVerticalPosition(); }
 
-void CadHeader::setDimensionTextVerticalPosition(double) {}
+void CadHeader::setDimensionTextVerticalPosition(double value) { _dimensionStyleOverrides->setTextVerticalPosition(value); }
 
-LineweightType CadHeader::dimensionLineWeight() const { return LineweightType::ByDIPs; }
+LineweightType CadHeader::dimensionLineWeight() const { return _dimensionStyleOverrides->dimensionLineWeight(); }
 
-void CadHeader::setDimensionLineWeight(LineweightType) {}
+void CadHeader::setDimensionLineWeight(LineweightType value) { _dimensionStyleOverrides->setimensionLineWeight(value); }
 
-LineweightType CadHeader::extensionLineWeight() const { return LineweightType::ByDIPs; }
+LineweightType CadHeader::extensionLineWeight() const { return _dimensionStyleOverrides->extensionLineWeight(); }
 
-void CadHeader::setExtensionLineWeight(LineweightType) {}
+void CadHeader::setExtensionLineWeight(LineweightType value) { _dimensionStyleOverrides->setExtensionLineWeight(value); }
 
-std::string CadHeader::dimensionPostFix() const { return std::string(); }
+std::string CadHeader::dimensionPostFix() const { return _dimensionStyleOverrides->postFix(); }
 
-void CadHeader::setDimensionPostFix(const std::string &value) {}
+void CadHeader::setDimensionPostFix(const std::string &value) { _dimensionStyleOverrides->setPostFix(value); }
 
-double CadHeader::dimensionRounding() const { return 0.0; }
+double CadHeader::dimensionRounding() const { return _dimensionStyleOverrides->rounding(); }
 
-void CadHeader::setDimensionRounding(double) {}
+void CadHeader::setDimensionRounding(double value) { _dimensionStyleOverrides->setRounding(value); }
 
-bool CadHeader::dimensionSuppressFirstExtensionLine() const { return false; }
+bool CadHeader::dimensionSuppressFirstExtensionLine() const { return _dimensionStyleOverrides->suppressFirstExtensionLine(); }
 
-void CadHeader::setDimensionSuppressFirstExtensionLine(bool) {}
+void CadHeader::setDimensionSuppressFirstExtensionLine(bool value) { _dimensionStyleOverrides->setSuppressFirstExtensionLine(value); }
 
-bool CadHeader::dimensionSuppressSecondExtensionLine() const { return false; }
+bool CadHeader::dimensionSuppressSecondExtensionLine() const { return _dimensionStyleOverrides->suppressSecondExtensionLine(); }
 
-void CadHeader::setDimensionSuppressSecondExtensionLine(bool) {}
+void CadHeader::setDimensionSuppressSecondExtensionLine(bool value) { _dimensionStyleOverrides->setSuppressSecondExtensionLine(value); }
 
-bool CadHeader::dimensionSuppressOutsideExtensions() const { return false; }
+bool CadHeader::dimensionSuppressOutsideExtensions() const { return _dimensionStyleOverrides->suppressOutsideExtensions(); }
 
-void CadHeader::setDimensionSuppressOutsideExtensions(bool) {}
+void CadHeader::setDimensionSuppressOutsideExtensions(bool value) { _dimensionStyleOverrides->setSuppressOutsideExtensions(value); }
 
 DimensionTextVerticalAlignment CadHeader::dimensionTextVerticalAlignment() const
 {
-    return DimensionTextVerticalAlignment::Centered;
+    return _dimensionStyleOverrides->textVerticalAlignment();
 }
 
-void CadHeader::setDimensionTextVerticalAlignment(DimensionTextVerticalAlignment) {}
+void CadHeader::setDimensionTextVerticalAlignment(DimensionTextVerticalAlignment value) { _dimensionStyleOverrides->setTextVerticalAlignment(value); }
 
-short CadHeader::dimensionUnit() const { return 0; }
+short CadHeader::dimensionUnit() const { return _dimensionStyleOverrides->dimensionUnit(); }
 
-void CadHeader::setDimensionUnit(short) {}
+void CadHeader::setDimensionUnit(short value) { _dimensionStyleOverrides->setDimensionUnit(value); }
 
-double CadHeader::dimensionToleranceScaleFactor() const { return 0.0; }
+double CadHeader::dimensionToleranceScaleFactor() const { return _dimensionStyleOverrides->toleranceScaleFactor(); }
 
-void CadHeader::setDimensionToleranceScaleFactor(double) {}
+void CadHeader::setDimensionToleranceScaleFactor(double value) { _dimensionStyleOverrides->setToleranceScaleFactor(value); }
 
-bool CadHeader::dimensionTextInsideHorizontal() const { return false; }
+bool CadHeader::dimensionTextInsideHorizontal() const { return _dimensionStyleOverrides->textInsideHorizontal(); }
 
-void CadHeader::setDimensionTextInsideHorizontal(bool) {}
+void CadHeader::setDimensionTextInsideHorizontal(bool value) { _dimensionStyleOverrides->setTextInsideHorizontal(value); }
 
-bool CadHeader::dimensionTextInsideExtensions() const { return false; }
+bool CadHeader::dimensionTextInsideExtensions() const { return _dimensionStyleOverrides->textInsideExtensions(); }
 
-void CadHeader::setDimensionTextInsideExtensions(bool) {}
+void CadHeader::setDimensionTextInsideExtensions(bool value) { _dimensionStyleOverrides->setTextInsideExtensions(value); }
 
-double CadHeader::dimensionMinusTolerance() const { return 0.0; }
+double CadHeader::dimensionMinusTolerance() const { return _dimensionStyleOverrides->minusTolerance(); }
 
-void CadHeader::setDimensionMinusTolerance(double) {}
+void CadHeader::setDimensionMinusTolerance(double value) { _dimensionStyleOverrides->setMinusTolerance(value); }
 
-bool CadHeader::dimensionTextOutsideExtensions() const { return false; }
+bool CadHeader::dimensionTextOutsideExtensions() const { return _dimensionStyleOverrides->textOutsideExtensions(); }
 
-void CadHeader::setDimensionTextOutsideExtensions(bool) {}
+void CadHeader::setDimensionTextOutsideExtensions(bool value) { _dimensionStyleOverrides->setTextOutsideExtensions(value); }
 
-bool CadHeader::dimensionTextOutsideHorizontal() const { return false; }
+bool CadHeader::dimensionTextOutsideHorizontal() const { return _dimensionStyleOverrides->textOutsideHorizontal(); }
 
-void CadHeader::setDimensionTextOutsideHorizontal(bool) {}
+void CadHeader::setDimensionTextOutsideHorizontal(bool value) { _dimensionStyleOverrides->setTextOutsideHorizontal(value); }
 
-bool CadHeader::dimensionLimitsGeneration() const { return false; }
+bool CadHeader::dimensionLimitsGeneration() const { return _dimensionStyleOverrides->limitsGeneration(); }
 
-void CadHeader::setDimensionLimitsGeneration() {}
+void CadHeader::setDimensionLimitsGeneration(bool value) { _dimensionStyleOverrides->setLimitsGeneration(value); }
 
-double CadHeader::dimensionPlusTolerance() const { return 0.0; }
+double CadHeader::dimensionPlusTolerance() const { return _dimensionStyleOverrides->plusTolerance(); }
 
-void CadHeader::setDimensionPlusTolerance(double) {}
+void CadHeader::setDimensionPlusTolerance(double value) { _dimensionStyleOverrides->setPlusTolerance(value); }
 
-double CadHeader::dimensionTextHeight() const { return 0.0; }
+double CadHeader::dimensionTextHeight() const { return _dimensionStyleOverrides->textHeight(); }
 
-void CadHeader::setDimensionTextHeight(double) {}
+void CadHeader::setDimensionTextHeight(double value) { _dimensionStyleOverrides->textHeight(value); }
 
-TextDirection CadHeader::dimensionTextDirection() const { return TextDirection::LeftToRight; }
+TextDirection CadHeader::dimensionTextDirection() const { return _dimensionStyleOverrides->textDirection(); }
 
-void CadHeader::setDimensionTextDirection(TextDirection) {}
+void CadHeader::setDimensionTextDirection(TextDirection value) { _dimensionStyleOverrides->textDirection(value); }
 
-double CadHeader::dimensionAltMzf() const { return _dimensionAltMzf; }
+double CadHeader::dimensionAltMzf() const { return _dimensionStyleOverrides->altMzf(); }
 
-void CadHeader::setDimensionAltMzf(double) {}
+void CadHeader::setDimensionAltMzf(double value) { _dimensionStyleOverrides->setAltMzf(value); }
 
-std::string CadHeader::dimensionAltMzs() const { return _dimensionAltMzs; }
+std::string CadHeader::dimensionAltMzs() const { return _dimensionStyleOverrides->altMzs(); }
 
-void CadHeader::setDimensionAltMzs(const std::string &value) {}
+void CadHeader::setDimensionAltMzs(const std::string &value) { _dimensionStyleOverrides->setAltMzs(value); }
 
-double CadHeader::dimensionMzf() const { return _dimensionMzf; }
+double CadHeader::dimensionMzf() const { return _dimensionStyleOverrides->mzf(); }
 
-void CadHeader::setDimensionMzf(double) {}
+void CadHeader::setDimensionMzf(double value) { _dimensionStyleOverrides->setMzf(value); }
 
-std::string CadHeader::dimensionMzs() const { return _dimensionMzs; }
+std::string CadHeader::dimensionMzs() const { return _dimensionStyleOverrides->mzs(); }
 
-void CadHeader::setDimensionMzs(const std::string &value) {}
+void CadHeader::setDimensionMzs(const std::string &value) { _dimensionStyleOverrides->setMzs(value); }
 
 std::string CadHeader::dimensionLineType() const { return _dimensionLineType; }
 
-void CadHeader::setDimensionLineType(const std::string &value) {}
+void CadHeader::setDimensionLineType(const std::string &value) { _dimensionLineType = value; }
 
 std::string CadHeader::dimensionTex1() const { return _dimensionTex1; }
 
@@ -1351,9 +1367,23 @@ std::string CadHeader::dimensionTex2() const { return _dimensionTex2; }
 
 void CadHeader::setDimensionTex2(const std::string &value) {}
 
-Layer *CadHeader::currentLayer() const { return _currentLayer; }
+Layer *CadHeader::currentLayer() const 
+{ 
+    if (!_document)
+    {
+        return _currentLayer;
+    }
+    else
+    {
+        return _document->layers()->getValue(currentLayerName());
+    }
+}
 
-void CadHeader::setCurrentLayer(Layer *) {}
+void CadHeader::setCurrentLayer(Layer *value) 
+{
+    delete _currentLayer;
+    _currentLayer = value;
+}
 
 LineType *CadHeader::currentLineType() const { return _currentLineType; }
 
@@ -1363,28 +1393,56 @@ TextStyle *CadHeader::currentTextStyle() const { return _currentTextStyle; }
 
 void CadHeader::setTextStyle(TextStyle *) {}
 
-TextStyle *CadHeader::dimensionTextStyle() const { return _dimensionTextStyle; }
+TextStyle *CadHeader::dimensionTextStyle() const 
+{
+    if(!_document)
+    {
+        return _dimensionTextStyle;
+    } 
+    else
+    {
+        return _document->textStyles()->getValue(dimensionTextStyleName());
+    }
+}
 
-void CadHeader::setDimensionTextStyle(TextStyle *) {}
+void CadHeader::setDimensionTextStyle(TextStyle *value) 
+{
+    delete _dimensionTextStyle;
+    _dimensionTextStyle = value;
+}
 
 DimensionStyle *CadHeader::dimensionStyleOverrides() const { return _dimensionStyleOverrides; }
 
-void CadHeader::setDimensionStyleOverrides(DimensionStyle *) {}
-
 UCS *CadHeader::modelSpaceUcs() const { return _modelSpaceUcs; }
 
-void CadHeader::setModelSpaceUcs(UCS *) {}
+void CadHeader::setModelSpaceUcs(UCS *value) 
+{
+    delete _modelSpaceUcs;
+    _modelSpaceUcs = value;
+}
 
 UCS *CadHeader::modelSpaceUcsBase() const { return _modelSpaceUcsBase; }
 
-void CadHeader::setModelSpaceUcsBase(UCS *) {}
+void CadHeader::setModelSpaceUcsBase(UCS *value) 
+{
+    delete _modelSpaceUcsBase;
+    _modelSpaceUcsBase = value;
+}
 
 UCS *CadHeader::paperSpaceUcs() const { return _paperSpaceUcs; }
 
-void CadHeader::setPaperSpaceUcs(UCS *) {}
+void CadHeader::setPaperSpaceUcs(UCS *value) 
+{
+    delete _paperSpaceUcs;
+    _paperSpaceUcs = value;
+}
 
 UCS *CadHeader::paperSpaceUcsBase() const { return _paperSpaceUcsBase; }
 
-void CadHeader::setPaperSpaceUcsBase(UCS *) {}
+void CadHeader::setPaperSpaceUcsBase(UCS *value) 
+{
+    delete _paperSpaceUcsBase;
+    _paperSpaceUcsBase = value;
+}
 
 }// namespace dwg

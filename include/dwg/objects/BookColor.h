@@ -36,27 +36,20 @@ class LIBDWG_API BookColor : public NonGraphicalObject
 
 public:
     BookColor();
-
     BookColor(const std::string &name);
-
     ~BookColor();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     std::string name() const override;
-
     void setName(const std::string &) override;
 
     std::string colorName() const;
-
     std::string bookName() const;
 
     Color color() const;
-
     void setColor(const Color &);
 };
 

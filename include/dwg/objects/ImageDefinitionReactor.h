@@ -35,17 +35,13 @@ public:
     ~ImageDefinitionReactor();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     int classVersion() const;
-
     void setClassVersion(int);
 
     ImageDefinition *definition() const;
-
     void setDefinition(ImageDefinition *);
 
 private:

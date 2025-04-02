@@ -45,21 +45,17 @@ public:
 
 public:
     SortEntitiesTable();
-
     SortEntitiesTable(BlockRecord *owner);
+    ~SortEntitiesTable();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     BlockRecord *blockOwner() const;
-
     void setBlockOwner(BlockRecord *);
 
     std::vector<Sorter> sorters() const;
-
     void setAddEntity(Entity *, unsigned long long sorterHandle);
 };
 
