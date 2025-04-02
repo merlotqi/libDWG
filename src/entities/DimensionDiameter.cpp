@@ -30,20 +30,44 @@ DimensionDiameter::DimensionDiameter() : Dimension(DimensionType::Diameter) {}
 
 DimensionDiameter::~DimensionDiameter() {}
 
-ObjectType DimensionDiameter::objectType() const { return ObjectType::DIMENSION_DIAMETER; }
+ObjectType DimensionDiameter::objectType() const
+{
+    return ObjectType::DIMENSION_DIAMETER;
+}
 
-std::string DimensionDiameter::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionDiameter::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionDiameter::subclassMarker() const { return DxfSubclassMarker::DiametricDimension; }
+std::string DimensionDiameter::subclassMarker() const
+{
+    return DxfSubclassMarker::DiametricDimension;
+}
 
-XYZ DimensionDiameter::angleVertex() const { return _angleVertex; }
+XYZ DimensionDiameter::angleVertex() const
+{
+    return _angleVertex;
+}
 
-void DimensionDiameter::setAngleVertex(const XYZ &value) { _angleVertex = value; }
+void DimensionDiameter::setAngleVertex(const XYZ &value)
+{
+    _angleVertex = value;
+}
 
-double DimensionDiameter::leaderLength() const { return _leaderLength; }
+double DimensionDiameter::leaderLength() const
+{
+    return _leaderLength;
+}
 
-void DimensionDiameter::setLeaderLength(double value) { _leaderLength = value; }
+void DimensionDiameter::setLeaderLength(double value)
+{
+    _leaderLength = value;
+}
 
-double DimensionDiameter::measurement() const { return insertionPoint().distanceToPoint(_angleVertex) * 2.0; }
+double DimensionDiameter::measurement() const
+{
+    return insertionPoint().distanceToPoint(_angleVertex) * 2.0;
+}
 
 }// namespace dwg

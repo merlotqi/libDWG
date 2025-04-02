@@ -31,12 +31,24 @@ AttributeEntity::AttributeEntity() {}
 
 AttributeEntity::~AttributeEntity() {}
 
-AttributeEntity::AttributeEntity(AttributeDefinition *definition) { matchAttributeProperties(definition); }
+AttributeEntity::AttributeEntity(AttributeDefinition *definition)
+{
+    matchAttributeProperties(definition);
+}
 
-ObjectType AttributeEntity::objectType() const { return ObjectType::ATTRIB; }
+ObjectType AttributeEntity::objectType() const
+{
+    return ObjectType::ATTRIB;
+}
 
-std::string AttributeEntity::objectName() const { return DxfFileToken::EntityAttribute; }
+std::string AttributeEntity::objectName() const
+{
+    return DxfFileToken::EntityAttribute;
+}
 
-std::string AttributeEntity::subclassMarker() const { return DxfSubclassMarker::Attribute; }
+std::string AttributeEntity::subclassMarker() const
+{
+    return DxfSubclassMarker::Attribute;
+}
 
 }// namespace dwg

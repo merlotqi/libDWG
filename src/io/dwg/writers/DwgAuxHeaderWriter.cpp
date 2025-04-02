@@ -41,7 +41,10 @@ DwgAuxHeaderWriter::~DwgAuxHeaderWriter()
     _header = nullptr;
 }
 
-std::string DwgAuxHeaderWriter::sectionName() const { return DwgSectionDefinition::AuxHeader; }
+std::string DwgAuxHeaderWriter::sectionName() const
+{
+    return DwgSectionDefinition::AuxHeader;
+}
 
 void DwgAuxHeaderWriter::write()
 {

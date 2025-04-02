@@ -42,9 +42,15 @@ public:
         _dictionary = nullptr;
     }
 
-    unsigned long long handle() const { return _dictionary->handle(); }
+    unsigned long long handle() const
+    {
+        return _dictionary->handle();
+    }
 
-    void add(T *entry) { _dictionary->add(entry); }
+    void add(T *entry)
+    {
+        _dictionary->add(entry);
+    }
 };
 
 }// namespace dwg

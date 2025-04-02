@@ -41,7 +41,10 @@ DwgAppInfoWriter::~DwgAppInfoWriter()
     _writer = nullptr;
 }
 
-std::string DwgAppInfoWriter::sectionName() const { return DwgSectionDefinition::AppInfo; }
+std::string DwgAppInfoWriter::sectionName() const
+{
+    return DwgSectionDefinition::AppInfo;
+}
 
 void DwgAppInfoWriter::write()
 {

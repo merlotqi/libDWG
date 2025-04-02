@@ -30,26 +30,59 @@ Line::Line() : _normal(XYZ::AxisZ), _startPoint(XYZ::Zero), _endPoint(XYZ::Zero)
 
 Line::~Line() {}
 
-ObjectType Line::objectType() const { return ObjectType::LINE; }
+ObjectType Line::objectType() const
+{
+    return ObjectType::LINE;
+}
 
-std::string Line::objectName() const { return DxfFileToken::EntityLine; }
+std::string Line::objectName() const
+{
+    return DxfFileToken::EntityLine;
+}
 
-std::string Line::subclassMarker() const { return DxfSubclassMarker::Line; }
+std::string Line::subclassMarker() const
+{
+    return DxfSubclassMarker::Line;
+}
 
-XYZ Line::normal() const { return _normal; }
+XYZ Line::normal() const
+{
+    return _normal;
+}
 
-void Line::setNormal(const XYZ &normal) { _normal = normal; }
+void Line::setNormal(const XYZ &normal)
+{
+    _normal = normal;
+}
 
-XYZ Line::startPoint() const { return _startPoint; }
+XYZ Line::startPoint() const
+{
+    return _startPoint;
+}
 
-void Line::setStartPoint(const XYZ &point) { _startPoint = point; }
+void Line::setStartPoint(const XYZ &point)
+{
+    _startPoint = point;
+}
 
-XYZ Line::endPoint() const { return _endPoint; }
+XYZ Line::endPoint() const
+{
+    return _endPoint;
+}
 
-void Line::setEndPoint(const XYZ &point) { _endPoint = point; }
+void Line::setEndPoint(const XYZ &point)
+{
+    _endPoint = point;
+}
 
-double Line::thickness() const { return _thickness; }
+double Line::thickness() const
+{
+    return _thickness;
+}
 
-void Line::setThickness(double thickness) { _thickness = thickness; }
+void Line::setThickness(double thickness)
+{
+    _thickness = thickness;
+}
 
 }// namespace dwg

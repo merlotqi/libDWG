@@ -30,10 +30,19 @@ Material::Material() {}
 
 Material::~Material() {}
 
-ObjectType Material::objectType() const { return ObjectType::UNLISTED; }
+ObjectType Material::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string Material::objectName() const { return DxfFileToken::ObjectMaterial; }
+std::string Material::objectName() const
+{
+    return DxfFileToken::ObjectMaterial;
+}
 
-std::string Material::subclassMarker() const { return DxfSubclassMarker::Material; }
+std::string Material::subclassMarker() const
+{
+    return DxfSubclassMarker::Material;
+}
 
 }// namespace dwg

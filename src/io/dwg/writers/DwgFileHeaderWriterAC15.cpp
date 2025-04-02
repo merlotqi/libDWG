@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <sstream>
 #include <array>
 #include <dwg/CadDocument.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC15_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
+#include <sstream>
 
 namespace dwg {
 
@@ -47,7 +47,10 @@ int DwgFileHeaderWriterAC15::handleSectionOffset() const
     return (int) offset;
 }
 
-int DwgFileHeaderWriterAC15::fileHeaderSize() const { return 0x61; }
+int DwgFileHeaderWriterAC15::fileHeaderSize() const
+{
+    return 0x61;
+}
 
 DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterBase(stream, encoding, model)

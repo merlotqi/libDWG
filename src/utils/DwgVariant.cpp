@@ -134,7 +134,10 @@ DwgVariant::DwgVariant(DwgVariant &&rhs) noexcept
     *this = std::move(rhs);
 }
 
-DwgVariant::DwgVariant(VarType type) { Type = type; }
+DwgVariant::DwgVariant(VarType type)
+{
+    Type = type;
+}
 
 DwgVariant &DwgVariant::operator=(const DwgVariant &rhs)
 {
@@ -256,11 +259,20 @@ DwgVariant &DwgVariant::operator=(std::vector<unsigned char> &&v) noexcept
 }
 
 
-DwgVariant &DwgVariant::operator=(DwgVariant &&v) noexcept { return *this; }
+DwgVariant &DwgVariant::operator=(DwgVariant &&v) noexcept
+{
+    return *this;
+}
 
-bool DwgVariant::operator==(const DwgVariant &o) const { return false; }
+bool DwgVariant::operator==(const DwgVariant &o) const
+{
+    return false;
+}
 
-bool DwgVariant::operator!=(const DwgVariant &o) const { return false; }
+bool DwgVariant::operator!=(const DwgVariant &o) const
+{
+    return false;
+}
 
 void DwgVariant::clear() {}
 
@@ -336,7 +348,10 @@ std::string DwgVariant::asString() const
     return str;
 }
 
-int DwgVariant::asBlob(unsigned char *bBlob) const { return 0; }
+int DwgVariant::asBlob(unsigned char *bBlob) const
+{
+    return 0;
+}
 
 XY DwgVariant::asCoord2D() const
 {

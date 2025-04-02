@@ -42,11 +42,11 @@ public:
 
     static unsigned char ToIndex(LineweightType value);
 
-    static CodePage GetCodePage(std::string &value);
+    static CodePage GetCodePageByString(const std::string &value);
 
     static std::string GetCodePageName(CodePage value);
 
-    static CodePage GetCodePage(int value);
+    static CodePage GetCodePageByIndex(int value);
 
     static int GetCodeIndex(CodePage code);
 

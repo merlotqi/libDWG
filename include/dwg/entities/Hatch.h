@@ -37,7 +37,7 @@ class LIBDWG_API Hatch : public Entity
 public:
     Hatch();
     ~Hatch();
-    
+
     virtual ObjectType objectType() const override;
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;

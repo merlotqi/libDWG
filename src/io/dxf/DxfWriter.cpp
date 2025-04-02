@@ -71,7 +71,10 @@ void DxfWriter::write()
     }
 }
 
-bool DxfWriter::isBinaray() const { return _binary; }
+bool DxfWriter::isBinaray() const
+{
+    return _binary;
+}
 
 void DxfWriter::createStreamWriter()
 {
@@ -87,37 +90,37 @@ void DxfWriter::createStreamWriter()
 
 void DxfWriter::writeHeader()
 {
-    auto &&writer = std::make_unique<DxfHeaderSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfHeaderSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 
 void DxfWriter::writeDxfClasses()
 {
-    auto &&writer = std::make_unique<DxfClassesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfClassesSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 
 void DxfWriter::writeTables()
 {
-    auto &&writer = std::make_unique<DxfTablesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfTablesSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 
 void DxfWriter::writeBlocks()
 {
-    auto &&writer = std::make_unique<DxfBlocksSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfBlocksSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 
 void DxfWriter::writeEntities()
 {
-    auto &&writer = std::make_unique<DxfEntitiesSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfEntitiesSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 
 void DxfWriter::writeObjects()
 {
-    auto &&writer = std::make_unique<DxfObjectsSectionWriter>(_writer, _document, _objectHolder);
+    auto &&writer = std::make_unique<DxfObjectsSectionWriter>(_writer, _document, _objectHolder, *this);
     writer->write();
 }
 

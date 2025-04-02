@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/TextStyle.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/tables/TextStyle.h>
+
 
 namespace dwg {
 
@@ -32,51 +33,117 @@ TextStyle::TextStyle(const std::string &name) : TableEntry(name) {}
 
 TextStyle::~TextStyle() {}
 
-TextStyle *TextStyle::Default() { return new TextStyle(DefaultName); }
+TextStyle *TextStyle::Default()
+{
+    return new TextStyle(DefaultName);
+}
 
-ObjectType TextStyle::objectType() const { return ObjectType::STYLE; }
+ObjectType TextStyle::objectType() const
+{
+    return ObjectType::STYLE;
+}
 
-std::string TextStyle::objectName() const { return DxfFileToken::TableStyle; }
+std::string TextStyle::objectName() const
+{
+    return DxfFileToken::TableStyle;
+}
 
-std::string TextStyle::subclassMarker() const { return DxfSubclassMarker::TextStyle; }
+std::string TextStyle::subclassMarker() const
+{
+    return DxfSubclassMarker::TextStyle;
+}
 
-StyleFlags TextStyle::flags() const { return _flags; }
+StyleFlags TextStyle::flags() const
+{
+    return _flags;
+}
 
-void TextStyle::setFlags(StyleFlags value) { _flags = value; }
+void TextStyle::setFlags(StyleFlags value)
+{
+    _flags = value;
+}
 
-std::string TextStyle::filename() const { return _filename; }
+std::string TextStyle::filename() const
+{
+    return _filename;
+}
 
-void TextStyle::setFilename(const std::string &value) { _filename = value; }
+void TextStyle::setFilename(const std::string &value)
+{
+    _filename = value;
+}
 
-std::string TextStyle::bigFontFilename() const { return _bigFontFilename; }
+std::string TextStyle::bigFontFilename() const
+{
+    return _bigFontFilename;
+}
 
-void TextStyle::setBigFontFilename(const std::string &value) { _bigFontFilename = value; }
+void TextStyle::setBigFontFilename(const std::string &value)
+{
+    _bigFontFilename = value;
+}
 
-double TextStyle::height() const { return _height; }
+double TextStyle::height() const
+{
+    return _height;
+}
 
-void TextStyle::setHeight(double value) { _height = value; }
+void TextStyle::setHeight(double value)
+{
+    _height = value;
+}
 
-double TextStyle::width() const { return _width; }
+double TextStyle::width() const
+{
+    return _width;
+}
 
-void TextStyle::setWidth(double value) { _width = value; }
+void TextStyle::setWidth(double value)
+{
+    _width = value;
+}
 
-double TextStyle::lastHeight() const { return _lastHeight; }
+double TextStyle::lastHeight() const
+{
+    return _lastHeight;
+}
 
-void TextStyle::setLastHeight(double value) { _lastHeight = value; }
+void TextStyle::setLastHeight(double value)
+{
+    _lastHeight = value;
+}
 
-double TextStyle::obliqueAngle() const { return _obliqueAngle; }
+double TextStyle::obliqueAngle() const
+{
+    return _obliqueAngle;
+}
 
-void TextStyle::setObliqueAngle(double value) { _obliqueAngle = value; }
+void TextStyle::setObliqueAngle(double value)
+{
+    _obliqueAngle = value;
+}
 
-TextMirrorFlag TextStyle::mirrorFlag() const { return _mirrorFlag; }
+TextMirrorFlag TextStyle::mirrorFlag() const
+{
+    return _mirrorFlag;
+}
 
-void TextStyle::setMirrorFlag(TextMirrorFlag value) { _mirrorFlag = value; }
+void TextStyle::setMirrorFlag(TextMirrorFlag value)
+{
+    _mirrorFlag = value;
+}
 
-FontFlags TextStyle::trueType() const { return _trueType; }
+FontFlags TextStyle::trueType() const
+{
+    return _trueType;
+}
 
-void TextStyle::setTrueType(FontFlags value) { _trueType = value; }
+void TextStyle::setTrueType(FontFlags value)
+{
+    _trueType = value;
+}
 
-bool TextStyle::isShapeFile() const 
+bool TextStyle::isShapeFile() const
 {
     bool v = _flags & static_cast<int>(StyleFlag::IsShape);
     return v;

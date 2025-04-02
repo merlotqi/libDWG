@@ -24,15 +24,6 @@
 
 namespace dwg {
 
-/**
- * @enum BoundaryPathFlag
- * @brief Defines the flags for boundary path types of a hatch in a DWG/DXF drawing.
- *
- * This enum specifies different properties and characteristics of a hatch boundary path.
- * The flags can be combined to describe multiple attributes of the boundary, such as 
- * whether it is external, a polyline, or self-intersecting, among others.
- * \remarks Bit flag
- */
 enum BoundaryPathFlag
 {
     Default = 0,               ///< Default boundary path.

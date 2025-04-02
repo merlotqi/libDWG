@@ -54,12 +54,24 @@ CadSystemVariableAttribute::CadSystemVariableAttribute(DxfReferenceType rf, cons
     _referenceType = rf;
 }
 
-std::vector<DxfCode> CadSystemVariableAttribute::valueCodes() const { return _valueCodes; }
+std::vector<DxfCode> CadSystemVariableAttribute::valueCodes() const
+{
+    return _valueCodes;
+}
 
-DxfReferenceType CadSystemVariableAttribute::referenceType() const { return _referenceType; }
+DxfReferenceType CadSystemVariableAttribute::referenceType() const
+{
+    return _referenceType;
+}
 
-std::string CadSystemVariableAttribute::name() const { return _name; }
+std::string CadSystemVariableAttribute::name() const
+{
+    return _name;
+}
 
-bool CadSystemVariableAttribute::isName() const { return _isName; }
+bool CadSystemVariableAttribute::isName() const
+{
+    return _isName;
+}
 
 }// namespace dwg

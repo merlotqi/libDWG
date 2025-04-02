@@ -199,11 +199,11 @@ unsigned char CadUtils::ToIndex(LineweightType value)
             break;
         default:
             {
-                auto it = std::find_if(_indexedValue.begin(), _indexedValue.end(), value);
-                if (it != _indexedValue.end())
-                    result = (unsigned char) *it;
-                else
-                    result = 31;
+                // auto it = std::find_if(_indexedValue.begin(), _indexedValue.end(), value);
+                // if (it != _indexedValue.end())
+                //     result = (unsigned char) *it;
+                // else
+                //     result = 31;
             }
             break;
     }
@@ -211,7 +211,7 @@ unsigned char CadUtils::ToIndex(LineweightType value)
     return result;
 }
 
-CodePage CadUtils::GetCodePage(std::string &value)
+CodePage CadUtils::GetCodePageByString(const std::string &value)
 {
     std::string v = value;
     std::transform(v.begin(), v.end(), v.begin(), [](unsigned char c) { return std::tolower(c); });
@@ -236,7 +236,7 @@ std::string CadUtils::GetCodePageName(CodePage value)
     return "gb2312";
 }
 
-CodePage CadUtils::GetCodePage(int value)
+CodePage CadUtils::GetCodePageByIndex(int value)
 {
     return CodePage::Windows1252;
 
@@ -329,7 +329,7 @@ DateTime CadUtils::FromJulianCalendar(double date)
     int seconds = (int) decimalSeconds;
     int milliseconds = (int) ((decimalSeconds - seconds) * 1000);
 
-    return 0.0;// DateTime(years, months, days, hours, minutes, seconds, milliseconds);
+    return DateTime();// DateTime(years, months, days, hours, minutes, seconds, milliseconds);
 }
 
 double CadUtils::EditingTime(double elapsed)

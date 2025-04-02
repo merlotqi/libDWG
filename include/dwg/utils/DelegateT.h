@@ -70,10 +70,16 @@ public:
     virtual ~StaticDelegateT() = default;
 
     // Check if the delegate type matches the given type.
-    bool isType(const std::type_info &_type) override { return typeid(StaticDelegateT<Return (*)(Args...)>) == _type; }
+    bool isType(const std::type_info &_type) override
+    {
+        return typeid(StaticDelegateT<Return (*)(Args...)>) == _type;
+    }
 
     // Invoke the stored function with the provided arguments.
-    Return invoke(Args... args) override { return invoke_fun_(std::forward<Args>(args)...); }
+    Return invoke(Args... args) override
+    {
+        return invoke_fun_(std::forward<Args>(args)...);
+    }
 
     // Compare this delegate with another for equality.
     bool compare(DelegateT<Return, Args...> *_delegate) const override
@@ -89,7 +95,10 @@ public:
     }
 
     // Check if the function pointer is valid (i.e., can be invoked).
-    bool canInvoke() const override { return invoke_fun_; }
+    bool canInvoke() const override
+    {
+        return invoke_fun_;
+    }
 
 private:
     // Function pointer to the static function to be invoked.
@@ -114,7 +123,10 @@ public:
     }
 
     // Invoke the member function on the stored object with the provided arguments.
-    Return invoke(Args... args) override { return (obj->*invoke_fun_)(std::forward<Args>(args)...); }
+    Return invoke(Args... args) override
+    {
+        return (obj->*invoke_fun_)(std::forward<Args>(args)...);
+    }
 
     // Compare this delegate with another for equality.
     bool compare(DelegateT<Return, Args...> *_delegate) const override
@@ -129,7 +141,10 @@ public:
     }
 
     // Check if the object and member function pointer are valid (i.e., can be invoked).
-    virtual bool canInvoke() const override { return (obj && invoke_fun_); }
+    virtual bool canInvoke() const override
+    {
+        return (obj && invoke_fun_);
+    }
 
 private:
     // Member function pointer to be invoked on the stored object.

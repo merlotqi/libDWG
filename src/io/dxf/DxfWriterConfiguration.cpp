@@ -41,12 +41,21 @@ DxfWriterConfiguration::DxfWriterConfiguration()
 
 DxfWriterConfiguration::~DxfWriterConfiguration() {}
 
-bool DxfWriterConfiguration::writeAllHeaderVariables() const { return _writeAllHeaderVariables; }
+bool DxfWriterConfiguration::writeAllHeaderVariables() const
+{
+    return _writeAllHeaderVariables;
+}
 
-void DxfWriterConfiguration::setWriteAllHeaderVariables(bool value) { _writeAllHeaderVariables = value; }
+void DxfWriterConfiguration::setWriteAllHeaderVariables(bool value)
+{
+    _writeAllHeaderVariables = value;
+}
 
 void DxfWriterConfiguration::addHeaderVariable(const std::string &name) {}
 
-bool DxfWriterConfiguration::removeHeaderVariable(const std::string &name) { return false; }
+bool DxfWriterConfiguration::removeHeaderVariable(const std::string &name)
+{
+    return false;
+}
 
 }// namespace dwg

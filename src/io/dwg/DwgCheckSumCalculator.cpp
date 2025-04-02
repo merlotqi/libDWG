@@ -41,7 +41,10 @@ std::vector<unsigned char> DwgCheckSumCalculator::MagicSequence = {
         0x69, 0x15, 0xf8, 0x46, 0x6a, 0x04, 0x96, 0x73, 0x0e, 0xd9, 0x16, 0x2f, 0x67, 0x68, 0xd4, 0xf7, 0x4a, 0x4a,
         0xd0, 0x57, 0x68, 0x76};
 
-int DwgCheckSumCalculator::CompressionCalculator(int length) { return 0x1F - (length + 0x20 - 1) % 0x20; }
+int DwgCheckSumCalculator::CompressionCalculator(int length)
+{
+    return 0x1F - (length + 0x20 - 1) % 0x20;
+}
 
 unsigned int DwgCheckSumCalculator::Calculate(unsigned int seed, const std::vector<unsigned char> &buffer, int offset,
                                               int size)

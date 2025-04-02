@@ -30,14 +30,29 @@ DimensionLinear::DimensionLinear() : DimensionAligned(DimensionType::Linear) {}
 
 DimensionLinear::~DimensionLinear() {}
 
-ObjectType DimensionLinear::objectType() const { return ObjectType::DIMENSION_LINEAR; }
+ObjectType DimensionLinear::objectType() const
+{
+    return ObjectType::DIMENSION_LINEAR;
+}
 
-std::string DimensionLinear::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionLinear::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionLinear::subclassMarker() const { return DxfSubclassMarker::LinearDimension; }
+std::string DimensionLinear::subclassMarker() const
+{
+    return DxfSubclassMarker::LinearDimension;
+}
 
-double DimensionLinear::rotation() const { return _rotation; }
+double DimensionLinear::rotation() const
+{
+    return _rotation;
+}
 
-void DimensionLinear::setRotation(double value) { _rotation = value; }
+void DimensionLinear::setRotation(double value)
+{
+    _rotation = value;
+}
 
 }// namespace dwg

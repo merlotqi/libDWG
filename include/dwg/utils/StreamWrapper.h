@@ -70,7 +70,7 @@ public:
         size_t sz = sizeof(T);
         std::vector<unsigned char> buffer = readBytes(sz);
         auto converter = E::instance();
-        return converter->fromBytesT<T>(buffer.data());
+        return converter->template fromBytesT<T>(buffer.data());
     }
 
     std::string readUntil(char match);
@@ -107,7 +107,7 @@ public:
     void write(const T &value)
     {
         auto convert = E::instance();
-        std::vector<unsigned char> buffer = convert->bytesT<T>(value);
+        std::vector<unsigned char> buffer = convert->template bytesT<T>(value);
         write(buffer, 0, buffer.size());
     }
 
@@ -117,7 +117,10 @@ public:
     void writeByte(unsigned char b);
 };
 
-static int stringstream_length(const std::stringstream &ss) { return ss.str().length(); }
+static int stringstream_length(const std::stringstream &ss)
+{
+    return ss.str().length();
+}
 
 static std::vector<unsigned char> stringstream_buffer(const std::stringstream &ss)
 {

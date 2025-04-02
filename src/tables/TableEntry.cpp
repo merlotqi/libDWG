@@ -32,9 +32,15 @@ TableEntry::TableEntry(const std::string &name) : _name(name), _flags(static_cas
 
 TableEntry::~TableEntry() {}
 
-std::string TableEntry::subclassMarker() const { return DxfSubclassMarker::TableRecord; }
+std::string TableEntry::subclassMarker() const
+{
+    return DxfSubclassMarker::TableRecord;
+}
 
-std::string TableEntry::name() const { return _name; }
+std::string TableEntry::name() const
+{
+    return _name;
+}
 
 void TableEntry::setName(const std::string &value)
 {
@@ -46,9 +52,15 @@ void TableEntry::setName(const std::string &value)
     _name = value;
 }
 
-StandardFlags TableEntry::flags() const { return _flags; }
+StandardFlags TableEntry::flags() const
+{
+    return _flags;
+}
 
-void TableEntry::setFlags(StandardFlags flags) { _flags = flags; }
+void TableEntry::setFlags(StandardFlags flags)
+{
+    _flags = flags;
+}
 
 TableEntry::TableEntry() : _name(""), _flags(static_cast<int>(StandardFlag::None)) {}
 

@@ -34,31 +34,70 @@ CadWipeoutBase::CadWipeoutBase()
 }
 CadWipeoutBase::~CadWipeoutBase() {}
 
-int CadWipeoutBase::classVersion() const { return _classVersion; }
+int CadWipeoutBase::classVersion() const
+{
+    return _classVersion;
+}
 
-void CadWipeoutBase::setClassVersion(int version) { _classVersion = version; }
+void CadWipeoutBase::setClassVersion(int version)
+{
+    _classVersion = version;
+}
 
-XYZ CadWipeoutBase::insertPoint() const { return _insertPoint; }
+XYZ CadWipeoutBase::insertPoint() const
+{
+    return _insertPoint;
+}
 
-void CadWipeoutBase::setInsertPoint(const XYZ &point) { _insertPoint = point; }
+void CadWipeoutBase::setInsertPoint(const XYZ &point)
+{
+    _insertPoint = point;
+}
 
-XYZ CadWipeoutBase::UVector() const { return _uvector; }
+XYZ CadWipeoutBase::UVector() const
+{
+    return _uvector;
+}
 
-void CadWipeoutBase::setUVector(const XYZ &vector) { _uvector = vector; }
+void CadWipeoutBase::setUVector(const XYZ &vector)
+{
+    _uvector = vector;
+}
 
-XYZ CadWipeoutBase::VVector() const { return _vvector; }
+XYZ CadWipeoutBase::VVector() const
+{
+    return _vvector;
+}
 
-void CadWipeoutBase::setVVector(const XYZ &vector) { _vvector = vector; }
+void CadWipeoutBase::setVVector(const XYZ &vector)
+{
+    _vvector = vector;
+}
 
-XY CadWipeoutBase::size() const { return _size; }
+XY CadWipeoutBase::size() const
+{
+    return _size;
+}
 
-void CadWipeoutBase::setSize(const XY &size) { _size = size; }
+void CadWipeoutBase::setSize(const XY &size)
+{
+    _size = size;
+}
 
-ImageDisplayFlags CadWipeoutBase::flags() const { return _flags; }
+ImageDisplayFlags CadWipeoutBase::flags() const
+{
+    return _flags;
+}
 
-void CadWipeoutBase::setFlags(ImageDisplayFlags flags) { _flags = flags; }
+void CadWipeoutBase::setFlags(ImageDisplayFlags flags)
+{
+    _flags = flags;
+}
 
-bool CadWipeoutBase::showImage() const { return _flags & ImageDisplayFlag::ShowImage; }
+bool CadWipeoutBase::showImage() const
+{
+    return _flags & ImageDisplayFlag::ShowImage;
+}
 
 void CadWipeoutBase::setShowImage(bool value)
 {
@@ -68,11 +107,20 @@ void CadWipeoutBase::setShowImage(bool value)
         _flags &= ~ImageDisplayFlag::ShowImage;
 }
 
-bool CadWipeoutBase::clippingState() const { return _clippingState; }
+bool CadWipeoutBase::clippingState() const
+{
+    return _clippingState;
+}
 
-void CadWipeoutBase::setClippingState(bool state) { _clippingState = state; }
+void CadWipeoutBase::setClippingState(bool state)
+{
+    _clippingState = state;
+}
 
-unsigned char CadWipeoutBase::brightness() const { return _brightness; }
+unsigned char CadWipeoutBase::brightness() const
+{
+    return _brightness;
+}
 
 void CadWipeoutBase::setBrightness(unsigned char value)
 {
@@ -81,7 +129,10 @@ void CadWipeoutBase::setBrightness(unsigned char value)
     _brightness = value;
 }
 
-unsigned char CadWipeoutBase::contrast() const { return _contrast; }
+unsigned char CadWipeoutBase::contrast() const
+{
+    return _contrast;
+}
 
 void CadWipeoutBase::setContrast(unsigned char value)
 {
@@ -90,7 +141,10 @@ void CadWipeoutBase::setContrast(unsigned char value)
     _contrast = value;
 }
 
-unsigned char CadWipeoutBase::fade() const { return _fade; }
+unsigned char CadWipeoutBase::fade() const
+{
+    return _fade;
+}
 
 void CadWipeoutBase::setFade(unsigned char value)
 {
@@ -99,19 +153,40 @@ void CadWipeoutBase::setFade(unsigned char value)
     _fade = value;
 }
 
-ClipMode CadWipeoutBase::clipMode() const { return _clipMode; }
+ClipMode CadWipeoutBase::clipMode() const
+{
+    return _clipMode;
+}
 
-void CadWipeoutBase::setClipMode(ClipMode mode) { _clipMode = mode; }
+void CadWipeoutBase::setClipMode(ClipMode mode)
+{
+    _clipMode = mode;
+}
 
-ClipType CadWipeoutBase::clipType() const { return _clipType; }
+ClipType CadWipeoutBase::clipType() const
+{
+    return _clipType;
+}
 
-void CadWipeoutBase::setClipType(ClipType type) { _clipType = type; }
+void CadWipeoutBase::setClipType(ClipType type)
+{
+    _clipType = type;
+}
 
-std::vector<XY> CadWipeoutBase::clipBoundaryVertices() const { return _clipBoundaryVertices; }
+std::vector<XY> CadWipeoutBase::clipBoundaryVertices() const
+{
+    return _clipBoundaryVertices;
+}
 
-void CadWipeoutBase::setClipBoundaryVertices(const std::vector<XY> &vertices) { _clipBoundaryVertices = vertices; }
+void CadWipeoutBase::setClipBoundaryVertices(const std::vector<XY> &vertices)
+{
+    _clipBoundaryVertices = vertices;
+}
 
-ImageDefinition *CadWipeoutBase::definition() const { return _definition; }
+ImageDefinition *CadWipeoutBase::definition() const
+{
+    return _definition;
+}
 
 void CadWipeoutBase::setDefinition(ImageDefinition *definition)
 {
@@ -125,8 +200,14 @@ void CadWipeoutBase::setDefinition(ImageDefinition *definition)
     _definition = definition;
 }
 
-ImageDefinitionReactor *CadWipeoutBase::definitionReactor() const { return _definitionReactor; }
+ImageDefinitionReactor *CadWipeoutBase::definitionReactor() const
+{
+    return _definitionReactor;
+}
 
-void CadWipeoutBase::setDefinitionReactor(ImageDefinitionReactor *reactor) { _definitionReactor = reactor; }
+void CadWipeoutBase::setDefinitionReactor(ImageDefinitionReactor *reactor)
+{
+    _definitionReactor = reactor;
+}
 
 }// namespace dwg

@@ -30,7 +30,10 @@ NonGraphicalObject::NonGraphicalObject(const std::string &name) : _name(name) {}
 
 NonGraphicalObject::~NonGraphicalObject() {}
 
-std::string NonGraphicalObject::name() const { return _name; }
+std::string NonGraphicalObject::name() const
+{
+    return _name;
+}
 
 void NonGraphicalObject::setName(const std::string &value)
 {

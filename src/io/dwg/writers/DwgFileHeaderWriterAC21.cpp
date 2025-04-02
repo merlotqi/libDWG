@@ -33,7 +33,10 @@ DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding
     _compressor = new DwgLZ77AC21Compressor();
 }
 
-int DwgFileHeaderWriterAC21::fileHeaderSize() const { return 0x480; }
+int DwgFileHeaderWriterAC21::fileHeaderSize() const
+{
+    return 0x480;
+}
 
 void DwgFileHeaderWriterAC21::craeteLocalSection(DwgSectionDescriptor descriptor,
                                                  const std::vector<unsigned char> &buffer, int decompressedSize,

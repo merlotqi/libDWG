@@ -29,7 +29,6 @@ namespace dwg {
 
 class DxfProperty
 {
-
 };
 
 }// namespace dwg

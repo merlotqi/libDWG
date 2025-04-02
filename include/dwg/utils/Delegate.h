@@ -52,10 +52,16 @@ public:
     Delegate() = default;
 
     // Destructor, clears the list of delegates.
-    ~Delegate() { Clear(); }
+    ~Delegate()
+    {
+        Clear();
+    }
 
     // Clears all delegates from the list.
-    void Clear() { invoke_delegates.clear(); }
+    void Clear()
+    {
+        invoke_delegates.clear();
+    }
 
     // Add a static function delegate.
     template<typename Fun>
@@ -202,10 +208,16 @@ public:
     Delegate() = default;
 
     // Destructor, clears the list of delegates.
-    ~Delegate() { Clear(); }
+    ~Delegate()
+    {
+        Clear();
+    }
 
     // Clears all delegates from the list.
-    void Clear() { invoke_delegates.clear(); }
+    void Clear()
+    {
+        invoke_delegates.clear();
+    }
 
     // Add a static function delegate.
     template<typename Fun>

@@ -27,7 +27,6 @@
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/entities/TextVerticalAlignment.h>
 
-
 namespace dwg {
 
 class TextStyle;

@@ -32,37 +32,85 @@ DwgSectionDescriptor::DwgSectionDescriptor(const std::string &name)
 {
 }
 
-long DwgSectionDescriptor::pageType() const { return _pageType; }
+long DwgSectionDescriptor::pageType() const
+{
+    return _pageType;
+}
 
-std::string DwgSectionDescriptor::name() const { return _name; }
+std::string DwgSectionDescriptor::name() const
+{
+    return _name;
+}
 
-void DwgSectionDescriptor::setName(const std::string &name) { _name = name; }
+void DwgSectionDescriptor::setName(const std::string &name)
+{
+    _name = name;
+}
 
-unsigned long long DwgSectionDescriptor::compressedSize() const { return _compressedSize; }
+unsigned long long DwgSectionDescriptor::compressedSize() const
+{
+    return _compressedSize;
+}
 
-void DwgSectionDescriptor::setCompressedSize(unsigned long long value) { _compressedSize = value; }
+void DwgSectionDescriptor::setCompressedSize(unsigned long long value)
+{
+    _compressedSize = value;
+}
 
-int DwgSectionDescriptor::pageCount() const { return _pageCount; }
+int DwgSectionDescriptor::pageCount() const
+{
+    return _pageCount;
+}
 
-void DwgSectionDescriptor::setPageCount(int value) { _pageCount = value; }
+void DwgSectionDescriptor::setPageCount(int value)
+{
+    _pageCount = value;
+}
 
-unsigned long long DwgSectionDescriptor::decompressedSize() const { return _decompressedSize; }
+unsigned long long DwgSectionDescriptor::decompressedSize() const
+{
+    return _decompressedSize;
+}
 
-void DwgSectionDescriptor::setDecompressedSize(unsigned long long value) { _decompressedSize = value; }
+void DwgSectionDescriptor::setDecompressedSize(unsigned long long value)
+{
+    _decompressedSize = value;
+}
 
-int DwgSectionDescriptor::compressedCode() const { return _compressed; }
+int DwgSectionDescriptor::compressedCode() const
+{
+    return _compressed;
+}
 
-void DwgSectionDescriptor::setCompressedCode(int value) { _compressed = value; }
+void DwgSectionDescriptor::setCompressedCode(int value)
+{
+    _compressed = value;
+}
 
-bool DwgSectionDescriptor::isCompressed() const { return _compressed == 1; }
+bool DwgSectionDescriptor::isCompressed() const
+{
+    return _compressed == 1;
+}
 
-int DwgSectionDescriptor::sectionId() const { return _sectionId; }
+int DwgSectionDescriptor::sectionId() const
+{
+    return _sectionId;
+}
 
-void DwgSectionDescriptor::setSectionId(int value) { _sectionId = value; }
+void DwgSectionDescriptor::setSectionId(int value)
+{
+    _sectionId = value;
+}
 
-int DwgSectionDescriptor::encrypted() const { return _encrypted; }
+int DwgSectionDescriptor::encrypted() const
+{
+    return _encrypted;
+}
 
-void DwgSectionDescriptor::setEncrypted(int value) { _encrypted = value; }
+void DwgSectionDescriptor::setEncrypted(int value)
+{
+    _encrypted = value;
+}
 
 unsigned long long DwgSectionDescriptor::hashCode(bool *ok) const
 {
@@ -80,7 +128,10 @@ unsigned long long DwgSectionDescriptor::hashCode(bool *ok) const
     }
 }
 
-void DwgSectionDescriptor::setHashCode(unsigned long long value) { _hashCode = value; }
+void DwgSectionDescriptor::setHashCode(unsigned long long value)
+{
+    _hashCode = value;
+}
 
 unsigned long long DwgSectionDescriptor::encoding(bool *ok) const
 {
@@ -98,12 +149,24 @@ unsigned long long DwgSectionDescriptor::encoding(bool *ok) const
     }
 }
 
-void DwgSectionDescriptor::setEncoding(unsigned long long value) { _encoding = value; }
+void DwgSectionDescriptor::setEncoding(unsigned long long value)
+{
+    _encoding = value;
+}
 
-std::vector<DwgLocalSectionMap> DwgSectionDescriptor::localSections() const { return _localSections; }
+std::vector<DwgLocalSectionMap> DwgSectionDescriptor::localSections() const
+{
+    return _localSections;
+}
 
-std::vector<DwgLocalSectionMap> &DwgSectionDescriptor::localSections() { return _localSections; }
+std::vector<DwgLocalSectionMap> &DwgSectionDescriptor::localSections()
+{
+    return _localSections;
+}
 
-void DwgSectionDescriptor::setLocalSections(const std::vector<DwgLocalSectionMap> &value) { _localSections = value; }
+void DwgSectionDescriptor::setLocalSections(const std::vector<DwgLocalSectionMap> &value)
+{
+    _localSections = value;
+}
 
 }// namespace dwg

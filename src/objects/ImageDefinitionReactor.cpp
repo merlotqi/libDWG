@@ -32,18 +32,39 @@ ImageDefinitionReactor::ImageDefinitionReactor(ImageDefinition *definition) : _d
 
 ImageDefinitionReactor::~ImageDefinitionReactor() {}
 
-ObjectType ImageDefinitionReactor::objectType() const { return ObjectType::UNLISTED; }
+ObjectType ImageDefinitionReactor::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string ImageDefinitionReactor::objectName() const { return DxfFileToken::ObjectImageDefinitionReactor; }
+std::string ImageDefinitionReactor::objectName() const
+{
+    return DxfFileToken::ObjectImageDefinitionReactor;
+}
 
-std::string ImageDefinitionReactor::subclassMarker() const { return DxfSubclassMarker::RasterImageDefReactor; }
+std::string ImageDefinitionReactor::subclassMarker() const
+{
+    return DxfSubclassMarker::RasterImageDefReactor;
+}
 
-int ImageDefinitionReactor::classVersion() const { return _classVersion; }
+int ImageDefinitionReactor::classVersion() const
+{
+    return _classVersion;
+}
 
-void ImageDefinitionReactor::setClassVersion(int value) { _classVersion = value; }
+void ImageDefinitionReactor::setClassVersion(int value)
+{
+    _classVersion = value;
+}
 
-ImageDefinition *ImageDefinitionReactor::definition() const { return _definition; }
+ImageDefinition *ImageDefinitionReactor::definition() const
+{
+    return _definition;
+}
 
-void ImageDefinitionReactor::setDefinition(ImageDefinition *value) { _definition = value; }
+void ImageDefinitionReactor::setDefinition(ImageDefinition *value)
+{
+    _definition = value;
+}
 
 }// namespace dwg

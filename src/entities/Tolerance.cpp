@@ -32,13 +32,25 @@ Tolerance::Tolerance() {}
 
 Tolerance::~Tolerance() {}
 
-ObjectType Tolerance::objectType() const { return ObjectType::TOLERANCE; }
+ObjectType Tolerance::objectType() const
+{
+    return ObjectType::TOLERANCE;
+}
 
-std::string Tolerance::objectName() const { return DxfFileToken::EntityTolerance; }
+std::string Tolerance::objectName() const
+{
+    return DxfFileToken::EntityTolerance;
+}
 
-std::string Tolerance::subclassMarker() const { return DxfSubclassMarker::Tolerance; }
+std::string Tolerance::subclassMarker() const
+{
+    return DxfSubclassMarker::Tolerance;
+}
 
-DimensionStyle *Tolerance::style() const { return _style; }
+DimensionStyle *Tolerance::style() const
+{
+    return _style;
+}
 
 void Tolerance::setStyle(DimensionStyle *value)
 {

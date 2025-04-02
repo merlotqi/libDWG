@@ -39,7 +39,7 @@ class Table : public CadObject
     static_assert(std::is_base_of_v<TableEntry, T>, "T must inherit from TableEntry.");
 
 public:
-    using pointer = T*;
+    using pointer = T *;
     using const_pointer = T *;
     using iterator = typename std::map<std::string, pointer>::iterator;
     using const_iterator = typename std::map<std::string, pointer>::const_iterator;
@@ -54,9 +54,18 @@ public:
         _entries.clear();
     }
 
-    size_t count() const { return _entries.size(); }
-    std::string objectName() const override { return "TableEntry"; }
-    std::string subclassMarker() const override { return "TABLE"; }
+    size_t count() const
+    {
+        return _entries.size();
+    }
+    std::string objectName() const override
+    {
+        return "TableEntry";
+    }
+    std::string subclassMarker() const override
+    {
+        return "TABLE";
+    }
 
     pointer operator[](const std::string &key) const
     {
@@ -99,11 +108,23 @@ public:
         }
     }
 
-    iterator begin() { return _entries.begin(); }
-    iterator end() { return _entries.end(); }
+    iterator begin()
+    {
+        return _entries.begin();
+    }
+    iterator end()
+    {
+        return _entries.end();
+    }
 
-    const_iterator begin() const { return _entries.cbegin(); }
-    const_iterator end() const { return _entries.cend(); }
+    const_iterator begin() const
+    {
+        return _entries.cbegin();
+    }
+    const_iterator end() const
+    {
+        return _entries.cend();
+    }
 
 protected:
     void add(const std::string &key, pointer item)
@@ -114,7 +135,10 @@ protected:
         item->setOwner(this);
     }
 
-    virtual std::vector<std::string> defaultEntries() const { return std::vector<std::string>(); }
+    virtual std::vector<std::string> defaultEntries() const
+    {
+        return std::vector<std::string>();
+    }
 
 private:
     std::string createName() const

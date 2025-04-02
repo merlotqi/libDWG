@@ -29,18 +29,36 @@ namespace dwg {
 
 AttributeDefinition::AttributeDefinition() {}
 
-AttributeDefinition::AttributeDefinition(AttributeEntity *entity) { matchAttributeProperties(entity); }
+AttributeDefinition::AttributeDefinition(AttributeEntity *entity)
+{
+    matchAttributeProperties(entity);
+}
 
 AttributeDefinition::~AttributeDefinition() {}
 
-ObjectType AttributeDefinition::objectType() const { return ObjectType::ATTDEF; }
+ObjectType AttributeDefinition::objectType() const
+{
+    return ObjectType::ATTDEF;
+}
 
-std::string AttributeDefinition::objectName() const { return DxfFileToken::EntityAttributeDefinition; }
+std::string AttributeDefinition::objectName() const
+{
+    return DxfFileToken::EntityAttributeDefinition;
+}
 
-std::string AttributeDefinition::subclassMarker() const { return DxfSubclassMarker::AttributeDefinition; }
+std::string AttributeDefinition::subclassMarker() const
+{
+    return DxfSubclassMarker::AttributeDefinition;
+}
 
-std::string AttributeDefinition::prompt() const { return _prompt; }
+std::string AttributeDefinition::prompt() const
+{
+    return _prompt;
+}
 
-void AttributeDefinition::setPrompt(const std::string &prompt) { _prompt = prompt; }
+void AttributeDefinition::setPrompt(const std::string &prompt)
+{
+    _prompt = prompt;
+}
 
 }// namespace dwg

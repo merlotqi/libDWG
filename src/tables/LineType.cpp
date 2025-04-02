@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/LineType.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/tables/LineType.h>
+
 
 namespace dwg {
 
@@ -32,53 +33,95 @@ LineType::LineType(const std::string &name) : TableEntry(name) {}
 
 LineType::~LineType() {}
 
-LineType *LineType::ByLayer() { return new LineType(ByLayerName); }
+LineType *LineType::ByLayer()
+{
+    return new LineType(ByLayerName);
+}
 
-LineType *LineType::ByBlock() { return new LineType(ByBlockName); }
+LineType *LineType::ByBlock()
+{
+    return new LineType(ByBlockName);
+}
 
-LineType *LineType::Continuous() { return new LineType(ContinuousName); }
+LineType *LineType::Continuous()
+{
+    return new LineType(ContinuousName);
+}
 
-ObjectType LineType::objectType() const { return ObjectType::LTYPE; }
+ObjectType LineType::objectType() const
+{
+    return ObjectType::LTYPE;
+}
 
-std::string LineType::objectName() const { return DxfFileToken::TableLinetype; }
+std::string LineType::objectName() const
+{
+    return DxfFileToken::TableLinetype;
+}
 
-std::string LineType::subclassMarker() const { return DxfSubclassMarker::Linetype; }
+std::string LineType::subclassMarker() const
+{
+    return DxfSubclassMarker::Linetype;
+}
 
-std::string LineType::description() const { return _description; }
+std::string LineType::description() const
+{
+    return _description;
+}
 
-void LineType::setDescription(const std::string &value) { _description = value; }
+void LineType::setDescription(const std::string &value)
+{
+    _description = value;
+}
 
 double LineType::patternLen() const
 {
     double len = 0.0;
-    for(auto &&seg : _segments)
+    for (auto &&seg: _segments)
     {
         len += seg.length;
     }
     return len;
 }
 
-char LineType::alignment() const { return _alignment; }
-
-void LineType::setAlignment(char value) { _alignment = value; }
-
-std::vector<LineType::Segment> LineType::segments() const { return _segments; }
-
-std::vector<LineType::Segment> &LineType::segments() { return _segments; }
-
-void LineType::setSegments(const std::vector<LineType::Segment> &value) { _segments = value; }
-
-void LineType::addSegment(LineType::Segment value) 
+char LineType::alignment() const
 {
-    if(value.lineType)
+    return _alignment;
+}
+
+void LineType::setAlignment(char value)
+{
+    _alignment = value;
+}
+
+std::vector<LineType::Segment> LineType::segments() const
+{
+    return _segments;
+}
+
+std::vector<LineType::Segment> &LineType::segments()
+{
+    return _segments;
+}
+
+void LineType::setSegments(const std::vector<LineType::Segment> &value)
+{
+    _segments = value;
+}
+
+void LineType::addSegment(LineType::Segment value)
+{
+    if (value.lineType)
     {
         throw new std::invalid_argument(fmt::format("Segment has already a LineType: {}", value.lineType->name()));
     }
     value.lineType = this;
-     _segments.push_back(value); 
+    _segments.push_back(value);
 }
 
-LineType::Segment::Segment() : length(0.0), shapeFlag(0), shapeNumber(0), offset(XY::Zero), rotation(0.0), scale(1.0), style(nullptr), lineType(nullptr)
-{}
+LineType::Segment::Segment()
+    : length(0.0), shapeFlag(0), shapeNumber(0), offset(XY::Zero), rotation(0.0), scale(1.0), style(nullptr),
+      lineType(nullptr)
+{
+}
 
 }// namespace dwg

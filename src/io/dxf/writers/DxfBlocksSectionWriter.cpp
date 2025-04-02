@@ -20,30 +20,33 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfCode.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
-#include <dwg/tables/Layer.h>
-#include <dwg/CadDocument.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 #include <dwg/io/dxf/CadObjectHolder_p.h>
+#include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
+#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/Layer.h>
 
 namespace dwg {
 
 DxfBlocksSectionWriter::DxfBlocksSectionWriter(IDxfStreamWriter *writer, CadDocument *document,
                                                CadObjectHolder *objectHolder,
                                                const DxfWriterConfiguration &configuration)
-    : DxfSectionWriterBase(writer,document, objectHolder, configuration)
+    : DxfSectionWriterBase(writer, document, objectHolder, configuration)
 {
 }
 
 DxfBlocksSectionWriter::~DxfBlocksSectionWriter() {}
 
-std::string DxfBlocksSectionWriter::sectionName() const { return DxfFileToken::BlocksSection; }
+std::string DxfBlocksSectionWriter::sectionName() const
+{
+    return DxfFileToken::BlocksSection;
+}
 
 void DxfBlocksSectionWriter::writeSection()
 {

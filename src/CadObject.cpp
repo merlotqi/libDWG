@@ -24,14 +24,26 @@
 
 namespace dwg {
 
-unsigned long long CadObject::handle() const { return _handle; }
+unsigned long long CadObject::handle() const
+{
+    return _handle;
+}
 
 CadObject::~CadObject() {}
 
-CadObject *CadObject::owner() const { return _owner; }
+CadObject *CadObject::owner() const
+{
+    return _owner;
+}
 
-void CadObject::setOwner(CadObject *obj) { _owner = obj; }
+void CadObject::setOwner(CadObject *obj)
+{
+    _owner = obj;
+}
 
-void CadObject::setHandle(unsigned long long value) { _handle = value; }
+void CadObject::setHandle(unsigned long long value)
+{
+    _handle = value;
+}
 
 }// namespace dwg

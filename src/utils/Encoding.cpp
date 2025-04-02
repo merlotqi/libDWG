@@ -178,7 +178,10 @@ Encoding::Encoding() : cp(CodePage::Utf8) {}
 
 Encoding::Encoding(CodePage codePage) : cp(codePage) {}
 
-std::vector<unsigned char> Encoding::bytes(const std::string &str) const { return std::vector<unsigned char>(); }
+std::vector<unsigned char> Encoding::bytes(const std::string &str) const
+{
+    return std::vector<unsigned char>();
+}
 
 std::string Encoding::toUtf8(const char *str) noexcept(false)
 {
@@ -354,6 +357,9 @@ std::string Encoding::fromUnicode(const std::wstring &wstr) noexcept(false)
 #endif
 }
 
-CodePage Encoding::codePage() const { return cp; }
+CodePage Encoding::codePage() const
+{
+    return cp;
+}
 
 }// namespace dwg

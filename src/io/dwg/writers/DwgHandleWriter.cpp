@@ -37,7 +37,10 @@ DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostream *stream,
 
 DwgHandleWriter::~DwgHandleWriter() {}
 
-std::string DwgHandleWriter::sectionName() const { return DwgSectionDefinition::Handles; }
+std::string DwgHandleWriter::sectionName() const
+{
+    return DwgSectionDefinition::Handles;
+}
 
 void DwgHandleWriter::write(int sectionOffset)
 {

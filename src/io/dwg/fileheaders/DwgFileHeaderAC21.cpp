@@ -30,8 +30,14 @@ DwgFileHeaderAC21::DwgFileHeaderAC21(ACadVersion version) : DwgFileHeaderAC18(ve
 
 DwgFileHeaderAC21::~DwgFileHeaderAC21() {}
 
-Dwg21CompressedMetadata DwgFileHeaderAC21::compressedMetadata() const { return _compressedMetadata; }
+Dwg21CompressedMetadata DwgFileHeaderAC21::compressedMetadata() const
+{
+    return _compressedMetadata;
+}
 
-void DwgFileHeaderAC21::setCompressedMetadata(const Dwg21CompressedMetadata &value) { _compressedMetadata = value; }
+void DwgFileHeaderAC21::setCompressedMetadata(const Dwg21CompressedMetadata &value)
+{
+    _compressedMetadata = value;
+}
 
 }// namespace dwg

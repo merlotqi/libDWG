@@ -24,13 +24,6 @@
 
 namespace dwg {
 
-/**
- * @enum BackgroundFillFlag
- * @brief Defines the flags for background fill options in a DWG/DXF drawing.
- *
- * These flags determine how the background of an entity or text is filled, 
- * including options for background color, drawing window color, and text framing.
- */
 enum class BackgroundFillFlag : unsigned char
 {
     None = 0,                  ///< No background fill.

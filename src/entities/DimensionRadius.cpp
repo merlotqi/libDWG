@@ -30,20 +30,44 @@ DimensionRadius::DimensionRadius() : Dimension(DimensionType::Radius) {}
 
 DimensionRadius::~DimensionRadius() {}
 
-ObjectType DimensionRadius::objectType() const { return ObjectType::DIMENSION_RADIUS; }
+ObjectType DimensionRadius::objectType() const
+{
+    return ObjectType::DIMENSION_RADIUS;
+}
 
-std::string DimensionRadius::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionRadius::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionRadius::subclassMarker() const { return DxfSubclassMarker::RadialDimension; }
+std::string DimensionRadius::subclassMarker() const
+{
+    return DxfSubclassMarker::RadialDimension;
+}
 
-XYZ DimensionRadius::angleVertex() const { return _angleVertex; }
+XYZ DimensionRadius::angleVertex() const
+{
+    return _angleVertex;
+}
 
-void DimensionRadius::setAngleVertex(const XYZ &value) { _angleVertex = value; }
+void DimensionRadius::setAngleVertex(const XYZ &value)
+{
+    _angleVertex = value;
+}
 
-double DimensionRadius::leaderLength() const { return _leaderLength; }
+double DimensionRadius::leaderLength() const
+{
+    return _leaderLength;
+}
 
-void DimensionRadius::setLeaderLength(double value) { _leaderLength = value; }
+void DimensionRadius::setLeaderLength(double value)
+{
+    _leaderLength = value;
+}
 
-double DimensionRadius::measurement() const { return _insertionPoint.distanceToPoint(_angleVertex); }
+double DimensionRadius::measurement() const
+{
+    return _insertionPoint.distanceToPoint(_angleVertex);
+}
 
 }// namespace dwg

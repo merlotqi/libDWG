@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/View.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/tables/View.h>
+
 
 namespace dwg {
 
@@ -30,86 +31,209 @@ View::View(const std::string &name) : TableEntry(name) {}
 
 View::~View() {}
 
-ObjectType View::objectType() const { return ObjectType::VIEW; }
+ObjectType View::objectType() const
+{
+    return ObjectType::VIEW;
+}
 
-std::string View::objectName() const { return DxfFileToken::TableView; }
+std::string View::objectName() const
+{
+    return DxfFileToken::TableView;
+}
 
-std::string View::subclassMarker() const { return DxfSubclassMarker::View; }
+std::string View::subclassMarker() const
+{
+    return DxfSubclassMarker::View;
+}
 
-double View::height() const { return _height; }
+double View::height() const
+{
+    return _height;
+}
 
-void View::setHeight(double value) { _height = value; }
+void View::setHeight(double value)
+{
+    _height = value;
+}
 
-double View::width() const { return _width; }
+double View::width() const
+{
+    return _width;
+}
 
-void View::setWidth(double value) { _width = value; }
+void View::setWidth(double value)
+{
+    _width = value;
+}
 
-double View::lensLength() const { return _lensLength; }
+double View::lensLength() const
+{
+    return _lensLength;
+}
 
-void View::setLensLength(double value) { _lensLength = value; }
+void View::setLensLength(double value)
+{
+    _lensLength = value;
+}
 
-double View::frontClipping() const { return _frontClipping; }
+double View::frontClipping() const
+{
+    return _frontClipping;
+}
 
-void View::setFrontClipping(double value) { _frontClipping = value; }
+void View::setFrontClipping(double value)
+{
+    _frontClipping = value;
+}
 
-double View::backClipping() const { return _backClipping; }
+double View::backClipping() const
+{
+    return _backClipping;
+}
 
-void View::setBackClipping(double value) { _backClipping = value; }
+void View::setBackClipping(double value)
+{
+    _backClipping = value;
+}
 
-double View::angle() const { return _angle; }
+double View::angle() const
+{
+    return _angle;
+}
 
-void View::setAngle(double value) { _angle = value; }
+void View::setAngle(double value)
+{
+    _angle = value;
+}
 
-ViewModeType View::viewMode() const { return _viewMode; }
+ViewModeType View::viewMode() const
+{
+    return _viewMode;
+}
 
-void View::setViewMode(ViewModeType value) { _viewMode = value; }
+void View::setViewMode(ViewModeType value)
+{
+    _viewMode = value;
+}
 
-bool View::isUcsAssociated() const { return _isUcsAssociated; }
+bool View::isUcsAssociated() const
+{
+    return _isUcsAssociated;
+}
 
-void View::setIsUcsAssociated(bool value) { _isUcsAssociated = value; }
+void View::setIsUcsAssociated(bool value)
+{
+    _isUcsAssociated = value;
+}
 
-bool View::isPlottable() const { return _isPlottable; }
+bool View::isPlottable() const
+{
+    return _isPlottable;
+}
 
-void View::setIsPlottable(bool value) { _isPlottable = value; }
+void View::setIsPlottable(bool value)
+{
+    _isPlottable = value;
+}
 
-RenderMode View::renderMode() const { return _renderMode; }
+RenderMode View::renderMode() const
+{
+    return _renderMode;
+}
 
-void View::setRenderMode(RenderMode value) { _renderMode = value; }
+void View::setRenderMode(RenderMode value)
+{
+    _renderMode = value;
+}
 
-XY View::center() const { return _center; }
+XY View::center() const
+{
+    return _center;
+}
 
-void View::setCenter(const XY &value) { _center = value; }
+void View::setCenter(const XY &value)
+{
+    _center = value;
+}
 
-XYZ View::direction() const { return _direction; }
+XYZ View::direction() const
+{
+    return _direction;
+}
 
-void View::setDirection(const XYZ &value) { _direction = value; }
+void View::setDirection(const XYZ &value)
+{
+    _direction = value;
+}
 
-XYZ View::target() const { return _target; }
+XYZ View::target() const
+{
+    return _target;
+}
 
-void View::setTarget(const XYZ &value) { _target = value; }
+void View::setTarget(const XYZ &value)
+{
+    _target = value;
+}
 
-VisualStyle *View::visualStyle() const { return _visualStyle; }
+VisualStyle *View::visualStyle() const
+{
+    return _visualStyle;
+}
 
-void View::setVisualStyle(VisualStyle *value) { _visualStyle = value; }
+void View::setVisualStyle(VisualStyle *value)
+{
+    _visualStyle = value;
+}
 
-XYZ View::ucsOrigin() const { return _ucsOrigin; }
+XYZ View::ucsOrigin() const
+{
+    return _ucsOrigin;
+}
 
-void View::setUcsOrigin(const XYZ &value) { _ucsOrigin = value; }
+void View::setUcsOrigin(const XYZ &value)
+{
+    _ucsOrigin = value;
+}
 
-XYZ View::ucsXAxis() const { return _ucsXAxis; }
+XYZ View::ucsXAxis() const
+{
+    return _ucsXAxis;
+}
 
-void View::setUcsXAxis(const XYZ &value) { _ucsXAxis = value; }
+void View::setUcsXAxis(const XYZ &value)
+{
+    _ucsXAxis = value;
+}
 
-XYZ View::ucsYAxis() const { return _ucsYAxis; }
+XYZ View::ucsYAxis() const
+{
+    return _ucsYAxis;
+}
 
-void View::setUcsYAxis(const XYZ &value) { _ucsYAxis = value; }
+void View::setUcsYAxis(const XYZ &value)
+{
+    _ucsYAxis = value;
+}
 
-double View::ucsElevation() const { return _ucsElevation; }
+double View::ucsElevation() const
+{
+    return _ucsElevation;
+}
 
-void View::setUcsElevation(double value) { _ucsElevation =value; }
+void View::setUcsElevation(double value)
+{
+    _ucsElevation = value;
+}
 
-OrthographicType View::ucsOrthographicType() const { return _ucsOrthographicType; }
+OrthographicType View::ucsOrthographicType() const
+{
+    return _ucsOrthographicType;
+}
 
-void View::setUcsOrthographicType(OrthographicType value) { _ucsOrthographicType = value; }
+void View::setUcsOrthographicType(OrthographicType value)
+{
+    _ucsOrthographicType = value;
+}
 
 }// namespace dwg

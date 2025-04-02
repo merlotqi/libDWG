@@ -28,16 +28,34 @@ CadWriterConfiguration::CadWriterConfiguration() : _closeStream(true), _writeXRe
 
 CadWriterConfiguration::~CadWriterConfiguration() {}
 
-bool CadWriterConfiguration::closeStream() const { return _closeStream; }
+bool CadWriterConfiguration::closeStream() const
+{
+    return _closeStream;
+}
 
-void CadWriterConfiguration::setCloseStream(bool value) { _closeStream = value; }
+void CadWriterConfiguration::setCloseStream(bool value)
+{
+    _closeStream = value;
+}
 
-bool CadWriterConfiguration::writeXRecords() const { return _writeXRecords; }
+bool CadWriterConfiguration::writeXRecords() const
+{
+    return _writeXRecords;
+}
 
-void CadWriterConfiguration::setWriteXRecords(bool value) { _writeXRecords = value; }
+void CadWriterConfiguration::setWriteXRecords(bool value)
+{
+    _writeXRecords = value;
+}
 
-bool CadWriterConfiguration::writeXData() const { return _writeXData; }
+bool CadWriterConfiguration::writeXData() const
+{
+    return _writeXData;
+}
 
-void CadWriterConfiguration::setWriteXData(bool value) { _writeXData = value; }
+void CadWriterConfiguration::setWriteXData(bool value)
+{
+    _writeXData = value;
+}
 
 }// namespace dwg

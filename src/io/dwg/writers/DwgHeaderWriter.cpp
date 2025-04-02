@@ -62,7 +62,10 @@ DwgHeaderWriter::~DwgHeaderWriter()
     _writer = nullptr;
 }
 
-std::string DwgHeaderWriter::sectionName() const { return DwgSectionDefinition::Header; }
+std::string DwgHeaderWriter::sectionName() const
+{
+    return DwgSectionDefinition::Header;
+}
 
 void DwgHeaderWriter::write()
 {

@@ -31,6 +31,8 @@ namespace dwg {
 class CRC32StreamHandlerBase
 {
 public:
+    CRC32StreamHandlerBase();
+    virtual ~CRC32StreamHandlerBase() {}
     unsigned int seed() const;
 
 protected:

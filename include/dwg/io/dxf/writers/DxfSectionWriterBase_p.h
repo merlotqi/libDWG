@@ -33,6 +33,48 @@ class CadObjectHolder;
 class CadObject;
 class Entity;
 class ExtendedDataDictionary;
+class Arc;
+class Circle;
+class Dimension;
+class DimensionAligned;
+class DimensionLinear;
+class DimensionRadius;
+class DimensionDiameter;
+class DimensionAngular2Line;
+class DimensionAngular3Pt;
+class DimensionOrdinate;
+class Hatch;
+class HatchBoundaryPath;
+class HatchBoundaryPathEdge;
+class HatchPattern;
+class Ellipse;
+class Face3D;
+class Insert;
+class Leader;
+class Line;
+class LwPolyline;
+class Mesh;
+class MLine;
+class MText;
+class MultiLeader;
+class MultiLeaderAnnotContext;
+class MultiLeaderAnnotContextLeaderRoot;
+class MultiLeaderAnnotContextLeaderLine;
+class Point;
+class Polyline;
+class Seqend;
+class Ray;
+class Shape;
+class Solid;
+class Spline;
+class TextEntity;
+class Tolerance;
+class AttributeBase;
+class Vertex;
+class Viewport;
+class CadWipeoutBase;
+class XLine;
+
 class DxfSectionWriterBase
 {
 public:
@@ -55,7 +97,7 @@ protected:
 
 private:
     void writeArc(Arc *arc);
-    void writeCircle(Arc *circle);
+    void writeCircle(Circle *circle);
     void writeDimension(Dimension *dim);
     void writeDimensionAligned(DimensionAligned *aligned);
     void writeDimensionLinear(DimensionLinear *linear);
@@ -94,7 +136,7 @@ private:
     void writeVertex(Vertex *v);
     void writeViewport(Viewport *vp);
     void writeCadImage(CadWipeoutBase *image);
-    void writeXLine(XLine xline);
+    void writeXLine(XLine *xline);
 
 protected:
     IDxfStreamWriter *_writer;

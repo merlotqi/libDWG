@@ -34,16 +34,34 @@ bool DwgSectionLocatorRecord::isInTheRecord(int position) const
     return position >= _seeker && position < _seeker + _size;
 }
 
-int DwgSectionLocatorRecord::number() const { return _number; }
+int DwgSectionLocatorRecord::number() const
+{
+    return _number;
+}
 
-long long DwgSectionLocatorRecord::seeker() const { return _seeker; }
+long long DwgSectionLocatorRecord::seeker() const
+{
+    return _seeker;
+}
 
-long long DwgSectionLocatorRecord::size() const { return _size; }
+long long DwgSectionLocatorRecord::size() const
+{
+    return _size;
+}
 
-void DwgSectionLocatorRecord::setNumber(int number) { _number = number; }
+void DwgSectionLocatorRecord::setNumber(int number)
+{
+    _number = number;
+}
 
-void DwgSectionLocatorRecord::setSeeker(long long seeker) { _seeker = seeker; }
+void DwgSectionLocatorRecord::setSeeker(long long seeker)
+{
+    _seeker = seeker;
+}
 
-void DwgSectionLocatorRecord::setSize(long long size) { _size = size; }
+void DwgSectionLocatorRecord::setSize(long long size)
+{
+    _size = size;
+}
 
 }// namespace dwg

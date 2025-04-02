@@ -30,18 +30,39 @@ Ray::Ray() : _startPoint(XYZ::Zero), _direction(XYZ::Zero) {}
 
 Ray::~Ray() {}
 
-ObjectType Ray::objectType() const { return ObjectType::RAY; }
+ObjectType Ray::objectType() const
+{
+    return ObjectType::RAY;
+}
 
-std::string Ray::objectName() const { return DxfFileToken::EntityRay; }
+std::string Ray::objectName() const
+{
+    return DxfFileToken::EntityRay;
+}
 
-std::string Ray::subclassMarker() const { return DxfSubclassMarker::Ray; }
+std::string Ray::subclassMarker() const
+{
+    return DxfSubclassMarker::Ray;
+}
 
-XYZ Ray::startPoint() const { return _startPoint; }
+XYZ Ray::startPoint() const
+{
+    return _startPoint;
+}
 
-void Ray::setStartPoint(const XYZ &point) { _startPoint = point; }
+void Ray::setStartPoint(const XYZ &point)
+{
+    _startPoint = point;
+}
 
-XYZ Ray::direction() const { return _direction; }
+XYZ Ray::direction() const
+{
+    return _direction;
+}
 
-void Ray::setDirection(const XYZ &direction) { _direction = direction; }
+void Ray::setDirection(const XYZ &direction)
+{
+    _direction = direction;
+}
 
 }// namespace dwg

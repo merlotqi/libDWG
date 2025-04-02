@@ -40,22 +40,43 @@ AppId::AppId(const std::string &name) : TableEntry(name)
 
 AppId::~AppId() {}
 
-ObjectType AppId::objectType() const { return ObjectType::APPID; }
+ObjectType AppId::objectType() const
+{
+    return ObjectType::APPID;
+}
 
-std::string AppId::objectName() const { return DxfFileToken::TableAppId; }
+std::string AppId::objectName() const
+{
+    return DxfFileToken::TableAppId;
+}
 
-std::string AppId::subclassMarker() const { return DxfSubclassMarker::ApplicationId; }
+std::string AppId::subclassMarker() const
+{
+    return DxfSubclassMarker::ApplicationId;
+}
 
-AppId *AppId::Default() { return new AppId(DefaultName); }
+AppId *AppId::Default()
+{
+    return new AppId(DefaultName);
+}
 
 /* -------------------------- AppIdsTable impls -------------------------- */
 
 AppIdsTable::AppIdsTable() {}
 
-ObjectType AppIdsTable::objectType() const { return ObjectType::APPID_CONTROL_OBJ; }
+ObjectType AppIdsTable::objectType() const
+{
+    return ObjectType::APPID_CONTROL_OBJ;
+}
 
-std::string AppIdsTable::objectName() const { return DxfFileToken::TableAppId; }
+std::string AppIdsTable::objectName() const
+{
+    return DxfFileToken::TableAppId;
+}
 
-std::vector<std::string> AppIdsTable::defaultEntries() const { return {AppId::DefaultName}; }
+std::vector<std::string> AppIdsTable::defaultEntries() const
+{
+    return {AppId::DefaultName};
+}
 
 }// namespace dwg

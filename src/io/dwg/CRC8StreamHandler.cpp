@@ -43,9 +43,15 @@ unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed, const std
     return currValue;
 }
 
-unsigned short CRC8StreamHandlerBase::seed() const { return _seed; }
+unsigned short CRC8StreamHandlerBase::seed() const
+{
+    return _seed;
+}
 
-void CRC8StreamHandlerBase::setSeed(unsigned short seed) { _seed = seed; }
+void CRC8StreamHandlerBase::setSeed(unsigned short seed)
+{
+    _seed = seed;
+}
 
 unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
 {

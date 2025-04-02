@@ -39,76 +39,184 @@ Layout::Layout(const std::string &name)
     _name = name;
 }
 
-ObjectType Layout::objectType() const { return ObjectType::LAYOUT; }
+ObjectType Layout::objectType() const
+{
+    return ObjectType::LAYOUT;
+}
 
-std::string Layout::objectName() const { return DxfFileToken::ObjectLayout; }
+std::string Layout::objectName() const
+{
+    return DxfFileToken::ObjectLayout;
+}
 
-std::string Layout::subclassMarker() const { return DxfSubclassMarker::Layout; }
+std::string Layout::subclassMarker() const
+{
+    return DxfSubclassMarker::Layout;
+}
 
-LayoutFlags Layout::layoutFlags() const { return _layoutFlags; }
+LayoutFlags Layout::layoutFlags() const
+{
+    return _layoutFlags;
+}
 
-void Layout::setLayoutFlags(LayoutFlags value) { _layoutFlags = value; }
+void Layout::setLayoutFlags(LayoutFlags value)
+{
+    _layoutFlags = value;
+}
 
-int Layout::tabOrder() const { return _tabOrder; }
+int Layout::tabOrder() const
+{
+    return _tabOrder;
+}
 
-void Layout::setTabOrder(int value) { _tabOrder = value; }
+void Layout::setTabOrder(int value)
+{
+    _tabOrder = value;
+}
 
-XY Layout::minLimits() const { return _minLimits; }
+XY Layout::minLimits() const
+{
+    return _minLimits;
+}
 
-void Layout::setMinLimits(const XY &value) { _minLimits = value; }
+void Layout::setMinLimits(const XY &value)
+{
+    _minLimits = value;
+}
 
-XY Layout::maxLimits() const { return _maxLimits; }
+XY Layout::maxLimits() const
+{
+    return _maxLimits;
+}
 
-void Layout::setMaxLimits(const XY &value) { _maxLimits = value; }
+void Layout::setMaxLimits(const XY &value)
+{
+    _maxLimits = value;
+}
 
-XYZ Layout::insertionBasePoint() const { return _insertionBasePoint; }
+XYZ Layout::insertionBasePoint() const
+{
+    return _insertionBasePoint;
+}
 
-void Layout::setInsertionBasePoint(const XYZ &value) { _insertionBasePoint = value; }
+void Layout::setInsertionBasePoint(const XYZ &value)
+{
+    _insertionBasePoint = value;
+}
 
-XYZ Layout::minExtents() const { return _minExtents; }
+XYZ Layout::minExtents() const
+{
+    return _minExtents;
+}
 
-void Layout::setMinExtents(const XYZ &value) { _minExtents = value; }
+void Layout::setMinExtents(const XYZ &value)
+{
+    _minExtents = value;
+}
 
-XYZ Layout::maxExtents() const { return _maxExtents; }
+XYZ Layout::maxExtents() const
+{
+    return _maxExtents;
+}
 
-void Layout::setMaxExtents(const XYZ &value) { _maxExtents = value; }
+void Layout::setMaxExtents(const XYZ &value)
+{
+    _maxExtents = value;
+}
 
-double Layout::elevation() const { return _elevation; }
+double Layout::elevation() const
+{
+    return _elevation;
+}
 
-void Layout::setElevation(double value) { _elevation = value; }
+void Layout::setElevation(double value)
+{
+    _elevation = value;
+}
 
-XYZ Layout::origin() const { return _origin; }
+XYZ Layout::origin() const
+{
+    return _origin;
+}
 
-void Layout::setOrigin(const XYZ &value) { _origin = value; }
+void Layout::setOrigin(const XYZ &value)
+{
+    _origin = value;
+}
 
-XYZ Layout::xAxis() const { return _xaxis; }
+XYZ Layout::xAxis() const
+{
+    return _xaxis;
+}
 
-void Layout::setXAxis(const XYZ &value) { _xaxis = value; }
+void Layout::setXAxis(const XYZ &value)
+{
+    _xaxis = value;
+}
 
-XYZ Layout::yAxis() const { return _yaxis; }
+XYZ Layout::yAxis() const
+{
+    return _yaxis;
+}
 
-void Layout::setYAxis(const XYZ &value) { _yaxis = value; }
+void Layout::setYAxis(const XYZ &value)
+{
+    _yaxis = value;
+}
 
-OrthographicType Layout::ucsOrthographicType() const { return _ucsOrthographicType; }
+OrthographicType Layout::ucsOrthographicType() const
+{
+    return _ucsOrthographicType;
+}
 
-void Layout::setUcsOrthographicType(OrthographicType value) { _ucsOrthographicType = value; }
+void Layout::setUcsOrthographicType(OrthographicType value)
+{
+    _ucsOrthographicType = value;
+}
 
-BlockRecord *Layout::associatedBlock() const { return _associatedBlock; }
+BlockRecord *Layout::associatedBlock() const
+{
+    return _associatedBlock;
+}
 
-void Layout::setAssociatedBlock(BlockRecord *value) { _associatedBlock = value; }
+void Layout::setAssociatedBlock(BlockRecord *value)
+{
+    _associatedBlock = value;
+}
 
-Viewport *Layout::viewport() const { return _viewport; }
+Viewport *Layout::viewport() const
+{
+    return _viewport;
+}
 
-void Layout::setViewport(Viewport *value) { _viewport = value; }
+void Layout::setViewport(Viewport *value)
+{
+    _viewport = value;
+}
 
-UCS *Layout::ucs() const { return _ucs; }
+UCS *Layout::ucs() const
+{
+    return _ucs;
+}
 
-void Layout::setUCS(UCS *value) { _ucs = value; }
+void Layout::setUCS(UCS *value)
+{
+    _ucs = value;
+}
 
-UCS *Layout::baseUCS() const { return _baseUCS; }
+UCS *Layout::baseUCS() const
+{
+    return _baseUCS;
+}
 
-void Layout::setBaseUCS(UCS *value) { _baseUCS = value; }
+void Layout::setBaseUCS(UCS *value)
+{
+    _baseUCS = value;
+}
 
-bool Layout::isPaperSpace() const { return false; }
+bool Layout::isPaperSpace() const
+{
+    return false;
+}
 
 }// namespace dwg

@@ -27,10 +27,19 @@ namespace dwg {
 
 PdfUnderlayDefinition::PdfUnderlayDefinition() {}
 
-std::string PdfUnderlayDefinition::objectName() const { return DxfFileToken::ObjectPdfDefinition; }
+std::string PdfUnderlayDefinition::objectName() const
+{
+    return DxfFileToken::ObjectPdfDefinition;
+}
 
-std::string PdfUnderlayDefinition::page() const { return _page; }
+std::string PdfUnderlayDefinition::page() const
+{
+    return _page;
+}
 
-void PdfUnderlayDefinition::setPage(const std::string &value) { _page = value; }
+void PdfUnderlayDefinition::setPage(const std::string &value)
+{
+    _page = value;
+}
 
 }// namespace dwg

@@ -277,6 +277,9 @@ static std::vector<CadSystemVariableAttribute> _headerVariables = {
         {"$XEDIT", {290}},
 };
 
-std::vector<CadSystemVariableAttribute> CadSystemVariables::headerVariables() { return _headerVariables; }
+std::vector<CadSystemVariableAttribute> CadSystemVariables::headerVariables()
+{
+    return _headerVariables;
+}
 
 }// namespace dwg

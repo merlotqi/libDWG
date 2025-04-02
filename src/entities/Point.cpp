@@ -30,26 +30,59 @@ Point::Point() : _location(XYZ::Zero), _normal(XYZ::Zero), _thickness(0.0), _rot
 
 Point::~Point() {}
 
-ObjectType Point::objectType() const { return ObjectType::POINT; }
+ObjectType Point::objectType() const
+{
+    return ObjectType::POINT;
+}
 
-std::string Point::objectName() const { return DxfFileToken::EntityPoint; }
+std::string Point::objectName() const
+{
+    return DxfFileToken::EntityPoint;
+}
 
-std::string Point::subclassMarker() const { return DxfSubclassMarker::Point; }
+std::string Point::subclassMarker() const
+{
+    return DxfSubclassMarker::Point;
+}
 
-XYZ Point::location() const { return _location; }
+XYZ Point::location() const
+{
+    return _location;
+}
 
-void Point::setLocation(const XYZ &value) { _location = value; }
+void Point::setLocation(const XYZ &value)
+{
+    _location = value;
+}
 
-XYZ Point::normal() const { return _normal; }
+XYZ Point::normal() const
+{
+    return _normal;
+}
 
-void Point::setNormal(const XYZ &value) { _normal = value; }
+void Point::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-double Point::thickness() const { return _thickness; }
+double Point::thickness() const
+{
+    return _thickness;
+}
 
-void Point::setThickness(double value) { _thickness = value; }
+void Point::setThickness(double value)
+{
+    _thickness = value;
+}
 
-double Point::rotation() const { return _rotation; }
+double Point::rotation() const
+{
+    return _rotation;
+}
 
-void Point::setRotation(double value) { _rotation = value; }
+void Point::setRotation(double value)
+{
+    _rotation = value;
+}
 
 }// namespace dwg

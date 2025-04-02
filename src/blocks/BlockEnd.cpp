@@ -28,12 +28,24 @@
 
 namespace dwg {
 
-BlockEnd::BlockEnd(BlockRecord *record) { _owner = record; }
+BlockEnd::BlockEnd(BlockRecord *record)
+{
+    _owner = record;
+}
 
-std::string BlockEnd::objectName() const { return DxfFileToken::EndBlock; }
+std::string BlockEnd::objectName() const
+{
+    return DxfFileToken::EndBlock;
+}
 
-ObjectType BlockEnd::objectType() const { return ObjectType::ENDBLK; }
+ObjectType BlockEnd::objectType() const
+{
+    return ObjectType::ENDBLK;
+}
 
-std::string BlockEnd::subclassMarker() const { return DxfSubclassMarker::BlockEnd; }
+std::string BlockEnd::subclassMarker() const
+{
+    return DxfSubclassMarker::BlockEnd;
+}
 
 }// namespace dwg

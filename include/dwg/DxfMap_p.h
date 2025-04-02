@@ -22,10 +22,11 @@
 
 #pragma once
 
-#include <dwg/DxfProperty_p.h>
 #include <dwg/DxfClassMap_p.h>
+#include <dwg/DxfProperty_p.h>
 #include <map>
 #include <string>
+
 
 namespace dwg {
 

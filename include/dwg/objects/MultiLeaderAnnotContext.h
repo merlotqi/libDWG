@@ -231,7 +231,7 @@ class LIBDWG_API MultiLeaderAnnotContextLeaderRoot
     std::vector<StartEndPointPair> breakStartEndPointsPairs;
     int leaderIndex;
     double landingDistance;
-    std::vector<LeaderLine> lines;
+    std::vector<MultiLeaderAnnotContextLeaderLine> lines;
     TextAttachmentDirectionType textAttachmentDirection;
 };
 

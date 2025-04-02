@@ -29,4 +29,4 @@ unsigned int DwgLZ77AC21Decompressor::_length = 0;
 unsigned int DwgLZ77AC21Decompressor::_sourceIndex = 0;
 unsigned int DwgLZ77AC21Decompressor::_opCode = 0;
 
-}
+}// namespace dwg

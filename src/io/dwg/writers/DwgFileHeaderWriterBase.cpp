@@ -45,7 +45,7 @@ DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream, Encoding
 
 unsigned short DwgFileHeaderWriterBase::getFileCodePage()
 {
-    unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePage(_document->header()->codePage()));
+    unsigned short codePage = CadUtils::GetCodeIndex(CadUtils::GetCodePageByString(_document->header()->codePage()));
     if (codePage < 1)
     {
         return 30;

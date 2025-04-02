@@ -54,7 +54,10 @@ DwgClassesWriter::~DwgClassesWriter()
     _writer = nullptr;
 }
 
-std::string DwgClassesWriter::sectionName() const { return DwgSectionDefinition::Classes; }
+std::string DwgClassesWriter::sectionName() const
+{
+    return DwgSectionDefinition::Classes;
+}
 
 void DwgClassesWriter::write()
 {

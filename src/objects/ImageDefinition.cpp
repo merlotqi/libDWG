@@ -30,34 +30,79 @@ ImageDefinition::ImageDefinition() {}
 
 ImageDefinition::~ImageDefinition() {}
 
-ObjectType ImageDefinition::objectType() const { return ObjectType::UNLISTED; }
+ObjectType ImageDefinition::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string ImageDefinition::objectName() const { return DxfFileToken::ObjectImageDefinition; }
+std::string ImageDefinition::objectName() const
+{
+    return DxfFileToken::ObjectImageDefinition;
+}
 
-std::string ImageDefinition::subclassMarker() const { return DxfSubclassMarker::RasterImageDef; }
+std::string ImageDefinition::subclassMarker() const
+{
+    return DxfSubclassMarker::RasterImageDef;
+}
 
-int ImageDefinition::classVersion() const { return _classVersion; }
+int ImageDefinition::classVersion() const
+{
+    return _classVersion;
+}
 
-void ImageDefinition::setClassVersion(int value) { _classVersion = value; }
+void ImageDefinition::setClassVersion(int value)
+{
+    _classVersion = value;
+}
 
-std::string ImageDefinition::fileName() const { return _fileName; }
+std::string ImageDefinition::fileName() const
+{
+    return _fileName;
+}
 
-void ImageDefinition::setFileName(const std::string &value) { _fileName = value; }
+void ImageDefinition::setFileName(const std::string &value)
+{
+    _fileName = value;
+}
 
-XY ImageDefinition::size() const { return _size; }
+XY ImageDefinition::size() const
+{
+    return _size;
+}
 
-void ImageDefinition::setSize(const XY &value) { _size = value; }
+void ImageDefinition::setSize(const XY &value)
+{
+    _size = value;
+}
 
-XY ImageDefinition::defaultSize() const { return _defaultSize; }
+XY ImageDefinition::defaultSize() const
+{
+    return _defaultSize;
+}
 
-void ImageDefinition::setDefaultSize(const XY &value) { _defaultSize = value; }
+void ImageDefinition::setDefaultSize(const XY &value)
+{
+    _defaultSize = value;
+}
 
-bool ImageDefinition::isLoaded() const { return _isLoaded; }
+bool ImageDefinition::isLoaded() const
+{
+    return _isLoaded;
+}
 
-void ImageDefinition::setIsLoaded(bool value) { _isLoaded = value; }
+void ImageDefinition::setIsLoaded(bool value)
+{
+    _isLoaded = value;
+}
 
-ResolutionUnit ImageDefinition::units() const { return _units; }
+ResolutionUnit ImageDefinition::units() const
+{
+    return _units;
+}
 
-void ImageDefinition::setUnits(ResolutionUnit value) { _units = value; }
+void ImageDefinition::setUnits(ResolutionUnit value)
+{
+    _units = value;
+}
 
 }// namespace dwg

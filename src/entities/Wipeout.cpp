@@ -30,10 +30,19 @@ Wipeout::Wipeout() {}
 
 Wipeout::~Wipeout() {}
 
-ObjectType Wipeout::objectType() const { return ObjectType::UNLISTED; }
+ObjectType Wipeout::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string Wipeout::objectName() const { return DxfFileToken::EntityWipeout; }
+std::string Wipeout::objectName() const
+{
+    return DxfFileToken::EntityWipeout;
+}
 
-std::string Wipeout::subclassMarker() const { return DxfSubclassMarker::Wipeout; }
+std::string Wipeout::subclassMarker() const
+{
+    return DxfSubclassMarker::Wipeout;
+}
 
 }// namespace dwg

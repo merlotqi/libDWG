@@ -30,23 +30,50 @@ DimensionAngular3Pt::DimensionAngular3Pt() : Dimension(DimensionType::Angular3Po
 
 DimensionAngular3Pt::~DimensionAngular3Pt() {}
 
-ObjectType DimensionAngular3Pt::objectType() const { return ObjectType::DIMENSION_ANG_3_Pt; }
+ObjectType DimensionAngular3Pt::objectType() const
+{
+    return ObjectType::DIMENSION_ANG_3_Pt;
+}
 
-std::string DimensionAngular3Pt::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionAngular3Pt::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionAngular3Pt::subclassMarker() const { return DxfSubclassMarker::Angular3PointDimension; }
+std::string DimensionAngular3Pt::subclassMarker() const
+{
+    return DxfSubclassMarker::Angular3PointDimension;
+}
 
-XYZ DimensionAngular3Pt::firstPoint() const { return _firstPoint; }
+XYZ DimensionAngular3Pt::firstPoint() const
+{
+    return _firstPoint;
+}
 
-void DimensionAngular3Pt::setFirstPoint(const XYZ &value) { _firstPoint = value; }
+void DimensionAngular3Pt::setFirstPoint(const XYZ &value)
+{
+    _firstPoint = value;
+}
 
-XYZ DimensionAngular3Pt::secondPoint() const { return _secondPoint; }
+XYZ DimensionAngular3Pt::secondPoint() const
+{
+    return _secondPoint;
+}
 
-void DimensionAngular3Pt::setSecondPoint(const XYZ &value) { _secondPoint = value; }
+void DimensionAngular3Pt::setSecondPoint(const XYZ &value)
+{
+    _secondPoint = value;
+}
 
-XYZ DimensionAngular3Pt::angleVertex() const { return _angleVertex; }
+XYZ DimensionAngular3Pt::angleVertex() const
+{
+    return _angleVertex;
+}
 
-void DimensionAngular3Pt::setAngleVertex(const XYZ &value) { _angleVertex = value; }
+void DimensionAngular3Pt::setAngleVertex(const XYZ &value)
+{
+    _angleVertex = value;
+}
 
 double DimensionAngular3Pt::measurement() const
 {

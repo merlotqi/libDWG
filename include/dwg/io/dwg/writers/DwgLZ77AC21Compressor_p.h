@@ -30,7 +30,8 @@ class DwgLZ77AC21Compressor : public ICompressor
 {
 public:
     DwgLZ77AC21Compressor();
-    void compress(std::vector<unsigned char> &source, size_t offset, size_t totalSize, std::ostream *dest) override;
+    void compress(const std::vector<unsigned char> &source, size_t offset, size_t totalSize,
+                  std::ostream *dest) override;
 };
 
 }// namespace dwg

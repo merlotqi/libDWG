@@ -30,23 +30,50 @@ DimensionOrdinate::DimensionOrdinate() : Dimension(DimensionType::Ordinate) {}
 
 DimensionOrdinate::~DimensionOrdinate() {}
 
-ObjectType DimensionOrdinate::objectType() const { return ObjectType::DIMENSION_ORDINATE; }
+ObjectType DimensionOrdinate::objectType() const
+{
+    return ObjectType::DIMENSION_ORDINATE;
+}
 
-std::string DimensionOrdinate::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionOrdinate::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionOrdinate::subclassMarker() const { return DxfSubclassMarker::OrdinateDimension; }
+std::string DimensionOrdinate::subclassMarker() const
+{
+    return DxfSubclassMarker::OrdinateDimension;
+}
 
-XYZ DimensionOrdinate::featureLocation() const { return _featureLocation; }
+XYZ DimensionOrdinate::featureLocation() const
+{
+    return _featureLocation;
+}
 
-void DimensionOrdinate::setFeatureLocation(const XYZ &value) { _featureLocation = value; }
+void DimensionOrdinate::setFeatureLocation(const XYZ &value)
+{
+    _featureLocation = value;
+}
 
-XYZ DimensionOrdinate::leaderEndpoint() const { return _leaderEndpoint; }
+XYZ DimensionOrdinate::leaderEndpoint() const
+{
+    return _leaderEndpoint;
+}
 
-void DimensionOrdinate::setLeaderEndpoint(const XYZ &value) { _leaderEndpoint = value; }
+void DimensionOrdinate::setLeaderEndpoint(const XYZ &value)
+{
+    _leaderEndpoint = value;
+}
 
-double DimensionOrdinate::measurement() const { return 0.0; }
+double DimensionOrdinate::measurement() const
+{
+    return 0.0;
+}
 
-bool DimensionOrdinate::isOrdinateTypeX() const { return _flags & DimensionType::OrdinateTypeX; }
+bool DimensionOrdinate::isOrdinateTypeX() const
+{
+    return _flags & DimensionType::OrdinateTypeX;
+}
 
 void DimensionOrdinate::setIsOrdinateTypeX(bool value)
 {

@@ -30,10 +30,19 @@ AcdbPlaceHolder::AcdbPlaceHolder() {}
 
 AcdbPlaceHolder::~AcdbPlaceHolder() {}
 
-ObjectType AcdbPlaceHolder::objectType() const { return ObjectType::ACDBPLACEHOLDER; }
+ObjectType AcdbPlaceHolder::objectType() const
+{
+    return ObjectType::ACDBPLACEHOLDER;
+}
 
-std::string AcdbPlaceHolder::objectName() const { return DxfFileToken::ObjectPlaceholder; }
+std::string AcdbPlaceHolder::objectName() const
+{
+    return DxfFileToken::ObjectPlaceholder;
+}
 
-std::string AcdbPlaceHolder::subclassMarker() const { return DxfSubclassMarker::AcDbPlaceHolder; }
+std::string AcdbPlaceHolder::subclassMarker() const
+{
+    return DxfSubclassMarker::AcDbPlaceHolder;
+}
 
 }// namespace dwg

@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <assert.h>
 #include <dwg/utils/StreamWrapper.h>
 #include <stdexcept>
-#include <assert.h>
+
 
 namespace dwg {
 
@@ -36,17 +37,32 @@ InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), 
 
 InputStreamWrapper::~InputStreamWrapper() {}
 
-std::istream *InputStreamWrapper::stream() { return _stream; }
+std::istream *InputStreamWrapper::stream()
+{
+    return _stream;
+}
 
-std::size_t InputStreamWrapper::length() const { return 0; }
+std::size_t InputStreamWrapper::length() const
+{
+    return 0;
+}
 
-std::size_t InputStreamWrapper::pos() const { return 0; }
+std::size_t InputStreamWrapper::pos() const
+{
+    return 0;
+}
 
 void InputStreamWrapper::seek(std::size_t pos) {}
 
-Encoding InputStreamWrapper::encoding() const { return _encoding; }
+Encoding InputStreamWrapper::encoding() const
+{
+    return _encoding;
+}
 
-void InputStreamWrapper::setEncoding(Encoding encoding) { _encoding = encoding; }
+void InputStreamWrapper::setEncoding(Encoding encoding)
+{
+    _encoding = encoding;
+}
 
 char InputStreamWrapper::readChar()
 {
@@ -69,23 +85,50 @@ std::vector<unsigned char> InputStreamWrapper::readBytes(int length)
     return buffer;
 }
 
-short InputStreamWrapper::readShort() { return readT<short, LittleEndianConverter>(); }
+short InputStreamWrapper::readShort()
+{
+    return readT<short, LittleEndianConverter>();
+}
 
-unsigned short InputStreamWrapper::readUShort() { return readT<unsigned short, LittleEndianConverter>(); }
+unsigned short InputStreamWrapper::readUShort()
+{
+    return readT<unsigned short, LittleEndianConverter>();
+}
 
-int InputStreamWrapper::readInt() { return readT<int, LittleEndianConverter>(); }
+int InputStreamWrapper::readInt()
+{
+    return readT<int, LittleEndianConverter>();
+}
 
-unsigned int InputStreamWrapper::readUInt() { return readT<unsigned int, LittleEndianConverter>(); }
+unsigned int InputStreamWrapper::readUInt()
+{
+    return readT<unsigned int, LittleEndianConverter>();
+}
 
-long long InputStreamWrapper::readLong() { return readT<long long, LittleEndianConverter>(); }
+long long InputStreamWrapper::readLong()
+{
+    return readT<long long, LittleEndianConverter>();
+}
 
-unsigned long long InputStreamWrapper::readULong() { return readT<unsigned long long, LittleEndianConverter>(); }
+unsigned long long InputStreamWrapper::readULong()
+{
+    return readT<unsigned long long, LittleEndianConverter>();
+}
 
-float InputStreamWrapper::readFloat() { return readT<float, LittleEndianConverter>(); }
+float InputStreamWrapper::readFloat()
+{
+    return readT<float, LittleEndianConverter>();
+}
 
-double InputStreamWrapper::readDouble() { return readT<double, LittleEndianConverter>(); }
+double InputStreamWrapper::readDouble()
+{
+    return readT<double, LittleEndianConverter>();
+}
 
-std::string InputStreamWrapper::readString(int length) { return readString(length, _encoding); }
+std::string InputStreamWrapper::readString(int length)
+{
+    return readString(length, _encoding);
+}
 
 std::string InputStreamWrapper::readString(int length, Encoding encoding)
 {
@@ -93,7 +136,10 @@ std::string InputStreamWrapper::readString(int length, Encoding encoding)
     return encoding.toUtf8(reinterpret_cast<const char *>(buffer.data()));
 }
 
-std::string InputStreamWrapper::readUntil(char match) { return std::string(); }
+std::string InputStreamWrapper::readUntil(char match)
+{
+    return std::string();
+}
 
 
 /* --------------------------- OutputStreamWrapper -------------------------- */
@@ -102,7 +148,10 @@ OutputStreamWrapper::OutputStreamWrapper(std::ostream *stream) : _stream(stream)
 
 OutputStreamWrapper ::~OutputStreamWrapper() {}
 
-std::ostream *OutputStreamWrapper::stream() { return _stream; }
+std::ostream *OutputStreamWrapper::stream()
+{
+    return _stream;
+}
 
 std::size_t OutputStreamWrapper::length() const
 {
@@ -114,17 +163,32 @@ std::size_t OutputStreamWrapper::length() const
     return len;
 }
 
-std::size_t OutputStreamWrapper::pos() const { return _stream->tellp(); }
+std::size_t OutputStreamWrapper::pos() const
+{
+    return _stream->tellp();
+}
 
-void OutputStreamWrapper::seek(std::size_t pos) { _stream->seekp(pos); }
+void OutputStreamWrapper::seek(std::size_t pos)
+{
+    _stream->seekp(pos);
+}
 
 void OutputStreamWrapper::flush() {}
 
-Encoding OutputStreamWrapper::encoding() const { return _encoding; }
+Encoding OutputStreamWrapper::encoding() const
+{
+    return _encoding;
+}
 
-void OutputStreamWrapper::setEncoding(Encoding encoding) { _encoding = encoding; }
+void OutputStreamWrapper::setEncoding(Encoding encoding)
+{
+    _encoding = encoding;
+}
 
-std::vector<unsigned char> OutputStreamWrapper::buffer() { return std::vector<unsigned char>(); }
+std::vector<unsigned char> OutputStreamWrapper::buffer()
+{
+    return std::vector<unsigned char>();
+}
 
 void OutputStreamWrapper::write(const std::vector<unsigned char> &buffer, int offset, int length)
 {
@@ -137,6 +201,9 @@ void OutputStreamWrapper::write(const std::string &) {}
 
 void OutputStreamWrapper::write(const std::string &, Encoding) {}
 
-void OutputStreamWrapper::writeByte(unsigned char b) { _stream->write(reinterpret_cast<const char *>(&b), 1); }
+void OutputStreamWrapper::writeByte(unsigned char b)
+{
+    _stream->write(reinterpret_cast<const char *>(&b), 1);
+}
 
 }// namespace dwg

@@ -39,7 +39,7 @@ class DwgLZ77AC18Compressor : public ICompressor
 
 public:
     DwgLZ77AC18Compressor();
-    void compress(std::vector<unsigned char> &source, size_t offset, size_t totalSize, std::ostream *dest) override;
+    void compress(const std::vector<unsigned char> &source, size_t offset, size_t totalSize, std::ostream *dest) override;
 
 private:
     void restartBlock();

@@ -318,7 +318,10 @@ std::vector<unsigned char> Color::getRgb() const
     }
 }
 
-Color::Color(const Color &rhs) { _color = rhs._color; }
+Color::Color(const Color &rhs)
+{
+    _color = rhs._color;
+}
 
 Color &Color::operator=(const Color &rhs)
 {
@@ -345,9 +348,15 @@ Color::Color(short index)
 
 Color::Color(unsigned char r, unsigned char g, unsigned char b) : Color(std::vector<unsigned char>{r, g, b}) {}
 
-Color::Color(const std::vector<unsigned char> &rgb) { _color = getInt24(rgb); }
+Color::Color(const std::vector<unsigned char> &rgb)
+{
+    _color = getInt24(rgb);
+}
 
-Color Color::fromTrueColor(unsigned int color) { return Color(color); }
+Color Color::fromTrueColor(unsigned int color)
+{
+    return Color(color);
+}
 
 unsigned char Color::approxIndex(unsigned char r, unsigned char g, unsigned char b)
 {
@@ -368,21 +377,45 @@ unsigned char Color::approxIndex(unsigned char r, unsigned char g, unsigned char
     return 0;
 }
 
-bool Color::isByLayer() const { return index() == 256; }
+bool Color::isByLayer() const
+{
+    return index() == 256;
+}
 
-bool Color::isByBlock() const { return index() == 0; }
+bool Color::isByBlock() const
+{
+    return index() == 0;
+}
 
-short Color::index() const { return isTrueColor() ? (short) -1 : (short) _color; }
+short Color::index() const
+{
+    return isTrueColor() ? (short) -1 : (short) _color;
+}
 
-int Color::trueColor() const { return isTrueColor() ? (int) (_color ^ (1 << 30)) : -1; }
+int Color::trueColor() const
+{
+    return isTrueColor() ? (int) (_color ^ (1 << 30)) : -1;
+}
 
-bool Color::isTrueColor() const { return _color > 257 || _color < 0; }
+bool Color::isTrueColor() const
+{
+    return _color > 257 || _color < 0;
+}
 
-unsigned char Color::red() const { return getRgb()[0]; }
+unsigned char Color::red() const
+{
+    return getRgb()[0];
+}
 
-unsigned char Color::green() const { return getRgb()[1]; }
+unsigned char Color::green() const
+{
+    return getRgb()[1];
+}
 
-unsigned char Color::blue() const { return getRgb()[2]; }
+unsigned char Color::blue() const
+{
+    return getRgb()[2];
+}
 
 unsigned char Color::approxIndex() const
 {

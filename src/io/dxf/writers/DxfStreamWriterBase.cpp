@@ -32,7 +32,10 @@ DxfStreamWriterBase::DxfStreamWriterBase() {}
 
 DxfStreamWriterBase::~DxfStreamWriterBase() {}
 
-bool DxfStreamWriterBase::writeOptional() const { return _writeOptional; }
+bool DxfStreamWriterBase::writeOptional() const
+{
+    return _writeOptional;
+}
 
 void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap) {}
 

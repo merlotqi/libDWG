@@ -42,21 +42,45 @@ TimeSpan::TimeSpan(int day, int hour, int min, int sec)
     _timeSpan = (day * 86400LL) + (hour * 3600LL) + (min * 60LL) + sec;
 }
 
-int TimeSpan::days() const { return static_cast<int>(_timeSpan / 86400LL); }
+int TimeSpan::days() const
+{
+    return static_cast<int>(_timeSpan / 86400LL);
+}
 
-int TimeSpan::totalHours() const { return static_cast<int>(_timeSpan / 3600LL); }
+int TimeSpan::totalHours() const
+{
+    return static_cast<int>(_timeSpan / 3600LL);
+}
 
-int TimeSpan::hours() const { return static_cast<int>((_timeSpan % 86400LL) / 3600LL); }
+int TimeSpan::hours() const
+{
+    return static_cast<int>((_timeSpan % 86400LL) / 3600LL);
+}
 
-int TimeSpan::totalMinutes() const { return static_cast<int>(_timeSpan / 60LL); }
+int TimeSpan::totalMinutes() const
+{
+    return static_cast<int>(_timeSpan / 60LL);
+}
 
-int TimeSpan::minutes() const { return static_cast<int>((_timeSpan % 3600LL) / 60LL); }
+int TimeSpan::minutes() const
+{
+    return static_cast<int>((_timeSpan % 3600LL) / 60LL);
+}
 
-int TimeSpan::totalSeconds() const { return static_cast<int>(_timeSpan); }
+int TimeSpan::totalSeconds() const
+{
+    return static_cast<int>(_timeSpan);
+}
 
-int TimeSpan::seconds() const { return static_cast<int>(_timeSpan % 60LL); }
+int TimeSpan::seconds() const
+{
+    return static_cast<int>(_timeSpan % 60LL);
+}
 
-TimeSpan::operator long long() const { return _timeSpan; }
+TimeSpan::operator long long() const
+{
+    return _timeSpan;
+}
 
 TimeSpan &TimeSpan::operator=(const TimeSpan &rhs)
 {
@@ -73,21 +97,45 @@ TimeSpan &TimeSpan::operator=(const long long span)
     return *this;
 }
 
-bool TimeSpan::operator==(const TimeSpan &rhs) const { return _timeSpan == rhs._timeSpan; }
+bool TimeSpan::operator==(const TimeSpan &rhs) const
+{
+    return _timeSpan == rhs._timeSpan;
+}
 
-bool TimeSpan::operator!=(const TimeSpan &rhs) const { return _timeSpan != rhs._timeSpan; }
+bool TimeSpan::operator!=(const TimeSpan &rhs) const
+{
+    return _timeSpan != rhs._timeSpan;
+}
 
-bool TimeSpan::operator>(const TimeSpan &rhs) const { return _timeSpan > rhs._timeSpan; }
+bool TimeSpan::operator>(const TimeSpan &rhs) const
+{
+    return _timeSpan > rhs._timeSpan;
+}
 
-bool TimeSpan::operator<(const TimeSpan &rhs) const { return _timeSpan < rhs._timeSpan; }
+bool TimeSpan::operator<(const TimeSpan &rhs) const
+{
+    return _timeSpan < rhs._timeSpan;
+}
 
-bool TimeSpan::operator<=(const TimeSpan &rhs) const { return _timeSpan <= rhs._timeSpan; }
+bool TimeSpan::operator<=(const TimeSpan &rhs) const
+{
+    return _timeSpan <= rhs._timeSpan;
+}
 
-bool TimeSpan::operator>=(const TimeSpan &rhs) const { return _timeSpan >= rhs._timeSpan; }
+bool TimeSpan::operator>=(const TimeSpan &rhs) const
+{
+    return _timeSpan >= rhs._timeSpan;
+}
 
-TimeSpan TimeSpan::operator+(const TimeSpan &rhs) const { return TimeSpan(_timeSpan + rhs._timeSpan); }
+TimeSpan TimeSpan::operator+(const TimeSpan &rhs) const
+{
+    return TimeSpan(_timeSpan + rhs._timeSpan);
+}
 
-TimeSpan TimeSpan::operator-(const TimeSpan &rhs) const { return TimeSpan(_timeSpan - rhs._timeSpan); }
+TimeSpan TimeSpan::operator-(const TimeSpan &rhs) const
+{
+    return TimeSpan(_timeSpan - rhs._timeSpan);
+}
 
 TimeSpan &TimeSpan::operator+=(const TimeSpan &rhs)
 {
@@ -103,7 +151,10 @@ TimeSpan &TimeSpan::operator-=(const TimeSpan &rhs)
 
 /* -------------------------------- DateTime -------------------------------- */
 
-DateTime::DateTime() { _time = static_cast<long long>(time(nullptr)); }
+DateTime::DateTime()
+{
+    _time = static_cast<long long>(time(nullptr));
+}
 
 DateTime::DateTime(const DateTime &rhs) : _time(rhs._time) {}
 
@@ -147,7 +198,10 @@ long long DateTime::timeZone()
 #endif
 }
 
-DateTime DateTime::now() { return DateTime(); }
+DateTime DateTime::now()
+{
+    return DateTime();
+}
 
 DateTime DateTime::toUTC() const
 {
@@ -246,7 +300,10 @@ WeekDay DateTime::dayOfWeek() const
     }
 }
 
-DateTime::operator time_t() const { return static_cast<time_t>(_time); }
+DateTime::operator time_t() const
+{
+    return static_cast<time_t>(_time);
+}
 
 DateTime &DateTime::operator=(const long long tim)
 {
@@ -263,23 +320,50 @@ DateTime &DateTime::operator=(const DateTime &rhs)
     return *this;
 }
 
-bool DateTime::operator==(const DateTime &rhs) const { return _time == rhs._time; }
+bool DateTime::operator==(const DateTime &rhs) const
+{
+    return _time == rhs._time;
+}
 
-bool DateTime::operator!=(const DateTime &rhs) const { return _time != rhs._time; }
+bool DateTime::operator!=(const DateTime &rhs) const
+{
+    return _time != rhs._time;
+}
 
-bool DateTime::operator>(const DateTime &rhs) const { return _time > rhs._time; }
+bool DateTime::operator>(const DateTime &rhs) const
+{
+    return _time > rhs._time;
+}
 
-bool DateTime::operator<(const DateTime &rhs) const { return _time < rhs._time; }
+bool DateTime::operator<(const DateTime &rhs) const
+{
+    return _time < rhs._time;
+}
 
-bool DateTime::operator<=(const DateTime &rhs) const { return _time <= rhs._time; }
+bool DateTime::operator<=(const DateTime &rhs) const
+{
+    return _time <= rhs._time;
+}
 
-bool DateTime::operator>=(const DateTime &rhs) const { return _time >= rhs._time; }
+bool DateTime::operator>=(const DateTime &rhs) const
+{
+    return _time >= rhs._time;
+}
 
-DateTime DateTime::operator+(const TimeSpan &rhs) const { return DateTime(_time + rhs); }
+DateTime DateTime::operator+(const TimeSpan &rhs) const
+{
+    return DateTime(_time + rhs);
+}
 
-DateTime DateTime::operator-(const TimeSpan &rhs) const { return DateTime(_time - rhs); }
+DateTime DateTime::operator-(const TimeSpan &rhs) const
+{
+    return DateTime(_time - rhs);
+}
 
-TimeSpan DateTime::operator-(const DateTime &rhs) const { return TimeSpan(_time - rhs._time); }
+TimeSpan DateTime::operator-(const DateTime &rhs) const
+{
+    return TimeSpan(_time - rhs._time);
+}
 
 DateTime &DateTime::operator+=(const TimeSpan &rhs)
 {
@@ -293,21 +377,30 @@ DateTime &DateTime::operator-=(const TimeSpan &rhs)
     return *this;
 }
 
-std::string DateTime::toLongDateString() const { return fmt::format("{:04}-{:02}-{:02}", year(), month(), day()); }
+std::string DateTime::toLongDateString() const
+{
+    return fmt::format("{:04}-{:02}-{:02}", year(), month(), day());
+}
 
 std::string DateTime::toLongTimeString() const
 {
     return fmt::format("{:04}-{:02}-{:02} {:02}:{:02}:{:02}", year(), month(), day(), hour(), minute(), second());
 }
 
-std::string DateTime::toShortDateString() const { return fmt::format("{:04}/{:02}/{:02}", year(), month(), day()); }
+std::string DateTime::toShortDateString() const
+{
+    return fmt::format("{:04}/{:02}/{:02}", year(), month(), day());
+}
 
 std::string DateTime::toShortTimeString() const
 {
     return fmt::format("{:04}/{:02}/{:02} {:02}:{:02}", year(), month(), day(), hour(), minute());
 }
 
-std::string DateTime::toString() const { return toLongTimeString(); }
+std::string DateTime::toString() const
+{
+    return toLongTimeString();
+}
 
 std::string DateTime::toString(const char *format) const
 {

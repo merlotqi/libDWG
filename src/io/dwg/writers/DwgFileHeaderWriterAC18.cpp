@@ -29,8 +29,8 @@
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 #include <dwg/io/dwg/fileheaders/DwgLocalSectionMap_p.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDescriptor_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterAC18_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>
 #include <dwg/io/dwg/writers/DwgLZ77AC18Compressor_p.h>
@@ -40,9 +40,15 @@
 
 namespace dwg {
 
-int DwgFileHeaderWriterAC18::handleSectionOffset() const { return 0; }
+int DwgFileHeaderWriterAC18::handleSectionOffset() const
+{
+    return 0;
+}
 
-int DwgFileHeaderWriterAC18::fileHeaderSize() const { return 0x100; }
+int DwgFileHeaderWriterAC18::fileHeaderSize() const
+{
+    return 0x100;
+}
 
 DwgFileHeaderWriterAC18::DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding, CadDocument *document)
     : DwgFileHeaderWriterBase(stream, encoding, document)
@@ -134,7 +140,8 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
 
     writeDataSection(&checkSumStream, descriptor, localMap, (int) descriptor.pageType());
 
-    applyMask(checkSumStream_wrapper.buffer(), 0, (int) checkSumStream_wrapper.length());
+    std::vector<unsigned char> checkSumBuffer = checkSumStream_wrapper.buffer();
+    applyMask(checkSumBuffer, 0, (int) checkSumBuffer.size());
 
     _stream->write(checkSumStream.str().c_str(), checkSumStream.str().length());
     _stream->write(descriptorStream.str().c_str(), descriptorStream.str().length());
@@ -217,10 +224,10 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
         /*0x08	4	Page count(PageCount). Note that there can be more pages than PageCount,
 							as PageCount is just the number of pages written to file.
 							If a page contains zeroes only, that page is not written to file.
-							These “zero pages” can be detected by checking if the page’s start 
+							These "zero pages" can be detected by checking if the page's start 
 							offset is bigger than it should be based on the sum of previously read pages 
 							decompressed size(including zero pages).After reading all pages, if the total 
-							decompressed size of the pages is not equal to the section’s size, add more zero 
+							decompressed size of the pages is not equal to the section's size, add more zero 
 							pages to the section until this condition is met.
 				*/
         swriter->writeInt(descriptors.pageCount());
@@ -319,7 +326,7 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
 
     _stream->write(reinterpret_cast<const char *>(stream.str().c_str()), stream.str().length());
 
-    ////0x00	6	“ACXXXX” version string
+    ////0x00	6	"ACXXXX" version string
     _stream->seekp(std::ios::beg);
     Encoding encoding(CodePage::Windows1251);
     writer.write(encoding.bytes(_document->header()->versionString()), 0, 6);
@@ -334,7 +341,8 @@ void DwgFileHeaderWriterAC18::writeFileMetaData()
     writer.write<unsigned char>(3);
 
     //0x0D	4	Preview address(long), points to the image page + page header size(0x20).
-    writer.write((unsigned int) ((int) _descriptors[DwgSectionDefinition::Preview].localSections().at(0).seeker() + 0x20));
+    writer.write(
+            (unsigned int) ((int) _descriptors[DwgSectionDefinition::Preview].localSections().at(0).seeker() + 0x20));
 
     //0x11	1	Dwg version (Acad version that writes the file)
     writer.write<unsigned char>(33);
@@ -378,7 +386,7 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::ostringstream *stream)
 {
     CRC32OutputStreamHandler swriter(stream);
 
-    //0x00	12	“AcFssFcAJMB” file ID string
+    //0x00	12	"AcFssFcAJMB" file ID string
     Encoding encoding(CodePage::Windows1252);
     swriter.write(encoding.fromUtf8("AcFssFcAJMB"));
     swriter.writeByte(0);
@@ -480,8 +488,10 @@ void DwgFileHeaderWriterAC18::compressChecksum(DwgLocalSectionMap &section, std:
     std::ostringstream checkSumHolder;
     writePageHeaderData(section, &checkSumHolder);
     OutputStreamWrapper checkSumHolder_wrapper(&checkSumHolder);
-    section.setChecksum(DwgCheckSumCalculator::Calculate(0u, checkSumHolder_wrapper.buffer(), 0, (int) checkSumHolder_wrapper.length()));
-    section.setChecksum(DwgCheckSumCalculator::Calculate((unsigned int) section.checksum(), main_wrapper.buffer(), 0, (int) main_wrapper.length()));
+    section.setChecksum(DwgCheckSumCalculator::Calculate(0u, checkSumHolder_wrapper.buffer(), 0,
+                                                         (int) checkSumHolder_wrapper.length()));
+    section.setChecksum(DwgCheckSumCalculator::Calculate((unsigned int) section.checksum(), main_wrapper.buffer(), 0,
+                                                         (int) main_wrapper.length()));
 
     writePageHeaderData(section, _stream);
     _stream->write(reinterpret_cast<const char *>(main.str().data()), main.str().length());
@@ -510,7 +520,7 @@ void DwgFileHeaderWriterAC18::writeDataSection(std::ostream *stream, const DwgSe
 {
     OutputStreamWrapper writer(stream);
 
-    //0x00	4	Section page type, since it’s always a data section: 0x4163043b
+    //0x00	4	Section page type, since it's always a data section: 0x4163043b
     writer.write(size);
     //0x04	4	Section number
     writer.write(descriptor.sectionId());

@@ -32,34 +32,79 @@ AttributeBase::AttributeBase()
 
 AttributeBase::~AttributeBase() {}
 
-TextVerticalAlignment AttributeBase::verticalAlignment() const { return _verticalAlignment; }
+TextVerticalAlignment AttributeBase::verticalAlignment() const
+{
+    return _verticalAlignment;
+}
 
-void AttributeBase::setVerticalAlignment(TextVerticalAlignment alignment) { _verticalAlignment = alignment; }
+void AttributeBase::setVerticalAlignment(TextVerticalAlignment alignment)
+{
+    _verticalAlignment = alignment;
+}
 
-unsigned char AttributeBase::version() const { return _version; }
+unsigned char AttributeBase::version() const
+{
+    return _version;
+}
 
-void AttributeBase::setVersion(unsigned char version) { _version = version; }
+void AttributeBase::setVersion(unsigned char version)
+{
+    _version = version;
+}
 
-std::string AttributeBase::tag() const { return _tag; }
+std::string AttributeBase::tag() const
+{
+    return _tag;
+}
 
-void AttributeBase::setTag(const std::string &tag) { _tag = tag; }
+void AttributeBase::setTag(const std::string &tag)
+{
+    _tag = tag;
+}
 
-AttributeFlags AttributeBase::flags() const { return _flags; }
+AttributeFlags AttributeBase::flags() const
+{
+    return _flags;
+}
 
-void AttributeBase::setFlags(AttributeFlags flags) { _flags = flags; }
+void AttributeBase::setFlags(AttributeFlags flags)
+{
+    _flags = flags;
+}
 
-AttributeBase::AttributeType AttributeBase::attributeType() const { return _attributeType; }
+AttributeBase::AttributeType AttributeBase::attributeType() const
+{
+    return _attributeType;
+}
 
-void AttributeBase::setAttributeType(AttributeType attributeType) { _attributeType = attributeType; }
+void AttributeBase::setAttributeType(AttributeType attributeType)
+{
+    _attributeType = attributeType;
+}
 
-bool AttributeBase::isReallyLocked() const { return _isReallyLocked; }
+bool AttributeBase::isReallyLocked() const
+{
+    return _isReallyLocked;
+}
 
-void AttributeBase::setIsReallyLocked(bool value) { _isReallyLocked = value; }
+void AttributeBase::setIsReallyLocked(bool value)
+{
+    _isReallyLocked = value;
+}
 
-MText *AttributeBase::mtext() const { return _mtext; }
+MText *AttributeBase::mtext() const
+{
+    return _mtext;
+}
 
-void AttributeBase::setMText(MText *mtext) { _mtext = mtext; }
+void AttributeBase::setMText(MText *mtext)
+{
+    _mtext = mtext;
+}
 
-void AttributeBase::matchAttributeProperties(AttributeBase *src) { src->matchProperties(this); }
+void AttributeBase::matchAttributeProperties(AttributeBase *src)
+{
+    src->matchProperties(this);
+}
 
 }// namespace dwg

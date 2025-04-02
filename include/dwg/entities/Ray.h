@@ -26,69 +26,23 @@
 
 namespace dwg {
 
-/**
- * @class Ray
- * @brief Represents a ray entity in a DWG/DXF drawing.
- *
- * A ray is a linear infinite construction line that starts at a point and extends in a specified direction.
- * It inherits from Entity and contains a start point and a direction vector.
- */
 class LIBDWG_API Ray : public Entity
 {
     XYZ _startPoint;///< The starting point of the ray.
     XYZ _direction; ///< The direction vector of the ray.
 
 public:
-    /**
-     * @brief Constructs a Ray object with default values.
-     */
     Ray();
-
-    /**
-     * @brief Destroys the Ray object.
-     */
     ~Ray();
 
-    /**
-     * @brief Gets the object type of the ray.
-     * @return The object type as ObjectType.
-     */
     virtual ObjectType objectType() const override;
-
-    /**
-     * @brief Gets the name of the ray object.
-     * @return The object name as a string.
-     */
     virtual std::string objectName() const override;
-
-    /**
-     * @brief Gets the subclass marker associated with this ray.
-     * @return The subclass marker as a string.
-     */
     virtual std::string subclassMarker() const override;
 
-    /**
-     * @brief Gets the start point of the ray.
-     * @return The start point as an XYZ object.
-     */
     XYZ startPoint() const;
-
-    /**
-     * @brief Sets the start point of the ray.
-     * @param point The new start point.
-     */
     void setStartPoint(const XYZ &point);
 
-    /**
-     * @brief Gets the direction vector of the ray.
-     * @return The direction vector as an XYZ object.
-     */
     XYZ direction() const;
-
-    /**
-     * @brief Sets the direction vector of the ray.
-     * @param direction The new direction vector.
-     */
     void setDirection(const XYZ &direction);
 };
 

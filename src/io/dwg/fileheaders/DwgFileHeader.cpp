@@ -37,19 +37,40 @@ DwgFileHeader::DwgFileHeader(ACadVersion version)
 
 DwgFileHeader::~DwgFileHeader() {}
 
-ACadVersion DwgFileHeader::version() const { return _version; }
+ACadVersion DwgFileHeader::version() const
+{
+    return _version;
+}
 
-long long DwgFileHeader::previewAddress() const { return _previewAddress; }
+long long DwgFileHeader::previewAddress() const
+{
+    return _previewAddress;
+}
 
-void DwgFileHeader::setPreviewAddress(long long value) { _previewAddress = value; }
+void DwgFileHeader::setPreviewAddress(long long value)
+{
+    _previewAddress = value;
+}
 
-int DwgFileHeader::acadMaintenanceVersion() const { return _acadMaintenanceVersion; }
+int DwgFileHeader::acadMaintenanceVersion() const
+{
+    return _acadMaintenanceVersion;
+}
 
-void DwgFileHeader::setAcadMaintenanceVersion(int value) { _acadMaintenanceVersion = value; }
+void DwgFileHeader::setAcadMaintenanceVersion(int value)
+{
+    _acadMaintenanceVersion = value;
+}
 
-CodePage DwgFileHeader::drawingCodePage() const { return _drawingCodePage; }
+CodePage DwgFileHeader::drawingCodePage() const
+{
+    return _drawingCodePage;
+}
 
-void DwgFileHeader::setDrawingCodePage(CodePage value) { _drawingCodePage = value; }
+void DwgFileHeader::setDrawingCodePage(CodePage value)
+{
+    _drawingCodePage = value;
+}
 
 DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
 {

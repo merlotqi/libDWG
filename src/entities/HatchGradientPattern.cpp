@@ -34,36 +34,84 @@ HatchGradientPattern::HatchGradientPattern(const std::string &name)
 
 HatchGradientPattern::~HatchGradientPattern() {}
 
-bool HatchGradientPattern::enabled() const { return _enabled; }
+bool HatchGradientPattern::enabled() const
+{
+    return _enabled;
+}
 
-void HatchGradientPattern::setEnabled(bool enabled) { _enabled = enabled; }
+void HatchGradientPattern::setEnabled(bool enabled)
+{
+    _enabled = enabled;
+}
 
-int HatchGradientPattern::reserved() const { return _reserved; }
+int HatchGradientPattern::reserved() const
+{
+    return _reserved;
+}
 
-void HatchGradientPattern::setReserved(int reserved) { _reserved = reserved; }
+void HatchGradientPattern::setReserved(int reserved)
+{
+    _reserved = reserved;
+}
 
-double HatchGradientPattern::angle() const { return _angle; }
+double HatchGradientPattern::angle() const
+{
+    return _angle;
+}
 
-void HatchGradientPattern::setAngle(double angle) { _angle = angle; }
+void HatchGradientPattern::setAngle(double angle)
+{
+    _angle = angle;
+}
 
-double HatchGradientPattern::shift() const { return _shift; }
+double HatchGradientPattern::shift() const
+{
+    return _shift;
+}
 
-void HatchGradientPattern::setShift(double shift) { _shift = shift; }
+void HatchGradientPattern::setShift(double shift)
+{
+    _shift = shift;
+}
 
-bool HatchGradientPattern::isSingleColorGradient() const { return _singleColorGradient; }
+bool HatchGradientPattern::isSingleColorGradient() const
+{
+    return _singleColorGradient;
+}
 
-void HatchGradientPattern::setIsSingleColorGradient(bool singleColor) { _singleColorGradient = singleColor; }
+void HatchGradientPattern::setIsSingleColorGradient(bool singleColor)
+{
+    _singleColorGradient = singleColor;
+}
 
-double HatchGradientPattern::colorTint() const { return _colorTint; }
+double HatchGradientPattern::colorTint() const
+{
+    return _colorTint;
+}
 
-void HatchGradientPattern::setColorTint(double tint) { _colorTint = tint; }
+void HatchGradientPattern::setColorTint(double tint)
+{
+    _colorTint = tint;
+}
 
-const std::vector<GradientColor> &HatchGradientPattern::colors() const { return _colors; }
+const std::vector<GradientColor> &HatchGradientPattern::colors() const
+{
+    return _colors;
+}
 
-void HatchGradientPattern::setColors(const std::vector<GradientColor> &colors) { _colors = colors; }
+void HatchGradientPattern::setColors(const std::vector<GradientColor> &colors)
+{
+    _colors = colors;
+}
 
-std::string HatchGradientPattern::name() const { return _name; }
+std::string HatchGradientPattern::name() const
+{
+    return _name;
+}
 
-void HatchGradientPattern::setName(const std::string &name) { _name = name; }
+void HatchGradientPattern::setName(const std::string &name)
+{
+    _name = name;
+}
 
 }// namespace dwg

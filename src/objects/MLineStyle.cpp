@@ -26,7 +26,10 @@
 
 namespace dwg {
 
-MLineStyle *MLineStyle::Default() { return new MLineStyle(DefaultName); }
+MLineStyle *MLineStyle::Default()
+{
+    return new MLineStyle(DefaultName);
+}
 
 MLineStyle::MLineStyle() : _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0) {}
 
@@ -35,36 +38,84 @@ MLineStyle::MLineStyle(const std::string &name) : _startAngle(M_PI / 2.0), _endA
     setName(name);
 }
 
-ObjectType MLineStyle::objectType() const { return ObjectType::MLINESTYLE; }
+ObjectType MLineStyle::objectType() const
+{
+    return ObjectType::MLINESTYLE;
+}
 
-std::string MLineStyle::objectName() const { return DxfFileToken::ObjectMLineStyle; }
+std::string MLineStyle::objectName() const
+{
+    return DxfFileToken::ObjectMLineStyle;
+}
 
-std::string MLineStyle::subclassMarker() const { return DxfSubclassMarker::MLineStyle; }
+std::string MLineStyle::subclassMarker() const
+{
+    return DxfSubclassMarker::MLineStyle;
+}
 
-MLineStyleFlags MLineStyle::flags() const { return _flags; }
+MLineStyleFlags MLineStyle::flags() const
+{
+    return _flags;
+}
 
-void MLineStyle::setFlags(MLineStyleFlags value) { _flags = value; }
+void MLineStyle::setFlags(MLineStyleFlags value)
+{
+    _flags = value;
+}
 
-std::string MLineStyle::description() const { return _description; }
+std::string MLineStyle::description() const
+{
+    return _description;
+}
 
-void MLineStyle::setDescription(const std::string &value) { _description = value; }
+void MLineStyle::setDescription(const std::string &value)
+{
+    _description = value;
+}
 
-Color MLineStyle::fillColor() const { return _fillColor; }
+Color MLineStyle::fillColor() const
+{
+    return _fillColor;
+}
 
-void MLineStyle::setFillColor(const Color &value) { _fillColor = value; }
+void MLineStyle::setFillColor(const Color &value)
+{
+    _fillColor = value;
+}
 
-double MLineStyle::startAngle() const { return _startAngle; }
+double MLineStyle::startAngle() const
+{
+    return _startAngle;
+}
 
-void MLineStyle::setStartAngle(double value) { _startAngle = value; }
+void MLineStyle::setStartAngle(double value)
+{
+    _startAngle = value;
+}
 
-double MLineStyle::endAngle() const { return _endAngle; }
+double MLineStyle::endAngle() const
+{
+    return _endAngle;
+}
 
-void MLineStyle::setEndAngle(double value) { _endAngle = value; }
+void MLineStyle::setEndAngle(double value)
+{
+    _endAngle = value;
+}
 
-std::vector<MLineStyle::Element> MLineStyle::elements() const { return _elements; }
+std::vector<MLineStyle::Element> MLineStyle::elements() const
+{
+    return _elements;
+}
 
-std::vector<MLineStyle::Element> &MLineStyle::elements() { return _elements; }
+std::vector<MLineStyle::Element> &MLineStyle::elements()
+{
+    return _elements;
+}
 
-void MLineStyle::setElements(const std::vector<Element> &value) { _elements = value; }
+void MLineStyle::setElements(const std::vector<Element> &value)
+{
+    _elements = value;
+}
 
 }// namespace dwg

@@ -45,14 +45,14 @@ public:
     int valueFlag() const;
     void setValueFlag(int flag);
 
-    std::vector<Row> rows() const;
-    void setRows(const std::vector<Row> &rows);
+    std::vector<TableRow> rows() const;
+    void setRows(const std::vector<TableRow> &rows);
 
-    std::vector<Column> columns() const;
-    void setColumns(const std::vector<Column> &cols);
+    std::vector<TableColumn> columns() const;
+    void setColumns(const std::vector<TableColumn> &cols);
 
     bool overrideFlag() const;
-    void setOverrideFlag(flag);
+    void setOverrideFlag(bool);
 
     bool overrideBorderColor() const;
     void setOverrideBorderColor(bool obc);
@@ -72,13 +72,13 @@ public:
     TableContent content() const;
     void setContent(const TableContent &);
 
-    BreakData tableBreakData() const;
-    void setTableBreakData(const BreakData &);
+    TableBreakData tableBreakData() const;
+    void setTableBreakData(const TableBreakData &);
 
-    std::vector<BreakRowRange> breakRowRanges() const;
-    void setBreakRowRanges(const std::vector<BreakRowRange> &);
+    std::vector<TableBreakRowRange> breakRowRanges() const;
+    void setBreakRowRanges(const std::vector<TableBreakRowRange> &);
 
-    Cell cellAt(int row, int column) const;
+    TableCell cellAt(int row, int column) const;
 };
 
 }// namespace dwg

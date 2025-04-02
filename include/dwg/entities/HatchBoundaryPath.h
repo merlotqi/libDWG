@@ -63,7 +63,7 @@ public:
 
     std::vector<HBP_Edge *> edges() const;
     void setEdges(const std::vector<HBP_Edge *> &edges);
-    
+
     std::vector<Entity *> entities() const;
     void setEntities(const std::vector<Entity *> &entities);
 

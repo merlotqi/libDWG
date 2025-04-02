@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/entities/TableEntityBase.h>
+#include <dwg/objects/NonGraphicalObject.h>
+
 
 namespace dwg {
 

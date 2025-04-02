@@ -207,9 +207,15 @@ DxfClass *DxfClassCollection::getByName(const std::string &name) const
     }
 }
 
-size_t DxfClassCollection::count() const { return _entries.size(); }
+size_t DxfClassCollection::count() const
+{
+    return _entries.size();
+}
 
-void DxfClassCollection::clear() { _entries.clear(); }
+void DxfClassCollection::clear()
+{
+    _entries.clear();
+}
 
 bool DxfClassCollection::contains(const std::string &name) const
 {
@@ -217,8 +223,14 @@ bool DxfClassCollection::contains(const std::string &name) const
     return (it == _entries.end()) ? false : true;
 }
 
-std::map<std::string, DxfClass *>::const_iterator DxfClassCollection::begin() const { return _entries.begin(); }
+std::map<std::string, DxfClass *>::const_iterator DxfClassCollection::begin() const
+{
+    return _entries.begin();
+}
 
-std::map<std::string, DxfClass *>::const_iterator DxfClassCollection::end() const { return _entries.end(); }
+std::map<std::string, DxfClass *>::const_iterator DxfClassCollection::end() const
+{
+    return _entries.end();
+}
 
 }// namespace dwg

@@ -36,43 +36,100 @@ Entity::Entity()
 
 Entity::~Entity() {}
 
-std::string Entity::subclassMarker() const { return DxfSubclassMarker::Entity; }
+std::string Entity::subclassMarker() const
+{
+    return DxfSubclassMarker::Entity;
+}
 
-Layer *Entity::layer() const { return _layer; }
+Layer *Entity::layer() const
+{
+    return _layer;
+}
 
-void Entity::setLayer(Layer *value) { _layer = value; }
+void Entity::setLayer(Layer *value)
+{
+    _layer = value;
+}
 
-Color Entity::color() const { return _color; }
+Color Entity::color() const
+{
+    return _color;
+}
 
-void Entity::setColor(const Color &value) { _color = value; }
+void Entity::setColor(const Color &value)
+{
+    _color = value;
+}
 
-LineweightType Entity::lineweight() const { return _lineweight; }
+LineweightType Entity::lineweight() const
+{
+    return _lineweight;
+}
 
-void Entity::setLineweight(LineweightType value) { _lineweight = value; }
+void Entity::setLineweight(LineweightType value)
+{
+    _lineweight = value;
+}
 
-double Entity::linetypeScale() const { return _linetypeScale; }
+double Entity::linetypeScale() const
+{
+    return _linetypeScale;
+}
 
-void Entity::setLinetypeScale(double value) { _linetypeScale = value; }
+void Entity::setLinetypeScale(double value)
+{
+    _linetypeScale = value;
+}
 
-bool Entity::isInvisible() const { return _isInvisible; }
+bool Entity::isInvisible() const
+{
+    return _isInvisible;
+}
 
-void Entity::setIsInvisible(bool value) { _isInvisible = value; }
+void Entity::setIsInvisible(bool value)
+{
+    _isInvisible = value;
+}
 
-Transparency Entity::transparency() const { return _transparency; }
+Transparency Entity::transparency() const
+{
+    return _transparency;
+}
 
-void Entity::setTransparency(const Transparency &value) { _transparency = value; }
+void Entity::setTransparency(const Transparency &value)
+{
+    _transparency = value;
+}
 
-LineType *Entity::lineType() const { return _linetype; }
+LineType *Entity::lineType() const
+{
+    return _linetype;
+}
 
-void Entity::setLineType(LineType *value) { _linetype = value; }
+void Entity::setLineType(LineType *value)
+{
+    _linetype = value;
+}
 
-Material *Entity::material() const { return _material; }
+Material *Entity::material() const
+{
+    return _material;
+}
 
-void Entity::setMaterial(Material *value) { _material = value; }
+void Entity::setMaterial(Material *value)
+{
+    _material = value;
+}
 
-BookColor *Entity::bookColor() const { return _bookColor; }
+BookColor *Entity::bookColor() const
+{
+    return _bookColor;
+}
 
-void Entity::setBookColor(BookColor *value) { _bookColor = value; }
+void Entity::setBookColor(BookColor *value)
+{
+    _bookColor = value;
+}
 
 void Entity::matchProperties(Entity *entity) {}
 

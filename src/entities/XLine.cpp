@@ -30,18 +30,39 @@ XLine::XLine() : Entity() {}
 
 XLine::~XLine() {}
 
-ObjectType XLine::objectType() const { return ObjectType::XLINE; }
+ObjectType XLine::objectType() const
+{
+    return ObjectType::XLINE;
+}
 
-std::string XLine::objectName() const { return DxfFileToken::EntityXline; }
+std::string XLine::objectName() const
+{
+    return DxfFileToken::EntityXline;
+}
 
-std::string XLine::subclassMarker() const { return DxfSubclassMarker::XLine; }
+std::string XLine::subclassMarker() const
+{
+    return DxfSubclassMarker::XLine;
+}
 
-XYZ XLine::firstPoint() const { return _firstPoint; }
+XYZ XLine::firstPoint() const
+{
+    return _firstPoint;
+}
 
-void XLine::setFirstPoint(const XYZ &value) { _firstPoint = value; }
+void XLine::setFirstPoint(const XYZ &value)
+{
+    _firstPoint = value;
+}
 
-XYZ XLine::direction() const { return _direction; }
+XYZ XLine::direction() const
+{
+    return _direction;
+}
 
-void XLine::setDirection(const XYZ &value) { _direction = value; }
+void XLine::setDirection(const XYZ &value)
+{
+    _direction = value;
+}
 
 }// namespace dwg

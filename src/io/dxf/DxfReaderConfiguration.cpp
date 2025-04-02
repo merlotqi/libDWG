@@ -28,8 +28,14 @@ DxfReaderConfiguration::DxfReaderConfiguration() {}
 
 DxfReaderConfiguration::~DxfReaderConfiguration() {}
 
-bool DxfReaderConfiguration::clearCache() const { return _clearCache; }
+bool DxfReaderConfiguration::clearCache() const
+{
+    return _clearCache;
+}
 
-void DxfReaderConfiguration::setClearCache(bool value) { _clearCache = value; }
+void DxfReaderConfiguration::setClearCache(bool value)
+{
+    _clearCache = value;
+}
 
 }// namespace dwg

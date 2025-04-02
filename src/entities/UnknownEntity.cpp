@@ -31,7 +31,10 @@ UnknownEntity::UnknownEntity() : _dxfclass(nullptr) {}
 
 UnknownEntity::~UnknownEntity() {}
 
-ObjectType UnknownEntity::objectType() const { return ObjectType::UNDEFINED; }
+ObjectType UnknownEntity::objectType() const
+{
+    return ObjectType::UNDEFINED;
+}
 
 std::string UnknownEntity::objectName() const
 {

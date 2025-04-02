@@ -30,25 +30,55 @@ DimensionAligned::DimensionAligned() : Dimension(DimensionType::Aligned) {}
 
 DimensionAligned::~DimensionAligned() {}
 
-ObjectType DimensionAligned::objectType() const { return ObjectType::DIMENSION_ALIGNED; }
+ObjectType DimensionAligned::objectType() const
+{
+    return ObjectType::DIMENSION_ALIGNED;
+}
 
-std::string DimensionAligned::objectName() const { return DxfFileToken::EntityDimension; }
+std::string DimensionAligned::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
 
-std::string DimensionAligned::subclassMarker() const { return DxfSubclassMarker::AlignedDimension; }
+std::string DimensionAligned::subclassMarker() const
+{
+    return DxfSubclassMarker::AlignedDimension;
+}
 
-XYZ DimensionAligned::firstPoint() const { return _firstPoint; }
+XYZ DimensionAligned::firstPoint() const
+{
+    return _firstPoint;
+}
 
-void DimensionAligned::setFirstPoint(const XYZ &value) { _firstPoint = value; }
+void DimensionAligned::setFirstPoint(const XYZ &value)
+{
+    _firstPoint = value;
+}
 
-XYZ DimensionAligned::secondPoint() const { return _secondPoint; }
+XYZ DimensionAligned::secondPoint() const
+{
+    return _secondPoint;
+}
 
-void DimensionAligned::setSecondPoint(const XYZ &value) { _secondPoint = value; }
+void DimensionAligned::setSecondPoint(const XYZ &value)
+{
+    _secondPoint = value;
+}
 
-double DimensionAligned::extLineRotation() const { return _extLineRotation; }
+double DimensionAligned::extLineRotation() const
+{
+    return _extLineRotation;
+}
 
-void DimensionAligned::setExtLineRotation(double value) { _extLineRotation = value; }
+void DimensionAligned::setExtLineRotation(double value)
+{
+    _extLineRotation = value;
+}
 
-double DimensionAligned::measurement() const { return _firstPoint.distanceToPoint(_secondPoint); }
+double DimensionAligned::measurement() const
+{
+    return _firstPoint.distanceToPoint(_secondPoint);
+}
 
 DimensionAligned::DimensionAligned(DimensionType type) : Dimension(type) {}
 

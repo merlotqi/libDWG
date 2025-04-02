@@ -34,37 +34,85 @@ UnderlayEntity::UnderlayEntity()
 
 UnderlayEntity::~UnderlayEntity() {}
 
-std::string UnderlayEntity::subclassMarker() const { return DxfSubclassMarker::Underlay; }
+std::string UnderlayEntity::subclassMarker() const
+{
+    return DxfSubclassMarker::Underlay;
+}
 
-XYZ UnderlayEntity::normal() const { return _normal; }
+XYZ UnderlayEntity::normal() const
+{
+    return _normal;
+}
 
-void UnderlayEntity::setNormal(const XYZ &value) { _normal = value; }
+void UnderlayEntity::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-XYZ UnderlayEntity::insertPoint() const { return _insertPoint; }
+XYZ UnderlayEntity::insertPoint() const
+{
+    return _insertPoint;
+}
 
-void UnderlayEntity::setInsertPoint(const XYZ &value) { _insertPoint = value; }
+void UnderlayEntity::setInsertPoint(const XYZ &value)
+{
+    _insertPoint = value;
+}
 
-double UnderlayEntity::xScale() const { return _xscale; }
+double UnderlayEntity::xScale() const
+{
+    return _xscale;
+}
 
-void UnderlayEntity::setXScale(double value) { _xscale = value; }
+void UnderlayEntity::setXScale(double value)
+{
+    _xscale = value;
+}
 
-double UnderlayEntity::yScale() const { return _yscale; }
+double UnderlayEntity::yScale() const
+{
+    return _yscale;
+}
 
-void UnderlayEntity::setYScale(double value) { _yscale = value; }
+void UnderlayEntity::setYScale(double value)
+{
+    _yscale = value;
+}
 
-double UnderlayEntity::zScale() const { return _zscale; }
+double UnderlayEntity::zScale() const
+{
+    return _zscale;
+}
 
-void UnderlayEntity::setZScale(double value) { _zscale = value; }
+void UnderlayEntity::setZScale(double value)
+{
+    _zscale = value;
+}
 
-double UnderlayEntity::rotation() const { return _rotation; }
+double UnderlayEntity::rotation() const
+{
+    return _rotation;
+}
 
-void UnderlayEntity::setRotation(double value) { _rotation = value; }
+void UnderlayEntity::setRotation(double value)
+{
+    _rotation = value;
+}
 
-UnderlayDisplayFlags UnderlayEntity::flags() const { return _flags; }
+UnderlayDisplayFlags UnderlayEntity::flags() const
+{
+    return _flags;
+}
 
-void UnderlayEntity::setFlags(UnderlayDisplayFlags value) { _flags = value; }
+void UnderlayEntity::setFlags(UnderlayDisplayFlags value)
+{
+    _flags = value;
+}
 
-unsigned char UnderlayEntity::contrast() const { return _contrast; }
+unsigned char UnderlayEntity::contrast() const
+{
+    return _contrast;
+}
 
 void UnderlayEntity::setContrast(unsigned char value)
 {
@@ -73,7 +121,10 @@ void UnderlayEntity::setContrast(unsigned char value)
     _contrast = value;
 }
 
-unsigned char UnderlayEntity::fade() const { return _fade; }
+unsigned char UnderlayEntity::fade() const
+{
+    return _fade;
+}
 
 void UnderlayEntity::setFade(unsigned char value)
 {
@@ -82,8 +133,14 @@ void UnderlayEntity::setFade(unsigned char value)
     _fade = value;
 }
 
-UnderlayDefinition *UnderlayEntity::definition() const { return _definition; }
+UnderlayDefinition *UnderlayEntity::definition() const
+{
+    return _definition;
+}
 
-void UnderlayEntity::setDefinition(UnderlayDefinition *value) { _definition = value; }
+void UnderlayEntity::setDefinition(UnderlayDefinition *value)
+{
+    _definition = value;
+}
 
 }// namespace dwg

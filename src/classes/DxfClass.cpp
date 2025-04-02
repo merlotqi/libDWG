@@ -53,48 +53,114 @@ DxfClass::DxfClass(const std::string &applicationName, const std::string &cppCla
     _wasZombie = wasZombie;
 }
 
-std::string DxfClass::dxfName() const { return _dxfName; }
+std::string DxfClass::dxfName() const
+{
+    return _dxfName;
+}
 
-void DxfClass::setDxfName(const std::string &dxfName) { _dxfName = dxfName; }
+void DxfClass::setDxfName(const std::string &dxfName)
+{
+    _dxfName = dxfName;
+}
 
-std::string DxfClass::cppClassName() const { return _cppClassName; }
+std::string DxfClass::cppClassName() const
+{
+    return _cppClassName;
+}
 
-void DxfClass::setCppClassName(const std::string &className) { _cppClassName = className; }
+void DxfClass::setCppClassName(const std::string &className)
+{
+    _cppClassName = className;
+}
 
-std::string DxfClass::applicationName() const { return _applicationName; }
+std::string DxfClass::applicationName() const
+{
+    return _applicationName;
+}
 
-void DxfClass::setApplicationName(const std::string &applicationName) { _applicationName = applicationName; }
+void DxfClass::setApplicationName(const std::string &applicationName)
+{
+    _applicationName = applicationName;
+}
 
-ProxyFlags DxfClass::proxyFlags() const { return _proxyFlags; }
+ProxyFlags DxfClass::proxyFlags() const
+{
+    return _proxyFlags;
+}
 
-void DxfClass::setProxyFlags(ProxyFlags proxyFlags) { _proxyFlags = proxyFlags; }
+void DxfClass::setProxyFlags(ProxyFlags proxyFlags)
+{
+    _proxyFlags = proxyFlags;
+}
 
-int DxfClass::instanceCount() const { return _instanceCount; }
+int DxfClass::instanceCount() const
+{
+    return _instanceCount;
+}
 
-void DxfClass::setInstanceCount(int instanceCount) { _instanceCount = instanceCount; }
+void DxfClass::setInstanceCount(int instanceCount)
+{
+    _instanceCount = instanceCount;
+}
 
-bool DxfClass::wasZombie() const { return _wasZombie; }
+bool DxfClass::wasZombie() const
+{
+    return _wasZombie;
+}
 
-void DxfClass::setWasZombie(bool wasZombie) { _wasZombie = wasZombie; }
+void DxfClass::setWasZombie(bool wasZombie)
+{
+    _wasZombie = wasZombie;
+}
 
-bool DxfClass::isAnEntity() const { return _isAnEntity; }
+bool DxfClass::isAnEntity() const
+{
+    return _isAnEntity;
+}
 
-void DxfClass::setIsAnEntity(bool isAnEntity) { _isAnEntity = isAnEntity; }
+void DxfClass::setIsAnEntity(bool isAnEntity)
+{
+    _isAnEntity = isAnEntity;
+}
 
-short DxfClass::classNumber() const { return _classNumber; }
+short DxfClass::classNumber() const
+{
+    return _classNumber;
+}
 
-void DxfClass::setClassNumber(short classNumber) { _classNumber = classNumber; }
+void DxfClass::setClassNumber(short classNumber)
+{
+    _classNumber = classNumber;
+}
 
-short DxfClass::itemClassId() const { return _itemClassId; }
+short DxfClass::itemClassId() const
+{
+    return _itemClassId;
+}
 
-void DxfClass::setItemClassId(short itemClassId) { _itemClassId = itemClassId; }
+void DxfClass::setItemClassId(short itemClassId)
+{
+    _itemClassId = itemClassId;
+}
 
-ACadVersion DxfClass::dwgVersion() const { return _dwgVersion; }
+ACadVersion DxfClass::dwgVersion() const
+{
+    return _dwgVersion;
+}
 
-void DxfClass::setDwgVersion(ACadVersion dwgVersion) { _dwgVersion = dwgVersion; }
+void DxfClass::setDwgVersion(ACadVersion dwgVersion)
+{
+    _dwgVersion = dwgVersion;
+}
 
-short DxfClass::maintenanceVersion() const { return _maintenanceVersion; }
+short DxfClass::maintenanceVersion() const
+{
+    return _maintenanceVersion;
+}
 
-void DxfClass::setMaintenanceVersion(short maintenanceVersion) { _maintenanceVersion = maintenanceVersion; }
+void DxfClass::setMaintenanceVersion(short maintenanceVersion)
+{
+    _maintenanceVersion = maintenanceVersion;
+}
 
 }// namespace dwg

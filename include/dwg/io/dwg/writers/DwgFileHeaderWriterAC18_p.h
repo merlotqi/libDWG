@@ -58,7 +58,7 @@ private:
     void compressChecksum(DwgLocalSectionMap &section, std::ostringstream *stream);
     void writePageHeaderData(const DwgLocalSectionMap &section, std::ostream *stream);
     void writeDataSection(std::ostream *stream, const DwgSectionDescriptor &descriptor, const DwgLocalSectionMap &map,
-        int size);
+                          int size);
 
     std::vector<DwgLocalSectionMap> _localSectionsMaps;
     std::map<std::string, DwgSectionDescriptor> _descriptors;

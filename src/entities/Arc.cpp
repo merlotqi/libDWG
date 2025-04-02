@@ -31,18 +31,39 @@ Arc::Arc() : _startangle(0.0), _endangle(2 * M_PI) {}
 
 Arc::~Arc() {}
 
-ObjectType Arc::objectType() const { return ObjectType::ARC; }
+ObjectType Arc::objectType() const
+{
+    return ObjectType::ARC;
+}
 
-std::string Arc::objectName() const { return DxfFileToken::EntityArc; }
+std::string Arc::objectName() const
+{
+    return DxfFileToken::EntityArc;
+}
 
-std::string Arc::subclassMarker() const { return DxfSubclassMarker::Arc; }
+std::string Arc::subclassMarker() const
+{
+    return DxfSubclassMarker::Arc;
+}
 
-double Arc::startAngle() const { return _startangle; }
+double Arc::startAngle() const
+{
+    return _startangle;
+}
 
-double Arc::endAngle() const { return _endangle; }
+double Arc::endAngle() const
+{
+    return _endangle;
+}
 
-void Arc::setStartAngle(double value) { _startangle = value; }
+void Arc::setStartAngle(double value)
+{
+    _startangle = value;
+}
 
-void Arc::setEndAngle(double value) { _endangle = value; }
+void Arc::setEndAngle(double value)
+{
+    _endangle = value;
+}
 
 }// namespace dwg

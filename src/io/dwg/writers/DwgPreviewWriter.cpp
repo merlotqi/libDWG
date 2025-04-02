@@ -40,7 +40,10 @@ DwgPreviewWriter::~DwgPreviewWriter()
     _swriter = nullptr;
 }
 
-std::string DwgPreviewWriter::sectionName() const { return DwgSectionDefinition::Preview; }
+std::string DwgPreviewWriter::sectionName() const
+{
+    return DwgSectionDefinition::Preview;
+}
 
 void DwgPreviewWriter::write()
 {

@@ -24,13 +24,6 @@
 
 namespace dwg {
 
-/**
- * @enum AttributeFlag
- * @brief Defines the flags for attributes in a DWG/DXF drawing.
- *
- * The flags specify various attributes of an attribute entity, such as visibility,
- * constant value, verification requirements, and preset status.
- */
 enum AttributeFlag
 {
     None = 0,    ///< No flags.

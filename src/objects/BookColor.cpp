@@ -34,13 +34,25 @@ BookColor::BookColor(const std::string &name) : _name(name), _color((short) 0) {
 
 BookColor::~BookColor() {}
 
-ObjectType BookColor::objectType() const { return ObjectType::UNLISTED; }
+ObjectType BookColor::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string BookColor::objectName() const { return DxfFileToken::ObjectDBColor; }
+std::string BookColor::objectName() const
+{
+    return DxfFileToken::ObjectDBColor;
+}
 
-std::string BookColor::subclassMarker() const { return DxfSubclassMarker::DbColor; }
+std::string BookColor::subclassMarker() const
+{
+    return DxfSubclassMarker::DbColor;
+}
 
-std::string BookColor::name() const { return _name; }
+std::string BookColor::name() const
+{
+    return _name;
+}
 
 void BookColor::setName(const std::string &value)
 {
@@ -71,8 +83,14 @@ std::string BookColor::bookName() const
         return _name.substr(pos + 1);
 }
 
-Color BookColor::color() const { return _color; }
+Color BookColor::color() const
+{
+    return _color;
+}
 
-void BookColor::setColor(const Color &value) { _color = value; }
+void BookColor::setColor(const Color &value)
+{
+    _color = value;
+}
 
 }// namespace dwg

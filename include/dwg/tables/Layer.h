@@ -43,6 +43,7 @@ class LIBDWG_API Layer : public TableEntry
     unsigned long long _plotStyleName;
     Material *_material;
     bool _isOn;
+
 public:
     Layer();
     Layer(const std::string &name);

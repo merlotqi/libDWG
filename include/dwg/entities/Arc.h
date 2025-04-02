@@ -26,13 +26,6 @@
 
 namespace dwg {
 
-/**
- * @class Arc
- * @brief Represents an arc entity in a DWG/DXF drawing.
- *
- * An arc is a portion of a circle defined by a start angle and an end angle.
- * It inherits from Circle, sharing properties such as center, radius, and normal.
- */
 class LIBDWG_API Arc : public Circle
 {
     /// Start angle of the arc (in degrees)

@@ -30,22 +30,46 @@ HatchPattern::HatchPattern(const std::string &name) : _name(name) {}
 
 HatchPattern::~HatchPattern() {}
 
-HatchPattern HatchPattern::Solid() { return HatchPattern("SOLID"); }
+HatchPattern HatchPattern::Solid()
+{
+    return HatchPattern("SOLID");
+}
 
-std::string HatchPattern::name() const { return _name; }
+std::string HatchPattern::name() const
+{
+    return _name;
+}
 
-std::vector<HatchPattern> HatchPattern::LoadFrom(const std::string &filepath) { return std::vector<HatchPattern>(); }
+std::vector<HatchPattern> HatchPattern::LoadFrom(const std::string &filepath)
+{
+    return std::vector<HatchPattern>();
+}
 
 void HatchPattern::SavePatterns(const std::string &filepath, const std::vector<HatchPattern> &patterns) {}
 
-void HatchPattern::setName(const std::string &name) { _name = name; }
+void HatchPattern::setName(const std::string &name)
+{
+    _name = name;
+}
 
-std::string HatchPattern::description() const { return _description; }
+std::string HatchPattern::description() const
+{
+    return _description;
+}
 
-void HatchPattern::setDescription(const std::string &description) { _description = description; }
+void HatchPattern::setDescription(const std::string &description)
+{
+    _description = description;
+}
 
-std::vector<HatchPattern::Line> HatchPattern::lines() const { return _lines; }
+std::vector<HatchPattern::Line> HatchPattern::lines() const
+{
+    return _lines;
+}
 
-void HatchPattern::setLines(const std::vector<HatchPattern::Line> &lines) { _lines = lines; }
+void HatchPattern::setLines(const std::vector<HatchPattern::Line> &lines)
+{
+    _lines = lines;
+}
 
 }// namespace dwg

@@ -26,13 +26,6 @@
 
 namespace dwg {
 
-/**
- * @class PdfUnderlay
- * @brief Represents a PDF underlay entity in a DWG/DXF drawing.
- *
- * A PDF underlay allows embedding a PDF document as a reference within a drawing.
- * It inherits from UnderlayEntity, sharing common underlay properties.
- */
 class LIBDWG_API PdfUnderlay : public UnderlayEntity
 {
 public:

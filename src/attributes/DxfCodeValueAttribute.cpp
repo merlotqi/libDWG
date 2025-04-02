@@ -36,8 +36,14 @@ DxfCodeValueAttribute::DxfCodeValueAttribute(DxfReferenceType rf, const std::vec
     }
 }
 
-std::vector<DxfCode> DxfCodeValueAttribute::valueCodes() const { return _valueCodes; }
+std::vector<DxfCode> DxfCodeValueAttribute::valueCodes() const
+{
+    return _valueCodes;
+}
 
-DxfReferenceType DxfCodeValueAttribute::referenceType() const { return _referenceType; }
+DxfReferenceType DxfCodeValueAttribute::referenceType() const
+{
+    return _referenceType;
+}
 
 }// namespace dwg

@@ -24,44 +24,95 @@
 
 namespace dwg {
 
-std::vector<unsigned char> EndianConverter::bytes(char value) { return bytesT<char>(value); }
+std::vector<unsigned char> EndianConverter::bytes(char value)
+{
+    return bytesT<char>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(short value) { return bytesT<short>(value); }
+std::vector<unsigned char> EndianConverter::bytes(short value)
+{
+    return bytesT<short>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(unsigned short value) { return bytesT<unsigned short>(value); }
+std::vector<unsigned char> EndianConverter::bytes(unsigned short value)
+{
+    return bytesT<unsigned short>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(int value) { return bytesT<int>(value); }
+std::vector<unsigned char> EndianConverter::bytes(int value)
+{
+    return bytesT<int>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(unsigned int value) { return bytesT<unsigned int>(value); }
+std::vector<unsigned char> EndianConverter::bytes(unsigned int value)
+{
+    return bytesT<unsigned int>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(long long value) { return bytesT<long long>(value); }
+std::vector<unsigned char> EndianConverter::bytes(long long value)
+{
+    return bytesT<long long>(value);
+}
 
 std::vector<unsigned char> EndianConverter::bytes(unsigned long long value)
 {
     return bytesT<unsigned long long>(value);
 }
 
-std::vector<unsigned char> EndianConverter::bytes(double value) { return bytesT<double>(value); }
+std::vector<unsigned char> EndianConverter::bytes(double value)
+{
+    return bytesT<double>(value);
+}
 
-std::vector<unsigned char> EndianConverter::bytes(float value) { return bytesT<float>(value); }
+std::vector<unsigned char> EndianConverter::bytes(float value)
+{
+    return bytesT<float>(value);
+}
 
-char EndianConverter::toChar(const unsigned char *bytes) { return fromBytesT<char>(bytes); }
+char EndianConverter::toChar(const unsigned char *bytes)
+{
+    return fromBytesT<char>(bytes);
+}
 
-int16_t EndianConverter::toInt16(const unsigned char *bytes) { return fromBytesT<int16_t>(bytes); }
+int16_t EndianConverter::toInt16(const unsigned char *bytes)
+{
+    return fromBytesT<int16_t>(bytes);
+}
 
-uint16_t EndianConverter::toUInt16(const unsigned char *bytes) { return fromBytesT<uint16_t>(bytes); }
+uint16_t EndianConverter::toUInt16(const unsigned char *bytes)
+{
+    return fromBytesT<uint16_t>(bytes);
+}
 
-int32_t EndianConverter::toInt32(const unsigned char *bytes) { return fromBytesT<int32_t>(bytes); }
+int32_t EndianConverter::toInt32(const unsigned char *bytes)
+{
+    return fromBytesT<int32_t>(bytes);
+}
 
-uint32_t EndianConverter::toUint32(const unsigned char *bytes) { return fromBytesT<uint32_t>(bytes); }
+uint32_t EndianConverter::toUint32(const unsigned char *bytes)
+{
+    return fromBytesT<uint32_t>(bytes);
+}
 
-int64_t EndianConverter::toInt64(const unsigned char *bytes) { return fromBytesT<int64_t>(bytes); }
+int64_t EndianConverter::toInt64(const unsigned char *bytes)
+{
+    return fromBytesT<int64_t>(bytes);
+}
 
-uint64_t EndianConverter::toUInt64(const unsigned char *bytes) { return fromBytesT<uint64_t>(bytes); }
+uint64_t EndianConverter::toUInt64(const unsigned char *bytes)
+{
+    return fromBytesT<uint64_t>(bytes);
+}
 
-float EndianConverter::toFloat(const unsigned char *bytes) { return fromBytesT<float>(bytes); }
+float EndianConverter::toFloat(const unsigned char *bytes)
+{
+    return fromBytesT<float>(bytes);
+}
 
-double EndianConverter::toDouble(const unsigned char *bytes) { return fromBytesT<double>(bytes); }
+double EndianConverter::toDouble(const unsigned char *bytes)
+{
+    return fromBytesT<double>(bytes);
+}
 
 class DefaultEndianConverter : public EndianConverter
 {

@@ -40,7 +40,8 @@ public:
     };
 
     DwgPreview();
-    DwgPreview(PreviewType code, const std::vector<unsigned char> &rawHeader, const std::vector<unsigned char> &rawImage);
+    DwgPreview(PreviewType code, const std::vector<unsigned char> &rawHeader,
+               const std::vector<unsigned char> &rawImage);
     ~DwgPreview();
 
     PreviewType code() const;

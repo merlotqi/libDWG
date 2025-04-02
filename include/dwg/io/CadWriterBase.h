@@ -32,7 +32,7 @@ namespace dwg {
 class CadDocument;
 
 template<class T>
-class LIBDWG_API CadWriterBase : public ICadWriter, protected T
+class LIBDWG_API CadWriterBase : public ICadWriter, public T
 {
     static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
 

@@ -24,7 +24,6 @@
 
 namespace dwg {
 
-/// Knot parameterization
 enum class KnotParameterization : unsigned short
 {
     /// Chord

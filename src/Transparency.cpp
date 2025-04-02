@@ -39,11 +39,20 @@ Transparency::Transparency(short value)
     setValue(value);
 }
 
-bool Transparency::isByLayer() const { return _value == -1; }
+bool Transparency::isByLayer() const
+{
+    return _value == -1;
+}
 
-bool Transparency::isByBlock() const { return _value == 100; }
+bool Transparency::isByBlock() const
+{
+    return _value == 100;
+}
 
-short Transparency::value() const { return _value; }
+short Transparency::value() const
+{
+    return _value;
+}
 
 void Transparency::setValue(short value)
 {

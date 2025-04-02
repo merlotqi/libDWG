@@ -31,16 +31,34 @@ CadReaderConfiguration::CadReaderConfiguration()
 
 CadReaderConfiguration::~CadReaderConfiguration() {}
 
-bool CadReaderConfiguration::failsafe() const { return _failsafe; }
+bool CadReaderConfiguration::failsafe() const
+{
+    return _failsafe;
+}
 
-void CadReaderConfiguration::setFailsafe(bool value) { _failsafe = value; }
+void CadReaderConfiguration::setFailsafe(bool value)
+{
+    _failsafe = value;
+}
 
-bool CadReaderConfiguration::keepUnknownEntities() const { return _keepUnknownEntities; }
+bool CadReaderConfiguration::keepUnknownEntities() const
+{
+    return _keepUnknownEntities;
+}
 
-void CadReaderConfiguration::setKeepUnknownEntities(bool value) { _keepUnknownEntities = value; }
+void CadReaderConfiguration::setKeepUnknownEntities(bool value)
+{
+    _keepUnknownEntities = value;
+}
 
-bool CadReaderConfiguration::keepUnknownNonGraphicalObjects() const { return _keepUnknownNonGraphicalObjects; }
+bool CadReaderConfiguration::keepUnknownNonGraphicalObjects() const
+{
+    return _keepUnknownNonGraphicalObjects;
+}
 
-void CadReaderConfiguration::setKeepUnknownNonGraphicalObjects(bool value) { _keepUnknownNonGraphicalObjects = value; }
+void CadReaderConfiguration::setKeepUnknownNonGraphicalObjects(bool value)
+{
+    _keepUnknownNonGraphicalObjects = value;
+}
 
 }// namespace dwg

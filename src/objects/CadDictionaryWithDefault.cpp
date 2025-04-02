@@ -29,14 +29,29 @@ namespace dwg {
 
 CadDictionaryWithDefault::CadDictionaryWithDefault() {}
 
-ObjectType CadDictionaryWithDefault::objectType() const { return ObjectType::UNLISTED; }
+ObjectType CadDictionaryWithDefault::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string CadDictionaryWithDefault::objectName() const { return DxfFileToken::ObjectDictionaryWithDefault; }
+std::string CadDictionaryWithDefault::objectName() const
+{
+    return DxfFileToken::ObjectDictionaryWithDefault;
+}
 
-std::string CadDictionaryWithDefault::subclassMarker() const { return DxfSubclassMarker::DictionaryWithDefault; }
+std::string CadDictionaryWithDefault::subclassMarker() const
+{
+    return DxfSubclassMarker::DictionaryWithDefault;
+}
 
-CadObject *CadDictionaryWithDefault::defaultEntry() const { return _defaultEntry; }
+CadObject *CadDictionaryWithDefault::defaultEntry() const
+{
+    return _defaultEntry;
+}
 
-void CadDictionaryWithDefault::setDefaultEntry(CadObject *obj) { _defaultEntry = obj; }
+void CadDictionaryWithDefault::setDefaultEntry(CadObject *obj)
+{
+    _defaultEntry = obj;
+}
 
 }// namespace dwg
