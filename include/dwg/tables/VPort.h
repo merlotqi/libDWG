@@ -34,7 +34,6 @@
 #include <dwg/tables/UscIconType.h>
 #include <dwg/tables/ViewModeType.h>
 
-
 namespace dwg {
 
 class VisualStyle;
@@ -45,6 +44,7 @@ class LIBDWG_API VPort : public TableEntry
 public:
     VPort();
     VPort(const std::string &name);
+    ~VPort();
 
     static constexpr auto DefaultName = "*Active";
 
@@ -167,6 +167,46 @@ public:
 
     Color ambientColor() const;
     void setAmbientColor(const Color &);
+
+private:
+    XY _bottomLeft;
+    XY _topRight;
+    XY _center;
+    XY _snapBasePoint;
+    XY _snapSpacing;
+    XY _gridSpacing;
+    XYZ _direction;
+    XYZ _target;
+    double _viewHeight;
+    double _aspectRatio;
+    double _lensLength;
+    double _frontClippingPlane;
+    double _backClippingPlane;
+    double _snapRotation;
+    double _twistAngle;
+    short _circleZoomPercent;
+    RenderMode _renderMode;
+    ViewModeType _viewMode;
+    UscIconType _ucsIconDisplay;
+    bool _spanOn;
+    bool _showGrid;
+    bool _isometricSnap;
+    short _snapIsoPair;
+    XYZ _origin;
+    XYZ _xAxis;
+    XYZ _yAxis;
+    UCS *_namedUcs = nullptr;
+    UCS *_baseUcs = nullptr;
+    OrthographicType _orthographicType;
+    double _elevation;
+    GridFlags _gridFlags;
+    short _minorGridLinesPerMajorGridLine;
+    VisualStyle *_visualStyle = nullptr;
+    bool _useDefaultLighting;
+    DefaultLightingType _defaultLighting;
+    double _brightness;
+    double _contrast;
+    Color _ambientColor;
 };
 
 

@@ -19,3 +19,68 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/tables/Layer.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+
+namespace dwg {
+
+Layer::Layer() : _flags(0), _color(Color(7)), _lineType(LineType::Continuous), 
+    _plotFlag(true), _lineweight(LineweightType::Default), _plotStyleName(0ULL), _material(nullptr), _isOn(true) 
+{}
+
+Layer::Layer(const std::string &name) : TableEntry(name), _flags(0), _color(Color(7)), _lineType(LineType::Continuous), 
+    _plotFlag(true), _lineweight(LineweightType::Default), _plotStyleName(0ULL), _material(nullptr), _isOn(true) 
+{}
+
+Layer::~Layer() {}
+
+Layer *Layer::Default() { return new Layer(DefaultName); }
+
+ObjectType Layer::objectType() const { return ObjectType::LAYER; }
+
+std::string Layer::objectName() const { return DxfFileToken::TableLayer; }
+
+std::string Layer::subclassMarker() const { return DxfSubclassMarker::Layer; }
+
+LayerFlags Layer::flags() const { return _flags; }
+
+void Layer::setFlags(LayerFlags value) { _flags = value; }
+
+Color Layer::color() const { return _color; }
+
+void Layer::setColor(const Color &value)
+{
+    if(value.isByLayer() || value.isByBlock())
+    {
+        throw new std::invalid_argument("The layer color cannot be ByLayer or ByBlock");
+    }
+    _color = value;
+}
+
+LineType *Layer::lineType() const { return _lineType; }
+
+void Layer::setLineType(LineType *value) { _lineType = value; }
+
+bool Layer::plotFlag() const { return _plotFlag; }
+
+void Layer::setPlotFlag(bool value) { _plotFlag = value; }
+
+LineweightType Layer::lineweight() const { return _lineweight; }
+
+void Layer::setLineweight(LineweightType value) { _lineweight = value; }
+
+unsigned long long Layer::plotStyleName() const { return _plotStyleName; }
+
+void Layer::setPlotStyleName(unsigned long long value) { _plotStyleName = value; }
+
+Material *Layer::material() const { return _material; }
+
+void Layer::setMaterial(Material *value) { _material = value; }
+
+bool Layer::isOn() const { return _isOn; }
+
+void Layer::setIsOn(bool value) { _isOn = value; }
+
+}// namespace dwg

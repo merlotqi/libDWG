@@ -35,10 +35,18 @@ class LineType;
 
 class LIBDWG_API Layer : public TableEntry
 {
+    LayerFlags _flags;
+    Color _color;
+    LineType *_lineType;
+    bool _plotFlag;
+    LineweightType _lineweight;
+    unsigned long long _plotStyleName;
+    Material *_material;
+    bool _isOn;
 public:
     Layer();
-
     Layer(const std::string &name);
+    ~Layer();
 
     static constexpr auto DefaultName = "0";
     static Layer *Default();

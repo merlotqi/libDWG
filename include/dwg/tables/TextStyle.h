@@ -28,14 +28,13 @@
 #include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
-
 namespace dwg {
 
 class LIBDWG_API TextStyle : public TableEntry
 {
 public:
     TextStyle();
-    TextStyle(const std::string &);
+    TextStyle(const std::string &name);
     ~TextStyle();
 
     static constexpr auto DefaultName = "Standard";
@@ -73,6 +72,16 @@ public:
     void setTrueType(FontFlags);
 
     bool isShapeFile() const;
+
+private:
+    StyleFlags _flags = 0;
+    std::string _filename;
+    std::string _bigFontFilename;
+    double _height = 0.0;
+    double _width = 1.0;
+    double _obliqueAngle = 0.0;
+    TextMirrorFlag _mirrorFlag = TextMirrorFlag::None;
+    FontFlags _trueType = FontFlag::Regular;
 };
 
 class LIBDWG_API TextStylesTable : public Table<TextStyle>

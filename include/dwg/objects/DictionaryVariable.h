@@ -30,21 +30,16 @@ class LIBDWG_API DictionaryVariable : public NonGraphicalObject
 {
 public:
     DictionaryVariable();
-
     ~DictionaryVariable();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     std::string value() const;
-
     void setValue(const std::string &);
 
     int objectSchemaNumber() const;
-
     void setObjectSchemaNumber(int);
 };
 

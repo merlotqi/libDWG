@@ -22,28 +22,37 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/entities/TableEntityBase.h>
+#include <dwg/exports.h>
+#include <string>
+#include <vector>
 
 namespace dwg {
 
-class LIBDWG_API TableContent : public NonGraphicalObject
+class LIBDWG_API DwgPreview
 {
 public:
-    TableContent();
-    ~TableContent();
+    enum PreviewType
+    {
+        Unknown,
+        Bmp = 2,
+        Wmf = 3,
+        Png = 6,
+    };
 
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-    std::string subclassMarker() const override;
+    DwgPreview();
+    DwgPreview(PreviewType code, const std::vector<unsigned char> &rawHeader, const std::vector<unsigned char> &rawImage);
+    ~DwgPreview();
 
-    std::string description() const;
-    void setDescription(const std::string &);
+    PreviewType code() const;
+    std::vector<unsigned char> rawHeader() const;
+    std::vector<unsigned char> rawImage() const;
 
-    CellStyle cellStyleOverride() const;
-    void setCellStyleOverride(CellStyle);
+    void save(const std::string &path);
 
-    std::vector<CellRange> MergedCellRanges() const;
-    void setMergedCellRanges(const std::vector<CellRange> &);
-}
+private:
+    PreviewType _code;
+    std::vector<unsigned char> _rawHeader;
+    std::vector<unsigned char> _rawImage;
+};
+
 }// namespace dwg

@@ -31,7 +31,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 #else
-
+#include <uuid/uuid.h>
 #endif
 
 namespace dwg {
@@ -39,9 +39,19 @@ namespace dwg {
 CadHeader::CadHeader()
 {
 #ifdef _WIN32
+    GUID guid;
+    HRESULT res = CoCreateGuid(&guid);
+    char guidStr[39];
+    sprintf_s(guidStr, sizeof(guidStr), "{%08lX-%04X-%04X-%04X-%012llX}", guid.Data1, guid.Data2, guid.Data3,
+              (guid.Data4[0] << 8) + guid.Data4[1], *(unsigned long long *) (guid.Data4 + 2));
+    _fingerPrintGuid = guidStr;
 #else
+    uuid_t uuid;
+    char uuidStr[37];
+    uuid_generate(uuid);
+    uid_unparse(uuid, uuidStr);
+    _fingerPrintGuid = uuidStr;
 #endif
-    // _fingerPrintGuid = GUID;
 }
 
 CadHeader::CadHeader(CadDocument *document) {}

@@ -1,0 +1,41 @@
+
+/**
+ * dwg export macro define for Meson build
+ */
+#ifndef LIBDWG_API_H
+#define LIBDWG_API_H
+
+#ifdef DWG_STATIC_DEFINE
+#  define LIBDWG_API
+#else
+#  ifndef LIBDWG_API
+#    ifdef _MSC_VER
+#       ifdef dwg_EXPORTS
+#           define LIBDWG_API __declspec(dllexport)
+#       else
+#           define LIBDWG_API __declspec(dllimport)
+#       endif
+#    else
+#       ifdef dwg_EXPORTS
+#           define LIBDWG_API __attribute__((visibility("default")))
+#       else
+#           define LIBDWG_API __attribute__((visibility("default")))
+#       endif
+#    endif
+#  endif
+
+#  ifndef DWG_NO_EXPORT
+#    define DWG_NO_EXPORT 
+#  endif
+
+#endif
+
+#ifndef DWG_DEPRECATED
+#  ifdef _MSC_VER
+#    define DWG_DEPRECATED __declspec(deprecated)
+#  else
+#    define DWG_DEPRECATED __attribute__ ((__deprecated__))
+#  endif
+#endif
+
+#endif /* LIBDWG_API_H */

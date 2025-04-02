@@ -19,31 +19,3 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
-
-#pragma once
-
-#include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/entities/TableEntityBase.h>
-
-namespace dwg {
-
-class LIBDWG_API TableContent : public NonGraphicalObject
-{
-public:
-    TableContent();
-    ~TableContent();
-
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-    std::string subclassMarker() const override;
-
-    std::string description() const;
-    void setDescription(const std::string &);
-
-    CellStyle cellStyleOverride() const;
-    void setCellStyleOverride(CellStyle);
-
-    std::vector<CellRange> MergedCellRanges() const;
-    void setMergedCellRanges(const std::vector<CellRange> &);
-}
-}// namespace dwg

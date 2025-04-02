@@ -27,7 +27,6 @@
 #include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
-
 namespace dwg {
 
 class LIBDWG_API UCS : public TableEntry
@@ -58,6 +57,14 @@ public:
 
     double elevation() const;
     void setElevation(double);
+
+private:
+    XYZ _origin = XYZ::Zero;
+    XYZ _xAxis = XYZ::Zero;
+    XYZ _yAxis = XYZ::Zero;
+    OrthographicType _orthographicType = OrthographicType::None;
+    OrthographicType _orthographicViewType = OrthographicType::None;
+    double _elevation = 0.0;
 };
 
 class LIBDWG_API UCSTable : public Table<UCS>

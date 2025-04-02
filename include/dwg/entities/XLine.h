@@ -32,31 +32,17 @@ class LIBDWG_API XLine : public Entity
     XYZ _direction; // The direction vector defining the XLine.
 
 public:
-    // Default constructor for XLine. Initializes the first point and direction.
     XLine();
-
-    // Destructor for XLine.
     ~XLine();
 
-    // Overrides the ObjectType method to return the specific object type for XLine.
     virtual ObjectType objectType() const override;
-
-    // Overrides the ObjectName method to return the name of the object (XLine).
     virtual std::string objectName() const override;
-
-    // Overrides the SubclassMarker method to return the subclass marker associated with XLine.
     virtual std::string subclassMarker() const override;
 
-    // Getter for the first point of the XLine.
     XYZ firstPoint() const;
-
-    // Setter for the first point of the XLine.
     void setFirstPoint(const XYZ &);
 
-    // Getter for the direction of the XLine.
     XYZ direction() const;
-
-    // Setter for the direction of the XLine.
     void setDirection(const XYZ &);
 };
 

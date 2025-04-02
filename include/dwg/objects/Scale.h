@@ -37,29 +37,22 @@ public:
     Scale(const std::string &name, double paperUnits, double drawingUnits, bool isUnitScale);
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     double paperUnits() const;
-
     void setPaperUnits(double);
 
     double drawingUnits() const;
-
     void setDrawingUnits(double);
 
     bool isUnitScale() const;
-
     void setIsUnitScale(bool);
 
     double scaleFactor() const;
-
     double applyTo(double value);
 
     XYZ applyTo(const XYZ &);
-
     XY applyTo(const XY &);
 };
 

@@ -29,7 +29,6 @@
 #include <dwg/objects/ScaleEstimationType.h>
 #include <dwg/units/UnitsType.h>
 
-
 namespace dwg {
 
 class BlockRecord;

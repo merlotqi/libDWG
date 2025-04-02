@@ -36,8 +36,8 @@ class LIBDWG_API View : public TableEntry
 {
 public:
     View() = default;
-
     View(const std::string &name);
+    ~View();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
@@ -99,6 +99,27 @@ public:
 
     OrthographicType ucsOrthographicType() const;
     void setUcsOrthographicType(OrthographicType);
+
+private:
+    double _height = 0.0;
+    double _width = 0.0;
+    double _lensLength = 0.0;
+    double _frontClipping = 0.0;
+    double _backClipping = 0.0;
+    double _angle = 0.0;
+    ViewModeType _viewMode = ViewModeType::Off;
+    bool _isUcsAssociated = false;
+    bool _isPlottable = false;
+    RenderMode _renderMode = RenderMode::Optimized2D;
+    XY _center = XY::Zero;
+    XYZ _direction = XYZ::Zero;
+    XYZ _target = XYZ::Zero;
+    VisualStyle *_visualStyle = nullptr;
+    XYZ _ucsOrigin = XYZ::Zero;
+    XYZ _ucsXAxis = XYZ::Zero;
+    XYZ _ucsYAxis = XYZ::Zero;
+    double _ucsElevation = 0.0;
+    OrthographicType _ucsOrthographicType;
 };
 
 class LIBDWG_API ViewsTable : public Table<View>

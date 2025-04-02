@@ -26,6 +26,8 @@ if(WIN32)
 endif()
 target_link_libraries(dwg Iconv::Iconv fmt::fmt)
 
+add_library(DWG::dwg ALIAS dwg)
+
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()

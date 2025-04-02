@@ -38,19 +38,22 @@ class LIBDWG_API LineType : public TableEntry
 public:
     struct Segment
     {
-        double Length;
-        LinetypeShapeFlags ShapeFlag;
-        short ShapeNumber;
-        XY Offset;
-        double Rotation;
-        double Scale;
-        std::string Text;
-        TextStyle *Style;
+        double length;
+        LinetypeShapeFlags shapeFlag;
+        short shapeNumber;
+        XY offset;
+        double rotation;
+        double scale;
+        std::string text;
+        TextStyle *style;
+
+        Segment();
     };
 
 public:
     LineType();
     LineType(const std::string &name);
+    ~LineType();
 
     static constexpr auto ByLayerName = "ByLayer";
     static constexpr auto ByBlockName = "ByBlock";
@@ -64,16 +67,23 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::string Description() const;
-    void description(const std::string &);
+    std::string description() const;
+    void setDescription(const std::string &);
 
     double patternLen() const;
-    char alignment() const;
 
-    void alignment(char);
+    char alignment() const;
+    void setAlignment(char);
+
     std::vector<Segment> segments() const;
-    void segments(const std::vector<Segment> &);
+    std::vector<Segment> &segments();
+    void setSegments(const std::vector<Segment> &);
     void addSegment(const Segment &);
+
+private:
+    std::string _description;
+    char _alignment = 'A';
+    std::vector<Segment> _segments;
 };
 
 class LIBDWG_API LineTypesTable : public Table<LineType>
