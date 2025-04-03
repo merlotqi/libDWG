@@ -19,3 +19,21 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/Solid3D.h>
+
+namespace dwg {
+
+Solid3D::Solid3D() {}
+
+Solid3D::~Solid3D() {}
+
+ObjectType Solid::objectType() const { return ObjectType::SOLID3D; }
+
+std::string Solid::objectName() const { return DxfFileToken::Entity3DSolid; }
+
+std::string Solid::subclassMarker() const { return DxfSubclassMarker::ModelerGeometry; }
+
+}// namespace dwg

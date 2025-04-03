@@ -22,41 +22,21 @@
 
 #pragma once
 
+#include <dwg/exports.h>
 #include <dwg/utils/Delegate.h>
 #include <string>
 
 namespace dwg {
 
-/**
- * @brief Interface for CAD objects with a name property.
- * 
- * This class provides a mechanism to get the name of a CAD object
- * and a delegate for name change notifications.
- */
-class INamedCadObject
+class LIBDWG_API INamedCadObject
 {
 public:
-    /**
-     * @brief Default constructor.
-     */
     INamedCadObject() = default;
-
-    /**
-     * @brief Virtual destructor.
-     */
+    
     virtual ~INamedCadObject() {}
 
-    /**
-     * @brief Gets the name of the CAD object.
-     * @return The name of the object as a string.
-     */
     virtual std::string name() const = 0;
 
-    /**
-     * @brief Event triggered when the object's name changes.
-     * 
-     * This delegate is invoked with the old and new names when the name is updated.
-     */
     Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 };
 

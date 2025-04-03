@@ -20,22 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/DxfFileToken_p.h>
-#include <dwg/entities/Seqend.h>
+#include <dwg/objects/PaperMargin.h>
 
 namespace dwg {
 
-Seqend::Seqend() {}
+PaperMargin::PaperMargin() : Left(0), Right(0), Top(0), Bottom(0)
+{}
 
-Seqend::~Seqend() {}
-
-ObjectType Seqend::objectType() const { return ObjectType::SEQEND; }
-
-std::string Seqend::objectName() const { return DxfFileToken::EntitySeqend; }
-
-Seqend::Seqend(CadObject *owner) 
-{
-   setOwner(owner);
-}
+PaperMargin::PaperMargin(double left, double bottom, double right, double top) : Left(left), Right(right), Top(top), Bottom(bottom)
+{}
 
 }// namespace dwg

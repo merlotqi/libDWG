@@ -68,12 +68,12 @@ public:
     friend bool operator!=(const Color &lhs, const Color &rhs);
 };
 
-bool operator==(const Color &lhs, const Color &rhs)
+inline bool operator==(const Color &lhs, const Color &rhs)
 {
     return lhs._color == rhs._color;
 }
 
-bool operator!=(const Color &lhs, const Color &rhs)
+inline bool operator!=(const Color &lhs, const Color &rhs)
 {
     return !(lhs == rhs);
 }

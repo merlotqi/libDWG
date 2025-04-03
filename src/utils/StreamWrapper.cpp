@@ -190,10 +190,10 @@ std::vector<unsigned char> OutputStreamWrapper::buffer()
     return std::vector<unsigned char>();
 }
 
-void OutputStreamWrapper::write(const std::vector<unsigned char> &buffer, int offset, int length)
+void OutputStreamWrapper::write(const std::vector<unsigned char> &buffer, size_t offset, size_t length)
 {
     assert(offset >= 0 && length >= 0);
-    assert(offset + length <= static_cast<int>(buffer.size()));
+    assert(offset + length <= buffer.size());
     _stream->write(reinterpret_cast<const char *>(buffer.data() + offset), length);
 }
 

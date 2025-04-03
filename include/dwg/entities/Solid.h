@@ -53,6 +53,14 @@ public:
 
     XYZ normal() const;
     void setNormal(const XYZ &);
+
+private:
+    XYZ _firstCorner = XYZ::Zero;
+    XYZ _secondCorner = XYZ::Zero;
+    XYZ _thirdCorner = XYZ::Zero;
+    XYZ _fourthCorner = XYZ::Zero;
+    double _thickness = 0.0;
+    XYZ _normal = XYZ::AxisZ;
 };
 
 }// namespace dwg

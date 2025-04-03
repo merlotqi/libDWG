@@ -19,3 +19,13 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/TextEntity.h>
+
+namespace dwg {
+
+
+    
+}

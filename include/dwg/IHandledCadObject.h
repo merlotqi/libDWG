@@ -26,28 +26,13 @@
 
 namespace dwg {
 
-/**
- * @brief Interface for CAD objects that have a handle.
- * 
- * This class provides a mechanism to retrieve the handle of a CAD object.
- */
 class LIBDWG_API IHandledCadObject
 {
 public:
-    /**
-     * @brief Default constructor.
-     */
     IHandledCadObject() = default;
 
-    /**
-     * @brief Virtual destructor with no exception guarantee.
-     */
     virtual ~IHandledCadObject() {}
 
-    /**
-     * @brief Gets the handle of the CAD object.
-     * @return The handle of the object as an unsigned long long.
-     */
     virtual unsigned long long handle() const = 0;
 };
 

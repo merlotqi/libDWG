@@ -22,10 +22,15 @@
 
 #pragma once
 
+#include <dwg/entities/Entity.h>
+
 namespace dwg {
 
-class Vertex
+class Vertex : public Entity
 {
+public:
+    Vertex();
+    ~Vertex();
 };
 
 

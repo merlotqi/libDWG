@@ -28,127 +28,85 @@
 
 namespace dwg {
 
-/**
- * @class CadObjectCollection
- * @brief Manages a collection of CadObject-derived entities.
- *
- * This template class provides storage and management for a collection of 
- * objects that inherit from CadObject. It ensures ownership consistency
- * and provides mechanisms for adding and removing objects.
- *
- * @tparam T The type of objects stored in the collection, which must derive from CadObject.
- */
 template<class T>
 class CadObjectCollection
 {
     static_assert(std::is_base_of<CadObject, T>::value, "T must be derived from CadObject");
 
-protected:
-    std::vector<T *> _entries;///< List of objects in the collection.
-    CadObject *_owner;        ///< The owner of this collection.
-
 public:
-    /**
-     * @brief Constructs a CadObjectCollection with a specified owner.
-     * @param owner The owning CadObject.
-     */
+    using pointer = T*;
+    using const_pointer = T*;
+    using iterator = typename std::vector<pointer>::iterator;
+    using const_iterator = typename std::set<pointer>::const_iterator;
+
     CadObjectCollection(CadObject *owner) : _owner(owner) {}
-
-    /**
-     * @brief Destructor for CadObjectCollection.
-     */
-    virtual ~CadObjectCollection() {}
-
-    /**
-     * @brief Adds an item to the collection.
-     * @param item The object to be added.
-     * @throws std::invalid_argument If the item is null.
-     * @throws std::runtime_error If the item already has an owner.
-     */
-    void add(T *item)
+    ~CadObjectCollection()
     {
-        if (!item)
-            throw std::invalid_argument("item is null");
-        if (item->owner())
-            throw std::runtime_error("item already has an owner");
-
-        _entries.push_back(item);
-        item->Owner(_owner);
-        OnAdded(item);
+        for(pointer i : _entries)
+        {
+            delete i;
+            i = nullptr;
+        }
     }
 
-    /**
-     * @brief Removes an item from the collection.
-     * @param item The object to be removed.
-     * @return A pointer to the removed object, or nullptr if not found.
-     */
-    T *remove(T *item)
-    {
-        auto it = std::find(_entries.begin(), _entries.end(), item);
-        if (it == _entries.end())
-            return nullptr;
-
-        item->Owner(nullptr);
-        OnRemoved(item);
-        return _entries.erase(it);
-    }
-
-    /**
-     * @brief Gets the number of objects in the collection.
-     * @return The number of objects.
-     */
-    size_t count() const
-    {
-        return _entries.size();
-    }
-
-    /**
-     * @brief Accesses an object by index.
-     * @param index The index of the object.
-     * @return A pointer to the object at the given index.
-     */
-    T *operator[](size_t index) const
-    {
-        return _entries[index];
-    }
-
-    /**
-     * @brief Retrieves an object at a specified index.
-     * @param index The index of the object.
-     * @return A pointer to the object at the given index.
-     */
-    T *at(size_t index) const
-    {
-        return _entries[index];
-    }
-
-    /**
-     * @brief Gets the owner of the collection.
-     * @return A pointer to the owner.
-     */
     CadObject *owner() const
     {
         return _owner;
     }
 
-    /**
-     * @brief Sets the owner of the collection.
-     * @param owner A pointer to the new owner.
-     */
-    void setOwner(CadObject *owner)
+    size_t size() const { return _entries.size(); }
+    iterator begin() { return _entries.begin(); }
+    iterator end() { return _entries.end(); }
+    const_iterator cbegin() { return _entries.cbegin(); }
+    const_iterator cend() { return _entries.cend(); }
+    pointer operator[](size_t index) const { return _entries[index]; }
+    pointer &operator[](size_t index) { return _entries[index]; }
+
+    virtual void push_back(pointer item)
     {
-        _owner = owner;
+        if(!item)
+            return;
+        if(item->owner())
+            throw new std::invalid_argument("item already has an owner");
+        
+        auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
+        if(itFind != _entries.end())
+            throw new std::invalid_argument("item is already in the collection");
+
+        _entries.push_back(item);
+        item->setOwner(_owner);
+
+        OnAdd(item);
     }
 
-    /**
-     * @brief Delegate triggered when an object is added.
-     */
-    Delegate<void(T *)> OnAdded;
+    void clear()
+    {
+        for(pointer i : _entries)
+        {
+            delete i;
+            i = nullptr;
+        }
+        _entries.clear();
+    }
 
-    /**
-     * @brief Delegate triggered when an object is removed.
-     */
-    Delegate<void(T *)> OnRemoved;
+    pointer remove(pointer item)
+    {
+        auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
+        if(itFind == _entries.end())
+            return nullptr;
+        
+        _entries.erase(itFind);
+        item->setOwner(nullptr);
+        OnRemove(item);
+        return item;
+    }
+
+    Delegate<void(pointer)> OnAdd;
+    Delegate<void(pointer)> OnRemove;
+
+protected:
+    CadObject *_owner;
+    std::vector<pointer> _entries;
 };
 
 }// namespace dwg

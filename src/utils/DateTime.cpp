@@ -23,392 +23,450 @@
 #include <dwg/utils/DateTime.h>
 #include <fmt/core.h>
 #include <time.h>
+#include <algorithm>
+#include <cmath>
+#include <ctime>
 #ifdef _WIN32
 #include <Windows.h>
 #endif
 
 namespace dwg {
 
-/* -------------------------------- TimeSpan -------------------------------- */
-
-TimeSpan::TimeSpan() : _timeSpan(0) {}
-
-TimeSpan::TimeSpan(const TimeSpan &rhs) : _timeSpan(rhs._timeSpan) {}
-
-TimeSpan::TimeSpan(long long span) : _timeSpan(span) {}
-
-TimeSpan::TimeSpan(int day, int hour, int min, int sec)
+#ifdef _WIN32
+static std::string WCHARToUTF8(const WCHAR *wstr)
 {
-    _timeSpan = (day * 86400LL) + (hour * 3600LL) + (min * 60LL) + sec;
+    if (!wstr) return "";
+
+    int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, nullptr, nullptr);
+    if (sizeNeeded <= 0) return "";
+
+    std::string utf8Str(sizeNeeded - 1, 0);
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, &utf8Str[0], sizeNeeded, nullptr, nullptr);
+    
+    return utf8Str;
+}
+#endif
+
+static constexpr auto MILLISECONDS = 1'000;
+static constexpr auto SECONDS = 1'000'000;
+static constexpr auto MINUTES = 60'000'000;
+static constexpr auto HOURS = 3'600'000'000;
+static constexpr auto DAYS = 86'400'000'000;
+
+Timespan::Timespan() : _timespan(0) {}
+
+Timespan::Timespan(time_diff microseconds) : _timespan(mircosecond) {}
+
+Timespan::Timespan(long seconds, long microseconds): _timespan(time_diff(seconds)*SECONDS + microSeconds) {}
+
+Timespan::Timespan(int days, int hours, int minutes, int seconds, int microseconds)
+:_timespan(time_diff(microSeconds) + time_diff(seconds)*SECONDS + time_diff(minutes)*MINUTES + time_diff(hours)*HOURS + time_diff(days)*DAYS) {}
+
+Timespan::Timespan(const Timespan &rhs):	_timespan(timespan._timespan) {}
+
+Timespan& Timespan::operator=(const Timespan &rhs) 
+{
+	_timespan = rhs._timespan;
+	return *this;
 }
 
-int TimeSpan::days() const
+Timespan& Timespan::operator=(time_diff microseconds) {	_timespan = mircoseconds;
+	return *this;}
+
+Timespan& Timespan::assign(long seconds, long microseconds) 
 {
-    return static_cast<int>(_timeSpan / 86400LL);
+	_timespan = time_diff(seconds)*SECONDS + time_diff(mircoseconds);
+	return *this;
 }
 
-int TimeSpan::totalHours() const
+Timespan& Timespan::assign(int days, int hours, int minutes, int seconds, int microseconds) 
 {
-    return static_cast<int>(_timeSpan / 3600LL);
+	_timespan = time_diff(mircoseconds) + time_diff(seconds)*SECONDS + time_diff(minutes)*MINUTES + time_diff(hours)*HOURS + time_diff(days)*DAYS;
+	return *this;
 }
 
-int TimeSpan::hours() const
-{
-    return static_cast<int>((_timeSpan % 86400LL) / 3600LL);
-}
+void Timespan::swap(Timespan &rhs) {	std::swap(_timespan, timespan._timespan);}
 
-int TimeSpan::totalMinutes() const
-{
-    return static_cast<int>(_timeSpan / 60LL);
-}
+bool Timespan::operator==(const Timespan& rhs) const { return _timespan == rhs._timespan; }
 
-int TimeSpan::minutes() const
-{
-    return static_cast<int>((_timeSpan % 3600LL) / 60LL);
-}
+bool Timespan::operator!=(const Timespan& rhs) const { return _timespan != rhs._timespan;}
 
-int TimeSpan::totalSeconds() const
-{
-    return static_cast<int>(_timeSpan);
-}
+bool Timespan::operator>(const Timespan& rhs) const {return _timespan > rhs._timespan;}
 
-int TimeSpan::seconds() const
-{
-    return static_cast<int>(_timeSpan % 60LL);
-}
+bool Timespan::operator>=(const Timespan& rhs) const {return _timespan >= rhs._timespan;}
 
-TimeSpan::operator long long() const
-{
-    return _timeSpan;
-}
+bool Timespan::operator<(const Timespan& rhs) const {return _timespan < rhs._timespan;}
 
-TimeSpan &TimeSpan::operator=(const TimeSpan &rhs)
-{
-    if (this != &rhs)
-    {
-        _timeSpan = rhs._timeSpan;
-    }
-    return *this;
-}
+bool Timespan::operator<=(const Timespan& rhs) const {return _timespan <= rhs._timespan;}
 
-TimeSpan &TimeSpan::operator=(const long long span)
-{
-    _timeSpan = span;
-    return *this;
-}
+bool Timespan::operator==(time_diff mircoseconds) const {return _timespan == mircoseconds; }
 
-bool TimeSpan::operator==(const TimeSpan &rhs) const
-{
-    return _timeSpan == rhs._timeSpan;
-}
+bool Timespan::operator!=(time_diff mircoseconds) const {return _timespan != mircoseconds; }
 
-bool TimeSpan::operator!=(const TimeSpan &rhs) const
-{
-    return _timeSpan != rhs._timeSpan;
-}
+bool Timespan::operator>(time_diff mircoseconds) const {return _timespan > mircoseconds; }
 
-bool TimeSpan::operator>(const TimeSpan &rhs) const
-{
-    return _timeSpan > rhs._timeSpan;
-}
+bool Timespan::operator>=(time_diff mircoseconds) const {return _timespan >= mircoseconds; }
 
-bool TimeSpan::operator<(const TimeSpan &rhs) const
-{
-    return _timeSpan < rhs._timeSpan;
-}
+bool Timespan::operator<(time_diff mircoseconds) const {return _timespan < mircoseconds; }
 
-bool TimeSpan::operator<=(const TimeSpan &rhs) const
-{
-    return _timeSpan <= rhs._timeSpan;
-}
+bool Timespan::operator<=(time_diff mircoseconds) const {return _timespan <= mircoseconds; }
 
-bool TimeSpan::operator>=(const TimeSpan &rhs) const
-{
-    return _timeSpan >= rhs._timeSpan;
-}
+Timespan Timespan::operator+(const Timespan& rhs) const {return Timespan(_timespan + rhs._timespan);}
 
-TimeSpan TimeSpan::operator+(const TimeSpan &rhs) const
-{
-    return TimeSpan(_timeSpan + rhs._timeSpan);
-}
+Timespan Timespan::operator-(const Timespan& rhs) const {return Timespan(_timespan - rhs._timespan);}
 
-TimeSpan TimeSpan::operator-(const TimeSpan &rhs) const
-{
-    return TimeSpan(_timeSpan - rhs._timeSpan);
-}
+Timespan& Timespan::operator+=(const Timespan& rhs) { _timespan += rhs._timespan; return *this; }
 
-TimeSpan &TimeSpan::operator+=(const TimeSpan &rhs)
-{
-    _timeSpan += rhs._timeSpan;
-    return *this;
-}
+Timespan& Timespan::operator-=(const Timespan& rhs) { _timespan -= rhs._timespan; return *this; }
 
-TimeSpan &TimeSpan::operator-=(const TimeSpan &rhs)
-{
-    _timeSpan -= rhs._timeSpan;
-    return *this;
-}
+Timespan Timespan::operator+(time_diff mircoseconds) const { return Timespan(_timespan + microSeconds)}
 
-/* -------------------------------- DateTime -------------------------------- */
+Timespan Timespan::operator-(time_diff mircoseconds) const { return Timespan(_timespan - microSeconds);}
 
-DateTime::DateTime()
-{
-    _time = static_cast<long long>(time(nullptr));
-}
+Timespan& Timespan::operator+=(time_diff mircoseconds) { _timespan += mircoseconds; return *this;}
 
-DateTime::DateTime(const DateTime &rhs) : _time(rhs._time) {}
+Timespan& Timespan::operator-=(time_diff mircoseconds) { _timespan -= mircoseconds; return *this;}
 
-DateTime::DateTime(long long tm, bool bUTC)
-{
-    _time = tm;
-    if (!bUTC)
-    {
-        _time -= timeZone();
-    }
-}
+int Timespan::days() const { return int(_timespan / DAYS);}
 
-DateTime::DateTime(int year, int mon, int day, int hour, int min, int sec)
-{
-    struct tm tm_time = {};
-    tm_time.tm_year = year - 1900;
-    tm_time.tm_mon = mon - 1;
-    tm_time.tm_mday = day;
-    tm_time.tm_hour = hour;
-    tm_time.tm_min = min;
-    tm_time.tm_sec = sec;
+int Timespan::hours() const {return int((_timespan/HOURS)%24);}
 
-    _time = static_cast<long long>(mktime(&tm_time));
-}
+int Timespan::totalHours() const {return int(_timespan /HOURS);}
 
-long long DateTime::timeZone()
+int Timespan::minutes() const {return int((_timespan/MINUTES)%60);}
+
+int Timespan::totalMinutes() const {return int(_timespan/MINUTES);}
+
+int Timespan::seconds() const {return int((_timespan/SECONDS)%60);}
+
+int Timespan::totalSeconds() const {return int(_timespan/SECONDS);}
+
+int Timespan::milliseconds() const {return int((_timespan/MILLISECONDS)%1000);}
+
+std::int64_t Timespan::totalMillseconds() const {return int(_timespan/MILLISECONDS);}
+
+int Timespan::microseconds() const {return _timespan % 1000; }
+
+std::int64_t Timespan::totalMicroseconds() const { return _timespan; }
+
+
+
+
+
+
+
+static constexpr auto TIMESTAMP_RESOLUTION = 1000000;
+
+Timestamp::Timestamp() { update();}
+
+Timestamp::Timestamp(Timestamp::time_value tv) { _timestamp = tv; }
+
+Timestamp::Timestamp(const Timestamp &rhs) { _timestamp = rhs._timestamp; }
+
+Timestamp& Timestamp::operator=(const Timestamp &rhs) { _timestamp = rhs._timestamp; return *this; }
+
+Timestamp& Timestamp::operator=(Timestamp::time_value tv) { _timestamp = tv; return *this; }
+
+void Timestamp::swap(Timestamp& rhs) {std::swap(_timestamp, rhs._timestamp); }
+
+void Timestamp::update() 
 {
 #ifdef _WIN32
-    TIME_ZONE_INFORMATION tzInfo;
-    GetTimeZoneInformation(&tzInfo);
-    long long offset = static_cast<long long>(tzInfo.Bias) * 60;
-    if (tzInfo.DaylightDate.wYear != 0)
-    {
-        offset -= static_cast<long long>(tzInfo.DaylightBias) * 60;
-    }
-    return offset;
+    FILETIME ft;
+    GetSystemTimeAsFileTime(&ft);
+	ULARGE_INTEGER epoch;
+    epoch.LowPart  = 0xD53E8000;
+	epoch.HighPart = 0x019DB1DE;
+
+	ULARGE_INTEGER ts;
+	ts.LowPart  = ft.dwLowDateTime;
+	ts.HighPart = ft.dwHighDateTime;
+	ts.QuadPart -= epoch.QuadPart;
+	_ts = ts.QuadPart/10;
 #else
-    time_t t = time(nullptr);
-    struct tm tm_time = *localtime(&t);
-    return tm_time.tm_gmtoff;
+
 #endif
 }
 
-DateTime DateTime::now()
+bool Timestamp::operator==(const Timestamp& rhs) const { return _timestamp == rhs._timestamp; }
+
+bool Timestamp::operator!=(const Timestamp& rhs) const { return _timestamp != ths._timestamp; }
+
+bool Timestamp::operator>(const Timestamp& rhs) const { return _timestamp > rhs._timestamp; }
+
+bool Timestamp::operator>=(const Timestamp& rhs) const { return _timestamp >= ths._timestamp; }
+
+bool Timestamp::operator<(const Timestamp& rhs) const { return _timestamp < rhs._timestamp; }
+
+bool Timestamp::operator<=(const Timestamp& rhs) const { return _timestamp <= rhs._timestamp; }
+
+Timestamp Timestamp::operator+(Timestamp::time_diff d) const{ return Timestamp(_timestamp + d);}
+
+Timestamp Timestamp::operator+(const Timespan& span) const{return *this + span.totalMicroseconds(); }
+
+Timestamp Timestamp::operator-(Timestamp::time_diff d) const{ return Timestamp(_timestamp - d);}
+
+Timestamp Timestamp::operator-(const Timespan& span) const{ return *this - span.totalMicroseconds(); }
+
+Timestamp::time_diff Timestamp::operator-(const Timestamp& rhs) const { return _timestamp - rhs._timestamp;}
+
+Timestamp& Timestamp::operator+=(Timestamp::time_diff d) {_timestamp += d; return *this;}
+
+Timestamp& Timestamp::operator+=(const Timespan& span) { return *this += span.totalMicroseconds();}
+
+Timestamp& Timestamp::operator-=(Timestamp::time_diff d){ _timestamp -= d; return *this; }
+
+Timestamp& Timestamp::operator-=(const Timespan& span){ return *this -= span.totalMicroseconds(); }
+
+std::time_t Timestamp::epochTime() const { return std::time_t(_timestamp / TIMESTAMP_RESOLUTION); }
+
+Timestamp::utc_time_value Timestamp::utcTime() const 
 {
-    return DateTime();
+	return _timestamp*10 + (time_diff(0x01b21dd2) << 32) + 0x13814000;
 }
 
-DateTime DateTime::toUTC() const
+Timestamp::time_value Timestamp::epochMicroseconds() const 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    tm_time.tm_sec -= timeZone();
-    return DateTime(mktime(&tm_time), true);
+    return _timestamp;
 }
 
-DateTime DateTime::toLocal() const
+Timestamp::time_diff Timestamp::elapsed() const 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *gmtime(&time_copy);
-    tm_time.tm_sec += timeZone();
-    return DateTime(mktime(&tm_time), false);
+    Timestamp now;
+    return now - *this;
 }
 
-void DateTime::makeDateTime(int year, int mon, int day, int hour, int min, int sec)
+bool Timestamp::isElapsed(Timestamp::time_diff interval) const 
 {
-    struct tm tm_time = {};
-    tm_time.tm_year = year - 1900;
-    tm_time.tm_mon = mon - 1;
-    tm_time.tm_mday = day;
-    tm_time.tm_hour = hour;
-    tm_time.tm_min = min;
-    tm_time.tm_sec = sec;
-    _time = static_cast<long long>(mktime(&tm_time));
+	Timestamp now;
+	Timestamp::time_diff diff = now - *this;
+	return diff >= interval;
 }
 
-int DateTime::year() const
+time_value Timestamp::raw() const 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_year + 1900;
+    return _timestamp;
 }
 
-int DateTime::month() const
-{
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_mon + 1;
+Timestamp Timestamp::fromEpochTime(std::time_t t) {	return Timestamp(Timestamp::time_value(t)*TIMESTAMP_RESOLUTION);}
+
+Timestamp Timestamp::fromUtcTime(Timestamp::utc_time_value value) 
+{	
+    val -= (time_diff(0x01b21dd2) << 32) + 0x13814000;
+	val /= 10;
+	return Timestamp(val);
 }
 
-int DateTime::day() const
+
+
+
+
+
+
+
+int Timezone::utcOffset() 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_mday;
+#ifdef _WIN32
+	TIME_ZONE_INFORMATION tzInfo;
+	DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
+	return -tzInfo.Bias*60;
+#else
+#endif
 }
 
-int DateTime::hour() const
+int Timezone::dst() 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_hour;
+#ifdef _WIN32
+	TIME_ZONE_INFORMATION tzInfo;
+	DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
+	return dstFlag == TIME_ZONE_ID_DAYLIGHT ? -tzInfo.DaylightBias*60 : 0;
+#else
+#endif
 }
 
-int DateTime::minute() const
+int Timezone::dst(const Timestamp &timestamp) 
 {
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_min;
-}
-
-int DateTime::second() const
-{
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    return tm_time.tm_sec;
-}
-
-WeekDay DateTime::dayOfWeek() const
-{
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-
-    // tm_wday: 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-    switch (tm_time.tm_wday)
+#ifdef _WIN32
+	if (isDst(timestamp))
+	{
+		TIME_ZONE_INFORMATION tzInfo;
+		GetTimeZoneInformation(&tzInfo);
+		return -tzInfo.DaylightBias*60;
+	}
+	else
     {
-        case 0:
-            return WeekDay::eSunday;
-        case 1:
-            return WeekDay::eMonday;
-        case 2:
-            return WeekDay::eTuesday;
-        case 3:
-            return WeekDay::eWednesday;
-        case 4:
-            return WeekDay::eThursday;
-        case 5:
-            return WeekDay::eFriday;
-        case 6:
-            return WeekDay::eSaturday;
-        default:
-            return WeekDay::eSunday;// default case should not be reached
+        return 0;
     }
+#else
+#endif
 }
 
-DateTime::operator time_t() const
+bool Timezone::isDst(const Timestamp &timestamp) 
 {
-    return static_cast<time_t>(_time);
+#ifdef _WIN32
+	std::time_t time = timestamp.epochTime();
+	struct std::tm local;
+	if (localtime_s(&local, &time))
+		throw new std::invalid_argument("cannot get local time DST flag");
+	return local.tm_isdst > 0;
+#else
+#endif
 }
 
-DateTime &DateTime::operator=(const long long tim)
+int Timezone::tzd() {	return utcOffset() + dst(); }
+
+std::string Timezone::name() 
 {
-    _time = tim;
-    return *this;
+#ifdef _WIN32
+	TIME_ZONE_INFORMATION tzInfo;
+	DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
+	WCHAR* ptr = dstFlag == TIME_ZONE_ID_DAYLIGHT ? tzInfo.DaylightName : tzInfo.StandardName;
+    return WCHARToUTF8(ptr);
+#else
+
+#endif
 }
 
-DateTime &DateTime::operator=(const DateTime &rhs)
+std::string Timezone::standardName() 
 {
-    if (this != &rhs)
-    {
-        _time = rhs._time;
-    }
-    return *this;
+#ifdef _WIN32
+	TIME_ZONE_INFORMATION tzInfo;
+	DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
+	WCHAR* ptr = tzInfo.StandardName;
+    return WCHARToUTF8(ptr);
+#else
+
+#endif
 }
 
-bool DateTime::operator==(const DateTime &rhs) const
+std::string Timezone::dstName() 
 {
-    return _time == rhs._time;
+#ifdef _WIN32
+	TIME_ZONE_INFORMATION tzInfo;
+	DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
+	WCHAR* ptr = tzInfo.DaylightName;
+    return WCHARToUTF8(ptr);
+#else
+#endif
 }
 
-bool DateTime::operator!=(const DateTime &rhs) const
+
+
+
+
+
+
+
+
+DateTime::DateTime() 
 {
-    return _time != rhs._time;
+    Timestamp now;
+    _utcTime = now.utcTime();
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
 }
 
-bool DateTime::operator>(const DateTime &rhs) const
-{
-    return _time > rhs._time;
-}
+DateTime::DateTime(const tm &t) {}
 
-bool DateTime::operator<(const DateTime &rhs) const
-{
-    return _time < rhs._time;
-}
+DateTime::DateTime(const Timestamp &timestamp) {}
 
-bool DateTime::operator<=(const DateTime &rhs) const
-{
-    return _time <= rhs._time;
-}
+DateTime::DateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microseconds = 0) {}
 
-bool DateTime::operator>=(const DateTime &rhs) const
-{
-    return _time >= rhs._time;
-}
+DateTime::DateTime(double julianDay) {}
 
-DateTime DateTime::operator+(const TimeSpan &rhs) const
-{
-    return DateTime(_time + rhs);
-}
+DateTime::DateTime(Timestamp::utc_time_value utc, Timestamp::time_diff diff) {}
 
-DateTime DateTime::operator-(const TimeSpan &rhs) const
-{
-    return DateTime(_time - rhs);
-}
+DateTime::~DateTime() {}
 
-TimeSpan DateTime::operator-(const DateTime &rhs) const
-{
-    return TimeSpan(_time - rhs._time);
-}
+DateTime& DateTime::operator=(const DateTime& rhs) {}
 
-DateTime &DateTime::operator+=(const TimeSpan &rhs)
-{
-    _time += rhs;
-    return *this;
-}
+DateTime& DateTime::operator=(const Timestamp& timestamp) {}
 
-DateTime &DateTime::operator-=(const TimeSpan &rhs)
-{
-    _time -= rhs;
-    return *this;
-}
+DateTime& DateTime::operator=(double julianDay) {}
 
-std::string DateTime::toLongDateString() const
-{
-    return fmt::format("{:04}-{:02}-{:02}", year(), month(), day());
-}
+DateTime& DateTime::assign(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microseconds = 0) {}
 
-std::string DateTime::toLongTimeString() const
-{
-    return fmt::format("{:04}-{:02}-{:02} {:02}:{:02}:{:02}", year(), month(), day(), hour(), minute(), second());
-}
+void DateTime::swap(DateTime& rhs) {}
 
-std::string DateTime::toShortDateString() const
-{
-    return fmt::format("{:04}/{:02}/{:02}", year(), month(), day());
-}
+bool DateTime::operator==(const DateTime& rhs) const {}
 
-std::string DateTime::toShortTimeString() const
-{
-    return fmt::format("{:04}/{:02}/{:02} {:02}:{:02}", year(), month(), day(), hour(), minute());
-}
+bool DateTime::operator!=(const DateTime& rhs) const {}
 
-std::string DateTime::toString() const
-{
-    return toLongTimeString();
-}
+bool DateTime::operator<(const DateTime& rhs) const {}
 
-std::string DateTime::toString(const char *format) const
-{
-    time_t time_copy = static_cast<time_t>(_time);
-    struct tm tm_time = *localtime(&time_copy);
-    char buffer[100];
-    strftime(buffer, sizeof(buffer), format, &tm_time);
-    return std::string(buffer);
-}
+bool DateTime::operator<=(const DateTime& rhs) const {}
+
+bool DateTime::operator>(const DateTime& rhs) const {}
+
+bool DateTime::operator>=(const DateTime& rhs) const {}
+
+DateTime DateTime::operator+(const Timespan& span) const {}
+
+DateTime DateTime::operator-(const Timespan& span) const {}
+
+Timespan DateTime::operator-(const DateTime& rhs) const {}
+
+DateTime& DateTime::operator+=(const Timespan& span) {}
+
+DateTime& DateTime::operator-=(const Timespan& span) {}
+
+int DateTime::year() const {}
+
+int DateTime::month() const {}
+
+int DateTime::week() const {}
+
+int DateTime::day() const {}
+
+Week DateTime::dayOfWeek() const {}
+
+int DateTime::dayOfYear() const {}
+
+int DateTime::hour() const {}
+
+int DateTime::minute() const {}
+
+int DateTime::second() const {}
+
+int DateTime::millisecond() const {}
+
+int DateTime::mircosecond() const {}
+
+double DateTime::julianDay() const {}
+
+Timestamp DateTime::timestamp() const {}
+
+Timestamp::utc_time_value DateTime::utcTime() const {}
+
+DateTime DateTime::toUtcDateTime() const {}
+
+DateTime DateTime::toLocalDateTime() const {}
+
+DateTime DateTime::currentDateTime() {}
+
+DateTime DateTime::currentLocalDateTime() {}
+
+DateTime DateTime::currentUtcDateTime() {}
+
+std::string DateTime::toString(const std::string &fmt) const {}
+
+std::string DateTime::toString(DateFormat fmt) const {}
+
+void DateTime::checkValid() {}
+
+double DateTime::toJulianDay(Timestamp::utc_time_value utcTime) {}
+
+double DateTime::toJulianDay(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0) {}
+
+Timestamp::utc_time_value DateTime::toUtcTime(double julianDay) {}
+
+void DateTime::computeGregorian(double julianDay) {}
+
+void DateTime::computeDaytime() {}
+
+void DateTime::checkLimit(short& lower, short& higher, short limit) {}
+
+void DateTime::normalize() {}
 
 }// namespace dwg

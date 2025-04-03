@@ -41,8 +41,8 @@ public:
     double thickness() const;
     void setThickness(double);
 
-    XYZ insertPoint() const;
-    void setInsertPoint(const XYZ &);
+    XYZ insertionPoint() const;
+    void setInsertionPoint(const XYZ &);
 
     double size() const;
     void setSize(double);
@@ -64,6 +64,17 @@ public:
 
     unsigned short shapeIndex() const;
     void setShapeIndex(unsigned short);
+
+private:
+    double _thickness = 0.0;
+    XYZ _insertionPoint = XYZ::Zero;
+    double _size = 1.0;
+    TextStyle *_shapeStyle = nullptr;
+    double _rotation = 0;
+    double _relativeXScale = 1;
+    double _obliqueAngle = 0;
+    XYZ _normal = XYZ::AxisZ;
+    unsigned short _shapeIndex = 0;
 };
 
 }// namespace dwg

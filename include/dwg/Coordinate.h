@@ -28,7 +28,7 @@
 
 namespace dwg {
 
-bool fuzzyIsNull(double d) noexcept
+inline bool fuzzyIsNull(double d) noexcept
 {
     return std::fabs(d) <= 0.000000000001;
 }

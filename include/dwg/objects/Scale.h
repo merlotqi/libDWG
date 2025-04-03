@@ -35,6 +35,9 @@ public:
     Scale() = default;
     Scale(const std::string &name);
     Scale(const std::string &name, double paperUnits, double drawingUnits, bool isUnitScale);
+    ~Scale();
+
+    static Scale *Default();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
@@ -54,6 +57,11 @@ public:
 
     XYZ applyTo(const XYZ &);
     XY applyTo(const XY &);
+
+private:
+    double _paperUnits = 1.0;
+    double _drawingUnits = 1.0;
+    bool _isUnitScale = false;
 };
 
 class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection<Scale>

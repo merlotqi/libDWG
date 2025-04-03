@@ -23,6 +23,7 @@ add_subdirectory(src)
 
 if(WIN32)
     target_compile_definitions(dwg PRIVATE _USE_MATH_DEFINES)
+    target_compile_options(dwg PRIVATE /wd4251)
 endif()
 target_link_libraries(dwg Iconv::Iconv fmt::fmt)
 

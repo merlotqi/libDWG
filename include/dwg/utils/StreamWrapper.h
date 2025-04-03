@@ -111,20 +111,10 @@ public:
         write(buffer, 0, buffer.size());
     }
 
-    virtual void write(const std::vector<unsigned char> &buffer, int offset, int length);
+    virtual void write(const std::vector<unsigned char> &buffer, size_t offset, size_t length);
     virtual void write(const std::string &);
     virtual void write(const std::string &, Encoding);
     void writeByte(unsigned char b);
 };
-
-static int stringstream_length(const std::stringstream &ss)
-{
-    return ss.str().length();
-}
-
-static std::vector<unsigned char> stringstream_buffer(const std::stringstream &ss)
-{
-    return std::vector<unsigned char>(ss.str().begin(), ss.str().end());
-}
 
 }// namespace dwg

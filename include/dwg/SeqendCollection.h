@@ -20,22 +20,38 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/DxfFileToken_p.h>
-#include <dwg/entities/Seqend.h>
+#pragma once
+
+#include <dwg/CadObjectCollection.h>
+#include <dwg/entites/Seqend.h>
 
 namespace dwg {
 
-Seqend::Seqend() {}
-
-Seqend::~Seqend() {}
-
-ObjectType Seqend::objectType() const { return ObjectType::SEQEND; }
-
-std::string Seqend::objectName() const { return DxfFileToken::EntitySeqend; }
-
-Seqend::Seqend(CadObject *owner) 
+template<class T>
+class SeqendCollection : public CadObjectCollection<T>
 {
-   setOwner(owner);
+    Seqend *_seqend;
+    
+public:
+    SeqendCollection(CadObject *owner) : CadObjectCollection<T>(owner)
+    {
+        _seqend = new Seqend(owner);
+    }
+
+    Seqend* seqend() const
+    {
+        if(_entries.size() != 0)
+            return _seqend;
+        else
+            return nullptr;
+    }
+
+    void setSeqend(Seqend *value)
+    {
+        delete _seqend;
+        _seqend = value;
+        _seqend->setOwner(owner());
+    }
 }
 
 }// namespace dwg
