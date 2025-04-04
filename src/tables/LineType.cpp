@@ -112,7 +112,7 @@ void LineType::addSegment(LineType::Segment value)
 {
     if (value.lineType)
     {
-        throw new std::invalid_argument(fmt::format("Segment has already a LineType: {}", value.lineType->name()));
+        throw std::invalid_argument(fmt::format("Segment has already a LineType: {}", value.lineType->name()));
     }
     value.lineType = this;
     _segments.push_back(value);

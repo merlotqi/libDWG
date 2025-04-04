@@ -24,10 +24,11 @@
 
 namespace dwg {
 
-PaperMargin::PaperMargin() : Left(0), Right(0), Top(0), Bottom(0)
-{}
+PaperMargin::PaperMargin() : Left(0), Right(0), Top(0), Bottom(0) {}
 
-PaperMargin::PaperMargin(double left, double bottom, double right, double top) : Left(left), Right(right), Top(top), Bottom(bottom)
-{}
+PaperMargin::PaperMargin(double left, double bottom, double right, double top)
+    : Left(left), Right(right), Top(top), Bottom(bottom)
+{
+}
 
 }// namespace dwg

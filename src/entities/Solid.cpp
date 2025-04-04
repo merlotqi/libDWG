@@ -30,34 +30,79 @@ Solid::Solid() {}
 
 Solid::~Solid() {}
 
-ObjectType Solid::objectType() const { return ObjectType::SOLID; }
+ObjectType Solid::objectType() const
+{
+    return ObjectType::SOLID;
+}
 
-std::string Solid::objectName() const { return DxfFileToken::EntitySolid; }
+std::string Solid::objectName() const
+{
+    return DxfFileToken::EntitySolid;
+}
 
-std::string Solid::subclassMarker() const { return DxfSubclassMarker::Solid; }
+std::string Solid::subclassMarker() const
+{
+    return DxfSubclassMarker::Solid;
+}
 
-XYZ Solid::firstCorner() const { return _firstCorner; }
+XYZ Solid::firstCorner() const
+{
+    return _firstCorner;
+}
 
-void Solid::setFirstCorner(const XYZ &value) { _firstCorner = value; }
+void Solid::setFirstCorner(const XYZ &value)
+{
+    _firstCorner = value;
+}
 
-XYZ Solid::secondCorner() const { return _secondCorner; }
+XYZ Solid::secondCorner() const
+{
+    return _secondCorner;
+}
 
-void Solid::setSecondCorner(const XYZ &value) { _secondCorner = value; }
+void Solid::setSecondCorner(const XYZ &value)
+{
+    _secondCorner = value;
+}
 
-XYZ Solid::thirdCorner() const { return _thirdCorner; }
+XYZ Solid::thirdCorner() const
+{
+    return _thirdCorner;
+}
 
-void Solid::setThirdCorner(const XYZ &value) { _thirdCorner =value;}
+void Solid::setThirdCorner(const XYZ &value)
+{
+    _thirdCorner = value;
+}
 
-XYZ Solid::fourthCorner() const { return _fourthCorner; }
+XYZ Solid::fourthCorner() const
+{
+    return _fourthCorner;
+}
 
-void Solid::setFourthCorner(const XYZ &value) { _fourthCorner =value;}
+void Solid::setFourthCorner(const XYZ &value)
+{
+    _fourthCorner = value;
+}
 
-double Solid::thickness() const { return _thickness;}
+double Solid::thickness() const
+{
+    return _thickness;
+}
 
-void Solid::setThickness(double value) { _thickness =value; }
+void Solid::setThickness(double value)
+{
+    _thickness = value;
+}
 
-XYZ Solid::normal() const { return _normal; }
+XYZ Solid::normal() const
+{
+    return _normal;
+}
 
-void Solid::setNormal(const XYZ &value) { _normal = value; }
+void Solid::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
 }// namespace dwg

@@ -29,13 +29,19 @@ Seqend::Seqend() {}
 
 Seqend::~Seqend() {}
 
-ObjectType Seqend::objectType() const { return ObjectType::SEQEND; }
-
-std::string Seqend::objectName() const { return DxfFileToken::EntitySeqend; }
-
-Seqend::Seqend(CadObject *owner) 
+ObjectType Seqend::objectType() const
 {
-   setOwner(owner);
+    return ObjectType::SEQEND;
+}
+
+std::string Seqend::objectName() const
+{
+    return DxfFileToken::EntitySeqend;
+}
+
+Seqend::Seqend(CadObject *owner)
+{
+    setOwner(owner);
 }
 
 }// namespace dwg

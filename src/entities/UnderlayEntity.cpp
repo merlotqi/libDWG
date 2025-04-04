@@ -117,7 +117,7 @@ unsigned char UnderlayEntity::contrast() const
 void UnderlayEntity::setContrast(unsigned char value)
 {
     if (value < 0 || value > 100)
-        throw new std::out_of_range(fmt::format("Invalid Contrast value: {}, must be in range 0-100", value));
+        throw std::out_of_range(fmt::format("Invalid Contrast value: {}, must be in range 0-100", value));
     _contrast = value;
 }
 
@@ -129,7 +129,7 @@ unsigned char UnderlayEntity::fade() const
 void UnderlayEntity::setFade(unsigned char value)
 {
     if (value < 0 || value > 100)
-        throw new std::out_of_range(fmt::format("Invalid Fade value: {}, must be in range 0-100", value));
+        throw std::out_of_range(fmt::format("Invalid Fade value: {}, must be in range 0-100", value));
     _fade = value;
 }
 

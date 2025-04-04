@@ -152,7 +152,7 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
     }
     else if (compressDiff != 0)
     {
-        throw new std::exception();
+        throw std::exception();
     }
 
     if (localMap.pageNumber() > 0)

@@ -23,7 +23,7 @@
 #pragma once
 
 namespace dwg {
-    
+
 enum InvisibleEdgeFlag
 {
     /// No flags equivalent to all edges are visible.

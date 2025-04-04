@@ -81,7 +81,7 @@ void Layer::setColor(const Color &value)
 {
     if (value.isByLayer() || value.isByBlock())
     {
-        throw new std::invalid_argument("The layer color cannot be ByLayer or ByBlock");
+        throw std::invalid_argument("The layer color cannot be ByLayer or ByBlock");
     }
     _color = value;
 }

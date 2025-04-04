@@ -39,35 +39,35 @@ public:
     Timespan(int days, int hours, int minutes, int seconds, int microseconds);
     Timespan(const Timespan &rhs);
     ~Timespan() = default;
-    Timespan& operator=(const Timespan &rhs);
-    Timespan& operator=(time_diff microseconds);
-    Timespan& assign(long seconds, long microseconds);
-    Timespan& assign(int days, int hours, int minutes, int seconds, int microseconds);
+    Timespan &operator=(const Timespan &rhs);
+    Timespan &operator=(time_diff microseconds);
+    Timespan &assign(long seconds, long microseconds);
+    Timespan &assign(int days, int hours, int minutes, int seconds, int microseconds);
     void swap(Timespan &rhs);
 
-	bool operator==(const Timespan& rhs) const;
-	bool operator!=(const Timespan& rhs) const;
-	bool operator>(const Timespan& rhs) const;
-	bool operator>=(const Timespan& rhs) const;
-	bool operator<(const Timespan& rhs) const;
-	bool operator<=(const Timespan& rhs) const;
+    bool operator==(const Timespan &rhs) const;
+    bool operator!=(const Timespan &rhs) const;
+    bool operator>(const Timespan &rhs) const;
+    bool operator>=(const Timespan &rhs) const;
+    bool operator<(const Timespan &rhs) const;
+    bool operator<=(const Timespan &rhs) const;
 
-	bool operator==(time_diff mircoseconds) const;
-	bool operator!=(time_diff mircoseconds) const;
-	bool operator>(time_diff mircoseconds) const;
-	bool operator>=(time_diff mircoseconds) const;
-	bool operator<(time_diff mircoseconds) const;
-	bool operator<=(time_diff mircoseconds) const;
+    bool operator==(time_diff microseconds) const;
+    bool operator!=(time_diff microseconds) const;
+    bool operator>(time_diff microseconds) const;
+    bool operator>=(time_diff microseconds) const;
+    bool operator<(time_diff microseconds) const;
+    bool operator<=(time_diff microseconds) const;
 
-	Timespan operator+(const Timespan& rhs) const;
-	Timespan operator-(const Timespan& rhs) const;
-	Timespan& operator+=(const Timespan& rhs);
-	Timespan& operator-=(const Timespan& rhs);
+    Timespan operator+(const Timespan &rhs) const;
+    Timespan operator-(const Timespan &rhs) const;
+    Timespan &operator+=(const Timespan &rhs);
+    Timespan &operator-=(const Timespan &rhs);
 
-	Timespan operator+(time_diff mircoseconds) const;
-	Timespan operator-(time_diff mircoseconds) const;
-	Timespan& operator+=(time_diff mircoseconds);
-	Timespan& operator-=(time_diff mircoseconds);
+    Timespan operator+(time_diff microseconds) const;
+    Timespan operator-(time_diff microseconds) const;
+    Timespan &operator+=(time_diff microseconds);
+    Timespan &operator-=(time_diff microseconds);
 
     int days() const;
     int hours() const;
@@ -89,35 +89,35 @@ private:
 class LIBDWG_API Timestamp
 {
 public:
-    using time_value = std::int64_t;        // base at 1970-01-01 00:00:00
-    using utc_time_value = std::int64_t;    // base at 1582-10-15 00:00:00
+    using time_value = std::int64_t;    // base at 1970-01-01 00:00:00
+    using utc_time_value = std::int64_t;// base at 1582-10-15 00:00:00
     using time_diff = std::int64_t;
 
     Timestamp();
     Timestamp(time_value tv);
     Timestamp(const Timestamp &rhs);
-    Timestamp& operator=(const Timestamp &rhs);
-    Timestamp& operator=(time_value tv);
+    Timestamp &operator=(const Timestamp &rhs);
+    Timestamp &operator=(time_value tv);
     ~Timestamp() = default;
-    void swap(Timestamp& rhs);
+    void swap(Timestamp &rhs);
     void update();
 
-	bool operator==(const Timestamp& rhs) const;
-	bool operator!=(const Timestamp& rhs) const;
-	bool operator>(const Timestamp& rhs) const;
-	bool operator>=(const Timestamp& rhs) const;
-	bool operator<(const Timestamp& rhs) const;
-	bool operator<=(const Timestamp& rhs) const;
+    bool operator==(const Timestamp &rhs) const;
+    bool operator!=(const Timestamp &rhs) const;
+    bool operator>(const Timestamp &rhs) const;
+    bool operator>=(const Timestamp &rhs) const;
+    bool operator<(const Timestamp &rhs) const;
+    bool operator<=(const Timestamp &rhs) const;
 
-	Timestamp operator+(time_diff d) const;
-	Timestamp operator+(const Timespan& span) const;
-	Timestamp operator-(time_diff d) const;
-	Timestamp operator-(const Timespan& span) const;
-	time_diff operator-(const Timestamp& rhs) const;
-	Timestamp& operator+=(time_diff d);
-	Timestamp& operator+=(const Timespan& span);
-	Timestamp& operator-=(time_diff d);
-	Timestamp& operator-=(const Timespan& span);
+    Timestamp operator+(time_diff d) const;
+    Timestamp operator+(const Timespan &span) const;
+    Timestamp operator-(time_diff d) const;
+    Timestamp operator-(const Timespan &span) const;
+    time_diff operator-(const Timestamp &rhs) const;
+    Timestamp &operator+=(time_diff d);
+    Timestamp &operator+=(const Timespan &span);
+    Timestamp &operator-=(time_diff d);
+    Timestamp &operator-=(const Timespan &span);
 
     std::time_t epochTime() const;
     utc_time_value utcTime() const;
@@ -180,28 +180,30 @@ public:
     DateTime();
     DateTime(const tm &t);
     DateTime(const Timestamp &timestamp);
-    DateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microseconds = 0);
+    DateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0,
+             int microseconds = 0);
     DateTime(double julianDay);
     DateTime(Timestamp::utc_time_value utc, Timestamp::time_diff diff);
     ~DateTime();
-    DateTime& operator=(const DateTime& rhs);
-	DateTime& operator=(const Timestamp& timestamp);
-	DateTime& operator=(double julianDay);
-	DateTime& assign(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microseconds = 0);
-    void swap(DateTime& rhs);
+    DateTime &operator=(const DateTime &rhs);
+    DateTime &operator=(const Timestamp &timestamp);
+    DateTime &operator=(double julianDay);
+    DateTime &assign(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0,
+                     int microseconds = 0);
+    void swap(DateTime &rhs);
 
-	bool operator==(const DateTime& rhs) const;
-	bool operator!=(const DateTime& rhs) const;
-	bool operator<(const DateTime& rhs) const;
-	bool operator<=(const DateTime& rhs) const;
-	bool operator>(const DateTime& rhs) const;
-	bool operator>=(const DateTime& rhs) const;
+    bool operator==(const DateTime &rhs) const;
+    bool operator!=(const DateTime &rhs) const;
+    bool operator<(const DateTime &rhs) const;
+    bool operator<=(const DateTime &rhs) const;
+    bool operator>(const DateTime &rhs) const;
+    bool operator>=(const DateTime &rhs) const;
 
-	DateTime operator+(const Timespan& span) const;
-	DateTime operator-(const Timespan& span) const;
-	Timespan operator-(const DateTime& rhs) const;
-	DateTime& operator+=(const Timespan& span);
-	DateTime& operator-=(const Timespan& span);
+    DateTime operator+(const Timespan &span) const;
+    DateTime operator-(const Timespan &span) const;
+    Timespan operator-(const DateTime &rhs) const;
+    DateTime &operator+=(const Timespan &span);
+    DateTime &operator-=(const Timespan &span);
 
     int year() const;
     int month() const;
@@ -225,19 +227,19 @@ public:
     static DateTime currentLocalDateTime();
     static DateTime currentUtcDateTime();
 
-    enum class DateFormat 
+    enum class DateFormat
     {
-        ISO8601,      // ISO 8601 format, e.g., 2005-01-01T12:00:00+01:00
-        ISO8601Frac,  // ISO 8601 format with fractional seconds, e.g., 2005-01-01T12:00:00.000000+01:00
-        RFC822,       // RFC 822 format (obsoleted by RFC 1123), e.g., Sat, 1 Jan 05 12:00:00 +0100
-        RFC1123,      // RFC 1123 format (obsoletes RFC 822), e.g., Sat, 1 Jan 2005 12:00:00 +0100
-        HTTP,         // HTTP date format (RFC 2616), e.g., Sat, 01 Jan 2005 12:00:00 +0100
-        RFC850,       // RFC 850 format (obsoleted by RFC 1036), e.g., Saturday, 1-Jan-05 12:00:00 +0100
-        RFC1036,      // RFC 1036 format (obsoletes RFC 850), e.g., Saturday, 1 Jan 05 12:00:00 +0100
-        Asctime,      // ANSI C asctime() format, e.g., Sat Jan  1 12:00:00 2005
-        Sortable,     // Simple sortable format, e.g., 2005-01-01 12:00:00
-        WeekdayName,  // English names of week days (Sunday, Monday, etc.)
-        MonthName     // English names of months (January, February, etc.)
+        ISO8601,    // ISO 8601 format, e.g., 2005-01-01T12:00:00+01:00
+        ISO8601Frac,// ISO 8601 format with fractional seconds, e.g., 2005-01-01T12:00:00.000000+01:00
+        RFC822,     // RFC 822 format (obsoleted by RFC 1123), e.g., Sat, 1 Jan 05 12:00:00 +0100
+        RFC1123,    // RFC 1123 format (obsoletes RFC 822), e.g., Sat, 1 Jan 2005 12:00:00 +0100
+        HTTP,       // HTTP date format (RFC 2616), e.g., Sat, 01 Jan 2005 12:00:00 +0100
+        RFC850,     // RFC 850 format (obsoleted by RFC 1036), e.g., Saturday, 1-Jan-05 12:00:00 +0100
+        RFC1036,    // RFC 1036 format (obsoletes RFC 850), e.g., Saturday, 1 Jan 05 12:00:00 +0100
+        Asctime,    // ANSI C asctime() format, e.g., Sat Jan  1 12:00:00 2005
+        Sortable,   // Simple sortable format, e.g., 2005-01-01 12:00:00
+        WeekdayName,// English names of week days (Sunday, Monday, etc.)
+        MonthName   // English names of months (January, February, etc.)
     };
 
     /**
@@ -278,23 +280,24 @@ public:
 private:
     void checkValid();
     static double toJulianDay(Timestamp::utc_time_value utcTime);
-    static double toJulianDay(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0);
+    static double toJulianDay(int year, int month, int day, int hour = 0, int minute = 0, int second = 0,
+                              int millisecond = 0, int microsecond = 0);
     static Timestamp::utc_time_value toUtcTime(double julianDay);
     void computeGregorian(double julianDay);
     void computeDaytime();
-	void checkLimit(short& lower, short& higher, short limit);
-	void normalize();
+    void checkLimit(short &lower, short &higher, short limit);
+    void normalize();
 
 private:
     Timestamp::utc_time_value _utcTime;
-	short _year;
-	short _month;
-	short _day;
-	short _hour;
-	short _minute;
-	short _second;
-	short _millisecond;
-	short _microsecond;
+    short _year;
+    short _month;
+    short _day;
+    short _hour;
+    short _minute;
+    short _second;
+    short _millisecond;
+    short _microsecond;
 };
 
 }// namespace dwg

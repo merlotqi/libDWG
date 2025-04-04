@@ -24,13 +24,6 @@
 
 namespace dwg {
 
-/**
- * @enum DwgReferenceType
- * @brief Specifies the types of references in a DWG file.
- *
- * This enumeration defines different types of references between CAD objects, 
- * including ownership and pointer relationships.
- */
 enum class DwgReferenceType
 {
     /// Undefined reference type.

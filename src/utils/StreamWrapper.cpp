@@ -31,7 +31,7 @@ InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), 
 {
     if (!_stream || !_stream->good())
     {
-        throw new std::bad_alloc();
+        throw std::bad_alloc();
     }
 }
 

@@ -35,7 +35,7 @@ std::string AppId::DefaultName = "libDWG";
 AppId::AppId(const std::string &name) : TableEntry(name)
 {
     if (name.empty())
-        throw new std::invalid_argument("Application id must have a name.");
+        throw std::invalid_argument("Application id must have a name.");
 }
 
 AppId::~AppId() {}

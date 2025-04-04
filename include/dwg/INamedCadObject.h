@@ -32,7 +32,7 @@ class LIBDWG_API INamedCadObject
 {
 public:
     INamedCadObject() = default;
-    
+
     virtual ~INamedCadObject() {}
 
     virtual std::string name() const = 0;

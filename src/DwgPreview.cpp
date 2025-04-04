@@ -20,25 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/DwgPreview.h>
 
 namespace dwg {
-
-class LIBDWG_API UnderlayDefinition : public NonGraphicalObject
-{
-    std::string _file;
-
-public:
-    UnderlayDefinition();
-    ~UnderlayDefinition();
-
-    ObjectType objectType() const override;
-    std::string subclassMarker() const override;
-
-    std::string file() const;
-    void setFile(const std::string &);
-};
 
 }// namespace dwg

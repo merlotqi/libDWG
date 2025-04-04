@@ -107,7 +107,7 @@ void DwgWriter::getFileHeaderWriter()
         case ACadVersion::AC1006:
         case ACadVersion::AC1009:
         case ACadVersion::AC1012:
-            throw new std::runtime_error(
+            throw std::runtime_error(
                     fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
@@ -117,7 +117,7 @@ void DwgWriter::getFileHeaderWriter()
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         case ACadVersion::AC1021:
-            throw new std::runtime_error(
+            throw std::runtime_error(
                     fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
@@ -125,7 +125,7 @@ void DwgWriter::getFileHeaderWriter()
             _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
             break;
         default:
-            throw new std::runtime_error(
+            throw std::runtime_error(
                     fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
     };
 }

@@ -36,12 +36,12 @@ DwgFileHeaderAC15::~DwgFileHeaderAC15() {}
 
 void DwgFileHeaderAC15::addSection(const std::string &name)
 {
-    throw new std::runtime_error("not implemented");
+    throw std::runtime_error("not implemented");
 }
 
 DwgSectionDescriptor &DwgFileHeaderAC15::getDescriptor(const std::string &name)
 {
-    throw new std::runtime_error("not implemented");
+    throw std::runtime_error("not implemented");
 }
 
 }// namespace dwg

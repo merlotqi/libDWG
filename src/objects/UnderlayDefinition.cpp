@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/UnderlayDefinition.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/objects/UnderlayDefinition.h>
 
 namespace dwg {
 
@@ -29,12 +29,24 @@ UnderlayDefinition::UnderlayDefinition() {}
 
 UnderlayDefinition::~UnderlayDefinition() {}
 
-ObjectType UnderlayDefinition::objectType() const { return ObjectType::UNLISTED; }
+ObjectType UnderlayDefinition::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string UnderlayDefinition::subclassMarker() const { return DxfSubclassMarker::UnderlayDefinition; }
+std::string UnderlayDefinition::subclassMarker() const
+{
+    return DxfSubclassMarker::UnderlayDefinition;
+}
 
-std::string UnderlayDefinition::file() const { return _file; }
+std::string UnderlayDefinition::file() const
+{
+    return _file;
+}
 
-void UnderlayDefinition::setFile(const std::string &value) { _file = value; }
+void UnderlayDefinition::setFile(const std::string &value)
+{
+    _file = value;
+}
 
 }// namespace dwg

@@ -30,23 +30,50 @@ Shape::Shape() {}
 
 Shape::~Shape() {}
 
-ObjectType Shape::objectType() const { return ObjectType::SHAPE; }
+ObjectType Shape::objectType() const
+{
+    return ObjectType::SHAPE;
+}
 
-std::string Shape::objectName() const { return DxfFileToken::EntityShape; }
+std::string Shape::objectName() const
+{
+    return DxfFileToken::EntityShape;
+}
 
-std::string Shape::subclassMarker() const { return DxfSubclassMarker::Shape; }
+std::string Shape::subclassMarker() const
+{
+    return DxfSubclassMarker::Shape;
+}
 
-double Shape::thickness() const { return _thickness; }
+double Shape::thickness() const
+{
+    return _thickness;
+}
 
-void Shape::setThickness(double value) { _thickness = value; }
+void Shape::setThickness(double value)
+{
+    _thickness = value;
+}
 
-XYZ Shape::insertionPoint() const { return _insertionPoint; }
+XYZ Shape::insertionPoint() const
+{
+    return _insertionPoint;
+}
 
-void Shape::setInsertionPoint(const XYZ &value) { _insertionPoint = value; }
+void Shape::setInsertionPoint(const XYZ &value)
+{
+    _insertionPoint = value;
+}
 
-double Shape::size() const { return _size; }
+double Shape::size() const
+{
+    return _size;
+}
 
-void Shape::setSize(double value) { _size = value; }
+void Shape::setSize(double value)
+{
+    _size = value;
+}
 
 TextStyle *Shape::shapeStyle() const
 {
@@ -55,11 +82,11 @@ TextStyle *Shape::shapeStyle() const
 
 void Shape::setShapeStyle(TextStyle *value)
 {
-    if(!value || !value->isShapeFile())
+    if (!value || !value->isShapeFile())
     {
-        throw new std::invalid_argument("invalid value");
+        throw std::invalid_argument("invalid value");
     }
-    if(document())
+    if (document())
     {
         _shapeStyle = updateTable(value, document()->textStyles());
     }
@@ -68,24 +95,54 @@ void Shape::setShapeStyle(TextStyle *value)
     }
 }
 
-double Shape::rotation() const { return _rotation; }
+double Shape::rotation() const
+{
+    return _rotation;
+}
 
-void Shape::setRotation(double value) { _rotation = value; }
+void Shape::setRotation(double value)
+{
+    _rotation = value;
+}
 
-double Shape::relativeXScale() const { return _relativeXScale ;}
+double Shape::relativeXScale() const
+{
+    return _relativeXScale;
+}
 
-void Shape::setRelativeXScale(double value) { _relativeXScale = value; }
+void Shape::setRelativeXScale(double value)
+{
+    _relativeXScale = value;
+}
 
-double Shape::obliqueAngle() const { return _obliqueAngle; }
+double Shape::obliqueAngle() const
+{
+    return _obliqueAngle;
+}
 
-void Shape::setObliqueAngle(double value) { _obliqueAngle = value; }
+void Shape::setObliqueAngle(double value)
+{
+    _obliqueAngle = value;
+}
 
-XYZ Shape::normal() const { return _normal; }
+XYZ Shape::normal() const
+{
+    return _normal;
+}
 
-void Shape::setNormal(const XYZ &value) { _normal = value; }
+void Shape::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-unsigned short Shape::shapeIndex() const { return _shapeIndex; }
+unsigned short Shape::shapeIndex() const
+{
+    return _shapeIndex;
+}
 
-void Shape::setShapeIndex(unsigned short value) { _shapeIndex = value; }
+void Shape::setShapeIndex(unsigned short value)
+{
+    _shapeIndex = value;
+}
 
-}// namespace
+}// namespace dwg

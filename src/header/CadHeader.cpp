@@ -625,7 +625,7 @@ short CadHeader::surfaceIsolineCount() const
 void CadHeader::setSurfaceIsolineCount(short value)
 {
     if (value < 0 || value > 2047)
-        throw new std::out_of_range("ISOLINES valid values are from 0 to 2047");
+        throw std::out_of_range("ISOLINES valid values are from 0 to 2047");
     _surfaceIsolineCount = value;
 }
 
@@ -647,7 +647,7 @@ short CadHeader::textQuality() const
 void CadHeader::setTextQuality(short value)
 {
     if (value < 0 || value > 100)
-        throw new std::out_of_range("TEXTQLTY valid values are from 0 to 100");
+        throw std::out_of_range("TEXTQLTY valid values are from 0 to 100");
     _textQuality = value;
 }
 
@@ -870,7 +870,7 @@ double CadHeader::facetResolution() const
 void CadHeader::setFacetResolution(double value)
 {
     if (value < 0.01 || value > 10)
-        throw new std::out_of_range("FACETRES valid values are from 0.01 to 10.0");
+        throw std::out_of_range("FACETRES valid values are from 0.01 to 10.0");
     _facetResolution = value;
 }
 
@@ -1736,7 +1736,7 @@ double CadHeader::stepsPerSecond() const
 void CadHeader::setStepsPerSecond(double value)
 {
     if (value < 1 || value > 30)
-        throw new std::out_of_range("FACETRES valid values are from 1 to 30");
+        throw std::out_of_range("FACETRES valid values are from 1 to 30");
     _stepsPerSecond = value;
 }
 

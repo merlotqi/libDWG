@@ -58,9 +58,9 @@ void BookColor::setName(const std::string &value)
 {
     if (value.find('$') == std::string::npos)
     {
-        throw new std::invalid_argument(fmt::format("Invalid BookColor name: ({}), a book color name has to separate "
-                                                    "the book name and the color name by the character '$'",
-                                                    value));
+        throw std::invalid_argument(fmt::format("Invalid BookColor name: ({}), a book color name has to separate "
+                                                "the book name and the color name by the character '$'",
+                                                value));
     }
     _name = value;
 }

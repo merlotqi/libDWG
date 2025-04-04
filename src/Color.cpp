@@ -332,7 +332,7 @@ Color &Color::operator=(const Color &rhs)
 Color::Color(unsigned int trueColor)
 {
     if (trueColor < 0 || trueColor > _maxTrueColor)
-        throw new std::invalid_argument("True color must be a 24 bit color.");
+        throw std::invalid_argument("True color must be a 24 bit color.");
 
     // Shift to set the 30th bit indicating a true color.
     _color = (unsigned int) (trueColor | _trueColorFlag);
@@ -341,7 +341,7 @@ Color::Color(unsigned int trueColor)
 Color::Color(short index)
 {
     if (index < 0 || index > 257)
-        throw new std::invalid_argument("True index must be a value between 0 and 257.");
+        throw std::invalid_argument("True index must be a value between 0 and 257.");
 
     _color = (unsigned int) index;
 }

@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/CadObjectCollection.h>
-#include <dwg/entites/Seqend.h>
+#include <dwg/entities/Seqend.h>
 
 namespace dwg {
 
@@ -31,16 +31,16 @@ template<class T>
 class SeqendCollection : public CadObjectCollection<T>
 {
     Seqend *_seqend;
-    
+
 public:
     SeqendCollection(CadObject *owner) : CadObjectCollection<T>(owner)
     {
         _seqend = new Seqend(owner);
     }
 
-    Seqend* seqend() const
+    Seqend *seqend() const
     {
-        if(_entries.size() != 0)
+        if (_entries.size() != 0)
             return _seqend;
         else
             return nullptr;
@@ -52,6 +52,6 @@ public:
         _seqend = value;
         _seqend->setOwner(owner());
     }
-}
+};
 
 }// namespace dwg

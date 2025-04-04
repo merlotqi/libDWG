@@ -80,7 +80,7 @@ void DwgHandleWriter::write(int sectionOffset)
 
             if (handleOff == 0)
             {
-                throw new std::runtime_error("");
+                throw std::runtime_error("");
             }
 
             locDiff = lastLoc - initialLoc;

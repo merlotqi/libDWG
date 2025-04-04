@@ -34,15 +34,15 @@ class CadObjectCollection
     static_assert(std::is_base_of<CadObject, T>::value, "T must be derived from CadObject");
 
 public:
-    using pointer = T*;
-    using const_pointer = T*;
+    using pointer = T *;
+    using const_pointer = T *;
     using iterator = typename std::vector<pointer>::iterator;
     using const_iterator = typename std::set<pointer>::const_iterator;
 
     CadObjectCollection(CadObject *owner) : _owner(owner) {}
     ~CadObjectCollection()
     {
-        for(pointer i : _entries)
+        for (pointer i: _entries)
         {
             delete i;
             i = nullptr;
@@ -54,24 +54,45 @@ public:
         return _owner;
     }
 
-    size_t size() const { return _entries.size(); }
-    iterator begin() { return _entries.begin(); }
-    iterator end() { return _entries.end(); }
-    const_iterator cbegin() { return _entries.cbegin(); }
-    const_iterator cend() { return _entries.cend(); }
-    pointer operator[](size_t index) const { return _entries[index]; }
-    pointer &operator[](size_t index) { return _entries[index]; }
+    size_t size() const
+    {
+        return _entries.size();
+    }
+    iterator begin()
+    {
+        return _entries.begin();
+    }
+    iterator end()
+    {
+        return _entries.end();
+    }
+    const_iterator cbegin()
+    {
+        return _entries.cbegin();
+    }
+    const_iterator cend()
+    {
+        return _entries.cend();
+    }
+    pointer operator[](size_t index) const
+    {
+        return _entries[index];
+    }
+    pointer &operator[](size_t index)
+    {
+        return _entries[index];
+    }
 
     virtual void push_back(pointer item)
     {
-        if(!item)
+        if (!item)
             return;
-        if(item->owner())
-            throw new std::invalid_argument("item already has an owner");
-        
+        if (item->owner())
+            throw std::invalid_argument("item already has an owner");
+
         auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-        if(itFind != _entries.end())
-            throw new std::invalid_argument("item is already in the collection");
+        if (itFind != _entries.end())
+            throw std::invalid_argument("item is already in the collection");
 
         _entries.push_back(item);
         item->setOwner(_owner);
@@ -81,7 +102,7 @@ public:
 
     void clear()
     {
-        for(pointer i : _entries)
+        for (pointer i: _entries)
         {
             delete i;
             i = nullptr;
@@ -92,9 +113,9 @@ public:
     pointer remove(pointer item)
     {
         auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-        if(itFind == _entries.end())
+        if (itFind == _entries.end())
             return nullptr;
-        
+
         _entries.erase(itFind);
         item->setOwner(nullptr);
         OnRemove(item);
