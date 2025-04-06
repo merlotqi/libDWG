@@ -184,6 +184,7 @@ public:
              int microseconds = 0);
     DateTime(double julianDay);
     DateTime(Timestamp::utc_time_value utc, Timestamp::time_diff diff);
+    DateTime(const DateTime &rhs);
     ~DateTime();
     DateTime &operator=(const DateTime &rhs);
     DateTime &operator=(const Timestamp &timestamp);

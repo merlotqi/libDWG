@@ -610,76 +610,256 @@ DateTime::DateTime()
     checkValid();
 }
 
-DateTime::DateTime(const tm &t) {}
+DateTime::DateTime(const tm &t)
+    : _year(t.tm_year + 1900), _month(t.tm_mon + 1), _day(t.tm_mday), _hour(t.tm_hour), _minute(t.tm_min),
+      _second(t.tm_sec), _millisecond(0), _microsecond(0)
+{
+    checkValid();
+    _utcTime =
+            toUtcTime(toJulianDay(_year, _month, _day)) + 10 * (_hour * HOURS + _minute * MINUTES + _second * SECONDS);
+}
 
-DateTime::DateTime(const Timestamp &timestamp) {}
+DateTime::DateTime(const Timestamp &timestamp) : _utcTime(timestamp.utcTime())
+{
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
+}
 
-DateTime::DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int microseconds) {}
+DateTime::DateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int microsecond)
+    : _year(year), _month(month), _day(day), _hour(hour), _minute(minute), _second(second), _millisecond(millisecond),
+      _microsecond(microsecond)
+{
+    checkValid();
+    _utcTime = toUtcTime(toJulianDay(year, month, day)) +
+               10 * (hour * HOURS + minute * MINUTES + second * SECONDS + millisecond * MILLISECONDS + microsecond);
+}
 
-DateTime::DateTime(double julianDay) {}
+DateTime::DateTime(double julianDay) : _utcTime(toUtcTime(julianDay))
+{
+    computeGregorian(julianDay);
+    checkValid();
+}
 
-DateTime::DateTime(Timestamp::utc_time_value utc, Timestamp::time_diff diff) {}
+DateTime::DateTime(Timestamp::utc_time_value utc, Timestamp::time_diff diff) : _utcTime(utc + diff * 10)
+{
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
+}
 
-DateTime::~DateTime() {}
 
-DateTime &DateTime::operator=(const DateTime &rhs) {}
-
-DateTime &DateTime::operator=(const Timestamp &timestamp) {}
-
-DateTime &DateTime::operator=(double julianDay) {}
-
-DateTime &DateTime::assign(int year, int month, int day, int hour, int minute, int second, int millisecond,
-                           int microseconds)
+DateTime::DateTime(const DateTime &rhs)
+    : _utcTime(rhs._utcTime), _year(rhs._year), _month(rhs._month), _day(rhs._day), _hour(rhs._hour),
+      _minute(rhs._minute), _second(rhs._second), _millisecond(rhs._millisecond), _microsecond(rhs._microsecond)
 {
 }
 
-void DateTime::swap(DateTime &rhs) {}
+DateTime::~DateTime() {}
 
-bool DateTime::operator==(const DateTime &rhs) const {}
+DateTime &DateTime::operator=(const DateTime &rhs)
+{
+    if (&rhs != this)
+    {
+        _utcTime = rhs._utcTime;
+        _year = rhs._year;
+        _month = rhs._month;
+        _day = rhs._day;
+        _hour = rhs._hour;
+        _minute = rhs._minute;
+        _second = rhs._second;
+        _millisecond = rhs._millisecond;
+        _microsecond = rhs._microsecond;
+    }
+    return *this;
+}
 
-bool DateTime::operator!=(const DateTime &rhs) const {}
+DateTime &DateTime::operator=(const Timestamp &timestamp)
+{
+    _utcTime = timestamp.utcTime();
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
+    return *this;
+}
 
-bool DateTime::operator<(const DateTime &rhs) const {}
+DateTime &DateTime::operator=(double julianDay)
+{
+    _utcTime = toUtcTime(julianDay);
+    computeGregorian(julianDay);
+    checkValid();
+    return *this;
+}
 
-bool DateTime::operator<=(const DateTime &rhs) const {}
+DateTime &DateTime::assign(int year, int month, int day, int hour, int minute, int second, int millisecond,
+                           int microsecond)
+{
+    _utcTime = toUtcTime(toJulianDay(year, month, day)) +
+               10 * (hour * HOURS + minute * MINUTES + second * SECONDS + millisecond * MILLISECONDS + microsecond);
+    _year = year;
+    _month = month;
+    _day = day;
+    _hour = hour;
+    _minute = minute;
+    _second = second;
+    _millisecond = millisecond;
+    _microsecond = microsecond;
+    checkValid();
 
-bool DateTime::operator>(const DateTime &rhs) const {}
+    return *this;
+}
 
-bool DateTime::operator>=(const DateTime &rhs) const {}
+void DateTime::swap(DateTime &rhs)
+{
+    std::swap(_utcTime, rhs._utcTime);
+    std::swap(_year, rhs._year);
+    std::swap(_month, rhs._month);
+    std::swap(_day, rhs._day);
+    std::swap(_hour, rhs._hour);
+    std::swap(_minute, rhs._minute);
+    std::swap(_second, rhs._second);
+    std::swap(_millisecond, rhs._millisecond);
+    std::swap(_microsecond, rhs._microsecond);
+}
 
-DateTime DateTime::operator+(const Timespan &span) const {}
+bool DateTime::operator==(const DateTime &rhs) const
+{
+    return _utcTime == rhs._utcTime;
+}
 
-DateTime DateTime::operator-(const Timespan &span) const {}
+bool DateTime::operator!=(const DateTime &rhs) const
+{
+    return _utcTime == rhs._utcTime;
+}
 
-Timespan DateTime::operator-(const DateTime &rhs) const {}
+bool DateTime::operator<(const DateTime &rhs) const
+{
+    return _utcTime < rhs._utcTime;
+}
 
-DateTime &DateTime::operator+=(const Timespan &span) {}
+bool DateTime::operator<=(const DateTime &rhs) const
+{
+    return _utcTime <= rhs._utcTime;
+}
 
-DateTime &DateTime::operator-=(const Timespan &span) {}
+bool DateTime::operator>(const DateTime &rhs) const
+{
+    return _utcTime > rhs._utcTime;
+}
 
-int DateTime::year() const {}
+bool DateTime::operator>=(const DateTime &rhs) const
+{
+    return _utcTime >= rhs._utcTime;
+}
 
-int DateTime::month() const {}
+DateTime DateTime::operator+(const Timespan &span) const
+{
+    return DateTime(_utcTime, span.totalMicroseconds());
+}
+
+DateTime DateTime::operator-(const Timespan &span) const
+{
+    return DateTime(_utcTime, -span.totalMicroseconds());
+}
+
+Timespan DateTime::operator-(const DateTime &rhs) const
+{
+    return Timespan((_utcTime - rhs._utcTime) / 10);
+}
+
+DateTime &DateTime::operator+=(const Timespan &span)
+{
+    _utcTime += span.totalMicroseconds() * 10;
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
+    return *this;
+}
+
+DateTime &DateTime::operator-=(const Timespan &span)
+{
+    _utcTime -= span.totalMicroseconds() * 10;
+    computeGregorian(julianDay());
+    computeDaytime();
+    checkValid();
+    return *this;
+}
+
+Week DateTime::dayOfWeek() const
+{
+    return Week(int((std::floor(julianDay() + 1.5))) % 7);
+}
+
+int DateTime::dayOfYear() const
+{
+    int doy = 0;
+    for (int month = 1; month < _month; ++month) doy += daysOfMonth(_year, month);
+    doy += _day;
+    return doy;
+}
+
+int DateTime::daysOfMonth(int year, int month)
+{
+    static int daysOfMonthTable[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if (month == 2 && isLeapYear(year))
+        return 29;
+    else if (month < 1 || month > 12)
+        return 0;
+    return daysOfMonthTable[month];
+}
+
+bool DateTime::isLeapYear(int year)
+{
+    return (year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0);
+}
+
+int DateTime::year() const
+{
+    return _year;
+}
+
+int DateTime::month() const
+{
+    return _month;
+}
 
 int DateTime::week() const {}
 
-int DateTime::day() const {}
+int DateTime::day() const
+{
+    return _day;
+}
 
-Week DateTime::dayOfWeek() const {}
+int DateTime::hour() const
+{
+    return _hour;
+}
 
-int DateTime::dayOfYear() const {}
+int DateTime::minute() const
+{
+    return _minute;
+}
 
-int DateTime::hour() const {}
+int DateTime::second() const
+{
+    return _second;
+}
 
-int DateTime::minute() const {}
+int DateTime::millisecond() const
+{
+    return _millisecond;
+}
 
-int DateTime::second() const {}
+int DateTime::mircosecond() const
+{
+    return _microsecond;
+}
 
-int DateTime::millisecond() const {}
-
-int DateTime::mircosecond() const {}
-
-double DateTime::julianDay() const {}
+double DateTime::julianDay() const
+{
+    return toJulianDay(_utcTime);
+}
 
 Timestamp DateTime::timestamp() const {}
 
@@ -699,7 +879,31 @@ std::string DateTime::toString(const std::string &fmt) const {}
 
 std::string DateTime::toString(DateFormat fmt) const {}
 
-void DateTime::checkValid() {}
+void DateTime::checkValid()
+{
+    if (!isValid(_year, _month, _day, _hour, _minute, _second, _millisecond, _microsecond))
+        throw std::invalid_argument(fmt::format("Date time is %hd-%hd-%hdT%hd:%hd:%hd.%hd.%hd\n"
+                                                "Valid values:\n"
+                                                "-4713 <= year <= 9999\n"
+                                                "1 <= month <= 12\n"
+                                                "1 <= day <=  %d\n"
+                                                "0 <= hour <= 23\n"
+                                                "0 <= minute <= 59\n"
+                                                "0 <= second <= 60\n"
+                                                "0 <= millisecond <= 999\n"
+                                                "0 <= microsecond <= 999",
+                                                _year, _month, _day, _hour, _minute, _second, _millisecond,
+                                                _microsecond, daysOfMonth(_year, _month)));
+}
+
+bool DateTime::isValid(int year, int month, int day, int hour, int minute, int second, int millisecond, int microsecond)
+{
+    return (year >= -4713 && year <= 9999) && (month >= 1 && month <= 12) &&
+           (day >= 1 && day <= daysOfMonth(year, month)) && (hour >= 0 && hour <= 23) &&
+           (minute >= 0 && minute <= 59) && (second >= 0 && second <= 60) && (millisecond >= 0 && millisecond <= 999) &&
+           (microsecond >= 0 && microsecond <= 999);
+}
+
 
 double DateTime::toJulianDay(Timestamp::utc_time_value utcTime) {}
 
