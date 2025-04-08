@@ -70,7 +70,9 @@ private:
 class LIBDWG_API UCSTable : public Table<UCS>
 {
 public:
-    UCSTable() = default;
+    UCSTable();
+    UCSTable(CadDocument *document);
+    ~UCSTable();
 
     ObjectType objectType() const override;
     std::string objectName() const override;

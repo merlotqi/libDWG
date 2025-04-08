@@ -89,14 +89,11 @@ private:
 class LIBDWG_API LineTypesTable : public Table<LineType>
 {
 public:
-    LineType *ByLayer;
-    LineType *ByBlock;
-    LineType *Continuous;
+    LineTypesTable();
+    LineTypesTable(CadDocument *document);
+    ~LineTypesTable();
 
     ObjectType objectType() const override;
-
-    LineTypesTable() = default;
-    ~LineTypesTable();
 
 protected:
     std::vector<std::string> defaultEntries() const;

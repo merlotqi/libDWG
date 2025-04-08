@@ -22,7 +22,7 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/TextEntity.h>
+#include <dwg/entities/TextEntity.h>
 
 namespace dwg {
 

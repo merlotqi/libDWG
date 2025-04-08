@@ -375,7 +375,7 @@ class LIBDWG_API DimensionStylesTable : public Table<DimensionStyle>
 {
 public:
     DimensionStylesTable();
-
+    DimensionStylesTable(CadDocument *document);
     ObjectType objectType() const override;
     std::string objectName() const override;
 

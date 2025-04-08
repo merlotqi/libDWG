@@ -88,7 +88,8 @@ private:
 class LIBDWG_API TextStylesTable : public Table<TextStyle>
 {
 public:
-    TextStylesTable() = default;
+    TextStylesTable() ;
+    TextStylesTable(CadDocument *document);
     ObjectType objectType() const override;
 
 protected:

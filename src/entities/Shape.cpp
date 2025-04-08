@@ -22,7 +22,9 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/entitites/Shape.h>
+#include <dwg/entities/Shape.h>
+#include <dwg/tables/TextStyle.h>
+#include <stdexcept>
 
 namespace dwg {
 
@@ -84,11 +86,11 @@ void Shape::setShapeStyle(TextStyle *value)
 {
     if (!value || !value->isShapeFile())
     {
-        throw std::invalid_argument("invalid value");
+        throw std::runtime_error("invalid value");
     }
     if (document())
     {
-        _shapeStyle = updateTable(value, document()->textStyles());
+        //_shapeStyle = updateTable(value, document()->textStyles());
     }
     {
         _shapeStyle = value;

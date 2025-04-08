@@ -25,6 +25,7 @@
 
 #include <dwg/exports.h>
 #include <string>
+#include <ctime>
 
 namespace dwg {
 
@@ -227,6 +228,10 @@ public:
     static DateTime currentDateTime();
     static DateTime currentLocalDateTime();
     static DateTime currentUtcDateTime();
+    static bool isLeapYear(int year);
+    static int daysOfMonth(int year, int month);
+    static bool isValid(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0,
+                        int microsecond = 0);
 
     enum class DateFormat
     {

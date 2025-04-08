@@ -23,7 +23,10 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/CadDictionary.h>
-
+#include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/Scale.h>
+#include <assert.h>
 
 namespace dwg {
 
@@ -47,10 +50,69 @@ std::string CadDictionary::GeographicData = "ACAD_GEOGRAPHICDATA";
 
 CadDictionary *CadDictionary::CreateRoot()
 {
-    return nullptr;
+    CadDictionary *pRoot = new CadDictionary(Root);
+    CreateDefaultEntries(pRoot);
+    return pRoot;
 }
 
-void CadDictionary::CreateDefaultEntries(CadDictionary *root) {}
+void CadDictionary::CreateDefaultEntries(CadDictionary *root)
+{
+    assert(root);
+
+    root->tryAdd(new CadDictionary(AcadMaterial));
+    root->tryAdd(new CadDictionary(AcadSortEnts));
+
+    CadDictionary *mLeaderStyles = root->ensureCadDictionaryExist(AcadMLeaderStyle);
+    if (!mLeaderStyles->containsKey(MultiLeaderStyle::DefaultName))
+        mLeaderStyles->add(MultiLeaderStyle::Default());
+
+    CadDictionary *mLineStyles = root->ensureCadDictionaryExist(AcadMLineStyle);
+    if (!mLineStyles->containsKey(MLineStyle::DefaultName))
+        mLineStyles->add(MLineStyle::Default());
+
+    if (!root->containsKey(AcadTableStyle))
+        root->add(new CadDictionary(AcadTableStyle));
+
+    if (!root->containsKey(AcadPlotSettings))
+        root->add(new CadDictionary(AcadPlotSettings));
+
+    if (!root->containsKey(VariableDictionary))
+        root->add(new CadDictionary(VariableDictionary));
+
+    CadDictionary *mLeaderStyles = root->ensureCadDictionaryExist(AcadMLeaderStyle);
+    mLeaderStyles->tryAdd(MultiLeaderStyle::Default());
+
+    CadDictionary *mLineStyles = root->ensureCadDictionaryExist(AcadMLineStyle);
+    mLineStyles->tryAdd(MLineStyle::Default());
+
+    root->tryAdd(new CadDictionary(AcadTableStyle));
+    root->tryAdd(new CadDictionary(AcadPlotSettings));
+
+    root->tryAdd(new CadDictionary(VariableDictionary));
+
+    CadDictionary *scales = root->ensureCadDictionaryExist(AcadScaleList);
+    scales->tryAdd(new Scale("A0", 1.0, 1.0, true));
+    scales->tryAdd(new Scale("A1", 1.0, 2.0, false));
+    scales->tryAdd(new Scale("A2", 1.0, 4.0, false));
+    scales->tryAdd(new Scale("A3", 1.0, 5.0, false));
+    scales->tryAdd(new Scale("A4", 1.0, 8.0, false));
+    scales->tryAdd(new Scale("A5", 1.0, 10.0, false));
+    scales->tryAdd(new Scale("A6", 1.0, 16.0, false));
+    scales->tryAdd(new Scale("A7", 1.0, 20.0, false));
+    scales->tryAdd(new Scale("A8", 1.0, 30.0, false));
+    scales->tryAdd(new Scale("A9", 1.0, 40.0, false));
+    scales->tryAdd(new Scale("B0", 1.0, 50.0, false));
+    scales->tryAdd(new Scale("B1", 1.0, 100.0, false));
+    scales->tryAdd(new Scale("B2", 2.0, 1.0, false));
+    scales->tryAdd(new Scale("B3", 4.0, 1.0, false));
+    scales->tryAdd(new Scale("B4", 8.0, 1.0, false));
+    scales->tryAdd(new Scale("B5", 10.0, 1.0, false));
+    scales->tryAdd(new Scale("B6", 100.0, 1.0, false));
+
+    root->tryAdd(new CadDictionary(AcadVisualStyle));
+    root->tryAdd(new CadDictionary(AcadFieldList));
+    root->tryAdd(new CadDictionary(AcadImageDict));
+}
 
 CadDictionary::CadDictionary() {}
 
@@ -89,6 +151,24 @@ DictionaryCloningFlags CadDictionary::clonningFlags() const
 void CadDictionary::setClonningFlags(DictionaryCloningFlags value)
 {
     _clonningFlags = value;
+}
+
+bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs)
+{
+    if (lhs.size() != rhs.size())
+    {
+        return false;
+    }
+
+    for (size_t i = 0; i < lhs.size(); ++i)
+    {
+        if (std::toupper(lhs[i]) != std::toupper(rhs[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 }// namespace dwg

@@ -32,6 +32,7 @@
 namespace dwg {
 
 class TableEntry;
+class CadDocument;
 
 template<class T>
 class Table : public CadObject
@@ -45,6 +46,11 @@ public:
     using const_iterator = typename std::map<std::string, pointer>::const_iterator;
 
     Table() = default;
+    Table(CadDocument *document)   
+    {
+        _owner = document;
+    }
+
     virtual ~Table()
     {
         for (auto &&entry: _entries)

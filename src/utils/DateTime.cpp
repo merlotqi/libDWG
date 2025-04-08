@@ -309,7 +309,7 @@ void Timestamp::update()
     ts.LowPart = ft.dwLowDateTime;
     ts.HighPart = ft.dwHighDateTime;
     ts.QuadPart -= epoch.QuadPart;
-    _ts = ts.QuadPart / 10;
+    _timestamp = ts.QuadPart / 10;
 #else
     struct timespec ts;
     if (clock_gettime(CLOCK_REALTIME, &ts))
@@ -824,7 +824,19 @@ int DateTime::month() const
     return _month;
 }
 
-int DateTime::week() const {}
+int DateTime::week() const
+{
+    /// find the first firstDayOfWeek.
+    int baseDay = 1;
+    while (DateTime(_year, 1, baseDay).dayOfWeek() != Week::Monday) ++baseDay;
+
+    int doy = dayOfYear();
+    int offs = baseDay <= 4 ? 0 : 1;
+    if (doy < baseDay)
+        return offs;
+    else
+        return (doy - baseDay) / 7 + 1 + offs;
+}
 
 int DateTime::day() const
 {
@@ -861,23 +873,66 @@ double DateTime::julianDay() const
     return toJulianDay(_utcTime);
 }
 
-Timestamp DateTime::timestamp() const {}
+Timestamp DateTime::timestamp() const
+{
+    return Timestamp::fromUtcTime(_utcTime);
+}
 
-Timestamp::utc_time_value DateTime::utcTime() const {}
+Timestamp::utc_time_value DateTime::utcTime() const { return _utcTime;}
 
-DateTime DateTime::toUtcDateTime() const {}
+DateTime DateTime::toUtcDateTime() const
+{
+    return DateTime(_utcTime);
+}
 
-DateTime DateTime::toLocalDateTime() const {}
+DateTime DateTime::toLocalDateTime() const 
+{
+    DateTime dateTime = *this;
+    std::time_t epochTime = this->timestamp().epochTime();
+#if defined(_WIN32) 
+    std::tm brokenBuf;
+    std::tm *broken = &brokenBuf;
+    errno_t err = localtime_s(broken, &epochTime);
+    if (err)
+        broken = nullptr;
 
-DateTime DateTime::currentDateTime() {}
+    if (!broken)
+        throw std::runtime_error("cannot get local time");
+    int _tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
+#else
+    std::tm broken;
+    if (!localtime_r(&epochTime, &broken))
+        throw std::runtime_error("cannot get local time");
 
-DateTime DateTime::currentLocalDateTime() {}
+    _tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
+#endif
+    dateTime += Timespan(((Timestamp::time_diff) _tzd) * SECONDS);
+    return dateTime;
+}
 
-DateTime DateTime::currentUtcDateTime() {}
+DateTime DateTime::currentDateTime() { return currentUtcDateTime();}
 
-std::string DateTime::toString(const std::string &fmt) const {}
+DateTime DateTime::currentLocalDateTime() 
+{
+    DateTime now;
+    return now.toLocalDateTime();
+}
 
-std::string DateTime::toString(DateFormat fmt) const {}
+DateTime DateTime::currentUtcDateTime() 
+{
+    DateTime now;
+    return now;
+}
+
+std::string DateTime::toString(const std::string &fmt) const
+{
+    return std::string();
+}
+
+std::string DateTime::toString(DateFormat fmt) const
+{
+    return std::string();
+}
 
 void DateTime::checkValid()
 {
@@ -905,21 +960,147 @@ bool DateTime::isValid(int year, int month, int day, int hour, int minute, int s
 }
 
 
-double DateTime::toJulianDay(Timestamp::utc_time_value utcTime) {}
+double DateTime::toJulianDay(Timestamp::utc_time_value utcTime)
+{
+    double utcDays = double(utcTime) / 864000000000.0;
+    return utcDays + 2299160.5;// first day of Gregorian reform (Oct 15 1582)
+}
 
 double DateTime::toJulianDay(int year, int month, int day, int hour, int minute, int second, int millisecond,
                              int microsecond)
 {
+    // lookup table for (153*month - 457)/5 - note that 3 <= month <= 14.
+    static int lookup[] = {-91, -60, -30, 0, 31, 61, 92, 122, 153, 184, 214, 245, 275, 306, 337};
+
+    // day to double
+    double dday =
+            double(day) +
+            ((double((hour * 60 + minute) * 60 + second) * 1000 + millisecond) * 1000 + microsecond) / 86400000000.0;
+    if (month < 3)
+    {
+        month += 12;
+        --year;
+    }
+    double dyear = double(year);
+    return dday + lookup[month] + 365 * year + std::floor(dyear / 4) - std::floor(dyear / 100) +
+           std::floor(dyear / 400) + 1721118.5;
 }
 
-Timestamp::utc_time_value DateTime::toUtcTime(double julianDay) {}
+Timestamp::utc_time_value DateTime::toUtcTime(double julianDay)
+{
+    return Timestamp::utc_time_value((julianDay - 2299160.5) * 864000000000.0);
+}
 
-void DateTime::computeGregorian(double julianDay) {}
+void DateTime::computeGregorian(double julianDay)
+{
+    double z = std::floor(julianDay - 1721118.5);
+    double r = julianDay - 1721118.5 - z;
+    double g = z - 0.25;
+    double a = std::floor(g / 36524.25);
+    double b = a - std::floor(a / 4);
+    _year = short(std::floor((b + g) / 365.25));
+    double c = b + z - std::floor(365.25 * _year);
+    _month = short(std::floor((5 * c + 456) / 153));
+    double dday = c - std::floor((153.0 * _month - 457) / 5) + r;
+    _day = short(dday);
+    if (_month > 12)
+    {
+        ++_year;
+        _month -= 12;
+    }
+    r *= 24;
+    _hour = short(std::floor(r));
+    r -= std::floor(r);
+    r *= 60;
+    _minute = short(std::floor(r));
+    r -= std::floor(r);
+    r *= 60;
+    _second = short(std::floor(r));
+    r -= std::floor(r);
+    r *= 1000;
+    _millisecond = short(std::floor(r));
+    r -= std::floor(r);
+    r *= 1000;
+    _microsecond = short(r + 0.5);
 
-void DateTime::computeDaytime() {}
+    normalize();
+}
 
-void DateTime::checkLimit(short &lower, short &higher, short limit) {}
+void DateTime::computeDaytime()
+{
+    Timestamp::utc_time_value ut(_utcTime);
+    if (ut < 0)
+    {
+        // GH3723: UtcTimeVal is negative for pre-gregorian dates
+        // move it 1600 years to the future
+        // keeping hour, minute, second,... for corrections
+        ut += 86400LL * 1000 * 1000 * 10 * 1600 * 365;
+    }
+    Timespan span(ut / 10);
+    int hour = span.hours();
+    // Due to double rounding issues, the previous call to computeGregorian()
+    // may have crossed into the next or previous day. We need to correct that.
+    if (hour == 23 && _hour == 0)
+    {
+        _day--;
+        if (_day == 0)
+        {
+            _month--;
+            if (_month == 0)
+            {
+                _month = 12;
+                _year--;
+            }
+            _day = daysOfMonth(_year, _month);
+        }
+    }
+    else if (hour == 0 && _hour == 23)
+    {
+        _day++;
+        if (_day > daysOfMonth(_year, _month))
+        {
+            _month++;
+            if (_month > 12)
+            {
+                _month = 1;
+                _year++;
+            }
+            _day = 1;
+        }
+    }
+    _hour = hour;
+    _minute = span.minutes();
+    _second = span.seconds();
+    _millisecond = span.milliseconds();
+    _microsecond = span.microseconds();
+}
 
-void DateTime::normalize() {}
+void DateTime::checkLimit(short &lower, short &higher, short limit)
+{
+    if (lower >= limit)
+    {
+        higher += short(lower / limit);
+        lower = short(lower % limit);
+    }
+}
+
+void DateTime::normalize()
+{
+    checkLimit(_microsecond, _millisecond, 1000);
+    checkLimit(_millisecond, _second, 1000);
+    checkLimit(_second, _minute, 60);
+    checkLimit(_minute, _hour, 60);
+    checkLimit(_hour, _day, 24);
+
+    if (_day > daysOfMonth(_year, _month))
+    {
+        _day -= daysOfMonth(_year, _month);
+        if (++_month > 12)
+        {
+            ++_year;
+            _month -= 12;
+        }
+    }
+}
 
 }// namespace dwg

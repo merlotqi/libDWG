@@ -84,7 +84,8 @@ public:
 class LIBDWG_API LayersTable : public Table<Layer>
 {
 public:
-    LayersTable() = default;
+    LayersTable();
+    LayersTable(CadDocument *document);
     std::string objectName() const override;
     ObjectType objectType() const override;
 

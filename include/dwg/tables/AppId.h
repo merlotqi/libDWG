@@ -48,6 +48,8 @@ class LIBDWG_API AppIdsTable : public Table<AppId>
 {
 public:
     AppIdsTable();
+    AppIdsTable(CadDocument *document);
+    ~AppIdsTable();
 
     ObjectType objectType() const override;
     std::string objectName() const override;

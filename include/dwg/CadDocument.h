@@ -27,6 +27,7 @@
 #include <dwg/IHandledCadObject.h>
 #include <dwg/exports.h>
 #include <string>
+#include <map>
 
 namespace dwg {
 
@@ -99,6 +100,8 @@ public:
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
+    void registerCollection();
+
 protected:
     CadDocument(bool createDefaults);
     void setRootDictionary(CadDictionary *dic);
@@ -117,6 +120,32 @@ private:
     bool updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary);
     void addCadObject(CadObject *cadObject);
     void removeCadObject(CadObject *cadObject);
+
+private:
+    CadHeader *_header = nullptr;
+    CadSummaryInfo *_summaryInfo = nullptr;
+
+    BlockRecordsTable *_blockRecords = nullptr;
+    LayersTable *_layers = nullptr;
+    DimensionStylesTable *_dimensionStyles = nullptr;
+    TextStylesTable *_textStyles = nullptr;
+    LineTypesTable *_lineTypes = nullptr;
+    ViewsTable *_views = nullptr;
+    UCSTable *_ucss = nullptr;
+    VPortsTable *_vports = nullptr;
+    AppIdsTable *_appIds = nullptr;
+    
+    CadDictionary *_rootDictionary = nullptr;
+
+    ColorCollection *_colors = nullptr;
+    LayoutCollection *_layouts = nullptr;
+    GroupCollection *_groups = nullptr;
+    ScaleCollection *_scales = nullptr;
+    MLineStyleCollection *_mlineStyles = nullptr;
+    ImageDefinitionCollection *_imageDefinitions = nullptr;
+    MLeaderStyleCollection *_mleaderStyles = nullptr;
+
+    std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 };
 
 }// namespace dwg

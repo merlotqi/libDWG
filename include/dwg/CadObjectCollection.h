@@ -37,7 +37,7 @@ public:
     using pointer = T *;
     using const_pointer = T *;
     using iterator = typename std::vector<pointer>::iterator;
-    using const_iterator = typename std::set<pointer>::const_iterator;
+    using const_iterator = typename std::vector<pointer>::const_iterator;
 
     CadObjectCollection(CadObject *owner) : _owner(owner) {}
     ~CadObjectCollection()

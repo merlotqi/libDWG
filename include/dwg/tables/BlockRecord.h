@@ -80,6 +80,7 @@ class LIBDWG_API BlockRecordsTable : public Table<BlockRecord>
 {
 public:
     BlockRecordsTable();
+    BlockRecordsTable(CadDocument *document);
     virtual ~BlockRecordsTable();
 
     ObjectType objectType() const override;

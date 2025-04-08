@@ -125,7 +125,8 @@ private:
 class LIBDWG_API ViewsTable : public Table<View>
 {
 public:
-    ViewsTable() = default;
+    ViewsTable();
+    ViewsTable(CadDocument *document);
     ObjectType objectType() const override;
     std::string objectName() const override;
 

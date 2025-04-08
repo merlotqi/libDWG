@@ -38,7 +38,7 @@ class LIBDWG_API Layout : public PlotSettings
 {
 public:
     Layout(const std::string &name);
-    ~Layout();
+    ~Layout() = default;
 
     static constexpr auto ModelLayoutName = "Model";
     static constexpr auto PaperLayoutName = "Layout1";

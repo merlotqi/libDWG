@@ -49,7 +49,7 @@ class LIBDWG_API MultiLeaderStyle : public NonGraphicalObject
 public:
     static constexpr auto DefaultName = "Standard";
 
-    static MultiLeaderStyle *Default;
+    static MultiLeaderStyle *Default();
 
 public:
     MultiLeaderStyle();

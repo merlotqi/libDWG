@@ -30,17 +30,17 @@ Solid3D::Solid3D() {}
 
 Solid3D::~Solid3D() {}
 
-ObjectType Solid::objectType() const
+ObjectType Solid3D::objectType() const
 {
     return ObjectType::SOLID3D;
 }
 
-std::string Solid::objectName() const
+std::string Solid3D::objectName() const
 {
     return DxfFileToken::Entity3DSolid;
 }
 
-std::string Solid::subclassMarker() const
+std::string Solid3D::subclassMarker() const
 {
     return DxfSubclassMarker::ModelerGeometry;
 }
