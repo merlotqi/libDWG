@@ -31,12 +31,12 @@ unsigned long long CadObject::handle() const
 
 CadObject::~CadObject() {}
 
-CadObject *CadObject::owner() const
+IHandledCadObject *CadObject::owner() const
 {
     return _owner;
 }
 
-void CadObject::setOwner(CadObject *obj)
+void CadObject::setOwner(IHandledCadObject *obj)
 {
     _owner = obj;
 }

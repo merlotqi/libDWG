@@ -41,4 +41,18 @@ std::vector<std::string> ViewsTable::defaultEntries() const
     return std::vector<std::string>();
 }
 
+bool ViewsTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto view = dynamic_cast<View *>(item);
+    return view ? true : false;
+}
+
+TableEntry *ViewsTable::createEntry(const std::string &name)
+{
+    return new View(name);
+}
+
 }// namespace dwg

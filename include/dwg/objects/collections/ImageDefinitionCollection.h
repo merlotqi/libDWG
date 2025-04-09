@@ -29,7 +29,7 @@ namespace dwg {
 class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection
 {
 public:
-    ImageDefinitionCollection(CadDictionary *dictionary) : : ObjectDictionaryCollection(dictionary) {}
+    ImageDefinitionCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~ImageDefinitionCollection() = default;
 
 protected:

@@ -30,7 +30,7 @@ UCSTable::UCSTable() {}
 
 UCSTable::UCSTable(CadDocument *document) : TableCollection(document) {}
 
-UCSTable::~UCSTable(); 
+UCSTable::~UCSTable() {}
 
 ObjectType UCSTable::objectType() const { return ObjectType::UCS_CONTROL_OBJ; }
 
@@ -39,6 +39,20 @@ std::string UCSTable::objectName() const { return DxfFileToken::TableUcs; }
 std::vector<std::string> UCSTable::defaultEntries() const
 {
     return std::vector<std::string>();
+}
+
+bool UCSTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto ucs = dynamic_cast<UCS *>(item);
+    return ucs ? true : false;
+}
+
+TableEntry *UCSTable::createEntry(const std::string &name)
+{
+    return new UCS(name);
 }
 
 }// namespace dwg

@@ -28,7 +28,6 @@
 #include <variant>
 #include <vector>
 
-
 namespace dwg {
 
 class LIBDWG_API DwgVariant

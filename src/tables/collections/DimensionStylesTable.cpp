@@ -38,4 +38,18 @@ std::string DimensionStylesTable::objectName() const { return DxfFileToken::Tabl
 
 std::vector<std::string> DimensionStylesTable::defaultEntries() const { return {DimensionStyle::DefaultName}; }
 
+bool DimensionStylesTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto dim = dynamic_cast<DimensionStyle *>(item);
+    return dim ? true : false;
+}
+
+TableEntry *DimensionStylesTable::createEntry(const std::string &name)
+{
+    return new DimensionStyle(name);
+}
+
 }// namespace dwg

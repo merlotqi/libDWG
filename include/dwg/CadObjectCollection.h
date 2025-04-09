@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/CadObject.h>
+#include <dwg/utils/Delegate.h>
 #include <vector>
 
 namespace dwg {
@@ -30,13 +31,16 @@ namespace dwg {
 template<class T>
 class CadObjectCollection
 {
-    static_assert(std::is_base_of<CadObject, T>::value, "T must be derived from CadObject");
+    static_assert(std::is_pointer<T>::value, "T must be a pointer type");
+    static_assert(std::is_base_of<CadObject, std::remove_pointer_t<T>>::value,
+                  "T must be a pointer to a class derived from CadObject");
 
 public:
-    using pointer = T *;
-    using const_pointer = T *;
-    using iterator = typename std::vector<pointer>::iterator;
-    using const_iterator = typename std::vector<pointer>::const_iterator;
+    using pointer = T;
+    using value_type = std::remove_pointer_t<T>;
+    using container_type = std::vector<pointer>;
+    using iterator = typename container_type::iterator;
+    using const_iterator = typename container_type::const_iterator;
 
     CadObjectCollection(CadObject *owner) : _owner(owner) {}
     ~CadObjectCollection()
@@ -53,50 +57,40 @@ public:
         return _owner;
     }
 
-    size_t size() const
-    {
-        return _entries.size();
-    }
-    iterator begin()
-    {
-        return _entries.begin();
-    }
-    iterator end()
-    {
-        return _entries.end();
-    }
-    const_iterator cbegin()
-    {
-        return _entries.cbegin();
-    }
-    const_iterator cend()
-    {
-        return _entries.cend();
-    }
-    pointer operator[](size_t index) const
-    {
-        return _entries[index];
-    }
-    pointer &operator[](size_t index)
-    {
-        return _entries[index];
-    }
+// clang-format off
+    size_t size() const { return _entries.size(); }
+    pointer at(size_t i) const { return _entries.at(i); }
+    bool empty() const { return _entries.empty(); }
+
+    iterator begin() { return _entries.begin(); }
+    iterator end() { return _entries.end(); }
+
+    const_iterator begin() const { return _entries.begin(); }
+    const_iterator end() const { return _entries.end(); }
+
+    const_iterator cbegin() const { return _entries.cbegin(); }
+    const_iterator cend() const { return _entries.cend(); }
+
+    pointer operator[](size_t index) const { return _entries[index]; }
+    pointer &operator[](size_t index) { return _entries[index]; }
+
+// clang-format on
 
     virtual void push_back(pointer item)
     {
-        if (!item)
-            return;
-        if (item->owner())
-            throw std::invalid_argument("item already has an owner");
+        // if (!item)
+        //     return;
+        // if (item->owner())
+        //     throw std::invalid_argument("item already has an owner");
 
-        auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-        if (itFind != _entries.end())
-            throw std::invalid_argument("item is already in the collection");
+        // auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
+        // if (itFind != _entries.end())
+        //     throw std::invalid_argument("item is already in the collection");
 
-        _entries.push_back(item);
-        item->setOwner(_owner);
+        // _entries.push_back(item);
+        // item->setOwner(_owner);
 
-        OnAdd(item);
+        // OnAdd(item);
     }
 
     void clear()
@@ -126,7 +120,7 @@ public:
 
 protected:
     CadObject *_owner;
-    std::vector<pointer> _entries;
+    container_type _entries;
 };
 
 }// namespace dwg

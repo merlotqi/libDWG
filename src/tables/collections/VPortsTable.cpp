@@ -45,13 +45,7 @@ std::string VPortsTable::objectName() const
 
 std::vector<std::string> VPortsTable::defaultEntries() const
 {
-    return { VPort::DefaultName; }
-}
-
-bool VPortsTable::assertType(TableEntry *item) const
-{
-    assert(item);
-    return (dynamic_cast<VPort *>(item) == nullptr) ? false : true;
+    return { VPort::DefaultName };
 }
 
 void VPortsTable::add(TableEntry *item)
@@ -63,8 +57,22 @@ void VPortsTable::add(TableEntry *item)
     }
     else
     {
-        add(item->name(), item);
+        addPrivate(item->name(), item);
     }
+}
+
+bool VPortsTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto vport = dynamic_cast<VPort *>(item);
+    return vport ? true : false;
+}
+
+TableEntry *VPortsTable::createEntry(const std::string &name)
+{
+    return new VPort(name);
 }
 
 }// namespace dwg

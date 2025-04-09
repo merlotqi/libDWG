@@ -38,10 +38,24 @@ std::string LineTypesTable::objectName() const { return DxfFileToken::TableLinet
 
 std::vector<std::string> LineTypesTable::defaultEntries() const { return {LineType::ByLayerName, LineType::ByBlockName, LineType::ContinuousName}; }
 
-LineType *LineTypesTable::byLayer() const { return _entries[LineType::ByLayerName]; }
+LineType *LineTypesTable::byLayer() const { return getValueT<LineType>(LineType::ByLayerName); }
 
-LineType *LineTypesTable::byBlock() const { return _entries[LineType::ByBlockName]; }
+LineType *LineTypesTable::byBlock() const { return getValueT<LineType>(LineType::ByBlockName); }
 
-LineType *LineTypesTable::continuous() const { return _entries[LineType::ContinuousName]; }
+LineType *LineTypesTable::continuous() const { return getValueT<LineType>(LineType::ContinuousName); }
+
+bool LineTypesTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto lt = dynamic_cast<LineType *>(item);
+    return lt ? true : false;
+}
+
+TableEntry *LineTypesTable::createEntry(const std::string &name)
+{
+    return new LineType(name);
+}
 
 }// namespace dwg

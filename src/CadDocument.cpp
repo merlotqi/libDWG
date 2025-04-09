@@ -33,6 +33,15 @@
 #include <dwg/tables/VPort.h>
 #include <dwg/tables/AppId.h>
 #include <dwg/tables/View.h>
+#include <dwg/tables/collections/AppIdsTable.h>
+#include <dwg/tables/collections/BlockRecordsTable.h>
+#include <dwg/tables/collections/DimensionStylesTable.h>
+#include <dwg/tables/collections/LayersTable.h>
+#include <dwg/tables/collections/LineTypesTable.h>
+#include <dwg/tables/collections/TextStylesTable.h>
+#include <dwg/tables/collections/UCSTable.h>
+#include <dwg/tables/collections/ViewsTable.h>
+#include <dwg/tables/collections/VPortsTable.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/objects/Group.h>
@@ -41,6 +50,13 @@
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/ImageDefinition.h>
 #include <dwg/objects/BookColor.h>
+#include <dwg/objects/collections/LayoutCollection.h>
+#include <dwg/objects/collections/GroupCollection.h>
+#include <dwg/objects/collections/ScaleCollection.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
+#include <dwg/objects/collections/ColorCollection.h>
 
 namespace dwg {
 
@@ -157,7 +173,7 @@ void CadDocument::updateCollections(bool createDictionaries)
     }
 }
 
-unsigned long long CadDocument::handle() const {}
+unsigned long long CadDocument::handle() const { return 0ULL; }
 
 CadHeader *CadDocument::header() const
 {
@@ -166,58 +182,59 @@ CadHeader *CadDocument::header() const
 
 void CadDocument::setHeader(CadHeader *value)
 {
+    delete _header;
     _header = value;
 }
 
-CadSummaryInfo *CadDocument::summaryInfo() const {}
+CadSummaryInfo *CadDocument::summaryInfo() const { return _summaryInfo; }
 
-void CadDocument::setSummaryInfo(CadSummaryInfo *) {}
+void CadDocument::setSummaryInfo(CadSummaryInfo *value) {delete _summaryInfo; _summaryInfo = value; }
 
-DxfClassCollection *CadDocument::classes() const {}
+DxfClassCollection *CadDocument::classes() const { return _classes; }
 
-void CadDocument::setClasses(DxfClassCollection *) {}
+void CadDocument::setClasses(DxfClassCollection *value) { delete _classes; _classes = value; }
 
-AppIdsTable *CadDocument::appIds() const {}
+AppIdsTable *CadDocument::appIds() const { return _appIds; }
 
-BlockRecordsTable *CadDocument::blockRecords() const {}
+BlockRecordsTable *CadDocument::blockRecords() const { return _blockRecords; }
 
-DimensionStylesTable *CadDocument::dimensionStyles() const {}
+DimensionStylesTable *CadDocument::dimensionStyles() const { return _dimensionStyles; }
 
-LayersTable *CadDocument::layers() const {}
+LayersTable *CadDocument::layers() const { return _layers; }
 
-LineTypesTable *CadDocument::lineTypes() const {}
+LineTypesTable *CadDocument::lineTypes() const { return _lineTypes; }
 
-TextStylesTable *CadDocument::textStyles() const {}
+TextStylesTable *CadDocument::textStyles() const { return _textStyles; }
 
-UCSTable *CadDocument::UCSs() const {}
+UCSTable *CadDocument::UCSs() const { return _ucss; }
 
-ViewsTable *CadDocument::views() const {}
+ViewsTable *CadDocument::views() const { return _views; }
 
-VPortsTable *CadDocument::vports() const {}
+VPortsTable *CadDocument::vports() const { return _vports; }
 
-ColorCollection *CadDocument::colors() const {}
+ColorCollection *CadDocument::colors() const { return _colors; }
 
-LayoutCollection *CadDocument::layouts() const {}
+LayoutCollection *CadDocument::layouts() const { return _layouts; }
 
-GroupCollection *CadDocument::groups() const {}
+GroupCollection *CadDocument::groups() const { return _groups; }
 
-ScaleCollection *CadDocument::scales() const {}
+ScaleCollection *CadDocument::scales() const { return _scales; }
 
-MLineStyleCollection *CadDocument::mlineStyles() const {}
+MLineStyleCollection *CadDocument::mlineStyles() const { return _mlineStyles; }
 
-ImageDefinitionCollection *CadDocument::imageDefinitions() const {}
+ImageDefinitionCollection *CadDocument::imageDefinitions() const { return _imageDefinitions; }
 
-MLeaderStyleCollection *CadDocument::mleaderStyles() const {}
+MLeaderStyleCollection *CadDocument::mleaderStyles() const { return _mleaderStyles; }
 
-CadDictionary *CadDocument::rootDictionary() const {}
+CadDictionary *CadDocument::rootDictionary() const { return _rootDictionary; }
 
-CadObjectCollection<Entity *> CadDocument::entities() const {}
+CadObjectCollection<Entity *> CadDocument::entities() const { return modelSpace()->entities(); }
 
-BlockRecord *CadDocument::modelSpace() const {}
+BlockRecord *CadDocument::modelSpace() const { return _blockRecords->getValueT<BlockRecord>(BlockRecord::ModelSpaceName); }
 
-BlockRecord *CadDocument::paperSpace() const {}
+BlockRecord *CadDocument::paperSpace() const { return _blockRecords->getValueT<BlockRecord>(BlockRecord::PaperSpaceName); }
 
-void CadDocument::registerCollection() {}
+void CadDocument::registerCollection(TableCollection *) {}
 
 CadDocument::CadDocument(bool createDefaults) 
 {

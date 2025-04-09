@@ -38,4 +38,18 @@ std::string AppIdsTable::objectName() const { return DxfFileToken::TableAppId; }
 
 std::vector<std::string> AppIdsTable::defaultEntries() const { return { AppId::DefaultName }; }
 
+bool AppIdsTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto appid = dynamic_cast<AppId *>(item);
+    return appid ? true : false;
+}
+
+TableEntry *AppIdsTable::createEntry(const std::string &name)
+{
+    return new AppId(name);
+}
+
 }// namespace dwg

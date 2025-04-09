@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
 #include <dwg/objects/ImageDefinition.h>
 
 namespace dwg {

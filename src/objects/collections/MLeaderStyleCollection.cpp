@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
 #include <dwg/objects/MultiLeaderStyle.h>
 
 namespace dwg {

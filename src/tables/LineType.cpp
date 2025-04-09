@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/LineType.h>
+#include <fmt/core.h>
 
 namespace dwg {
 

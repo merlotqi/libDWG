@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
 #include <dwg/objects/MLineStyle.h>
 
 namespace dwg {

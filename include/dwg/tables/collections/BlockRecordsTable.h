@@ -39,6 +39,7 @@ public:
 protected:
     std::vector<std::string> defaultEntries() const override;
     bool assertType(TableEntry *item) const override;
+    TableEntry *createEntry(const std::string &name) override;
 };
 
 }// namespace dwg

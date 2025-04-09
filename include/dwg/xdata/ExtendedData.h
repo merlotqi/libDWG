@@ -22,12 +22,17 @@
 
 #pragma once
 
-#include <dwg/utils/DwgVariant.h>
+#include <vector>
 
 namespace dwg {
 
+class ExtendedDataRecord;
+
 class ExtendedData
 {
+    std::vector<ExtendedDataRecord *> _records;
+public:
+
 };
 
 }// namespace dwg

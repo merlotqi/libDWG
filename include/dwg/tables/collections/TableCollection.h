@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/CadObject.h>
+#include <dwg/utils/Delegate.h>
 #include <map>
 #include <string>
 #include <vector>
@@ -35,9 +36,8 @@ class CadDocument;
 class LIBDWG_API TableCollection : public CadObject
 {
 public:
-    using pointer = TableEntry *;
-    using iterator = typename std::map<std::string, pointer>::iterator;
-    using const_iterator = typename std::map<std::string, pointer>::const_iterator;
+    using iterator = typename std::map<std::string, TableEntry *>::iterator;
+    using const_iterator = typename std::map<std::string, TableEntry *>::const_iterator;
 
     TableCollection() = default;
     TableCollection(CadDocument *document);
@@ -47,10 +47,20 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    pointer operator[](const std::string &key) const;
-    void add(pointer entry);
+    TableEntry * operator[](const std::string &key) const;
+    virtual void add(TableEntry * entry);
     bool contains(const std::string &key) const;
-    pointer getValue(const std::string &key) const;
+    TableEntry * getValue(const std::string &key) const;
+
+    template<class T>
+    T* getValueT(const std::string& key) const
+    {
+        TableEntry *t = getValue(key);
+        if (!t)
+            return nullptr;
+        return dynamic_cast<T *>(t);
+    }
+
     void createDefaultEntries();
 
     iterator begin();
@@ -58,16 +68,22 @@ public:
     const_iterator begin() const;
     const_iterator end() const;
 
+    Delegate<void(CadObject *)> OnAdd;
+    Delegate<void(CadObject *)> OnRemove;
+
 protected:
-    void add(const std::string &key, pointer item);
+    void addPrivate(const std::string &key, TableEntry * item);
+    void addHandlePrefix(TableEntry *item);
     virtual std::vector<std::string> defaultEntries() const;
-    virtual bool assertType(pointer item) const;
+    virtual bool assertType(TableEntry * item) const;
+    virtual TableEntry *createEntry(const std::string &name) = 0;
 
 private:
     std::string createName() const;
+    void onEntryNameChanged(const std::string &oldname, const std::string &newname);
 
-private:
-    std::map<std::string, pointer> _entries;
+protected:
+    std::map<std::string, TableEntry *> _entries;
 };
 
 }// namespace dwg

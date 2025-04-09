@@ -25,7 +25,7 @@
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <map>
-
+#include <string>
 #include <vector>
 
 namespace dwg {
@@ -34,7 +34,7 @@ class LIBDWG_API CadDictionary : public NonGraphicalObject
 {
     struct StringComparerOrdinalIgnoreCase
     {
-        bool operator()(const std::string &lhs, const std::string &rhs);
+        bool operator()(const std::string &lhs, const std::string &rhs) const;
     };
 
     std::map<std::string, NonGraphicalObject *, StringComparerOrdinalIgnoreCase> _entries;

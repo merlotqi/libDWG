@@ -20,9 +20,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/ExtendedDataCollection.h>
+#pragma once
+
+#include <map>
 
 namespace dwg {
 
+class AppId;
+class ExtendedData;
+
+class LIBDWG_API ExtendedDataDictionary
+{
+    std::map<AppId *, ExtendedData *> _data;
+};
 
 }

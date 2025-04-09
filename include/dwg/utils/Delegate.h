@@ -54,18 +54,18 @@ public:
     // Destructor, clears the list of delegates.
     ~Delegate()
     {
-        Clear();
+        clear();
     }
 
     // Clears all delegates from the list.
-    void Clear()
+    void clear()
     {
         invoke_delegates.clear();
     }
 
     // Add a static function delegate.
     template<typename Fun>
-    void Add(Fun _fun)
+    void add(Fun _fun)
     {
         // Lock the mutex for thread safety.
         std::unique_lock<std::mutex> l(this->_mutex);
@@ -91,7 +91,7 @@ public:
 
     // Add a class member function delegate.
     template<typename T, typename Fun>
-    void Add(T *_object, Fun _fun)
+    void add(T *_object, Fun _fun)
     {
         // Lock the mutex for thread safety.
         std::unique_lock<std::mutex> l(this->_mutex);
@@ -117,7 +117,7 @@ public:
 
     // Remove a static function delegate.
     template<typename Fun>
-    void Remove(Fun _fun)
+    void remove(Fun _fun)
     {
         // Lock the mutex for thread safety.
         std::unique_lock<std::mutex> l(this->_mutex);
@@ -145,7 +145,7 @@ public:
 
     // Remove a class member function delegate.
     template<typename T, typename Fun>
-    void Remove(T *_object, Fun _fun)
+    void remove(T *_object, Fun _fun)
     {
         // Lock the mutex for thread safety.
         std::unique_lock<std::mutex> l(this->_mutex);
@@ -210,18 +210,18 @@ public:
     // Destructor, clears the list of delegates.
     ~Delegate()
     {
-        Clear();
+        clear();
     }
 
     // Clears all delegates from the list.
-    void Clear()
+    void clear()
     {
         invoke_delegates.clear();
     }
 
     // Add a static function delegate.
     template<typename Fun>
-    void Add(Fun &&_fun)
+    void add(Fun &&_fun)
     {
         // Lock the mutex for thread safety.
         _mutex.lock();
@@ -249,7 +249,7 @@ public:
 
     // Add a class member function delegate.
     template<typename T, typename Fun>
-    void Add(T *_object, Fun &&_fun)
+    void add(T *_object, Fun &&_fun)
     {
         // Lock the mutex for thread safety.
         _mutex.lock();
@@ -277,7 +277,7 @@ public:
 
     // Remove a static function delegate.
     template<typename Fun>
-    void Remove(Fun &&_fun)
+    void remove(Fun &&_fun)
     {
         // Lock the mutex for thread safety.
         _mutex.lock();
@@ -307,7 +307,7 @@ public:
 
     // Remove a class member function delegate.
     template<typename T, typename Fun>
-    void Remove(T *_object, Fun &&_fun)
+    void remove(T *_object, Fun &&_fun)
     {
         // Lock the mutex for thread safety.
         _mutex.lock();

@@ -42,6 +42,8 @@ public:
 
     StandardFlags flags() const;
     void setFlags(StandardFlags flags);
+    
+    Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 
 protected:
     TableEntry();

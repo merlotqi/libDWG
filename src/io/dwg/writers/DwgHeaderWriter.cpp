@@ -40,6 +40,22 @@
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/VPort.h>
 #include <dwg/tables/View.h>
+#include <dwg/tables/collections/AppIdsTable.h>
+#include <dwg/tables/collections/BlockRecordsTable.h>
+#include <dwg/tables/collections/DimensionStylesTable.h>
+#include <dwg/tables/collections/LayersTable.h>
+#include <dwg/tables/collections/LineTypesTable.h>
+#include <dwg/tables/collections/TextStylesTable.h>
+#include <dwg/tables/collections/UCSTable.h>
+#include <dwg/tables/collections/ViewsTable.h>
+#include <dwg/tables/collections/VPortsTable.h>
+#include <dwg/objects/collections/LayoutCollection.h>
+#include <dwg/objects/collections/GroupCollection.h>
+#include <dwg/objects/collections/ScaleCollection.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
+#include <dwg/objects/collections/ColorCollection.h>
 
 namespace dwg {
 

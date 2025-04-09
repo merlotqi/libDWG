@@ -38,4 +38,18 @@ std::string LayersTable::objectName() const { return DxfFileToken::TableLayer; }
 
 std::vector<std::string> LayersTable::defaultEntries() const { return {Layer::DefaultName}; }
 
+bool LayersTable::assertType(TableEntry *item) const
+{
+    if(!item)
+        return false;
+
+    auto layer = dynamic_cast<Layer *>(item);
+    return layer ? true : false;
+}
+
+TableEntry *LayersTable::createEntry(const std::string &name)
+{
+    return new Layer(name);
+}
+
 }// namespace dwg

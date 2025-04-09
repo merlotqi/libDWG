@@ -141,7 +141,7 @@ void CadDictionary::setClonningFlags(DictionaryCloningFlags value)
     _clonningFlags = value;
 }
 
-bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs)
+bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs) const
 {
     if (lhs.size() != rhs.size())
     {

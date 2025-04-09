@@ -70,9 +70,8 @@ public:
     Layout *layout() const;
     void setLayout(Layout *layout);
 
-    std::vector<Entity *> entities() const;
-    std::vector<Entity *> &entities();
-    void setEntities(const std::vector<Entity *> &);
+    CadObjectCollection<Entity *> entities() const;
+    void setEntities(const CadObjectCollection<Entity *> &);
 };
 
 }// namespace dwg

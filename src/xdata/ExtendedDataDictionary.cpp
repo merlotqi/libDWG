@@ -19,28 +19,3 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
-
-#pragma once
-
-#include <dwg/tables/collections/TableCollection.h>
-
-namespace dwg {
-
-class LIBDWG_API VPortsTable : public TableCollection
-{
-public:
-    VPortsTable();
-    VPortsTable(CadDocument *document);
-    ~VPortsTable();
-    
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-    void add(TableEntry *item) override;
-
-protected:
-    std::vector<std::string> defaultEntries() const override;
-    bool assertType(TableEntry *item) const override;
-    TableEntry *createEntry(const std::string &name) override;
-};
-
-}// namespace dwg

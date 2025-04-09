@@ -25,6 +25,7 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/CadObjectCollection.h>
 #include <dwg/IHandledCadObject.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/exports.h>
 #include <string>
 #include <map>
@@ -34,6 +35,7 @@ namespace dwg {
 class CadHeader;
 class CadSummaryInfo;
 class DxfClassCollection;
+class TableCollection;
 class AppIdsTable;
 class BlockRecordsTable;
 class DimensionStylesTable;
@@ -51,7 +53,6 @@ class MLineStyleCollection;
 class ImageDefinitionCollection;
 class MLeaderStyleCollection;
 class CadDictionary;
-class Entity;
 class BlockRecord;
 class CadObject;
 
@@ -100,7 +101,7 @@ public:
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
-    void registerCollection();
+    void registerCollection(TableCollection *);
 
 protected:
     CadDocument(bool createDefaults);
@@ -144,6 +145,7 @@ private:
     MLineStyleCollection *_mlineStyles = nullptr;
     ImageDefinitionCollection *_imageDefinitions = nullptr;
     MLeaderStyleCollection *_mleaderStyles = nullptr;
+    DxfClassCollection *_classes = nullptr;
 
     std::map<unsigned long long, IHandledCadObject *> _cadObjects;
 };
