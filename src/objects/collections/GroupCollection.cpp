@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/GroupCollection.h>
 #include <dwg/objects/Group.h>
+#include <dwg/objects/collections/GroupCollection.h>
+
 
 namespace dwg {
 
 bool GroupCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto grp = dynamic_cast<Group *>(item);
     return grp ? true : false;
 }
 
-}// namespace
+}// namespace dwg

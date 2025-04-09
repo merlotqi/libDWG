@@ -31,6 +31,13 @@
 #include <dwg/objects/Group.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/collections/ColorCollection.h>
+#include <dwg/objects/collections/GroupCollection.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
+#include <dwg/objects/collections/LayoutCollection.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
+#include <dwg/objects/collections/ScaleCollection.h>
 #include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
@@ -47,15 +54,8 @@
 #include <dwg/tables/collections/LineTypesTable.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/tables/collections/UCSTable.h>
-#include <dwg/tables/collections/ViewsTable.h>
 #include <dwg/tables/collections/VPortsTable.h>
-#include <dwg/objects/collections/LayoutCollection.h>
-#include <dwg/objects/collections/GroupCollection.h>
-#include <dwg/objects/collections/ScaleCollection.h>
-#include <dwg/objects/collections/MLineStyleCollection.h>
-#include <dwg/objects/collections/MLeaderStyleCollection.h>
-#include <dwg/objects/collections/ImageDefinitionCollection.h>
-#include <dwg/objects/collections/ColorCollection.h>
+#include <dwg/tables/collections/ViewsTable.h>
 
 namespace dwg {
 
@@ -1003,11 +1003,11 @@ void DwgHeaderWriter::write()
     //H: BLOCK_RECORD(*MODEL_SPACE)(hard pointer)
     _writer->handleReference(DwgReferenceType::HardPointer, _document->modelSpace()->handle());
     //H: LTYPE(BYLAYER)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("ByLayer")->handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->value("ByLayer")->handle());
     //H: LTYPE(BYBLOCK)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("ByBlock")->handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->value("ByBlock")->handle());
     //H: LTYPE(CONTINUOUS)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->getValue("Continuous")->handle());
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->lineTypes()->value("Continuous")->handle());
 
     //R2007 +:
     if (R2007Plus)

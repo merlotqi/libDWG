@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ScaleCollection.h>
 #include <dwg/objects/Scale.h>
+#include <dwg/objects/collections/ScaleCollection.h>
+
 
 namespace dwg {
 
 bool ScaleCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto scale = dynamic_cast<Scale *>(item);
     return scale ? true : false;
 }
 
-}// namespace
+}// namespace dwg

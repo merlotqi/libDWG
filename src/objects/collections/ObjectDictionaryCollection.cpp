@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 #include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/collections/ObjectDictionaryCollection.h>
+
 
 namespace dwg {
 

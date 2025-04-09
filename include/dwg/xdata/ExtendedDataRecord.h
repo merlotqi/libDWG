@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/utils/DwgVariant.h>
 #include <dwg/DxfCode.h>
+#include <dwg/utils/DwgVariant.h>
+
 
 namespace dwg {
 
@@ -32,8 +33,14 @@ class LIBDWG_API ExtendedDataRecord
 public:
     virtual ~ExtendedDataRecord() = value;
 
-    DxfCode code() const { return _code; }
-    DwgVariant rawValue() const { return _value; }
+    DxfCode code() const
+    {
+        return _code;
+    }
+    DwgVariant rawValue() const
+    {
+        return _value;
+    }
 
 protected:
     ExtendedDataRecord(DxfCode code, const DwgVariant &value);
@@ -67,92 +74,120 @@ protected:
 class LIBDWG_API ExtendedDataBinaryChunk : public ExtendedDataRecordT<std::vector<unsigned char>>
 {
 public:
-    ExtendedDataBinaryChunk(const std::vector<unsigned char> &chunk) : ExtendedDataRecordT<std::vector<unsigned char>>(DxfCode::ExtendedDataBinaryChunk, chunk)
-    {}
+    ExtendedDataBinaryChunk(const std::vector<unsigned char> &chunk)
+        : ExtendedDataRecordT<std::vector<unsigned char>>(DxfCode::ExtendedDataBinaryChunk, chunk)
+    {
+    }
 };
 
 class LIBDWG_API ExtendedDataControlString : public ExtendedDataRecord
 {
     bool _isClosing;
+
 public:
-    ExtendedDataControlString(bool close) : ExtendedDataRecord(DxfCode::ExtendedDataControlString, close ? '}' : '{'), _isClosing(close)
-    {}
+    ExtendedDataControlString(bool close)
+        : ExtendedDataRecord(DxfCode::ExtendedDataControlString, close ? '}' : '{'), _isClosing(close)
+    {
+    }
 
-    char value() const { _isClosing ? '}' : '{'; }
-    bool isClosing() const { return _isClosing; }
+    char value() const
+    {
+        _isClosing ? '}' : '{';
+    }
+    bool isClosing() const
+    {
+        return _isClosing;
+    }
 
-    static ExtendedDataControlString *Open() { return new ExtendedDataControlString(false); }
-    static ExtendedDataControlString *Close() { return new ExtendedDataControlString(true); }
+    static ExtendedDataControlString *Open()
+    {
+        return new ExtendedDataControlString(false);
+    }
+    static ExtendedDataControlString *Close()
+    {
+        return new ExtendedDataControlString(true);
+    }
 };
 
 
 class LIBDWG_API ExtendedDataCoordinate : public ExtendedDataRecordT<XYZ>
 {
 public:
-    ExtendedDataCoordinate(const XYZ coordinate) : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataXCoordinate, coordinate) { }
+    ExtendedDataCoordinate(const XYZ coordinate)
+        : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataXCoordinate, coordinate)
+    {
+    }
 };
 
 
 class LIBDWG_API ExtendedDataDirection : public ExtendedDataRecordT<XYZ>
 {
 public:
-    ExtendedDataDirection(const XYZ direction) : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDir, direction) { }
+    ExtendedDataDirection(const XYZ direction) : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDir, direction) {}
 };
 
 
 class LIBDWG_API ExtendedDataDisplacement : public ExtendedDataRecordT<XYZ>
 {
 public:
-    ExtendedDataDisplacement(const XYZ displacement) : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDisp, displacement) { }
+    ExtendedDataDisplacement(const XYZ displacement)
+        : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDisp, displacement)
+    {
+    }
 };
 
 
 class LIBDWG_API ExtendedDataWorldCoordinate : public ExtendedDataRecordT<XYZ>
 {
 public:
-    ExtendedDataWorldCoordinate(const XYZ &coordinate) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataWorldXCoordinate, coordinate) { }
+    ExtendedDataWorldCoordinate(const XYZ &coordinate)
+        : ExtendedDataRecordT<double>(DxfCode::ExtendedDataWorldXCoordinate, coordinate)
+    {
+    }
 };
 
 
 class LIBDWG_API ExtendedDataDistance : public ExtendedDataRecordT<double>
 {
 public:
-    ExtendedDataDistance(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataDist, value) { }
+    ExtendedDataDistance(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataDist, value) {}
 };
 
 
 class LIBDWG_API ExtendedDataInteger16 : public ExtendedDataRecordT<short>
 {
 public:
-    ExtendedDataInteger16(short value) : ExtendedDataRecordT<short>(DxfCode::ExtendedDataInteger16, value) { }
+    ExtendedDataInteger16(short value) : ExtendedDataRecordT<short>(DxfCode::ExtendedDataInteger16, value) {}
 };
 
 
 class LIBDWG_API ExtendedDataInteger32 : public ExtendedDataRecordT<int>
 {
 public:
-    ExtendedDataInteger32(int value) : ExtendedDataRecordT<int>(DxfCode::ExtendedDataInteger32, value) { }
+    ExtendedDataInteger32(int value) : ExtendedDataRecordT<int>(DxfCode::ExtendedDataInteger32, value) {}
 };
 
 
 class LIBDWG_API ExtendedDataReal : public ExtendedDataRecordT<double>
 {
 public:
-    ExtendedDataReal(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataReal, value) { }
+    ExtendedDataReal(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataReal, value) {}
 };
 
 
 class LIBDWG_API ExtendedDataScale : public ExtendedDataRecordT<double>
 {
 public:
-    ExtendedDataScale(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataScale, value) { }
+    ExtendedDataScale(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataScale, value) {}
 };
 
 
 class LIBDWG_API ExtendedDataString : public ExtendedDataRecordT<std::string>
 {
 public:
-    ExtendedDataString(const std::string &value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataAsciiString, value) { }
+    ExtendedDataString(const std::string &value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataAsciiString, value)
+    {
+    }
 };
 
-}
+}// namespace dwg

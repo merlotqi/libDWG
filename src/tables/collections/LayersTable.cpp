@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/LayersTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/Layer.h>
+#include <dwg/tables/collections/LayersTable.h>
 
 namespace dwg {
 
@@ -32,15 +32,24 @@ LayersTable::LayersTable(CadDocument *document) : TableCollection(document) {}
 
 LayersTable::~LayersTable() {}
 
-ObjectType LayersTable::objectType() const { return ObjectType::LAYER_CONTROL_OBJ; }
+ObjectType LayersTable::objectType() const
+{
+    return ObjectType::LAYER_CONTROL_OBJ;
+}
 
-std::string LayersTable::objectName() const { return DxfFileToken::TableLayer; }
+std::string LayersTable::objectName() const
+{
+    return DxfFileToken::TableLayer;
+}
 
-std::vector<std::string> LayersTable::defaultEntries() const { return {Layer::DefaultName}; }
+std::vector<std::string> LayersTable::defaultEntries() const
+{
+    return {Layer::DefaultName};
+}
 
 bool LayersTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto layer = dynamic_cast<Layer *>(item);

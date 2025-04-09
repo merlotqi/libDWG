@@ -32,7 +32,7 @@ public:
     VPortsTable();
     VPortsTable(CadDocument *document);
     ~VPortsTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
     void add(TableEntry *item) override;

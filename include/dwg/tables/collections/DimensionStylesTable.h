@@ -32,7 +32,7 @@ public:
     DimensionStylesTable();
     DimensionStylesTable(CadDocument *document);
     ~DimensionStylesTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
 

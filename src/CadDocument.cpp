@@ -21,17 +21,32 @@
  */
 
 #include <dwg/CadDocument.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/classes/DxfClassCollection.h>
 #include <dwg/CadSummaryInfo.h>
+#include <dwg/classes/DxfClassCollection.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/objects/BookColor.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/Group.h>
+#include <dwg/objects/ImageDefinition.h>
+#include <dwg/objects/Layout.h>
+#include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/objects/Scale.h>
+#include <dwg/objects/collections/ColorCollection.h>
+#include <dwg/objects/collections/GroupCollection.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
+#include <dwg/objects/collections/LayoutCollection.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
+#include <dwg/objects/collections/ScaleCollection.h>
+#include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/Layer.h>
 #include <dwg/tables/DimensionStyle.h>
-#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
+#include <dwg/tables/TextStyle.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/VPort.h>
-#include <dwg/tables/AppId.h>
 #include <dwg/tables/View.h>
 #include <dwg/tables/collections/AppIdsTable.h>
 #include <dwg/tables/collections/BlockRecordsTable.h>
@@ -40,23 +55,9 @@
 #include <dwg/tables/collections/LineTypesTable.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/tables/collections/UCSTable.h>
-#include <dwg/tables/collections/ViewsTable.h>
 #include <dwg/tables/collections/VPortsTable.h>
-#include <dwg/objects/CadDictionary.h>
-#include <dwg/objects/Layout.h>
-#include <dwg/objects/Group.h>
-#include <dwg/objects/Scale.h>
-#include <dwg/objects/MLineStyle.h>
-#include <dwg/objects/MultiLeaderStyle.h>
-#include <dwg/objects/ImageDefinition.h>
-#include <dwg/objects/BookColor.h>
-#include <dwg/objects/collections/LayoutCollection.h>
-#include <dwg/objects/collections/GroupCollection.h>
-#include <dwg/objects/collections/ScaleCollection.h>
-#include <dwg/objects/collections/MLineStyleCollection.h>
-#include <dwg/objects/collections/MLeaderStyleCollection.h>
-#include <dwg/objects/collections/ImageDefinitionCollection.h>
-#include <dwg/objects/collections/ColorCollection.h>
+#include <dwg/tables/collections/ViewsTable.h>
+
 
 namespace dwg {
 
@@ -69,7 +70,7 @@ CadDocument::CadDocument(ACadVersion version) : CadDocument(true)
 
 CadDocument::~CadDocument() {}
 
-void CadDocument::createDefaults() 
+void CadDocument::createDefaults()
 {
     DxfClassCollection::UpdateDxfClasses(this);
 
@@ -89,7 +90,7 @@ void CadDocument::createDefaults()
     UCSTable *_ucss = new UCSTable(this);
     VPortsTable *_vports = new VPortsTable(this);
     AppIdsTable *_appIds = new AppIdsTable(this);
-           
+
 
     //Root dictionary
     if (!_rootDictionary)
@@ -125,7 +126,7 @@ void CadDocument::createDefaults()
     }
 }
 
-void CadDocument::updateCollections(bool createDictionaries) 
+void CadDocument::updateCollections(bool createDictionaries)
 {
     if (createDictionaries && !this->_rootDictionary)
     {
@@ -173,7 +174,10 @@ void CadDocument::updateCollections(bool createDictionaries)
     }
 }
 
-unsigned long long CadDocument::handle() const { return 0ULL; }
+unsigned long long CadDocument::handle() const
+{
+    return 0ULL;
+}
 
 CadHeader *CadDocument::header() const
 {
@@ -186,57 +190,131 @@ void CadDocument::setHeader(CadHeader *value)
     _header = value;
 }
 
-CadSummaryInfo *CadDocument::summaryInfo() const { return _summaryInfo; }
+CadSummaryInfo *CadDocument::summaryInfo() const
+{
+    return _summaryInfo;
+}
 
-void CadDocument::setSummaryInfo(CadSummaryInfo *value) {delete _summaryInfo; _summaryInfo = value; }
+void CadDocument::setSummaryInfo(CadSummaryInfo *value)
+{
+    delete _summaryInfo;
+    _summaryInfo = value;
+}
 
-DxfClassCollection *CadDocument::classes() const { return _classes; }
+DxfClassCollection *CadDocument::classes() const
+{
+    return _classes;
+}
 
-void CadDocument::setClasses(DxfClassCollection *value) { delete _classes; _classes = value; }
+void CadDocument::setClasses(DxfClassCollection *value)
+{
+    delete _classes;
+    _classes = value;
+}
 
-AppIdsTable *CadDocument::appIds() const { return _appIds; }
+AppIdsTable *CadDocument::appIds() const
+{
+    return _appIds;
+}
 
-BlockRecordsTable *CadDocument::blockRecords() const { return _blockRecords; }
+BlockRecordsTable *CadDocument::blockRecords() const
+{
+    return _blockRecords;
+}
 
-DimensionStylesTable *CadDocument::dimensionStyles() const { return _dimensionStyles; }
+DimensionStylesTable *CadDocument::dimensionStyles() const
+{
+    return _dimensionStyles;
+}
 
-LayersTable *CadDocument::layers() const { return _layers; }
+LayersTable *CadDocument::layers() const
+{
+    return _layers;
+}
 
-LineTypesTable *CadDocument::lineTypes() const { return _lineTypes; }
+LineTypesTable *CadDocument::lineTypes() const
+{
+    return _lineTypes;
+}
 
-TextStylesTable *CadDocument::textStyles() const { return _textStyles; }
+TextStylesTable *CadDocument::textStyles() const
+{
+    return _textStyles;
+}
 
-UCSTable *CadDocument::UCSs() const { return _ucss; }
+UCSTable *CadDocument::UCSs() const
+{
+    return _ucss;
+}
 
-ViewsTable *CadDocument::views() const { return _views; }
+ViewsTable *CadDocument::views() const
+{
+    return _views;
+}
 
-VPortsTable *CadDocument::vports() const { return _vports; }
+VPortsTable *CadDocument::vports() const
+{
+    return _vports;
+}
 
-ColorCollection *CadDocument::colors() const { return _colors; }
+ColorCollection *CadDocument::colors() const
+{
+    return _colors;
+}
 
-LayoutCollection *CadDocument::layouts() const { return _layouts; }
+LayoutCollection *CadDocument::layouts() const
+{
+    return _layouts;
+}
 
-GroupCollection *CadDocument::groups() const { return _groups; }
+GroupCollection *CadDocument::groups() const
+{
+    return _groups;
+}
 
-ScaleCollection *CadDocument::scales() const { return _scales; }
+ScaleCollection *CadDocument::scales() const
+{
+    return _scales;
+}
 
-MLineStyleCollection *CadDocument::mlineStyles() const { return _mlineStyles; }
+MLineStyleCollection *CadDocument::mlineStyles() const
+{
+    return _mlineStyles;
+}
 
-ImageDefinitionCollection *CadDocument::imageDefinitions() const { return _imageDefinitions; }
+ImageDefinitionCollection *CadDocument::imageDefinitions() const
+{
+    return _imageDefinitions;
+}
 
-MLeaderStyleCollection *CadDocument::mleaderStyles() const { return _mleaderStyles; }
+MLeaderStyleCollection *CadDocument::mleaderStyles() const
+{
+    return _mleaderStyles;
+}
 
-CadDictionary *CadDocument::rootDictionary() const { return _rootDictionary; }
+CadDictionary *CadDocument::rootDictionary() const
+{
+    return _rootDictionary;
+}
 
-CadObjectCollection<Entity *> CadDocument::entities() const { return modelSpace()->entities(); }
+CadObjectCollection<Entity *> &CadDocument::entities()
+{
+    return modelSpace()->entities();
+}
 
-BlockRecord *CadDocument::modelSpace() const { return _blockRecords->getValueT<BlockRecord>(BlockRecord::ModelSpaceName); }
+BlockRecord *CadDocument::modelSpace() const
+{
+    return _blockRecords->valueT<BlockRecord>(BlockRecord::ModelSpaceName);
+}
 
-BlockRecord *CadDocument::paperSpace() const { return _blockRecords->getValueT<BlockRecord>(BlockRecord::PaperSpaceName); }
+BlockRecord *CadDocument::paperSpace() const
+{
+    return _blockRecords->valueT<BlockRecord>(BlockRecord::PaperSpaceName);
+}
 
 void CadDocument::registerCollection(TableCollection *) {}
 
-CadDocument::CadDocument(bool createDefaults) 
+CadDocument::CadDocument(bool createDefaults)
 {
     _cadObjects.insert({this->handle(), this});
     if (createDefaults)
@@ -265,7 +343,7 @@ void CadDocument::setViews(ViewsTable *) {}
 
 void CadDocument::setVPorts(VPortsTable *) {}
 
-bool CadDocument::updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary) 
+bool CadDocument::updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary)
 {
     if (_rootDictionary->tryGetEntryT<CadDictionary>(dictName, dictionary))
     {

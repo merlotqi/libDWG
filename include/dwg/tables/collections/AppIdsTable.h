@@ -32,10 +32,10 @@ public:
     AppIdsTable();
     AppIdsTable(CadDocument *document);
     ~AppIdsTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
-    
+
 protected:
     std::vector<std::string> defaultEntries() const override;
     bool assertType(TableEntry *item) const override;

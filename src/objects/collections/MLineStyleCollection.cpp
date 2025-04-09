@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/MLineStyleCollection.h>
 #include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
+
 
 namespace dwg {
 
 bool MLineStyleCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto mls = dynamic_cast<MLineStyle *>(item);
     return mls ? true : false;
 }
 
-}// namespace
+}// namespace dwg

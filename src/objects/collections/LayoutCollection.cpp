@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/LayoutCollection.h>
 #include <dwg/objects/Layout.h>
+#include <dwg/objects/collections/LayoutCollection.h>
+
 
 namespace dwg {
 
 bool LayoutCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto layout = dynamic_cast<Layout *>(item);
     return layout ? true : false;
 }
 
-}// namespace
+}// namespace dwg

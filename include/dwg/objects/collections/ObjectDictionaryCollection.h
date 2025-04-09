@@ -50,9 +50,9 @@ public:
     bool tryGetEntryT(const std::string &name, T **entry)
     {
         NonGraphicalObject *tmp = nullptr;
-        if(tryGetEntry(name, &tmp))
+        if (tryGetEntry(name, &tmp))
         {
-            if(dynamic_cast<T*>(tmp))
+            if (dynamic_cast<T *>(tmp))
             {
                 *entry = tmp;
                 return true;
@@ -67,7 +67,6 @@ protected:
     virtual bool assertType(NonGraphicalObject *item) const;
     virtual bool beforeRemove(const std::string &name);
     virtual void beforeAdd(NonGraphicalObject *entry);
-
 };
 
 }// namespace dwg

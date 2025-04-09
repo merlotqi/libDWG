@@ -37,4 +37,4 @@ protected:
     bool beforeRemove(const std::string &name) override;
 };
 
-}// namespace
+}// namespace dwg

@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ImageDefinitionCollection.h>
 #include <dwg/objects/ImageDefinition.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
+
 
 namespace dwg {
 
 bool ImageDefinitionCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto img = dynamic_cast<ImageDefinition *>(item);
     return img ? true : false;
 }
 
-}// namespace
+}// namespace dwg

@@ -34,4 +34,4 @@ class LIBDWG_API ExtendedDataDictionary
     std::map<AppId *, ExtendedData *> _data;
 };
 
-}
+}// namespace dwg

@@ -27,11 +27,11 @@
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/TextStyle.h>
 #include <dwg/tables/UCS.h>
-#include <stdexcept>
 #include <dwg/tables/collections/DimensionStylesTable.h>
 #include <dwg/tables/collections/LayersTable.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/tables/collections/UCSTable.h>
+#include <stdexcept>
 
 
 #ifdef _WIN32
@@ -1993,7 +1993,7 @@ void CadHeader::setDimensionTextStyleName(const std::string &value)
 {
     if (_document)
     {
-        _dimensionTextStyle = _document->textStyles()->getValueT<TextStyle>(value);
+        _dimensionTextStyle = _document->textStyles()->valueT<TextStyle>(value);
     }
     else
     {
@@ -2762,7 +2762,7 @@ Layer *CadHeader::currentLayer() const
     }
     else
     {
-        return _document->layers()->getValueT<Layer>(currentLayerName());
+        return _document->layers()->valueT<Layer>(currentLayerName());
     }
 }
 
@@ -2794,7 +2794,7 @@ TextStyle *CadHeader::dimensionTextStyle() const
     }
     else
     {
-        return _document->textStyles()->getValueT<TextStyle>(dimensionTextStyleName());
+        return _document->textStyles()->valueT<TextStyle>(dimensionTextStyleName());
     }
 }
 

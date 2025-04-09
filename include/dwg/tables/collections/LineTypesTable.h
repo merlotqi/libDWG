@@ -33,10 +33,10 @@ public:
     LineTypesTable();
     LineTypesTable(CadDocument *document);
     ~LineTypesTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
-    
+
     LineType *byLayer() const;
     LineType *byBlock() const;
     LineType *continuous() const;
@@ -45,7 +45,6 @@ protected:
     std::vector<std::string> defaultEntries() const override;
     bool assertType(TableEntry *item) const override;
     TableEntry *createEntry(const std::string &name) override;
-
 };
 
 }// namespace dwg

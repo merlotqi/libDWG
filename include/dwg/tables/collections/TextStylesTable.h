@@ -32,7 +32,7 @@ public:
     TextStylesTable();
     TextStylesTable(CadDocument *document);
     ~TextStylesTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
 

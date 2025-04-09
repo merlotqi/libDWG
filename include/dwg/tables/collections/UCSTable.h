@@ -32,7 +32,7 @@ public:
     UCSTable();
     UCSTable(CadDocument *document);
     ~UCSTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
 

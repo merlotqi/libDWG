@@ -52,7 +52,7 @@ public:
         BLOB,
     };
 
-    DwgVariant() = default;
+    DwgVariant() = delete;
 
     VarType Type;
 

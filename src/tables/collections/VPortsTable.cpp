@@ -20,10 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/VPortsTable.h>
+#include <assert.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/VPort.h>
-#include <assert.h>
+#include <dwg/tables/collections/VPortsTable.h>
+
 
 namespace dwg {
 
@@ -45,13 +46,13 @@ std::string VPortsTable::objectName() const
 
 std::vector<std::string> VPortsTable::defaultEntries() const
 {
-    return { VPort::DefaultName };
+    return {VPort::DefaultName};
 }
 
 void VPortsTable::add(TableEntry *item)
 {
     assert(item);
-    if(contains(item->name()))
+    if (contains(item->name()))
     {
         addHandlePrefix(item);
     }
@@ -63,7 +64,7 @@ void VPortsTable::add(TableEntry *item)
 
 bool VPortsTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto vport = dynamic_cast<VPort *>(item);

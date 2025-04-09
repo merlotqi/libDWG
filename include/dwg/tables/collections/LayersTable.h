@@ -32,7 +32,7 @@ public:
     LayersTable();
     LayersTable(CadDocument *document);
     ~LayersTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
 

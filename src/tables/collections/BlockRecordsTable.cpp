@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/BlockRecordsTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/collections/BlockRecordsTable.h>
 
 namespace dwg {
 
@@ -32,15 +32,24 @@ BlockRecordsTable::BlockRecordsTable(CadDocument *document) : TableCollection(do
 
 BlockRecordsTable::~BlockRecordsTable() {}
 
-ObjectType BlockRecordsTable::objectType() const { return ObjectType::BLOCK_CONTROL_OBJ; }
+ObjectType BlockRecordsTable::objectType() const
+{
+    return ObjectType::BLOCK_CONTROL_OBJ;
+}
 
-std::string BlockRecordsTable::objectName() const { return DxfFileToken::TableBlockRecord; }
+std::string BlockRecordsTable::objectName() const
+{
+    return DxfFileToken::TableBlockRecord;
+}
 
-std::vector<std::string> BlockRecordsTable::defaultEntries() const { return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName}; }
+std::vector<std::string> BlockRecordsTable::defaultEntries() const
+{
+    return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
+}
 
 bool BlockRecordsTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto block = dynamic_cast<BlockRecord *>(item);

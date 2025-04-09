@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ColorCollection.h>
 #include <dwg/objects/BookColor.h>
+#include <dwg/objects/collections/ColorCollection.h>
+
 
 namespace dwg {
 
 bool ColorCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto bookColor = dynamic_cast<BookColor *>(item);
     return bookColor ? true : false;
 }
 
-}// namespace
+}// namespace dwg

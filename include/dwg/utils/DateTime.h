@@ -23,9 +23,9 @@
 
 #pragma once
 
+#include <ctime>
 #include <dwg/exports.h>
 #include <string>
-#include <ctime>
 
 namespace dwg {
 

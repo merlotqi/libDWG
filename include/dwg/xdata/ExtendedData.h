@@ -31,8 +31,8 @@ class ExtendedDataRecord;
 class ExtendedData
 {
     std::vector<ExtendedDataRecord *> _records;
-public:
 
+public:
 };
 
 }// namespace dwg

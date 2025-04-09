@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/ViewsTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/View.h>
+#include <dwg/tables/collections/ViewsTable.h>
+
 
 namespace dwg {
 
@@ -32,9 +33,15 @@ ViewsTable::ViewsTable(CadDocument *document) : TableCollection(document) {}
 
 ViewsTable::~ViewsTable() {}
 
-ObjectType ViewsTable::objectType() const { return ObjectType::VIEW_CONTROL_OBJ; }
+ObjectType ViewsTable::objectType() const
+{
+    return ObjectType::VIEW_CONTROL_OBJ;
+}
 
-std::string ViewsTable::objectName() const { return DxfFileToken::TableView; }
+std::string ViewsTable::objectName() const
+{
+    return DxfFileToken::TableView;
+}
 
 std::vector<std::string> ViewsTable::defaultEntries() const
 {
@@ -43,7 +50,7 @@ std::vector<std::string> ViewsTable::defaultEntries() const
 
 bool ViewsTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto view = dynamic_cast<View *>(item);

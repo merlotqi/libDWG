@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/AppIdsTable.h>
-#include <dwg/tables/AppId.h>
 #include <dwg/DxfFileToken_p.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/collections/AppIdsTable.h>
 
 namespace dwg {
 
@@ -32,15 +32,24 @@ AppIdsTable::AppIdsTable(CadDocument *document) : TableCollection(document) {}
 
 AppIdsTable::~AppIdsTable() {}
 
-ObjectType AppIdsTable::objectType() const { return ObjectType::APPID_CONTROL_OBJ; }
+ObjectType AppIdsTable::objectType() const
+{
+    return ObjectType::APPID_CONTROL_OBJ;
+}
 
-std::string AppIdsTable::objectName() const { return DxfFileToken::TableAppId; }
+std::string AppIdsTable::objectName() const
+{
+    return DxfFileToken::TableAppId;
+}
 
-std::vector<std::string> AppIdsTable::defaultEntries() const { return { AppId::DefaultName }; }
+std::vector<std::string> AppIdsTable::defaultEntries() const
+{
+    return {AppId::DefaultName};
+}
 
 bool AppIdsTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto appid = dynamic_cast<AppId *>(item);

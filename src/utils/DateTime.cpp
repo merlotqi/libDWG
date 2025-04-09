@@ -878,18 +878,21 @@ Timestamp DateTime::timestamp() const
     return Timestamp::fromUtcTime(_utcTime);
 }
 
-Timestamp::utc_time_value DateTime::utcTime() const { return _utcTime;}
+Timestamp::utc_time_value DateTime::utcTime() const
+{
+    return _utcTime;
+}
 
 DateTime DateTime::toUtcDateTime() const
 {
     return DateTime(_utcTime);
 }
 
-DateTime DateTime::toLocalDateTime() const 
+DateTime DateTime::toLocalDateTime() const
 {
     DateTime dateTime = *this;
     std::time_t epochTime = this->timestamp().epochTime();
-#if defined(_WIN32) 
+#if defined(_WIN32)
     std::tm brokenBuf;
     std::tm *broken = &brokenBuf;
     errno_t err = localtime_s(broken, &epochTime);
@@ -898,27 +901,30 @@ DateTime DateTime::toLocalDateTime() const
 
     if (!broken)
         throw std::runtime_error("cannot get local time");
-    int _tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
+    int tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
 #else
     std::tm broken;
     if (!localtime_r(&epochTime, &broken))
         throw std::runtime_error("cannot get local time");
 
-    _tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
+    int tzd = Timezone::utcOffset() + Timezone::dst(dateTime.timestamp());
 #endif
-    dateTime += Timespan(((Timestamp::time_diff) _tzd) * SECONDS);
+    dateTime += Timespan(((Timestamp::time_diff) tzd) * SECONDS);
     return dateTime;
 }
 
-DateTime DateTime::currentDateTime() { return currentUtcDateTime();}
+DateTime DateTime::currentDateTime()
+{
+    return currentUtcDateTime();
+}
 
-DateTime DateTime::currentLocalDateTime() 
+DateTime DateTime::currentLocalDateTime()
 {
     DateTime now;
     return now.toLocalDateTime();
 }
 
-DateTime DateTime::currentUtcDateTime() 
+DateTime DateTime::currentUtcDateTime()
 {
     DateTime now;
     return now;

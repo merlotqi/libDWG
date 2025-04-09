@@ -37,12 +37,12 @@ public:
 
     std::string subclassMarker() const override;
 
-    virtual std::string name() const;
+    virtual std::string name() const override;
     virtual void setName(const std::string &value);
 
     StandardFlags flags() const;
     void setFlags(StandardFlags flags);
-    
+
     Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 
 protected:

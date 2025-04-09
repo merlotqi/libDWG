@@ -39,7 +39,7 @@ protected:
     unsigned long long _handle;
     IHandledCadObject *_owner;
     CadDocument *_document;
-    ExtendedDataDictionary * _extendedData;
+    ExtendedDataDictionary *_extendedData;
     CadDictionary *_xdictionary;
     std::vector<CadObject *> _reactors;
 
@@ -81,7 +81,6 @@ protected:
     virtual void unassignDocument();
     void updateCollection();
     void updateTable();
-    
 
 private:
     CadObject(const CadObject &) = delete;

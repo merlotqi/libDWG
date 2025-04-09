@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/TextStyle.h>
+#include <dwg/tables/collections/TextStylesTable.h>
+
 
 namespace dwg {
 
@@ -32,15 +33,24 @@ TextStylesTable::TextStylesTable(CadDocument *document) : TableCollection(docume
 
 TextStylesTable::~TextStylesTable() {}
 
-ObjectType TextStylesTable::objectType() const { return ObjectType::STYLE_CONTROL_OBJ; }
+ObjectType TextStylesTable::objectType() const
+{
+    return ObjectType::STYLE_CONTROL_OBJ;
+}
 
-std::string TextStylesTable::objectName() const { return DxfFileToken::TableStyle; }
+std::string TextStylesTable::objectName() const
+{
+    return DxfFileToken::TableStyle;
+}
 
-std::vector<std::string> TextStylesTable::defaultEntries() const { return { TextStyle::DefaultName }; }
+std::vector<std::string> TextStylesTable::defaultEntries() const
+{
+    return {TextStyle::DefaultName};
+}
 
 bool TextStylesTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto text = dynamic_cast<TextStyle *>(item);

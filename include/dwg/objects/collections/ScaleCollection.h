@@ -36,4 +36,4 @@ protected:
     bool assertType(NonGraphicalObject *item) const override;
 };
 
-}// namespace
+}// namespace dwg

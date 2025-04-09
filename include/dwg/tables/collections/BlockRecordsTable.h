@@ -32,7 +32,7 @@ public:
     BlockRecordsTable();
     BlockRecordsTable(CadDocument *document);
     ~BlockRecordsTable();
-    
+
     ObjectType objectType() const override;
     std::string objectName() const override;
 

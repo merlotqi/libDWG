@@ -75,7 +75,7 @@ public:
 
     bool hardOwnerFlag() const;
     void setHardOwnerFlag(bool);
-    
+
     DictionaryCloningFlags clonningFlags() const;
     void setClonningFlags(DictionaryCloningFlags);
 

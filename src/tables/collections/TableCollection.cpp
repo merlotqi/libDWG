@@ -20,13 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
- #include <dwg/DxfFileToken_p.h>
- #include <dwg/DxfSubclassMarker_p.h>
+#include <assert.h>
+#include <dwg/CadDocument.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/TableEntry.h>
- #include <dwg/tables/collections/TableCollection.h>
- #include <dwg/CadDocument.h>
- #include <fmt/core.h>
- #include <assert.h>
+#include <dwg/tables/collections/TableCollection.h>
+#include <fmt/core.h>
 
 namespace dwg {
 
@@ -37,14 +37,23 @@ TableCollection::TableCollection(CadDocument *document)
 }
 TableCollection::~TableCollection() {}
 
-size_t TableCollection::count() const { return _entries.size(); }
+size_t TableCollection::count() const
+{
+    return _entries.size();
+}
 
-std::string TableCollection::objectName() const{ return DxfFileToken::TableEntry_; }
+std::string TableCollection::objectName() const
+{
+    return DxfFileToken::TableEntry_;
+}
 
-std::string TableCollection::subclassMarker() const{ return DxfSubclassMarker::Table; }
+std::string TableCollection::subclassMarker() const
+{
+    return DxfSubclassMarker::Table;
+}
 
-TableEntry * TableCollection::operator[](const std::string &key) const
-{ 
+TableEntry *TableCollection::operator[](const std::string &key) const
+{
     auto itFind = _entries.find(key);
     if (itFind != _entries.end())
     {
@@ -56,10 +65,10 @@ TableEntry * TableCollection::operator[](const std::string &key) const
     }
 }
 
-void TableCollection::add(TableEntry * entry)
+void TableCollection::add(TableEntry *entry)
 {
     assert(entry);
-    if(entry->name().empty())
+    if (entry->name().empty())
     {
         entry->setName(createName());
     }
@@ -69,13 +78,13 @@ void TableCollection::add(TableEntry * entry)
 bool TableCollection::contains(const std::string &key) const
 {
     auto itFind = _entries.find(key);
-    if(itFind == _entries.end())
+    if (itFind == _entries.end())
         return false;
     else
         return true;
 }
 
-TableEntry * TableCollection::getValue(const std::string &key) const 
+TableEntry *TableCollection::value(const std::string &key) const
 {
     auto itFind = _entries.find(key);
     if (itFind != _entries.end())
@@ -88,27 +97,39 @@ TableEntry * TableCollection::getValue(const std::string &key) const
     }
 }
 
-void TableCollection::createDefaultEntries() 
+void TableCollection::createDefaultEntries()
 {
-    auto&& names = defaultEntries();
-    for(auto&& name : names)
+    auto &&names = defaultEntries();
+    for (auto &&name: names)
     {
-        if(contains(name))
+        if (contains(name))
             continue;
 
         add(createEntry(name));
     }
 }
 
-TableCollection::iterator TableCollection::begin() { return _entries.begin(); }
+TableCollection::iterator TableCollection::begin()
+{
+    return _entries.begin();
+}
 
-TableCollection::iterator TableCollection::end() { return _entries.end(); }
+TableCollection::iterator TableCollection::end()
+{
+    return _entries.end();
+}
 
-TableCollection::const_iterator TableCollection::begin() const { return _entries.begin(); }
+TableCollection::const_iterator TableCollection::begin() const
+{
+    return _entries.begin();
+}
 
-TableCollection::const_iterator TableCollection::end() const { return _entries.end(); }
+TableCollection::const_iterator TableCollection::end() const
+{
+    return _entries.end();
+}
 
-void TableCollection::addPrivate(const std::string &key, TableEntry * item)
+void TableCollection::addPrivate(const std::string &key, TableEntry *item)
 {
     _entries.insert({key, item});
     item->setOwner(this);
@@ -128,18 +149,21 @@ void TableCollection::addHandlePrefix(TableEntry *item)
     _entries.insert({key, item});
 }
 
-std::vector<std::string> TableCollection::defaultEntries() const { return std::vector<std::string>(); }
-
-bool TableCollection::assertType(TableEntry * item) const
+std::vector<std::string> TableCollection::defaultEntries() const
 {
-    (void)item;
+    return std::vector<std::string>();
+}
+
+bool TableCollection::assertType(TableEntry *item) const
+{
+    (void) item;
     return true;
 }
 std::string TableCollection::createName() const
 {
     std::string name = "unamed";
     int i = 0;
-    while(contains(fmt::format("{}_{}", name, i)))
+    while (contains(fmt::format("{}_{}", name, i)))
     {
         i++;
     }

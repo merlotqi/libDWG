@@ -20,13 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <assert.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/CadDictionary.h>
-#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/Scale.h>
-#include <assert.h>
+
 
 namespace dwg {
 

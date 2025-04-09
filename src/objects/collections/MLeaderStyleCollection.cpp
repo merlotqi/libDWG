@@ -22,18 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/collections/MLeaderStyleCollection.h>
 #include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
+
 
 namespace dwg {
 
 bool MLeaderStyleCollection::assertType(NonGraphicalObject *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto mls = dynamic_cast<MultiLeaderStyle *>(item);
     return mls ? true : false;
 }
 
-}// namespace
+}// namespace dwg

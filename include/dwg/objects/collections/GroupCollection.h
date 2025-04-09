@@ -34,7 +34,7 @@ public:
 
 protected:
     bool assertType(NonGraphicalObject *item) const override;
-    void beforeAdd(NonGraphicalObject *entry) override; 
+    void beforeAdd(NonGraphicalObject *entry) override;
 };
 
-}// namespace
+}// namespace dwg

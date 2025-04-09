@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/LineTypesTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/LineType.h>
+#include <dwg/tables/collections/LineTypesTable.h>
 
 namespace dwg {
 
@@ -32,21 +32,39 @@ LineTypesTable::LineTypesTable(CadDocument *document) : TableCollection(document
 
 LineTypesTable::~LineTypesTable() {}
 
-ObjectType LineTypesTable::objectType() const { return ObjectType::LTYPE_CONTROL_OBJ; }
+ObjectType LineTypesTable::objectType() const
+{
+    return ObjectType::LTYPE_CONTROL_OBJ;
+}
 
-std::string LineTypesTable::objectName() const { return DxfFileToken::TableLinetype; }
+std::string LineTypesTable::objectName() const
+{
+    return DxfFileToken::TableLinetype;
+}
 
-std::vector<std::string> LineTypesTable::defaultEntries() const { return {LineType::ByLayerName, LineType::ByBlockName, LineType::ContinuousName}; }
+std::vector<std::string> LineTypesTable::defaultEntries() const
+{
+    return {LineType::ByLayerName, LineType::ByBlockName, LineType::ContinuousName};
+}
 
-LineType *LineTypesTable::byLayer() const { return getValueT<LineType>(LineType::ByLayerName); }
+LineType *LineTypesTable::byLayer() const
+{
+    return valueT<LineType>(LineType::ByLayerName);
+}
 
-LineType *LineTypesTable::byBlock() const { return getValueT<LineType>(LineType::ByBlockName); }
+LineType *LineTypesTable::byBlock() const
+{
+    return valueT<LineType>(LineType::ByBlockName);
+}
 
-LineType *LineTypesTable::continuous() const { return getValueT<LineType>(LineType::ContinuousName); }
+LineType *LineTypesTable::continuous() const
+{
+    return valueT<LineType>(LineType::ContinuousName);
+}
 
 bool LineTypesTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto lt = dynamic_cast<LineType *>(item);

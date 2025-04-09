@@ -43,19 +43,19 @@ public:
     TableCollection(CadDocument *document);
     virtual ~TableCollection();
     size_t count() const;
-    
+
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    TableEntry * operator[](const std::string &key) const;
-    virtual void add(TableEntry * entry);
+    TableEntry *operator[](const std::string &key) const;
+    virtual void add(TableEntry *entry);
     bool contains(const std::string &key) const;
-    TableEntry * getValue(const std::string &key) const;
+    TableEntry *value(const std::string &key) const;
 
     template<class T>
-    T* getValueT(const std::string& key) const
+    T *valueT(const std::string &key) const
     {
-        TableEntry *t = getValue(key);
+        TableEntry *t = value(key);
         if (!t)
             return nullptr;
         return dynamic_cast<T *>(t);
@@ -72,10 +72,10 @@ public:
     Delegate<void(CadObject *)> OnRemove;
 
 protected:
-    void addPrivate(const std::string &key, TableEntry * item);
+    void addPrivate(const std::string &key, TableEntry *item);
     void addHandlePrefix(TableEntry *item);
     virtual std::vector<std::string> defaultEntries() const;
-    virtual bool assertType(TableEntry * item) const;
+    virtual bool assertType(TableEntry *item) const;
     virtual TableEntry *createEntry(const std::string &name) = 0;
 
 private:

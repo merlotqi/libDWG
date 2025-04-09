@@ -57,7 +57,7 @@ public:
         return _owner;
     }
 
-// clang-format off
+    // clang-format off
     size_t size() const { return _entries.size(); }
     pointer at(size_t i) const { return _entries.at(i); }
     bool empty() const { return _entries.empty(); }
@@ -74,7 +74,7 @@ public:
     pointer operator[](size_t index) const { return _entries[index]; }
     pointer &operator[](size_t index) { return _entries[index]; }
 
-// clang-format on
+    // clang-format on
 
     virtual void push_back(pointer item)
     {

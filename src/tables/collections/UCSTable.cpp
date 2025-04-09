@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/UCSTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/UCS.h>
+#include <dwg/tables/collections/UCSTable.h>
+
 
 namespace dwg {
 
@@ -32,9 +33,15 @@ UCSTable::UCSTable(CadDocument *document) : TableCollection(document) {}
 
 UCSTable::~UCSTable() {}
 
-ObjectType UCSTable::objectType() const { return ObjectType::UCS_CONTROL_OBJ; }
+ObjectType UCSTable::objectType() const
+{
+    return ObjectType::UCS_CONTROL_OBJ;
+}
 
-std::string UCSTable::objectName() const { return DxfFileToken::TableUcs; }
+std::string UCSTable::objectName() const
+{
+    return DxfFileToken::TableUcs;
+}
 
 std::vector<std::string> UCSTable::defaultEntries() const
 {
@@ -43,7 +50,7 @@ std::vector<std::string> UCSTable::defaultEntries() const
 
 bool UCSTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto ucs = dynamic_cast<UCS *>(item);

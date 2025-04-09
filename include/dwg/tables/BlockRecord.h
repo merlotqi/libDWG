@@ -71,6 +71,7 @@ public:
     void setLayout(Layout *layout);
 
     CadObjectCollection<Entity *> entities() const;
+    CadObjectCollection<Entity *> &entities();
     void setEntities(const CadObjectCollection<Entity *> &);
 };
 

@@ -27,8 +27,9 @@
 #include <dwg/IHandledCadObject.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/exports.h>
-#include <string>
 #include <map>
+#include <string>
+
 
 namespace dwg {
 
@@ -96,7 +97,7 @@ public:
     MLeaderStyleCollection *mleaderStyles() const;
 
     CadDictionary *rootDictionary() const;
-    CadObjectCollection<Entity *> entities() const;
+    CadObjectCollection<Entity *> &entities();
 
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
@@ -135,7 +136,7 @@ private:
     UCSTable *_ucss = nullptr;
     VPortsTable *_vports = nullptr;
     AppIdsTable *_appIds = nullptr;
-    
+
     CadDictionary *_rootDictionary = nullptr;
 
     ColorCollection *_colors = nullptr;

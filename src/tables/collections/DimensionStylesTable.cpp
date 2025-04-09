@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/tables/collections/DimensionStylesTable.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/collections/DimensionStylesTable.h>
 
 namespace dwg {
 
@@ -32,15 +32,24 @@ DimensionStylesTable::DimensionStylesTable(CadDocument *document) : TableCollect
 
 DimensionStylesTable::~DimensionStylesTable() {}
 
-ObjectType DimensionStylesTable::objectType() const { return ObjectType::DIMSTYLE_CONTROL_OBJ; }
+ObjectType DimensionStylesTable::objectType() const
+{
+    return ObjectType::DIMSTYLE_CONTROL_OBJ;
+}
 
-std::string DimensionStylesTable::objectName() const { return DxfFileToken::TableDimstyle; }
+std::string DimensionStylesTable::objectName() const
+{
+    return DxfFileToken::TableDimstyle;
+}
 
-std::vector<std::string> DimensionStylesTable::defaultEntries() const { return {DimensionStyle::DefaultName}; }
+std::vector<std::string> DimensionStylesTable::defaultEntries() const
+{
+    return {DimensionStyle::DefaultName};
+}
 
 bool DimensionStylesTable::assertType(TableEntry *item) const
 {
-    if(!item)
+    if (!item)
         return false;
 
     auto dim = dynamic_cast<DimensionStyle *>(item);
