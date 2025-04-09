@@ -22,7 +22,6 @@
 
 #pragma once
 
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -41,21 +40,6 @@ public:
 public:
     static std::string DefaultName;
     static AppId *Default();
-};
-
-
-class LIBDWG_API AppIdsTable : public Table<AppId>
-{
-public:
-    AppIdsTable();
-    AppIdsTable(CadDocument *document);
-    ~AppIdsTable();
-
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

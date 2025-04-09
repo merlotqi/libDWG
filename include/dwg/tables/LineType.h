@@ -24,7 +24,6 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/tables/LinetypeShapeFlags.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextStyle.h>
 
@@ -84,19 +83,6 @@ private:
     std::string _description;
     char _alignment = 'A';
     std::vector<Segment> _segments;
-};
-
-class LIBDWG_API LineTypesTable : public Table<LineType>
-{
-public:
-    LineTypesTable();
-    LineTypesTable(CadDocument *document);
-    ~LineTypesTable();
-
-    ObjectType objectType() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

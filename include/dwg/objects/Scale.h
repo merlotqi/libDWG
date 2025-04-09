@@ -24,7 +24,6 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
@@ -64,10 +63,5 @@ private:
     bool _isUnitScale = false;
 };
 
-class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection<Scale>
-{
-public:
-    ScaleCollection(CadDictionary *);
-};
 
 }// namespace dwg

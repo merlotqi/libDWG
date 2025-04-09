@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/CadObject.h>
-#include <dwg/utils/Delegate.h>
 #include <vector>
 
 namespace dwg {

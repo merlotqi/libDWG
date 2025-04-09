@@ -25,7 +25,6 @@
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/tables/FontFlags.h>
 #include <dwg/tables/StyleFlags.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -83,17 +82,6 @@ private:
     double _obliqueAngle = 0.0;
     TextMirrorFlag _mirrorFlag = TextMirrorFlag::None;
     FontFlags _trueType = (int) FontFlag::Regular;
-};
-
-class LIBDWG_API TextStylesTable : public Table<TextStyle>
-{
-public:
-    TextStylesTable() ;
-    TextStylesTable(CadDocument *document);
-    ObjectType objectType() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

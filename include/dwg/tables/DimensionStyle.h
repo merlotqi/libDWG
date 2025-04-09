@@ -29,7 +29,6 @@
 #include <dwg/tables/DimensionTextHorizontalAlignment.h>
 #include <dwg/tables/DimensionTextVerticalAlignment.h>
 #include <dwg/tables/FractionFormat.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/TextArrowFitType.h>
 #include <dwg/tables/TextDirection.h>
@@ -369,18 +368,6 @@ private:
     std::string _mzs;
     double _altMzf = 0.0;
     double _mzf = 0.0;
-};
-
-class LIBDWG_API DimensionStylesTable : public Table<DimensionStyle>
-{
-public:
-    DimensionStylesTable();
-    DimensionStylesTable(CadDocument *document);
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

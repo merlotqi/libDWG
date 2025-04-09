@@ -35,7 +35,6 @@
 #include <dwg/objects/LeaderDrawOrderType.h>
 #include <dwg/objects/MultiLeaderDrawOrderType.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
@@ -186,12 +185,5 @@ public:
     TextAttachmentType textTopAttachment() const;
     void setTextTopAttachment(TextAttachmentType);
 };
-
-class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection<MultiLeaderStyle>
-{
-public:
-    MLeaderStyleCollection(CadDictionary *);
-};
-
 
 }// namespace dwg

@@ -29,13 +29,6 @@
 
 namespace dwg {
 
-/**
- * @class CadSummaryInfo
- * @brief Represents metadata information about a CAD document.
- *
- * This class stores various metadata properties such as title, author, keywords, 
- * and timestamps for creation and modification.
- */
 class LIBDWG_API CadSummaryInfo
 {
 public:

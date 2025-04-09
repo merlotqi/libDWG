@@ -25,7 +25,6 @@
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
 
-
 namespace dwg {
 
 Layer::Layer()

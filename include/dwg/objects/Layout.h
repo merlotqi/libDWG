@@ -24,7 +24,6 @@
 
 #include <dwg/OrthographicType.h>
 #include <dwg/objects/LayoutFlags.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 #include <dwg/objects/PlotSettings.h>
 
 namespace dwg {
@@ -114,12 +113,6 @@ private:
     Viewport *_viewport;
     UCS *_ucs;
     UCS *_baseUCS;
-};
-
-class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection<Layout>
-{
-public:
-    LayoutCollection(CadDictionary *);
 };
 
 }// namespace dwg

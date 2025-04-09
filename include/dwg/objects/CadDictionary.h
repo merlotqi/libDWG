@@ -74,27 +74,20 @@ public:
     std::string subclassMarker() const override;
 
     bool hardOwnerFlag() const;
-
     void setHardOwnerFlag(bool);
-
+    
     DictionaryCloningFlags clonningFlags() const;
-
     void setClonningFlags(DictionaryCloningFlags);
 
     CadObject *operator[](const std::string &key) const;
-
     NonGraphicalObject *tryGetEntry(const std::string &name);
 
     void add(const std::string &key, NonGraphicalObject *value);
-
     void add(NonGraphicalObject *value);
-
     bool tryAdd(NonGraphicalObject *value) const;
 
     bool containsKey(const std::string &key) const;
-
     bool remove(const std::string &key, NonGraphicalObject **item);
-
     void clear();
 
     template<class T>
@@ -111,7 +104,6 @@ public:
 
 private:
     CadDictionary *ensureCadDictionaryExist(const std::string &name);
-
     void onEntryNameChanged(const std::string &olName, const std::string &newName);
 };
 

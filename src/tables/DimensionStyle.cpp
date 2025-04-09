@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/DimensionStyle.h>
 
-
 namespace dwg {
 
 DimensionStyle *DimensionStyle::Default()

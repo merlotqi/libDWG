@@ -24,7 +24,6 @@
 
 #include <dwg/CadObjectCollection.h>
 #include <dwg/blocks/BlockTypeFlags.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
 #include <string>
@@ -74,19 +73,6 @@ public:
     std::vector<Entity *> entities() const;
     std::vector<Entity *> &entities();
     void setEntities(const std::vector<Entity *> &);
-};
-
-class LIBDWG_API BlockRecordsTable : public Table<BlockRecord>
-{
-public:
-    BlockRecordsTable();
-    BlockRecordsTable(CadDocument *document);
-    virtual ~BlockRecordsTable();
-
-    ObjectType objectType() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/TextStyle.h>
 
-
 namespace dwg {
 
 TextStyle::TextStyle() {}

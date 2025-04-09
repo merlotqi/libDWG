@@ -25,32 +25,49 @@
 #include <dwg/IHandledCadObject.h>
 #include <dwg/objects/CadDictionary.h>
 
-
 namespace dwg {
 
-template<class T>
-class ObjectDictionaryCollection : public IHandledCadObject
+class NonGraphicalObject;
+class LIBDWG_API ObjectDictionaryCollection : public IHandledCadObject
 {
     CadDictionary *_dictionary;
 
 public:
-    ObjectDictionaryCollection(CadDictionary *dictionary) : _dictionary(dictionary) {}
+    ObjectDictionaryCollection(CadDictionary *dictionary);
+    virtual ~ObjectDictionaryCollection();
 
-    ~ObjectDictionaryCollection()
+    unsigned long long handle() const;
+
+    NonGraphicalObject *operator[](const std::string &key) const;
+
+    void add(NonGraphicalObject *);
+    bool remove(const std::string &name, NonGraphicalObject **entry);
+    bool remove(const std::string &name);
+    bool containsKey(const std::string &) const;
+    bool tryGetEntry(const std::string &name, NonGraphicalObject **);
+
+    template<typename T>
+    bool tryGetEntryT(const std::string &name, T **entry)
     {
-        delete _dictionary;
-        _dictionary = nullptr;
+        NonGraphicalObject *tmp = nullptr;
+        if(tryGetEntry(name, &tmp))
+        {
+            if(dynamic_cast<T*>(tmp))
+            {
+                *entry = tmp;
+                return true;
+            }
+        }
+        return false;
     }
 
-    unsigned long long handle() const
-    {
-        return _dictionary->handle();
-    }
+    void clear();
 
-    void add(T *entry)
-    {
-        _dictionary->add(entry);
-    }
+protected:
+    virtual bool assertType(NonGraphicalObject *item);
+    virtual bool beforeRemove(const std::string &name);
+    virtual void beforeAdd(NonGraphicalObject *entry);
+
 };
 
 }// namespace dwg

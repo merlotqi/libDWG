@@ -24,7 +24,6 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -65,20 +64,6 @@ private:
     OrthographicType _orthographicType = OrthographicType::None;
     OrthographicType _orthographicViewType = OrthographicType::None;
     double _elevation = 0.0;
-};
-
-class LIBDWG_API UCSTable : public Table<UCS>
-{
-public:
-    UCSTable();
-    UCSTable(CadDocument *document);
-    ~UCSTable();
-
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const override;
 };
 
 }// namespace dwg

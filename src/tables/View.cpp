@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/View.h>
 
-
 namespace dwg {
 
 View::View(const std::string &name) : TableEntry(name) {}

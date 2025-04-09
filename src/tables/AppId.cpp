@@ -25,10 +25,7 @@
 #include <dwg/tables/AppId.h>
 #include <stdexcept>
 
-
 namespace dwg {
-
-/* ----------------------------- AppId impls ----------------------------- */
 
 std::string AppId::DefaultName = "libDWG";
 
@@ -58,25 +55,6 @@ std::string AppId::subclassMarker() const
 AppId *AppId::Default()
 {
     return new AppId(DefaultName);
-}
-
-/* -------------------------- AppIdsTable impls -------------------------- */
-
-AppIdsTable::AppIdsTable() {}
-
-ObjectType AppIdsTable::objectType() const
-{
-    return ObjectType::APPID_CONTROL_OBJ;
-}
-
-std::string AppIdsTable::objectName() const
-{
-    return DxfFileToken::TableAppId;
-}
-
-std::vector<std::string> AppIdsTable::defaultEntries() const
-{
-    return {AppId::DefaultName};
 }
 
 }// namespace dwg

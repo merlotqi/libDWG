@@ -24,7 +24,6 @@
 
 #include <dwg/Coordinate.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 #include <dwg/objects/ResolutionUnit.h>
 
 namespace dwg {
@@ -65,12 +64,6 @@ private:
     XY _defaultSize;
     bool _isLoaded;
     ResolutionUnit _units;
-};
-
-class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection<ImageDefinition>
-{
-public:
-    ImageDefinitionCollection(CadDictionary *);
 };
 
 }// namespace dwg

@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/UCS.h>
 
-
 namespace dwg {
 
 UCS::UCS() {}

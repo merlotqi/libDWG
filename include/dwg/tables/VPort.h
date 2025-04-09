@@ -29,7 +29,6 @@
 #include <dwg/RenderMode.h>
 #include <dwg/tables/DefaultLightingType.h>
 #include <dwg/tables/GridFlags.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/UscIconType.h>
 #include <dwg/tables/ViewModeType.h>
@@ -207,21 +206,6 @@ private:
     double _brightness;
     double _contrast;
     Color _ambientColor;
-};
-
-
-class LIBDWG_API VPortsTable : public Table<VPort>
-{
-public:
-    VPortsTable();
-    VPortsTable(CadDocument *document);
-    ~VPortsTable();
-
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const override;
 };
 
 }// namespace dwg

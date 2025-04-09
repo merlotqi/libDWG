@@ -35,13 +35,10 @@ public:
     virtual ~CadDictionaryWithDefault();
 
     ObjectType objectType() const override;
-
     std::string objectName() const override;
-
     std::string subclassMarker() const override;
 
     CadObject *defaultEntry() const;
-
     void setDefaultEntry(CadObject *);
 };
 

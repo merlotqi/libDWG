@@ -25,7 +25,6 @@
 #include <dwg/Color.h>
 #include <dwg/LineWeightType.h>
 #include <dwg/tables/LayerFlags.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 
 namespace dwg {
@@ -79,18 +78,6 @@ public:
 
     bool isOn() const;
     void setIsOn(bool);
-};
-
-class LIBDWG_API LayersTable : public Table<Layer>
-{
-public:
-    LayersTable();
-    LayersTable(CadDocument *document);
-    std::string objectName() const override;
-    ObjectType objectType() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const override;
 };
 
 }// namespace dwg

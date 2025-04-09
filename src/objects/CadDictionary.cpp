@@ -59,25 +59,13 @@ void CadDictionary::CreateDefaultEntries(CadDictionary *root)
 {
     assert(root);
 
+    root->tryAdd(new CadDictionary(AcadColor));
+    root->tryAdd(new CadDictionary(AcadGroup));
+
+    CadDictionary *layouts = root->ensureCadDictionaryExist(AcadLayout);
+
     root->tryAdd(new CadDictionary(AcadMaterial));
     root->tryAdd(new CadDictionary(AcadSortEnts));
-
-    CadDictionary *mLeaderStyles = root->ensureCadDictionaryExist(AcadMLeaderStyle);
-    if (!mLeaderStyles->containsKey(MultiLeaderStyle::DefaultName))
-        mLeaderStyles->add(MultiLeaderStyle::Default());
-
-    CadDictionary *mLineStyles = root->ensureCadDictionaryExist(AcadMLineStyle);
-    if (!mLineStyles->containsKey(MLineStyle::DefaultName))
-        mLineStyles->add(MLineStyle::Default());
-
-    if (!root->containsKey(AcadTableStyle))
-        root->add(new CadDictionary(AcadTableStyle));
-
-    if (!root->containsKey(AcadPlotSettings))
-        root->add(new CadDictionary(AcadPlotSettings));
-
-    if (!root->containsKey(VariableDictionary))
-        root->add(new CadDictionary(VariableDictionary));
 
     CadDictionary *mLeaderStyles = root->ensureCadDictionaryExist(AcadMLeaderStyle);
     mLeaderStyles->tryAdd(MultiLeaderStyle::Default());

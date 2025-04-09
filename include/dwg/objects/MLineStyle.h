@@ -25,7 +25,6 @@
 #include <dwg/Color.h>
 #include <dwg/objects/MLineStyleFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
@@ -80,12 +79,6 @@ private:
     double _startAngle;
     double _endAngle;
     std::vector<Element> _elements;
-};
-
-class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection<MLineStyle>
-{
-public:
-    MLineStyleCollection(CadDictionary *);
 };
 
 }// namespace dwg

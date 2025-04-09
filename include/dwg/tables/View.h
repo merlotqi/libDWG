@@ -25,7 +25,6 @@
 #include <dwg/Coordinate.h>
 #include <dwg/OrthographicType.h>
 #include <dwg/RenderMode.h>
-#include <dwg/tables/TableCollection.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/tables/ViewModeType.h>
 
@@ -120,18 +119,6 @@ private:
     XYZ _ucsYAxis = XYZ::Zero;
     double _ucsElevation = 0.0;
     OrthographicType _ucsOrthographicType;
-};
-
-class LIBDWG_API ViewsTable : public Table<View>
-{
-public:
-    ViewsTable();
-    ViewsTable(CadDocument *document);
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-
-protected:
-    std::vector<std::string> defaultEntries() const override;
 };
 
 }// namespace dwg

@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/VPort.h>
 
-
 namespace dwg {
 
 VPort::VPort() : _ambientColor(Color((short) 0)) {}

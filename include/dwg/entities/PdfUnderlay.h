@@ -29,26 +29,10 @@ namespace dwg {
 class LIBDWG_API PdfUnderlay : public UnderlayEntity
 {
 public:
-    /**
-     * @brief Constructs a PdfUnderlay object.
-     */
     PdfUnderlay();
-
-    /**
-     * @brief Destroys the PdfUnderlay object.
-     */
     ~PdfUnderlay();
 
-    /**
-     * @brief Gets the object type of the PDF underlay.
-     * @return The object type as ObjectType.
-     */
     virtual ObjectType objectType() const override;
-
-    /**
-     * @brief Gets the name of the PDF underlay object.
-     * @return The object name as a string.
-     */
     virtual std::string objectName() const override;
 };
 

@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/objects/NonGraphicalObject.h>
-#include <dwg/objects/ObjectDictionaryCollection.h>
 #include <map>
 
 namespace dwg {
@@ -58,12 +57,6 @@ private:
     bool _isUnnamed;
     bool _selectable;
     std::map<unsigned long long, Entity *> _entities;
-};
-
-class LIBDWG_API GroupCollection : public ObjectDictionaryCollection<Group>
-{
-public:
-    GroupCollection(CadDictionary *);
 };
 
 }// namespace dwg
