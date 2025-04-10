@@ -20,11 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/collections/ColorCollection.h>
-
 
 namespace dwg {
 

@@ -20,11 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/Layout.h>
 #include <dwg/objects/collections/LayoutCollection.h>
-
 
 namespace dwg {
 
@@ -35,6 +32,11 @@ bool LayoutCollection::assertType(NonGraphicalObject *item) const
 
     auto layout = dynamic_cast<Layout *>(item);
     return layout ? true : false;
+}
+
+bool LayoutCollection::beforeRemove(const std::string &name)
+{
+    return false;
 }
 
 }// namespace dwg

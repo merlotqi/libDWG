@@ -20,19 +20,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/Scale.h>
-#include <dwg/objects/collections/ScaleCollection.h>
-
+#include <dwg/Coordinate.h>
 
 namespace dwg {
 
-bool ScaleCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
+XY XY::Zero = XY(0, 0);
 
-    auto scale = dynamic_cast<Scale *>(item);
-    return scale ? true : false;
-}
+XY XY::AxisX = XY(1, 0);
+
+XY XY::AxisY = XY(0, 1);
+
+
+XYZ XYZ::Zero = XYZ(0, 0, 0);
+
+XYZ XYZ::AxisX = XYZ(1, 0, 0);
+
+XYZ XYZ::AxisY = XYZ(0, 1, 0);
+
+XYZ XYZ::AxisZ = XYZ(0, 0, 1);
 
 }// namespace dwg

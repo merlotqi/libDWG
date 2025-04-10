@@ -20,11 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/Group.h>
 #include <dwg/objects/collections/GroupCollection.h>
-
 
 namespace dwg {
 
@@ -35,6 +32,11 @@ bool GroupCollection::assertType(NonGraphicalObject *item) const
 
     auto grp = dynamic_cast<Group *>(item);
     return grp ? true : false;
+}
+
+void GroupCollection::beforeAdd(NonGraphicalObject *entry)
+{
+
 }
 
 }// namespace dwg

@@ -23,16 +23,23 @@
 #pragma once
 
 #include <vector>
+#include <dwg/exports.h>
 
 namespace dwg {
 
 class ExtendedDataRecord;
 
-class ExtendedData
+class LIBDWG_API ExtendedData
 {
     std::vector<ExtendedDataRecord *> _records;
 
 public:
+    ExtendedData();
+    ~ExtendedData();
+    void addControlStrings();
+
+    std::vector<ExtendedDataRecord *> records() const;
+    std::vector<ExtendedDataRecord *> &records();
 };
 
 }// namespace dwg

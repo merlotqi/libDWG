@@ -20,11 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/collections/MLineStyleCollection.h>
-
 
 namespace dwg {
 

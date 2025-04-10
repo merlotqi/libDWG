@@ -36,6 +36,7 @@ class CadDictionary;
 class LIBDWG_API Layout : public PlotSettings
 {
 public:
+    Layout() = default;
     Layout(const std::string &name);
     ~Layout() = default;
 

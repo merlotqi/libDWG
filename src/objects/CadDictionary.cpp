@@ -107,6 +107,8 @@ CadDictionary::CadDictionary() {}
 
 CadDictionary::CadDictionary(const std::string &name) : NonGraphicalObject(name) {}
 
+CadDictionary::~CadDictionary() {}
+
 ObjectType CadDictionary::objectType() const
 {
     return ObjectType::DICTIONARY;
@@ -142,6 +144,16 @@ void CadDictionary::setClonningFlags(DictionaryCloningFlags value)
     _clonningFlags = value;
 }
 
+CadObject *CadDictionary::operator[](const std::string &key) const { return nullptr; }
+
+bool CadDictionary::tryGetEntry(const std::string &name, NonGraphicalObject **entry) { return false; }
+
+void CadDictionary::add(const std::string &key, NonGraphicalObject *value) {}
+
+void CadDictionary::add(NonGraphicalObject *value) {}
+
+bool CadDictionary::tryAdd(NonGraphicalObject *value) const { return false; }
+
 bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs) const
 {
     if (lhs.size() != rhs.size())
@@ -159,5 +171,9 @@ bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::strin
 
     return true;
 }
+
+CadDictionary *CadDictionary::ensureCadDictionaryExist(const std::string &name) { return nullptr; }
+
+void onEntryNameChanged(const std::string &olName, const std::string &newName) {}
 
 }// namespace dwg

@@ -80,7 +80,7 @@ public:
     void setClonningFlags(DictionaryCloningFlags);
 
     CadObject *operator[](const std::string &key) const;
-    NonGraphicalObject *tryGetEntry(const std::string &name);
+    bool tryGetEntry(const std::string &name, NonGraphicalObject **entry);
 
     void add(const std::string &key, NonGraphicalObject *value);
     void add(NonGraphicalObject *value);
@@ -88,6 +88,7 @@ public:
 
     bool containsKey(const std::string &key) const;
     bool remove(const std::string &key, NonGraphicalObject **item);
+    bool remove(const std::string &key);
     void clear();
 
     template<class T>

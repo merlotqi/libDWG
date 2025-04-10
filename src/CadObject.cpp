@@ -24,26 +24,50 @@
 
 namespace dwg {
 
-unsigned long long CadObject::handle() const
-{
-    return _handle;
-}
+CadObject::CadObject() {}
 
 CadObject::~CadObject() {}
 
-IHandledCadObject *CadObject::owner() const
-{
-    return _owner;
-}
+ExtendedDataDictionary *CadObject::extendedData() const { return _extendedData; }
 
-void CadObject::setOwner(IHandledCadObject *obj)
-{
-    _owner = obj;
-}
+unsigned long long CadObject::handle() const { return _handle; }
 
-void CadObject::setHandle(unsigned long long value)
-{
-    _handle = value;
-}
+IHandledCadObject *CadObject::owner() const { return _owner; }
+
+CadDictionary *CadObject::xdictionary() const { return _xdictionary; }
+
+CadDocument *CadObject::document() const { return _document; }
+
+void CadObject::setDocument(CadDocument *doc) { _document = doc; }
+
+CadObject *CadObject::clone() { return nullptr; }
+
+bool CadObject::hasDynamicSubclass() const { return false; }
+
+std::vector<CadObject *> CadObject::reactors() const { return _reactors; }
+
+std::vector<CadObject *> &CadObject::reactors() { return _reactors; }
+
+void CadObject::clearReactors() {}
+
+void CadObject::addReactor(CadObject *reactor) { _reactors.push_back(reactor); }
+
+bool CadObject::removeReactor(CadObject *) { return false; }
+
+void CadObject::setHandle(unsigned long long value) { _handle = value; }
+
+void CadObject::setOwner(IHandledCadObject *obj) { _owner = obj; }
+
+void CadObject::setExtendedData(ExtendedDataDictionary *) {}
+
+void CadObject::setXDictionary(CadDictionary *value) { _xdictionary = value; }
+
+void CadObject::assignDocument(CadDocument *doc) { }
+
+void CadObject::unassignDocument() {}
+
+void CadObject::updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *table) {}
+
+void CadObject::updateTable(TableEntry *entry, TableCollection* table) {}
 
 }// namespace dwg

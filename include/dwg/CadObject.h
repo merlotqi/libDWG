@@ -33,6 +33,11 @@ namespace dwg {
 class CadDocument;
 class CadDictionary;
 class ExtendedDataDictionary;
+class NonGraphicalObject;
+class ObjectDictionaryCollection;
+class TableEntry;
+class TableCollection;
+
 class LIBDWG_API CadObject : public IHandledCadObject
 {
 protected:
@@ -44,8 +49,8 @@ protected:
     std::vector<CadObject *> _reactors;
 
 public:
-    CadObject() = default;
-    virtual ~CadObject() override;
+    CadObject();
+    virtual ~CadObject();
 
     virtual ObjectType objectType() const = 0;
     virtual std::string objectName() const = 0;
@@ -79,8 +84,8 @@ public:
 protected:
     void assignDocument(CadDocument *doc);
     virtual void unassignDocument();
-    void updateCollection();
-    void updateTable();
+    void updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *table);
+    void updateTable(TableEntry *entry, TableCollection* table);
 
 private:
     CadObject(const CadObject &) = delete;

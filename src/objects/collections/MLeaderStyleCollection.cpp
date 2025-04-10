@@ -20,11 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/collections/MLeaderStyleCollection.h>
-
 
 namespace dwg {
 

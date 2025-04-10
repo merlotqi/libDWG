@@ -32,12 +32,23 @@ namespace dwg {
 
 class Layout;
 class Entity;
+class Block;
+class BlockEnd;
 
 class LIBDWG_API BlockRecord : public TableEntry
 {
+    Block *_blockEntity;
+    BlockEnd *_blockEnd;
+    UnitsType _units;
+    BlockTypeFlags _flags;
+    bool _isExplodable = false;
+    std::vector<unsigned char> _preview;
+    Layout *_layout;
+    CadObjectCollection<Entity *> _entities;
+
 public:
-    BlockRecord() = default;
-    BlockRecord(const std::string &name) : TableEntry(name) {}
+    BlockRecord();
+    BlockRecord(const std::string &name);
 
     static constexpr auto ModelSpaceName = "*Model_Space";
     static constexpr auto PaperSpaceName = "*Paper_Space";
@@ -70,9 +81,7 @@ public:
     Layout *layout() const;
     void setLayout(Layout *layout);
 
-    CadObjectCollection<Entity *> entities() const;
     CadObjectCollection<Entity *> &entities();
-    void setEntities(const CadObjectCollection<Entity *> &);
 };
 
 }// namespace dwg
