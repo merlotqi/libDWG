@@ -24,7 +24,6 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/CadDictionaryWithDefault.h>
 
-
 namespace dwg {
 
 CadDictionaryWithDefault::CadDictionaryWithDefault() {}

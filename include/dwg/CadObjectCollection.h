@@ -25,39 +25,85 @@
 #include <dwg/CadObject.h>
 #include <dwg/utils/Delegate.h>
 #include <vector>
+#include <algorithm>
+#include <utility>
+#include <initializer_list>
 
 namespace dwg {
 
-template<class T>
+    template<typename T>
 class CadObjectCollection
 {
     static_assert(std::is_pointer<T>::value, "T must be a pointer type");
     static_assert(std::is_base_of<CadObject, std::remove_pointer_t<T>>::value,
                   "T must be a pointer to a class derived from CadObject");
 
+    std::vector<T> _entries;
+    CadObject *_owner;
+
 public:
-    using pointer = T;
-    using value_type = std::remove_pointer_t<T>;
-    using container_type = std::vector<pointer>;
-    using iterator = typename container_type::iterator;
-    using const_iterator = typename container_type::const_iterator;
+    CadObjectCollection() noexcept = default;
+    CadObjectCollection(const CadObjectCollection &other) = default;
+    CadObjectCollection(CadObjectCollection &&other) noexcept = default;
+    CadObjectCollection& operator=(const CadObjectCollection& other) = default;
+    CadObjectCollection& operator=(CadObjectCollection&& other) noexcept = default;
+    Collection(std::initializer_list<T> initList) : _entries(initList) {}
 
-    CadObjectCollection(CadObject *owner) : _owner(owner) {}
-    ~CadObjectCollection()
+    Delegate<void(pointer)> OnAdd;
+    Delegate<void(pointer)> OnRemove;
+
+public:
+    void push_back(const T &value)
     {
-        for (pointer i: _entries)
-        {
-            delete i;
-            i = nullptr;
-        }
+        if (!value)
+            return;
+        if (value->owner())
+            throw std::invalid_argument("value already has an owner");
+
+        auto itFind = std::find_if(_entries.begin(), _entries.end(), [&](pointer i) { return i == value; });
+        if (itFind != _entries.end())
+            throw std::invalid_argument("value is already in the collection");
+
+        _entries.push_back(value);
+        value->setOwner(_owner);
+
+        OnAdd(value);
     }
 
-    CadObject *owner() const
-    {
-        return _owner;
+    void push_back(T&& value) noexcept(std::is_nothrow_move_constructible<T>::value) {
+        if (!value)
+            return;
+        if (value->owner())
+            throw std::invalid_argument("value already has an owner");
+
+        auto itFind = std::find_if(_entries.begin(), _entries.end(), [&](pointer i) { return i == value; });
+        if (itFind != _entries.end())
+            throw std::invalid_argument("value is already in the collection");
+
+        _entries.push_back(std::move(value));
+        value->setOwner(_owner);
+
+        OnAdd(value);
     }
 
-    // clang-format off
+    T removeOne(const T &value)
+    {
+        auto itFind = std::find_if(_entries.begin(), _entries.end(), [&](pointer i) { return i == value; });
+        if (itFind == _entries.end())
+            return nullptr;
+
+        _entries.erase(itFind);
+        value->setOwner(nullptr);
+        OnRemove(value);
+        return value;
+    }
+
+    CadObject *owner() const { return _owner; }
+    void setOwner(CadObject *obj)
+    {
+        delete _owner;
+        _owner = obj;
+    }
     size_t size() const { return _entries.size(); }
     pointer at(size_t i) const { return _entries.at(i); }
     bool empty() const { return _entries.empty(); }
@@ -74,53 +120,25 @@ public:
     pointer operator[](size_t index) const { return _entries[index]; }
     pointer &operator[](size_t index) { return _entries[index]; }
 
-    // clang-format on
-
-    virtual void push_back(pointer item)
+    template<typename Func>
+    void forEach(Func &&f)
     {
-        // if (!item)
-        //     return;
-        // if (item->owner())
-        //     throw std::invalid_argument("item already has an owner");
-
-        // auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-        // if (itFind != _entries.end())
-        //     throw std::invalid_argument("item is already in the collection");
-
-        // _entries.push_back(item);
-        // item->setOwner(_owner);
-
-        // OnAdd(item);
-    }
-
-    void clear()
-    {
-        for (pointer i: _entries)
+        for(T& item : _entries)
         {
-            delete i;
-            i = nullptr;
+            f(item);
         }
-        _entries.clear();
     }
 
-    pointer remove(pointer item)
+    template<typename Func>
+    void forEach(Func &&f) const
     {
-        auto itFind = std::find_if(_entries.begin(), _entries.end(), item);
-        if (itFind == _entries.end())
-            return nullptr;
-
-        _entries.erase(itFind);
-        item->setOwner(nullptr);
-        OnRemove(item);
-        return item;
+        for(const T& item : _entries)
+        {
+            f(item);
+        }
     }
-
-    Delegate<void(pointer)> OnAdd;
-    Delegate<void(pointer)> OnRemove;
-
-protected:
-    CadObject *_owner;
-    container_type _entries;
 };
+
+
 
 }// namespace dwg

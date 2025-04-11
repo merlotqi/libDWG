@@ -26,15 +26,14 @@
 #include <dwg/blocks/BlockTypeFlags.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
+#include <dwg/entities/Entity.h>
 #include <string>
 
 namespace dwg {
 
 class Layout;
-class Entity;
 class Block;
 class BlockEnd;
-
 class LIBDWG_API BlockRecord : public TableEntry
 {
     Block *_blockEntity;

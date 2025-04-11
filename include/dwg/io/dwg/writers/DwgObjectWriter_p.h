@@ -158,8 +158,6 @@ private:
     void writeVPort(VPort *vport);
 
 private:
-    /*
- */
     void writeEntity(Entity *entity);
     void writeArc(Arc *arc);
     void writeAttribute(AttributeEntity *att);

@@ -25,6 +25,7 @@
 #include <dwg/io/CadReaderBase.h>
 #include <dwg/io/dwg/DwgReaderConfiguration.h>
 #include <fstream>
+#include <sstream>
 #include <map>
 #include <string>
 #include <vector>
@@ -49,57 +50,37 @@ class LIBDWG_API DwgReader : public CadReaderBase<DwgReaderConfiguration>
 
 public:
     DwgReader(const std::string &name);
-
     DwgReader(std::ifstream *stream);
-
     ~DwgReader();
 
     CadDocument *read() override;
-
     CadHeader *readHeader() override;
-
     CadSummaryInfo *readSummaryInfo();
-
     DwgPreview *readPreview();
-
 
 private:
     DwgFileHeader *readFileHeader();
-
     DxfClassCollection *readClasses();
-
     std::map<unsigned long long, unsigned long long> readHandles();
-
     unsigned int readObjFreeSpace();
 
     void readTemplate();
-
     void readObjects();
 
     void readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamReader *sender);
-
     void readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sender);
-
     void readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamReader *sreader);
-
     void readFileMetaData(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader);
-
     IDwgStreamReader *getSectionStream(const std::string &sectionName);
 
     void getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType, int64_t &decompressedSize,
                            int64_t &compressedSize, int64_t &compressionType, int64_t &checksum);
-
     std::ifstream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &section_name);
-
     std::ifstream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &section_name);
-
     void decryptDataSection(const DwgLocalSectionMap &section, IDwgStreamReader *sreader);
-
     std::istringstream getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
-
     void reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor,
                              int blockSize);
-
     std::vector<unsigned char> getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,
                                              unsigned long long uncompressedSize, unsigned long long correctionFactor,
                                              int blockSize, std::istream *stream);

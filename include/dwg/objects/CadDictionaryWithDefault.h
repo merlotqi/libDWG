@@ -32,7 +32,7 @@ class LIBDWG_API CadDictionaryWithDefault : public CadDictionary
 
 public:
     CadDictionaryWithDefault();
-    virtual ~CadDictionaryWithDefault();
+    virtual ~CadDictionaryWithDefault() = default;
 
     ObjectType objectType() const override;
     std::string objectName() const override;

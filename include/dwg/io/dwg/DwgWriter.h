@@ -42,7 +42,7 @@ private:
 public:
     DwgWriter(const std::string &filename, CadDocument *document);
     DwgWriter(std::ofstream *stream, CadDocument *document);
-    ~DwgWriter();
+    ~DwgWriter() = default;
     void write() override;
 
 private:

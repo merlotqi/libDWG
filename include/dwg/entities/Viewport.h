@@ -57,7 +57,7 @@ public:
     void setWidth(double);
 
     double height() const;
-    void setHeight(double) const;
+    void setHeight(double);
 
     short id() const;
 
@@ -168,6 +168,45 @@ public:
     double scaleFactor() const;
 
     bool representsPaper() const;
+
+private:
+    XYZ _center;
+    double _width;
+    double _height;
+    XY _viewCenter;
+    XY _snapBase;
+    XY _snapSpacing;
+    XY _gridSpacing;
+    XYZ _viewDirection;
+    XY _viewTarget;
+    double _lensLength;
+    double _frontClipPlane;
+    double _backClipPlane;
+    double _viewHeight;
+    double _snapAngle;
+    double _twistAngle;
+    short _circleZoomPercent;
+    std::vector<Layer *> _frozenLayers;
+    ViewportStatusFlags _status;
+    Entity *_boundary;
+    std::string _styleSheetName;
+    RenderMode _renderMode;
+    bool _ucsPerViewport;
+    bool _displayUcsIcon;
+    XYZ _ucsOrigin;
+    XYZ _ucsXAxis;
+    XYZ _ucsYAxis;
+    OrthographicType _ucsOrthographicType;
+    double _elevation;
+    ShadePlotMode _shadePlotMode;
+    short _majorGridLineFrequency;
+    VisualStyle *_visualStyle;
+    bool _useDefaultLighting;
+    LightingType _defaultLightingType;
+    double _brightness;
+    double _contrast;
+    Color _ambientLightColor = Color((short)0);
+    Scale *_scale;
 };
 
 }// namespace dwg

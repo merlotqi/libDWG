@@ -33,72 +33,38 @@ class BlockRecord;
 
 class LIBDWG_API Block : public Entity
 {
-    // Block's name (string representation)
     std::string _name;
-
-    // Flags associated with the block type
     BlockTypeFlags _flags;
-
-    // Base point of the block, default initialized to zero
     XYZ _base_point = XYZ::Zero;
-
-    // Path to the external reference (xref) associated with the block
     std::string _xrefPath;
-
-    // Comments or description related to the block
     std::string _comments;
 
 public:
-    // Constructor accepting a BlockRecord pointer
     Block(BlockRecord *record);
-
-    // Destructor
     ~Block();
 
-    // Overrides the ObjectType method to return the type of object
     ObjectType objectType() const override;
-
-    // Overrides the ObjectName method to return the object's name
     std::string objectName() const override;
-
-    // Overrides the SubclassMarker method to return the subclass marker
     std::string subclassMarker() const override;
 
-    // Returns the associated BlockRecord pointer
     BlockRecord *blockRecord() const;
 
-    // Getter for the block's name
     std::string name() const;
-
-    // Setter for the block's name
     void setName(const std::string &name);
 
-    // Getter for the block's flags
     BlockTypeFlags flags() const;
-
-    // Setter for the block's flags
     void setFlags(BlockTypeFlags flags);
 
-    // Getter for the block's base point
     XYZ basePoint() const;
-
-    // Setter for the block's base point
     void setBasePoint(const XYZ &);
 
-    // Getter for the block's xref path
     std::string xrefPath() const;
-
-    // Setter for the block's xref path
     void setXrefPath(const std::string &);
 
-    // Getter for the block's comments
     std::string comments() const;
-
-    // Setter for the block's comments
     void setComments(const std::string &);
 
 protected:
-    // Protected default constructor
     Block();
 };
 

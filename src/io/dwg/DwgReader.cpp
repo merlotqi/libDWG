@@ -24,5 +24,66 @@
 
 namespace dwg {
 
+DwgReader::DwgReader(const std::string &name) {}
 
+DwgReader::DwgReader(std::ifstream *stream) {}
+
+DwgReader::~DwgReader() {}
+
+CadDocument *DwgReader::read() { return nullptr; }
+
+CadHeader *DwgReader::readHeader() { return nullptr; }
+
+CadSummaryInfo *DwgReader::readSummaryInfo() { return nullptr; }
+
+DwgPreview *DwgReader::readPreview() { return nullptr; }
+
+DwgFileHeader *DwgReader::readFileHeader() { return nullptr; }
+
+DxfClassCollection *DwgReader::readClasses() { return nullptr; }
+
+std::map<unsigned long long, unsigned long long> DwgReader::readHandles() { return std::map<unsigned long long, unsigned long long>(); }
+
+unsigned int DwgReader::readObjFreeSpace() { return 0UL; }
+
+void DwgReader::readTemplate() {}
+
+void DwgReader::readObjects() {}
+
+void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamReader *sender) {}
+
+void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sender) {}
+
+void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamReader *sreader) {}
+
+void DwgReader::readFileMetaData(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader) {}
+
+IDwgStreamReader *DwgReader::getSectionStream(const std::string &sectionName) { return nullptr; }
+
+void DwgReader::getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType, int64_t &decompressedSize,
+                       int64_t &compressedSize, int64_t &compressionType, int64_t &checksum) {}
+
+std::ifstream *DwgReader::getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &section_name) { return nullptr; }
+
+std::ifstream *DwgReader::getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &section_name) { return nullptr; }
+
+void DwgReader::decryptDataSection(const DwgLocalSectionMap &section, IDwgStreamReader *sreader) {}
+
+std::istringstream DwgReader::getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName) 
+{     
+    std::istringstream iss;
+    return iss; 
 }
+
+void DwgReader::reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor,
+                         int blockSize) 
+{}
+
+std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,
+                                         unsigned long long uncompressedSize, unsigned long long correctionFactor,
+                                         int blockSize, std::istream *stream) 
+{ 
+    return std::vector<unsigned char>(); 
+}
+
+}// namespace dwg

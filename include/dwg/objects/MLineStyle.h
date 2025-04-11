@@ -44,7 +44,7 @@ public:
 public:
     MLineStyle();
     MLineStyle(const std::string &name);
-    ~MLineStyle();
+    ~MLineStyle() = default;
 
     static constexpr auto DefaultName = "Standard";
     static MLineStyle *Default();

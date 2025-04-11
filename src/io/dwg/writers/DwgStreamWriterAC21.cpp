@@ -24,5 +24,12 @@
 
 namespace dwg {
 
+    DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream, Encoding encoding) : DwgStreamWriterAC18(stream, encoding) {}
+
+    DwgStreamWriterAC21::~DwgStreamWriterAC21() {}
+
+    void DwgStreamWriterAC21::writeVariableText(const std::string &value)  {}
+    
+    void DwgStreamWriterAC21::writeTextUtf8(const std::string &value)  {}
 
 }// namespace dwg

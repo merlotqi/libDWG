@@ -24,5 +24,14 @@
 
 namespace dwg {
 
+    DwgStreamWriterAC18::DwgStreamWriterAC18(std::ostream *stream, Encoding encoding) : DwgStreamWriterAC15(stream, encoding) {}
+
+    DwgStreamWriterAC18::~DwgStreamWriterAC18() {}
+
+    void DwgStreamWriterAC18::writeCmColor(const Color &value)  {}
+
+    void DwgStreamWriterAC18::writeEnColor(const Color &value, const Transparency &transparency)  {}
+
+    void DwgStreamWriterAC18::writeEnColor(const Color &value, const Transparency &transparency, bool isBookColor)  {}
 
 }// namespace dwg

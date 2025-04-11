@@ -33,14 +33,14 @@ BlockRecord::BlockRecord()
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
-    _entities = new CadObjectCollection<Entity *>(this);
+    _entities.setOwner(this);
 }
 
 BlockRecord::BlockRecord(const std::string &name) : TableEntry(name)
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
-    _entities = new CadObjectCollection<Entity *>(this);
+    _entities.setOwner(this);
 }
 
 BlockRecord *BlockRecord::ModelSpace() 

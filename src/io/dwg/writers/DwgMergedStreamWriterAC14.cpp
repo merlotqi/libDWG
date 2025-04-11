@@ -20,7 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/writers/DwgmMergedStreamWriterAC14_p.h>
+#include <dwg/io/dwg/writers/DwgMergedStreamWriterAC14_p.h>
 
 namespace dwg {
 

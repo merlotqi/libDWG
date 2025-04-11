@@ -60,4 +60,18 @@ unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char v
     return key;
 }
 
+
+
+CRC8InputStreamHandler::CRC8InputStreamHandler(std::istream *stream) : InputStreamWrapper(stream) {}
+
+CRC8InputStreamHandler::~CRC8InputStreamHandler() {}
+
+CRC8OutputStreamHandler::CRC8OutputStreamHandler(std::ostream *stream, unsigned short seed)
+    : OutputStreamWrapper(stream)
+{
+    setSeed(seed);
+}
+
+CRC8OutputStreamHandler::~CRC8OutputStreamHandler() {}
+
 }// namespace dwg

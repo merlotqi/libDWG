@@ -46,7 +46,6 @@ protected:
 class CRC8InputStreamHandler : public InputStreamWrapper, public CRC8StreamHandlerBase
 {
 public:
-    CRC8InputStreamHandler();
     CRC8InputStreamHandler(std::istream *stream);
     ~CRC8InputStreamHandler();
 };
@@ -55,7 +54,6 @@ public:
 class CRC8OutputStreamHandler : public OutputStreamWrapper, public CRC8StreamHandlerBase
 {
 public:
-    CRC8OutputStreamHandler();
     CRC8OutputStreamHandler(std::ostream *stream, unsigned short seed);
     ~CRC8OutputStreamHandler();
 };

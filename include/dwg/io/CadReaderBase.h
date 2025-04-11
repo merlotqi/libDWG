@@ -48,4 +48,24 @@ protected:
 };
 
 
+template<class T>
+inline CadReaderBase<T>::~CadReaderBase()
+{
+}
+
+template<class T>
+inline CadReaderBase<T>::CadReaderBase()
+{
+}
+
+template<class T>
+inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
+{
+}
+
+template<class T>
+inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream)
+{
+}
+
 }// namespace dwg

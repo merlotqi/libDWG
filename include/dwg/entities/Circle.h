@@ -28,16 +28,9 @@ namespace dwg {
 
 class LIBDWG_API Circle : public Entity
 {
-    /// The center of the circle (in 3D space).
     XYZ _center;
-
-    /// The normal vector to the plane of the circle (default is the Z-axis).
     XYZ _normal;
-
-    /// The thickness of the circle (for 3D circles or discs).
     double _thickness;
-
-    /// The radius of the circle.
     double _radius;
 
 public:

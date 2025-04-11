@@ -90,7 +90,7 @@ public:
 protected:
     virtual void writeSection() = 0;
     void writeCommonObjectData(CadObject *object);
-    void writeExtendedData(ExtendedDataDictionary xdata);
+    void writeExtendedData(ExtendedDataDictionary *xdata);
     void writeCommonEntityData(Entity *entity);
     void writeLongTextValue(int code, int subcode, const std::string &text);
     void writeEntity(Entity *entity);

@@ -24,4 +24,14 @@
 
 namespace dwg {
 
+DxfAsciiWriter::DxfAsciiWriter(std::ofstream *stream, Encoding encoding) {}
+
+void DxfAsciiWriter::flush() {}
+
+void DxfAsciiWriter::close() {}
+
+void DxfAsciiWriter::writeDxfCode(int code) {}
+
+void DxfAsciiWriter::writeValue(int code, DwgVariant value) {}
+
 }// namespace dwg

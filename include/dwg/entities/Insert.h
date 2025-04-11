@@ -44,8 +44,32 @@ public:
     BlockRecord *block() const;
     void setBlock(BlockRecord *);
 
+    unsigned short columnCount() const;
+    void setColumnCount(unsigned short count);
+
+    double columnSpacing() const;
+    void setColumnSpacing(double spacing);
+
+    bool hasAttributes() const;
+
+    bool hasDynamicSubclass() const override;
+
     XYZ insertPoint() const;
     void setInsertPoint(const XYZ &point);
+
+    bool isMultiple() const;
+
+    XYZ normal() const;
+    void setNormal(const XYZ &normal);
+
+    double rotation() const;
+    void setRotation(double angle);
+
+    unsigned short rowCount() const;
+    void setRowCount(unsigned short count);
+
+    double rowSpacing() const;
+    void setRowSpacing(double spacing);
 
     double XScale() const;
     void setXScale(double scale);
@@ -56,28 +80,21 @@ public:
     double ZScale() const;
     void setZScale(double scale);
 
-    double rotation() const;
-    void setRotation(double angle);
-
-    XYZ normal() const;
-    void setNormal(const XYZ &normal);
-
-    unsigned short columnCount() const;
-    void setColumnCount(unsigned short count);
-
-    unsigned short rowCount() const;
-    void setRowCount(unsigned short count);
-
-    double columnSpacing() const;
-    void setColumnSpacing(double spacing);
-
-    double rowSpacing() const;
-    void setRowSpacing(double spacing);
-
-    bool hasAttributes() const;
-
 private:
     Insert();
+
+private:
+    BlockRecord *_block;
+    XYZ _insertPoint;
+    double _xscale = 1;
+    double _yscale = 1;
+    double _zscale = 1;
+    double _rotation;
+    XYZ _normal;
+    unsigned short _columnCount;
+    unsigned short _rowCount;
+    double _columnSpacing;
+    double _rowSpacing;
 };
 
 }// namespace dwg

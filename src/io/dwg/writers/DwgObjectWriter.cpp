@@ -21,7 +21,57 @@
  */
 
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
+#include <dwg/CadDocument.h>
+#include <dwg/header/CadHeader.h>
 
 namespace dwg {
+
+DwgObjectWriter::DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords,
+        bool writeXData)    : DwgSectionIO(document->header()->version()) {}
+DwgObjectWriter::~DwgObjectWriter() {}
+
+std::string DwgObjectWriter::sectionName() const { return std::string(); }
+
+void DwgObjectWriter::write() {}
+
+std::map<unsigned long long, long long> DwgObjectWriter::handleMap() const { return std::map<unsigned long long, long long>(); }
+
+bool DwgObjectWriter::writeXRecords() const { return false; }
+
+bool DwgObjectWriter::writeXData() const { return false; }
+
+void DwgObjectWriter::writeLTypeControlObject() {}
+
+void DwgObjectWriter::writeBlockControl() {}
+
+void DwgObjectWriter::writeTable() {}
+
+void DwgObjectWriter::writeEntries() {}
+
+void DwgObjectWriter::writeBlockEntities() {}
+
+void DwgObjectWriter::writeAppId(AppId *app) {}
+
+void DwgObjectWriter::writeBlockRecord(BlockRecord *blkRecord) {}
+
+void DwgObjectWriter::writeBlockHeader(BlockRecord *record) {}
+
+void DwgObjectWriter::writeBlockBegin(Block *block) {}
+
+void DwgObjectWriter::writeBlockEnd(BlockEnd *blkEnd) {}
+
+void DwgObjectWriter::writeLayer(Layer *layer) {}
+
+void DwgObjectWriter::writeLineType(LineType *ltype) {}
+
+void DwgObjectWriter::writeTextStyle(TextStyle *style) {}
+
+void DwgObjectWriter::writeUCS(UCS *ucs) {}
+
+void DwgObjectWriter::writeView(View *view) {}
+
+void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle) {}
+
+void DwgObjectWriter::writeVPort(VPort *vport) {}
 
 }// namespace dwg

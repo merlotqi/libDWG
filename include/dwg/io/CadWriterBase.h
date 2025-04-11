@@ -38,9 +38,8 @@ class LIBDWG_API CadWriterBase : public ICadWriter, public T
 
 public:
     CadWriterBase();
-
     CadWriterBase(std::ofstream *stream, CadDocument *document);
-
+    virtual ~CadWriterBase();
     virtual void write() override;
 
 protected:
@@ -51,5 +50,31 @@ protected:
     CadDocument *_document;
     Encoding _encoding;
 };
+
+template<class T>
+inline CadWriterBase<T>::CadWriterBase()
+{
+}
+
+template<class T>
+inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document)
+{
+}
+
+template<class T>
+inline CadWriterBase<T>::~CadWriterBase()
+{
+}
+
+template<class T>
+inline void CadWriterBase<T>::write()
+{
+}
+
+template<class T>
+inline Encoding CadWriterBase<T>::getListedEncoding(const std::string &codePage)
+{
+    return Encoding();
+}
 
 }// namespace dwg

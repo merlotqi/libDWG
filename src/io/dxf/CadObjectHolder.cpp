@@ -20,22 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+ #include <dwg/io/dxf/CadObjectHolder_p.h>
 
-#include <dwg/entities/Entity.h>
+ namespace dwg {
+ 
+    CadObjectHolder::CadObjectHolder() {}
+    
+    CadObjectHolder::~CadObjectHolder() {}
+    
+    std::queue<Entity *> CadObjectHolder::entities() const { return _entities; }
+    
+    std::queue<Entity *> &CadObjectHolder::entities() { return _entities; }
+    
+    std::queue<CadObject *> CadObjectHolder::objects() const { return _objects; }
+    
+    std::queue<CadObject *> &CadObjectHolder::objects() { return _objects; }
 
-namespace dwg {
-
-class BlockRecord;
-class LIBDWG_API BlockEnd : public Entity
-{
-public:
-    BlockEnd(BlockRecord *record);
-    ~BlockEnd() = default;
-
-    std::string objectName() const override;
-    ObjectType objectType() const override;
-    std::string subclassMarker() const override;
-};
-
-}// namespace dwg
+ }// namespace dwg

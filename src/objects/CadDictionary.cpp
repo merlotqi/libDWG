@@ -154,6 +154,14 @@ void CadDictionary::add(NonGraphicalObject *value) {}
 
 bool CadDictionary::tryAdd(NonGraphicalObject *value) const { return false; }
 
+bool CadDictionary::containsKey(const std::string &key) const { return false; }
+
+bool CadDictionary::remove(const std::string &key, NonGraphicalObject **item) { return false; }
+
+bool CadDictionary::remove(const std::string &key) { return false; }
+
+void CadDictionary::clear() {}
+
 bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs) const
 {
     if (lhs.size() != rhs.size())
@@ -174,6 +182,6 @@ bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::strin
 
 CadDictionary *CadDictionary::ensureCadDictionaryExist(const std::string &name) { return nullptr; }
 
-void onEntryNameChanged(const std::string &olName, const std::string &newName) {}
+void CadDictionary::onEntryNameChanged(const std::string &olName, const std::string &newName) {}
 
 }// namespace dwg

@@ -31,9 +31,11 @@ class CadObject;
 
 class CadObjectHolder
 {
+    std::queue<CadObject *> _objects;
+    std::queue<Entity *> _entities;
+
 public:
     CadObjectHolder();
-
     virtual ~CadObjectHolder();
 
     std::queue<Entity *> entities() const;

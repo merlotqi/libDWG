@@ -24,5 +24,8 @@
 
 namespace dwg {
 
+    DwgStreamWriterAC12::DwgStreamWriterAC12(std::ostream *stream, Encoding encoding) {}
+    
+    DwgStreamWriterAC12::~DwgStreamWriterAC12() {}
 
 }// namespace dwg

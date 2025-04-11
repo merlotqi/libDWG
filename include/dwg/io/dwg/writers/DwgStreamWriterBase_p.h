@@ -35,6 +35,8 @@ public:
     static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
 
 public:
+    DwgStreamWriterBase(std::ostream *stream, Encoding encoding);
+
     Encoding encoding() override;
 
     IDwgStreamWriter *main() const override;
