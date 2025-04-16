@@ -27,6 +27,7 @@
 #include <vector>
 #include <algorithm>
 #include <utility>
+#include <iterator>
 #include <initializer_list>
 
 namespace dwg {
@@ -41,13 +42,17 @@ class CadObjectCollection
     std::vector<T> _entries;
     CadObject *_owner;
 
+    using pointer = T;
+    using iterator = typename std::vector<T>::iterator;
+    using const_iterator = typename std::vector<T>::const_iterator;
+
 public:
     CadObjectCollection() noexcept = default;
     CadObjectCollection(const CadObjectCollection &other) = default;
     CadObjectCollection(CadObjectCollection &&other) noexcept = default;
     CadObjectCollection& operator=(const CadObjectCollection& other) = default;
     CadObjectCollection& operator=(CadObjectCollection&& other) noexcept = default;
-    Collection(std::initializer_list<T> initList) : _entries(initList) {}
+    CadObjectCollection(std::initializer_list<T> initList) : _entries(initList) {}
 
     Delegate<void(pointer)> OnAdd;
     Delegate<void(pointer)> OnRemove;

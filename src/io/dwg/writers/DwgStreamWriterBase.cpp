@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-    DwgStreamWriterBase(std::ostream *stream, Encoding encoding) {}
+    DwgStreamWriterBase::DwgStreamWriterBase(std::ostream *stream, Encoding encoding) {}
 
     IDwgStreamWriter *DwgStreamWriterBase::GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding) { return nullptr; }
     IDwgStreamWriter *DwgStreamWriterBase::GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding) { return nullptr; }

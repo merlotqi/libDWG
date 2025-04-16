@@ -25,12 +25,19 @@
 #include <dwg/entities/TableEntityBase.h>
 #include <dwg/objects/NonGraphicalObject.h>
 
-
 namespace dwg {
 
 class LIBDWG_API TableContent : public NonGraphicalObject
 {
 public:
+    struct TableCellRange
+    {
+        int topRowIndex;
+        int leftColumnIndex;
+        int bottomRowIndex;
+        int rightColumnIndex;
+    };
+
     TableContent();
     ~TableContent();
 

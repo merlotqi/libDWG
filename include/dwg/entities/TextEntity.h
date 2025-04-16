@@ -33,20 +33,6 @@ class TextStyle;
 
 class LIBDWG_API TextEntity : public Entity
 {
-    double _thickness;
-    XYZ _insertPoint;
-    double _height;
-    std::string _value;
-    double _rotation;
-    double _widthFactor;
-    double _obliqueAngle;
-    TextStyle *_style;
-    TextMirrorFlag _mirror;
-    TextHorizontalAlignment _horizontalAlignment;
-    XYZ _alignmentPoint;
-    XYZ _normal;
-    TextVerticalAlignment _verticalAlignment;
-
 public:
     TextEntity();
     virtual ~TextEntity();
@@ -59,7 +45,7 @@ public:
     void setThickness(double);
 
     XYZ insertPoint() const;
-    void setInsertPoint(XYZ);
+    void setInsertPoint(const XYZ &);
 
     double height() const;
     void setHeight(double);
@@ -93,6 +79,21 @@ public:
 
     TextVerticalAlignment verticalAlignment() const;
     void setVerticalAlignment(TextVerticalAlignment);
+
+private:
+    double _thickness;
+    XYZ _insertPoint;
+    double _height;
+    std::string _value;
+    double _rotation;
+    double _widthFactor;
+    double _obliqueAngle;
+    TextStyle *_style;
+    TextMirrorFlag _mirror;
+    TextHorizontalAlignment _horizontalAlignment;
+    XYZ _alignmentPoint;
+    XYZ _normal;
+    TextVerticalAlignment _verticalAlignment;
 };
 
 }// namespace dwg

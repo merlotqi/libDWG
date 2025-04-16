@@ -80,7 +80,7 @@ public:
     double ZScale() const;
     void setZScale(double scale);
 
-private:
+protected:
     Insert();
 
 private:

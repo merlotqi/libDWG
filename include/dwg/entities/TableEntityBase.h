@@ -26,360 +26,389 @@
 #include <dwg/utils/DwgVariant.h>
 
 namespace dwg {
-enum class TableBorderPropertyFlag
-{
-    /// None.
-    None = 0x0,
-    /// Border type.
-    BorderType = 0x1,
-    /// Line weight.
-    LineWeight = 0x2,
-    /// Line type.
-    LineType = 0x4,
-    /// Color.
-    Color = 0x8,
-    /// Invisibility.
-    Invisibility = 0x10,
-    /// Double line spacing.
-    DoubleLineSpacing = 0x20,
-    /// All.
-    All = 0x3F
-};
-typedef int TableBorderPropertyFlags;
 
-enum class TableCellContentLayoutFlag
+class LIBDWG_API TableBreakData
 {
-    None = 0,
-    Flow = 1,
-    StackedHorizontal = 2,
-    StackedVertical = 4
-};
-typedef int TableCellContentLayoutFlags;
+public:
+    struct BreakHeight
+    {
+        XYZ position;
+        double height;
+    };
+    enum class BreakOptionFlag
+    {
+        None = 0,        /// None
+        EnableBreaks = 1,        /// Enable breaks
+        RepeatTopLabels = 2,        /// Repeat top labels
+        RepeatBottomLabels = 4,        /// Repeat bottom labels
+        AllowManualPositions = 8,        /// Allow manual positions
+        AllowManualHeights = 16        /// Allow manual heights
+    };
+    typedef int BreakOptionFlags;
 
-enum class TableCellContentType
-{
-    Unknown = 0,
-    Value = 0x1,
-    Field = 0x2,
-    Block = 0x4,
-};
+    enum class BreakFlowDirection
+    {
+        Right = 1,      /// Right
+        Vertical = 2,   /// Vertical
+        Left = 4        /// Left
+    };
 
-enum class TableCellStateFlag
-{
-    /// None
-    None = 0x0,
-    /// Content  locked
-    ContentLocked = 0x1,
-    /// Content read only
-    ContentReadOnly = 0x2,
-    /// Linked.
-    Linked = 0x4,
-    /// Content modifed after update
-    ContentModifiedAfterUpdate = 0x8,
-    /// Format locked
-    FormatLocked = 0x10,
-    /// Format readonly
-    FormatReadOnly = 0x20,
-    /// Format was modified after update
-    FormatModifiedAfterUpdate = 0x40,
-};
-typedef int TableCellStateFlags;
+public:
+    TableBreakData();
+    ~TableBreakData();
 
-enum class TableCellStylePropertyFlag
-{
-    None = 0x0,
-    //Content format properties:
-    DataType = 0x1,
-    DataFormat = 0x2,
-    Rotation = 0x4,
-    BlockScale = 0x8,
-    Alignment = 0x10,
-    ContentColor = 0x20,
-    TextStyle = 0x40,
-    TextHeight = 0x80,
-    AutoScale = 0x100,
-    // Cell style properties:
-    BackgroundColor = 0x200,
-    MarginLeft = 0x400,
-    MarginTop = 0x800,
-    MarginRight = 0x1000,
-    MarginBottom = 0x2000,
-    ContentLayout = 0x4000,
-    MarginHorizontalSpacing = 0x20000,
-    MarginVerticalSpacing = 0x40000,
-    //Row/column properties:
-    MergeAll = 0x8000,
-    //Table properties:
-    FlowDirectionBottomToTop = 0x10000
-};
-typedef int TableCellStylePropertyFlags;
+    BreakOptionFlags flags() const;
+    void setFlags(BreakOptionFlags);
 
+    BreakFlowDirection flowDirection() const;
+    void setFlowDirection(BreakFlowDirection);
 
-enum class TableBorderType
-{
-    /// Single border line.
-    Single = 1,
-    /// Double border line.
-    Double = 2
+    double breakSpacing() const;
+    void setBreakSpacing(double);
+
+    std::vector<BreakHeight> heights() const;
+    void setHeight(const std::vector<BreakHeight> &);
+
+private:
+    BreakOptionFlags _flags;
+    BreakFlowDirection _flowDirection;
+    double _breakSpacing;
+    std::vector<BreakHeight> _heights;
 };
 
-enum class TableBreakFlowDirection
+class LIBDWG_API TableBreakRowRange
 {
-    /// Right
-    Right = 1,
-    /// Vertical
-    Vertical = 2,
-    /// Left
-    Left = 4
+public:
+    TableBreakRowRange();
+    ~TableBreakRowRange();
+
+    XYZ position() const;
+    void setPosition(const XYZ &);
+
+    int startRowIndex() const;
+    void setStartRowIndex(int);
+
+    int endRowIndex() const;
+    void setEndRowIndex(int);
+
+private:
+    XYZ _position;
+    int _startRowIndex;
+    int _endRowIndex;
 };
 
-enum class TableBreakOptionFlag
+class LIBDWG_API TableCellValue
 {
-    /// None
-    None = 0,
-    /// Enable breaks
-    EnableBreaks = 1,
-    /// Repeat top labels
-    RepeatTopLabels = 2,
-    /// Repeat bottom labels
-    RepeatBottomLabels = 4,
-    /// Allow manual positions
-    AllowManualPositions = 8,
-    /// Allow manual heights
-    AllowManualHeights = 16
-};
-typedef int TableBreakOptionFlags;
+public:
+    enum class TableValueUnitType
+    {
+        NoUnits = 0,        /// No units.
+        Distance = 1,       /// Distance.
+        Angle = 2,          /// Angle.
+        Area = 4,           /// Area.
+        Volume = 8,         /// Volumne.
+        Currency = 0x10,    /// Currency.
+        Percentage = 0x20   /// Percentage.
+    };
 
-enum class TableCellEdgeFlag
-{
-    Unknown = 0,
-    Top = 1,
-    Right = 2,
-    Bottom = 4,
-    Left = 8,
-    InsideVertical = 16,
-    InsideHorizontal = 32,
-};
-typedef int TableCellEdgeFlags;
+    enum class TableCellValueType
+    {
+        Unknown = 0,            /// Unknown
+        Long = 1,               /// 32 bit Long value
+        Double = 2,             /// Double value
+        String = 4,             /// String value
+        Date = 8,               /// Date value
+        Point2D = 0x10,         /// 2D point value
+        Point3D = 0x20,         /// 3D point value
+        Handle = 0x40,          /// Object handle value
+        Buffer = 0x80,          /// Buffer value
+        ResultBuffer = 0x100,   /// Result buffer value
+        General = 0x200         /// General
+    };
 
-enum class TableCellStyleTypeType
-{
-    Cell = 1,
-    Row = 2,
-    Column = 3,
-    FormattedTableData = 4,
-    Table = 5
-};
+public:
+    TableCellValue();
+    ~TableCellValue();
 
-enum class TableCellType
-{
-    Text = 1,
-    Block = 2
-};
+    TableCellValueType valueType() const;
+    void setValueType(TableCellValueType);
 
-enum class TableValueUnitType
-{
-    /// No units.
-    NoUnits = 0,
-    /// Distance.
-    Distance = 1,
-    /// Angle.
-    Angle = 2,
-    /// Area.
-    Area = 4,
-    /// Volumne.
-    Volume = 8,
-    /// Currency.
-    Currency = 0x10,
-    /// Percentage.
-    Percentage = 0x20
-};
+    TableValueUnitType units() const;
+    void  setUnits(TableValueUnitType);
 
-enum class TableCellValueType
-{
-    /// Unknown
-    Unknown = 0,
-    /// 32 bit Long value
-    Long = 1,
-    /// Double value
-    Double = 2,
-    /// String value
-    String = 4,
-    /// Date value
-    Date = 8,
-    /// 2D point value
-    Point2D = 0x10,
-    /// 3D point value
-    Point3D = 0x20,
-    /// Object handle value
-    Handle = 0x40,
-    /// Buffer value
-    Buffer = 0x80,
-    /// Result buffer value
-    ResultBuffer = 0x100,
-    /// General
-    General = 0x200
+    int flags() const;
+    void setFlags(int);
+
+    bool isEmpty() const;
+    void setEmpty(bool);
+
+    std::string text() const;
+    void setText(const std::string &);
+
+    std::string format() const;
+    void setFormat(const std::string &);
+
+    std::string formatedValue() const;
+    void setFormatedValue(const std::string &);
+
+    DwgVariant value() const;
+    void setValue(const DwgVariant &);
+
+private:
+    TableCellValueType _valueType;
+    TableValueUnitType _units;
+    int _flags;
+    bool _isEmpty;
+    std::string _text;
+    std::string _format;
+    std::string _formatedValue;
+    DwgVariant _value;
 };
 
-enum class TableMarginFlag
+class LIBDWG_API TableCellBorder
 {
-    None = 0,
-    Override = 1,
-};
-typedef int TableMarginFlags;
+public:
+    enum class TableBorderPropertyFlag
+    {
+        None = 0x0,        /// None.
+        BorderType = 0x1,        /// Border type.
+        LineWeight = 0x2,        /// Line weight.
+        LineType = 0x4,        /// Line type.
+        Color = 0x8,        /// Color.
+        Invisibility = 0x10,        /// Invisibility.
+        DoubleLineSpacing = 0x20,        /// Double line spacing.
+        All = 0x3F        /// All.
+    };
+    typedef int TableBorderPropertyFlags;
 
-struct TableBreakHeight
-{
-    XYZ position;
-    double height;
-};
+    enum class TableBorderType
+    {
+        Single = 1,        /// Single border line.
+        Double = 2        /// Double border line.
+    };
 
-struct TableCellValue
-{
-    TableCellValueType valueType;
-    TableValueUnitType units;
-    int flags;
-    bool isEmpty;
-    std::string text;
-    std::string format;
-    std::string formatedValue;
-    DwgVariant value;
-};
+    enum class CellEdgeFlag
+    {
+        Unknown = 0,
+        Top = 1,
+        Right = 2,
+        Bottom = 4,
+        Left = 8,
+        InsideVertical = 16,
+        InsideHorizontal = 32,
+    };
+    typedef int CellEdgeFlags;
 
-struct TableBreakData
-{
-    TableBreakOptionFlags flags;
-    TableBreakFlowDirection flowDirection;
-    double breakSpacing;
-    std::vector<TableBreakHeight> heights;
-};
+public:
+    TableCellBorder();
+    ~TableCellBorder();
 
-struct TableBreakRowRange
-{
-    XYZ position;
-    int startRowIndex;
-    int endRowIndex;
-};
+    CellEdgeFlags edgeFlags() const;
+    void setEdgeFlags(CellEdgeFlags);
 
-struct TableCellBorder
-{
-    TableCellEdgeFlags edgeFlags;
-    TableBorderPropertyFlags propertyOverrideFlags;
-    TableBorderType type;
-    Color color;
-    short lineWeight;
-    bool isInvisible;
-    double doubleLineSpacing;
-};
+    TableBorderPropertyFlags propertyOverrideFlags() const;
+    void setPropertyOverrideFlags(TableBorderPropertyFlags);
 
-struct TableContentFormat
-{
-    bool hasData;
-    double rotation;
-    double scale;
-    int alignment;
-    TableCellStylePropertyFlags propertyOverrideFlags;
-    int propertyFlags;
-    int valueDataType;
-    int valueUnitType;
-    std::string valueFormatString;
-    Color color;
-    double textHeight;
-};
+    TableBorderType type() const;
+    void setType(TableBorderType);
 
-struct TableCellContent
-{
-    TableContentFormat format;
-    TableCellContentType contentType;
-    TableCellValue value;
+    Color color() const;
+    void setColor(const Color &);
+
+    short lineWeight() const;
+    void setLineWeight(short);
+
+    bool isInvisible() const;
+    void setIsInvisible(bool);
+
+    double doubleLineSpacing() const;
+    void setDoubleLineSpacing(double);
+
+private:
+    CellEdgeFlags _edgeFlags;
+    TableBorderPropertyFlags _propertyOverrideFlags;
+    TableBorderType _type;
+    Color _color;
+    short _lineWeight;
+    bool _isInvisible;
+    double _doubleLineSpacing;
 };
 
-struct TableCellContentGeometry
+class LIBDWG_API TableContentFormat
 {
-    XYZ distanceTopLeft;
-    XYZ distanceCenter;
-    double contentWidth;
-    double contentHeight;
-    double width;
-    double height;
-    int flags;
+public:
+    enum class TableCellStylePropertyFlag
+    {
+        None = 0x0,
+        //Content format properties:
+        DataType = 0x1,
+        DataFormat = 0x2,
+        Rotation = 0x4,
+        BlockScale = 0x8,
+        Alignment = 0x10,
+        ContentColor = 0x20,
+        TextStyle = 0x40,
+        TextHeight = 0x80,
+        AutoScale = 0x100,
+        // Cell style properties:
+        BackgroundColor = 0x200,
+        MarginLeft = 0x400,
+        MarginTop = 0x800,
+        MarginRight = 0x1000,
+        MarginBottom = 0x2000,
+        ContentLayout = 0x4000,
+        MarginHorizontalSpacing = 0x20000,
+        MarginVerticalSpacing = 0x40000,
+        //Row/column properties:
+        MergeAll = 0x8000,
+        //Table properties:
+        FlowDirectionBottomToTop = 0x10000
+    };
+    typedef int TableCellStylePropertyFlags;
+public:
+    TableContentFormat();
+    ~TableContentFormat();
+
+    bool hasData() const;
+    void setHasData(bool);
+    
+    double rotation() const;
+    void setRotation(double);
+    
+    double scale() const;
+    void setScale(double);
+    
+    int alignment() const;
+    void setAlignment(int);
+    
+    TableCellStylePropertyFlags propertyOverrideFlags() const;
+    void setPropertyOverrideFlags(TableCellStylePropertyFlags);
+    
+    int propertyFlags() const;
+    void setPropertyFlags(int);
+    
+    int valueDataType() const;
+    void setValueDataType(int);
+    
+    int valueUnitType() const;
+    void setValueUnitType(int);
+    
+    std::string valueFormatString() const;
+    void setValueFormatString(const std::string &);
+    
+    Color color() const;
+    void setColor(const Color &);
+    
+    double textHeight() const;
+    void setTextHeight(double);
+
+private:
+    bool _hasData;
+    double _rotation;
+    double _scale;
+    int _alignment;
+    TableCellStylePropertyFlags _propertyOverrideFlags;
+    int _propertyFlags;
+    int _valueDataType;
+    int _valueUnitType;
+    std::string _valueFormatString;
+    Color _color;
+    double _textHeight;
 };
 
-struct TableCellRange
+class LIBDWG_API TableCellStyle : public TableContentFormat
 {
-    int topRowIndex;
-    int leftColumnIndex;
-    int bottomRowIndex;
-    int rightColumnIndex;
+public:
+    enum class CellStyleTypeType
+    {
+        Cell = 1,
+        Row = 2,
+        Column = 3,
+        FormattedTableData = 4,
+        Table = 5
+    };
+
+    enum class TableCellContentLayoutFlag
+    {
+        None = 0,
+        Flow = 1,
+        StackedHorizontal = 2,
+        StackedVertical = 4
+    };
+    typedef int TableCellContentLayoutFlags;
+
+    enum class MarginFlags
+    {
+        None = 0,
+        Override = 1,
+    };
+
+    TableCellStyle();
+
+    CellStyleTypeType type() const;
+    void setType(CellStyleTypeType);
+    
+    TableCellStylePropertyFlags tableCellStylePropertyFlags() const;
+    void  setTableCellStylePropertyFlags(TableCellStylePropertyFlags);
+    
+    Color backgroundColor() const;
+    void setBackgroundColor(const Color &);
+    
+    TableCellContentLayoutFlags contentLayoutFlags() const;
+    void setContentLayoutFlags(TableCellContentLayoutFlags);
+    
+    MarginFlags marginOverrideFlags() const;
+    void setMarginOverrideFlags(MarginFlags);
+    
+    double verticalMargin() const;
+    void setVerticalMargin(double);
+    
+    double horizontalMargin() const;
+    void setHorizontalMargin(double);
+    
+    double bottomMargin() const;
+    void setBottomMargin(double);
+    
+    double rightMargin() const;
+    void setRightMargin(double);
+    
+    double marginHorizontalSpacing() const;
+    void setMarginHorizontalSpacing(double);
+    
+    double marginVerticalSpacing() const;
+    void setMarginVerticalSpacing(double);
+    
+    std::vector<TableCellBorder> borders() const;
+    void setBorders(const std::vector<TableCellBorder> &);
+
+private:
+    CellStyleTypeType _type;
+    TableCellStylePropertyFlags _tableCellStylePropertyFlags;
+    Color _backgroundColor;
+    TableCellContentLayoutFlags _contentLayoutFlags;
+    MarginFlags _marginOverrideFlags;
+    double _verticalMargin;
+    double _horizontalMargin;
+    double _bottomMargin;
+    double _rightMargin;
+    double _marginHorizontalSpacing;
+    double _marginVerticalSpacing;
+    std::vector<TableCellBorder> _borders;
 };
 
-struct TableCellStyle : TableContentFormat
+class LIBDWG_API TableCustomDataEntry
 {
-    TableCellStyleTypeType type;
-    TableCellStylePropertyFlags tableCellStylePropertyFlags;
-    Color backgroundColor;
-    TableCellContentLayoutFlags contentLayoutFlags;
-    TableMarginFlags marginOverrideFlags;
-    double verticalMargin;
-    double horizontalMargin;
-    double bottomMargin;
-    double rightMargin;
-    double marginHorizontalSpacing;
-    double marginVerticalSpacing;
-    std::vector<TableCellBorder> borders;
-};
+public:
+    TableCustomDataEntry();
 
+    std::string name() const;
+    void setNname(const std::string &);
+    TableCellValue value() const;
+    void setValue(const TableCellValue &);
 
-struct TableCustomDataEntry
-{
-    std::string name;
-    TableCellValue value;
-};
-
-struct TableCell
-{
-    TableCellType type;
-    int flagValue;
-    int mergedValue;
-    bool autofit;
-    int borderWith;
-    int borderHeight;
-    short virtualEdgeFlag;
-    double rotation;
-    std::string toolTip;
-    TableCellStateFlags stateFlags;
-    bool hasLinkedData;
-    TableCellStyle styleOverride;
-    int customData;
-    std::vector<TableCustomDataEntry> customDataCollection;
-    std::vector<TableCellContent> contents;
-    TableCellContentGeometry geometry;
-
-    bool hasMultipleContent() const;
-    TableCellContent content() const;
-};
-
-struct TableColumn
-{
-    std::string name;
-    double width;
-    int customData;
-    TableCellStyle styleOverride;
-    std::vector<TableCustomDataEntry> customDataCollection;
-};
-
-struct TableRow
-{
-    double height;
-    int customData;
-    TableCellStyle cellStyleOverride;
-    std::vector<TableCell> cells;
-    std::vector<TableCustomDataEntry> cstomDataCollection;
-};
-
-struct TableAttribute
-{
-    std::string value;
+private:
+    std::string _name;
+    TableCellValue _value;
 };
 
 }// namespace dwg
