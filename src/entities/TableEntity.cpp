@@ -33,7 +33,7 @@ bool TableEntity::Cell::hasMultipleContent() const
     return contents.size() > 1;
 }
 
-TableEntity::Cell::TableCellContentTableCellContent TableEntity::Cell::content() const 
+TableEntity::Cell::TableCellContent TableEntity::Cell::content() const 
 { 
     if(hasMultipleContent() || contents.size() == 0) 
         return TableCellContent();

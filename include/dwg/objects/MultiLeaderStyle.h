@@ -184,6 +184,50 @@ public:
 
     TextAttachmentType textTopAttachment() const;
     void setTextTopAttachment(TextAttachmentType);
+
+private:
+    LeaderContentType _contentType;
+    MultiLeaderDrawOrderType _multiLeaderDrawOrder;
+    LeaderDrawOrderType _leaderDrawOrder;
+    int _maxLeaderSegmentsPoints;
+    double _firstSegmentAngleConstraint;
+    double _secondSegmentAngleConstraint;
+    MultiLeaderPathType _pathType;
+    Color _lineColor;
+    LineType *_leaderLineType;
+    LineweightType _leaderLineWeight;
+    bool _enableLanding;
+    double _landingGap;
+    bool _enableDogleg;
+    double _landingDistance;
+    std::string _description;
+    BlockRecord *_arrowhead;
+    double _arrowheadSize;
+    std::string _defaultTextContents;
+    TextStyle *_textStyle;
+    TextAttachmentType _textLeftAttachment;
+    TextAngleType _textAngle;
+    TextAlignmentType _textAlignment;
+    TextAlignmentType _textRightAttachment;
+    Color _textColor;
+    double _textHeight;
+    bool _textFrame;
+    bool _textAlignAlwaysLeft;
+    double _alignSpace;
+    BlockRecord *_blockContent;
+    Color _blockContentColor;
+    XYZ _blockContentScale;
+    bool _enableBlockContentScale;
+    double _blockContentRotation;
+    bool _enableBlockContentRotation;
+    BlockContentConnectionType _blockContentConnection;
+    double _scaleFactor;
+    bool _overwritePropertyValue;
+    bool _isAnnotative;
+    double _breakGapSize;
+    TextAttachmentDirectionType _textAttachmentDirection;
+    TextAttachmentType _textBottomAttachment;
+    TextAttachmentType _textTopAttachment;
 };
 
 }// namespace dwg
