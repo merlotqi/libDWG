@@ -57,10 +57,16 @@ short Transparency::value() const
 void Transparency::setValue(short value)
 {
     if (value == -1)
+    {
         _value = value;
+        return;
+    }
 
     if (value == 100)
+    {
         _value = value;
+        return;
+    }
 
     if (value < 0 || value > 90)
         throw std::invalid_argument("Transparency must be in range from 0 to 90.");

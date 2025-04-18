@@ -22,7 +22,7 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
-#include <dwg/CadUtils_p.h>
+#include <dwg/CadUtils.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/DwgWriter.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>

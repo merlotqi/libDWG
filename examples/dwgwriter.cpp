@@ -20,8 +20,4 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/CadReaderBase.h>
-
-namespace dwg {
-
-}// namespace dwg
+#include <dwg/io/dwg/DwgWriter.h>

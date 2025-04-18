@@ -31,7 +31,7 @@
 
 namespace dwg {
 
-class CadUtils
+class LIBDWG_API CadUtils
 {
     static std::map<std::string, CodePage> _dxfEncodingMap;
     static std::vector<LineweightType> _indexedValue;

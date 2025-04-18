@@ -22,7 +22,7 @@
 
 #include <algorithm>
 #include <cmath>
-#include <dwg/CadUtils_p.h>
+#include <dwg/CadUtils.h>
 #include <stdexcept>
 
 namespace dwg {

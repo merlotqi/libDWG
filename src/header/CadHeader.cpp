@@ -21,7 +21,7 @@
  */
 
 #include <dwg/CadDocument.h>
-#include <dwg/CadUtils_p.h>
+#include <dwg/CadUtils.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>

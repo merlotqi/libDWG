@@ -28,10 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Arc : public Circle
 {
-    /// Start angle of the arc (in degrees)
     double _startangle;
-
-    /// End angle of the arc (in degrees)
     double _endangle;
 
 public:

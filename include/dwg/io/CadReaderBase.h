@@ -24,6 +24,8 @@
 
 #include <dwg/io/CadReaderConfiguration.h>
 #include <dwg/io/ICadReader.h>
+#include <dwg/io/Notification.h>
+#include <dwg/utils/Delegate.h>
 #include <string>
 #include <type_traits>
 
@@ -36,6 +38,7 @@ class LIBDWG_API CadReaderBase : public ICadReader, protected T
 
 public:
     virtual ~CadReaderBase();
+    Delegate<void(const std::string &, Notification)> OnNotification;
 
 protected:
     CadReaderBase();
@@ -54,17 +57,18 @@ inline CadReaderBase<T>::~CadReaderBase()
 }
 
 template<class T>
-inline CadReaderBase<T>::CadReaderBase()
+inline CadReaderBase<T>::CadReaderBase() : _fileStream(nullptr), _document(nullptr)
 {
 }
 
 template<class T>
 inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
+    : _fileStream(new std::ifstream(filename)), _document(nullptr)
 {
 }
 
 template<class T>
-inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream)
+inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
 {
 }
 

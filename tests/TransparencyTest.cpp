@@ -19,5 +19,3 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
-
-#include <dwg/io/dwg/DwgReader.h>

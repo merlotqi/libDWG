@@ -23,7 +23,7 @@
 #include <assert.h>
 #include <dwg/ACadVersion.h>
 #include <dwg/CadDocument.h>
-#include <dwg/CadUtils_p.h>
+#include <dwg/CadUtils.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/DwgCheckSumCalculator_p.h>
 #include <dwg/io/dwg/writers/DwgFileHeaderWriterBase_p.h>

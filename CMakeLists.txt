@@ -23,7 +23,11 @@ add_subdirectory(src)
 
 if(WIN32)
     target_compile_definitions(dwg PRIVATE _USE_MATH_DEFINES)
-    target_compile_options(dwg PRIVATE /wd4251)
+    target_compile_options(dwg PRIVATE 
+        /wd4251  # class 'X' needs to have dll-interface
+        /wd4275  # non-dll-interface class 'std::exception' used as base
+        /wd4661  # no suitable definition provided for explicit template instantiation request
+    )
 endif()
 target_link_libraries(dwg Iconv::Iconv fmt::fmt)
 

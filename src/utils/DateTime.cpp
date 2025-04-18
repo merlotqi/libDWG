@@ -729,7 +729,7 @@ bool DateTime::operator==(const DateTime &rhs) const
 
 bool DateTime::operator!=(const DateTime &rhs) const
 {
-    return _utcTime == rhs._utcTime;
+    return _utcTime != rhs._utcTime;
 }
 
 bool DateTime::operator<(const DateTime &rhs) const
