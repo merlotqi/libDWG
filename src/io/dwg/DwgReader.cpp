@@ -24,13 +24,18 @@
 
 namespace dwg {
 
-DwgReader::DwgReader(const std::string &name) {}
+DwgReader::DwgReader(const std::string &name) : CadReaderBase<DwgReaderConfiguration>(name), _builder(nullptr), _fileHeader(nullptr) {}
 
-DwgReader::DwgReader(std::ifstream *stream) {}
+DwgReader::DwgReader(std::ifstream *stream) : CadReaderBase<DwgReaderConfiguration>(stream), _builder(nullptr), _fileHeader(nullptr) {}
 
 DwgReader::~DwgReader() {}
 
-CadDocument *DwgReader::read() { return nullptr; }
+CadDocument *DwgReader::read() 
+{
+    _document = new CadDocument(false);
+    _fileHeader = readFileHeader(); 
+    return nullptr; 
+}
 
 CadHeader *DwgReader::readHeader() { return nullptr; }
 
@@ -38,7 +43,20 @@ CadSummaryInfo *DwgReader::readSummaryInfo() { return nullptr; }
 
 DwgPreview *DwgReader::readPreview() { return nullptr; }
 
-DwgFileHeader *DwgReader::readFileHeader() { return nullptr; }
+DwgFileHeader *DwgReader::readFileHeader() 
+{
+    //Reset the stream position at the beginning
+    _fileStream->seekg(std::ios::beg);
+
+    //0x00	6	“ACXXXX” version string
+
+    char buffer[7] = {0};
+    _fileStream->read(buffer, 6);
+    ACadVersion version = CadUtils::GetVersionFromName(std::string(buffer));
+    DwgFileHeader *fileHeader = DwgFileHeader::CreateFileHeader(version);
+    
+    return nullptr;
+}
 
 DxfClassCollection *DwgReader::readClasses() { return nullptr; }
 

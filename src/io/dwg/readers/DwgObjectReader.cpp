@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dwg/readers/DwgObjectReader_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 
 namespace dwg {
 

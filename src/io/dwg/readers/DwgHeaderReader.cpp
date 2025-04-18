@@ -21,7 +21,19 @@
  */
 
 #include <dwg/io/dwg/readers/DwgHeaderReader_p.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 
 namespace dwg {
 
+DwgHeaderReader::DwgHeaderReader(ACadVersion version, IDwgStreamReader *sreader, CadHeader *header) : DwgSectionIO(version) {}
+
+DwgHeaderReader::~DwgHeaderReader() {}
+
+std::string DwgHeaderReader::sectionName() const { return DwgSectionDefinition::Header; }
+
+void DwgHeaderReader::read(int acadMaintenanceVersion, DwgHeaderHandlesCollection *objectPointers)
+{
+
 }
+
+}// namespace dwg

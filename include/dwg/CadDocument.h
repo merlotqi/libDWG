@@ -62,6 +62,7 @@ class LIBDWG_API CadDocument : public IHandledCadObject
 public:
     CadDocument();
     CadDocument(ACadVersion version);
+    CadDocument(bool createDefaults);
     ~CadDocument();
 
     void createDefaults();
@@ -105,7 +106,6 @@ public:
     void registerCollection(TableCollection *);
 
 protected:
-    CadDocument(bool createDefaults);
     void setRootDictionary(CadDictionary *dic);
 
 private:

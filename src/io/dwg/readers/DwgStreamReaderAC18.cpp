@@ -24,4 +24,13 @@
 
 namespace dwg {
 
+DwgStreamReaderAC18::DwgStreamReaderAC18(std::istream *stream, bool resetPosition) : DwgStreamReaderAC15(stream, resetPosition)
+{}
+
+DwgStreamReaderAC18::~DwgStreamReaderAC18() {}
+
+Color DwgStreamReaderAC18::readCmColor() { return Color(short(0)); }
+
+Color DwgStreamReaderAC18::readEnColor(Transparency &, bool &isBookColor) { return Color(short(0)); }
+
 }

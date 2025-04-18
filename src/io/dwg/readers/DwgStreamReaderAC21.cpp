@@ -24,4 +24,13 @@
 
 namespace dwg {
 
+DwgStreamReaderAC21::DwgStreamReaderAC21(std::istream *stream, bool resetPosition) : DwgStreamReaderAC18(stream, resetPosition)
+{}
+
+DwgStreamReaderAC21::~DwgStreamReaderAC21() {}
+
+std::string DwgStreamReaderAC21::readTextUtf8() { return std::string(); }
+
+std::string DwgStreamReaderAC21::readVariableText() { return std::string(); }
+
 }

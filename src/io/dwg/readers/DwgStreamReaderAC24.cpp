@@ -24,4 +24,11 @@
 
 namespace dwg {
 
-}
+DwgStreamReaderAC24::DwgStreamReaderAC24(std::istream *stream, bool resetPosition) : DwgStreamReaderAC21(stream, resetPosition)
+{}
+
+DwgStreamReaderAC24::~DwgStreamReaderAC24() {}
+
+ObjectType DwgStreamReaderAC24::readObjectType() { return OBjectType::UNLISTED; }
+
+}// namespace dwg

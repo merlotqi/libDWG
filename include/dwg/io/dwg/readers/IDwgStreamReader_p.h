@@ -40,9 +40,9 @@ public:
 
     virtual void setEncoding(Encoding value) = 0;
 
-    virtual int bitShift() = 0;
+    virtual int bitShift() const = 0;
 
-    virtual long long position() = 0;
+    virtual long long position() const = 0;
 
     virtual void setPosition(long long) = 0;
 
