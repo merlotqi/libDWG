@@ -80,11 +80,11 @@ void DxfWriter::createStreamWriter()
 {
     if (_binary)
     {
-        _writer = new DxfBinaryWriter(_stream.get(), Encoding(CodePage::Utf8));
+        _writer = new DxfBinaryWriter(_stream, Encoding(CodePage::Utf8));
     }
     else
     {
-        _writer = new DxfAsciiWriter(_stream.get(), Encoding(CodePage::Utf8));
+        _writer = new DxfAsciiWriter(_stream, Encoding(CodePage::Utf8));
     }
 }
 

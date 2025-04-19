@@ -22,15 +22,15 @@
 
 #pragma once
 
+#include <dwg/CadUtils.h>
+#include <dwg/classes/DxfClassCollection.h>
+#include <dwg/header/CadHeader.h>
 #include <dwg/io/CadWriterConfiguration.h>
 #include <dwg/io/ICadWriter.h>
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
 #include <dwg/utils/Encoding.h>
-#include <dwg/CadUtils.h>
 #include <fstream>
-#include <dwg/classes/DxfClassCollection.h>
-#include <dwg/header/CadHeader.h>
 
 namespace dwg {
 
@@ -52,7 +52,7 @@ protected:
     Encoding getListedEncoding(const std::string &codePage);
 
 protected:
-    std::unique_ptr<std::ofstream> _stream;
+    std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;
 };
@@ -63,7 +63,8 @@ inline CadWriterBase<T>::CadWriterBase()
 }
 
 template<class T>
-inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document) ： _stream(stream), _document(document)
+inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document)
+    : _stream(stream), _document(document)
 {
 }
 
@@ -82,7 +83,7 @@ inline void CadWriterBase<T>::write()
 template<class T>
 inline Encoding CadWriterBase<T>::getListedEncoding(const std::string &codePage)
 {
-    CodePage code = CadUtils::codePage(codePage);
+    CodePage code = CadUtils::GetCodePageByString(codePage);
     return Encoding(code);
 }
 

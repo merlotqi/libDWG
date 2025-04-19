@@ -29,7 +29,7 @@ ExtendedData::ExtendedData() {}
 
 ExtendedData::~ExtendedData()
 {
-    for(auto &&record : _records)
+    for (auto &&record: _records)
     {
         delete record;
     }
@@ -38,7 +38,7 @@ ExtendedData::~ExtendedData()
 
 void ExtendedData::addControlStrings()
 {
-    if(_records.empty())
+    if (_records.empty())
     {
         _records.push_back(ExtendedDataControlString::Open());
         _records.push_back(ExtendedDataControlString::Close());
@@ -52,7 +52,7 @@ void ExtendedData::addControlStrings()
         _records.insert(_records.begin(), ExtendedDataControlString::Open());
     }
     else if (firstControl->isClosing())
-    {    
+    {
         _records.insert(_records.begin(), ExtendedDataControlString::Open());
     }
 
@@ -63,7 +63,7 @@ void ExtendedData::addControlStrings()
         _records.push_back(ExtendedDataControlString::Close());
     }
     else if (lastControl->isClosing())
-    {    
+    {
         _records.push_back(ExtendedDataControlString::Close());
     }
 }

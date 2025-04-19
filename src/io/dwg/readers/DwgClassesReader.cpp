@@ -20,19 +20,29 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgClassesReader_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/readers/DwgClassesReader_p.h>
+
 
 namespace dwg {
 
-DwgClassesReader::DwgClassesReader(ACadVersion version, IDwgStreamReader *sreader, DwgFileHeader *fileheader) : DwgSectionIO(version) {}
+DwgClassesReader::DwgClassesReader(ACadVersion version, IDwgStreamReader *sreader, DwgFileHeader *fileheader)
+    : DwgSectionIO(version)
+{
+}
 
 DwgClassesReader::~DwgClassesReader() {}
 
-std::string DwgClassesReader::sectionName() const { return DwgSectionDefinition::Classes; }
+std::string DwgClassesReader::sectionName() const
+{
+    return DwgSectionDefinition::Classes;
+}
 
 void DwgClassesReader::read(DxfClassCollection *collection) {}
 
-long long DwgClassesReader::getCurrPos(IDwgStreamReader *sreader) { return 0LL; }
-
+long long DwgClassesReader::getCurrPos(IDwgStreamReader *sreader)
+{
+    return 0LL;
 }
+
+}// namespace dwg

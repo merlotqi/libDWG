@@ -20,20 +20,32 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
- #include <dwg/io/dxf/CadObjectHolder_p.h>
+#include <dwg/io/dxf/CadObjectHolder_p.h>
 
- namespace dwg {
- 
-    CadObjectHolder::CadObjectHolder() {}
-    
-    CadObjectHolder::~CadObjectHolder() {}
-    
-    std::queue<Entity *> CadObjectHolder::entities() const { return _entities; }
-    
-    std::queue<Entity *> &CadObjectHolder::entities() { return _entities; }
-    
-    std::queue<CadObject *> CadObjectHolder::objects() const { return _objects; }
-    
-    std::queue<CadObject *> &CadObjectHolder::objects() { return _objects; }
+namespace dwg {
 
- }// namespace dwg
+CadObjectHolder::CadObjectHolder() {}
+
+CadObjectHolder::~CadObjectHolder() {}
+
+std::queue<Entity *> CadObjectHolder::entities() const
+{
+    return _entities;
+}
+
+std::queue<Entity *> &CadObjectHolder::entities()
+{
+    return _entities;
+}
+
+std::queue<CadObject *> CadObjectHolder::objects() const
+{
+    return _objects;
+}
+
+std::queue<CadObject *> &CadObjectHolder::objects()
+{
+    return _objects;
+}
+
+}// namespace dwg

@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgHandleReader_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/readers/DwgHandleReader_p.h>
 
 namespace dwg {
 
@@ -29,7 +29,10 @@ DwgHandleReader::DwgHandleReader(ACadVersion version, IDwgStreamReader *sreader)
 
 DwgHandleReader::~DwgHandleReader() {}
 
-std::string DwgHandleReader::sectionName() const { return DwgSectionDefinition::Handle; }
+std::string DwgHandleReader::sectionName() const
+{
+    return DwgSectionDefinition::Handles;
+}
 
 std::map<unsigned long long, long long> DwgHandleReader::read()
 {

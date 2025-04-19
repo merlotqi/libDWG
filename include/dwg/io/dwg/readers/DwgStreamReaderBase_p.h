@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
 #include <dwg/ACadVersion.h>
+#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
+
 
 namespace dwg {
 
@@ -33,7 +34,8 @@ public:
     DwgStreamReaderBase(std::istream *stream, bool resetPosition);
     ~DwgStreamReaderBase();
 
-    static IDwgStreamReader *GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(), bool resetPosition = false);
+    static IDwgStreamReader *GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
+                                             bool resetPosition = false);
 
     int bitShift() const override;
     long long position() const override;
@@ -43,7 +45,7 @@ public:
 
     bool isEmpty() const;
     void setEmpty(bool);
-    
+
     unsigned char readByte() override;
     short readShort() override;
     long long setPositionByFlag(long long) override;

@@ -25,8 +25,8 @@
 #include <dwg/io/CadReaderBase.h>
 #include <dwg/io/dwg/DwgReaderConfiguration.h>
 #include <fstream>
-#include <sstream>
 #include <map>
+#include <sstream>
 #include <string>
 #include <vector>
 

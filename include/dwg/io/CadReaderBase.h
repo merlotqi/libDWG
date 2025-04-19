@@ -26,6 +26,7 @@
 #include <dwg/io/ICadReader.h>
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
+#include <fstream>
 #include <string>
 #include <type_traits>
 

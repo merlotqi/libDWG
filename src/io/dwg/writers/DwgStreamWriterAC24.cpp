@@ -24,10 +24,13 @@
 
 namespace dwg {
 
-    DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding) : DwgStreamWriterAC21(stream, encoding) {}
+DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding)
+    : DwgStreamWriterAC21(stream, encoding)
+{
+}
 
-    DwgStreamWriterAC24::~DwgStreamWriterAC24() {}
+DwgStreamWriterAC24::~DwgStreamWriterAC24() {}
 
-    void DwgStreamWriterAC24::writeObjectType(short value)  {}
+void DwgStreamWriterAC24::writeObjectType(short value) {}
 
 }// namespace dwg

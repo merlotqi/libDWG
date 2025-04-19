@@ -34,9 +34,6 @@ bool GroupCollection::assertType(NonGraphicalObject *item) const
     return grp ? true : false;
 }
 
-void GroupCollection::beforeAdd(NonGraphicalObject *entry)
-{
-
-}
+void GroupCollection::beforeAdd(NonGraphicalObject *entry) {}
 
 }// namespace dwg

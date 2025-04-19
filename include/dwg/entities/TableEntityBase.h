@@ -37,20 +37,20 @@ public:
     };
     enum class BreakOptionFlag
     {
-        None = 0,        /// None
+        None = 0,                /// None
         EnableBreaks = 1,        /// Enable breaks
-        RepeatTopLabels = 2,        /// Repeat top labels
-        RepeatBottomLabels = 4,        /// Repeat bottom labels
-        AllowManualPositions = 8,        /// Allow manual positions
-        AllowManualHeights = 16        /// Allow manual heights
+        RepeatTopLabels = 2,     /// Repeat top labels
+        RepeatBottomLabels = 4,  /// Repeat bottom labels
+        AllowManualPositions = 8,/// Allow manual positions
+        AllowManualHeights = 16  /// Allow manual heights
     };
     typedef int BreakOptionFlags;
 
     enum class BreakFlowDirection
     {
-        Right = 1,      /// Right
-        Vertical = 2,   /// Vertical
-        Left = 4        /// Left
+        Right = 1,   /// Right
+        Vertical = 2,/// Vertical
+        Left = 4     /// Left
     };
 
 public:
@@ -102,28 +102,28 @@ class LIBDWG_API TableCellValue
 public:
     enum class TableValueUnitType
     {
-        NoUnits = 0,        /// No units.
-        Distance = 1,       /// Distance.
-        Angle = 2,          /// Angle.
-        Area = 4,           /// Area.
-        Volume = 8,         /// Volumne.
-        Currency = 0x10,    /// Currency.
-        Percentage = 0x20   /// Percentage.
+        NoUnits = 0,     /// No units.
+        Distance = 1,    /// Distance.
+        Angle = 2,       /// Angle.
+        Area = 4,        /// Area.
+        Volume = 8,      /// Volumne.
+        Currency = 0x10, /// Currency.
+        Percentage = 0x20/// Percentage.
     };
 
     enum class TableCellValueType
     {
-        Unknown = 0,            /// Unknown
-        Long = 1,               /// 32 bit Long value
-        Double = 2,             /// Double value
-        String = 4,             /// String value
-        Date = 8,               /// Date value
-        Point2D = 0x10,         /// 2D point value
-        Point3D = 0x20,         /// 3D point value
-        Handle = 0x40,          /// Object handle value
-        Buffer = 0x80,          /// Buffer value
-        ResultBuffer = 0x100,   /// Result buffer value
-        General = 0x200         /// General
+        Unknown = 0,         /// Unknown
+        Long = 1,            /// 32 bit Long value
+        Double = 2,          /// Double value
+        String = 4,          /// String value
+        Date = 8,            /// Date value
+        Point2D = 0x10,      /// 2D point value
+        Point3D = 0x20,      /// 3D point value
+        Handle = 0x40,       /// Object handle value
+        Buffer = 0x80,       /// Buffer value
+        ResultBuffer = 0x100,/// Result buffer value
+        General = 0x200      /// General
     };
 
 public:
@@ -134,7 +134,7 @@ public:
     void setValueType(TableCellValueType);
 
     TableValueUnitType units() const;
-    void  setUnits(TableValueUnitType);
+    void setUnits(TableValueUnitType);
 
     int flags() const;
     void setFlags(int);
@@ -170,21 +170,21 @@ class LIBDWG_API TableCellBorder
 public:
     enum class TableBorderPropertyFlag
     {
-        None = 0x0,        /// None.
+        None = 0x0,              /// None.
         BorderType = 0x1,        /// Border type.
         LineWeight = 0x2,        /// Line weight.
-        LineType = 0x4,        /// Line type.
-        Color = 0x8,        /// Color.
-        Invisibility = 0x10,        /// Invisibility.
-        DoubleLineSpacing = 0x20,        /// Double line spacing.
-        All = 0x3F        /// All.
+        LineType = 0x4,          /// Line type.
+        Color = 0x8,             /// Color.
+        Invisibility = 0x10,     /// Invisibility.
+        DoubleLineSpacing = 0x20,/// Double line spacing.
+        All = 0x3F               /// All.
     };
     typedef int TableBorderPropertyFlags;
 
     enum class TableBorderType
     {
-        Single = 1,        /// Single border line.
-        Double = 2        /// Double border line.
+        Single = 1,/// Single border line.
+        Double = 2 /// Double border line.
     };
 
     enum class CellEdgeFlag
@@ -265,40 +265,41 @@ public:
         FlowDirectionBottomToTop = 0x10000
     };
     typedef int TableCellStylePropertyFlags;
+
 public:
     TableContentFormat();
     ~TableContentFormat();
 
     bool hasData() const;
     void setHasData(bool);
-    
+
     double rotation() const;
     void setRotation(double);
-    
+
     double scale() const;
     void setScale(double);
-    
+
     int alignment() const;
     void setAlignment(int);
-    
+
     TableCellStylePropertyFlags propertyOverrideFlags() const;
     void setPropertyOverrideFlags(TableCellStylePropertyFlags);
-    
+
     int propertyFlags() const;
     void setPropertyFlags(int);
-    
+
     int valueDataType() const;
     void setValueDataType(int);
-    
+
     int valueUnitType() const;
     void setValueUnitType(int);
-    
+
     std::string valueFormatString() const;
     void setValueFormatString(const std::string &);
-    
+
     Color color() const;
     void setColor(const Color &);
-    
+
     double textHeight() const;
     void setTextHeight(double);
 
@@ -347,37 +348,37 @@ public:
 
     CellStyleTypeType type() const;
     void setType(CellStyleTypeType);
-    
+
     TableCellStylePropertyFlags tableCellStylePropertyFlags() const;
-    void  setTableCellStylePropertyFlags(TableCellStylePropertyFlags);
-    
+    void setTableCellStylePropertyFlags(TableCellStylePropertyFlags);
+
     Color backgroundColor() const;
     void setBackgroundColor(const Color &);
-    
+
     TableCellContentLayoutFlags contentLayoutFlags() const;
     void setContentLayoutFlags(TableCellContentLayoutFlags);
-    
+
     MarginFlags marginOverrideFlags() const;
     void setMarginOverrideFlags(MarginFlags);
-    
+
     double verticalMargin() const;
     void setVerticalMargin(double);
-    
+
     double horizontalMargin() const;
     void setHorizontalMargin(double);
-    
+
     double bottomMargin() const;
     void setBottomMargin(double);
-    
+
     double rightMargin() const;
     void setRightMargin(double);
-    
+
     double marginHorizontalSpacing() const;
     void setMarginHorizontalSpacing(double);
-    
+
     double marginVerticalSpacing() const;
     void setMarginVerticalSpacing(double);
-    
+
     std::vector<TableCellBorder> borders() const;
     void setBorders(const std::vector<TableCellBorder> &);
 

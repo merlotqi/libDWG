@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <assert.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
-#include <assert.h>
+
 
 namespace dwg {
 
@@ -93,8 +94,6 @@ bool ObjectDictionaryCollection::beforeRemove(const std::string &name)
     return true;
 }
 
-void ObjectDictionaryCollection::beforeAdd(NonGraphicalObject *entry)
-{
-}
+void ObjectDictionaryCollection::beforeAdd(NonGraphicalObject *entry) {}
 
 }// namespace dwg

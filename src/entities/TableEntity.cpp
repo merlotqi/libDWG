@@ -28,14 +28,14 @@ namespace dwg {
 
 TableEntity::Cell::Cell() {}
 
-bool TableEntity::Cell::hasMultipleContent() const 
-{ 
+bool TableEntity::Cell::hasMultipleContent() const
+{
     return contents.size() > 1;
 }
 
-TableEntity::Cell::TableCellContent TableEntity::Cell::content() const 
-{ 
-    if(hasMultipleContent() || contents.size() == 0) 
+TableEntity::Cell::TableCellContent TableEntity::Cell::content() const
+{
+    if (hasMultipleContent() || contents.size() == 0)
         return TableCellContent();
     else
         return contents.at(0);
@@ -45,68 +45,164 @@ TableEntity::TableEntity() {}
 
 TableEntity::~TableEntity() {}
 
-ObjectType TableEntity::objectType() const { return ObjectType::UNLISTED; }
+ObjectType TableEntity::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string TableEntity::objectName() const { return DxfFileToken::EntityTable; }
+std::string TableEntity::objectName() const
+{
+    return DxfFileToken::EntityTable;
+}
 
-std::string TableEntity::subclassMarker() const { return DxfSubclassMarker::TableEntity; }
+std::string TableEntity::subclassMarker() const
+{
+    return DxfSubclassMarker::TableEntity;
+}
 
-short TableEntity::version() const { return _version; }
+short TableEntity::version() const
+{
+    return _version;
+}
 
-void TableEntity::setVersion(short value) { _version = value; }
+void TableEntity::setVersion(short value)
+{
+    _version = value;
+}
 
-XYZ TableEntity::horizontalDirection() const { return _horizontalDirection; }
+XYZ TableEntity::horizontalDirection() const
+{
+    return _horizontalDirection;
+}
 
-void TableEntity::setHorizontalDirection(const XYZ &value) { _horizontalDirection = value; }
+void TableEntity::setHorizontalDirection(const XYZ &value)
+{
+    _horizontalDirection = value;
+}
 
-int TableEntity::valueFlag() const { return _valueFlag; }
+int TableEntity::valueFlag() const
+{
+    return _valueFlag;
+}
 
-void TableEntity::setValueFlag(int value) { _valueFlag = value; }
+void TableEntity::setValueFlag(int value)
+{
+    _valueFlag = value;
+}
 
-std::vector<TableEntity::Row> TableEntity::rows() const { return _rows; }
+std::vector<TableEntity::Row> TableEntity::rows() const
+{
+    return _rows;
+}
 
-void TableEntity::setRows(const std::vector<TableEntity::Row> &value) { _rows = value; }
+void TableEntity::setRows(const std::vector<TableEntity::Row> &value)
+{
+    _rows = value;
+}
 
-std::vector<TableEntity::Column> TableEntity::columns() const { return _columns; }
+std::vector<TableEntity::Column> TableEntity::columns() const
+{
+    return _columns;
+}
 
-void TableEntity::setColumns(const std::vector<TableEntity::Column> &value) { _columns = value; }
+void TableEntity::setColumns(const std::vector<TableEntity::Column> &value)
+{
+    _columns = value;
+}
 
-bool TableEntity::overrideFlag() const { return _overrideFlag; }
+bool TableEntity::overrideFlag() const
+{
+    return _overrideFlag;
+}
 
-void TableEntity::setOverrideFlag(bool value) { _overrideFlag = value; }
+void TableEntity::setOverrideFlag(bool value)
+{
+    _overrideFlag = value;
+}
 
-bool TableEntity::overrideBorderColor() const { return _overrideBorderColor; }
+bool TableEntity::overrideBorderColor() const
+{
+    return _overrideBorderColor;
+}
 
-void TableEntity::setOverrideBorderColor(bool value) { _overrideBorderColor = value; }
+void TableEntity::setOverrideBorderColor(bool value)
+{
+    _overrideBorderColor = value;
+}
 
-bool TableEntity::overrideBorderLineWeight() const { return _overrideBorderLineWeight; }
+bool TableEntity::overrideBorderLineWeight() const
+{
+    return _overrideBorderLineWeight;
+}
 
-void TableEntity::setOverrideBorderLineWeight(bool value) { _overrideBorderLineWeight = value; }
+void TableEntity::setOverrideBorderLineWeight(bool value)
+{
+    _overrideBorderLineWeight = value;
+}
 
-bool TableEntity::overrideBorderVisibility() const { return _overrideBorderVisibility; }
+bool TableEntity::overrideBorderVisibility() const
+{
+    return _overrideBorderVisibility;
+}
 
-void TableEntity::setOverrideBorderVisibility(bool value) { _overrideBorderVisibility = value; }
+void TableEntity::setOverrideBorderVisibility(bool value)
+{
+    _overrideBorderVisibility = value;
+}
 
-TableStyle *TableEntity::style() const { return _style; }
+TableStyle *TableEntity::style() const
+{
+    return _style;
+}
 
-void TableEntity::setTableStyle(TableStyle *value) { _style = value; }
+void TableEntity::setTableStyle(TableStyle *value)
+{
+    _style = value;
+}
 
-BlockRecord *TableEntity::tableBlock() const { return _tableBlock; }
+BlockRecord *TableEntity::tableBlock() const
+{
+    return _tableBlock;
+}
 
-void TableEntity::setTableBlock(BlockRecord *value) { _tableBlock = value; }
+void TableEntity::setTableBlock(BlockRecord *value)
+{
+    _tableBlock = value;
+}
 
-TableContent *TableEntity::content() const { return _content; }
+TableContent *TableEntity::content() const
+{
+    return _content;
+}
 
-void TableEntity::setContent(TableContent *value) { _content = value; }
+void TableEntity::setContent(TableContent *value)
+{
+    _content = value;
+}
 
-TableBreakData TableEntity::tableBreakData() const { return _tableBreakData; }
+TableBreakData TableEntity::tableBreakData() const
+{
+    return _tableBreakData;
+}
 
-void TableEntity::setTableBreakData(const TableBreakData &value) { _tableBreakData = value; }
+void TableEntity::setTableBreakData(const TableBreakData &value)
+{
+    _tableBreakData = value;
+}
 
-std::vector<TableBreakRowRange> TableEntity::breakRowRanges() const { return _breakRowRanges; }
+std::vector<TableBreakRowRange> TableEntity::breakRowRanges() const
+{
+    return _breakRowRanges;
+}
 
-void TableEntity::setBreakRowRanges(const std::vector<TableBreakRowRange> &value) { _breakRowRanges = value; }
+void TableEntity::setBreakRowRanges(const std::vector<TableBreakRowRange> &value)
+{
+    _breakRowRanges = value;
+}
 
-TableEntity::Cell TableEntity::cellAt(int row, int column) const { return TableEntity::Cell(); }
+TableEntity::Cell TableEntity::cellAt(int row, int column) const
+{
+    return TableEntity::Cell();
+}
 
 }// namespace dwg

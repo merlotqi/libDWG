@@ -28,105 +28,247 @@ DwgStreamReaderBase::DwgStreamReaderBase(std::istream *stream, bool resetPositio
 
 DwgStreamReaderBase::~DwgStreamReaderBase() {}
 
-IDwgStreamReader *DwgStreamReaderBase::GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding, bool resetPosition) { return nullptr; }
+IDwgStreamReader *DwgStreamReaderBase::GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding,
+                                                       bool resetPosition)
+{
+    return nullptr;
+}
 
-int DwgStreamReaderBase::bitShift() const { return 1; }
+int DwgStreamReaderBase::bitShift() const
+{
+    return 1;
+}
 
-long long DwgStreamReaderBase::position() const { return 0LL;}
+long long DwgStreamReaderBase::position() const
+{
+    return 0LL;
+}
 
 void DwgStreamReaderBase::setBitShift(int) {}
 
 void DwgStreamReaderBase::setPosition(long long) {}
 
-bool DwgStreamReaderBase::isEmpty() const { return false; }
+bool DwgStreamReaderBase::isEmpty() const
+{
+    return false;
+}
 
 void DwgStreamReaderBase::setEmpty(bool) {}
 
-unsigned char DwgStreamReaderBase::readByte() { return (unsigned char)(1); }
+unsigned char DwgStreamReaderBase::readByte()
+{
+    return (unsigned char) (1);
+}
 
-short DwgStreamReaderBase::readShort() { return short(0); }
+short DwgStreamReaderBase::readShort()
+{
+    return short(0);
+}
 
-long long DwgStreamReaderBase::setPositionByFlag(long long) { return 0LL; }
+long long DwgStreamReaderBase::setPositionByFlag(long long)
+{
+    return 0LL;
+}
 
-int DwgStreamReaderBase::readInt() { return 0; }
+int DwgStreamReaderBase::readInt()
+{
+    return 0;
+}
 
-unsigned int DwgStreamReaderBase::readUInt() { return 0; }
+unsigned int DwgStreamReaderBase::readUInt()
+{
+    return 0;
+}
 
-double DwgStreamReaderBase::readDouble() { return 0.0; }
+double DwgStreamReaderBase::readDouble()
+{
+    return 0.0;
+}
 
-std::vector<unsigned char> DwgStreamReaderBase::readBytes(int length) { return std::vector<unsigned char>(); }
+std::vector<unsigned char> DwgStreamReaderBase::readBytes(int length)
+{
+    return std::vector<unsigned char>();
+}
 
-bool DwgStreamReaderBase::readBit() { return false; }
+bool DwgStreamReaderBase::readBit()
+{
+    return false;
+}
 
-short DwgStreamReaderBase::readBitAsShort() { return short(0); }
+short DwgStreamReaderBase::readBitAsShort()
+{
+    return short(0);
+}
 
-unsigned char DwgStreamReaderBase::read2Bits() { return (unsigned char)(0); }
+unsigned char DwgStreamReaderBase::read2Bits()
+{
+    return (unsigned char) (0);
+}
 
-short DwgStreamReaderBase::readBitShort() { return short(0); }
+short DwgStreamReaderBase::readBitShort()
+{
+    return short(0);
+}
 
-bool DwgStreamReaderBase::readBitShortAsBool() { return false; }
+bool DwgStreamReaderBase::readBitShortAsBool()
+{
+    return false;
+}
 
-int DwgStreamReaderBase::readBitLong() { return 0; }
+int DwgStreamReaderBase::readBitLong()
+{
+    return 0;
+}
 
-long long DwgStreamReaderBase::readBitLongLong() { return 0LL; }
+long long DwgStreamReaderBase::readBitLongLong()
+{
+    return 0LL;
+}
 
-double DwgStreamReaderBase::readBitDouble() { return 0.0; }
+double DwgStreamReaderBase::readBitDouble()
+{
+    return 0.0;
+}
 
-XY DwgStreamReaderBase::read2BitDouble() { return XY(0, 0);}
+XY DwgStreamReaderBase::read2BitDouble()
+{
+    return XY(0, 0);
+}
 
-XYZ DwgStreamReaderBase::read3BitDouble() { return XYZ(0, 0, 0); }
+XYZ DwgStreamReaderBase::read3BitDouble()
+{
+    return XYZ(0, 0, 0);
+}
 
-char DwgStreamReaderBase::readRawChar() { return char(0); }
+char DwgStreamReaderBase::readRawChar()
+{
+    return char(0);
+}
 
-long long DwgStreamReaderBase::readRawLong() { return 0LL; }
+long long DwgStreamReaderBase::readRawLong()
+{
+    return 0LL;
+}
 
-unsigned long long DwgStreamReaderBase::readRawULong() { return 0ULL; }
+unsigned long long DwgStreamReaderBase::readRawULong()
+{
+    return 0ULL;
+}
 
-XYZ DwgStreamReaderBase::read2RawDouble() { return XYZ(0, 0, 0); }
+XYZ DwgStreamReaderBase::read2RawDouble()
+{
+    return XYZ(0, 0, 0);
+}
 
-XYZ DwgStreamReaderBase::read3RawDouble() { return XYZ(0, 0, 0); }
+XYZ DwgStreamReaderBase::read3RawDouble()
+{
+    return XYZ(0, 0, 0);
+}
 
-unsigned long long DwgStreamReaderBase::readModularChar() { return 0ULL; }
+unsigned long long DwgStreamReaderBase::readModularChar()
+{
+    return 0ULL;
+}
 
-int DwgStreamReaderBase::readSignedModularChar() { return 0; }
+int DwgStreamReaderBase::readSignedModularChar()
+{
+    return 0;
+}
 
-int DwgStreamReaderBase::readModularShort() { return 0; }
+int DwgStreamReaderBase::readModularShort()
+{
+    return 0;
+}
 
-unsigned long long DwgStreamReaderBase::handleReference(unsigned long long referenceHandle) { return 0ULL;}
+unsigned long long DwgStreamReaderBase::handleReference(unsigned long long referenceHandle)
+{
+    return 0ULL;
+}
 
-unsigned long long DwgStreamReaderBase::handleReference(unsigned long long referenceHandle, DwgReferenceType &reference) { return 0ULL; }
+unsigned long long DwgStreamReaderBase::handleReference(unsigned long long referenceHandle, DwgReferenceType &reference)
+{
+    return 0ULL;
+}
 
-std::string DwgStreamReaderBase::readTextUtf8() { return std::string(); }
+std::string DwgStreamReaderBase::readTextUtf8()
+{
+    return std::string();
+}
 
-std::string DwgStreamReaderBase::readVariableText() { return std::string(); }
+std::string DwgStreamReaderBase::readVariableText()
+{
+    return std::string();
+}
 
-std::vector<unsigned char> DwgStreamReaderBase::readSentinel() { return std::vector<unsigned char>(); }
+std::vector<unsigned char> DwgStreamReaderBase::readSentinel()
+{
+    return std::vector<unsigned char>();
+}
 
-XY DwgStreamReaderBase::read2BitDoubleWithDefault(const XY &) {return XY(0, 0);}
+XY DwgStreamReaderBase::read2BitDoubleWithDefault(const XY &)
+{
+    return XY(0, 0);
+}
 
-XYZ DwgStreamReaderBase::read3BitDoubleWithDefault(const XYZ &) {return XYZ(0, 0, 0);}
+XYZ DwgStreamReaderBase::read3BitDoubleWithDefault(const XYZ &)
+{
+    return XYZ(0, 0, 0);
+}
 
-Color DwgStreamReaderBase::readCmColor() { return Color(short(0)); }
+Color DwgStreamReaderBase::readCmColor()
+{
+    return Color(short(0));
+}
 
-Color DwgStreamReaderBase::readEnColor(Transparency &, bool &flag) { return Color(short(0)); }
+Color DwgStreamReaderBase::readEnColor(Transparency &, bool &flag)
+{
+    return Color(short(0));
+}
 
-Color DwgStreamReaderBase::readColorByIndex() { return Color(short(0)); }
+Color DwgStreamReaderBase::readColorByIndex()
+{
+    return Color(short(0));
+}
 
-ObjectType DwgStreamReaderBase::readObjectType() { return ObjectType::UNLISTED; }
+ObjectType DwgStreamReaderBase::readObjectType()
+{
+    return ObjectType::UNLISTED;
+}
 
-XYZ DwgStreamReaderBase::readBitExtrusion() { return XYZ(0, 0, 0); }
+XYZ DwgStreamReaderBase::readBitExtrusion()
+{
+    return XYZ(0, 0, 0);
+}
 
-double DwgStreamReaderBase::readBitDoubleWithDefault(double def) { return 0.0; }
+double DwgStreamReaderBase::readBitDoubleWithDefault(double def)
+{
+    return 0.0;
+}
 
-double DwgStreamReaderBase::readBitThickness() { return 0.0; }
+double DwgStreamReaderBase::readBitThickness()
+{
+    return 0.0;
+}
 
-DateTime DwgStreamReaderBase::read8BitJulianDate() { return DateTime(); }
+DateTime DwgStreamReaderBase::read8BitJulianDate()
+{
+    return DateTime();
+}
 
-DateTime DwgStreamReaderBase::readDateTime() { return DateTime(); }
+DateTime DwgStreamReaderBase::readDateTime()
+{
+    return DateTime();
+}
 
-double DwgStreamReaderBase::readTimeSpan() { return 0.0; }
+double DwgStreamReaderBase::readTimeSpan()
+{
+    return 0.0;
+}
 
-long long DwgStreamReaderBase::positionInBits() { return 0LL; }
+long long DwgStreamReaderBase::positionInBits()
+{
+    return 0LL;
+}
 
 void DwgStreamReaderBase::setPositionInBits(long positon) {}
 
@@ -134,6 +276,9 @@ void DwgStreamReaderBase::advanceByte() {}
 
 void DwgStreamReaderBase::advance(int offset) {}
 
-unsigned short DwgStreamReaderBase::resetShit() { return (unsigned short)(0); }
+unsigned short DwgStreamReaderBase::resetShit()
+{
+    return (unsigned short) (0);
+}
 
 }// namespace dwg

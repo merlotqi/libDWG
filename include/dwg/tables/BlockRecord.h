@@ -24,9 +24,9 @@
 
 #include <dwg/CadObjectCollection.h>
 #include <dwg/blocks/BlockTypeFlags.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
-#include <dwg/entities/Entity.h>
 #include <string>
 
 namespace dwg {

@@ -82,7 +82,7 @@ public:
             TableCellContentType contentType;
             TableCellValue value;
         };
-        
+
 
         struct LIBDWG_API TableCellContentGeometry
         {

@@ -20,25 +20,40 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/CadDocument.h>
 #include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 
 namespace dwg {
 
 DwgObjectWriter::DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords,
-        bool writeXData)    : DwgSectionIO(document->header()->version()) {}
+                                 bool writeXData)
+    : DwgSectionIO(document->header()->version())
+{
+}
 DwgObjectWriter::~DwgObjectWriter() {}
 
-std::string DwgObjectWriter::sectionName() const { return std::string(); }
+std::string DwgObjectWriter::sectionName() const
+{
+    return std::string();
+}
 
 void DwgObjectWriter::write() {}
 
-std::map<unsigned long long, long long> DwgObjectWriter::handleMap() const { return std::map<unsigned long long, long long>(); }
+std::map<unsigned long long, long long> DwgObjectWriter::handleMap() const
+{
+    return std::map<unsigned long long, long long>();
+}
 
-bool DwgObjectWriter::writeXRecords() const { return false; }
+bool DwgObjectWriter::writeXRecords() const
+{
+    return false;
+}
 
-bool DwgObjectWriter::writeXData() const { return false; }
+bool DwgObjectWriter::writeXData() const
+{
+    return false;
+}
 
 void DwgObjectWriter::writeLTypeControlObject() {}
 

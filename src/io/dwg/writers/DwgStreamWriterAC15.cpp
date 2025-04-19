@@ -24,12 +24,15 @@
 
 namespace dwg {
 
-    DwgStreamWriterAC15::DwgStreamWriterAC15(std::ostream *stream, Encoding encoding) : DwgStreamWriterAC12(stream, encoding) {}
+DwgStreamWriterAC15::DwgStreamWriterAC15(std::ostream *stream, Encoding encoding)
+    : DwgStreamWriterAC12(stream, encoding)
+{
+}
 
-    DwgStreamWriterAC15::~DwgStreamWriterAC15() {}
+DwgStreamWriterAC15::~DwgStreamWriterAC15() {}
 
-    void DwgStreamWriterAC15::writeBitExtrusion(const XYZ &normal)  {}
+void DwgStreamWriterAC15::writeBitExtrusion(const XYZ &normal) {}
 
-    void DwgStreamWriterAC15::writeBitThickness(double thickness)  {}
-    
+void DwgStreamWriterAC15::writeBitThickness(double thickness) {}
+
 }// namespace dwg

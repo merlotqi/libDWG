@@ -20,15 +20,22 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/ObjectType.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC24_p.h>
+
 
 namespace dwg {
 
-DwgStreamReaderAC24::DwgStreamReaderAC24(std::istream *stream, bool resetPosition) : DwgStreamReaderAC21(stream, resetPosition)
-{}
+DwgStreamReaderAC24::DwgStreamReaderAC24(std::istream *stream, bool resetPosition)
+    : DwgStreamReaderAC21(stream, resetPosition)
+{
+}
 
 DwgStreamReaderAC24::~DwgStreamReaderAC24() {}
 
-ObjectType DwgStreamReaderAC24::readObjectType() { return OBjectType::UNLISTED; }
+ObjectType DwgStreamReaderAC24::readObjectType()
+{
+    return ObjectType::UNLISTED;
+}
 
 }// namespace dwg

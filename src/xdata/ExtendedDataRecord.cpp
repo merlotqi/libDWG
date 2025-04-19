@@ -35,22 +35,29 @@ DwgVariant ExtendedDataRecord::rawValue() const
     return _value;
 }
 
-ExtendedDataRecord::ExtendedDataRecord(DxfCode code, const DwgVariant &value) : _code(code), _value(value)
-{}
+ExtendedDataRecord::ExtendedDataRecord(DxfCode code, const DwgVariant &value) : _code(code), _value(value) {}
 
 /* ------------------------- ExtendedDataBinaryChunk ------------------------ */
 ExtendedDataBinaryChunk::ExtendedDataBinaryChunk(const std::vector<unsigned char> &chunk)
     : ExtendedDataRecordT<std::vector<unsigned char>>(DxfCode::ExtendedDataBinaryChunk, chunk)
-{}
+{
+}
 
 /* ------------------------ ExtendedDataControlString ----------------------- */
 ExtendedDataControlString::ExtendedDataControlString(bool close)
     : ExtendedDataRecord(DxfCode::ExtendedDataControlString, close ? '}' : '{'), _isClosing(close)
-{}
+{
+}
 
-char ExtendedDataControlString::value() const { return _isClosing ? '}' : '{'; }
+char ExtendedDataControlString::value() const
+{
+    return _isClosing ? '}' : '{';
+}
 
-bool ExtendedDataControlString::isClosing() const { return _isClosing; }
+bool ExtendedDataControlString::isClosing() const
+{
+    return _isClosing;
+}
 
 ExtendedDataControlString *ExtendedDataControlString::Open()
 {
@@ -69,7 +76,10 @@ ExtendedDataCoordinate::ExtendedDataCoordinate(const XYZ coordinate)
 }
 
 /* -------------------------- ExtendedDataDirection ------------------------- */
-ExtendedDataDirection::ExtendedDataDirection(const XYZ direction) : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDir, direction) {}
+ExtendedDataDirection::ExtendedDataDirection(const XYZ direction)
+    : ExtendedDataRecordT<XYZ>(DxfCode::ExtendedDataWorldXDir, direction)
+{
+}
 
 /* ------------------------ ExtendedDataDisplacement ------------------------ */
 ExtendedDataDisplacement::ExtendedDataDisplacement(const XYZ displacement)
@@ -84,13 +94,21 @@ ExtendedDataWorldCoordinate::ExtendedDataWorldCoordinate(const XYZ &coordinate)
 }
 
 /* -------------------------- ExtendedDataDistance -------------------------- */
-ExtendedDataDistance::ExtendedDataDistance(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataDist, value) {}
+ExtendedDataDistance::ExtendedDataDistance(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataDist, value)
+{
+}
 
 /* -------------------------- ExtendedDataInteger16 ------------------------- */
-ExtendedDataInteger16::ExtendedDataInteger16(short value) : ExtendedDataRecordT<short>(DxfCode::ExtendedDataInteger16, value) {}
+ExtendedDataInteger16::ExtendedDataInteger16(short value)
+    : ExtendedDataRecordT<short>(DxfCode::ExtendedDataInteger16, value)
+{
+}
 
 /* -------------------------- ExtendedDataInteger32 ------------------------- */
-ExtendedDataInteger32::ExtendedDataInteger32(int value) : ExtendedDataRecordT<int>(DxfCode::ExtendedDataInteger32, value) {}
+ExtendedDataInteger32::ExtendedDataInteger32(int value)
+    : ExtendedDataRecordT<int>(DxfCode::ExtendedDataInteger32, value)
+{
+}
 
 /* ---------------------------- ExtendedDataReal ---------------------------- */
 ExtendedDataReal::ExtendedDataReal(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataReal, value) {}
@@ -99,7 +117,8 @@ ExtendedDataReal::ExtendedDataReal(double value) : ExtendedDataRecordT<double>(D
 ExtendedDataScale::ExtendedDataScale(double value) : ExtendedDataRecordT<double>(DxfCode::ExtendedDataScale, value) {}
 
 /* --------------------------- ExtendedDataString --------------------------- */
-ExtendedDataString::ExtendedDataString(const std::string &value) : ExtendedDataRecordT<std::string>(DxfCode::ExtendedDataAsciiString, value)
+ExtendedDataString::ExtendedDataString(const std::string &value)
+    : ExtendedDataRecordT<std::string>(DxfCode::ExtendedDataAsciiString, value)
 {
 }
 

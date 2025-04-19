@@ -50,7 +50,7 @@ DwgWriter::DwgWriter(const std::string &filename, CadDocument *document)
 {
     if (!document)
         throw std::invalid_argument("document is null");
-    _stream = std::make_unique<std::ofstream>(filename, std::ios::binary);
+    _stream = new std::ofstream(filename, std::ios::binary);
     _document = document;
 }
 
@@ -111,10 +111,10 @@ void DwgWriter::getFileHeaderWriter()
                     fmt::format("File version not supported:{}", CadUtils::GetNameFromVersion(version)));
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:
-            _fileHeaderWriter = new DwgFileHeaderWriterAC15(_stream.get(), _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC15(_stream, _encoding, _document);
             break;
         case ACadVersion::AC1018:
-            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
             break;
         case ACadVersion::AC1021:
             throw std::runtime_error(
@@ -122,7 +122,7 @@ void DwgWriter::getFileHeaderWriter()
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
-            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream.get(), _encoding, _document);
+            _fileHeaderWriter = new DwgFileHeaderWriterAC18(_stream, _encoding, _document);
             break;
         default:
             throw std::runtime_error(
@@ -162,7 +162,7 @@ void DwgWriter::writeSummaryInfo()
     writer->writeTextUtf8(info->revisionNumber());
     writer->writeTextUtf8(info->hyperlinkBase());
 
-    //?	8	Total editing time(ODA writes two zero Int32’s)
+    //?	8	Total editing time(ODA writes two zero Int32's)
     writer->writeInt(0);
     writer->writeInt(0);
 

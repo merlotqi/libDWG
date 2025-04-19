@@ -30,62 +30,110 @@ TextEntity::TextEntity() {}
 
 TextEntity::~TextEntity() {}
 
-ObjectType TextEntity::objectType() const { return ObjectType::TEXT; }
+ObjectType TextEntity::objectType() const
+{
+    return ObjectType::TEXT;
+}
 
-std::string TextEntity::objectName() const { return DxfFileToken::EntityText; }
+std::string TextEntity::objectName() const
+{
+    return DxfFileToken::EntityText;
+}
 
-std::string TextEntity::subclassMarker() const { return DxfSubclassMarker::Text; }
+std::string TextEntity::subclassMarker() const
+{
+    return DxfSubclassMarker::Text;
+}
 
-double TextEntity::thickness() const { return _thickness; }
+double TextEntity::thickness() const
+{
+    return _thickness;
+}
 
 void TextEntity::setThickness(double) {}
 
-XYZ TextEntity::insertPoint() const { return _insertPoint; }
+XYZ TextEntity::insertPoint() const
+{
+    return _insertPoint;
+}
 
 void TextEntity::setInsertPoint(const XYZ &) {}
 
-double TextEntity::height() const { return _height; }
+double TextEntity::height() const
+{
+    return _height;
+}
 
 void TextEntity::setHeight(double) {}
 
-std::string TextEntity::value() const { return _value; }
+std::string TextEntity::value() const
+{
+    return _value;
+}
 
 void TextEntity::setValue(const std::string &) {}
 
-double TextEntity::rotation() const { return _rotation; }
+double TextEntity::rotation() const
+{
+    return _rotation;
+}
 
 void TextEntity::setRotation(double) {}
 
-double TextEntity::widthFactor() const { return _widthFactor; }
+double TextEntity::widthFactor() const
+{
+    return _widthFactor;
+}
 
 void TextEntity::setWidthFactor(double) {}
 
-double TextEntity::obliqueAngle() const { return _obliqueAngle; }
+double TextEntity::obliqueAngle() const
+{
+    return _obliqueAngle;
+}
 
 void TextEntity::setObliqueAngle(double) {}
 
-TextStyle *TextEntity::style() const { return _style; }
+TextStyle *TextEntity::style() const
+{
+    return _style;
+}
 
 void TextEntity::setStyle(TextStyle *) {}
 
-TextMirrorFlag TextEntity::mirror() const { return _mirror; }
+TextMirrorFlag TextEntity::mirror() const
+{
+    return _mirror;
+}
 
 void TextEntity::setMirror(TextMirrorFlag) {}
 
-TextHorizontalAlignment TextEntity::horizontalAlignment() const { return _horizontalAlignment; }
+TextHorizontalAlignment TextEntity::horizontalAlignment() const
+{
+    return _horizontalAlignment;
+}
 
 void TextEntity::setHorizontalAlignment(TextHorizontalAlignment) {}
 
-XYZ TextEntity::alignmentPoint() const { return _alignmentPoint; }
+XYZ TextEntity::alignmentPoint() const
+{
+    return _alignmentPoint;
+}
 
 void TextEntity::setAlignmentPoint(const XYZ &) {}
 
-XYZ TextEntity::normal() const { return _normal; }
+XYZ TextEntity::normal() const
+{
+    return _normal;
+}
 
 void TextEntity::setNormal(const XYZ &) {}
 
-TextVerticalAlignment TextEntity::verticalAlignment() const { return _verticalAlignment; }
+TextVerticalAlignment TextEntity::verticalAlignment() const
+{
+    return _verticalAlignment;
+}
 
 void TextEntity::setVerticalAlignment(TextVerticalAlignment) {}
 
-}
+}// namespace dwg

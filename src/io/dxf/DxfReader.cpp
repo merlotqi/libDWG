@@ -28,15 +28,30 @@ DxfReader::DxfReader(const std::string &filename) {}
 
 DxfReader::DxfReader(std::ifstream *stream) {}
 
-bool DxfReader::isBinary() const { return false; }
+bool DxfReader::isBinary() const
+{
+    return false;
+}
 
-CadDocument *DxfReader::read() { return nullptr; }
+CadDocument *DxfReader::read()
+{
+    return nullptr;
+}
 
-CadHeader *DxfReader::readHeader() { return nullptr; }
+CadHeader *DxfReader::readHeader()
+{
+    return nullptr;
+}
 
-CadDocument *DxfReader::readTables() { return nullptr; }
+CadDocument *DxfReader::readTables()
+{
+    return nullptr;
+}
 
-std::vector<Entity *> DxfReader::readEntities() { return std::vector<Entity *>(); }
+std::vector<Entity *> DxfReader::readEntities()
+{
+    return std::vector<Entity *>();
+}
 
 void DxfReader::readBlocks() {}
 
@@ -46,10 +61,19 @@ void DxfReader::readObjects() {}
 
 void DxfReader::readThumbnailImage() {}
 
-IDxfStreamReader *DxfReader::getReader() { return nullptr; }
+IDxfStreamReader *DxfReader::getReader()
+{
+    return nullptr;
+}
 
-IDxfStreamReader *DxfReader::goToSection(const std::string &sectionName) { return nullptr; }
+IDxfStreamReader *DxfReader::goToSection(const std::string &sectionName)
+{
+    return nullptr;
+}
 
-IDxfStreamReader *DxfReader::createReader(bool isBinary, bool isAC1009Format) { return nullptr; }
+IDxfStreamReader *DxfReader::createReader(bool isBinary, bool isAC1009Format)
+{
+    return nullptr;
+}
 
 }// namespace dwg

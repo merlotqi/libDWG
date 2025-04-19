@@ -20,20 +20,25 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/writers/DxfSectionWriterBase_p.h>
 #include <dwg/CadDocument.h>
 #include <dwg/header/CadHeader.h>
+#include <dwg/io/dxf/writers/DxfSectionWriterBase_p.h>
 
 namespace dwg {
 
 DxfSectionWriterBase::DxfSectionWriterBase(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *holder,
-    DxfWriterConfiguration configuration) {}
+                                           DxfWriterConfiguration configuration)
+{
+}
 
 DxfSectionWriterBase::~DxfSectionWriterBase() {}
 
 void DxfSectionWriterBase::write() {}
 
-ACadVersion DxfSectionWriterBase::version() const {return _document->header()->version(); }
+ACadVersion DxfSectionWriterBase::version() const
+{
+    return _document->header()->version();
+}
 
 CadObjectHolder *DxfSectionWriterBase::holder()
 {

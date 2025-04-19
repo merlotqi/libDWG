@@ -20,21 +20,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgSummaryInfoReader_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/readers/DwgSummaryInfoReader_p.h>
+
 
 namespace dwg {
 
-DwgSummaryInfoReader::DwgSummaryInfoReader(ACadVersion version, IDwgStreamReader *reader) : DwgSectionIO(version)
-{   
-}
+DwgSummaryInfoReader::DwgSummaryInfoReader(ACadVersion version, IDwgStreamReader *reader) : DwgSectionIO(version) {}
 
 DwgSummaryInfoReader::~DwgSummaryInfoReader() {}
 
-std::string DwgSummaryInfoReader::sectionName() const { return DwgSectionDefinition::SummaryInfo; }
+std::string DwgSummaryInfoReader::sectionName() const
+{
+    return DwgSectionDefinition::SummaryInfo;
+}
 
 void DwgSummaryInfoReader::read() {}
 
 void DwgSummaryInfoReader::readUtf8String() {}
 
-}
+}// namespace dwg

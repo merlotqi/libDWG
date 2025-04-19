@@ -24,12 +24,14 @@
 
 namespace dwg {
 
-DwgStreamReaderAC15::DwgStreamReaderAC15(std::istream *stream, bool resetPosition) : DwgStreamReaderAC12(stream, resetPosition)
-{}
+DwgStreamReaderAC15::DwgStreamReaderAC15(std::istream *stream, bool resetPosition)
+    : DwgStreamReaderAC12(stream, resetPosition)
+{
+}
 
 DwgStreamReaderAC15::~DwgStreamReaderAC15() {}
 
-double DwgStreamReaderAC15::readBitThickness() 
+double DwgStreamReaderAC15::readBitThickness()
 {
     return 0.0;
 }

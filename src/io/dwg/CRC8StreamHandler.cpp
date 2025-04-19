@@ -61,7 +61,6 @@ unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char v
 }
 
 
-
 CRC8InputStreamHandler::CRC8InputStreamHandler(std::istream *stream) : InputStreamWrapper(stream) {}
 
 CRC8InputStreamHandler::~CRC8InputStreamHandler() {}

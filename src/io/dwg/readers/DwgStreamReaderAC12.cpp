@@ -24,8 +24,10 @@
 
 namespace dwg {
 
-DwgStreamReaderAC12::DwgStreamReaderAC12(std::istream *stream, bool resetPosition) : DwgStreamReaderBase(stream, resetPosition)
-{}
+DwgStreamReaderAC12::DwgStreamReaderAC12(std::istream *stream, bool resetPosition)
+    : DwgStreamReaderBase(stream, resetPosition)
+{
+}
 
 DwgStreamReaderAC12::~DwgStreamReaderAC12() {}
 

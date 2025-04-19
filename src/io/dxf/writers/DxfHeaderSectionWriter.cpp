@@ -24,12 +24,19 @@
 
 namespace dwg {
 
-    DxfHeaderSectionWriter::DxfHeaderSectionWriter(IDxfStreamWriter *writer, CadDocument *document, CadObjectHolder *objectHolder,
-        const DxfWriterConfiguration &configuration) : DxfSectionWriterBase(writer, document, objectHolder, configuration) {}
-        
-        DxfHeaderSectionWriter::~DxfHeaderSectionWriter() {}
+DxfHeaderSectionWriter::DxfHeaderSectionWriter(IDxfStreamWriter *writer, CadDocument *document,
+                                               CadObjectHolder *objectHolder,
+                                               const DxfWriterConfiguration &configuration)
+    : DxfSectionWriterBase(writer, document, objectHolder, configuration)
+{
+}
 
-std::string DxfHeaderSectionWriter::sectionName() const { return std::string(); }
+DxfHeaderSectionWriter::~DxfHeaderSectionWriter() {}
+
+std::string DxfHeaderSectionWriter::sectionName() const
+{
+    return std::string();
+}
 
 void DxfHeaderSectionWriter::writeSection() {}
 

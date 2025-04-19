@@ -22,8 +22,9 @@
 
 #pragma once
 
-#include <vector>
 #include <dwg/exports.h>
+#include <vector>
+
 
 namespace dwg {
 

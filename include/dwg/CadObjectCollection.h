@@ -22,17 +22,17 @@
 
 #pragma once
 
+#include <algorithm>
 #include <dwg/CadObject.h>
 #include <dwg/utils/Delegate.h>
-#include <vector>
-#include <algorithm>
-#include <utility>
-#include <iterator>
 #include <initializer_list>
+#include <iterator>
+#include <utility>
+#include <vector>
 
 namespace dwg {
 
-    template<typename T>
+template<typename T>
 class CadObjectCollection
 {
     static_assert(std::is_pointer<T>::value, "T must be a pointer type");
@@ -50,8 +50,8 @@ public:
     CadObjectCollection() noexcept = default;
     CadObjectCollection(const CadObjectCollection &other) = default;
     CadObjectCollection(CadObjectCollection &&other) noexcept = default;
-    CadObjectCollection& operator=(const CadObjectCollection& other) = default;
-    CadObjectCollection& operator=(CadObjectCollection&& other) noexcept = default;
+    CadObjectCollection &operator=(const CadObjectCollection &other) = default;
+    CadObjectCollection &operator=(CadObjectCollection &&other) noexcept = default;
     CadObjectCollection(std::initializer_list<T> initList) : _entries(initList) {}
 
     Delegate<void(pointer)> OnAdd;
@@ -75,7 +75,8 @@ public:
         OnAdd(value);
     }
 
-    void push_back(T&& value) noexcept(std::is_nothrow_move_constructible<T>::value) {
+    void push_back(T &&value) noexcept(std::is_nothrow_move_constructible<T>::value)
+    {
         if (!value)
             return;
         if (value->owner())
@@ -103,32 +104,68 @@ public:
         return value;
     }
 
-    CadObject *owner() const { return _owner; }
+    CadObject *owner() const
+    {
+        return _owner;
+    }
     void setOwner(CadObject *obj)
     {
         delete _owner;
         _owner = obj;
     }
-    size_t size() const { return _entries.size(); }
-    pointer at(size_t i) const { return _entries.at(i); }
-    bool empty() const { return _entries.empty(); }
+    size_t size() const
+    {
+        return _entries.size();
+    }
+    pointer at(size_t i) const
+    {
+        return _entries.at(i);
+    }
+    bool empty() const
+    {
+        return _entries.empty();
+    }
 
-    iterator begin() { return _entries.begin(); }
-    iterator end() { return _entries.end(); }
+    iterator begin()
+    {
+        return _entries.begin();
+    }
+    iterator end()
+    {
+        return _entries.end();
+    }
 
-    const_iterator begin() const { return _entries.begin(); }
-    const_iterator end() const { return _entries.end(); }
+    const_iterator begin() const
+    {
+        return _entries.begin();
+    }
+    const_iterator end() const
+    {
+        return _entries.end();
+    }
 
-    const_iterator cbegin() const { return _entries.cbegin(); }
-    const_iterator cend() const { return _entries.cend(); }
+    const_iterator cbegin() const
+    {
+        return _entries.cbegin();
+    }
+    const_iterator cend() const
+    {
+        return _entries.cend();
+    }
 
-    pointer operator[](size_t index) const { return _entries[index]; }
-    pointer &operator[](size_t index) { return _entries[index]; }
+    pointer operator[](size_t index) const
+    {
+        return _entries[index];
+    }
+    pointer &operator[](size_t index)
+    {
+        return _entries[index];
+    }
 
     template<typename Func>
     void forEach(Func &&f)
     {
-        for(T& item : _entries)
+        for (T &item: _entries)
         {
             f(item);
         }
@@ -137,13 +174,12 @@ public:
     template<typename Func>
     void forEach(Func &&f) const
     {
-        for(const T& item : _entries)
+        for (const T &item: _entries)
         {
             f(item);
         }
     }
 };
-
 
 
 }// namespace dwg

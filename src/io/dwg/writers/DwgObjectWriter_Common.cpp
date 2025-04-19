@@ -23,7 +23,7 @@
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 
 namespace dwg {
-    
+
 void DwgObjectWriter::registerObject(CadObject *cadObject) {}
 void DwgObjectWriter::writeSize(std::ostream stream, unsigned int size) {}
 void DwgObjectWriter::writeSizeInBits(std::ostream *stream, unsigned long long size) {}
@@ -35,10 +35,10 @@ void DwgObjectWriter::writeEntityMode(Entity *entity) {}
 void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data) {}
 void DwgObjectWriter::writeExtendedDataEntry(AppId *app, ExtendedData *entry) {}
 void DwgObjectWriter::writeReactorsAndDictionaryHandle(CadObject *cadObject) {}
-unsigned char DwgObjectWriter::getEntMode(Entity *entity) 
-{ 
-    unsigned char ch = '0'; 
-    return ch; 
+unsigned char DwgObjectWriter::getEntMode(Entity *entity)
+{
+    unsigned char ch = '0';
+    return ch;
 }
 
 }// namespace dwg

@@ -20,8 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgAppInfoReader_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/readers/DwgAppInfoReader_p.h>
+
 
 namespace dwg {
 
@@ -29,10 +30,13 @@ DwgAppInfoReader::DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader
 
 DwgAppInfoReader::~DwgAppInfoReader() {}
 
-std::string DwgAppInfoReader::sectionName() const { return DwgSectionDefinition::AppInfo; }
+std::string DwgAppInfoReader::sectionName() const
+{
+    return DwgSectionDefinition::AppInfo;
+}
 
 void DwgAppInfoReader::read() {}
 
 void DwgAppInfoReader::readR18() {}
 
-}
+}// namespace dwg

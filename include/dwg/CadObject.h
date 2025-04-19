@@ -85,7 +85,7 @@ protected:
     void assignDocument(CadDocument *doc);
     virtual void unassignDocument();
     void updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *table);
-    void updateTable(TableEntry *entry, TableCollection* table);
+    void updateTable(TableEntry *entry, TableCollection *table);
 
 private:
     CadObject(const CadObject &) = delete;

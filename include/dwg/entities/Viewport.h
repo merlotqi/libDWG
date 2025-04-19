@@ -205,7 +205,7 @@ private:
     LightingType _defaultLightingType;
     double _brightness;
     double _contrast;
-    Color _ambientLightColor = Color((short)0);
+    Color _ambientLightColor = Color((short) 0);
     Scale *_scale;
 };
 
