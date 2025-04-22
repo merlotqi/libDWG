@@ -28,7 +28,7 @@ DwgStreamReaderBase::DwgStreamReaderBase(std::istream *stream, bool resetPositio
 
 DwgStreamReaderBase::~DwgStreamReaderBase() {}
 
-IDwgStreamReader *DwgStreamReaderBase::GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding,
+IDwgStreamReader *DwgStreamReaderBase::GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding,
                                                        bool resetPosition)
 {
     return nullptr;
@@ -276,9 +276,14 @@ void DwgStreamReaderBase::advanceByte() {}
 
 void DwgStreamReaderBase::advance(int offset) {}
 
-unsigned short DwgStreamReaderBase::resetShit()
+unsigned short DwgStreamReaderBase::resetShift()
 {
     return (unsigned short) (0);
+}
+
+std::string DwgStreamReaderBase::readString(size_t length, Encoding encoding)
+{
+    return std::string();
 }
 
 }// namespace dwg

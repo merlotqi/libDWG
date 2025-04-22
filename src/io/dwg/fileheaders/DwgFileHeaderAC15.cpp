@@ -44,4 +44,19 @@ DwgSectionDescriptor &DwgFileHeaderAC15::getDescriptor(const std::string &name)
     throw std::runtime_error("not implemented");
 }
 
+std::map<int, DwgSectionLocatorRecord> DwgFileHeaderAC15::records() const
+{
+    return _records;
+}
+
+std::map<int, DwgSectionLocatorRecord>& DwgFileHeaderAC15::records()
+{
+    return _records;
+}
+
+void DwgFileHeaderAC15::setRcords(const std::map<int, DwgSectionLocatorRecord> & value)
+{
+    _records = value; 
+}
+
 }// namespace dwg

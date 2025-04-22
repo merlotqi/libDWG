@@ -33,6 +33,7 @@ class DwgLZ77AC21Decompressor
                                unsigned int)>
             copyDelegate;
 
+    static std::vector<copyDelegate> _copyMethods;
     static unsigned int _sourceOffset;
     static unsigned int _length;
     static unsigned int _sourceIndex;
@@ -43,11 +44,17 @@ public:
                            std::vector<unsigned char> &buffer);
 
 private:
+    static void nextIndex(const std::vector<unsigned char> &source, std::vector<unsigned char> &dest,
+                          unsigned int &index);
     static unsigned int copyDecompressedChunks(const std::vector<unsigned char> &src, unsigned int endIndex,
                                                std::vector<unsigned char> &det, unsigned int destIndex);
-    static void readInstructions(std::vector<unsigned char> &buffer);
-    static void readLiteralLength(std::vector<unsigned char> &buffer);
-
+    static void readInstructions(const std::vector<unsigned char> &buffer);
+    static void readLiteralLength(const std::vector<unsigned char> &buffer);
+    
+    static void copyBytes(std::vector<unsigned char> &dst, unsigned int dstIndex, unsigned int length,
+                          unsigned int srcOffset);
+    static void copy(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
+                     unsigned int destIndex, unsigned int length);
     static void copy1b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,
                        unsigned int destIndex);
     static void copy2b(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,

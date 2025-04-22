@@ -22,13 +22,14 @@
 
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/readers/DwgHeaderReader_p.h>
-
+#include <dwg/header/CadHeader.h>
 
 namespace dwg {
 
 DwgHeaderReader::DwgHeaderReader(ACadVersion version, IDwgStreamReader *sreader, CadHeader *header)
-    : DwgSectionIO(version)
+    : DwgSectionIO(version), _sreader(sreader), _header(header)
 {
+    _header->setVersion(version);
 }
 
 DwgHeaderReader::~DwgHeaderReader() {}

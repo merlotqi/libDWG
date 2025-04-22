@@ -20,9 +20,28 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/readers/DwgObjectReader_p.h>
+#pragma once
+
+#include <dwg/io/dwg/DwgSectionIO_p.h>
 
 namespace dwg {
+    
+class DwgPreview;
+class IDwgStreamReader;
+class DwgPreviewReader : public DwgSectionIO
+{
+public:
+    DwgPreviewReader(ACadVersion version, IDwgStreamReader *reader, long long previewAddress);
+    ~DwgPreviewReader();
 
-}
+    std::string sectionName() const;
+    DwgPreview *read();
+
+private:
+    IDwgStreamReader *_reader;
+    long long _previewAddress;
+    std::vector<unsigned char> _startSentinel;
+    std::vector<unsigned char> _endSentinel;
+};
+
+}// namespace dwg

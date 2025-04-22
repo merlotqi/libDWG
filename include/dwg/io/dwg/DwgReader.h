@@ -75,10 +75,10 @@ private:
 
     void getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType, int64_t &decompressedSize,
                            int64_t &compressedSize, int64_t &compressionType, int64_t &checksum);
-    std::ifstream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &section_name);
-    std::ifstream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &section_name);
+    std::istream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName);
+    std::istream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName);
+    std::istream *getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
     void decryptDataSection(const DwgLocalSectionMap &section, IDwgStreamReader *sreader);
-    std::istringstream getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
     void reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor,
                              int blockSize);
     std::vector<unsigned char> getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,

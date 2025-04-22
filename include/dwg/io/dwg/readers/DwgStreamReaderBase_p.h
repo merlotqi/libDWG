@@ -34,7 +34,7 @@ public:
     DwgStreamReaderBase(std::istream *stream, bool resetPosition);
     ~DwgStreamReaderBase();
 
-    static IDwgStreamReader *GetStreamHeader(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
+    static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
                                              bool resetPosition = false);
 
     int bitShift() const override;
@@ -92,7 +92,8 @@ public:
     void setPositionInBits(long positon) override;
     void advanceByte() override;
     void advance(int offset) override;
-    unsigned short resetShit() override;
+    unsigned short resetShift() override;
+    std::string readString(size_t length, Encoding encoding) override;
 };
 
 }// namespace dwg

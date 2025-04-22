@@ -20,9 +20,21 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/readers/DwgObjectReader_p.h>
+#include <dwg/utils/StringHelp.h>
 
 namespace dwg {
+namespace StringHelp {
 
+std::string replace(const std::string &str, const std::string &from, const std::string &to)
+{
+    if (from.empty()) return;
+    size_t start_pos = 0;
+    while ((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length();
+    }
 }
+
+}// namespace StringHelp
+}// namespace dwg

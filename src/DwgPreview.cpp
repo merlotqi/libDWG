@@ -24,4 +24,20 @@
 
 namespace dwg {
 
+DwgPreview::DwgPreview() : _code(DwgPreview::PreviewType::Unknown) {}
+
+DwgPreview::DwgPreview(PreviewType code, const std::vector<unsigned char> &rawHeader,
+           const std::vector<unsigned char> &rawImage) : _code(code), _rawHeader(rawHeader), _rawImage(rawImage)
+{}
+
+DwgPreview::~DwgPreview() {}
+
+DwgPreview::PreviewType DwgPreview::code() const { return _code; }
+
+std::vector<unsigned char> DwgPreview::rawHeader() const { return _rawHeader; }
+
+std::vector<unsigned char> DwgPreview::rawImage() const { return _rawImage; }
+
+void DwgPreview::save(const std::string &path) {}
+
 }// namespace dwg

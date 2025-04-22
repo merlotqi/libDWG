@@ -19,3 +19,27 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/io/dwg/DwgHeaderHandlesCollection_p.h>
+
+namespace dwg {
+
+std::optional<unsigned long long> DwgHeaderHandlesCollection::getHandle(const std::string &name) const
+{
+    auto itFind = _handles.find(name);
+    if (itFind == _handles.end())
+    {
+        return std::nullopt;
+    }
+    else
+    {
+        return itFind->second;
+    }
+}
+
+void DwgHeaderHandlesCollection::setHandle(const std::string &name, unsigned long long value)
+{
+    _handles[name] = value;
+}
+
+}// namespace dwg

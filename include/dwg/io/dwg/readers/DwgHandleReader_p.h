@@ -28,16 +28,13 @@
 namespace dwg {
 
 class IDwgStreamReader;
-
 class DwgHandleReader : public DwgSectionIO
 {
 public:
     DwgHandleReader(ACadVersion version, IDwgStreamReader *sreader);
-
     ~DwgHandleReader();
 
     std::string sectionName() const;
-
     std::map<unsigned long long, long long> read();
 
 private:

@@ -31,9 +31,22 @@ DwgStreamReaderAC15::DwgStreamReaderAC15(std::istream *stream, bool resetPositio
 
 DwgStreamReaderAC15::~DwgStreamReaderAC15() {}
 
+XYZ DwgStreamReaderAC15::readBitExtrusion()
+{
+    //For R2000, this is a single bit, followed optionally by 3BD.
+    //If the single bit is 1, 
+    //the extrusion value is assumed to be 0,0,1 and no explicit extrusion is stored.
+    //If the single bit is 0, 
+    //then it will be followed by 3BD.
+    return readBit() ? XYZ::AxisZ : read3BitDouble();
+}
+
 double DwgStreamReaderAC15::readBitThickness()
 {
-    return 0.0;
+	//For R2000+, this is a single bit followed optionally by a BD. 
+	//If the bit is one, the thickness value is assumed to be 0.0. 
+	//If the bit is 0, then a BD that represents the thickness follows.
+	return readBit() ? 0.0 : readBitDouble();
 }
 
 }// namespace dwg

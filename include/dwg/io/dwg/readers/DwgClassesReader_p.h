@@ -37,12 +37,10 @@ class DwgClassesReader : public DwgSectionIO
 
 public:
     DwgClassesReader(ACadVersion version, IDwgStreamReader *sreader, DwgFileHeader *fileheader);
-
     ~DwgClassesReader();
 
     std::string sectionName() const;
-
-    void read(DxfClassCollection *collection);
+    DxfClassCollection *read();
 
 private:
     long long getCurrPos(IDwgStreamReader *sreader);

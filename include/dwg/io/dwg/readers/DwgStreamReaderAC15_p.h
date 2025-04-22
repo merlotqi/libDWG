@@ -30,9 +30,9 @@ class DwgStreamReaderAC15 : public DwgStreamReaderAC12
 {
 public:
     DwgStreamReaderAC15(std::istream *stream, bool resetPosition);
-
     virtual ~DwgStreamReaderAC15();
 
+    XYZ readBitExtrusion() override;
     double readBitThickness() override;
 };
 

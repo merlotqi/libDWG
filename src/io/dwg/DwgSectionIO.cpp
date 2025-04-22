@@ -21,6 +21,8 @@
  */
 
 #include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
+#include <fmt/format.h>
 #include <string>
 #include <vector>
 
@@ -57,5 +59,16 @@ bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual, const
 
     return true;
 }
+
+void DwgSectionIO::checkSentinel(IDwgStreamReader *sreader, const std::vector<unsigned char> &expected) 
+{
+    auto sn = sreader->readSentinel();
+    if (!DwgSectionIO::CheckSentinel(sn, expected))
+    {
+        notify(fmt::format("Invalid section sentinel found in {}", sectionName()), Notification::Warning);
+    }
+}
+
+void DwgSectionIO::notify(const std::string &message, Notification type) {}
 
 }// namespace dwg

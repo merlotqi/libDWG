@@ -23,11 +23,13 @@
 #pragma once
 
 #include <dwg/ACadVersion.h>
+#include <dwg/io/Notification.h>
 #include <string>
 #include <vector>
 
 namespace dwg {
 
+class IDwgStreamReader;
 class DwgSectionIO
 {
 public:
@@ -37,6 +39,10 @@ public:
 
     static bool CheckSentinel(const std::vector<unsigned char> &actual, const std::vector<unsigned char> &expected);
 
+protected:
+    void checkSentinel(IDwgStreamReader *sreader, const std::vector<unsigned char> &expected);
+    void notify(const std::string &message, Notification type);
+    
 protected:
     bool R13_14Only;
     bool R13_15Only;

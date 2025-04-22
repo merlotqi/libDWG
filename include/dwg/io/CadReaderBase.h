@@ -26,6 +26,7 @@
 #include <dwg/io/ICadReader.h>
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
+#include <dwg/utils/Encoding.h>
 #include <fstream>
 #include <string>
 #include <type_traits>
@@ -33,7 +34,7 @@
 namespace dwg {
 
 template<class T>
-class LIBDWG_API CadReaderBase : public ICadReader, protected T
+class CadReaderBase : public ICadReader, protected T
 {
     static_assert(std::is_base_of<CadReaderConfiguration, T>::value, "T must is base CadReaderConfiguration");
 
@@ -45,10 +46,12 @@ protected:
     CadReaderBase();
     CadReaderBase(const std::string &filename);
     CadReaderBase(std::ifstream *stream);
+    Encoding getListedEncoding(int code);
 
 protected:
     CadDocument *_document;
     std::ifstream *_fileStream;
+    Encoding _encoding = Encoding(CodePage::Utf8);
 };
 
 
@@ -71,6 +74,12 @@ inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
 template<class T>
 inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
 {
+}
+
+template<class T>
+inline Encoding CadReaderBase<T>::getListedEncoding(int code)
+{
+    return Encoding();
 }
 
 }// namespace dwg

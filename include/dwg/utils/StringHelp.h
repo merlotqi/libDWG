@@ -20,9 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/readers/DwgObjectReader_p.h>
+#pragma once
+
+#include <string>
 
 namespace dwg {
+namespace StringHelp {
 
-}
+extern std::string replace(const std::string &str, const std::string &from, const std::string &to);
+
+}// namespace StringHelp
+}// namespace dwg

@@ -22,16 +22,21 @@
 
 #pragma once
 
-#include <fstream>
 #include <iostream>
-#include <sstream>
 
 namespace dwg {
 
 class DwgLZ77AC18Decompressor
 {
 public:
-    static void Decompress(std::istream *compressed, long long decompressedSize, std::istream *out);
+    static void Decompress(std::istream *compressed, long long decompressedSize, std::ostream *out);
+
+private:
+    static void decompress(std::istream *src, std::ostream *dst);
+    static unsigned char copy(int count, std::istream *src, std::ostream *dst);
+    static int literalCount(int code, std::istream *src);
+    static int readCompressedBytes(int opcode1, int validBits, std::istream *compressed);
+    static int twoByteOffset(int &offset, int addedValue, std::istream *stream);
 };
 
 }// namespace dwg

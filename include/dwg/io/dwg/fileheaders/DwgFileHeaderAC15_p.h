@@ -30,6 +30,8 @@ namespace dwg {
 
 class DwgFileHeaderAC15 : public DwgFileHeader
 {
+    std::map<int, DwgSectionLocatorRecord> _records;
+
 public:
     static std::vector<unsigned char> EndSentinel;
 
@@ -42,6 +44,10 @@ public:
     virtual void addSection(const std::string &name) override;
 
     DwgSectionDescriptor &getDescriptor(const std::string &name) override;
+
+    std::map<int, DwgSectionLocatorRecord> records() const;
+    std::map<int, DwgSectionLocatorRecord>& records();
+    void setRcords(const std::map<int, DwgSectionLocatorRecord> &);
 };
 
 

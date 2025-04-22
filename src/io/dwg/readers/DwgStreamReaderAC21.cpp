@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dwg/readers/DwgStreamReaderAC21_p.h>
+#include <dwg/utils/StringHelp.h>
 
 namespace dwg {
 
@@ -33,12 +34,40 @@ DwgStreamReaderAC21::~DwgStreamReaderAC21() {}
 
 std::string DwgStreamReaderAC21::readTextUtf8()
 {
-    return std::string();
+    short textLength = readShortT<LittleEndianConverter>();
+    std::string value;
+    if (textLength == 0)
+    {
+        value = "";
+    }
+    else
+    {
+        //Correct the text length by shifting 1 bit
+        short length = (short)(textLength << 1);
+        //Read the string and get rid of the empty bytes
+        value = readString(length, Encoding(CodePage::Utf8));
+        value = StringHelp::replace(value, "\0", "");
+    }
+    return value;
 }
 
 std::string DwgStreamReaderAC21::readVariableText()
 {
-    return std::string();
+    int textLength = readBitShort();
+    std::string value;
+    if (textLength == 0)
+    {
+        value = "";
+    }
+    else
+    {
+        //Correct the text length by shifting 1 bit
+        short length = (short)(textLength << 1);
+        //Read the string and get rid of the empty bytes
+        value = readString(length, Encoding(CodePage::Utf8));
+        value = StringHelp::replace(value, "\0", "");
+    }
+    return value;
 }
 
 }// namespace dwg
