@@ -69,7 +69,6 @@ class LIBDWG_API CadHeader
 {
 public:
     CadHeader();
-    CadHeader(CadDocument *document);
     CadHeader(ACadVersion version);
 
     std::string versionString() const;
@@ -873,6 +872,11 @@ public:
     void setPaperSpaceUcsBase(UCS *);
 
 private:
+    CadHeader(CadDocument *document);
+
+private:
+    friend class CadDocument;
+
     CadDocument *_document;
     std::string _versionString;
     ACadVersion _version;

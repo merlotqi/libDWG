@@ -24,6 +24,7 @@
 
 #include <map>
 #include <string>
+#include <optional>
 
 namespace dwg {
 
