@@ -41,7 +41,7 @@ Color DwgStreamReaderAC18::readCmColor()
     short colorIndex = readBitShort();
     //BL: RGB value
     //Always negative
-    unsigned int rgb = (unsigned int)readBitLong();
+    unsigned int rgb = (unsigned int) readBitLong();
 
     auto arr = LittleEndianConverter::instance()->bytes(rgb);
 
@@ -94,7 +94,7 @@ Color DwgStreamReaderAC18::readEnColor(Transparency &transparency, bool &isBookC
     if (size != 0)
     {
         //color flags: first byte of the bitshort.
-        unsigned short flags = (unsigned short)((unsigned short)size & 0b1111111100000000);
+        unsigned short flags = (unsigned short) ((unsigned short) size & 0b1111111100000000);
 
         //0x4000: has AcDbColor reference (0x8000 is also set in this case).
         if ((flags & 0x4000) > 0)
@@ -108,14 +108,14 @@ Color DwgStreamReaderAC18::readEnColor(Transparency &transparency, bool &isBookC
         {
             //Next value is a BS containing the RGB value(last 24 bits).
             //flags: 0b1100_0010_0000_0000_0000_0000_0000_0000
-            unsigned int rgb = (unsigned int)readBitLong();
+            unsigned int rgb = (unsigned int) readBitLong();
             auto arr = LittleEndianConverter::instance()->bytes(rgb);
             color = Color(arr[2], arr[1], arr[0]);
         }
         else
         {
             //Color index: if no flags were set, the color is looked up by the color number (ACI color).
-            color = Color((short)(size & 0b111111111111));
+            color = Color((short) (size & 0b111111111111));
         }
 
         //0x2000: color is followed by a transparency BL

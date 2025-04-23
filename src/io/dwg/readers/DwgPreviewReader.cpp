@@ -20,15 +20,16 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgPreviewReader_p.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
-#include <dwg/DwgPreview.h>
 #include <assert.h>
+#include <dwg/DwgPreview.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/readers/DwgPreviewReader_p.h>
+#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
+
 
 namespace dwg {
 
-DwgPreviewReader::DwgPreviewReader(ACadVersion version, IDwgStreamReader *reader, long long previewAddress) 
+DwgPreviewReader::DwgPreviewReader(ACadVersion version, IDwgStreamReader *reader, long long previewAddress)
     : DwgSectionIO(version), _reader(reader), _previewAddress(previewAddress)
 {
     _startSentinel = DwgSectionDefinition::StartSentinels[DwgSectionDefinition::Preview];

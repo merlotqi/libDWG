@@ -35,29 +35,29 @@ DwgStreamReaderAC24::~DwgStreamReaderAC24() {}
 
 ObjectType DwgStreamReaderAC24::readObjectType()
 {
-	//A bit pair, followed by either 1 or 2 bytes, depending on the bit pair value:
-	unsigned char pair = read2Bits();
-	short value = 0;
-	switch (pair)
-	{
-		//Read the following byte
-		case 0:
-			value = readByte();
-			break;
-		//Read following byte and add 0x1f0.
-		case 1:
-			value = (short)(0x1F0 + readByte());
-			break;
-		//Read the following two bytes (raw short)
-		case 2:
-			value = readShort();
-			break;
-		//The value 3 should never occur, but interpret the same as 2 nevertheless.
-		case 3:
-			value = readShort();
-			break;
-	}
-	return (ObjectType)value;
+    //A bit pair, followed by either 1 or 2 bytes, depending on the bit pair value:
+    unsigned char pair = read2Bits();
+    short value = 0;
+    switch (pair)
+    {
+        //Read the following byte
+        case 0:
+            value = readByte();
+            break;
+        //Read following byte and add 0x1f0.
+        case 1:
+            value = (short) (0x1F0 + readByte());
+            break;
+        //Read the following two bytes (raw short)
+        case 2:
+            value = readShort();
+            break;
+        //The value 3 should never occur, but interpret the same as 2 nevertheless.
+        case 3:
+            value = readShort();
+            break;
+    }
+    return (ObjectType) value;
 }
 
 }// namespace dwg

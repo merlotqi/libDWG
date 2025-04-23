@@ -42,7 +42,7 @@ public:
 protected:
     void checkSentinel(IDwgStreamReader *sreader, const std::vector<unsigned char> &expected);
     void notify(const std::string &message, Notification type);
-    
+
 protected:
     bool R13_14Only;
     bool R13_15Only;

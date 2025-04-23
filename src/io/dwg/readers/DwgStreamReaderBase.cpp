@@ -29,7 +29,7 @@ DwgStreamReaderBase::DwgStreamReaderBase(std::istream *stream, bool resetPositio
 DwgStreamReaderBase::~DwgStreamReaderBase() {}
 
 IDwgStreamReader *DwgStreamReaderBase::GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding,
-                                                       bool resetPosition)
+                                                        bool resetPosition)
 {
     return nullptr;
 }

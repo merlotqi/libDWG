@@ -23,14 +23,15 @@
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
 #include <dwg/io/dwg/DwgReader.h>
-#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
+#include <dwg/io/dwg/DwgSectionIO_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC15_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC18_p.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeaderAC21_p.h>
-#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
 #include <dwg/io/dwg/readers/DwgLZ77AC21Decompressor_p.h>
-#include <dwg/io/dwg/DwgSectionIO_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 #include <stdexcept>
+
 
 namespace dwg {
 
@@ -99,7 +100,7 @@ DwgFileHeader *DwgReader::readFileHeader()
         case dwg::ACadVersion::AC1004:
         case dwg::ACadVersion::AC1006:
         case dwg::ACadVersion::AC1009:
-        throw std::invalid_argument("");
+            throw std::invalid_argument("");
         case dwg::ACadVersion::AC1012:
         case dwg::ACadVersion::AC1014:
         case dwg::ACadVersion::AC1015:
@@ -142,7 +143,7 @@ void DwgReader::readTemplate() {}
 
 void DwgReader::readObjects() {}
 
-void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamReader *sreader) 
+void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamReader *sreader)
 {
     // The next 7 starting at offset 0x06 are to be six bytes of 0
     // (in R14, 5 0's and the ACADMAINTVER variable) and a byte of 1.
@@ -156,7 +157,7 @@ void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamRead
     // Bytes at 0x13 and 0x14 are a raw short indicating the value of the code page for this drawing file.
     fileheader->setDrawingCodePage(CadUtils::GetCodePageByIndex(sreader->readShort()));
     _encoding = getListedEncoding((int) fileheader->drawingCodePage());
-    
+
     // At 0x15 is a long that tells how many sets of recno/seeker/length records follow.
     int nRecords = (int) sreader->readRawLong();
     for (int i = 0; i < nRecords; ++i)
@@ -176,68 +177,68 @@ void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamRead
     DwgSectionIO::CheckSentinel(sn, DwgFileHeaderAC15::EndSentinel);
 }
 
-void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader) 
+void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader)
 {
     readFileMetaData(fileheader, sreader);
 
-	//0x80	0x6C	Encrypted Data
-	//Metadata:
-	//The encrypted data at 0x80 can be decrypted by exclusive or’ing the 0x6c bytes of data 
-	//from the file with the following magic number sequence:
+    //0x80	0x6C	Encrypted Data
+    //Metadata:
+    //The encrypted data at 0x80 can be decrypted by exclusive or’ing the 0x6c bytes of data
+    //from the file with the following magic number sequence:
 
-	//29 23 BE 84 E1 6C D6 AE 52 90 49 F1 F1 BB E9 EB
-	//B3 A6 DB 3C 87 0C 3E 99 24 5E 0D 1C 06 B7 47 DE
-	//B3 12 4D C8 43 BB 8B A6 1F 03 5A 7D 09 38 25 1F
-	//5D D4 CB FC 96 F5 45 3B 13 0D 89 0A 1C DB AE 32
-	//20 9A 50 EE 40 78 36 FD 12 49 32 F6 9E 7D 49 DC
-	//AD 4F 14 F2 44 40 66 D0 6B C4 30 B7
+    //29 23 BE 84 E1 6C D6 AE 52 90 49 F1 F1 BB E9 EB
+    //B3 A6 DB 3C 87 0C 3E 99 24 5E 0D 1C 06 B7 47 DE
+    //B3 12 4D C8 43 BB 8B A6 1F 03 5A 7D 09 38 25 1F
+    //5D D4 CB FC 96 F5 45 3B 13 0D 89 0A 1C DB AE 32
+    //20 9A 50 EE 40 78 36 FD 12 49 32 F6 9E 7D 49 DC
+    //AD 4F 14 F2 44 40 66 D0 6B C4 30 B7
 }
 
 void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamReader *sreader) {}
 
-void DwgReader::readFileMetaData(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader) 
+void DwgReader::readFileMetaData(DwgFileHeaderAC18 *fileheader, IDwgStreamReader *sreader)
 {
-	//5 bytes of 0x00 
-	sreader->advance(5);
+    //5 bytes of 0x00
+    sreader->advance(5);
 
-	//0x0B	1	Maintenance release version
-	fileheader->setAcadMaintenanceVersion(sreader->readByte());
-	//0x0C	1	Byte 0x00, 0x01, or 0x03
-	sreader->advance(1);
-	//0x0D	4	Preview address(long), points to the image page + page header size(0x20).
-	fileheader->setPreviewAddress(sreader->readRawLong());
-	//0x11	1	Dwg version (Acad version that writes the file)
-	fileheader->setDwgVersion(sreader->readByte());
-	//0x12	1	Application maintenance release version(Acad maintenance version that writes the file)
-	fileheader->setAppReleaseVersion(sreader->readByte());
+    //0x0B	1	Maintenance release version
+    fileheader->setAcadMaintenanceVersion(sreader->readByte());
+    //0x0C	1	Byte 0x00, 0x01, or 0x03
+    sreader->advance(1);
+    //0x0D	4	Preview address(long), points to the image page + page header size(0x20).
+    fileheader->setPreviewAddress(sreader->readRawLong());
+    //0x11	1	Dwg version (Acad version that writes the file)
+    fileheader->setDwgVersion(sreader->readByte());
+    //0x12	1	Application maintenance release version(Acad maintenance version that writes the file)
+    fileheader->setAppReleaseVersion(sreader->readByte());
 
-	//0x13	2	Codepage
+    //0x13	2	Codepage
     fileheader->setDrawingCodePage(CadUtils::GetCodePageByIndex(sreader->readShort()));
-    _encoding = getListedEncoding((int) fileheader->drawingCodePage());    
+    _encoding = getListedEncoding((int) fileheader->drawingCodePage());
     sreader->setEncoding(_encoding);
 
-    //Advance empty bytes 
-	//0x15	3	3 0x00 bytes
-	sreader->advance(3);
+    //Advance empty bytes
+    //0x15	3	3 0x00 bytes
+    sreader->advance(3);
 
-	//0x18	4	SecurityType (long), see R2004 meta data, the definition is the same, paragraph 4.1.
-	fileheader->setSecurityType(sreader->readRawLong());
-	//0x1C	4	Unknown long
-	sreader->readRawLong();
-	//0x20	4	Summary info Address in stream
-	fileheader->setSummaryInfoAddr(sreader->readRawLong());
-	//0x24	4	VBA Project Addr(0 if not present)
-	fileheader->setVbaProjectAddr(sreader->readRawLong());
+    //0x18	4	SecurityType (long), see R2004 meta data, the definition is the same, paragraph 4.1.
+    fileheader->setSecurityType(sreader->readRawLong());
+    //0x1C	4	Unknown long
+    sreader->readRawLong();
+    //0x20	4	Summary info Address in stream
+    fileheader->setSummaryInfoAddr(sreader->readRawLong());
+    //0x24	4	VBA Project Addr(0 if not present)
+    fileheader->setVbaProjectAddr(sreader->readRawLong());
 
-	//0x28	4	0x00000080
-	sreader->readRawLong();
+    //0x28	4	0x00000080
+    sreader->readRawLong();
 
-	//0x2C	4	App info Address in stream
-	sreader->readRawLong();
+    //0x2C	4	App info Address in stream
+    sreader->readRawLong();
 
-	//Get to offset 0x80
-	//0x30	0x80	0x00 bytes
-	sreader->advance(80);
+    //Get to offset 0x80
+    //0x30	0x80	0x00 bytes
+    sreader->advance(80);
 }
 
 IDwgStreamReader *DwgReader::getSectionStream(const std::string &sectionName)
@@ -369,7 +370,7 @@ std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffse
     std::vector<unsigned char> buffer(length, 0);
 
     //Relative to data page map 1, add 0x480 to get stream position
-    stream->seekg((std::streampos) (0x480 + pageOffset));
+    stream->seekg((std::streampos)(0x480 + pageOffset));
     stream->read(reinterpret_cast<char *>(buffer.data()), length);
 
     std::vector<unsigned char> compressedData(totalSize, 0);

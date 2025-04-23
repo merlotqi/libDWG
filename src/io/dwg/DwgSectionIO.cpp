@@ -60,7 +60,7 @@ bool DwgSectionIO::CheckSentinel(const std::vector<unsigned char> &actual, const
     return true;
 }
 
-void DwgSectionIO::checkSentinel(IDwgStreamReader *sreader, const std::vector<unsigned char> &expected) 
+void DwgSectionIO::checkSentinel(IDwgStreamReader *sreader, const std::vector<unsigned char> &expected)
 {
     auto sn = sreader->readSentinel();
     if (!DwgSectionIO::CheckSentinel(sn, expected))

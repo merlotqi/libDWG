@@ -22,12 +22,13 @@
 
 #include <dwg/classes/DxfClass.h>
 #include <dwg/classes/DxfClassCollection.h>
+#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/readers/DwgClassesReader_p.h>
-#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
-#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 #include <dwg/io/dwg/readers/DwgMergedReader_p.h>
-#include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
+#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
+
 
 namespace dwg {
 
@@ -43,7 +44,7 @@ std::string DwgClassesReader::sectionName() const
     return DwgSectionDefinition::Classes;
 }
 
-DxfClassCollection *DwgClassesReader::read() 
+DxfClassCollection *DwgClassesReader::read()
 {
     DxfClassCollection *classes = new DxfClassCollection();
 
@@ -55,9 +56,8 @@ DxfClassCollection *DwgClassesReader::read()
     long endSection = _sreader->position() + size;
 
     //R2010+ (only present if the maintenance version is greater than 3!)
-    if (_fileHeader->version() >= ACadVersion::AC1024
-        && _fileHeader->acadMaintenanceVersion() > 3
-        || _fileHeader->version() > ACadVersion::AC1027)
+    if (_fileHeader->version() >= ACadVersion::AC1024 && _fileHeader->acadMaintenanceVersion() > 3 ||
+        _fileHeader->version() > ACadVersion::AC1027)
     {
         //RL : unknown, possibly the high 32 bits of a 64-bit size?
         long unknown = _sreader->readRawLong();
@@ -75,13 +75,14 @@ DxfClassCollection *DwgClassesReader::read()
         _sreader->setPositionInBits(savedOffset);
 
         //Setup the text reader for versions 2007 and above
-        IDwgStreamReader *textReader = DwgStreamReaderBase::GetStreamHandler(_version,
-            //Create a copy of the stream
-            new StreamIO(_sreader.Stream, true).Stream);
-        //Set the position and use the flag
-        textReader->setPositionInBits(endSection);
+        // IDwgStreamReader *textReader =
+        //         DwgStreamReaderBase::GetStreamHandler(_version,
+        //                                               //Create a copy of the stream
+        //                                               new StreamIO(_sreader.Stream, true).Stream);
+        // //Set the position and use the flag
+        // textReader->setPositionInBits(endSection);
 
-        _sreader = new DwgMergedReader(_sreader, textReader, nullptr);
+        // _sreader = new DwgMergedReader(_sreader, textReader, nullptr);
 
         //BL: 0x00
         _sreader->readBitLong();
@@ -108,7 +109,7 @@ DxfClassCollection *DwgClassesReader::read()
         //BS : classnum
         dxfClass->setClassNumber(_sreader->readBitShort());
         //BS : version – in R14, becomes a flag indicating whether objects can be moved, edited, etc.
-        dxfClass->setProxyFlags((ProxyFlags)_sreader->readBitShort());
+        dxfClass->setProxyFlags((ProxyFlags) _sreader->readBitShort());
 
         //TV : appname
         dxfClass->setApplicationName(_sreader->readVariableText());
@@ -140,9 +141,9 @@ DxfClassCollection *DwgClassesReader::read()
             dxfClass->setInstanceCount(_sreader->readBitLong());
 
             //BS : Dwg Version
-            dxfClass->setDwgVersion((ACadVersion)_sreader->readBitLong());
+            dxfClass->setDwgVersion((ACadVersion) _sreader->readBitLong());
             //BS : Maintenance release version.
-            dxfClass->setMaintenanceVersion((short)_sreader->readBitLong());
+            dxfClass->setMaintenanceVersion((short) _sreader->readBitLong());
 
             //BL : Unknown(normally 0L)
             _sreader->readBitLong();
@@ -155,7 +156,7 @@ DxfClassCollection *DwgClassesReader::read()
 
     if (R2007Plus)
     {
-        _sreader->setetPositionInBits(flagPos + 1);
+        _sreader->setPositionInBits(flagPos + 1);
     }
 
     //RS: CRC

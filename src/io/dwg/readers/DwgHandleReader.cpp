@@ -22,6 +22,8 @@
 
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/readers/DwgHandleReader_p.h>
+#include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
+#include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
 

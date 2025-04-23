@@ -49,14 +49,14 @@ std::map<int, DwgSectionLocatorRecord> DwgFileHeaderAC15::records() const
     return _records;
 }
 
-std::map<int, DwgSectionLocatorRecord>& DwgFileHeaderAC15::records()
+std::map<int, DwgSectionLocatorRecord> &DwgFileHeaderAC15::records()
 {
     return _records;
 }
 
-void DwgFileHeaderAC15::setRcords(const std::map<int, DwgSectionLocatorRecord> & value)
+void DwgFileHeaderAC15::setRcords(const std::map<int, DwgSectionLocatorRecord> &value)
 {
-    _records = value; 
+    _records = value;
 }
 
 }// namespace dwg

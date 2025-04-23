@@ -29,8 +29,8 @@ void DwgLZ77AC18Decompressor::Decompress(std::istream *compressed, long long dec
 
 void DwgLZ77AC18Decompressor::decompress(std::istream *src, std::ostream *dst) {}
 
-unsigned char DwgLZ77AC18Decompressor::copy(int count, std::istream *src, std::ostream *dst) 
-{ 
+unsigned char DwgLZ77AC18Decompressor::copy(int count, std::istream *src, std::ostream *dst)
+{
     InputStreamWrapper src_wrapper(src);
     OutputStreamWrapper dst_wrapper(dst);
     for (int i = 0; i < count; ++i)
@@ -42,11 +42,11 @@ unsigned char DwgLZ77AC18Decompressor::copy(int count, std::istream *src, std::o
     return (unsigned char) src_wrapper.readByte();
 }
 
-int DwgLZ77AC18Decompressor::literalCount(int code, std::istream *src) 
-{ 
+int DwgLZ77AC18Decompressor::literalCount(int code, std::istream *src)
+{
     InputStreamWrapper wrapper(src);
     int lowbits = code & 0b1111;
-    // 0x00 : Set the running total to 0x0F, and read the next byte. From this point on, a 0x00 byte adds 0xFF to the running total, 
+    // 0x00 : Set the running total to 0x0F, and read the next byte. From this point on, a 0x00 byte adds 0xFF to the running total,
     // and a non-zero byte adds that value to the running total and terminates the process. Add 3 to the final result.
     if (lowbits == 0)
     {
@@ -60,8 +60,8 @@ int DwgLZ77AC18Decompressor::literalCount(int code, std::istream *src)
     return lowbits;
 }
 
-int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std::istream *compressed) 
-{ 
+int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std::istream *compressed)
+{
     InputStreamWrapper wrapper(compressed);
 
     int compressedBytes = opcode1 & validBits;
@@ -80,8 +80,8 @@ int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std
     return compressedBytes + 2;
 }
 
-int DwgLZ77AC18Decompressor::twoByteOffset(int &offset, int addedValue, std::istream *stream) 
-{ 
+int DwgLZ77AC18Decompressor::twoByteOffset(int &offset, int addedValue, std::istream *stream)
+{
     InputStreamWrapper wrapper(stream);
     int firstByte = wrapper.readByte();
 

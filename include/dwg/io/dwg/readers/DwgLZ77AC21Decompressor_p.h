@@ -50,7 +50,7 @@ private:
                                                std::vector<unsigned char> &det, unsigned int destIndex);
     static void readInstructions(const std::vector<unsigned char> &buffer);
     static void readLiteralLength(const std::vector<unsigned char> &buffer);
-    
+
     static void copyBytes(std::vector<unsigned char> &dst, unsigned int dstIndex, unsigned int length,
                           unsigned int srcOffset);
     static void copy(const std::vector<unsigned char> &src, unsigned int endIndex, std::vector<unsigned char> &det,

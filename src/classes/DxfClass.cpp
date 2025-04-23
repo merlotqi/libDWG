@@ -26,6 +26,8 @@ namespace dwg {
 
 /* -------------------------------- DxfClass -------------------------------- */
 
+DxfClass::DxfClass() {}
+
 DxfClass::DxfClass(const std::string &cppClassName, short classNumber, ACadVersion version, const std::string &dxfName,
                    short itemClassId, short maintenanceVersion, ProxyFlags proxyFlags, bool wasZombie)
 {

@@ -30,7 +30,7 @@ class IDwgStreamReader;
 class DwgAppInfoReader : public DwgSectionIO
 {
     IDwgStreamReader *_reader;
-    
+
 public:
     DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader);
 

@@ -20,9 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/readers/DwgHeaderReader_p.h>
-#include <dwg/header/CadHeader.h>
+
 
 namespace dwg {
 

@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dwg/readers/DwgStreamReaderAC21_p.h>
+#include <dwg/utils/EndianConverter.h>
 #include <dwg/utils/StringHelp.h>
 
 namespace dwg {
@@ -43,7 +44,7 @@ std::string DwgStreamReaderAC21::readTextUtf8()
     else
     {
         //Correct the text length by shifting 1 bit
-        short length = (short)(textLength << 1);
+        short length = (short) (textLength << 1);
         //Read the string and get rid of the empty bytes
         value = readString(length, Encoding(CodePage::Utf8));
         value = StringHelp::replace(value, "\0", "");
@@ -62,7 +63,7 @@ std::string DwgStreamReaderAC21::readVariableText()
     else
     {
         //Correct the text length by shifting 1 bit
-        short length = (short)(textLength << 1);
+        short length = (short) (textLength << 1);
         //Read the string and get rid of the empty bytes
         value = readString(length, Encoding(CodePage::Utf8));
         value = StringHelp::replace(value, "\0", "");

@@ -26,7 +26,10 @@
 
 namespace dwg {
 
-DwgAppInfoReader::DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader) : DwgSectionIO(version), _reader(reader) {}
+DwgAppInfoReader::DwgAppInfoReader(ACadVersion version, IDwgStreamReader *reader)
+    : DwgSectionIO(version), _reader(reader)
+{
+}
 
 DwgAppInfoReader::~DwgAppInfoReader() {}
 
@@ -35,7 +38,7 @@ std::string DwgAppInfoReader::sectionName() const
     return DwgSectionDefinition::AppInfo;
 }
 
-void DwgAppInfoReader::read() 
+void DwgAppInfoReader::read()
 {
     if (!R2007Plus)
     {
@@ -68,7 +71,7 @@ void DwgAppInfoReader::read()
     std::string xml = _reader->readTextUtf8();
 }
 
-void DwgAppInfoReader::readR18() 
+void DwgAppInfoReader::readR18()
 {
     //For this version the values don't match with the documentaiton
 

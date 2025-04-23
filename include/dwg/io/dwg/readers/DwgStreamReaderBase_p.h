@@ -35,7 +35,7 @@ public:
     ~DwgStreamReaderBase();
 
     static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
-                                             bool resetPosition = false);
+                                              bool resetPosition = false);
 
     int bitShift() const override;
     long long position() const override;

@@ -30,172 +30,175 @@ unsigned int DwgLZ77AC21Decompressor::_sourceIndex = 0;
 unsigned int DwgLZ77AC21Decompressor::_opCode = 0;
 
 std::vector<DwgLZ77AC21Decompressor::copyDelegate> DwgLZ77AC21Decompressor::_copyMethods = {
-    [](const std::vector<unsigned char> &, unsigned int, std::vector<unsigned char> &, unsigned int) {},
-    [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex)  {copy1b(src, srcIndex, dst, dstIndex); },
-    [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex)  {copy2b(src, srcIndex, dst, dstIndex); },
-    [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex)  {copy3b(src, srcIndex, dst, dstIndex); },
-    [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex)  {copy4b(src, srcIndex, dst, dstIndex); },
-    [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 4U, dst, dstIndex);
-	  copy4b(src, srcIndex, dst, dstIndex + 1U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 5U, dst, dstIndex);
-	  copy4b(src, srcIndex + 1U, dst, dstIndex + 1U);
-	  copy1b(src, srcIndex, dst, dstIndex + 5U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 5U, dst, dstIndex);
-	  copy4b(src, srcIndex + 1U, dst, dstIndex + 2U);
-	  copy1b(src, srcIndex, dst, dstIndex + 6U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 8U, dst, dstIndex);
-	  copy8b(src, srcIndex, dst, dstIndex + 1U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 9U, dst, dstIndex);
-	  copy8b(src, srcIndex + 1U, dst, dstIndex + 1U);
-	  copy1b(src, srcIndex, dst, dstIndex + 9U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 9U, dst, dstIndex);
-	  copy8b(src, srcIndex + 1U, dst, dstIndex + 2U);
-	  copy1b(src, srcIndex, dst, dstIndex + 10U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy4b(src, srcIndex + 8U, dst, dstIndex);
-	  copy8b(src, srcIndex, dst, dstIndex + 4U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 12U, dst, dstIndex);
-	  copy4b(src, srcIndex + 8U, dst, dstIndex + 1U);
-	  copy8b(src, srcIndex, dst, dstIndex + 5U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 13U, dst, dstIndex);
-	  copy4b(src, srcIndex + 9U, dst, dstIndex + 1U);
-	  copy8b(src, srcIndex + 1U, dst, dstIndex + 5U);
-	  copy1b(src, srcIndex, dst, dstIndex + 13U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 13U, dst, dstIndex);
-	  copy4b(src, srcIndex + 9U, dst, dstIndex + 2U);
-	  copy8b(src, srcIndex + 1U, dst, dstIndex + 6U);
-	  copy1b(src, srcIndex, dst, dstIndex + 14U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy8b(src, srcIndex + 9U, dst, dstIndex);
-	  copy1b(src, srcIndex + 8U, dst, dstIndex + 8U);
-	  copy8b(src, srcIndex, dst, dstIndex + 9U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 17U, dst, dstIndex);
-	  copy16b(src, srcIndex + 1U, dst, dstIndex + 1U);
-	  copy1b(src, srcIndex, dst, dstIndex + 17U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy3b(src, srcIndex + 16U, dst, dstIndex);
-	  copy16b(src, srcIndex, dst, dstIndex + 3U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy4b(src, srcIndex + 16U, dst, dstIndex);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 4U);
-	  copy8b(src, srcIndex, dst, dstIndex + 12U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 20U, dst, dstIndex);
-	  copy4b(src, srcIndex + 16U, dst, dstIndex + 1U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 5U);
-	  copy8b(src, srcIndex, dst, dstIndex + 13U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 20U, dst, dstIndex);
-	  copy4b(src, srcIndex + 16U, dst, dstIndex + 2U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 6U);
-	  copy8b(src, srcIndex, dst, dstIndex + 14U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy3b(src, srcIndex + 20U, dst, dstIndex);
-	  copy4b(src, srcIndex + 16U, dst, dstIndex + 3U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 7U);
-	  copy8b(src, srcIndex, dst, dstIndex + 15U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy8b(src, srcIndex + 16U, dst, dstIndex);
-	  copy16b(src, srcIndex, dst, dstIndex + 8U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy8b(src, srcIndex + 17U, dst, dstIndex);
-	  copy1b(src, srcIndex + 16U, dst, dstIndex + 8U);
-	  copy16b(src, srcIndex, dst, dstIndex + 9U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 25U, dst, dstIndex);
-	  copy8b(src, srcIndex + 17U, dst, dstIndex + 1U);
-	  copy1b(src, srcIndex + 16U, dst, dstIndex + 9U);
-	  copy16b(src, srcIndex, dst, dstIndex + 10U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 25U, dst, dstIndex);
-	  copy8b(src, srcIndex + 17U, dst, dstIndex + 2U);
-	  copy1b(src, srcIndex + 16U, dst, dstIndex + 10U);
-	  copy16b(src, srcIndex, dst, dstIndex + 11U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy4b(src, srcIndex + 24U, dst, dstIndex);
-	  copy8b(src, srcIndex + 16U, dst, dstIndex + 4U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 12U);
-	  copy8b(src, srcIndex, dst, dstIndex + 20U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 28U, dst, dstIndex);
-	  copy4b(src, srcIndex + 24U, dst, dstIndex + 1U);
-	  copy8b(src, srcIndex + 16U, dst, dstIndex + 5U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 13U);
-	  copy8b(src, srcIndex, dst, dstIndex + 21U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy2b(src, srcIndex + 28U, dst, dstIndex);
-	  copy4b(src, srcIndex + 24U, dst, dstIndex + 2U);
-	  copy8b(src, srcIndex + 16U, dst, dstIndex + 6U);
-	  copy8b(src, srcIndex + 8U, dst, dstIndex + 14U);
-	  copy8b(src, srcIndex, dst, dstIndex + 22U);
-	},
-	 [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex) 
-	{
-	  copy1b(src, srcIndex + 30U, dst, dstIndex);
-	  copy4b(src, srcIndex + 26U, dst, dstIndex + 1U);
-	  copy8b(src, srcIndex + 18U, dst, dstIndex + 5U);
-	  copy8b(src, srcIndex + 10U, dst, dstIndex + 13U);
-	  copy8b(src, srcIndex + 2U, dst, dstIndex + 21U);
-	  copy2b(src, srcIndex, dst, dstIndex + 29U);
-	}
-};
+        [](const std::vector<unsigned char> &, unsigned int, std::vector<unsigned char> &, unsigned int) {},
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) { copy1b(src, srcIndex, dst, dstIndex); },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) { copy2b(src, srcIndex, dst, dstIndex); },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) { copy3b(src, srcIndex, dst, dstIndex); },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) { copy4b(src, srcIndex, dst, dstIndex); },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 4U, dst, dstIndex);
+            copy4b(src, srcIndex, dst, dstIndex + 1U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 5U, dst, dstIndex);
+            copy4b(src, srcIndex + 1U, dst, dstIndex + 1U);
+            copy1b(src, srcIndex, dst, dstIndex + 5U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 5U, dst, dstIndex);
+            copy4b(src, srcIndex + 1U, dst, dstIndex + 2U);
+            copy1b(src, srcIndex, dst, dstIndex + 6U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 8U, dst, dstIndex);
+            copy8b(src, srcIndex, dst, dstIndex + 1U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 9U, dst, dstIndex);
+            copy8b(src, srcIndex + 1U, dst, dstIndex + 1U);
+            copy1b(src, srcIndex, dst, dstIndex + 9U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 9U, dst, dstIndex);
+            copy8b(src, srcIndex + 1U, dst, dstIndex + 2U);
+            copy1b(src, srcIndex, dst, dstIndex + 10U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy4b(src, srcIndex + 8U, dst, dstIndex);
+            copy8b(src, srcIndex, dst, dstIndex + 4U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 12U, dst, dstIndex);
+            copy4b(src, srcIndex + 8U, dst, dstIndex + 1U);
+            copy8b(src, srcIndex, dst, dstIndex + 5U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 13U, dst, dstIndex);
+            copy4b(src, srcIndex + 9U, dst, dstIndex + 1U);
+            copy8b(src, srcIndex + 1U, dst, dstIndex + 5U);
+            copy1b(src, srcIndex, dst, dstIndex + 13U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 13U, dst, dstIndex);
+            copy4b(src, srcIndex + 9U, dst, dstIndex + 2U);
+            copy8b(src, srcIndex + 1U, dst, dstIndex + 6U);
+            copy1b(src, srcIndex, dst, dstIndex + 14U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy8b(src, srcIndex + 9U, dst, dstIndex);
+            copy1b(src, srcIndex + 8U, dst, dstIndex + 8U);
+            copy8b(src, srcIndex, dst, dstIndex + 9U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 17U, dst, dstIndex);
+            copy16b(src, srcIndex + 1U, dst, dstIndex + 1U);
+            copy1b(src, srcIndex, dst, dstIndex + 17U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy3b(src, srcIndex + 16U, dst, dstIndex);
+            copy16b(src, srcIndex, dst, dstIndex + 3U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy4b(src, srcIndex + 16U, dst, dstIndex);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 4U);
+            copy8b(src, srcIndex, dst, dstIndex + 12U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 20U, dst, dstIndex);
+            copy4b(src, srcIndex + 16U, dst, dstIndex + 1U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 5U);
+            copy8b(src, srcIndex, dst, dstIndex + 13U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 20U, dst, dstIndex);
+            copy4b(src, srcIndex + 16U, dst, dstIndex + 2U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 6U);
+            copy8b(src, srcIndex, dst, dstIndex + 14U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy3b(src, srcIndex + 20U, dst, dstIndex);
+            copy4b(src, srcIndex + 16U, dst, dstIndex + 3U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 7U);
+            copy8b(src, srcIndex, dst, dstIndex + 15U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy8b(src, srcIndex + 16U, dst, dstIndex);
+            copy16b(src, srcIndex, dst, dstIndex + 8U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy8b(src, srcIndex + 17U, dst, dstIndex);
+            copy1b(src, srcIndex + 16U, dst, dstIndex + 8U);
+            copy16b(src, srcIndex, dst, dstIndex + 9U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 25U, dst, dstIndex);
+            copy8b(src, srcIndex + 17U, dst, dstIndex + 1U);
+            copy1b(src, srcIndex + 16U, dst, dstIndex + 9U);
+            copy16b(src, srcIndex, dst, dstIndex + 10U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 25U, dst, dstIndex);
+            copy8b(src, srcIndex + 17U, dst, dstIndex + 2U);
+            copy1b(src, srcIndex + 16U, dst, dstIndex + 10U);
+            copy16b(src, srcIndex, dst, dstIndex + 11U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy4b(src, srcIndex + 24U, dst, dstIndex);
+            copy8b(src, srcIndex + 16U, dst, dstIndex + 4U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 12U);
+            copy8b(src, srcIndex, dst, dstIndex + 20U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 28U, dst, dstIndex);
+            copy4b(src, srcIndex + 24U, dst, dstIndex + 1U);
+            copy8b(src, srcIndex + 16U, dst, dstIndex + 5U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 13U);
+            copy8b(src, srcIndex, dst, dstIndex + 21U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy2b(src, srcIndex + 28U, dst, dstIndex);
+            copy4b(src, srcIndex + 24U, dst, dstIndex + 2U);
+            copy8b(src, srcIndex + 16U, dst, dstIndex + 6U);
+            copy8b(src, srcIndex + 8U, dst, dstIndex + 14U);
+            copy8b(src, srcIndex, dst, dstIndex + 22U);
+        },
+        [](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst,
+           unsigned int dstIndex) {
+            copy1b(src, srcIndex + 30U, dst, dstIndex);
+            copy4b(src, srcIndex + 26U, dst, dstIndex + 1U);
+            copy8b(src, srcIndex + 18U, dst, dstIndex + 5U);
+            copy8b(src, srcIndex + 10U, dst, dstIndex + 13U);
+            copy8b(src, srcIndex + 2U, dst, dstIndex + 21U);
+            copy2b(src, srcIndex, dst, dstIndex + 29U);
+        }};
 
 void DwgLZ77AC21Decompressor::Decompress(const std::vector<unsigned char> &source, unsigned int initialOffset,
                                          unsigned int length, std::vector<unsigned char> &buffer)
@@ -213,18 +216,18 @@ void DwgLZ77AC21Decompressor::Decompress(const std::vector<unsigned char> &sourc
     if (_sourceIndex >= endIndex)
         return;
 
-        if (((int) _opCode & 240) == 32)
-        {
-            _sourceIndex += 3U;
-            _length = source[_sourceIndex - 1];
-            _length &= 7U;
-        }
-    
-        while (_sourceIndex < endIndex)
-        {
-            nextIndex(source, buffer, destIndex);
-    
-            if (_sourceIndex >= endIndex)
+    if (((int) _opCode & 240) == 32)
+    {
+        _sourceIndex += 3U;
+        _length = source[_sourceIndex - 1];
+        _length &= 7U;
+    }
+
+    while (_sourceIndex < endIndex)
+    {
+        nextIndex(source, buffer, destIndex);
+
+        if (_sourceIndex >= endIndex)
             break;
 
         destIndex = copyDecompressedChunks(source, endIndex, buffer, destIndex);
@@ -234,12 +237,12 @@ void DwgLZ77AC21Decompressor::Decompress(const std::vector<unsigned char> &sourc
 void DwgLZ77AC21Decompressor::nextIndex(const std::vector<unsigned char> &source, std::vector<unsigned char> &dest,
                                         unsigned int &index)
 {
-	if (_length == 0U)
-		readLiteralLength(source);
+    if (_length == 0U)
+        readLiteralLength(source);
 
     copy(source, _sourceIndex, dest, index, _length);
-	_sourceIndex += _length;
-	index += _length;
+    _sourceIndex += _length;
+    index += _length;
 }
 
 unsigned int DwgLZ77AC21Decompressor::copyDecompressedChunks(const std::vector<unsigned char> &src,
@@ -277,7 +280,7 @@ unsigned int DwgLZ77AC21Decompressor::copyDecompressedChunks(const std::vector<u
     return destIndex;
 }
 
-void DwgLZ77AC21Decompressor::readInstructions(const std::vector<unsigned char> &buffer) 
+void DwgLZ77AC21Decompressor::readInstructions(const std::vector<unsigned char> &buffer)
 {
     switch (_opCode >> 4)
     {
@@ -301,7 +304,7 @@ void DwgLZ77AC21Decompressor::readInstructions(const std::vector<unsigned char> 
         case 2:
             _sourceOffset = buffer[_sourceIndex];
             ++_sourceIndex;
-            _sourceOffset = (unsigned int)(buffer[_sourceIndex] << 8 & 0xFF00) | _sourceOffset;
+            _sourceOffset = (unsigned int) (buffer[_sourceIndex] << 8 & 0xFF00) | _sourceOffset;
             ++_sourceIndex;
             _length = _opCode & 7U;
             if ((_opCode & 8) == 0)
@@ -309,12 +312,11 @@ void DwgLZ77AC21Decompressor::readInstructions(const std::vector<unsigned char> 
                 _opCode = buffer[_sourceIndex];
                 ++_sourceIndex;
                 _length = (_opCode & 0xF8) + _length;
-
             }
             else
             {
                 ++_sourceOffset;
-                _length = (unsigned int)((buffer[_sourceIndex] << 3) + _length);
+                _length = (unsigned int) ((buffer[_sourceIndex] << 3) + _length);
                 ++_sourceIndex;
                 _opCode = buffer[_sourceIndex];
                 ++_sourceIndex;
@@ -331,7 +333,7 @@ void DwgLZ77AC21Decompressor::readInstructions(const std::vector<unsigned char> 
     }
 }
 
-void DwgLZ77AC21Decompressor::readLiteralLength(const std::vector<unsigned char> &buffer) 
+void DwgLZ77AC21Decompressor::readLiteralLength(const std::vector<unsigned char> &buffer)
 {
     _length = _opCode + 8;
     if (_length == 0x17)
@@ -346,7 +348,7 @@ void DwgLZ77AC21Decompressor::readLiteralLength(const std::vector<unsigned char>
             {
                 n = buffer[_sourceIndex];
                 ++_sourceIndex;
-                n |= (unsigned int)buffer[_sourceIndex] << 8;
+                n |= (unsigned int) buffer[_sourceIndex] << 8;
                 ++_sourceIndex;
                 _length += n;
 
@@ -384,7 +386,7 @@ void DwgLZ77AC21Decompressor::copy(const std::vector<unsigned char> &src, unsign
     if (length <= 0U)
         return;
 
-	_copyMethods[(int)length][](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex);
+    _copyMethods[(int) length](src, srcIndex, dst, dstIndex);
 }
 
 void DwgLZ77AC21Decompressor::copy1b(const std::vector<unsigned char> &src, unsigned int srcIndex,
@@ -418,9 +420,9 @@ void DwgLZ77AC21Decompressor::copy4b(const std::vector<unsigned char> &src, unsi
 }
 
 void DwgLZ77AC21Decompressor::copy8b(const std::vector<unsigned char> &src, unsigned int srcIndex,
-                                     std::vector<unsigned char> &dst, unsigned int dstIndex) 
+                                     std::vector<unsigned char> &dst, unsigned int dstIndex)
 {
-    copy4b[](const std::vector<unsigned char> &src, unsigned int srcIndex, std::vector<unsigned char> &dst, unsigned int dstIndex);
+    copy4b(src, srcIndex, dst, dstIndex);
     copy4b(src, srcIndex + 4U, dst, dstIndex + 4U);
 }
 

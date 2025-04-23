@@ -25,7 +25,7 @@
 #include <dwg/io/dwg/DwgSectionIO_p.h>
 
 namespace dwg {
-    
+
 class DwgPreview;
 class IDwgStreamReader;
 class DwgPreviewReader : public DwgSectionIO

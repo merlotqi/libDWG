@@ -46,7 +46,7 @@ public:
     DwgSectionDescriptor &getDescriptor(const std::string &name) override;
 
     std::map<int, DwgSectionLocatorRecord> records() const;
-    std::map<int, DwgSectionLocatorRecord>& records();
+    std::map<int, DwgSectionLocatorRecord> &records();
     void setRcords(const std::map<int, DwgSectionLocatorRecord> &);
 };
 
