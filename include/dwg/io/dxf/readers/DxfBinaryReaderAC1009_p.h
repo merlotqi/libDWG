@@ -28,6 +28,11 @@ namespace dwg {
 
 class DxfBinaryReaderAC1009 : public DxfBinaryReader
 {
+public:
+    DxfBinaryReaderAC1009(std::istream *stream, Encoding encoding);
+    ~DxfBinaryReaderAC1009();
+
+    DxfCode readCode() const override;
 };
 
 }// namespace dwg

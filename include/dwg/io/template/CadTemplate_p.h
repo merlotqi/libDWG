@@ -23,20 +23,55 @@
 #pragma once
 
 #include <dwg/io/template/ICadTemplate_p.h>
+#include <optional>
+#include <map>
+#include <vector>
+#include <type_traits>
 
 namespace dwg {
 
 class ExtendedDataRecord;
+class Entity;
 
-class CadTemplate : public ICadObjectTemplate
+template<typename T>
+class CadTemplate : public ICadObjectTemplate<T>
 {
+public:
+    CadTemplate(T obj);
+    virtual ~CadTemplate();
 
+    void setCadObject(T v);
+
+    std::optional<unsigned long long> ownerHandle() const;
+    void setOwnerHandle(unsigned long long);
+
+    std::optional<unsigned long long> xdictHandle() const;
+    void setXDictHandle(unsigned long long);
+
+    std::vector<unsigned long long> reactorsHandles() const;
+    std::vector<unsigned long long> &reactorsHandles();
+    void setReactorsHandles(const std::vector<unsigned long long> &);
+
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> edataTemplate() const;
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> &edataTemplate();
+
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> edataTemplateByAppName() const;
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> &edataTemplateByAppName();
+
+    virtual void build(CadDocumentBuilder *builder) override;
+
+    template<typename U>
+    std::vector<U> getEntitiesCollection(CadDocumentBuilder *builder, unsigned long long firstHandle, unsigned long long endHandle)
+    {
+        return std::vector<U>();   
+    }
+
+    template<typename U>
+    bool getTableReference(CadDocumentBuilder *build, std::optional<unsigned long long> handle, const std::string &name, T reference)
+    {
+        return false;
+    }
+    
 };
 
-template<class T>
-class CadTemplateT : public CadTemplate
-{
-
-};
-
-}
+}// namespace dwg

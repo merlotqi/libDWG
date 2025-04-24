@@ -36,7 +36,7 @@ namespace dwg {
 
 class CadDocument;
 
-template<class T>
+template<typename T>
 class CadWriterBase : public ICadWriter, public T
 {
     static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
@@ -57,30 +57,30 @@ protected:
     Encoding _encoding;
 };
 
-template<class T>
+template<typename T>
 inline CadWriterBase<T>::CadWriterBase()
 {
 }
 
-template<class T>
+template<typename T>
 inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document)
     : _stream(stream), _document(document)
 {
 }
 
-template<class T>
+template<typename T>
 inline CadWriterBase<T>::~CadWriterBase()
 {
 }
 
-template<class T>
+template<typename T>
 inline void CadWriterBase<T>::write()
 {
     DxfClassCollection::UpdateDxfClasses(_document);
     _encoding = getListedEncoding(_document->header()->codePage());
 }
 
-template<class T>
+template<typename T>
 inline Encoding CadWriterBase<T>::getListedEncoding(const std::string &codePage)
 {
     CodePage code = CadUtils::GetCodePageByString(codePage);

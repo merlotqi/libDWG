@@ -78,7 +78,7 @@ unsigned char InputStreamWrapper::readByte()
     return ch;
 }
 
-std::vector<unsigned char> InputStreamWrapper::readBytes(int length)
+std::vector<unsigned char> InputStreamWrapper::readBytes(std::size_t length)
 {
     std::vector<unsigned char> buffer(length, 0);
     _stream->read(reinterpret_cast<char *>(buffer.data()), length);

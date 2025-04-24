@@ -49,7 +49,7 @@ std::vector<std::string> VPortsTable::defaultEntries() const
     return {VPort::DefaultName};
 }
 
-void VPortsTable::add(TableEntry *item)
+void VPortsTable::add(VPort *item)
 {
     assert(item);
     if (contains(item->name()))
@@ -58,7 +58,7 @@ void VPortsTable::add(TableEntry *item)
     }
     else
     {
-        addPrivate(item->name(), item);
+        push_back(item->name(), item);
     }
 }
 

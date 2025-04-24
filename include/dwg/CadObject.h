@@ -30,10 +30,10 @@
 
 namespace dwg {
 
-template<class T>
+template<typename T>
 class ObjectDictionaryCollection;
 
-template<typename T>
+template<typename _Ty, typename _Derived>
 class Table;
 
 class CadDocument;
@@ -41,7 +41,6 @@ class CadDictionary;
 class ExtendedDataDictionary;
 class NonGraphicalObject;
 class TableEntry;
-class Table;
 
 class LIBDWG_API CadObject : public IHandledCadObject
 {
@@ -90,13 +89,13 @@ protected:
     void assignDocument(CadDocument *doc);
     virtual void unassignDocument();
 
-    template<class T>
+    template<typename T>
     void updateCollection(NonGraphicalObject* entry, ObjectDictionaryCollection<T>* table)
     {
     }
 
-    template<class T>
-    void updateTable(T entry, Table<T> *table)
+    template<typename _Ty, typename _Derived>
+    void updateTable(_Ty entry, Table<_Ty, _Derived> *table)
     {
 
     }

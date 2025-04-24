@@ -51,7 +51,7 @@ public:
 
     char readChar();
     unsigned char readByte();
-    std::vector<unsigned char> readBytes(int length);
+    std::vector<unsigned char> readBytes(std::size_t length);
     short readShort();
     unsigned short readUShort();
     int readInt();
@@ -63,7 +63,7 @@ public:
     std::string readString(int length);
     std::string readString(int length, Encoding encoding);
 
-    template<class T, class E>
+    template<typename T, typename E>
     T readT()
     {
         T t = 0;
@@ -97,13 +97,13 @@ public:
 
     std::vector<unsigned char> buffer();
 
-    template<class T>
+    template<typename T>
     void write(const T &value)
     {
         write<T, LittleEndianConverter>(value);
     }
 
-    template<class T, class E>
+    template<typename T, typename E>
     void write(const T &value)
     {
         auto convert = E::instance();

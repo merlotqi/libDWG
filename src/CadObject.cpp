@@ -111,6 +111,4 @@ void CadObject::assignDocument(CadDocument *doc) {}
 
 void CadObject::unassignDocument() {}
 
-void CadObject::updateTable(TableEntry *entry, Table *table) {}
-
 }// namespace dwg

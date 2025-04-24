@@ -60,7 +60,7 @@ public:
     float toFloat(const unsigned char *bytes);
     double toDouble(const unsigned char *bytes);
 
-    template<class T>
+    template<typename T>
     std::vector<unsigned char> bytesT(T value)
     {
         static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,
@@ -73,7 +73,7 @@ public:
         return buffer;
     }
 
-    template<class T>
+    template<typename T>
     T fromBytesT(const unsigned char *bytes)
     {
         static_assert(std::is_integral_v<T> || std::is_floating_point_v<T>,

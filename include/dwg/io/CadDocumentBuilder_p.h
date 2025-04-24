@@ -27,7 +27,6 @@
 #include <dwg/utils/Delegate.h>
 #include <map>
 
-
 namespace dwg {
 
 class CadDocument;

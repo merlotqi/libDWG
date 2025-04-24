@@ -102,8 +102,8 @@ public:
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
-    template<typename T>
-    void registerCollection(Table<T>*)
+    template<typename _Ty, typename _Derived>
+    void registerCollection(Table<_Ty, _Derived> *)
     {
 
     }

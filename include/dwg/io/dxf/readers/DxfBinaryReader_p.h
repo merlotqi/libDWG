@@ -23,15 +23,29 @@
 #pragma once
 
 #include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
+#include <dwg/utils/Encoding.h>
 
 namespace dwg {
 
 class DxfBinaryReader : public DxfStreamReaderBase
 {
 public:
-    static constexpr auto Sentinel = "AutoCAD Binary DXF\r\n\u001a\0";
-    DxfBinaryReader();
+    static std::string Sentinel;
+    DxfBinaryReader(std::istream *stream);
+    DxfBinaryReader(std::istream *stream, Encoding encoding);
     virtual ~DxfBinaryReader();
+
+    void start() override;
+
+    std::string readStringLine() const override;
+    DxfCode readCode() const override;
+    bool lineAsBool() const override;
+    double lineAsDouble() const override;
+    short lineAsShort() const override;
+    int lineAsInt() const override;
+    long long lineAsLong() const override;
+    unsigned long long lineAsHandle() const override;
+    std::vector<unsigned char> lineAsBinaryChunk() const override; 
 };
 
 }// namespace dwg

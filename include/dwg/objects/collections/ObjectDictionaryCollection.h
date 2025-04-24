@@ -30,7 +30,7 @@ namespace dwg {
 
 class NonGraphicalObject;
 
-template<class T>
+template<typename T>
 class ObjectDictionaryCollection : public IHandledCadObject
 {
     CadDictionary *_dictionary;

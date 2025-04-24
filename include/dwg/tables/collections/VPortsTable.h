@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API VPortsTable : public Table<VPort *>
+class LIBDWG_API VPortsTable : public Table<VPort *, VPortsTable>
 {
 public:
     VPortsTable();
@@ -36,10 +36,10 @@ public:
 
     ObjectType objectType() const override;
     std::string objectName() const override;
-    void add(TableEntry *item) override;
 
-protected:
-    using Table::defaultEntries;
+    using Table::add;
+    void add(VPort *item);
+
     std::vector<std::string> defaultEntries() const;
 };
 

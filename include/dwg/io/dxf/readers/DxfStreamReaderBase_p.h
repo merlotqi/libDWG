@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/io/dxf/readers/IDxfStreamReader_p.h>
+#include <iostream>
 
 namespace dwg {
 
@@ -31,6 +32,58 @@ class DxfStreamReaderBase : public IDxfStreamReader
 public:
     DxfStreamReaderBase();
     virtual ~DxfStreamReaderBase();
+
+    DxfCode dxfCode() const override;
+    GroupCodeValueType groupCodeValue() const override;
+    int code() const override;
+    DwgVariant value() const override;
+    size_t position() const override;
+    std::string valueRaw() const override;
+
+    std::string valueAsString() const override;
+    bool valueAsBool() const override;
+    short valueAsShort() const override;
+    unsigned short valueAsUShort() const override;
+    int valueAsInt() const override;
+    unsigned int valueAsUInt() const override;
+    long long valueAsLongLong() const override;
+    unsigned long long valueAsHandle() const override;
+    double valueAsDouble() const override;
+    double valueAsAngle() const override;
+    std::vector<unsigned char> valueAsBinaryChunk() const override;
+
+    void readNext() override;
+    bool find(const std::string &) override;
+    void expectedCode(int code) override;
+    std::string toString() const;
+
+    void start() override;
+
+    virtual DxfCode readCode() = 0;
+    virtual std::string readStringLine() = 0;
+    virtual double lineAsDouble() = 0;
+    virtual short lineAsShort() = 0;
+    virtual int lineAsInt() = 0;
+    virtual long long lineAsLong() = 0;
+    virtual unsigned long long lineAsHandle() = 0;
+    virtual std::vector<unsigned char> lineAsBinaryChunk() = 0;
+    virtual bool lineAsBool() = 0;
+
+    DwgVariant transformValue(GroupCodeValueType code);
+
+protected:
+    void setDxfCode(DxfCode);
+    void setGroupCodeValue(GroupCodeValueType);
+    void setPosition(size_t);
+    void setValueRaw(const std::string &);
+
+protected:
+    DxfCode _dxfcode;
+    GroupCodeValueType _groupCodeValue;
+    DwgVariant _value;
+    std::istream *_stream;
+    std::size_t _position; /// Current line or offset in the file
+    std::string _valueRaw;
 };
 
 }// namespace dwg

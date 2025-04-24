@@ -87,7 +87,7 @@ public:
 
     virtual short readShort() = 0;
 
-    template<class T>
+    template<typename T>
     short readShortT()
     {
         short v = readShort();

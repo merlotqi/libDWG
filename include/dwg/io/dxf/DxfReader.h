@@ -30,6 +30,10 @@ namespace dwg {
 
 class IDxfStreamReader;
 class Entity;
+class DxfDocumentBuilder;
+class DxfClass;
+class DxfClassCollection;
+
 class LIBDWG_API DxfReader : public CadReaderBase<DxfReaderConfiguration>
 {
 public:
@@ -41,7 +45,12 @@ public:
     CadDocument *readTables();
     std::vector<Entity *> readEntities();
 
+    static bool IsBinary(const std::string &filename);
+    static bool IsBinary(std::istream *stream, bool resetPos = false);
+
 private:
+    DxfClassCollection *readClasses();
+    DxfClass *readClass();
     void readBlocks();
     void readEntitiesPrivate();
     void readObjects();
@@ -49,6 +58,12 @@ private:
     IDxfStreamReader *getReader();
     IDxfStreamReader *goToSection(const std::string &sectionName);
     IDxfStreamReader *createReader(bool isBinary, bool isAC1009Format);
+    void triggerNotification(const std::string &msg, Notification);
+
+private:
+    ACadVersion _version;
+    DxfDocumentBuilder *_builder;
+    IDxfStreamReader *_reader;
 };
 
 }// namespace dwg

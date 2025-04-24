@@ -34,7 +34,7 @@ public:
     ~LayoutCollection() = default;
 
     using ObjectDictionaryCollection::remove;
-    void remove(const std::string &name, Layout **layout);
+    bool remove(const std::string &name, Layout **layout);
 };
 
 }// namespace dwg

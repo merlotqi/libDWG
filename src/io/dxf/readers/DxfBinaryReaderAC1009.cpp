@@ -24,4 +24,10 @@
 
 namespace dwg {
 
+DxfBinaryReaderAC1009::DxfBinaryReaderAC1009(std::istream *stream, Encoding encoding) : DxfBinaryReader(stream, encoding) {}
+
+DxfBinaryReaderAC1009::~DxfBinaryReaderAC1009() {}
+
+DxfCode DxfBinaryReaderAC1009::readCode() { return DxfCode::Invalid; }
+    
 }// namespace dwg

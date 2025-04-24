@@ -29,8 +29,20 @@ namespace dwg {
 class DxfTextReader : public DxfStreamReaderBase
 {
 public:
-    DxfTextReader();
+    DxfTextReader(std::istream *stream, Encoding encoding);
     virtual ~DxfTextReader();
+    void start() override;
+    void readNext() override;
+
+    std::string readStringLine() const override;
+    DxfCode readCode() const override;
+    bool lineAsBool() const override;
+    double lineAsDouble() const override;
+    short lineAsShort() const override;
+    int lineAsInt() const override;
+    long long lineAsLong() const override;
+    unsigned long long lineAsHandle() const override;
+    std::vector<unsigned char> lineAsBinaryChunk() const override;
 };
 
 }// namespace dwg

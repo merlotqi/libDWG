@@ -24,4 +24,36 @@
 
 namespace dwg {
 
+DxfTextReader::DxfTextReader(std::istream *stream, Encoding encoding) {}
+
+DxfTextReader::~DxfTextReader() {}
+
+void DxfTextReader::start() {}
+
+void DxfTextReader::readNext() {}
+
+std::string DxfTextReader::readStringLine() 
+{ 
+    std::string str;
+    std::getline(*_stream, str);
+    _valueRaw = str;
+    return _valueRaw;
+}
+
+DxfCode DxfTextReader::readCode() { return DxfCode::Invalid; }
+
+bool DxfTextReader::lineAsBool() { return false; }
+
+double DxfTextReader::lineAsDouble() { return 0.0; }
+
+short DxfTextReader::lineAsShort() { return 0; }
+
+int DxfTextReader::lineAsInt() { return 0; }
+
+long long DxfTextReader::lineAsLong() { return 0LL; }
+
+unsigned long long DxfTextReader::lineAsHandle() { return 0ULL; }
+
+std::vector<unsigned char> DxfTextReader::lineAsBinaryChunk() { return std::vector<unsigned char>(); }
+
 }// namespace dwg

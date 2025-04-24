@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API BlockRecordsTable : public Table<BlockRecord *>
+class LIBDWG_API BlockRecordsTable : public Table<BlockRecord *, BlockRecordsTable>
 {
 public:
     BlockRecordsTable();
@@ -37,8 +37,6 @@ public:
     ObjectType objectType() const override;
     std::string objectName() const override;
 
-protected:
-    using Table::defaultEntries;
     std::vector<std::string> defaultEntries() const;
 };
 

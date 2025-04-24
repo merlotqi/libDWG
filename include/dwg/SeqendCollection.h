@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-template<class T>
+template<typename T>
 class SeqendCollection : public CadObjectCollection<T>
 {
     Seqend *_seqend;

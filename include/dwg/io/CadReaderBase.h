@@ -33,7 +33,7 @@
 
 namespace dwg {
 
-template<class T>
+template<typename T>
 class CadReaderBase : public ICadReader, protected T
 {
     static_assert(std::is_base_of<CadReaderConfiguration, T>::value, "T must is base CadReaderConfiguration");
@@ -55,28 +55,28 @@ protected:
 };
 
 
-template<class T>
+template<typename T>
 inline CadReaderBase<T>::~CadReaderBase()
 {
 }
 
-template<class T>
+template<typename T>
 inline CadReaderBase<T>::CadReaderBase() : _fileStream(nullptr), _document(nullptr)
 {
 }
 
-template<class T>
+template<typename T>
 inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
     : _fileStream(new std::ifstream(filename)), _document(nullptr)
 {
 }
 
-template<class T>
+template<typename T>
 inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
 {
 }
 
-template<class T>
+template<typename T>
 inline Encoding CadReaderBase<T>::getListedEncoding(int code)
 {
     return Encoding();

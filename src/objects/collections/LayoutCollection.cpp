@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-    bool LayoutCollection::remove(const std::string &name, Layout **entry)
+bool LayoutCollection::remove(const std::string &name, Layout **entry)
 {
     return false;
 }

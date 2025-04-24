@@ -33,7 +33,7 @@
 
 namespace dwg {
 
-template<typename _Ty>
+template<typename _Ty, typename _Derived>
 class Table : public CadObject
 {
 public:
@@ -87,7 +87,21 @@ public:
     iterator end() { return _entries.end(); }
     const_iterator begin() const { return _entries.begin(); }
     const_iterator end() const { return _entries.end(); }
-    void createDefaultEntries() {}
+    void createDefaultEntries() 
+    {
+        auto ns = static_cast<_Derived*>(this)->defaultEntries();
+        for (auto&& entry : ns)
+        {
+            if(contains(entry))
+                continue;
+
+            push_back(entry, new pointee(entry));
+        }
+    }
+    std::vector<std::string> defaultEntries() const
+    {
+        return std::vector<std::string>();
+    } 
     // clang-format on
 
 protected:
@@ -95,22 +109,19 @@ protected:
     {
         assert(v);
         v->setOwner(this);
-        v->OnNameChanged.add(this, &Table<_Ty>::onEntryNameChanged);
+        v->OnNameChanged.add(this, &Table<_Ty, _Derived>::onEntryNameChanged);
 
         OnAdd(v);
 
         std::string k = fmt::format("{}:{}", v->handle(), v->name());
         _entries.insert({k, v});
     }
-    std::vector<std::string> defaultEntries() const
-    {
-        return std::vector<std::string>();
-    }  
+ 
     void push_back(const std::string &n, pointer v)
     {
         _entries.insert({n, v});
         v->setOwner(this);
-        v->OnNameChanged.add(this, &Table<_Ty>::onEntryNameChanged);
+        v->OnNameChanged.add(this, &Table<_Ty, _Derived>::onEntryNameChanged);
         OnAdd(v);
     }
 

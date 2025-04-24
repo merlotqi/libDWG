@@ -39,7 +39,7 @@ public:
     virtual int code() const = 0;
     virtual DwgVariant value() const = 0;
 
-    virtual int position() const = 0;
+    virtual size_t position() const = 0;
 
     virtual std::string valueAsString() const = 0;
     virtual std::string valueRaw() const = 0;
@@ -54,7 +54,7 @@ public:
     virtual double valueAsAngle() const = 0;
     virtual std::vector<unsigned char> valueAsBinaryChunk() const = 0;
 
-    virtual bool find(const std::string &dxfEntry) const = 0;
+    virtual bool find(const std::string &) = 0;
 
     virtual void start() = 0;
     virtual void readNext() = 0;

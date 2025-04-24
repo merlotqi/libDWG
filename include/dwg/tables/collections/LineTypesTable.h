@@ -28,7 +28,7 @@
 namespace dwg {
 
 class LineType;
-class LIBDWG_API LineTypesTable : public Table<LineType *>
+class LIBDWG_API LineTypesTable : public Table<LineType *, LineTypesTable>
 {
 public:
     LineTypesTable();
@@ -42,8 +42,6 @@ public:
     LineType *byBlock() const;
     LineType *continuous() const;
 
-protected:
-    using Table::defaultEntries;
     std::vector<std::string> defaultEntries() const;
 };
 

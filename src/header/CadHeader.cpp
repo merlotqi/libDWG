@@ -62,6 +62,8 @@ CadHeader::CadHeader()
 
 CadHeader::CadHeader(CadDocument *document) {}
 
+void CadHeader::setDocument(CadDocument *document) {}
+
 CadHeader::CadHeader(ACadVersion version) : _version(version)
 {
     setVersion(version);

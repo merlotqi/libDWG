@@ -24,4 +24,32 @@
 
 namespace dwg {
 
+std::string DxfBinaryReader::Sentinel = "AutoCAD Binary DXF\r\n\u001a\0";
+
+DxfBinaryReader::DxfBinaryReader(std::istream *stream) : DxfBinaryReader(stream, Encoding(CodePage::Usascii)) {}
+
+DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding) {}
+
+DxfBinaryReader::~DxfBinaryReader() {}
+
+void DxfBinaryReader::start() {}
+
+std::string DxfBinaryReader::readStringLine() { return std::string(); }
+
+DxfCode DxfBinaryReader::readCode() { return DxfCode::Invalid; }
+
+bool DxfBinaryReader::lineAsBool() { return false; }
+
+double DxfBinaryReader::lineAsDouble() { return 0.0; }
+
+short DxfBinaryReader::lineAsShort() { return 0; }
+
+int DxfBinaryReader::lineAsInt() { return 0; }
+
+long long DxfBinaryReader::lineAsLong() { return 0LL; }
+
+unsigned long long DxfBinaryReader::lineAsHandle() { return 0ULL; }
+
+std::vector<unsigned char> DxfBinaryReader::lineAsBinaryChunk() { return std::vector<unsigned char>(); }
+
 }// namespace dwg
