@@ -22,12 +22,13 @@
 
 #pragma once
 
-#include <dwg/tables/collections/TableCollection.h>
+#include <dwg/tables/collections/Table.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
 class LineType;
-class LIBDWG_API LineTypesTable : public TableCollection
+class LIBDWG_API LineTypesTable : public Table<LineType *>
 {
 public:
     LineTypesTable();
@@ -42,9 +43,8 @@ public:
     LineType *continuous() const;
 
 protected:
-    std::vector<std::string> defaultEntries() const override;
-    bool assertType(TableEntry *item) const override;
-    TableEntry *createEntry(const std::string &name) override;
+    using Table::defaultEntries;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

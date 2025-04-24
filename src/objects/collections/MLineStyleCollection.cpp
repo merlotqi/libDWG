@@ -20,18 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/collections/MLineStyleCollection.h>
 
 namespace dwg {
-
-bool MLineStyleCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto mls = dynamic_cast<MLineStyle *>(item);
-    return mls ? true : false;
-}
 
 }// namespace dwg

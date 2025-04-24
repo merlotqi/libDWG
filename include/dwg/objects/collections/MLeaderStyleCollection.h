@@ -23,17 +23,15 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/MultiLeaderStyle.h>
 
 namespace dwg {
 
-class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection
+class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection<MultiLeaderStyle *>
 {
 public:
     MLeaderStyleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~MLeaderStyleCollection() = default;
-
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
 };
 
 }// namespace dwg

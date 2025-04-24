@@ -20,18 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/BookColor.h>
 #include <dwg/objects/collections/ColorCollection.h>
 
 namespace dwg {
-
-bool ColorCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto bookColor = dynamic_cast<BookColor *>(item);
-    return bookColor ? true : false;
-}
 
 }// namespace dwg

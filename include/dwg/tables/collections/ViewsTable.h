@@ -22,11 +22,12 @@
 
 #pragma once
 
-#include <dwg/tables/collections/TableCollection.h>
+#include <dwg/tables/collections/Table.h>
+#include <dwg/tables/View.h>
 
 namespace dwg {
 
-class LIBDWG_API ViewsTable : public TableCollection
+class LIBDWG_API ViewsTable : public Table<View *>
 {
 public:
     ViewsTable();
@@ -37,9 +38,8 @@ public:
     std::string objectName() const override;
 
 protected:
-    std::vector<std::string> defaultEntries() const override;
-    bool assertType(TableEntry *item) const override;
-    TableEntry *createEntry(const std::string &name) override;
+    using Table::defaultEntries;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

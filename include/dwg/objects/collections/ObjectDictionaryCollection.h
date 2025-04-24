@@ -24,49 +24,49 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <dwg/objects/CadDictionary.h>
+#include <type_traits>
 
 namespace dwg {
 
 class NonGraphicalObject;
-class LIBDWG_API ObjectDictionaryCollection : public IHandledCadObject
+
+template<class T>
+class ObjectDictionaryCollection : public IHandledCadObject
 {
     CadDictionary *_dictionary;
-
 public:
-    ObjectDictionaryCollection(CadDictionary *dictionary);
-    virtual ~ObjectDictionaryCollection();
+    using pointer = std::remove_cv_t<T>;
+    using pointee = std::remove_pointer_t<pointer>;
 
-    unsigned long long handle() const;
+    static_assert(std::is_pointer<pointer>::value, "T must be a pointer type.");
+    static_assert(std::is_base_of<NonGraphicalObject, pointee>::value, "T must point to a type derived from NonGraphicalObject.");
 
-    NonGraphicalObject *operator[](const std::string &key) const;
+    // clang-format off
+    ObjectDictionaryCollection(CadDictionary *dictionary) : _dictionary(dictionary) {}
+    virtual ~ObjectDictionaryCollection() {}
 
-    void add(NonGraphicalObject *);
-    bool remove(const std::string &name, NonGraphicalObject **entry);
-    bool remove(const std::string &name);
-    bool containsKey(const std::string &) const;
-    bool tryGetEntry(const std::string &name, NonGraphicalObject **);
-
-    template<typename T>
-    bool tryGetEntryT(const std::string &name, T **entry)
-    {
-        NonGraphicalObject *tmp = nullptr;
-        if (tryGetEntry(name, &tmp))
-        {
-            if (dynamic_cast<T *>(tmp))
-            {
-                *entry = tmp;
-                return true;
-            }
-        }
-        return false;
+    unsigned long long handle() const { return _dictionary->handle(); }
+    pointer operator[](const std::string &key) const { return dynamic_cast<pointer>(_dictionary->operator[](key)); }
+    void add(pointer v) { _dictionary->add(v); }
+    bool remove(const std::string &name, pointer *entry) 
+    { 
+        NonGraphicalObject* temp = nullptr;
+        bool result = _dictionary->remove(name, &temp);
+        *entry = dynamic_cast<pointer>(temp);
+        return result;
     }
+    bool remove(const std::string &name) { return _dictionary->remove(name); }
+    bool containsKey(const std::string &name) const { return _dictionary->containsKey(name); }
+    bool tryGetEntry(const std::string &name, pointer *e) 
+    {
+        NonGraphicalObject* temp = nullptr;
+        bool result = _dictionary->tryGetEntry(name, &temp);
+        *e = dynamic_cast<pointer>(temp);
+        return result;
+    }
+    void clear() { _dictionary->clear(); }
 
-    void clear();
-
-protected:
-    virtual bool assertType(NonGraphicalObject *item) const;
-    virtual bool beforeRemove(const std::string &name);
-    virtual void beforeAdd(NonGraphicalObject *entry);
+    // clang-format on
 };
 
 }// namespace dwg

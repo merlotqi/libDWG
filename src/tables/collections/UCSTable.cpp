@@ -29,7 +29,7 @@ namespace dwg {
 
 UCSTable::UCSTable() {}
 
-UCSTable::UCSTable(CadDocument *document) : TableCollection(document) {}
+UCSTable::UCSTable(CadDocument *document) : Table(document) {}
 
 UCSTable::~UCSTable() {}
 
@@ -46,20 +46,6 @@ std::string UCSTable::objectName() const
 std::vector<std::string> UCSTable::defaultEntries() const
 {
     return std::vector<std::string>();
-}
-
-bool UCSTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto ucs = dynamic_cast<UCS *>(item);
-    return ucs ? true : false;
-}
-
-TableEntry *UCSTable::createEntry(const std::string &name)
-{
-    return new UCS(name);
 }
 
 }// namespace dwg

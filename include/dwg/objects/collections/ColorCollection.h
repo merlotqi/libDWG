@@ -23,17 +23,15 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/BookColor.h>
 
 namespace dwg {
 
-class LIBDWG_API ColorCollection : public ObjectDictionaryCollection
+class LIBDWG_API ColorCollection : public ObjectDictionaryCollection<BookColor *>
 {
 public:
     ColorCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~ColorCollection() = default;
-
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
 };
 
 }// namespace dwg

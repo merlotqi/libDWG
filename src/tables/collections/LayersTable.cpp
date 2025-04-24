@@ -28,7 +28,7 @@ namespace dwg {
 
 LayersTable::LayersTable() {}
 
-LayersTable::LayersTable(CadDocument *document) : TableCollection(document) {}
+LayersTable::LayersTable(CadDocument *document) : Table(document) {}
 
 LayersTable::~LayersTable() {}
 
@@ -47,18 +47,5 @@ std::vector<std::string> LayersTable::defaultEntries() const
     return {Layer::DefaultName};
 }
 
-bool LayersTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto layer = dynamic_cast<Layer *>(item);
-    return layer ? true : false;
-}
-
-TableEntry *LayersTable::createEntry(const std::string &name)
-{
-    return new Layer(name);
-}
 
 }// namespace dwg

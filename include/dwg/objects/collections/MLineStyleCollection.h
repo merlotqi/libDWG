@@ -23,17 +23,15 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/MLineStyle.h>
 
 namespace dwg {
 
-class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection
+class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection<MLineStyle *>
 {
 public:
     MLineStyleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~MLineStyleCollection() = default;
-
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
 };
 
 }// namespace dwg

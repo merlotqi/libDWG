@@ -22,11 +22,12 @@
 
 #pragma once
 
-#include <dwg/tables/collections/TableCollection.h>
+#include <dwg/tables/collections/Table.h>
+#include <dwg/tables/View.h>
 
 namespace dwg {
 
-class LIBDWG_API VPortsTable : public TableCollection
+class LIBDWG_API VPortsTable : public Table<VPort *>
 {
 public:
     VPortsTable();
@@ -38,9 +39,8 @@ public:
     void add(TableEntry *item) override;
 
 protected:
-    std::vector<std::string> defaultEntries() const override;
-    bool assertType(TableEntry *item) const override;
-    TableEntry *createEntry(const std::string &name) override;
+    using Table::defaultEntries;
+    std::vector<std::string> defaultEntries() const;
 };
 
 }// namespace dwg

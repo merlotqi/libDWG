@@ -20,21 +20,11 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/Layout.h>
 #include <dwg/objects/collections/LayoutCollection.h>
 
 namespace dwg {
 
-bool LayoutCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto layout = dynamic_cast<Layout *>(item);
-    return layout ? true : false;
-}
-
-bool LayoutCollection::beforeRemove(const std::string &name)
+    bool LayoutCollection::remove(const std::string &name, Layout **entry)
 {
     return false;
 }

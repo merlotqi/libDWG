@@ -26,17 +26,16 @@
 #include <dwg/CadObjectCollection.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/tables/collections/Table.h>
 #include <dwg/exports.h>
 #include <map>
 #include <string>
-
 
 namespace dwg {
 
 class CadHeader;
 class CadSummaryInfo;
 class DxfClassCollection;
-class TableCollection;
 class AppIdsTable;
 class BlockRecordsTable;
 class DimensionStylesTable;
@@ -103,7 +102,11 @@ public:
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
-    void registerCollection(TableCollection *);
+    template<typename T>
+    void registerCollection(Table<T>*)
+    {
+
+    }
 
 protected:
     void setRootDictionary(CadDictionary *dic);

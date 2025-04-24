@@ -28,7 +28,7 @@ namespace dwg {
 
 LineTypesTable::LineTypesTable() {}
 
-LineTypesTable::LineTypesTable(CadDocument *document) : TableCollection(document) {}
+LineTypesTable::LineTypesTable(CadDocument *document) : Table(document) {}
 
 LineTypesTable::~LineTypesTable() {}
 
@@ -49,31 +49,18 @@ std::vector<std::string> LineTypesTable::defaultEntries() const
 
 LineType *LineTypesTable::byLayer() const
 {
-    return valueT<LineType>(LineType::ByLayerName);
+    return value(LineType::ByLayerName);
 }
 
 LineType *LineTypesTable::byBlock() const
 {
-    return valueT<LineType>(LineType::ByBlockName);
+    return value(LineType::ByBlockName);
 }
 
 LineType *LineTypesTable::continuous() const
 {
-    return valueT<LineType>(LineType::ContinuousName);
+    return value(LineType::ContinuousName);
 }
 
-bool LineTypesTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto lt = dynamic_cast<LineType *>(item);
-    return lt ? true : false;
-}
-
-TableEntry *LineTypesTable::createEntry(const std::string &name)
-{
-    return new LineType(name);
-}
 
 }// namespace dwg

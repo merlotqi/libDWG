@@ -29,7 +29,7 @@ namespace dwg {
 
 ViewsTable::ViewsTable() {}
 
-ViewsTable::ViewsTable(CadDocument *document) : TableCollection(document) {}
+ViewsTable::ViewsTable(CadDocument *document) : Table(document) {}
 
 ViewsTable::~ViewsTable() {}
 
@@ -46,20 +46,6 @@ std::string ViewsTable::objectName() const
 std::vector<std::string> ViewsTable::defaultEntries() const
 {
     return std::vector<std::string>();
-}
-
-bool ViewsTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto view = dynamic_cast<View *>(item);
-    return view ? true : false;
-}
-
-TableEntry *ViewsTable::createEntry(const std::string &name)
-{
-    return new View(name);
 }
 
 }// namespace dwg

@@ -23,17 +23,15 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/ImageDefinition.h>
 
 namespace dwg {
 
-class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection
+class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection<ImageDefinition *>
 {
 public:
     ImageDefinitionCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~ImageDefinitionCollection() = default;
-
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
 };
 
 }// namespace dwg

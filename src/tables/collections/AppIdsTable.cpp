@@ -28,7 +28,7 @@ namespace dwg {
 
 AppIdsTable::AppIdsTable() {}
 
-AppIdsTable::AppIdsTable(CadDocument *document) : TableCollection(document) {}
+AppIdsTable::AppIdsTable(CadDocument *document) : Table(document) {}
 
 AppIdsTable::~AppIdsTable() {}
 
@@ -45,20 +45,6 @@ std::string AppIdsTable::objectName() const
 std::vector<std::string> AppIdsTable::defaultEntries() const
 {
     return {AppId::DefaultName};
-}
-
-bool AppIdsTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto appid = dynamic_cast<AppId *>(item);
-    return appid ? true : false;
-}
-
-TableEntry *AppIdsTable::createEntry(const std::string &name)
-{
-    return new AppId(name);
 }
 
 }// namespace dwg

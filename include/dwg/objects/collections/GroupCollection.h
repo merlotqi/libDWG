@@ -23,18 +23,22 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/Group.h>
+#include <initializer_list>
 
 namespace dwg {
 
-class LIBDWG_API GroupCollection : public ObjectDictionaryCollection
+class LIBDWG_API GroupCollection : public ObjectDictionaryCollection<Group *>
 {
 public:
     GroupCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~GroupCollection() = default;
 
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
-    void beforeAdd(NonGraphicalObject *entry) override;
+    using ObjectDictionaryCollection::add;
+    void add(Group *group);
+
+    Group *createGroup(const std::initializer_list<Entity *> &range);
+    Group *createGroup(const std::string &name, const std::initializer_list<Entity *> &range);
 };
 
 }// namespace dwg

@@ -20,18 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/ImageDefinition.h>
 #include <dwg/objects/collections/ImageDefinitionCollection.h>
 
 namespace dwg {
-
-bool ImageDefinitionCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto img = dynamic_cast<ImageDefinition *>(item);
-    return img ? true : false;
-}
 
 }// namespace dwg

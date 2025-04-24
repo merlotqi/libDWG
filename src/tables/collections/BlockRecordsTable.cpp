@@ -28,7 +28,7 @@ namespace dwg {
 
 BlockRecordsTable::BlockRecordsTable() {}
 
-BlockRecordsTable::BlockRecordsTable(CadDocument *document) : TableCollection(document) {}
+BlockRecordsTable::BlockRecordsTable(CadDocument *document) : Table(document) {}
 
 BlockRecordsTable::~BlockRecordsTable() {}
 
@@ -47,18 +47,5 @@ std::vector<std::string> BlockRecordsTable::defaultEntries() const
     return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
 }
 
-bool BlockRecordsTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto block = dynamic_cast<BlockRecord *>(item);
-    return block ? true : false;
-}
-
-TableEntry *BlockRecordsTable::createEntry(const std::string &name)
-{
-    return new BlockRecord(name);
-}
 
 }// namespace dwg

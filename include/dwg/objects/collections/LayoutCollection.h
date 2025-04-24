@@ -23,18 +23,18 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/Layout.h>
 
 namespace dwg {
 
-class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection
+class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection<Layout *>
 {
 public:
     LayoutCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~LayoutCollection() = default;
 
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
-    bool beforeRemove(const std::string &name) override;
+    using ObjectDictionaryCollection::remove;
+    void remove(const std::string &name, Layout **layout);
 };
 
 }// namespace dwg

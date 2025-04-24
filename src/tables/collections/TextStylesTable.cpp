@@ -29,7 +29,7 @@ namespace dwg {
 
 TextStylesTable::TextStylesTable() {}
 
-TextStylesTable::TextStylesTable(CadDocument *document) : TableCollection(document) {}
+TextStylesTable::TextStylesTable(CadDocument *document) : Table(document) {}
 
 TextStylesTable::~TextStylesTable() {}
 
@@ -46,20 +46,6 @@ std::string TextStylesTable::objectName() const
 std::vector<std::string> TextStylesTable::defaultEntries() const
 {
     return {TextStyle::DefaultName};
-}
-
-bool TextStylesTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto text = dynamic_cast<TextStyle *>(item);
-    return text ? true : false;
-}
-
-TableEntry *TextStylesTable::createEntry(const std::string &name)
-{
-    return new TextStyle(name);
 }
 
 }// namespace dwg

@@ -20,18 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/collections/MLeaderStyleCollection.h>
 
 namespace dwg {
-
-bool MLeaderStyleCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto mls = dynamic_cast<MultiLeaderStyle *>(item);
-    return mls ? true : false;
-}
 
 }// namespace dwg

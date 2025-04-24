@@ -304,15 +304,13 @@ CadObjectCollection<Entity *> &CadDocument::entities()
 
 BlockRecord *CadDocument::modelSpace() const
 {
-    return _blockRecords->valueT<BlockRecord>(BlockRecord::ModelSpaceName);
+    return _blockRecords->value(BlockRecord::ModelSpaceName);
 }
 
 BlockRecord *CadDocument::paperSpace() const
 {
-    return _blockRecords->valueT<BlockRecord>(BlockRecord::PaperSpaceName);
+    return _blockRecords->value(BlockRecord::PaperSpaceName);
 }
-
-void CadDocument::registerCollection(TableCollection *) {}
 
 CadDocument::CadDocument(bool createDefaults)
 {

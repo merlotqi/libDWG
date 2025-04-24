@@ -28,9 +28,9 @@
 
 namespace dwg {
 
-VPortsTable::VPortsTable() : TableCollection() {}
+VPortsTable::VPortsTable() : Table() {}
 
-VPortsTable::VPortsTable(CadDocument *document) : TableCollection(document) {}
+VPortsTable::VPortsTable(CadDocument *document) : Table(document) {}
 
 VPortsTable::~VPortsTable() {}
 
@@ -60,20 +60,6 @@ void VPortsTable::add(TableEntry *item)
     {
         addPrivate(item->name(), item);
     }
-}
-
-bool VPortsTable::assertType(TableEntry *item) const
-{
-    if (!item)
-        return false;
-
-    auto vport = dynamic_cast<VPort *>(item);
-    return vport ? true : false;
-}
-
-TableEntry *VPortsTable::createEntry(const std::string &name)
-{
-    return new VPort(name);
 }
 
 }// namespace dwg

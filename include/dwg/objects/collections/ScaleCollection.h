@@ -23,17 +23,15 @@
 #pragma once
 
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/objects/Scale.h>
 
 namespace dwg {
 
-class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection
+class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection<Scale *>
 {
 public:
     ScaleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~ScaleCollection() = default;
-
-protected:
-    bool assertType(NonGraphicalObject *item) const override;
 };
 
 }// namespace dwg

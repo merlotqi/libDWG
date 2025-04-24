@@ -1993,7 +1993,7 @@ void CadHeader::setDimensionTextStyleName(const std::string &value)
 {
     if (_document)
     {
-        _dimensionTextStyle = _document->textStyles()->valueT<TextStyle>(value);
+        _dimensionTextStyle = _document->textStyles()->value(value);
     }
     else
     {
@@ -2762,7 +2762,7 @@ Layer *CadHeader::currentLayer() const
     }
     else
     {
-        return _document->layers()->valueT<Layer>(currentLayerName());
+        return _document->layers()->value(currentLayerName());
     }
 }
 
@@ -2794,7 +2794,7 @@ TextStyle *CadHeader::dimensionTextStyle() const
     }
     else
     {
-        return _document->textStyles()->valueT<TextStyle>(dimensionTextStyleName());
+        return _document->textStyles()->value(dimensionTextStyleName());
     }
 }
 

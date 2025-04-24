@@ -20,20 +20,20 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/Group.h>
 #include <dwg/objects/collections/GroupCollection.h>
 
 namespace dwg {
+    
+void GroupCollection::add(Group *group) {}
 
-bool GroupCollection::assertType(NonGraphicalObject *item) const
+Group *GroupCollection::createGroup(const std::initializer_list<Entity *> &range)
 {
-    if (!item)
-        return false;
-
-    auto grp = dynamic_cast<Group *>(item);
-    return grp ? true : false;
+    return nullptr;
 }
 
-void GroupCollection::beforeAdd(NonGraphicalObject *entry) {}
+Group *GroupCollection::createGroup(const std::string &name, const std::initializer_list<Entity *> &range)
+{
+    return nullptr;
+}
 
 }// namespace dwg

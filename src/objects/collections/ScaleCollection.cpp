@@ -20,19 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/objects/Scale.h>
 #include <dwg/objects/collections/ScaleCollection.h>
 
-
 namespace dwg {
-
-bool ScaleCollection::assertType(NonGraphicalObject *item) const
-{
-    if (!item)
-        return false;
-
-    auto scale = dynamic_cast<Scale *>(item);
-    return scale ? true : false;
-}
 
 }// namespace dwg
