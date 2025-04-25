@@ -28,7 +28,8 @@ namespace dwg {
  
 class CadLeaderTemplate : public CadEntityTemplate
 {
-
+public:
+    
 };
  
 }// namespace dwg

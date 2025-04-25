@@ -23,11 +23,32 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
 class CadLineTypeTemplate : public CadTemplate<LineType *>
 {
+public:
+    struct SegmentTemplate
+    {
+        LineType::Segment segment;
+        std::optional<unsigned long long> styleHandle;
+        void build(CadDocumentBuilder *builder);
+    };
+
+    CadLineTypeTemplate();
+    CadLineTypeTemplate(LineType *);
+    void build(CadDocumentBuilder *builder);
+
+    std::optional<unsigned long long> ltypeControlHandle() const;
+    void setLtypeControlHandle(unsigned long long);
+
+    std::optional<double> totalLen() const;
+    void setTotalLen(double);
+
+    std::vector<SegmentTemplate> segmentTemplates() const;
+    std::vector<SegmentTemplate> &segmentTemplates();
 
 };
 

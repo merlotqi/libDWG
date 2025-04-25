@@ -22,26 +22,21 @@
 
 #pragma once
 
-#include <dwg/io/template/CadEntityTemplate_p.h>
-#include <dwg/entities/CadWipeoutBase.h>
+#include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/BlockParameter.h>
 
 namespace dwg {
- 
-class CadImageTemplate : public CadEntityTemplate
+
+class GraphNodeTemplate;
+class CadEvaluationGraphTemplate : public CadTemplate<EvaluationGraph *>
 {
 public:
-    CadImageTemplate(CadWipeoutBase *image);
+    CadEvaluationGraphTemplate();
+    CadEvaluationGraphTemplate(EvaluationGraph *evaluationGraph);
     void build(CadDocumentBuilder *builder);
 
-    std::optional<unsigned long long> imgDefHandle() const;
-    void setImgDefHandle(unsigned long long);
-
-    std::optional<unsigned long long> imgReactorHandle() const;
-    void setImgReactorHandle(unsigned long long);
-
-private:
-    std::optional<unsigned long long> _imgDefHandle;
-    std::optional<unsigned long long> _imgReactorHandle;
+    std::vector<GraphNodeTemplate *> nodeTemplates() const;
+    std::vector<GraphNodeTemplate *> &nodeTemplates();
 };
- 
+
 }// namespace dwg

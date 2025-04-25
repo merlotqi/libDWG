@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/io/CadDocumentBuilder_p.h>
 #include <dwg/io/template/ICadTemplate_p.h>
 #include <optional>
 #include <map>
@@ -34,13 +35,21 @@ class ExtendedDataRecord;
 class Entity;
 
 template<typename T>
-class CadTemplate : public ICadObjectTemplate<T>
+class CadTemplate : public ICadObjectTemplate
 {
-public:
-    CadTemplate(T obj);
-    virtual ~CadTemplate();
+    static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+    static_assert(std::is_base_of<CadObject, std::remove_pointer_t<T>>::value, "T must point to a type derived from CadObject.");
 
-    void setCadObject(T v);
+public:
+    CadTemplate(T obj) : _object(obj) {}
+    virtual ~CadTemplate() {}
+
+    T cadObject() const { return _object; }
+    void setCadObject(T v)
+    {
+        delete _object;
+        _object = v;
+    }
 
     std::optional<unsigned long long> ownerHandle() const;
     void setOwnerHandle(unsigned long long);
@@ -67,11 +76,24 @@ public:
     }
 
     template<typename U>
-    bool getTableReference(CadDocumentBuilder *build, std::optional<unsigned long long> handle, const std::string &name, T reference)
+    bool getTableReference(CadDocumentBuilder *builder, std::optional<unsigned long long> handle, const std::string &name, T reference)
     {
         return false;
     }
-    
+  
+protected:
+    CadObject *rawObject() const override
+    {
+        return _object;
+    }
+
+protected:
+    T _object;
+    std::optional<unsigned long long> _ownerHandle;
+    std::optional<unsigned long long> _xdictHandle;
+    std::vector<unsigned long long> _reactorsHandles;
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> _edataTemplate;
+    std::map<unsigned long long, std::vector<ExtendedDataRecord *>> _edataTemplateByAppName;
 };
 
 }// namespace dwg

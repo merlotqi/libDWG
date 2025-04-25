@@ -22,26 +22,35 @@
 
 #pragma once
 
-#include <dwg/io/template/CadEntityTemplate_p.h>
-#include <dwg/entities/CadWipeoutBase.h>
+#include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/MultiLeaderStyle.h>
 
 namespace dwg {
- 
-class CadImageTemplate : public CadEntityTemplate
+
+class CadMLeaderStyleTemplate : public CadTemplate<MultiLeaderStyle *>
 {
 public:
-    CadImageTemplate(CadWipeoutBase *image);
+    CadMLeaderStyleTemplate();
+    CadMLeaderStyleTemplate(MultiLeaderStyle *);
     void build(CadDocumentBuilder *builder);
 
-    std::optional<unsigned long long> imgDefHandle() const;
-    void setImgDefHandle(unsigned long long);
+    unsigned long long leaderLineTypeHandle() const;
+    void setLeaderLineTypeHandle(unsigned long long);
 
-    std::optional<unsigned long long> imgReactorHandle() const;
-    void setImgReactorHandle(unsigned long long);
+    unsigned long long arrowheadHandle() const;
+    void setArrowheadHandle(unsigned long long);
+
+    unsigned long long mtextStyleHandle() const;
+    void setMTextStyleHandle(unsigned long long);
+
+    unsigned long long blockContentHandle() const;
+    void setBlockContentHandle(unsigned long long);
 
 private:
-    std::optional<unsigned long long> _imgDefHandle;
-    std::optional<unsigned long long> _imgReactorHandle;
+    unsigned long long _leaderLineTypeHandle;
+    unsigned long long _arrowheadHandle;
+    unsigned long long _mtextStyleHandle;
+    unsigned long long _blockContentHandle;
 };
- 
+
 }// namespace dwg

@@ -28,7 +28,36 @@ namespace dwg {
 
 class CadLayerTemplate : public CadTemplate<Layer *>
 {
+public:
+    CadLayerTemplate();
+    CadLayerTemplate(Layer *l);
+    void build(CadDocumentBuilder *builder);
 
+    unsigned long long layerControlHandle() const;
+    void setLayerControlHandle(unsigned long long);
+    
+    unsigned long long plotStyleHandle() const;
+    void setPlotStyleHandle(unsigned long long);
+    
+    unsigned long long materialHandle() const;
+    void setMaterialHandle(unsigned long long);
+    
+    std::optional<unsigned long long> lineTypeHandle() const;
+    void setLineTypeHandle(unsigned long long);
+    
+    std::string lineTypeName() const;
+    void setLineTypeName(const std::string &);
+    
+    std::string trueColorName() const;
+    void setTrueColorName(const std::string &);
+
+private:
+    unsigned long long _layerControlHandle;
+    unsigned long long _plotStyleHandle;
+    unsigned long long _materialHandle;
+    std::optional<unsigned long long> _lineTypeHandle;
+    std::string _lineTypeName;
+    std::string _trueColorName;
 };
 
 }// namespace dwg

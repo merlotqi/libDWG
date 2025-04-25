@@ -20,28 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/template/CadEntityTemplate_p.h>
-#include <dwg/entities/CadWipeoutBase.h>
+#include <dwg/io/template/CadAttributeTemplate_p.h>
 
 namespace dwg {
- 
-class CadImageTemplate : public CadEntityTemplate
-{
-public:
-    CadImageTemplate(CadWipeoutBase *image);
-    void build(CadDocumentBuilder *builder);
 
-    std::optional<unsigned long long> imgDefHandle() const;
-    void setImgDefHandle(unsigned long long);
-
-    std::optional<unsigned long long> imgReactorHandle() const;
-    void setImgReactorHandle(unsigned long long);
-
-private:
-    std::optional<unsigned long long> _imgDefHandle;
-    std::optional<unsigned long long> _imgReactorHandle;
-};
- 
 }// namespace dwg

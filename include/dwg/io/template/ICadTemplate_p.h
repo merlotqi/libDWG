@@ -28,19 +28,45 @@
 namespace dwg {
 
 class CadDocumentBuilder;
+class CadObject;
 class ICadTemplate
 {
 public:
+    ICadTemplate() = default;
     virtual ~ICadTemplate() = default;
     virtual void build(CadDocumentBuilder *builder) = 0;
 };
 
-template<typename T>
 class ICadObjectTemplate : public ICadTemplate
 {
 public:
+    ICadObjectTemplate() = default;
     virtual ~ICadObjectTemplate() = default;
-    T cadObject() const;
+
+protected:
+    virtual CadObject *rawObject() const = 0;
+};
+
+class ICadDictionaryTemplate : public ICadObjectTemplate
+{
+public:
+    ICadDictionaryTemplate() = default;
+    virtual ~ICadDictionaryTemplate() = default;
+};
+
+class ICadTableTemplate : public ICadObjectTemplate
+{
+public:
+    ICadTableTemplate() = default;
+    virtual ~ICadTableTemplate() = default;
+    virtual std::vector<unsigned long long> entryHandle() const = 0;
+};
+
+class ICadTableEntryTemplate : public ICadObjectTemplate
+{
+public:
+    ICadTableEntryTemplate() = default;
+    virtual ~ICadTableEntryTemplate() = default;
 };
 
 }// namespace dwg

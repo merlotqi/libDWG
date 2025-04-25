@@ -27,6 +27,32 @@
 
 namespace dwg {
 
-class CadEvaluationExpressionTemplate : public 
+class CadEvaluationExpressionTemplate : public CadTemplate<EvaluationExpression *>
+{
+public:
+    CadEvaluationExpressionTemplate(EvaluationExpression *object);
+    virtual ~CadEvaluationExpressionTemplate();
+};
+
+class CadBlockElementTemplate : public CadEvaluationExpressionTemplate
+{
+public:
+    CadBlockElementTemplate(BlockElement *object);
+    BlockElement *blockElement() const;
+};
+
+class CadBlockParameterTemplate : public: CadBlockElementTemplate
+{
+public:
+    CadBlockParameterTemplate(BlockParameter *object);
+    BlockParameter *blockParameter() const;
+};
+
+class CadBlock1PtParameterTemplate : public CadBlockParameterTemplate
+{
+public:
+    CadBlock1PtParameterTemplate(Block1PtParameter *object);
+    Block1PtParameter *block1PtParameter() const;
+};
 
 }// namespace dwg

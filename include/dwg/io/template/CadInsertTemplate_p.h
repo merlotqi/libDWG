@@ -28,7 +28,34 @@ namespace dwg {
  
 class CadInsertTemplate : public CadEntityTemplate
 {
+public:
+    CadInsertTemplate();
+    CadInsertTemplate(Insert *insert);
+    void build(CadDocumentBuilder *builder);
 
+    bool hasAtts() const;
+    void setHasAtts(bool);
+
+    int ownedObjectsCount() const;
+    void setOwnedObjectsCount(int);
+
+    std::optional<unsigned long long> blockHeaderHandle() const; 
+    void setBlockHeaderHandle(unsigned long long);
+
+    std::string blockName() const;
+    void setBlockName(const std::string &);
+
+    std::optional<unsigned long long> firstAttributeHandle() const;
+    void setFirstAttributeHandle(unsigned long long);
+
+    std::optional<unsigned long long> endAttributeHandle() const;
+    void setEndAttributeHandle(unsigned long long);
+
+    std::optional<unsigned long long> seqendHandle() const;
+    void setSeqendHandle(unsigned long long);
+
+    std::vector<unsigned long long> attributesHandles() const;
+    void setAttributesHandles(unsigned long long);
 };
  
 }// namespace dwg

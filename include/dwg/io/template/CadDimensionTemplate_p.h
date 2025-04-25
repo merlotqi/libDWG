@@ -23,12 +23,44 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
+#include <dwg/entities/Dimension.h>
  
 namespace dwg {
- 
+
+class DimensionPlaceHolder : public Dimension
+{
+public:
+    DimensionPlaceHolder();
+    ObjectType objectType() const override;
+};
+
 class CadDimensionTemplate : public CadEntityTemplate
 {
+public:
+    CadDimensionTemplate();
+    CadDimensionTemplate(Dimension *dimension);
+    void build(CadDocumentBuilder *builder);
+    
+    std::optional<unsigned long long> styleHandle() const;
+    void setStyleHandle(unsigned long long);
+    
+    std::optional<unsigned long long> blockHandle() const;
+    void setBlockHandle(unsigned long long);
+    
+    std::string blockName() const;
+    void setBlockName(const std::string &);
+    
+    std::string styleName() const;
+    void setStyleName(const std::string &);
 
+    void setDimensionFlags(DimensionType flags);
+    void setDimensionObject(Dimension *dimension);
+
+private:
+    std::optional<unsigned long long> _styleHandle;
+    std::optional<unsigned long long> _blockHandle;
+    std::string _blockName;
+    std::string _styleName;
 };
  
 }// namespace dwg
