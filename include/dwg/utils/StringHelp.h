@@ -23,42 +23,45 @@
 #pragma once
 
 #include <string>
+#include <dwg/exports.h>
 
 namespace dwg {
-namespace StringHelp {
 
-extern std::string replace(const std::string &str, const std::string &from, const std::string &to);
+class LIBDWG_API StringHelp
+{
+public:
+    static std::string replace(const std::string &str, const std::string &from, const std::string &to);
 
-extern int parse(const std::string &, char thousandSeparator = ',');
-extern bool tryParse(const std::string &, int& value, char thousandSeparator = ',');
+    static int parse(const std::string &);
+    static bool tryParse(const std::string &, int& value);
 
-extern unsigned int parseUnsigned(const std::string &, char thousandSeparator = ',');
-extern bool tryParseUnsigned(const std::string &, unsigned int& value, char thousandSeparator = ',');
+    static unsigned int parseUnsigned(const std::string &);
+    static bool tryParseUnsigned(const std::string &, unsigned int& value);
 
-extern Int64 parse64(const std::string &, char thousandSeparator = ',');
-extern bool tryParse64(const std::string &, Int64& value, char thousandSeparator = ',');
+    static long long parse64(const std::string &);
+    static bool tryParse64(const std::string &, long long& value);
 
-extern UInt64 parseUnsigned64(const std::string &, char thousandSeparator = ',');
-extern bool tryParseUnsigned64(const std::string &, UInt64& value, char thousandSeparator = ',');
+    static unsigned long long parseUnsigned64(const std::string &);
+    static bool tryParseUnsigned64(const std::string &, unsigned long long& value);
 
-extern UInt64 parseHex64(const std::string &);
-extern bool tryParseHex64(const std::string &, UInt64& value);
+    static unsigned long long parseHex64(const std::string &);
+    static bool tryParseHex64(const std::string &, unsigned long long& value);
 
-extern double parseFloat(const std::string &, char decimalSeparator = '.', char thousandSeparator = ',');
-extern bool tryParseFloat(const std::string &, double& value, char decimalSeparator = '.', char thousandSeparator = ',');
+    static double parseFloat(const std::string &);
+    static bool tryParseFloat(const std::string &, double& value);
 
-extern bool parseBool(const std::string &);
-extern bool tryParseBool(const std::string &, bool& value);
+    static bool parseBool(const std::string &);
+    static bool tryParseBool(const std::string &, bool& value);
 
-extern std::string tolower(const std::string &);
-extern std::string toupper(const std::string &);
+    static std::string tolower(const std::string &);
+    static std::string toupper(const std::string &);
 
-extern std::string trimLeft(const std::string &);
-extern std::string trimRight(const std::string &);
-extern std::string trim(const std::string &);
+    static std::string trimLeft(const std::string &);
+    static std::string trimRight(const std::string &);
+    static std::string trim(const std::string &);
 
-extern bool startsWith(const std::string &, const std::string &);
-extern bool endsWith(const std::string &, const std::string &);
+    static bool startsWith(const std::string &, const std::string &);
+    static bool endsWith(const std::string &, const std::string &); 
+};
 
-}// namespace StringHelp
 }// namespace dwg

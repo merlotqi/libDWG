@@ -24,10 +24,21 @@
 
 namespace dwg {
 
-DxfBinaryReaderAC1009::DxfBinaryReaderAC1009(std::istream *stream, Encoding encoding) : DxfBinaryReader(stream, encoding) {}
+DxfBinaryReaderAC1009::DxfBinaryReaderAC1009(std::istream *stream, Encoding encoding)
+    : DxfBinaryReader(stream, encoding)
+{
+}
 
 DxfBinaryReaderAC1009::~DxfBinaryReaderAC1009() {}
 
-DxfCode DxfBinaryReaderAC1009::readCode() { return DxfCode::Invalid; }
+DxfCode DxfBinaryReaderAC1009::readCode()
+{
+    int code = _wrapper.readByte();
+    if (code == UCHAR_MAX)
+    {
+        code = _wrapper.readShort();
+    }
+    return DxfCode(code);
+}
     
 }// namespace dwg

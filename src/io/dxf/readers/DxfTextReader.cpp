@@ -24,13 +24,19 @@
 
 namespace dwg {
 
-DxfTextReader::DxfTextReader(std::istream *stream, Encoding encoding) {}
+DxfTextReader::DxfTextReader(std::istream *stream, Encoding encoding)
+    : _stream(stream), _encoding(encoding), _wrapper(_stream)
+{
+    start();
+}
 
 DxfTextReader::~DxfTextReader() {}
 
-void DxfTextReader::start() {}
-
-void DxfTextReader::readNext() {}
+void DxfTextReader::readNext() 
+{
+    DxfStreamReaderBase::readNext();
+    _position += 2;
+}
 
 std::string DxfTextReader::readStringLine() 
 { 

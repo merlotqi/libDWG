@@ -24,6 +24,7 @@
 
 #include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
 #include <dwg/utils/Encoding.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -37,15 +38,20 @@ public:
 
     void start() override;
 
-    std::string readStringLine() const override;
-    DxfCode readCode() const override;
-    bool lineAsBool() const override;
-    double lineAsDouble() const override;
-    short lineAsShort() const override;
-    int lineAsInt() const override;
-    long long lineAsLong() const override;
-    unsigned long long lineAsHandle() const override;
-    std::vector<unsigned char> lineAsBinaryChunk() const override; 
+    std::string readStringLine() override;
+    DxfCode readCode() override;
+    bool lineAsBool() override;
+    double lineAsDouble() override;
+    short lineAsShort() override;
+    int lineAsInt() override;
+    long long lineAsLong() override;
+    unsigned long long lineAsHandle() override;
+    std::vector<unsigned char> lineAsBinaryChunk() override;
+
+protected:
+    Encoding _encoding;
+    std::istream *_stream;
+    InputStreamWrapper _wrapper;
 };
 
 }// namespace dwg

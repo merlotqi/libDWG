@@ -22,23 +22,11 @@
 
 #pragma once
 
-#include <dwg/io/template/CadTextEntityTemplate_p.h>
+#include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/BlockParameter.h>
 
 namespace dwg {
 
-class AttributeBase;
-class CadTextEntityTemplate;
-class CadAttributeTemplate : public CadTextEntityTemplate
-{
-public:
-    CadAttributeTemplate(AttributeBase *entity);
-    void build(CadDocumentBuilder *builder);
-
-    CadTextEntityTemplate *mtextTemplate() const;
-    void setMTextTemplate(CadTextEntityTemplate *);
-
-private:
-    CadTextEntityTemplate *_mtextTemplate;
-};
+class CadEvaluationExpressionTemplate : public 
 
 }// namespace dwg

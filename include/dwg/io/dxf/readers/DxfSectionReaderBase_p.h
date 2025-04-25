@@ -22,6 +22,10 @@
 
 #pragma once
 
+#include <string>
+#include <optional>
+#include <vector>
+
 namespace dwg {
 
 class IDxfStreamReader;
@@ -32,7 +36,12 @@ public:
     DxfSectionReaderBase(IDxfStreamReader *reader, DxfDocumentBuilder *builder);
 
     virtual void read() = 0;
-
+    
+protected:
+    void readCommonObjectData(std::string &name, unsigned long long &handle,
+                              std::optional<unsigned long long> &ownerHandle,
+                              std::optional<unsigned long long> &xdictHandle,
+                              std::vector<unsigned long long> &reactors);
 protected:
     IDxfStreamReader *_reader;
     DxfDocumentBuilder *_builder;

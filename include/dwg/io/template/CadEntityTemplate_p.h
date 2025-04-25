@@ -65,7 +65,20 @@ public:
     void setBookColorName(const std::string &);
 
     std::optional<unsigned long long> materialHandle() const;
-    void setMaterialHandle(unsigned long long); 
+    void setMaterialHandle(unsigned long long);
+
+protected:
+    unsigned char _entityMode;
+    std::optional<unsigned char> _ltypeFlags;
+    std::optional<unsigned char> _layerHandle;
+    std::string _layerName;
+    std::optional<unsigned long long> _lineTypeHandle;
+    std::string _lineTypeName;
+    std::optional<unsigned long long> _prevEntity;
+    std::optional<unsigned long long> _nextEntity;
+    std::optional<unsigned long long> _colorHandle;
+    std::string _boolColorName;
+    std::optional<unsigned long long> _materialHandle;
 };
 
 }// namespace dwg

@@ -32,7 +32,7 @@ public:
     DxfBinaryReaderAC1009(std::istream *stream, Encoding encoding);
     ~DxfBinaryReaderAC1009();
 
-    DxfCode readCode() const override;
+    DxfCode readCode() override;
 };
 
 }// namespace dwg

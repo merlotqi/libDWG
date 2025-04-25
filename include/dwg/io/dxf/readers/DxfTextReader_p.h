@@ -31,18 +31,22 @@ class DxfTextReader : public DxfStreamReaderBase
 public:
     DxfTextReader(std::istream *stream, Encoding encoding);
     virtual ~DxfTextReader();
-    void start() override;
     void readNext() override;
 
-    std::string readStringLine() const override;
-    DxfCode readCode() const override;
-    bool lineAsBool() const override;
-    double lineAsDouble() const override;
-    short lineAsShort() const override;
-    int lineAsInt() const override;
-    long long lineAsLong() const override;
-    unsigned long long lineAsHandle() const override;
-    std::vector<unsigned char> lineAsBinaryChunk() const override;
+    std::string readStringLine() override;
+    DxfCode readCode() override;
+    bool lineAsBool() override;
+    double lineAsDouble() override;
+    short lineAsShort() override;
+    int lineAsInt() override;
+    long long lineAsLong() override;
+    unsigned long long lineAsHandle() override;
+    std::vector<unsigned char> lineAsBinaryChunk() override;
+
+private:
+    Encoding _encoding;
+    std::istream *_stream;
+    InputStreamWrapper _wrapper;
 };
 
 }// namespace dwg

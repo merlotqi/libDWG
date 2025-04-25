@@ -23,12 +23,45 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
-class CadAttributeTemplate : public CadTemplate<BlockRecord *>
+class Entity;
+class CadBlockRecordTemplate : public CadTemplate<BlockRecord *>
 {
+public:
+    CadBlockRecordTemplate();
+    CadBlockRecordTemplate(BlockRecord *block);
+    void build(CadDocumentBuilder *builder);
+    void setBlockToRecord(CadDocumentBuilder *builder);
 
+    std::optional<unsigned long long> firstEntityHandle() const;
+    void setFirstEntityHandle(unsigned long long);
+
+    std::optional<unsigned long long> lastEntityHandle() const;
+    void setLastEntityHandle(unsigned long long);
+
+    std::optional<unsigned long long> beginBlockHandle() const;
+    void setBeginBlockHandle(unsigned long long);
+
+    std::optional<unsigned long long> endBlockHandle() const;
+    void setEndBlockHandle(unsigned long long);
+
+    std::optional<unsigned long long> layoutHandle() const;
+    void setLayoutHandle(unsigned long long);
+
+    std::vector<unsigned long long> ownedObjectHandles() const;
+    std::vector<unsigned long long> &ownedObjectHandles();
+
+    std::vector<unsigned long long> insertHandles() const;
+    std::vector<unsigned long long> &insertHandles();
+
+    std::string layerName() const;
+    void setLayerName(const std::string &);
+
+private:
+    void addEntity(CadDocumentBuilder *builder, Entity *entity);
 };
 
 }// namespace dwg

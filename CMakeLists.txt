@@ -13,6 +13,7 @@ set(LIBDWG_VERSION_STRING "${LIBDWG_VERSION_MAJOR}.${LIBDWG_VERSION_MINOR}.${LIB
 
 find_package(Iconv REQUIRED)
 find_package(fmt REQUIRED)
+find_package(double-conversion REQUIRED)
 
 include(GenerateExportHeader)
 
@@ -29,7 +30,7 @@ if(WIN32)
         /wd4661  # no suitable definition provided for explicit template instantiation request
     )
 endif()
-target_link_libraries(dwg Iconv::Iconv fmt::fmt)
+target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion)
 
 add_library(DWG::dwg ALIAS dwg)
 

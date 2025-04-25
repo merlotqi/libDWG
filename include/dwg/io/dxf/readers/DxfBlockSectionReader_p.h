@@ -26,6 +26,7 @@
 
 namespace dwg {
 
+class BlockEnd;
 class DxfBlockSectionReader : public DxfSectionReaderBase
 {
 public:
@@ -33,6 +34,10 @@ public:
     ~DxfBlockSectionReader();
 
     void read() override;
+
+private:
+    void readBlock();
+    void readBlockEnd(BlockEnd *block);
 };
 
 }// namespace dwg

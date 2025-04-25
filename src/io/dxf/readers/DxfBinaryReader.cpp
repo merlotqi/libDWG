@@ -28,28 +28,76 @@ std::string DxfBinaryReader::Sentinel = "AutoCAD Binary DXF\r\n\u001a\0";
 
 DxfBinaryReader::DxfBinaryReader(std::istream *stream) : DxfBinaryReader(stream, Encoding(CodePage::Usascii)) {}
 
-DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding) {}
+DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding)
+    : _stream(stream), _encoding(encoding), _wrapper(InputStreamWrapper(_stream))
+{
+    start();
+}
 
 DxfBinaryReader::~DxfBinaryReader() {}
 
-void DxfBinaryReader::start() {}
+void DxfBinaryReader::start() 
+{
+    DxfStreamReaderBase::start();
+    auto sentinel = _wrapper.readBytes(22);
+    //AutoCAD Binary DXF\r\n\u001a\0
+}
 
-std::string DxfBinaryReader::readStringLine() { return std::string(); }
+std::string DxfBinaryReader::readStringLine() 
+{ 
+    unsigned char b = _wrapper.readByte();
+    std::vector<unsigned char> bytes;
 
-DxfCode DxfBinaryReader::readCode() { return DxfCode::Invalid; }
+    while (b != 0)
+    {
+        bytes.push_back(b);
+        b = _wrapper.readByte();
+    }
 
-bool DxfBinaryReader::lineAsBool() { return false; }
+    _valueRaw = _encoding.toUtf8(std::string(bytes.begin(), bytes.end()));
+    return _valueRaw;
+}
 
-double DxfBinaryReader::lineAsDouble() { return 0.0; }
+DxfCode DxfBinaryReader::readCode()
+{
+    return DxfCode(_wrapper.readShort());
+}
 
-short DxfBinaryReader::lineAsShort() { return 0; }
+bool DxfBinaryReader::lineAsBool()
+{
+    return _wrapper.readByte() > 0;
+}
 
-int DxfBinaryReader::lineAsInt() { return 0; }
 
-long long DxfBinaryReader::lineAsLong() { return 0LL; }
+double DxfBinaryReader::lineAsDouble()
+{
+    return _wrapper.readDouble();
+}
 
-unsigned long long DxfBinaryReader::lineAsHandle() { return 0ULL; }
+short DxfBinaryReader::lineAsShort()
+{
+    return _wrapper.readShort();
+}
 
-std::vector<unsigned char> DxfBinaryReader::lineAsBinaryChunk() { return std::vector<unsigned char>(); }
+int DxfBinaryReader::lineAsInt()
+{
+    return _wrapper.readInt();
+}
+
+long long DxfBinaryReader::lineAsLong()
+{
+    return _wrapper.readLong();
+}
+
+unsigned long long DxfBinaryReader::lineAsHandle()
+{
+    return _wrapper.readULong();
+}
+
+std::vector<unsigned char> DxfBinaryReader::lineAsBinaryChunk()
+{
+    unsigned char length = _wrapper.readByte();
+    return _wrapper.readBytes(length);
+}
 
 }// namespace dwg
