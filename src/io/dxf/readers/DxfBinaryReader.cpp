@@ -30,21 +30,22 @@ DxfBinaryReader::DxfBinaryReader(std::istream *stream) : DxfBinaryReader(stream,
 
 DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding)
     : _stream(stream), _encoding(encoding), _wrapper(InputStreamWrapper(_stream))
-{
+{    
+    _stream->seekg(std::ios::beg);
     start();
 }
 
 DxfBinaryReader::~DxfBinaryReader() {}
 
-void DxfBinaryReader::start() 
+void DxfBinaryReader::start()
 {
     DxfStreamReaderBase::start();
     auto sentinel = _wrapper.readBytes(22);
     //AutoCAD Binary DXF\r\n\u001a\0
 }
 
-std::string DxfBinaryReader::readStringLine() 
-{ 
+std::string DxfBinaryReader::readStringLine()
+{
     unsigned char b = _wrapper.readByte();
     std::vector<unsigned char> bytes;
 

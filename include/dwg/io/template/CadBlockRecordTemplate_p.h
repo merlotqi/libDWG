@@ -28,7 +28,7 @@
 namespace dwg {
 
 class Entity;
-class CadBlockRecordTemplate : public CadTemplate<BlockRecord *>
+class CadBlockRecordTemplate : public CadTemplateT<BlockRecord *>
 {
 public:
     CadBlockRecordTemplate();

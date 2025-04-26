@@ -30,7 +30,7 @@ if(WIN32)
         /wd4661  # no suitable definition provided for explicit template instantiation request
     )
 endif()
-target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion)
+target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion)
 
 add_library(DWG::dwg ALIAS dwg)
 

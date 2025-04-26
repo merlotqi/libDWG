@@ -23,12 +23,12 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/tables/VPort.h>
 
 namespace dwg {
 
-class CadVPortTemplate : public CadTemplate<VPort *>
+class CadVPortTemplate : public CadTemplateT<VPort *>
 {
-
 };
 
 }// namespace dwg

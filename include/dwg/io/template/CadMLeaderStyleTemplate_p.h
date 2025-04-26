@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class CadMLeaderStyleTemplate : public CadTemplate<MultiLeaderStyle *>
+class CadMLeaderStyleTemplate : public CadTemplateT<MultiLeaderStyle *>
 {
 public:
     CadMLeaderStyleTemplate();

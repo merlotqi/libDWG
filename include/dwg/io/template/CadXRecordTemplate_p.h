@@ -23,12 +23,12 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/XRecord.h>
 
 namespace dwg {
 
-class CadXRecordTemplate : public CadTemplate<XRecord *>
+class CadXRecordTemplate : public CadTemplateT<XRecord *>
 {
-
 };
 
 }// namespace dwg

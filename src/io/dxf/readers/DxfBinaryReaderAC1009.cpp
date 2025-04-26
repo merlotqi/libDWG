@@ -40,5 +40,5 @@ DxfCode DxfBinaryReaderAC1009::readCode()
     }
     return DxfCode(code);
 }
-    
+
 }// namespace dwg

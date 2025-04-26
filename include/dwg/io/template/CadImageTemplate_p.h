@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <dwg/io/template/CadEntityTemplate_p.h>
 #include <dwg/entities/CadWipeoutBase.h>
+#include <dwg/io/template/CadEntityTemplate_p.h>
 
 namespace dwg {
- 
+
 class CadImageTemplate : public CadEntityTemplate
 {
 public:
@@ -43,5 +43,5 @@ private:
     std::optional<unsigned long long> _imgDefHandle;
     std::optional<unsigned long long> _imgReactorHandle;
 };
- 
+
 }// namespace dwg

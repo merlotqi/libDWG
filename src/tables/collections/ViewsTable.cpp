@@ -24,7 +24,6 @@
 #include <dwg/tables/View.h>
 #include <dwg/tables/collections/ViewsTable.h>
 
-
 namespace dwg {
 
 ViewsTable::ViewsTable() {}

@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 #include <dwg/objects/BookColor.h>
+#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 
 namespace dwg {
 

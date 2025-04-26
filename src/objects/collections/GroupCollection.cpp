@@ -23,7 +23,7 @@
 #include <dwg/objects/collections/GroupCollection.h>
 
 namespace dwg {
-    
+
 void GroupCollection::add(Group *group) {}
 
 Group *GroupCollection::createGroup(const std::initializer_list<Entity *> &range)

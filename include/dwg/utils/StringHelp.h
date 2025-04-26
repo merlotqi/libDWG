@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <string>
 #include <dwg/exports.h>
+#include <string>
 
 namespace dwg {
 
@@ -33,25 +33,25 @@ public:
     static std::string replace(const std::string &str, const std::string &from, const std::string &to);
 
     static int parse(const std::string &);
-    static bool tryParse(const std::string &, int& value);
+    static bool tryParse(const std::string &, int &value);
 
     static unsigned int parseUnsigned(const std::string &);
-    static bool tryParseUnsigned(const std::string &, unsigned int& value);
+    static bool tryParseUnsigned(const std::string &, unsigned int &value);
 
     static long long parse64(const std::string &);
-    static bool tryParse64(const std::string &, long long& value);
+    static bool tryParse64(const std::string &, long long &value);
 
     static unsigned long long parseUnsigned64(const std::string &);
-    static bool tryParseUnsigned64(const std::string &, unsigned long long& value);
+    static bool tryParseUnsigned64(const std::string &, unsigned long long &value);
 
     static unsigned long long parseHex64(const std::string &);
-    static bool tryParseHex64(const std::string &, unsigned long long& value);
+    static bool tryParseHex64(const std::string &, unsigned long long &value);
 
     static double parseFloat(const std::string &);
-    static bool tryParseFloat(const std::string &, double& value);
+    static bool tryParseFloat(const std::string &, double &value);
 
     static bool parseBool(const std::string &);
-    static bool tryParseBool(const std::string &, bool& value);
+    static bool tryParseBool(const std::string &, bool &value);
 
     static std::string tolower(const std::string &);
     static std::string toupper(const std::string &);
@@ -61,7 +61,10 @@ public:
     static std::string trim(const std::string &);
 
     static bool startsWith(const std::string &, const std::string &);
-    static bool endsWith(const std::string &, const std::string &); 
+    static bool endsWith(const std::string &, const std::string &);
+
+    static int icompare(const std::string &a, const std::string &b);
+    static int icomparen(const std::string &a, const std::string &b, size_t n);
 };
 
 }// namespace dwg

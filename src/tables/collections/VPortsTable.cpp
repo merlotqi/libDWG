@@ -25,7 +25,6 @@
 #include <dwg/tables/VPort.h>
 #include <dwg/tables/collections/VPortsTable.h>
 
-
 namespace dwg {
 
 VPortsTable::VPortsTable() : Table() {}

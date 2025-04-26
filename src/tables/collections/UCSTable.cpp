@@ -24,7 +24,6 @@
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/collections/UCSTable.h>
 
-
 namespace dwg {
 
 UCSTable::UCSTable() {}

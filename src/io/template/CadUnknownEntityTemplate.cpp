@@ -21,7 +21,7 @@
  */
 
 #include <dwg/io/template/CadUnknownEntityTemplate_p.h>
- 
+
 namespace dwg {
 
 }// namespace dwg

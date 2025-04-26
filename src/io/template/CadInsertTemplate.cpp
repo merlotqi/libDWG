@@ -21,7 +21,7 @@
  */
 
 #include <dwg/io/template/CadInsertTemplate_p.h>
- 
+
 namespace dwg {
- 
+
 }// namespace dwg

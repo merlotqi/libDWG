@@ -24,5 +24,96 @@
 
 namespace dwg {
 
+CadDocumentBuilder::CadDocumentBuilder(ACadVersion version, CadDocument *document) {}
 
+CadDocumentBuilder::~CadDocumentBuilder() {}
+
+ACadVersion CadDocumentBuilder::version() const
+{
+    return ACadVersion::Unknown;
 }
+
+CadDocument *CadDocumentBuilder::documentToBuild() const
+{
+    return nullptr;
+}
+
+AppIdsTable *CadDocumentBuilder::appIds() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setAppIds(AppIdsTable *tables) {}
+
+BlockRecordsTable *CadDocumentBuilder::blockRecords() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setBlockRecords(BlockRecordsTable *tables) {}
+
+DimensionStylesTable *CadDocumentBuilder::dimensionStyles() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setDimensionStyles(DimensionStylesTable *table) {}
+
+LayersTable *CadDocumentBuilder::layers() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setLayers(LayersTable *table) {}
+
+LineTypesTable *CadDocumentBuilder::lineTypesTable() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setLineTypesTable(LineTypesTable *) {}
+
+TextStylesTable *CadDocumentBuilder::textStyles() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setTextStyles(TextStylesTable *) {}
+
+UCSTable *CadDocumentBuilder::UCSs() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setUCSs(UCSTable *) {}
+
+ViewsTable *CadDocumentBuilder::views() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setViews(ViewsTable *) {}
+
+VPortsTable *CadDocumentBuilder::vports() const
+{
+    return nullptr;
+}
+
+void CadDocumentBuilder::setVPorts(VPortsTable *) {}
+
+unsigned long long CadDocumentBuilder::initialHandSeed() const
+{
+    return 0ULL;
+}
+
+void CadDocumentBuilder::setInitialHandSeed(unsigned long long) {}
+
+void CadDocumentBuilder::buildDocument() {}
+
+void CadDocumentBuilder::setAppTemplate(CadTemplate *tmpl) {}
+
+void CadDocumentBuilder::setRegisterTables() {}
+
+void CadDocumentBuilder::setBuildTables() {}
+
+}// namespace dwg

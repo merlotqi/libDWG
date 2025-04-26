@@ -22,12 +22,12 @@
 
 #pragma once
 
-#include <dwg/io/template/CadTemplate_p.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/io/template/CadTemplate_p.h>
 
 namespace dwg {
 
-class CadEntityTemplate : public CadTemplate<Entity *>
+class CadEntityTemplate : public CadTemplateT<Entity *>
 {
 public:
     CadEntityTemplate(Entity *v);
@@ -56,10 +56,10 @@ public:
     void setPrevEntity(unsigned long long);
 
     std::optional<unsigned long long> nextEntity() const;
-    void setNextEntity(unsigned long long);  
+    void setNextEntity(unsigned long long);
 
     std::optional<unsigned long long> colorHandle() const;
-    void setColorHandle(unsigned long long); 
+    void setColorHandle(unsigned long long);
 
     std::string bookColorName() const;
     void setBookColorName(const std::string &);

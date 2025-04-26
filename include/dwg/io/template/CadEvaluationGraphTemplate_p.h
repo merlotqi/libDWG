@@ -23,12 +23,12 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
-#include <dwg/objects/BlockParameter.h>
+#include <dwg/objects/EvaluationGraph.h>
 
 namespace dwg {
 
 class GraphNodeTemplate;
-class CadEvaluationGraphTemplate : public CadTemplate<EvaluationGraph *>
+class CadEvaluationGraphTemplate : public CadTemplateT<EvaluationGraph *>
 {
 public:
     CadEvaluationGraphTemplate();

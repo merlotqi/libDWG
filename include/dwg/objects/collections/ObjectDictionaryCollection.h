@@ -34,12 +34,14 @@ template<typename T>
 class ObjectDictionaryCollection : public IHandledCadObject
 {
     CadDictionary *_dictionary;
+
 public:
     using pointer = std::remove_cv_t<T>;
     using pointee = std::remove_pointer_t<pointer>;
 
     static_assert(std::is_pointer<pointer>::value, "T must be a pointer type.");
-    static_assert(std::is_base_of<NonGraphicalObject, pointee>::value, "T must point to a type derived from NonGraphicalObject.");
+    static_assert(std::is_base_of<NonGraphicalObject, pointee>::value,
+                  "T must point to a type derived from NonGraphicalObject.");
 
     // clang-format off
     ObjectDictionaryCollection(CadDictionary *dictionary) : _dictionary(dictionary) {}

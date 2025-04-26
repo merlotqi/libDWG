@@ -23,12 +23,11 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
- 
+
 namespace dwg {
- 
+
 class CadPdfUnderlayTemplate : public CadEntityTemplate
 {
-
 };
- 
+
 }// namespace dwg

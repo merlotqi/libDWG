@@ -22,20 +22,30 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
+#include <dwg/CadUtils.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dxf/DxfDocumentBuilder_p.h>
 #include <dwg/io/dxf/DxfReader.h>
-#include <dwg/io/dxf/readers/DxfBinaryReader_p.h>
 #include <dwg/io/dxf/readers/DxfBinaryReaderAC1009_p.h>
+#include <dwg/io/dxf/readers/DxfBinaryReader_p.h>
 #include <dwg/io/dxf/readers/DxfTextReader_p.h>
 #include <dwg/io/dxf/readers/IDxfStreamReader_p.h>
-#include <dwg/io/dxf/DxfDocumentBuilder_p.h>
 #include <dwg/utils/StreamWrapper.h>
-#include <dwg/header/CadHeader.h>
+#include <fmt/core.h>
 
 namespace dwg {
 
-DxfReader::DxfReader(const std::string &filename) : CadReaderBase<DxfReaderConfiguration>(filename), _builder(nullptr), _reader(nullptr), _version(ACadVersion::Unknown) {}
+DxfReader::DxfReader(const std::string &filename)
+    : CadReaderBase<DxfReaderConfiguration>(filename), _builder(nullptr), _reader(nullptr),
+      _version(ACadVersion::Unknown)
+{
+}
 
-DxfReader::DxfReader(std::ifstream *stream) : CadReaderBase<DxfReaderConfiguration>(stream), _builder(nullptr), _reader(nullptr), _version(ACadVersion::Unknown) {}
+DxfReader::DxfReader(std::ifstream *stream)
+    : CadReaderBase<DxfReaderConfiguration>(stream), _builder(nullptr), _reader(nullptr), _version(ACadVersion::Unknown)
+{
+}
 
 bool DxfReader::isBinary() const
 {
@@ -225,7 +235,7 @@ IDxfStreamReader *DxfReader::getReader()
         tmpReader->readNext();
     }
 
-    return createReader(isBinary, isA1009Format);   
+    return createReader(isBinary, isA1009Format);
 }
 
 IDxfStreamReader *DxfReader::goToSection(const std::string &sectionName)

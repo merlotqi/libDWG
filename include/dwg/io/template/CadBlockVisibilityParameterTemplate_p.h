@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class CadEvaluationExpressionTemplate : public CadTemplate<EvaluationExpression *>
+class CadEvaluationExpressionTemplate : public CadTemplateT<EvaluationExpression *>
 {
 public:
     CadEvaluationExpressionTemplate(EvaluationExpression *object);
@@ -41,7 +41,7 @@ public:
     BlockElement *blockElement() const;
 };
 
-class CadBlockParameterTemplate : public: CadBlockElementTemplate
+class CadBlockParameterTemplate : public CadBlockElementTemplate
 {
 public:
     CadBlockParameterTemplate(BlockParameter *object);

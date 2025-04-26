@@ -22,14 +22,14 @@
 
 #pragma once
 
+#include <dwg/CadDocument.h>
 #include <dwg/CadObject.h>
 #include <dwg/utils/Delegate.h>
-#include <dwg/CadDocument.h>
+#include <fmt/core.h>
 #include <map>
 #include <string>
-#include <vector>
 #include <type_traits>
-#include <fmt/core.h>
+#include <vector>
 
 namespace dwg {
 
@@ -39,8 +39,8 @@ class Table : public CadObject
 public:
     using pointer = std::remove_cv_t<_Ty>;
     using pointee = std::remove_pointer_t<pointer>;
-    using iterator = typename std::map<std::string, pointer >::iterator;
-    using const_iterator = typename std::map<std::string, pointer >::const_iterator;
+    using iterator = typename std::map<std::string, pointer>::iterator;
+    using const_iterator = typename std::map<std::string, pointer>::const_iterator;
 
     static_assert(std::is_pointer<pointer>::value, "T must be a pointer type.");
     static_assert(std::is_base_of<TableEntry, pointee>::value, "T must point to a type derived from TableEntry.");
@@ -101,7 +101,7 @@ public:
     std::vector<std::string> defaultEntries() const
     {
         return std::vector<std::string>();
-    } 
+    }
     // clang-format on
 
 protected:
@@ -116,7 +116,7 @@ protected:
         std::string k = fmt::format("{}:{}", v->handle(), v->name());
         _entries.insert({k, v});
     }
- 
+
     void push_back(const std::string &n, pointer v)
     {
         _entries.insert({n, v});

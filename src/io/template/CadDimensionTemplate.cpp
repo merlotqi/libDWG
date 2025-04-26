@@ -21,8 +21,8 @@
  */
 
 #include <dwg/io/template/CadDimensionTemplate_p.h>
- 
+
 namespace dwg {
 
- 
+
 }// namespace dwg

@@ -23,10 +23,11 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/Layout.h>
 
 namespace dwg {
 
-class CadLayoutTemplate : public CadTemplate<Layout *>
+class CadLayoutTemplate : public CadTemplateT<Layout *>
 {
 public:
     CadLayoutTemplate();

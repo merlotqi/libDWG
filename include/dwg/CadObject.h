@@ -90,14 +90,13 @@ protected:
     virtual void unassignDocument();
 
     template<typename T>
-    void updateCollection(NonGraphicalObject* entry, ObjectDictionaryCollection<T>* table)
+    void updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection<T> *table)
     {
     }
 
     template<typename _Ty, typename _Derived>
     void updateTable(_Ty entry, Table<_Ty, _Derived> *table)
     {
-
     }
 
 private:

@@ -24,4 +24,46 @@
 
 namespace dwg {
 
+DxfDocumentBuilder::DxfDocumentBuilder(ACadVersion version, CadDocument *document,
+                                       const DxfReaderConfiguration &configuration)
+    : CadDocumentBuilder(version, document), _configuration(configuration)
+{
+}
+
+DxfDocumentBuilder::~DxfDocumentBuilder() {}
+
+DxfReaderConfiguration DxfDocumentBuilder::configuration() const
+{
+    return _configuration;
+}
+
+bool DxfDocumentBuilder::keepUnknownEntities() const
+{
+    return _configuration.keepUnknownEntities();
+}
+
+bool DxfDocumentBuilder::keepUnknownNonGraphicalObjects() const
+{
+    return _configuration.keepUnknownNonGraphicalObjects();
+}
+
+std::set<unsigned long long> DxfDocumentBuilder::modelSpaceEntities() const
+{
+    return _modelSpaceEntities;
+}
+
+std::set<unsigned long long> &DxfDocumentBuilder::modelSpaceEntities()
+{
+    return _modelSpaceEntities;
+}
+
+void DxfDocumentBuilder::buildDocument() {}
+
+std::vector<Entity *> DxfDocumentBuilder::buildEntities()
+{
+    return std::vector<Entity *>();
+}
+
+void DxfDocumentBuilder::assignOwner() {}
+
 }// namespace dwg

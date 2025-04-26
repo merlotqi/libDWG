@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 #include <dwg/objects/Group.h>
+#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 #include <initializer_list>
 
 namespace dwg {

@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class CadLineTypeTemplate : public CadTemplate<LineType *>
+class CadLineTypeTemplate : public CadTemplateT<LineType *>
 {
 public:
     struct SegmentTemplate
@@ -49,7 +49,6 @@ public:
 
     std::vector<SegmentTemplate> segmentTemplates() const;
     std::vector<SegmentTemplate> &segmentTemplates();
-
 };
 
 }// namespace dwg

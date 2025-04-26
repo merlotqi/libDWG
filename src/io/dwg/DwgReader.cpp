@@ -370,7 +370,7 @@ std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffse
     std::vector<unsigned char> buffer(length, 0);
 
     //Relative to data page map 1, add 0x480 to get stream position
-    stream->seekg((std::streampos)(0x480 + pageOffset));
+    stream->seekg((std::streampos) (0x480 + pageOffset));
     stream->read(reinterpret_cast<char *>(buffer.data()), length);
 
     std::vector<unsigned char> compressedData(totalSize, 0);

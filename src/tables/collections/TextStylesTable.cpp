@@ -24,7 +24,6 @@
 #include <dwg/tables/TextStyle.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 
-
 namespace dwg {
 
 TextStylesTable::TextStylesTable() {}

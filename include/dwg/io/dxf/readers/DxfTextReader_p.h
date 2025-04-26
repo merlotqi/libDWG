@@ -23,6 +23,8 @@
 #pragma once
 
 #include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
+#include <dwg/utils/Encoding.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 

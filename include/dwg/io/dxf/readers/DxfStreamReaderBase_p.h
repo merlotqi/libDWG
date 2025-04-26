@@ -81,7 +81,7 @@ protected:
     DxfCode _dxfcode;
     GroupCodeValueType _groupCodeValue;
     DwgVariant _value;
-    std::size_t _position; /// Current line or offset in the file
+    std::size_t _position;/// Current line or offset in the file
     std::string _valueRaw;
 };
 

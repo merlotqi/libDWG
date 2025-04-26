@@ -62,5 +62,4 @@ LineType *LineTypesTable::continuous() const
     return value(LineType::ContinuousName);
 }
 
-
 }// namespace dwg

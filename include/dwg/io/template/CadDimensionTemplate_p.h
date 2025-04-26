@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/io/template/CadEntityTemplate_p.h>
 #include <dwg/entities/Dimension.h>
- 
+#include <dwg/io/template/CadEntityTemplate_p.h>
+
 namespace dwg {
 
 class DimensionPlaceHolder : public Dimension
@@ -40,16 +40,16 @@ public:
     CadDimensionTemplate();
     CadDimensionTemplate(Dimension *dimension);
     void build(CadDocumentBuilder *builder);
-    
+
     std::optional<unsigned long long> styleHandle() const;
     void setStyleHandle(unsigned long long);
-    
+
     std::optional<unsigned long long> blockHandle() const;
     void setBlockHandle(unsigned long long);
-    
+
     std::string blockName() const;
     void setBlockName(const std::string &);
-    
+
     std::string styleName() const;
     void setStyleName(const std::string &);
 
@@ -62,5 +62,5 @@ private:
     std::string _blockName;
     std::string _styleName;
 };
- 
+
 }// namespace dwg

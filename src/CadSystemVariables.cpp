@@ -24,7 +24,6 @@
 
 namespace dwg {
 
-
 static std::vector<CadSystemVariableAttribute> _headerVariables = {
         {"$ANGBASE", {50}},
         {"$ANGDIR", {70}},

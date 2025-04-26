@@ -26,8 +26,8 @@
 #include <dwg/CadObjectCollection.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/entities/Entity.h>
-#include <dwg/tables/collections/Table.h>
 #include <dwg/exports.h>
+#include <dwg/tables/collections/Table.h>
 #include <map>
 #include <string>
 
@@ -105,7 +105,6 @@ public:
     template<typename _Ty, typename _Derived>
     void registerCollection(Table<_Ty, _Derived> *)
     {
-
     }
 
 protected:

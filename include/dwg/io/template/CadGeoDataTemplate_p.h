@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class CadGeoDataTemplate : public CadTemplate<GeoData *>
+class CadGeoDataTemplate : public CadTemplateT<GeoData *>
 {
 public:
     CadGeoDataTemplate();

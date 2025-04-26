@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <dwg/tables/collections/Table.h>
 #include <dwg/tables/TextStyle.h>
+#include <dwg/tables/collections/Table.h>
 
 namespace dwg {
 

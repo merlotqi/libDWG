@@ -50,6 +50,7 @@ class CadDocumentBuilder
 {
 public:
     CadDocumentBuilder(ACadVersion version, CadDocument *document);
+    virtual ~CadDocumentBuilder();
 
     ACadVersion version() const;
     CadDocument *documentToBuild() const;

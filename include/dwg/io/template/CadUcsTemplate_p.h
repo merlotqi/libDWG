@@ -23,12 +23,12 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/tables/UCS.h>
 
 namespace dwg {
 
-class CadUcsTemplate : public CadTemplate<UCS *>
+class CadUcsTemplate : public CadTemplateT<UCS *>
 {
-
 };
 
 }// namespace dwg

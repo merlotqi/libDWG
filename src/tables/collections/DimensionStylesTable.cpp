@@ -47,5 +47,4 @@ std::vector<std::string> DimensionStylesTable::defaultEntries() const
     return {DimensionStyle::DefaultName};
 }
 
-
 }// namespace dwg

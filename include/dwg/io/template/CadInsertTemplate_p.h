@@ -23,9 +23,10 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
- 
+#include <dwg/entities/Insert.h>
+
 namespace dwg {
- 
+
 class CadInsertTemplate : public CadEntityTemplate
 {
 public:
@@ -39,7 +40,7 @@ public:
     int ownedObjectsCount() const;
     void setOwnedObjectsCount(int);
 
-    std::optional<unsigned long long> blockHeaderHandle() const; 
+    std::optional<unsigned long long> blockHeaderHandle() const;
     void setBlockHeaderHandle(unsigned long long);
 
     std::string blockName() const;
@@ -57,5 +58,5 @@ public:
     std::vector<unsigned long long> attributesHandles() const;
     void setAttributesHandles(unsigned long long);
 };
- 
+
 }// namespace dwg

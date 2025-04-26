@@ -28,7 +28,7 @@
 
 namespace dwg {
 
-class CadGroupTemplate : public CadTemplate<Group *>
+class CadGroupTemplate : public CadTemplateT<Group *>
 {
 public:
     CadGroupTemplate();

@@ -23,13 +23,12 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
- 
+
 namespace dwg {
- 
+
 class CadLeaderTemplate : public CadEntityTemplate
 {
 public:
-    
 };
- 
+
 }// namespace dwg

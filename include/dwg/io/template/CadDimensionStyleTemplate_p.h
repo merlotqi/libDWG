@@ -23,49 +23,50 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/tables/DimensionStyle.h>
 
 namespace dwg {
 
-class CadDimensionStyleTemplate : public CadTemplate<DimensionStyle *>
+class CadDimensionStyleTemplate : public CadTemplateT<DimensionStyle *>
 {
 public:
     CadDimensionStyleTemplate();
     CadDimensionStyleTemplate(DimensionStyle *);
     void build(CadDocumentBuilder *builder);
-  
+
     std::string TextStyle_Name() const;
     void setTextStyle_Name(const std::string &);
-    
+
     std::string DIMBL_Name() const;
     void setDIMBL_Name(const std::string &);
-    
+
     std::string DIMBLK1_Name() const;
     void setDIMBLK1_Name(const std::string &);
-    
+
     std::string DIMBLK2_Name() const;
     void setDIMBLK2_Name(const std::string &);
-    
+
     std::optional<unsigned long long> TextStyleHandle() const;
     void setTextStyleHandle(unsigned long long);
-    
+
     std::optional<unsigned long long> DIMLDRBLK() const;
     void setDIMLDRBLK(unsigned long long);
-	
+
     std::optional<unsigned long long> DIMBLK() const;
     void setDIMBLK(unsigned long long);
-	
+
     std::optional<unsigned long long> DIMBLK1() const;
     void setDIMBLK1(unsigned long long);
-	
+
     std::optional<unsigned long long> DIMBLK2() const;
     void setDIMBLK2(unsigned long long);
-	
+
     unsigned long long Dimltype() const;
     void setDimltype(unsigned long long);
-	
+
     unsigned long long Dimltex1() const;
     void setDimltex1(unsigned long long);
-	
+
     unsigned long long Dimltex2() const;
     void setDimltex2(unsigned long long);
 
@@ -76,12 +77,12 @@ private:
     std::string _DIMBLK2_Name;
     std::optional<unsigned long long> _TextStyleHandle;
     std::optional<unsigned long long> _DIMLDRBLK;
-	std::optional<unsigned long long> _DIMBLK;
-	std::optional<unsigned long long> _DIMBLK1;
-	std::optional<unsigned long long> _DIMBLK2;
-	unsigned long long _Dimltype;
-	unsigned long long _Dimltex1;
-	unsigned long long _Dimltex2;
+    std::optional<unsigned long long> _DIMBLK;
+    std::optional<unsigned long long> _DIMBLK1;
+    std::optional<unsigned long long> _DIMBLK2;
+    unsigned long long _Dimltype;
+    unsigned long long _Dimltex1;
+    unsigned long long _Dimltex2;
 };
 
 }// namespace dwg

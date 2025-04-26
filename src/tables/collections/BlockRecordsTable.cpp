@@ -47,5 +47,4 @@ std::vector<std::string> BlockRecordsTable::defaultEntries() const
     return {BlockRecord::ModelSpaceName, BlockRecord::PaperSpaceName};
 }
 
-
 }// namespace dwg
