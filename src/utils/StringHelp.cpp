@@ -291,7 +291,7 @@ bool StringHelp::tryParseUnsigned64(const std::string &str, unsigned long long &
 unsigned long long StringHelp::parseHex64(const std::string &str)
 {
     unsigned long long result;
-    if (tryParseUnsigned64(str, result))
+    if (tryParseHex64(str, result))
         return result;
     else
         throw std::runtime_error(fmt::format("{} is not a valid hexadecimal integer", str));
@@ -302,7 +302,7 @@ bool StringHelp::tryParseHex64(const std::string &str, unsigned long long &value
     int offset = 0;
     if (str.size() > 2 && str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
         offset = 2;
-    return strToInt(str.c_str() + offset, value, 10U);
+    return strToInt(str.c_str() + offset, value, 16U);
 }
 
 double StringHelp::parseFloat(const std::string &str)
