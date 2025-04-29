@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/IObservableCadCollection.h>
 #include <dwg/objects/DictionaryCloningFlags.h>
 #include <dwg/objects/NonGraphicalObject.h>
 #include <map>
@@ -30,7 +31,7 @@
 
 namespace dwg {
 
-class LIBDWG_API CadDictionary : public NonGraphicalObject
+class LIBDWG_API CadDictionary : public NonGraphicalObject, public IObservableCadCollection
 {
     struct StringComparerOrdinalIgnoreCase
     {

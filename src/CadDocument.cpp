@@ -312,6 +312,8 @@ BlockRecord *CadDocument::paperSpace() const
     return _blockRecords->value(BlockRecord::PaperSpaceName);
 }
 
+void CadDocument::registerCollection(IObservableCadCollection *) {}
+
 CadDocument::CadDocument(bool createDefaults)
 {
     _cadObjects.insert({this->handle(), this});

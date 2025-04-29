@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/IHandledCadObject.h>
+#include <dwg/IObservableCadCollection.h>
 #include <dwg/objects/CadDictionary.h>
 #include <type_traits>
 
@@ -31,7 +32,7 @@ namespace dwg {
 class NonGraphicalObject;
 
 template<typename T>
-class ObjectDictionaryCollection : public IHandledCadObject
+class ObjectDictionaryCollection : public IHandledCadObject, public IObservableCadCollection
 {
     CadDictionary *_dictionary;
 

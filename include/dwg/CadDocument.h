@@ -32,8 +32,7 @@
 
 namespace dwg {
 
-template<typename _Ty, typename _Derived>
-class Table;
+class IObservableCadCollection;
 class CadHeader;
 class CadSummaryInfo;
 class DxfClassCollection;
@@ -103,10 +102,7 @@ public:
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
-    template<typename _Ty, typename _Derived>
-    void registerCollection(Table<_Ty, _Derived> *)
-    {
-    }
+    void registerCollection(IObservableCadCollection *);
 
 protected:
     void setRootDictionary(CadDictionary *dic);

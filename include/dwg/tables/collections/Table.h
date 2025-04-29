@@ -24,6 +24,7 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadObject.h>
+#include <dwg/IObservableCadCollection.h>
 #include <dwg/utils/Delegate.h>
 #include <fmt/core.h>
 #include <map>
@@ -34,7 +35,7 @@
 namespace dwg {
 
 template<typename _Ty, typename _Derived>
-class Table : public CadObject
+class Table : public CadObject, public IObservableCadCollection
 {
 public:
     using pointer = std::remove_cv_t<_Ty>;
@@ -52,9 +53,6 @@ public:
         document->registerCollection(this);
     }
     ~Table() {}
-
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
 
     // clang-format off
     std::string objectName() const override { return "TABLE"; }
