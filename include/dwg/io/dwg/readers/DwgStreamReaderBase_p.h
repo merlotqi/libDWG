@@ -41,7 +41,7 @@ public:
     long long position() const override;
 
     void setBitShift(int);
-    void setPosition(long long);
+    void setPosition(long long) override;
 
     bool isEmpty() const;
     void setEmpty(bool);

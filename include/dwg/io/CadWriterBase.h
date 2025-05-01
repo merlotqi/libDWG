@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
 #include <dwg/classes/DxfClassCollection.h>
 #include <dwg/header/CadHeader.h>

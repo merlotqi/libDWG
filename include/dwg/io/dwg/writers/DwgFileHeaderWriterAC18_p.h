@@ -36,7 +36,7 @@ class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 public:
     DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding, CadDocument *document);
 
-    int handleSectionOffset() const;
+    int handleSectionOffset() const override;
     void writeFile() override;
     void addSection(const std::string &name, std::ostream *stream, bool isCompressed, int decompsize = 0x7400) override;
 
