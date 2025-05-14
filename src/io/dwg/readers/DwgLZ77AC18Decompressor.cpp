@@ -25,7 +25,9 @@
 
 namespace dwg {
 
-void DwgLZ77AC18Decompressor::Decompress(std::istream *compressed, long long decompressedSize, std::ostream *out) {}
+void DwgLZ77AC18Decompressor::Decompress(std::istream *compressed, long long decompressedSize, std::istream *out) {}
+
+void DwgLZ77AC18Decompressor::DecompressToDest(std::istream *src, std::ostream *dst) {}
 
 void DwgLZ77AC18Decompressor::decompress(std::istream *src, std::ostream *dst) {}
 

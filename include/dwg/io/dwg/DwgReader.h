@@ -60,8 +60,9 @@ public:
 
 private:
     DwgFileHeader *readFileHeader();
+    void readAppInfo();
     DxfClassCollection *readClasses();
-    std::map<unsigned long long, unsigned long long> readHandles();
+    std::map<unsigned long long, long long> readHandles();
     unsigned int readObjFreeSpace();
 
     void readTemplate();
@@ -78,7 +79,7 @@ private:
     std::istream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName);
     std::istream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName);
     std::istream *getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
-    void decryptDataSection(const DwgLocalSectionMap &section, IDwgStreamReader *sreader);
+    void decryptDataSection(DwgLocalSectionMap &section, IDwgStreamReader *sreader);
     void reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor,
                              int blockSize);
     std::vector<unsigned char> getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,

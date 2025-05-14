@@ -29,7 +29,8 @@ namespace dwg {
 class DwgLZ77AC18Decompressor
 {
 public:
-    static void Decompress(std::istream *compressed, long long decompressedSize, std::ostream *out);
+    static void Decompress(std::istream *compressed, long long decompressedSize, std::istream *out);
+    static void DecompressToDest(std::istream *src, std::ostream *dst);
 
 private:
     static void decompress(std::istream *src, std::ostream *dst);

@@ -21,6 +21,12 @@
  */
 
 #include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
+#include <stdexcept>
+#include <dwg/io/dwg/readers/DwgStreamReaderAC12_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderAC15_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderAC18_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderAC21_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderAC24_p.h>
 
 namespace dwg {
 
@@ -30,6 +36,60 @@ DwgStreamReaderBase::~DwgStreamReaderBase() {}
 
 IDwgStreamReader *DwgStreamReaderBase::GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding,
                                                         bool resetPosition)
+{
+    IDwgStreamReader *reader = nullptr;
+
+    switch (version)
+    {
+        case ACadVersion::Unknown:
+        case ACadVersion::MC0_0:
+        case ACadVersion::AC1_2:
+        case ACadVersion::AC1_4:
+        case ACadVersion::AC1_50:
+        case ACadVersion::AC2_10:
+        case ACadVersion::AC1002:
+        case ACadVersion::AC1003:
+        case ACadVersion::AC1004:
+        case ACadVersion::AC1006:
+        case ACadVersion::AC1009:
+            throw std::runtime_error("Not supported DWG version");
+        case ACadVersion::AC1012:
+        case ACadVersion::AC1014:
+            reader = new DwgStreamReaderAC12(stream, resetPosition);
+            break;
+        case ACadVersion::AC1015:
+            reader = new DwgStreamReaderAC15(stream, resetPosition);
+            break;
+        case ACadVersion::AC1018:
+            reader = new DwgStreamReaderAC18(stream, resetPosition);
+            break;
+        case ACadVersion::AC1021:
+            reader = new DwgStreamReaderAC21(stream, resetPosition);
+            break;
+        case ACadVersion::AC1024:
+        case ACadVersion::AC1027:
+        case ACadVersion::AC1032:
+            reader = new DwgStreamReaderAC24(stream, resetPosition);
+            break;
+        default:
+            throw std::runtime_error("Not supported DWG version");
+    }
+
+    if (encoding.codePage() != CodePage::Unknown)
+    {
+        reader->setEncoding(encoding);
+    }
+    return reader;
+}
+
+Encoding DwgStreamReaderBase::encoding() const
+{
+    return Encoding();
+}
+
+void DwgStreamReaderBase::setEncoding(Encoding value) {}
+
+std::istream *DwgStreamReaderBase::stream()
 {
     return nullptr;
 }

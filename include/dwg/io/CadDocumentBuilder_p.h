@@ -83,7 +83,6 @@ public:
     void setVPorts(VPortsTable *);
 
     virtual bool keepUnknownEntities() const = 0;
-
     virtual bool keepUnknownNonGraphicalObjects() const = 0;
 
     unsigned long long initialHandSeed() const;

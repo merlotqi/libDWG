@@ -21,3 +21,10 @@
  */
 
 #include <dwg/io/dwg/DwgWriter.h>
+
+using namespace dwg;
+
+int main(int argc, char **argv)
+{
+    return 0;
+}

@@ -26,7 +26,7 @@ namespace dwg {
 
 Dwg21CompressedMetadata::Dwg21CompressedMetadata()
     : _headerSize(0x70), _fileSize(0), _pagesMapCrcCompressed(0), _pagesMapCorrectionFactor(0), _pagesMapCrcSeed(0),
-      _map2Offset(0), _map2Id(0), _pagesMapOffset(0), _header2Offset(0), _pagesMapSizeCompressed(0),
+      _map2Offset(0), _map2Id(0), _pagesMapOffset(0), _header2offset(0), _pagesMapSizeCompressed(0),
       _pagesMapSizeUncompressed(0), _pagesAmount(0), _pagesMaxId(0), _sectionsMap2Id(0), _pagesMapId(0),
       _unknow0x20(32), _unknow0x40(64), _pagesMapCrcUncompressed(0), _unknown0xF800(0xF800), _unknown4(4), _unknown1(1),
       _sectionsAmount(0), _sectionsMapCrcUncompressed(0), _sectionsMapSizeCompressed(0), _sectionsMapId(0),
@@ -115,14 +115,14 @@ void Dwg21CompressedMetadata::setPagesMapOffset(unsigned long long pagesMapOffse
     _pagesMapOffset = pagesMapOffset;
 }
 
-unsigned long long Dwg21CompressedMetadata::header2Offset() const
+unsigned long long Dwg21CompressedMetadata::header2offset() const
 {
-    return _header2Offset;
+    return _header2offset;
 }
 
-void Dwg21CompressedMetadata::setHeader2Offset(unsigned long long header2Offset)
+void Dwg21CompressedMetadata::setHeader2offset(unsigned long long header2Offset)
 {
-    _header2Offset = header2Offset;
+    _header2offset = header2Offset;
 }
 
 unsigned long long Dwg21CompressedMetadata::pagesMapSizeCompressed() const

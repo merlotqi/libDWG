@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DwgReaderConfiguration::DwgReaderConfiguration() : _crcCheck(false) {}
+DwgReaderConfiguration::DwgReaderConfiguration() : _crcCheck(false), _readSummaryInfo(true) {}
 
 bool DwgReaderConfiguration::crcCheck() const
 {
@@ -34,6 +34,16 @@ bool DwgReaderConfiguration::crcCheck() const
 void DwgReaderConfiguration::setCrcCheck(bool value)
 {
     _crcCheck = value;
+}
+
+bool DwgReaderConfiguration::isReadSummaryInfo() const
+{
+    return _readSummaryInfo;
+}
+
+void DwgReaderConfiguration::setReadSummaryInfo(bool value)
+{
+    _readSummaryInfo = value;
 }
 
 }// namespace dwg

@@ -34,11 +34,14 @@ public:
     virtual ~DwgReaderConfiguration() = default;
 
     bool crcCheck() const;
-
     void setCrcCheck(bool value);
+
+    bool isReadSummaryInfo() const;
+    void setReadSummaryInfo(bool value);
 
 private:
     bool _crcCheck;
+    bool _readSummaryInfo;
 };
 
 }// namespace dwg

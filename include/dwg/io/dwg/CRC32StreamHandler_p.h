@@ -42,7 +42,7 @@ protected:
 class CRC32InputStreamHandler : public InputStreamWrapper, public CRC32StreamHandlerBase
 {
 public:
-    CRC32InputStreamHandler(std::istream *stream);
+    CRC32InputStreamHandler(std::istream *stream, unsigned int seed);
     int rawRead(unsigned char *buff, int nLen);
 };
 

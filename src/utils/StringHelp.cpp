@@ -436,4 +436,9 @@ int StringHelp::icomparen(const std::string &a, const std::string &b, size_t n)
 #endif
 }
 
+std::vector<std::string> StringHelp::split(const std::string &str, char delimiter)
+{
+    return std::vector<std::string>();
+}
+
 }// namespace dwg

@@ -24,11 +24,12 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/DwgSectionIO_p.h>
-
+#include <functional>
 
 namespace dwg {
 
 class IDwgStreamReader;
+class CadSummaryInfo;
 class DwgSummaryInfoReader : public DwgSectionIO
 {
 public:
@@ -38,10 +39,14 @@ public:
 
     std::string sectionName() const;
 
-    void read();
+    CadSummaryInfo* read();
 
 private:
-    void readUtf8String();
+    std::string readUtf8String();
+
+    std::function<std::string()> _readStringMethod;
+
+    IDwgStreamReader *_reader = nullptr;
 };
 
 }// namespace dwg

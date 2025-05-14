@@ -24,6 +24,7 @@
 
 #include <dwg/exports.h>
 #include <string>
+#include <vector>
 
 namespace dwg {
 
@@ -65,6 +66,8 @@ public:
 
     static int icompare(const std::string &a, const std::string &b);
     static int icomparen(const std::string &a, const std::string &b, size_t n);
+
+    static std::vector<std::string> split(const std::string &str, char delimiter);
 };
 
 }// namespace dwg

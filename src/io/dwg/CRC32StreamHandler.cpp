@@ -32,7 +32,11 @@ unsigned int CRC32StreamHandlerBase::seed() const
 }
 
 
-CRC32InputStreamHandler::CRC32InputStreamHandler(std::istream *stream) : InputStreamWrapper(stream) {}
+CRC32InputStreamHandler::CRC32InputStreamHandler(std::istream *stream, unsigned int seed)
+    : InputStreamWrapper(stream)
+{
+    _seed = seed;
+}
 
 int CRC32InputStreamHandler::rawRead(unsigned char *buff, int nLen)
 {

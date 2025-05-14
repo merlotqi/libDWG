@@ -53,8 +53,8 @@ public:
     unsigned long long pagesMapOffset() const;
     void setPagesMapOffset(unsigned long long pagesMapOffset);
 
-    unsigned long long header2Offset() const;
-    void setHeader2Offset(unsigned long long header2Offset);
+    unsigned long long header2offset() const;
+    void setHeader2offset(unsigned long long header2Offset);
 
     unsigned long long pagesMapSizeCompressed() const;
     void setPagesMapSizeCompressed(unsigned long long pagesMapSizeCompressed);
@@ -140,7 +140,7 @@ private:
     unsigned long long _map2Offset;
     unsigned long long _map2Id;
     unsigned long long _pagesMapOffset;
-    unsigned long long _header2Offset;
+    unsigned long long _header2offset;
     unsigned long long _pagesMapSizeCompressed;
     unsigned long long _pagesMapSizeUncompressed;
     unsigned long long _pagesAmount;

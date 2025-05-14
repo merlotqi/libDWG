@@ -24,6 +24,7 @@
 #include <cmath>
 #include <dwg/CadUtils.h>
 #include <stdexcept>
+#include <dwg/utils/StringHelp.h>
 
 namespace dwg {
 
@@ -251,19 +252,24 @@ int CadUtils::GetCodeIndex(CodePage code)
 
 ACadVersion CadUtils::GetVersionFromName(const std::string &name)
 {
-    return ACadVersion::AC1018;
-    // //Modify the format of the name
-    // std::string vname = name.Replace('.', '_').ToUpper();
+    std::string vname = StringHelp::replace(name, ".", "_");
+    vname = StringHelp::toupper(vname);
 
-    // if (Enum.TryParse(vname, out ACadVersion version)) return version;
-    // else
-    //     return ACadVersion.Unknown;
+    auto it = stringToAcadVersion.find(vname);
+    if (it != stringToAcadVersion.end())
+    {
+        return it->second;
+    }
+    else
+    {
+        return ACadVersion::Unknown;
+    }
 }
 
 std::string CadUtils::GetNameFromVersion(ACadVersion version)
 {
-    //return acadVersionToString[version];
-    return std::string();//version.ToString().Replace('_', '.');
+    std::string name = AcadVersionToString[version];
+    return StringHelp::replace(name, "_", ".");
 }
 
 double CadUtils::ToJulianCalendar(const DateTime &date)

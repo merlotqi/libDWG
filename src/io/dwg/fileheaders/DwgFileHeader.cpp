@@ -77,7 +77,7 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
     switch (version)
     {
         case ACadVersion::Unknown:
-            throw std::runtime_error("not cupported");
+            throw std::runtime_error("Not support");
         case ACadVersion::MC0_0:
         case ACadVersion::AC1_2:
         case ACadVersion::AC1_4:
@@ -88,7 +88,7 @@ DwgFileHeader *DwgFileHeader::CreateFileHeader(ACadVersion version)
         case ACadVersion::AC1004:
         case ACadVersion::AC1006:
         case ACadVersion::AC1009:
-            throw std::runtime_error("not cupported");
+            throw std::runtime_error("Not support");
         case ACadVersion::AC1012:
         case ACadVersion::AC1014:
         case ACadVersion::AC1015:

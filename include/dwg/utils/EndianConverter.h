@@ -60,6 +60,16 @@ public:
     float toFloat(const unsigned char *bytes);
     double toDouble(const unsigned char *bytes);
 
+    char toChar(const unsigned char *bytes, std::size_t offset);
+    int16_t toInt16(const unsigned char *bytes, std::size_t offset);
+    uint16_t toUInt16(const unsigned char *bytes, std::size_t offset);
+    int32_t toInt32(const unsigned char *bytes, std::size_t offset);
+    uint32_t toUint32(const unsigned char *bytes, std::size_t offset);
+    int64_t toInt64(const unsigned char *bytes, std::size_t offset);
+    uint64_t toUInt64(const unsigned char *bytes, std::size_t offset);
+    float toFloat(const unsigned char *bytes, std::size_t offset);
+    double toDouble(const unsigned char *bytes, std::size_t offset);
+
     template<typename T>
     std::vector<unsigned char> bytesT(T value)
     {

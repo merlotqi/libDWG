@@ -30,6 +30,7 @@
 #include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
 #include <vector>
+#include <iostream>
 
 namespace dwg {
 /*
@@ -76,6 +77,8 @@ public:
     virtual Encoding encoding() const = 0;
 
     virtual void setEncoding(Encoding value) = 0;
+
+    virtual std::istream *stream() = 0;
 
     virtual int bitShift() const = 0;
 

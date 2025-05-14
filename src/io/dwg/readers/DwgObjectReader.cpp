@@ -25,4 +25,35 @@
 
 namespace dwg {
 
+DwgObjectReader::DwgObjectReader(ACadVersion version, DwgDocumentBuilder *builder, IDwgStreamReader *reader,
+                                 const std::queue<unsigned long long> &handles,
+                                 const std::map<unsigned long long, long long> &handleMap, DxfClassCollection *classes)
+    : DwgSectionIO(version)
+{
 }
+
+DwgObjectReader::~DwgObjectReader() {}
+
+std::string DwgObjectReader::sectionName() const
+{
+    return DwgSectionDefinition::AcDbObjects;
+}
+
+void DwgObjectReader::read() {}
+
+ObjectType DwgObjectReader::getEntityType(long long offset)
+{
+    return ObjectType::UNLISTED;
+}
+
+unsigned long long DwgObjectReader::handleReference()
+{
+    return 0ULL;
+}
+
+unsigned long long DwgObjectReader::handleReference(unsigned long long)
+{
+    return 0ULL;
+}
+
+}// namespace dwg

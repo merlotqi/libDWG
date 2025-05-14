@@ -21,3 +21,12 @@
  */
 
 #include <dwg/io/dwg/DwgReader.h>
+
+using namespace dwg;
+
+int main(int argc, char** argv)
+{
+    DwgReader reader("D:/codes/libDWG/samples/sample_AC1032.dwg");
+    reader.read();
+    return 0;
+}

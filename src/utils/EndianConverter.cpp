@@ -114,6 +114,50 @@ double EndianConverter::toDouble(const unsigned char *bytes)
     return fromBytesT<double>(bytes);
 }
 
+char EndianConverter::toChar(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+int16_t EndianConverter::toInt16(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+uint16_t EndianConverter::toUInt16(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+int32_t EndianConverter::toInt32(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+uint32_t EndianConverter::toUint32(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+int64_t EndianConverter::toInt64(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+uint64_t EndianConverter::toUInt64(const unsigned char *bytes, std::size_t offset)
+{
+    return 0;
+}
+
+float EndianConverter::toFloat(const unsigned char *bytes, std::size_t offset)
+{
+    return 0.0;
+}
+
+double EndianConverter::toDouble(const unsigned char *bytes, std::size_t offset)
+{
+    return 0.0;
+}
+
 class DefaultEndianConverter : public EndianConverter
 {
 public:

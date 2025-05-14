@@ -21,3 +21,49 @@
  */
 
 #pragma once
+
+#include <dwg/io/CadDocumentBuilder_p.h>
+#include <dwg/io/dwg/DwgReaderConfiguration.h>
+#include <dwg/io/dwg/DwgHeaderHandlesCollection_p.h>
+
+namespace dwg {
+
+class Entity;
+class CadBlockRecordTemplate;
+
+class DwgDocumentBuilder : public CadDocumentBuilder
+{
+public:
+    DwgDocumentBuilder(ACadVersion version, CadDocument *document, const DwgReaderConfiguration &configuration);
+    ~DwgDocumentBuilder();
+
+    DwgReaderConfiguration configuration() const; 
+
+    DwgHeaderHandlesCollection headerHandles() const;
+    void setHeaderHandles(const DwgHeaderHandlesCollection &headerHandles);
+
+    std::vector<CadBlockRecordTemplate *> blockRecordTemplates() const;
+    std::vector<CadBlockRecordTemplate *> &blockRecordTemplates();
+    void setBlockRecordTemplates(const std::vector<CadBlockRecordTemplate *> &);
+
+    std::vector<Entity *> paperSpaceEntities() const;
+    std::vector<Entity *> &paperSpaceEntities();
+
+    std::vector<Entity *> modelSpaceEntities() const;
+    std::vector<Entity *> &modelSpaceEntities();
+
+    bool keepUnknownEntities() const override;
+    bool keepUnknownNonGraphicalObjects() const override;
+
+    void buildDocument() override;
+
+private:
+    DwgReaderConfiguration _configuration;
+    DwgHeaderHandlesCollection _headerHandles;
+
+    std::vector<CadBlockRecordTemplate *> _blockRecordTemplates;
+    std::vector<Entity *> _paperSpaceEntities;
+    std::vector<Entity *> _modelSpaceEntities;
+};
+
+}// namespace dwg
