@@ -24,4 +24,20 @@
 
 namespace dwg {
 
+CadGroupTemplate::CadGroupTemplate() : CadTemplateT<Group *>(new Group()) {}
+
+CadGroupTemplate::CadGroupTemplate(Group *group) : CadTemplateT<Group *>(group) {}
+
+void CadGroupTemplate::build(CadDocumentBuilder *builder) {}
+
+std::vector<unsigned long long> CadGroupTemplate::handles() const
+{
+    return _handles;
+}
+
+std::vector<unsigned long long> &CadGroupTemplate::handles()
+{
+    return _handles;
+}
+
 }// namespace dwg

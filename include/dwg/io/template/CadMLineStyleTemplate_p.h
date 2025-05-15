@@ -21,3 +21,34 @@
  */
 
 #pragma once
+
+#include <dwg/io/template/CadTemplate_p.h>
+#include <dwg/objects/MLineStyle.h>
+#include <optional>
+
+namespace dwg {
+
+class CadMLineStyleTemplate : public CadTemplateT<MLineStyle *>
+{
+public:
+    struct ElementTemplate
+    {
+        std::optional<unsigned long long> lineTypeHandle;
+        std::optional<unsigned long long> lineTypeName;
+        std::optional<int> linetypeIndex;
+        MLineStyle::Element element;
+        void build(CadDocumentBuilder *builder);
+    };
+
+    CadMLineStyleTemplate(MLineStyle *mlStyle);
+
+    void build(CadDocumentBuilder *builder) override;
+
+    std::vector<ElementTemplate> elementTemplates() const;
+    std::vector<ElementTemplate> &elementTemplates();
+
+private:
+    std::vector<ElementTemplate> _elementTemplates;
+};
+
+}// namespace dwg

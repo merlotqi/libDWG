@@ -24,4 +24,95 @@
 
 namespace dwg {
 
+CadInsertTemplate::CadInsertTemplate() : CadEntityTemplate(new Insert()) {}
+
+CadInsertTemplate::CadInsertTemplate(Insert *insert) : CadEntityTemplate(insert) {}
+
+void CadInsertTemplate::build(CadDocumentBuilder *builder) {}
+
+bool CadInsertTemplate::hasAtts() const
+{
+    return _hasAtts;
+}
+
+void CadInsertTemplate::setHasAtts(bool value)
+{
+    _hasAtts = value;
+}
+
+int CadInsertTemplate::ownedObjectsCount() const
+{
+    return _ownedObjectsCount;
+}
+
+void CadInsertTemplate::setOwnedObjectsCount(int value)
+{
+    _ownedObjectsCount = value;
+}
+
+std::optional<unsigned long long> CadInsertTemplate::blockHeaderHandle() const
+{
+    return _blockHeaderHandle;
+}
+
+void CadInsertTemplate::setBlockHeaderHandle(unsigned long long value)
+{
+    _blockHeaderHandle = value;
+}
+
+std::string CadInsertTemplate::blockName() const
+{
+    return _blockName;
+}
+
+void CadInsertTemplate::setBlockName(const std::string &value)
+{
+    _blockName = value;
+}
+
+std::optional<unsigned long long> CadInsertTemplate::firstAttributeHandle() const
+{
+    return _firstAttributeHandle;
+}
+
+void CadInsertTemplate::setFirstAttributeHandle(unsigned long long value)
+{
+    _firstAttributeHandle = value;
+}
+
+std::optional<unsigned long long> CadInsertTemplate::endAttributeHandle() const
+{
+    return _endAttributeHandle;
+}
+
+void CadInsertTemplate::setEndAttributeHandle(unsigned long long value)
+{
+    _endAttributeHandle = value;
+}
+
+std::optional<unsigned long long> CadInsertTemplate::seqendHandle() const
+{
+    return _seqendHandle;
+}
+
+void CadInsertTemplate::setSeqendHandle(unsigned long long value)
+{
+    _seqendHandle = value;
+}
+
+std::vector<unsigned long long> CadInsertTemplate::attributesHandles() const
+{
+    return _attributesHandles;
+}
+
+std::vector<unsigned long long> &CadInsertTemplate::attributesHandles()
+{
+    return _attributesHandles;
+}
+
+void CadInsertTemplate::setAttributesHandles(const std::vector<unsigned long long> &value)
+{
+    _attributesHandles = value;
+}
+
 }// namespace dwg

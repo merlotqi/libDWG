@@ -26,8 +26,19 @@
 
 namespace dwg {
 
+class PdfUnderlay;
 class CadPdfUnderlayTemplate : public CadEntityTemplate
 {
+public:
+    CadPdfUnderlayTemplate();
+    CadPdfUnderlayTemplate(PdfUnderlay *);
+    void build(CadDocumentBuilder *builder) override;
+
+    std::optional<unsigned long long> definitionHandle() const;
+    void setDefinitionHandle(unsigned long long);
+
+private:
+    std::optional<unsigned long long> _definitionHandle;
 };
 
 }// namespace dwg

@@ -31,7 +31,7 @@ class CadImageTemplate : public CadEntityTemplate
 {
 public:
     CadImageTemplate(CadWipeoutBase *image);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::optional<unsigned long long> imgDefHandle() const;
     void setImgDefHandle(unsigned long long);

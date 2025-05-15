@@ -20,8 +20,25 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/entities/PdfUnderlay.h>
 #include <dwg/io/template/CadPdfUnderlayTemplate_p.h>
 
 namespace dwg {
+
+CadPdfUnderlayTemplate::CadPdfUnderlayTemplate() : CadEntityTemplate(new PdfUnderlay()) {}
+
+CadPdfUnderlayTemplate::CadPdfUnderlayTemplate(PdfUnderlay *entity) : CadEntityTemplate(entity) {}
+
+void CadPdfUnderlayTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadPdfUnderlayTemplate::definitionHandle() const
+{
+    return _definitionHandle;
+}
+
+void CadPdfUnderlayTemplate::setDefinitionHandle(unsigned long long value)
+{
+    _definitionHandle = value;
+}
 
 }// namespace dwg

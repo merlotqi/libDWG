@@ -24,4 +24,22 @@
 
 namespace dwg {
 
+void CadMLineStyleTemplate::ElementTemplate::build(CadDocumentBuilder *builder) {}
+
+CadMLineStyleTemplate::CadMLineStyleTemplate(MLineStyle *mlStyle) : CadTemplateT<MLineStyle *>(mlStyle) {}
+
+
+void CadMLineStyleTemplate::build(CadDocumentBuilder *builder) {}
+
+
+std::vector<CadMLineStyleTemplate::ElementTemplate> CadMLineStyleTemplate::elementTemplates() const
+{
+    return _elementTemplates;
+}
+
+std::vector<CadMLineStyleTemplate::ElementTemplate> &CadMLineStyleTemplate::elementTemplates()
+{
+    return _elementTemplates;
+}
+
 }// namespace dwg

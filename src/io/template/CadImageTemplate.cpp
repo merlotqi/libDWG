@@ -24,5 +24,28 @@
 
 namespace dwg {
 
+CadImageTemplate::CadImageTemplate(CadWipeoutBase *image) : CadEntityTemplate(image) {}
+
+void CadImageTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadImageTemplate::imgDefHandle() const
+{
+    return _imgDefHandle;
+}
+
+void CadImageTemplate::setImgDefHandle(unsigned long long handle)
+{
+    _imgDefHandle = handle;
+}
+
+std::optional<unsigned long long> CadImageTemplate::imgReactorHandle() const
+{
+    return _imgReactorHandle;
+}
+
+void CadImageTemplate::setImgReactorHandle(unsigned long long handle)
+{
+    _imgReactorHandle = handle;
+}
 
 }// namespace dwg

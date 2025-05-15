@@ -33,7 +33,7 @@ class CadBlockRecordTemplate : public CadTemplateT<BlockRecord *>
 public:
     CadBlockRecordTemplate();
     CadBlockRecordTemplate(BlockRecord *block);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
     void setBlockToRecord(CadDocumentBuilder *builder);
 
     std::optional<unsigned long long> firstEntityHandle() const;
@@ -62,6 +62,16 @@ public:
 
 private:
     void addEntity(CadDocumentBuilder *builder, Entity *entity);
+
+    private:
+    std::optional<unsigned long long> _firstEntityHandle;
+    std::optional<unsigned long long> _lastEntityHandle;
+    std::optional<unsigned long long> _beginBlockHandle;
+    std::optional<unsigned long long> _endBlockHandle;
+    std::optional<unsigned long long> _layoutHandle;
+    std::vector<unsigned long long> _ownedObjectHandles;
+    std::vector<unsigned long long> _insertHandles;
+    std::string _layerName;
 };
 
 }// namespace dwg

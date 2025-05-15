@@ -32,7 +32,7 @@ class CadGeoDataTemplate : public CadTemplateT<GeoData *>
 public:
     CadGeoDataTemplate();
     CadGeoDataTemplate(GeoData *geodata);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::optional<unsigned long long> hostBlockHandle() const;
     void setHostBlockHandle(unsigned long long);

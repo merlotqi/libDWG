@@ -32,7 +32,7 @@ class CadLayerTemplate : public CadTemplateT<Layer *>
 public:
     CadLayerTemplate();
     CadLayerTemplate(Layer *l);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     unsigned long long layerControlHandle() const;
     void setLayerControlHandle(unsigned long long);

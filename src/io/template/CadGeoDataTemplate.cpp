@@ -24,4 +24,20 @@
 
 namespace dwg {
 
+CadGeoDataTemplate::CadGeoDataTemplate() : CadTemplateT<GeoData *>(new GeoData()) {}
+
+CadGeoDataTemplate::CadGeoDataTemplate(GeoData *geodata) : CadTemplateT<GeoData *>(geodata) {}
+
+void CadGeoDataTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadGeoDataTemplate::hostBlockHandle() const
+{
+    return _hostBlockHandle;
+}
+
+void CadGeoDataTemplate::setHostBlockHandle(unsigned long long value)
+{
+    _hostBlockHandle = value;
+}
+
 }// namespace dwg

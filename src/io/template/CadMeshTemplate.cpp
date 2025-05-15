@@ -20,8 +20,23 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/entities/Mesh.h>
 #include <dwg/io/template/CadMeshTemplate_p.h>
 
 namespace dwg {
+
+CadMeshTemplate::CadMeshTemplate() : CadEntityTemplate(new Mesh()) {}
+
+CadMeshTemplate::CadMeshTemplate(Mesh *mesh) : CadEntityTemplate(mesh) {}
+
+bool CadMeshTemplate::subclassMarker() const
+{
+    return _subclassMarker;
+}
+
+void CadMeshTemplate::setSubclassMarker(bool value)
+{
+    _subclassMarker = value;
+}
 
 }// namespace dwg

@@ -23,11 +23,38 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
+#include <vector>
 
 namespace dwg {
 
+class PolyfaceMesh;
 class CadPolyfaceMeshTemplate : public CadEntityTemplate
 {
+public:
+    CadPolyfaceMeshTemplate(PolyfaceMesh *polyfaceMesh);
+    void build(CadDocumentBuilder *builder) override;
+
+    std::optional<unsigned long long> firstVerticeHandle() const;
+    void setFirstVerticeHandle(unsigned long long);
+
+    std::optional<unsigned long long> lastVerticeHandle() const;
+    void setLastVerticeHandle(unsigned long long);
+
+    std::optional<unsigned long long> seqendHandle() const;
+    void setSeqendHandle(unsigned long long);
+
+    std::vector<unsigned long long> verticesHandles() const;
+    std::vector<unsigned long long> &verticesHandles();
+
+
+private:
+    void addItemToPolyface(CadObject *item, CadDocumentBuilder *builder);
+
+private:
+    std::optional<unsigned long long> _firstVerticeHandle;
+    std::optional<unsigned long long> _lastVerticeHandle;
+    std::optional<unsigned long long> _seqendHandle;
+    std::vector<unsigned long long> _verticesHandles;
 };
 
 }// namespace dwg

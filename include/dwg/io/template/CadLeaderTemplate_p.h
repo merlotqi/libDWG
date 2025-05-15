@@ -26,9 +26,31 @@
 
 namespace dwg {
 
+class Leader;
 class CadLeaderTemplate : public CadEntityTemplate
 {
 public:
+    CadLeaderTemplate();
+    CadLeaderTemplate(Leader *leader);
+    void build(CadDocumentBuilder *builder) override;
+
+    double dimasz() const;
+    void setDimasz(double);
+
+    unsigned long long DIMSTYLEHandle() const;
+    void setDIMSTYLEHandle(unsigned long long);
+
+    std::string DIMSTYLEName() const;
+    void setDIMSTYLEName(const std::string &);
+
+    unsigned long long annotationHandle() const;
+    void setAnnotationHandle(unsigned long long);
+
+private:
+    double _dimasz;
+    unsigned long long _DIMSTYLEHandle;
+    std::string _DIMSTYLEName;
+    unsigned long long _annotationHandle;
 };
 
 }// namespace dwg

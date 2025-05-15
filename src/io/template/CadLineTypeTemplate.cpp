@@ -24,4 +24,45 @@
 
 namespace dwg {
 
+/* ------------------ CadLineTypeTemplate::SegmentTemplate ------------------ */
+void CadLineTypeTemplate::SegmentTemplate::build(CadDocumentBuilder *builder) {}
+
+
+/* --------------------------- CadLineTypeTemplate -------------------------- */
+CadLineTypeTemplate::CadLineTypeTemplate() : CadTemplateT<LineType *>(new LineType()) {}
+
+CadLineTypeTemplate::CadLineTypeTemplate(LineType *l) : CadTemplateT<LineType *>(l) {}
+
+void CadLineTypeTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadLineTypeTemplate::ltypeControlHandle() const
+{
+    return _ltypeControlHandle;
+}
+
+void CadLineTypeTemplate::setLtypeControlHandle(unsigned long long value)
+{
+    _ltypeControlHandle = value;
+}
+
+std::optional<double> CadLineTypeTemplate::totalLen() const
+{
+    return _totalLen;
+}
+
+void CadLineTypeTemplate::setTotalLen(double value)
+{
+    _totalLen = value;
+}
+
+std::vector<CadLineTypeTemplate::SegmentTemplate> CadLineTypeTemplate::segmentTemplates() const
+{
+    return _segmentTemplates;
+}
+
+std::vector<CadLineTypeTemplate::SegmentTemplate> &CadLineTypeTemplate::segmentTemplates()
+{
+    return _segmentTemplates;
+}
+
 }// namespace dwg

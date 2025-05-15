@@ -24,5 +24,110 @@
 
 namespace dwg {
 
+CadMLeaderTemplate::CadMLeaderTemplate() : CadEntityTemplate(new MultiLeader()) {}
+
+CadMLeaderTemplate::CadMLeaderTemplate(MultiLeader *entity) : CadEntityTemplate(entity) {}
+
+void CadMLeaderTemplate::build(CadDocumentBuilder *builder) {}
+
+unsigned long long CadMLeaderTemplate::leaderStyleHandle() const
+{
+    return _leaderStyleHandle;
+}
+
+void CadMLeaderTemplate::setLeaderStyleHandle(unsigned long long value)
+{
+    _leaderStyleHandle = value;
+}
+
+unsigned long long CadMLeaderTemplate::leaderLineTypeHandle() const
+{
+    return _leaderLineTypeHandle;
+}
+
+void CadMLeaderTemplate::setLeaderLineTypeHandle(unsigned long long value)
+{
+    _leaderLineTypeHandle = value;
+}
+
+unsigned long long CadMLeaderTemplate::mtextStyleHandle() const
+{
+    return _mtextStyleHandle;
+}
+
+void CadMLeaderTemplate::setMtextStyleHandle(unsigned long long value)
+{
+    _mtextStyleHandle = value;
+}
+
+unsigned long long CadMLeaderTemplate::blockContentHandle() const
+{
+    return _blockContentHandle;
+}
+
+void CadMLeaderTemplate::setBlockContentHandle(unsigned long long value)
+{
+    _blockContentHandle = value;
+}
+
+unsigned long long CadMLeaderTemplate::arrowheadHandle() const
+{
+    return _arrowheadHandle;
+}
+
+void CadMLeaderTemplate::setArrowheadHandle(unsigned long long value)
+{
+    _arrowheadHandle = value;
+}
+
+std::map<unsigned long long, bool> CadMLeaderTemplate::arrowheadHandles() const
+{
+    return _arrowheadHandles;
+}
+
+std::map<unsigned long long, bool> &CadMLeaderTemplate::arrowheadHandles()
+{
+    return _arrowheadHandles;
+}
+
+std::map<MultiLeader::BlockAttribute, unsigned long long> CadMLeaderTemplate::blockAttributeHandles() const
+{
+    return _blockAttributeHandles;
+}
+
+std::map<MultiLeader::BlockAttribute, unsigned long long> &CadMLeaderTemplate::blockAttributeHandles()
+{
+    return _blockAttributeHandles;
+}
+
+unsigned long long CadMLeaderTemplate::annotContextTextStyleHandle() const
+{
+    return _annotContextTextStyleHandle;
+}
+
+void CadMLeaderTemplate::setAnnotContextTextStyleHandle(unsigned long long value)
+{
+    _annotContextTextStyleHandle = value;
+}
+
+unsigned long long CadMLeaderTemplate::annotContextBlockRecordHandle() const
+{
+    return _annotContextBlockRecordHandle;
+}
+
+void CadMLeaderTemplate::setAnnotContextBlockRecordHandle(unsigned long long value)
+{
+    _annotContextBlockRecordHandle = value;
+}
+
+std::vector<CadMLeaderTemplate::LeaderLineSubTemplate> CadMLeaderTemplate::leaderLineSubTemplates() const
+{
+    return _leaderLineSubTemplates;
+}
+
+std::vector<CadMLeaderTemplate::LeaderLineSubTemplate> &CadMLeaderTemplate::leaderLineSubTemplates()
+{
+    return _leaderLineSubTemplates;
+}
 
 }// namespace dwg

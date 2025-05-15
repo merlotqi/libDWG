@@ -59,6 +59,10 @@ public:
     MultiLeader();
     virtual ~MultiLeader();
 
+    virtual ObjectType objectType() const override;
+    virtual std::string objectName() const override;
+    virtual std::string subclassMarker() const override;
+
     MultiLeaderAnnotContext *contextData() const;
     void setContextData(MultiLeaderAnnotContext *context);
 

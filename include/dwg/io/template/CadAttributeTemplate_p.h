@@ -32,7 +32,7 @@ class CadAttributeTemplate : public CadTextEntityTemplate
 {
 public:
     CadAttributeTemplate(AttributeBase *entity);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     CadTextEntityTemplate *mtextTemplate() const;
     void setMTextTemplate(CadTextEntityTemplate *);

@@ -24,4 +24,50 @@
 
 namespace dwg {
 
+CadMLeaderStyleTemplate::CadMLeaderStyleTemplate() : CadTemplateT<MultiLeaderStyle *>(new MultiLeaderStyle()) {}
+
+CadMLeaderStyleTemplate::CadMLeaderStyleTemplate(MultiLeaderStyle *style) : CadTemplateT<MultiLeaderStyle *>(style) {}
+
+void CadMLeaderStyleTemplate::build(CadDocumentBuilder *builder) {}
+
+unsigned long long CadMLeaderStyleTemplate::leaderLineTypeHandle() const
+{
+    return _leaderLineTypeHandle;
+}
+
+void CadMLeaderStyleTemplate::setLeaderLineTypeHandle(unsigned long long value)
+{
+    _leaderLineTypeHandle = value;
+}
+
+unsigned long long CadMLeaderStyleTemplate::arrowheadHandle() const
+{
+    return _arrowheadHandle;
+}
+
+void CadMLeaderStyleTemplate::setArrowheadHandle(unsigned long long value)
+{
+    _arrowheadHandle = value;
+}
+
+unsigned long long CadMLeaderStyleTemplate::mtextStyleHandle() const
+{
+    return _mtextStyleHandle;
+}
+
+void CadMLeaderStyleTemplate::setMTextStyleHandle(unsigned long long value)
+{
+    _mtextStyleHandle = value;
+}
+
+unsigned long long CadMLeaderStyleTemplate::blockContentHandle() const
+{
+    return _blockContentHandle;
+}
+
+void CadMLeaderStyleTemplate::setBlockContentHandle(unsigned long long value)
+{
+    _blockContentHandle = value;
+}
+
 }// namespace dwg

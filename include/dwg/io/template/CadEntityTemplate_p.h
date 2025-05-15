@@ -31,7 +31,7 @@ class CadEntityTemplate : public CadTemplateT<Entity *>
 {
 public:
     CadEntityTemplate(Entity *v);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
     void setUnlinkedReferences();
 
     unsigned char entityMode() const;
@@ -77,7 +77,7 @@ protected:
     std::optional<unsigned long long> _prevEntity;
     std::optional<unsigned long long> _nextEntity;
     std::optional<unsigned long long> _colorHandle;
-    std::string _boolColorName;
+    std::string _bookColorName;
     std::optional<unsigned long long> _materialHandle;
 };
 

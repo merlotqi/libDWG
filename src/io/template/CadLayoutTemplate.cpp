@@ -24,4 +24,70 @@
 
 namespace dwg {
 
+CadLayoutTemplate::CadLayoutTemplate() : CadTemplateT<Layout *>(new Layout()) {}
+
+CadLayoutTemplate::CadLayoutTemplate(Layout *l) : CadTemplateT<Layout *>(l) {}
+
+void CadLayoutTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadLayoutTemplate::paperSpaceBlockHandle() const
+{
+    return _paperSpaceBlockHandle;
+}
+
+void CadLayoutTemplate::setPaperSpaceBlockHandle(unsigned long long value)
+{
+    _paperSpaceBlockHandle = value;
+}
+
+std::optional<unsigned long long> CadLayoutTemplate::activeViewportHandle() const
+{
+    return _activeViewportHandle;
+}
+
+void CadLayoutTemplate::setActiveViewportHandle(unsigned long long value)
+{
+    _activeViewportHandle = value;
+}
+
+std::optional<unsigned long long> CadLayoutTemplate::baseUcsHandle() const
+{
+    return _baseUcsHandle;
+}
+
+void CadLayoutTemplate::setBaseUcsHandle(unsigned long long value)
+{
+    _baseUcsHandle = value;
+}
+
+std::optional<unsigned long long> CadLayoutTemplate::namesUcsHandle() const
+{
+    return _namesUcsHandle;
+}
+
+void CadLayoutTemplate::setNamesUcsHandle(unsigned long long value)
+{
+    _namesUcsHandle = value;
+}
+
+std::optional<unsigned long long> CadLayoutTemplate::lasActiveViewportHandle() const
+{
+    return _lasActiveViewportHandle;
+}
+
+void CadLayoutTemplate::setLasActiveViewportHandle(unsigned long long value)
+{
+    _lasActiveViewportHandle = value;
+}
+
+std::vector<unsigned long long> CadLayoutTemplate::viewportHandles() const
+{
+    return _viewportHandles;
+}
+
+std::vector<unsigned long long> &CadLayoutTemplate::viewportHandles()
+{
+    return _viewportHandles;
+}
+
 }// namespace dwg

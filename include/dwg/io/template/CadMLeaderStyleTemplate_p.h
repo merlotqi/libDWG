@@ -32,7 +32,7 @@ class CadMLeaderStyleTemplate : public CadTemplateT<MultiLeaderStyle *>
 public:
     CadMLeaderStyleTemplate();
     CadMLeaderStyleTemplate(MultiLeaderStyle *);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     unsigned long long leaderLineTypeHandle() const;
     void setLeaderLineTypeHandle(unsigned long long);

@@ -22,12 +22,42 @@
 
 #pragma once
 
+#include <dwg/entities/HatchBoundaryPath.h>
 #include <dwg/io/template/CadEntityTemplate_p.h>
 
 namespace dwg {
 
+class Hatch;
+class CadBoundaryPathTemplate
+{
+public:
+    CadBoundaryPathTemplate();
+    ~CadBoundaryPathTemplate();
+
+    HatchBoundaryPath *path() const;
+    void setPath(HatchBoundaryPath *path);
+
+    std::vector<unsigned long long> handles() const;
+    std::vector<unsigned long long> &handles();
+    void setHandles(const std::vector<unsigned long long> &handles);
+
+    void build(CadDocumentBuilder *builder) override;
+};
+
 class CadHatchTemplate : public CadEntityTemplate
 {
+public:
+    CadHatchTemplate();
+    CadHatchTemplate(Hatch *hatch);
+    ~CadHatchTemplate();
+
+    std::string hatchPatternName() const;
+    void setHatchPatternName(const std::string &name);
+
+    std::vector<CadBoundaryPathTemplate> PathTempaltes() const;
+    std::vector<CadBoundaryPathTemplate> &PathTempaltes();
+
+    void build(CadDocumentBuilder *builder) override;
 };
 
 }// namespace dwg

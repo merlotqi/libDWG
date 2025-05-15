@@ -34,6 +34,7 @@ class CadObjectCollection;
 class LIBDWG_API Insert : public Entity
 {
 public:
+    Insert();
     Insert(BlockRecord *);
     ~Insert();
 
@@ -79,9 +80,6 @@ public:
 
     double ZScale() const;
     void setZScale(double scale);
-
-protected:
-    Insert();
 
 private:
     BlockRecord *_block;

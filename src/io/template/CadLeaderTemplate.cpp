@@ -20,8 +20,55 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/entities/Leader.h>
 #include <dwg/io/template/CadLeaderTemplate_p.h>
 
 namespace dwg {
+
+CadLeaderTemplate::CadLeaderTemplate() : CadEntityTemplate(new Leader()) {}
+
+CadLeaderTemplate::CadLeaderTemplate(Leader *leader) : CadEntityTemplate(leader) {}
+
+void CadLeaderTemplate::build(CadDocumentBuilder *builder) {}
+
+double CadLeaderTemplate::dimasz() const
+{
+    return _dimasz;
+}
+
+void CadLeaderTemplate::setDimasz(double value)
+{
+    _dimasz = value;
+}
+
+unsigned long long CadLeaderTemplate::DIMSTYLEHandle() const
+{
+    return _DIMSTYLEHandle;
+}
+
+void CadLeaderTemplate::setDIMSTYLEHandle(unsigned long long value)
+{
+    _DIMSTYLEHandle = value;
+}
+
+std::string CadLeaderTemplate::DIMSTYLEName() const
+{
+    return _DIMSTYLEName;
+}
+
+void CadLeaderTemplate::setDIMSTYLEName(const std::string &value)
+{
+    _DIMSTYLEName = value;
+}
+
+unsigned long long CadLeaderTemplate::annotationHandle() const
+{
+    return _annotationHandle;
+}
+
+void CadLeaderTemplate::setAnnotationHandle(unsigned long long value)
+{
+    _annotationHandle = value;
+}
 
 }// namespace dwg

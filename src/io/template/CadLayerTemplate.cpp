@@ -24,4 +24,70 @@
 
 namespace dwg {
 
+CadLayerTemplate::CadLayerTemplate() : CadTemplateT<Layer *>(new Layer()) {}
+
+CadLayerTemplate::CadLayerTemplate(Layer *l) : CadTemplateT<Layer *>(l) {}
+
+void CadLayerTemplate::build(CadDocumentBuilder *builder) {}
+
+unsigned long long CadLayerTemplate::layerControlHandle() const
+{
+    return _layerControlHandle;
+}
+
+void CadLayerTemplate::setLayerControlHandle(unsigned long long value)
+{
+    _layerControlHandle = value;
+}
+
+unsigned long long CadLayerTemplate::plotStyleHandle() const
+{
+    return _plotStyleHandle;
+}
+
+void CadLayerTemplate::setPlotStyleHandle(unsigned long long value)
+{
+    _layerControlHandle = value;
+}
+
+unsigned long long CadLayerTemplate::materialHandle() const
+{
+    return _materialHandle;
+}
+
+void CadLayerTemplate::setMaterialHandle(unsigned long long value)
+{
+    _materialHandle = value;
+}
+
+std::optional<unsigned long long> CadLayerTemplate::lineTypeHandle() const
+{
+    return _lineTypeHandle;
+}
+
+void CadLayerTemplate::setLineTypeHandle(unsigned long long value)
+{
+    _lineTypeHandle = value;
+}
+
+std::string CadLayerTemplate::lineTypeName() const
+{
+    return _lineTypeName;
+}
+
+void CadLayerTemplate::setLineTypeName(const std::string &value)
+{
+    _lineTypeName = value;
+}
+
+std::string CadLayerTemplate::trueColorName() const
+{
+    return _trueColorName;
+}
+
+void CadLayerTemplate::setTrueColorName(const std::string &value)
+{
+    _trueColorName = value;
+}
+
 }// namespace dwg

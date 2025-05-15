@@ -33,10 +33,13 @@ class CadEvaluationGraphTemplate : public CadTemplateT<EvaluationGraph *>
 public:
     CadEvaluationGraphTemplate();
     CadEvaluationGraphTemplate(EvaluationGraph *evaluationGraph);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::vector<GraphNodeTemplate *> nodeTemplates() const;
     std::vector<GraphNodeTemplate *> &nodeTemplates();
+
+private:
+    std::vector<GraphNodeTemplate *> _nodeTemplates;
 };
 
 }// namespace dwg

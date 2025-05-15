@@ -26,8 +26,26 @@
 
 namespace dwg {
 
+class Shape;
 class CadShapeTemplate : public CadEntityTemplate
 {
+public:
+    CadShapeTemplate(Shape *);
+    void build(CadDocumentBuilder *builder) override;
+
+    std::optional<unsigned short> shapeIndex() const;
+    void setShapeIndex(unsigned short);
+
+    std::optional<unsigned long long> shapeFileHandle() const;
+    void setShapeFileHandle(unsigned long long);
+
+    std::string shapeFileName() const;
+    void setShapeFileName(const std::string &);
+
+private:
+    std::optional<unsigned short> _shapeIndex;
+    std::optional<unsigned long long> _shapeFileHandle;
+    std::string _shapeFileName;
 };
 
 }// namespace dwg

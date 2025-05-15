@@ -24,4 +24,9 @@
 
 namespace dwg {
 
+CadNonGraphicalObjectTemplate::CadNonGraphicalObjectTemplate(NonGraphicalObject *obj)
+    : CadTemplateT<NonGraphicalObject *>(obj)
+{
+}
+
 }// namespace dwg

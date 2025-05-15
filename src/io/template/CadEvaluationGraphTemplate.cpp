@@ -24,4 +24,23 @@
 
 namespace dwg {
 
+CadEvaluationGraphTemplate::CadEvaluationGraphTemplate() : CadTemplateT<EvaluationGraph *>(new EvaluationGraph()) {}
+
+CadEvaluationGraphTemplate::CadEvaluationGraphTemplate(EvaluationGraph *evaluationGraph)
+    : CadTemplateT<EvaluationGraph *>(evaluationGraph)
+{
+}
+
+void CadEvaluationGraphTemplate::build(CadDocumentBuilder *builder) {}
+
+std::vector<GraphNodeTemplate *> CadEvaluationGraphTemplate::nodeTemplates() const
+{
+    return _nodeTemplates;
+}
+
+std::vector<GraphNodeTemplate *> &CadEvaluationGraphTemplate::nodeTemplates()
+{
+    return _nodeTemplates;
+}
+
 }// namespace dwg

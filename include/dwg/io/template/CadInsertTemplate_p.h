@@ -32,7 +32,7 @@ class CadInsertTemplate : public CadEntityTemplate
 public:
     CadInsertTemplate();
     CadInsertTemplate(Insert *insert);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     bool hasAtts() const;
     void setHasAtts(bool);
@@ -56,7 +56,18 @@ public:
     void setSeqendHandle(unsigned long long);
 
     std::vector<unsigned long long> attributesHandles() const;
-    void setAttributesHandles(unsigned long long);
+    std::vector<unsigned long long> &attributesHandles();
+    void setAttributesHandles(const std::vector<unsigned long long> &);
+
+private:
+    bool _hasAtts;
+    int _ownedObjectsCount;
+    std::optional<unsigned long long> _blockHeaderHandle;
+    std::string _blockName;
+    std::optional<unsigned long long> _firstAttributeHandle;
+    std::optional<unsigned long long> _endAttributeHandle;
+    std::optional<unsigned long long> _seqendHandle;
+    std::vector<unsigned long long> _attributesHandles;
 };
 
 }// namespace dwg

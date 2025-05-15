@@ -24,4 +24,18 @@
 
 namespace dwg {
 
+CadAttributeTemplate::CadAttributeTemplate(AttributeBase *entity) : CadTextEntityTemplate(entity) {}
+
+void CadAttributeTemplate::build(CadDocumentBuilder *builder) {}
+
+CadTextEntityTemplate *CadAttributeTemplate::mtextTemplate() const
+{
+    return _mtextTemplate;
+}
+
+void CadAttributeTemplate::setMTextTemplate(CadTextEntityTemplate *value)
+{
+    _mtextTemplate = value;
+}
+
 }// namespace dwg

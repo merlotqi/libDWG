@@ -24,5 +24,42 @@
 
 namespace dwg {
 
+/* --------------------- CadEvaluationExpressionTemplate -------------------- */
+CadEvaluationExpressionTemplate::CadEvaluationExpressionTemplate(EvaluationExpression *object)
+    : CadTemplateT<EvaluationExpression *>(object)
+{
+}
+
+CadEvaluationExpressionTemplate::~CadEvaluationExpressionTemplate() {}
+
+
+/* ------------------------- CadBlockElementTemplate ------------------------ */
+CadBlockElementTemplate::CadBlockElementTemplate(BlockElement *object) : CadEvaluationExpressionTemplate(object) {}
+
+BlockElement *CadBlockElementTemplate::blockElement() const
+{
+    return nullptr;
+}
+
+
+/* ------------------------ CadBlockParameterTemplate ----------------------- */
+CadBlockParameterTemplate::CadBlockParameterTemplate(BlockParameter *object) : CadBlockElementTemplate(object) {}
+
+BlockParameter *CadBlockParameterTemplate::blockParameter() const
+{
+    return nullptr;
+}
+
+
+/* ---------------------- CadBlock1PtParameterTemplate ---------------------- */
+CadBlock1PtParameterTemplate::CadBlock1PtParameterTemplate(Block1PtParameter *object)
+    : CadBlockParameterTemplate(object)
+{
+}
+
+Block1PtParameter *CadBlock1PtParameterTemplate::block1PtParameter() const
+{
+    return nullptr;
+}
 
 }// namespace dwg

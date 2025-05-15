@@ -39,7 +39,7 @@ public:
 
     CadLineTypeTemplate();
     CadLineTypeTemplate(LineType *);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::optional<unsigned long long> ltypeControlHandle() const;
     void setLtypeControlHandle(unsigned long long);
@@ -49,6 +49,11 @@ public:
 
     std::vector<SegmentTemplate> segmentTemplates() const;
     std::vector<SegmentTemplate> &segmentTemplates();
+
+private:
+    std::optional<unsigned long long> _ltypeControlHandle;
+    std::optional<double> _totalLen;
+    std::vector<SegmentTemplate> _segmentTemplates;
 };
 
 }// namespace dwg

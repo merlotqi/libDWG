@@ -20,8 +20,43 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/entities/Shape.h>
 #include <dwg/io/template/CadShapeTemplate_p.h>
 
 namespace dwg {
+
+CadShapeTemplate::CadShapeTemplate(Shape *shape) : CadEntityTemplate(shape) {}
+
+void CadShapeTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned short> CadShapeTemplate::shapeIndex() const
+{
+    return _shapeIndex;
+}
+
+void CadShapeTemplate::setShapeIndex(unsigned short value)
+{
+    _shapeIndex = value;
+}
+
+std::optional<unsigned long long> CadShapeTemplate::shapeFileHandle() const
+{
+    return _shapeFileHandle;
+}
+
+void CadShapeTemplate::setShapeFileHandle(unsigned long long value)
+{
+    _shapeFileHandle = value;
+}
+
+std::string CadShapeTemplate::shapeFileName() const
+{
+    return _shapeFileName;
+}
+
+void CadShapeTemplate::setShapeFileName(const std::string &value)
+{
+    _shapeFileName = value;
+}
 
 }// namespace dwg

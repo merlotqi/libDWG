@@ -21,3 +21,16 @@
  */
 
 #pragma once
+
+#include <dwg/io/template/CadTemplate_p.h>
+
+namespace dwg {
+
+class NonGraphicalObject;
+class CadNonGraphicalObjectTemplate : public CadTemplateT<NonGraphicalObject *>
+{
+public:
+    CadNonGraphicalObjectTemplate(NonGraphicalObject *obj);
+};
+
+}// namespace dwg

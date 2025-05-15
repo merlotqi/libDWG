@@ -22,12 +22,49 @@
 
 #pragma once
 
+#include <dwg/entities/PolyLine.h>
 #include <dwg/io/template/CadEntityTemplate_p.h>
-
 namespace dwg {
+
+class PolyfaceMesh;
+
+class PolyLinePlaceholder : public Polyline
+{
+public:
+    PolyLinePlaceholder();
+    ObjectType objectType() const override;
+};
 
 class CadPolyLineTemplate : public CadEntityTemplate
 {
+public:
+    CadPolyLineTemplate();
+    CadPolyLineTemplate(Polyline *polyline);
+    void build(CadDocumentBuilder *builder) override;
+
+    std::optional<unsigned long long> firstVertexHandle() const;
+    void setFirstVertexHandle(unsigned long long);
+    
+    std::optional<unsigned long long> lastVertexHandle() const;
+    void setLastVertexHandle(unsigned long long);
+
+    std::optional<unsigned long long> seqendHandle() const;
+    void setSeqendHandle(unsigned long long);
+
+    std::vector<unsigned long long> vertexHandles() const;
+    std::vector<unsigned long long> &vertexHandles();
+
+    Polyline *polyline() const;
+    void SetPolyLineObject(Polyline *polyline);
+
+private:
+    void buildPolyfaceMesh(PolyfaceMesh *polyfaceMesh, CadDocumentBuilder *builder);
+
+private:
+    std::optional<unsigned long long> _firstVertexHandle;
+    std::optional<unsigned long long> _lastVertexHandle;
+    std::optional<unsigned long long> _seqendHandle;
+    std::vector<unsigned long long> _vertexHandles;
 };
 
 }// namespace dwg

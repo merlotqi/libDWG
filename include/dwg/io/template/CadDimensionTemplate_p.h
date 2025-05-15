@@ -32,6 +32,8 @@ class DimensionPlaceHolder : public Dimension
 public:
     DimensionPlaceHolder();
     ObjectType objectType() const override;
+    double measurement() const override;
+    std::string objectName() const override;
 };
 
 class CadDimensionTemplate : public CadEntityTemplate
@@ -39,7 +41,7 @@ class CadDimensionTemplate : public CadEntityTemplate
 public:
     CadDimensionTemplate();
     CadDimensionTemplate(Dimension *dimension);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::optional<unsigned long long> styleHandle() const;
     void setStyleHandle(unsigned long long);

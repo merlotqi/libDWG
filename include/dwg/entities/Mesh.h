@@ -42,6 +42,10 @@ public:
     Mesh();
     virtual ~Mesh();
 
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
+
     short version() const;
     void setVersion(short version);
 

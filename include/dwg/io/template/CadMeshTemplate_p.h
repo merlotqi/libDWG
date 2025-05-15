@@ -26,8 +26,18 @@
 
 namespace dwg {
 
+class Mesh;
 class CadMeshTemplate : public CadEntityTemplate
 {
+public:
+    CadMeshTemplate();
+    CadMeshTemplate(Mesh *);
+
+    bool subclassMarker() const;
+    void setSubclassMarker(bool);
+
+private:
+    bool _subclassMarker;
 };
 
 }// namespace dwg

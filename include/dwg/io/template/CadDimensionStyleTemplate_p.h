@@ -32,9 +32,9 @@ class CadDimensionStyleTemplate : public CadTemplateT<DimensionStyle *>
 public:
     CadDimensionStyleTemplate();
     CadDimensionStyleTemplate(DimensionStyle *);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
-    std::string TextStyle_Name() const;
+    std::string textStyle_Name() const;
     void setTextStyle_Name(const std::string &);
 
     std::string DIMBL_Name() const;
@@ -71,7 +71,7 @@ public:
     void setDimltex2(unsigned long long);
 
 private:
-    std::string _TextStyle_Name;
+    std::string _textStyle_Name;
     std::string _DIMBL_Name;
     std::string _DIMBLK1_Name;
     std::string _DIMBLK2_Name;

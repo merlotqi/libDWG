@@ -24,5 +24,94 @@
 
 namespace dwg {
 
+CadBlockRecordTemplate::CadBlockRecordTemplate() : CadTemplateT<BlockRecord *>(new BlockRecord *) {}
+
+CadBlockRecordTemplate::CadBlockRecordTemplate(BlockRecord *block) : CadTemplateT<BlockRecord *>(block) {}
+
+void CadBlockRecordTemplate::build(CadDocumentBuilder *builder) {}
+
+void CadBlockRecordTemplate::setBlockToRecord(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadBlockRecordTemplate::firstEntityHandle() const
+{
+    return _firstEntityHandle;
+}
+
+void CadBlockRecordTemplate::setFirstEntityHandle(unsigned long long value)
+{
+    _firstEntityHandle = value;
+}
+
+std::optional<unsigned long long> CadBlockRecordTemplate::lastEntityHandle() const
+{
+    return _lastEntityHandle;
+}
+
+void CadBlockRecordTemplate::setLastEntityHandle(unsigned long long value)
+{
+    _lastEntityHandle = value;
+}
+
+std::optional<unsigned long long> CadBlockRecordTemplate::beginBlockHandle() const
+{
+    return _beginBlockHandle;
+}
+
+void CadBlockRecordTemplate::setBeginBlockHandle(unsigned long long value)
+{
+    _beginBlockHandle = value;
+}
+
+std::optional<unsigned long long> CadBlockRecordTemplate::endBlockHandle() const
+{
+    return _endBlockHandle;
+}
+
+void CadBlockRecordTemplate::setEndBlockHandle(unsigned long long value)
+{
+    _endBlockHandle = value;
+}
+
+std::optional<unsigned long long> CadBlockRecordTemplate::layoutHandle() const
+{
+    return _layoutHandle;
+}
+
+void CadBlockRecordTemplate::setLayoutHandle(unsigned long long value)
+{
+    _layoutHandle = value;
+}
+
+std::vector<unsigned long long> CadBlockRecordTemplate::ownedObjectHandles() const
+{
+    return _ownedObjectHandles;
+}
+
+std::vector<unsigned long long> &CadBlockRecordTemplate::ownedObjectHandles()
+{
+    return _ownedObjectHandles;
+}
+
+std::vector<unsigned long long> CadBlockRecordTemplate::insertHandles() const
+{
+    return _insertHandles;
+}
+
+std::vector<unsigned long long> &CadBlockRecordTemplate::insertHandles()
+{
+    return _insertHandles;
+}
+
+std::string CadBlockRecordTemplate::layerName() const
+{
+    return _layerName;
+}
+
+void CadBlockRecordTemplate::setLayerName(const std::string &value)
+{
+    _layerName = value;
+}
+
+void CadBlockRecordTemplate::addEntity(CadDocumentBuilder *builder, Entity *entity) {}
 
 }// namespace dwg

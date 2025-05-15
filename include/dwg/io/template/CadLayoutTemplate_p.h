@@ -32,7 +32,7 @@ class CadLayoutTemplate : public CadTemplateT<Layout *>
 public:
     CadLayoutTemplate();
     CadLayoutTemplate(Layout *l);
-    void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder) override;
 
     std::optional<unsigned long long> paperSpaceBlockHandle() const;
     void setPaperSpaceBlockHandle(unsigned long long);

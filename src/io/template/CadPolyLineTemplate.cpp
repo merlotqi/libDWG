@@ -24,4 +24,69 @@
 
 namespace dwg {
 
+/* --------------------------- PolyLinePlaceholder -------------------------- */
+PolyLinePlaceholder::PolyLinePlaceholder() {}
+
+ObjectType PolyLinePlaceholder::objectType() const
+{
+    return ObjectType::INVALID;
+}
+
+
+/* --------------------------- CadPolyLineTemplate -------------------------- */
+CadPolyLineTemplate::CadPolyLineTemplate() : CadEntityTemplate(new PolyLinePlaceholder()) {}
+
+CadPolyLineTemplate::CadPolyLineTemplate(Polyline *polyline) : CadEntityTemplate(polyline) {}
+
+void CadPolyLineTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadPolyLineTemplate::firstVertexHandle() const
+{
+    return _firstVertexHandle;
+}
+
+void CadPolyLineTemplate::setFirstVertexHandle(unsigned long long value)
+{
+    _firstVertexHandle = value;
+}
+
+std::optional<unsigned long long> CadPolyLineTemplate::lastVertexHandle() const
+{
+    return _lastVertexHandle;
+}
+
+void CadPolyLineTemplate::setLastVertexHandle(unsigned long long value)
+{
+    _lastVertexHandle = value;
+}
+
+std::optional<unsigned long long> CadPolyLineTemplate::seqendHandle() const
+{
+    return _seqendHandle;
+}
+
+void CadPolyLineTemplate::setSeqendHandle(unsigned long long value)
+{
+    _seqendHandle = value;
+}
+
+std::vector<unsigned long long> CadPolyLineTemplate::vertexHandles() const
+{
+    return _vertexHandles;
+}
+
+std::vector<unsigned long long> &CadPolyLineTemplate::vertexHandles()
+{
+    return _vertexHandles;
+}
+
+Polyline *CadPolyLineTemplate::polyline() const
+{
+    return nullptr;
+}
+
+void CadPolyLineTemplate::SetPolyLineObject(Polyline *polyline) {}
+
+void CadPolyLineTemplate::buildPolyfaceMesh(PolyfaceMesh *polyfaceMesh, CadDocumentBuilder *builder) {}
+
 }// namespace dwg

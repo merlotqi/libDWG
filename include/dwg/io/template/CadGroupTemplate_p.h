@@ -32,11 +32,14 @@ class CadGroupTemplate : public CadTemplateT<Group *>
 {
 public:
     CadGroupTemplate();
-    CadGroupTemplate(Group *geodata);
-    void build(CadDocumentBuilder *builder);
+    CadGroupTemplate(Group *group);
+    void build(CadDocumentBuilder *builder) override;
 
     std::vector<unsigned long long> handles() const;
     std::vector<unsigned long long> &handles();
+
+private:
+    std::vector<unsigned long long> _handles;
 };
 
 }// namespace dwg

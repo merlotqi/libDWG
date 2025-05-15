@@ -20,9 +20,77 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
 #include <dwg/io/template/CadDimensionTemplate_p.h>
 
 namespace dwg {
 
+/* -------------------------- DimensionPlaceHolder -------------------------- */
+DimensionPlaceHolder::DimensionPlaceHolder() : Dimension(DimensionType::Linear) {}
+
+ObjectType DimensionPlaceHolder::objectType() const
+{
+    return ObjectType::INVALID;
+}
+double DimensionPlaceHolder::measurement() const
+{
+    return 0.0;
+}
+
+std::string DimensionPlaceHolder::objectName() const
+{
+    return DxfFileToken::EntityDimension;
+}
+
+/* -------------------------- CadDimensionTemplate -------------------------- */
+CadDimensionTemplate::CadDimensionTemplate() : CadEntityTemplate(new DimensionPlaceHolder()) {}
+
+CadDimensionTemplate::CadDimensionTemplate(Dimension *dimension) : CadEntityTemplate(dimension) {}
+
+void CadDimensionTemplate::build(CadDocumentBuilder *builder) {}
+
+std::optional<unsigned long long> CadDimensionTemplate::styleHandle() const
+{
+    return _styleHandle;
+}
+
+void CadDimensionTemplate::setStyleHandle(unsigned long long value)
+{
+    _styleHandle = value;
+}
+
+std::optional<unsigned long long> CadDimensionTemplate::blockHandle() const
+{
+    return _blockHandle;
+}
+
+void CadDimensionTemplate::setBlockHandle(unsigned long long value)
+{
+    _blockHandle = value;
+}
+
+std::string CadDimensionTemplate::blockName() const
+{
+    return _blockName;
+}
+
+void CadDimensionTemplate::setBlockName(const std::string &value)
+{
+    _blockName = value;
+}
+
+std::string CadDimensionTemplate::styleName() const
+{
+    return _styleName;
+}
+
+void CadDimensionTemplate::setStyleName(const std::string &value)
+{
+    _styleName = value;
+}
+
+void CadDimensionTemplate::setDimensionFlags(DimensionType flags) {}
+
+void CadDimensionTemplate::setDimensionObject(Dimension *dimension) {}
 
 }// namespace dwg
