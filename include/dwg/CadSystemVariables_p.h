@@ -23,14 +23,19 @@
 #pragma once
 
 #include <dwg/attributes/CadSystemVariableAttribute_p.h>
+#include <dwg/utils/DwgVariant.h>
 #include <vector>
+#include <string>
 
 namespace dwg {
 
+class CadHeader;
 class CadSystemVariables
 {
 public:
     static std::vector<CadSystemVariableAttribute> headerVariables();
+
+    static DwgVariant value(const std::string &, CadHeader *header);
 };
 
 }// namespace dwg

@@ -21,6 +21,9 @@
  */
 
 #include <dwg/CadSystemVariables_p.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/utils/StringHelp.h>
+#include <assert.h>
 
 namespace dwg {
 
@@ -279,6 +282,363 @@ static std::vector<CadSystemVariableAttribute> _headerVariables = {
 std::vector<CadSystemVariableAttribute> CadSystemVariables::headerVariables()
 {
     return _headerVariables;
+}
+
+DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
+{
+    assert(header);
+    if(key == "$ANGBASE")
+    {
+        return header->angleBase();
+    }
+    if(key == "$ANGDIR")
+    {
+        return static_cast<short>(header->angularDirection());
+    }
+    if(key == "$AUNITS")
+    {
+        return static_cast<short>(header->angularUnit());
+    }
+    if(key == "$AUPREC")
+    {
+        return header->angularUnitPrecision();
+    }
+    if(key == "$DIMLDRBLK")
+    {
+        return header->arrowBlockName();
+    }
+    if(key == "$DIMASO")
+    {
+        return header->associatedDimensions();
+    }
+    if(key == "$ATTMODE")
+    {
+        return static_cast<int>(header->attributeVisibility());
+    }
+    if(key == "$BLIPMODE")
+    {
+        return header->blipMode();
+    }
+    if(key == "$CAMERADISPLAY")
+    {
+        return header->cameraDisplayObjects();
+    }
+    if(key == "$CAMERAHEIGHT")
+    {
+        return header->cameraHeight();
+    }
+    if(key == "$CHAMFERD")
+    {
+        return header->chamferAngle();
+    }
+    if(key == "$CHAMFERA")
+    {
+        return header->chamferDistance1();
+    }
+    if(key == "$CHAMFERB")
+    {
+        return header->chamferDistance2();
+    }
+    if(key == "$CHAMFERC")
+    {
+        return header->chamferLength();
+    }
+    if(key == "$DWGCODEPAGE")
+    {
+        return header->codePage();
+    }
+    if(key == "$TDCREATE")
+    {
+        return header->createDateTime();
+    }
+    if(key == "$PELLIPSE")
+    {
+        return header->createEllipseAsPolyline();
+    }
+    if(key == "$CECOLOR")
+    {
+        return header->currentEntityColor();
+    }
+    if(key == "$CELTSCALE")
+    {
+        return header->currentEntityLinetypeScale();
+    }
+    if(key == "$CELWEIGHT")
+    {
+        return static_cast<short>(header->currentEntityLineWeight());
+    }
+    if(key == "$CEPSNTYPE")
+    {
+        return static_cast<short>(header->currentEntityPlotStyle());
+    }
+    if(key == "$CLAYER")
+    {
+        return header->currentLayerName();
+    }
+    if(key == "$CELTYPE")
+    {
+        return header->currentLineTypeName();
+    }
+    if(key == "$CMLJUST")
+    {
+        return static_cast<short>(header->currentMultilineJustification());
+    }
+    if(key == "$CMLSCALE")
+    {
+        return header->currentMultilineScale();
+    }
+    if(key == "$CMLSTYLE")
+    {
+        return header->currentMultiLineStyleName();
+    }
+    if(key == "$DGNFRAME")
+    {
+        return header->dgnUnderlayFramesVisibility();
+    }
+    if(key == "$DIMAPOST")
+    {
+        return header->dimensionAlternateDimensioningSuffix();
+    }
+    if(key == "$DIMALTD")
+    {
+        return header->dimensionAlternateUnitDecimalPlaces();
+    }
+    if(key == "$DIMALT")
+    {
+        return header->dimensionAlternateUnitDimensioning();
+    }
+    if(key == "$DIMALTU")
+    {
+        return static_cast<short>(header->dimensionAlternateUnitFormat());
+    }
+    if(key == "$DIMALTRND")
+    {
+        return header->dimensionAlternateUnitRounding();
+    }
+    if(key == "$DIMALTF")
+    {
+        return header->dimensionAlternateUnitScaleFactor();
+    }
+    if(key == "$DIMALTTD")
+    {
+        return header->dimensionAlternateUnitToleranceDecimalPlaces();
+    }
+    if(key == "$DIMALTTZ")
+    {
+        return static_cast<unsigned char>(header->dimensionAlternateUnitToleranceZeroHandling());
+    }
+    if(key == "$DIMALTZ")
+    {
+        return static_cast<unsigned char>(header->dimensionAlternateUnitZeroHandling());
+    }
+    if(key == "$DIMALTMZF")
+    {
+        return header->dimensionAltMzf();
+    }
+    if(key == "$DIMALTMZS")
+    {
+        return header->dimensionAltMzs();
+    }
+    if(key == "$DIMADEC")
+    {
+        return header->dimensionAngularDimensionDecimalPlaces();
+    }
+    if(key == "$DIMAUNIT")
+    {
+        return static_cast<short>(header->dimensionAngularUnit());
+    }
+    if(key == "$DIMAZIN")
+    {
+        return static_cast<unsigned char>(header->dimensionAngularZeroHandling());
+    }
+    if(key == "$DIMARCSYM")
+    {
+        return static_cast<short>(header->dimensionArcLengthSymbolPosition());
+    }
+    if(key == "$DIMASZ")
+    {
+        return header->dimensionArrowSize();
+    }
+    if(key == "$DIMASSOC")
+    {
+        return static_cast<short>(header->dimensionAssociativity());
+    }
+    if(key == "$DIMBLK")
+    {
+        return header->dimensionBlockName();
+    }
+    if(key == "$DIMBLK1")
+    {
+        return header->dimensionBlockNameFirst();
+    }
+    if(key == "$DIMBLK2")
+    {
+        return header->dimensionBlockNameSecond();
+    }
+    if(key == "$DIMCEN")
+    {
+        return header->dimensionCenterMarkSize();
+    }
+    if(key == "$DIMUPT")
+    {
+        return header->dimensionCursorUpdate();
+    }
+    if(key == "$DIMDEC")
+    {
+        return header->dimensionDecimalPlaces();
+    }
+    if(key == "$DIMDSEP")
+    {
+        return header->dimensionDecimalSeparator();
+    }
+    if(key == "$DIMATFIT")
+    {
+        return static_cast<unsigned char>(header->dimensionDimensionTextArrowFit());
+    }
+    if(key == "$DIMCLRE")
+    {
+        return header->dimensionExtensionLineColor();
+    }
+    if(key == "$DIMEXE")
+    {
+        return header->dimensionExtensionLineExtension();
+    }
+    if(key == "$DIMEXO")
+    {
+        return header->dimensionExtensionLineOffset();
+    }
+    if(key == "$DIMFIT")
+    {
+        return header->dimensionFit();
+    }
+    if(key == "$DIMFXL")
+    {
+        return header->dimensionFixedExtensionLineLength();
+    }
+    if(key == "$DIMFRAC")
+    {
+        return static_cast<short>(header->dimensionFractionFormat());
+    }
+    if(key == "$DIMTOL")
+    {
+        return header->dimensionGenerateTolerances();
+    }
+    if(key == "$DIMFXLON")
+    {
+        return header->dimensionIsExtensionLineLengthFixed();
+    }
+    if(key == "$DIMJOGANG")
+    {
+        return header->dimensionJoggedRadiusDimensionTransverseSegmentAngle();
+    }
+    if(key == "$DIMLIM")
+    {
+        return header->dimensionLimitsGeneration();
+    }
+    if(key == "$DIMLFAC")
+    {
+        return header->dimensionLinearScaleFactor();
+    }
+    if(key == "$DIMLUNIT")
+    {
+        return static_cast<short>(header->dimensionLinearUnitFormat());
+    }
+    if(key == "$DIMCLRD")
+    {
+        return header->dimensionLineColor();
+    }
+    if(key == "$DIMDLE")
+    {
+        return header->dimensionLineExtension();
+    }
+    if(key == "$DIMGAP")
+    {
+        return header->dimensionLineGap();
+    }
+    if(key == "$DIMDLI")
+    {
+        return header->dimensionLineIncrement();
+    }
+    if(key == "$DIMLTYPE")
+    {
+        return header->dimensionLineType();
+    }
+    if(key == "$DIMLWD")
+    {
+        return static_cast<short>(header->dimensionLineWeight());
+    }
+    if(key == "$DIMTM")
+    {
+        return header->dimensionMinusTolerance();
+    }
+    if(key == "$DIMMZF")
+    {
+        return header->dimensionMzf();
+    }
+    if(key == "$DIMMZS")
+    {
+        return header->dimensionMzs();
+    }
+    if(key == "$DIMTP")
+    {
+        return header->dimensionPlusTolerance();
+    }
+    if(key == "$DIMPOST")
+    {
+        return header->dimensionPostFix();
+    }
+    if(key == "$DIMRND")
+    {
+        return header->dimensionRounding();
+    }
+    if(key == "$DIMSCALE")
+    {
+        return header->dimensionScaleFactor();
+    }
+    if(key == "$DIMSAH")
+    {
+        return header->dimensionSeparateArrowBlocks();
+    }
+    if(key == "$DIMSTYLE")
+    {
+        return header->currentDimensionStyleName();
+    }
+    if(key == "$DIMSD1")
+    {
+        return header->dimensionSuppressFirstDimensionLine();
+    }
+    if(key == "$DIMSE1")
+    {
+        return header->dimensionSuppressFirstExtensionLine();
+    }
+    if(key == "$DIMSOXD")
+    {
+        return header->dimensionSuppressOutsideExtensions();
+    }
+    if(key == "$DIMSD2")
+    {
+        return header->dimensionSuppressSecondDimensionLine();
+    }
+    if(key == "$DIMSE2")
+    {
+        return header->dimensionSuppressSecondExtensionLine();
+    }
+    if(key == "$DIMLTEX1")
+    {
+        return header->dimensionTex1();
+    }
+    if(key == "$DIMLTEX2")
+    {
+        return header->dimensionTex2();
+    }
+    if(key == "$DIMTFILLCLR")
+    {
+        return header->dimensionTextBackgroundColor();
+    }
+    if(key == "$DIMTFILL")
+    {
+        return static_cast<short>(header->dimensionTextBackgroundFillMode());
+    }
 }
 
 }// namespace dwg
