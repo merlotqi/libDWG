@@ -41,7 +41,7 @@ public:
     std::vector<unsigned long long> &handles();
     void setHandles(const std::vector<unsigned long long> &handles);
 
-    void build(CadDocumentBuilder *builder) override;
+    void build(CadDocumentBuilder *builder);
 };
 
 class CadHatchTemplate : public CadEntityTemplate

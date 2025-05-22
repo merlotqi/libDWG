@@ -43,6 +43,8 @@ public:
 
     bool removeHeaderVariable(const std::string &name);
 
+    std::set<std::string> headerVariables() const;
+
 private:
     bool _writeAllHeaderVariables;
     std::set<std::string> _headerVariables;

@@ -314,6 +314,15 @@ public:
     double currentMultilineScale() const;
     void setCurrentMultilineScale(double);
 
+    std::string currentMultiLineStyleName() const;
+    void setCurrentMultiLineStyleName(const std::string &);
+
+    std::string currentDimensionStyleName() const;
+    void setCurrentDimensionStyleName(const std::string &);
+
+    long long requiredVersions() const;
+    void setRequiredVersions(long long);
+
     double currentEntityLinetypeScale() const;
     void setCurrentEntityLinetypeScale(double);
 

@@ -39,11 +39,13 @@ class LIBDWG_API Color
     Color(unsigned int trueColor);
 
 public:
-    Color(const Color &rhs);
-    Color &operator=(const Color &rhs);
+    Color();
     Color(short index);
     Color(unsigned char r, unsigned char g, unsigned char b);
     Color(const std::vector<unsigned char> &rgb);
+    
+    Color(const Color &rhs);
+    Color &operator=(const Color &rhs);
 
     static Color ByLayer;
     static Color ByBlock;

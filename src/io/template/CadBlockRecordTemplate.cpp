@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-CadBlockRecordTemplate::CadBlockRecordTemplate() : CadTemplateT<BlockRecord *>(new BlockRecord *) {}
+CadBlockRecordTemplate::CadBlockRecordTemplate() : CadTemplateT<BlockRecord *>(new BlockRecord()) {}
 
 CadBlockRecordTemplate::CadBlockRecordTemplate(BlockRecord *block) : CadTemplateT<BlockRecord *>(block) {}
 

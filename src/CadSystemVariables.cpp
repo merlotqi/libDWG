@@ -771,7 +771,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$SORTENTS")
     {
-        return header->entitySortingFlags();
+        return static_cast<unsigned char>(header->entitySortingFlags());
     }
     if(key == "$EXTNAMES")
     {
@@ -811,7 +811,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$HIDETEXT")
     {
-        return header->hyperlinkBase();
+        return header->hideText();
     }
     if(key == "$INDEXCTL")
     {
@@ -819,7 +819,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$INSUNITS")
     {
-        return header->insUnits();
+        return static_cast<short>(header->insUnits());
     }
     if(key == "$INTERFERECOLOR")
     {
@@ -847,7 +847,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$LUNITS")
     {
-        return header->linearUnitFormat();
+        return static_cast<short>(header->linearUnitFormat());
     }
     if(key == "$LUPREC")
     {
@@ -855,7 +855,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$LTSCALE")
     {
-        return header->linetypeScale();
+        return header->lineTypeScale();
     }
     if(key == "$LOFTNORMALS")
     {
@@ -875,7 +875,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$MEASUREMENT")
     {
-        return header->measurementUnits();
+        return static_cast<short>(header->measurementUnits());
     }
     if(key == "$MENU")
     {
@@ -951,7 +951,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$OSMODE")
     {
-        return header->objectSnapMode();
+        return static_cast<unsigned short>(header->objectSnapMode());
     }
     if(key == "$ORTHOMODE")
     {
@@ -991,7 +991,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$PSLTSCALE")
     {
-        return header->paperSpaceLineTypeScaling();
+        return static_cast<short>(header->paperSpaceLineTypeScaling());
     }
     if(key == "$PUCSNAME")
     {
@@ -1083,11 +1083,11 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$SHADEDGE")
     {
-        return header->shadeEdge();
+        return static_cast<short>(header->shadeEdge());
     }
     if(key == "$CSHADOW")
     {
-        return header->shadowMode();
+        return static_cast<unsigned char>(header->shadowMode());
     }
     if(key == "$SHADOWPLANELOCATION")
     {
@@ -1127,7 +1127,7 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     }
     if(key == "$SPLINETYPE")
     {
-        return header->splineType();
+        return static_cast<short>(header->splineType());
     }
     if(key == "$STEPSIZE")
     {

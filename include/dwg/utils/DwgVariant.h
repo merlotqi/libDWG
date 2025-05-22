@@ -50,6 +50,8 @@ public:
         COORD2D,
         COORD3D,
         BLOB,
+        DATETIME,
+        COLOR,
     };
 
     DwgVariant();
@@ -91,6 +93,8 @@ public:
     DwgVariant(const XY &v);
     DwgVariant(const XYZ &v);
     DwgVariant(const std::vector<unsigned char> &blob);
+    DwgVariant(const DateTime &v);
+    DwgVariant(const Color &v);
 
     DwgVariant(const DwgVariant &rhs);
     DwgVariant(DwgVariant &&rhs) noexcept;
@@ -112,6 +116,8 @@ public:
     DwgVariant &operator=(const std::string &str);
     DwgVariant &operator=(const XY &v);
     DwgVariant &operator=(const XYZ &v);
+    DwgVariant &operator=(const DateTime &v);
+    DwgVariant &operator=(const Color &v);
     DwgVariant &operator=(const std::vector<unsigned char> &blob);
     DwgVariant &operator=(std::vector<unsigned char> &&blob) noexcept;
 
@@ -138,6 +144,8 @@ public:
     XY asCoord2D() const;
     XYZ asCoord3D() const;
     const std::vector<unsigned char> &asBlob() const;
+    DateTime asDateTime() const;
+    Color asColor() const;
 
     operator char() const;
     operator unsigned char() const;
@@ -153,7 +161,8 @@ public:
     operator const std::string &() const;
     operator const XY &() const;
     operator const XYZ &() const;
-    operator const std::vector<unsigned char> &() const;
+    operator const DateTime &() const;
+    operator const Color &() const;
 
     void swap(DwgVariant &rhs);
 

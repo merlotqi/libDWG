@@ -28,6 +28,19 @@ namespace dwg {
 
 class CadTextEntityTemplate : public CadEntityTemplate
 {
+public:
+    CadTextEntityTemplate(Entity *entity);
+    void build(CadDocumentBuilder *builder) override;
+
+    std::optional<unsigned long long> styleHandle() const;
+    void setStyleHandle(unsigned long long);
+
+    std::string styleName() const;
+    void setStyleName(const std::string &);
+
+private:
+    std::optional<unsigned long long> _styleHandle;
+    std::string _styleName;
 };
 
 }// namespace dwg

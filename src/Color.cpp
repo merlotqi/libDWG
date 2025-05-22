@@ -318,6 +318,8 @@ std::vector<unsigned char> Color::getRgb() const
     }
 }
 
+Color::Color() : _color(0) {}
+
 Color::Color(const Color &rhs)
 {
     _color = rhs._color;

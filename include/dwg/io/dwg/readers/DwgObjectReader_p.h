@@ -55,6 +55,8 @@ class MultiLeaderAnnotContextLeaderRoot;
 class MultiLeaderAnnotContextLeaderLine;
 class CadWipeoutBase;
 class PlotSettings;
+class Vertex;
+class StateTemplate;
 
 class DwgObjectReader : public DwgSectionIO
 {
@@ -95,7 +97,7 @@ private:
     void readBlockParameter(CadBlockParameterTemplate *temp);
     void readBlock1PtParameter(CadBlock1PtParameterTemplate *temp);
     CadTemplate *readBlockVisibilityParameter();
-    CadBlockVisibilityParameterTemplate.StateTemplate readState();
+    StateTemplate *readState();
 #pragma endregion Evaluation Graph, Enhanced Block etc.
 
 #pragma region Text entities
@@ -130,13 +132,13 @@ private:
 #pragma region Object readers
     CadTemplate *readObject(ObjectType type);
     CadTemplate *readUnlistedType(short classNumber);
-    CadTemplate *readDocumentTable<T>(Table<T> table);
-    CadTemplate *readDocumentTable<T>(CadTableTemplate<T> temp);
+    // CadTemplate *readDocumentTable<T>(Table<T> table);
+    // CadTemplate *readDocumentTable<T>(CadTableTemplate<T> temp);
     CadTemplate *readBlock();
     CadTemplate *readEndBlock();
     CadTemplate *readSeqend();
     CadTemplate *readVertex2D();
-    CadTemplate *readVertex3D(Vertex vertex);
+    CadTemplate *readVertex3D(Vertex *vertex);
     CadTemplate *readPfaceVertex();
     CadTemplate *readPolyline2D();
     CadTemplate *readPolyline3D();

@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/io/CadDocumentBuilder_p.h>
 #include <dwg/io/template/ICadTemplate_p.h>
 #include <map>
@@ -99,6 +100,8 @@ class CadTemplateT : public CadTemplate
                   "T must point to a type derived from CadObject.");
 
 public:
+    CadTemplateT(T obj) : CadTemplate(obj) {}
+
     T cadObjectT() const;
     void setCadObjectT(T v);
 };

@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/template/CadAttributeTemplate_p.h>
+#include <dwg/entities/AttributeBase.h>
 
 namespace dwg {
 
