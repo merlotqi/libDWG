@@ -26,6 +26,7 @@
 #include <dwg/utils/DwgVariant.h>
 #include <vector>
 #include <string>
+#include <map>
 
 namespace dwg {
 
@@ -34,6 +35,8 @@ class CadSystemVariables
 {
 public:
     static std::vector<CadSystemVariableAttribute> headerVariables();
+
+    static std::map<std::string, CadSystemVariableAttribute> headerMap();
 
     static DwgVariant value(const std::string &, CadHeader *header);
 };

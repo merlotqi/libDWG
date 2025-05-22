@@ -142,6 +142,7 @@ protected:
     IDxfStreamWriter *_writer;
     CadDocument *_document;
     CadObjectHolder *_holder;
+    DxfWriterConfiguration _configuration;
 };
 
 }// namespace dwg

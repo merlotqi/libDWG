@@ -284,6 +284,16 @@ std::vector<CadSystemVariableAttribute> CadSystemVariables::headerVariables()
     return _headerVariables;
 }
 
+std::map<std::string, CadSystemVariableAttribute> CadSystemVariables::headerMap()
+{
+    std::map<std::string, CadSystemVariableAttribute> _map;
+    for(auto &&attr : _headerVariables)
+    {
+        _map.insert({attr.name(), attr});
+    }
+    return _map;
+}
+
 DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
 {
     assert(header);
