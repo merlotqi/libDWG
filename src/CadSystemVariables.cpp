@@ -639,6 +639,646 @@ DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
     {
         return static_cast<short>(header->dimensionTextBackgroundFillMode());
     }
+    if(key == "$DIMCLRT")
+    {
+        return header->dimensionTextColor();
+    }
+    if(key == "$DIMTXTDIRECTION")
+    {
+        return static_cast<unsigned char>(header->dimensionTextDirection());
+    }
+    if(key == "$DIMTXT")
+    {
+        return header->dimensionTextHeight();
+    }
+    if(key == "$DIMJUST")
+    {
+        return static_cast<unsigned char>(header->dimensionTextHorizontalAlignment());
+    }
+    if(key == "$DIMTIX")
+    {
+        return header->dimensionTextInsideExtensions();
+    }
+    if(key == "$DIMTIH")
+    {
+        return header->dimensionTextInsideHorizontal();
+    }
+    if(key == "$DIMTMOVE")
+    {
+        return static_cast<short>(header->dimensionTextMovement());
+    }
+    if(key == "$DIMTOFL")
+    {
+        return header->dimensionTextOutsideExtensions();
+    }
+    if(key == "$DIMTOH")
+    {
+        return header->dimensionTextOutsideHorizontal();
+    }
+    if(key == "$DIMTXSTY")
+    {
+        return header->dimensionTextStyleName();
+    }
+    if(key == "$DIMTAD")
+    {
+        return static_cast<int>(header->dimensionTextVerticalAlignment());
+    }
+    if(key == "$DIMTVP")
+    {
+        return header->dimensionTextVerticalPosition();
+    }
+    if(key == "$DIMTSZ")
+    {
+        return header->dimensionTickSize();
+    }
+    if(key == "$DIMTOLJ")
+    {
+        return static_cast<unsigned char>(header->dimensionToleranceAlignment());
+    }
+    if(key == "$DIMTDEC")
+    {
+        return header->dimensionToleranceDecimalPlaces();
+    }
+    if(key == "$DIMTFAC")
+    {
+        return header->dimensionToleranceScaleFactor();
+    }
+    if(key == "$DIMTZIN")
+    {
+        return static_cast<unsigned char>(header->dimensionToleranceZeroHandling());
+    }
+    if(key == "$DIMUNIT")
+    {
+        return header->dimensionUnit();
+    }
+    if(key == "$DIMZIN")
+    {
+        return static_cast<unsigned char>(header->dimensionZeroHandling());
+    }
+    if(key == "$LIGHTGLYPHDISPLAY")
+    {
+        return header->displayLightGlyphs();
+    }
+    if(key == "$LWDISPLAY")
+    {
+        return header->displayLineWeight();
+    }
+    if(key == "$DISPSILH")
+    {
+        return header->displaySilhouetteCurves();
+    }
+    if(key == "$LOFTANG1")
+    {
+        return header->draftAngleFirstCrossSection();
+    }
+    if(key == "$LOFTANG2")
+    {
+        return header->draftAngleSecondCrossSection();
+    }
+    if(key == "$LOFTMAG1")
+    {
+        return header->draftMagnitudeFirstCrossSection();
+    }
+    if(key == "$LOFTMAG2")
+    {
+        return header->draftMagnitudeSecondCrossSection();
+    }
+    if(key == "$3DDWFPREC")
+    {
+        return header->dw3DPrecision();
+    }
+    if(key == "$DWFFRAME")
+    {
+        return header->dwgUnderlayFramesVisibility();
+    }
+    if(key == "$ELEVATION")
+    {
+        return header->elevation();
+    }
+    if(key == "$ENDCAPS")
+    {
+        return header->endCaps();
+    }
+    if(key == "$SORTENTS")
+    {
+        return header->entitySortingFlags();
+    }
+    if(key == "$EXTNAMES")
+    {
+        return header->extendedNames();
+    }
+    if(key == "$DIMLWE")
+    {
+        return static_cast<short>(header->extensionLineWeight());
+    }
+    if(key == "$XCLIPFRAME")
+    {
+        return header->externalReferenceClippingBoundaryType();
+    }
+    if(key == "$FACETRES")
+    {
+        return header->facetResolution();
+    }
+    if(key == "$FILLETRAD")
+    {
+        return header->filletRadius();
+    }
+    if(key == "$FILLMODE")
+    {
+        return header->fillMode();
+    }
+    if(key == "$FINGERPRINTGUID")
+    {
+        return header->fingerPrintGuid();
+    }
+    if(key == "$HALOGAP")
+    {
+        return header->haloGapPercentage();
+    }
+    if(key == "$HANDSEED")
+    {
+        return header->handleSeed();
+    }
+    if(key == "$HIDETEXT")
+    {
+        return header->hyperlinkBase();
+    }
+    if(key == "$INDEXCTL")
+    {
+        return header->indexCreationFlags();
+    }
+    if(key == "$INSUNITS")
+    {
+        return header->insUnits();
+    }
+    if(key == "$INTERFERECOLOR")
+    {
+        return header->interfereColor();
+    }
+    if(key == "$JOINSTYLE")
+    {
+        return header->joinStyle();
+    }
+    if(key == "$LASTSAVEDBY")
+    {
+        return header->lastSavedBy();
+    }
+    if(key == "$LATITUDE")
+    {
+        return header->latitude();
+    }
+    if(key == "$LENSLENGTH")
+    {
+        return header->lensLength();
+    }
+    if(key == "$LIMCHECK")
+    {
+        return header->limitCheckingOn();
+    }
+    if(key == "$LUNITS")
+    {
+        return header->linearUnitFormat();
+    }
+    if(key == "$LUPREC")
+    {
+        return header->linearUnitPrecision();
+    }
+    if(key == "$LTSCALE")
+    {
+        return header->linetypeScale();
+    }
+    if(key == "$LOFTNORMALS")
+    {
+        return header->loftedObjectNormals();
+    }
+    if(key == "$LONGITUDE")
+    {
+        return header->longitude();
+    }
+    if(key == "$ACADMAINTVER")
+    {
+        return header->maintenanceVersion();
+    }
+    if(key == "$MAXACTVP")
+    {
+        return header->maxViewportCount();
+    }
+    if(key == "$MEASUREMENT")
+    {
+        return header->measurementUnits();
+    }
+    if(key == "$MENU")
+    {
+        return header->menuFileName();
+    }
+    if(key == "$MIRRTEXT")
+    {
+        return header->mirrorText();
+    }
+    if(key == "$EXTMAX")
+    {
+        return header->modelSpaceExtMax();
+    }
+    if(key == "$EXTMIN")
+    {
+        return header->modelSpaceExtMin();
+    }
+    if(key == "$INSBASE")
+    {
+        return header->modelSpaceInsertionBase();
+    }
+    if(key == "$LIMMAX")
+    {
+        return header->modelSpaceLimitsMax();
+    }
+    if(key == "$LIMMIN")
+    {
+        return header->modelSpaceLimitsMin();
+    }
+    if(key == "$UCSORG")
+    {
+        return header->modelSpaceOrigin();
+    }
+    if(key == "$UCSORGBACK")
+    {
+        return header->modelSpaceOrthographicBackDOrigin();
+    }
+    if(key == "$UCSORGBOTTOM")
+    {
+        return header->modelSpaceOrthographicBottomDOrigin();
+    }
+    if(key == "$UCSORGFRONT")
+    {
+        return header->modelSpaceOrthographicFrontDOrigin();
+    }
+    if(key == "$UCSORGLEFT")
+    {
+        return header->modelSpaceOrthographicLeftDOrigin();
+    }
+    if(key == "$UCSORGRIGHT")
+    {
+        return header->modelSpaceOrthographicRightDOrigin();
+    }
+    if(key == "$UCSORGTOP")
+    {
+        return header->modelSpaceOrthographicTopDOrigin();
+    }
+    if(key == "$UCSXDIR")
+    {
+        return header->modelSpaceXAxis();
+    }
+    if(key == "$UCSYDIR")
+    {
+        return header->modelSpaceYAxis();
+    }
+    if(key == "$NORTHDIRECTION")
+    {
+        return header->northDirection();
+    }
+    if(key == "$SPLINESEGS")
+    {
+        return header->numberOfSplineSegments();
+    }
+    if(key == "$OSMODE")
+    {
+        return header->objectSnapMode();
+    }
+    if(key == "$ORTHOMODE")
+    {
+        return header->orthoMode();
+    }
+    if(key == "$PUCSBASE")
+    {
+        return header->paperSpaceBaseName();
+    }
+    if(key == "$PELEVATION")
+    {
+        return header->paperSpaceElevation();
+    }
+    if(key == "$PEXTMAX")
+    {
+        return header->paperSpaceExtMax();
+    }
+    if(key == "$PEXTMIN")
+    {
+        return header->paperSpaceExtMin();
+    }
+    if(key == "$PINSBASE")
+    {
+        return header->paperSpaceInsertionBase();
+    }
+    if(key == "$PLIMCHECK")
+    {
+        return header->paperSpaceLimitsChecking();
+    }
+    if(key == "$PLIMMAX")
+    {
+        return header->paperSpaceLimitsMax();
+    }
+    if(key == "$PLIMMIN")
+    {
+        return header->paperSpaceLimitsMin();
+    }
+    if(key == "$PSLTSCALE")
+    {
+        return header->paperSpaceLineTypeScaling();
+    }
+    if(key == "$PUCSNAME")
+    {
+        return header->paperSpaceName();
+    }
+    if(key == "$PUCSORGBACK")
+    {
+        return header->paperSpaceOrthographicBackDOrigin();
+    }
+    if(key == "$PUCSORGBOTTOM")
+    {
+        return header->paperSpaceOrthographicBottomDOrigin();
+    }
+    if(key == "$PUCSORGFRONT")
+    {
+        return header->paperSpaceOrthographicFrontDOrigin();
+    }
+    if(key == "$PUCSORGLEFT")
+    {
+        return header->paperSpaceOrthographicLeftDOrigin();
+    }
+    if(key == "$PUCSORGRIGHT")
+    {
+        return header->paperSpaceOrthographicRightDOrigin();
+    }
+    if(key == "$PUCSORGTOP")
+    {
+        return header->paperSpaceOrthographicTopDOrigin();
+    }
+    if(key == "$PUCSORG")
+    {
+        return header->paperSpaceUcsOrigin();
+    }
+    if(key == "$PUCSXDIR")
+    {
+        return header->paperSpaceUcsXAxis();
+    }
+    if(key == "$$PUCSYDIR")
+    {
+        return header->paperSpaceUcsYAxis();
+    }
+    if(key == "$PSTYLEMODE")
+    {
+        return header->plotStyleMode();
+    }
+    if(key == "$PDMODE")
+    {
+        return header->pointDisplayMode();
+    }
+    if(key =="$PDSIZE")
+    {
+        return header->pointDisplaySize();
+    }
+    if(key == "$PLINEGEN")
+    {
+        return header->polylineLineTypeGeneration();
+    }
+    if(key == "$PLINEWID")
+    {
+        return header->polylineWidthDefault();
+    }
+    if(key == "$PROJECTNAME")
+    {
+        return header->projectName();
+    }
+    if(key == "$PROXYGRAPHICS")
+    {
+        return header->proxyGraphics();
+    }
+    if(key == "$QTEXTMODE")
+    {
+        return header->quickTextMode();
+    }
+    if(key == "$REGENMODE")
+    {
+        return header->regenerationMode();
+    }
+    if(key == "$REQUIREDVERSIONS")
+    {
+        return header->requiredVersions();
+    }
+    if(key == "$VISRETAIN")
+    {
+        return header->retainXRefDependentVisibilitySettings();
+    }
+    if(key == "$SHADEDIF")
+    {
+        return header->shadeDiffuseToAmbientPercentage();
+    }
+    if(key == "$SHADEDGE")
+    {
+        return header->shadeEdge();
+    }
+    if(key == "$CSHADOW")
+    {
+        return header->shadowMode();
+    }
+    if(key == "$SHADOWPLANELOCATION")
+    {
+        return header->shadowPlaneLocation();
+    }
+    if(key == "$TILEMODE")
+    {
+        return header->showModelSpace();
+    }
+    if(key == "$SHOWHIST")
+    {
+        return header->showSolidsHistory();
+    }
+    if(key == "$SPLFRAME")
+    {
+        return header->showSplineControlPoints();
+    }
+    if(key == "$SKETCHINC")
+    {
+        return header->sketchIncrement();
+    }
+    if(key == "$SKPOLY")
+    {
+        return header->sketchPolylines();
+    }
+    if(key == "$LOFTPARAM")
+    {
+        return header->solidLoftedShape();
+    }
+    if(key == "$SOLIDHIST")
+    {
+        return header->solidsRetainHistory();
+    }
+    if(key == "$TREEDEPTH")
+    {
+        return header->spatialIndexMaxTreeDepth();
+    }
+    if(key == "$SPLINETYPE")
+    {
+        return header->splineType();
+    }
+    if(key == "$STEPSIZE")
+    {
+        return header->stepSize();
+    }
+    if(key == "$STEPSPERSEC")
+    {
+        return header->stepsPerSecond();
+    }
+    if(key == "$STYLESHEET")
+    {
+        return header->styleSheetName();
+    }
+    if(key == "$SURFU")
+    {
+        return header->surfaceDensityU();
+    }
+    if(key == "$SURFV")
+    {
+        return header->surfaceDensityV();
+    }
+    if(key == "$SURFTAB1")
+    {
+        return header->surfaceMeshTabulationCount1();
+    }
+    if(key == "$SURFTAB2")
+    {
+        return header->surfaceMeshTabulationCount2();
+    }
+    if(key == "$SURFTYPE")
+    {
+        return header->surfaceType();
+    }
+    if(key == "$PSOLHEIGHT")
+    {
+        return header->sweptSolidHeight();
+    }
+    if(key == "$PSOLWIDTH")
+    {
+        return header->sweptSolidWidth();
+    }
+    if(key == "$TEXTSIZE")
+    {
+        return header->textHeightDefault();
+    }
+    if(key == "$TEXTSTYLE")
+    {
+        return header->textStyleName();
+    }
+    if(key == "$THICKNESS")
+    {
+        return header->thicknessDefault();
+    }
+    if(key == "$TIMEZONE")
+    {
+        return header->timeZone();
+    }
+    if(key == "$TDINDWG")
+    {
+        return header->totalEditingTime();
+    }
+    if(key == "$TRACEWID")
+    {
+        return header->traceWidthDefault();
+    }
+    if(key == "$UCSBASE")
+    {
+        return header->ucsBaseName();
+    }
+    if(key == "$UCSNAME")
+    {
+        return header->ucsName();
+    }
+    if(key == "$UNITMODE")
+    {
+        return header->unitMode();
+    }
+    if(key == "$TDUCREATE")
+    {
+        return header->universalCreateDateTime();
+    }
+    if(key == "$TDUUPDATE")
+    {
+        return header->universalUpdateDateTime();
+    }
+    if(key == "$TDUPDATE")
+    {
+        return header->updateDateTime();
+    }
+    if(key == "$DIMSHO")
+    {
+        return header->updateDimensionsWhileDragging();
+    }
+    if(key == "$USERR1")
+    {
+        return header->userDouble1();
+    }
+    if(key == "$USERR2")
+    {
+        return header->userDouble2();
+    }
+    if(key == "$USERR3")
+    {
+        return header->userDouble3();
+    }
+    if(key == "$USERR4")
+    {
+        return header->userDouble4();
+    }
+    if(key == "$USERR5")
+    {
+        return header->userDouble5();
+    }
+    if(key == "$TDUSRTIMER")
+    {
+        return header->userElapsedTimeSpan();
+    }
+    if(key == "$USERI1")
+    {
+        return header->userShort1();
+    }
+    if(key == "$USERI2")
+    {
+        return header->userShort2();
+    }
+    if(key == "$USERI3")
+    {
+        return header->userShort3();
+    }
+    if(key == "$USERI4")
+    {
+        return header->userShort4();
+    }
+    if(key == "$USERI5")
+    {
+        return header->userShort5();
+    }
+    if(key == "$USRTIMER")
+    {
+        return header->userTimer();
+    }
+    if(key == "$VERSIONGUID")
+    {
+        return header->versionGuid();
+    }
+    if(key == "$ACADVER")
+    {
+        return header->versionString();
+    }
+    if(key == "$PSVPSCALE")
+    {
+        return header->viewportDefaultViewScaleFactor();
+    }
+    if(key == "$WORLDVIEW")
+    {
+        return header->worldView();
+    }
+    if(key == "$XEDIT")
+    {
+        return header->xedit();
+    }
 }
 
 }// namespace dwg
