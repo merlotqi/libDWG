@@ -39,7 +39,7 @@ public:
 
     std::string sectionName() const;
 
-    CadSummaryInfo* read();
+    CadSummaryInfo *read();
 
 private:
     std::string readUtf8String();

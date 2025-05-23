@@ -23,6 +23,7 @@
 
 #pragma once
 
+#include <cstdint>
 #include <ctime>
 #include <dwg/exports.h>
 #include <string>

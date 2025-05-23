@@ -46,13 +46,14 @@ class TextStyle;
 class LIBDWG_API MultiLeader : public Entity
 {
 public:
-    class BlockAttribute
+    struct BlockAttribute
     {
-    public:
-        AttributeDefinition *AttributeDefinition;///< Pointer to the attribute definition.
-        short Index;                             ///< Index of the attribute within the block.
-        double Width;                            ///< Width of the attribute text.
-        std::string Text;                        ///< The actual text content of the attribute.
+        AttributeDefinition *attributeDefinition;///< Pointer to the attribute definition.
+        short index;                             ///< Index of the attribute within the block.
+        double width;                            ///< Width of the attribute text.
+        std::string text;                        ///< The actual text content of the attribute.
+        bool operator==(const BlockAttribute &other) const;
+        bool operator<(const BlockAttribute &other) const;
     };
 
 public:
@@ -62,6 +63,9 @@ public:
     virtual ObjectType objectType() const override;
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
+
+    BlockRecord *arrowhead() const;
+    void setArrowhead(BlockRecord *);
 
     double arrowheadSize() const;
     void setArrowheadSize(double size);
@@ -135,12 +139,6 @@ public:
 
     LineweightType leaderLineLength() const;
     void setLeaderLineLength(LineweightType);
-
-    BlockRecord *arrowhead() const;
-    void setArrowhead(BlockRecord *);
-
-    TextStyle *textStyle() const;
-    void setTextStyle(TextStyle *);
 
 #pragma endregion Text Menu Properties
 

@@ -32,8 +32,8 @@ class LIBDWG_API Mesh : public Entity
 public:
     struct Edge
     {
-        int start;    ///< Index of the starting vertex.
-        int end;      ///< Index of the ending vertex.
+        int start;                   ///< Index of the starting vertex.
+        int end;                     ///< Index of the ending vertex.
         std::optional<double> crease;///< Crease value for subdivision (default: 0.0).
 
         Edge(int start, int end);

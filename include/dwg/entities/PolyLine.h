@@ -23,12 +23,13 @@
 #pragma once
 
 #include <dwg/CadObjectCollection.h>
+#include <dwg/SeqendCollection.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
 #include <dwg/entities/Vertex.h>
-#include <dwg/SeqendCollection.h>
 #include <initializer_list>
+
 
 namespace dwg {
 

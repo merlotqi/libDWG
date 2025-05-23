@@ -22,7 +22,9 @@
 
 #pragma once
 
+#include <dwg/Coordinate.h>
 #include <dwg/objects/evaluations/BlockParameter.h>
+
 
 namespace dwg {
 

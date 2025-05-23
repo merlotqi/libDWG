@@ -40,7 +40,7 @@ public:
 
     Seqend *seqend() const
     {
-        if (_entries.size() != 0)
+        if (this->_entries.size() != 0)
             return _seqend;
         else
             return nullptr;
@@ -50,7 +50,7 @@ public:
     {
         delete _seqend;
         _seqend = value;
-        _seqend->setOwner(owner());
+        _seqend->setOwner(this->owner());
     }
 };
 

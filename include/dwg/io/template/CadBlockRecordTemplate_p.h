@@ -63,7 +63,7 @@ public:
 private:
     void addEntity(CadDocumentBuilder *builder, Entity *entity);
 
-    private:
+private:
     std::optional<unsigned long long> _firstEntityHandle;
     std::optional<unsigned long long> _lastEntityHandle;
     std::optional<unsigned long long> _beginBlockHandle;

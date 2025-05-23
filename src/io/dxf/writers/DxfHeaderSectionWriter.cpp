@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
-#include <dwg/DxfFileToken_p.h>
-#include <dwg/CadSystemVariables_p.h>
 #include <algorithm>
+#include <dwg/CadSystemVariables_p.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
 
 namespace dwg {
 
@@ -41,10 +41,10 @@ std::string DxfHeaderSectionWriter::sectionName() const
     return DxfFileToken::HeaderSection;
 }
 
-void DxfHeaderSectionWriter::writeSection() 
+void DxfHeaderSectionWriter::writeSection()
 {
     std::map<std::string, CadSystemVariableAttribute> mapAttr = CadSystemVariables::headerMap();
-    for(auto it = mapAttr.begin(); it != mapAttr.end(); ++it)
+    for (auto it = mapAttr.begin(); it != mapAttr.end(); ++it)
     {
         // bool contains = false;
         // auto itFind = std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), it->first);

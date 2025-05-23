@@ -36,34 +36,79 @@ Mesh::Mesh() {}
 
 Mesh::~Mesh() {}
 
-ObjectType Mesh::objectType() const { return ObjectType::UNLISTED; }
+ObjectType Mesh::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string Mesh::objectName() const { return DxfFileToken::EntityMesh; }
+std::string Mesh::objectName() const
+{
+    return DxfFileToken::EntityMesh;
+}
 
-std::string Mesh::subclassMarker() const { return DxfSubclassMarker::Mesh; }
+std::string Mesh::subclassMarker() const
+{
+    return DxfSubclassMarker::Mesh;
+}
 
-short Mesh::version() const { return _version; }
+short Mesh::version() const
+{
+    return _version;
+}
 
-void Mesh::setVersion(short value) { _version = value; }
+void Mesh::setVersion(short value)
+{
+    _version = value;
+}
 
-bool Mesh::blendCrease() const { return _blendCrease; }
+bool Mesh::blendCrease() const
+{
+    return _blendCrease;
+}
 
-void Mesh::setBlendCrease(bool blend) { _blendCrease = blend; }
+void Mesh::setBlendCrease(bool blend)
+{
+    _blendCrease = blend;
+}
 
-int Mesh::subdivisionLevel() const { return _subdivisionLevel; }
+int Mesh::subdivisionLevel() const
+{
+    return _subdivisionLevel;
+}
 
-void Mesh::setSubdivisionLevel(int level) { _subdivisionLevel = level; }
+void Mesh::setSubdivisionLevel(int level)
+{
+    _subdivisionLevel = level;
+}
 
-std::vector<XYZ> Mesh::vertices() const { return _vertices; }
+std::vector<XYZ> Mesh::vertices() const
+{
+    return _vertices;
+}
 
-std::vector<XYZ> &Mesh::vertices() { return _vertices; }
+std::vector<XYZ> &Mesh::vertices()
+{
+    return _vertices;
+}
 
-std::vector<std::vector<int>> Mesh::faces() const { return _faces; }
+std::vector<std::vector<int>> Mesh::faces() const
+{
+    return _faces;
+}
 
-std::vector<std::vector<int>> &Mesh::faces() { return _faces; }
+std::vector<std::vector<int>> &Mesh::faces()
+{
+    return _faces;
+}
 
-std::vector<Mesh::Edge> Mesh::edges() const { return _edges; }
+std::vector<Mesh::Edge> Mesh::edges() const
+{
+    return _edges;
+}
 
-std::vector<Mesh::Edge> &Mesh::edges() { return _edges; }
+std::vector<Mesh::Edge> &Mesh::edges()
+{
+    return _edges;
+}
 
 }// namespace dwg

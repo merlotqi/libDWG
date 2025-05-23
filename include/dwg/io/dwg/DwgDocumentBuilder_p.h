@@ -23,8 +23,9 @@
 #pragma once
 
 #include <dwg/io/CadDocumentBuilder_p.h>
-#include <dwg/io/dwg/DwgReaderConfiguration.h>
 #include <dwg/io/dwg/DwgHeaderHandlesCollection_p.h>
+#include <dwg/io/dwg/DwgReaderConfiguration.h>
+
 
 namespace dwg {
 
@@ -37,7 +38,7 @@ public:
     DwgDocumentBuilder(ACadVersion version, CadDocument *document, const DwgReaderConfiguration &configuration);
     ~DwgDocumentBuilder();
 
-    DwgReaderConfiguration configuration() const; 
+    DwgReaderConfiguration configuration() const;
 
     DwgHeaderHandlesCollection headerHandles() const;
     void setHeaderHandles(const DwgHeaderHandlesCollection &headerHandles);

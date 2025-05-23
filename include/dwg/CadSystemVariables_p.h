@@ -24,9 +24,10 @@
 
 #include <dwg/attributes/CadSystemVariableAttribute_p.h>
 #include <dwg/utils/DwgVariant.h>
-#include <vector>
-#include <string>
 #include <map>
+#include <string>
+#include <vector>
+
 
 namespace dwg {
 

@@ -23,8 +23,8 @@
 #include <algorithm>
 #include <cmath>
 #include <dwg/CadUtils.h>
-#include <stdexcept>
 #include <dwg/utils/StringHelp.h>
+#include <stdexcept>
 
 namespace dwg {
 

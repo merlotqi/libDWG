@@ -20,9 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
 #include <dwg/GroupCodeValue.h>
 #include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
-#include <dwg/DxfFileToken_p.h>
 
 namespace dwg {
 

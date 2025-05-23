@@ -890,19 +890,19 @@ void CadHeader::setCurrentMultilineScale(double value)
     _currentMultilineScale = value;
 }
 
-std::string CadHeader::currentMultiLineStyleName() const 
+std::string CadHeader::currentMultiLineStyleName() const
 {
     return std::string();
 }
 
-void CadHeader::setCurrentMultiLineStyleName(const std::string & value) {}
+void CadHeader::setCurrentMultiLineStyleName(const std::string &value) {}
 
 std::string CadHeader::currentDimensionStyleName() const
 {
     return std::string();
 }
 
-void CadHeader::setCurrentDimensionStyleName(const std::string & value) {}
+void CadHeader::setCurrentDimensionStyleName(const std::string &value) {}
 
 long long CadHeader::requiredVersions() const
 {

@@ -81,7 +81,7 @@ private:
     double _lastHeight = 0.0;
     double _obliqueAngle = 0.0;
     TextMirrorFlag _mirrorFlag = TextMirrorFlag::None;
-    FontFlags _trueType = (int) FontFlag::Regular;
+    FontFlags _trueType = FontFlag::Regular;
 };
 
 }// namespace dwg

@@ -20,13 +20,14 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
-#include <stdexcept>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC12_p.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC15_p.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC18_p.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC21_p.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC24_p.h>
+#include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
+#include <stdexcept>
+
 
 namespace dwg {
 

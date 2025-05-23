@@ -37,17 +37,18 @@
 #include <dwg/io/dwg/readers/DwgHandleReader_p.h>
 #include <dwg/io/dwg/readers/DwgLZ77AC18Decompressor_p.h>
 #include <dwg/io/dwg/readers/DwgLZ77AC21Decompressor_p.h>
+#include <dwg/io/dwg/readers/DwgObjectReader_p.h>
 #include <dwg/io/dwg/readers/DwgPreviewReader_p.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 #include <dwg/io/dwg/readers/DwgSummaryInfoReader_p.h>
-#include <dwg/io/dwg/readers/DwgObjectReader_p.h>
 #include <dwg/utils/EndianConverter.h>
 #include <dwg/utils/StreamWrapper.h>
 #include <dwg/utils/StringHelp.h>
 #include <fmt/core.h>
 #include <memory>
-#include <stdexcept>
 #include <queue>
+#include <stdexcept>
+
 
 namespace dwg {
 
@@ -253,7 +254,7 @@ void DwgReader::readTemplate()
     throw std::runtime_error("not implemented");
 }
 
-void DwgReader::readObjects() 
+void DwgReader::readObjects()
 {
     std::map<unsigned long long, long long> handles = readHandles();
     _document->setClasses(readClasses());
@@ -261,7 +262,8 @@ void DwgReader::readObjects()
     IDwgStreamReader *sreader = nullptr;
     if (_fileHeader->version() <= ACadVersion::AC1015)
     {
-        sreader = DwgStreamReaderBase::GetStreamHandler(_fileHeader->version(), _fileStream);//Handles are in absolute offset for this versions
+        sreader = DwgStreamReaderBase::GetStreamHandler(_fileHeader->version(),
+                                                        _fileStream);//Handles are in absolute offset for this versions
         sreader->setPosition(0LL);
     }
     else
@@ -271,8 +273,8 @@ void DwgReader::readObjects()
 
     std::queue<unsigned long long> objectHandles;
 
-    std::unique_ptr<DwgObjectReader> sectionReader =
-            std::make_unique<DwgObjectReader>(_fileHeader->version(), _builder, sreader, objectHandles, handles, _document->classes());
+    std::unique_ptr<DwgObjectReader> sectionReader = std::make_unique<DwgObjectReader>(
+            _fileHeader->version(), _builder, sreader, objectHandles, handles, _document->classes());
     sectionReader->read();
 }
 
@@ -1093,7 +1095,7 @@ std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffse
     std::vector<unsigned char> buffer(length, 0);
 
     //Relative to data page map 1, add 0x480 to get stream position
-    stream->seekg((std::streampos) (0x480 + pageOffset));
+    stream->seekg((std::streampos)(0x480 + pageOffset));
     stream->read(reinterpret_cast<char *>(buffer.data()), length);
 
     std::vector<unsigned char> compressedData(totalSize, 0);

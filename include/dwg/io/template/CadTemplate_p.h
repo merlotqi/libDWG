@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
 #include <dwg/io/CadDocumentBuilder_p.h>
 #include <dwg/io/template/ICadTemplate_p.h>
+#include <dwg/objects/NonGraphicalObject.h>
 #include <map>
 #include <optional>
 #include <type_traits>
@@ -34,12 +34,11 @@ namespace dwg {
 
 class ExtendedDataRecord;
 class Entity;
-
 class CadTemplate : public ICadObjectTemplate
 {
 public:
     CadTemplate(CadObject *obj);
-    virtual ~CadTemplate() {}
+    virtual ~CadTemplate() noexcept {}
 
     CadObject *cadObject() const;
     void setCadObject(CadObject *v);
@@ -83,7 +82,7 @@ protected:
     }
 
 protected:
-    CadObject * _object;
+    CadObject *_object;
     std::optional<unsigned long long> _ownerHandle;
     std::optional<unsigned long long> _xdictHandle;
     std::vector<unsigned long long> _reactorsHandles;
@@ -101,6 +100,7 @@ class CadTemplateT : public CadTemplate
 
 public:
     CadTemplateT(T obj) : CadTemplate(obj) {}
+    virtual ~CadTemplateT() {}
 
     T cadObjectT() const;
     void setCadObjectT(T v);

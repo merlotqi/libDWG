@@ -70,79 +70,153 @@ namespace dwg {
 class QFlag
 {
     int i;
+
 public:
     constexpr inline QFlag(int value) noexcept : i(value) {}
-    constexpr inline operator int() const noexcept { return i; }
+    constexpr inline operator int() const noexcept
+    {
+        return i;
+    }
 
     constexpr inline QFlag(unsigned int value) noexcept : i(int(value)) {}
     constexpr inline QFlag(short value) noexcept : i(int(value)) {}
-    constexpr inline QFlag(unsigned short value) noexcept : i(int(unsigned int(value))) {}
-    constexpr inline operator unsigned int() const noexcept { return unsigned int(i); }
+    constexpr inline QFlag(unsigned short value) noexcept : i((int)(unsigned int)value) {}
+    constexpr inline operator unsigned int() const noexcept
+    {
+        return (unsigned int)i;
+    }
 };
 
 
 template<typename Enum>
 class QFlags
 {
-    static_assert((sizeof(Enum) <= sizeof(int)),
-                      "QFlags uses an int as storage, so an enum with underlying "
-                      "long long will overflow.");
+    static_assert((sizeof(Enum) <= sizeof(int)), "QFlags uses an int as storage, so an enum with underlying "
+                                                 "long long will overflow.");
     static_assert((std::is_enum<Enum>::value), "QFlags is only usable on enumeration types.");
 
     struct Private;
-    typedef int (Private::*Zero);
+    typedef int(Private::*Zero);
+
 public:
 #if defined(_MSC_VER)
     typedef int Int;
 #else
-    typedef typename std::conditional<
-            std::is_unsigned<typename std::underlying_type<Enum>::type>::value,
-            unsigned int,
-            signed int
-        >::type Int;
+    typedef typename std::conditional<std::is_unsigned<typename std::underlying_type<Enum>::type>::value, unsigned int,
+                                      signed int>::type Int;
 #endif
     typedef Enum enum_type;
 
-    constexpr inline QFlags(const QFlags &other){ i = other.i; }
-    constexpr inline QFlags &operator=(const QFlags &other) { i = other.i; return *this; }
+    constexpr inline QFlags(const QFlags &other)
+    {
+        i = other.i;
+    }
+    constexpr inline QFlags &operator=(const QFlags &other)
+    {
+        i = other.i;
+        return *this;
+    }
     constexpr inline QFlags(Enum flags) noexcept : i(Int(flags)) {}
     constexpr inline QFlags(Zero = nullptr) noexcept : i(0) {}
     constexpr inline QFlags(QFlag flag) noexcept : i(flag) {}
 
     constexpr inline QFlags(std::initializer_list<Enum> flags) noexcept
-        : i(initializer_list_helper(flags.begin(), flags.end())) {}
+        : i(initializer_list_helper(flags.begin(), flags.end()))
+    {
+    }
 
-    constexpr inline QFlags &operator&=(int mask) noexcept { i &= mask; return *this; }
-    constexpr inline QFlags &operator&=(unsigned int mask) noexcept { i &= mask; return *this; }
-    constexpr inline QFlags &operator&=(Enum mask) noexcept { i &= Int(mask); return *this; }
-    constexpr inline QFlags &operator|=(QFlags other) noexcept { i |= other.i; return *this; }
-    constexpr inline QFlags &operator|=(Enum other) noexcept { i |= Int(other); return *this; }
-    constexpr inline QFlags &operator^=(QFlags other) noexcept { i ^= other.i; return *this; }
-    constexpr inline QFlags &operator^=(Enum other) noexcept { i ^= Int(other); return *this; }
+    constexpr inline QFlags &operator&=(int mask) noexcept
+    {
+        i &= mask;
+        return *this;
+    }
+    constexpr inline QFlags &operator&=(unsigned int mask) noexcept
+    {
+        i &= mask;
+        return *this;
+    }
+    constexpr inline QFlags &operator&=(Enum mask) noexcept
+    {
+        i &= Int(mask);
+        return *this;
+    }
+    constexpr inline QFlags &operator|=(QFlags other) noexcept
+    {
+        i |= other.i;
+        return *this;
+    }
+    constexpr inline QFlags &operator|=(Enum other) noexcept
+    {
+        i |= Int(other);
+        return *this;
+    }
+    constexpr inline QFlags &operator^=(QFlags other) noexcept
+    {
+        i ^= other.i;
+        return *this;
+    }
+    constexpr inline QFlags &operator^=(Enum other) noexcept
+    {
+        i ^= Int(other);
+        return *this;
+    }
 
-    constexpr inline operator Int() const noexcept { return i; }
+    constexpr inline operator Int() const noexcept
+    {
+        return i;
+    }
 
-    constexpr inline QFlags operator|(QFlags other) const noexcept { return QFlags(QFlag(i | other.i)); }
-    constexpr inline QFlags operator|(Enum other) const noexcept { return QFlags(QFlag(i | Int(other))); }
-    constexpr inline QFlags operator^(QFlags other) const noexcept { return QFlags(QFlag(i ^ other.i)); }
-    constexpr inline QFlags operator^(Enum other) const noexcept { return QFlags(QFlag(i ^ Int(other))); }
-    constexpr inline QFlags operator&(int mask) const noexcept { return QFlags(QFlag(i & mask)); }
-    constexpr inline QFlags operator&(unsigned int mask) const noexcept { return QFlags(QFlag(i & mask)); }
-    constexpr inline QFlags operator&(Enum other) const noexcept { return QFlags(QFlag(i & Int(other))); }
-    constexpr inline QFlags operator~() const noexcept { return QFlags(QFlag(~i)); }
+    constexpr inline QFlags operator|(QFlags other) const noexcept
+    {
+        return QFlags(QFlag(i | other.i));
+    }
+    constexpr inline QFlags operator|(Enum other) const noexcept
+    {
+        return QFlags(QFlag(i | Int(other)));
+    }
+    constexpr inline QFlags operator^(QFlags other) const noexcept
+    {
+        return QFlags(QFlag(i ^ other.i));
+    }
+    constexpr inline QFlags operator^(Enum other) const noexcept
+    {
+        return QFlags(QFlag(i ^ Int(other)));
+    }
+    constexpr inline QFlags operator&(int mask) const noexcept
+    {
+        return QFlags(QFlag(i & mask));
+    }
+    constexpr inline QFlags operator&(unsigned int mask) const noexcept
+    {
+        return QFlags(QFlag(i & mask));
+    }
+    constexpr inline QFlags operator&(Enum other) const noexcept
+    {
+        return QFlags(QFlag(i & Int(other)));
+    }
+    constexpr inline QFlags operator~() const noexcept
+    {
+        return QFlags(QFlag(~i));
+    }
 
-    constexpr inline bool operator!() const noexcept { return !i; }
+    constexpr inline bool operator!() const noexcept
+    {
+        return !i;
+    }
 
-    constexpr inline bool testFlag(Enum flag) const noexcept { return (i & Int(flag)) == Int(flag) && (Int(flag) != 0 || i == Int(flag) ); }
+    constexpr inline bool testFlag(Enum flag) const noexcept
+    {
+        return (i & Int(flag)) == Int(flag) && (Int(flag) != 0 || i == Int(flag));
+    }
     constexpr inline QFlags &setFlag(Enum flag, bool on = true) noexcept
     {
         return on ? (*this |= flag) : (*this &= ~Int(flag));
     }
 
 private:
-    constexpr static inline Int initializer_list_helper(typename std::initializer_list<Enum>::const_iterator it,
-                                                               typename std::initializer_list<Enum>::const_iterator end)
-    noexcept
+    constexpr static inline Int
+    initializer_list_helper(typename std::initializer_list<Enum>::const_iterator it,
+                            typename std::initializer_list<Enum>::const_iterator end) noexcept
     {
         return (it == end ? Int(0) : (Int(*it) | initializer_list_helper(it + 1, end)));
     }
@@ -150,7 +224,6 @@ private:
     Int i;
 };
 
-#define Q_DECLARE_FLAGS(Flags, Enum)\
-typedef QFlags<Enum> Flags;
+#define Q_DECLARE_FLAGS(Flags, Enum) typedef QFlags<Enum> Flags;
 
 }// namespace dwg

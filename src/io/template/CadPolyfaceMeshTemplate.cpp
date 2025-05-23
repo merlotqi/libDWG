@@ -20,8 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/template/CadPolyfaceMeshTemplate_p.h>
 #include <dwg/entities/PolyfaceMesh.h>
+#include <dwg/io/template/CadPolyfaceMeshTemplate_p.h>
+
 
 namespace dwg {
 

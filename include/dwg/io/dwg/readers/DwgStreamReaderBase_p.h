@@ -36,7 +36,7 @@ public:
 
     static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
                                               bool resetPosition = false);
-    
+
     Encoding encoding() const override;
     void setEncoding(Encoding value) override;
 

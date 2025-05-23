@@ -23,7 +23,7 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
-#include <dwg/objects/EvaluationGraph.h>
+#include <dwg/objects/evaluations/EvaluationGraph.h>
 
 namespace dwg {
 
@@ -33,6 +33,7 @@ class CadEvaluationGraphTemplate : public CadTemplateT<EvaluationGraph *>
 public:
     CadEvaluationGraphTemplate();
     CadEvaluationGraphTemplate(EvaluationGraph *evaluationGraph);
+    ~CadEvaluationGraphTemplate() noexcept override;
     void build(CadDocumentBuilder *builder) override;
 
     std::vector<GraphNodeTemplate *> nodeTemplates() const;

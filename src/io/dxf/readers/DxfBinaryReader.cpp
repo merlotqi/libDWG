@@ -30,7 +30,7 @@ DxfBinaryReader::DxfBinaryReader(std::istream *stream) : DxfBinaryReader(stream,
 
 DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding)
     : _stream(stream), _encoding(encoding), _wrapper(InputStreamWrapper(_stream))
-{    
+{
     _stream->seekg(std::ios::beg);
     start();
 }

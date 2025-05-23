@@ -31,13 +31,11 @@ class LIBDWG_API Seqend : public Entity
 {
 public:
     Seqend();
+    Seqend(CadObject *owner);
     ~Seqend();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
-
-private:
-    Seqend(CadObject *owner);
 };
 
 }// namespace dwg

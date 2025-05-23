@@ -42,6 +42,7 @@ public:
 
     CadMLeaderTemplate();
     CadMLeaderTemplate(MultiLeader *);
+    ~CadMLeaderTemplate() noexcept override;
     void build(CadDocumentBuilder *builder) override;
 
 
@@ -61,7 +62,7 @@ public:
     void setArrowheadHandle(unsigned long long);
 
     std::map<unsigned long long, bool> arrowheadHandles() const;
-    std::map<unsigned long long, bool> &arrowheadHandles() ;
+    std::map<unsigned long long, bool> &arrowheadHandles();
 
     std::map<MultiLeader::BlockAttribute, unsigned long long> blockAttributeHandles() const;
     std::map<MultiLeader::BlockAttribute, unsigned long long> &blockAttributeHandles();

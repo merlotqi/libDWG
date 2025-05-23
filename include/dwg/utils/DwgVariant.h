@@ -22,8 +22,10 @@
 
 #pragma once
 
+#include <dwg/Color.h>
 #include <dwg/Coordinate.h>
 #include <dwg/exports.h>
+#include <dwg/utils/DateTime.h>
 #include <string>
 #include <variant>
 #include <vector>
@@ -74,6 +76,8 @@ public:
         XY xy;
         XYZ xyz;
         std::vector<unsigned char> blob;
+        DateTime dt;
+        Color rgb;
     };
 
     virtual ~DwgVariant();

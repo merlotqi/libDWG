@@ -20,30 +20,24 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/dwg/CRC32StreamHandler_p.h>
+#include <dwg/io/template/CadTemplate_p.h>
 
 namespace dwg {
 
-CRC32StreamHandlerBase::CRC32StreamHandlerBase() : _seed(0) {}
+CadTemplate::CadTemplate(CadObject *obj) {}
 
-unsigned int CRC32StreamHandlerBase::seed() const
+std::optional<unsigned long long> CadTemplate::ownerHandle() const
 {
-    return ~_seed;
+    return std::nullopt;
 }
 
+void CadTemplate::setOwnerHandle(unsigned long long) {}
 
-CRC32InputStreamHandler::CRC32InputStreamHandler(std::istream *stream, unsigned int seed) : InputStreamWrapper(stream)
+std::optional<unsigned long long> CadTemplate::xdictHandle() const
 {
-    _seed = seed;
+    return std::nullopt;
 }
 
-int CRC32InputStreamHandler::rawRead(unsigned char *buff, int nLen)
-{
-    return 0;
-}
-
-
-CRC32OutputStreamHandler::CRC32OutputStreamHandler(std::ostream *stream) : OutputStreamWrapper(stream) {}
-
+void CadTemplate::setXDictHandle(unsigned long long) {}
 
 }// namespace dwg

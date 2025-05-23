@@ -29,8 +29,9 @@
 #include <dwg/Transparency.h>
 #include <dwg/utils/DateTime.h>
 #include <dwg/utils/Encoding.h>
-#include <vector>
 #include <iostream>
+#include <vector>
+
 
 namespace dwg {
 /*

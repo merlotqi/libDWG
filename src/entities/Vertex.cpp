@@ -29,39 +29,84 @@ namespace dwg {
 /* --------------------------------- Vertex --------------------------------- */
 Vertex::Vertex() {}
 
-Vertex::Vertex(const XYZ & v) {}
+Vertex::Vertex(const XYZ &v) {}
 
 Vertex::~Vertex() {}
 
-std::string Vertex::objectName() const { return DxfFileToken::EntityVertex; }
+std::string Vertex::objectName() const
+{
+    return DxfFileToken::EntityVertex;
+}
 
-double Vertex::bulge() const { return _bulge; }
+double Vertex::bulge() const
+{
+    return _bulge;
+}
 
-void Vertex::setBulge(double v) { _bulge = v; }
+void Vertex::setBulge(double v)
+{
+    _bulge = v;
+}
 
-double Vertex::curveTangent() const { return _curveTangent; }
+double Vertex::curveTangent() const
+{
+    return _curveTangent;
+}
 
-void Vertex::setCurveTangent(double v) { _curveTangent = v; }
+void Vertex::setCurveTangent(double v)
+{
+    _curveTangent = v;
+}
 
-double Vertex::endWidth() const { return _endWidth; }
+double Vertex::endWidth() const
+{
+    return _endWidth;
+}
 
-void Vertex::setEndWidth(double v) { _endWidth = v; }
+void Vertex::setEndWidth(double v)
+{
+    _endWidth = v;
+}
 
-double Vertex::startWidth() const { return _startWidth; }
+double Vertex::startWidth() const
+{
+    return _startWidth;
+}
 
-void Vertex::setStartWidth(double v) { _startWidth = v; }
+void Vertex::setStartWidth(double v)
+{
+    _startWidth = v;
+}
 
-VertexFlags Vertex::flags() const { return _flags; }
+VertexFlags Vertex::flags() const
+{
+    return _flags;
+}
 
-void Vertex::setFlags(VertexFlags v) { _flags = v; }
+void Vertex::setFlags(VertexFlags v)
+{
+    _flags = v;
+}
 
-int Vertex::id() const { return _id; }
+int Vertex::id() const
+{
+    return _id;
+}
 
-void Vertex::setId(int v) { _id = v; }
+void Vertex::setId(int v)
+{
+    _id = v;
+}
 
-XYZ Vertex::location() const { return _location; }
+XYZ Vertex::location() const
+{
+    return _location;
+}
 
-void Vertex::setLocation(const XYZ &v) { _location = v; }
+void Vertex::setLocation(const XYZ &v)
+{
+    _location = v;
+}
 
 /* -------------------------------- Vertex2D -------------------------------- */
 
@@ -71,17 +116,29 @@ Vertex2D::Vertex2D(const XY &v) : Vertex(v) {}
 
 Vertex2D::Vertex2D(const XYZ &v) : Vertex(v) {}
 
-ObjectType Vertex2D::objectType() const { return ObjectType::VERTEX_2D; }
+ObjectType Vertex2D::objectType() const
+{
+    return ObjectType::VERTEX_2D;
+}
 
-std::string Vertex2D::subclassMarker() const { return DxfSubclassMarker::PolylineVertex; }
+std::string Vertex2D::subclassMarker() const
+{
+    return DxfSubclassMarker::PolylineVertex;
+}
 
 /* -------------------------------- Vertex3D -------------------------------- */
 
 Vertex3D::Vertex3D() : Vertex(XYZ::Zero) {}
 
-ObjectType Vertex3D::objectType() const { return ObjectType::VERTEX_3D; }
+ObjectType Vertex3D::objectType() const
+{
+    return ObjectType::VERTEX_3D;
+}
 
-std::string Vertex3D::subclassMarker() const { return DxfSubclassMarker::Polyline3dVertex; }
+std::string Vertex3D::subclassMarker() const
+{
+    return DxfSubclassMarker::Polyline3dVertex;
+}
 
 /* ----------------------------- VertexFaceMesh ----------------------------- */
 
@@ -89,9 +146,15 @@ VertexFaceMesh::VertexFaceMesh() : Vertex(XYZ::Zero) {}
 
 VertexFaceMesh::VertexFaceMesh(const XYZ &v) : Vertex(v) {}
 
-ObjectType VertexFaceMesh::objectType() const { return ObjectType::VERTEX_PFACE; }
+ObjectType VertexFaceMesh::objectType() const
+{
+    return ObjectType::VERTEX_PFACE;
+}
 
-std::string VertexFaceMesh::subclassMarker() const { return DxfSubclassMarker::PolyfaceMeshVertex; }
+std::string VertexFaceMesh::subclassMarker() const
+{
+    return DxfSubclassMarker::PolyfaceMeshVertex;
+}
 
 /* ---------------------------- VertexFaceRecord ---------------------------- */
 
@@ -99,24 +162,54 @@ VertexFaceRecord::VertexFaceRecord() : Vertex(XYZ::Zero) {}
 
 VertexFaceRecord::VertexFaceRecord(const XYZ &v) : Vertex(v) {}
 
-ObjectType VertexFaceRecord::objectType() const { return ObjectType::VERTEX_PFACE_FACE; }
+ObjectType VertexFaceRecord::objectType() const
+{
+    return ObjectType::VERTEX_PFACE_FACE;
+}
 
-std::string VertexFaceRecord::subclassMarker() const { return DxfSubclassMarker::PolyfaceMeshFace; }
+std::string VertexFaceRecord::subclassMarker() const
+{
+    return DxfSubclassMarker::PolyfaceMeshFace;
+}
 
-short VertexFaceRecord::index1() const { return _index1; }
+short VertexFaceRecord::index1() const
+{
+    return _index1;
+}
 
-void VertexFaceRecord::setIndex1(short v) { _index1 = v; }
+void VertexFaceRecord::setIndex1(short v)
+{
+    _index1 = v;
+}
 
-short VertexFaceRecord::index2() const { return _index2; }
+short VertexFaceRecord::index2() const
+{
+    return _index2;
+}
 
-void VertexFaceRecord::setIndex2(short v) { _index2 = v; }
+void VertexFaceRecord::setIndex2(short v)
+{
+    _index2 = v;
+}
 
-short VertexFaceRecord::index3() const { return _index3; }
+short VertexFaceRecord::index3() const
+{
+    return _index3;
+}
 
-void VertexFaceRecord::setIndex3(short v) { _index3 = v; }
+void VertexFaceRecord::setIndex3(short v)
+{
+    _index3 = v;
+}
 
-short VertexFaceRecord::index4() const { return _index4; }
+short VertexFaceRecord::index4() const
+{
+    return _index4;
+}
 
-void VertexFaceRecord::setIndex4(short v) { _index4 = v; }   
+void VertexFaceRecord::setIndex4(short v)
+{
+    _index4 = v;
+}
 
 }// namespace dwg

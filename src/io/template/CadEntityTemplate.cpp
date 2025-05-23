@@ -23,7 +23,7 @@
 #include <dwg/io/template/CadEntityTemplate_p.h>
 
 namespace dwg {
-    
+
 CadEntityTemplate::CadEntityTemplate(Entity *v) : CadTemplateT<Entity *>(v) {}
 
 void CadEntityTemplate::build(CadDocumentBuilder *builder) {}

@@ -23,7 +23,11 @@
 #pragma once
 
 #include <dwg/io/template/CadTemplate_p.h>
-#include <dwg/objects/BlockParameter.h>
+#include <dwg/objects/evaluations/Block1PtParameter.h>
+#include <dwg/objects/evaluations/BlockParameter.h>
+#include <dwg/objects/evaluations/EvaluationExpression.h>
+
+
 
 namespace dwg {
 
@@ -31,7 +35,7 @@ class CadEvaluationExpressionTemplate : public CadTemplateT<EvaluationExpression
 {
 public:
     CadEvaluationExpressionTemplate(EvaluationExpression *object);
-    virtual ~CadEvaluationExpressionTemplate();
+    virtual ~CadEvaluationExpressionTemplate() noexcept;
 };
 
 class CadBlockElementTemplate : public CadEvaluationExpressionTemplate

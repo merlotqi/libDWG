@@ -20,8 +20,9 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/io/template/CadAttributeTemplate_p.h>
 #include <dwg/entities/AttributeBase.h>
+#include <dwg/io/template/CadAttributeTemplate_p.h>
+
 
 namespace dwg {
 

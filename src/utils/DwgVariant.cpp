@@ -127,7 +127,7 @@ DwgVariant::DwgVariant(const std::vector<unsigned char> &v)
 DwgVariant::DwgVariant(const DateTime &v)
 {
     Type = VarType::DATETIME;
-    time = v;
+    dt = v;
 }
 
 DwgVariant::DwgVariant(const Color &v)
@@ -261,7 +261,7 @@ DwgVariant &DwgVariant::operator=(const XYZ &v)
 DwgVariant &DwgVariant::operator=(const DateTime &v)
 {
     Type = VarType::DATETIME;
-    time = v;
+    dt = v;
     return *this;
 }
 
@@ -402,7 +402,7 @@ const std::vector<unsigned char> &DwgVariant::asBlob() const
 DateTime DwgVariant::asDateTime() const
 {
     assert(Type == VarType::DATETIME);
-    return time;
+    return dt;
 }
 
 Color DwgVariant::asColor() const
@@ -498,7 +498,7 @@ DwgVariant::operator const XYZ &() const
 DwgVariant::operator const DateTime &() const
 {
     assert(Type == VarType::DATETIME);
-    return time;
+    return dt;
 }
 
 DwgVariant::operator const Color &() const

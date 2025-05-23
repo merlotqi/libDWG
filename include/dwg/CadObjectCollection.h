@@ -39,6 +39,7 @@ class CadObjectCollection
     static_assert(std::is_base_of<CadObject, std::remove_pointer_t<T>>::value,
                   "T must be a pointer to a class derived from CadObject");
 
+protected:
     std::vector<T> _entries;
     CadObject *_owner;
 

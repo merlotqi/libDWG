@@ -44,7 +44,7 @@ public:
 
     std::optional<unsigned long long> firstVertexHandle() const;
     void setFirstVertexHandle(unsigned long long);
-    
+
     std::optional<unsigned long long> lastVertexHandle() const;
     void setLastVertexHandle(unsigned long long);
 
