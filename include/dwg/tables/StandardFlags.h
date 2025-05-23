@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Standard flags for tables
@@ -40,6 +42,6 @@ enum class StandardFlag : short
     /// drawing was edited.
     Referenced = 64,
 };
-typedef int StandardFlags;
+Q_DECLARE_FLAGS(StandardFlags, StandardFlag);
 
 }// namespace dwg

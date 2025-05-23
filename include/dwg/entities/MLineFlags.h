@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Flags (bit-coded values)
@@ -36,6 +38,6 @@ enum class MLineFlag
     /// Suppress end caps
     NoEndCaps = 8
 };
-typedef int MLineFlags;
+Q_DECLARE_FLAGS(MLineFlags, MLineFlag);
 
 }// namespace dwg

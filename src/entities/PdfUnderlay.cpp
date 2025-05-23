@@ -19,3 +19,24 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/entities/PdfUnderlay.h>
+
+namespace dwg {
+
+PdfUnderlay::PdfUnderlay() {}
+
+PdfUnderlay::~PdfUnderlay() {}
+
+ObjectType PdfUnderlay::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
+
+std::string PdfUnderlay::objectName() const
+{
+    return DxfFileToken::EntityPdfUnderlay;
+}
+
+}// namespace dwg

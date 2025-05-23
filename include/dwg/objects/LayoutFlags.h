@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Layout flags
@@ -34,6 +36,6 @@ enum class LayoutFlag : short
     /// Indicates the LIMCHECK value for this layout when this layout is current
     LimitsChecking = 2,
 };
-typedef int LayoutFlags;
+Q_DECLARE_FLAGS(LayoutFlags, LayoutFlag);
 
 }// namespace dwg

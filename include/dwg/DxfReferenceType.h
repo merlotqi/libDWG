@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class DxfReferenceType : unsigned char
@@ -49,8 +51,7 @@ enum class DxfReferenceType : unsigned char
 
     Unprocess = 64
 };
-
-typedef int DxfReferenceTypes;
+Q_DECLARE_FLAGS(DxfReferenceTypes, DxfReferenceType);
 
 
 }// namespace dwg

@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum ImageDisplayFlag : short
@@ -37,6 +39,6 @@ enum ImageDisplayFlag : short
     /// Transparency is on
     TransparencyIsOn = 8
 };
-typedef int ImageDisplayFlags;
+Q_DECLARE_FLAGS(ImageDisplayFlags, ImageDisplayFlag);
 
 }// namespace dwg

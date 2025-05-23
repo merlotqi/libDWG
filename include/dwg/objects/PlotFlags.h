@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Defines the plot settings flag.
@@ -72,6 +74,6 @@ enum class PlotFlag
     /// Preview plot initialization.
     PrevPlotInit = 16384
 };
-typedef int PlotFlags;
+Q_DECLARE_FLAGS(PlotFlags, PlotFlag);
 
 }// namespace dwg

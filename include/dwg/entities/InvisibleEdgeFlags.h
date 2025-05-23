@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum InvisibleEdgeFlag
@@ -37,6 +39,6 @@ enum InvisibleEdgeFlag
     /// Fourth edge is invisible.
     Fourth = 8
 };
-typedef int InvisibleEdgeFlags;
+Q_DECLARE_FLAGS(InvisibleEdgeFlags, InvisibleEdgeFlag);
 
 }// namespace dwg

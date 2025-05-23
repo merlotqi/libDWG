@@ -330,7 +330,7 @@ long long DwgStreamReaderBase::positionInBits()
     return 0LL;
 }
 
-void DwgStreamReaderBase::setPositionInBits(long positon) {}
+void DwgStreamReaderBase::setPositionInBits(long long positon) {}
 
 void DwgStreamReaderBase::advanceByte() {}
 

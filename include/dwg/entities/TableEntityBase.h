@@ -24,6 +24,7 @@
 
 #include <dwg/Color.h>
 #include <dwg/utils/DwgVariant.h>
+#include <dwg/utils/QFlags.h>
 
 namespace dwg {
 
@@ -44,7 +45,7 @@ public:
         AllowManualPositions = 8,/// Allow manual positions
         AllowManualHeights = 16  /// Allow manual heights
     };
-    typedef int BreakOptionFlags;
+    Q_DECLARE_FLAGS(BreakOptionFlags, BreakOptionFlag);
 
     enum class BreakFlowDirection
     {
@@ -179,7 +180,7 @@ public:
         DoubleLineSpacing = 0x20,/// Double line spacing.
         All = 0x3F               /// All.
     };
-    typedef int TableBorderPropertyFlags;
+    Q_DECLARE_FLAGS(TableBorderPropertyFlags, TableBorderPropertyFlag);
 
     enum class TableBorderType
     {
@@ -197,7 +198,7 @@ public:
         InsideVertical = 16,
         InsideHorizontal = 32,
     };
-    typedef int CellEdgeFlags;
+    Q_DECLARE_FLAGS(CellEdgeFlags, CellEdgeFlag);
 
 public:
     TableCellBorder();
@@ -264,7 +265,7 @@ public:
         //Table properties:
         FlowDirectionBottomToTop = 0x10000
     };
-    typedef int TableCellStylePropertyFlags;
+    Q_DECLARE_FLAGS(TableCellStylePropertyFlags, TableCellStylePropertyFlag);
 
 public:
     TableContentFormat();
@@ -336,7 +337,7 @@ public:
         StackedHorizontal = 2,
         StackedVertical = 4
     };
-    typedef int TableCellContentLayoutFlags;
+    Q_DECLARE_FLAGS(TableCellContentLayoutFlags, TableCellContentLayoutFlag);
 
     enum class MarginFlags
     {

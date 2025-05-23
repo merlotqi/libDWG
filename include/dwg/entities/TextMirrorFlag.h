@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class TextMirrorFlag : short
@@ -33,6 +35,6 @@ enum class TextMirrorFlag : short
     /// Mirrored in Y
     UpsideDown = 4,
 };
-typedef int TextMirrorFlags;
+Q_DECLARE_FLAGS(TextMirrorFlags, TextMirrorFlag);
 
 }// namespace dwg

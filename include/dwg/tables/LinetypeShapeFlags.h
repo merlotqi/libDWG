@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Represents a line type complex element type.
@@ -39,6 +41,6 @@ enum class LinetypeShapeFlag : short
     /// Complex shape code holds the index into the text area of the string to be drawn.
     Shape = 4,
 };
-typedef int LinetypeShapeFlags;
+Q_DECLARE_FLAGS(LinetypeShapeFlags, LinetypeShapeFlag);
 
 }// namespace dwg

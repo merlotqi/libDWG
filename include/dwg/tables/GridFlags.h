@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class GridFlag : short
@@ -32,6 +34,6 @@ enum class GridFlag : short
     _3 = 4,
     _4 = 8,
 };
-typedef int GridFlags;
+Q_DECLARE_FLAGS(GridFlags, GridFlag);
 
 }// namespace dwg

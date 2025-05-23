@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class BackgroundFillFlag : unsigned char
@@ -31,6 +33,6 @@ enum class BackgroundFillFlag : unsigned char
     UseDrawingWindowColor = 2, ///< Use the drawing window color for fill.
     TextFrame = 16,            ///< Adds a text frame around the entity.
 };
-typedef int BackgroundFillFlags;
+Q_DECLARE_FLAGS(BackgroundFillFlags, BackgroundFillFlag);
 
 }// namespace dwg

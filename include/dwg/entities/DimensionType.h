@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Dimension type
@@ -57,6 +59,6 @@ enum DimensionType
     /// Indicates if the dimension text has been positioned at a user-defined location rather than at the default location
     TextUserDefinedLocation = 128
 };
-typedef int DimensionTypes;
+Q_DECLARE_FLAGS(DimensionTypes, DimensionType);
 
 }// namespace dwg

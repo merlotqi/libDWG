@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum BoundaryPathFlag
@@ -42,6 +44,6 @@ enum BoundaryPathFlag
     OrientToPaper = 4096,      ///< Orients hatch loop to paper.
     IsAnnotativeBlock = 8192,  ///< Annotative block boundary path.
 };
-typedef int BoundaryPathFlags;
+Q_DECLARE_FLAGS(BoundaryPathFlags, BoundaryPathFlag);
 
 }// namespace dwg

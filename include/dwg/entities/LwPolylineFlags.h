@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Polyline flag (bit-coded)
@@ -31,6 +33,6 @@ enum class LwPolylineFlag
     Closed = 1,
     Plinegen = 128
 };
-typedef int LwPolylineFlags;
+Q_DECLARE_FLAGS(LwPolylineFlags, LwPolylineFlag);
 
 }// namespace dwg

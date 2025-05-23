@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class LeaderLinePropertOverrideFlag : int
@@ -34,6 +36,6 @@ enum class LeaderLinePropertOverrideFlag : int
     eArrowheadSize = 16,
     eArrowhead = 32,
 };
-typedef int LeaderLinePropertOverrideFlags;
+Q_DECLARE_FLAGS(LeaderLinePropertOverrideFlags, LeaderLinePropertOverrideFlag);
 
 }// namespace dwg

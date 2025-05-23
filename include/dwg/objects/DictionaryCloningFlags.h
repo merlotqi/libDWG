@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Duplicate record cloning flag (determines how to merge duplicate entries).
@@ -40,6 +42,6 @@ enum class DictionaryCloningFlag : short
     /// Unmangle name.
     UnmangleName = 16
 };
-typedef int DictionaryCloningFlags;
+Q_DECLARE_FLAGS(DictionaryCloningFlags, DictionaryCloningFlag);
 
 }// namespace dwg

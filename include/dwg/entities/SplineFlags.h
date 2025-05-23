@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Defines the spline flags
@@ -45,7 +47,7 @@ enum class SplineFlag : unsigned short
     /// Linear (planar flag is also set)
     Linear = 16,
 };
-typedef int SplineFlags;
+Q_DECLARE_FLAGS(SplineFlags, SplineFlag);
 
 /// Defines the spline flags 1
 enum class SplineFlag1 : unsigned short
@@ -65,6 +67,6 @@ enum class SplineFlag1 : unsigned short
     /// Use knot parameter
     UseKnotParameter = 8,
 };
-typedef int SplineFlags1;
+Q_DECLARE_FLAGS(SplineFlags1, SplineFlag1);
 
 }// namespace dwg

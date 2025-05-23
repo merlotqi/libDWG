@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Underlay display options.
@@ -42,6 +44,6 @@ enum UnderlayDisplayFlag : unsigned char
     /// Clip is inside mode.
     ClipInsideMode = 16
 };
-typedef int UnderlayDisplayFlags;
+Q_DECLARE_FLAGS(UnderlayDisplayFlags, UnderlayDisplayFlag);
 
 }// namespace dwg

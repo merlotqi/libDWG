@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Defines the vertex flags.
@@ -47,6 +49,6 @@ enum class VertexFlag
     /// Polyface mesh vertex.
     PolyfaceMeshVertex = 128
 };
-typedef int VertexFlags;
+Q_DECLARE_FLAGS(VertexFlags, VertexFlag);
 
 }// namespace dwg

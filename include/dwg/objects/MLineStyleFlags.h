@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Flags (bit-coded).
@@ -46,6 +48,6 @@ enum class MLineStyleFlag
     /// End round (outer arcs) cap
     EndRoundCap = 1024
 };
-typedef int MLineStyleFlags;
+Q_DECLARE_FLAGS(MLineStyleFlags, MLineStyleFlag);
 
 }// namespace dwg

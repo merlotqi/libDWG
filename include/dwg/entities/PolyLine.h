@@ -27,6 +27,8 @@
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
 #include <dwg/entities/Vertex.h>
+#include <dwg/SeqendCollection.h>
+#include <initializer_list>
 
 namespace dwg {
 
@@ -58,21 +60,34 @@ public:
 
     SmoothSurfaceType smoothSurface() const;
     void setSmoothSurface(SmoothSurfaceType);
+
+    bool isClosed() const;
+    void setIsClosed(bool);
+
+    SeqendCollection<Vertex *> vertices();
 };
 
 class Polyline2D : public Polyline
 {
 public:
     Polyline2D();
+    Polyline2D(const std::initializer_list<Vertex2D *> &vertices, bool isClosed);
     ~Polyline2D();
+
+    ObjectType objectType() const override;
+    std::string subclassMarker() const override;
 };
 
 class Polyline3D : public Polyline
 {
 public:
     Polyline3D();
+    Polyline3D(const std::initializer_list<Vertex3D *> &vertices, bool isClosed);
+    Polyline3D(const std::initializer_list<XYZ> &vertices, bool isClosed);
     ~Polyline3D();
-};
 
+    ObjectType objectType() const override;
+    std::string subclassMarker() const override;
+};
 
 }// namespace dwg

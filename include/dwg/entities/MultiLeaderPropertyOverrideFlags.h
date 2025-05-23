@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class MultiLeaderPropertyOverrideFlag : int
@@ -89,6 +91,6 @@ enum class MultiLeaderPropertyOverrideFlag : int
     /// Override <see cref="MultiLeaderStyle.TextBottomAttachment"/> property.
     TextBottomAttachment = 0x20000000
 };
-typedef int MultiLeaderPropertyOverrideFlags;
+Q_DECLARE_FLAGS(MultiLeaderPropertyOverrideFlags, MultiLeaderPropertyOverrideFlag);
 
 }// namespace dwg

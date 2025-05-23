@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Defines the polyline flags.
@@ -46,6 +48,6 @@ enum class PolylineFlag
     /// The line type pattern is generated continuously around the vertexes of this polyline.
     ContinuousLinetypePattern = 128
 };
-typedef int PolylineFlags;
+Q_DECLARE_FLAGS(PolylineFlags, PolylineFlag);
 
 }// namespace dwg

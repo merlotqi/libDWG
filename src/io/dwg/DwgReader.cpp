@@ -551,11 +551,11 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
     reedSolomonDecoding(compressedData, decodedData, 3, 239);
 
     //0x00	8	CRC
-    long crc = LittleEndianConverter::instance()->toInt64(decodedData.data(), 0);
+    long long crc = LittleEndianConverter::instance()->toInt64(decodedData.data(), 0);
     //0x08	8	Unknown key
-    long unknownKey = LittleEndianConverter::instance()->toInt64(decodedData.data(), 8);
+    long long unknownKey = LittleEndianConverter::instance()->toInt64(decodedData.data(), 8);
     //0x10	8	Compressed Data CRC
-    long compressedDataCRC = LittleEndianConverter::instance()->toInt64(decodedData.data(), 16);
+    long long compressedDataCRC = LittleEndianConverter::instance()->toInt64(decodedData.data(), 16);
     //0x18	4	ComprLen
     int comprLen = LittleEndianConverter::instance()->toInt32(decodedData.data(), 24);
     //0x1C	4	Length2

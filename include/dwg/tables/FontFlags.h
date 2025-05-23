@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Represent the font character formatting, such as italic, bold, or regular.
@@ -34,6 +36,6 @@ enum class FontFlag
     /// Bold.
     Bold = 2
 };
-typedef int FontFlags;
+Q_DECLARE_FLAGS(FontFlags, FontFlag);
 
 }// namespace dwg

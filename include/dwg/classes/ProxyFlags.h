@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum ProxyFlag : unsigned short
@@ -57,6 +59,6 @@ enum ProxyFlag : unsigned short
     /// R13 format proxy.
     R13FormatProxy = 32768,
 };
-typedef int ProxyFlags;
+Q_DECLARE_FLAGS(ProxyFlags, ProxyFlag);
 
 }// namespace dwg

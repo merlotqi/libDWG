@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Standard layer flags (bit-coded values).
@@ -49,6 +51,6 @@ enum class LayerFlag : short
     /// drawing was edited.
     Referenced = 64
 };
-typedef int LayerFlags;
+Q_DECLARE_FLAGS(LayerFlags, LayerFlag);
 
 }// namespace dwg

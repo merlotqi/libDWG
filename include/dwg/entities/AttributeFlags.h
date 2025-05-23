@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum AttributeFlag
@@ -32,6 +34,6 @@ enum AttributeFlag
     Verify = 4,  ///< Attribute requires verification on input.
     Preset = 8   ///< Attribute is preset, no user prompt.
 };
-typedef int AttributeFlags;
+Q_DECLARE_FLAGS(AttributeFlags, AttributeFlag);
 
 }// namespace dwg

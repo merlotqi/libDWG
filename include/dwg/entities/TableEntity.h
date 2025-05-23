@@ -24,6 +24,7 @@
 
 #include <dwg/entities/Insert.h>
 #include <dwg/entities/TableEntityBase.h>
+#include <dwg/utils/QFlags.h>
 
 namespace dwg {
 
@@ -66,7 +67,7 @@ public:
             /// Format was modified after update
             FormatModifiedAfterUpdate = 0x40,
         };
-        typedef int TableCellStateFlags;
+        Q_DECLARE_FLAGS(TableCellStateFlags, TableCellStateFlag);
 
         enum class TableCellContentType
         {

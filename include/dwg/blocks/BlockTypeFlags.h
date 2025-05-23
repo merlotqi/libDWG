@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Block-type flags (bit-coded values, may be combined).
@@ -45,6 +47,6 @@ enum class BlockTypeFlag
     /// This definition is a referenced external reference (ignored on input).
     Referenced = 64
 };
-typedef int BlockTypeFlags;
+Q_DECLARE_FLAGS(BlockTypeFlags, BlockTypeFlag);
 
 }// namespace dwg

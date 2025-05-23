@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Controls whether layer and spatial indexes are created and saved in drawing files
@@ -36,6 +38,6 @@ enum class IndexCreationFlag : unsigned char
     /// Layer and spatial indexes are created
     LayerAndSpatialIndex = 0b11
 };
-typedef int IndexCreationFlags;
+Q_DECLARE_FLAGS(IndexCreationFlags, IndexCreationFlag);
 
 }// namespace dwg

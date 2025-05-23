@@ -117,7 +117,34 @@ public:
     void setObservationToTag(const std::string &);
 
     std::vector<GeoMeshPoint> points() const;
+    std::vector<GeoMeshPoint> &points();
+
     std::vector<GeoMeshFace> faces() const;
+    std::vector<GeoMeshFace> &faces();
+
+private:
+    GeoDataVersion _version;
+    DesignCoordinatesType _coordinatesType;
+    BlockRecord *_hostBlock;
+    XYZ _designPoint;
+    XYZ _referencePoint;
+    XY _northDirection;
+    double _horizontalUnitScale;
+    double _verticalUnitScale;
+    UnitsType _horizontalUnits;
+    UnitsType _verticalUnits;
+    XYZ _upDirection;
+    ScaleEstimationType _scaleEstimationMethod;
+    bool _enableSeaLevelCorrection;
+    double _userSpecifiedScaleFactor;
+    double _seaLevelElevation;
+    double _coordinateProjectionRadius;
+    std::string _coordinateSystemDefinition;
+    std::string _geoRssTag;
+    std::string _observationFromTag;
+    std::string _observationToTag;
+    std::vector<GeoMeshPoint> _points;
+    std::vector<GeoMeshFace> _faces;
 };
 
 }// namespace dwg

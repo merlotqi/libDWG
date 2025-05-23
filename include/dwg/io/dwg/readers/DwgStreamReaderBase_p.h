@@ -94,7 +94,7 @@ public:
     DateTime readDateTime() override;
     double readTimeSpan() override;
     long long positionInBits() override;
-    void setPositionInBits(long positon) override;
+    void setPositionInBits(long long positon) override;
     void advanceByte() override;
     void advance(int offset) override;
     unsigned short resetShift() override;

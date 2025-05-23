@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// viewport status flags
@@ -90,6 +92,6 @@ enum class ViewportStatusFlag
     /// Enables subdivision of the grid below the set grid spacing when the grid display is adaptive.
     SubdivisionGridBelowSpacing = 1048576
 };
-typedef int ViewportStatusFlags;
+Q_DECLARE_FLAGS(ViewportStatusFlags, ViewportStatusFlag);
 
 }// namespace dwg

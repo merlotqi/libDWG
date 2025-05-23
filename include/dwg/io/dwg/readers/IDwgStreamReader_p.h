@@ -180,7 +180,7 @@ public:
 
     virtual long long positionInBits() = 0;
 
-    virtual void setPositionInBits(long positon) = 0;
+    virtual void setPositionInBits(long long positon) = 0;
 
     virtual void advanceByte() = 0;
 

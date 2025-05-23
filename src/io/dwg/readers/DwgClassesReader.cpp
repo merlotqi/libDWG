@@ -52,15 +52,15 @@ DxfClassCollection *DwgClassesReader::read()
     checkSentinel(_sreader, DwgSectionDefinition::StartSentinels[sectionName()]);
 
     //RL : size of class data area
-    long size = _sreader->readRawLong();
-    long endSection = _sreader->position() + size;
+    long long size = _sreader->readRawLong();
+    long long endSection = _sreader->position() + size;
 
     //R2010+ (only present if the maintenance version is greater than 3!)
     if (_fileHeader->version() >= ACadVersion::AC1024 && _fileHeader->acadMaintenanceVersion() > 3 ||
         _fileHeader->version() > ACadVersion::AC1027)
     {
         //RL : unknown, possibly the high 32 bits of a 64-bit size?
-        long unknown = _sreader->readRawLong();
+        long long unknown = _sreader->readRawLong();
     }
 
     long flagPos = 0;
@@ -68,8 +68,8 @@ DxfClassCollection *DwgClassesReader::read()
     if (R2007Plus)
     {
         //Setup readers
-        flagPos = _sreader->positionInBits() + _sreader->readRawLong() - 1L;
-        long savedOffset = _sreader->positionInBits();
+        flagPos = _sreader->positionInBits() + _sreader->readRawLong() - 1LL;
+        long long savedOffset = _sreader->positionInBits();
         endSection = _sreader->setPositionByFlag(flagPos);
 
         _sreader->setPositionInBits(savedOffset);

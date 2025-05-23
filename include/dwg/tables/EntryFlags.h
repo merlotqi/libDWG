@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Standard entry flags (bit-coded values).
@@ -37,6 +39,6 @@ enum class EntryFlag
     /// drawing was edited.
     Referenced = 64
 };
-typedef int EntryFlags;
+Q_DECLARE_FLAGS(EntryFlags, EntryFlag);
 
 }// namespace dwg

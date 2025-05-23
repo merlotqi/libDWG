@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/entities/Entity.h>
+#include <optional>
 
 namespace dwg {
 
@@ -31,9 +32,9 @@ class LIBDWG_API Mesh : public Entity
 public:
     struct Edge
     {
-        int Start;    ///< Index of the starting vertex.
-        int End;      ///< Index of the ending vertex.
-        double Crease;///< Crease value for subdivision (default: 0.0).
+        int start;    ///< Index of the starting vertex.
+        int end;      ///< Index of the ending vertex.
+        std::optional<double> crease;///< Crease value for subdivision (default: 0.0).
 
         Edge(int start, int end);
     };
@@ -56,13 +57,21 @@ public:
     void setSubdivisionLevel(int level);
 
     std::vector<XYZ> vertices() const;
-    void setVertices(const std::vector<XYZ> &vertices);
+    std::vector<XYZ> &vertices();
 
     std::vector<std::vector<int>> faces() const;
-    void setFaces(const std::vector<std::vector<int>> &faces);
+    std::vector<std::vector<int>> &faces();
 
-    std::vector<Mesh::Edge> edges() const;
-    void setEdges(const std::vector<Mesh::Edge> &edges);
+    std::vector<Edge> edges() const;
+    std::vector<Edge> &edges();
+
+private:
+    short _version;
+    bool _blendCrease;
+    int _subdivisionLevel;
+    std::vector<XYZ> _vertices;
+    std::vector<std::vector<int>> _faces;
+    std::vector<Mesh::Edge> _edges;
 };
 
 }// namespace dwg

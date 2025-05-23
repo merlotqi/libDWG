@@ -63,65 +63,122 @@ public:
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
 
-    MultiLeaderAnnotContext *contextData() const;
-    void setContextData(MultiLeaderAnnotContext *context);
-
-    MultiLeaderStyle *style() const;
-    void setStyle(MultiLeaderStyle *style);
-
-    MultiLeaderPropertyOverrideFlags propertyOverrideFlags() const;
-    void setPropertyOverrideFlags(MultiLeaderPropertyOverrideFlags flags);
-
-    MultiLeaderPathType pathType() const;
-    void setPathType(MultiLeaderPathType pathType);
-
-    Color lineColor() const;
-    void setLineColor(const Color &color);
-
-    LineType *leaderLineType() const;
-    void setLeaderLineType(LineType *lineType);
-
-    LineweightType leaderLineLength() const;
-    void setLeaderLineLength(LineweightType length);
-
-    bool enableLanding() const;
-    void setEnableLanding(bool enable);
-
-    bool enableDogleg() const;
-    void setEnableDogleg(bool enable);
-
-    double landingDistance() const;
-    void setLandingDistance(double distance);
-
-    BlockRecord *arrowhead() const;
-    void setArrowhead(BlockRecord *block);
-
     double arrowheadSize() const;
     void setArrowheadSize(double size);
 
+    std::vector<BlockAttribute> blockAttributes() const;
+    void setBlockAttributes(const std::vector<BlockAttribute> &);
+
     LeaderContentType contentType() const;
-    void setContentType(LeaderContentType type);
+    void setContentType(LeaderContentType);
 
-    TextStyle *textStyle() const;
-    void setTextStyle(TextStyle *style);
-
-    BlockRecord *blockContent() const;
-    void setBlockContent(BlockRecord *block);
+    MultiLeaderAnnotContext *contextData() const;
+    void setContextData(MultiLeaderAnnotContext *);
 
     bool enableAnnotationScale() const;
-    void setEnableAnnotationScale(bool enable);
+    void setEnableAnnotationScale(bool);
 
-    std::vector<BlockAttribute> blockAttributes() const;
-    void setBlockAttributes(const std::vector<BlockAttribute> &attributes);
+    bool enableDogleg() const;
+    void setEnableDogleg(bool);
 
-    bool textDirectionNegative() const;
-    void setTextDirectionNegative(bool negative);
+    bool enableLanding() const;
+    void setEnableLanding(bool);
+
+    bool extendedToText() const;
+    void setExtendedToText(bool);
+
+    double landingDistance() const;
+    void setLandingDistance(double);
+
+    LineType *leaderLineType() const;
+    void setLeaderLineType(LineType *);
+
+    LineweightType leaderLineWeight() const;
+    void setLeaderLineWeight(LineweightType);
+
+    Color lineColor() const;
+    void setLineColor(const Color &);
+
+    MultiLeaderPathType pathType() const;
+    void setPathType(MultiLeaderPathType);
+
+    MultiLeaderPropertyOverrideFlags propertyOverrideFlags() const;
+    void setPropertyOverrideFlags(MultiLeaderPropertyOverrideFlags);
+
+    double scaleFactor() const;
+    void setScaleFactor(double);
+
+    MultiLeaderStyle *style() const;
+    void setStyle(MultiLeaderStyle *);
+
+#pragma region Text Menu Properties
+    TextAlignmentType textAlignment() const;
+    void setTextAlignment(TextAlignmentType);
+
+    TextAngleType textAngle() const;
+    void setTextAngle(TextAngleType);
+
+    Color textColor() const;
+    void setTextColor(const Color &);
+
+    bool textFrame() const;
+    void setTextFrame(bool);
+
+    TextAttachmentType textLeftAttachment() const;
+    void setTextLeftAttachment(TextAttachmentType);
+
+    TextAttachmentType textRightAttachment() const;
+    void setTextRightAttachment(TextAttachmentType);
+
+    TextStyle *textStyle() const;
+    void setTextStyle(TextStyle *);
+
+    LineweightType leaderLineLength() const;
+    void setLeaderLineLength(LineweightType);
+
+    BlockRecord *arrowhead() const;
+    void setArrowhead(BlockRecord *);
+
+    TextStyle *textStyle() const;
+    void setTextStyle(TextStyle *);
+
+#pragma endregion Text Menu Properties
+
+#pragma region Block Content Properties
+    BlockRecord *blockContent() const;
+    void setBlockContent(BlockRecord *);
+
+    Color blockContentColor() const;
+    void setBlockContentColor(const Color &);
+
+    BlockContentConnectionType blockContentConnection() const;
+    void setBlockContentConnection(BlockContentConnectionType);
+
+    double BlockContentRotation() const;
+    void setBlockContentRotation(double);
+
+    XYZ blockContentScale() const;
+    void setBlockContentScale(const XYZ &);
+
+#pragma endregion Block Content Properties
 
     short textAligninIPE() const;
-    void setTextAligninIPE(short alignment);
+    void setTextAligninIPE(short);
+
+    TextAttachmentDirectionType textAttachmentDirection() const;
+    void setTextAttachmentDirection(TextAttachmentDirectionType);
 
     TextAttachmentPointType textAttachmentPoint() const;
-    void setTextAttachmentPoint(TextAttachmentPointType point);
+    void setTextAttachmentPoint(TextAttachmentPointType);
+
+    TextAttachmentType textBottomAttachment() const;
+    void setTextBottomAttachment(TextAttachmentType);
+
+    bool textDirectionNegative() const;
+    void setTextDirectionNegative(bool);
+
+    TextAttachmentType textTopAttachment() const;
+    void setTextTopAttachment(TextAttachmentType);
 };
 
 }// namespace dwg

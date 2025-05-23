@@ -146,6 +146,7 @@ struct LIBDWG_API XYZ
     static XYZ AxisZ;
 
     constexpr XYZ() noexcept;
+    constexpr XYZ(const XY &v) noexcept;
     constexpr XYZ(double xpos, double ypos, double zpos) noexcept : v{xpos, ypos, zpos} {}
 
     constexpr double &operator[](int i);
@@ -333,7 +334,9 @@ constexpr inline double XY::dotProduct(XY v1, XY v2) noexcept
 
 /***************************** XYZ *****************************/
 
-constexpr inline XYZ::XYZ() noexcept : v{0.0f, 0.0f, 0.0f} {}
+constexpr inline XYZ::XYZ() noexcept : v{0.0, 0.0, 0.0} {}
+
+inline constexpr XYZ::XYZ(const XY &pv) noexcept : v{pv.X, pv.Y, 0.0} {}
 
 constexpr inline double &XYZ::operator[](int i)
 {
