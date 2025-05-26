@@ -30,19 +30,15 @@ class LIBDWG_API CadReaderConfiguration
 {
 public:
     CadReaderConfiguration();
-
     virtual ~CadReaderConfiguration();
 
     bool failsafe() const;
-
     void setFailsafe(bool value);
 
     bool keepUnknownEntities() const;
-
     void setKeepUnknownEntities(bool value);
 
     bool keepUnknownNonGraphicalObjects() const;
-
     void setKeepUnknownNonGraphicalObjects(bool value);
 
 private:

@@ -45,10 +45,6 @@ public:
         EvaluationExpression *expression;
     };
 
-    struct Edge
-    {
-    };
-
 public:
     static constexpr auto DictionaryEntryName = "ACAD_ENHANCEDBLOCK";
 
@@ -66,10 +62,13 @@ public:
     void setValue97(int);
 
     std::vector<Node> nodes() const;
+    std::vector<Node> &nodes();
     void setNodes(const std::vector<Node> &);
 
-    std::vector<Edge> edges() const;
-    void setEdges(const std::vector<Edge> &);
+private:
+    int _value96;
+    int _value97;
+    std::vector<Node> _nodes;
 };
 
 }// namespace dwg

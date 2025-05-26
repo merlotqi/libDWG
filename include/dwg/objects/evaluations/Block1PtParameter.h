@@ -25,7 +25,6 @@
 #include <dwg/Coordinate.h>
 #include <dwg/objects/evaluations/BlockParameter.h>
 
-
 namespace dwg {
 
 class LIBDWG_API Block1PtParameter : public BlockParameter

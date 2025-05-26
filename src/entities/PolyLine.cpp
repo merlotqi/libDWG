@@ -19,3 +19,20 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/PolyLine.h>
+
+namespace dwg {
+
+Polyline::Polyline() {}
+
+Polyline::~Polyline() {}
+
+std::string Polyline::objectName() const
+{
+    return DxfFileToken::EntityPolyline;
+}
+
+}// namespace dwg

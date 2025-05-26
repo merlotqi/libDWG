@@ -31,11 +31,9 @@ class ICadReader
 {
 public:
     ICadReader() = default;
-
     virtual ~ICadReader() = default;
 
     virtual CadDocument *read() = 0;
-
     virtual CadHeader *readHeader() = 0;
 };
 

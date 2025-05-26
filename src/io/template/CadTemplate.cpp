@@ -26,6 +26,13 @@ namespace dwg {
 
 CadTemplate::CadTemplate(CadObject *obj) {}
 
+CadObject *CadTemplate::cadObject() const
+{
+    return nullptr;
+}
+
+void CadTemplate::setCadObject(CadObject *v) {}
+
 std::optional<unsigned long long> CadTemplate::ownerHandle() const
 {
     return std::nullopt;
@@ -39,5 +46,27 @@ std::optional<unsigned long long> CadTemplate::xdictHandle() const
 }
 
 void CadTemplate::setXDictHandle(unsigned long long) {}
+
+
+std::vector<unsigned long long> CadTemplate::reactorsHandles() const  { return _reactorsHandles; }
+
+std::vector<unsigned long long> &CadTemplate::reactorsHandles()  { return _reactorsHandles; }
+
+void CadTemplate::setReactorsHandles(const std::vector<unsigned long long> &value)  { _reactorsHandles = value; }
+
+std::map<unsigned long long, std::vector<ExtendedDataRecord *>> CadTemplate::edataTemplate() const { return _edataTemplate; }
+
+std::map<unsigned long long, std::vector<ExtendedDataRecord *>> &CadTemplate::edataTemplate() { return _edataTemplate; }
+
+std::map<unsigned long long, std::vector<ExtendedDataRecord *>> CadTemplate::edataTemplateByAppName() const { return _edataTemplateByAppName; }
+
+std::map<unsigned long long, std::vector<ExtendedDataRecord *>> &CadTemplate::edataTemplateByAppName() { return _edataTemplateByAppName; }
+
+void CadTemplate::build(CadDocumentBuilder *builder) {}
+
+CadObject *CadTemplate::rawObject() const
+{
+    return _object;
+}
 
 }// namespace dwg

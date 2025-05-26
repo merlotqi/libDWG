@@ -76,10 +76,7 @@ public:
     }
 
 protected:
-    CadObject *rawObject() const override
-    {
-        return _object;
-    }
+    CadObject *rawObject() const override;
 
 protected:
     CadObject *_object;
@@ -102,8 +99,16 @@ public:
     CadTemplateT(T obj) : CadTemplate(obj) {}
     virtual ~CadTemplateT() {}
 
-    T cadObjectT() const;
-    void setCadObjectT(T v);
+    T cadObjectT() const
+    {
+        auto o = rawObject();
+        auto t = dynamic_cast<T>(o);
+        return t;
+    }
+    void setCadObjectT(T v)
+    {
+        setCadObject(v);
+    }
 };
 
 }// namespace dwg

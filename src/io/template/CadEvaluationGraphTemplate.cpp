@@ -31,6 +31,8 @@ CadEvaluationGraphTemplate::CadEvaluationGraphTemplate(EvaluationGraph *evaluati
 {
 }
 
+CadEvaluationGraphTemplate::~CadEvaluationGraphTemplate() noexcept {}
+
 void CadEvaluationGraphTemplate::build(CadDocumentBuilder *builder) {}
 
 std::vector<GraphNodeTemplate *> CadEvaluationGraphTemplate::nodeTemplates() const

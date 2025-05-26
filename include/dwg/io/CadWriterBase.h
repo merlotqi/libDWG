@@ -27,7 +27,6 @@
 #include <dwg/classes/DxfClassCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/CadWriterConfiguration.h>
-#include <dwg/io/ICadWriter.h>
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
 #include <dwg/utils/Encoding.h>
@@ -36,15 +35,12 @@
 namespace dwg {
 
 class CadDocument;
-
-template<typename T>
-class CadWriterBase : public ICadWriter, public T
+class LIBDWG_API CadWriterBase
 {
-    static_assert(std::is_base_of<CadWriterConfiguration, T>::value, "T must is base CadWriterConfiguration");
-
 public:
     virtual ~CadWriterBase();
-    virtual void write() override;
+    virtual void write();
+
     Delegate<void(const std::string &, Notification)> OnNotification;
 
 protected:
@@ -56,36 +52,7 @@ protected:
     std::ofstream *_stream;
     CadDocument *_document;
     Encoding _encoding;
+    CadWriterConfiguration *_configuration;
 };
-
-template<typename T>
-inline CadWriterBase<T>::CadWriterBase()
-{
-}
-
-template<typename T>
-inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document)
-    : _stream(stream), _document(document)
-{
-}
-
-template<typename T>
-inline CadWriterBase<T>::~CadWriterBase()
-{
-}
-
-template<typename T>
-inline void CadWriterBase<T>::write()
-{
-    DxfClassCollection::UpdateDxfClasses(_document);
-    _encoding = getListedEncoding(_document->header()->codePage());
-}
-
-template<typename T>
-inline Encoding CadWriterBase<T>::getListedEncoding(const std::string &codePage)
-{
-    CodePage code = CadUtils::GetCodePageByString(codePage);
-    return Encoding(code);
-}
 
 }// namespace dwg

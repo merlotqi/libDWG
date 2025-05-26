@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/io/CadReaderConfiguration.h>
-#include <dwg/io/ICadReader.h>
 #include <dwg/io/Notification.h>
 #include <dwg/utils/Delegate.h>
 #include <dwg/utils/Encoding.h>
@@ -33,11 +32,8 @@
 
 namespace dwg {
 
-template<typename T>
-class CadReaderBase : public ICadReader, protected T
+class LIBDWG_API CadReaderBase
 {
-    static_assert(std::is_base_of<CadReaderConfiguration, T>::value, "T must is base CadReaderConfiguration");
-
 public:
     virtual ~CadReaderBase();
     Delegate<void(const std::string &, Notification)> OnNotification;
@@ -51,35 +47,8 @@ protected:
 protected:
     CadDocument *_document;
     std::ifstream *_fileStream;
-    Encoding _encoding = Encoding(CodePage::Utf8);
+    CadReaderConfiguration *_configuration;
+    Encoding _encoding;
 };
-
-
-template<typename T>
-inline CadReaderBase<T>::~CadReaderBase()
-{
-}
-
-template<typename T>
-inline CadReaderBase<T>::CadReaderBase() : _fileStream(nullptr), _document(nullptr)
-{
-}
-
-template<typename T>
-inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
-    : _fileStream(new std::ifstream(filename)), _document(nullptr)
-{
-}
-
-template<typename T>
-inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
-{
-}
-
-template<typename T>
-inline Encoding CadReaderBase<T>::getListedEncoding(int code)
-{
-    return Encoding();
-}
 
 }// namespace dwg

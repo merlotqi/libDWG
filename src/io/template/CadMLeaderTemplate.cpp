@@ -28,6 +28,8 @@ CadMLeaderTemplate::CadMLeaderTemplate() : CadEntityTemplate(new MultiLeader()) 
 
 CadMLeaderTemplate::CadMLeaderTemplate(MultiLeader *entity) : CadEntityTemplate(entity) {}
 
+CadMLeaderTemplate::~CadMLeaderTemplate() noexcept {}
+
 void CadMLeaderTemplate::build(CadDocumentBuilder *builder) {}
 
 unsigned long long CadMLeaderTemplate::leaderStyleHandle() const

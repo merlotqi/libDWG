@@ -20,26 +20,30 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/Coordinate.h>
-#include <dwg/objects/evaluations/BlockParameter.h>
+#include <dwg/io/CadReaderBase.h>
 
 namespace dwg {
 
-class LIBDWG_API Block2PtParameter : public BlockParameter
+CadReaderBase::~CadReaderBase()
 {
-public:
-    Block2PtParameter();
-    virtual ~Block2PtParameter();
+}
 
-    std::string subclassMarker() const override;
+CadReaderBase::CadReaderBase() : _fileStream(nullptr), _document(nullptr)
+{
+}
 
-    XYZ firstPoint() const;
-    void setFirstPoint(const XYZ &);
+CadReaderBase::CadReaderBase(const std::string &filename)
+    : _fileStream(new std::ifstream(filename)), _document(nullptr)
+{
+}
 
-    XYZ secondPoint() const;
-    void setSecondPoint(const XYZ &);
-};
+CadReaderBase::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
+{
+}
+
+Encoding CadReaderBase::getListedEncoding(int code)
+{
+    return Encoding();
+}
 
 }// namespace dwg

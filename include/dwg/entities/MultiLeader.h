@@ -152,7 +152,7 @@ public:
     BlockContentConnectionType blockContentConnection() const;
     void setBlockContentConnection(BlockContentConnectionType);
 
-    double BlockContentRotation() const;
+    double blockContentRotation() const;
     void setBlockContentRotation(double);
 
     XYZ blockContentScale() const;
@@ -177,6 +177,44 @@ public:
 
     TextAttachmentType textTopAttachment() const;
     void setTextTopAttachment(TextAttachmentType);
+
+private:
+    BlockRecord *_arrowhead;
+    double _arrowheadSize;
+    std::vector<BlockAttribute> _blockAttributes;
+    LeaderContentType _contentType;
+    MultiLeaderAnnotContext *_contextData;
+    bool _enableAnnotationScale;
+    bool _enableDogleg;
+    bool _enableLanding;
+    bool _extendedToText;
+    double _landingDistance;
+    LineType *_leaderLineType;
+    LineweightType _leaderLineWeight;
+    Color _lineColor;
+    MultiLeaderPathType _pathType;
+    MultiLeaderPropertyOverrideFlags _propertyOverrideFlags;
+    double _scaleFactor;
+    MultiLeaderStyle *_style;
+    TextAlignmentType _textAlignment;
+    TextAngleType _textAngle;
+    Color _textColor;
+    bool _textFrame;
+    TextAttachmentType _textLeftAttachment;
+    TextAttachmentType _textRightAttachment;
+    TextStyle *_textStyle;
+    LineweightType _leaderLineLength;
+    BlockRecord *_blockContent;
+    Color _blockContentColor;
+    BlockContentConnectionType _blockContentConnection;
+    double _blockContentRotation;
+    XYZ _blockContentScale;
+    short _textAligninIPE;
+    TextAttachmentDirectionType _textAttachmentDirection;
+    TextAttachmentPointType _textAttachmentPoint;
+    TextAttachmentType _textBottomAttachment;
+    bool _textDirectionNegative;
+    TextAttachmentType _textTopAttachment;
 };
 
 }// namespace dwg

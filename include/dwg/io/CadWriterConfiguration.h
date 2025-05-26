@@ -30,19 +30,15 @@ class LIBDWG_API CadWriterConfiguration
 {
 public:
     CadWriterConfiguration();
-
     virtual ~CadWriterConfiguration();
 
     bool closeStream() const;
-
     void setCloseStream(bool value);
 
     bool writeXRecords() const;
-
     void setWriteXRecords(bool value);
 
     bool writeXData() const;
-
     void setWriteXData(bool value);
 
 private:

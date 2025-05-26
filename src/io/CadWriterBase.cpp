@@ -20,14 +20,33 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
+#include <dwg/io/CadWriterBase.h>
 
 namespace dwg {
 
-class ICadWriter
+CadWriterBase::CadWriterBase()
 {
-public:
-    virtual void write() = 0;
-};
+}
+
+CadWriterBase::CadWriterBase(std::ofstream *stream, CadDocument *document)
+    : _stream(stream), _document(document)
+{
+}
+
+CadWriterBase::~CadWriterBase()
+{
+}
+
+void CadWriterBase::write()
+{
+    DxfClassCollection::UpdateDxfClasses(_document);
+    _encoding = getListedEncoding(_document->header()->codePage());
+}
+
+Encoding CadWriterBase::getListedEncoding(const std::string &codePage)
+{
+    CodePage code = CadUtils::GetCodePageByString(codePage);
+    return Encoding(code);
+}
 
 }// namespace dwg
