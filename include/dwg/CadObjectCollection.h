@@ -180,6 +180,33 @@ public:
             f(item);
         }
     }
+    pointer front() 
+    {
+        if (empty())
+            throw std::out_of_range("Collection is empty");
+        return _entries.front();
+    }
+
+    const pointer front() const
+    {
+        if (empty())
+            throw std::out_of_range("Collection is empty");
+        return _entries.front();
+    }
+
+    pointer back() 
+    {
+        if (empty())
+            throw std::out_of_range("Collection is empty");
+        return _entries.back();
+    }
+
+    const pointer back() const
+    {
+        if (empty())
+            throw std::out_of_range("Collection is empty");
+        return _entries.back();
+    }
 };
 
 

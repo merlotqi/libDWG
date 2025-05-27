@@ -126,7 +126,7 @@ public:
 
 private:
     void registerObject(CadObject *cadObject);
-    void writeSize(std::ostream stream, unsigned int size);
+    void writeSize(std::ostream *stream, unsigned int size);
     void writeSizeInBits(std::ostream *stream, unsigned long long size);
     void writeXrefDependantBit(TableEntry *entry);
     void writeCommonData(CadObject *cadObject);

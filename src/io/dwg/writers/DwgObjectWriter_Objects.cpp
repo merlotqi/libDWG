@@ -25,23 +25,41 @@
 namespace dwg {
 
 void DwgObjectWriter::writeObjects() {}
+
 void DwgObjectWriter::writeObject(CadObject *obj) {}
+
 void DwgObjectWriter::writeAcdbPlaceHolder(AcdbPlaceHolder *acdbPlaceHolder) {}
+
 void DwgObjectWriter::writeBookColor(BookColor *color) {}
+
 void DwgObjectWriter::writeCadDictionaryWithDefault(CadDictionaryWithDefault *dictionary) {}
+
 void DwgObjectWriter::writeDictionary(CadDictionary *dictionary) {}
+
 void DwgObjectWriter::addEntriesToWriter(CadDictionary *dictionary) {}
+
 void DwgObjectWriter::writeDictionaryVariable(DictionaryVariable *dictionaryVariable) {}
+
 void DwgObjectWriter::writeGeoData(GeoData *geodata) {}
+
 void DwgObjectWriter::writeGroup(Group *group) {}
+
 void DwgObjectWriter::writeImageDefinitionReactor(ImageDefinitionReactor *definitionReactor) {}
+
 void DwgObjectWriter::writeImageDefinition(ImageDefinition *definition) {}
+
 void DwgObjectWriter::writeLayout(Layout *layout) {}
+
 void DwgObjectWriter::writeMLineStyle(MLineStyle *mlineStyle) {}
+
 void DwgObjectWriter::writeMultiLeaderStyle(MultiLeaderStyle *mLeaderStyle) {}
+
 void DwgObjectWriter::writePlotSettings(PlotSettings *plot) {}
+
 void DwgObjectWriter::writeScale(Scale *scale) {}
+
 void DwgObjectWriter::writeSortEntitiesTable(SortEntitiesTable *sortEntitiesTable) {}
+
 void DwgObjectWriter::writeXRecord(XRecord *xrecord) {}
 
 }// namespace dwg
