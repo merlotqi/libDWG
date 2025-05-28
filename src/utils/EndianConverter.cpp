@@ -89,7 +89,7 @@ int32_t EndianConverter::toInt32(const unsigned char *bytes)
     return fromBytesT<int32_t>(bytes);
 }
 
-uint32_t EndianConverter::toUint32(const unsigned char *bytes)
+uint32_t EndianConverter::toUInt32(const unsigned char *bytes)
 {
     return fromBytesT<uint32_t>(bytes);
 }
@@ -133,7 +133,7 @@ int32_t EndianConverter::toInt32(const unsigned char *bytes, std::size_t offset)
 {
     return 0;
 }
-uint32_t EndianConverter::toUint32(const unsigned char *bytes, std::size_t offset)
+uint32_t EndianConverter::toUInt32(const unsigned char *bytes, std::size_t offset)
 {
     return 0;
 }

@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dwg/writers/DwgStreamWriterAC18_p.h>
+#include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
 
@@ -31,10 +32,139 @@ DwgStreamWriterAC18::DwgStreamWriterAC18(std::ostream *stream, Encoding encoding
 
 DwgStreamWriterAC18::~DwgStreamWriterAC18() {}
 
-void DwgStreamWriterAC18::writeCmColor(const Color &value) {}
+void DwgStreamWriterAC18::writeCmColor(const Color &value) 
+{
+			//CMC:
+			//BS: color index(always 0)
+			writeBitShort(0);
 
-void DwgStreamWriterAC18::writeEnColor(const Color &value, const Transparency &transparency) {}
+			unsigned char arr[4] = {0};
 
-void DwgStreamWriterAC18::writeEnColor(const Color &value, const Transparency &transparency, bool isBookColor) {}
+			if (value.isTrueColor())
+			{
+				arr[2] = (unsigned char)value.red();
+				arr[1] = (unsigned char)value.green();
+				arr[0] = (unsigned char)value.blue();
+				arr[3] = 0b1100'0010;
+			}
+			else if (value.isByLayer())
+			{
+				arr[3] = 0b11000000;
+			}
+			else
+			{
+				arr[3] = 0b1100'0011;
+				arr[0] = (unsigned char)value.index();
+			}
+
+			//BL: RGB value
+			writeBitLong(LittleEndianConverter::instance()->toInt32(arr));
+
+			//RC: Color Byte
+			writeByte(0);
+
+			//(&1 => color name follows(TV),
+			//&2 => book name follows(TV))
+}
+
+void DwgStreamWriterAC18::writeEnColor(const Color &color, const Transparency &transparency) 
+{
+			//BS : color number: flags + color index
+			unsigned short size = 0;
+
+			if (color.isByBlock() && transparency.isByLayer())
+			{
+				writeBitShort(0);
+				return;
+			}
+
+			//0x2000: color is followed by a transparency BL
+			if (!transparency.isByLayer())
+			{
+				size = (unsigned short)(size | 0b10000000000000);
+            }
+
+			//0x8000: complex color (rgb).
+			if (color.isTrueColor())
+			{
+				size = (unsigned short)(size | 0x8000);
+			}
+			else
+			{
+				//Color index: if no flags were set, the color is looked up by the color number (ACI color).
+				size = (unsigned short)(size | (unsigned short)color.index());
+			}
+
+			writeBitShort((short)size);
+
+			if (color.isTrueColor())
+			{
+				unsigned char arr[4] = { color.blue(), color.green(), color.red(), 0b11000010 };
+				unsigned int rgb = LittleEndianConverter::instance()->toUInt32(arr);
+				writeBitLong((int)rgb);
+			}
+
+			if (!transparency.isByLayer())
+			{
+				//The first byte represents the transparency type:
+				//0 = BYLAYER,
+				//1 = BYBLOCK,
+				//3 = the transparency value in the last byte.
+				writeBitLong(Transparency::ToAlphaValue(transparency));
+			}
+}
+
+void DwgStreamWriterAC18::writeEnColor(const Color &color, const Transparency &transparency, bool isBookColor) 
+{
+			//BS : color number: flags + color index
+			unsigned short size = 0;
+
+			if (color.isByBlock() && transparency.isByLayer() && !isBookColor)
+			{
+				writeBitShort(0);
+				return;
+			}
+
+			//0x2000: color is followed by a transparency BL
+			if (!transparency.isByLayer())
+			{
+				size = (unsigned short)(size | 0b10000000000000);
+			}
+
+			//0x4000: has AcDbColor reference (0x8000 is also set in this case).
+			if (isBookColor)
+			{
+				size = (unsigned short)(size | 0x4000);
+				size = (unsigned short)(size | 0x8000);
+			}
+			//0x8000: complex color (rgb).
+			else if (color.isTrueColor())
+			{
+				size = (unsigned short)(size | 0x8000);
+			}
+			else
+			{
+				//Color index: if no flags were set, the color is looked up by the color number (ACI color).
+				size = (unsigned short)(size | (unsigned short)color.index());
+			}
+
+			writeBitShort((short)size);
+
+			if (color.isTrueColor())
+			{
+                unsigned char arr[4] = { color.blue(), color.green(), color.red(), 0b11000010 };
+				unsigned int rgb = LittleEndianConverter::instance()->toUInt32(arr);
+				writeBitLong((int)rgb);
+			}
+
+			if (!transparency.isByLayer())
+			{
+				//The first byte represents the transparency type:
+				//0 = BYLAYER,
+				//1 = BYBLOCK,
+				//3 = the transparency value in the last byte.
+				writeBitLong(Transparency::ToAlphaValue(transparency));
+			}
+}
 
 }// namespace dwg

@@ -39,8 +39,11 @@ protected:
     int64_t _savedPositionInBits;
     int64_t _positionInBits;
 
-
 public:
+    DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter, IDwgStreamWriter *handlewriter);
+    ~DwgMergedStreamWriter();
+    
+    std::ostream *stream() override;
     Encoding encoding() override;
 
     IDwgStreamWriter *main() const override;
@@ -81,7 +84,7 @@ public:
 
     void write8BitJulianDate(const DateTime &value) override;
 
-    void writeTimeSpan(double value) override;
+    void writeTimeSpan(const Timespan &value) override;
 
     void writeCmColor(const Color &value) override;
 

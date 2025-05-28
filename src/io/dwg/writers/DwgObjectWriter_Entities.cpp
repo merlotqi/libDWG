@@ -38,6 +38,7 @@
 #include <dwg/entities/DimensionDiameter.h>
 #include <dwg/entities/DimensionOrdinate.h>
 #include <dwg/entities/Ellipse.h>
+#include <dwg/entities/Insert.h>
 
 namespace dwg {
 
@@ -296,7 +297,7 @@ void DwgObjectWriter::writeInsert(Insert *insert)
 			_writer->write3BitDouble(insert->insertPoint());
 
 			//R13-R14 Only:
-			if (this.R13_14Only)
+			if (R13_14Only)
 			{
 				//X Scale BD 41
 				_writer->writeBitDouble(insert->XScale());
@@ -307,7 +308,7 @@ void DwgObjectWriter::writeInsert(Insert *insert)
 			}
 
 			//R2000 + Only:
-			if (this.R2000Plus)
+			if (R2000Plus)
 			{
 				//Data flags BB
 				//Scale Data Varies with Data flags:
@@ -343,7 +344,7 @@ void DwgObjectWriter::writeInsert(Insert *insert)
 			//Rotation BD 50
 			_writer->writeBitDouble(insert->rotation());
 			//Extrusion 3BD 210
-			_writer->write3BitDouble(insert->mormal());
+			_writer->write3BitDouble(insert->normal());
 			//Has ATTRIBs B 66 Single bit; 1 if ATTRIBs follow.
 			_writer->writeBit(insert->hasAttributes());
 
@@ -384,7 +385,7 @@ void DwgObjectWriter::writeInsert(Insert *insert)
 				_writer->handleReference(DwgReferenceType::SoftPointer, insert->attributes().back());
 			}
 			//R2004+:
-			else if (this.R2004Plus)
+			else if (R2004Plus)
 			{
 				for (auto &&att : insert->attributes())
 				{

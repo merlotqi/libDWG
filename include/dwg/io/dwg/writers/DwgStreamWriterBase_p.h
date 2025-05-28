@@ -25,11 +25,14 @@
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 
-
 namespace dwg {
 
 class DwgStreamWriterBase : public IDwgStreamWriter
 {
+    int _bitShift = 0;
+    unsigned char _lastByte;
+    std::ostream *_stream;
+    
 public:
     static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
     static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
@@ -37,6 +40,7 @@ public:
 public:
     DwgStreamWriterBase(std::ostream *stream, Encoding encoding);
 
+    std::ostream *stream() override;
     Encoding encoding() override;
 
     IDwgStreamWriter *main() const override;
@@ -77,7 +81,7 @@ public:
 
     void write8BitJulianDate(const DateTime &value) override;
 
-    void writeTimeSpan(double value) override;
+    void writeTimeSpan(const Timespan &value) override;
 
     void writeCmColor(const Color &value) override;
 
@@ -128,6 +132,9 @@ public:
     void setPositionByFlag(long long pos) override;
 
     void writeShiftValue() override;
+
+private:
+    void resetShift();
 };
 
 }// namespace dwg

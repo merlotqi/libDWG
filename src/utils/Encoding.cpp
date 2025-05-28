@@ -178,6 +178,11 @@ Encoding::Encoding() : cp(CodePage::Utf8) {}
 
 Encoding::Encoding(CodePage codePage) : cp(codePage) {}
 
+Encoding Encoding::Utf8()
+{
+    return Encoding(CodePage::Utf8);
+}
+
 std::vector<unsigned char> Encoding::bytes(const std::string &str) const
 {
     return std::vector<unsigned char>();
