@@ -67,7 +67,6 @@ private:
     XYZ _location;
 };
 
-
 class Vertex2D : public Vertex
 {
 public:

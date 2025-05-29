@@ -22,14 +22,12 @@
 
 #pragma once
 
-#include <dwg/CadObjectCollection.h>
-#include <dwg/SeqendCollection.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
 #include <dwg/entities/Vertex.h>
 #include <initializer_list>
-
+#include <dwg/utils/Delegate.h>
 
 namespace dwg {
 
@@ -65,7 +63,16 @@ public:
     bool isClosed() const;
     void setIsClosed(bool);
 
-    SeqendCollection<Vertex *> vertices();
+    // seqend
+public:
+    std::vector<Vertex *> vertices() const;
+    void addVertex(Vertex *);
+    void removeVertex(Vertex *);
+    Seqend *seqend() const;
+    void setSeqend(Seqend *);
+
+    Delegate<void(CadObject *)> OnAdd;
+    Delegate<void(CadObject *)> OnRemove;
 };
 
 class Polyline2D : public Polyline

@@ -97,7 +97,10 @@ public:
     MLeaderStyleCollection *mleaderStyles() const;
 
     CadDictionary *rootDictionary() const;
-    CadObjectCollection<Entity *> &entities();
+    std::vector<Entity *> entities() const;
+    void addEntity(Entity *);
+    void removeEntity(Entity *);
+
 
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;

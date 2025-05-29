@@ -26,11 +26,26 @@
 
 namespace dwg {
 
+class VertexFaceRecord;
 class LIBDWG_API PolyfaceMesh : public Polyline
 {
 public:
     PolyfaceMesh();
-    virtual ~PolyfaceMesh();
+    ~PolyfaceMesh();
+
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
+
+    std::vector<VertexFaceRecord *> faces() const;
+    void addFace(VertexFaceRecord *);
+    void removeFace(VertexFaceRecord *);
+
+    Delegate<void(CadObject *)> OnAdd;
+    Delegate<void(CadObject *)> OnRemove;
+
+private:
+    std::vector<VertexFaceRecord *> _faces;
 };
 
 }// namespace dwg

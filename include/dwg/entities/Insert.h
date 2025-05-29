@@ -25,11 +25,11 @@
 
 #include <dwg/entities/AttributeEntity.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/utils/Delegate.h>
 
 namespace dwg {
 
 class BlockRecord;
-class CadObjectCollection;
 
 class LIBDWG_API Insert : public Entity
 {
@@ -80,6 +80,17 @@ public:
 
     double ZScale() const;
     void setZScale(double scale);
+
+    // seqend
+public:
+    std::vector<AttributeEntity *> attributes() const;
+    void addAttribute(AttributeEntity *);
+    void removeAttribute(AttributeEntity *);
+    Seqend *seqend() const;
+    void setSeqend(Seqend *);
+
+    Delegate<void(CadObject *)> OnAdd;
+    Delegate<void(CadObject *)> OnRemove;
 
 private:
     BlockRecord *_block;

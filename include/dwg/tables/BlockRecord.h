@@ -22,12 +22,13 @@
 
 #pragma once
 
-#include <dwg/CadObjectCollection.h>
 #include <dwg/blocks/BlockTypeFlags.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/tables/TableEntry.h>
 #include <dwg/units/UnitsType.h>
+#include <dwg/utils/Delegate.h>
 #include <string>
+#include <vector>
 
 namespace dwg {
 
@@ -43,7 +44,7 @@ class LIBDWG_API BlockRecord : public TableEntry
     bool _isExplodable = false;
     std::vector<unsigned char> _preview;
     Layout *_layout;
-    CadObjectCollection<Entity *> _entities;
+    std::vector<Entity *> _entities;
 
 public:
     BlockRecord();
@@ -80,7 +81,12 @@ public:
     Layout *layout() const;
     void setLayout(Layout *layout);
 
-    CadObjectCollection<Entity *> &entities();
+public:
+    std::vector<Entity *> entities() const;
+    void addEntity(Entity *);
+    void removeEntity(Entity *);
+    Delegate<void(CadObject *)> OnAdd;
+    Delegate<void(CadObject *)> OnRemove;
 };
 
 }// namespace dwg

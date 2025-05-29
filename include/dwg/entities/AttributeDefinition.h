@@ -37,9 +37,9 @@ public:
     AttributeDefinition(AttributeEntity *);
     ~AttributeDefinition();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     std::string prompt() const;
     void setPrompt(const std::string &prompt);

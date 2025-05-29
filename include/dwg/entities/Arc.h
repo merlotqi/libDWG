@@ -35,9 +35,9 @@ public:
     Arc();
     ~Arc();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     double startAngle() const;
     void setStartAngle(double angle);
