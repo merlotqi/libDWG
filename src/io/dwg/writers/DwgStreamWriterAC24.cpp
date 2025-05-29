@@ -32,28 +32,28 @@ DwgStreamWriterAC24::DwgStreamWriterAC24(std::ostream *stream, Encoding encoding
 
 DwgStreamWriterAC24::~DwgStreamWriterAC24() {}
 
-void DwgStreamWriterAC24::writeObjectType(short value) 
+void DwgStreamWriterAC24::writeObjectType(short value)
 {
-			//A bit pair, followed by either 1 or 2 bytes
-			//Amount of bytes depens on the value
-			if (value <= 255)
-			{
-				//Read the following byte
-				write2Bits(0);
-				writeByte((unsigned char)value);
-			}
-			else if (value >= 0x1F0 && value <= 0x2EF)
-			{
-				//Read following byte and add 0x1f0.
-				write2Bits(1);
-				writeByte((unsigned char)(value - 0x1F0));
-			}
-			else
-			{
-				//Read the following two bytes (raw short)
-				write2Bits(2);
-				writeBytes(LittleEndianConverter::instance()->bytes(value));
-			}
+    //A bit pair, followed by either 1 or 2 bytes
+    //Amount of bytes depens on the value
+    if (value <= 255)
+    {
+        //Read the following byte
+        write2Bits(0);
+        writeByte((unsigned char) value);
+    }
+    else if (value >= 0x1F0 && value <= 0x2EF)
+    {
+        //Read following byte and add 0x1f0.
+        write2Bits(1);
+        writeByte((unsigned char) (value - 0x1F0));
+    }
+    else
+    {
+        //Read the following two bytes (raw short)
+        write2Bits(2);
+        writeBytes(LittleEndianConverter::instance()->bytes(value));
+    }
 }
 
 }// namespace dwg

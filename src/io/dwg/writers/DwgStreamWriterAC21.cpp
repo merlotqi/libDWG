@@ -32,24 +32,24 @@ DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream, Encoding encoding
 
 DwgStreamWriterAC21::~DwgStreamWriterAC21() {}
 
-void DwgStreamWriterAC21::writeVariableText(const std::string &value) 
+void DwgStreamWriterAC21::writeVariableText(const std::string &value)
 {
-			if (value.empty())
-			{
-				writeBitShort(0);
-				return;
-			}
-			writeBitShort((short)value.length());
-			writeBytes(Encoding::Utf8().bytes(value));
+    if (value.empty())
+    {
+        writeBitShort(0);
+        return;
+    }
+    writeBitShort((short) value.length());
+    writeBytes(Encoding::Utf8().bytes(value));
 }
 
-void DwgStreamWriterAC21::writeTextUtf8(const std::string &value) 
+void DwgStreamWriterAC21::writeTextUtf8(const std::string &value)
 {
-			writeRawShort((short)(value.length() + 1));
-			std::vector<unsigned char> bytes = Encoding::Utf8().bytes(value);
+    writeRawShort((short) (value.length() + 1));
+    std::vector<unsigned char> bytes = Encoding::Utf8().bytes(value);
 
-			writeBytes(bytes);
-            _stream.write(0, 0);
+    writeBytes(bytes);
+    _stream.write(0, 0);
     _stream->write(0, 1);
     _stream->write(0, 1);
 }

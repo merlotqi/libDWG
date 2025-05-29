@@ -26,8 +26,8 @@
 #include <dwg/entities/PolylineFlags.h>
 #include <dwg/entities/SmoothSurfaceType.h>
 #include <dwg/entities/Vertex.h>
-#include <initializer_list>
 #include <dwg/utils/Delegate.h>
+#include <initializer_list>
 
 namespace dwg {
 

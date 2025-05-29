@@ -28,7 +28,6 @@
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/Scale.h>
 
-
 namespace dwg {
 
 std::string CadDictionary::Root = "ROOT";

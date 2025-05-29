@@ -49,7 +49,6 @@
 #include <queue>
 #include <stdexcept>
 
-
 namespace dwg {
 
 DwgReader::DwgReader(const std::string &name)

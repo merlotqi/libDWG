@@ -80,10 +80,10 @@ public:
 
     constexpr inline QFlag(unsigned int value) noexcept : i(int(value)) {}
     constexpr inline QFlag(short value) noexcept : i(int(value)) {}
-    constexpr inline QFlag(unsigned short value) noexcept : i((int)(unsigned int)value) {}
+    constexpr inline QFlag(unsigned short value) noexcept : i((int) (unsigned int) value) {}
     constexpr inline operator unsigned int() const noexcept
     {
-        return (unsigned int)i;
+        return (unsigned int) i;
     }
 };
 

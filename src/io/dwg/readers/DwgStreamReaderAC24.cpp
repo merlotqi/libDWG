@@ -23,7 +23,6 @@
 #include <dwg/ObjectType.h>
 #include <dwg/io/dwg/readers/DwgStreamReaderAC24_p.h>
 
-
 namespace dwg {
 
 DwgStreamReaderAC24::DwgStreamReaderAC24(std::istream *stream, bool resetPosition)

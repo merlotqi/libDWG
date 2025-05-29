@@ -25,7 +25,6 @@
 #include <dwg/blocks/Block.h>
 #include <dwg/tables/BlockRecord.h>
 
-
 namespace dwg {
 
 Block::Block(BlockRecord *record)

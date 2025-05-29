@@ -32,7 +32,7 @@ class DwgStreamWriterBase : public IDwgStreamWriter
     int _bitShift = 0;
     unsigned char _lastByte;
     std::ostream *_stream;
-    
+
 public:
     static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
     static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);

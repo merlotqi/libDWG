@@ -40,9 +40,10 @@ protected:
     int64_t _positionInBits;
 
 public:
-    DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter, IDwgStreamWriter *handlewriter);
+    DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
+                          IDwgStreamWriter *handlewriter);
     ~DwgMergedStreamWriter();
-    
+
     std::ostream *stream() override;
     Encoding encoding() override;
 

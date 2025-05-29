@@ -23,7 +23,6 @@
 #include <dwg/entities/AttributeBase.h>
 #include <dwg/io/template/CadAttributeTemplate_p.h>
 
-
 namespace dwg {
 
 CadAttributeTemplate::CadAttributeTemplate(AttributeBase *entity) : CadTextEntityTemplate(entity) {}

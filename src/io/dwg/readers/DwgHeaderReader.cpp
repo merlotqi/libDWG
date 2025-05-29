@@ -24,7 +24,6 @@
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/readers/DwgHeaderReader_p.h>
 
-
 namespace dwg {
 
 DwgHeaderReader::DwgHeaderReader(ACadVersion version, IDwgStreamReader *sreader, CadHeader *header)

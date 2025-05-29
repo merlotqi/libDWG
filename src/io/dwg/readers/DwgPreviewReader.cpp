@@ -26,7 +26,6 @@
 #include <dwg/io/dwg/readers/DwgPreviewReader_p.h>
 #include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
 
-
 namespace dwg {
 
 DwgPreviewReader::DwgPreviewReader(ACadVersion version, IDwgStreamReader *reader, long long previewAddress)

@@ -25,7 +25,6 @@
 #include <dwg/blocks/BlockEnd.h>
 #include <dwg/tables/BlockRecord.h>
 
-
 namespace dwg {
 
 BlockEnd::BlockEnd(BlockRecord *record)

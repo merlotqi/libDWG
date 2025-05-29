@@ -30,24 +30,54 @@ EvaluationGraph::EvaluationGraph() {}
 
 EvaluationGraph::~EvaluationGraph() {}
 
-ObjectType EvaluationGraph::objectType() const { return ObjectType::UNLISTED; }
+ObjectType EvaluationGraph::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string EvaluationGraph::objectName() const { return DxfFileToken::ObjectEvalGraph; }
+std::string EvaluationGraph::objectName() const
+{
+    return DxfFileToken::ObjectEvalGraph;
+}
 
-std::string EvaluationGraph::subclassMarker() const { return DxfSubclassMarker::EvalGraph; }
+std::string EvaluationGraph::subclassMarker() const
+{
+    return DxfSubclassMarker::EvalGraph;
+}
 
-int EvaluationGraph::value96() const { return _value96; }
+int EvaluationGraph::value96() const
+{
+    return _value96;
+}
 
-void EvaluationGraph::setValue96(int value) { _value96 = value; }
+void EvaluationGraph::setValue96(int value)
+{
+    _value96 = value;
+}
 
-int EvaluationGraph::value97() const { return _value97; }
+int EvaluationGraph::value97() const
+{
+    return _value97;
+}
 
-void EvaluationGraph::setValue97(int value) { _value97 = value; }
+void EvaluationGraph::setValue97(int value)
+{
+    _value97 = value;
+}
 
-std::vector<EvaluationGraph::Node> EvaluationGraph::nodes() const { return _nodes; }
+std::vector<EvaluationGraph::Node> EvaluationGraph::nodes() const
+{
+    return _nodes;
+}
 
-std::vector<EvaluationGraph::Node> &EvaluationGraph::nodes() { return _nodes; }
+std::vector<EvaluationGraph::Node> &EvaluationGraph::nodes()
+{
+    return _nodes;
+}
 
-void EvaluationGraph::setNodes(const std::vector<EvaluationGraph::Node> &value) { _nodes = value; }
+void EvaluationGraph::setNodes(const std::vector<EvaluationGraph::Node> &value)
+{
+    _nodes = value;
+}
 
 }// namespace dwg

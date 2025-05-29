@@ -29,7 +29,6 @@
 #include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 #include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
 
-
 namespace dwg {
 
 DwgClassesReader::DwgClassesReader(ACadVersion version, IDwgStreamReader *sreader, DwgFileHeader *fileheader)

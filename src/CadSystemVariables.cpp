@@ -25,7 +25,6 @@
 #include <dwg/header/CadHeader.h>
 #include <dwg/utils/StringHelp.h>
 
-
 namespace dwg {
 
 static std::vector<CadSystemVariableAttribute> _headerVariables = {

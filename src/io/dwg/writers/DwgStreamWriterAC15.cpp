@@ -31,36 +31,36 @@ DwgStreamWriterAC15::DwgStreamWriterAC15(std::ostream *stream, Encoding encoding
 
 DwgStreamWriterAC15::~DwgStreamWriterAC15() {}
 
-void DwgStreamWriterAC15::writeBitExtrusion(const XYZ &normal) 
+void DwgStreamWriterAC15::writeBitExtrusion(const XYZ &normal)
 {
-			//For R2000, this is a single bit, followed optionally by 3BD.
-			if (normal == XYZ::AxisZ)
-			{
-				//If the single bit is 1, 
-				//the extrusion value is assumed to be 0,0,1 and no explicit extrusion is stored.
-				writeBit(true);
-				return;
-			}
+    //For R2000, this is a single bit, followed optionally by 3BD.
+    if (normal == XYZ::AxisZ)
+    {
+        //If the single bit is 1,
+        //the extrusion value is assumed to be 0,0,1 and no explicit extrusion is stored.
+        writeBit(true);
+        return;
+    }
 
-			//If the single bit is 0, 
-			writeBit(false);
-			//then it will be followed by 3BD.
-			write3BitDouble(normal);
+    //If the single bit is 0,
+    writeBit(false);
+    //then it will be followed by 3BD.
+    write3BitDouble(normal);
 }
 
-void DwgStreamWriterAC15::writeBitThickness(double thickness) 
+void DwgStreamWriterAC15::writeBitThickness(double thickness)
 {
-			//For R2000+, this is a single bit followed optionally by a BD. 
-			//If the bit is one, the thickness value is assumed to be 0.0. 
-			//If the bit is 0, then a BD that represents the thickness follows.
-			if (thickness == 0.0)
-			{
-				writeBit(true);
-				return;
-			}
+    //For R2000+, this is a single bit followed optionally by a BD.
+    //If the bit is one, the thickness value is assumed to be 0.0.
+    //If the bit is 0, then a BD that represents the thickness follows.
+    if (thickness == 0.0)
+    {
+        writeBit(true);
+        return;
+    }
 
-			writeBit( false);
-			writeBitDouble(thickness);
+    writeBit(false);
+    writeBitDouble(thickness);
 }
 
 }// namespace dwg

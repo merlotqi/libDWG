@@ -23,7 +23,6 @@
 #include <dwg/entities/PolyfaceMesh.h>
 #include <dwg/io/template/CadPolyfaceMeshTemplate_p.h>
 
-
 namespace dwg {
 
 CadPolyfaceMeshTemplate::CadPolyfaceMeshTemplate(PolyfaceMesh *entity) : CadEntityTemplate(entity) {}

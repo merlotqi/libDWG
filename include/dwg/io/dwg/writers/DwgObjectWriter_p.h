@@ -228,7 +228,7 @@ private:
     std::map<unsigned long long, CadDictionary *> _dictionaries;
     std::queue<CadObject *> _objects;
     std::ostringstream _msmain;
-    IDwgStreamWriter *_writers;
+    IDwgStreamWriter *_writer;
     CadDocument *_document;
     Entity *_prev;
     Entity *_next;

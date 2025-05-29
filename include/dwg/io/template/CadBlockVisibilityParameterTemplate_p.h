@@ -28,7 +28,6 @@
 #include <dwg/objects/evaluations/EvaluationExpression.h>
 
 
-
 namespace dwg {
 
 class CadEvaluationExpressionTemplate : public CadTemplateT<EvaluationExpression *>

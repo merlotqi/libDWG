@@ -28,7 +28,6 @@
 #include <dwg/io/dwg/readers/DwgStreamReaderBase_p.h>
 #include <stdexcept>
 
-
 namespace dwg {
 
 DwgStreamReaderBase::DwgStreamReaderBase(std::istream *stream, bool resetPosition) {}

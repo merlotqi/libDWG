@@ -58,7 +58,6 @@
 #include <dwg/tables/collections/VPortsTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
 
-
 namespace dwg {
 
 CadDocument::CadDocument() : CadDocument(ACadVersion::AC1018) {}

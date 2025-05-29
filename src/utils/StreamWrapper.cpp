@@ -24,7 +24,6 @@
 #include <dwg/utils/StreamWrapper.h>
 #include <stdexcept>
 
-
 namespace dwg {
 
 InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))

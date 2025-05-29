@@ -28,12 +28,24 @@ CadTextEntityTemplate::CadTextEntityTemplate(Entity *entity) : CadEntityTemplate
 
 void CadTextEntityTemplate::build(CadDocumentBuilder *builder) {}
 
-std::optional<unsigned long long> CadTextEntityTemplate::styleHandle() const { return _styleHandle; }
+std::optional<unsigned long long> CadTextEntityTemplate::styleHandle() const
+{
+    return _styleHandle;
+}
 
-void CadTextEntityTemplate::setStyleHandle(unsigned long long value) { _styleHandle = value; }
+void CadTextEntityTemplate::setStyleHandle(unsigned long long value)
+{
+    _styleHandle = value;
+}
 
-std::string CadTextEntityTemplate::styleName() const { return _styleName; }
+std::string CadTextEntityTemplate::styleName() const
+{
+    return _styleName;
+}
 
-void CadTextEntityTemplate::setStyleName(const std::string &value) { _styleName = value; }
+void CadTextEntityTemplate::setStyleName(const std::string &value)
+{
+    _styleName = value;
+}
 
 }// namespace dwg
