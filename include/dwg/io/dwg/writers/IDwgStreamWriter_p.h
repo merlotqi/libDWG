@@ -82,7 +82,7 @@ public:
 
     virtual void write8BitJulianDate(const DateTime &value) = 0;
 
-    virtual void writeTimeSpan(const Timespan value) = 0;
+    virtual void writeTimeSpan(const Timespan &value) = 0;
 
     virtual void writeCmColor(const Color &value) = 0;
 

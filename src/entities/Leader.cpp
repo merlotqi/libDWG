@@ -29,7 +29,7 @@ namespace dwg {
 
 Leader::Leader()
     : _style(DimensionStyle::Default()), _arrowHeadEnabled(false), _pathType(LeaderPathType::Spline),
-      _creationType(LeaderCreationType::CreatedWithBlockReferenceAnnotation), _hookLineDirection(false),
+      _creationType(LeaderCreationType::CreatedWithBlockReferenceAnnotation), _hookLineDirection(HookLineDirection::Opposite),
       _hasHookline(false), _textHeight(0.0), _textWidth(0.0), _associatedAnnotation(nullptr), _normal(XYZ::AxisZ),
       _horizontalDirection(XYZ::AxisX), _blockOffset(XYZ::Zero), _annotationOffset(XYZ::Zero)
 {
@@ -92,12 +92,12 @@ void Leader::setCreationType(LeaderCreationType creationType)
     _creationType = creationType;
 }
 
-bool Leader::hookLineDirection() const
+hookLineDirection Leader::hookLineDirection() const
 {
     return _hookLineDirection;
 }
 
-void Leader::setHookLineDirection(bool hookLineDirection)
+void Leader::setHookLineDirection(hookLineDirection hookLineDirection)
 {
     _hookLineDirection = hookLineDirection;
 }

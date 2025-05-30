@@ -31,6 +31,7 @@
 
 namespace dwg {
 
+class Seqend;
 class LIBDWG_API Polyline : public Entity
 {
 public:

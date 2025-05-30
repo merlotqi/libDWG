@@ -69,8 +69,8 @@ public:
     bool isPlottable() const;
     void setIsPlottable(bool);
 
-    RenderMode renderMode() const;
-    void setRenderMode(RenderMode);
+    ViewModeTypes renderMode() const;
+    void setRenderMode(ViewModeTypes);
 
     XY center() const;
     void setCenter(const XY &);

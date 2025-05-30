@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 /// Display Ucs icon
@@ -37,7 +39,8 @@ enum class UscIconType : short
     OffOrigin,
 
     /// On; Displays the UCS icon at the origin, if possible.
-    OnOrigin
+    OnOrigin = 4
 };
+Q_DECLARE_FLAGS(UscIconTypes, UscIconType)
 
 }// namespace dwg

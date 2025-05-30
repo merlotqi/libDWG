@@ -48,12 +48,16 @@
 #include <dwg/entities/Seqend.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/entities/XLine.h>
+#include <dwg/entities/MultiLeader.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/objects/MultiLeaderAnnotContext.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
@@ -533,7 +537,7 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
 {
     bool nbulges = false;
     bool ndiffwidth = false;
-    for (LwPolyline.Vertex item in lwPolyline->Vertices)
+    for (auto &&item : lwPolyline->vertices())
     {
         if (!nbulges && item.Bulge != 0.0)
         {
@@ -547,32 +551,32 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
 
     short flags = 0;
 
-    if (lwPolyline->Flags.HasFlag(LwPolylineFlags.Plinegen))
+    if (lwPolyline->flags() & LwPolylineFlag::Plinegen)
     {
         flags = (short) (flags | 0x100);
     }
 
-    if (lwPolyline->Flags.HasFlag(LwPolylineFlags.Closed))
+    if (lwPolyline->flags() & LwPolylineFlag::Closed)
     {
         flags = (short) (flags | 0x200);
     }
 
-    if (lwPolyline->ConstantWidth != 0.0)
+    if (lwPolyline->constantWidth() != 0.0)
     {
         flags = (short) (flags | 0x4);
     }
 
-    if (lwPolyline->Elevation != 0.0)
+    if (lwPolyline->elevation() != 0.0)
     {
         flags = (short) (flags | 0x8);
     }
 
-    if (lwPolyline->Thickness != 0.0)
+    if (lwPolyline->thickness() != 0.0)
     {
         flags = (short) (flags | 2);
     }
 
-    if (lwPolyline->Normal != XYZ::AxisZ)
+    if (lwPolyline->normal() != XYZ::AxisZ)
     {
         flags = (short) (flags | 1);
     }
@@ -592,50 +596,50 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
     //More specifically: it starts at the LWPOLYLINE flags (BS), and ends with the width array (BD).
     _writer->writeBitShort(flags);
 
-    if (lwPolyline->ConstantWidth != 0.0)
+    if (lwPolyline->constantWidth() != 0.0)
     {
-        _writer->writeBitDouble(lwPolyline->ConstantWidth);
+        _writer->writeBitDouble(lwPolyline->constantWidth());
     }
-    if (lwPolyline->Elevation != 0.0)
+    if (lwPolyline->elevation() != 0.0)
     {
-        _writer->writeBitDouble(lwPolyline->Elevation);
+        _writer->writeBitDouble(lwPolyline->elevation());
     }
-    if (lwPolyline->Thickness != 0.0)
+    if (lwPolyline->thickness() != 0.0)
     {
-        _writer->writeBitDouble(lwPolyline->Thickness);
+        _writer->writeBitDouble(lwPolyline->thickness());
     }
-    if (lwPolyline->Normal != XYZ.AxisZ)
+    if (lwPolyline->normal() != XYZ::AxisZ)
     {
-        _writer->write3BitDouble(lwPolyline->Normal);
+        _writer->write3BitDouble(lwPolyline->normal());
     }
 
-    _writer->writeBitLong(lwPolyline->Vertices.Count);
+    _writer->writeBitLong(lwPolyline->vertices().size());
 
     if (nbulges)
     {
-        _writer->writeBitLong(lwPolyline->Vertices.Count);
+        _writer->writeBitLong(lwPolyline->vertices().size());
     }
 
     if (ndiffwidth)
     {
-        _writer->writeBitLong(lwPolyline->Vertices.Count);
+        _writer->writeBitLong(lwPolyline->vertices().size());
     }
 
     if (R13_14Only)
     {
-        for (int i = 0; i < lwPolyline->Vertices.Count; i++)
+        for (int i = 0; i < lwPolyline->vertices().size(); i++)
         {
-            _writer->write2RawDouble(lwPolyline->Vertices[i].Location);
+            _writer->write2RawDouble(lwPolyline->vertices()[i].Location);
         }
     }
 
-    if (R2000Plus && lwPolyline->Vertices.Count > 0)
+    if (R2000Plus && lwPolyline->vertices().size() > 0)
     {
-        LwPolyline.Vertex last = lwPolyline->Vertices[0];
+        auto &&last = lwPolyline->vertices().at(0);
         _writer->write2RawDouble(last.Location);
-        for (int j = 1; j < lwPolyline->Vertices.Count; j++)
+        for (int j = 1; j < lwPolyline->vertices().size(); j++)
         {
-            LwPolyline.Vertex curr = lwPolyline->Vertices[j];
+            auto&& curr = lwPolyline->vertices().at(j);
             _writer->write2BitDoubleWithDefault(curr.Location, last.Location);
             last = curr;
         }
@@ -643,18 +647,18 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
 
     if (nbulges)
     {
-        for (int k = 0; k < lwPolyline->Vertices.Count; k++)
+        for (int k = 0; k < lwPolyline->vertices().size(); k++)
         {
-            _writer->writeBitDouble(lwPolyline->Vertices[k].Bulge);
+            _writer->writeBitDouble(lwPolyline->vertices()[k].Bulge);
         }
     }
 
     if (ndiffwidth)
     {
-        for (int l = 0; l < lwPolyline->Vertices.Count; l++)
+        for (int l = 0; l < lwPolyline->vertices().size(); l++)
         {
-            _writer->writeBitDouble(lwPolyline->Vertices[l].StartWidth);
-            _writer->writeBitDouble(lwPolyline->Vertices[l].EndWidth);
+            _writer->writeBitDouble(lwPolyline->vertices()[l].StartWidth);
+            _writer->writeBitDouble(lwPolyline->vertices()[l].EndWidth);
         }
     }
 }
@@ -664,7 +668,7 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     //R2004+:
     if (R2004Plus)
     {
-        HatchGradientPattern gradient = hatch.GradientColor;//TODO: set default ?? HatchGradientPattern.Default;
+        HatchGradientPattern gradient = hatch->GradientColor;//TODO: set default ?? HatchGradientPattern.Default;
 
         //Is Gradient Fill BL 450 Non-zero indicates a gradient fill is used.
         _writer->writeBitLong(gradient.Enabled ? 1 : 0);
@@ -696,20 +700,20 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
 
     //Common:
     //Z coord BD 30 X, Y always 0.0
-    _writer->writeBitDouble(hatch.Elevation);
+    _writer->writeBitDouble(hatch->Elevation);
     //Extrusion 3BD 210
-    _writer->write3BitDouble(hatch.Normal);
+    _writer->write3BitDouble(hatch->Normal);
     //Name TV 2 name of hatch
-    _writer->writeVariableText(hatch.Pattern.Name);
+    _writer->writeVariableText(hatch->Pattern.Name);
     //Solidfill B 70 1 if solidfill, else 0
-    _writer->writeBit(hatch.IsSolid);
+    _writer->writeBit(hatch->IsSolid);
     //Associative B 71 1 if associative, else 0
-    _writer->writeBit(hatch.IsAssociative);
+    _writer->writeBit(hatch->IsAssociative);
 
     //Numpaths BL 91 Number of paths enclosing the hatch
-    _writer->writeBitLong(hatch.Paths.Count);
+    _writer->writeBitLong(hatch->Paths.Count);
     bool hasDerivedBoundary = false;
-    for (Hatch.BoundaryPath boundaryPath in hatch.Paths)
+    for (Hatch.BoundaryPath boundaryPath in hatch->Paths)
     {
         //Pathflag BL 92 Path flag
         _writer->writeBitLong((int) boundaryPath.Flags);
@@ -729,8 +733,8 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
             _writer->writeBit(pline.IsClosed);
 
             //numpathsegs BL 91 number of path segments
-            _writer->writeBitLong(pline.Vertices.Count);
-            for (auto &&i = 0; i < pline.Vertices.Count; ++i)
+            _writer->writeBitLong(pline.vertices().size());
+            for (auto &&i = 0; i < pline.vertices().size(); ++i)
             {
                 auto &&vertex = pline.Vertices[i];
 
@@ -848,16 +852,16 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     }
 
     //style BS 75 style of hatch 0==odd parity, 1==outermost, 2==whole area
-    _writer->writeBitShort((short) hatch.Style);
+    _writer->writeBitShort((short) hatch->Style);
     //patterntype BS 76 pattern type 0==user-defined, 1==predefined, 2==custom
-    _writer->writeBitShort((short) hatch.PatternType);
+    _writer->writeBitShort((short) hatch->PatternType);
 
-    if (!hatch.IsSolid)
+    if (!hatch->IsSolid)
     {
-        HatchPattern pattern = hatch.Pattern;
-        _writer->writeBitDouble(hatch.PatternAngle);
-        _writer->writeBitDouble(hatch.PatternScale);
-        _writer->writeBit(hatch.IsDouble);
+        HatchPattern pattern = hatch->Pattern;
+        _writer->writeBitDouble(hatch->PatternAngle);
+        _writer->writeBitDouble(hatch->PatternScale);
+        _writer->writeBit(hatch->IsDouble);
 
         _writer.WriteBitShort((short) pattern.Lines.Count);
         for (auto &&line in pattern.Lines)
@@ -882,12 +886,12 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     if (hasDerivedBoundary)
     {
         //pixelsize BD 47 pixel size
-        _writer->writeBitDouble(hatch.PixelSize);
+        _writer->writeBitDouble(hatch->PixelSize);
     }
 
     //numseedpoints BL 98 number of seed points
-    _writer->writeBitLong(hatch.SeedPoints.Count);
-    for (XY sp in hatch.SeedPoints)
+    _writer->writeBitLong(hatch->SeedPoints.Count);
+    for (XY sp in hatch->SeedPoints)
     {
         //pt0 2RD 10 seed point
         _writer->write2RawDouble(sp);
@@ -900,39 +904,39 @@ void DwgObjectWriter::writeLeader(Leader *leader)
     _writer->writeBit(false);
 
     //Annot type BS --- Annotation type (NOT bit-coded):
-    _writer->writeBitShort((short) leader.CreationType);
+    _writer->writeBitShort((short) leader->creationType());
     //path type BS ---
-    _writer->writeBitShort((short) leader.PathType);
+    _writer->writeBitShort((short) leader->pathType());
 
     //numpts BL --- number of points
-    _writer->writeBitLong(leader.Vertices.Count);
-    for (XYZ v in leader.Vertices)
+    _writer->writeBitLong(leader->vertices().size());
+    for (XYZ v : leader->vertices())
     {
         //point 3BD 10 As many as counter above specifies.
         _writer->write3BitDouble(v);
     }
 
     //Origin 3BD --- The leader plane origin (by default it's the first point).
-    _writer->write3BitDouble(leader.Vertices.FirstOrDefault());
+    _writer->write3BitDouble(leader->vertices().empty() ? XYZ::Zero : leader->vertices().front());
     //Extrusion 3BD 210
-    _writer->write3BitDouble(leader.Normal);
+    _writer->write3BitDouble(leader->normal());
     //x direction 3BD 211
-    _writer->write3BitDouble(leader.HorizontalDirection);
+    _writer->write3BitDouble(leader->horizontalDirection());
     //offsettoblockinspt 3BD 212 Used when the BLOCK option is used. Seems to be an unused feature.
-    _writer->write3BitDouble(leader.BlockOffset);
+    _writer->write3BitDouble(leader->blockOffset());
 
     //R14+:
     if (_version >= ACadVersion::AC1014)
     {
         //Endptproj 3BD --- A non-planar leader gives a point that projects the endpoint back to the annotation.
-        _writer->write3BitDouble(leader.AnnotationOffset);
+        _writer->write3BitDouble(leader->annotationOffset());
     }
 
     //R13-R14 Only:
     if (R13_14Only)
     {
         //DIMGAP BD --- The value of DIMGAP in the associated DIMSTYLE at the time of creation, multiplied by the dimscale in that dimstyle.
-        _writer->writeBitDouble(leader.Style.DimensionLineGap);
+        _writer->writeBitDouble(leader->style()->dimensionLineGap());
     }
 
 
@@ -940,15 +944,15 @@ void DwgObjectWriter::writeLeader(Leader *leader)
     if (_version <= ACadVersion::AC1021)
     {
         //Box height BD 40 MTEXT extents height. (A text box is slightly taller, probably by some DIMvar amount.)
-        _writer->writeBitDouble(leader.TextHeight);
+        _writer->writeBitDouble(leader->textHeight());
         //Box width BD 41 MTEXT extents width. (A text box is slightly wider, probably by some DIMvar amount.)
-        _writer->writeBitDouble(leader.TextWidth);
+        _writer->writeBitDouble(leader->textWidth());
     }
 
     //Hooklineonxdir B hook line is on x direction if 1
-    _writer->writeBit(leader.HookLineDirection == HookLineDirection.Same);
+    _writer->writeBit(leader->hookLineDirection() == HookLineDirection::Same);
     //Arrowheadon B arrowhead on indicator
-    _writer->writeBit(leader.ArrowHeadEnabled);
+    _writer->writeBit(leader->arrowHeadEnabled());
 
     //R13-R14 Only:
     if (R13_14Only)
@@ -956,7 +960,7 @@ void DwgObjectWriter::writeLeader(Leader *leader)
         //Arrowheadtype BS arrowhead type
         _writer->writeBitShort(0);
         //Dimasz BD DIMASZ at the time of creation, multiplied by DIMSCALE
-        _writer->writeBitDouble(leader.Style.ArrowSize * leader.Style.ScaleFactor);
+        _writer->writeBitDouble(leader->style()->arrowSize() * leader->style()->scaleFactor());
         //Unknown B
         _writer->writeBit(false);
         //Unknown B
@@ -985,7 +989,7 @@ void DwgObjectWriter::writeLeader(Leader *leader)
     //H 340 Associated annotation
     _writer->handleReference(DwgReferenceType::HardPointer, nullptr);
     //H 2 DIMSTYLE (hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, leader.Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, leader->style());
 }
 
 void DwgObjectWriter::writeMultiLeader(MultiLeader *multiLeader)
@@ -996,104 +1000,104 @@ void DwgObjectWriter::writeMultiLeader(MultiLeader *multiLeader)
         _writer->writeBitShort(2);
     }
 
-    writeMultiLeaderAnnotContext(multiLeader.ContextData);
+    writeMultiLeaderAnnotContext(multiLeader->contextData());
 
     //	Multileader Common data
     //	340 Leader StyleId (handle)
-    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader.Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->style());
     //	90  Property Override Flags (int32)
-    _writer->writeBitLong((int) multiLeader.PropertyOverrideFlags);
+    _writer->writeBitLong((int) multiLeader->propertyOverrideFlags());
     //	170 LeaderLineType (short)
-    _writer->writeBitShort((short) multiLeader.PathType);
+    _writer->writeBitShort((short) multiLeader->pathType());
     //	91  Leader LineColor (Color)
-    _writer->writeCmColor(multiLeader.LineColor);
+    _writer->writeCmColor(multiLeader->lineColor());
     //	341 LeaderLineTypeID (handle/LineType)
-    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader.LeaderLineType);
+    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->leaderLineType());
     //	171 LeaderLine Weight
-    _writer->writeBitLong((short) multiLeader.LeaderLineWeight);
+    _writer->writeBitLong((short) multiLeader->leaderLineWeight());
 
     //  290 Enable Landing
-    _writer->writeBit(multiLeader.EnableLanding);
+    _writer->writeBit(multiLeader->enableLanding());
     //  291 Enable Dogleg
-    _writer->writeBit(multiLeader.EnableDogleg);
+    _writer->writeBit(multiLeader->enableDogleg());
 
     //  41  Dogleg Length / Landing distance
-    _writer->writeBitDouble(multiLeader.LandingDistance);
+    _writer->writeBitDouble(multiLeader->landingDistance());
     //  342 Arrowhead ID
-    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader.Arrowhead);
+    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->arrowhead());
     //template.ArrowheadHandle = handleReference();
     //  42  Arrowhead Size
-    _writer->writeBitDouble(multiLeader.ArrowheadSize);
+    _writer->writeBitDouble(multiLeader->arrowheadSize());
     //  172 Content Type
-    _writer->writeBitShort((short) multiLeader.ContentType);
+    _writer->writeBitShort((short) multiLeader->contentType());
     //  343 Text Style ID (handle/TextStyle)
-    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader.TextStyle);//	Hard/soft??
+    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->textStyle());//	Hard/soft??
                                                                                    //  173 Text Left Attachment Type
-    _writer->writeBitShort((short) multiLeader.TextLeftAttachment);
+    _writer->writeBitShort((short) multiLeader->textLeftAttachment());
     //  95  Text Right Attachement Type
-    _writer->writeBitShort((short) multiLeader.TextRightAttachment);
+    _writer->writeBitShort((short) multiLeader->textRightAttachment());
     //  174 Text Angle Type
-    _writer->writeBitShort((short) multiLeader.TextAngle);
+    _writer->writeBitShort((short) multiLeader->textAngle());
     //  175 Text Alignment Type
-    _writer->writeBitShort((short) multiLeader.TextAlignment);
+    _writer->writeBitShort((short) multiLeader->textAlignment());
     //  92  Text Color
-    _writer->writeCmColor(multiLeader.TextColor);
+    _writer->writeCmColor(multiLeader->textColor());
     //  292 Enable Frame Text
-    _writer->writeBit(multiLeader.TextFrame);
+    _writer->writeBit(multiLeader->textFrame());
     //  344 Block Content ID
-    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader.BlockContent);//	Hard/soft??
+    _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->blockContent());//	Hard/soft??
                                                                                       //  93  Block Content Color
-    _writer->writeCmColor(multiLeader.BlockContentColor);
+    _writer->writeCmColor(multiLeader->blockContentColor());
     //  10  Block Content Scale
-    _writer->write3BitDouble(multiLeader.BlockContentScale);
+    _writer->write3BitDouble(multiLeader->blockContentScale());
     //  43  Block Content Rotation
-    _writer->writeBitDouble(multiLeader.BlockContentRotation);
+    _writer->writeBitDouble(multiLeader->blockContentRotation());
     //  176 Block Content Connection Type
-    _writer->writeBitShort((short) multiLeader.BlockContentConnection);
+    _writer->writeBitShort((short) multiLeader->blockContentConnection());
     //  293 Enable Annotation Scale/Is annotative
-    _writer->writeBit(multiLeader.EnableAnnotationScale);
+    _writer->writeBit(multiLeader->enableAnnotationScale());
 
     //	R2007pre not supported
 
     //	BL Number of Block Labels
-    int blockLabelCount = multiLeader.BlockAttributes.Count;
+    int blockLabelCount = multiLeader->blockAttributes().size();
     _writer->writeBitLong(blockLabelCount);
     for (int bl = 0; bl < blockLabelCount; bl++)
     {
         //  330 Block Attribute definition handle (hard pointer)
-        MultiLeader.BlockAttribute blockAttribute = multiLeader.BlockAttributes[bl];
-        _writer->handleReference(DwgReferenceType::HardPointer, blockAttribute.AttributeDefinition);
+        MultiLeader::BlockAttribute blockAttribute = multiLeader->blockAttributes().at(bl);
+        _writer->handleReference(DwgReferenceType::HardPointer, blockAttribute.attributeDefinition);
         //  302 Block Attribute Text String
-        _writer->writeVariableText(blockAttribute.Text);
+        _writer->writeVariableText(blockAttribute.text);
         //  177 Block Attribute Index
-        _writer->writeBitShort(blockAttribute.Index);
+        _writer->writeBitShort(blockAttribute.index);
         //  44  Block Attribute Width
-        _writer->writeBitDouble(blockAttribute.Width);
+        _writer->writeBitDouble(blockAttribute.width);
     }
 
     //  294 Text Direction Negative
-    _writer->writeBit(multiLeader.TextDirectionNegative);
+    _writer->writeBit(multiLeader->textDirectionNegative());
     //  178 Text Align in IPE
-    _writer->writeBitShort(multiLeader.TextAligninIPE);
+    _writer->writeBitShort(multiLeader->textAligninIPE());
     //  179 Text Attachment Point
-    _writer->writeBitShort((short) multiLeader.TextAttachmentPoint);
+    _writer->writeBitShort((short) multiLeader->textAttachmentPoint());
     //	45	BD	ScaleFactor
-    _writer->writeBitDouble(multiLeader.ScaleFactor);
+    _writer->writeBitDouble(multiLeader->scaleFactor());
 
     if (R2010Plus)
     {
         //  271 Text attachment direction for MText contents
-        _writer->writeBitShort((short) multiLeader.TextAttachmentDirection);
+        _writer->writeBitShort((short) multiLeader->textAttachmentDirection());
         //  272 Bottom text attachment direction (sequence my be interchanged)
-        _writer->writeBitShort((short) multiLeader.TextBottomAttachment);
+        _writer->writeBitShort((short) multiLeader->textBottomAttachment());
         //  273 Top text attachment direction
-        _writer->writeBitShort((short) multiLeader.TextTopAttachment);
+        _writer->writeBitShort((short) multiLeader->textTopAttachment());
     }
 
     if (R2013Plus)
     {
         //	295 Leader extended to text
-        _writer->writeBit(multiLeader.ExtendedToText);
+        _writer->writeBit(multiLeader->extendedToText());
     }
 }
 
@@ -1103,8 +1107,8 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
         //	Points
         //	BL	-	Number of points
         //	3BD		10		Point
-        _writer->writeBitLong(leaderLine.Points.Count);
-        for (XYZ point in leaderLine.Points)
+        _writer->writeBitLong(leaderLine.points.size());
+        for (auto &&point : leaderLine.points)
         {
             //	3BD		10		Point
             _writer->write3BitDouble(point);
@@ -1112,15 +1116,15 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
 
         //	Add optional Break Info (one or more)
         //	BL	Break info count
-        _writer->writeBitLong(leaderLine.BreakInfoCount);
-        if (leaderLine.BreakInfoCount > 0)
+        _writer->writeBitLong(leaderLine.breakInfoCount);
+        if (leaderLine.breakInfoCount > 0)
         {
             //	BL	90		Segment index
-            _writer->writeBitLong(leaderLine.SegmentIndex);
+            _writer->writeBitLong(leaderLine.segmentIndex);
 
             //	Start/end point pairs
             //	3BD	12	End point
-            _writer->writeBitLong(leaderLine.StartEndPoints.Count);
+            _writer->writeBitLong(leaderLine.startEndPoints.size());
             for (MultiLeaderAnnotContext.StartEndPointPair sep in leaderLine.StartEndPoints)
             {
                 //	3BD	11	Start Point
@@ -1412,7 +1416,7 @@ void DwgObjectWriter::writePoint(Point *point)
 void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
 {
     //Numverts BS 71 Number of vertices in the mesh.
-    _writer->writeBitShort((short) fm.Vertices.Count);
+    _writer->writeBitShort((short) fm.vertices().size());
     //Numfaces BS 72 Number of faces
     _writer->writeBitShort((short) fm.Faces.Count);
 
@@ -1420,7 +1424,7 @@ void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(fm.Vertices.Count + fm.Faces.Count);
+        _writer->writeBitLong(fm.vertices().size() + fm.Faces.Count);
         for (auto &&v in fm.Vertices)
         {
             //H[VERTEX(soft pointer)] Repeats "Owned Object Count" times.
@@ -1469,7 +1473,7 @@ void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
     //Extrusion BE 210
     _writer->writeBitExtrusion(pline.Normal);
 
-    int count = pline.Vertices.Count;
+    int count = pline.vertices().size();
     //R2004+:
     if (R2004Plus)
     {
@@ -1513,7 +1517,7 @@ void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(pline.Vertices.Count);
+        _writer->writeBitLong(pline.vertices().size());
 
         for (auto &&vertex in pline.Vertices)
         {

@@ -101,14 +101,14 @@ public:
     short circleZoomPercent() const;
     void setCircleZoomPercent(short);
 
-    RenderMode renderMode() const;
-    void setRenderMode(RenderMode);
+    ViewModeTypes renderMode() const;
+    void setRenderMode(ViewModeTypes);
 
-    ViewModeType viewMode() const;
-    void setViewMode(ViewModeType);
+    ViewModeTypes viewMode() const;
+    void setViewMode(ViewModeTypes);
 
-    UscIconType ucsIconDisplay() const;
-    void setUcsIconDisplay(UscIconType);
+    UscIconTypes ucsIconDisplay() const;
+    void setUcsIconDisplay(UscIconTypes);
 
     bool snapOn() const;
     void setSnapOn(bool);

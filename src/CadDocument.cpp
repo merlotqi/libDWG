@@ -296,7 +296,7 @@ CadDictionary *CadDocument::rootDictionary() const
     return _rootDictionary;
 }
 
-CadObjectCollection<Entity *> &CadDocument::entities()
+std::vector<Entity *> CadDocument::entities() const
 {
     return modelSpace()->entities();
 }

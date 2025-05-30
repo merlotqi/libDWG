@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <dwg/utils/QFlags.h>
+
 namespace dwg {
 
 enum class ViewModeType
@@ -42,5 +44,6 @@ enum class ViewModeType
     /// This setting is ignored if the front-clipping bit 2 is turned off.
     FrontClippingZ = 16,
 };
+Q_DECLARE_FLAGS(ViewModeTypes, ViewModeType)
 
 }// namespace dwg

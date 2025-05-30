@@ -127,8 +127,8 @@ TEST_F(EndianConverterTest, UnsignedIntConversion)
     auto bigEndianBytes = bigEndianConverter->bytes(original);
     auto littleEndianBytes = littleEndianConverter->bytes(original);
 
-    unsigned int bigEndianResult = bigEndianConverter->toUint32(bigEndianBytes.data());
-    unsigned int littleEndianResult = littleEndianConverter->toUint32(littleEndianBytes.data());
+    unsigned int bigEndianResult = bigEndianConverter->toUInt32(bigEndianBytes.data());
+    unsigned int littleEndianResult = littleEndianConverter->toUInt32(littleEndianBytes.data());
 
     if (is_little_endian)
     {

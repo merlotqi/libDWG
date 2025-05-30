@@ -35,6 +35,8 @@ namespace dwg {
 class Layout;
 class Block;
 class BlockEnd;
+class Viewport;
+class SortEntitiesTable;
 class LIBDWG_API BlockRecord : public TableEntry
 {
     Block *_blockEntity;
@@ -60,6 +62,15 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
+    BlockEnd *blockEnd();
+    void setBlockEnd(BlockEnd *);
+
+    Block* blockEntity() const;
+    void setBlockEntity(Block *);
+
+    EvaluationGraph evaluationGraph() const;
+    void setEvaluationGraph(EvaluationGraph *);
+
     UnitsType units() const;
     void setUnits(UnitsType units);
 
@@ -70,7 +81,7 @@ public:
     void setIsExplodable(bool explodable);
 
     bool isDynamic() const;
-    bool hasAttribute() const;
+    bool hasAttributes() const;
 
     bool canScale() const;
     void setCanScale(bool scaleable);
@@ -80,6 +91,11 @@ public:
 
     Layout *layout() const;
     void setLayout(Layout *layout);
+
+    SortEntitiesTable *sortEntitiesTable() const;
+    void setSortEntitiesTable(SortEntitiesTable *);
+
+    std::vector<Viewport *> viewports() const;
 
 public:
     std::vector<Entity *> entities() const;

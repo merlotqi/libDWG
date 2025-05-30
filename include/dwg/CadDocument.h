@@ -23,7 +23,6 @@
 #pragma once
 
 #include <dwg/ACadVersion.h>
-#include <dwg/CadObjectCollection.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/exports.h>

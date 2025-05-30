@@ -29,6 +29,7 @@
 
 namespace dwg {
 
+class Seqend;
 class BlockRecord;
 
 class LIBDWG_API Insert : public Entity
