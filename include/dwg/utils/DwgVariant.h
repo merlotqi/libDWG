@@ -131,6 +131,7 @@ public:
     bool operator!=(const DwgVariant &o) const;
 
     void clear();
+    bool isEmpty() const;
 
     char asChar() const;
     unsigned char asUChar() const;

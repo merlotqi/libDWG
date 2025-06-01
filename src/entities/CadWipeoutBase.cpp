@@ -102,9 +102,9 @@ bool CadWipeoutBase::showImage() const
 void CadWipeoutBase::setShowImage(bool value)
 {
     if (value)
-        _flags |= ImageDisplayFlag::ShowImage;
+        _flags.setFlag(ImageDisplayFlag::ShowImage, true);
     else
-        _flags &= ~ImageDisplayFlag::ShowImage;
+        _flags.setFlag(ImageDisplayFlag::ShowImage, false);
 }
 
 bool CadWipeoutBase::clippingState() const

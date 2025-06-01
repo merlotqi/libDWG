@@ -97,6 +97,8 @@ public:
 
     bool isPaperSpace() const;
 
+    std::vector<Viewport *> viewports() const;
+
 private:
     LayoutFlags _layoutFlags;
     int _tabOrder;

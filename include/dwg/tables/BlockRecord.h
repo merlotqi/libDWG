@@ -37,6 +37,7 @@ class Block;
 class BlockEnd;
 class Viewport;
 class SortEntitiesTable;
+class EvaluationGraph;
 class LIBDWG_API BlockRecord : public TableEntry
 {
     Block *_blockEntity;
@@ -65,10 +66,10 @@ public:
     BlockEnd *blockEnd();
     void setBlockEnd(BlockEnd *);
 
-    Block* blockEntity() const;
+    Block *blockEntity() const;
     void setBlockEntity(Block *);
 
-    EvaluationGraph evaluationGraph() const;
+    EvaluationGraph *evaluationGraph() const;
     void setEvaluationGraph(EvaluationGraph *);
 
     UnitsType units() const;

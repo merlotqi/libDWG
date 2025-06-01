@@ -92,12 +92,12 @@ void Leader::setCreationType(LeaderCreationType creationType)
     _creationType = creationType;
 }
 
-hookLineDirection Leader::hookLineDirection() const
+HookLineDirection Leader::hookLineDirection() const
 {
     return _hookLineDirection;
 }
 
-void Leader::setHookLineDirection(hookLineDirection hookLineDirection)
+void Leader::setHookLineDirection(HookLineDirection hookLineDirection)
 {
     _hookLineDirection = hookLineDirection;
 }

@@ -105,12 +105,12 @@ void View::setAngle(double value)
     _angle = value;
 }
 
-ViewModeType View::viewMode() const
+ViewModeTypes View::viewMode() const
 {
     return _viewMode;
 }
 
-void View::setViewMode(ViewModeType value)
+void View::setViewMode(ViewModeTypes value)
 {
     _viewMode = value;
 }

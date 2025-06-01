@@ -116,6 +116,9 @@ public:
     std::string observationToTag() const;
     void setObservationToTag(const std::string &);
 
+    std::string observationCoverageTag() const;
+    void setObservationCoverageTag(const std::string &);
+
     std::vector<GeoMeshPoint> points() const;
     std::vector<GeoMeshPoint> &points();
 
@@ -143,6 +146,7 @@ private:
     std::string _geoRssTag;
     std::string _observationFromTag;
     std::string _observationToTag;
+    std::string _observationCoverageTag;
     std::vector<GeoMeshPoint> _points;
     std::vector<GeoMeshFace> _faces;
 };

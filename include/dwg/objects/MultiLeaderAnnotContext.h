@@ -137,6 +137,9 @@ public:
     double textRotation() const;
     void setTextRotation(double);
 
+    double boundaryWidth();
+    void setBoundaryWidth(double);
+
     double boundaryHeight() const;
     void setBoundaryHeight(double);
 

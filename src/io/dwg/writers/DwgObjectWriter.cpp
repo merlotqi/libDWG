@@ -21,23 +21,28 @@
  */
 
 #include <dwg/CadDocument.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
-#include <dwg/tables/AppId.h>
-#include <dwg/tables/Layer.h>
-#include <dwg/tables/BlockRecord.h>
-#include <dwg/tables/DimensionStyle.h>
-#include <dwg/tables/UCS.h>
-#include <dwg/tables/TextStyle.h>
-#include <dwg/tables/VPort.h>
-#include <dwg/tables/View.h>
-#include <dwg/tables/LineType.h>
-#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
-#include <dwg/utils/EndianConverter.h>
-#include <dwg/objects/CadDictionary.h>
-#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/CadUtils.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
+#include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
+#include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/Layout.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/UCS.h>
+#include <dwg/tables/VPort.h>
+#include <dwg/tables/View.h>
+#include <dwg/tables/collections/TextStylesTable.h>
+#include <dwg/tables/collections/UCSTable.h>
+#include <dwg/tables/collections/ViewsTable.h>
+#include <dwg/utils/EndianConverter.h>
 
 namespace dwg {
 
@@ -151,7 +156,7 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     _writer->writeBit(record->flags() & BlockTypeFlag::Anonymous);
 
     //Hasatts B 1 if block contains attdefs (2 bit)
-    _writer->writeBit(record->hasAttribute());
+    _writer->writeBit(record->hasAttributes());
 
     //Blkisxref B 1 if block is xref (4 bit)
     _writer->writeBit(record->flags() & BlockTypeFlag::XRef);
@@ -167,8 +172,7 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     }
 
     //R2004+:
-    if ((R2004Plus && !(record->flags() & BlockTypeFlag::XRef)) &&
-        !(record->flags() & BlockTypeFlag::XRefOverlay))
+    if ((R2004Plus && !(record->flags() & BlockTypeFlag::XRef)) && !(record->flags() & BlockTypeFlag::XRefOverlay))
     {
         //Owned Object Count BL Number of objects owned by this object.
         _writer->writeBitLong(record->entities().size());
@@ -176,10 +180,10 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
 
     //Common:
     //Base pt 3BD 10 Base point of block.
-    _writer->write3BitDouble(record.BlockEntity.BasePoint);
+    _writer->write3BitDouble(record->blockEntity()->basePoint());
     //Xref pname TV 1 Xref pathname. That's right: DXF 1 AND 3!
     //3 1 appears in a tblnext/ search elist; 3 appears in an entget.
-    _writer->writeVariableText(record.BlockEntity.XrefPath);
+    _writer->writeVariableText(record->blockEntity()->xrefPath());
 
     //R2000+:
     if (R2000Plus)
@@ -193,7 +197,7 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
         _writer->writeByte(0);
 
         //Block Description TV 4 Block description.
-        _writer->writeVariableText(record.BlockEntity.Comments);
+        _writer->writeVariableText(record->blockEntity()->comments());
 
         //Size of preview data BL Indicates number of bytes of data following.
         _writer->writeBitLong(0);
@@ -203,11 +207,11 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if (R2007Plus)
     {
         //Insert units BS 70
-        _writer->writeBitShort((short) record.Units);
+        _writer->writeBitShort((short) record->units());
         //Explodable B 280
         _writer->writeBit(record->isExplodable());
         //Block scaling RC 281
-        _writer->writeByte((unsigned char) (record.CanScale ? 1 : 0));
+        _writer->writeByte((unsigned char) (record->canScale() ? 1 : 0));
     }
 
     //NULL(hard pointer)
@@ -220,7 +224,7 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015 &&
         !(record->flags() & BlockTypeFlag::XRef) && !(record->flags() & BlockTypeFlag::XRefOverlay))
     {
-        if (!record.Entities.empty())
+        if (!record->entities().empty())
         {
             //first entity in the def. (soft pointer)
             _writer->handleReference(DwgReferenceType::SoftPointer, record->entities().front());
@@ -237,9 +241,9 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     //R2004+:
     if (R2004Plus)
     {
-        for (auto item : record->entities())
+        for (auto item: record->entities())
         {
-            //H[ENTITY(hard owner)] Repeats “Owned Object Count” times.
+            //H[ENTITY(hard owner)] Repeats "Owned Object Count" times.
             _writer->handleReference(DwgReferenceType::HardOwnership, item);
         }
     }
@@ -269,7 +273,7 @@ void DwgObjectWriter::writeBlockBegin(Block *block)
 
     //Common:
     //Entry name TV 2
-    _writer->writeVariableText(block.Name);
+    _writer->writeVariableText(block->name());
 
     registerObject(block);
 }
@@ -308,7 +312,7 @@ void DwgObjectWriter::writeLayer(Layer *layer)
     if (R2000Plus)
     {
         //and lineweight (mask with 0x03E0)
-        short values = (short) (CadUtils.toIndex(layer->LineWeight) << 5);
+        short values = (short) (CadUtils::ToIndex(layer->lineWeight()) << 5);
 
         //contains frozen (1 bit),
         if (layer->flags() & LayerFlag::Frozen)
@@ -374,40 +378,40 @@ void DwgObjectWriter::writeLineType(LineType *ltype)
 
     //Common:
     //Entry name TV 2
-    _writer->writeVariableText(ltype->Name);
+    _writer->writeVariableText(ltype->name());
 
     writeXrefDependantBit(ltype);
 
     //Description TV 3
-    _writer->writeVariableText(ltype->Description);
+    _writer->writeVariableText(ltype->description());
     //Pattern Len BD 40
-    _writer->writeBitDouble(ltype->PatternLen);
+    _writer->writeBitDouble(ltype->patternLen());
     //Alignment RC 72 Always 'A'.
-    _writer->writeByte((unsigned char) ltype->Alignment);
+    _writer->writeByte((unsigned char) ltype->alignment());
 
     //Numdashes RC 73 The number of repetitions of the 49...74 data.
-    _writer->writeByte((unsigned char) ltype->Segments.Count());
+    _writer->writeByte((unsigned char) ltype->segments().size());
     bool isText = false;
-    for (LineType.Segment segment in ltype->Segments)
+    for (auto &&segment: ltype->segments())
     {
         //Dash length BD 49 Dash or dot specifier.
-        _writer->writeBitDouble(segment.Length);
+        _writer->writeBitDouble(segment.length);
         //Complex shapecode BS 75 Shape number if shapeflag is 2, or index into the string area if shapeflag is 4.
-        _writer->writeBitShort(segment.ShapeNumber);
+        _writer->writeBitShort(segment.shapeNumber);
 
         //X - offset RD 44 (0.0 for a simple dash.)
         //Y - offset RD 45(0.0 for a simple dash.)
-        _writer->writeRawDouble(segment.Offset.X);
-        _writer->writeRawDouble(segment.Offset.Y);
+        _writer->writeRawDouble(segment.offset.X);
+        _writer->writeRawDouble(segment.offset.Y);
 
         //Scale BD 46 (1.0 for a simple dash.)
-        _writer->writeBitDouble(segment.Scale);
+        _writer->writeBitDouble(segment.scale);
         //Rotation BD 50 (0.0 for a simple dash.)
-        _writer->writeBitDouble(segment.Rotation);
+        _writer->writeBitDouble(segment.rotation);
         //Shapeflag BS 74 bit coded:
-        _writer->writeBitShort((short) segment.Shapeflag);
+        _writer->writeBitShort((short) segment.shapeFlag);
 
-        if (segment.Shapeflag.HasFlag(LinetypeShapeFlags.Text))
+        if (segment.shapeFlag.testFlag(LinetypeShapeFlag::Text))
             isText = true;
     }
 
@@ -439,10 +443,10 @@ void DwgObjectWriter::writeLineType(LineType *ltype)
     //External reference block handle(hard pointer)
     _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
-    for (auto &&segment in ltype->Segments)
+    for (auto &&segment: ltype->segments())
     {
         //340 shapefile for dash/shape (1 each) (hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, segment.Style);
+        _writer->handleReference(DwgReferenceType::HardPointer, segment.style);
     }
 
     registerObject(ltype);
@@ -454,38 +458,38 @@ void DwgObjectWriter::writeTextStyle(TextStyle *style)
 
     //Common:
     //Entry name TV 2
-    if (style->IsShapeFile)
+    if (style->isShapeFile())
     {
-        _writer->writeVariableText(string.Empty);
+        _writer->writeVariableText("");
     }
     else
     {
-        _writer->writeVariableText(style->Name);
+        _writer->writeVariableText(style->name());
     }
 
     writeXrefDependantBit(style);
 
     //shape file B 1 if a shape file rather than a font (1 bit)
-    _writer->writeBit(style->Flags.HasFlag(StyleFlags.IsShape));
+    _writer->writeBit(style->flags().testFlag(StyleFlag::IsShape));
 
     //Vertical B 1 if vertical (4 bit of flag)
-    _writer->writeBit(style->Flags.HasFlag(StyleFlags.VerticalText));
+    _writer->writeBit(style->flags().testFlag(StyleFlag::VerticalText));
     //Fixed height BD 40
-    _writer->writeBitDouble(style->Height);
+    _writer->writeBitDouble(style->height());
     //Width factor BD 41
-    _writer->writeBitDouble(style->Width);
+    _writer->writeBitDouble(style->width());
     //Oblique ang BD 50
-    _writer->writeBitDouble(style->ObliqueAngle);
+    _writer->writeBitDouble(style->obliqueAngle());
     //Generation RC 71 Generation flags (not bit-pair coded).
-    _writer->writeByte((unsigned char) style->MirrorFlag);
+    _writer->writeByte((unsigned char) style->mirrorFlag());
     //Last height BD 42
-    _writer->writeBitDouble(style->LastHeight);
+    _writer->writeBitDouble(style->lastHeight());
     //Font name TV 3
-    _writer->writeVariableText(style->Filename);
+    _writer->writeVariableText(style->filename());
     //Bigfont name TV 4
-    _writer->writeVariableText(style->BigFontFilename);
+    _writer->writeVariableText(style->bigFontFilename());
 
-    _writer->handleReference(DwgReferenceType::HardPointer, _document.TextStyles);
+    _writer->handleReference(DwgReferenceType::HardPointer, _document->textStyles());
 
     registerObject(style);
 }
@@ -503,9 +507,9 @@ void DwgObjectWriter::writeUCS(UCS *ucs)
     //Origin 3BD 10
     _writer->write3BitDouble(ucs->origin());
     //X - direction 3BD 11
-    _writer->write3BitDouble(ucs->XAxis);
+    _writer->write3BitDouble(ucs->xAxis());
     //Y - direction 3BD 12
-    _writer->write3BitDouble(ucs->YAxis);
+    _writer->write3BitDouble(ucs->yAxis());
 
     //R2000+:
     if (R2000Plus)
@@ -520,7 +524,7 @@ void DwgObjectWriter::writeUCS(UCS *ucs)
 
     //Common:
     //Handle refs H ucs control object (soft pointer)
-    _writer->handleReference(DwgReferenceType::SoftPointer, _document.UCSs);
+    _writer->handleReference(DwgReferenceType::SoftPointer, _document->UCSs());
 
     //R2000 +:
     if (R2000Plus)
@@ -540,45 +544,45 @@ void DwgObjectWriter::writeView(View *view)
 
     //Common:
     //Entry name TV 2
-    _writer->writeVariableText(view->Name);
+    _writer->writeVariableText(view->name());
 
     writeXrefDependantBit(view);
 
     //View height BD 40
-    _writer->writeBitDouble(view->Height);
+    _writer->writeBitDouble(view->height());
     //View width BD 41
-    _writer->writeBitDouble(view->Width);
+    _writer->writeBitDouble(view->width());
     //View center 2RD 10(Not bit - pair coded.)
-    _writer->write2RawDouble(view->Center);
+    _writer->write2RawDouble(view->center());
     //Target 3BD 12
-    _writer->write3BitDouble(view->Target);
+    _writer->write3BitDouble(view->target());
     //View dir 3BD 11 DXF doc suggests from target toward camera.
-    _writer->write3BitDouble(view->Direction);
+    _writer->write3BitDouble(view->direction());
     //Twist angle BD 50 Radians
-    _writer->writeBitDouble(view->Angle);
+    _writer->writeBitDouble(view->angle());
     //Lens length BD 42
-    _writer->writeBitDouble(view->LensLength);
+    _writer->writeBitDouble(view->lensLength());
     //Front clip BD 43
-    _writer->writeBitDouble(view->FrontClipping);
+    _writer->writeBitDouble(view->frontClipping());
     //Back clip BD 44
-    _writer->writeBitDouble(view->BackClipping);
+    _writer->writeBitDouble(view->backClipping());
 
     //View mode X 71 4 bits: 0123
     //Note that only bits 0, 1, 2, and 4 of the 71 can be specified -- not bit 3 (8).
     //0 : 71's bit 0 (1)
-    _writer->writeBit(view->ViewMode.HasFlag(ViewModeType.PerspectiveView));
+    _writer->writeBit(view->viewMode().testFlag(ViewModeType::PerspectiveView));
     //1 : 71's bit 1 (2)
-    _writer->writeBit(view->ViewMode.HasFlag(ViewModeType.FrontClipping));
+    _writer->writeBit(view->viewMode().testFlag(ViewModeType::FrontClipping));
     //2 : 71's bit 2 (4)
-    _writer->writeBit(view->ViewMode.HasFlag(ViewModeType.BackClipping));
+    _writer->writeBit(view->viewMode().testFlag(ViewModeType::BackClipping));
     //3 : OPPOSITE of 71's bit 4 (16)
-    _writer->writeBit(view->ViewMode.HasFlag(ViewModeType.FrontClippingZ));
+    _writer->writeBit(view->viewMode().testFlag(ViewModeType::FrontClippingZ));
 
     //R2000+:
     if (R2000Plus)
     {
         //Render Mode RC 281
-        _writer->writeByte((unsigned char) view->RenderMode);
+        _writer->writeByte((unsigned char) view->renderMode());
     }
 
     //R2007+:
@@ -593,40 +597,40 @@ void DwgObjectWriter::writeView(View *view)
         //Contrast BD ? Default value is 0
         _writer->writeBitDouble(0.0);
         //Abient color CMC? Default value is indexed color 250
-        _writer->writeCmColor(new Color(250));
+        _writer->writeCmColor(Color((short) 250));
     }
 
     //Common:
     //Pspace flag B 70 Bit 0(1) of the 70 - group.
-    _writer->writeBit(view->Flags.HasFlag((StandardFlags) 0b1));
+    _writer->writeBit(view->flags().testFlag((StandardFlag) 0b1));
 
     if (R2000Plus)
     {
-        _writer->writeBit(view->IsUcsAssociated);
-        if (view->IsUcsAssociated)
+        _writer->writeBit(view->isUcsAssociated());
+        if (view->isUcsAssociated())
         {
             //Origin 3BD 10 This and next 4 R2000 items are present only if 72 value is 1.
-            _writer->write3BitDouble(view->UcsOrigin);
+            _writer->write3BitDouble(view->ucsOrigin());
             //X-direction 3BD 11
-            _writer->write3BitDouble(view->UcsXAxis);
+            _writer->write3BitDouble(view->ucsXAxis());
             //Y-direction 3BD 12
-            _writer->write3BitDouble(view->UcsYAxis);
+            _writer->write3BitDouble(view->ucsYAxis());
             //Elevation BD 146
-            _writer->writeBitDouble(view->UcsElevation);
+            _writer->writeBitDouble(view->ucsElevation());
             //OrthographicViewType BS 79
-            _writer->writeBitShort((short) view->UcsOrthographicType);
+            _writer->writeBitShort((short) view->ucsOrthographicType());
         }
     }
 
     //Common:
     //Handle refs H view control object (soft pointer)
-    _writer->handleReference(DwgReferenceType::SoftPointer, _document.Views);
+    _writer->handleReference(DwgReferenceType::SoftPointer, _document->views());
 
     //R2007+:
     if (R2007Plus)
     {
         //Camera plottable B 73
-        _writer->writeBit(view->IsPlottable);
+        _writer->writeBit(view->isPlottable());
 
         //Background handle H 332 soft pointer
         _writer->handleReference(DwgReferenceType::SoftPointer, 0ULL);
@@ -636,7 +640,7 @@ void DwgObjectWriter::writeView(View *view)
         _writer->handleReference(DwgReferenceType::HardOwnership, 0ULL);
     }
 
-    if (R2000Plus && view->IsUcsAssociated)
+    if (R2000Plus && view->isUcsAssociated())
     {
         //TODO: Implement ucs reference for view
         //Base UCS Handle H 346 hard pointer
@@ -661,7 +665,7 @@ void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle)
 
     //Common:
     //Entry name TV 2
-    _writer->writeVariableText(dimStyle->Name);
+    _writer->writeVariableText(dimStyle->name());
 
     writeXrefDependantBit(dimStyle);
 
@@ -669,263 +673,263 @@ void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle)
     if (R13_14Only)
     {
         //DIMTOL B 71
-        _writer->writeBit(dimStyle->GenerateTolerances);
+        _writer->writeBit(dimStyle->generateTolerances());
         //DIMLIM B 72
-        _writer->writeBit(dimStyle->LimitsGeneration);
+        _writer->writeBit(dimStyle->limitsGeneration());
         //DIMTIH B 73
-        _writer->writeBit(dimStyle->TextOutsideHorizontal);
+        _writer->writeBit(dimStyle->textOutsideHorizontal());
         //DIMTOH B 74
-        _writer->writeBit(dimStyle->SuppressFirstExtensionLine);
+        _writer->writeBit(dimStyle->suppressFirstExtensionLine());
         //DIMSE1 B 75
-        _writer->writeBit(dimStyle->SuppressSecondExtensionLine);
+        _writer->writeBit(dimStyle->suppressSecondExtensionLine());
         //DIMSE2 B 76
-        _writer->writeBit(dimStyle->TextInsideHorizontal);
+        _writer->writeBit(dimStyle->textInsideHorizontal());
         //DIMALT B 170
-        _writer->writeBit(dimStyle->AlternateUnitDimensioning);
+        _writer->writeBit(dimStyle->alternateUnitDimensioning());
         //DIMTOFL B 172
-        _writer->writeBit(dimStyle->TextOutsideExtensions);
+        _writer->writeBit(dimStyle->textOutsideExtensions());
         //DIMSAH B 173
-        _writer->writeBit(dimStyle->SeparateArrowBlocks);
+        _writer->writeBit(dimStyle->separateArrowBlocks());
         //DIMTIX B 174
-        _writer->writeBit(dimStyle->TextInsideExtensions);
+        _writer->writeBit(dimStyle->textInsideExtensions());
         //DIMSOXD B 175
-        _writer->writeBit(dimStyle->SuppressOutsideExtensions);
+        _writer->writeBit(dimStyle->suppressOutsideExtensions());
         //DIMALTD RC 171
-        _writer->writeByte((unsigned char) dimStyle->AlternateUnitDecimalPlaces);
+        _writer->writeByte((unsigned char) dimStyle->alternateUnitDecimalPlaces());
         //DIMZIN RC 78
-        _writer->writeByte((unsigned char) dimStyle->ZeroHandling);
+        _writer->writeByte((unsigned char) dimStyle->zeroHandling());
         //DIMSD1 B 281
-        _writer->writeBit(dimStyle->SuppressFirstDimensionLine);
+        _writer->writeBit(dimStyle->suppressFirstDimensionLine());
         //DIMSD2 B 282
-        _writer->writeBit(dimStyle->SuppressSecondDimensionLine);
+        _writer->writeBit(dimStyle->suppressSecondDimensionLine());
         //DIMTOLJ RC 283
-        _writer->writeByte((unsigned char) dimStyle->ToleranceAlignment);
+        _writer->writeByte((unsigned char) dimStyle->toleranceAlignment());
         //DIMJUST RC 280
-        _writer->writeByte((unsigned char) dimStyle->TextHorizontalAlignment);
+        _writer->writeByte((unsigned char) dimStyle->textHorizontalAlignment());
         //DIMFIT RC 287
-        _writer->writeByte((unsigned char) dimStyle->DimensionFit);
+        _writer->writeByte((unsigned char) dimStyle->dimensionFit());
         //DIMUPT B 288
-        _writer->writeBit(dimStyle->CursorUpdate);
+        _writer->writeBit(dimStyle->cursorUpdate());
         //DIMTZIN RC 284
-        _writer->writeByte((unsigned char) dimStyle->ToleranceZeroHandling);
+        _writer->writeByte((unsigned char) dimStyle->toleranceZeroHandling());
         //DIMALTZ RC 285
-        _writer->writeByte((unsigned char) dimStyle->AlternateUnitZeroHandling);
+        _writer->writeByte((unsigned char) dimStyle->alternateUnitZeroHandling());
         //DIMALTTZ RC 286
-        _writer->writeByte((unsigned char) dimStyle->AlternateUnitToleranceZeroHandling);
+        _writer->writeByte((unsigned char) dimStyle->alternateUnitToleranceZeroHandling());
         //DIMTAD RC 77
-        _writer->writeByte((unsigned char) dimStyle->TextVerticalAlignment);
+        _writer->writeByte((unsigned char) dimStyle->textVerticalAlignment());
         //DIMUNIT BS 270
-        _writer->writeBitShort(dimStyle->DimensionUnit);
+        _writer->writeBitShort(dimStyle->dimensionUnit());
         //DIMAUNIT BS 275
-        _writer->writeBitShort((short) dimStyle->AngularUnit);
+        _writer->writeBitShort((short) dimStyle->angularUnit());
         //DIMDEC BS 271
-        _writer->writeBitShort(dimStyle->DecimalPlaces);
+        _writer->writeBitShort(dimStyle->decimalPlaces());
         //DIMTDEC BS 272
-        _writer->writeBitShort(dimStyle->ToleranceDecimalPlaces);
+        _writer->writeBitShort(dimStyle->toleranceDecimalPlaces());
         //DIMALTU BS 273
-        _writer->writeBitShort((short) dimStyle->AlternateUnitFormat);
+        _writer->writeBitShort((short) dimStyle->alternateUnitFormat());
         //DIMALTTD BS 274
-        _writer->writeBitShort(dimStyle->AlternateUnitToleranceDecimalPlaces);
+        _writer->writeBitShort(dimStyle->alternateUnitToleranceDecimalPlaces());
         //DIMSCALE BD 40
-        _writer->writeBitDouble(dimStyle->ScaleFactor);
+        _writer->writeBitDouble(dimStyle->scaleFactor());
         //DIMASZ BD 41
-        _writer->writeBitDouble(dimStyle->ArrowSize);
+        _writer->writeBitDouble(dimStyle->arrowSize());
         //DIMEXO BD 42
-        _writer->writeBitDouble(dimStyle->ExtensionLineOffset);
+        _writer->writeBitDouble(dimStyle->extensionLineOffset());
         //DIMDLI BD 43
-        _writer->writeBitDouble(dimStyle->DimensionLineIncrement);
+        _writer->writeBitDouble(dimStyle->dimensionLineIncrement());
         //DIMEXE BD 44
-        _writer->writeBitDouble(dimStyle->ExtensionLineExtension);
+        _writer->writeBitDouble(dimStyle->extensionLineExtension());
         //DIMRND BD 45
-        _writer->writeBitDouble(dimStyle->Rounding);
+        _writer->writeBitDouble(dimStyle->rounding());
         //DIMDLE BD 46
-        _writer->writeBitDouble(dimStyle->DimensionLineExtension);
+        _writer->writeBitDouble(dimStyle->dimensionLineExtension());
         //DIMTP BD 47
-        _writer->writeBitDouble(dimStyle->PlusTolerance);
+        _writer->writeBitDouble(dimStyle->plusTolerance());
         //DIMTM BD 48
-        _writer->writeBitDouble(dimStyle->MinusTolerance);
+        _writer->writeBitDouble(dimStyle->minusTolerance());
         //DIMTXT BD 140
-        _writer->writeBitDouble(dimStyle->TextHeight);
+        _writer->writeBitDouble(dimStyle->textHeight());
         //DIMCEN BD 141
-        _writer->writeBitDouble(dimStyle->CenterMarkSize);
+        _writer->writeBitDouble(dimStyle->centerMarkSize());
         //DIMTSZ BD 142
-        _writer->writeBitDouble(dimStyle->TickSize);
+        _writer->writeBitDouble(dimStyle->tickSize());
         //DIMALTF BD 143
-        _writer->writeBitDouble(dimStyle->AlternateUnitScaleFactor);
+        _writer->writeBitDouble(dimStyle->alternateUnitScaleFactor());
         //DIMLFAC BD 144
-        _writer->writeBitDouble(dimStyle->LinearScaleFactor);
+        _writer->writeBitDouble(dimStyle->linearScaleFactor());
         //DIMTVP BD 145
-        _writer->writeBitDouble(dimStyle->TextVerticalPosition);
+        _writer->writeBitDouble(dimStyle->textVerticalPosition());
         //DIMTFAC BD 146
-        _writer->writeBitDouble(dimStyle->ToleranceScaleFactor);
+        _writer->writeBitDouble(dimStyle->toleranceScaleFactor());
         //DIMGAP BD 147
-        _writer->writeBitDouble(dimStyle->DimensionLineGap);
+        _writer->writeBitDouble(dimStyle->dimensionLineGap());
 
         //DIMPOST T 3
-        _writer->writeVariableText(dimStyle->PostFix);
+        _writer->writeVariableText(dimStyle->postFix());
         //DIMAPOST T 4
-        _writer->writeVariableText(dimStyle->AlternateDimensioningSuffix);
+        _writer->writeVariableText(dimStyle->alternateDimensioningSuffix());
 
         //DIMBLK T 5
-                _writer->writeVariableText(dimStyle->ArrowBlock?.Name);
-                //DIMBLK1 T 6
-                _writer->writeVariableText(dimStyle->DimArrow1?.Name);
-                //DIMBLK2 T 7
-                _writer->writeVariableText(dimStyle->DimArrow2?.Name);
+        _writer->writeVariableText(dimStyle->arrowBlock()->name());
+        //DIMBLK1 T 6
+        _writer->writeVariableText(dimStyle->dimArrow1()->name());
+        //DIMBLK2 T 7
+        _writer->writeVariableText(dimStyle->dimArrow1()->name());
 
-                //DIMCLRD BS 176
-                _writer->writeCmColor(dimStyle->DimensionLineColor);
-                //DIMCLRE BS 177
-                _writer->writeCmColor(dimStyle->ExtensionLineColor);
-                //DIMCLRT BS 178
-                _writer->writeCmColor(dimStyle->TextColor);
+        //DIMCLRD BS 176
+        _writer->writeCmColor(dimStyle->dimensionLineColor());
+        //DIMCLRE BS 177
+        _writer->writeCmColor(dimStyle->extensionLineColor());
+        //DIMCLRT BS 178
+        _writer->writeCmColor(dimStyle->textColor());
     }
 
     //R2000+:
     if (R2000Plus)
     {
         //DIMPOST TV 3
-        _writer->writeVariableText(dimStyle->PostFix);
+        _writer->writeVariableText(dimStyle->postFix());
         //DIMAPOST TV 4
-        _writer->writeVariableText(dimStyle->AlternateDimensioningSuffix);
+        _writer->writeVariableText(dimStyle->alternateDimensioningSuffix());
         //DIMSCALE BD 40
-        _writer->writeBitDouble(dimStyle->ScaleFactor);
+        _writer->writeBitDouble(dimStyle->scaleFactor());
         //DIMASZ BD 41
-        _writer->writeBitDouble(dimStyle->ArrowSize);
+        _writer->writeBitDouble(dimStyle->arrowSize());
         //DIMEXO BD 42
-        _writer->writeBitDouble(dimStyle->ExtensionLineOffset);
+        _writer->writeBitDouble(dimStyle->extensionLineOffset());
         //DIMDLI BD 43
-        _writer->writeBitDouble(dimStyle->DimensionLineIncrement);
+        _writer->writeBitDouble(dimStyle->dimensionLineIncrement());
         //DIMEXE BD 44
-        _writer->writeBitDouble(dimStyle->ExtensionLineExtension);
+        _writer->writeBitDouble(dimStyle->extensionLineExtension());
         //DIMRND BD 45
-        _writer->writeBitDouble(dimStyle->Rounding);
+        _writer->writeBitDouble(dimStyle->rounding());
         //DIMDLE BD 46
-        _writer->writeBitDouble(dimStyle->DimensionLineExtension);
+        _writer->writeBitDouble(dimStyle->dimensionLineExtension());
         //DIMTP BD 47
-        _writer->writeBitDouble(dimStyle->PlusTolerance);
+        _writer->writeBitDouble(dimStyle->plusTolerance());
         //DIMTM BD 48
-        _writer->writeBitDouble(dimStyle->MinusTolerance);
+        _writer->writeBitDouble(dimStyle->minusTolerance());
     }
 
     //R2007+:
     if (R2007Plus)
     {
         //DIMFXL BD 49
-        _writer->writeBitDouble(dimStyle->FixedExtensionLineLength);
+        _writer->writeBitDouble(dimStyle->fixedExtensionLineLength());
         //DIMJOGANG BD 50
-        _writer->writeBitDouble(dimStyle->JoggedRadiusDimensionTransverseSegmentAngle);
+        _writer->writeBitDouble(dimStyle->joggedRadiusDimensionTransverseSegmentAngle());
         //DIMTFILL BS 69
-        _writer->writeBitShort((short) dimStyle->TextBackgroundFillMode);
+        _writer->writeBitShort((short) dimStyle->textBackgroundFillMode());
         //DIMTFILLCLR CMC 70
-        _writer->writeCmColor(dimStyle->TextBackgroundColor);
+        _writer->writeCmColor(dimStyle->textBackgroundColor());
     }
 
     //R2000+:
     if (R2000Plus)
     {
         //DIMTOL B 71
-        _writer->writeBit(dimStyle->GenerateTolerances);
+        _writer->writeBit(dimStyle->generateTolerances());
         //DIMLIM B 72
-        _writer->writeBit(dimStyle->LimitsGeneration);
+        _writer->writeBit(dimStyle->limitsGeneration());
         //DIMTIH B 73
-        _writer->writeBit(dimStyle->TextInsideHorizontal);
+        _writer->writeBit(dimStyle->textInsideHorizontal());
         //DIMTOH B 74
-        _writer->writeBit(dimStyle->TextOutsideHorizontal);
+        _writer->writeBit(dimStyle->textOutsideHorizontal());
         //DIMSE1 B 75
-        _writer->writeBit(dimStyle->SuppressFirstExtensionLine);
+        _writer->writeBit(dimStyle->suppressFirstExtensionLine());
         //DIMSE2 B 76
-        _writer->writeBit(dimStyle->SuppressSecondExtensionLine);
+        _writer->writeBit(dimStyle->suppressSecondExtensionLine());
         //DIMTAD BS 77
-        _writer->writeBitShort((short) dimStyle->TextVerticalAlignment);
+        _writer->writeBitShort((short) dimStyle->textVerticalAlignment());
         //DIMZIN BS 78
-        _writer->writeBitShort((short) dimStyle->ZeroHandling);
+        _writer->writeBitShort((short) dimStyle->zeroHandling());
         //DIMAZIN BS 79
-        _writer->writeBitShort((short) dimStyle->AngularZeroHandling);
+        _writer->writeBitShort((short) dimStyle->angularZeroHandling());
     }
 
     //R2007 +:
     if (R2007Plus)
     {
         //DIMARCSYM BS 90
-        _writer->writeBitShort((short) dimStyle->ArcLengthSymbolPosition);
+        _writer->writeBitShort((short) dimStyle->arcLengthSymbolPosition());
     }
 
     //R2000 +:
     if (R2000Plus)
     {
         //DIMTXT BD 140
-        _writer->writeBitDouble(dimStyle->TextHeight);
+        _writer->writeBitDouble(dimStyle->textHeight());
         //DIMCEN BD 141
-        _writer->writeBitDouble(dimStyle->CenterMarkSize);
+        _writer->writeBitDouble(dimStyle->centerMarkSize());
         //DIMTSZ BD 142
-        _writer->writeBitDouble(dimStyle->TickSize);
+        _writer->writeBitDouble(dimStyle->tickSize());
         //DIMALTF BD 143
-        _writer->writeBitDouble(dimStyle->AlternateUnitScaleFactor);
+        _writer->writeBitDouble(dimStyle->alternateUnitScaleFactor());
         //DIMLFAC BD 144
-        _writer->writeBitDouble(dimStyle->LinearScaleFactor);
+        _writer->writeBitDouble(dimStyle->linearScaleFactor());
         //DIMTVP BD 145
-        _writer->writeBitDouble(dimStyle->TextVerticalPosition);
+        _writer->writeBitDouble(dimStyle->textVerticalPosition());
         //DIMTFAC BD 146
-        _writer->writeBitDouble(dimStyle->ToleranceScaleFactor);
+        _writer->writeBitDouble(dimStyle->toleranceScaleFactor());
         //DIMGAP BD 147
-        _writer->writeBitDouble(dimStyle->DimensionLineGap);
+        _writer->writeBitDouble(dimStyle->dimensionLineGap());
         //DIMALTRND BD 148
-        _writer->writeBitDouble(dimStyle->AlternateUnitRounding);
+        _writer->writeBitDouble(dimStyle->alternateUnitRounding());
         //DIMALT B 170
-        _writer->writeBit(dimStyle->AlternateUnitDimensioning);
+        _writer->writeBit(dimStyle->alternateUnitDimensioning());
         //DIMALTD BS 171
-        _writer->writeBitShort(dimStyle->AlternateUnitDecimalPlaces);
+        _writer->writeBitShort(dimStyle->alternateUnitDecimalPlaces());
         //DIMTOFL B 172
-        _writer->writeBit(dimStyle->TextOutsideExtensions);
+        _writer->writeBit(dimStyle->textOutsideExtensions());
         //DIMSAH B 173
-        _writer->writeBit(dimStyle->SeparateArrowBlocks);
+        _writer->writeBit(dimStyle->separateArrowBlocks());
         //DIMTIX B 174
-        _writer->writeBit(dimStyle->TextInsideExtensions);
+        _writer->writeBit(dimStyle->textInsideExtensions());
         //DIMSOXD B 175
-        _writer->writeBit(dimStyle->SuppressOutsideExtensions);
+        _writer->writeBit(dimStyle->suppressOutsideExtensions());
         //DIMCLRD BS 176
-        _writer->writeCmColor(dimStyle->DimensionLineColor);
+        _writer->writeCmColor(dimStyle->dimensionLineColor());
         //DIMCLRE BS 177
-        _writer->writeCmColor(dimStyle->ExtensionLineColor);
+        _writer->writeCmColor(dimStyle->extensionLineColor());
         //DIMCLRT BS 178
-        _writer->writeCmColor(dimStyle->TextColor);
+        _writer->writeCmColor(dimStyle->textColor());
         //DIMADEC BS 179
-        _writer->writeBitShort(dimStyle->AngularDimensionDecimalPlaces);
+        _writer->writeBitShort(dimStyle->angularDimensionDecimalPlaces());
         //DIMDEC BS 271
-        _writer->writeBitShort(dimStyle->DecimalPlaces);
+        _writer->writeBitShort(dimStyle->decimalPlaces());
         //DIMTDEC BS 272
-        _writer->writeBitShort(dimStyle->ToleranceDecimalPlaces);
+        _writer->writeBitShort(dimStyle->toleranceDecimalPlaces());
         //DIMALTU BS 273
-        _writer->writeBitShort((short) dimStyle->AlternateUnitFormat);
+        _writer->writeBitShort((short) dimStyle->alternateUnitFormat());
         //DIMALTTD BS 274
-        _writer->writeBitShort(dimStyle->AlternateUnitToleranceDecimalPlaces);
+        _writer->writeBitShort(dimStyle->alternateUnitToleranceDecimalPlaces());
         //DIMAUNIT BS 275
-        _writer->writeBitShort((short) dimStyle->AngularUnit);
+        _writer->writeBitShort((short) dimStyle->angularUnit());
         //DIMFRAC BS 276
-        _writer->writeBitShort((short) dimStyle->FractionFormat);
+        _writer->writeBitShort((short) dimStyle->fractionFormat());
         //DIMLUNIT BS 277
-        _writer->writeBitShort((short) dimStyle->LinearUnitFormat);
+        _writer->writeBitShort((short) dimStyle->linearUnitFormat());
         //DIMDSEP BS 278
-        _writer->writeBitShort((short) dimStyle->DecimalSeparator);
+        _writer->writeBitShort((short) dimStyle->decimalSeparator());
         //DIMTMOVE BS 279
-        _writer->writeBitShort((short) dimStyle->TextMovement);
+        _writer->writeBitShort((short) dimStyle->textMovement());
         //DIMJUST BS 280
-        _writer->writeBitShort((short) dimStyle->TextHorizontalAlignment);
+        _writer->writeBitShort((short) dimStyle->textHorizontalAlignment());
         //DIMSD1 B 281
-        _writer->writeBit(dimStyle->SuppressFirstDimensionLine);
+        _writer->writeBit(dimStyle->suppressFirstDimensionLine());
         //DIMSD2 B 282
-        _writer->writeBit(dimStyle->SuppressSecondDimensionLine);
+        _writer->writeBit(dimStyle->suppressSecondDimensionLine());
         //DIMTOLJ BS 283
-        _writer->writeBitShort((short) dimStyle->ToleranceAlignment);
+        _writer->writeBitShort((short) dimStyle->toleranceAlignment());
         //DIMTZIN BS 284
-        _writer->writeBitShort((short) dimStyle->ToleranceZeroHandling);
+        _writer->writeBitShort((short) dimStyle->toleranceZeroHandling());
         //DIMALTZ BS 285
-        _writer->writeBitShort((short) dimStyle->AlternateUnitZeroHandling);
+        _writer->writeBitShort((short) dimStyle->alternateUnitZeroHandling());
         //DIMALTTZ BS 286
-        _writer->writeBitShort((short) dimStyle->AlternateUnitToleranceZeroHandling);
+        _writer->writeBitShort((short) dimStyle->alternateUnitToleranceZeroHandling());
         //DIMUPT B 288
-        _writer->writeBit(dimStyle->CursorUpdate);
+        _writer->writeBit(dimStyle->cursorUpdate());
         //DIMFIT BS 287
         _writer->writeBitShort(3);
     }
@@ -934,31 +938,31 @@ void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle)
     if (R2007Plus)
     {
         //DIMFXLON B 290
-        _writer->writeBit(dimStyle->IsExtensionLineLengthFixed);
+        _writer->writeBit(dimStyle->isExtensionLineLengthFixed());
     }
 
     //R2010+:
     if (R2010Plus)
     {
         //DIMTXTDIRECTION B 295
-        _writer->writeBit(dimStyle->TextDirection == TextDirection.RightToLeft);
+        _writer->writeBit(dimStyle->textDirection() == TextDirection::RightToLeft);
         //DIMALTMZF BD ?
-        _writer->writeBitDouble(dimStyle->AltMzf);
+        _writer->writeBitDouble(dimStyle->altMzf());
         //DIMALTMZS T ?
-        _writer->writeVariableText(dimStyle->AltMzs);
+        _writer->writeVariableText(dimStyle->altMzs());
         //DIMMZF BD ?
-        _writer->writeBitDouble(dimStyle->Mzf);
+        _writer->writeBitDouble(dimStyle->mzf());
         //DIMMZS T ?
-        _writer->writeVariableText(dimStyle->Mzs);
+        _writer->writeVariableText(dimStyle->mzs());
     }
 
     //R2000+:
     if (R2000Plus)
     {
         //DIMLWD BS 371
-        _writer->writeBitShort((short) dimStyle->DimensionLineWeight);
+        _writer->writeBitShort((short) dimStyle->dimensionLineWeight());
         //DIMLWE BS 372
-        _writer->writeBitShort((short) dimStyle->ExtensionLineWeight);
+        _writer->writeBitShort((short) dimStyle->extensionLineWeight());
     }
 
     //Common:
@@ -973,30 +977,30 @@ void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle)
     _writer->handleReference(DwgReferenceType::HardPointer, 0ULL);
 
     //340 shapefile(DIMTXSTY)(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->style());
 
     //R2000+:
     if (R2000Plus)
     {
         //341 leader block(DIMLDRBLK) (hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->LeaderArrow);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->leaderArrow());
         //342 dimblk(DIMBLK)(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->ArrowBlock);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->arrowBlock());
         //343 dimblk1(DIMBLK1)(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->DimArrow1);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->dimArrow1());
         //344 dimblk2(DIMBLK2)(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->DimArrow2);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->dimArrow2());
     }
 
     //R2007+:
     if (R2007Plus)
     {
         //345 dimltype(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->LineType);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->lineType());
         //346 dimltex1(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->LineTypeExt1);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->lineTypeExt1());
         //347 dimltex2(hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->LineTypeExt2);
+        _writer->handleReference(DwgReferenceType::HardPointer, dimStyle->lineTypeExt2());
     }
 
     registerObject(dimStyle);
@@ -1008,73 +1012,73 @@ void DwgObjectWriter::writeVPort(VPort *vport)
 
     //Common:
     //Entry name TV 2
-    _writer->writeVariableText(vport->Name);
+    _writer->writeVariableText(vport->name());
 
     writeXrefDependantBit(vport);
 
     //View height BD 40
-    _writer->writeBitDouble(vport->ViewHeight);
+    _writer->writeBitDouble(vport->viewHeight());
     //Aspect ratio BD 41 The number stored here is actually the aspect ratio times the view height (40),
     //so this number must be divided by the 40-value to produce the aspect ratio that entget gives.
     //(R13 quirk; R12 has just the aspect ratio.)
-    _writer->writeBitDouble(vport->AspectRatio * vport->ViewHeight);
+    _writer->writeBitDouble(vport->aspectRatio() * vport->viewHeight());
     //View Center 2RD 12 DCS. (If it's plan view, add the view target (17) to get the WCS coordinates.
     //Careful! Sometimes you have to SAVE/OPEN to update the .dwg file.) Note that it's WSC in R12.
-    _writer->write2RawDouble(vport->Center);
+    _writer->write2RawDouble(vport->center());
     //View target 3BD 17
-    _writer->write3BitDouble(vport->Target);
+    _writer->write3BitDouble(vport->target());
     //View dir 3BD 16
-    _writer->write3BitDouble(vport->Direction);
+    _writer->write3BitDouble(vport->direction());
     //View twist BD 51
-    _writer->writeBitDouble(vport->TwistAngle);
+    _writer->writeBitDouble(vport->twistAngle());
     //Lens length BD 42
-    _writer->writeBitDouble(vport->LensLength);
+    _writer->writeBitDouble(vport->lensLength());
     //Front clip BD 43
-    _writer->writeBitDouble(vport->FrontClippingPlane);
+    _writer->writeBitDouble(vport->frontClippingPlane());
     //Back clip BD 44
-    _writer->writeBitDouble(vport->BackClippingPlane);
+    _writer->writeBitDouble(vport->backClippingPlane());
 
     //View mode X 71 4 bits: 0123
     //Note that only bits 0, 1, 2, and 4 are given here; see UCSFOLLOW below for bit 3(8) of the 71.
     //0 : 71's bit 0 (1)
-    _writer->writeBit(vport->ViewMode.HasFlag(ViewModeType.PerspectiveView));
+    _writer->writeBit(vport->viewMode().testFlag(ViewModeType::PerspectiveView));
     //1 : 71's bit 1 (2)
-    _writer->writeBit(vport->ViewMode.HasFlag(ViewModeType.FrontClipping));
+    _writer->writeBit(vport->viewMode().testFlag(ViewModeType::FrontClipping));
     //2 : 71's bit 2 (4)
-    _writer->writeBit(vport->ViewMode.HasFlag(ViewModeType.BackClipping));
+    _writer->writeBit(vport->viewMode().testFlag(ViewModeType::BackClipping));
     //3 : OPPOSITE of 71's bit 4 (16)
-    _writer->writeBit(vport->ViewMode.HasFlag(ViewModeType.FrontClippingZ));
+    _writer->writeBit(vport->viewMode().testFlag(ViewModeType::FrontClippingZ));
 
     //R2000+:
     if (R2000Plus)
     {
         //Render Mode RC 281
-        _writer->writeByte((unsigned char) vport->RenderMode);
+        _writer->writeByte((unsigned char) vport->renderMode());
     }
 
     //R2007+:
     if (R2007Plus)
     {
         //Use default lights B 292
-        _writer->writeBit(vport->UseDefaultLighting);
+        _writer->writeBit(vport->useDefaultLighting());
         //Default lighting type RC 282
-        _writer->writeByte((unsigned char) vport->DefaultLighting);
+        _writer->writeByte((unsigned char) vport->defaultLighting());
         //Brightness BD 141
-        _writer->writeBitDouble(vport->Brightness);
+        _writer->writeBitDouble(vport->brightness());
         //Constrast BD 142
-        _writer->writeBitDouble(vport->Contrast);
+        _writer->writeBitDouble(vport->contrast());
         //Ambient Color CMC 63
-        _writer->writeCmColor(vport->AmbientColor);
+        _writer->writeCmColor(vport->ambientColor());
     }
 
     //Common:
     //Lower left 2RD 10 In fractions of screen width and height.
-    _writer->write2RawDouble(vport->BottomLeft);
+    _writer->write2RawDouble(vport->bottomLeft());
     //Upper right 2RD 11 In fractions of screen width and height.
-    _writer->write2RawDouble(vport->TopRight);
+    _writer->write2RawDouble(vport->topRight());
 
     //UCSFOLLOW B 71 UCSFOLLOW. Bit 3 (8) of the 71-group.
-    _writer->writeBit(vport->ViewMode.HasFlag(ViewModeType.Follow));
+    _writer->writeBit(vport->viewMode().testFlag(ViewModeType::Follow));
 
     //Circle zoom BS 72 Circle zoom percent.
     _writer->writeBitShort(vport->circleZoomPercent());

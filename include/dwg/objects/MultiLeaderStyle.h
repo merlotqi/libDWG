@@ -185,6 +185,9 @@ public:
     TextAttachmentType textTopAttachment() const;
     void setTextTopAttachment(TextAttachmentType);
 
+    bool unknownFlag298() const;
+    void setUnknownFlag298(bool);
+
 private:
     LeaderContentType _contentType;
     MultiLeaderDrawOrderType _multiLeaderDrawOrder;
@@ -228,6 +231,7 @@ private:
     TextAttachmentDirectionType _textAttachmentDirection;
     TextAttachmentType _textBottomAttachment;
     TextAttachmentType _textTopAttachment;
+    bool _unknownFlag298;
 };
 
 }// namespace dwg

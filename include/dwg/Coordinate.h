@@ -60,6 +60,7 @@ struct LIBDWG_API XY
 
     XY normalized() const noexcept;
     void normalize() noexcept;
+    double angle() const noexcept;
 
     double distanceToPoint(XY point) const noexcept;
 

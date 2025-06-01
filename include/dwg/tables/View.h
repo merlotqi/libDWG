@@ -60,8 +60,8 @@ public:
     double angle() const;
     void setAngle(double);
 
-    ViewModeType viewMode() const;
-    void setViewMode(ViewModeType);
+    ViewModeTypes viewMode() const;
+    void setViewMode(ViewModeTypes);
 
     bool isUcsAssociated() const;
     void setIsUcsAssociated(bool);
@@ -106,7 +106,7 @@ private:
     double _frontClipping = 0.0;
     double _backClipping = 0.0;
     double _angle = 0.0;
-    ViewModeType _viewMode = ViewModeType::Off;
+    ViewModeTypes _viewMode = ViewModeType::Off;
     bool _isUcsAssociated = false;
     bool _isPlottable = false;
     RenderMode _renderMode = RenderMode::Optimized2D;

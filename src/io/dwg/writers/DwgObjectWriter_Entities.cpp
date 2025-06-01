@@ -24,6 +24,7 @@
 #include <dwg/entities/AttributeBase.h>
 #include <dwg/entities/AttributeDefinition.h>
 #include <dwg/entities/AttributeEntity.h>
+#include <dwg/entities/CadWipeoutBase.h>
 #include <dwg/entities/Circle.h>
 #include <dwg/entities/Dimension.h>
 #include <dwg/entities/DimensionAligned.h>
@@ -37,23 +38,32 @@
 #include <dwg/entities/Face3D.h>
 #include <dwg/entities/Hatch.h>
 #include <dwg/entities/HatchBoundaryPath.h>
+#include <dwg/entities/HatchGradientPattern.h>
+#include <dwg/entities/HatchPattern.h>
 #include <dwg/entities/Insert.h>
 #include <dwg/entities/Leader.h>
 #include <dwg/entities/Line.h>
 #include <dwg/entities/LwPolyline.h>
 #include <dwg/entities/MLine.h>
 #include <dwg/entities/MText.h>
+#include <dwg/entities/MultiLeader.h>
 #include <dwg/entities/Point.h>
+#include <dwg/entities/PolyfaceMesh.h>
 #include <dwg/entities/Ray.h>
 #include <dwg/entities/Seqend.h>
+#include <dwg/entities/Shape.h>
+#include <dwg/entities/Solid.h>
+#include <dwg/entities/Spline.h>
+#include <dwg/entities/TextEntity.h>
+#include <dwg/entities/Tolerance.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/entities/XLine.h>
-#include <dwg/entities/MultiLeader.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/objects/ImageDefinition.h>
 #include <dwg/objects/MLineStyle.h>
-#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/MultiLeaderAnnotContext.h>
+#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
@@ -537,7 +547,7 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
 {
     bool nbulges = false;
     bool ndiffwidth = false;
-    for (auto &&item : lwPolyline->vertices())
+    for (auto &&item: lwPolyline->vertices())
     {
         if (!nbulges && item.Bulge != 0.0)
         {
@@ -639,7 +649,7 @@ void DwgObjectWriter::writeLwPolyline(LwPolyline *lwPolyline)
         _writer->write2RawDouble(last.Location);
         for (int j = 1; j < lwPolyline->vertices().size(); j++)
         {
-            auto&& curr = lwPolyline->vertices().at(j);
+            auto &&curr = lwPolyline->vertices().at(j);
             _writer->write2BitDoubleWithDefault(curr.Location, last.Location);
             last = curr;
         }
@@ -668,78 +678,79 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     //R2004+:
     if (R2004Plus)
     {
-        HatchGradientPattern gradient = hatch->GradientColor;//TODO: set default ?? HatchGradientPattern.Default;
+        HatchGradientPattern *gradient = hatch->gradientColor();//TODO: set default ?? HatchGradientPattern.Default;
 
         //Is Gradient Fill BL 450 Non-zero indicates a gradient fill is used.
-        _writer->writeBitLong(gradient.Enabled ? 1 : 0);
+        _writer->writeBitLong(gradient->enabled() ? 1 : 0);
 
         //Reserved BL 451
-        _writer->writeBitLong(gradient.Reserved);
+        _writer->writeBitLong(gradient->reserved());
         //Gradient Angle BD 460
-        _writer->writeBitDouble(gradient.Angle);
+        _writer->writeBitDouble(gradient->angle());
         //Gradient Shift BD 461
-        _writer->writeBitDouble(gradient.Shift);
+        _writer->writeBitDouble(gradient->shift());
         //Single Color Grad.BL 452
-        _writer->writeBitLong(gradient.IsSingleColorGradient ? 1 : 0);
+        _writer->writeBitLong(gradient->isSingleColorGradient() ? 1 : 0);
         //Gradient Tint BD 462
-        _writer->writeBitDouble(gradient.ColorTint);
+        _writer->writeBitDouble(gradient->colorTint());
 
         //# of Gradient Colors BL 453
-        _writer->writeBitLong(gradient.Colors.Count);
-        for (GradientColor color in gradient.Colors)
+        _writer->writeBitLong(gradient->colors().size());
+        for (auto &&color: gradient->colors())
         {
             //Gradient Value double BD 463
-            _writer->writeBitDouble(color.Value);
+            _writer->writeBitDouble(color.value);
             //RGB Color
-            _writer->writeCmColor(color.Color);
+            _writer->writeCmColor(color.color);
         }
 
         //Gradient Name TV 470
-        _writer->writeVariableText(gradient.Name);
+        _writer->writeVariableText(gradient->name());
     }
 
     //Common:
     //Z coord BD 30 X, Y always 0.0
-    _writer->writeBitDouble(hatch->Elevation);
+    _writer->writeBitDouble(hatch->elevation());
     //Extrusion 3BD 210
-    _writer->write3BitDouble(hatch->Normal);
+    _writer->write3BitDouble(hatch->normal());
     //Name TV 2 name of hatch
-    _writer->writeVariableText(hatch->Pattern.Name);
+    _writer->writeVariableText(hatch->pattern()->name());
     //Solidfill B 70 1 if solidfill, else 0
-    _writer->writeBit(hatch->IsSolid);
+    _writer->writeBit(hatch->isSolid());
     //Associative B 71 1 if associative, else 0
-    _writer->writeBit(hatch->IsAssociative);
+    _writer->writeBit(hatch->isAssociative());
 
     //Numpaths BL 91 Number of paths enclosing the hatch
-    _writer->writeBitLong(hatch->Paths.Count);
+    _writer->writeBitLong(hatch->paths().size());
     bool hasDerivedBoundary = false;
-    for (Hatch.BoundaryPath boundaryPath in hatch->Paths)
+    for (auto &&boundaryPath: hatch->paths())
     {
         //Pathflag BL 92 Path flag
-        _writer->writeBitLong((int) boundaryPath.Flags);
+        _writer->writeBitLong((int) boundaryPath->flags());
 
-        if (boundaryPath.Flags.HasFlag(BoundaryPathFlags.Derived))
+        if (boundaryPath->flags() & BoundaryPathFlag::Derived)
         {
             hasDerivedBoundary = true;
         }
 
-        if (boundaryPath.Flags.HasFlag(BoundaryPathFlags.Polyline))
+        if (boundaryPath->flags() & BoundaryPathFlag::Polyline)
         {
-            Hatch.BoundaryPath.Polyline pline = boundaryPath.Edges.First() as Hatch.BoundaryPath.Polyline;
+            HatchBoundaryPath::HBP_Polyline *pline =
+                    dynamic_cast<HatchBoundaryPath::HBP_Polyline *>(boundaryPath->edges().front());
 
             //bulgespresent B 72 bulges are present if 1
-            _writer->writeBit(pline.HasBulge);
+            _writer->writeBit(pline->hasBulge());
             //closed B 73 1 if closed
-            _writer->writeBit(pline.IsClosed);
+            _writer->writeBit(pline->isClosed());
 
             //numpathsegs BL 91 number of path segments
-            _writer->writeBitLong(pline.vertices().size());
-            for (auto &&i = 0; i < pline.vertices().size(); ++i)
+            _writer->writeBitLong(pline->vertices().size());
+            for (auto &&i = 0; i < pline->vertices().size(); ++i)
             {
-                auto &&vertex = pline.Vertices[i];
+                auto &&vertex = pline->vertices().at(i);
 
-                _writer->write2RawDouble(new XY(vertex.X, vertex.Y));
-                if (pline.HasBulge)
+                _writer->write2RawDouble(XY(vertex.X, vertex.Y));
+                if (pline->hasBulge())
                 {
                     _writer->writeBitDouble(vertex.Z);
                 }
@@ -748,103 +759,116 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
         else
         {
             //Numpathsegs BL 93 number of segments in this path
-            _writer->writeBitLong(boundaryPath.Edges.Count);
-            for (auto &&edge in boundaryPath.Edges)
+            _writer->writeBitLong(boundaryPath->edges().size());
+            for (auto &&edge: boundaryPath->edges())
             {
                 //pathtypestatus RC 72 type of path
-                _writer->writeByte((unsigned char) edge.Type);
+                auto et = edge->type();
+                _writer->writeByte((unsigned char) edge->type());
 
-                switch (edge)
+                switch (et)
                 {
-                    case Hatch.BoundaryPath.Line line:
-                        //pt0 2RD 10 first endpoint
-                        _writer->write2RawDouble(line.Start);
-                        //pt1 2RD 11 second endpoint
-                        _writer->write2RawDouble(line.End);
-                        break;
-                    case Hatch.BoundaryPath.Arc arc:
-                        //pt0 2RD 10 center
-                        _writer->write2RawDouble(arc.Center);
-                        //radius BD 40 radius
-                        _writer->writeBitDouble(arc.Radius);
-                        //startangle BD 50 start angle
-                        _writer->writeBitDouble(arc.StartAngle);
-                        //endangle BD 51 endangle
-                        _writer->writeBitDouble(arc.EndAngle);
-                        //isccw B 73 1 if counter clockwise, otherwise 0
-                        _writer->writeBit(arc.CounterClockWise);
-                        break;
-                    case Hatch.BoundaryPath.Ellipse ellispe:
-                        //pt0 2RD 10 center
-                        _writer->write2RawDouble(ellispe.Center);
-                        //endpoint 2RD 11 endpoint of major axis
-                        _writer->write2RawDouble(ellispe.MajorAxisEndPoint);
-                        //minormajoratio BD 40 ratio of minor to major axis
-                        _writer->writeBitDouble(ellispe.MinorToMajorRatio);
-                        //startangle BD 50 start angle
-                        _writer->writeBitDouble(ellispe.StartAngle);
-                        //endangle BD 51 endangle
-                        _writer->writeBitDouble(ellispe.EndAngle);
-                        //isccw B 73 1 if counter clockwise; otherwise 0
-                        _writer->writeBit(ellispe.IsCounterclockwise);
-                        break;
-                    case Hatch.BoundaryPath.Spline splineEdge:
-                        //degree BL 94 degree of the spline
-                        _writer->writeBitLong(splineEdge.Degree);
-                        //isrational B 73 1 if rational(has weights), else 0
-                        _writer->writeBit(splineEdge.Rational);
-                        //isperiodic B 74 1 if periodic, else 0
-                        _writer->writeBit(splineEdge.Periodic);
-
-                        //numknots BL 95 number of knots
-                        _writer->writeBitLong(splineEdge.Knots.Count);
-                        //numctlpts BL 96 number of control points
-                        _writer->writeBitLong(splineEdge.ControlPoints.Count);
-                        for (double k in splineEdge.Knots)
+                    case HatchBoundaryPath::HBP_EdgeType::HBP_Line:
                         {
-                            //knot BD 40 knot value
-                            _writer->writeBitDouble(k);
+                            auto line = dynamic_cast<HatchBoundaryPath::HBP_Line *>(edge);
+                            //pt0 2RD 10 first endpoint
+                            _writer->write2RawDouble(line->start());
+                            //pt1 2RD 11 second endpoint
+                            _writer->write2RawDouble(line->end());
+                            break;
                         }
-
-                        for (int p = 0; p < splineEdge.ControlPoints.Count; ++p)
+                    case HatchBoundaryPath::HBP_EdgeType::HBP_CircularArc:
                         {
-                            //pt0 2RD 10 control point
-                            _writer->write2RawDouble((XY) splineEdge.ControlPoints[p]);
-
-                            if (splineEdge.Rational)
-                                //weight BD 40 weight
-                                _writer->writeBitDouble(splineEdge.ControlPoints[p].Z);
+                            auto arc = dynamic_cast<HatchBoundaryPath::HBP_Arc *>(edge);
+                            //pt0 2RD 10 center
+                            _writer->write2RawDouble(arc->center());
+                            //radius BD 40 radius
+                            _writer->writeBitDouble(arc->radius());
+                            //startangle BD 50 start angle
+                            _writer->writeBitDouble(arc->startAngle());
+                            //endangle BD 51 endangle
+                            _writer->writeBitDouble(arc->endAngle());
+                            //isccw B 73 1 if counter clockwise, otherwise 0
+                            _writer->writeBit(arc->counterClockWise());
+                            break;
                         }
-
-                        //R24:
-                        if (R2010Plus)
+                    case HatchBoundaryPath::HBP_EdgeType::HBP_EllipticArc:
                         {
-                            //Numfitpoints BL 97 number of fit points
-                            _writer->writeBitLong(splineEdge.FitPoints.Count);
-                            if (splineEdge.FitPoints.Any())
+                            auto ellipse = dynamic_cast<HatchBoundaryPath::HBP_Ellipse *>(edge);
+                            //pt0 2RD 10 center
+                            _writer->write2RawDouble(ellipse->center());
+                            //endpoint 2RD 11 endpoint of major axis
+                            _writer->write2RawDouble(ellipse->majorAxisEndPoint());
+                            //minormajoratio BD 40 ratio of minor to major axis
+                            _writer->writeBitDouble(ellipse->minorToMajorRatio());
+                            //startangle BD 50 start angle
+                            _writer->writeBitDouble(ellipse->startAngle());
+                            //endangle BD 51 endangle
+                            _writer->writeBitDouble(ellipse->endAngle());
+                            //isccw B 73 1 if counter clockwise; otherwise 0
+                            _writer->writeBit(ellipse->counterClockWise());
+                            break;
+                        }
+                    case HatchBoundaryPath::HBP_EdgeType::HBP_Spline:
+                        {
+                            auto splineEdge = dynamic_cast<HatchBoundaryPath::HBP_Spline *>(edge);
+                            //degree BL 94 degree of the spline
+                            _writer->writeBitLong(splineEdge->degree());
+                            //isrational B 73 1 if rational(has weights), else 0
+                            _writer->writeBit(splineEdge->rational());
+                            //isperiodic B 74 1 if periodic, else 0
+                            _writer->writeBit(splineEdge->periodic());
+
+                            //numknots BL 95 number of knots
+                            _writer->writeBitLong(splineEdge->knots().size());
+                            //numctlpts BL 96 number of control points
+                            _writer->writeBitLong(splineEdge->controlPoints().size());
+                            for (auto k: splineEdge->knots())
                             {
-                                for (XY fp in splineEdge.FitPoints)
-                                {
-                                    //Fitpoint 2RD 11
-                                    _writer->write2RawDouble(fp);
-                                }
+                                //knot BD 40 knot value
+                                _writer->writeBitDouble(k);
+                            }
 
-                                //Start tangent 2RD 12
-                                _writer->write2RawDouble(splineEdge.StartTangent);
-                                //End tangent 2RD 13
-                                _writer->write2RawDouble(splineEdge.EndTangent);
+                            for (int p = 0; p < splineEdge->controlPoints().size(); ++p)
+                            {
+                                //pt0 2RD 10 control point
+                                _writer->write2RawDouble(splineEdge->controlPoints().at(p).to2D());
+
+                                if (splineEdge->rational())
+                                    //weight BD 40 weight
+                                    _writer->writeBitDouble(splineEdge->controlPoints().at(p).Z);
+                            }
+
+                            //R24:
+                            if (R2010Plus)
+                            {
+                                //Numfitpoints BL 97 number of fit points
+                                _writer->writeBitLong(splineEdge->fitPoints().size());
+                                if (!splineEdge->fitPoints().empty())
+                                {
+                                    for (auto &&fp: splineEdge->fitPoints())
+                                    {
+                                        //Fitpoint 2RD 11
+                                        _writer->write2RawDouble(fp);
+                                    }
+
+                                    //Start tangent 2RD 12
+                                    _writer->write2RawDouble(splineEdge->startTangent());
+                                    //End tangent 2RD 13
+                                    _writer->write2RawDouble(splineEdge->endTangent());
+                                }
                             }
                         }
                         break;
                     default:
-                        throw new ArgumentException($ "Unrecognized Boundary type: {boundaryPath.GetType().FullName}");
+                        break;
                 }
             }
         }
 
         //numboundaryobjhandles BL 97 Number of boundary object handles for this path
-        _writer->writeBitLong(boundaryPath.Entities.Count);
-        for (Entity e in boundaryPath.Entities)
+        _writer->writeBitLong(boundaryPath->entities().size());
+        for (auto &&e: boundaryPath->entities())
         {
             //boundaryhandle H 330 boundary handle(soft pointer)
             _writer->handleReference(DwgReferenceType::SoftPointer, e);
@@ -852,33 +876,33 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     }
 
     //style BS 75 style of hatch 0==odd parity, 1==outermost, 2==whole area
-    _writer->writeBitShort((short) hatch->Style);
+    _writer->writeBitShort((short) hatch->style());
     //patterntype BS 76 pattern type 0==user-defined, 1==predefined, 2==custom
-    _writer->writeBitShort((short) hatch->PatternType);
+    _writer->writeBitShort((short) hatch->patternType());
 
-    if (!hatch->IsSolid)
+    if (!hatch->isSolid())
     {
-        HatchPattern pattern = hatch->Pattern;
-        _writer->writeBitDouble(hatch->PatternAngle);
-        _writer->writeBitDouble(hatch->PatternScale);
-        _writer->writeBit(hatch->IsDouble);
+        HatchPattern *pattern = hatch->pattern();
+        _writer->writeBitDouble(hatch->patternAngle());
+        _writer->writeBitDouble(hatch->patternScale());
+        _writer->writeBit(hatch->isDouble());
 
-        _writer.WriteBitShort((short) pattern.Lines.Count);
-        for (auto &&line in pattern.Lines)
+        _writer->writeBitShort((short) pattern->lines().size());
+        for (auto &&line: pattern->lines())
         {
             //angle BD 53 line angle
-            _writer.WriteBitDouble(line.Angle);
+            _writer->writeBitDouble(line.Angle);
             //pt0 2BD 43 / 44 pattern through this point(X, Y)
-            _writer.Write2BitDouble(line.BasePoint);
+            _writer->write2BitDouble(line.BasePoint);
             //offset 2BD 45 / 56 pattern line offset
-            _writer.Write2BitDouble(line.Offset);
+            _writer->write2BitDouble(line.Offset);
 
             //  numdashes BS 79 number of dash length items
-            _writer.WriteBitShort((short) line.DashLengths.Count);
-            for (double dl in line.DashLengths)
+            _writer->writeBitShort((short) line.DashLengths.size());
+            for (auto &&dl: line.DashLengths)
             {
                 //dashlength BD 49 dash length
-                _writer.WriteBitDouble(dl);
+                _writer->writeBitDouble(dl);
             }
         }
     }
@@ -886,12 +910,12 @@ void DwgObjectWriter::writeHatch(Hatch *hatch)
     if (hasDerivedBoundary)
     {
         //pixelsize BD 47 pixel size
-        _writer->writeBitDouble(hatch->PixelSize);
+        _writer->writeBitDouble(hatch->pixelSize());
     }
 
     //numseedpoints BL 98 number of seed points
-    _writer->writeBitLong(hatch->SeedPoints.Count);
-    for (XY sp in hatch->SeedPoints)
+    _writer->writeBitLong(hatch->seedPoints().size());
+    for (auto sp: hatch->seedPoints())
     {
         //pt0 2RD 10 seed point
         _writer->write2RawDouble(sp);
@@ -910,7 +934,7 @@ void DwgObjectWriter::writeLeader(Leader *leader)
 
     //numpts BL --- number of points
     _writer->writeBitLong(leader->vertices().size());
-    for (XYZ v : leader->vertices())
+    for (XYZ v: leader->vertices())
     {
         //point 3BD 10 As many as counter above specifies.
         _writer->write3BitDouble(v);
@@ -1032,7 +1056,7 @@ void DwgObjectWriter::writeMultiLeader(MultiLeader *multiLeader)
     _writer->writeBitShort((short) multiLeader->contentType());
     //  343 Text Style ID (handle/TextStyle)
     _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->textStyle());//	Hard/soft??
-                                                                                   //  173 Text Left Attachment Type
+                                                                                      //  173 Text Left Attachment Type
     _writer->writeBitShort((short) multiLeader->textLeftAttachment());
     //  95  Text Right Attachement Type
     _writer->writeBitShort((short) multiLeader->textRightAttachment());
@@ -1046,7 +1070,7 @@ void DwgObjectWriter::writeMultiLeader(MultiLeader *multiLeader)
     _writer->writeBit(multiLeader->textFrame());
     //  344 Block Content ID
     _writer->handleReference(DwgReferenceType::HardPointer, multiLeader->blockContent());//	Hard/soft??
-                                                                                      //  93  Block Content Color
+                                                                                         //  93  Block Content Color
     _writer->writeCmColor(multiLeader->blockContentColor());
     //  10  Block Content Scale
     _writer->write3BitDouble(multiLeader->blockContentScale());
@@ -1108,7 +1132,7 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
         //	BL	-	Number of points
         //	3BD		10		Point
         _writer->writeBitLong(leaderLine.points.size());
-        for (auto &&point : leaderLine.points)
+        for (auto &&point: leaderLine.points)
         {
             //	3BD		10		Point
             _writer->write3BitDouble(point);
@@ -1125,67 +1149,67 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
             //	Start/end point pairs
             //	3BD	12	End point
             _writer->writeBitLong(leaderLine.startEndPoints.size());
-            for (MultiLeaderAnnotContext.StartEndPointPair sep in leaderLine.StartEndPoints)
+            for (auto &&sep: leaderLine.startEndPoints)
             {
                 //	3BD	11	Start Point
-                _writer->write3BitDouble(sep.StartPoint);
-                _writer->write3BitDouble(sep.EndPoint);
+                _writer->write3BitDouble(sep.startPoint);
+                _writer->write3BitDouble(sep.endPoint);
             }
         }
 
         //	BL	91	Leader line index
-        _writer->writeBitLong(leaderLine.Index);
+        _writer->writeBitLong(leaderLine.index);
 
         if (R2010Plus)
         {
             //	BS	170	Leader type(0 = invisible leader, 1 = straight leader, 2 = spline leader)
-            _writer->writeBitShort((short) leaderLine.PathType);
+            _writer->writeBitShort((short) leaderLine.pathType);
             //	CMC	92	Line color
-            _writer->writeCmColor(leaderLine.LineColor);
+            _writer->writeCmColor(leaderLine.lineColor);
             //	H	340	Line type handle(hard pointer)
-            _writer->handleReference(DwgReferenceType::HardPointer, leaderLine.LineType);
+            _writer->handleReference(DwgReferenceType::HardPointer, leaderLine.lineType);
             //	BL	171	Line weight
-            _writer->writeBitLong((short) leaderLine.LineWeight);
+            _writer->writeBitLong((short) leaderLine.lineWeight);
             //	BD	40	Arrow size
-            _writer->writeBitDouble(leaderLine.ArrowheadSize);
+            _writer->writeBitDouble(leaderLine.arrowheadSize);
             //	H	341	Arrow symbol handle(hard pointer)
-            _writer->handleReference(DwgReferenceType::HardPointer, leaderLine.Arrowhead);
+            _writer->handleReference(DwgReferenceType::HardPointer, leaderLine.arrowHead);
 
             //	BL	93	Override flags (1 = leader type, 2 = line color, 4 = line type, 8 = line weight, 16 = arrow size, 32 = arrow symbol(handle)
-            _writer->writeBitLong((short) leaderLine.OverrideFlags);
+            _writer->writeBitLong((short) leaderLine.overrideFlags);
         }
     };
 
     auto writeLeaderRoot = [&](MultiLeaderAnnotContext::LeaderRoot leaderRoot) {
         //	B		290		Is content valid(ODA writes true)/DXF: Has Set Last Leader Line Point
-        _writer->writeBit(leaderRoot.ContentValid);
+        _writer->writeBit(leaderRoot.contentValid);
         //	B		291		Unknown(ODA writes true)/DXF: Has Set Dogleg Vector
         _writer->writeBit(true);
         //	3BD		10		Connection point/DXF: Last Leader Line Point
-        _writer->write3BitDouble(leaderRoot.ConnectionPoint);
+        _writer->write3BitDouble(leaderRoot.connectionPoint);
         //	3BD		11		Direction/DXF: Dogleg vector
-        _writer->write3BitDouble(leaderRoot.Direction);
+        _writer->write3BitDouble(leaderRoot.direction);
 
         //	Break start/end point pairs
         //	BL		Number of break start / end point pairs
         //	3BD		12		Break start point
         //	3BD		13		Break end point
-        _writer->writeBitLong(leaderRoot.BreakStartEndPointsPairs.Count);
-        for (MultiLeaderAnnotContext.StartEndPointPair startEndPointPair in leaderRoot.BreakStartEndPointsPairs)
+        _writer->writeBitLong(leaderRoot.breakStartEndPointsPairs.size());
+        for (auto &&startEndPointPair: leaderRoot.breakStartEndPointsPairs)
         {
-            _writer->write3BitDouble(startEndPointPair.StartPoint);
-            _writer->write3BitDouble(startEndPointPair.EndPoint);
+            _writer->write3BitDouble(startEndPointPair.startPoint);
+            _writer->write3BitDouble(startEndPointPair.endPoint);
         }
 
         //	BL		90		Leader index
-        _writer->writeBitLong(leaderRoot.LeaderIndex);
+        _writer->writeBitLong(leaderRoot.leaderIndex);
         //	BD		40		Landing distance
-        _writer->writeBitDouble(leaderRoot.LandingDistance);
+        _writer->writeBitDouble(leaderRoot.landingDistance);
 
         //	Leader lines
         //	BL		Number of leader lines
-        _writer->writeBitLong(leaderRoot.Lines.Count);
-        for (MultiLeaderAnnotContext.LeaderLine leaderLine in leaderRoot.Lines)
+        _writer->writeBitLong(leaderRoot.lines.size());
+        for (auto &&leaderLine: leaderRoot.lines)
         {
             writeLeaderLine(leaderLine);
         }
@@ -1193,129 +1217,129 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
         if (R2010Plus)
         {
             //	BS	271	Attachment direction(0 = horizontal, 1 = vertical, default is 0)
-            _writer->writeBitShort((short) leaderRoot.TextAttachmentDirection);
+            _writer->writeBitShort((short) leaderRoot.textAttachmentDirection);
         }
     };
 
 
     //	BL	-	Number of leader roots
-    int leaderRootCount = annotContext.LeaderRoots.Count;
+    int leaderRootCount = annotContext->leaderRoots().size();
     _writer->writeBitLong(leaderRootCount);
     for (int i = 0; i < leaderRootCount; i++)
     {
-        writeLeaderRoot(annotContext.LeaderRoots[i]);
+        writeLeaderRoot(annotContext->leaderRoots().at(i));
     }
 
     //	Common
     //	BD	40	Overall scale
-    _writer->writeBitDouble(annotContext.ScaleFactor);
+    _writer->writeBitDouble(annotContext->scaleFactor());
     //	3BD	10	Content base point
-    _writer->write3BitDouble(annotContext.ContentBasePoint);
+    _writer->write3BitDouble(annotContext->contentBasePoint());
     //	BD	41	Text height
-    _writer->writeBitDouble(annotContext.TextHeight);
+    _writer->writeBitDouble(annotContext->textHeight());
     //	BD	140	Arrow head size
-    _writer->writeBitDouble(annotContext.ArrowheadSize);
+    _writer->writeBitDouble(annotContext->arrowheadSize());
     //  BD	145	Landing gap
-    _writer->writeBitDouble(annotContext.LandingGap);
+    _writer->writeBitDouble(annotContext->landingGap());
     //	BS	174	Style left text attachment type. See also MLEADER style left text attachment type for values. Relevant if mleader attachment direction is horizontal.
-    _writer->writeBitShort((short) annotContext.TextLeftAttachment);
+    _writer->writeBitShort((short) annotContext->textLeftAttachment());
     //	BS	175	Style right text attachment type. See also MLEADER style left text attachment type for values. Relevant if mleader attachment direction is horizontal.
-    _writer->writeBitShort((short) annotContext.TextRightAttachment);
+    _writer->writeBitShort((short) annotContext->textRightAttachment());
     //	BS	176	Text align type (0 = left, 1 = center, 2 = right)
-    _writer->writeBitShort((short) annotContext.TextAlignment);
+    _writer->writeBitShort((short) annotContext->textAlignment());
     //	BS	177	Attachment type (0 = content extents, 1 = insertion point).
-    _writer->writeBitShort((short) annotContext.BlockContentConnection);
+    _writer->writeBitShort((short) annotContext->blockContentConnection());
     //	B	290	Has text contents
-    _writer->writeBit(annotContext.HasTextContents);
-    if (annotContext.HasTextContents)
+    _writer->writeBit(annotContext->hasTextContents());
+    if (annotContext->hasTextContents())
     {
         //	TV	304	Text label
-        _writer->writeVariableText(annotContext.TextLabel);
+        _writer->writeVariableText(annotContext->textLabel());
         //	3BD	11	Normal vector
-        _writer->write3BitDouble(annotContext.TextNormal);
+        _writer->write3BitDouble(annotContext->textNormal());
         //	H	340	Text style handle (hard pointer)
-        _writer->handleReference(DwgReferenceType::HardPointer, annotContext.TextStyle);
+        _writer->handleReference(DwgReferenceType::HardPointer, annotContext->textStyle());
         //	3BD	12	Location
-        _writer->write3BitDouble(annotContext.TextLocation);
+        _writer->write3BitDouble(annotContext->textLocation());
         //	3BD	13	Direction
-        _writer->write3BitDouble(annotContext.Direction);
+        _writer->write3BitDouble(annotContext->direction());
         //	BD	42	Rotation (radians)
-        _writer->writeBitDouble(annotContext.TextRotation);
+        _writer->writeBitDouble(annotContext->textRotation());
         //	BD	43	Boundary width
-        _writer->writeBitDouble(annotContext.BoundaryWidth);
+        _writer->writeBitDouble(annotContext->boundaryWidth());
         //	BD	44	Boundary height
-        _writer->writeBitDouble(annotContext.BoundaryHeight);
+        _writer->writeBitDouble(annotContext->boundaryHeight());
         //	BD	45	Line spacing factor
-        _writer->writeBitDouble(annotContext.LineSpacingFactor);
+        _writer->writeBitDouble(annotContext->lineSpacingFactor());
         //	BS	170	Line spacing style (1 = at least, 2 = exactly)
-        _writer->writeBitShort((short) annotContext.LineSpacing);
+        _writer->writeBitShort((short) annotContext->lineSpacing());
         //	CMC	90	Text color
-        _writer->writeCmColor(annotContext.TextColor);
+        _writer->writeCmColor(annotContext->textColor());
         //	BS	171	Alignment (1 = left, 2 = center, 3 = right)
-        _writer->writeBitShort((short) annotContext.TextAttachmentPoint);
+        _writer->writeBitShort((short) annotContext->textAttachmentPoint());
         //	BS	172	Flow direction (1 = horizontal, 3 = vertical, 6 = by style)
-        _writer->writeBitShort((short) annotContext.FlowDirection);
+        _writer->writeBitShort((short) annotContext->flowDirection());
         //	CMC	91	Background fill color
-        _writer->writeCmColor(annotContext.BackgroundFillColor);
+        _writer->writeCmColor(annotContext->backgroundFillColor());
         //	BD	141	Background scale factor
-        _writer->writeBitDouble(annotContext.BackgroundScaleFactor);
+        _writer->writeBitDouble(annotContext->backgroundScaleFactor());
         //	BL	92	Background transparency
-        _writer->writeBitLong(annotContext.BackgroundTransparency);
+        _writer->writeBitLong(annotContext->backgroundTransparency());
         //	B	291	Is background fill enabled
-        _writer->writeBit(annotContext.BackgroundFillEnabled);
+        _writer->writeBit(annotContext->backgroundFillEnabled());
         //	B	292	Is background mask fill on
-        _writer->writeBit(annotContext.BackgroundMaskFillOn);
+        _writer->writeBit(annotContext->backgroundMaskFillOn());
         //	BS	173	Column type (ODA writes 0), *TODO: what meaning for values?
-        _writer->writeBitShort(annotContext.ColumnType);
+        _writer->writeBitShort(annotContext->columnType());
         //	B	293	Is text height automatic?
-        _writer->writeBit(annotContext.TextHeightAutomatic);
+        _writer->writeBit(annotContext->textHeightAutomatic());
         //	BD	142	Column width
-        _writer->writeBitDouble(annotContext.ColumnWidth);
+        _writer->writeBitDouble(annotContext->columnWidth());
         //	BD	143	Column gutter
-        _writer->writeBitDouble(annotContext.ColumnGutter);
+        _writer->writeBitDouble(annotContext->columnGutter());
         //	B	294	Column flow reversed
-        _writer->writeBit(annotContext.ColumnFlowReversed);
+        _writer->writeBit(annotContext->columnFlowReversed());
 
         //	Column sizes
         //  BD	144	Column size
-        int columnSizesCount = annotContext.ColumnSizes.Count;
+        int columnSizesCount = annotContext->columnSizes().size();
         _writer->writeBitLong(columnSizesCount);
-        for (int i = 0; i < columnSizesCount; i++)
+        for (auto &&columnSize: annotContext->columnSizes())
         {
-            _writer->writeBitDouble(annotContext.ColumnSizes[i]);
+            _writer->writeBitDouble(columnSize);
         }
 
         //	B	295	Word break
-        _writer->writeBit(annotContext.WordBreak);
+        _writer->writeBit(annotContext->wordBreak());
         //	B	Unknown
         _writer->writeBit(false);
     }
 
-    else if (annotContext.HasContentsBlock)
+    else if (annotContext->hasContentsBlock())
     {
-        _writer->writeBit(annotContext.HasContentsBlock);
+        _writer->writeBit(annotContext->hasContentsBlock());
 
         //B	296	Has contents block
         //IF Has contents block
         //	H	341	AcDbBlockTableRecord handle (soft pointer)
-        _writer->handleReference(DwgReferenceType::SoftPointer, annotContext.BlockContent);
+        _writer->handleReference(DwgReferenceType::SoftPointer, annotContext->blockContent());
         //	3BD	14	Normal vector
-        _writer->write3BitDouble(annotContext.BlockContentNormal);
+        _writer->write3BitDouble(annotContext->blockContentNormal());
         //	3BD	15	Location
-        _writer->write3BitDouble(annotContext.BlockContentLocation);
+        _writer->write3BitDouble(annotContext->blockContentLocation());
         //	3BD	16	Scale vector
-        _writer->write3BitDouble(annotContext.BlockContentScale);
+        _writer->write3BitDouble(annotContext->blockContentScale());
         //	BD	46	Rotation (radians)
-        _writer->writeBitDouble(annotContext.BlockContentRotation);
+        _writer->writeBitDouble(annotContext->blockContentRotation());
         //  CMC	93	Block color
-        _writer->writeCmColor(annotContext.BlockContentColor);
+        _writer->writeCmColor(annotContext->blockContentColor());
         //	BD (16)	47	16 doubles containing the complete transformation
         //	matrix. Order of transformation is:
         //	- Rotation,
         //	- OCS to WCS (using normal vector),
         //	- Scaling (using scale vector)
         //	- Translation (using location)
-        auto &&m4 = annotContext.TransformationMatrix;
+        auto &&m4 = annotContext->transformationMatrix();
         _writer->writeBitDouble(m4.m00);
         _writer->writeBitDouble(m4.m10);
         _writer->writeBitDouble(m4.m20);
@@ -1340,20 +1364,20 @@ void DwgObjectWriter::writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *anno
     //END IF Has text contents
 
     //	3BD	110	Base point
-    _writer->write3BitDouble(annotContext.BasePoint);
+    _writer->write3BitDouble(annotContext->basePoint());
     //	3BD	111	Base direction
-    _writer->write3BitDouble(annotContext.BaseDirection);
+    _writer->write3BitDouble(annotContext->baseDirection());
     //	3BD	112	Base vertical
-    _writer->write3BitDouble(annotContext.BaseVertical);
+    _writer->write3BitDouble(annotContext->baseVertical());
     //	B	297	Is normal reversed?
-    _writer->writeBit(annotContext.NormalReversed);
+    _writer->writeBit(annotContext->normalReversed());
 
     if (R2010Plus)
     {
         //	BS	273	Style top attachment
-        _writer->writeBitShort((short) annotContext.TextTopAttachment);
+        _writer->writeBitShort((short) annotContext->textTopAttachment());
         //	BS	272	Style bottom attachment
-        _writer->writeBitShort((short) annotContext.TextBottomAttachment);
+        _writer->writeBitShort((short) annotContext->textBottomAttachment());
     }
 }
 
@@ -1416,21 +1440,21 @@ void DwgObjectWriter::writePoint(Point *point)
 void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
 {
     //Numverts BS 71 Number of vertices in the mesh.
-    _writer->writeBitShort((short) fm.vertices().size());
+    _writer->writeBitShort((short) fm->vertices().size());
     //Numfaces BS 72 Number of faces
-    _writer->writeBitShort((short) fm.Faces.Count);
+    _writer->writeBitShort((short) fm->faces().size());
 
     //R2004 +:
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(fm.vertices().size() + fm.Faces.Count);
-        for (auto &&v in fm.Vertices)
+        _writer->writeBitLong(fm->vertices().size() + fm->faces().size());
+        for (auto &&v: fm->vertices())
         {
             //H[VERTEX(soft pointer)] Repeats "Owned Object Count" times.
             _writer->handleReference(DwgReferenceType::SoftPointer, v);
         }
-        for (auto &&f in fm.Faces)
+        for (auto &&f: fm->faces())
         {
             _writer->handleReference(DwgReferenceType::SoftPointer, f);
         }
@@ -1439,11 +1463,14 @@ void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
     //R13 - R2000:
     if (R13_15Only)
     {
-        List<CadObject> child = new List<CadObject>(fm.Vertices);
-        child.AddRange(fm.Faces);
-
-        CadObject first = child.FirstOrDefault();
-        CadObject last = child.LastOrDefault();
+        std::vector<CadObject *> child;
+        child.insert(child.end(), fm->faces().begin(), fm->faces().end());
+        CadObject *first = nullptr, *last = nullptr;
+        if (!child.empty())
+        {
+            first = child.front();
+            last = child.back();
+        }
 
         //H first VERTEX(soft pointer)
         _writer->handleReference(DwgReferenceType::SoftPointer, first);
@@ -1453,27 +1480,27 @@ void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::SoftPointer, fm.Vertices.Seqend);
+    _writer->handleReference(DwgReferenceType::SoftPointer, fm->seqend());
 }
 
 void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
 {
     //Flags BS 70
-    _writer->writeBitShort((short) pline.Flags);
+    _writer->writeBitShort((short) pline->flags());
     //Curve type BS 75 Curve and smooth surface type.
-    _writer->writeBitShort((short) pline.SmoothSurface);
+    _writer->writeBitShort((short) pline->smoothSurface());
     //Start width BD 40 Default start width
-    _writer->writeBitDouble(pline.StartWidth);
+    _writer->writeBitDouble(pline->startWidth());
     //End width BD 41 Default end width
-    _writer->writeBitDouble(pline.EndWidth);
+    _writer->writeBitDouble(pline->endWidth());
     //Thickness BT 39
-    _writer->writeBitThickness(pline.Thickness);
+    _writer->writeBitThickness(pline->thickness());
     //Elevation BD 10 The 10-pt is (0,0,elev)
-    _writer->writeBitDouble(pline.Elevation);
+    _writer->writeBitDouble(pline->elevation());
     //Extrusion BE 210
-    _writer->writeBitExtrusion(pline.Normal);
+    _writer->writeBitExtrusion(pline->normal());
 
-    int count = pline.vertices().size();
+    int count = pline->vertices().size();
     //R2004+:
     if (R2004Plus)
     {
@@ -1481,22 +1508,32 @@ void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
         _writer->writeBitLong(count);
         for (int i = 0; i < count; i++)
         {
-            _writer->handleReference(DwgReferenceType::HardOwnership, pline.Vertices[i]);
+            _writer->handleReference(DwgReferenceType::HardOwnership, pline->vertices().at(i));
         }
     }
 
     //R13-R2000:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015)
     {
-        //H first VERTEX (soft pointer)
-        _writer->handleReference(DwgReferenceType::SoftPointer, pline.Vertices.FirstOrDefault());
-        //H last VERTEX (soft pointer)
-        _writer->handleReference(DwgReferenceType::SoftPointer, pline.Vertices.LastOrDefault());
+        if (pline->vertices().empty())
+        {
+            //H first VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
+            //H last VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
+        }
+        else
+        {
+            //H first VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().front());
+            //H last VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().back());
+        }
     }
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, pline.Vertices.Seqend);
+    _writer->handleReference(DwgReferenceType::HardOwnership, pline->seqend());
 }
 
 void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
@@ -1504,22 +1541,21 @@ void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
     //Flags RC 70 NOT DIRECTLY THE 75. Bit-coded (76543210):
     //75 0 : Splined(75 value is 5)
     //1 : Splined(75 value is 6)
-    //Should assign pline.SmoothSurface ??
+    //Should assign pline->SmoothSurface ??
     _writer->writeByte(0);
 
     //Flags RC 70 NOT DIRECTLY THE 70. Bit-coded (76543210):
     //0 : Closed(70 bit 0(1))
     //(Set 70 bit 3(8) because this is a 3D POLYLINE.)
-    _writer->writeByte(
-            (unsigned char) (pline.Flags.HasFlag(PolylineFlags.ClosedPolylineOrClosedPolygonMeshInM) ? 1 : 0));
+    _writer->writeByte((unsigned char) (pline->flags() & PolylineFlag::ClosedPolylineOrClosedPolygonMeshInM) ? 1 : 0);
 
     //R2004+:
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(pline.vertices().size());
+        _writer->writeBitLong(pline->vertices().size());
 
-        for (auto &&vertex in pline.Vertices)
+        for (auto &&vertex: pline->vertices())
         {
             _writer->handleReference(DwgReferenceType::HardOwnership, vertex);
         }
@@ -1528,15 +1564,22 @@ void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
     //R13-R2000:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015)
     {
-        //H first VERTEX (soft pointer)
-        _writer->handleReference(DwgReferenceType::SoftPointer, pline.Vertices.FirstOrDefault());
-        //H last VERTEX (soft pointer)
-        _writer->handleReference(DwgReferenceType::SoftPointer, pline.Vertices.LastOrDefault());
+        if (pline->vertices().empty())
+        {
+            _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
+            _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
+        }
+        {
+            //H first VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().front());
+            //H last VERTEX (soft pointer)
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().back());
+        }
     }
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, pline.Vertices.Seqend);
+    _writer->handleReference(DwgReferenceType::HardOwnership, pline->seqend());
 }
 
 void DwgObjectWriter::writeSeqend(Seqend *seqend)
@@ -1546,8 +1589,8 @@ void DwgObjectWriter::writeSeqend(Seqend *seqend)
         return;
 
     //Seqend does not have links for AC1015 or before (causes errors)
-    Entity prevHolder = _prev;
-    Entity nextHolder = _next;
+    Entity *prevHolder = _prev;
+    Entity *nextHolder = _next;
     _prev = nullptr;
     _next = nullptr;
 
@@ -1561,17 +1604,17 @@ void DwgObjectWriter::writeSeqend(Seqend *seqend)
 void DwgObjectWriter::writeShape(Shape *shape)
 {
     //Ins pt 3BD 10
-    _writer->write3BitDouble(shape.InsertionPoint);
+    _writer->write3BitDouble(shape->insertionPoint());
     //Scale BD 40 Scale factor, default value 1.
-    _writer->writeBitDouble(shape.Size);
+    _writer->writeBitDouble(shape->size());
     //Rotation BD 50 Rotation in radians, default value 0.
-    _writer->writeBitDouble(shape.Rotation);
+    _writer->writeBitDouble(shape->rotation());
     //Width factor BD 41 Width factor, default value 1.
-    _writer->writeBitDouble(shape.RelativeXScale);
+    _writer->writeBitDouble(shape->relativeXScale());
     //Oblique BD 51 Oblique angle in radians, default value 0.
-    _writer->writeBitDouble(shape.ObliqueAngle);
+    _writer->writeBitDouble(shape->obliqueAngle());
     //Thickness BD 39
-    _writer->writeBitDouble(shape.Thickness);
+    _writer->writeBitDouble(shape->thickness());
 
     //Shapeno BS 2
     //This is the shape index.
@@ -1579,10 +1622,10 @@ void DwgObjectWriter::writeShape(Shape *shape)
     //When reading from DXF, the shape is found by iterating over all the text styles
     //(SHAPEFILE, see paragraph 20.4.56) and when the text style contains a shape file,
     //iterating over all the shapes until the one with the matching name is found.
-    _writer->writeBitShort((short) shape.ShapeIndex);
+    _writer->writeBitShort((short) shape->shapeIndex());
 
     //Extrusion 3BD 210
-    _writer->write3BitDouble(shape.Normal);
+    _writer->write3BitDouble(shape->normal());
 
     //H SHAPEFILE (hard pointer)
     _writer->handleReference(DwgReferenceType::HardPointer, nullptr);
@@ -1591,70 +1634,70 @@ void DwgObjectWriter::writeShape(Shape *shape)
 void DwgObjectWriter::writeSolid(Solid *solid)
 {
     //Thickness BT 39
-    _writer->writeBitThickness(solid.Thickness);
+    _writer->writeBitThickness(solid->thickness());
 
     //Elevation BD ---Z for 10 - 13.
-    _writer->writeBitDouble((double) solid.FirstCorner.Z);
+    _writer->writeBitDouble((double) solid->firstCorner().Z);
 
     //1st corner 2RD 10
-    _writer->writeRawDouble(solid.FirstCorner.X);
-    _writer->writeRawDouble(solid.FirstCorner.Y);
+    _writer->writeRawDouble(solid->firstCorner().X);
+    _writer->writeRawDouble(solid->firstCorner().Y);
     //2nd corner 2RD 11
-    _writer->writeRawDouble(solid.SecondCorner.X);
-    _writer->writeRawDouble(solid.SecondCorner.Y);
+    _writer->writeRawDouble(solid->secondCorner().X);
+    _writer->writeRawDouble(solid->secondCorner().Y);
     //3rd corner 2RD 12
-    _writer->writeRawDouble(solid.ThirdCorner.X);
-    _writer->writeRawDouble(solid.ThirdCorner.Y);
+    _writer->writeRawDouble(solid->thirdCorner().X);
+    _writer->writeRawDouble(solid->thirdCorner().Y);
     //4th corner 2RD 13
-    _writer->writeRawDouble(solid.FirstCorner.X);
-    _writer->writeRawDouble(solid.FirstCorner.Y);
+    _writer->writeRawDouble(solid->firstCorner().X);
+    _writer->writeRawDouble(solid->firstCorner().Y);
 
     //Extrusion BE 210
-    _writer->writeBitExtrusion(solid.Normal);
+    _writer->writeBitExtrusion(solid->normal());
 }
 
 void DwgObjectWriter::writeSolid3D(Solid3D *solid) {}
 
 void DwgObjectWriter::writeCadImage(CadWipeoutBase *image)
 {
-    _writer->writeBitLong(image.ClassVersion);
+    _writer->writeBitLong(image->classVersion());
 
-    _writer->write3BitDouble(image.InsertPoint);
-    _writer->write3BitDouble(image.UVector);
-    _writer->write3BitDouble(image.VVector);
+    _writer->write3BitDouble(image->insertPoint());
+    _writer->write3BitDouble(image->UVector());
+    _writer->write3BitDouble(image->VVector());
 
-    _writer->write2RawDouble(image.Size);
+    _writer->write2RawDouble(image->size());
 
-    _writer->writeBitShort((short) image.Flags);
-    _writer->writeBit(image.ClippingState);
-    _writer->writeByte(image.Brightness);
-    _writer->writeByte(image.Contrast);
-    _writer->writeByte(image.Fade);
+    _writer->writeBitShort((short) image->flags());
+    _writer->writeBit(image->clippingState());
+    _writer->writeByte(image->brightness());
+    _writer->writeByte(image->contrast());
+    _writer->writeByte(image->fade());
 
     if (R2010Plus)
     {
-        _writer->writeBit(image.ClipMode == ClipMode.Inside);
+        _writer->writeBit(image->clipMode() == ClipMode::Inside);
     }
 
-    _writer->writeBitShort((short) image.ClipType);
+    _writer->writeBitShort((short) image->clipType());
 
 
-    switch (image.ClipType)
+    switch (image->clipType())
     {
-        case ClipType.Rectangular:
-            _writer->write2RawDouble(image.ClipBoundaryVertices[0]);
-            _writer->write2RawDouble(image.ClipBoundaryVertices[1]);
+        case ClipType::Rectangular:
+            _writer->write2RawDouble(image->clipBoundaryVertices().at(0));
+            _writer->write2RawDouble(image->clipBoundaryVertices().at(1));
             break;
-        case ClipType.Polygonal:
-            _writer->writeBitLong(image.ClipBoundaryVertices.Count);
-            for (int i = 0; i < image.ClipBoundaryVertices.Count; i++)
+        case ClipType::Polygonal:
+            _writer->writeBitLong(image->clipBoundaryVertices().size());
+            for (auto &&v: image->clipBoundaryVertices())
             {
-                _writer->write2RawDouble(image.ClipBoundaryVertices[i]);
+                _writer->write2RawDouble(v);
             }
             break;
     }
 
-    _writer->handleReference(DwgReferenceType::HardPointer, image.Definition);
+    _writer->handleReference(DwgReferenceType::HardPointer, image->definition());
     //Reactor, not needed
     _writer->handleReference(nullptr);
 }
@@ -1666,7 +1709,7 @@ void DwgObjectWriter::writeSpline(Spline *spline)
     if (R2013Plus)
     {
         //The scenario flag becomes 1 if the knot parameter is Custom or has no fit data, otherwise 2.
-        if (spline.KnotParameterization == KnotParameterization.Custom || spline.FitPoints.Count == 0)
+        if (spline->knotParameterization() == KnotParameterization::Custom || spline->fitPoints().size() == 0)
         {
             scenario = 1;
         }
@@ -1676,13 +1719,13 @@ void DwgObjectWriter::writeSpline(Spline *spline)
         }
 
         _writer->writeBitLong(scenario);
-        _writer->writeBitLong((int) spline.Flags1);
-        _writer->writeBitLong((int) spline.KnotParameterization);
+        _writer->writeBitLong((int) spline->flags1());
+        _writer->writeBitLong((int) spline->knotParameterization());
     }
     else
     {
-        scenario = (spline.FitPoints.Count <= 0) ? 1 : 2;
-        if (scenario == 2 && spline.KnotParameterization != 0)
+        scenario = (spline->fitPoints().size() <= 0) ? 1 : 2;
+        if (scenario == 2 && spline->knotParameterization() != KnotParameterization::Chord)
         {
             scenario = 1;
         }
@@ -1693,47 +1736,47 @@ void DwgObjectWriter::writeSpline(Spline *spline)
 
     //Common:
     //Degree BL degree of this spline
-    _writer->writeBitLong(spline.Degree);
+    _writer->writeBitLong(spline->degree());
 
-    bool flag = spline.Weights.Count > 0;
+    bool flag = spline->weights().size() > 0;
     switch (scenario)
     {
         case 1:
             {
                 //Rational B flag bit 2
-                _writer->writeBit(spline.Flags.HasFlag(SplineFlags.Rational));
+                _writer->writeBit(spline->flags() & SplineFlag::Rational);
                 //Closed B flag bit 0
-                _writer->writeBit(spline.Flags.HasFlag(SplineFlags.Closed));
+                _writer->writeBit(spline->flags() & SplineFlag::Closed);
                 //Periodic B flag bit 1
-                _writer->writeBit(spline.Flags.HasFlag(SplineFlags.Periodic));
+                _writer->writeBit(spline->flags() & SplineFlag::Periodic);
 
                 //Knot tol BD 42
-                _writer->writeBitDouble(spline.KnotTolerance);
+                _writer->writeBitDouble(spline->knotTolerance());
                 //Ctrl tol BD 43
-                _writer->writeBitDouble(spline.ControlPointTolerance);
+                _writer->writeBitDouble(spline->controlPointTolerance());
 
                 //Numknots BL 72 This is stored as a LONG
-                _writer->writeBitLong(spline.Knots.Count);
+                _writer->writeBitLong(spline->knots().size());
                 //Numctrlpts BL 73 Number of 10's (and 41's, if weighted) that follow.
-                _writer->writeBitLong(spline.ControlPoints.Count);
+                _writer->writeBitLong(spline->controlPoints().size());
 
                 //Weight B Seems to be an echo of the 4 bit on the flag for "weights present".
                 _writer->writeBit(flag);
 
-                for (double k in spline.Knots)
+                for (auto k: spline->knots())
                 {
                     //Knot BD knot value
                     _writer->writeBitDouble(k);
                 }
 
-                for (int i = 0; i < spline.ControlPoints.Count; i++)
+                for (int i = 0; i < spline->controlPoints().size(); i++)
                 {
                     //Control pt 3BD 10
-                    _writer->write3BitDouble(spline.ControlPoints[i]);
+                    _writer->write3BitDouble(spline->controlPoints().at(i));
                     if (flag)
                     {
                         //Weight D 41 if present as indicated by 4 bit on flag
-                        _writer->writeBitDouble(spline.Weights[i]);
+                        _writer->writeBitDouble(spline->weights().at(i));
                     }
                 }
                 break;
@@ -1741,15 +1784,15 @@ void DwgObjectWriter::writeSpline(Spline *spline)
         case 2:
             {
                 //Fit Tol BD 44
-                _writer->writeBitDouble(spline.FitTolerance);
+                _writer->writeBitDouble(spline->fitTolerance());
                 //Beg tan vec 3BD 12 Beginning tangent direction vector (normalized).
-                _writer->write3BitDouble(spline.StartTangent);
+                _writer->write3BitDouble(spline->startTangent());
                 //End tan vec 3BD 13 Ending tangent direction vector (normalized).
-                _writer->write3BitDouble(spline.EndTangent);
+                _writer->write3BitDouble(spline->endTangent());
                 //num fit pts BL 74 Number of fit points.
-                _writer->writeBitLong(spline.FitPoints.Count);
+                _writer->writeBitLong(spline->fitPoints().size());
 
-                for (XYZ fp in spline.FitPoints)
+                for (auto &&fp: spline->fitPoints())
                 {
                     //Fit pt 3BD
                     _writer->write3BitDouble(fp);
@@ -1773,70 +1816,70 @@ void DwgObjectWriter::writeTextEntity(TextEntity *text)
     if (R13_14Only)
     {
         //Elevation BD ---
-        _writer->writeBitDouble(text.InsertPoint.Z);
+        _writer->writeBitDouble(text->insertPoint().Z);
         //Insertion pt 2RD 10
-        _writer->writeRawDouble(text.InsertPoint.X);
-        _writer->writeRawDouble(text.InsertPoint.Y);
+        _writer->writeRawDouble(text->insertPoint().X);
+        _writer->writeRawDouble(text->insertPoint().Y);
 
         //Alignment pt 2RD 11
-        _writer->writeRawDouble(text.AlignmentPoint.X);
-        _writer->writeRawDouble(text.AlignmentPoint.Y);
+        _writer->writeRawDouble(text->alignmentPoint().X);
+        _writer->writeRawDouble(text->alignmentPoint().Y);
 
         //Extrusion 3BD 210
-        _writer->write3BitDouble(text.Normal);
+        _writer->write3BitDouble(text->normal());
         //Thickness BD 39
-        _writer->writeBitDouble(text.Thickness);
+        _writer->writeBitDouble(text->thickness());
         //Oblique ang BD 51
-        _writer->writeBitDouble(text.ObliqueAngle);
+        _writer->writeBitDouble(text->obliqueAngle());
         //Rotation ang BD 50
-        _writer->writeBitDouble(text.Rotation);
+        _writer->writeBitDouble(text->rotation());
         //Height BD 40
-        _writer->writeBitDouble(text.Height);
+        _writer->writeBitDouble(text->height());
         //Width factor BD 41
-        _writer->writeBitDouble(text.WidthFactor);
+        _writer->writeBitDouble(text->widthFactor());
         //Text value TV 1
-        _writer->writeVariableText(text.Value);
+        _writer->writeVariableText(text->value());
         //Generation BS 71
-        _writer->writeBitShort((short) text.Mirror);
+        _writer->writeBitShort((short) text->mirror());
         //Horiz align. BS 72
-        _writer->writeBitShort((short) text.HorizontalAlignment);
+        _writer->writeBitShort((short) text->horizontalAlignment());
         //Vert align. BS 73
-        _writer->writeBitShort((short) text.VerticalAlignment);
+        _writer->writeBitShort((short) text->verticalAlignment());
     }
     else
     {
         //DataFlags RC Used to determine presence of subsquent data
         unsigned char dataFlags = 0;
 
-        if (text.InsertPoint.Z == 0.0)
+        if (text->insertPoint().Z == 0.0)
         {
             dataFlags = (unsigned char) (dataFlags | 0b1);
         }
-        if (text.AlignmentPoint == XYZ.Zero)
+        if (text->alignmentPoint() == XYZ::Zero)
         {
             dataFlags = (unsigned char) (dataFlags | 0b10);
         }
-        if (text.ObliqueAngle == 0.0)
+        if (text->obliqueAngle() == 0.0)
         {
             dataFlags = (unsigned char) (dataFlags | 0b100);
         }
-        if (text.Rotation == 0.0)
+        if (text->rotation() == 0.0)
         {
             dataFlags = (unsigned char) (dataFlags | 0b1000);
         }
-        if (text.WidthFactor == 1.0)
+        if (text->widthFactor() == 1.0)
         {
             dataFlags = (unsigned char) (dataFlags | 0b10000);
         }
-        if (text.Mirror == TextMirrorFlag.None)
+        if (text->mirror() == TextMirrorFlag::None)
         {
             dataFlags = (unsigned char) (dataFlags | 0b100000);
         }
-        if (text.HorizontalAlignment == TextHorizontalAlignment.Left)
+        if (text->horizontalAlignment() == TextHorizontalAlignment::Left)
         {
             dataFlags = (unsigned char) (dataFlags | 0b1000000);
         }
-        if (text.VerticalAlignment == TextVerticalAlignmentType.Baseline)
+        if (text->verticalAlignment() == TextVerticalAlignment::Baseline)
         {
             dataFlags = (unsigned char) (dataFlags | 0b10000000);
         }
@@ -1845,82 +1888,82 @@ void DwgObjectWriter::writeTextEntity(TextEntity *text)
 
         //Elevation RD --- present if !(DataFlags & 0x01)
         if ((dataFlags & 0b1) == 0)
-            _writer->writeRawDouble(text.InsertPoint.Z);
+            _writer->writeRawDouble(text->insertPoint().Z);
 
         //Insertion pt 2RD 10
-        _writer->writeRawDouble(text.InsertPoint.X);
-        _writer->writeRawDouble(text.InsertPoint.Y);
+        _writer->writeRawDouble(text->insertPoint().X);
+        _writer->writeRawDouble(text->insertPoint().Y);
 
         //Alignment pt 2DD 11 present if !(DataFlags & 0x02), use 10 & 20 values for 2 default values.
         if ((dataFlags & 0x2) == 0)
         {
-            _writer->writeBitDoubleWithDefault(text.AlignmentPoint.X, text.InsertPoint.X);
-            _writer->writeBitDoubleWithDefault(text.AlignmentPoint.Y, text.InsertPoint.Y);
+            _writer->writeBitDoubleWithDefault(text->alignmentPoint().X, text->insertPoint().X);
+            _writer->writeBitDoubleWithDefault(text->alignmentPoint().Y, text->insertPoint().Y);
         }
 
         //Extrusion BE 210
-        _writer->writeBitExtrusion(text.Normal);
+        _writer->writeBitExtrusion(text->normal());
         //Thickness BT 39
-        _writer->writeBitThickness(text.Thickness);
+        _writer->writeBitThickness(text->thickness());
 
         //Oblique ang RD 51 present if !(DataFlags & 0x04)
         if ((dataFlags & 0x4) == 0)
-            _writer->writeRawDouble(text.ObliqueAngle);
+            _writer->writeRawDouble(text->obliqueAngle());
         //Rotation ang RD 50 present if !(DataFlags & 0x08)
         if ((dataFlags & 0x8) == 0)
-            _writer->writeRawDouble(text.Rotation);
+            _writer->writeRawDouble(text->rotation());
 
         //Height RD 40
-        _writer->writeRawDouble(text.Height);
+        _writer->writeRawDouble(text->height());
 
         //Width factor RD 41 present if !(DataFlags & 0x10)
         if ((dataFlags & 0x10) == 0)
-            _writer->writeRawDouble(text.WidthFactor);
+            _writer->writeRawDouble(text->widthFactor());
 
         //Text value TV 1
-        _writer->writeVariableText(text.Value);
+        _writer->writeVariableText(text->value());
 
         //Generation BS 71 present if !(DataFlags & 0x20)
         if ((dataFlags & 0x20) == 0)
-            _writer->writeBitShort((short) text.Mirror);
+            _writer->writeBitShort((short) text->mirror());
         //Horiz align. BS 72 present if !(DataFlags & 0x40)
         if ((dataFlags & 0x40) == 0)
-            _writer->writeBitShort((short) text.HorizontalAlignment);
+            _writer->writeBitShort((short) text->horizontalAlignment());
         //Vert align. BS 73 present if !(DataFlags & 0x80)
         if ((dataFlags & 0x80) == 0)
-            _writer->writeBitShort((short) text.VerticalAlignment);
+            _writer->writeBitShort((short) text->verticalAlignment());
     }
 
     //Common:
     //Common Entity Handle Data H 7 STYLE(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, text.Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, text->style());
 }
 
 void DwgObjectWriter::writeMText(MText *mtext)
 {
     //Insertion pt3 BD 10 First picked point. (Location relative to text depends on attachment point (71).)
-    _writer->write3BitDouble(mtext.InsertPoint);
+    _writer->write3BitDouble(mtext->insertPoint());
     //Extrusion 3BD 210 Undocumented; appears in DXF and entget, but ACAD doesn't even bother to adjust it to unit length.
-    _writer->write3BitDouble(mtext.Normal);
+    _writer->write3BitDouble(mtext->normal());
     //X-axis dir 3BD 11 Apparently the text x-axis vector. (Why not just a rotation?) ACAD maintains it as a unit vector.
-    _writer->write3BitDouble(mtext.AlignmentPoint);
+    _writer->write3BitDouble(mtext->alignmentPoint());
     //Rect width BD 41 Reference rectangle width (width picked by the user).
-    _writer->writeBitDouble(mtext.RectangleWidth);
+    _writer->writeBitDouble(mtext->rectangleWidth());
 
     //R2007+:
     if (R2007Plus)
     {
         //Rect height BD 46 Reference rectangle height.
-        _writer->writeBitDouble(mtext.RectangleHeight);
+        _writer->writeBitDouble(mtext->rectangleHeight());
     }
 
     //Common:
     //Text height BD 40 Undocumented
-    _writer->writeBitDouble(mtext.Height);
+    _writer->writeBitDouble(mtext->height());
     //Attachment BS 71 Similar to justification; see DXF doc
-    _writer->writeBitShort((short) mtext.AttachmentPoint);
+    _writer->writeBitShort((short) mtext->attachmentPoint());
     //Drawing dir BS 72 Left to right, etc.; see DXF doc
-    _writer->writeBitShort((short) mtext.DrawingDirection);
+    _writer->writeBitShort((short) mtext->drawingDirection());
 
     //Extents ht BD ---Undocumented and not present in DXF or entget
     _writer->writeBitDouble(0);
@@ -1928,18 +1971,18 @@ void DwgObjectWriter::writeMText(MText *mtext)
     _writer->writeBitDouble(0);
 
     //Text TV 1 All text in one long string
-    _writer->writeVariableText(mtext.Value);
+    _writer->writeVariableText(mtext->value());
 
     //H 7 STYLE (hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, mtext.Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, mtext->style());
 
     //R2000+:
     if (R2000Plus)
     {
         //Linespacing Style BS 73
-        _writer->writeBitShort((short) mtext.LineSpacingStyle);
+        _writer->writeBitShort((short) mtext->lineSpacingStyle());
         //Linespacing Factor BD 44
-        _writer->writeBitDouble(mtext.LineSpacing);
+        _writer->writeBitDouble(mtext->lineSpacing());
         //Unknown bit B
         _writer->writeBit(false);
     }
@@ -1948,18 +1991,19 @@ void DwgObjectWriter::writeMText(MText *mtext)
     if (R2004Plus)
     {
         //Background flags BL 90 0 = no background, 1 = background fill, 2 = background fill with drawing fill color, 0x10 = text frame (R2018+)
-        _writer->writeBitLong((int) mtext.BackgroundFillFlags);
+        _writer->writeBitLong((int) mtext->backgroundFillFlags());
 
         //background flags has bit 0x01 set, or in case of R2018 bit 0x10:
-        if ((mtext.BackgroundFillFlags & BackgroundFillFlags.UseBackgroundFillColor) != BackgroundFillFlags.None ||
-            _version > ACadVersion::AC1027 && (mtext.BackgroundFillFlags & BackgroundFillFlags.TextFrame) > 0)
+        if ((mtext->backgroundFillFlags() & BackgroundFillFlag::UseBackgroundFillColor) !=
+                    (int) BackgroundFillFlag::None ||
+            _version > ACadVersion::AC1027 && (mtext->backgroundFillFlags() & BackgroundFillFlag::TextFrame) > 0)
         {
             //Background scale factor	BL 45 default = 1.5
-            _writer->writeBitDouble(mtext.BackgroundScale);
+            _writer->writeBitDouble(mtext->backgroundScale());
             //Background color CMC 63
-            _writer->writeCmColor(mtext.BackgroundColor);
+            _writer->writeCmColor(mtext->backgroundColor());
             //Background transparency BL 441
-            _writer->writeBitLong(mtext.BackgroundTransparency.Value);
+            _writer->writeBitLong(mtext->backgroundTransparency().value());
         }
     }
 
@@ -1970,10 +2014,10 @@ void DwgObjectWriter::writeMText(MText *mtext)
     }
 
     //Is NOT annotative B
-    _writer->writeBit(!mtext.IsAnnotative);
+    _writer->writeBit(!mtext->isAnnotative());
 
     //IF MTEXT is not annotative
-    if (mtext.IsAnnotative)
+    if (mtext->isAnnotative())
     {
         return;
     }
@@ -1988,42 +2032,42 @@ void DwgObjectWriter::writeMText(MText *mtext)
     _writer->handleReference(DwgReferenceType::HardPointer, nullptr);
 
     //Attachment point BL
-    _writer->writeBitLong((int) mtext.AttachmentPoint);
+    _writer->writeBitLong((int) mtext->attachmentPoint());
     //X - axis dir 3BD 10
-    _writer->write3BitDouble(mtext.AlignmentPoint);
+    _writer->write3BitDouble(mtext->alignmentPoint());
     //Insertion point 3BD 11
-    _writer->write3BitDouble(mtext.InsertPoint);
+    _writer->write3BitDouble(mtext->insertPoint());
     //Rect width BD 40
-    _writer->writeBitDouble(mtext.RectangleWidth);
+    _writer->writeBitDouble(mtext->rectangleWidth());
     //Rect height BD 41 -> wrong code, should be 46, undocumented
-    _writer->writeBitDouble(mtext.RectangleHeight);
+    _writer->writeBitDouble(mtext->rectangleHeight());
     //Extents width BD 42
-    _writer->writeBitDouble(mtext.HorizontalWidth);
+    _writer->writeBitDouble(mtext->horizontalWidth());
     //Extents height BD 43
-    _writer->writeBitDouble(mtext.VerticalHeight);
+    _writer->writeBitDouble(mtext->verticalHeight());
     //END REDUNDANT FIELDS
 
     //Column type BS 71 0 = No columns, 1 = static columns, 2 = dynamic columns
-    _writer->writeBitShort((short) mtext.Column.ColumnType);
+    _writer->writeBitShort((short) mtext->column().ColumnType);
 
     //IF Has Columns data(column type is not 0)
-    if (mtext.Column.ColumnType != ColumnType.NoColumns)
+    if (mtext->column().ColumnType != ColumnType::NoColumns)
     {
         //Column height count BL 72
-        _writer->writeBitLong(mtext.Column.ColumnCount);
+        _writer->writeBitLong(mtext->column().ColumnCount);
         //Columnn width BD 44
-        _writer->writeBitDouble(mtext.Column.ColumnWidth);
+        _writer->writeBitDouble(mtext->column().ColumnWidth);
         //Gutter BD 45
-        _writer->writeBitDouble(mtext.Column.ColumnGutter);
+        _writer->writeBitDouble(mtext->column().ColumnGutter);
         //Auto height? B 73
-        _writer->writeBit(mtext.Column.ColumnAutoHeight);
+        _writer->writeBit(mtext->column().ColumnAutoHeight);
         //Flow reversed? B 74
-        _writer->writeBit(mtext.Column.ColumnFlowReversed);
+        _writer->writeBit(mtext->column().ColumnFlowReversed);
 
         //IF not auto height and column type is dynamic columns
-        if (!mtext.Column.ColumnAutoHeight && mtext.Column.ColumnType == ColumnType.DynamicColumns)
+        if (!mtext->column().ColumnAutoHeight && mtext->column().ColumnType == ColumnType::DynamicColumns)
         {
-            for (double h in mtext.Column.ColumnHeights)
+            for (double h: mtext->column().ColumnHeights)
             {
                 //Column height BD 46
                 _writer->writeBitDouble(h);
@@ -2035,59 +2079,59 @@ void DwgObjectWriter::writeMText(MText *mtext)
 void DwgObjectWriter::writeFaceRecord(VertexFaceRecord *face)
 {
     //Vert index BS 71 1 - based vertex index(see DXF doc)
-    _writer->writeBitShort(face.Index1);
+    _writer->writeBitShort(face->index1());
     //Vert index BS 72 1 - based vertex index(see DXF doc)
-    _writer->writeBitShort(face.Index2);
+    _writer->writeBitShort(face->index2());
     //Vert index BS 73 1 - based vertex index(see DXF doc)
-    _writer->writeBitShort(face.Index3);
+    _writer->writeBitShort(face->index3());
     //Vert index BS 74 1 - based vertex index(see DXF doc)
-    _writer->writeBitShort(face.Index4);
+    _writer->writeBitShort(face->index4());
 }
 
 void DwgObjectWriter::writeVertex2D(Vertex2D *vertex)
 {
     //Flags EC 70 NOT bit-pair-coded.
-    _writer->writeByte((unsigned char) (vertex.Flags));
+    _writer->writeByte((unsigned char) (vertex->flags()));
 
     //Point 3BD 10 NOTE THAT THE Z SEEMS TO ALWAYS BE 0.0! The Z must be taken from the 2D POLYLINE elevation.
-    _writer->writeBitDouble(vertex.Location.X);
-    _writer->writeBitDouble(vertex.Location.Y);
+    _writer->writeBitDouble(vertex->location().X);
+    _writer->writeBitDouble(vertex->location().Y);
     _writer->writeBitDouble(0.0);
 
     //Start width BD 40 If it's negative, use the abs val for start AND end widths (and note that no end width will be present).
     //This is a compression trick for cases where the start and end widths are identical and non-0.
-    if (vertex.StartWidth != 0.0 && vertex.EndWidth == vertex.StartWidth)
+    if (vertex->startWidth() != 0.0 && vertex->endWidth() == vertex->startWidth())
     {
-        _writer->writeBitDouble(0.0 - (double) vertex.StartWidth);
+        _writer->writeBitDouble(0.0 - (double) vertex->startWidth());
     }
     else
     {
-        _writer->writeBitDouble(vertex.StartWidth);
+        _writer->writeBitDouble(vertex->startWidth());
         //End width BD 41 Not present if the start width is < 0.0; see above.
-        _writer->writeBitDouble(vertex.EndWidth);
+        _writer->writeBitDouble(vertex->endWidth());
     }
 
     //Bulge BD 42
-    _writer->writeBitDouble(vertex.Bulge);
+    _writer->writeBitDouble(vertex->bulge());
 
     //R2010+:
     if (R2010Plus)
     {
         //Vertex ID BL 91
-        _writer->writeBitLong(vertex.Id);
+        _writer->writeBitLong(vertex->id());
     }
 
     //Common:
     //Tangent dir BD 50
-    _writer->writeBitDouble(vertex.CurveTangent);
+    _writer->writeBitDouble(vertex->curveTangent());
 }
 
 void DwgObjectWriter::writeVertex(Vertex *vertex)
 {
     //Flags EC 70 NOT bit-pair-coded.
-    _writer->writeByte((unsigned char) vertex.Flags);
+    _writer->writeByte((unsigned char) vertex->flags());
     //Point 3BD 10
-    _writer->write3BitDouble(vertex.Location);
+    _writer->write3BitDouble(vertex->location());
 }
 
 void DwgObjectWriter::writeTolerance(Tolerance *tolerance)
@@ -2105,17 +2149,17 @@ void DwgObjectWriter::writeTolerance(Tolerance *tolerance)
 
     //Common:
     //Ins pt 3BD 10
-    _writer->write3BitDouble(tolerance.InsertionPoint);
+    _writer->write3BitDouble(tolerance->insertionPoint());
     //X direction 3BD 11
-    _writer->write3BitDouble(tolerance.Direction);
+    _writer->write3BitDouble(tolerance->direction());
     //Extrusion 3BD 210 etc.
-    _writer->write3BitDouble(tolerance.Normal);
+    _writer->write3BitDouble(tolerance->normal());
     //Text string BS 1
-    _writer->writeVariableText(tolerance.Text);
+    _writer->writeVariableText(tolerance->text());
 
     //Common Entity Handle Data
     //H DIMSTYLE(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, tolerance.Style);
+    _writer->handleReference(DwgReferenceType::HardPointer, tolerance->style());
 }
 
 void DwgObjectWriter::writeViewport(Viewport *viewport)
@@ -2283,15 +2327,15 @@ void DwgObjectWriter::writeChildEntities(const std::vector<Entity *> &entities, 
     if (entities.empty())
         return;
 
-    Entity prevHolder = _prev;
-    Entity nextHolder = _next;
+    Entity *prevHolder = _prev;
+    Entity *nextHolder = _next;
     _prev = nullptr;
     _next = nullptr;
 
-    Entity curr = entities.First();
-    for (int i = 1; i < entities.Count(); i++)
+    Entity *curr = entities.front();
+    for (int i = 1; i < entities.size(); i++)
     {
-        _next = entities.ElementAt(i);
+        _next = entities.at(i);
         writeEntity(curr);
         _prev = curr;
         curr = _next;

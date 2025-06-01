@@ -49,14 +49,14 @@ public:
     bool selectable() const;
     void setSelectable(bool value);
 
-    std::map<unsigned long long, Entity *> entities() const;
-    void setEntities(const std::map<unsigned long long, Entity *> &);
+    std::vector<Entity *> entities() const;
+    std::vector<Entity *> &entities();
 
 private:
     std::string _description;
     bool _isUnnamed;
     bool _selectable;
-    std::map<unsigned long long, Entity *> _entities;
+    std::vector<Entity *> _entities;
 };
 
 }// namespace dwg

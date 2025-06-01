@@ -290,6 +290,15 @@ public:
     double mzf() const;
     void setMzf(double);
 
+    LineType *lineType() const;
+    void setLineType(LineType *);
+
+    LineType *lineTypeExt1() const;
+    void setLineTypeExt1(LineType *);
+
+    LineType *lineTypeExt2() const;
+    void setLineTypeExt2(LineType *);
+
 private:
     std::string _postFix = "<>";
     std::string _alternateDimensioningSuffix = "[]";

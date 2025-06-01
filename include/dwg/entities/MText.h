@@ -79,6 +79,12 @@ public:
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
 
+    double horizontalWidth() const;
+    void setHorizontalWidth(double width);
+
+    double verticalHeight() const;
+    void setVerticalHeight(double height);
+
     XYZ insertPoint() const;
     void setInsertPoint(const XYZ &point);
 

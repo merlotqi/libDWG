@@ -90,7 +90,6 @@ public:
     std::vector<double> weights() const;
     void setWeights(const std::vector<double> &);
 
-protected:
     SplineFlag1 flags1() const;
     void setFlags1(SplineFlag1);
 

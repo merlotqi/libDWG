@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum InvisibleEdgeFlag
+enum class InvisibleEdgeFlag
 {
     /// No flags equivalent to all edges are visible.
     None = 0,
