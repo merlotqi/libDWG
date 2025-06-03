@@ -20,8 +20,28 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
+#include <dwg/CadObject.h>
+#include <dwg/CadUtils.h>
+#include <dwg/classes/DxfClass.h>
+#include <dwg/classes/DxfClassCollection.h>
+#include <dwg/entities/Entity.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/objects/BookColor.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/objects/CadDictionaryWithDefault.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/TableEntry.h>
+#include <dwg/utils/EndianConverter.h>
+#include <dwg/utils/StreamWrapper.h>
+#include <dwg/xdata/ExtendedData.h>
+#include <dwg/xdata/ExtendedDataDictionary.h>
+#include <dwg/xdata/ExtendedDataRecord.h>
+#include <fmt/core.h>
+#include <fstream>
 
 namespace dwg {
 
@@ -35,7 +55,7 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
 
     //MS : Size of object, not including the CRC
     uint size = (uint) _msmain.Length;
-    long sizeb = (_msmain.Length << 3) - _writer->SavedPositionInBits;
+    long sizeb = (_msmain.Length << 3) - _writer->savedPositionInBits();
     writeSize(crc, size);
 
     //R2010+:
@@ -54,7 +74,7 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
     Map.Add(cadObject.Handle, position);
 }
 
-void DwgObjectWriter::writeSize(std::ostream stream, unsigned int size)
+void DwgObjectWriter::writeSize(std::ostream *stream, unsigned int size)
 {
     // This value is only read in IDwgStreamReader.ReadModularShort()
     // this should do the trick to write the modular short
@@ -106,12 +126,12 @@ void DwgObjectWriter::writeXrefDependantBit(TableEntry *entry)
         //xrefindex+1 BS 70 subtract one from this value when read.
         //After that, -1 indicates that this reference did not come from an xref,
         //otherwise this value indicates the index of the blockheader for the xref from which this came.
-        _writer->writeBitShort((short) (entry.Flags.HasFlag(StandardFlags.XrefDependent) ? 0b100000000 : 0));
+        _writer->writeBitShort((short) ((entry->flags() & StandardFlag::XrefDependent) ? 0b100000000 : 0));
     }
     else
     {
         //64-flag B 70 The 64-bit of the 70 group.
-        _writer->writeBit(entry.Flags.HasFlag(StandardFlags.Referenced));
+        _writer->writeBit(entry->flags() & StandardFlag::Referenced);
 
         //xrefindex + 1 BS 70 subtract one from this value when read.
         //After that, -1 indicates that this reference did not come from an xref,
@@ -119,19 +139,19 @@ void DwgObjectWriter::writeXrefDependantBit(TableEntry *entry)
         _writer->writeBitShort(0);
 
         //Xdep B 70 dependent on an xref. (16 bit)
-        _writer->writeBit(entry.Flags.HasFlag(StandardFlags.XrefDependent));
+        _writer->writeBit(entry->flags() & StandardFlag::XrefDependent);
     }
 }
 
 void DwgObjectWriter::writeCommonData(CadObject *cadObject)
 {
     //Reset the current stream to re-write a new object in it
-    _writer->ResetStream();
+    _writer->resetStream();
 
-    switch (cadObject.ObjectType)
+    switch (cadObject->objectType())
     {
-        case ACadVersion::UNLISTED:
-            if (_document.Classes.TryGetByName(cadObject.ObjectName, out DxfClass dxfClass))
+        case ObjectType::UNLISTED:
+            if (_document->classes()->getByName(cadObject->objectName(), out DxfClass dxfClass))
             {
                 _writer->writeObjectType(dxfClass.ClassNumber);
             }
@@ -142,26 +162,26 @@ void DwgObjectWriter::writeCommonData(CadObject *cadObject)
                 return;
             }
             break;
-        case ACadVersion::INVALID:
-        case ACadVersion::UNDEFINED:
+        case ObjectType::INVALID:
+        case ObjectType::UNDEFINED:
             notify($ "CadObject type: {cadObject.ObjectType} fullname: {cadObject.GetType().FullName}",
                    Notification::NotImplemented);
             return;
         default:
-            _writer->writeObjectType(cadObject.ObjectType);
+            _writer->writeObjectType(cadObject->objectType());
             break;
     }
 
     if (_version >= ACadVersion::AC1015 && _version < ACadVersion::AC1024)
         //Obj size RL size of object in bits, not including end handles
-        _writer->SavePositonForSize();
+        _writer->savePositonForSize();
 
     //Common:
     //Handle H 5 code 0, length followed by the handle bytes.
     _writer->main()->handleReference(cadObject);
 
     //Extended object data, if any
-    writeExtendedData(cadObject.ExtendedData);
+    writeExtendedData(cadObject->extendedData());
 }
 
 void DwgObjectWriter::writeCommonNonEntityData(CadObject *cadObject)
@@ -171,10 +191,10 @@ void DwgObjectWriter::writeCommonNonEntityData(CadObject *cadObject)
     //R13-R14 Only:
     //Obj size RL size of object in bits, not including end handles
     if (R13_14Only)
-        _writer->SavePositonForSize();
+        _writer->savePositonForSize();
 
     //[Owner ref handle (soft pointer)]
-    _writer->handleReference(DwgReferenceType.SoftPointer, cadObject.Owner.Handle);
+    _writer->handleReference(DwgReferenceType::SoftPointer, cadObject->owner()->handle());
 
     //write the cad object reactors
     writeReactorsAndDictionaryHandle(cadObject);
@@ -190,7 +210,7 @@ void DwgObjectWriter::writeCommonEntityData(Entity *entity)
     //R13 - R14 Only:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1014)
     {
-        _writer->SavePositonForSize();
+        _writer->savePositonForSize();
     }
 
     writeEntityMode(entity);
@@ -214,7 +234,7 @@ void DwgObjectWriter::writeEntityMode(Entity *entity)
     _writer->write2Bits(entmode);
     if (entmode == 0)
     {
-        _writer->handleReference(DwgReferenceType.SoftPointer, entity.Owner);
+        _writer->handleReference(DwgReferenceType::SoftPointer, entity->layer());
     }
 
     writeReactorsAndDictionaryHandle(entity);
@@ -223,14 +243,14 @@ void DwgObjectWriter::writeEntityMode(Entity *entity)
     if (R13_14Only)
     {
         //8 LAYER (hard pointer)
-        _writer->handleReference(DwgReferenceType.HardPointer, entity.Layer);
+        _writer->handleReference(DwgReferenceType::HardPointer, entity->layer());
 
         //Isbylayerlt B 1 if bylayer linetype, else 0
-        bool isbylayerlt = entity.LineType.Name == LineType.ByLayerName;
+        bool isbylayerlt = (entity->lineType()->name() == LineType::ByLayerName);
         _writer->writeBit(isbylayerlt);
         if (isbylayerlt)
             //6 [LTYPE (hard pointer)] (present if Isbylayerlt is 0)
-            _writer->handleReference(DwgReferenceType.HardPointer, entity.LineType);
+            _writer->handleReference(DwgReferenceType::HardPointer, entity->lineType());
     }
 
     //R13-R2000 Only:
@@ -239,54 +259,54 @@ void DwgObjectWriter::writeEntityMode(Entity *entity)
     bool hasLinks = true;
     if (!R2004Plus)
     {
-        hasLinks = _prev != null && _prev.Handle == entity.Handle - 1 && _next != null &&
-                   _next.Handle == entity.Handle + 1;
+        hasLinks = _prev != nullptr && _prev->handle() == entity->handle() - 1 && _next != nullptr &&
+                   _next->handle() == entity->handle() + 1;
 
         _writer->writeBit(hasLinks);
 
         //[PREVIOUS ENTITY (relative soft pointer)]
-        _writer->handleReference(DwgReferenceType.SoftPointer, _prev);
+        _writer->handleReference(DwgReferenceType::SoftPointer, _prev);
         //[NEXT ENTITY (relative soft pointer)]
-        _writer->handleReference(DwgReferenceType.SoftPointer, _next);
+        _writer->handleReference(DwgReferenceType::SoftPointer, _next);
     }
 
     //Color	CMC(B)	62
-    _writer->writeEnColor(entity.Color, entity.Transparency, entity.BookColor != null);
+    _writer->writeEnColor(entity->color(), entity->transparency(), entity->bookColor() != nullptr);
 
     //R2004+:
-    if ((_version >= ACadVersion::AC1018) && entity.BookColor != null)
+    if ((_version >= ACadVersion::AC1018) && entity->bookColor() != nullptr)
     {
         //[Color book color handle (hard pointer)]
-        _writer->handleReference(DwgReferenceType.HardPointer, entity.BookColor);
+        _writer->handleReference(DwgReferenceType::HardPointer, entity->bookColor());
     }
 
     //Ltype scale	BD	48
-    _writer->writeBitDouble(entity.LinetypeScale);
+    _writer->writeBitDouble(entity->linetypeScale());
 
     if (!(_version >= ACadVersion::AC1015))
     {
         //Common:
         //Invisibility BS 60
-        _writer->writeBitShort((short) (entity.IsInvisible ? 0 : 1));
+        _writer->writeBitShort((short) (entity->isInvisible() ? 0 : 1));
 
         return;
     }
 
     //R2000+:
     //8 LAYER (hard pointer)
-    _writer->handleReference(DwgReferenceType.HardPointer, entity.Layer);
+    _writer->handleReference(DwgReferenceType::HardPointer, entity->layer());
 
-    if (entity.LineType.Name == LineType.ByLayerName)
+    if (entity->lineType()->name() == LineType::ByLayerName)
     {
         //Ltype flags BB 00 = bylayer,
         _writer->write2Bits(0b00);
     }
-    else if (entity.LineType.Name == LineType.ByBlockName)
+    else if (entity->lineType()->name() == LineType::ByBlockName)
     {
         //01 = byblock,
         _writer->write2Bits(0b01);
     }
-    else if (entity.LineType.Name == LineType.ContinuousName)
+    else if (entity->lineType()->name() == LineType::ContinuousName)
     {
         //10 = continous,
         _writer->write2Bits(0b10);
@@ -296,7 +316,7 @@ void DwgObjectWriter::writeEntityMode(Entity *entity)
         //11 = linetype handle present at end of object
         _writer->write2Bits(0b11);
         //6 [LTYPE (hard pointer)] present if linetype flags were 11
-        _writer->handleReference(DwgReferenceType.HardPointer, entity.LineType);
+        _writer->handleReference(DwgReferenceType::HardPointer, entity->lineType());
     }
 
     //R2007+:
@@ -337,21 +357,21 @@ void DwgObjectWriter::writeEntityMode(Entity *entity)
 
     //Common:
     //Invisibility BS 60
-    _writer->writeBitShort((short) (entity.IsInvisible ? 1 : 0));
+    _writer->writeBitShort((short) (entity->isInvisible() ? 1 : 0));
 
     //R2000+:
     //Lineweight RC 370
-    _writer->writeByte(CadUtils.ToIndex(entity.LineWeight));
+    _writer->writeByte(CadUtils::ToIndex(entity->lineweight()));
 }
 
 void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data)
 {
-    if (WriteXData)
+    if (writeXData())
     {
         //EED size BS size of extended entity data, if any
-        foreach (var item in data)
+        for (auto &&item: data)
         {
-            writeExtendedDataEntry(item.Key, item.Value);
+            writeExtendedDataEntry(item->first(), item->second());
         }
     }
 
@@ -360,111 +380,132 @@ void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data)
 
 void DwgObjectWriter::writeExtendedDataEntry(AppId *app, ExtendedData *entry)
 {
-    using(MemoryStream mstream = new MemoryStream())
+    std::ostringstream stream;
+    OutputStreamWrapper mstream(&stream);
+
+    for (auto &&record: entry->records())
     {
-        foreach (ExtendedDataRecord record in entry.Records)
+        //Each data item has a 1-unsigned char code (DXF group code minus 1000) followed by the value.
+        mstream.writeByte((unsigned char) ((int) record->code() - 1000));
+        auto &&binaryChunk = dynamic_cast<ExtendedDataBinaryChunk *>(record);
+        if (binaryChunk)
         {
-            //Each data item has a 1-unsigned char code (DXF group code minus 1000) followed by the value.
-            mstream.WriteByte((unsigned char) (record.Code - 1000));
-
-            switch (record)
+            mstream.writeByte((unsigned char) binaryChunk->value().size());
+            mstream.write(binaryChunk->value(), 0, binaryChunk->value().size());
+        }
+        auto &&control = dynamic_cast<ExtendedDataControlString *>(record);
+        if (control)
+        {
+            mstream.writeByte((unsigned char) (control->value() == '}' ? 1 : 0));
+        }
+        auto &&s16 = dynamic_cast<ExtendedDataInteger16 *>(record);
+        if (s16)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(s16->value()), 0, 2);
+        }
+        auto &&s32 = dynamic_cast<ExtendedDataInteger32 *>(record);
+        if (s32)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(s32->value()), 0, 4);
+        }
+        auto &&real = dynamic_cast<ExtendedDataReal *>(record);
+        if (real)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(real->value()), 0, 8);
+        }
+        auto &&scale = dynamic_cast<ExtendedDataScale *>(record);
+        if (scale)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(scale->value()), 0, 8);
+        }
+        auto &&dist = dynamic_cast<ExtendedDataDistance *>(record);
+        if (dist)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(dist->value()), 0, 8);
+        }
+        auto &&dir = dynamic_cast<ExtendedDataDirection *>(record);
+        if (dir)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(dir->value().X), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(dir->value().Y), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(dir->value().Z), 0, 8);
+        }
+        auto &&disp = dynamic_cast<ExtendedDataDisplacement *>(record);
+        if (disp)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(disp->value().X), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(disp->value().Y), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(disp->value().Z), 0, 8);
+        }
+        auto &&coord = dynamic_cast<ExtendedDataCoordinate *>(record);
+        if (coord)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(coord->value().X), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(coord->value().Y), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(coord->value().Z), 0, 8);
+        }
+        auto &&wcoord = dynamic_cast<ExtendedDataWorldCoordinate *>(record);
+        if (wcoord)
+        {
+            mstream.write(LittleEndianConverter::instance()->bytes(wcoord->value().X), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(wcoord->value().Y), 0, 8);
+            mstream.write(LittleEndianConverter::instance()->bytes(wcoord->value().Z), 0, 8);
+        }
+        auto &&handle = dynamic_cast<IExtendedDataHandleReference *>(record);
+        if (handle)
+        {
+            unsigned long long h = handle->value();
+            if (handle->resolveReference(_document) == nullptr)
             {
-                case ExtendedDataBinaryChunk binaryChunk:
-                    mstream.WriteByte((unsigned char) binaryChunk.Value.Length);
-                    mstream.Write(binaryChunk.Value, 0, binaryChunk.Value.Length);
-                    break;
-                case ExtendedDataControlString control:
-                    mstream.WriteByte((unsigned char) (control.Value == '}' ? 1 : 0));
-                    break;
-                case ExtendedDataInteger16 s16:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(s16.Value), 0, 2);
-                    break;
-                case ExtendedDataInteger32 s32:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(s32.Value), 0, 4);
-                    break;
-                case ExtendedDataReal real:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(real.Value), 0, 8);
-                    break;
-                case ExtendedDataScale scale:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(scale.Value), 0, 8);
-                    break;
-                case ExtendedDataDistance dist:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(dist.Value), 0, 8);
-                    break;
-                case ExtendedDataDirection dir:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(dir.Value.X), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(dir.Value.Y), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(dir.Value.Z), 0, 8);
-                    break;
-                case ExtendedDataDisplacement disp:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(disp.Value.X), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(disp.Value.Y), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(disp.Value.Z), 0, 8);
-                    break;
-                case ExtendedDataCoordinate coord:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(coord.Value.X), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(coord.Value.Y), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(coord.Value.Z), 0, 8);
-                    break;
-                case ExtendedDataWorldCoordinate wcoord:
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(wcoord.Value.X), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(wcoord.Value.Y), 0, 8);
-                    mstream.Write(LittleEndianConverter.Instance.GetBytes(wcoord.Value.Z), 0, 8);
-                    break;
-                case IExtendedDataHandleReference handle:
-                    unsigned long long h = handle.Value;
-                    if (handle.ResolveReference(_document) == null)
-                    {
-                        h = 0;
-                    }
-                    mstream.Write(BigEndianConverter.Instance.GetBytes(h), 0, 8);
-                    break;
-                case ExtendedDataString str:
-                    //same as ReadTextUnicode()
-                    if (R2007Plus)
-                    {
-                        mstream.Write(LittleEndianConverter.Instance.GetBytes((ushort) str.Value.Length + 1), 0, 2);
-                        unsigned char[] bytes = Encoding.Unicode.GetBytes(str.Value);
+                h = 0;
+            }
+            mstream.write(BigEndianConverter::instance()->bytes(h), 0, 8);
+        }
+        auto &&str = dynamic_cast<ExtendedDataString *>(record);
+        if (str)
+        {
+            if (R2007Plus)
+            {
+                mstream.write(LittleEndianConverter::instance()->bytes((unsigned short) str->value().size() + 1), 0, 2);
+                std::vector<unsigned char> bytes = Encoding::Utf8().bytes(str->value());
 
-                        mstream.Write(bytes, 0, bytes.Length);
-                        mstream.WriteByte(0);
-                        mstream.WriteByte(0);
-                    }
-                    else
-                    {
-                        unsigned char[] bytes =
-                                _writer->Encoding.GetBytes(string.IsNullOrEmpty(str.Value) ? string.Empty : str.Value);
-                        mstream.Write(LittleEndianConverter.Instance.GetBytes((ushort) str.Value.Length + 1), 0, 2);
-                        mstream.Write(bytes, 0, bytes.Length);
-                        mstream.WriteByte(0);
-                    }
-                    break;
-                default:
-                    throw new System.NotSupportedException(
-                            $ "ExtendedDataRecord of type {record.GetType().FullName} not supported.");
+                mstream.write(bytes, 0, bytes.size());
+                mstream.writeByte(0);
+                mstream.writeByte(0);
+            }
+            else
+            {
+                unsigned char[] bytes =
+                        _writer->Encoding.GetBytes(string.IsNullOrEmpty(str.Value) ? string.Empty : str.Value);
+                mstream.Write(LittleEndianConverter.Instance.GetBytes((ushort) str.Value.Length + 1), 0, 2);
+                mstream.Write(bytes, 0, bytes.Length);
+                mstream.WriteByte(0);
             }
         }
 
-        _writer->writeBitShort((short) mstream.Length);
-
-        _writer->Main.HandleReference(DwgReferenceType.HardPointer, app.Handle);
-
-        _writer->writeBytes(mstream.GetBuffer(), 0, (int) mstream.Length);
+        throw new System.NotSupportedException($
+                                               "ExtendedDataRecord of type {record.GetType().FullName} not supported.");
     }
+
+    _writer->writeBitShort((short) mstream.Length);
+
+    _writer->Main.HandleReference(DwgReferenceType::HardPointer, app.Handle);
+
+    _writer->writeBytes(mstream.GetBuffer(), 0, (int) mstream.Length);
 }
 
 void DwgObjectWriter::writeReactorsAndDictionaryHandle(CadObject *cadObject)
 {
     //Numreactors S number of reactors in this object
-    cadObject.CleanReactors();
-    _writer->writeBitLong(cadObject.Reactors.Count());
-    foreach (var item in cadObject.Reactors)
+    cadObject->clearReactors();
+    _writer->writeBitLong(cadObject->reactors().size());
+    for (auto &&item: cadObject->reactors())
     {
         //[Reactors (soft pointer)]
-        _writer->handleReference(DwgReferenceType.SoftPointer, item);
+        _writer->handleReference(DwgReferenceType::SoftPointer, item);
     }
 
-    bool noDictionary = cadObject.XDictionary == null;
+    bool noDictionary = (cadObject->xdictionary() == nullptr);
 
     //R2004+:
     if (R2004Plus)
@@ -472,13 +513,13 @@ void DwgObjectWriter::writeReactorsAndDictionaryHandle(CadObject *cadObject)
         _writer->writeBit(noDictionary);
         if (!noDictionary)
         {
-            _writer->handleReference(DwgReferenceType.HardOwnership, cadObject.XDictionary);
+            _writer->handleReference(DwgReferenceType::HardOwnership, cadObject->xdictionary());
         }
     }
     else
     {
         //xdicobjhandle(hard owner)
-        _writer->handleReference(DwgReferenceType.HardOwnership, cadObject.XDictionary);
+        _writer->handleReference(DwgReferenceType::HardOwnership, cadObject->xdictionary());
     }
 
     //R2013+:
@@ -490,24 +531,24 @@ void DwgObjectWriter::writeReactorsAndDictionaryHandle(CadObject *cadObject)
 
     if (!noDictionary)
     {
-        _dictionaries.Add(cadObject.XDictionary.Handle, cadObject.XDictionary);
-        _objects.Enqueue(cadObject.XDictionary);
+        _dictionaries.insert({cadObject->xdictionary()->handle(), cadObject->xdictionary()});
+        _objects.push(cadObject->xdictionary());
     }
 }
 
 unsigned char DwgObjectWriter::getEntMode(Entity *entity)
 {
-    if (entity.Owner == null)
+    if (entity->owner() == nullptr)
     {
         return 0;
     }
 
-    if (entity.Owner.Handle == _document.PaperSpace.Handle)
+    if (entity->owner()->handle() == _document->paperSpace()->handle())
     {
         return 0b01;
     }
 
-    if (entity.Owner.Handle == _document.ModelSpace.Handle)
+    if (entity->owner()->handle() == _document->modelSpace()->handle())
     {
         return 0b10;
     }

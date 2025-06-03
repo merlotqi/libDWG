@@ -448,7 +448,7 @@ void DwgObjectWriter::writeFace3D(Face3D *face)
     //R2000 +:
     if (R2000Plus)
     {
-        bool noFlags = face->flags() == InvisibleEdgeFlag::None;
+        bool noFlags = face->flags() == (int) InvisibleEdgeFlag::None;
         //Has no flag ind. B
         _writer->writeBit(noFlags);
 
