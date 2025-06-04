@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/DimensionStyle.h>
+#include <dwg/tables/LineType.h>
 
 namespace dwg {
 
@@ -820,6 +821,36 @@ double DimensionStyle::mzf() const
 void DimensionStyle::setMzf(double value)
 {
     _mzf = value;
+}
+
+LineType *DimensionStyle::lineType() const
+{
+    return _lineType;
+}
+
+void DimensionStyle::setLineType(LineType *)
+{
+
+}
+
+LineType *DimensionStyle::lineTypeExt1() const
+{
+    return _lineTypeExt1;
+}
+
+void DimensionStyle::setLineTypeExt1(LineType *)
+{
+
+}
+
+LineType *DimensionStyle::lineTypeExt2() const
+{
+    return _lineTypeExt2;
+}
+
+void DimensionStyle::setLineTypeExt2(LineType *)
+{
+
 }
 
 }// namespace dwg

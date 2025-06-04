@@ -104,6 +104,59 @@ public:
         return false;
     }
 
+
+public:
+    using iterator = std::map<std::string, NonGraphicalObject *, StringComparerOrdinalIgnoreCase>::iterator;
+    using const_iterator = std::map<std::string, NonGraphicalObject *, StringComparerOrdinalIgnoreCase>::const_iterator;
+
+    // clang-format off
+    iterator begin() {return _entries.begin(); }
+    iterator end() { return _entries.end(); }
+    const_iterator begin() const { return _entries.begin(); }
+    const_iterator end() const { return _entries.end(); }
+    const_iterator cbegin() const { return _entries.cbegin(); }
+    const_iterator cend() const { return _entries.cend(); }
+
+    class value_iterator {
+        iterator iter;
+
+    public:
+        using value_type = NonGraphicalObject*;
+        using reference = NonGraphicalObject*&;
+        using pointer = NonGraphicalObject**;
+        using difference_type = std::ptrdiff_t;
+        using iterator_category = std::forward_iterator_tag;
+        explicit value_iterator(iterator i) : iter(i) {}
+        reference operator*() const { return iter->second; }
+        value_iterator& operator++() { ++iter; return *this; }
+        bool operator!=(const value_iterator& other) const { return iter != other.iter; }
+        bool operator==(const value_iterator& other) const { return iter == other.iter; }
+    };
+
+    class const_value_iterator {
+        const_iterator iter;
+
+    public:
+        using value_type = NonGraphicalObject*;
+        using reference = NonGraphicalObject*&;
+        using pointer = NonGraphicalObject**;
+        using difference_type = std::ptrdiff_t;
+        using iterator_category = std::forward_iterator_tag;
+        explicit const_value_iterator(iterator i) : iter(i) {}
+        reference operator*() const { return iter->second; }
+        const_value_iterator& operator++() { ++iter; return *this; }
+        bool operator!=(const const_value_iterator& other) const { return iter != other.iter; }
+        bool operator==(const const_value_iterator& other) const { return iter == other.iter; }
+    };
+
+    value_iterator value_begin() { return value_iterator(_entries.begin()); }
+    value_iterator value_end() { return value_iterator(_entries.end()); }
+
+    const_value_iterator value_begin() const { return const_value_iterator(_entries.begin()); }
+    const_value_iterator value_end() const { return const_value_iterator(_entries.end()); }
+
+    // clang-format on
+
 private:
     CadDictionary *ensureCadDictionaryExist(const std::string &name);
     void onEntryNameChanged(const std::string &olName, const std::string &newName);

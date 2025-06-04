@@ -35,7 +35,7 @@ class CadMLeaderTemplate : public CadEntityTemplate
 public:
     struct LeaderLineSubTemplate
     {
-        MultiLeaderAnnotContextLeaderLine *leaderLine;
+        MultiLeaderAnnotContext::LeaderLine *leaderLine;
         unsigned long long lineTypeHandle;
         unsigned long long arrowSymbolHandle;
     };

@@ -33,14 +33,12 @@ BlockRecord::BlockRecord()
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
-    _entities.setOwner(this);
 }
 
 BlockRecord::BlockRecord(const std::string &name) : TableEntry(name)
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
-    _entities.setOwner(this);
 }
 
 BlockRecord *BlockRecord::ModelSpace()
@@ -76,6 +74,18 @@ std::string BlockRecord::subclassMarker() const
     return DxfSubclassMarker::BlockRecord;
 }
 
+BlockEnd *BlockRecord::blockEnd() { return _blockEnd; }
+
+void BlockRecord::setBlockEnd(BlockEnd *) {}
+
+Block *BlockRecord::blockEntity() const { return _blockEntity; }
+
+void BlockRecord::setBlockEntity(Block *) {}
+
+EvaluationGraph *BlockRecord::evaluationGraph() const { return _evaluationGraph; }
+
+void BlockRecord::setEvaluationGraph(EvaluationGraph *) {}
+
 UnitsType BlockRecord::units() const
 {
     return _units;
@@ -108,7 +118,7 @@ bool BlockRecord::isDynamic() const
     return false;
 }
 
-bool BlockRecord::hasAttribute() const
+bool BlockRecord::hasAttributes() const
 {
     return false;
 }
@@ -141,9 +151,19 @@ void BlockRecord::setLayout(Layout *layout)
     _layout = layout;
 }
 
-CadObjectCollection<Entity *> &BlockRecord::entities()
+SortEntitiesTable *BlockRecord::sortEntitiesTable() const { return _sortEntitiesTable; }
+
+void BlockRecord::setSortEntitiesTable(SortEntitiesTable *) {}
+
+std::vector<Viewport *> BlockRecord::viewports() const { return std::vector<Viewport *>(); }
+
+std::vector<Entity *> BlockRecord::entities() const
 {
     return _entities;
 }
+
+void BlockRecord::addEntity(Entity *) {}
+
+void BlockRecord::removeEntity(Entity *){}
 
 }// namespace dwg

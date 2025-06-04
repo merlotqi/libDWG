@@ -101,8 +101,8 @@ public:
     short circleZoomPercent() const;
     void setCircleZoomPercent(short);
 
-    ViewModeTypes renderMode() const;
-    void setRenderMode(ViewModeTypes);
+    RenderMode renderMode() const;
+    void setRenderMode(RenderMode);
 
     ViewModeTypes viewMode() const;
     void setViewMode(ViewModeTypes);
@@ -185,8 +185,8 @@ private:
     double _twistAngle;
     short _circleZoomPercent;
     RenderMode _renderMode;
-    ViewModeType _viewMode;
-    UscIconType _ucsIconDisplay;
+    ViewModeTypes _viewMode;
+    UscIconTypes _ucsIconDisplay;
     bool _snapOn;
     bool _showGrid;
     bool _isometricSnap;

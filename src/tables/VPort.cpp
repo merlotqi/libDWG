@@ -222,22 +222,22 @@ void VPort::setRenderMode(RenderMode value)
     _renderMode = value;
 }
 
-ViewModeType VPort::viewMode() const
+ViewModeTypes VPort::viewMode() const
 {
     return _viewMode;
 }
 
-void VPort::setViewMode(ViewModeType value)
+void VPort::setViewMode(ViewModeTypes value)
 {
     _viewMode = value;
 }
 
-UscIconType VPort::ucsIconDisplay() const
+UscIconTypes VPort::ucsIconDisplay() const
 {
     return _ucsIconDisplay;
 }
 
-void VPort::setUcsIconDisplay(UscIconType value)
+void VPort::setUcsIconDisplay(UscIconTypes value)
 {
     _ucsIconDisplay = value;
 }

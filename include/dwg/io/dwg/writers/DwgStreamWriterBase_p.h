@@ -29,6 +29,7 @@ namespace dwg {
 
 class DwgStreamWriterBase : public IDwgStreamWriter
 {
+protected:
     int _bitShift = 0;
     unsigned char _lastByte;
     std::ostream *_stream;

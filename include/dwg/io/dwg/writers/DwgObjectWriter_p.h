@@ -111,6 +111,15 @@ class SortEntitiesTable;
 class XRecord;
 class CadDictionary;
 
+class LayersTable;
+class TextStylesTable;
+class ViewsTable;
+class UCSTable;
+class VPortsTable;
+class AppIdsTable;
+class DimensionStylesTable;
+
+class CRC8OutputStreamHandler;
 class DwgObjectWriter : public DwgSectionIO
 {
 public:
@@ -126,8 +135,8 @@ public:
 
 private:
     void registerObject(CadObject *cadObject);
-    void writeSize(std::ostream *stream, unsigned int size);
-    void writeSizeInBits(std::ostream *stream, unsigned long long size);
+    void writeSize(CRC8OutputStreamHandler *stream, unsigned int size);
+    void writeSizeInBits(CRC8OutputStreamHandler *stream, unsigned long long size);
     void writeXrefDependantBit(TableEntry *entry);
     void writeCommonData(CadObject *cadObject);
     void writeCommonNonEntityData(CadObject *cadObject);
@@ -141,7 +150,13 @@ private:
 private:
     void writeLTypeControlObject();
     void writeBlockControl();
-    void writeTable();
+    void writeLayers(LayersTable *layers);
+    void writeTextStyles(TextStylesTable *textStyles);
+    void writeViews(ViewsTable *views);
+    void writeUCSs(UCSTable *ucss);
+    void writeVPorts(VPortsTable *vports);
+    void writeAppIds(AppIdsTable *appids);
+    void writeDimensionStyles(DimensionStylesTable *dimStyles);
     void writeEntries();
     void writeBlockEntities();
     void writeAppId(AppId *app);
@@ -225,6 +240,7 @@ private:
     void writeXRecord(XRecord *xrecord);
 
 private:
+    std::map<unsigned long long, long long> _map;
     std::map<unsigned long long, CadDictionary *> _dictionaries;
     std::queue<CadObject *> _objects;
     std::ostringstream _msmain;

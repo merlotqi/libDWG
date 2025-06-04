@@ -25,9 +25,10 @@
 #include <dwg/DxfCode.h>
 #include <dwg/utils/DwgVariant.h>
 
-
 namespace dwg {
 
+class CadDocument;
+class CadObject;
 class LIBDWG_API ExtendedDataRecord
 {
 public:
@@ -151,6 +152,26 @@ class LIBDWG_API ExtendedDataString : public ExtendedDataRecordT<std::string>
 {
 public:
     ExtendedDataString(const std::string &value);
+};
+
+
+class LIBDWG_API IExtendedDataHandleReference
+{
+public:
+    IExtendedDataHandleReference() = default;
+    virtual ~IExtendedDataHandleReference() = default;
+    virtual unsigned long long value() const = 0;
+    virtual CadObject *resolveReference(CadDocument *document) const = 0;
+};
+
+class LIBDWG_API ExtendedDataReference : public ExtendedDataRecordT<unsigned long long>, public IExtendedDataHandleReference
+{
+public:
+public:
+    ExtendedDataReference(unsigned long long handle);
+    ~ExtendedDataReference();
+    unsigned long long value() const override;
+    CadObject *resolveReference(CadDocument *document) const override;
 };
 
 }// namespace dwg

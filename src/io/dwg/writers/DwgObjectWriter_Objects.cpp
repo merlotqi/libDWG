@@ -42,6 +42,7 @@
 #include <dwg/objects/Scale.h>
 #include <dwg/objects/SortEntitiesTable.h>
 #include <dwg/objects/XRecord.h>
+#include <dwg/objects/UnknownNonGraphicalObject.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/utils/EndianConverter.h>
@@ -104,22 +105,22 @@ void DwgObjectWriter::writeDictionary(CadDictionary *dictionary)
     //Common:
     //Numitems L number of dictionary items
     std::vector<NonGraphicalObject *> entries;
-    for (auto &&item: dictionary)
+    for (auto it = dictionary->value_begin(); it != dictionary->value_end(); ++it)
     {
-        if (item is XRecord && !WriteXRecords)
+        auto item = *it;
+        if (dynamic_cast<XRecord *>(item) && !writeXRecords())
         {
             continue;
         }
-
-        if (item is UnknownNonGraphicalObject)
+        
+        if (dynamic_cast<UnknownNonGraphicalObject *>(item))
         {
             continue;
         }
-
-        entries.Add(item);
+        entries.emplace_back(item);
     }
 
-    _writer->writeBitLong(entries.Count);
+    _writer->writeBitLong(entries.size());
 
     //R14 Only:
     if (_version == ACadVersion::AC1014)
@@ -132,25 +133,25 @@ void DwgObjectWriter::writeDictionary(CadDictionary *dictionary)
     if (R2000Plus)
     {
         //Cloning flag BS 281
-        _writer->writeBitShort((short) dictionary.ClonningFlags);
-        _writer->writeByte((unsigned char) (dictionary.HardOwnerFlag ? 1u : 0u));
+        _writer->writeBitShort((short) dictionary->clonningFlags());
+        _writer->writeByte((unsigned char) (dictionary->hardOwnerFlag() ? 1u : 0u));
     }
 
     //Common:
-    for (auto &&item in entries)
+    for (auto &&item : entries)
     {
-        if (item is XRecord && !WriteXRecords)
+        if (dynamic_cast<XRecord *>(item) && !writeXRecords())
+        {
+            continue;
+        }
+        
+        if (dynamic_cast<UnknownNonGraphicalObject *>(item))
         {
             continue;
         }
 
-        if (item is UnknownNonGraphicalObject)
-        {
-            continue;
-        }
-
-        _writer->writeVariableText(item.Name);
-        _writer->handleReference(DwgReferenceType::SoftOwnership, item.Handle);
+        _writer->writeVariableText(item->name());
+        _writer->handleReference(DwgReferenceType::SoftOwnership, item->handle());
     }
 
     addEntriesToWriter(dictionary);
@@ -158,9 +159,9 @@ void DwgObjectWriter::writeDictionary(CadDictionary *dictionary)
 
 void DwgObjectWriter::addEntriesToWriter(CadDictionary *dictionary)
 {
-    for (CadObject *e: dictionary)
+    for (auto it = dictionary->value_begin(); it != dictionary->value_end(); ++it)
     {
-        _objects.push(e);
+        _objects.push(*it);
     }
 }
 
@@ -731,37 +732,52 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
         {
             case GroupCodeValueType::Byte:
             case GroupCodeValueType::Bool:
+            {
                 ms.writeByte(entry.value.asChar());
                 break;
+            }
             case GroupCodeValueType::Int16:
             case GroupCodeValueType::ExtendedDataInt16:
+            {
                 ms.write<short>(entry.value.asShort());
                 break;
+            }
             case GroupCodeValueType::Int32:
             case GroupCodeValueType::ExtendedDataInt32:
+            {
                 ms.write<int>(entry.value.asInt());
                 break;
+            }
             case GroupCodeValueType::Int64:
+            {
                 ms.write<long>(entry.value.asLongLong());
                 break;
+            }
             case GroupCodeValueType::Double:
             case GroupCodeValueType::ExtendedDataDouble:
+            {
                 ms.write<double>(entry.value.asDouble());
                 break;
+            }
             case GroupCodeValueType::Point3D:
+            {
                 XYZ xyz = entry.value.asCoord3D();
                 ms.write<double>(xyz.X);
                 ms.write<double>(xyz.Y);
                 ms.write<double>(xyz.Z);
                 break;
+            }
             case GroupCodeValueType::Chunk:
             case GroupCodeValueType::ExtendedDataChunk:
+            {
                 auto chunk = entry.value.asBlob();
                 ms.write((unsigned char) chunk.size());
                 break;
+            }
             case GroupCodeValueType::String:
             case GroupCodeValueType::ExtendedDataString:
             case GroupCodeValueType::Handle:
+            {
                 std::string text = entry.value.asString();
                 if (R2007Plus)
                 {
@@ -786,11 +802,14 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
                     ms.write(text, _writer->encoding());
                 }
                 break;
+            }
             case GroupCodeValueType::ObjectId:
             case GroupCodeValueType::ExtendedDataHandle:
+            {
                 unsigned long long u = entry.value.asULongLong();
                 ms.write<unsigned long long, LittleEndianConverter>(u);
                 break;
+            }
             default:
                 break;
         }

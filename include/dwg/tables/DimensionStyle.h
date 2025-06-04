@@ -43,6 +43,7 @@ namespace dwg {
 
 class BlockRecord;
 class TextStyle;
+class LineType;
 class LIBDWG_API DimensionStyle : public TableEntry
 {
 public:
@@ -377,6 +378,9 @@ private:
     std::string _mzs;
     double _altMzf = 0.0;
     double _mzf = 0.0;
+    LineType *_lineType = nullptr;
+    LineType *_lineTypeExt1 = nullptr;
+    LineType *_lineTypeExt2 = nullptr;
 };
 
 }// namespace dwg

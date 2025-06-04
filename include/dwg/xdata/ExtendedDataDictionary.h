@@ -25,15 +25,20 @@
 #include <dwg/exports.h>
 #include <map>
 
-
 namespace dwg {
 
 class AppId;
 class ExtendedData;
+class CadObject;
 
 class LIBDWG_API ExtendedDataDictionary
 {
     std::map<AppId *, ExtendedData *> _data;
+
+public:
+    ExtendedDataDictionary(CadObject *owner);
+    void add(AppId *app);
+    void add(AppId *app, ExtendedData *extendedData);
 };
 
 }// namespace dwg

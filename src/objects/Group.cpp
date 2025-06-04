@@ -75,14 +75,14 @@ void Group::setSelectable(bool value)
     _selectable = value;
 }
 
-std::map<unsigned long long, Entity *> Group::entities() const
+std::vector<Entity *> Group::entities() const
 {
     return _entities;
 }
 
-void Group::setEntities(const std::map<unsigned long long, Entity *> &value)
+std::vector<Entity *> &Group::entities()
 {
-    _entities = value;
+    return _entities;
 }
 
 }// namespace dwg

@@ -26,11 +26,13 @@
 #include <dwg/classes/DxfClass.h>
 #include <dwg/classes/DxfClassCollection.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/io/dwg/CRC8StreamHandler_p.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/CadDictionaryWithDefault.h>
+#include <dwg/tables/AppId.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
@@ -42,6 +44,7 @@
 #include <dwg/xdata/ExtendedDataRecord.h>
 #include <fmt/core.h>
 #include <fstream>
+#include <stdexcept>
 
 namespace dwg {
 
@@ -50,13 +53,13 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
     _writer->writeSpearShift();
 
     //Set the position to the entity to find
-    long position = _stream.Position;
-    CRC8StreamHandler crc = new CRC8StreamHandler(_stream, 0xC0C1);
+    long long position = _stream->tellp();
+    CRC8OutputStreamHandler crc(_stream, 0xC0C1);
 
     //MS : Size of object, not including the CRC
     uint size = (uint) _msmain.Length;
     long sizeb = (_msmain.Length << 3) - _writer->savedPositionInBits();
-    writeSize(crc, size);
+    writeSize(&crc, size);
 
     //R2010+:
     if (R2010Plus)
@@ -64,43 +67,43 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
         //MC : Size in bits of the handle stream (unsigned, 0x40 is not interpreted as sign).
         //This includes the padding bits at the end of the handle stream
         //(the padding bits make sure the object stream ends on a unsigned char boundary).
-        writeSizeInBits(crc, (unsigned long long) sizeb);
+        writeSizeInBits(&crc, (unsigned long long) sizeb);
     }
 
     //Write the object in the stream
-    crc.Write(_msmain.GetBuffer(), 0, (int) _msmain.Length);
-    _stream.Write(LittleEndianConverter.Instance.GetBytes(crc.Seed), 0, 2);
+    crc.write(_msmain.str().data(), 0, (int) _msmain.str().length());
+    _stream->write(reinterpret_cast<const char *>(LittleEndianConverter::instance()->bytes(crc.seed()).data()), 2);
 
-    Map.Add(cadObject.Handle, position);
+    _map.insert({cadObject->handle(), position});
 }
 
-void DwgObjectWriter::writeSize(std::ostream *stream, unsigned int size)
+void DwgObjectWriter::writeSize(CRC8OutputStreamHandler *stream, unsigned int size)
 {
     // This value is only read in IDwgStreamReader.ReadModularShort()
     // this should do the trick to write the modular short
 
     if (size >= 0b1000000000000000)
     {
-        stream.WriteByte((unsigned char) (size & 0b11111111));
-        stream.WriteByte((unsigned char) (((size >> 8) & 0b1111111) | 0b10000000));
-        stream.WriteByte((unsigned char) ((size >> 15) & 0b11111111));
-        stream.WriteByte((unsigned char) ((size >> 23) & 0b11111111));
+        stream->writeByte((unsigned char) (size & 0b11111111));
+        stream->writeByte((unsigned char) (((size >> 8) & 0b1111111) | 0b10000000));
+        stream->writeByte((unsigned char) ((size >> 15) & 0b11111111));
+        stream->writeByte((unsigned char) ((size >> 23) & 0b11111111));
     }
     else
     {
-        stream.WriteByte((unsigned char) (size & 0b11111111));
-        stream.WriteByte((unsigned char) ((size >> 8) & 0b11111111));
+        stream->writeByte((unsigned char) (size & 0b11111111));
+        stream->writeByte((unsigned char) ((size >> 8) & 0b11111111));
     }
 }
 
-void DwgObjectWriter::writeSizeInBits(std::ostream *stream, unsigned long long size)
+void DwgObjectWriter::writeSizeInBits(CRC8OutputStreamHandler *stream, unsigned long long size)
 {
     // This value is only read in IDwgStreamReader.ReadModularChar()
     // this should do the trick to write the modular char
 
     if (size == 0)
     {
-        stream.WriteByte(0);
+        stream->writeByte(0);
         return;
     }
 
@@ -113,7 +116,7 @@ void DwgObjectWriter::writeSizeInBits(std::ostream *stream, unsigned long long s
             b = (unsigned char) (b | 0b10000000);
         }
 
-        stream.WriteByte(b);
+        stream->writeByte(b);
         size = shift;
         shift = size >> 7;
     }
@@ -475,23 +478,22 @@ void DwgObjectWriter::writeExtendedDataEntry(AppId *app, ExtendedData *entry)
             }
             else
             {
-                unsigned char[] bytes =
-                        _writer->Encoding.GetBytes(string.IsNullOrEmpty(str.Value) ? string.Empty : str.Value);
-                mstream.Write(LittleEndianConverter.Instance.GetBytes((ushort) str.Value.Length + 1), 0, 2);
-                mstream.Write(bytes, 0, bytes.Length);
-                mstream.WriteByte(0);
+                std::vector<unsigned char> bytes = _writer->encoding().bytes(str->value());
+                mstream.write(LittleEndianConverter::instance()->bytes((unsigned short) str->value().length() + 1), 0,
+                              2);
+                mstream.write(bytes, 0, bytes.size());
+                mstream.writeByte(0);
             }
         }
 
-        throw new System.NotSupportedException($
-                                               "ExtendedDataRecord of type {record.GetType().FullName} not supported.");
+        throw std::runtime_error("ExtendedDataRecord of type {record.GetType().FullName} not supported.");
     }
 
-    _writer->writeBitShort((short) mstream.Length);
+    _writer->writeBitShort((short) mstream.length());
 
-    _writer->Main.HandleReference(DwgReferenceType::HardPointer, app.Handle);
+    _writer->main()->handleReference(DwgReferenceType::HardPointer, app->handle());
 
-    _writer->writeBytes(mstream.GetBuffer(), 0, (int) mstream.Length);
+    _writer->writeBytes(mstream.buffer(), 0, (int) mstream.length());
 }
 
 void DwgObjectWriter::writeReactorsAndDictionaryHandle(CadObject *cadObject)

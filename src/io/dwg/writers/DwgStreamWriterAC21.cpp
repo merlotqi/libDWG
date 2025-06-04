@@ -49,7 +49,7 @@ void DwgStreamWriterAC21::writeTextUtf8(const std::string &value)
     std::vector<unsigned char> bytes = Encoding::Utf8().bytes(value);
 
     writeBytes(bytes);
-    _stream.write(0, 0);
+    _stream->write(0, 1);
     _stream->write(0, 1);
     _stream->write(0, 1);
 }

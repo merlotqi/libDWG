@@ -60,8 +60,8 @@ public:
     double angle() const;
     void setAngle(double);
 
-    ViewModeTypes viewMode() const;
-    void setViewMode(ViewModeTypes);
+    RenderMode viewMode() const;
+    void setViewMode(RenderMode);
 
     bool isUcsAssociated() const;
     void setIsUcsAssociated(bool);

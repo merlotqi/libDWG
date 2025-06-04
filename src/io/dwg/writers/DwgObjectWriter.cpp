@@ -24,6 +24,7 @@
 #include <dwg/CadUtils.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
+#include <dwg/entities/Insert.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
@@ -71,15 +72,15 @@ void DwgObjectWriter::write()
     _objects.push(_document->rootDictionary());
 
     writeBlockControl();
-    writeTable(_document->layers());
-    writeTable(_document.TextStyles);
+    writeLayers(_document->layers());
+    writeTextStyles(_document->textStyles());
     writeLTypeControlObject();
-    writeTable(_document.Views);
-    writeTable(_document.UCSs);
-    writeTable(_document.VPorts);
-    writeTable(_document.AppIds);
+    writeViews(_document->views());
+    writeUCSs(_document->UCSs());
+    writeVPorts(_document->vports());
+    writeAppIds(_document->appIds());
     //For some reason the dimension must be writen the last
-    writeTable(_document.DimensionStyles);
+    writeDimensionStyles(_document->dimensionStyles());
 
     writeBlockEntities();
     writeObjects();
@@ -189,9 +190,13 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if (R2000Plus)
     {
         //Insert Count RC A sequence of zero or more non-zero RC’s, followed by a terminating 0 RC.The total number of these indicates how many insert handles will be present.
-        for (var item in _document.Entities.OfType<Insert>().Where(i = > i.Block.Name == record.Name))
+        for (auto&& item : _document->entities())
         {
-            _writer->writeByte(1);
+            auto insert = dynamic_cast<Insert *>(item);
+            if (insert && insert->block()->name() == record->name())
+            {
+                _writer->writeByte(1);                
+            }
         }
 
         _writer->writeByte(0);
@@ -255,9 +260,13 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     //R2000+:
     if (R2000Plus)
     {
-        for (var item in _document.Entities.OfType<Insert>().Where(i = > i.Block.Name == record.Name))
+        for (auto &&item: _document->entities())
         {
-            _writer->handleReference(DwgReferenceType::SoftPointer, item);
+            auto insert = dynamic_cast<Insert *>(item);
+            if (insert && insert->block()->name() == record->name())
+            {
+                _writer->handleReference(DwgReferenceType::SoftPointer, item);
+            }
         }
 
         //Layout Handle H(hard pointer)
