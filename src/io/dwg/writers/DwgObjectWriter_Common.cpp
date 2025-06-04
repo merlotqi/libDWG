@@ -55,10 +55,11 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
     //Set the position to the entity to find
     long long position = _stream->tellp();
     CRC8OutputStreamHandler crc(_stream, 0xC0C1);
+    OutputStreamWrapper msmain_wrapper(&_msmain);
 
     //MS : Size of object, not including the CRC
-    uint size = (uint) _msmain.Length;
-    long sizeb = (_msmain.Length << 3) - _writer->savedPositionInBits();
+    unsigned int size = (unsigned int) _msmain.tellp();
+    long sizeb = (msmain_wrapper.length() << 3) - _writer->savedPositionInBits();
     writeSize(&crc, size);
 
     //R2010+:
@@ -71,7 +72,7 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
     }
 
     //Write the object in the stream
-    crc.write(_msmain.str().data(), 0, (int) _msmain.str().length());
+    crc.write(msmain_wrapper.buffer(), 0, (int) msmain_wrapper.length());
     _stream->write(reinterpret_cast<const char *>(LittleEndianConverter::instance()->bytes(crc.seed()).data()), 2);
 
     _map.insert({cadObject->handle(), position});
@@ -154,22 +155,27 @@ void DwgObjectWriter::writeCommonData(CadObject *cadObject)
     switch (cadObject->objectType())
     {
         case ObjectType::UNLISTED:
-            if (_document->classes()->getByName(cadObject->objectName(), out DxfClass dxfClass))
             {
-                _writer->writeObjectType(dxfClass.ClassNumber);
+                DxfClass *dxfClass = _document->classes()->getByName(cadObject->objectName());
+                if (dxfClass)
+                {
+                    _writer->writeObjectType(dxfClass->classNumber());
+                }
+                else
+                {
+                    notify("Dxf Class not found for {cadObject.ObjectType} fullname: {cadObject.GetType().FullName}",
+                           Notification::Warning);
+                    return;
+                }
+                break;
             }
-            else
-            {
-                notify($ "Dxf Class not found for {cadObject.ObjectType} fullname: {cadObject.GetType().FullName}",
-                       Notification::Warning);
-                return;
-            }
-            break;
         case ObjectType::INVALID:
         case ObjectType::UNDEFINED:
-            notify($ "CadObject type: {cadObject.ObjectType} fullname: {cadObject.GetType().FullName}",
-                   Notification::NotImplemented);
-            return;
+            {
+                notify("CadObject type: {cadObject.ObjectType} fullname: {cadObject.GetType().FullName}",
+                       Notification::NotImplemented);
+                return;
+            }
         default:
             _writer->writeObjectType(cadObject->objectType());
             break;
@@ -372,9 +378,9 @@ void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data)
     if (writeXData())
     {
         //EED size BS size of extended entity data, if any
-        for (auto &&item: data)
+        for (auto it = data->begin(); it != data->end(); ++it)
         {
-            writeExtendedDataEntry(item->first(), item->second());
+            writeExtendedDataEntry(it->first, it->second);
         }
     }
 

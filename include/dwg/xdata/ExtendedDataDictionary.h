@@ -39,6 +39,18 @@ public:
     ExtendedDataDictionary(CadObject *owner);
     void add(AppId *app);
     void add(AppId *app, ExtendedData *extendedData);
+
+    using iterator = std::map<AppId *, ExtendedData *>::iterator;
+    using const_iterator = std::map<AppId *, ExtendedData *>::const_iterator;
+
+    // clang-format off
+    iterator begin() { return _data.begin(); }
+    iterator end() { return _data.end(); }
+    const_iterator begin() const { return _data.begin(); }
+    const_iterator end() const { return _data.end(); }
+    const_iterator cbegin() const { return _data.cbegin(); }
+    const_iterator cend() const { return _data.cend(); }
+    // clang-format on
 };
 
 }// namespace dwg

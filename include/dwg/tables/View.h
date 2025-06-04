@@ -60,8 +60,8 @@ public:
     double angle() const;
     void setAngle(double);
 
-    RenderMode viewMode() const;
-    void setViewMode(RenderMode);
+    ViewModeTypes viewMode() const;
+    void setViewMode(ViewModeTypes);
 
     bool isUcsAssociated() const;
     void setIsUcsAssociated(bool);
@@ -69,8 +69,8 @@ public:
     bool isPlottable() const;
     void setIsPlottable(bool);
 
-    ViewModeTypes renderMode() const;
-    void setRenderMode(ViewModeTypes);
+    RenderMode renderMode() const;
+    void setRenderMode(RenderMode);
 
     XY center() const;
     void setCenter(const XY &);

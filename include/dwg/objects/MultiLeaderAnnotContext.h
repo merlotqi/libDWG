@@ -137,7 +137,7 @@ public:
     double textRotation() const;
     void setTextRotation(double);
 
-    double boundaryWidth();
+    double boundaryWidth() const;
     void setBoundaryWidth(double);
 
     double boundaryHeight() const;
@@ -189,6 +189,7 @@ public:
     void setColumnFlowReversed(bool);
 
     std::vector<double> columnSizes() const;
+    std::vector<double> &columnSizes();
 
     bool wordBreak() const;
     void setWordBreak(bool);
@@ -234,6 +235,58 @@ public:
 
     TextAttachmentType textBottomAttachment() const;
     void setTextBottomAttachment(TextAttachmentType);
+
+private:
+    std::vector<LeaderRoot> _leaderRoots;
+    double _scaleFactor;
+    XYZ _contentBasePoint;
+    double _textHeight;
+    double _arrowheadSize;
+    double _landingGap;
+    TextAttachmentType _textLeftAttachment;
+    TextAttachmentType _textRightAttachment;
+    TextAlignmentType _textAlignment;
+    BlockContentConnectionType _blockContentConnection;
+    bool _hasTextContents;
+    std::string _textLabel;
+    XYZ _textNormal;
+    TextStyle *_textStyle;
+    XYZ _textLocation;
+    XYZ _direction;
+    double _textRotation;
+    double _boundaryWidth;
+    double _boundaryHeight;
+    double _lineSpacingFactor;
+    LineSpacingStyle _lineSpacing;
+    Color _textColor;
+    TextAttachmentPointType _textAttachmentPoint;
+    FlowDirectionType _flowDirection;
+    Color _backgroundFillColor;
+    double _backgroundScaleFactor;
+    int _backgroundTransparency;
+    bool _backgroundFillEnabled;
+    bool _backgroundMaskFillOn;
+    short _columnType;
+    bool _textHeightAutomatic;
+    double _columnWidth;
+    double _columnGutter;
+    bool _columnFlowReversed;
+    std::vector<double> _columnSizes;
+    bool _wordBreak;
+    bool _hasContentsBlock;
+    BlockRecord *_blockContent;
+    XYZ _blockContentNormal;
+    XYZ _blockContentLocation;
+    XYZ _blockContentScale;
+    double _blockContentRotation;
+    Color _blockContentColor;
+    Matrix4 _transformationMatrix;
+    XYZ _basePoint;
+    XYZ _baseDirection;
+    XYZ _baseVertical;
+    bool _normalReversed;
+    TextAttachmentType _textTopAttachment;
+    TextAttachmentType _textBottomAttachment;
 };
 
 }// namespace dwg

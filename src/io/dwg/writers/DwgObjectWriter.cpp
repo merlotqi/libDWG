@@ -105,7 +105,19 @@ void DwgObjectWriter::writeLTypeControlObject() {}
 
 void DwgObjectWriter::writeBlockControl() {}
 
-void DwgObjectWriter::writeTable() {}
+void DwgObjectWriter::writeLayers(LayersTable *layers) {}
+
+void DwgObjectWriter::writeTextStyles(TextStylesTable *textStyles) {}
+
+void DwgObjectWriter::writeViews(ViewsTable *views) {}
+
+void DwgObjectWriter::writeUCSs(UCSTable *ucss) {}
+
+void DwgObjectWriter::writeVPorts(VPortsTable *vports) {}
+
+void DwgObjectWriter::writeAppIds(AppIdsTable *appids) {}
+
+void DwgObjectWriter::writeDimensionStyles(DimensionStylesTable *dimStyles) {}
 
 void DwgObjectWriter::writeEntries() {}
 
@@ -189,13 +201,13 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     //R2000+:
     if (R2000Plus)
     {
-        //Insert Count RC A sequence of zero or more non-zero RC’s, followed by a terminating 0 RC.The total number of these indicates how many insert handles will be present.
-        for (auto&& item : _document->entities())
+        //Insert Count RC A sequence of zero or more non-zero RC's, followed by a terminating 0 RC.The total number of these indicates how many insert handles will be present.
+        for (auto &&item: _document->entities())
         {
             auto insert = dynamic_cast<Insert *>(item);
             if (insert && insert->block()->name() == record->name())
             {
-                _writer->writeByte(1);                
+                _writer->writeByte(1);
             }
         }
 

@@ -245,6 +245,16 @@ void GeoData::setObservationToTag(const std::string &value)
     _observationToTag = value;
 }
 
+std::string GeoData::observationCoverageTag() const
+{
+    return _observationCoverageTag;
+}
+
+void GeoData::setObservationCoverageTag(const std::string &value)
+{
+    _observationCoverageTag = value;
+}
+
 std::vector<GeoData::GeoMeshPoint> GeoData::points() const
 {
     return _points;

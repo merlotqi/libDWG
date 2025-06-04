@@ -67,4 +67,44 @@ void Tolerance::setStyle(DimensionStyle *value)
     }
 }
 
+XYZ Tolerance::insertionPoint() const
+{
+    return _insertionPoint;
+}
+
+void Tolerance::setInsertionPoint(const XYZ &value)
+{
+    _insertionPoint = value;
+}
+
+XYZ Tolerance::direction() const
+{
+    return _direction;
+}
+
+void Tolerance::setDirection(const XYZ &value)
+{
+    _direction = value;
+}
+
+XYZ Tolerance::normal() const
+{
+    return _normal;
+}
+
+void Tolerance::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
+
+std::string Tolerance::text() const
+{
+    return _text;
+}
+
+void Tolerance::setText(const std::string &value)
+{
+    _text = value;
+}
+
 }// namespace dwg

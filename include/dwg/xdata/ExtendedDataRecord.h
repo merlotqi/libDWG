@@ -164,7 +164,8 @@ public:
     virtual CadObject *resolveReference(CadDocument *document) const = 0;
 };
 
-class LIBDWG_API ExtendedDataReference : public ExtendedDataRecordT<unsigned long long>, public IExtendedDataHandleReference
+class LIBDWG_API ExtendedDataReference : public ExtendedDataRecordT<unsigned long long>,
+                                         public IExtendedDataHandleReference
 {
 public:
 public:

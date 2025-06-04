@@ -166,6 +166,7 @@ public:
     operator const std::string &() const;
     operator const XY &() const;
     operator const XYZ &() const;
+    operator const std::vector<unsigned char> &() const;
     operator const DateTime &() const;
     operator const Color &() const;
 

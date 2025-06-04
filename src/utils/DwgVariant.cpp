@@ -304,6 +304,12 @@ bool DwgVariant::operator!=(const DwgVariant &o) const
 
 void DwgVariant::clear() {}
 
+
+bool DwgVariant::isEmpty() const
+{
+    return Type == VarType::None;
+}
+
 char DwgVariant::asChar() const
 {
     assert(Type == VarType::I8);
@@ -493,6 +499,12 @@ DwgVariant::operator const XYZ &() const
 {
     assert(Type == VarType::COORD3D);
     return xyz;
+}
+
+DwgVariant::operator const std::vector<unsigned char> &() const
+{
+    assert(Type == VarType::BLOB);
+    return blob;
 }
 
 DwgVariant::operator const DateTime &() const

@@ -30,9 +30,6 @@ namespace dwg {
 
 class LIBDWG_API Spline : public Entity
 {
-    SplineFlag1 _flags1;
-    KnotParameterization _knotParameterization;
-
     XYZ _normal;
     SplineFlags _flags;
     int _degree;
@@ -45,6 +42,9 @@ class LIBDWG_API Spline : public Entity
     XYZ _startTangent;
     XYZ _endTangent;
     std::vector<double> _weights;
+
+    SplineFlag1 _flags1;
+    KnotParameterization _knotParameterization;
 
 public:
     Spline();
@@ -64,12 +64,15 @@ public:
     void setDegree(int);
 
     std::vector<double> knots() const;
+    std::vector<double> &knots();
     void setKnots(const std::vector<double> &);
 
     std::vector<XYZ> controlPoints() const;
+    std::vector<XYZ> &controlPoints();
     void setControlPoints(const std::vector<XYZ> &);
 
     std::vector<XYZ> fitPoints() const;
+    std::vector<XYZ> &fitPoints();
     void setFitPoints(const std::vector<XYZ> &);
 
     double knotTolerance() const;
@@ -88,6 +91,7 @@ public:
     void setEndTangent(const XYZ &);
 
     std::vector<double> weights() const;
+    std::vector<double> &weights();
     void setWeights(const std::vector<double> &);
 
     SplineFlag1 flags1() const;
