@@ -57,6 +57,10 @@ public:
 
     std::vector<Sorter> sorters() const;
     void setAddEntity(Entity *, unsigned long long sorterHandle);
+
+private:
+    BlockRecord *_blockOwner;
+    std::vector<Sorter> _sorters;
 };
 
 }// namespace dwg

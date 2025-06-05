@@ -219,4 +219,9 @@ bool Layout::isPaperSpace() const
     return false;
 }
 
+std::vector<Viewport *> Layout::viewports() const
+{
+    return std::vector<Viewport *>();
+}
+
 }// namespace dwg

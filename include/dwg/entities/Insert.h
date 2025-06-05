@@ -105,6 +105,8 @@ private:
     unsigned short _rowCount;
     double _columnSpacing;
     double _rowSpacing;
+    std::vector<AttributeEntity *> _attributes;
+    Seqend *_seqend;
 };
 
 }// namespace dwg

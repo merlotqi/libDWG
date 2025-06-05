@@ -153,18 +153,42 @@ bool CadDictionary::tryGetEntry(const std::string &name, NonGraphicalObject **en
     return false;
 }
 
-void CadDictionary::add(const std::string &key, NonGraphicalObject *value) {}
-
-void CadDictionary::add(NonGraphicalObject *value) {}
-
-bool CadDictionary::tryAdd(NonGraphicalObject *value) const
+void CadDictionary::add(const std::string &key, NonGraphicalObject *value) 
 {
+    if (key.empty())
+    {
+        throw std::runtime_error("");
+    }
+    value->setOwner(this);
+    value->OnNameChanged.add(this, &CadDictionary::onEntryNameChanged);
+    OnAdd(value);
+    _entries.insert({key, value});
+}
+
+void CadDictionary::add(NonGraphicalObject *value) 
+{
+    assert(value);
+    add(value->name(), value);
+}
+
+bool CadDictionary::tryAdd(NonGraphicalObject *value)
+{
+    if (!containsKey(value->name()))
+    {
+        add(value->name(), value);
+        return true;
+    }
+    delete value;
     return false;
 }
 
 bool CadDictionary::containsKey(const std::string &key) const
 {
-    return false;
+    auto it = _entries.find(key);
+    if (it == _entries.end())
+        return false;
+    else
+        return true;
 }
 
 bool CadDictionary::remove(const std::string &key, NonGraphicalObject **item)
@@ -181,25 +205,27 @@ void CadDictionary::clear() {}
 
 bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs) const
 {
-    if (lhs.size() != rhs.size())
-    {
-        return false;
-    }
-
-    for (size_t i = 0; i < lhs.size(); ++i)
-    {
-        if (std::toupper(lhs[i]) != std::toupper(rhs[i]))
-        {
-            return false;
-        }
-    }
-
-    return true;
+    auto cmp = [](char a, char b) {
+        return std::tolower(static_cast<unsigned char>(a)) < std::tolower(static_cast<unsigned char>(b));
+    };
+    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), cmp);
 }
 
 CadDictionary *CadDictionary::ensureCadDictionaryExist(const std::string &name)
 {
-    return nullptr;
+    CadDictionary *entry = nullptr;
+    auto it = _entries.find(name);
+    if (it != _entries.end())
+    {
+         entry = dynamic_cast<CadDictionary *>(it->second);
+        if (entry)
+        {
+            return entry;
+        }
+    }
+    entry = new CadDictionary(name);
+    add(entry);
+    return entry;
 }
 
 void CadDictionary::onEntryNameChanged(const std::string &olName, const std::string &newName) {}

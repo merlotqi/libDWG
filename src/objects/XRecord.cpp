@@ -20,8 +20,30 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/XRecord.h>
 
 namespace dwg {
+
+    XRecord::XRecord() {}
+
+    XRecord::XRecord(const std::string &name) : NonGraphicalObject(name) {}
+
+    XRecord::~XRecord() {}
+
+    ObjectType XRecord::objectType() const { return ObjectType::XRECORD; }
+
+    std::string XRecord::objectName() const { return DxfFileToken::ObjectXRecord; }
+
+    std::string XRecord::subclassMarker() const { return DxfSubclassMarker::XRecord; }
+
+    DictionaryCloningFlags XRecord::cloningFlags() const { return _cloningFlags; }
+
+    void XRecord::setCloningFlags(DictionaryCloningFlags value)  {_cloningFlags = value; } 
+
+    std::vector<XRecord::Entry> XRecord::entries() const { return _entries; }
+    
+    void XRecord::createEntry(int code, DwgVariant value) {}
 
 }// namespace dwg

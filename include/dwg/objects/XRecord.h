@@ -56,6 +56,10 @@ public:
 
     std::vector<Entry> entries() const;
     void createEntry(int code, DwgVariant value);
+
+private:
+    DictionaryCloningFlags _cloningFlags;
+    std::vector<Entry> _entries;
 };
 
 }// namespace dwg

@@ -24,6 +24,7 @@
 
 #include <dwg/CadObject.h>
 #include <dwg/INamedCadObject.h>
+#include <dwg/utils/Delegate.h>
 
 namespace dwg {
 
@@ -39,6 +40,8 @@ public:
 
     virtual std::string name() const override;
     virtual void setName(const std::string &value);
+
+    Delegate<void(const std::string &, const std::string &)> OnNameChanged;
 };
 
 }// namespace dwg

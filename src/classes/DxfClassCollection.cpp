@@ -192,7 +192,19 @@ void DxfClassCollection::add(DxfClass *cls)
     _entries.insert({cls->dxfName(), cls});
 }
 
-void DxfClassCollection::addOrUpdate(DxfClass *item) {}
+void DxfClassCollection::addOrUpdate(DxfClass *item) 
+{
+    assert(item);
+    auto it = _entries.find(item->dxfName());
+    if (it != _entries.end())
+    {
+        it->second->setInstanceCount(item->instanceCount());
+    }
+    else
+    {
+        _entries.insert({item->dxfName(), item});
+    }
+}
 
 DxfClass *DxfClassCollection::getByName(const std::string &name) const
 {

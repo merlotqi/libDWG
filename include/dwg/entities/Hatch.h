@@ -83,6 +83,22 @@ public:
 
     std::vector<HatchBoundaryPath *> paths() const;
     void setPaths(const std::vector<HatchBoundaryPath *> &);
+
+private:
+    double _elevation;
+    XYZ _normal;
+    HatchPattern *_pattern;
+    bool _isSolid;
+    bool _isAssociative;
+    HatchStyleType _style;
+    HatchPatternType _patternType;
+    double _patternAngle;
+    double _patternScale;
+    bool _isDouble;
+    double _pixelSize;
+    std::vector<XY> _seedPoints;
+    HatchGradientPattern *_gradientColor;
+    std::vector<HatchBoundaryPath *> _paths;
 };
 
 }// namespace dwg

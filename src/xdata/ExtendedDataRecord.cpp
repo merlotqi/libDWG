@@ -122,4 +122,40 @@ ExtendedDataString::ExtendedDataString(const std::string &value)
 {
 }
 
+/* --------------------------- ExtendedDataHandle --------------------------- */
+ExtendedDataHandle::ExtendedDataHandle(unsigned long long handle)
+    : ExtendedDataRecordT<unsigned long long>(DxfCode::ExtendedDataHandle, handle)
+{
+}
+
+ExtendedDataHandle::~ExtendedDataHandle() {}
+
+unsigned long long ExtendedDataHandle::value() const
+{
+    return 0LL;
+}
+
+CadObject* ExtendedDataHandle::resolveReference(CadDocument* document) const
+{
+    return NULL;
+}
+
+/* --------------------------- ExtendedDataLayer ---------------------------- */
+ExtendedDataLayer::ExtendedDataLayer(unsigned long long handle)
+    : ExtendedDataRecordT<unsigned long long>(DxfCode::ExtendedDataLayerName, handle)
+{
+}
+
+ExtendedDataLayer::~ExtendedDataLayer() {}
+
+unsigned long long ExtendedDataLayer::value() const
+{
+    return 0LL;
+}
+
+CadObject* ExtendedDataLayer::resolveReference(CadDocument* document) const
+{
+    return NULL;
+}
+
 }// namespace dwg

@@ -36,7 +36,7 @@ class LIBDWG_API Polyline : public Entity
 {
 public:
     Polyline();
-    ~Polyline();
+    virtual ~Polyline();
 
     virtual std::string objectName() const override;
 
@@ -74,6 +74,18 @@ public:
 
     Delegate<void(CadObject *)> OnAdd;
     Delegate<void(CadObject *)> OnRemove;
+
+protected:
+    double _elevation;
+    double _thickness;
+    XYZ _normal;
+    PolylineFlags _flags;
+    double _startWidth;
+    double _endWidth;
+    SmoothSurfaceType _smoothSurface;
+    bool _isClosed;
+    std::vector<Vertex *> _vertices;
+    Seqend *_seqend;
 };
 
 class Polyline2D : public Polyline

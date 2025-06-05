@@ -26,6 +26,8 @@
 
 namespace dwg {
 
+Insert::Insert() {}
+
 Insert::Insert(BlockRecord *) {}
 
 Insert::~Insert() {}
@@ -170,6 +172,14 @@ bool Insert::isMultiple() const
     return false;
 }
 
-Insert::Insert() {}
+std::vector<AttributeEntity *> Insert::attributes() const { return _attributes;}
+
+void Insert::addAttribute(AttributeEntity *) {}
+
+void Insert::removeAttribute(AttributeEntity *) {}
+
+Seqend *Insert::seqend() const { return _seqend; }
+
+void Insert::setSeqend(Seqend *value) {_seqend = value; }
 
 }// namespace dwg

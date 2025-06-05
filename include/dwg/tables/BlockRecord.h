@@ -40,15 +40,15 @@ class SortEntitiesTable;
 class EvaluationGraph;
 class LIBDWG_API BlockRecord : public TableEntry
 {
-    Block *_blockEntity;
-    BlockEnd *_blockEnd;
-    EvaluationGraph *_evaluationGraph;
+    Block *_blockEntity = nullptr;
+    BlockEnd *_blockEnd = nullptr;
+    EvaluationGraph *_evaluationGraph = nullptr;
     UnitsType _units;
     BlockTypeFlags _flags;
     bool _isExplodable = false;
     std::vector<unsigned char> _preview;
-    Layout *_layout;
-    SortEntitiesTable *_sortEntitiesTable;
+    Layout *_layout = nullptr;
+    SortEntitiesTable *_sortEntitiesTable = nullptr;
     std::vector<Entity *> _entities;
 
 public:

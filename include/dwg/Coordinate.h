@@ -278,6 +278,11 @@ inline void XY::normalize() noexcept
     v[1] /= len;
 }
 
+inline double XY::angle() const noexcept
+{
+    return 0.0;
+}
+
 inline double XY::distanceToPoint(XY point) const noexcept
 {
     return (*this - point).length();

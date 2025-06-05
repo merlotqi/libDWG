@@ -85,7 +85,7 @@ public:
 
     void add(const std::string &key, NonGraphicalObject *value);
     void add(NonGraphicalObject *value);
-    bool tryAdd(NonGraphicalObject *value) const;
+    bool tryAdd(NonGraphicalObject *value);
 
     bool containsKey(const std::string &key) const;
     bool remove(const std::string &key, NonGraphicalObject **item);

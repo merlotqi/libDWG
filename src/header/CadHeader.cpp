@@ -42,14 +42,37 @@
 
 namespace dwg {
 
-CadHeader::CadHeader()
+CadHeader::CadHeader() : CadHeader(ACadVersion::AC1032)
 {
+}
+
+CadHeader::CadHeader(CadDocument *document) : CadHeader(ACadVersion::AC1032) 
+{
+    _document = document;
+}
+
+CadDocument *CadHeader::document() 
+{
+    return _document;
+}
+
+void CadHeader::setDocument(CadDocument *document) {}
+
+CadHeader::CadHeader(ACadVersion version) : _version(version)
+{
+    setVersion(version);
 #ifdef _WIN32
     GUID guid;
     HRESULT res = CoCreateGuid(&guid);
     char guidStr[39];
-    sprintf_s(guidStr, sizeof(guidStr), "{%08lX-%04X-%04X-%04X-%012llX}", guid.Data1, guid.Data2, guid.Data3,
-              (guid.Data4[0] << 8) + guid.Data4[1], *(unsigned long long *) (guid.Data4 + 2));
+    unsigned long long last6 = 0;
+    for (int i = 2; i < 8; ++i)
+        last6 = (last6 << 8) | guid.Data4[i];
+    
+    sprintf_s(guidStr, sizeof(guidStr), "{%08lX-%04X-%04X-%02X%02X-%012llX}",
+              guid.Data1, guid.Data2, guid.Data3,
+              guid.Data4[0], guid.Data4[1], last6);
+    
     _fingerPrintGuid = guidStr;
 #else
     uuid_t uuid;
@@ -58,15 +81,6 @@ CadHeader::CadHeader()
     uuid_unparse_lower(uuid, guid_str);
     _fingerPrintGuid = std::string(guid_str);
 #endif
-}
-
-CadHeader::CadHeader(CadDocument *document) {}
-
-void CadHeader::setDocument(CadDocument *document) {}
-
-CadHeader::CadHeader(ACadVersion version) : _version(version)
-{
-    setVersion(version);
 }
 
 std::string CadHeader::versionString() const

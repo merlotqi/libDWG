@@ -20,48 +20,26 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <assert.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/tables/TableEntry.h>
-#include <fmt/core.h>
+#include <dwg/entities/PolyfaceMesh.h>
 
 namespace dwg {
 
-TableEntry::TableEntry(const std::string &name) : _name(name), _flags(StandardFlag::None) {}
+PolyfaceMesh::PolyfaceMesh() {}
 
-TableEntry::~TableEntry() {}
+PolyfaceMesh::~PolyfaceMesh() {}
 
-std::string TableEntry::subclassMarker() const
-{
-    return DxfSubclassMarker::TableRecord;
-}
+ObjectType PolyfaceMesh::objectType() const  { return ObjectType::POLYLINE_PFACE; }
 
-std::string TableEntry::name() const
-{
-    return _name;
-}
+std::string PolyfaceMesh::objectName() const  { return DxfFileToken::EntityPolyline; }
 
-void TableEntry::setName(const std::string &value)
-{
-    if (value.empty())
-    {
-        throw std::invalid_argument("The Table Entry must have a name");
-    }
-    OnNameChanged(_name, value);
-    _name = value;
-}
+std::string PolyfaceMesh::subclassMarker() const  { return DxfSubclassMarker::PolyfaceMesh; }
 
-StandardFlags TableEntry::flags() const
-{
-    return _flags;
-}
+std::vector<VertexFaceRecord *> PolyfaceMesh::faces() const { return _faces; }
 
-void TableEntry::setFlags(StandardFlags flags)
-{
-    _flags = flags;
-}
+void PolyfaceMesh::addFace(VertexFaceRecord *) {}
 
-TableEntry::TableEntry() : _name(""), _flags(static_cast<int>(StandardFlag::None)) {}
+void PolyfaceMesh::removeFace(VertexFaceRecord *) {}
 
 }// namespace dwg

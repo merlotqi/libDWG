@@ -164,13 +164,22 @@ public:
     virtual CadObject *resolveReference(CadDocument *document) const = 0;
 };
 
-class LIBDWG_API ExtendedDataReference : public ExtendedDataRecordT<unsigned long long>,
+class LIBDWG_API ExtendedDataHandle : public ExtendedDataRecordT<unsigned long long>,
                                          public IExtendedDataHandleReference
 {
 public:
+    ExtendedDataHandle(unsigned long long handle);
+    ~ExtendedDataHandle();
+    unsigned long long value() const override;
+    CadObject *resolveReference(CadDocument *document) const override;
+};
+
+class LIBDWG_API ExtendedDataLayer : public ExtendedDataRecordT<unsigned long long>,
+                                      public IExtendedDataHandleReference
+{
 public:
-    ExtendedDataReference(unsigned long long handle);
-    ~ExtendedDataReference();
+    ExtendedDataLayer(unsigned long long handle);
+    ~ExtendedDataLayer();
     unsigned long long value() const override;
     CadObject *resolveReference(CadDocument *document) const override;
 };

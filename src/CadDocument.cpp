@@ -80,15 +80,15 @@ void CadDocument::createDefaults()
     //The order of the elements is relevant for the handles assignation
 
     //Initialize tables
-    BlockRecordsTable *_blockRecords = new BlockRecordsTable(this);
-    LayersTable *_layers = new LayersTable(this);
-    DimensionStylesTable *_dimensionStyles = new DimensionStylesTable(this);
-    TextStylesTable *_textStyles = new TextStylesTable(this);
-    LineTypesTable *_lineTypes = new LineTypesTable(this);
-    ViewsTable *_views = new ViewsTable(this);
-    UCSTable *_ucss = new UCSTable(this);
-    VPortsTable *_vports = new VPortsTable(this);
-    AppIdsTable *_appIds = new AppIdsTable(this);
+    _blockRecords = new BlockRecordsTable(this);
+    _layers = new LayersTable(this);
+    _dimensionStyles = new DimensionStylesTable(this);
+    _textStyles = new TextStylesTable(this);
+    _lineTypes = new LineTypesTable(this);
+    _views = new ViewsTable(this);
+    _ucss = new UCSTable(this);
+    _vports = new VPortsTable(this);
+    _appIds = new AppIdsTable(this);
 
 
     //Root dictionary
@@ -315,6 +315,7 @@ void CadDocument::registerCollection(IObservableCadCollection *) {}
 
 CadDocument::CadDocument(bool createDefaults)
 {
+    _classes = new DxfClassCollection();
     _cadObjects.insert({this->handle(), this});
     if (createDefaults)
     {

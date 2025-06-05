@@ -31,9 +31,10 @@ MLineStyle *MLineStyle::Default()
     return new MLineStyle(DefaultName);
 }
 
-MLineStyle::MLineStyle() : _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0) {}
+MLineStyle::MLineStyle() : MLineStyle("") {}
 
-MLineStyle::MLineStyle(const std::string &name) : _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0)
+MLineStyle::MLineStyle(const std::string &name) 
+    : NonGraphicalObject(name),  _startAngle(M_PI / 2.0), _endAngle(M_PI / 2.0), _flags(0)
 {
     setName(name);
 }

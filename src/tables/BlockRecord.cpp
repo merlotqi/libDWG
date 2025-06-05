@@ -47,6 +47,7 @@ BlockRecord *BlockRecord::ModelSpace()
     Layout *layout = new Layout();
     layout->setName(Layout::ModelLayoutName);
     layout->setAssociatedBlock(record);
+    record->setLayout(layout);
     return record;
 }
 
@@ -56,6 +57,7 @@ BlockRecord *BlockRecord::PaperSpace()
     Layout *layout = new Layout();
     layout->setName(Layout::PaperLayoutName);
     layout->setAssociatedBlock(record);
+    record->setLayout(layout);
     return record;
 }
 

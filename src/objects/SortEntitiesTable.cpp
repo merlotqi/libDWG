@@ -20,8 +20,32 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/SortEntitiesTable.h>
 
 namespace dwg {
+
+SortEntitiesTable::Sorter::Sorter(Entity *_entity, unsigned long long _handle) : entity(_entity), handle(_handle) {}
+
+    SortEntitiesTable::SortEntitiesTable() {}
+    
+    SortEntitiesTable::SortEntitiesTable(BlockRecord *owner) : _blockOwner(owner) {}
+    
+    SortEntitiesTable::~SortEntitiesTable() {}
+
+    ObjectType SortEntitiesTable::objectType() const { return ObjectType::UNLISTED; }
+
+    std::string SortEntitiesTable::objectName() const { return DxfFileToken::ObjectSortEntsTable; }
+    
+    std::string SortEntitiesTable::subclassMarker() const { return DxfSubclassMarker::SortentsTable; }
+
+    BlockRecord *SortEntitiesTable::blockOwner() const { return _blockOwner; }
+    
+    void SortEntitiesTable::setBlockOwner(BlockRecord *value) { _blockOwner = value; }
+
+    std::vector<SortEntitiesTable::Sorter> SortEntitiesTable::sorters() const { return _sorters; }
+    
+    void SortEntitiesTable::setAddEntity(Entity *, unsigned long long sorterHandle) {}
 
 }// namespace dwg

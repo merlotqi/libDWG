@@ -19,3 +19,49 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/MLine.h>
+
+namespace dwg {
+
+MLine::MLine(){}
+
+MLine::~MLine(){}
+
+ObjectType MLine::objectType() const{ return ObjectType::MLINE; }
+
+std::string MLine::objectName() const { return DxfFileToken::EntityMLine; }
+
+std::string MLine::subclassMarker() const { return DxfSubclassMarker::MLine; }
+
+MLineStyle *MLine::style() const{ return _style; }
+
+void MLine::setStyle(MLineStyle *style){ _style = style; }
+
+double MLine::scaleFactor() const{ return _scaleFactor; }
+
+void MLine::setScaleFactor(double scale){ _scaleFactor = scale; }
+
+MLineJustification MLine::justification() const{ return _justification; }
+
+void MLine::setJustification(MLineJustification justification){ _justification = justification; }
+
+MLineFlags MLine::flags() const{ return _flags;}
+
+void MLine::setFlags(MLineFlags flags){ _flags = flags; }
+
+XYZ MLine::startPoint() const{ return _startPoint;}
+
+void MLine::setStartPoint(const XYZ &point){ _startPoint = point; }
+
+XYZ MLine::normal() const{ return _normal; }
+
+void MLine::setNormal(const XYZ &normal){ _normal = normal; }
+
+std::vector<MLine::Vertex> MLine::vertices() const{ return _vertices; }
+
+void MLine::setVertices(const std::vector<Vertex> &vertices){ _vertices = vertices;}
+
+}// namespace dwg

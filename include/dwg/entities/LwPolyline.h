@@ -31,10 +31,6 @@ namespace dwg {
 class LIBDWG_API LwPolyline : public Entity
 {
 public:
-    LwPolyline();
-
-    virtual ~LwPolyline();
-
     struct Vertex
     {
         XY Location;
@@ -45,6 +41,9 @@ public:
         double CurveTangent;
         int Id;
     };
+
+    LwPolyline();
+    virtual ~LwPolyline();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
@@ -60,7 +59,7 @@ public:
     void setElevation(double);
 
     double thickness() const;
-    void setThickness();
+    void setThickness(double);
 
     XYZ normal() const;
     void setNormal(const XYZ &);
@@ -70,6 +69,15 @@ public:
 
     bool isClosed() const;
     void setIsClosed(bool);
+
+private:
+    LwPolylineFlags _flags;
+    double _constantWidth;
+    double _elevation;
+    double _thickness; 
+    XYZ _normal;
+    std::vector<Vertex> _vertices;
+    bool _isClosed;
 };
 
 }// namespace dwg

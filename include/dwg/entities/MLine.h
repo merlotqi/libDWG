@@ -85,6 +85,12 @@ public:
     void setVertices(const std::vector<Vertex> &vertices);
 
 private:
+    MLineStyle *_style;
+    double _scaleFactor;
+    MLineJustification _justification;
+    MLineFlags _flags;
+    XYZ _startPoint;
+    XYZ _normal;
     std::vector<Vertex> _vertices;///< List of vertices defining the multiline.
 };
 

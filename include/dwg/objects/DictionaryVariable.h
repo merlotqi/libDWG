@@ -41,6 +41,10 @@ public:
 
     int objectSchemaNumber() const;
     void setObjectSchemaNumber(int);
+
+private:
+    std::string _value;
+    int _objectSchemaNumber;
 };
 
 }// namespace dwg

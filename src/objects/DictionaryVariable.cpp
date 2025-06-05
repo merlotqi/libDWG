@@ -20,48 +20,29 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <assert.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/tables/TableEntry.h>
-#include <fmt/core.h>
+#include <dwg/objects/DictionaryVariable.h>
 
 namespace dwg {
 
-TableEntry::TableEntry(const std::string &name) : _name(name), _flags(StandardFlag::None) {}
+DictionaryVariable::DictionaryVariable() {}
+    
+DictionaryVariable::~DictionaryVariable() {}
 
-TableEntry::~TableEntry() {}
+ObjectType DictionaryVariable::objectType() const { return ObjectType::UNLISTED; }
+   
+std::string DictionaryVariable::objectName() const { return DxfFileToken::ObjectDictionaryVar; }
+ 
+std::string DictionaryVariable::subclassMarker() const { return DxfSubclassMarker::DictionaryVariables; }
 
-std::string TableEntry::subclassMarker() const
-{
-    return DxfSubclassMarker::TableRecord;
-}
+std::string DictionaryVariable::value() const { return _value; }
+    
+void DictionaryVariable::setValue(const std::string &value) { _value = value;}
 
-std::string TableEntry::name() const
-{
-    return _name;
-}
+int DictionaryVariable::objectSchemaNumber() const { return _objectSchemaNumber; }
 
-void TableEntry::setName(const std::string &value)
-{
-    if (value.empty())
-    {
-        throw std::invalid_argument("The Table Entry must have a name");
-    }
-    OnNameChanged(_name, value);
-    _name = value;
-}
-
-StandardFlags TableEntry::flags() const
-{
-    return _flags;
-}
-
-void TableEntry::setFlags(StandardFlags flags)
-{
-    _flags = flags;
-}
-
-TableEntry::TableEntry() : _name(""), _flags(static_cast<int>(StandardFlag::None)) {}
+void DictionaryVariable::setObjectSchemaNumber(int value) { _objectSchemaNumber = value; }
 
 }// namespace dwg
+
