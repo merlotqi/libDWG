@@ -30,12 +30,8 @@
 
 namespace dwg {
 
-template<typename T>
-class ObjectDictionaryCollection;
-
-template<typename _Ty, typename _Derived>
 class Table;
-
+class ObjectDictionaryCollection;
 class CadDocument;
 class CadDictionary;
 class ExtendedDataDictionary;
@@ -85,18 +81,27 @@ public:
     void setExtendedData(ExtendedDataDictionary *);
     void setXDictionary(CadDictionary *);
 
-protected:
-    void assignDocument(CadDocument *doc);
+    virtual void assignDocument(CadDocument *doc);
     virtual void unassignDocument();
 
+    NonGraphicalObject *updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *collection);
     template<typename T>
-    void updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection<T> *table)
+    T updateCollectionT(T entry, ObjectDictionaryCollection *collection)
     {
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        static_assert(std::is_base_of<NonGraphicalObject, std::remove_pointer_t<T>>::value,
+                      "T must point to a type derived from NonGraphicalObject.");
+        NonGraphicalObject *existing = updateCollection(entry, collection);
+        return dynamic_cast<T>(existing);
     }
 
-    template<typename _Ty, typename _Derived>
-    void updateTable(_Ty entry, Table<_Ty, _Derived> *table)
+    TableEntry *updateTable(TableEntry *entry, Table *table);
+    template<typename T>
+    T updateTableT(T entry, Table *table)
     {
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        static_assert(std::is_base_of<TableEntry, std::remove_pointer_t<T>>::value,
+                      "T must point to a type derived from TableEntry.");
     }
 
 private:

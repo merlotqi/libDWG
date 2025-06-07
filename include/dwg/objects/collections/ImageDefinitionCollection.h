@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection<ImageDefinition *>
+class LIBDWG_API ImageDefinitionCollection : public ObjectDictionaryCollection
 {
 public:
     ImageDefinitionCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}

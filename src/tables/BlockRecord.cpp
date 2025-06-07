@@ -26,6 +26,7 @@
 #include <dwg/blocks/BlockEnd.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -159,13 +160,9 @@ void BlockRecord::setSortEntitiesTable(SortEntitiesTable *) {}
 
 std::vector<Viewport *> BlockRecord::viewports() const { return std::vector<Viewport *>(); }
 
-std::vector<Entity *> BlockRecord::entities() const
+EntityCollection* BlockRecord::entities()
 {
     return _entities;
 }
-
-void BlockRecord::addEntity(Entity *) {}
-
-void BlockRecord::removeEntity(Entity *){}
 
 }// namespace dwg

@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API ColorCollection : public ObjectDictionaryCollection<BookColor *>
+class LIBDWG_API ColorCollection : public ObjectDictionaryCollection
 {
 public:
     ColorCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}

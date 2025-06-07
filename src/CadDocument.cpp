@@ -57,6 +57,7 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <dwg/tables/collections/VPortsTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -296,19 +297,23 @@ CadDictionary *CadDocument::rootDictionary() const
     return _rootDictionary;
 }
 
-std::vector<Entity *> CadDocument::entities() const
+EntityCollection *CadDocument::entities()
 {
     return modelSpace()->entities();
 }
 
+void CadDocument::addEntity(Entity *) {}
+
+void CadDocument::removeEntity(Entity *) {}
+
 BlockRecord *CadDocument::modelSpace() const
 {
-    return _blockRecords->value(BlockRecord::ModelSpaceName);
+    return _blockRecords->valueT<BlockRecord *>(BlockRecord::ModelSpaceName);
 }
 
 BlockRecord *CadDocument::paperSpace() const
 {
-    return _blockRecords->value(BlockRecord::PaperSpaceName);
+    return _blockRecords->valueT<BlockRecord *>(BlockRecord::PaperSpaceName);
 }
 
 void CadDocument::registerCollection(IObservableCadCollection *) {}

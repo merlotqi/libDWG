@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/PolyLine.h>
+#include <dwg/entities/collection/VertexSeqendCollection.h>
 
 namespace dwg {
 /* -------------------------------- Polyline -------------------------------- */
@@ -67,15 +68,10 @@ bool Polyline::isClosed() const { return _isClosed; }
 
 void Polyline::setIsClosed(bool value) { _isClosed = value; }
 
-std::vector<Vertex *> Polyline::vertices() const { return _vertices; }
-
-void Polyline::addVertex(Vertex *) {}
-
-void Polyline::removeVertex(Vertex *) {}
-
-Seqend *Polyline::seqend() const { return _seqend; }
-
-void Polyline::setSeqend(Seqend *) {}
+VertexSeqendCollection *Polyline::vertices()
+{
+    return _vertices;
+}
 
 /* ------------------------------- Polyline2D ------------------------------- */
 Polyline2D::Polyline2D() {}

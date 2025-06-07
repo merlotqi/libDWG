@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API TextStylesTable : public Table<TextStyle *, TextStylesTable>
+class LIBDWG_API TextStylesTable : public Table
 {
 public:
     TextStylesTable();
@@ -38,6 +38,9 @@ public:
     std::string objectName() const override;
 
     std::vector<std::string> defaultEntries() const;
+
+protected:
+    TableEntry *createEntry(const std::string &name) override;
 };
 
 }// namespace dwg

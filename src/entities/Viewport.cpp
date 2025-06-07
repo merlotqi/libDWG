@@ -24,6 +24,9 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/objects/Scale.h>
+#include <dwg/CadDocument.h>
+#include <dwg/objects/collections/ScaleCollection.h>
 
 namespace dwg {
 
@@ -429,7 +432,14 @@ Scale *Viewport::scale() const
 
 void Viewport::setScale(Scale *value)
 {
-    _scale = value;
+    if (_document)
+    {
+        _scale = updateCollectionT<Scale *>(value, _document->scales());
+    }
+    else
+    {
+        _scale = value;
+    }
 }
 
 double Viewport::scaleFactor() const
@@ -440,6 +450,23 @@ double Viewport::scaleFactor() const
 bool Viewport::representsPaper() const
 {
     return id() == PaperViewId;
+}
+
+void Viewport::assignDocument(CadDocument* doc)
+{
+    Entity::assignDocument(doc);
+    _scale = updateCollectionT<Scale *>(_scale, doc->scales());
+    _document->scales()->OnRemove.add(this, &Viewport::scaleOnRemove);
+}
+
+void Viewport::unassignDocument()
+{
+
+}
+
+void Viewport::scaleOnRemove(CadObject* object)
+{
+
 }
 
 }// namespace dwg

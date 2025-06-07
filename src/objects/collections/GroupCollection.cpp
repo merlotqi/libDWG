@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-void GroupCollection::add(Group *group) {}
+void GroupCollection::add(NonGraphicalObject *group) {}
 
 Group *GroupCollection::createGroup(const std::initializer_list<Entity *> &range)
 {

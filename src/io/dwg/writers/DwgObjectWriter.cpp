@@ -44,6 +44,7 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
 #include <dwg/utils/EndianConverter.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -188,7 +189,7 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if ((R2004Plus && !(record->flags() & BlockTypeFlag::XRef)) && !(record->flags() & BlockTypeFlag::XRefOverlay))
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(record->entities().size());
+        _writer->writeBitLong(record->entities()->size());
     }
 
     //Common:
@@ -202,9 +203,9 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if (R2000Plus)
     {
         //Insert Count RC A sequence of zero or more non-zero RC's, followed by a terminating 0 RC.The total number of these indicates how many insert handles will be present.
-        for (auto &&item: _document->entities())
+        for (auto item = record->entities()->begin(); item != record->entities()->end(); ++item)
         {
-            auto insert = dynamic_cast<Insert *>(item);
+            auto insert = dynamic_cast<Insert *>(*item);
             if (insert && insert->block()->name() == record->name())
             {
                 _writer->writeByte(1);
@@ -241,12 +242,12 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015 &&
         !(record->flags() & BlockTypeFlag::XRef) && !(record->flags() & BlockTypeFlag::XRefOverlay))
     {
-        if (!record->entities().empty())
+        if (!record->entities()->empty())
         {
             //first entity in the def. (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, record->entities().front());
+            _writer->handleReference(DwgReferenceType::SoftPointer, record->entities()->front());
             //last entity in the def. (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, record->entities().back());
+            _writer->handleReference(DwgReferenceType::SoftPointer, record->entities()->back());
         }
         else
         {
@@ -258,10 +259,10 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     //R2004+:
     if (R2004Plus)
     {
-        for (auto item: record->entities())
+        for (auto it = record->entities()->begin(); it != record->entities()->end(); ++it)
         {
             //H[ENTITY(hard owner)] Repeats "Owned Object Count" times.
-            _writer->handleReference(DwgReferenceType::HardOwnership, item);
+            _writer->handleReference(DwgReferenceType::HardOwnership, *it);
         }
     }
 
@@ -272,12 +273,12 @@ void DwgObjectWriter::writeBlockHeader(BlockRecord *record)
     //R2000+:
     if (R2000Plus)
     {
-        for (auto &&item: _document->entities())
+        for (auto item = record->entities()->begin(); item != record->entities()->end(); ++item)
         {
-            auto insert = dynamic_cast<Insert *>(item);
+            auto insert = dynamic_cast<Insert *>(*item);
             if (insert && insert->block()->name() == record->name())
             {
-                _writer->handleReference(DwgReferenceType::SoftPointer, item);
+                _writer->handleReference(DwgReferenceType::SoftPointer, *item);
             }
         }
 

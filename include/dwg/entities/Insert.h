@@ -29,7 +29,7 @@
 
 namespace dwg {
 
-class Seqend;
+class AttributeEntitySeqendCollection;
 class BlockRecord;
 
 class LIBDWG_API Insert : public Entity
@@ -84,11 +84,7 @@ public:
 
     // seqend
 public:
-    std::vector<AttributeEntity *> attributes() const;
-    void addAttribute(AttributeEntity *);
-    void removeAttribute(AttributeEntity *);
-    Seqend *seqend() const;
-    void setSeqend(Seqend *);
+    AttributeEntitySeqendCollection *attributes();
 
     Delegate<void(CadObject *)> OnAdd;
     Delegate<void(CadObject *)> OnRemove;
@@ -105,8 +101,7 @@ private:
     unsigned short _rowCount;
     double _columnSpacing;
     double _rowSpacing;
-    std::vector<AttributeEntity *> _attributes;
-    Seqend *_seqend;
+    AttributeEntitySeqendCollection *_attributes;
 };
 
 }// namespace dwg

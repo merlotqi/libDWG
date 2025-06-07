@@ -22,6 +22,7 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/entities/CadWipeoutBase.h>
+#include <dwg/objects/collections/ImageDefinitionCollection.h>
 #include <fmt/core.h>
 
 namespace dwg {
@@ -194,7 +195,7 @@ void CadWipeoutBase::setDefinition(ImageDefinition *definition)
 
     if (document())
     {
-        // _definition = updateCollection(definition, document()->imageDefinitions());
+        _definition = updateCollectionT<ImageDefinition*>(definition, document()->imageDefinitions());
     }
 
     _definition = definition;
@@ -209,5 +210,19 @@ void CadWipeoutBase::setDefinitionReactor(ImageDefinitionReactor *reactor)
 {
     _definitionReactor = reactor;
 }
+
+void CadWipeoutBase::unassignDocument()
+{
+    
+}
+
+void CadWipeoutBase::assignDocument(CadDocument* document)
+{
+    Entity::assignDocument(document);
+    _definition = updateCollectionT<ImageDefinition*>(_definition, document->imageDefinitions());
+    _document->imageDefinitions()->OnRemove.add(this, &CadWipeoutBase::imageDefinitionsOnRemove);
+}
+
+void CadWipeoutBase::imageDefinitionsOnRemove(CadObject *object) {}
 
 }// namespace dwg

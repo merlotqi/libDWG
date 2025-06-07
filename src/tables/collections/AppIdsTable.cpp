@@ -47,4 +47,9 @@ std::vector<std::string> AppIdsTable::defaultEntries() const
     return {AppId::DefaultName};
 }
 
+TableEntry *AppIdsTable::createEntry(const std::string &name)
+{
+    return new AppId(name);
+}
+
 }// namespace dwg

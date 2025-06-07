@@ -169,6 +169,11 @@ public:
 
     bool representsPaper() const;
 
+protected:
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+    void scaleOnRemove(CadObject *object);
+
 private:
     XYZ _center;
     double _width;

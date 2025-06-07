@@ -31,7 +31,7 @@
 
 namespace dwg {
 
-class Seqend;
+class VertexSeqendCollection;
 class LIBDWG_API Polyline : public Entity
 {
 public:
@@ -66,11 +66,7 @@ public:
 
     // seqend
 public:
-    std::vector<Vertex *> vertices() const;
-    void addVertex(Vertex *);
-    void removeVertex(Vertex *);
-    Seqend *seqend() const;
-    void setSeqend(Seqend *);
+    VertexSeqendCollection *vertices();
 
     Delegate<void(CadObject *)> OnAdd;
     Delegate<void(CadObject *)> OnRemove;
@@ -84,8 +80,7 @@ protected:
     double _endWidth;
     SmoothSurfaceType _smoothSurface;
     bool _isClosed;
-    std::vector<Vertex *> _vertices;
-    Seqend *_seqend;
+    VertexSeqendCollection *_vertices;
 };
 
 class Polyline2D : public Polyline

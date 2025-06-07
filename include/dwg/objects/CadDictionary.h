@@ -80,7 +80,7 @@ public:
     DictionaryCloningFlags clonningFlags() const;
     void setClonningFlags(DictionaryCloningFlags);
 
-    CadObject *operator[](const std::string &key) const;
+    CadObject *operator[](const std::string &key);
     bool tryGetEntry(const std::string &name, NonGraphicalObject **entry);
 
     void add(const std::string &key, NonGraphicalObject *value);

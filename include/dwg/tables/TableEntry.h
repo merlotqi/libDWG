@@ -29,7 +29,7 @@
 
 namespace dwg {
 
-class LIBDWG_API TableEntry : public CadObject, INamedCadObject
+class LIBDWG_API TableEntry : public CadObject, public INamedCadObject
 {
 public:
     TableEntry(const std::string &name);

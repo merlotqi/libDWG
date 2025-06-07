@@ -47,4 +47,9 @@ std::vector<std::string> LayersTable::defaultEntries() const
     return {Layer::DefaultName};
 }
 
+TableEntry *LayersTable::createEntry(const std::string &name)
+{
+    return new Layer(name);
+}
+
 }// namespace dwg

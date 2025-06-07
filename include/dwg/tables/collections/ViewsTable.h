@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API ViewsTable : public Table<View *, ViewsTable>
+class LIBDWG_API ViewsTable : public Table
 {
 public:
     ViewsTable();
@@ -38,6 +38,9 @@ public:
     std::string objectName() const override;
 
     std::vector<std::string> defaultEntries() const;
+
+protected:
+    TableEntry *createEntry(const std::string &name) override;
 };
 
 }// namespace dwg

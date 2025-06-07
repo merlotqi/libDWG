@@ -31,6 +31,7 @@
 #include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/Layer.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -65,16 +66,16 @@ void DxfBlocksSectionWriter::processEntities(BlockRecord *b)
 {
     if (b->name() == BlockRecord::ModelSpaceName || b->name() == BlockRecord::PaperSpaceName)
     {
-        for (auto &&e: b->entities())
+        for (auto it = b->entities()->begin(); it != b->entities()->end(); ++it)
         {
-            _holder->entities().push(e);
+            _holder->entities().push(*it);
         }
     }
     else
     {
-        for (auto &&e: b->entities())
+        for (auto it = b->entities()->begin(); it != b->entities()->end(); ++it)
         {
-            writeEntity(e);
+            writeEntity(*it);
         }
     }
 }

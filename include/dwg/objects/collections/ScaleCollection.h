@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection<Scale *>
+class LIBDWG_API ScaleCollection : public ObjectDictionaryCollection
 {
 public:
     ScaleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}

@@ -33,13 +33,6 @@ class MLineStyle;
 
 class LIBDWG_API MLine : public Entity
 {
-    MLineStyle *_style;               ///< Pointer to the multiline style.
-    double _scaleFactor;              ///< Scale factor for the multiline.
-    MLineJustification _justification;///< Justification of the multiline.
-    MLineFlags _flags;                ///< Flags indicating properties of the multiline.
-    XYZ _startPoint;                  ///< Start point of the multiline.
-    XYZ _normal;                      ///< Normal vector defining the plane of the multiline.
-
 public:
     struct Segment
     {
@@ -83,6 +76,13 @@ public:
 
     std::vector<Vertex> vertices() const;
     void setVertices(const std::vector<Vertex> &vertices);
+
+protected:
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
+private:
+    void mLineStylesOnRemove(CadObject *object);
 
 private:
     MLineStyle *_style;

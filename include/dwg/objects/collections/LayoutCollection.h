@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection<Layout *>
+class LIBDWG_API LayoutCollection : public ObjectDictionaryCollection
 {
 public:
     LayoutCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}

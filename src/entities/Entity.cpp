@@ -24,6 +24,9 @@
 #include <dwg/entities/Entity.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
+#include <dwg/objects/BookColor.h>
+#include <dwg/CadDocument.h>
+#include <dwg/objects/collections/ColorCollection.h>
 
 namespace dwg {
 
@@ -128,7 +131,14 @@ BookColor *Entity::bookColor() const
 
 void Entity::setBookColor(BookColor *value)
 {
-    _bookColor = value;
+    if (_document)
+    {
+        _bookColor = updateCollectionT<BookColor*>(value, _document->colors());
+    }
+    else
+    {
+        _bookColor = value;
+    }
 }
 
 void Entity::matchProperties(Entity *entity) {}

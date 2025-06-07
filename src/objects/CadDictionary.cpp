@@ -143,7 +143,7 @@ void CadDictionary::setClonningFlags(DictionaryCloningFlags value)
     _clonningFlags = value;
 }
 
-CadObject *CadDictionary::operator[](const std::string &key) const
+CadObject *CadDictionary::operator[](const std::string &key)
 {
     return nullptr;
 }

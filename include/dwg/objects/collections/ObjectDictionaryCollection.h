@@ -24,52 +24,40 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <dwg/IObservableCadCollection.h>
-#include <dwg/objects/CadDictionary.h>
 #include <type_traits>
 
 namespace dwg {
 
 class NonGraphicalObject;
-
-template<typename T>
+class CadDictionary;
 class ObjectDictionaryCollection : public IHandledCadObject, public IObservableCadCollection
 {
     CadDictionary *_dictionary;
 
 public:
-    using pointer = std::remove_cv_t<T>;
-    using pointee = std::remove_pointer_t<pointer>;
+    ObjectDictionaryCollection(CadDictionary *dictionary);
+    virtual ~ObjectDictionaryCollection();
 
-    static_assert(std::is_pointer<pointer>::value, "T must be a pointer type.");
-    static_assert(std::is_base_of<NonGraphicalObject, pointee>::value,
-                  "T must point to a type derived from NonGraphicalObject.");
-
-    // clang-format off
-    ObjectDictionaryCollection(CadDictionary *dictionary) : _dictionary(dictionary) {}
-    virtual ~ObjectDictionaryCollection() {}
-
-    unsigned long long handle() const { return _dictionary->handle(); }
-    pointer operator[](const std::string &key) const { return dynamic_cast<pointer>(_dictionary->operator[](key)); }
-    void add(pointer v) { _dictionary->add(v); }
-    bool remove(const std::string &name, pointer *entry) 
-    { 
-        NonGraphicalObject* temp = nullptr;
-        bool result = _dictionary->remove(name, &temp);
-        *entry = dynamic_cast<pointer>(temp);
-        return result;
-    }
-    bool remove(const std::string &name) { return _dictionary->remove(name); }
-    bool containsKey(const std::string &name) const { return _dictionary->containsKey(name); }
-    bool tryGetEntry(const std::string &name, pointer *e) 
+    unsigned long long handle() const;
+    NonGraphicalObject *operator[](const std::string &key);
+    template<typename T>
+    T operator[](const std::string &key)
     {
-        NonGraphicalObject* temp = nullptr;
-        bool result = _dictionary->tryGetEntry(name, &temp);
-        *e = dynamic_cast<pointer>(temp);
-        return result;
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        static_assert(std::is_base_of<NonGraphicalObject, std::remove_pointer_t<T>>::value,
+                      "T must point to a type derived from NonGraphicalObject.");
+        return dynamic_cast<T>(_dictionary->operator[](key));
     }
-    void clear() { _dictionary->clear(); }
 
-    // clang-format on
+    virtual void add(NonGraphicalObject *v);
+
+    virtual bool remove(const std::string &name, NonGraphicalObject **entry);
+    virtual bool remove(const std::string &name);
+
+    bool containsKey(const std::string &name) const;
+    bool tryGetEntry(const std::string &name, NonGraphicalObject **e);
+
+    void clear();
 };
 
 }// namespace dwg

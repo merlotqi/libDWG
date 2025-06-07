@@ -23,45 +23,121 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/MLine.h>
+#include <dwg/CadDocument.h>
+#include <dwg/objects/MLineStyle.h>
+#include <dwg/objects/collections/MLineStyleCollection.h>
 
 namespace dwg {
 
-MLine::MLine(){}
+MLine::MLine() {}
 
-MLine::~MLine(){}
+MLine::~MLine() {}
 
-ObjectType MLine::objectType() const{ return ObjectType::MLINE; }
+ObjectType MLine::objectType() const
+{
+    return ObjectType::MLINE;
+}
 
-std::string MLine::objectName() const { return DxfFileToken::EntityMLine; }
+std::string MLine::objectName() const
+{
+    return DxfFileToken::EntityMLine;
+}
 
-std::string MLine::subclassMarker() const { return DxfSubclassMarker::MLine; }
+std::string MLine::subclassMarker() const
+{
+    return DxfSubclassMarker::MLine;
+}
 
-MLineStyle *MLine::style() const{ return _style; }
+MLineStyle *MLine::style() const
+{
+    return _style;
+}
 
-void MLine::setStyle(MLineStyle *style){ _style = style; }
+void MLine::setStyle(MLineStyle *style)
+{
+    if (_document)
+    {
+        _style = updateCollectionT<MLineStyle*>(_style, _document->mlineStyles());
+    }
+    else
+    {
+        _style = style;
+    }
+}
 
-double MLine::scaleFactor() const{ return _scaleFactor; }
+double MLine::scaleFactor() const
+{
+    return _scaleFactor;
+}
 
-void MLine::setScaleFactor(double scale){ _scaleFactor = scale; }
+void MLine::setScaleFactor(double scale)
+{
+    _scaleFactor = scale;
+}
 
-MLineJustification MLine::justification() const{ return _justification; }
+MLineJustification MLine::justification() const
+{
+    return _justification;
+}
 
-void MLine::setJustification(MLineJustification justification){ _justification = justification; }
+void MLine::setJustification(MLineJustification justification)
+{
+    _justification = justification;
+}
 
-MLineFlags MLine::flags() const{ return _flags;}
+MLineFlags MLine::flags() const
+{
+    return _flags;
+}
 
-void MLine::setFlags(MLineFlags flags){ _flags = flags; }
+void MLine::setFlags(MLineFlags flags)
+{
+    _flags = flags;
+}
 
-XYZ MLine::startPoint() const{ return _startPoint;}
+XYZ MLine::startPoint() const
+{
+    return _startPoint;
+}
 
-void MLine::setStartPoint(const XYZ &point){ _startPoint = point; }
+void MLine::setStartPoint(const XYZ &point)
+{
+    _startPoint = point;
+}
 
-XYZ MLine::normal() const{ return _normal; }
+XYZ MLine::normal() const
+{
+    return _normal;
+}
 
-void MLine::setNormal(const XYZ &normal){ _normal = normal; }
+void MLine::setNormal(const XYZ &normal)
+{
+    _normal = normal;
+}
 
-std::vector<MLine::Vertex> MLine::vertices() const{ return _vertices; }
+std::vector<MLine::Vertex> MLine::vertices() const
+{
+    return _vertices;
+}
 
-void MLine::setVertices(const std::vector<Vertex> &vertices){ _vertices = vertices;}
+void MLine::setVertices(const std::vector<Vertex> &vertices)
+{
+    _vertices = vertices;
+}
+
+void MLine::assignDocument(CadDocument* doc)
+{
+    Entity::assignDocument(doc);
+    _style = this->updateCollectionT<MLineStyle*>(_style, doc->mlineStyles());
+    doc->mlineStyles()->OnRemove.add(this, &MLine::mLineStylesOnRemove);
+
+}
+
+void MLine::unassignDocument()
+{
+
+}
+
+void MLine::mLineStylesOnRemove(CadObject *object) {}
 
 }// namespace dwg

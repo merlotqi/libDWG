@@ -22,11 +22,9 @@
 
 #pragma once
 
-#include <dwg/CadDocument.h>
 #include <dwg/CadObject.h>
 #include <dwg/IObservableCadCollection.h>
 #include <dwg/utils/Delegate.h>
-#include <fmt/core.h>
 #include <map>
 #include <string>
 #include <type_traits>
@@ -34,108 +32,62 @@
 
 namespace dwg {
 
-template<typename _Ty, typename _Derived>
-class Table : public CadObject, public IObservableCadCollection
+class LIBDWG_API Table : public CadObject, public IObservableCadCollection
 {
 public:
-    using pointer = std::remove_cv_t<_Ty>;
-    using pointee = std::remove_pointer_t<pointer>;
+    using pointer = TableEntry *;
+    using pointee = TableEntry;
     using iterator = typename std::map<std::string, pointer>::iterator;
     using const_iterator = typename std::map<std::string, pointer>::const_iterator;
 
     static_assert(std::is_pointer<pointer>::value, "T must be a pointer type.");
     static_assert(std::is_base_of<TableEntry, pointee>::value, "T must point to a type derived from TableEntry.");
 
-    Table() {}
-    Table(CadDocument *document)
-    {
-        _owner = document;
-        document->registerCollection(this);
-    }
-    ~Table() {}
+    Table();
+    Table(CadDocument *document);
+    ~Table();
 
-    // clang-format off
-    std::string objectName() const override { return "TABLE"; }
-    std::string subclassMarker() const override { return "AcDbSymbolTable"; }
-    std::size_t size() const { return _entries.size(); }
-    pointer operator[](const std::string &key) const
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
+    std::size_t size() const;
+    pointer operator[](const std::string &key);
+    void add(pointer v);
+    bool contains(const std::string &key) const;
+    pointer value(const std::string &key) const;
+    template<typename T>
+    T valueT(const std::string &key) const
     {
-        auto _it = _entries.find(key);
-        return (_it != _entries.end()) ? _it->second : nullptr;
-    }
-    void add(pointer v)
-    {
-        assert(v);
-        if(v->name().empty())
-            v->setName(createName());
-        push_back(v->name(), v);
-    }
-    bool contains(const std::string &key) const
-    {
-        auto _it = _entries.find(key);
-        return (_it != _entries.end()) ? true : false;
-    }
-    pointer value(const std::string &key) const
-    {
-        auto _it = _entries.find(key);
-        return (_it != _entries.end()) ? _it->second : nullptr;
+        pointer ptr = value(key);
+        return dynamic_cast<T>(ptr);
     }
 
-    iterator begin() { return _entries.begin(); }
-    iterator end() { return _entries.end(); }
-    const_iterator begin() const { return _entries.begin(); }
-    const_iterator end() const { return _entries.end(); }
-    void createDefaultEntries() 
+    iterator begin()
     {
-        auto ns = static_cast<_Derived*>(this)->defaultEntries();
-        for (auto&& entry : ns)
-        {
-            if(contains(entry))
-                continue;
-
-            push_back(entry, new pointee(entry));
-        }
+        return _entries.begin();
     }
-    std::vector<std::string> defaultEntries() const
+    iterator end()
     {
-        return std::vector<std::string>();
+        return _entries.end();
     }
-    // clang-format on
+    const_iterator begin() const
+    {
+        return _entries.begin();
+    }
+    const_iterator end() const
+    {
+        return _entries.end();
+    }
+    void createDefaultEntries();
+    std::vector<std::string> defaultEntries() const;
 
 protected:
-    void addHandlePrefix(pointer v)
-    {
-        assert(v);
-        v->setOwner(this);
-        v->OnNameChanged.add(this, &Table<_Ty, _Derived>::onEntryNameChanged);
-
-        OnAdd(v);
-
-        std::string k = fmt::format("{}:{}", v->handle(), v->name());
-        _entries.insert({k, v});
-    }
-
-    void push_back(const std::string &n, pointer v)
-    {
-        _entries.insert({n, v});
-        v->setOwner(this);
-        v->OnNameChanged.add(this, &Table<_Ty, _Derived>::onEntryNameChanged);
-        OnAdd(v);
-    }
+    void addHandlePrefix(pointer v);
+    void push_back(const std::string &n, pointer v);
+    virtual TableEntry *createEntry(const std::string &name) = 0;
 
 private:
-    std::string createName() const
-    {
-        std::string name = "unamed";
-        int i = 0;
-        while (contains(fmt::format("{}_{}", name, i)))
-        {
-            i++;
-        }
-        return fmt::format("{}_{}", name, i);
-    }
-
-    void onEntryNameChanged(const std::string &oldname, const std::string &newname) {}
+    std::string createName() const;
+    void onEntryNameChanged(const std::string &oldname, const std::string &newname);
 
 private:
     std::map<std::string, pointer> _entries;

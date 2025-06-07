@@ -47,4 +47,9 @@ std::vector<std::string> TextStylesTable::defaultEntries() const
     return {TextStyle::DefaultName};
 }
 
+TableEntry *TextStylesTable::createEntry(const std::string &name)
+{
+    return new TextStyle(name);
+}
+
 }// namespace dwg

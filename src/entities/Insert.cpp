@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Insert.h>
+#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
 
 namespace dwg {
 
@@ -172,14 +173,9 @@ bool Insert::isMultiple() const
     return false;
 }
 
-std::vector<AttributeEntity *> Insert::attributes() const { return _attributes;}
-
-void Insert::addAttribute(AttributeEntity *) {}
-
-void Insert::removeAttribute(AttributeEntity *) {}
-
-Seqend *Insert::seqend() const { return _seqend; }
-
-void Insert::setSeqend(Seqend *value) {_seqend = value; }
+AttributeEntitySeqendCollection *Insert::attributes()
+{
+    return _attributes;
+}
 
 }// namespace dwg

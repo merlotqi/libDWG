@@ -47,4 +47,9 @@ std::vector<std::string> UCSTable::defaultEntries() const
     return std::vector<std::string>();
 }
 
+TableEntry *UCSTable::createEntry(const std::string &name)
+{
+    return new UCS(name);
+}
+
 }// namespace dwg

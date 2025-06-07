@@ -47,4 +47,9 @@ std::vector<std::string> ViewsTable::defaultEntries() const
     return std::vector<std::string>();
 }
 
+TableEntry *ViewsTable::createEntry(const std::string &name)
+{
+    return new View(name);
+}
+
 }// namespace dwg

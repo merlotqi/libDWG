@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API UCSTable : public Table<UCS *, UCSTable>
+class LIBDWG_API UCSTable : public Table
 {
 public:
     UCSTable();
@@ -38,6 +38,9 @@ public:
     std::string objectName() const override;
 
     std::vector<std::string> defaultEntries() const;
+
+protected:
+    TableEntry *createEntry(const std::string &name) override;
 };
 
 }// namespace dwg

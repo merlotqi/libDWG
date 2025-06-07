@@ -28,14 +28,13 @@
 
 namespace dwg {
 
-class LIBDWG_API GroupCollection : public ObjectDictionaryCollection<Group *>
+class LIBDWG_API GroupCollection : public ObjectDictionaryCollection
 {
 public:
     GroupCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
     ~GroupCollection() = default;
 
-    using ObjectDictionaryCollection::add;
-    void add(Group *group);
+    void add(NonGraphicalObject *group) override;
 
     Group *createGroup(const std::initializer_list<Entity *> &range);
     Group *createGroup(const std::string &name, const std::initializer_list<Entity *> &range);

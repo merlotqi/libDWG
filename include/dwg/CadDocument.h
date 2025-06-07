@@ -54,6 +54,7 @@ class MLeaderStyleCollection;
 class CadDictionary;
 class BlockRecord;
 class CadObject;
+class EntityCollection;
 
 class LIBDWG_API CadDocument : public IHandledCadObject
 {
@@ -96,7 +97,7 @@ public:
     MLeaderStyleCollection *mleaderStyles() const;
 
     CadDictionary *rootDictionary() const;
-    std::vector<Entity *> entities() const;
+    EntityCollection *entities();
     void addEntity(Entity *);
     void removeEntity(Entity *);
 

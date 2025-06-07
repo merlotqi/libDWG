@@ -61,4 +61,9 @@ void VPortsTable::add(VPort *item)
     }
 }
 
+TableEntry *VPortsTable::createEntry(const std::string &name)
+{
+    return new VPort(name);
+}
+
 }// namespace dwg

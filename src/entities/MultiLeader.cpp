@@ -23,6 +23,10 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/MultiLeader.h>
+#include <dwg/CadDocument.h>
+#include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/objects/MultiLeaderAnnotContext.h>
+#include <dwg/objects/collections/MLeaderStyleCollection.h>
 
 namespace dwg {
 
@@ -223,7 +227,14 @@ MultiLeaderStyle *MultiLeader::style() const
 
 void MultiLeader::setStyle(MultiLeaderStyle *value)
 {
-    _style = value;
+    if (_document)
+    {
+        _style = updateCollectionT<MultiLeaderStyle *>(value, _document->mleaderStyles());
+    }
+    else
+    {
+        _style = value;
+    }
 }
 
 TextAlignmentType MultiLeader::textAlignment() const
@@ -415,5 +426,18 @@ void MultiLeader::setTextTopAttachment(TextAttachmentType value)
 {
     _textTopAttachment = value;
 }
+
+void MultiLeader::assignDocument(CadDocument *document) 
+{
+    Entity::assignDocument(document);
+    _style = updateCollectionT<MultiLeaderStyle *>(_style, document->mleaderStyles());
+
+    _contextData->assignDocument(document);
+
+}
+
+void MultiLeader::unassignDocument() {}
+
+void MultiLeader::tableOnRemove(CadObject *object) {}
 
 }// namespace dwg

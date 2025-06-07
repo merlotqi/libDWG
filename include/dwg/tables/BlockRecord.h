@@ -38,6 +38,7 @@ class BlockEnd;
 class Viewport;
 class SortEntitiesTable;
 class EvaluationGraph;
+class EntityCollection;
 class LIBDWG_API BlockRecord : public TableEntry
 {
     Block *_blockEntity = nullptr;
@@ -49,7 +50,7 @@ class LIBDWG_API BlockRecord : public TableEntry
     std::vector<unsigned char> _preview;
     Layout *_layout = nullptr;
     SortEntitiesTable *_sortEntitiesTable = nullptr;
-    std::vector<Entity *> _entities;
+    EntityCollection *_entities;
 
 public:
     BlockRecord();
@@ -101,9 +102,8 @@ public:
     std::vector<Viewport *> viewports() const;
 
 public:
-    std::vector<Entity *> entities() const;
-    void addEntity(Entity *);
-    void removeEntity(Entity *);
+    EntityCollection *entities();
+    
     Delegate<void(CadObject *)> OnAdd;
     Delegate<void(CadObject *)> OnRemove;
 };

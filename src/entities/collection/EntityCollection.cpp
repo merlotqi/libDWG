@@ -20,30 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/entities/PolyLine.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
-
-class VertexFaceRecordCollection;
-class LIBDWG_API PolyfaceMesh : public Polyline
-{
-public:
-    PolyfaceMesh();
-    ~PolyfaceMesh();
-
-    ObjectType objectType() const override;
-    std::string objectName() const override;
-    std::string subclassMarker() const override;
-
-    VertexFaceRecordCollection *faces();
-
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
-
-private:
-    VertexFaceRecordCollection *_faces;
-};
 
 }// namespace dwg

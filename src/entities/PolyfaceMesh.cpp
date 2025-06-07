@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/PolyfaceMesh.h>
+#include <dwg/entities/collection/VertexFaceRecordCollection.h>
 
 namespace dwg {
 
@@ -36,10 +37,9 @@ std::string PolyfaceMesh::objectName() const  { return DxfFileToken::EntityPolyl
 
 std::string PolyfaceMesh::subclassMarker() const  { return DxfSubclassMarker::PolyfaceMesh; }
 
-std::vector<VertexFaceRecord *> PolyfaceMesh::faces() const { return _faces; }
-
-void PolyfaceMesh::addFace(VertexFaceRecord *) {}
-
-void PolyfaceMesh::removeFace(VertexFaceRecord *) {}
+VertexFaceRecordCollection *PolyfaceMesh::faces()
+{
+    return _faces;
+}
 
 }// namespace dwg

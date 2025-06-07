@@ -179,6 +179,13 @@ public:
     void setTextTopAttachment(TextAttachmentType);
 
 private:
+    void assignDocument(CadDocument *document) override;
+    void unassignDocument() override;
+
+private:
+    void tableOnRemove(CadObject *object);
+
+private:
     BlockRecord *_arrowhead;
     double _arrowheadSize;
     std::vector<BlockAttribute> _blockAttributes;

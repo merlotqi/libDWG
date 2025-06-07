@@ -68,6 +68,9 @@
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
+#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
+#include <dwg/entities/collection/VertexFaceRecordCollection.h>
+#include <dwg/entities/collection/VertexSeqendCollection.h>
 
 namespace dwg {
 
@@ -381,7 +384,7 @@ void DwgObjectWriter::writeInsert(Insert *insert)
     if (R2004Plus && insert->hasAttributes())
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(insert->attributes().size());
+        _writer->writeBitLong(insert->attributes()->size());
     }
 
     if (insert->isMultiple())
@@ -410,22 +413,22 @@ void DwgObjectWriter::writeInsert(Insert *insert)
     //R13 - R2000:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015)
     {
-        _writer->handleReference(DwgReferenceType::SoftPointer, insert->attributes().front());
-        _writer->handleReference(DwgReferenceType::SoftPointer, insert->attributes().back());
+        _writer->handleReference(DwgReferenceType::SoftPointer, insert->attributes()->front());
+        _writer->handleReference(DwgReferenceType::SoftPointer, insert->attributes()->back());
     }
     //R2004+:
     else if (R2004Plus)
     {
-        for (auto &&att: insert->attributes())
+        for (auto att = insert->attributes()->begin(); att != insert->attributes()->end(); ++att)
         {
             //H[ATTRIB(hard owner)] Repeats "Owned Object Count" times.
-            _writer->handleReference(DwgReferenceType::HardOwnership, att);
+            _writer->handleReference(DwgReferenceType::HardOwnership, *att);
         }
     }
 
     //Common:
     //H[SEQEND(hard owner)] if 66 bit set
-    _writer->handleReference(DwgReferenceType::HardOwnership, insert->seqend());
+    _writer->handleReference(DwgReferenceType::HardOwnership, insert->attributes()->seqend());
 }
 
 void DwgObjectWriter::writeFace3D(Face3D *face)
@@ -1440,23 +1443,23 @@ void DwgObjectWriter::writePoint(Point *point)
 void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
 {
     //Numverts BS 71 Number of vertices in the mesh.
-    _writer->writeBitShort((short) fm->vertices().size());
+    _writer->writeBitShort((short) fm->vertices()->size());
     //Numfaces BS 72 Number of faces
-    _writer->writeBitShort((short) fm->faces().size());
+    _writer->writeBitShort((short) fm->faces()->size());
 
     //R2004 +:
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(fm->vertices().size() + fm->faces().size());
-        for (auto &&v: fm->vertices())
+        _writer->writeBitLong(fm->vertices()->size() + fm->faces()->size());
+        for (auto v = fm->vertices()->begin(); v != fm->vertices()->end(); ++v)
         {
             //H[VERTEX(soft pointer)] Repeats "Owned Object Count" times.
-            _writer->handleReference(DwgReferenceType::SoftPointer, v);
+            _writer->handleReference(DwgReferenceType::SoftPointer, *v);
         }
-        for (auto &&f: fm->faces())
+        for (auto f = fm->faces()->begin(); f != fm->faces()->end(); ++f)
         {
-            _writer->handleReference(DwgReferenceType::SoftPointer, f);
+            _writer->handleReference(DwgReferenceType::SoftPointer, *f);
         }
     }
 
@@ -1464,7 +1467,7 @@ void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
     if (R13_15Only)
     {
         std::vector<CadObject *> child;
-        child.insert(child.end(), fm->faces().begin(), fm->faces().end());
+        child.insert(child.end(), fm->faces()->begin(), fm->faces()->end());
         CadObject *first = nullptr, *last = nullptr;
         if (!child.empty())
         {
@@ -1480,7 +1483,7 @@ void DwgObjectWriter::writePolyfaceMesh(PolyfaceMesh *fm)
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::SoftPointer, fm->seqend());
+    _writer->handleReference(DwgReferenceType::SoftPointer, fm->vertices()->seqend());
 }
 
 void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
@@ -1500,7 +1503,7 @@ void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
     //Extrusion BE 210
     _writer->writeBitExtrusion(pline->normal());
 
-    int count = pline->vertices().size();
+    int count = pline->vertices()->size();
     //R2004+:
     if (R2004Plus)
     {
@@ -1508,14 +1511,14 @@ void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
         _writer->writeBitLong(count);
         for (int i = 0; i < count; i++)
         {
-            _writer->handleReference(DwgReferenceType::HardOwnership, pline->vertices().at(i));
+            _writer->handleReference(DwgReferenceType::HardOwnership, pline->vertices()->at(i));
         }
     }
 
     //R13-R2000:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015)
     {
-        if (pline->vertices().empty())
+        if (pline->vertices()->empty())
         {
             //H first VERTEX (soft pointer)
             _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
@@ -1525,15 +1528,15 @@ void DwgObjectWriter::writePolyline2D(Polyline2D *pline)
         else
         {
             //H first VERTEX (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().front());
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices()->front());
             //H last VERTEX (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().back());
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices()->back());
         }
     }
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, pline->seqend());
+    _writer->handleReference(DwgReferenceType::HardOwnership, pline->vertices()->seqend());
 }
 
 void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
@@ -1553,33 +1556,33 @@ void DwgObjectWriter::writePolyline3D(Polyline3D *pline)
     if (R2004Plus)
     {
         //Owned Object Count BL Number of objects owned by this object.
-        _writer->writeBitLong(pline->vertices().size());
+        _writer->writeBitLong(pline->vertices()->size());
 
-        for (auto &&vertex: pline->vertices())
+        for (auto vertex = pline->vertices()->begin(); vertex != pline->vertices()->end(); ++vertex)
         {
-            _writer->handleReference(DwgReferenceType::HardOwnership, vertex);
+            _writer->handleReference(DwgReferenceType::HardOwnership, *vertex);
         }
     }
 
     //R13-R2000:
     if (_version >= ACadVersion::AC1012 && _version <= ACadVersion::AC1015)
     {
-        if (pline->vertices().empty())
+        if (pline->vertices()->empty())
         {
             _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
             _writer->handleReference(DwgReferenceType::SoftPointer, nullptr);
         }
         {
             //H first VERTEX (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().front());
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices()->front());
             //H last VERTEX (soft pointer)
-            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices().back());
+            _writer->handleReference(DwgReferenceType::SoftPointer, pline->vertices()->back());
         }
     }
 
     //Common:
     //H SEQEND(hard owner)
-    _writer->handleReference(DwgReferenceType::HardOwnership, pline->seqend());
+    _writer->handleReference(DwgReferenceType::HardOwnership, pline->vertices()->seqend());
 }
 
 void DwgObjectWriter::writeSeqend(Seqend *seqend)

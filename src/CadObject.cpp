@@ -111,4 +111,11 @@ void CadObject::assignDocument(CadDocument *doc) {}
 
 void CadObject::unassignDocument() {}
 
+NonGraphicalObject *CadObject::updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *collection)
+{
+    return nullptr;
+}
+
+void CadObject::updateTable(TableEntry *entry, Table *table) {}
+
 }// namespace dwg

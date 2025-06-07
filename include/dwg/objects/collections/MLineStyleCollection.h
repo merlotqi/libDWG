@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection<MLineStyle *>
+class LIBDWG_API MLineStyleCollection : public ObjectDictionaryCollection
 {
 public:
     MLineStyleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}

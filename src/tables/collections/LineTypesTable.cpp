@@ -49,17 +49,22 @@ std::vector<std::string> LineTypesTable::defaultEntries() const
 
 LineType *LineTypesTable::byLayer() const
 {
-    return value(LineType::ByLayerName);
+    return valueT<LineType *>(LineType::ByLayerName);
 }
 
 LineType *LineTypesTable::byBlock() const
 {
-    return value(LineType::ByBlockName);
+    return valueT<LineType *>(LineType::ByBlockName);
 }
 
 LineType *LineTypesTable::continuous() const
 {
-    return value(LineType::ContinuousName);
+    return valueT<LineType *>(LineType::ContinuousName);
+}
+
+TableEntry *LineTypesTable::createEntry(const std::string &name)
+{
+    return new LineType(name);
 }
 
 }// namespace dwg

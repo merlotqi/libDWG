@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection<MultiLeaderStyle *>
+class LIBDWG_API MLeaderStyleCollection : public ObjectDictionaryCollection
 {
 public:
     MLeaderStyleCollection(CadDictionary *dictionary) : ObjectDictionaryCollection(dictionary) {}
