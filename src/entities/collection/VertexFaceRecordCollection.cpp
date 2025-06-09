@@ -24,4 +24,41 @@
 
 namespace dwg {
 
+VertexFaceRecordCollection::VertexFaceRecordCollection(CadObject *owner) : _owner(owner) 
+{
+}
+
+VertexFaceRecordCollection::~VertexFaceRecordCollection() {}
+
+CadObject *VertexFaceRecordCollection::owner() const
+{
+    return _owner;
+}
+
+size_t VertexFaceRecordCollection::size() const
+{
+    return _entities.size();
+}
+
+VertexFaceRecord *VertexFaceRecordCollection::at(size_t index)
+{
+    return _entities.at(index);
+}
+
+VertexFaceRecord *VertexFaceRecordCollection::operator[](size_t index)
+{
+    return _entities.operator[](index);
+}
+
+void VertexFaceRecordCollection::add(VertexFaceRecord *entity) {}
+
+void VertexFaceRecordCollection::add(const std::initializer_list<VertexFaceRecord *> &entities) {}
+
+VertexFaceRecord *VertexFaceRecordCollection::remove(VertexFaceRecord *entity)
+{
+    return entity;
+}
+
+void VertexFaceRecordCollection::clear() {}
+
 }// namespace dwg

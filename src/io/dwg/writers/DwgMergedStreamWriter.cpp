@@ -57,39 +57,90 @@ long long DwgMergedStreamWriter::savedPositionInBits() const
     return 0LL;
 }
 
-void DwgMergedStreamWriter::writeBytes(const std::vector<unsigned char> &bytes) {}
+void DwgMergedStreamWriter::writeBytes(const std::vector<unsigned char> &bytes) 
+{
+    _main->writeBytes(bytes);
+}
 
-void DwgMergedStreamWriter::writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) {}
+void DwgMergedStreamWriter::writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) 
+{
+    _main->writeBytes(bytes, offset, length);
+}
 
-void DwgMergedStreamWriter::writeInt(int value) {}
+void DwgMergedStreamWriter::writeInt(int value) 
+{
+    _main->writeInsert(value);
+}
 
-void DwgMergedStreamWriter::writeObjectType(short value) {}
+void DwgMergedStreamWriter::writeObjectType(short value) 
+{
+    _main->writeObjectType(value);
+}
 
-void DwgMergedStreamWriter::writeObjectType(ObjectType value) {}
+void DwgMergedStreamWriter::writeObjectType(ObjectType value) 
+{
+    _main->writeObjectType(value);
+}
 
-void DwgMergedStreamWriter::writeRawLong(long long value) {}
+void DwgMergedStreamWriter::writeRawLong(long long value) 
+{
+    _main->writeRawLong(value);
+}
 
-void DwgMergedStreamWriter::writeBitDouble(double value) {}
+void DwgMergedStreamWriter::writeBitDouble(double value) 
+{
+    _main->writeBitDouble(value);
+}
 
-void DwgMergedStreamWriter::writeBitLong(int value) {}
+void DwgMergedStreamWriter::writeBitLong(int value) 
+{
+    _main->writeBitLong(value);
+}
 
-void DwgMergedStreamWriter::writeBitLongLong(long long value) {}
+void DwgMergedStreamWriter::writeBitLongLong(long long value) 
+{
+    _main->writeBitLongLong(value);
+}
 
-void DwgMergedStreamWriter::writeVariableText(const std::string &value) {}
+void DwgMergedStreamWriter::writeVariableText(const std::string &value) 
+{
+    _main->writeVariableText(value);
+}
 
-void DwgMergedStreamWriter::writeTextUtf8(const std::string &value) {}
+void DwgMergedStreamWriter::writeTextUtf8(const std::string &value) 
+{
+    _main->writeTextUtf8(value);
+}
 
-void DwgMergedStreamWriter::writeBit(bool value) {}
+void DwgMergedStreamWriter::writeBit(bool value) 
+{
+    _main->writeBit(value);
+}
 
-void DwgMergedStreamWriter::write2Bits(unsigned char value) {}
+void DwgMergedStreamWriter::write2Bits(unsigned char value) 
+{
+    _main->write2Bits(value);
+}
 
-void DwgMergedStreamWriter::writeBitShort(short value) {}
+void DwgMergedStreamWriter::writeBitShort(short value) 
+{
+    _main->writeBitShort(value);
+}
 
-void DwgMergedStreamWriter::writeDateTime(const DateTime &value) {}
+void DwgMergedStreamWriter::writeDateTime(const DateTime &value) 
+{
+    _main->writeDateTime(value);
+}
 
-void DwgMergedStreamWriter::write8BitJulianDate(const DateTime &value) {}
+void DwgMergedStreamWriter::write8BitJulianDate(const DateTime &value) 
+{
+    _main->write8BitJulianDate(value);
+}
 
-void DwgMergedStreamWriter::writeTimeSpan(const Timespan &value) {}
+void DwgMergedStreamWriter::writeTimeSpan(const Timespan &value) 
+{
+    _main->writeTimeSpan(value);
+}
 
 void DwgMergedStreamWriter::writeCmColor(const Color &value) {}
 

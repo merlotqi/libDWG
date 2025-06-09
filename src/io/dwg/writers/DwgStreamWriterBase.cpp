@@ -118,34 +118,73 @@ IDwgStreamWriter *DwgStreamWriterBase::GetMergedWriter(ACadVersion version, std:
 
 std::ostream *DwgStreamWriterBase::stream()
 {
-    return nullptr;
+    return _stream;
 }
 
 Encoding DwgStreamWriterBase::encoding()
 {
-    return Encoding();
+    return _encoding;
 }
 
 IDwgStreamWriter *DwgStreamWriterBase::main() const
 {
-    return nullptr;
+    return _msmain;
 }
 
 long long DwgStreamWriterBase::positionInBits() const
 {
-    return 0LL;
+    return _position * 8 + _bitShift;
 }
 
 long long DwgStreamWriterBase::savedPositionInBits() const
 {
-    return 0LL;
+    return _savedPositionInBits;
 }
 
-void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes) {}
+void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes) 
+{
+    if(_bitShift == 0)
+    {
+        for(int i = 0; i < bytes.size(); ++i)
+        {
+            _stream->write(bytes.at(i), 1);
+        }
+        return;
+    }
 
-void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) {}
+    int num = 8 - _bitShift;
+    for(auto && b : bytes)
+    {
+        _stream->write(static_cast<const char*>(_lastByte | (b >> _bitShift)), 1);
+        _lastByte = (unsigned char)(b << num);
+    }
+}
 
-void DwgStreamWriterBase::writeInt(int value) {}
+void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes, int initialIndex, int length) 
+{
+    if(_bitShift == 0)
+    {
+        for(int i = 0, j = initialIndex; i < length; ++i, ++j)
+        {
+            _stream->write(bytes.at(j), 1);
+        }
+        return;
+    }
+
+    int num = 8 - _bitShift;
+    for (int i = 0, j = initialIndex; i < length; i++, j++)
+    {
+        unsigned char b = bytes[j];
+        _stream->write(static_cast<const char*>(_lastByte | (b >> _bitShift)), 1);
+        _lastByte = (unsigned char)(b << num);
+    }
+}
+
+void DwgStreamWriterBase::writeInt(int value) 
+{
+    std::vector<unsigned char> arr = LittleEndianConverter::instance()->bytes(value);
+    _stream->write(reinterpret_cast<const char *>(arr.data()), arr.size());
+}
 
 void DwgStreamWriterBase::writeObjectType(short value)
 {
@@ -162,17 +201,109 @@ void DwgStreamWriterBase::writeRawLong(long long value)
     writeBytes(LittleEndianConverter::instance()->bytes(value));
 }
 
-void DwgStreamWriterBase::writeBitDouble(double value) {}
+void DwgStreamWriterBase::writeBitDouble(double value) 
+{
+    if (value == 0.0)
+    {
+        write2Bits(2);
+        return;
+    }
 
-void DwgStreamWriterBase::writeBitLong(int value) {}
+    if (value == 1.0)
+    {
+        write2Bits(1);
+        return;
+    }
 
-void DwgStreamWriterBase::writeBitLongLong(long long value) {}
+    write2Bits(0);
+    writeBytes(LittleEndianConverter::instance()->bytes(value));
+}
 
-void DwgStreamWriterBase::writeVariableText(const std::string &value) {}
+void DwgStreamWriterBase::writeBitLong(int value) 
+{
+    if( value == 0)
+    {
+        write2Bits(2);
+        return;
+    }
 
-void DwgStreamWriterBase::writeTextUtf8(const std::string &value) {}
+    if (value > 0 && value < 256)
+    {
+        write2Bits(1);
+        writeByte((unsigned char)value);
+        return;
+    }
 
-void DwgStreamWriterBase::writeBit(bool value) {}
+    write2Bits(0);
+    writeByte((unsigned char)value);
+    writeByte((unsigned char)(value >> 8));
+    writeByte((unsigned char)(value >> 16));
+    writeByte((unsigned char)(value >> 24));
+}
+
+void DwgStreamWriterBase::writeBitLongLong(long long value) 
+{
+    unsigned char size = 0;
+    unsigned long long unsignedValue = (unsigned long long)value;
+
+    unsigned long long hold = unsignedValue;
+    while (hold != 0)
+    {
+        hold >>= 8;
+        size = (unsigned char)(size + 1);
+    }
+
+    write3Bits(size);
+
+    hold = unsignedValue;
+    for (int i = 0; i < size; ++i)
+    {
+        writeByte((unsigned char)(hold & 0xFF));
+        hold >>= 8;
+    }
+}
+
+void DwgStreamWriterBase::writeVariableText(const std::string &value) 
+{
+    if(value.empty())
+    {
+        writeBitShort(0);
+        return;
+    }
+
+    std::vector<unsigned char> bytes = _encoding.bytes(value);
+    writeBitShort((short)(bytes.size()));
+    writeBytes(bytes);
+}
+
+void DwgStreamWriterBase::writeTextUtf8(const std::string &value) 
+{
+    std::vector<unsigned char> bytes = _encoding.bytes(value);
+    writeRawUShort((unsigned short)(bytes.size() + 1));
+    _stream->write(reinterpret_cast<const char *>(bytes.data()), bytes.size());
+    _stream->write(0, 1);
+}
+
+void DwgStreamWriterBase::writeBit(bool value) 
+{
+    if(_bitShift < 7)
+    {
+        if(value)
+        {
+            _lastByte |= (unsigned char)(1 << 7 - _bitShift);
+        }
+        _bitShift++;
+        return;
+    }
+
+    if(value)
+    {
+        _lastByte |= 1;
+    }
+
+    _stream->write(_lastByte, 1);
+    resetShift();
+}
 
 void DwgStreamWriterBase::write2Bits(unsigned char value)
 {
@@ -290,27 +421,157 @@ void DwgStreamWriterBase::write2RawDouble(const XY &value)
     writeRawDouble(value.Y);
 }
 
-void DwgStreamWriterBase::writeByte(unsigned char value) {}
+void DwgStreamWriterBase::writeByte(unsigned char value) 
+{
+	if (_bitShift == 0)
+	{
+        _stream->write(value, 1);
+		return;
+	}
 
-void DwgStreamWriterBase::handleReference(IHandledCadObject *cadObject) {}
+	int shift = 8 - _bitShift;
+	_stream->write((unsigned char)(this._lastByte | (value >> _bitShift)));
+	_lastByte = (unsigned char)(value << shift);
+}
 
-void DwgStreamWriterBase::handleReference(DwgReferenceType type, IHandledCadObject *cadObject) {}
+void DwgStreamWriterBase::handleReference(IHandledCadObject *cadObject) 
+{
+    handleReference(DwgReferenceType::Undefined, cadObject);
+}
 
-void DwgStreamWriterBase::handleReference(unsigned long long handle) {}
+void DwgStreamWriterBase::handleReference(DwgReferenceType type, IHandledCadObject *cadObject) 
+{
+    if (!cadObject)
+    {
+        handleReference(type, 0ULL);
+    }
+    else
+    {
+        handleReference(type, cadObject->handle());
+    }
+}
 
-void DwgStreamWriterBase::handleReference(DwgReferenceType type, unsigned long long handle) {}
+void DwgStreamWriterBase::handleReference(unsigned long long handle) 
+{
+    handleReference(DwgReferenceType::Undefined, handle);
+}
 
-void DwgStreamWriterBase::writeSpearShift() {}
+void DwgStreamWriterBase::handleReference(DwgReferenceType type, unsigned long long handle) 
+{
+    unsigned char b = (unsigned char)((unsigned int)type << 4);
 
-void DwgStreamWriterBase::writeRawShort(short value) {}
+    if (handle == 0)
+    {
+        writeByte(b);
+    }
+    else if(handle < 0x100)
+    {
+        writeByte((unsigned char)(b | 1U));
+        writeByte((unsigned char)handle);
+    }
+    else if( handle < 0x10000)
+    {
+		writeByte((unsigned char)(b | 2u));
+		writeByte((unsigned char)(handle >> 8));
+		writeByte((unsigned char)handle);
+    }
+	else if (handle < 0x1000000)
+	{
+		writeByte((unsigned char)(b | 3u));
+		writeByte((unsigned char)(handle >> 16));
+		writeByte((unsigned char)(handle >> 8));
+		writeByte((unsigned char)handle);
+	}
+    else if (handle < 0x100000000L)
+    {
+        writeByte((unsigned char)(b | 4u));
+        writeByte((unsigned char)(handle >> 24));
+        writeByte((unsigned char)(handle >> 16));
+        writeByte((unsigned char)(handle >> 8));
+        writeByte((unsigned char)handle);
+    }
+    else if (handle < 0x10000000000L)
+    {
+        writeByte((unsigned char)(b | 5u));
+        writeByte((unsigned char)(handle >> 32));
+        writeByte((unsigned char)(handle >> 24));
+        writeByte((unsigned char)(handle >> 16));
+        writeByte((unsigned char)(handle >> 8));
+        writeByte((unsigned char)handle);
+    }
+    else if (handle < 0x1000000000000L)
+    {
+        writeByte((unsigned char)(b | 6u));
+        writeByte((unsigned char)(handle >> 40));
+        writeByte((unsigned char)(handle >> 32));
+        writeByte((unsigned char)(handle >> 24));
+        writeByte((unsigned char)(handle >> 16));
+        writeByte((unsigned char)(handle >> 8));
+        writeByte((unsigned char)handle);
+    }
+    else if (handle < 0x100000000000000L)
+    {
+        writeByte((unsigned char)(b | 7u));
+        writeByte((unsigned char)(handle >> 48));
+        writeByte((unsigned char)(handle >> 40));
+        writeByte((unsigned char)(handle >> 32));
+        writeByte((unsigned char)(handle >> 24));
+        writeByte((unsigned char)(handle >> 16));
+        writeByte((unsigned char)(handle >> 8));
+        writeByte((unsigned char)handle);
+    }
+    else
+    {
+        writeByte((unsigned char)(b | 8u));
+        writeByte((unsigned char)(handle >> 56));
+        writeByte((unsigned char)(handle >> 48));
+        writeByte((unsigned char)(handle >> 40));
+        writeByte((unsigned char)(handle >> 32));
+        writeByte((unsigned char)(handle >> 24));
+        writeByte((unsigned char)(handle >> 16));
+        writeByte((unsigned char)(handle >> 8));
+        writeByte((unsigned char)handle);
+    }
+		
+}
 
-void DwgStreamWriterBase::writeRawUShort(unsigned short value) {}
+void DwgStreamWriterBase::writeSpearShift() 
+{
+    if(_bitShift > 0)
+    {
+        for(int i = _bitShift; i < 8; ++i)
+        {
+            writeBit(false);
+        }
+    }
+}
 
-void DwgStreamWriterBase::writeRawDouble(double value) {}
+void DwgStreamWriterBase::writeRawShort(short value) 
+{
+    writeBytes(LittleEndianConverter::instance()->bytes(value));
+}
 
-void DwgStreamWriterBase::writeBitThickness(double thickness) {}
+void DwgStreamWriterBase::writeRawUShort(unsigned short value) 
+{
+    writeBytes(LittleEndianConverter::instance()->bytes(value));
+}
 
-void DwgStreamWriterBase::writeBitExtrusion(const XYZ &normal) {}
+void DwgStreamWriterBase::writeRawDouble(double value) 
+{
+    writeBytes(LittleEndianConverter::instance()->bytes(value));
+}
+
+void DwgStreamWriterBase::writeBitThickness(double thickness) 
+{
+	//For R13-R14, this is a BD.
+    writeBitDouble(thickness);
+}
+
+void DwgStreamWriterBase::writeBitExtrusion(const XYZ &normal) 
+{
+	//For R13-R14 this is 3BD.
+	write3BitDouble(normal);
+}
 
 void DwgStreamWriterBase::writeBitDoubleWithDefault(double def, double value)
 {
@@ -374,14 +635,40 @@ void DwgStreamWriterBase::write3BitDoubleWithDefault(const XYZ &def, const XYZ &
     writeBitDoubleWithDefault(def.Z, value.Z);
 }
 
-void DwgStreamWriterBase::resetStream() {}
+void DwgStreamWriterBase::resetStream() 
+{
+    _stream->seekg(std::ios::beg);
+    resetShift();
+    _stream->setLength(0);
+}
 
 void DwgStreamWriterBase::savePositonForSize()
 {
     writeRawLong(0);
 }
 
-void DwgStreamWriterBase::setPositionInBits(long long posInBits) {}
+void DwgStreamWriterBase::setPositionInBits(long long posInBits) 
+{
+			long position = posInBits / 8;
+			_bitShift = (int)(posInBits % 8);
+			this._stream->seekg(position);
+
+			if (_bitShift > 0)
+			{
+				int value = this._stream.ReadByte();
+				if (value < 0)
+				{
+					throw new EndOfStreamException();
+				}
+				this._lastByte = (unsigned char)value;
+			}
+			else
+			{
+				_lastByte = 0;
+			}
+
+			_stream->seekg(position);
+}
 
 void DwgStreamWriterBase::setPositionByFlag(long long pos)
 {
@@ -405,8 +692,22 @@ void DwgStreamWriterBase::setPositionByFlag(long long pos)
     }
 }
 
-void DwgStreamWriterBase::writeShiftValue() {}
+void DwgStreamWriterBase::writeShiftValue() 
+{
+	if (this.BitShift > 0)
+	{
+		long position = this._stream.Position;
+		int lastValue = this._stream.ReadByte();
+		unsigned char currValue = (unsigned char)(this._lastByte | ((unsigned char)lastValue & (0b11111111 >> this.BitShift)));
+		this._stream.Position = position;
+		this._stream.WriteByte(currValue);
+	}
+}
 
-void DwgStreamWriterBase::resetShift() {}
+void DwgStreamWriterBase::resetShift() 
+{
+    _bitShift = 0;
+    _lastByte = 0;
+}
 
 }// namespace dwg

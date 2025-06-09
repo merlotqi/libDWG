@@ -24,4 +24,41 @@
 
 namespace dwg {
 
+EntityCollection::EntityCollection(CadObject *owner) : _owner(owner) 
+{
+}
+
+EntityCollection::~EntityCollection() {}
+
+CadObject *EntityCollection::owner() const
+{
+    return _owner;
+}
+
+size_t EntityCollection::size() const
+{
+    return _entities.size();
+}
+
+Entity *EntityCollection::at(size_t index)
+{
+    return _entities.at(index);
+}
+
+Entity *EntityCollection::operator[](size_t index)
+{
+    return _entities.operator[](index);
+}
+
+void EntityCollection::add(Entity *entity) {}
+
+void EntityCollection::add(const std::initializer_list<Entity *> &entities) {}
+
+Entity *EntityCollection::remove(Entity *entity)
+{
+    return entity;
+}
+
+void EntityCollection::clear() {}
+
 }// namespace dwg

@@ -21,7 +21,56 @@
  */
 
 #include <dwg/entities/collection/VertexSeqendCollection.h>
+#include <dwg/entities/Seqend.h>
 
 namespace dwg {
+
+VertexSeqendCollection::VertexSeqendCollection(CadObject *owner) : _owner(owner) 
+{
+    _seqend = new Seqend();
+}
+
+VertexSeqendCollection::~VertexSeqendCollection() {}
+
+CadObject *VertexSeqendCollection::owner() const
+{
+    return _owner;
+}
+
+Seqend *VertexSeqendCollection::seqend() const
+{
+    return _seqend;
+}
+
+void VertexSeqendCollection::setSeqend(Seqend *value)
+{
+    _seqend = value;
+}
+
+size_t VertexSeqendCollection::size() const
+{
+    return _entities.size();
+}
+
+Vertex *VertexSeqendCollection::at(size_t index)
+{
+    return _entities.at(index);
+}
+
+Vertex *VertexSeqendCollection::operator[](size_t index)
+{
+    return _entities.operator[](index);
+}
+
+void VertexSeqendCollection::add(Vertex *entity) {}
+
+void VertexSeqendCollection::add(const std::initializer_list<Vertex *> &entities) {}
+
+Vertex *VertexSeqendCollection::remove(Vertex *entity)
+{
+    return entity;
+}
+
+void VertexSeqendCollection::clear() {}
 
 }// namespace dwg

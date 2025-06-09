@@ -116,6 +116,9 @@ NonGraphicalObject *CadObject::updateCollection(NonGraphicalObject *entry, Objec
     return nullptr;
 }
 
-void CadObject::updateTable(TableEntry *entry, Table *table) {}
+TableEntry *CadObject::updateTable(TableEntry *entry, Table *table) 
+{
+    return nullptr;
+}
 
 }// namespace dwg

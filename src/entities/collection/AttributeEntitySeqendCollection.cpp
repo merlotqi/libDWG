@@ -21,7 +21,56 @@
  */
 
 #include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
+#include <dwg/entities/Seqend.h>
 
 namespace dwg {
+
+AttributeEntitySeqendCollection::AttributeEntitySeqendCollection(CadObject *owner) : _owner(owner) 
+{
+    _seqend = new Seqend();
+}
+
+AttributeEntitySeqendCollection::~AttributeEntitySeqendCollection() {}
+
+CadObject *AttributeEntitySeqendCollection::owner() const
+{
+    return _owner;
+}
+
+Seqend *AttributeEntitySeqendCollection::seqend() const
+{
+    return _seqend;
+}
+
+void AttributeEntitySeqendCollection::setSeqend(Seqend *value)
+{
+    _seqend = value;
+}
+
+size_t AttributeEntitySeqendCollection::size() const
+{
+    return _entities.size();
+}
+
+AttributeEntity *AttributeEntitySeqendCollection::at(size_t index)
+{
+    return _entities.at(index);
+}
+
+AttributeEntity *AttributeEntitySeqendCollection::operator[](size_t index)
+{
+    return _entities.operator[](index);
+}
+
+void AttributeEntitySeqendCollection::add(AttributeEntity *entity) {}
+
+void AttributeEntitySeqendCollection::add(const std::initializer_list<AttributeEntity *> &entities) {}
+
+AttributeEntity *AttributeEntitySeqendCollection::remove(AttributeEntity *entity)
+{
+    return entity;
+}
+
+void AttributeEntitySeqendCollection::clear() {}
 
 }// namespace dwg

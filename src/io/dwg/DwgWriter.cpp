@@ -47,14 +47,12 @@
 namespace dwg {
 
 DwgWriter::DwgWriter(const std::string &filename, CadDocument *document)
+    : DwgWriter(new std::ofstream(filename, std::ios::binary), document)
 {
-    if (!document)
-        throw std::invalid_argument("document is null");
-    _stream = new std::ofstream(filename, std::ios::binary);
-    _document = document;
 }
 
-DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document) : CadWriterBase(stream, document)
+DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document)
+    : CadWriterBase(stream, document), _fileHeaderWriter(nullptr)
 {
     _version = document->header()->version();
     _fileHeader = DwgFileHeader::CreateFileHeader(_version);
