@@ -24,9 +24,9 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
+#include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
-#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -77,15 +77,24 @@ std::string BlockRecord::subclassMarker() const
     return DxfSubclassMarker::BlockRecord;
 }
 
-BlockEnd *BlockRecord::blockEnd() { return _blockEnd; }
+BlockEnd *BlockRecord::blockEnd()
+{
+    return _blockEnd;
+}
 
 void BlockRecord::setBlockEnd(BlockEnd *) {}
 
-Block *BlockRecord::blockEntity() const { return _blockEntity; }
+Block *BlockRecord::blockEntity() const
+{
+    return _blockEntity;
+}
 
 void BlockRecord::setBlockEntity(Block *) {}
 
-EvaluationGraph *BlockRecord::evaluationGraph() const { return _evaluationGraph; }
+EvaluationGraph *BlockRecord::evaluationGraph() const
+{
+    return _evaluationGraph;
+}
 
 void BlockRecord::setEvaluationGraph(EvaluationGraph *) {}
 
@@ -154,13 +163,19 @@ void BlockRecord::setLayout(Layout *layout)
     _layout = layout;
 }
 
-SortEntitiesTable *BlockRecord::sortEntitiesTable() const { return _sortEntitiesTable; }
+SortEntitiesTable *BlockRecord::sortEntitiesTable() const
+{
+    return _sortEntitiesTable;
+}
 
 void BlockRecord::setSortEntitiesTable(SortEntitiesTable *) {}
 
-std::vector<Viewport *> BlockRecord::viewports() const { return std::vector<Viewport *>(); }
+std::vector<Viewport *> BlockRecord::viewports() const
+{
+    return std::vector<Viewport *>();
+}
 
-EntityCollection* BlockRecord::entities()
+EntityCollection *BlockRecord::entities()
 {
     return _entities;
 }

@@ -828,29 +828,20 @@ LineType *DimensionStyle::lineType() const
     return _lineType;
 }
 
-void DimensionStyle::setLineType(LineType *)
-{
-
-}
+void DimensionStyle::setLineType(LineType *) {}
 
 LineType *DimensionStyle::lineTypeExt1() const
 {
     return _lineTypeExt1;
 }
 
-void DimensionStyle::setLineTypeExt1(LineType *)
-{
-
-}
+void DimensionStyle::setLineTypeExt1(LineType *) {}
 
 LineType *DimensionStyle::lineTypeExt2() const
 {
     return _lineTypeExt2;
 }
 
-void DimensionStyle::setLineTypeExt2(LineType *)
-{
-
-}
+void DimensionStyle::setLineTypeExt2(LineType *) {}
 
 }// namespace dwg

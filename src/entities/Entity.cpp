@@ -20,13 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/objects/BookColor.h>
+#include <dwg/objects/collections/ColorCollection.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/objects/BookColor.h>
-#include <dwg/CadDocument.h>
-#include <dwg/objects/collections/ColorCollection.h>
 
 namespace dwg {
 
@@ -133,7 +133,7 @@ void Entity::setBookColor(BookColor *value)
 {
     if (_document)
     {
-        _bookColor = updateCollectionT<BookColor*>(value, _document->colors());
+        _bookColor = updateCollectionT<BookColor *>(value, _document->colors());
     }
     else
     {

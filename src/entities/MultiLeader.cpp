@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/MultiLeader.h>
-#include <dwg/CadDocument.h>
-#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/MultiLeaderAnnotContext.h>
+#include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/collections/MLeaderStyleCollection.h>
 
 namespace dwg {
@@ -427,13 +427,12 @@ void MultiLeader::setTextTopAttachment(TextAttachmentType value)
     _textTopAttachment = value;
 }
 
-void MultiLeader::assignDocument(CadDocument *document) 
+void MultiLeader::assignDocument(CadDocument *document)
 {
     Entity::assignDocument(document);
     _style = updateCollectionT<MultiLeaderStyle *>(_style, document->mleaderStyles());
 
     _contextData->assignDocument(document);
-
 }
 
 void MultiLeader::unassignDocument() {}

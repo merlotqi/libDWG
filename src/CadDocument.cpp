@@ -23,6 +23,7 @@
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
 #include <dwg/classes/DxfClassCollection.h>
+#include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/CadDictionary.h>
@@ -57,7 +58,6 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <dwg/tables/collections/VPortsTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
-#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 

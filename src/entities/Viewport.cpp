@@ -20,13 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Viewport.h>
-#include <dwg/tables/BlockRecord.h>
 #include <dwg/objects/Scale.h>
-#include <dwg/CadDocument.h>
 #include <dwg/objects/collections/ScaleCollection.h>
+#include <dwg/tables/BlockRecord.h>
 
 namespace dwg {
 
@@ -452,21 +452,15 @@ bool Viewport::representsPaper() const
     return id() == PaperViewId;
 }
 
-void Viewport::assignDocument(CadDocument* doc)
+void Viewport::assignDocument(CadDocument *doc)
 {
     Entity::assignDocument(doc);
     _scale = updateCollectionT<Scale *>(_scale, doc->scales());
     _document->scales()->OnRemove.add(this, &Viewport::scaleOnRemove);
 }
 
-void Viewport::unassignDocument()
-{
+void Viewport::unassignDocument() {}
 
-}
-
-void Viewport::scaleOnRemove(CadObject* object)
-{
-
-}
+void Viewport::scaleOnRemove(CadObject *object) {}
 
 }// namespace dwg

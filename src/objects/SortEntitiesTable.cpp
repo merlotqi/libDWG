@@ -28,24 +28,42 @@ namespace dwg {
 
 SortEntitiesTable::Sorter::Sorter(Entity *_entity, unsigned long long _handle) : entity(_entity), handle(_handle) {}
 
-    SortEntitiesTable::SortEntitiesTable() {}
-    
-    SortEntitiesTable::SortEntitiesTable(BlockRecord *owner) : _blockOwner(owner) {}
-    
-    SortEntitiesTable::~SortEntitiesTable() {}
+SortEntitiesTable::SortEntitiesTable() {}
 
-    ObjectType SortEntitiesTable::objectType() const { return ObjectType::UNLISTED; }
+SortEntitiesTable::SortEntitiesTable(BlockRecord *owner) : _blockOwner(owner) {}
 
-    std::string SortEntitiesTable::objectName() const { return DxfFileToken::ObjectSortEntsTable; }
-    
-    std::string SortEntitiesTable::subclassMarker() const { return DxfSubclassMarker::SortentsTable; }
+SortEntitiesTable::~SortEntitiesTable() {}
 
-    BlockRecord *SortEntitiesTable::blockOwner() const { return _blockOwner; }
-    
-    void SortEntitiesTable::setBlockOwner(BlockRecord *value) { _blockOwner = value; }
+ObjectType SortEntitiesTable::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-    std::vector<SortEntitiesTable::Sorter> SortEntitiesTable::sorters() const { return _sorters; }
-    
-    void SortEntitiesTable::setAddEntity(Entity *, unsigned long long sorterHandle) {}
+std::string SortEntitiesTable::objectName() const
+{
+    return DxfFileToken::ObjectSortEntsTable;
+}
+
+std::string SortEntitiesTable::subclassMarker() const
+{
+    return DxfSubclassMarker::SortentsTable;
+}
+
+BlockRecord *SortEntitiesTable::blockOwner() const
+{
+    return _blockOwner;
+}
+
+void SortEntitiesTable::setBlockOwner(BlockRecord *value)
+{
+    _blockOwner = value;
+}
+
+std::vector<SortEntitiesTable::Sorter> SortEntitiesTable::sorters() const
+{
+    return _sorters;
+}
+
+void SortEntitiesTable::setAddEntity(Entity *, unsigned long long sorterHandle) {}
 
 }// namespace dwg

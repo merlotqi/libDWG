@@ -20,10 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/MLine.h>
-#include <dwg/CadDocument.h>
 #include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/collections/MLineStyleCollection.h>
 
@@ -57,7 +57,7 @@ void MLine::setStyle(MLineStyle *style)
 {
     if (_document)
     {
-        _style = updateCollectionT<MLineStyle*>(_style, _document->mlineStyles());
+        _style = updateCollectionT<MLineStyle *>(_style, _document->mlineStyles());
     }
     else
     {
@@ -125,18 +125,14 @@ void MLine::setVertices(const std::vector<Vertex> &vertices)
     _vertices = vertices;
 }
 
-void MLine::assignDocument(CadDocument* doc)
+void MLine::assignDocument(CadDocument *doc)
 {
     Entity::assignDocument(doc);
-    _style = this->updateCollectionT<MLineStyle*>(_style, doc->mlineStyles());
+    _style = this->updateCollectionT<MLineStyle *>(_style, doc->mlineStyles());
     doc->mlineStyles()->OnRemove.add(this, &MLine::mLineStylesOnRemove);
-
 }
 
-void MLine::unassignDocument()
-{
-
-}
+void MLine::unassignDocument() {}
 
 void MLine::mLineStylesOnRemove(CadObject *object) {}
 

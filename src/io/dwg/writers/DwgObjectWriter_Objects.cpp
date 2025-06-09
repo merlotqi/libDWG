@@ -41,8 +41,8 @@
 #include <dwg/objects/PlotSettings.h>
 #include <dwg/objects/Scale.h>
 #include <dwg/objects/SortEntitiesTable.h>
-#include <dwg/objects/XRecord.h>
 #include <dwg/objects/UnknownNonGraphicalObject.h>
+#include <dwg/objects/XRecord.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/utils/EndianConverter.h>
@@ -112,7 +112,7 @@ void DwgObjectWriter::writeDictionary(CadDictionary *dictionary)
         {
             continue;
         }
-        
+
         if (dynamic_cast<UnknownNonGraphicalObject *>(item))
         {
             continue;
@@ -138,13 +138,13 @@ void DwgObjectWriter::writeDictionary(CadDictionary *dictionary)
     }
 
     //Common:
-    for (auto &&item : entries)
+    for (auto &&item: entries)
     {
         if (dynamic_cast<XRecord *>(item) && !writeXRecords())
         {
             continue;
         }
-        
+
         if (dynamic_cast<UnknownNonGraphicalObject *>(item))
         {
             continue;
@@ -732,84 +732,84 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
         {
             case GroupCodeValueType::Byte:
             case GroupCodeValueType::Bool:
-            {
-                ms.writeByte(entry.value.asChar());
-                break;
-            }
+                {
+                    ms.writeByte(entry.value.asChar());
+                    break;
+                }
             case GroupCodeValueType::Int16:
             case GroupCodeValueType::ExtendedDataInt16:
-            {
-                ms.write<short>(entry.value.asShort());
-                break;
-            }
+                {
+                    ms.write<short>(entry.value.asShort());
+                    break;
+                }
             case GroupCodeValueType::Int32:
             case GroupCodeValueType::ExtendedDataInt32:
-            {
-                ms.write<int>(entry.value.asInt());
-                break;
-            }
+                {
+                    ms.write<int>(entry.value.asInt());
+                    break;
+                }
             case GroupCodeValueType::Int64:
-            {
-                ms.write<long>(entry.value.asLongLong());
-                break;
-            }
+                {
+                    ms.write<long>(entry.value.asLongLong());
+                    break;
+                }
             case GroupCodeValueType::Double:
             case GroupCodeValueType::ExtendedDataDouble:
-            {
-                ms.write<double>(entry.value.asDouble());
-                break;
-            }
+                {
+                    ms.write<double>(entry.value.asDouble());
+                    break;
+                }
             case GroupCodeValueType::Point3D:
-            {
-                XYZ xyz = entry.value.asCoord3D();
-                ms.write<double>(xyz.X);
-                ms.write<double>(xyz.Y);
-                ms.write<double>(xyz.Z);
-                break;
-            }
+                {
+                    XYZ xyz = entry.value.asCoord3D();
+                    ms.write<double>(xyz.X);
+                    ms.write<double>(xyz.Y);
+                    ms.write<double>(xyz.Z);
+                    break;
+                }
             case GroupCodeValueType::Chunk:
             case GroupCodeValueType::ExtendedDataChunk:
-            {
-                auto chunk = entry.value.asBlob();
-                ms.write((unsigned char) chunk.size());
-                break;
-            }
+                {
+                    auto chunk = entry.value.asBlob();
+                    ms.write((unsigned char) chunk.size());
+                    break;
+                }
             case GroupCodeValueType::String:
             case GroupCodeValueType::ExtendedDataString:
             case GroupCodeValueType::Handle:
-            {
-                std::string text = entry.value.asString();
-                if (R2007Plus)
                 {
-                    if (text.empty())
+                    std::string text = entry.value.asString();
+                    if (R2007Plus)
+                    {
+                        if (text.empty())
+                        {
+                            ms.write<short, LittleEndianConverter>(0);
+                            return;
+                        }
+
+                        ms.write<short, LittleEndianConverter>((short) text.length());
+                        ms.write(text, Encoding::Utf8());
+                    }
+                    else if (text.empty())
                     {
                         ms.write<short, LittleEndianConverter>(0);
-                        return;
+                        ms.write((unsigned char) CadUtils::GetCodeIndex((CodePage) _writer->encoding().codePage()));
                     }
-
-                    ms.write<short, LittleEndianConverter>((short) text.length());
-                    ms.write(text, Encoding::Utf8());
+                    else
+                    {
+                        ms.write<short, LittleEndianConverter>((short) text.length());
+                        ms.write((unsigned char) CadUtils::GetCodeIndex((CodePage) _writer->encoding().codePage()));
+                        ms.write(text, _writer->encoding());
+                    }
+                    break;
                 }
-                else if (text.empty())
-                {
-                    ms.write<short, LittleEndianConverter>(0);
-                    ms.write((unsigned char) CadUtils::GetCodeIndex((CodePage) _writer->encoding().codePage()));
-                }
-                else
-                {
-                    ms.write<short, LittleEndianConverter>((short) text.length());
-                    ms.write((unsigned char) CadUtils::GetCodeIndex((CodePage) _writer->encoding().codePage()));
-                    ms.write(text, _writer->encoding());
-                }
-                break;
-            }
             case GroupCodeValueType::ObjectId:
             case GroupCodeValueType::ExtendedDataHandle:
-            {
-                unsigned long long u = entry.value.asULongLong();
-                ms.write<unsigned long long, LittleEndianConverter>(u);
-                break;
-            }
+                {
+                    unsigned long long u = entry.value.asULongLong();
+                    ms.write<unsigned long long, LittleEndianConverter>(u);
+                    break;
+                }
             default:
                 break;
         }

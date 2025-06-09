@@ -24,9 +24,7 @@
 
 namespace dwg {
 
-VertexFaceRecordCollection::VertexFaceRecordCollection(CadObject *owner) : _owner(owner) 
-{
-}
+VertexFaceRecordCollection::VertexFaceRecordCollection(CadObject *owner) : _owner(owner) {}
 
 VertexFaceRecordCollection::~VertexFaceRecordCollection() {}
 

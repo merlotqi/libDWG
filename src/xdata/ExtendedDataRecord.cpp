@@ -135,7 +135,7 @@ unsigned long long ExtendedDataHandle::value() const
     return 0LL;
 }
 
-CadObject* ExtendedDataHandle::resolveReference(CadDocument* document) const
+CadObject *ExtendedDataHandle::resolveReference(CadDocument *document) const
 {
     return NULL;
 }
@@ -153,7 +153,7 @@ unsigned long long ExtendedDataLayer::value() const
     return 0LL;
 }
 
-CadObject* ExtendedDataLayer::resolveReference(CadDocument* document) const
+CadObject *ExtendedDataLayer::resolveReference(CadDocument *document) const
 {
     return NULL;
 }

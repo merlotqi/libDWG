@@ -19,49 +19,100 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
- 
+
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/LwPolyline.h>
 
 namespace dwg {
 
-LwPolyline::LwPolyline(){}
+LwPolyline::LwPolyline() {}
 
-LwPolyline::~LwPolyline(){}
+LwPolyline::~LwPolyline() {}
 
-ObjectType LwPolyline::objectType() const{return ObjectType::LWPOLYLINE; }
+ObjectType LwPolyline::objectType() const
+{
+    return ObjectType::LWPOLYLINE;
+}
 
-std::string LwPolyline::objectName() const{ return DxfFileToken::EntityLwPolyline; }
+std::string LwPolyline::objectName() const
+{
+    return DxfFileToken::EntityLwPolyline;
+}
 
-std::string LwPolyline::subclassMarker() const{ return DxfSubclassMarker::LwPolyline; }
+std::string LwPolyline::subclassMarker() const
+{
+    return DxfSubclassMarker::LwPolyline;
+}
 
-LwPolylineFlags LwPolyline::flags() const{ return _flags; }
+LwPolylineFlags LwPolyline::flags() const
+{
+    return _flags;
+}
 
-void LwPolyline::setFlags(LwPolylineFlags value){ _flags = value; }
+void LwPolyline::setFlags(LwPolylineFlags value)
+{
+    _flags = value;
+}
 
-double LwPolyline::constantWidth() const{ return _constantWidth; }
+double LwPolyline::constantWidth() const
+{
+    return _constantWidth;
+}
 
-void LwPolyline::setConstantWidth(double value){ _constantWidth = value; }
+void LwPolyline::setConstantWidth(double value)
+{
+    _constantWidth = value;
+}
 
-double LwPolyline::elevation() const{ return _elevation; }
+double LwPolyline::elevation() const
+{
+    return _elevation;
+}
 
-void LwPolyline::setElevation(double value){ _elevation = value; }
+void LwPolyline::setElevation(double value)
+{
+    _elevation = value;
+}
 
-double LwPolyline::thickness() const{ return _thickness; }
+double LwPolyline::thickness() const
+{
+    return _thickness;
+}
 
-void LwPolyline::setThickness(double value){ _thickness = value; }
+void LwPolyline::setThickness(double value)
+{
+    _thickness = value;
+}
 
-XYZ LwPolyline::normal() const{ return _normal; }
+XYZ LwPolyline::normal() const
+{
+    return _normal;
+}
 
-void LwPolyline::setNormal(const XYZ &value){ _normal = value; }
+void LwPolyline::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-std::vector<LwPolyline::Vertex> LwPolyline::vertices() const{ return _vertices; }
+std::vector<LwPolyline::Vertex> LwPolyline::vertices() const
+{
+    return _vertices;
+}
 
-void LwPolyline::setVertices(const std::vector<Vertex> &value){ _vertices =value; }
+void LwPolyline::setVertices(const std::vector<Vertex> &value)
+{
+    _vertices = value;
+}
 
-bool LwPolyline::isClosed() const{ return _isClosed; }
+bool LwPolyline::isClosed() const
+{
+    return _isClosed;
+}
 
-void LwPolyline::setIsClosed(bool value){ _isClosed = value; }
+void LwPolyline::setIsClosed(bool value)
+{
+    _isClosed = value;
+}
 
 }// namespace dwg

@@ -26,12 +26,12 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
+#include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/io/dxf/CadObjectHolder_p.h>
 #include <dwg/io/dxf/writers/DxfBlocksSectionWriter_p.h>
 #include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/Layer.h>
-#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 

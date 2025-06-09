@@ -21,9 +21,9 @@
  */
 
 #include <assert.h>
+#include <dwg/CadObject.h>
 #include <dwg/objects/CadDictionary.h>
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
-#include <dwg/CadObject.h>
 
 namespace dwg {
 

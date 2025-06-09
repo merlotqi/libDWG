@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/entities/collection/VertexSeqendCollection.h>
 #include <dwg/entities/Seqend.h>
+#include <dwg/entities/collection/VertexSeqendCollection.h>
 
 namespace dwg {
 
-VertexSeqendCollection::VertexSeqendCollection(CadObject *owner) : _owner(owner) 
+VertexSeqendCollection::VertexSeqendCollection(CadObject *owner) : _owner(owner)
 {
     _seqend = new Seqend();
 }

@@ -153,7 +153,7 @@ bool CadDictionary::tryGetEntry(const std::string &name, NonGraphicalObject **en
     return false;
 }
 
-void CadDictionary::add(const std::string &key, NonGraphicalObject *value) 
+void CadDictionary::add(const std::string &key, NonGraphicalObject *value)
 {
     if (key.empty())
     {
@@ -165,7 +165,7 @@ void CadDictionary::add(const std::string &key, NonGraphicalObject *value)
     _entries.insert({key, value});
 }
 
-void CadDictionary::add(NonGraphicalObject *value) 
+void CadDictionary::add(NonGraphicalObject *value)
 {
     assert(value);
     add(value->name(), value);
@@ -217,7 +217,7 @@ CadDictionary *CadDictionary::ensureCadDictionaryExist(const std::string &name)
     auto it = _entries.find(name);
     if (it != _entries.end())
     {
-         entry = dynamic_cast<CadDictionary *>(it->second);
+        entry = dynamic_cast<CadDictionary *>(it->second);
         if (entry)
         {
             return entry;

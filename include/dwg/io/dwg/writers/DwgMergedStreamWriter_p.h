@@ -47,7 +47,7 @@ public:
     std::ostream *stream() override;
     Encoding encoding() override;
 
-    IDwgStreamWriter *main() const override;
+    IDwgStreamWriter *main() override;
 
     long long positionInBits() const override;
 

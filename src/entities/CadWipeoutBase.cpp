@@ -195,7 +195,7 @@ void CadWipeoutBase::setDefinition(ImageDefinition *definition)
 
     if (document())
     {
-        _definition = updateCollectionT<ImageDefinition*>(definition, document()->imageDefinitions());
+        _definition = updateCollectionT<ImageDefinition *>(definition, document()->imageDefinitions());
     }
 
     _definition = definition;
@@ -211,15 +211,12 @@ void CadWipeoutBase::setDefinitionReactor(ImageDefinitionReactor *reactor)
     _definitionReactor = reactor;
 }
 
-void CadWipeoutBase::unassignDocument()
-{
-    
-}
+void CadWipeoutBase::unassignDocument() {}
 
-void CadWipeoutBase::assignDocument(CadDocument* document)
+void CadWipeoutBase::assignDocument(CadDocument *document)
 {
     Entity::assignDocument(document);
-    _definition = updateCollectionT<ImageDefinition*>(_definition, document->imageDefinitions());
+    _definition = updateCollectionT<ImageDefinition *>(_definition, document->imageDefinitions());
     _document->imageDefinitions()->OnRemove.add(this, &CadWipeoutBase::imageDefinitionsOnRemove);
 }
 

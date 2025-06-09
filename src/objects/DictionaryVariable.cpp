@@ -27,22 +27,42 @@
 namespace dwg {
 
 DictionaryVariable::DictionaryVariable() {}
-    
+
 DictionaryVariable::~DictionaryVariable() {}
 
-ObjectType DictionaryVariable::objectType() const { return ObjectType::UNLISTED; }
-   
-std::string DictionaryVariable::objectName() const { return DxfFileToken::ObjectDictionaryVar; }
- 
-std::string DictionaryVariable::subclassMarker() const { return DxfSubclassMarker::DictionaryVariables; }
+ObjectType DictionaryVariable::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
 
-std::string DictionaryVariable::value() const { return _value; }
-    
-void DictionaryVariable::setValue(const std::string &value) { _value = value;}
+std::string DictionaryVariable::objectName() const
+{
+    return DxfFileToken::ObjectDictionaryVar;
+}
 
-int DictionaryVariable::objectSchemaNumber() const { return _objectSchemaNumber; }
+std::string DictionaryVariable::subclassMarker() const
+{
+    return DxfSubclassMarker::DictionaryVariables;
+}
 
-void DictionaryVariable::setObjectSchemaNumber(int value) { _objectSchemaNumber = value; }
+std::string DictionaryVariable::value() const
+{
+    return _value;
+}
+
+void DictionaryVariable::setValue(const std::string &value)
+{
+    _value = value;
+}
+
+int DictionaryVariable::objectSchemaNumber() const
+{
+    return _objectSchemaNumber;
+}
+
+void DictionaryVariable::setObjectSchemaNumber(int value)
+{
+    _objectSchemaNumber = value;
+}
 
 }// namespace dwg
-

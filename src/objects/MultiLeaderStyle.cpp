@@ -34,7 +34,8 @@ MultiLeaderStyle *MultiLeaderStyle::Default()
 MultiLeaderStyle::MultiLeaderStyle() : MultiLeaderStyle("") {}
 
 MultiLeaderStyle::MultiLeaderStyle(const std::string &name)
-    : NonGraphicalObject(name),  _lineColor(Color(short(0))), _textColor(Color(short(0))), _blockContentColor(Color(short(0)))
+    : NonGraphicalObject(name), _lineColor(Color(short(0))), _textColor(Color(short(0))),
+      _blockContentColor(Color(short(0)))
 {
 }
 
@@ -349,8 +350,14 @@ TextAttachmentType MultiLeaderStyle::textTopAttachment() const
 
 void MultiLeaderStyle::setTextTopAttachment(TextAttachmentType) {}
 
-bool MultiLeaderStyle::unknownFlag298() const { return _unknownFlag298; }
+bool MultiLeaderStyle::unknownFlag298() const
+{
+    return _unknownFlag298;
+}
 
-void MultiLeaderStyle::setUnknownFlag298(bool value) { _unknownFlag298 = value; }
+void MultiLeaderStyle::setUnknownFlag298(bool value)
+{
+    _unknownFlag298 = value;
+}
 
 }// namespace dwg

@@ -26,24 +26,42 @@
 
 namespace dwg {
 
-    XRecord::XRecord() {}
+XRecord::XRecord() {}
 
-    XRecord::XRecord(const std::string &name) : NonGraphicalObject(name) {}
+XRecord::XRecord(const std::string &name) : NonGraphicalObject(name) {}
 
-    XRecord::~XRecord() {}
+XRecord::~XRecord() {}
 
-    ObjectType XRecord::objectType() const { return ObjectType::XRECORD; }
+ObjectType XRecord::objectType() const
+{
+    return ObjectType::XRECORD;
+}
 
-    std::string XRecord::objectName() const { return DxfFileToken::ObjectXRecord; }
+std::string XRecord::objectName() const
+{
+    return DxfFileToken::ObjectXRecord;
+}
 
-    std::string XRecord::subclassMarker() const { return DxfSubclassMarker::XRecord; }
+std::string XRecord::subclassMarker() const
+{
+    return DxfSubclassMarker::XRecord;
+}
 
-    DictionaryCloningFlags XRecord::cloningFlags() const { return _cloningFlags; }
+DictionaryCloningFlags XRecord::cloningFlags() const
+{
+    return _cloningFlags;
+}
 
-    void XRecord::setCloningFlags(DictionaryCloningFlags value)  {_cloningFlags = value; } 
+void XRecord::setCloningFlags(DictionaryCloningFlags value)
+{
+    _cloningFlags = value;
+}
 
-    std::vector<XRecord::Entry> XRecord::entries() const { return _entries; }
-    
-    void XRecord::createEntry(int code, DwgVariant value) {}
+std::vector<XRecord::Entry> XRecord::entries() const
+{
+    return _entries;
+}
+
+void XRecord::createEntry(int code, DwgVariant value) {}
 
 }// namespace dwg

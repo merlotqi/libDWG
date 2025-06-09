@@ -44,7 +44,7 @@ public:
 
     virtual Encoding encoding() = 0;
 
-    virtual IDwgStreamWriter *main() const = 0;
+    virtual IDwgStreamWriter *main() = 0;
 
     virtual long long positionInBits() const = 0;
 

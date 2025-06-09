@@ -24,9 +24,7 @@
 
 namespace dwg {
 
-EntityCollection::EntityCollection(CadObject *owner) : _owner(owner) 
-{
-}
+EntityCollection::EntityCollection(CadObject *owner) : _owner(owner) {}
 
 EntityCollection::~EntityCollection() {}
 

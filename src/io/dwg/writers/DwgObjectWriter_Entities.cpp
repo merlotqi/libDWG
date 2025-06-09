@@ -58,6 +58,9 @@
 #include <dwg/entities/Tolerance.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/entities/XLine.h>
+#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
+#include <dwg/entities/collection/VertexFaceRecordCollection.h>
+#include <dwg/entities/collection/VertexSeqendCollection.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
 #include <dwg/objects/ImageDefinition.h>
@@ -68,9 +71,6 @@
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
-#include <dwg/entities/collection/VertexFaceRecordCollection.h>
-#include <dwg/entities/collection/VertexSeqendCollection.h>
 
 namespace dwg {
 

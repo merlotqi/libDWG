@@ -46,7 +46,7 @@ public:
         static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
         static_assert(std::is_base_of<NonGraphicalObject, std::remove_pointer_t<T>>::value,
                       "T must point to a type derived from NonGraphicalObject.");
-        return dynamic_cast<T>(_dictionary->operator[](key));
+        return dynamic_cast<T>(this->operator[](key));
     }
 
     virtual void add(NonGraphicalObject *v);

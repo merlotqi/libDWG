@@ -33,7 +33,6 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <stdexcept>
 
-
 #ifdef _WIN32
 #include <Windows.h>
 #else
@@ -42,16 +41,14 @@
 
 namespace dwg {
 
-CadHeader::CadHeader() : CadHeader(ACadVersion::AC1032)
-{
-}
+CadHeader::CadHeader() : CadHeader(ACadVersion::AC1032) {}
 
-CadHeader::CadHeader(CadDocument *document) : CadHeader(ACadVersion::AC1032) 
+CadHeader::CadHeader(CadDocument *document) : CadHeader(ACadVersion::AC1032)
 {
     _document = document;
 }
 
-CadDocument *CadHeader::document() 
+CadDocument *CadHeader::document()
 {
     return _document;
 }
@@ -66,13 +63,11 @@ CadHeader::CadHeader(ACadVersion version) : _version(version)
     HRESULT res = CoCreateGuid(&guid);
     char guidStr[39];
     unsigned long long last6 = 0;
-    for (int i = 2; i < 8; ++i)
-        last6 = (last6 << 8) | guid.Data4[i];
-    
-    sprintf_s(guidStr, sizeof(guidStr), "{%08lX-%04X-%04X-%02X%02X-%012llX}",
-              guid.Data1, guid.Data2, guid.Data3,
+    for (int i = 2; i < 8; ++i) last6 = (last6 << 8) | guid.Data4[i];
+
+    sprintf_s(guidStr, sizeof(guidStr), "{%08lX-%04X-%04X-%02X%02X-%012llX}", guid.Data1, guid.Data2, guid.Data3,
               guid.Data4[0], guid.Data4[1], last6);
-    
+
     _fingerPrintGuid = guidStr;
 #else
     uuid_t uuid;

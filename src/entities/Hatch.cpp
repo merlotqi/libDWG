@@ -26,69 +26,163 @@
 
 namespace dwg {
 
-    Hatch::Hatch() {}
-    Hatch::~Hatch() {}
+Hatch::Hatch() {}
 
-    ObjectType Hatch::objectType() const { return ObjectType::HATCH; }
+Hatch::~Hatch() {}
 
-    std::string Hatch::objectName() const { return DxfFileToken::EntityHatch; }
+ObjectType Hatch::objectType() const
+{
+    return ObjectType::HATCH;
+}
 
-    std::string Hatch::subclassMarker() const { return DxfSubclassMarker::Hatch; }
+std::string Hatch::objectName() const
+{
+    return DxfFileToken::EntityHatch;
+}
 
-    double Hatch::elevation() const { return _elevation; }
+std::string Hatch::subclassMarker() const
+{
+    return DxfSubclassMarker::Hatch;
+}
 
-    void Hatch::setElevation(double value) {_elevation = value; }
+double Hatch::elevation() const
+{
+    return _elevation;
+}
 
-    XYZ Hatch::normal() const { return _normal; }
+void Hatch::setElevation(double value)
+{
+    _elevation = value;
+}
 
-    void Hatch::setNormal(const XYZ &value) { _normal = value; }
+XYZ Hatch::normal() const
+{
+    return _normal;
+}
 
-    HatchPattern *Hatch::pattern() const { return _pattern; }
+void Hatch::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-    void Hatch::setPattern(HatchPattern *value) { _pattern = value; }
+HatchPattern *Hatch::pattern() const
+{
+    return _pattern;
+}
 
-    bool Hatch::isSolid() const { return _isSolid; }
+void Hatch::setPattern(HatchPattern *value)
+{
+    _pattern = value;
+}
 
-    void Hatch::setIsSolid(bool value) { _isSolid = value; }
+bool Hatch::isSolid() const
+{
+    return _isSolid;
+}
 
-    bool Hatch::isAssociative() const { return _isAssociative; }
+void Hatch::setIsSolid(bool value)
+{
+    _isSolid = value;
+}
 
-    void Hatch::setIsAssociative(bool value) { _isAssociative = value; }
+bool Hatch::isAssociative() const
+{
+    return _isAssociative;
+}
 
-    HatchStyleType Hatch::style() const { return _style; }
+void Hatch::setIsAssociative(bool value)
+{
+    _isAssociative = value;
+}
 
-    void Hatch::setStyle(HatchStyleType value) { _style = value; }
+HatchStyleType Hatch::style() const
+{
+    return _style;
+}
 
-    HatchPatternType Hatch::patternType() const { return _patternType; }
+void Hatch::setStyle(HatchStyleType value)
+{
+    _style = value;
+}
 
-    void Hatch::setPatternType(HatchPatternType value) { _patternType = value; }
+HatchPatternType Hatch::patternType() const
+{
+    return _patternType;
+}
 
-    double Hatch::patternAngle() const { return _patternAngle; }
+void Hatch::setPatternType(HatchPatternType value)
+{
+    _patternType = value;
+}
 
-    void Hatch::setPatternAngle(double value) { _patternAngle = value; }
+double Hatch::patternAngle() const
+{
+    return _patternAngle;
+}
 
-    double Hatch::patternScale() const { return _patternScale; }
+void Hatch::setPatternAngle(double value)
+{
+    _patternAngle = value;
+}
 
-    void Hatch::setPatternScale(double value) { _patternScale = value; }
+double Hatch::patternScale() const
+{
+    return _patternScale;
+}
 
-    bool Hatch::isDouble() const { return _isDouble; }
+void Hatch::setPatternScale(double value)
+{
+    _patternScale = value;
+}
 
-    void Hatch::setIsDouble(bool value) { _isDouble = value; }
+bool Hatch::isDouble() const
+{
+    return _isDouble;
+}
 
-    double Hatch::pixelSize() const { return _pixelSize; }
+void Hatch::setIsDouble(bool value)
+{
+    _isDouble = value;
+}
 
-    void Hatch::setPixelSize(double value) { _pixelSize = value; }
+double Hatch::pixelSize() const
+{
+    return _pixelSize;
+}
 
-    std::vector<XY> Hatch::seedPoints() const { return _seedPoints; }
+void Hatch::setPixelSize(double value)
+{
+    _pixelSize = value;
+}
 
-    void Hatch::setSeedPoints(const std::vector<XY> &value) { _seedPoints = value; }
+std::vector<XY> Hatch::seedPoints() const
+{
+    return _seedPoints;
+}
 
-    HatchGradientPattern *Hatch::gradientColor() const { return _gradientColor; }
+void Hatch::setSeedPoints(const std::vector<XY> &value)
+{
+    _seedPoints = value;
+}
 
-    void Hatch::setGradientColor(HatchGradientPattern *value) { _gradientColor = value; }
+HatchGradientPattern *Hatch::gradientColor() const
+{
+    return _gradientColor;
+}
 
-    std::vector<HatchBoundaryPath *> Hatch::paths() const { return _paths; }
+void Hatch::setGradientColor(HatchGradientPattern *value)
+{
+    _gradientColor = value;
+}
 
-    void Hatch::setPaths(const std::vector<HatchBoundaryPath *> &value) { _paths = value; }
+std::vector<HatchBoundaryPath *> Hatch::paths() const
+{
+    return _paths;
+}
+
+void Hatch::setPaths(const std::vector<HatchBoundaryPath *> &value)
+{
+    _paths = value;
+}
 
 }// namespace dwg

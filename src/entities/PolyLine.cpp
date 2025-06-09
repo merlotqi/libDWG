@@ -36,37 +36,85 @@ std::string Polyline::objectName() const
     return DxfFileToken::EntityPolyline;
 }
 
-double Polyline::elevation() const { return _elevation; }
+double Polyline::elevation() const
+{
+    return _elevation;
+}
 
-void Polyline::setElevation(double value) { _elevation = value; }
+void Polyline::setElevation(double value)
+{
+    _elevation = value;
+}
 
-double Polyline::thickness() const { return _thickness; }
+double Polyline::thickness() const
+{
+    return _thickness;
+}
 
-void Polyline::setThickness(double value) { _thickness = value; }
+void Polyline::setThickness(double value)
+{
+    _thickness = value;
+}
 
-XYZ Polyline::normal() const { return _normal; }
+XYZ Polyline::normal() const
+{
+    return _normal;
+}
 
-void Polyline::setNormal(const XYZ &value) {_normal = value; }
+void Polyline::setNormal(const XYZ &value)
+{
+    _normal = value;
+}
 
-PolylineFlags Polyline::flags() const { return _flags; }
+PolylineFlags Polyline::flags() const
+{
+    return _flags;
+}
 
-void Polyline::setFlags(PolylineFlags value) { _flags = value; }
+void Polyline::setFlags(PolylineFlags value)
+{
+    _flags = value;
+}
 
-double Polyline::startWidth() const { return _startWidth; }
+double Polyline::startWidth() const
+{
+    return _startWidth;
+}
 
-void Polyline::setStartWidth(double value) {_startWidth = value; }
+void Polyline::setStartWidth(double value)
+{
+    _startWidth = value;
+}
 
-double Polyline::endWidth() const { return _endWidth; }
+double Polyline::endWidth() const
+{
+    return _endWidth;
+}
 
-void Polyline::setEndWidth(double value) {_endWidth = value; }
+void Polyline::setEndWidth(double value)
+{
+    _endWidth = value;
+}
 
-SmoothSurfaceType Polyline::smoothSurface() const { return _smoothSurface; }
+SmoothSurfaceType Polyline::smoothSurface() const
+{
+    return _smoothSurface;
+}
 
-void Polyline::setSmoothSurface(SmoothSurfaceType value) { _smoothSurface = value; }
+void Polyline::setSmoothSurface(SmoothSurfaceType value)
+{
+    _smoothSurface = value;
+}
 
-bool Polyline::isClosed() const { return _isClosed; }
+bool Polyline::isClosed() const
+{
+    return _isClosed;
+}
 
-void Polyline::setIsClosed(bool value) { _isClosed = value; }
+void Polyline::setIsClosed(bool value)
+{
+    _isClosed = value;
+}
 
 VertexSeqendCollection *Polyline::vertices()
 {
@@ -80,9 +128,15 @@ Polyline2D::Polyline2D(const std::initializer_list<Vertex2D *> &vertices, bool i
 
 Polyline2D::~Polyline2D() {}
 
-ObjectType Polyline2D::objectType() const { return ObjectType::POLYLINE_2D; }
+ObjectType Polyline2D::objectType() const
+{
+    return ObjectType::POLYLINE_2D;
+}
 
-std::string Polyline2D::subclassMarker() const { return DxfSubclassMarker::Polyline; }
+std::string Polyline2D::subclassMarker() const
+{
+    return DxfSubclassMarker::Polyline;
+}
 
 /* ------------------------------- Polyline3D ------------------------------- */
 Polyline3D::Polyline3D() {}
@@ -93,8 +147,14 @@ Polyline3D::Polyline3D(const std::initializer_list<XYZ> &vertices, bool isClosed
 
 Polyline3D::~Polyline3D() {}
 
-ObjectType Polyline3D::objectType() const { return ObjectType::POLYLINE_3D; }
+ObjectType Polyline3D::objectType() const
+{
+    return ObjectType::POLYLINE_3D;
+}
 
-std::string Polyline3D::subclassMarker() const { return DxfSubclassMarker::Polyline3d; }
+std::string Polyline3D::subclassMarker() const
+{
+    return DxfSubclassMarker::Polyline3d;
+}
 
 }// namespace dwg

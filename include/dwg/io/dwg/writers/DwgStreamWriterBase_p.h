@@ -33,6 +33,8 @@ protected:
     int _bitShift = 0;
     unsigned char _lastByte;
     std::ostream *_stream;
+    Encoding _encoding;
+    long long _savedPositionInBits;
 
 public:
     static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
@@ -43,99 +45,63 @@ public:
 
     std::ostream *stream() override;
     Encoding encoding() override;
-
-    IDwgStreamWriter *main() const override;
-
+    IDwgStreamWriter *main() override;
     long long positionInBits() const override;
-
     long long savedPositionInBits() const override;
 
     void writeBytes(const std::vector<unsigned char> &bytes) override;
-
     void writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) override;
 
     void writeInt(int value) override;
-
     void writeObjectType(short value) override;
-
     void writeObjectType(ObjectType value) override;
-
     void writeRawLong(long long value) override;
-
     void writeBitDouble(double value) override;
-
     void writeBitLong(int value) override;
-
     void writeBitLongLong(long long value) override;
-
     void writeVariableText(const std::string &value) override;
-
     void writeTextUtf8(const std::string &value) override;
-
     void writeBit(bool value) override;
-
     void write2Bits(unsigned char value) override;
-
     void writeBitShort(short value) override;
 
     void writeDateTime(const DateTime &value) override;
-
     void write8BitJulianDate(const DateTime &value) override;
-
     void writeTimeSpan(const Timespan &value) override;
 
     void writeCmColor(const Color &value) override;
-
     void writeEnColor(const Color &color, const Transparency &transparency) override;
-
     void writeEnColor(const Color &color, const Transparency &transparency, bool isBookColor) override;
 
     void write2BitDouble(const XY &value) override;
-
     void write3BitDouble(const XYZ &value) override;
-
     void write2RawDouble(const XY &value) override;
-
     void writeByte(unsigned char value) override;
 
     void handleReference(IHandledCadObject *cadObject) override;
-
     void handleReference(DwgReferenceType type, IHandledCadObject *cadObject) override;
-
     void handleReference(unsigned long long handle) override;
-
     void handleReference(DwgReferenceType type, unsigned long long handle) override;
-
+    
     void writeSpearShift() override;
-
     void writeRawShort(short value) override;
-
     void writeRawUShort(unsigned short value) override;
-
     void writeRawDouble(double value) override;
-
     void writeBitThickness(double thickness) override;
-
     void writeBitExtrusion(const XYZ &normal) override;
-
     void writeBitDoubleWithDefault(double def, double value) override;
-
     void write2BitDoubleWithDefault(const XY &def, const XY &value) override;
-
     void write3BitDoubleWithDefault(const XYZ &def, const XYZ &value) override;
 
     void resetStream() override;
-
     void savePositonForSize() override;
-
     void setPositionInBits(long long posInBits) override;
-
     void setPositionByFlag(long long pos) override;
-
     void writeShiftValue() override;
 
 private:
     void resetShift();
+    void write3Bits(unsigned char value);
 };
 
 }// namespace dwg

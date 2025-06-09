@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
 #include <dwg/entities/Seqend.h>
+#include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
 
 namespace dwg {
 
-AttributeEntitySeqendCollection::AttributeEntitySeqendCollection(CadObject *owner) : _owner(owner) 
+AttributeEntitySeqendCollection::AttributeEntitySeqendCollection(CadObject *owner) : _owner(owner)
 {
     _seqend = new Seqend();
 }

@@ -31,11 +31,20 @@ PolyfaceMesh::PolyfaceMesh() {}
 
 PolyfaceMesh::~PolyfaceMesh() {}
 
-ObjectType PolyfaceMesh::objectType() const  { return ObjectType::POLYLINE_PFACE; }
+ObjectType PolyfaceMesh::objectType() const
+{
+    return ObjectType::POLYLINE_PFACE;
+}
 
-std::string PolyfaceMesh::objectName() const  { return DxfFileToken::EntityPolyline; }
+std::string PolyfaceMesh::objectName() const
+{
+    return DxfFileToken::EntityPolyline;
+}
 
-std::string PolyfaceMesh::subclassMarker() const  { return DxfSubclassMarker::PolyfaceMesh; }
+std::string PolyfaceMesh::subclassMarker() const
+{
+    return DxfSubclassMarker::PolyfaceMesh;
+}
 
 VertexFaceRecordCollection *PolyfaceMesh::faces()
 {

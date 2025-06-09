@@ -192,7 +192,7 @@ void DxfClassCollection::add(DxfClass *cls)
     _entries.insert({cls->dxfName(), cls});
 }
 
-void DxfClassCollection::addOrUpdate(DxfClass *item) 
+void DxfClassCollection::addOrUpdate(DxfClass *item)
 {
     assert(item);
     auto it = _entries.find(item->dxfName());

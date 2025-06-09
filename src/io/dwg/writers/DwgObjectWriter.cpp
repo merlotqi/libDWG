@@ -25,6 +25,7 @@
 #include <dwg/blocks/Block.h>
 #include <dwg/blocks/BlockEnd.h>
 #include <dwg/entities/Insert.h>
+#include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/fileheaders/DwgSectionDefinition_p.h>
 #include <dwg/io/dwg/writers/DwgObjectWriter_p.h>
@@ -44,7 +45,6 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
 #include <dwg/utils/EndianConverter.h>
-#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
