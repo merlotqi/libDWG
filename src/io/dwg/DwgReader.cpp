@@ -317,7 +317,7 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
 
     //0x80	0x6C	Encrypted Data
     //Metadata:
-    //The encrypted data at 0x80 can be decrypted by exclusive or’ing the 0x6c bytes of data
+    //The encrypted data at 0x80 can be decrypted by exclusive or'ing the 0x6c bytes of data
     //from the file with the following magic number sequence:
 
     //29 23 BE 84 E1 6C D6 AE 52 90 49 F1 F1 BB E9 EB
@@ -336,7 +336,7 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
 
 #pragma region Read header encrypted data
     {
-        //0x00	12	“AcFssFcAJMB” file ID string
+        //0x00	12	"AcFssFcAJMB" file ID string
         std::string fileId = headerStreamWrapper.readString(12);
         if (fileId != "AcFssFcAJMB\0")
         {
@@ -484,10 +484,10 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
             /*0x08	4	Page count(PageCount). Note that there can be more pages than PageCount,
 							as PageCount is just the number of pages written to file.
 							If a page contains zeroes only, that page is not written to file.
-							These “zero pages” can be detected by checking if the page’s start 
+							These "zero pages" can be detected by checking if the page's start 
 							offset is bigger than it should be based on the sum of previously read pages 
 							decompressed size(including zero pages).After reading all pages, if the total 
-							decompressed size of the pages is not equal to the section’s size, add more zero 
+							decompressed size of the pages is not equal to the section's size, add more zero 
 							pages to the section until this condition is met.
 				*/
             descriptor.setPageCount(decompressedWrapper.readT<int, LittleEndianConverter>());
@@ -498,7 +498,7 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
             decompressedWrapper.readT<int, LittleEndianConverter>();
             //0x14	4	Compressed(1 = no, 2 = yes, normally 2)
             descriptor.setCompressedCode(decompressedWrapper.readT<int, LittleEndianConverter>());
-            //0x18	4	Section Id(starts at 0). The first section(empty section) is numbered 0, consecutive sections are numbered descending from(the number of sections – 1) down to 1.
+            //0x18	4	Section Id(starts at 0). The first section(empty section) is numbered 0, consecutive sections are numbered descending from(the number of sections - 1) down to 1.
             descriptor.setSectionId(decompressedWrapper.readT<int, LittleEndianConverter>());
             //0x1C	4	Encrypted(0 = no, 1 = yes, 2 = unknown)
             descriptor.setEncrypted(decompressedWrapper.readT<int, LittleEndianConverter>());
@@ -544,7 +544,7 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
     readFileMetaData(fileheader, sreader);
 
     //The last 0x28 bytes of this section consists of check data,
-    //containing 5 Int64 values representing CRC’s and related numbers
+    //containing 5 Int64 values representing CRC's and related numbers
     //(starting from 0x3D8 until the end). The first 0x3D8 bytes
     //should be decoded using Reed-Solomon (255, 239) decoding, with a factor of 3.
     std::vector<unsigned char> compressedData = sreader->readBytes(0x400);
@@ -707,7 +707,7 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
         //0x38	8	NumPages.This is the number of pages present
         //			in the file for the section, but this does not include
         //			pages that contain zeroes only.A page that contains zeroes
-        //			only is not written to file.If a page’s data offset is
+        //			only is not written to file.If a page's data offset is
         //			smaller than the sum of the decompressed size of all previous
         //			pages, then it is to be preceded by a zero page with a size
         //			that is equal to the difference between these two numbers.
@@ -725,7 +725,7 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
         for (int i = 0; i < section.pageCount(); ++i)
         {
             DwgLocalSectionMap page;
-            //8	Page data offset.If a page’s data offset is
+            //8	Page data offset.If a page's data offset is
             //	smaller than the sum of the decompressed size
             //	of all previous pages, then it is to be preceded
             //	by a zero page with a size that is equal to the
@@ -890,15 +890,15 @@ std::istream *DwgReader::getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const
     std::istream *stream = nullptr;
 
     //Get the section locator
-    auto sectionLocator = DwgSectionDefinition::GetSectionLocatorByName(sectionName);
+    auto [sectionLocator, isNull] = DwgSectionDefinition::GetSectionLocatorByName(sectionName);
 
-    if (!sectionLocator.has_value())
+    if (!isNull)
         //There is no section for this version
         return nullptr;
 
 
     auto &&records = fileheader->records();
-    auto it = records.find(sectionLocator.value());
+    auto it = records.find(sectionLocator);
     if (it != records.end())
     {
         //set the stream position
@@ -1032,7 +1032,7 @@ void DwgReader::decryptDataSection(DwgLocalSectionMap &section, IDwgStreamReader
 {
     int secMask = 0x4164536B ^ (int) sreader->position();
 
-    //0x00	4	Section page type, since it’s always a data section: 0x4163043b
+    //0x00	4	Section page type, since it's always a data section: 0x4163043b
     auto pageType = sreader->readRawLong() ^ secMask;
     //0x04	4	Section number
     auto sectionNumber = sreader->readRawLong() ^ secMask;

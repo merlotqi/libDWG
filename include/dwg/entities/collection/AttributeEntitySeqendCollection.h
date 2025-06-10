@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/IObservableCadCollection.h>
+#include <dwg/ISeqendCollection.h>
 #include <dwg/exports.h>
 #include <vector>
 
@@ -30,16 +30,16 @@ namespace dwg {
 class AttributeEntity;
 class Seqend;
 
-class LIBDWG_API AttributeEntitySeqendCollection : public IObservableCadCollection
+class LIBDWG_API AttributeEntitySeqendCollection : public ISeqendCollection
 {
 public:
     AttributeEntitySeqendCollection(CadObject *owner);
     ~AttributeEntitySeqendCollection();
 
     CadObject *owner() const;
-    Seqend *seqend() const;
-    void setSeqend(Seqend *);
-    
+    Seqend *seqend() const override;
+    void setSeqend(Seqend *) override;
+
     size_t size() const;
     AttributeEntity *at(size_t index);
     AttributeEntity *operator[](size_t index);

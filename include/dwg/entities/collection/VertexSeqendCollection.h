@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <dwg/IObservableCadCollection.h>
+#include <dwg/ISeqendCollection.h>
 #include <dwg/exports.h>
 #include <vector>
 
@@ -30,16 +30,16 @@ namespace dwg {
 
 class Vertex;
 class Seqend;
-class LIBDWG_API VertexSeqendCollection : public IObservableCadCollection
+class LIBDWG_API VertexSeqendCollection : public ISeqendCollection
 {
 public:
     VertexSeqendCollection(CadObject *owner);
     ~VertexSeqendCollection();
 
     CadObject *owner() const;
-    Seqend *seqend() const;
-    void setSeqend(Seqend *);
-    
+    Seqend *seqend() const override;
+    void setSeqend(Seqend *) override;
+
     size_t size() const;
     Vertex *at(size_t index);
     Vertex *operator[](size_t index);

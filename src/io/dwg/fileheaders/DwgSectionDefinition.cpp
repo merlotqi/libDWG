@@ -36,21 +36,21 @@ std::map<std::string, std::vector<unsigned char>> DwgSectionDefinition::EndSenti
         {Preview, {0xE0, 0xDA, 0x92, 0xF8, 0x2B, 0xc9, 0xD7, 0xD7, 0x62, 0xA8, 0x35, 0xC0, 0x62, 0xBB, 0xEF, 0xD4}},
 };
 
-std::optional<int> DwgSectionDefinition::GetSectionLocatorByName(const std::string &name)
+std::tuple<int, bool> DwgSectionDefinition::GetSectionLocatorByName(const std::string &name)
 {
     if (0 == name.compare(Header))
-        return 0;
+        return {0, true};
     if (0 == name.compare(Classes))
-        return 1;
+        return {1, true};
     if (0 == name.compare(Handles))
-        return 2;
+        return {2, true};
     if (0 == name.compare(ObjFreeSpace))
-        return 3;
+        return {3, true};
     if (0 == name.compare(Template))
-        return 4;
+        return {4, true};
     if (0 == name.compare(AuxHeader))
-        return 5;
-    return std::nullopt;
+        return {5, true};
+    return {-1, false};
 }
 
 }// namespace dwg

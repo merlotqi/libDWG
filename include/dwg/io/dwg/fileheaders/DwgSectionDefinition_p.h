@@ -48,7 +48,13 @@ public:
     static std::map<std::string, std::vector<unsigned char>> StartSentinels;
     static std::map<std::string, std::vector<unsigned char>> EndSentinels;
 
-    static std::optional<int> GetSectionLocatorByName(const std::string &name);
+    /**
+     * @brief Get the Section Locator By Name object
+     * 
+     * @param name 
+     * @return std::tuple<int, bool> int is the section index, bool is true if the section is optional
+     */
+    static std::tuple<int, bool> GetSectionLocatorByName(const std::string &name);
 };
 
 }// namespace dwg

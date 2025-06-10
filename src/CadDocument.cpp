@@ -22,7 +22,10 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
+#include <dwg/IObservableCadCollection.h>
+#include <dwg/ISeqendCollection.h>
 #include <dwg/classes/DxfClassCollection.h>
+#include <dwg/entities/Seqend.h>
 #include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/objects/BookColor.h>
@@ -316,7 +319,7 @@ BlockRecord *CadDocument::paperSpace() const
     return _blockRecords->valueT<BlockRecord *>(BlockRecord::PaperSpaceName);
 }
 
-void CadDocument::registerCollection(IObservableCadCollection *collection) 
+void CadDocument::registerCollection(IObservableCadCollection *collection)
 {
     assert(collection);
     AppIdsTable *appIds = dynamic_cast<AppIdsTable *>(collection);
@@ -377,6 +380,25 @@ void CadDocument::registerCollection(IObservableCadCollection *collection)
     collection->OnAdd.add(this, &CadDocument::onAdd);
     collection->OnRemove.add(this, &CadDocument::onRemove);
 
+    {
+        CadObject *cadObject = dynamic_cast<CadObject *>(collection);
+        if (cadObject)
+        {
+            addCadObject(cadObject);
+        }
+    }
+    {
+        ISeqendCollection *seqendColleciton = dynamic_cast<ISeqendCollection *>(collection);
+        if (seqendColleciton)
+        {
+            seqendColleciton->OnSeqendAdded.add(this, &CadDocument::onAdd);
+            seqendColleciton->OnSeqendRemoved.add(this, &CadDocument::onRemove);
+            if (seqendColleciton->seqend() != 0)
+            {
+                addCadObject(seqendColleciton->seqend());
+            }
+        }
+    }
 }
 
 CadDocument::CadDocument(bool createDefaults)
@@ -389,7 +411,7 @@ CadDocument::CadDocument(bool createDefaults)
     }
 }
 
-void CadDocument::setRootDictionary(CadDictionary *dic) 
+void CadDocument::setRootDictionary(CadDictionary *dic)
 {
     _rootDictionary = dic;
     _rootDictionary->setOwner(this);
