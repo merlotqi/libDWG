@@ -126,6 +126,10 @@ private:
     void removeCadObject(CadObject *cadObject);
 
 private:
+    void onAdd(CadObject *);
+    void onRemove(CadObject *);
+
+private:
     CadHeader *_header = nullptr;
     CadSummaryInfo *_summaryInfo = nullptr;
 

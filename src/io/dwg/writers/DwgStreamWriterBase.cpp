@@ -663,7 +663,7 @@ void DwgStreamWriterBase::setPositionInBits(long long posInBits)
         int value = this._stream.ReadByte();
         if (value < 0)
         {
-            throw new EndOfStreamException();
+            throw std::runtime_error("End of stream");
         }
         _lastByte = (unsigned char) value;
     }
@@ -704,9 +704,9 @@ void DwgStreamWriterBase::writeShiftValue()
         long position = this._stream.Position;
         int lastValue = this._stream.ReadByte();
         unsigned char currValue =
-                (unsigned char) (this._lastByte | ((unsigned char) lastValue & (0b11111111 >> this.BitShift)));
-        this._stream.Position = position;
-        this._stream.WriteByte(currValue);
+                (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
+        _stream.Position = position;
+        _stream.WriteByte(currValue);
     }
 }
 

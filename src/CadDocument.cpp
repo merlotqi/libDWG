@@ -95,7 +95,7 @@ void CadDocument::createDefaults()
     //Root dictionary
     if (!_rootDictionary)
     {
-        _rootDictionary = CadDictionary::CreateRoot();
+        setRootDictionary(CadDictionary::CreateRoot());
     }
     else
     {
@@ -316,7 +316,68 @@ BlockRecord *CadDocument::paperSpace() const
     return _blockRecords->valueT<BlockRecord *>(BlockRecord::PaperSpaceName);
 }
 
-void CadDocument::registerCollection(IObservableCadCollection *) {}
+void CadDocument::registerCollection(IObservableCadCollection *collection) 
+{
+    assert(collection);
+    AppIdsTable *appIds = dynamic_cast<AppIdsTable *>(collection);
+    if (appIds)
+    {
+        _appIds = appIds;
+        _appIds->setOwner(this);
+    }
+    BlockRecordsTable *blockRecords = dynamic_cast<BlockRecordsTable *>(collection);
+    if (blockRecords)
+    {
+        _blockRecords = blockRecords;
+        _blockRecords->setOwner(this);
+    }
+    DimensionStylesTable *dimensionStyles = dynamic_cast<DimensionStylesTable *>(collection);
+    if (dimensionStyles)
+    {
+        _dimensionStyles = dimensionStyles;
+        _dimensionStyles->setOwner(this);
+    }
+    LayersTable *layers = dynamic_cast<LayersTable *>(collection);
+    if (layers)
+    {
+        _layers = layers;
+        _layers->setOwner(this);
+    }
+    LineTypesTable *lineTypes = dynamic_cast<LineTypesTable *>(collection);
+    if (lineTypes)
+    {
+        _lineTypes = lineTypes;
+        _lineTypes->setOwner(this);
+    }
+    TextStylesTable *textStyles = dynamic_cast<TextStylesTable *>(collection);
+    if (textStyles)
+    {
+        _textStyles = textStyles;
+        _textStyles->setOwner(this);
+    }
+    UCSTable *ucss = dynamic_cast<UCSTable *>(collection);
+    if (ucss)
+    {
+        _ucss = ucss;
+        _ucss->setOwner(this);
+    }
+    ViewsTable *views = dynamic_cast<ViewsTable *>(collection);
+    if (views)
+    {
+        _views = views;
+        _views->setOwner(this);
+    }
+    VPortsTable *vports = dynamic_cast<VPortsTable *>(collection);
+    if (vports)
+    {
+        _vports = vports;
+        _vports->setOwner(this);
+    }
+
+    collection->OnAdd.add(this, &CadDocument::onAdd);
+    collection->OnRemove.add(this, &CadDocument::onRemove);
+
+}
 
 CadDocument::CadDocument(bool createDefaults)
 {
@@ -328,7 +389,12 @@ CadDocument::CadDocument(bool createDefaults)
     }
 }
 
-void CadDocument::setRootDictionary(CadDictionary *dic) {}
+void CadDocument::setRootDictionary(CadDictionary *dic) 
+{
+    _rootDictionary = dic;
+    _rootDictionary->setOwner(this);
+    registerCollection(_rootDictionary);
+}
 
 void CadDocument::setAppIds(AppIdsTable *) {}
 
@@ -365,5 +431,9 @@ bool CadDocument::updateCollection(const std::string &dictName, bool createDicti
 void CadDocument::addCadObject(CadObject *cadObject) {}
 
 void CadDocument::removeCadObject(CadObject *cadObject) {}
+
+void CadDocument::onAdd(CadObject *) {}
+
+void CadDocument::onRemove(CadObject *) {}
 
 }// namespace dwg
