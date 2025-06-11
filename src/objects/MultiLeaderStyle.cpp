@@ -360,4 +360,8 @@ void MultiLeaderStyle::setUnknownFlag298(bool value)
     _unknownFlag298 = value;
 }
 
+void MultiLeaderStyle::assignDocument(CadDocument *doc) {}
+
+void MultiLeaderStyle::unassignDocument() {}
+
 }// namespace dwg

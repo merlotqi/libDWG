@@ -24,6 +24,8 @@
 #include <dwg/CadSummaryInfo.h>
 #include <dwg/IObservableCadCollection.h>
 #include <dwg/ISeqendCollection.h>
+#include <dwg/blocks/Block.h>
+#include <dwg/blocks/BlockEnd.h>
 #include <dwg/classes/DxfClassCollection.h>
 #include <dwg/entities/Seqend.h>
 #include <dwg/entities/collection/EntityCollection.h>
@@ -61,6 +63,7 @@
 #include <dwg/tables/collections/UCSTable.h>
 #include <dwg/tables/collections/VPortsTable.h>
 #include <dwg/tables/collections/ViewsTable.h>
+#include <fmt/core.h>
 
 namespace dwg {
 
@@ -131,49 +134,49 @@ void CadDocument::createDefaults()
 
 void CadDocument::updateCollections(bool createDictionaries)
 {
-    if (createDictionaries && !this->_rootDictionary)
+    if (createDictionaries && !_rootDictionary)
     {
-        this->_rootDictionary = CadDictionary::CreateRoot();
+        _rootDictionary = CadDictionary::CreateRoot();
     }
-    else if (!this->_rootDictionary)
+    else if (!_rootDictionary)
     {
         return;
     }
 
-    CadDictionary *layout = nullptr;
-    if (this->updateCollection(CadDictionary::AcadLayout, createDictionaries, &layout))
+    CadDictionary *layout = updateCollection(CadDictionary::AcadLayout, createDictionaries);
+    if (layout)
     {
-        this->_layouts = new LayoutCollection(layout);
+        _layouts = new LayoutCollection(layout);
     }
-    CadDictionary *groups = nullptr;
-    if (this->updateCollection(CadDictionary::AcadGroup, createDictionaries, &groups))
+    CadDictionary *groups = updateCollection(CadDictionary::AcadGroup, createDictionaries);
+    if (groups)
     {
-        this->_groups = new GroupCollection(groups);
+        _groups = new GroupCollection(groups);
     }
-    CadDictionary *scales = nullptr;
-    if (this->updateCollection(CadDictionary::AcadScaleList, createDictionaries, &scales))
+    CadDictionary *scales = updateCollection(CadDictionary::AcadScaleList, createDictionaries);
+    if (scales)
     {
-        this->_scales = new ScaleCollection(scales);
+        _scales = new ScaleCollection(scales);
     }
-    CadDictionary *mlineStyles = nullptr;
-    if (this->updateCollection(CadDictionary::AcadMLineStyle, createDictionaries, &mlineStyles))
+    CadDictionary *mlineStyles = updateCollection(CadDictionary::AcadMLineStyle, createDictionaries);
+    if (mlineStyles)
     {
-        this->_mlineStyles = new MLineStyleCollection(mlineStyles);
+        _mlineStyles = new MLineStyleCollection(mlineStyles);
     }
-    CadDictionary *mleaderStyles = nullptr;
-    if (this->updateCollection(CadDictionary::AcadMLeaderStyle, createDictionaries, &mleaderStyles))
+    CadDictionary *mleaderStyles = updateCollection(CadDictionary::AcadMLeaderStyle, createDictionaries);
+    if (mleaderStyles)
     {
-        this->_mleaderStyles = new MLeaderStyleCollection(mleaderStyles);
+        _mleaderStyles = new MLeaderStyleCollection(mleaderStyles);
     }
-    CadDictionary *imageDefinitions = nullptr;
-    if (this->updateCollection(CadDictionary::AcadImageDict, createDictionaries, &imageDefinitions))
+    CadDictionary *imageDefinitions = updateCollection(CadDictionary::AcadImageDict, createDictionaries);
+    if (imageDefinitions)
     {
-        this->_imageDefinitions = new ImageDefinitionCollection(imageDefinitions);
+        _imageDefinitions = new ImageDefinitionCollection(imageDefinitions);
     }
-    CadDictionary *colors = nullptr;
-    if (this->updateCollection(CadDictionary::AcadColor, createDictionaries, &colors))
+    CadDictionary *colors = updateCollection(CadDictionary::AcadColor, createDictionaries);
+    if (colors)
     {
-        this->_colors = new ColorCollection(colors);
+        _colors = new ColorCollection(colors);
     }
 }
 
@@ -380,23 +383,86 @@ void CadDocument::registerCollection(IObservableCadCollection *collection)
     collection->OnAdd.add(this, &CadDocument::onAdd);
     collection->OnRemove.add(this, &CadDocument::onRemove);
 
+    CadObject *cadObject = dynamic_cast<CadObject *>(collection);
+    if (cadObject)
     {
-        CadObject *cadObject = dynamic_cast<CadObject *>(collection);
-        if (cadObject)
+        addCadObject(cadObject);
+    }
+
+    ISeqendCollection *seqendColleciton = dynamic_cast<ISeqendCollection *>(collection);
+    if (seqendColleciton)
+    {
+        seqendColleciton->OnSeqendAdded.add(this, &CadDocument::onAdd);
+        seqendColleciton->OnSeqendRemoved.add(this, &CadDocument::onRemove);
+        if (seqendColleciton->seqend() != 0)
         {
-            addCadObject(cadObject);
+            addCadObject(seqendColleciton->seqend());
         }
     }
+
+    auto &&items = collection->rawCadObjects();
+    for (auto &&item: items)
     {
-        ISeqendCollection *seqendColleciton = dynamic_cast<ISeqendCollection *>(collection);
-        if (seqendColleciton)
+        CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);
+        if (dictionary)
         {
-            seqendColleciton->OnSeqendAdded.add(this, &CadDocument::onAdd);
-            seqendColleciton->OnSeqendRemoved.add(this, &CadDocument::onRemove);
-            if (seqendColleciton->seqend() != 0)
-            {
-                addCadObject(seqendColleciton->seqend());
-            }
+            registerCollection(dictionary);
+        }
+        else
+        {
+            addCadObject(item);
+        }
+    }
+}
+
+void CadDocument::unregisterCollection(IObservableCadCollection *collection) 
+{
+    assert(collection);
+    AppIdsTable *appIds = dynamic_cast<AppIdsTable *>(collection);
+    BlockRecordsTable *blockRecords = dynamic_cast<BlockRecordsTable *>(collection);
+    DimensionStylesTable *dimensionStyles = dynamic_cast<DimensionStylesTable *>(collection);
+    LayersTable *layers = dynamic_cast<LayersTable *>(collection);
+    LineTypesTable *lineTypes = dynamic_cast<LineTypesTable *>(collection);
+    TextStylesTable *textStyles = dynamic_cast<TextStylesTable *>(collection);
+    UCSTable *ucss = dynamic_cast<UCSTable *>(collection);
+    ViewsTable *views = dynamic_cast<ViewsTable *>(collection);
+    VPortsTable *vports = dynamic_cast<VPortsTable *>(collection);
+    if (appIds || blockRecords || dimensionStyles || layers || lineTypes || textStyles || ucss || views || vports)
+    {
+        throw std::runtime_error("The collection cannot be removed from a document.");
+    }
+    collection->OnAdd.remove(this, &CadDocument::onAdd);
+    collection->OnRemove.remove(this, &CadDocument::onRemove);
+
+    CadObject *cadObject = dynamic_cast<CadObject *>(collection);
+    if (cadObject)
+    {
+        removeCadObject(cadObject);
+    }
+
+    ISeqendCollection *seqendCollection = dynamic_cast<ISeqendCollection *>(collection);
+    if (seqendCollection)
+    {
+        seqendCollection->OnSeqendAdded.remove(this, &CadDocument::onAdd);
+        seqendCollection->OnSeqendRemoved.remove(this, &CadDocument::onRemove);
+
+        if (seqendCollection->seqend())
+        {
+            removeCadObject(seqendCollection->seqend());
+        }
+    }
+
+    auto &&items = collection->rawCadObjects();
+    for (auto &&item: items)
+    {
+        CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);
+        if (dictionary)
+        {
+            unregisterCollection(dictionary);
+        }
+        else
+        {
+            removeCadObject(item);
         }
     }
 }
@@ -404,7 +470,7 @@ void CadDocument::registerCollection(IObservableCadCollection *collection)
 CadDocument::CadDocument(bool createDefaults)
 {
     _classes = new DxfClassCollection();
-    _cadObjects.insert({this->handle(), this});
+    _cadObjects.insert({handle(), this});
     if (createDefaults)
     {
         this->createDefaults();
@@ -436,26 +502,79 @@ void CadDocument::setViews(ViewsTable *) {}
 
 void CadDocument::setVPorts(VPortsTable *) {}
 
-bool CadDocument::updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary)
+CadDictionary *CadDocument::updateCollection(const std::string &dictName, bool createDictionary)
 {
-    if (_rootDictionary->tryGetEntryT<CadDictionary>(dictName, dictionary))
+    CadDictionary *dictionary = _rootDictionary->valueT<CadDictionary *>(dictName);
+    if (dictionary)
     {
-        return true;
+        return dictionary;
     }
     else if (createDictionary)
     {
-        *dictionary = new CadDictionary(dictName);
-        _rootDictionary->add(dictName, *dictionary);
+        dictionary = new CadDictionary(dictName);
+        _rootDictionary->add(dictName, dictionary);
     }
-    return (*dictionary != nullptr);
+    return dictionary;
 }
 
-void CadDocument::addCadObject(CadObject *cadObject) {}
+void CadDocument::addCadObject(CadObject *cadObject) 
+{
+    if (cadObject->document())
+    {
+        throw std::runtime_error(
+                fmt::format("The item with handle {} is already assigned to a document", cadObject->handle()));
+    }
+
+    if (cadObject->handle() == 0 || _cadObjects.find(cadObject->handle()) != _cadObjects.end())
+    {
+        unsigned long long nextHandle = _header->handleSeed();
+        cadObject->setHandle(nextHandle);
+        _header->setHandleSeed(nextHandle + 1);
+    }
+    else if (cadObject->handle() >= _header->handleSeed())
+    {
+        _header->setHandleSeed(cadObject->handle() + 1);
+    }
+
+    _cadObjects.insert({cadObject->handle(), cadObject});
+
+    BlockRecord *record = dynamic_cast<BlockRecord *>(cadObject);
+    if (record)
+    {
+        addCadObject(record->blockEntity());
+        addCadObject(record->blockEnd());
+    }
+    cadObject->assignDocument(this);
+}
 
 void CadDocument::removeCadObject(CadObject *cadObject) {}
 
-void CadDocument::onAdd(CadObject *) {}
+void CadDocument::onAdd(CadObject *item) 
+{
+    assert(item);
+    CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);
+    if (dictionary)
+    {
+        registerCollection(dictionary);
+    }
+    else
+    {
+        addCadObject(item);
+    }
+}
 
-void CadDocument::onRemove(CadObject *) {}
+void CadDocument::onRemove(CadObject *item) 
+{
+    assert(item);
+    CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);
+    if (dictionary)
+    {
+        unregisterCollection(dictionary);
+    }
+    else
+    {
+        removeCadObject(item);
+    }
+}
 
 }// namespace dwg

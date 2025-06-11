@@ -21,10 +21,18 @@
  */
 
 #include <dwg/CadObject.h>
+#include <dwg/CadDocument.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/objects/CadDictionary.h>
+#include <dwg/xdata/ExtendedDataDictionary.h>
+#include <dwg/objects/collections/ObjectDictionaryCollection.h>
 
 namespace dwg {
 
-CadObject::CadObject() {}
+CadObject::CadObject() 
+{
+    _extendedData = new ExtendedDataDictionary(this);
+}
 
 CadObject::~CadObject() {}
 
@@ -87,6 +95,14 @@ void CadObject::addReactor(CadObject *reactor)
 
 bool CadObject::removeReactor(CadObject *)
 {
+    for (auto it = _reactors.begin(); it != _reactors.end(); ++it)
+    {
+        if (*it == reactor)
+        {
+            _reactors.erase(it);
+            return true;
+        }
+    }
     return false;
 }
 
@@ -100,25 +116,74 @@ void CadObject::setOwner(IHandledCadObject *obj)
     _owner = obj;
 }
 
-void CadObject::setExtendedData(ExtendedDataDictionary *) {}
+void CadObject::setExtendedData(ExtendedDataDictionary *) 
+{
+    _extendedData = value;
+}
 
 void CadObject::setXDictionary(CadDictionary *value)
 {
     _xdictionary = value;
 }
 
-void CadObject::assignDocument(CadDocument *doc) {}
+void CadObject::assignDocument(CadDocument *doc) 
+{
+    _document = doc;
+    if (_xdictionary)
+    {
+        doc->registerCollection(_xdictionary);
+    }
+
+    if (!_extendedData->data().empty())
+    {
+        auto &&entries = _extendedData->data();
+        _extendedData->clear();
+
+        for (auto &&[key, value]: entries)
+        {
+            _extendedData->add(dynamic_cast<AppId *>(key->clone()), value);
+        }
+    }
+}
 
 void CadObject::unassignDocument() {}
 
 NonGraphicalObject *CadObject::updateCollection(NonGraphicalObject *entry, ObjectDictionaryCollection *collection)
 {
-    return nullptr;
+    if (!entry || !collection)
+    {
+        return entry;
+    }
+
+    NonGraphicalObject *existing = collection->value(entry->name());
+    if (existing)
+    {
+        return existing;
+    }
+    else
+    {
+        collection->add(entry);
+        return entry;
+    }
 }
 
 TableEntry *CadObject::updateTable(TableEntry *entry, Table *table)
 {
-    return nullptr;
+    if (!table || !entry)
+    {
+        return entry;
+    }
+
+    TableEntry *existing = table->value(entry->name());
+    if (existing)
+    {
+        return existing;
+    }
+    else
+    {
+        table->add(entry);
+        return entry;
+    }
 }
 
 }// namespace dwg

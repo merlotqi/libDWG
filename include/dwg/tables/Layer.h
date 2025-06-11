@@ -78,6 +78,9 @@ public:
 
     bool isOn() const;
     void setIsOn(bool);
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 };
 
 }// namespace dwg

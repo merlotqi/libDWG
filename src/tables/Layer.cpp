@@ -145,4 +145,8 @@ void Layer::setIsOn(bool value)
     _isOn = value;
 }
 
+void Layer::assignDocument(CadDocument *doc) {}
+
+void Layer::unassignDocument() {}
+
 }// namespace dwg

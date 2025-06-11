@@ -38,7 +38,9 @@ public:
     ObjectDictionaryCollection(CadDictionary *dictionary);
     virtual ~ObjectDictionaryCollection();
 
-    unsigned long long handle() const;
+    unsigned long long handle() const override;
+    std::vector<CadObject *> rawCadObjects() const override;
+    
     NonGraphicalObject *operator[](const std::string &key);
     template<typename T>
     T operator[](const std::string &key)
@@ -55,7 +57,17 @@ public:
     virtual bool remove(const std::string &name);
 
     bool containsKey(const std::string &name) const;
-    bool tryGetEntry(const std::string &name, NonGraphicalObject **e);
+
+    NonGraphicalObject *value(const std::string &name);
+    template<typename T>
+    T valueT(const std::string& name)
+    {
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        static_assert(std::is_base_of<NonGraphicalObject, std::remove_pointer_t<T>>::value,
+                      "T must point to a type derived from NonGraphicalObject.");
+
+        return dynamic_cast<T>(value(name));
+    }
 
     void clear();
 };

@@ -275,4 +275,8 @@ std::vector<GeoData::GeoMeshFace> &GeoData::faces()
     return _faces;
 }
 
+void GeoData::assignDocument(CadDocument *doc) {}
+
+void GeoData::unassignDocument() {}
+
 }// namespace dwg

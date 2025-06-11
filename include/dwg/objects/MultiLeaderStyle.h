@@ -188,6 +188,9 @@ public:
     bool unknownFlag298() const;
     void setUnknownFlag298(bool);
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     LeaderContentType _contentType;
     MultiLeaderDrawOrderType _multiLeaderDrawOrder;

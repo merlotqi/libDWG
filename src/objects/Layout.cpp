@@ -20,12 +20,15 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/UCS.h>
+#include <dwg/tables/collections/BlockRecordsTable.h>
+#include <dwg/objects/collections/LayoutCollection.h>
 
 namespace dwg {
 
@@ -222,6 +225,26 @@ bool Layout::isPaperSpace() const
 std::vector<Viewport *> Layout::viewports() const
 {
     return std::vector<Viewport *>();
+}
+
+void Layout::assignDocument(CadDocument *doc) 
+{
+    PlotSettings::assignDocument(doc);
+    if (_associatedBlock)
+    {
+        doc->blockRecords()->add(_associatedBlock);
+        doc->blockRecords()->OnRemove.add(this, &Layout::onRemoveBlockRecord);
+    }
+}
+
+void Layout::unassignDocument() {}
+
+void Layout::onRemoveBlockRecord(CadObject *object) 
+{
+    if (_associatedBlock == object)
+    {
+        _document->layouts()->remove(_name);
+    }
 }
 
 }// namespace dwg

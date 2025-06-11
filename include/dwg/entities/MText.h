@@ -122,6 +122,9 @@ public:
     bool isAnnotative() const;
     void setIsAnnotative(bool annotative);
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     XYZ _insertPoint;                        ///< The insertion point of the text.
     XYZ _normal;                             ///< The normal vector defining the text plane.

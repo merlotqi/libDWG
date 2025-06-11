@@ -81,6 +81,9 @@ public:
     virtual void setBookColor(BookColor *);
 
     virtual void matchProperties(Entity *entity);
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 };
 
 }// namespace dwg

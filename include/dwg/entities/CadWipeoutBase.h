@@ -102,7 +102,6 @@ public:
     ImageDefinitionReactor *definitionReactor() const;
     void setDefinitionReactor(ImageDefinitionReactor *reactor);
 
-protected:
     void unassignDocument() override;
     void assignDocument(CadDocument *document) override;
 

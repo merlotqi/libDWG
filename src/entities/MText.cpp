@@ -257,4 +257,8 @@ void MText::setIsAnnotative(bool annotative)
     _isAnnotative = annotative;
 }
 
+void MText::assignDocument(CadDocument *doc) {}
+
+void MText::unassignDocument() {}
+
 }// namespace dwg

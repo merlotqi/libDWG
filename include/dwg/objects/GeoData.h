@@ -125,6 +125,9 @@ public:
     std::vector<GeoMeshFace> faces() const;
     std::vector<GeoMeshFace> &faces();
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     GeoDataVersion _version;
     DesignCoordinatesType _coordinatesType;

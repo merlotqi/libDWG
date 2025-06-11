@@ -35,6 +35,23 @@ public:
     IObservableCadCollection() {}
     virtual ~IObservableCadCollection() {}
 
+    virtual std::vector<CadObject *> rawCadObjects() const = 0;
+
+    template<typename T>
+    std::vector<T> rawCadObjectsT() const
+    {
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        std::vector<T> objects;
+        for (auto&& obj : rawCadObjects())
+        {
+            if (dynamic_cast<T>(obj))
+            {
+                objects.emplace_back(obj);
+            }
+        }
+        return objects;
+    }
+
     Delegate<void(CadObject *)> OnAdd;
     Delegate<void(CadObject *)> OnRemove;
 };

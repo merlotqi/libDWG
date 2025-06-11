@@ -175,6 +175,10 @@ std::vector<Viewport *> BlockRecord::viewports() const
     return std::vector<Viewport *>();
 }
 
+void BlockRecord::assignDocument(CadDocument *doc) {}
+
+void BlockRecord::unassignDocument() {}
+
 EntityCollection *BlockRecord::entities()
 {
     return _entities;

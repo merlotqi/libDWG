@@ -39,6 +39,8 @@ public:
     ExtendedDataDictionary(CadObject *owner);
     void add(AppId *app);
     void add(AppId *app, ExtendedData *extendedData);
+    std::map<AppId *, ExtendedData *> data() const;
+    void clear();
 
     using iterator = std::map<AppId *, ExtendedData *>::iterator;
     using const_iterator = std::map<AppId *, ExtendedData *>::const_iterator;

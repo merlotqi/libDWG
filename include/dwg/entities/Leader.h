@@ -97,6 +97,9 @@ public:
 
     XYZ annotationOffset() const;
     void setAnnotationOffset(const XYZ &offset);
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 };
 
 }// namespace dwg

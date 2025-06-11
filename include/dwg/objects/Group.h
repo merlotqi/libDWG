@@ -52,6 +52,9 @@ public:
     std::vector<Entity *> entities() const;
     std::vector<Entity *> &entities();
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     std::string _description;
     bool _isUnnamed;

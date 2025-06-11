@@ -73,6 +73,7 @@ public:
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
+    std::vector<CadObject *> rawCadObjects() const override;
 
     bool hardOwnerFlag() const;
     void setHardOwnerFlag(bool);
@@ -81,7 +82,6 @@ public:
     void setClonningFlags(DictionaryCloningFlags);
 
     CadObject *operator[](const std::string &key);
-    bool tryGetEntry(const std::string &name, NonGraphicalObject **entry);
 
     void add(const std::string &key, NonGraphicalObject *value);
     void add(NonGraphicalObject *value);
@@ -92,18 +92,16 @@ public:
     bool remove(const std::string &key);
     void clear();
 
+    NonGraphicalObject *value(const std::string &name) const;
     template<typename T>
-    bool tryGetEntryT(const std::string &name, T **value)
+    T valueT(const std::string &name)
     {
-        auto it = _entries.find(name);
-        if (it != _entries.end())
-        {
-            *value = dynamic_cast<T *>(it->second);
-            return true;
-        }
-        return false;
-    }
+        static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
+        static_assert(std::is_base_of<NonGraphicalObject, std::remove_pointer_t<T>>::value,
+                      "T must point to a type derived from NonGraphicalObject.");
 
+        return dynamic_cast<T>(value(name));
+    }
 
 public:
     using iterator = std::map<std::string, NonGraphicalObject *, StringComparerOrdinalIgnoreCase>::iterator;

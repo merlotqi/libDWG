@@ -115,6 +115,9 @@ public:
 public:
     bool isTextUserDefinedLocation() const;
     void setIsTextUserDefinedLocation(bool value);
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 };
 
 }// namespace dwg

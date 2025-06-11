@@ -121,6 +121,11 @@ VertexSeqendCollection *Polyline::vertices()
     return _vertices;
 }
 
+void Polyline::assignDocument(CadDocument *doc) {}
+
+void Polyline::unassignDocument() {}
+
+
 /* ------------------------------- Polyline2D ------------------------------- */
 Polyline2D::Polyline2D() {}
 

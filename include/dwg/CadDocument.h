@@ -101,11 +101,11 @@ public:
     void addEntity(Entity *);
     void removeEntity(Entity *);
 
-
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
 
     void registerCollection(IObservableCadCollection *);
+    void unregisterCollection(IObservableCadCollection *);
 
 protected:
     void setRootDictionary(CadDictionary *dic);
@@ -121,7 +121,7 @@ private:
     void setViews(ViewsTable *);
     void setVPorts(VPortsTable *);
 
-    bool updateCollection(const std::string &dictName, bool createDictionary, CadDictionary **dictionary);
+    CadDictionary *updateCollection(const std::string &dictName, bool createDictionary);
     void addCadObject(CadObject *cadObject);
     void removeCadObject(CadObject *cadObject);
 

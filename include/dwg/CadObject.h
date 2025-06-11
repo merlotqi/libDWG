@@ -41,11 +41,11 @@ class TableEntry;
 class LIBDWG_API CadObject : public IHandledCadObject
 {
 protected:
-    unsigned long long _handle;
-    IHandledCadObject *_owner;
-    CadDocument *_document;
-    ExtendedDataDictionary *_extendedData;
-    CadDictionary *_xdictionary;
+    unsigned long long _handle = 0x0;
+    IHandledCadObject *_owner = nullptr;
+    CadDocument *_document = nullptr;
+    ExtendedDataDictionary *_extendedData = nullptr;
+    CadDictionary *_xdictionary = nullptr;
     std::vector<CadObject *> _reactors;
 
 public:

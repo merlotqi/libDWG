@@ -300,6 +300,9 @@ public:
     LineType *lineTypeExt2() const;
     void setLineTypeExt2(LineType *);
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     std::string _postFix = "<>";
     std::string _alternateDimensioningSuffix = "[]";

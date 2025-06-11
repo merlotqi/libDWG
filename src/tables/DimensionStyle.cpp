@@ -844,4 +844,8 @@ LineType *DimensionStyle::lineTypeExt2() const
 
 void DimensionStyle::setLineTypeExt2(LineType *) {}
 
+void DimensionStyle::assignDocument(CadDocument *doc) {}
+
+void DimensionStyle::unassignDocument() {}
+
 }// namespace dwg

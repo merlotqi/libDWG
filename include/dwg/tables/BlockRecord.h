@@ -101,11 +101,11 @@ public:
 
     std::vector<Viewport *> viewports() const;
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 public:
     EntityCollection *entities();
-    
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
 };
 
 }// namespace dwg

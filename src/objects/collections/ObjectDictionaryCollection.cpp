@@ -37,6 +37,11 @@ unsigned long long ObjectDictionaryCollection::handle() const
     return _dictionary->handle();
 }
 
+std::vector<CadObject *> ObjectDictionaryCollection::rawCadObjects() const
+{
+    return _dictionary->rawCadObjects();
+}
+
 NonGraphicalObject *ObjectDictionaryCollection::operator[](const std::string &key)
 {
     assert(_dictionary);
@@ -68,10 +73,9 @@ bool ObjectDictionaryCollection::containsKey(const std::string &name) const
     return _dictionary->containsKey(name);
 }
 
-bool ObjectDictionaryCollection::tryGetEntry(const std::string &name, NonGraphicalObject **e)
+NonGraphicalObject *ObjectDictionaryCollection::value(const std::string &name)
 {
-    assert(_dictionary);
-    return _dictionary->tryGetEntry(name, e);
+    return nullptr;
 }
 
 void ObjectDictionaryCollection::clear()

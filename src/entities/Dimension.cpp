@@ -205,4 +205,8 @@ bool Dimension::isTextUserDefinedLocation() const
 
 void Dimension::setIsTextUserDefinedLocation(bool value) {}
 
+void Dimension::assignDocument(CadDocument *doc) {}
+
+void Dimension::unassignDocument() {}
+
 }// namespace dwg

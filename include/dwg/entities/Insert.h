@@ -86,8 +86,8 @@ public:
 public:
     AttributeEntitySeqendCollection *attributes();
 
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 
 private:
     BlockRecord *_block;

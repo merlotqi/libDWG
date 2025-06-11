@@ -19,3 +19,22 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/xdata/ExtendedDataDictionary.h>
+
+namespace dwg {
+
+ExtendedDataDictionary::ExtendedDataDictionary(CadObject *owner) {}
+
+void ExtendedDataDictionary::add(AppId *app) {}
+
+void ExtendedDataDictionary::add(AppId *app, ExtendedData *extendedData) {}
+
+std::map<AppId *, ExtendedData *> ExtendedDataDictionary::data() const
+{
+    return _data;
+}
+
+void ExtendedDataDictionary::clear() {}
+
+}// namespace dwg

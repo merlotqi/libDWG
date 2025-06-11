@@ -68,8 +68,8 @@ public:
 public:
     VertexSeqendCollection *vertices();
 
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 
 protected:
     double _elevation;

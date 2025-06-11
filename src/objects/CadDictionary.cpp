@@ -123,6 +123,16 @@ std::string CadDictionary::subclassMarker() const
     return DxfSubclassMarker::Dictionary;
 }
 
+std::vector<CadObject *> CadDictionary::rawCadObjects() const
+{
+    std::vector<CadObject *> objects;
+    for (auto [key, value] : _entries)
+    {
+        objects.emplace_back(value);
+    }
+    return objects;
+}
+
 bool CadDictionary::hardOwnerFlag() const
 {
     return _hardOwnerFlag;
@@ -146,11 +156,6 @@ void CadDictionary::setClonningFlags(DictionaryCloningFlags value)
 CadObject *CadDictionary::operator[](const std::string &key)
 {
     return nullptr;
-}
-
-bool CadDictionary::tryGetEntry(const std::string &name, NonGraphicalObject **entry)
-{
-    return false;
 }
 
 void CadDictionary::add(const std::string &key, NonGraphicalObject *value)
@@ -202,6 +207,16 @@ bool CadDictionary::remove(const std::string &key)
 }
 
 void CadDictionary::clear() {}
+
+NonGraphicalObject *CadDictionary::value(const std::string &name) const 
+{
+    auto it = _entries.find(name);
+    if (it != _entries.end())
+    {
+        return it->second;
+    }
+    return nullptr;
+}
 
 bool CadDictionary::StringComparerOrdinalIgnoreCase::operator()(const std::string &lhs, const std::string &rhs) const
 {

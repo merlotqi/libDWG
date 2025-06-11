@@ -236,6 +236,9 @@ public:
     TextAttachmentType textBottomAttachment() const;
     void setTextBottomAttachment(TextAttachmentType);
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     std::vector<LeaderRoot> _leaderRoots;
     double _scaleFactor;

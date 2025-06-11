@@ -85,4 +85,8 @@ std::vector<Entity *> &Group::entities()
     return _entities;
 }
 
+void Group::assignDocument(CadDocument *doc) {}
+
+void Group::unassignDocument() {}
+
 }// namespace dwg

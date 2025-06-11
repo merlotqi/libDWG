@@ -51,4 +51,8 @@ VertexFaceRecordCollection *PolyfaceMesh::faces()
     return _faces;
 }
 
+void PolyfaceMesh::assignDocument(CadDocument *doc) {}
+
+void PolyfaceMesh::unassignDocument() {}
+
 }// namespace dwg

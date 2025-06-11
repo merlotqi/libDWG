@@ -178,4 +178,8 @@ AttributeEntitySeqendCollection *Insert::attributes()
     return _attributes;
 }
 
+void Insert::assignDocument(CadDocument *doc) {}
+
+void Insert::unassignDocument() {}
+
 }// namespace dwg

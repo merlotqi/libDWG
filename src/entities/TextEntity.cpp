@@ -136,4 +136,8 @@ TextVerticalAlignment TextEntity::verticalAlignment() const
 
 void TextEntity::setVerticalAlignment(TextVerticalAlignment) {}
 
+void TextEntity::assignDocument(CadDocument *doc) {}
+
+void TextEntity::unassignDocument() {}
+
 }// namespace dwg

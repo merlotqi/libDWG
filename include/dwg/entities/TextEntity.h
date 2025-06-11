@@ -80,6 +80,9 @@ public:
     TextVerticalAlignment verticalAlignment() const;
     void setVerticalAlignment(TextVerticalAlignment);
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
 private:
     double _thickness;
     XYZ _insertPoint;

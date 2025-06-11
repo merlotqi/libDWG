@@ -49,6 +49,11 @@ std::string Table::subclassMarker() const
     return DxfSubclassMarker::Table;
 }
 
+std::vector<CadObject *> Table::rawCadObjects() const
+{
+    return std::vector<CadObject *>();
+}
+
 std::size_t Table::size() const
 {
     return _entries.size();

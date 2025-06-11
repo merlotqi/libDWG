@@ -193,4 +193,8 @@ void Leader::setAnnotationOffset(const XYZ &annotationOffset)
     _annotationOffset = annotationOffset;
 }
 
+void Leader::assignDocument(CadDocument *doc) {}
+
+void Leader::unassignDocument() {}
+
 }// namespace dwg

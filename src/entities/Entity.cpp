@@ -143,4 +143,8 @@ void Entity::setBookColor(BookColor *value)
 
 void Entity::matchProperties(Entity *entity) {}
 
+void Entity::assignDocument(CadDocument *doc) {}
+
+void Entity::unassignDocument() {}
+
 }// namespace dwg

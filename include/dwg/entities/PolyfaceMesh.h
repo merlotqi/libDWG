@@ -39,8 +39,8 @@ public:
 
     VertexFaceRecordCollection *faces();
 
-    Delegate<void(CadObject *)> OnAdd;
-    Delegate<void(CadObject *)> OnRemove;
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
 
 private:
     VertexFaceRecordCollection *_faces;

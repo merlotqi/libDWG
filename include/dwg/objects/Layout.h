@@ -99,6 +99,12 @@ public:
 
     std::vector<Viewport *> viewports() const;
 
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
+private:
+    void onRemoveBlockRecord(CadObject *object);
+
 private:
     LayoutFlags _layoutFlags;
     int _tabOrder;

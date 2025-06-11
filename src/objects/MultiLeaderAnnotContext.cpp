@@ -540,4 +540,8 @@ void MultiLeaderAnnotContext::setTextBottomAttachment(TextAttachmentType value)
     _textBottomAttachment = value;
 }
 
+void MultiLeaderAnnotContext::assignDocument(CadDocument *doc) {}
+
+void MultiLeaderAnnotContext::unassignDocument() {}
+
 }// namespace dwg
