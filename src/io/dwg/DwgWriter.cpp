@@ -210,8 +210,8 @@ void DwgWriter::writeFileDepList()
     if (_fileHeader->version() < ACadVersion::AC1018)
         return;
 
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    OutputStreamWrapper swriter(stream.get());
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
+    StreamWrapper swriter(stream.get());
     swriter.write<unsigned int>(0);//Int32	4	Feature count(ftc)
 
     //String32	ftc * (4 + n)	Feature name list.A feature name is one of the following:
@@ -273,8 +273,8 @@ void DwgWriter::writeObjects()
 
 void DwgWriter::writeObjFreeSpace()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    OutputStreamWrapper writer(stream.get());
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
+    StreamWrapper writer(stream.get());
 
     //Int32	4	0
     writer.write<int>(0);
@@ -326,8 +326,8 @@ void DwgWriter::writeObjFreeSpace()
 
 void DwgWriter::writeTemplate()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    OutputStreamWrapper writer(stream.get());
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
+    StreamWrapper writer(stream.get());
 
     //Int16	2	Template description string length in bytes(the ODA always writes 0 here).
     writer.write<short>(0);

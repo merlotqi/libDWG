@@ -145,7 +145,7 @@ long long DwgStreamWriterBase::savedPositionInBits() const
 
 void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes)
 {
-    OutputStreamWrapper wrapper(_stream);
+    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
         for (int i = 0; i < bytes.size(); ++i)
@@ -165,7 +165,7 @@ void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes)
 
 void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes, int initialIndex, int length)
 {
-    OutputStreamWrapper wrapper(_stream);
+    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
         for (int i = 0, j = initialIndex; i < length; ++i, ++j)
@@ -290,7 +290,7 @@ void DwgStreamWriterBase::writeTextUtf8(const std::string &value)
 
 void DwgStreamWriterBase::writeBit(bool value)
 {
-    OutputStreamWrapper wrapper(_stream);
+    StreamWrapper wrapper(_stream);
     if (_bitShift < 7)
     {
         if (value)
@@ -428,7 +428,7 @@ void DwgStreamWriterBase::write2RawDouble(const XY &value)
 
 void DwgStreamWriterBase::writeByte(unsigned char value)
 {
-    OutputStreamWrapper wrapper(_stream);
+    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
         wrapper.write(1);

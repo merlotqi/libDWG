@@ -24,53 +24,43 @@
 
 namespace dwg {
 
-CRC8StreamHandlerBase::CRC8StreamHandlerBase() {}
+CRC8StreamHandler::CRC8StreamHandler(std::iostream *stream, unsigned short seed) : StreamWrapper(stream)
+{
+    setSeed(seed);
+}
 
-CRC8StreamHandlerBase::~CRC8StreamHandlerBase() {}
+CRC8StreamHandler::~CRC8StreamHandler() {}
 
-unsigned short CRC8StreamHandlerBase::GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer,
-                                                  long startPos, long endPos)
+unsigned short CRC8StreamHandler::GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer,
+                                              long startPos, long endPos)
 {
     unsigned short currValue = seed;
     int index = (int) startPos;
 
     while (endPos-- > 0)
     {
-        currValue = CRC8StreamHandlerBase::decode(currValue, buffer[index]);
+        currValue = CRC8StreamHandler::decode(currValue, buffer[index]);
         index++;
     }
 
     return currValue;
 }
 
-unsigned short CRC8StreamHandlerBase::seed() const
+unsigned short CRC8StreamHandler::seed() const
 {
     return _seed;
 }
 
-void CRC8StreamHandlerBase::setSeed(unsigned short seed)
+void CRC8StreamHandler::setSeed(unsigned short seed)
 {
     _seed = seed;
 }
 
-unsigned short CRC8StreamHandlerBase::decode(unsigned short key, unsigned char value)
+unsigned short CRC8StreamHandler::decode(unsigned short key, unsigned char value)
 {
     int index = value ^ (unsigned char) key;
     key = (unsigned short) ((unsigned int) key >> 8 ^ CRC::CrcTable[index]);
     return key;
 }
-
-
-CRC8InputStreamHandler::CRC8InputStreamHandler(std::istream *stream) : InputStreamWrapper(stream) {}
-
-CRC8InputStreamHandler::~CRC8InputStreamHandler() {}
-
-CRC8OutputStreamHandler::CRC8OutputStreamHandler(std::ostream *stream, unsigned short seed)
-    : OutputStreamWrapper(stream)
-{
-    setSeed(seed);
-}
-
-CRC8OutputStreamHandler::~CRC8OutputStreamHandler() {}
 
 }// namespace dwg

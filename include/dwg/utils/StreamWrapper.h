@@ -31,24 +31,30 @@
 
 namespace dwg {
 
-class LIBDWG_API InputStreamWrapper
+class LIBDWG_API StreamWrapper
 {
-    std::istream *_stream;
+    std::iostream *_stream;
     Encoding _encoding;
+    bool _owned;
 
 public:
-    InputStreamWrapper(std::istream *stream);
-    virtual ~InputStreamWrapper();
+    StreamWrapper(std::iostream *stream);
+    StreamWrapper(const std::vector<unsigned char> &buffer);
+    StreamWrapper(const StreamWrapper &other);
+    StreamWrapper &operator=(const StreamWrapper &other);
+    ~StreamWrapper();
 
-    std::istream *stream();
-
-    std::size_t length() const;
-    std::size_t pos() const;
-    void seek(std::size_t pos);
-
+    std::iostream *stream();
     Encoding encoding() const;
     void setEncoding(Encoding encoding);
 
+    std::streampos tell() const;
+    void seek(std::streampos pos);
+
+    void flush();
+    void clear();
+
+public:
     char readChar();
     unsigned char readByte();
     std::vector<unsigned char> readBytes(std::size_t length);
@@ -74,28 +80,9 @@ public:
     }
 
     std::string readUntil(char match);
-};
-
-class LIBDWG_API OutputStreamWrapper
-{
-    std::ostream *_stream;
-    Encoding _encoding;
 
 public:
-    OutputStreamWrapper(std::ostream *stream);
-    virtual ~OutputStreamWrapper();
-
-    std::ostream *stream();
-
-    std::size_t length() const;
-    std::size_t pos() const;
-    void seek(std::size_t pos);
-    void flush();
-
-    Encoding encoding() const;
-    void setEncoding(Encoding encoding);
-
-    std::vector<unsigned char> buffer();
+    std::vector<unsigned char> buffer() const;
 
     template<typename T>
     void write(const T &value)

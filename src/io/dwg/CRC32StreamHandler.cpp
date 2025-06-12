@@ -24,26 +24,21 @@
 
 namespace dwg {
 
-CRC32StreamHandlerBase::CRC32StreamHandlerBase() : _seed(0) {}
-
-unsigned int CRC32StreamHandlerBase::seed() const
-{
-    return ~_seed;
-}
-
-
-CRC32InputStreamHandler::CRC32InputStreamHandler(std::istream *stream, unsigned int seed) : InputStreamWrapper(stream)
+CRC32StreamHandler::CRC32StreamHandler(std::iostream *stream, unsigned int seed) : StreamWrapper(stream)
 {
     _seed = seed;
 }
 
-int CRC32InputStreamHandler::rawRead(unsigned char *buff, int nLen)
+CRC32StreamHandler::~CRC32StreamHandler() {}
+
+int CRC32StreamHandler::rawRead(unsigned char *buff, int nLen)
 {
     return 0;
 }
 
-
-CRC32OutputStreamHandler::CRC32OutputStreamHandler(std::ostream *stream) : OutputStreamWrapper(stream) {}
-
+unsigned int CRC32StreamHandler::seed() const
+{
+    return ~_seed;
+}
 
 }// namespace dwg

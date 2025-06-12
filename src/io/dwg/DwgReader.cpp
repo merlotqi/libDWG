@@ -328,8 +328,8 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
     //AD 4F 14 F2 44 40 66 D0 6B C4 30 B7
 
     std::vector<unsigned char> arr = sreader->readBytes(0x6C);
-    std::istringstream headerStream(std::string(arr.begin(), arr.end()));
-    CRC32InputStreamHandler headerStreamWrapper(&headerStream, 0U);
+    std::stringstream headerStream(std::string(arr.begin(), arr.end()));
+    CRC32StreamHandler headerStreamWrapper(&headerStream, 0U);
     headerStreamWrapper.setEncoding(Encoding(CodePage::Windows1252));
 
     sreader->readBytes(20);//CHECK IF IS USEFUL
@@ -408,9 +408,9 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
         int64_t checksum;
         getPageHeaderData(sreader, sectionType, decompressedSize, compressedSize, compressionType, checksum);
         //Get the descompressed stream to read the records
-        std::istringstream decompressed;
+        std::stringstream decompressed;
         DwgLZ77AC18Decompressor::Decompress(sreader->stream(), decompressedSize, &decompressed);
-        InputStreamWrapper decompressedWrapper(&decompressed);
+        StreamWrapper decompressedWrapper(&decompressed);
 
         //Section size
         int total = 0x100;
@@ -460,9 +460,9 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
         int64_t checksum;
         getPageHeaderData(sreader, sectionType, decompressedSize, compressedSize, compressionType, checksum);
 
-        std::istringstream decompressed;
+        std::stringstream decompressed;
         DwgLZ77AC18Decompressor::Decompress(sreader->stream(), decompressedSize, &decompressed);
-        InputStreamWrapper decompressedWrapper(&decompressed);
+        StreamWrapper decompressedWrapper(&decompressed);
         decompressedWrapper.setEncoding(Encoding(CodePage::Windows1252));
 
         //0x00	4	Number of section descriptions(NumDescriptions)
@@ -577,8 +577,8 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
     }
 
     //Get the descompressed stream to read the records
-    std::istringstream decompressed(std::string(buffer.begin(), buffer.end()));
-    InputStreamWrapper decompressedWrapper(&decompressed);
+    std::stringstream decompressed(std::string(buffer.begin(), buffer.end()));
+    StreamWrapper decompressedWrapper(&decompressed);
 
     //Read the compressed data
     Dwg21CompressedMetadata metaData;
@@ -662,8 +662,8 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
                           fileheader->compressedMetadata().pagesMapCorrectionFactor(), 0xEF, sreader->stream());
 
     //Read the page data
-    std::istringstream pageDataStream(std::string(arr.begin(), arr.end()));
-    InputStreamWrapper pageDataStreamWrapper(&pageDataStream);
+    std::stringstream pageDataStream(std::string(arr.begin(), arr.end()));
+    StreamWrapper pageDataStreamWrapper(&pageDataStream);
 
     long long offset = 0;
     while (pageDataStreamWrapper.pos() < pageDataStreamWrapper.length())
@@ -684,8 +684,8 @@ void DwgReader::readFileHeaderAC21(DwgFileHeaderAC21 *fileheader, IDwgStreamRead
             fileheader->compressedMetadata().sectionsMapCorrectionFactor(), 239, sreader->stream());
 
     //Section map stream
-    std::istringstream sectionMapStream(std::string(arr.begin(), arr.end()));
-    InputStreamWrapper sectionMapStreamWrapper(&sectionMapStream);
+    std::stringstream sectionMapStream(std::string(arr.begin(), arr.end()));
+    StreamWrapper sectionMapStreamWrapper(&sectionMapStream);
 
     while (sectionMapStreamWrapper.pos() < sectionMapStreamWrapper.length())
     {
@@ -921,9 +921,9 @@ std::istream *DwgReader::getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const
 
     //get the total size of the page
     std::string ostr(descriptor.decompressedSize() * descriptor.localSections().size(), 0);
-    std::ostringstream memoryStream(ostr);
+    std::stringstream memoryStream(ostr);
     memoryStream.seekp(std::ios::beg);
-    OutputStreamWrapper wrapper(&memoryStream);
+    StreamWrapper wrapper(&memoryStream);
 
     for (auto &&section: descriptor.localSections())
     {

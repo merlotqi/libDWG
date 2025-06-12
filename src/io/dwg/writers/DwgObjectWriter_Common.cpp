@@ -54,8 +54,8 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
 
     //Set the position to the entity to find
     long long position = _stream->tellp();
-    CRC8OutputStreamHandler crc(_stream, 0xC0C1);
-    OutputStreamWrapper msmain_wrapper(&_msmain);
+    CRC8StreamHandler crc(_stream, 0xC0C1);
+    StreamWrapper msmain_wrapper(&_msmain);
 
     //MS : Size of object, not including the CRC
     unsigned int size = (unsigned int) _msmain.tellp();
@@ -78,7 +78,7 @@ void DwgObjectWriter::registerObject(CadObject *cadObject)
     _map.insert({cadObject->handle(), position});
 }
 
-void DwgObjectWriter::writeSize(CRC8OutputStreamHandler *stream, unsigned int size)
+void DwgObjectWriter::writeSize(CRC8StreamHandler *stream, unsigned int size)
 {
     // This value is only read in IDwgStreamReader.ReadModularShort()
     // this should do the trick to write the modular short
@@ -97,7 +97,7 @@ void DwgObjectWriter::writeSize(CRC8OutputStreamHandler *stream, unsigned int si
     }
 }
 
-void DwgObjectWriter::writeSizeInBits(CRC8OutputStreamHandler *stream, unsigned long long size)
+void DwgObjectWriter::writeSizeInBits(CRC8StreamHandler *stream, unsigned long long size)
 {
     // This value is only read in IDwgStreamReader.ReadModularChar()
     // this should do the trick to write the modular char
@@ -390,7 +390,7 @@ void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data)
 void DwgObjectWriter::writeExtendedDataEntry(AppId *app, ExtendedData *entry)
 {
     std::ostringstream stream;
-    OutputStreamWrapper mstream(&stream);
+    StreamWrapper mstream(&stream);
 
     for (auto &&record: entry->records())
     {

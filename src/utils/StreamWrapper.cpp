@@ -22,11 +22,14 @@
 
 #include <assert.h>
 #include <dwg/utils/StreamWrapper.h>
+#include <fstream>
+#include <sstream>
 #include <stdexcept>
+
 
 namespace dwg {
 
-InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))
+StreamWrapper::StreamWrapper(std::iostream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))
 {
     if (!_stream || !_stream->good())
     {
@@ -34,173 +37,174 @@ InputStreamWrapper::InputStreamWrapper(std::istream *stream) : _stream(stream), 
     }
 }
 
-InputStreamWrapper::~InputStreamWrapper() {}
 
-std::istream *InputStreamWrapper::stream()
+StreamWrapper::StreamWrapper(const std::vector<unsigned char> &buffer)
+{
+    _stream = new std::stringstream(std::ios::in | std::ios::out | std::ios::binary);
+    _stream->write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
+    _owned = true;
+    _stream->seekp(std::ios::beg);
+    _stream->seekg(std::ios::beg);
+}
+
+StreamWrapper::StreamWrapper(const StreamWrapper &other)
+{
+    _stream = other._stream;
+    _encoding = other._encoding;
+    _owned = other._owned;
+}
+
+StreamWrapper &StreamWrapper::operator=(const StreamWrapper &other)
+{
+    _stream = other._stream;
+    _encoding = other._encoding;
+    _owned = other._owned;
+    return *this;
+}
+
+StreamWrapper::~StreamWrapper()
+{
+    if (_owned)
+    {
+        delete _stream;
+    }
+}
+
+StreamWrapper::~StreamWrapper() {}
+
+std::iostream *StreamWrapper::stream()
 {
     return _stream;
 }
 
-std::size_t InputStreamWrapper::length() const
+std::streampos StreamWrapper::tell() const
 {
-    return 0;
+    return _stream->tellg();
 }
 
-std::size_t InputStreamWrapper::pos() const
+void StreamWrapper::seek(std::streampos pos)
 {
-    return 0;
+    _stream->seekg(pos);
+    _stream->seekp(pos);
 }
 
-void InputStreamWrapper::seek(std::size_t pos) {}
-
-Encoding InputStreamWrapper::encoding() const
+Encoding StreamWrapper::encoding() const
 {
     return _encoding;
 }
 
-void InputStreamWrapper::setEncoding(Encoding encoding)
+void StreamWrapper::setEncoding(Encoding encoding)
 {
     _encoding = encoding;
 }
 
-char InputStreamWrapper::readChar()
+char StreamWrapper::readChar()
 {
     char ch;
     _stream->read(&ch, sizeof(ch));
+    _stream->seekp(_stream->tellg());
     return ch;
 }
 
-unsigned char InputStreamWrapper::readByte()
+unsigned char StreamWrapper::readByte()
 {
     unsigned char ch;
     _stream->read(reinterpret_cast<char *>(&ch), sizeof(unsigned char));
+    _stream->seekp(_stream->tellg());
     return ch;
 }
 
-std::vector<unsigned char> InputStreamWrapper::readBytes(std::size_t length)
+std::vector<unsigned char> StreamWrapper::readBytes(std::size_t length)
 {
     std::vector<unsigned char> buffer(length, 0);
     _stream->read(reinterpret_cast<char *>(buffer.data()), length);
+    _stream->seekp(_stream->tellg());
     return buffer;
 }
 
-short InputStreamWrapper::readShort()
+short StreamWrapper::readShort()
 {
     return readT<short, LittleEndianConverter>();
 }
 
-unsigned short InputStreamWrapper::readUShort()
+unsigned short StreamWrapper::readUShort()
 {
     return readT<unsigned short, LittleEndianConverter>();
 }
 
-int InputStreamWrapper::readInt()
+int StreamWrapper::readInt()
 {
     return readT<int, LittleEndianConverter>();
 }
 
-unsigned int InputStreamWrapper::readUInt()
+unsigned int StreamWrapper::readUInt()
 {
     return readT<unsigned int, LittleEndianConverter>();
 }
 
-long long InputStreamWrapper::readLong()
+long long StreamWrapper::readLong()
 {
     return readT<long long, LittleEndianConverter>();
 }
 
-unsigned long long InputStreamWrapper::readULong()
+unsigned long long StreamWrapper::readULong()
 {
     return readT<unsigned long long, LittleEndianConverter>();
 }
 
-float InputStreamWrapper::readFloat()
+float StreamWrapper::readFloat()
 {
     return readT<float, LittleEndianConverter>();
 }
 
-double InputStreamWrapper::readDouble()
+double StreamWrapper::readDouble()
 {
     return readT<double, LittleEndianConverter>();
 }
 
-std::string InputStreamWrapper::readString(int length)
+std::string StreamWrapper::readString(int length)
 {
     return readString(length, _encoding);
 }
 
-std::string InputStreamWrapper::readString(int length, Encoding encoding)
+std::string StreamWrapper::readString(int length, Encoding encoding)
 {
     std::vector<unsigned char> buffer = readBytes(length);
     return encoding.toUtf8(reinterpret_cast<const char *>(buffer.data()));
 }
 
-std::string InputStreamWrapper::readUntil(char match)
+std::string StreamWrapper::readUntil(char match)
 {
     return std::string();
 }
 
-
-/* --------------------------- OutputStreamWrapper -------------------------- */
-
-OutputStreamWrapper::OutputStreamWrapper(std::ostream *stream) : _stream(stream) {}
-
-OutputStreamWrapper ::~OutputStreamWrapper() {}
-
-std::ostream *OutputStreamWrapper::stream()
+void StreamWrapper::flush()
 {
-    return _stream;
+    std::fstream *fs = dynamic_cast<std::fstream *>(_stream);
+    if (fs)
+    {
+        fs->flush();
+    }
 }
 
-std::size_t OutputStreamWrapper::length() const
-{
-    assert(_stream);
-    std::streampos cur = _stream->tellp();
-    _stream->seekp(0, std::ios::end);
-    std::streampos len = _stream->tellp();
-    _stream->seekp(cur);
-    return len;
-}
-
-std::size_t OutputStreamWrapper::pos() const
-{
-    return _stream->tellp();
-}
-
-void OutputStreamWrapper::seek(std::size_t pos)
-{
-    _stream->seekp(pos);
-}
-
-void OutputStreamWrapper::flush() {}
-
-Encoding OutputStreamWrapper::encoding() const
-{
-    return _encoding;
-}
-
-void OutputStreamWrapper::setEncoding(Encoding encoding)
-{
-    _encoding = encoding;
-}
-
-std::vector<unsigned char> OutputStreamWrapper::buffer()
+std::vector<unsigned char> StreamWrapper::buffer() const
 {
     return std::vector<unsigned char>();
 }
 
-void OutputStreamWrapper::write(const std::vector<unsigned char> &buffer, size_t offset, size_t length)
+void StreamWrapper::write(const std::vector<unsigned char> &buffer, size_t offset, size_t length)
 {
     assert(offset >= 0 && length >= 0);
     assert(offset + length <= buffer.size());
     _stream->write(reinterpret_cast<const char *>(buffer.data() + offset), length);
+    _stream->seekg(_stream->tellp());
 }
 
-void OutputStreamWrapper::write(const std::string &) {}
+void StreamWrapper::write(const std::string &) {}
 
-void OutputStreamWrapper::write(const std::string &, Encoding) {}
+void StreamWrapper::write(const std::string &, Encoding) {}
 
-void OutputStreamWrapper::writeByte(unsigned char b)
+void StreamWrapper::writeByte(unsigned char b)
 {
     _stream->write(reinterpret_cast<const char *>(&b), 1);
 }

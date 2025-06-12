@@ -27,35 +27,21 @@
 
 namespace dwg {
 
-class CRC8StreamHandlerBase
+class CRC8StreamHandler : public StreamWrapper
 {
-    static unsigned short decode(unsigned short key, unsigned char value);
-
 public:
-    CRC8StreamHandlerBase();
-    virtual ~CRC8StreamHandlerBase();
+    CRC8StreamHandler(std::iostream *stream, unsigned short seed);
+    virtual ~CRC8StreamHandler();
     static unsigned short GetCRCValue(unsigned short seed, const std::vector<unsigned char> &buffer, long startPos,
                                       long endPos);
     unsigned short seed() const;
     void setSeed(unsigned short);
 
+private:
+    static unsigned short decode(unsigned short key, unsigned char value);
+
 protected:
     unsigned short _seed;
-};
-
-class CRC8InputStreamHandler : public InputStreamWrapper, public CRC8StreamHandlerBase
-{
-public:
-    CRC8InputStreamHandler(std::istream *stream);
-    ~CRC8InputStreamHandler();
-};
-
-
-class CRC8OutputStreamHandler : public OutputStreamWrapper, public CRC8StreamHandlerBase
-{
-public:
-    CRC8OutputStreamHandler(std::ostream *stream, unsigned short seed);
-    ~CRC8OutputStreamHandler();
 };
 
 }// namespace dwg

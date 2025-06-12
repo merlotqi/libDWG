@@ -150,8 +150,8 @@ void DwgHandleWriter::processPosition(std::streampos pos)
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));
     _stream->seekp(streamPos);
 
-    OutputStreamWrapper wrapper(_stream);
-    unsigned short crc = CRC8OutputStreamHandler::GetCRCValue(0xC0C1, wrapper.buffer(), pos, wrapper.length() - pos);
+    StreamWrapper wrapper(_stream);
+    unsigned short crc = CRC8StreamHandler::GetCRCValue(0xC0C1, wrapper.buffer(), pos, wrapper.length() - pos);
 
     ch = (unsigned char) (crc >> 8);
     _stream->write(reinterpret_cast<const char *>(&ch), sizeof(unsigned char));

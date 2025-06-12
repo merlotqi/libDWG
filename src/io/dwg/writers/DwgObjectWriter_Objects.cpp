@@ -716,7 +716,7 @@ void DwgObjectWriter::writeSortEntitiesTable(SortEntitiesTable *sortEntitiesTabl
 void DwgObjectWriter::writeXRecord(XRecord *xrecord)
 {
     std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
-    OutputStreamWrapper ms(stream.get());
+    StreamWrapper ms(stream.get());
 
     for (auto &&entry: xrecord->entries())
     {

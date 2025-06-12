@@ -132,7 +132,7 @@ void DwgClassesWriter::writeSizeAndCrc()
     //SN : 0x8D 0xA1 0xC4 0xB8 0xC4 0xA9 0xF8 0xC5 0xC0 0xDC 0xF4 0x5F 0xE7 0xCF 0xB6 0x8A
     _startWriter->writeBytes(_startSentinel);
 
-    CRC8OutputStreamHandler swriter(_startWriter->stream(), 0xC0C1);
+    CRC8StreamHandler swriter(_startWriter->stream(), 0xC0C1);
 
     //RL : size of class data area.
     swriter.write((int) _sectionStream->str().length());

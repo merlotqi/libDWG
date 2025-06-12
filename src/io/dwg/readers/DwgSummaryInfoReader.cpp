@@ -110,7 +110,7 @@ CadSummaryInfo *DwgSummaryInfoReader::read()
     catch (const std::exception &e)
     {
         auto &&stream = _reader->stream();
-        InputStreamWrapper wrapper(stream);
+        StreamWrapper wrapper(stream);
         if (wrapper.pos() != wrapper.length())
         {
             notify("[SummaryInfo] An error occurred while reading the Summary Info", Notification::Error);
@@ -122,7 +122,7 @@ CadSummaryInfo *DwgSummaryInfoReader::read()
 std::string DwgSummaryInfoReader::readUtf8String()
 {
     auto &&stream = _reader->stream();
-    InputStreamWrapper wrapper(stream);
+    StreamWrapper wrapper(stream);
     short textLength = wrapper.readT<short, LittleEndianConverter>();
     std::string value;
     if (textLength == 0)
