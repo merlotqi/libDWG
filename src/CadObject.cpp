@@ -20,16 +20,18 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/CadObject.h>
 #include <dwg/CadDocument.h>
-#include <dwg/tables/AppId.h>
+#include <dwg/CadObject.h>
 #include <dwg/objects/CadDictionary.h>
-#include <dwg/xdata/ExtendedDataDictionary.h>
 #include <dwg/objects/collections/ObjectDictionaryCollection.h>
+#include <dwg/tables/AppId.h>
+#include <dwg/tables/TableEntry.h>
+#include <dwg/tables/collections/Table.h>
+#include <dwg/xdata/ExtendedDataDictionary.h>
 
 namespace dwg {
 
-CadObject::CadObject() 
+CadObject::CadObject()
 {
     _extendedData = new ExtendedDataDictionary(this);
 }
@@ -93,7 +95,7 @@ void CadObject::addReactor(CadObject *reactor)
     _reactors.push_back(reactor);
 }
 
-bool CadObject::removeReactor(CadObject *)
+bool CadObject::removeReactor(CadObject *reactor)
 {
     for (auto it = _reactors.begin(); it != _reactors.end(); ++it)
     {
@@ -116,7 +118,7 @@ void CadObject::setOwner(IHandledCadObject *obj)
     _owner = obj;
 }
 
-void CadObject::setExtendedData(ExtendedDataDictionary *) 
+void CadObject::setExtendedData(ExtendedDataDictionary *value)
 {
     _extendedData = value;
 }
@@ -126,7 +128,7 @@ void CadObject::setXDictionary(CadDictionary *value)
     _xdictionary = value;
 }
 
-void CadObject::assignDocument(CadDocument *doc) 
+void CadObject::assignDocument(CadDocument *doc)
 {
     _document = doc;
     if (_xdictionary)

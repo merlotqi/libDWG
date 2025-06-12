@@ -33,6 +33,7 @@ public:
     virtual ~BlockLinearParameter();
 
     ObjectType objectType() const override;
+    std::string objectName() const override;
     std::string subclassMarker() const override;
 
     std::string label() const;
@@ -43,6 +44,11 @@ public:
 
     double labelOffset() const;
     void setLabelOffset(double);
+
+private:
+    std::string _label;
+    std::string _description;
+    double _labelOffset;
 };
 
 }// namespace dwg

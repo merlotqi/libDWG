@@ -74,7 +74,7 @@ private:
     LwPolylineFlags _flags;
     double _constantWidth;
     double _elevation;
-    double _thickness; 
+    double _thickness;
     XYZ _normal;
     std::vector<Vertex> _vertices;
     bool _isClosed;

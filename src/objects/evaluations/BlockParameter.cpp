@@ -20,8 +20,38 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/evaluations/BlockParameter.h>
 
 namespace dwg {
+
+BlockParameter::BlockParameter() {}
+
+BlockParameter::~BlockParameter() {}
+
+std::string BlockParameter::subclassMarker() const
+{
+    return DxfSubclassMarker::BlockParameter;
+}
+
+bool BlockParameter::value280() const
+{
+    return _value280;
+}
+
+void BlockParameter::setValue280(bool value)
+{
+    _value280 = value;
+}
+
+bool BlockParameter::value281() const
+{
+    return _value281;
+}
+
+void BlockParameter::setValue281(bool value)
+{
+    _value281 = value;
+}
 
 }// namespace dwg

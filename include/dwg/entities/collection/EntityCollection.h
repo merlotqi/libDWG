@@ -27,7 +27,7 @@
 #include <vector>
 
 namespace dwg {
-    
+
 class Entity;
 class LIBDWG_API EntityCollection : public IObservableCadCollection
 {
@@ -61,7 +61,7 @@ public:
     inline Entity * front() noexcept { return _entities.front(); }
     inline Entity * back() noexcept { return _entities.back(); }
     // clang-format on
-    
+
 private:
     CadObject *_owner;
     std::vector<Entity *> _entities;

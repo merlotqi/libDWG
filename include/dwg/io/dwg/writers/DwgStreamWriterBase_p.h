@@ -82,7 +82,7 @@ public:
     void handleReference(DwgReferenceType type, IHandledCadObject *cadObject) override;
     void handleReference(unsigned long long handle) override;
     void handleReference(DwgReferenceType type, unsigned long long handle) override;
-    
+
     void writeSpearShift() override;
     void writeRawShort(short value) override;
     void writeRawUShort(unsigned short value) override;

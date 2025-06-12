@@ -38,13 +38,18 @@ public:
     std::string subclassMarker() const override;
 
     int value90() const;
-    void setValue90(int value) const;
+    void setValue90(int value);
 
     int value98() const;
     void setValue98(int value);
 
     int value99() const;
     void setValue99(int value);
+
+private:
+    int _value90;
+    int _value98;
+    int _value99;
 };
 
 }// namespace dwg

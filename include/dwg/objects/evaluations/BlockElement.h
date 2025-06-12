@@ -39,6 +39,10 @@ public:
 
     int value1071() const;
     void setValue1071(int value);
+
+private:
+    std::string _elementName;
+    int _value1071;
 };
 
 }// namespace dwg

@@ -642,9 +642,9 @@ void DwgStreamWriterBase::write3BitDoubleWithDefault(const XYZ &def, const XYZ &
 
 void DwgStreamWriterBase::resetStream()
 {
-    _stream->seekp(std::ios::beg);
-    resetShift();
-    _stream->setLength(0);
+    // _stream->seekp(std::ios::beg);
+    // resetShift();
+    // _stream->setLength(0);
 }
 
 void DwgStreamWriterBase::savePositonForSize()
@@ -654,25 +654,25 @@ void DwgStreamWriterBase::savePositonForSize()
 
 void DwgStreamWriterBase::setPositionInBits(long long posInBits)
 {
-    long position = posInBits / 8;
-    _bitShift = (int) (posInBits % 8);
-    _stream->seekp(position);
+    // long position = posInBits / 8;
+    // _bitShift = (int) (posInBits % 8);
+    // _stream->seekp(position);
 
-    if (_bitShift > 0)
-    {
-        int value = this._stream.ReadByte();
-        if (value < 0)
-        {
-            throw std::runtime_error("End of stream");
-        }
-        _lastByte = (unsigned char) value;
-    }
-    else
-    {
-        _lastByte = 0;
-    }
+    // if (_bitShift > 0)
+    // {
+    //     int value = this._stream.ReadByte();
+    //     if (value < 0)
+    //     {
+    //         throw std::runtime_error("End of stream");
+    //     }
+    //     _lastByte = (unsigned char) value;
+    // }
+    // else
+    // {
+    //     _lastByte = 0;
+    // }
 
-    _stream->seekp(position);
+    // _stream->seekp(position);
 }
 
 void DwgStreamWriterBase::setPositionByFlag(long long pos)
@@ -699,15 +699,14 @@ void DwgStreamWriterBase::setPositionByFlag(long long pos)
 
 void DwgStreamWriterBase::writeShiftValue()
 {
-    if (_bitShift > 0)
-    {
-        long position = this._stream.Position;
-        int lastValue = this._stream.ReadByte();
-        unsigned char currValue =
-                (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
-        _stream.Position = position;
-        _stream.WriteByte(currValue);
-    }
+    // if (_bitShift > 0)
+    // {
+    //     long position = this._stream.Position;
+    //     int lastValue = this._stream.ReadByte();
+    //     unsigned char currValue = (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
+    //     _stream.Position = position;
+    //     _stream.WriteByte(currValue);
+    // }
 }
 
 void DwgStreamWriterBase::resetShift()

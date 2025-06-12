@@ -40,6 +40,10 @@ public:
 
     XYZ secondPoint() const;
     void setSecondPoint(const XYZ &);
+
+private:
+    XYZ _firstPoint;
+    XYZ _secondPoint;
 };
 
 }// namespace dwg

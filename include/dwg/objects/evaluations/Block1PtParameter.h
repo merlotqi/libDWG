@@ -46,6 +46,12 @@ public:
 
     short value171() const;
     void setValue171(short value);
+
+private:
+    XYZ _location;
+    long long _value93;
+    short _value170;
+    short _value171;
 };
 
 }// namespace dwg

@@ -20,8 +20,38 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/evaluations/Block2PtParameter.h>
 
 namespace dwg {
+
+Block2PtParameter::Block2PtParameter() {}
+
+Block2PtParameter::~Block2PtParameter() {}
+
+std::string Block2PtParameter::subclassMarker() const
+{
+    return DxfSubclassMarker::Block2PtParameter;
+}
+
+XYZ Block2PtParameter::firstPoint() const
+{
+    return _firstPoint;
+}
+
+void Block2PtParameter::setFirstPoint(const XYZ &point)
+{
+    _firstPoint = point;
+}
+
+XYZ Block2PtParameter::secondPoint() const
+{
+    return _secondPoint;
+}
+
+void Block2PtParameter::setSecondPoint(const XYZ &point)
+{
+    _secondPoint = point;
+}
 
 }// namespace dwg

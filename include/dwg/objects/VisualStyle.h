@@ -78,6 +78,21 @@ public:
 
     bool internalFlag() const;
     void setInternalFlag(bool);
+
+private:
+    std::string _rasterFile;
+    std::string _description;
+    int _type = 0;
+    FaceLightingModelType _faceLightingModel;
+    FaceLightingQualityType _faceLightingQuality;
+    FaceColorMode _faceColorMode;
+    FaceModifierType _faceModifiers;
+    double _faceOpacityLevel;
+    double _faceSpecularLevel;
+    Color _color;
+    Color _faceStyleMonoColor;
+    bool _precisionFlag;
+    bool _internalFlag;
 };
 
 }// namespace dwg

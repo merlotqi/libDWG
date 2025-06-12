@@ -71,7 +71,7 @@ public:
     CadHeader();
     CadHeader(ACadVersion version);
     CadHeader(CadDocument *document);
-    
+
     CadDocument *document();
     void setDocument(CadDocument *document);
 

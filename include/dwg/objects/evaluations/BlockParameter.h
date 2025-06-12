@@ -39,6 +39,10 @@ public:
 
     bool value281() const;
     void setValue281(bool);
+
+private:
+    bool _value280;
+    bool _value281;
 };
 
 }// namespace dwg

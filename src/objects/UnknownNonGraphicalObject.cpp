@@ -20,8 +20,49 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/classes/DxfClass.h>
 #include <dwg/objects/UnknownNonGraphicalObject.h>
 
 namespace dwg {
+
+UnknownNonGraphicalObject::UnknownNonGraphicalObject() {}
+
+UnknownNonGraphicalObject::UnknownNonGraphicalObject(DxfClass *dxfclass) : _dxfClass(dxfclass) {}
+
+DxfClass *UnknownNonGraphicalObject::dxfClass() const
+{
+    return _dxfClass;
+}
+
+ObjectType UnknownNonGraphicalObject::objectType() const
+{
+    return ObjectType::UNDEFINED;
+}
+
+std::string UnknownNonGraphicalObject::objectName() const
+{
+    if (!_dxfClass)
+    {
+        return "UNKNOWN";
+    }
+    else
+    {
+        return _dxfClass->dxfName();
+    }
+}
+
+std::string UnknownNonGraphicalObject::subclassMarker() const
+{
+    if (!_dxfClass)
+    {
+        return DxfSubclassMarker::Entity;
+    }
+    else
+    {
+        return _dxfClass->cppClassName();
+    }
+}
+
 
 }// namespace dwg

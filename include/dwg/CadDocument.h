@@ -98,8 +98,6 @@ public:
 
     CadDictionary *rootDictionary() const;
     EntityCollection *entities();
-    void addEntity(Entity *);
-    void removeEntity(Entity *);
 
     BlockRecord *modelSpace() const;
     BlockRecord *paperSpace() const;
@@ -109,17 +107,6 @@ public:
 
 protected:
     void setRootDictionary(CadDictionary *dic);
-
-private:
-    void setAppIds(AppIdsTable *);
-    void setBlockRecords(BlockRecordsTable *);
-    void setDimensionStyles(DimensionStylesTable *);
-    void setLayers(LayersTable *);
-    void setLineTypes(LineTypesTable *);
-    void setTextStyles(TextStylesTable *);
-    void setUCSs(UCSTable *);
-    void setViews(ViewsTable *);
-    void setVPorts(VPortsTable *);
 
     CadDictionary *updateCollection(const std::string &dictName, bool createDictionary);
     void addCadObject(CadObject *cadObject);

@@ -22,24 +22,19 @@
 
 #pragma once
 
-#include <dwg/objects/NonGraphicalObject.h>
+#include <dwg/CadObject.h>
 
 namespace dwg {
 
-class LIBDWG_API TableContent : public NonGraphicalObject
+class LIBDWG_API TableStyle : public CadObject
 {
 public:
-    TableContent();
-    ~TableContent();
+    TableStyle();
+    ~TableStyle();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
     std::string subclassMarker() const override;
-
-    std::string description() const;
-    void setDescription(const std::string &);
-
-    // table's
 };
 
 }// namespace dwg

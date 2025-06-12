@@ -50,7 +50,7 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
     std::vector<CadObject *> rawCadObjects() const override;
-    
+
     std::size_t size() const;
     pointer operator[](const std::string &key);
     void add(pointer v);

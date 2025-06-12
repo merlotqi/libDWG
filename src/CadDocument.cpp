@@ -308,10 +308,6 @@ EntityCollection *CadDocument::entities()
     return modelSpace()->entities();
 }
 
-void CadDocument::addEntity(Entity *) {}
-
-void CadDocument::removeEntity(Entity *) {}
-
 BlockRecord *CadDocument::modelSpace() const
 {
     return _blockRecords->valueT<BlockRecord *>(BlockRecord::ModelSpaceName);
@@ -415,7 +411,7 @@ void CadDocument::registerCollection(IObservableCadCollection *collection)
     }
 }
 
-void CadDocument::unregisterCollection(IObservableCadCollection *collection) 
+void CadDocument::unregisterCollection(IObservableCadCollection *collection)
 {
     assert(collection);
     AppIdsTable *appIds = dynamic_cast<AppIdsTable *>(collection);
@@ -484,24 +480,6 @@ void CadDocument::setRootDictionary(CadDictionary *dic)
     registerCollection(_rootDictionary);
 }
 
-void CadDocument::setAppIds(AppIdsTable *) {}
-
-void CadDocument::setBlockRecords(BlockRecordsTable *) {}
-
-void CadDocument::setDimensionStyles(DimensionStylesTable *) {}
-
-void CadDocument::setLayers(LayersTable *) {}
-
-void CadDocument::setLineTypes(LineTypesTable *) {}
-
-void CadDocument::setTextStyles(TextStylesTable *) {}
-
-void CadDocument::setUCSs(UCSTable *) {}
-
-void CadDocument::setViews(ViewsTable *) {}
-
-void CadDocument::setVPorts(VPortsTable *) {}
-
 CadDictionary *CadDocument::updateCollection(const std::string &dictName, bool createDictionary)
 {
     CadDictionary *dictionary = _rootDictionary->valueT<CadDictionary *>(dictName);
@@ -517,7 +495,7 @@ CadDictionary *CadDocument::updateCollection(const std::string &dictName, bool c
     return dictionary;
 }
 
-void CadDocument::addCadObject(CadObject *cadObject) 
+void CadDocument::addCadObject(CadObject *cadObject)
 {
     if (cadObject->document())
     {
@@ -549,7 +527,7 @@ void CadDocument::addCadObject(CadObject *cadObject)
 
 void CadDocument::removeCadObject(CadObject *cadObject) {}
 
-void CadDocument::onAdd(CadObject *item) 
+void CadDocument::onAdd(CadObject *item)
 {
     assert(item);
     CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);
@@ -563,7 +541,7 @@ void CadDocument::onAdd(CadObject *item)
     }
 }
 
-void CadDocument::onRemove(CadObject *item) 
+void CadDocument::onRemove(CadObject *item)
 {
     assert(item);
     CadDictionary *dictionary = dynamic_cast<CadDictionary *>(item);

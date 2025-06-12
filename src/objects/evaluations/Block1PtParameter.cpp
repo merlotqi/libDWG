@@ -20,9 +20,59 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/evaluations/Block1PtParameter.h>
+
 
 namespace dwg {
 
+Block1PtParameter::Block1PtParameter() {}
+
+Block1PtParameter::~Block1PtParameter() {}
+
+std::string Block1PtParameter::subclassMarker() const
+{
+    return DxfSubclassMarker::Block1PtParameter;
+}
+
+XYZ Block1PtParameter::location() const
+{
+    return _location;
+}
+
+void Block1PtParameter::setLocation(const XYZ &value)
+{
+    _location = value;
+}
+
+long long Block1PtParameter::value93() const
+{
+    return _value93;
+}
+
+void Block1PtParameter::setValue93(long long value)
+{
+    _value93 = value;
+}
+
+short Block1PtParameter::value170() const
+{
+    return _value170;
+}
+
+void Block1PtParameter::setValue170(short value)
+{
+    _value170 = value;
+}
+
+short Block1PtParameter::value171() const
+{
+    return _value171;
+}
+
+void Block1PtParameter::setValue171(short value)
+{
+    _value171 = value;
+}
 
 }// namespace dwg

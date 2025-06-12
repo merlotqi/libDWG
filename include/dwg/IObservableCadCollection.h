@@ -42,7 +42,7 @@ public:
     {
         static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
         std::vector<T> objects;
-        for (auto&& obj : rawCadObjects())
+        for (auto &&obj: rawCadObjects())
         {
             if (dynamic_cast<T>(obj))
             {

@@ -25,10 +25,10 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Viewport.h>
 #include <dwg/objects/Layout.h>
+#include <dwg/objects/collections/LayoutCollection.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/collections/BlockRecordsTable.h>
-#include <dwg/objects/collections/LayoutCollection.h>
 
 namespace dwg {
 
@@ -227,7 +227,7 @@ std::vector<Viewport *> Layout::viewports() const
     return std::vector<Viewport *>();
 }
 
-void Layout::assignDocument(CadDocument *doc) 
+void Layout::assignDocument(CadDocument *doc)
 {
     PlotSettings::assignDocument(doc);
     if (_associatedBlock)
@@ -239,7 +239,7 @@ void Layout::assignDocument(CadDocument *doc)
 
 void Layout::unassignDocument() {}
 
-void Layout::onRemoveBlockRecord(CadObject *object) 
+void Layout::onRemoveBlockRecord(CadObject *object)
 {
     if (_associatedBlock == object)
     {

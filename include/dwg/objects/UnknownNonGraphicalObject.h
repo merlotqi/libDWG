@@ -22,18 +22,20 @@
 
 #pragma once
 
-#include <dwg/classes/DxfClass.h>
 #include <dwg/objects/NonGraphicalObject.h>
 
 namespace dwg {
 
+class DxfClass;
 class LIBDWG_API UnknownNonGraphicalObject : public NonGraphicalObject
 {
+    DxfClass *_dxfClass = nullptr;
+
 public:
     UnknownNonGraphicalObject();
-    UnknownNonGraphicalObject(const DxfClass &);
+    UnknownNonGraphicalObject(DxfClass *);
 
-    DxfClass DxfClass() const;
+    DxfClass *dxfClass() const;
 
     ObjectType objectType() const override;
     std::string objectName() const override;

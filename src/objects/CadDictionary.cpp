@@ -126,7 +126,7 @@ std::string CadDictionary::subclassMarker() const
 std::vector<CadObject *> CadDictionary::rawCadObjects() const
 {
     std::vector<CadObject *> objects;
-    for (auto [key, value] : _entries)
+    for (auto [key, value]: _entries)
     {
         objects.emplace_back(value);
     }
@@ -208,7 +208,7 @@ bool CadDictionary::remove(const std::string &key)
 
 void CadDictionary::clear() {}
 
-NonGraphicalObject *CadDictionary::value(const std::string &name) const 
+NonGraphicalObject *CadDictionary::value(const std::string &name) const
 {
     auto it = _entries.find(name);
     if (it != _entries.end())

@@ -20,8 +20,38 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/evaluations/BlockElement.h>
 
 namespace dwg {
+
+BlockElement::BlockElement() {}
+
+BlockElement::~BlockElement() {}
+
+std::string BlockElement::subclassMarker() const
+{
+    return DxfSubclassMarker::BlockElement;
+}
+
+std::string BlockElement::elementName() const
+{
+    return _elementName;
+}
+
+void BlockElement::setElementName(const std::string &name)
+{
+    _elementName = name;
+}
+
+int BlockElement::value1071() const
+{
+    return _value1071;
+}
+
+void BlockElement::setValue1071(int value)
+{
+    _value1071 = value;
+}
 
 }// namespace dwg

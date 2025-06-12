@@ -20,8 +20,59 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/evaluations/BlockLinearParameter.h>
 
 namespace dwg {
+
+BlockLinearParameter::BlockLinearParameter() {}
+
+BlockLinearParameter::~BlockLinearParameter() {}
+
+ObjectType BlockLinearParameter::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
+
+std::string BlockLinearParameter::objectName() const
+{
+    return DxfFileToken::ObjectBlockLinearParameter;
+}
+
+std::string BlockLinearParameter::subclassMarker() const
+{
+    return DxfSubclassMarker::BlockLinearParameter;
+}
+
+std::string BlockLinearParameter::label() const
+{
+    return _label;
+}
+
+void BlockLinearParameter::setLabel(const std::string &value)
+{
+    _label = value;
+}
+
+std::string BlockLinearParameter::description() const
+{
+    return _description;
+}
+
+void BlockLinearParameter::setDescription(const std::string &value)
+{
+    _description = value;
+}
+
+double BlockLinearParameter::labelOffset() const
+{
+    return _labelOffset;
+}
+
+void BlockLinearParameter::setLabelOffset(double value)
+{
+    _labelOffset = value;
+}
 
 }// namespace dwg
