@@ -964,7 +964,7 @@ private:
     double _currentMultilineScale = 20.0;
     double _currentEntityLinetypeScale = 1.0;
     std::string _menuFileName = ".";
-    unsigned long long _handleSeed = 0x0;
+    unsigned long long _handleSeed = 0x01;
     DateTime _createDateTime;
     DateTime _universalCreateDateTime;
     DateTime _updateDateTime;

@@ -29,7 +29,7 @@ namespace dwg {
 class DwgmMergedStreamWriterAC14 : public DwgMergedStreamWriter
 {
 public:
-    DwgmMergedStreamWriterAC14(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *handle);
+    DwgmMergedStreamWriterAC14(std::iostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *handle);
     void writeSpearShift() override;
 };
 

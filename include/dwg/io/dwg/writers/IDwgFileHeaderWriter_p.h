@@ -35,7 +35,7 @@ public:
 
     virtual int handleSectionOffset() const = 0;
 
-    virtual void addSection(const std::string &name, std::ostream *stream, bool isCompressed,
+    virtual void addSection(const std::string &name, std::iostream *stream, bool isCompressed,
                             int decompsize = 0x7400) = 0;
 
     virtual void writeFile() = 0;

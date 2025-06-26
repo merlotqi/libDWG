@@ -25,7 +25,7 @@
 
 namespace dwg {
 
-DwgStreamWriterAC21::DwgStreamWriterAC21(std::ostream *stream, Encoding encoding)
+DwgStreamWriterAC21::DwgStreamWriterAC21(std::iostream *stream, Encoding encoding)
     : DwgStreamWriterAC18(stream, encoding)
 {
 }

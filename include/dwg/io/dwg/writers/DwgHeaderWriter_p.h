@@ -33,7 +33,7 @@ class CadDocument;
 class IDwgStreamWriter;
 class DwgHeaderWriter : public DwgSectionIO
 {
-    std::ostringstream _msmain;
+    std::stringstream _msmain;
     IDwgStreamWriter *_startWriter;
     IDwgStreamWriter *_writer;
     CadDocument *_document;
@@ -41,7 +41,7 @@ class DwgHeaderWriter : public DwgSectionIO
     Encoding _encoding;
 
 public:
-    DwgHeaderWriter(std::ostream *stream, CadDocument *document, Encoding encoding);
+    DwgHeaderWriter(std::iostream *stream, CadDocument *document, Encoding encoding);
 
     ~DwgHeaderWriter();
 

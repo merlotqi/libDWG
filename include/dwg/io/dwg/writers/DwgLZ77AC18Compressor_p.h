@@ -30,7 +30,7 @@ namespace dwg {
 class DwgLZ77AC18Compressor : public ICompressor
 {
     std::vector<unsigned char> _source;
-    std::ostringstream _dest;
+    std::stringstream _dest;
     std::vector<int> _block;
     int _initialOffset;
     int _currPosition;
@@ -40,7 +40,7 @@ class DwgLZ77AC18Compressor : public ICompressor
 public:
     DwgLZ77AC18Compressor();
     void compress(const std::vector<unsigned char> &source, size_t offset, size_t totalSize,
-                  std::ostream *dest) override;
+                  std::iostream *dest) override;
 
 private:
     void restartBlock();

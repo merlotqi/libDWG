@@ -21,12 +21,23 @@
  */
 
 #include <dwg/entities/collection/EntityCollection.h>
+#include <dwg/entities/Entity.h>
 
 namespace dwg {
 
 EntityCollection::EntityCollection(CadObject *owner) : _owner(owner) {}
 
 EntityCollection::~EntityCollection() {}
+
+std::vector<CadObject *> EntityCollection::rawCadObjects() const
+{
+    std::vector<CadObject *> objects;
+    for (auto&& ent : _entities)
+    {
+        objects.emplace_back(ent);
+    }
+    return objects;
+}
 
 CadObject *EntityCollection::owner() const
 {
@@ -48,12 +59,42 @@ Entity *EntityCollection::operator[](size_t index)
     return _entities.operator[](index);
 }
 
-void EntityCollection::add(Entity *entity) {}
+void EntityCollection::add(Entity *entity) 
+{
+    assert(entity);
 
-void EntityCollection::add(const std::initializer_list<Entity *> &entities) {}
+    if (entity->owner() != nullptr)
+        throw std::runtime_error("Item already has an owner");
+
+    auto filter = [entity](Entity *ent) { return ent == entity; };
+    auto itFind = std::find_if(_entities.begin(), _entities.end(), filter);
+    if (itFind != _entities.end())
+        throw std::runtime_error("Item is already in the collection");
+
+    _entities.emplace_back(entity);
+    entity->setOwner(_owner);
+    OnAdd(entity);
+}
+
+void EntityCollection::add(const std::initializer_list<Entity *> &entities) 
+{
+    for (auto &&entity: entities)
+    {
+        add(entity);
+    }
+}
 
 Entity *EntityCollection::remove(Entity *entity)
 {
+    auto filter = [entity](Entity *ent) { return ent == entity; };
+    auto itFind = std::find_if(_entities.begin(), _entities.end(), filter);
+    if (itFind == _entities.end())
+        return nullptr;
+
+    _entities.erase(itFind);
+    auto item = *itFind;
+    item->setOwner(nullptr);
+    OnRemove(item);
     return entity;
 }
 

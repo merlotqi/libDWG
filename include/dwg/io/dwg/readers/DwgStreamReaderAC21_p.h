@@ -29,7 +29,7 @@ namespace dwg {
 class DwgStreamReaderAC21 : public DwgStreamReaderAC18
 {
 public:
-    DwgStreamReaderAC21(std::istream *stream, bool resetPosition);
+    DwgStreamReaderAC21(std::iostream *stream, bool resetPosition);
 
     virtual ~DwgStreamReaderAC21();
 

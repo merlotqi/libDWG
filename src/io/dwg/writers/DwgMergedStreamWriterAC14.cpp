@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DwgmMergedStreamWriterAC14::DwgmMergedStreamWriterAC14(std::ostream *stream, IDwgStreamWriter *main,
+DwgmMergedStreamWriterAC14::DwgmMergedStreamWriterAC14(std::iostream *stream, IDwgStreamWriter *main,
                                                        IDwgStreamWriter *handle)
     : DwgMergedStreamWriter(stream, main, main, handle)
 {

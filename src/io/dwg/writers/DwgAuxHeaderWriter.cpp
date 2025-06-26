@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::ostream *stream, Encoding encoding, CadHeader *header)
+DwgAuxHeaderWriter::DwgAuxHeaderWriter(std::iostream *stream, Encoding encoding, CadHeader *header)
     : DwgSectionIO(header->version())
 {
     _header = header;

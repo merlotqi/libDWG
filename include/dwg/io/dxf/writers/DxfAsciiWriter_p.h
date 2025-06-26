@@ -30,7 +30,7 @@ namespace dwg {
 class DxfAsciiWriter : public DxfStreamWriterBase
 {
 public:
-    DxfAsciiWriter(std::ofstream *stream, Encoding encoding);
+    DxfAsciiWriter(std::fstream *stream, Encoding encoding);
 
     void flush() override;
     void close() override;

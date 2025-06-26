@@ -30,7 +30,7 @@ namespace dwg {
 class DwgStreamWriterAC21 : public DwgStreamWriterAC18
 {
 public:
-    DwgStreamWriterAC21(std::ostream *stream, Encoding encoding);
+    DwgStreamWriterAC21(std::iostream *stream, Encoding encoding);
     virtual ~DwgStreamWriterAC21();
 
     void writeVariableText(const std::string &value) override;

@@ -31,16 +31,16 @@ namespace dwg {
 class DwgStreamReaderBase : public IDwgStreamReader
 {
 public:
-    DwgStreamReaderBase(std::istream *stream, bool resetPosition);
+    DwgStreamReaderBase(std::iostream *stream, bool resetPosition);
     ~DwgStreamReaderBase();
 
-    static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding = Encoding(),
+    static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::iostream *stream, Encoding encoding = Encoding(),
                                               bool resetPosition = false);
 
     Encoding encoding() const override;
     void setEncoding(Encoding value) override;
 
-    std::istream *stream() override;
+    std::iostream *stream() override;
 
     int bitShift() const override;
     long long position() const override;

@@ -38,7 +38,7 @@ class LIBDWG_API DxfReader : public CadReaderBase<DxfReaderConfiguration>
 {
 public:
     DxfReader(const std::string &filename);
-    DxfReader(std::ifstream *stream);
+    DxfReader(std::fstream *stream);
     bool isBinary() const;
     CadDocument *read() override;
     CadHeader *readHeader() override;
@@ -46,7 +46,7 @@ public:
     std::vector<Entity *> readEntities();
 
     static bool IsBinary(const std::string &filename);
-    static bool IsBinary(std::istream *stream, bool resetPos = false);
+    static bool IsBinary(std::iostream *stream, bool resetPos = false);
 
 private:
     DxfClassCollection *readClasses();

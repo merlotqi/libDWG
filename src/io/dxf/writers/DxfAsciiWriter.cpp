@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DxfAsciiWriter::DxfAsciiWriter(std::ofstream *stream, Encoding encoding) {}
+DxfAsciiWriter::DxfAsciiWriter(std::fstream *stream, Encoding encoding) {}
 
 void DxfAsciiWriter::flush() {}
 

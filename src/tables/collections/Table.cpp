@@ -97,11 +97,6 @@ void Table::createDefaultEntries()
     }
 }
 
-std::vector<std::string> Table::defaultEntries() const
-{
-    return std::vector<std::string>();
-}
-
 void Table::addHandlePrefix(pointer v)
 {
     assert(v);
@@ -120,6 +115,11 @@ void Table::push_back(const std::string &n, pointer v)
     v->setOwner(this);
     v->OnNameChanged.add(this, &Table::onEntryNameChanged);
     OnAdd(v);
+}
+
+std::vector<std::string> Table::defaultEntries() const
+{
+    return std::vector<std::string>();
 }
 
 std::string Table::createName() const

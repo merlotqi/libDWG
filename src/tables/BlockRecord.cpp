@@ -27,6 +27,7 @@
 #include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
+#include <dwg/CadDocument.h>
 
 namespace dwg {
 
@@ -34,12 +35,14 @@ BlockRecord::BlockRecord()
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
+    _entities = new EntityCollection(this);
 }
 
 BlockRecord::BlockRecord(const std::string &name) : TableEntry(name)
 {
     _blockEntity = new Block(this);
     _blockEnd = new BlockEnd(this);
+    _entities = new EntityCollection(this);
 }
 
 BlockRecord *BlockRecord::ModelSpace()
@@ -175,7 +178,11 @@ std::vector<Viewport *> BlockRecord::viewports() const
     return std::vector<Viewport *>();
 }
 
-void BlockRecord::assignDocument(CadDocument *doc) {}
+void BlockRecord::assignDocument(CadDocument *doc) 
+{
+    TableEntry::assignDocument(doc);
+    doc->registerCollection(_entities);
+}
 
 void BlockRecord::unassignDocument() {}
 

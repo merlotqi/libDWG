@@ -45,12 +45,12 @@ public:
 protected:
     CadReaderBase();
     CadReaderBase(const std::string &filename);
-    CadReaderBase(std::ifstream *stream);
+    CadReaderBase(std::fstream *stream);
     Encoding getListedEncoding(int code);
 
 protected:
     CadDocument *_document;
-    std::ifstream *_fileStream;
+    std::fstream *_fileStream;
     Encoding _encoding = Encoding(CodePage::Utf8);
 };
 
@@ -67,12 +67,12 @@ inline CadReaderBase<T>::CadReaderBase() : _fileStream(nullptr), _document(nullp
 
 template<typename T>
 inline CadReaderBase<T>::CadReaderBase(const std::string &filename)
-    : _fileStream(new std::ifstream(filename)), _document(nullptr)
+    : _fileStream(new std::fstream(filename)), _document(nullptr)
 {
 }
 
 template<typename T>
-inline CadReaderBase<T>::CadReaderBase(std::ifstream *stream) : _fileStream(stream), _document(nullptr)
+inline CadReaderBase<T>::CadReaderBase(std::fstream *stream) : _fileStream(stream), _document(nullptr)
 {
 }
 

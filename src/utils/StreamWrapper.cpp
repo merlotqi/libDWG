@@ -26,10 +26,9 @@
 #include <sstream>
 #include <stdexcept>
 
-
 namespace dwg {
 
-StreamWrapper::StreamWrapper(std::iostream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8))
+StreamWrapper::StreamWrapper(std::iostream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8)), _owned(false)
 {
     if (!_stream || !_stream->good())
     {
@@ -70,14 +69,21 @@ StreamWrapper::~StreamWrapper()
     }
 }
 
-StreamWrapper::~StreamWrapper() {}
-
 std::iostream *StreamWrapper::stream()
 {
     return _stream;
 }
 
-std::streampos StreamWrapper::tell() const
+std::size_t StreamWrapper::length() const
+{
+    std::streampos pos = _stream->tellg();
+    _stream->seekg(std::ios::end);
+    size_t size = _stream->tellg();
+    _stream->seekg(pos);
+    return size;
+}
+
+std::streampos StreamWrapper::pos() const
 {
     return _stream->tellg();
 }

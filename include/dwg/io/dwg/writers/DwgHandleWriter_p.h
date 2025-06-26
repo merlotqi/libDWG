@@ -31,11 +31,11 @@ namespace dwg {
 class DwgHandleWriter : public DwgSectionIO
 {
     std::vector<unsigned char> _emptyArr;
-    std::ostream *_stream;
+    std::iostream *_stream;
     std::map<unsigned long long, long long> _handleMap;
 
 public:
-    DwgHandleWriter(ACadVersion version, std::ostream *stream,
+    DwgHandleWriter(ACadVersion version, std::iostream *stream,
                     const std::map<unsigned long long, long long> &handlemap);
     ~DwgHandleWriter();
     std::string sectionName() const override;

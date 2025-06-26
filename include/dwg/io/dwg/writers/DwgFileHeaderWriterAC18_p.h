@@ -34,30 +34,30 @@ class DwgFileHeaderAC18;
 class DwgFileHeaderWriterAC18 : public DwgFileHeaderWriterBase
 {
 public:
-    DwgFileHeaderWriterAC18(std::ofstream *stream, Encoding encoding, CadDocument *document);
+    DwgFileHeaderWriterAC18(std::fstream *stream, Encoding encoding, CadDocument *document);
 
     int handleSectionOffset() const override;
     void writeFile() override;
-    void addSection(const std::string &name, std::ostream *stream, bool isCompressed, int decompsize = 0x7400) override;
+    void addSection(const std::string &name, std::iostream *stream, bool isCompressed, int decompsize = 0x7400) override;
 
 
 protected:
     int fileHeaderSize() const override;
     virtual void craeteLocalSection(DwgSectionDescriptor descriptor, const std::vector<unsigned char> &buffer,
                                     int decompressedSize, unsigned long long offset, int totalSize, bool isCompressed);
-    std::ostringstream applyCompression(const std::vector<unsigned char> &buffer, int decompressedSize,
+    std::stringstream applyCompression(const std::vector<unsigned char> &buffer, int decompressedSize,
                                         unsigned long long offset, int totalSize, bool isCompressed);
 
 private:
     void writeRecords();
     void writeDescriptors();
     void writeFileMetaData();
-    void writeFileHeader(std::ostringstream *stream);
+    void writeFileHeader(std::stringstream *stream);
     void addSection(DwgLocalSectionMap section);
-    DwgLocalSectionMap setSeeker(int map, std::ostringstream *stream);
-    void compressChecksum(DwgLocalSectionMap &section, std::ostringstream *stream);
-    void writePageHeaderData(const DwgLocalSectionMap &section, std::ostream *stream);
-    void writeDataSection(std::ostream *stream, const DwgSectionDescriptor &descriptor, const DwgLocalSectionMap &map,
+    DwgLocalSectionMap setSeeker(int map, std::stringstream *stream);
+    void compressChecksum(DwgLocalSectionMap &section, std::stringstream *stream);
+    void writePageHeaderData(const DwgLocalSectionMap &section, std::iostream *stream);
+    void writeDataSection(std::iostream *stream, const DwgSectionDescriptor &descriptor, const DwgLocalSectionMap &map,
                           int size);
 
     std::vector<DwgLocalSectionMap> _localSectionsMaps;

@@ -47,11 +47,11 @@
 namespace dwg {
 
 DwgWriter::DwgWriter(const std::string &filename, CadDocument *document)
-    : DwgWriter(new std::ofstream(filename, std::ios::binary), document)
+    : DwgWriter(new std::fstream(filename, std::ios::binary), document)
 {
 }
 
-DwgWriter::DwgWriter(std::ofstream *stream, CadDocument *document)
+DwgWriter::DwgWriter(std::fstream *stream, CadDocument *document)
     : CadWriterBase(stream, document), _fileHeaderWriter(nullptr)
 {
     _version = document->header()->version();
@@ -130,7 +130,7 @@ void DwgWriter::getFileHeaderWriter()
 
 void DwgWriter::writeHeader()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgHeaderWriter> writer = std::make_unique<DwgHeaderWriter>(stream.get(), _document, _encoding);
     writer->write();
 
@@ -139,7 +139,7 @@ void DwgWriter::writeHeader()
 
 void DwgWriter::writeClasses()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgClassesWriter> writer = std::make_unique<DwgClassesWriter>(stream.get(), _document, _encoding);
     writer->write();
 
@@ -148,7 +148,7 @@ void DwgWriter::writeClasses()
 
 void DwgWriter::writeSummaryInfo()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, stream.get(), _encoding);
     CadSummaryInfo *info = _document->summaryInfo();
     writer->writeTextUtf8(info->title());
@@ -186,7 +186,7 @@ void DwgWriter::writeSummaryInfo()
 
 void DwgWriter::writePreview()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgPreviewWriter> writer = std::make_unique<DwgPreviewWriter>(_version, stream.get());
     writer->write();
 
@@ -198,7 +198,7 @@ void DwgWriter::writeAppInfo()
     if (_fileHeader->version() < ACadVersion::AC1018)
         return;
 
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgAppInfoWriter> writer = std::make_unique<DwgAppInfoWriter>(_version, stream.get());
     writer->write();
 
@@ -243,7 +243,7 @@ void DwgWriter::writeRevHistory()
 {
     if (_fileHeader->version() < ACadVersion::AC1018)
         return;
-    std::ostringstream *stream = new std::ostringstream();
+    std::stringstream *stream = new std::stringstream();
     unsigned int v = 0;
     stream->write((char *) &v, sizeof(v));
     stream->write((char *) &v, sizeof(v));
@@ -252,7 +252,7 @@ void DwgWriter::writeRevHistory()
 }
 void DwgWriter::writeAuxHeader()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgAuxHeaderWriter> writer =
             std::make_unique<DwgAuxHeaderWriter>(stream.get(), _encoding, _document->header());
     writer->write();
@@ -261,7 +261,7 @@ void DwgWriter::writeAuxHeader()
 }
 void DwgWriter::writeObjects()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgObjectWriter> writer =
             std::make_unique<DwgObjectWriter>(stream.get(), _document, _encoding, false);
     writer->write();
@@ -339,7 +339,7 @@ void DwgWriter::writeTemplate()
 
 void DwgWriter::writeHandles()
 {
-    std::unique_ptr<std::ostringstream> stream = std::make_unique<std::ostringstream>();
+    std::unique_ptr<std::stringstream> stream = std::make_unique<std::stringstream>();
     std::unique_ptr<DwgHandleWriter> writer = std::make_unique<DwgHandleWriter>(_version, stream.get(), _handlesMap);
     writer->write(_fileHeaderWriter->handleSectionOffset());
 

@@ -33,7 +33,7 @@ class DwgAppInfoWriter : public DwgSectionIO
     std::vector<unsigned char> _emptyArr;
 
 public:
-    DwgAppInfoWriter(ACadVersion version, std::ostream *stream);
+    DwgAppInfoWriter(ACadVersion version, std::iostream *stream);
 
     ~DwgAppInfoWriter();
 

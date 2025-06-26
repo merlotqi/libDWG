@@ -33,7 +33,7 @@ class LIBDWG_API DxfWriter : public CadWriterBase<DxfWriterConfiguration>
 {
 public:
     DxfWriter(const std::string &filename, CadDocument *document, bool binary);
-    DxfWriter(std::ofstream *stream, CadDocument *document, bool binary);
+    DxfWriter(std::fstream *stream, CadDocument *document, bool binary);
     ~DxfWriter();
 
     void write() override;

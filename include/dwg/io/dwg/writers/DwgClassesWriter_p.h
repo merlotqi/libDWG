@@ -41,7 +41,7 @@ class DwgClassesWriter : public DwgSectionIO
     std::vector<unsigned char> _endSentinel;
 
 public:
-    DwgClassesWriter(std::ostream *stream, CadDocument *document, Encoding encoding);
+    DwgClassesWriter(std::iostream *stream, CadDocument *document, Encoding encoding);
 
     ~DwgClassesWriter();
 

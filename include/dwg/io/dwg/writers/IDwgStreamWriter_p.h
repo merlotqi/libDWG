@@ -40,7 +40,7 @@ class IDwgStreamWriter
 public:
     virtual ~IDwgStreamWriter() = default;
 
-    virtual std::ostream *stream() = 0;
+    virtual std::iostream *stream() = 0;
 
     virtual Encoding encoding() = 0;
 

@@ -56,7 +56,7 @@ DwgReader::DwgReader(const std::string &name)
 {
 }
 
-DwgReader::DwgReader(std::ifstream *stream)
+DwgReader::DwgReader(std::fstream *stream)
     : CadReaderBase<DwgReaderConfiguration>(stream), _builder(nullptr), _fileHeader(nullptr)
 {
 }
@@ -817,7 +817,7 @@ void DwgReader::readFileMetaData(DwgFileHeaderAC18 *fileheader, IDwgStreamReader
 
 IDwgStreamReader *DwgReader::getSectionStream(const std::string &sectionName)
 {
-    std::istream *sectionStream = nullptr;
+    std::iostream *sectionStream = nullptr;
     switch (_fileHeader->version())
     {
         case dwg::ACadVersion::Unknown:
@@ -885,9 +885,9 @@ void DwgReader::getPageHeaderData(IDwgStreamReader *sreader, int64_t &sectionTyp
     checksum = sreader->readRawLong();
 }
 
-std::istream *DwgReader::getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName)
+std::iostream *DwgReader::getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName)
 {
-    std::istream *stream = nullptr;
+    std::iostream *stream = nullptr;
 
     //Get the section locator
     auto [sectionLocator, isNull] = DwgSectionDefinition::GetSectionLocatorByName(sectionName);
@@ -909,7 +909,7 @@ std::istream *DwgReader::getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const
     return stream;
 }
 
-std::istream *DwgReader::getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName)
+std::iostream *DwgReader::getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName)
 {
     auto &&it = fileheader->descriptors().find(sectionName);
     if (it == fileheader->descriptors().end())
@@ -959,12 +959,12 @@ std::istream *DwgReader::getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const
     }
     //Reset the stream
     memoryStream.seekp(std::ios::beg);
-    return new std::istringstream(ostr);
+    return new std::stringstream(ostr);
 }
 
-std::istream *DwgReader::getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName)
+std::iostream *DwgReader::getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName)
 {
-    std::istream *stream = nullptr;
+    std::iostream *stream = nullptr;
 
     auto it = fileheader->descriptors().find(sectionName);
     if (it == fileheader->descriptors().end())
@@ -1080,7 +1080,7 @@ void DwgReader::reedSolomonDecoding(const std::vector<unsigned char> &encoded, s
 std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,
                                                     unsigned long long uncompressedSize,
                                                     unsigned long long correctionFactor, int blockSize,
-                                                    std::istream *stream)
+                                                    std::iostream *stream)
 {
     //Avoid shifted bits
     unsigned long long v = compressedSize + 7L;

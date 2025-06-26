@@ -79,7 +79,7 @@ public:
 
     virtual void setEncoding(Encoding value) = 0;
 
-    virtual std::istream *stream() = 0;
+    virtual std::iostream *stream() = 0;
 
     virtual int bitShift() const = 0;
 

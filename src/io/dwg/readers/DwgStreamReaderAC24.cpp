@@ -25,7 +25,7 @@
 
 namespace dwg {
 
-DwgStreamReaderAC24::DwgStreamReaderAC24(std::istream *stream, bool resetPosition)
+DwgStreamReaderAC24::DwgStreamReaderAC24(std::iostream *stream, bool resetPosition)
     : DwgStreamReaderAC21(stream, resetPosition)
 {
 }

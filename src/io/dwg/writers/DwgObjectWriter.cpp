@@ -48,7 +48,7 @@
 
 namespace dwg {
 
-DwgObjectWriter::DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords,
+DwgObjectWriter::DwgObjectWriter(std::iostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords,
                                  bool writeXData)
     : DwgSectionIO(document->header()->version())
 {

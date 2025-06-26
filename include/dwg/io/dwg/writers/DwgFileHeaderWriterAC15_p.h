@@ -33,12 +33,12 @@ class CadDocument;
 class IDwgStreamWriter;
 class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 {
-    std::map<std::string, std::pair<DwgSectionLocatorRecord, std::ostringstream *>> _records;
+    std::map<std::string, std::pair<DwgSectionLocatorRecord, std::stringstream *>> _records;
     static std::vector<unsigned char> _endSentinel;
 
 public:
-    DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model);
-    void addSection(const std::string &name, std::ostream *stream, bool isCompressed, int decompsize = 0x7400) override;
+    DwgFileHeaderWriterAC15(std::fstream *stream, Encoding encoding, CadDocument *model);
+    void addSection(const std::string &name, std::iostream *stream, bool isCompressed, int decompsize = 0x7400) override;
     void writeFile() override;
 
 protected:

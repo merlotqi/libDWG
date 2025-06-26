@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DxfBinaryWriter::DxfBinaryWriter(std::ofstream *stream, Encoding encoding) {}
+DxfBinaryWriter::DxfBinaryWriter(std::fstream *stream, Encoding encoding) {}
 
 void DxfBinaryWriter::flush() {}
 

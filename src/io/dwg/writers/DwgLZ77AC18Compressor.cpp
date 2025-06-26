@@ -28,7 +28,7 @@ namespace dwg {
 DwgLZ77AC18Compressor::DwgLZ77AC18Compressor() {}
 
 void DwgLZ77AC18Compressor::compress(const std::vector<unsigned char> &source, size_t offset, size_t totalSize,
-                                     std::ostream *dest)
+                                     std::iostream *dest)
 {
 }
 

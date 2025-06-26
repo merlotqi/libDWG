@@ -31,7 +31,7 @@ namespace dwg {
 class DwgMergedStreamWriter : public IDwgStreamWriter
 {
 protected:
-    std::ostream *_stream;
+    std::iostream *_stream;
     IDwgStreamWriter *_main;
     IDwgStreamWriter *_textWriter;
     IDwgStreamWriter *_handleWriter;
@@ -40,11 +40,11 @@ protected:
     int64_t _positionInBits;
 
 public:
-    DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
+    DwgMergedStreamWriter(std::iostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
                           IDwgStreamWriter *handlewriter);
     ~DwgMergedStreamWriter();
 
-    std::ostream *stream() override;
+    std::iostream *stream() override;
     Encoding encoding() override;
 
     IDwgStreamWriter *main() override;

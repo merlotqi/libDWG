@@ -25,13 +25,13 @@
 
 namespace dwg {
 
-void DwgLZ77AC18Decompressor::Decompress(std::istream *compressed, long long decompressedSize, std::istream *out) {}
+void DwgLZ77AC18Decompressor::Decompress(std::iostream *compressed, long long decompressedSize, std::iostream *out) {}
 
-void DwgLZ77AC18Decompressor::DecompressToDest(std::istream *src, std::ostream *dst) {}
+void DwgLZ77AC18Decompressor::DecompressToDest(std::iostream *src, std::iostream *dst) {}
 
-void DwgLZ77AC18Decompressor::decompress(std::istream *src, std::ostream *dst) {}
+void DwgLZ77AC18Decompressor::decompress(std::iostream *src, std::iostream *dst) {}
 
-unsigned char DwgLZ77AC18Decompressor::copy(int count, std::istream *src, std::ostream *dst)
+unsigned char DwgLZ77AC18Decompressor::copy(int count, std::iostream *src, std::iostream *dst)
 {
     StreamWrapper src_wrapper(src);
     StreamWrapper dst_wrapper(dst);
@@ -44,7 +44,7 @@ unsigned char DwgLZ77AC18Decompressor::copy(int count, std::istream *src, std::o
     return (unsigned char) src_wrapper.readByte();
 }
 
-int DwgLZ77AC18Decompressor::literalCount(int code, std::istream *src)
+int DwgLZ77AC18Decompressor::literalCount(int code, std::iostream *src)
 {
     StreamWrapper wrapper(src);
     int lowbits = code & 0b1111;
@@ -62,7 +62,7 @@ int DwgLZ77AC18Decompressor::literalCount(int code, std::istream *src)
     return lowbits;
 }
 
-int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std::istream *compressed)
+int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std::iostream *compressed)
 {
     StreamWrapper wrapper(compressed);
 
@@ -82,7 +82,7 @@ int DwgLZ77AC18Decompressor::readCompressedBytes(int opcode1, int validBits, std
     return compressedBytes + 2;
 }
 
-int DwgLZ77AC18Decompressor::twoByteOffset(int &offset, int addedValue, std::istream *stream)
+int DwgLZ77AC18Decompressor::twoByteOffset(int &offset, int addedValue, std::iostream *stream)
 {
     StreamWrapper wrapper(stream);
     int firstByte = wrapper.readByte();

@@ -29,7 +29,7 @@ namespace dwg {
 class DwgStreamWriterAC24 : public DwgStreamWriterAC21
 {
 public:
-    DwgStreamWriterAC24(std::ostream *stream, Encoding encoding);
+    DwgStreamWriterAC24(std::iostream *stream, Encoding encoding);
     virtual ~DwgStreamWriterAC24();
 
     void writeObjectType(short value) override;

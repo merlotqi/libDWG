@@ -29,7 +29,7 @@ namespace dwg {
 class DwgFileHeaderWriterAC21 : public DwgFileHeaderWriterAC18
 {
 public:
-    DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding, CadDocument *model);
+    DwgFileHeaderWriterAC21(std::fstream *stream, Encoding encoding, CadDocument *model);
 
 protected:
     int fileHeaderSize() const override;

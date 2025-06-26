@@ -32,8 +32,8 @@ class DxfBinaryReader : public DxfStreamReaderBase
 {
 public:
     static std::string Sentinel;
-    DxfBinaryReader(std::istream *stream);
-    DxfBinaryReader(std::istream *stream, Encoding encoding);
+    DxfBinaryReader(std::iostream *stream);
+    DxfBinaryReader(std::iostream *stream, Encoding encoding);
     virtual ~DxfBinaryReader();
 
     void start() override;
@@ -50,8 +50,8 @@ public:
 
 protected:
     Encoding _encoding;
-    std::istream *_stream;
-    InputStreamWrapper _wrapper;
+    std::iostream *_stream;
+    StreamWrapper _wrapper;
 };
 
 }// namespace dwg

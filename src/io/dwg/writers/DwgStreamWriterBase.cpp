@@ -38,9 +38,9 @@
 
 namespace dwg {
 
-DwgStreamWriterBase::DwgStreamWriterBase(std::ostream *stream, Encoding encoding) : _stream(stream), _lastByte(0) {}
+DwgStreamWriterBase::DwgStreamWriterBase(std::iostream *stream, Encoding encoding) : _stream(stream), _lastByte(0) {}
 
-IDwgStreamWriter *DwgStreamWriterBase::GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding)
+IDwgStreamWriter *DwgStreamWriterBase::GetStreamWriter(ACadVersion version, std::iostream *stream, Encoding encoding)
 {
     switch (version)
     {
@@ -76,7 +76,7 @@ IDwgStreamWriter *DwgStreamWriterBase::GetStreamWriter(ACadVersion version, std:
     return nullptr;
 }
 
-IDwgStreamWriter *DwgStreamWriterBase::GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding)
+IDwgStreamWriter *DwgStreamWriterBase::GetMergedWriter(ACadVersion version, std::iostream *stream, Encoding encoding)
 {
     switch (version)
     {
@@ -96,29 +96,29 @@ IDwgStreamWriter *DwgStreamWriterBase::GetMergedWriter(ACadVersion version, std:
         case ACadVersion::AC1012:
         case ACadVersion::AC1014:
             return new DwgmMergedStreamWriterAC14(stream, new DwgStreamWriterAC12(stream, encoding),
-                                                  new DwgStreamWriterAC12(new std::ostringstream(), encoding));
+                                                  new DwgStreamWriterAC12(new std::stringstream(), encoding));
         case ACadVersion::AC1015:
             return new DwgmMergedStreamWriterAC14(stream, new DwgStreamWriterAC15(stream, encoding),
-                                                  new DwgStreamWriterAC15(new std::ostringstream(), encoding));
+                                                  new DwgStreamWriterAC15(new std::stringstream(), encoding));
         case ACadVersion::AC1018:
             return new DwgmMergedStreamWriterAC14(stream, new DwgStreamWriterAC18(stream, encoding),
-                                                  new DwgStreamWriterAC18(new std::ostringstream(), encoding));
+                                                  new DwgStreamWriterAC18(new std::stringstream(), encoding));
         case ACadVersion::AC1021:
             return new DwgMergedStreamWriter(stream, new DwgStreamWriterAC21(stream, encoding),
-                                             new DwgStreamWriterAC21(new std::ostringstream(), encoding),
-                                             new DwgStreamWriterAC21(new std::ostringstream(), encoding));
+                                             new DwgStreamWriterAC21(new std::stringstream(), encoding),
+                                             new DwgStreamWriterAC21(new std::stringstream(), encoding));
         case ACadVersion::AC1024:
         case ACadVersion::AC1027:
         case ACadVersion::AC1032:
             return new DwgMergedStreamWriter(stream, new DwgStreamWriterAC24(stream, encoding),
-                                             new DwgStreamWriterAC24(new std::ostringstream(), encoding),
-                                             new DwgStreamWriterAC24(new std::ostringstream(), encoding));
+                                             new DwgStreamWriterAC24(new std::stringstream(), encoding),
+                                             new DwgStreamWriterAC24(new std::stringstream(), encoding));
         default:
             throw std::runtime_error(fmt::format("Dwg version not supported: ", CadUtils::GetNameFromVersion(version)));
     }
 }
 
-std::ostream *DwgStreamWriterBase::stream()
+std::iostream *DwgStreamWriterBase::stream()
 {
     return _stream;
 }

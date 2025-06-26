@@ -36,7 +36,7 @@ class DwgFileHeaderWriterBase : public IDwgFileHeaderWriter
 protected:
     ACadVersion _version;
     Encoding _encoding;
-    std::ofstream *_stream;
+    std::fstream *_stream;
     CadDocument *_document;
 
     virtual int handleSectionOffset() const = 0;
@@ -44,7 +44,7 @@ protected:
     virtual int fileHeaderSize() const = 0;
 
 public:
-    DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding, CadDocument *model);
+    DwgFileHeaderWriterBase(std::fstream *stream, Encoding encoding, CadDocument *model);
 
     unsigned short getFileCodePage();
 
@@ -55,7 +55,7 @@ public:
 
     void writeMagicNumber();
 
-    void applyMagicSequence(std::ostringstream *stream);
+    void applyMagicSequence(std::stringstream *stream);
 };
 
 

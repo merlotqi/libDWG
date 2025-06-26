@@ -35,7 +35,7 @@ class DwgAuxHeaderWriter : public DwgSectionIO
     CadHeader *_header;
 
 public:
-    DwgAuxHeaderWriter(std::ostream *stream, Encoding encoding, CadHeader *header);
+    DwgAuxHeaderWriter(std::iostream *stream, Encoding encoding, CadHeader *header);
 
     ~DwgAuxHeaderWriter();
 

@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DwgMergedStreamWriter::DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
+DwgMergedStreamWriter::DwgMergedStreamWriter(std::iostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
                                              IDwgStreamWriter *handlewriter)
     : _stream(stream), _main(main), _textWriter(textwriter), _handleWriter(handlewriter)
 {
@@ -32,7 +32,7 @@ DwgMergedStreamWriter::DwgMergedStreamWriter(std::ostream *stream, IDwgStreamWri
 
 DwgMergedStreamWriter::~DwgMergedStreamWriter() {}
 
-std::ostream *DwgMergedStreamWriter::stream()
+std::iostream *DwgMergedStreamWriter::stream()
 {
     return nullptr;
 }

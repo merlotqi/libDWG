@@ -102,6 +102,9 @@ public:
         static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
         static_assert(std::is_base_of<TableEntry, std::remove_pointer_t<T>>::value,
                       "T must point to a type derived from TableEntry.");
+
+        TableEntry *existing = updateTable(entry, table);
+        return dynamic_cast<T>(existing);
     }
 
 private:

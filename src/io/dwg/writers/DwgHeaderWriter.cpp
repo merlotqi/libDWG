@@ -59,7 +59,7 @@
 
 namespace dwg {
 
-DwgHeaderWriter::DwgHeaderWriter(std::ostream *stream, CadDocument *document, Encoding encoding)
+DwgHeaderWriter::DwgHeaderWriter(std::iostream *stream, CadDocument *document, Encoding encoding)
     : DwgSectionIO(document->header()->version())
 {
     _document = document;

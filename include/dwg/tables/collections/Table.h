@@ -80,11 +80,11 @@ public:
         return _entries.end();
     }
     void createDefaultEntries();
-    std::vector<std::string> defaultEntries() const;
 
 protected:
     void addHandlePrefix(pointer v);
     void push_back(const std::string &n, pointer v);
+    virtual std::vector<std::string> defaultEntries() const;
     virtual TableEntry *createEntry(const std::string &name) = 0;
 
 private:

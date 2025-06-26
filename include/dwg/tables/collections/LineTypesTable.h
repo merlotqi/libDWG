@@ -42,9 +42,8 @@ public:
     LineType *byBlock() const;
     LineType *continuous() const;
 
-    std::vector<std::string> defaultEntries() const;
-
 protected:
+    std::vector<std::string> defaultEntries() const override;
     TableEntry *createEntry(const std::string &name) override;
 };
 

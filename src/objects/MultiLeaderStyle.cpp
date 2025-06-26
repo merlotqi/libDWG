@@ -23,6 +23,13 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/MultiLeaderStyle.h>
+#include <dwg/CadDocument.h>
+#include <dwg/tables/TextStyle.h>
+#include <dwg/tables/BlockRecord.h>
+#include <dwg/tables/LineType.h>
+#include <dwg/tables/collections/TextStylesTable.h>
+#include <dwg/tables/collections/BlockRecordsTable.h>
+#include <dwg/tables/collections/LineTypesTable.h>
 
 namespace dwg {
 
@@ -37,6 +44,8 @@ MultiLeaderStyle::MultiLeaderStyle(const std::string &name)
     : NonGraphicalObject(name), _lineColor(Color(short(0))), _textColor(Color(short(0))),
       _blockContentColor(Color(short(0)))
 {
+    _leaderLineType = LineType::ByLayer();
+    _textStyle = TextStyle::Default();
 }
 
 MultiLeaderStyle::~MultiLeaderStyle() {}
@@ -360,8 +369,22 @@ void MultiLeaderStyle::setUnknownFlag298(bool value)
     _unknownFlag298 = value;
 }
 
-void MultiLeaderStyle::assignDocument(CadDocument *doc) {}
+void MultiLeaderStyle::assignDocument(CadDocument *doc) 
+{
+    NonGraphicalObject::assignDocument(doc);
+
+    _textStyle = updateTableT<TextStyle *>(_textStyle, doc->textStyles());
+    _leaderLineType = updateTableT<LineType *>(_leaderLineType, doc->lineTypes());
+    _arrowhead = updateTableT<BlockRecord *>(_arrowhead, doc->blockRecords());
+    _blockContent = updateTableT<BlockRecord *>(_blockContent, doc->blockRecords());
+
+    doc->textStyles()->OnRemove.add(this, &MultiLeaderStyle::tableOnRemove);
+    doc->lineTypes()->OnRemove.add(this, &MultiLeaderStyle::tableOnRemove);
+    doc->blockRecords()->OnRemove.add(this, &MultiLeaderStyle::tableOnRemove);
+}
 
 void MultiLeaderStyle::unassignDocument() {}
+
+void MultiLeaderStyle::tableOnRemove(CadObject *object) {}
 
 }// namespace dwg

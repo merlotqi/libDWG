@@ -192,6 +192,9 @@ public:
     void unassignDocument() override;
 
 private:
+    void tableOnRemove(CadObject *object);
+
+private:
     LeaderContentType _contentType;
     MultiLeaderDrawOrderType _multiLeaderDrawOrder;
     LeaderDrawOrderType _leaderDrawOrder;
@@ -200,17 +203,17 @@ private:
     double _secondSegmentAngleConstraint;
     MultiLeaderPathType _pathType;
     Color _lineColor;
-    LineType *_leaderLineType;
+    LineType *_leaderLineType = nullptr;
     LineweightType _leaderLineWeight;
     bool _enableLanding;
     double _landingGap;
     bool _enableDogleg;
     double _landingDistance;
     std::string _description;
-    BlockRecord *_arrowhead;
+    BlockRecord *_arrowhead = nullptr;
     double _arrowheadSize;
     std::string _defaultTextContents;
-    TextStyle *_textStyle;
+    TextStyle *_textStyle = nullptr;
     TextAttachmentType _textLeftAttachment;
     TextAngleType _textAngle;
     TextAlignmentType _textAlignment;
@@ -220,7 +223,7 @@ private:
     bool _textFrame;
     bool _textAlignAlwaysLeft;
     double _alignSpace;
-    BlockRecord *_blockContent;
+    BlockRecord *_blockContent = nullptr;
     Color _blockContentColor;
     XYZ _blockContentScale;
     bool _enableBlockContentScale;

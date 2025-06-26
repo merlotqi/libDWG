@@ -38,12 +38,12 @@
 namespace dwg {
 
 DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary)
-    : DxfWriter(new std::ofstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document,
+    : DxfWriter(new std::fstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document,
                 binary)
 {
 }
 
-DxfWriter::DxfWriter(std::ofstream *stream, CadDocument *document, bool binary)
+DxfWriter::DxfWriter(std::fstream *stream, CadDocument *document, bool binary)
     : CadWriterBase<DxfWriterConfiguration>(stream, document), _binary(binary)
 {
     _objectHolder = new CadObjectHolder();

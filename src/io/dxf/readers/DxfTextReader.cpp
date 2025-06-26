@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DxfTextReader::DxfTextReader(std::istream *stream, Encoding encoding)
+DxfTextReader::DxfTextReader(std::iostream *stream, Encoding encoding)
     : _stream(stream), _encoding(encoding), _wrapper(_stream)
 {
     _stream->seekg(std::ios::beg);

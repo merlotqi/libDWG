@@ -29,15 +29,15 @@ namespace dwg {
 class DwgLZ77AC18Decompressor
 {
 public:
-    static void Decompress(std::istream *compressed, long long decompressedSize, std::istream *out);
-    static void DecompressToDest(std::istream *src, std::ostream *dst);
+    static void Decompress(std::iostream *compressed, long long decompressedSize, std::iostream *out);
+    static void DecompressToDest(std::iostream *src, std::iostream *dst);
 
 private:
-    static void decompress(std::istream *src, std::ostream *dst);
-    static unsigned char copy(int count, std::istream *src, std::ostream *dst);
-    static int literalCount(int code, std::istream *src);
-    static int readCompressedBytes(int opcode1, int validBits, std::istream *compressed);
-    static int twoByteOffset(int &offset, int addedValue, std::istream *stream);
+    static void decompress(std::iostream *src, std::iostream *dst);
+    static unsigned char copy(int count, std::iostream *src, std::iostream *dst);
+    static int literalCount(int code, std::iostream *src);
+    static int readCompressedBytes(int opcode1, int validBits, std::iostream *compressed);
+    static int twoByteOffset(int &offset, int addedValue, std::iostream *stream);
 };
 
 }// namespace dwg

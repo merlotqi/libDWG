@@ -42,7 +42,7 @@ DxfReader::DxfReader(const std::string &filename)
 {
 }
 
-DxfReader::DxfReader(std::ifstream *stream)
+DxfReader::DxfReader(std::fstream *stream)
     : CadReaderBase<DxfReaderConfiguration>(stream), _builder(nullptr), _reader(nullptr), _version(ACadVersion::Unknown)
 {
 }
@@ -134,16 +134,16 @@ std::vector<Entity *> DxfReader::readEntities()
 
 bool DxfReader::IsBinary(const std::string &filename)
 {
-    std::ifstream ifs(filename);
+    std::fstream ifs(filename);
     bool result = IsBinary(&ifs);
     ifs.close();
     return result;
 }
 
-bool DxfReader::IsBinary(std::istream *stream, bool resetPos)
+bool DxfReader::IsBinary(std::iostream *stream, bool resetPos)
 {
     stream->seekg(std::ios::beg);
-    InputStreamWrapper wrapper(stream);
+    StreamWrapper wrapper(stream);
     std::string sn = wrapper.readString(DxfBinaryReader::Sentinel.length());
     bool isBinary = (sn == DxfBinaryReader::Sentinel);
 
@@ -174,7 +174,7 @@ void DxfReader::readThumbnailImage() {}
 
 IDxfStreamReader *DxfReader::getReader()
 {
-    InputStreamWrapper wrapper(_fileStream);
+    StreamWrapper wrapper(_fileStream);
     IDxfStreamReader *tmpReader = nullptr;
     _version = ACadVersion::Unknown;
 

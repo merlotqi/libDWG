@@ -49,11 +49,11 @@ public:
 
 protected:
     CadWriterBase();
-    CadWriterBase(std::ofstream *stream, CadDocument *document);
+    CadWriterBase(std::fstream *stream, CadDocument *document);
     Encoding getListedEncoding(const std::string &codePage);
 
 protected:
-    std::ofstream *_stream;
+    std::fstream *_stream;
     CadDocument *_document;
     Encoding _encoding;
 };
@@ -64,7 +64,7 @@ inline CadWriterBase<T>::CadWriterBase()
 }
 
 template<typename T>
-inline CadWriterBase<T>::CadWriterBase(std::ofstream *stream, CadDocument *document)
+inline CadWriterBase<T>::CadWriterBase(std::fstream *stream, CadDocument *document)
     : _stream(stream), _document(document)
 {
 }

@@ -50,7 +50,7 @@ class LIBDWG_API DwgReader : public CadReaderBase<DwgReaderConfiguration>
 
 public:
     DwgReader(const std::string &name);
-    DwgReader(std::ifstream *stream);
+    DwgReader(std::fstream *stream);
     ~DwgReader();
 
     CadDocument *read() override;
@@ -76,15 +76,15 @@ private:
 
     void getPageHeaderData(IDwgStreamReader *sender, int64_t &sectionType, int64_t &decompressedSize,
                            int64_t &compressedSize, int64_t &compressionType, int64_t &checksum);
-    std::istream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName);
-    std::istream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName);
-    std::istream *getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
+    std::iostream *getSectionBuffer15(DwgFileHeaderAC15 *fileheader, const std::string &sectionName);
+    std::iostream *getSectionBuffer18(DwgFileHeaderAC18 *fileheader, const std::string &sectionName);
+    std::iostream *getSectionBuffer21(DwgFileHeaderAC21 *fileheader, const std::string &sectionName);
     void decryptDataSection(DwgLocalSectionMap &section, IDwgStreamReader *sreader);
     void reedSolomonDecoding(const std::vector<unsigned char> &encoded, std::vector<unsigned char> &buffer, int factor,
                              int blockSize);
     std::vector<unsigned char> getPageBuffer(unsigned long long pageOffset, unsigned long long compressedSize,
                                              unsigned long long uncompressedSize, unsigned long long correctionFactor,
-                                             int blockSize, std::istream *stream);
+                                             int blockSize, std::iostream *stream);
 };
 
 }// namespace dwg

@@ -34,7 +34,7 @@ class DwgPreviewWriter : public DwgSectionIO
     std::vector<unsigned char> _endSentinel;
 
 public:
-    DwgPreviewWriter(ACadVersion version, std::ostream *stream);
+    DwgPreviewWriter(ACadVersion version, std::iostream *stream);
 
     ~DwgPreviewWriter();
 

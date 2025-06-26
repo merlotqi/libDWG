@@ -119,11 +119,11 @@ class VPortsTable;
 class AppIdsTable;
 class DimensionStylesTable;
 
-class CRC8OutputStreamHandler;
+class CRC8StreamHandler;
 class DwgObjectWriter : public DwgSectionIO
 {
 public:
-    DwgObjectWriter(std::ostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true,
+    DwgObjectWriter(std::iostream *stream, CadDocument *document, Encoding encoding, bool writeXRecords = true,
                     bool writeXData = true);
     ~DwgObjectWriter();
     std::string sectionName() const;
@@ -135,8 +135,8 @@ public:
 
 private:
     void registerObject(CadObject *cadObject);
-    void writeSize(CRC8OutputStreamHandler *stream, unsigned int size);
-    void writeSizeInBits(CRC8OutputStreamHandler *stream, unsigned long long size);
+    void writeSize(CRC8StreamHandler *stream, unsigned int size);
+    void writeSizeInBits(CRC8StreamHandler *stream, unsigned long long size);
     void writeXrefDependantBit(TableEntry *entry);
     void writeCommonData(CadObject *cadObject);
     void writeCommonNonEntityData(CadObject *cadObject);
@@ -243,12 +243,12 @@ private:
     std::map<unsigned long long, long long> _map;
     std::map<unsigned long long, CadDictionary *> _dictionaries;
     std::queue<CadObject *> _objects;
-    std::ostringstream _msmain;
+    std::stringstream _msmain;
     IDwgStreamWriter *_writer;
     CadDocument *_document;
     Entity *_prev;
     Entity *_next;
-    std::ostream *_stream;
+    std::iostream *_stream;
 };
 
 }// namespace dwg

@@ -44,13 +44,13 @@ class LIBDWG_API BlockRecord : public TableEntry
     Block *_blockEntity = nullptr;
     BlockEnd *_blockEnd = nullptr;
     EvaluationGraph *_evaluationGraph = nullptr;
-    UnitsType _units;
+    UnitsType _units = UnitsType::Unitless;
     BlockTypeFlags _flags;
     bool _isExplodable = false;
     std::vector<unsigned char> _preview;
     Layout *_layout = nullptr;
     SortEntitiesTable *_sortEntitiesTable = nullptr;
-    EntityCollection *_entities;
+    EntityCollection *_entities = nullptr;
 
 public:
     BlockRecord();

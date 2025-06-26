@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::ostream *stream,
+DwgHandleWriter::DwgHandleWriter(ACadVersion version, std::iostream *stream,
                                  const std::map<unsigned long long, long long> &handlemap)
     : DwgSectionIO(version)
 {

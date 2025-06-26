@@ -29,7 +29,7 @@ namespace dwg {
 class DwgStreamWriterAC12 : public DwgStreamWriterBase
 {
 public:
-    DwgStreamWriterAC12(std::ostream *stream, Encoding encoding);
+    DwgStreamWriterAC12(std::iostream *stream, Encoding encoding);
     virtual ~DwgStreamWriterAC12();
 };
 

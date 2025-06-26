@@ -48,7 +48,8 @@ public:
     Encoding encoding() const;
     void setEncoding(Encoding encoding);
 
-    std::streampos tell() const;
+    std::size_t length() const;
+    std::streampos pos() const;
     void seek(std::streampos pos);
 
     void flush();

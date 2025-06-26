@@ -26,10 +26,10 @@ namespace dwg {
 
 std::string DxfBinaryReader::Sentinel = "AutoCAD Binary DXF\r\n\u001a\0";
 
-DxfBinaryReader::DxfBinaryReader(std::istream *stream) : DxfBinaryReader(stream, Encoding(CodePage::Usascii)) {}
+DxfBinaryReader::DxfBinaryReader(std::iostream *stream) : DxfBinaryReader(stream, Encoding(CodePage::Usascii)) {}
 
-DxfBinaryReader::DxfBinaryReader(std::istream *stream, Encoding encoding)
-    : _stream(stream), _encoding(encoding), _wrapper(InputStreamWrapper(_stream))
+DxfBinaryReader::DxfBinaryReader(std::iostream *stream, Encoding encoding)
+    : _stream(stream), _encoding(encoding), _wrapper(StreamWrapper(_stream))
 {
     _stream->seekg(std::ios::beg);
     start();

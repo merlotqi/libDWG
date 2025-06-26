@@ -33,7 +33,7 @@
 
 namespace dwg {
 
-DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::ofstream *stream, Encoding encoding, CadDocument *model)
+DwgFileHeaderWriterBase::DwgFileHeaderWriterBase(std::fstream *stream, Encoding encoding, CadDocument *model)
 {
     assert(stream);
     assert(model);
@@ -98,7 +98,7 @@ void DwgFileHeaderWriterBase::writeMagicNumber()
     }
 }
 
-void DwgFileHeaderWriterBase::applyMagicSequence(std::ostringstream *stream)
+void DwgFileHeaderWriterBase::applyMagicSequence(std::stringstream *stream)
 {
     std::string buffer = stream->str();
     for (size_t i = 0; i < buffer.size(); ++i)

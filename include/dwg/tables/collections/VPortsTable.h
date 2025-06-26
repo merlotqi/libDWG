@@ -40,9 +40,8 @@ public:
     using Table::add;
     void add(VPort *item);
 
-    std::vector<std::string> defaultEntries() const;
-
 protected:
+    std::vector<std::string> defaultEntries() const override;
     TableEntry *createEntry(const std::string &name) override;
 };
 

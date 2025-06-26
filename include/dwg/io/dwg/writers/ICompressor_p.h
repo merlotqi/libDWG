@@ -33,7 +33,7 @@ public:
     virtual ~ICompressor() = default;
 
     virtual void compress(const std::vector<unsigned char> &source, size_t offset, size_t totalSize,
-                          std::ostream *dest) = 0;
+                          std::iostream *dest) = 0;
 };
 
 }// namespace dwg

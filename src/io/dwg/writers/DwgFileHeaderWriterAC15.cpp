@@ -52,7 +52,7 @@ int DwgFileHeaderWriterAC15::fileHeaderSize() const
     return 0x61;
 }
 
-DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding encoding, CadDocument *model)
+DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::fstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterBase(stream, encoding, model)
 {
     _records = {
@@ -67,7 +67,7 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::ofstream *stream, Encoding
     };
 }
 
-void DwgFileHeaderWriterAC15::addSection(const std::string &name, std::ostream *stream, bool isCompressed,
+void DwgFileHeaderWriterAC15::addSection(const std::string &name, std::iostream *stream, bool isCompressed,
                                          int decompsize)
 {
     // _records[name].first.Size = ostream_length(stream);
@@ -94,7 +94,7 @@ void DwgFileHeaderWriterAC15::setRecordSeekers()
 
 void DwgFileHeaderWriterAC15::writeFileHeader()
 {
-    // std::ostringstream memoryStream;
+    // std::stringstream memoryStream;
 
     // //0x00	6	“ACXXXX” version string
     // IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, &memoryStream, _encoding);

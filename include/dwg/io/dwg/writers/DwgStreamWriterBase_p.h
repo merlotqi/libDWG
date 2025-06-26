@@ -32,18 +32,18 @@ class DwgStreamWriterBase : public IDwgStreamWriter
 protected:
     int _bitShift = 0;
     unsigned char _lastByte;
-    std::ostream *_stream;
+    std::iostream *_stream;
     Encoding _encoding;
     long long _savedPositionInBits;
 
 public:
-    static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
-    static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::ostream *stream, Encoding encoding);
+    static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::iostream *stream, Encoding encoding);
+    static IDwgStreamWriter *GetMergedWriter(ACadVersion version, std::iostream *stream, Encoding encoding);
 
 public:
-    DwgStreamWriterBase(std::ostream *stream, Encoding encoding);
+    DwgStreamWriterBase(std::iostream *stream, Encoding encoding);
 
-    std::ostream *stream() override;
+    std::iostream *stream() override;
     Encoding encoding() override;
     IDwgStreamWriter *main() override;
     long long positionInBits() const override;

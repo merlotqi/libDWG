@@ -29,7 +29,7 @@ namespace dwg {
 class DwgStreamWriterAC18 : public DwgStreamWriterAC15
 {
 public:
-    DwgStreamWriterAC18(std::ostream *stream, Encoding encoding);
+    DwgStreamWriterAC18(std::iostream *stream, Encoding encoding);
     virtual ~DwgStreamWriterAC18();
 
     void writeCmColor(const Color &value) override;

@@ -389,7 +389,7 @@ void DwgObjectWriter::writeExtendedData(ExtendedDataDictionary *data)
 
 void DwgObjectWriter::writeExtendedDataEntry(AppId *app, ExtendedData *entry)
 {
-    std::ostringstream stream;
+    std::stringstream stream;
     StreamWrapper mstream(&stream);
 
     for (auto &&record: entry->records())

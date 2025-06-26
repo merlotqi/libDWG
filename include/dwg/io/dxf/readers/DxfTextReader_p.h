@@ -31,7 +31,7 @@ namespace dwg {
 class DxfTextReader : public DxfStreamReaderBase
 {
 public:
-    DxfTextReader(std::istream *stream, Encoding encoding);
+    DxfTextReader(std::iostream *stream, Encoding encoding);
     virtual ~DxfTextReader();
     void readNext() override;
 
@@ -47,8 +47,8 @@ public:
 
 private:
     Encoding _encoding;
-    std::istream *_stream;
-    InputStreamWrapper _wrapper;
+    std::iostream *_stream;
+    StreamWrapper _wrapper;
 };
 
 }// namespace dwg

@@ -27,7 +27,7 @@
 
 namespace dwg {
 
-DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::ofstream *stream, Encoding encoding, CadDocument *model)
+DwgFileHeaderWriterAC21::DwgFileHeaderWriterAC21(std::fstream *stream, Encoding encoding, CadDocument *model)
     : DwgFileHeaderWriterAC18(stream, encoding, model)
 {
     _compressor = new DwgLZ77AC21Compressor();
@@ -42,7 +42,7 @@ void DwgFileHeaderWriterAC21::craeteLocalSection(DwgSectionDescriptor descriptor
                                                  const std::vector<unsigned char> &buffer, int decompressedSize,
                                                  unsigned long long offset, int totalSize, bool isCompressed)
 {
-    std::ostringstream descriptorStream = applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
+    std::stringstream descriptorStream = applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
     writeMagicNumber();
 }
 

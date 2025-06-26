@@ -29,7 +29,7 @@
 
 namespace dwg {
 
-DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::ostream *stream) : DwgSectionIO(version)
+DwgAppInfoWriter::DwgAppInfoWriter(ACadVersion version, std::iostream *stream) : DwgSectionIO(version)
 {
     for (size_t i = 0; i < 16; ++i) _emptyArr.push_back(0);
     _writer = DwgStreamWriterBase::GetStreamWriter(version, stream, Encoding());

@@ -30,7 +30,7 @@ namespace dwg {
 class DxfBinaryWriter : public DxfStreamWriterBase
 {
 public:
-    DxfBinaryWriter(std::ofstream *stream, Encoding encoding);
+    DxfBinaryWriter(std::fstream *stream, Encoding encoding);
 
     void flush() override;
     void close() override;

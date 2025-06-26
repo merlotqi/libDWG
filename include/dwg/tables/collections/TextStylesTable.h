@@ -37,9 +37,8 @@ public:
     ObjectType objectType() const override;
     std::string objectName() const override;
 
-    std::vector<std::string> defaultEntries() const;
-
 protected:
+    std::vector<std::string> defaultEntries() const override;
     TableEntry *createEntry(const std::string &name) override;
 };
 

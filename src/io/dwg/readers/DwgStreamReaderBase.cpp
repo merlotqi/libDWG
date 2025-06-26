@@ -30,11 +30,11 @@
 
 namespace dwg {
 
-DwgStreamReaderBase::DwgStreamReaderBase(std::istream *stream, bool resetPosition) {}
+DwgStreamReaderBase::DwgStreamReaderBase(std::iostream *stream, bool resetPosition) {}
 
 DwgStreamReaderBase::~DwgStreamReaderBase() {}
 
-IDwgStreamReader *DwgStreamReaderBase::GetStreamHandler(ACadVersion version, std::istream *stream, Encoding encoding,
+IDwgStreamReader *DwgStreamReaderBase::GetStreamHandler(ACadVersion version, std::iostream *stream, Encoding encoding,
                                                         bool resetPosition)
 {
     IDwgStreamReader *reader = nullptr;
@@ -89,7 +89,7 @@ Encoding DwgStreamReaderBase::encoding() const
 
 void DwgStreamReaderBase::setEncoding(Encoding value) {}
 
-std::istream *DwgStreamReaderBase::stream()
+std::iostream *DwgStreamReaderBase::stream()
 {
     return nullptr;
 }
