@@ -52,7 +52,7 @@ public:
 
     virtual void writeBytes(const std::vector<unsigned char> &bytes) = 0;
 
-    virtual void writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) = 0;
+    virtual void writeBytes(const std::vector<unsigned char> &bytes, std::size_t offset, std::size_t length) = 0;
 
     virtual void writeInt(int value) = 0;
 

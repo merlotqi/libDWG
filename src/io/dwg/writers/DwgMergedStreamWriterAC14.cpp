@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dwg/writers/DwgMergedStreamWriterAC14_p.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -30,6 +31,22 @@ DwgmMergedStreamWriterAC14::DwgmMergedStreamWriterAC14(std::iostream *stream, ID
 {
 }
 
-void DwgmMergedStreamWriterAC14::writeSpearShift() {}
+void DwgmMergedStreamWriterAC14::writeSpearShift() 
+{
+    int pos = (int) _main->positionInBits();
+    if (_savedPosition)
+    {
+        _main->writeSpearShift();
+        _main->setPositionInBits(positionInBits());
+        _main->writeRawLong(pos);
+        _main->writeShiftValue();
+        _main->setPositionInBits(pos);
+    }
+
+    _handleWriter->writeSpearShift();
+    StreamWrapper wrapper(_handleWriter->stream());
+    _main->writeBytes(wrapper.buffer(), 0, wrapper.length());
+    _main->writeSpearShift();
+}
 
 }// namespace dwg

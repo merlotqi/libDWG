@@ -31,14 +31,16 @@
 #include <dwg/io/dwg/writers/DwgStreamWriterAC24_p.h>
 #include <dwg/io/dwg/writers/DwgStreamWriterBase_p.h>
 #include <dwg/utils/EndianConverter.h>
-#include <dwg/utils/StreamWrapper.h>
 #include <fmt/core.h>
 #include <sstream>
 #include <stdexcept>
 
 namespace dwg {
 
-DwgStreamWriterBase::DwgStreamWriterBase(std::iostream *stream, Encoding encoding) : _stream(stream), _lastByte(0) {}
+DwgStreamWriterBase::DwgStreamWriterBase(std::iostream *stream, Encoding encoding)
+    : _stream(stream), _lastByte(0), _savedPositionInBits(0LL), _wrapper(_stream)
+{
+}
 
 IDwgStreamWriter *DwgStreamWriterBase::GetStreamWriter(ACadVersion version, std::iostream *stream, Encoding encoding)
 {
@@ -135,7 +137,7 @@ IDwgStreamWriter *DwgStreamWriterBase::main()
 
 long long DwgStreamWriterBase::positionInBits() const
 {
-    return _stream->tellp() * 8 + _bitShift;
+    return _wrapper.pos() * 8 + _bitShift;
 }
 
 long long DwgStreamWriterBase::savedPositionInBits() const
@@ -145,12 +147,11 @@ long long DwgStreamWriterBase::savedPositionInBits() const
 
 void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes)
 {
-    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
         for (int i = 0; i < bytes.size(); ++i)
         {
-            wrapper.write(bytes.at(i));
+            _wrapper.write(bytes.at(i));
         }
         return;
     }
@@ -158,36 +159,35 @@ void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes)
     int num = 8 - _bitShift;
     for (auto &&b: bytes)
     {
-        wrapper.write((unsigned char) (_lastByte | (b >> _bitShift)));
+        _wrapper.write((unsigned char) (_lastByte | (b >> _bitShift)));
         _lastByte = (unsigned char) (b << num);
     }
 }
 
-void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes, int initialIndex, int length)
+void DwgStreamWriterBase::writeBytes(const std::vector<unsigned char> &bytes, std::size_t initialIndex,
+                                     std::size_t length)
 {
-    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
-        for (int i = 0, j = initialIndex; i < length; ++i, ++j)
+        for (size_t i = 0, j = initialIndex; i < length; ++i, ++j)
         {
-            wrapper.write(bytes.at(j));
+            _wrapper.write(bytes.at(j));
         }
         return;
     }
 
     int num = 8 - _bitShift;
-    for (int i = 0, j = initialIndex; i < length; i++, j++)
+    for (size_t i = 0, j = initialIndex; i < length; i++, j++)
     {
         unsigned char b = bytes[j];
-        wrapper.write((unsigned char) (_lastByte | (b >> _bitShift)));
+        _wrapper.write((unsigned char) (_lastByte | (b >> _bitShift)));
         _lastByte = (unsigned char) (b << num);
     }
 }
 
 void DwgStreamWriterBase::writeInt(int value)
 {
-    std::vector<unsigned char> arr = LittleEndianConverter::instance()->bytes(value);
-    _stream->write(reinterpret_cast<const char *>(arr.data()), arr.size());
+    _wrapper.write<int, LittleEndianConverter>(value);
 }
 
 void DwgStreamWriterBase::writeObjectType(short value)
@@ -284,13 +284,12 @@ void DwgStreamWriterBase::writeTextUtf8(const std::string &value)
 {
     std::vector<unsigned char> bytes = _encoding.bytes(value);
     writeRawUShort((unsigned short) (bytes.size() + 1));
-    _stream->write(reinterpret_cast<const char *>(bytes.data()), bytes.size());
-    _stream->write(0, 1);
+    _wrapper.write(bytes, 0, bytes.size());
+    _wrapper.writeByte(0);
 }
 
 void DwgStreamWriterBase::writeBit(bool value)
 {
-    StreamWrapper wrapper(_stream);
     if (_bitShift < 7)
     {
         if (value)
@@ -306,7 +305,7 @@ void DwgStreamWriterBase::writeBit(bool value)
         _lastByte |= 1;
     }
 
-    wrapper.write(_lastByte);
+    _wrapper.write(_lastByte);
     resetShift();
 }
 
@@ -314,19 +313,19 @@ void DwgStreamWriterBase::write2Bits(unsigned char value)
 {
     if (_bitShift < 6)
     {
-        _lastByte |= (unsigned char) (value << 6 - _bitShift);
+        _lastByte |= (unsigned char) ((value << 6) - _bitShift);
         _bitShift += 2;
     }
     else if (_bitShift == 6)
     {
         _lastByte |= value;
-        _stream->write(reinterpret_cast<const char *>(&_lastByte), 1);
+        _wrapper.writeByte(_lastByte);
         resetShift();
     }
     else
     {
         _lastByte |= (unsigned char) (value >> 1);
-        _stream->write(reinterpret_cast<const char *>(&_lastByte), 1);
+        _wrapper.writeByte(_lastByte);
         _lastByte = (unsigned char) (value << 7);
         _bitShift = 1;
     }
@@ -428,15 +427,14 @@ void DwgStreamWriterBase::write2RawDouble(const XY &value)
 
 void DwgStreamWriterBase::writeByte(unsigned char value)
 {
-    StreamWrapper wrapper(_stream);
     if (_bitShift == 0)
     {
-        wrapper.write(1);
+        _wrapper.write(1);
         return;
     }
 
     int shift = 8 - _bitShift;
-    wrapper.write((unsigned char) (_lastByte | (value >> shift)));
+    _wrapper.write((unsigned char) (_lastByte | (value >> shift)));
     _lastByte = (unsigned char) (value << shift);
 }
 
@@ -642,9 +640,7 @@ void DwgStreamWriterBase::write3BitDoubleWithDefault(const XYZ &def, const XYZ &
 
 void DwgStreamWriterBase::resetStream()
 {
-    // _stream->seekp(std::ios::beg);
-    // resetShift();
-    // _stream->setLength(0);
+    resetShift();
 }
 
 void DwgStreamWriterBase::savePositonForSize()
@@ -654,25 +650,25 @@ void DwgStreamWriterBase::savePositonForSize()
 
 void DwgStreamWriterBase::setPositionInBits(long long posInBits)
 {
-    // long position = posInBits / 8;
-    // _bitShift = (int) (posInBits % 8);
-    // _stream->seekp(position);
+     long position = posInBits / 8;
+     _bitShift = (int) (posInBits % 8);
+     _wrapper.seek(position);
 
-    // if (_bitShift > 0)
-    // {
-    //     int value = this._stream.ReadByte();
-    //     if (value < 0)
-    //     {
-    //         throw std::runtime_error("End of stream");
-    //     }
-    //     _lastByte = (unsigned char) value;
-    // }
-    // else
-    // {
-    //     _lastByte = 0;
-    // }
+     if (_bitShift > 0)
+     {
+         int value = _wrapper.readByte();
+         if (value < 0)
+         {
+             throw std::runtime_error("End of stream");
+         }
+         _lastByte = (unsigned char) value;
+     }
+     else
+     {
+         _lastByte = 0;
+     }
 
-    // _stream->seekp(position);
+     _wrapper.seek(position);
 }
 
 void DwgStreamWriterBase::setPositionByFlag(long long pos)
@@ -699,14 +695,14 @@ void DwgStreamWriterBase::setPositionByFlag(long long pos)
 
 void DwgStreamWriterBase::writeShiftValue()
 {
-    // if (_bitShift > 0)
-    // {
-    //     long position = this._stream.Position;
-    //     int lastValue = this._stream.ReadByte();
-    //     unsigned char currValue = (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
-    //     _stream.Position = position;
-    //     _stream.WriteByte(currValue);
-    // }
+     if (_bitShift > 0)
+     {
+         long long position = _wrapper.pos();
+         int lastValue = _wrapper.readByte();
+         unsigned char currValue = (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
+         _wrapper.seek(position);
+         _wrapper.writeByte(currValue);
+     }
 }
 
 void DwgStreamWriterBase::resetShift()
@@ -714,7 +710,6 @@ void DwgStreamWriterBase::resetShift()
     _bitShift = 0;
     _lastByte = 0;
 }
-
 
 void DwgStreamWriterBase::write3Bits(unsigned char value)
 {

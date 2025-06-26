@@ -67,7 +67,7 @@
 
 namespace dwg {
 
-CadDocument::CadDocument() : CadDocument(ACadVersion::AC1018) {}
+CadDocument::CadDocument() : CadDocument(ACadVersion::AC1032) {}
 
 CadDocument::CadDocument(ACadVersion version) : CadDocument(true)
 {

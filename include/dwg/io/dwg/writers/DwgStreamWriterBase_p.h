@@ -50,7 +50,7 @@ public:
     long long savedPositionInBits() const override;
 
     void writeBytes(const std::vector<unsigned char> &bytes) override;
-    void writeBytes(const std::vector<unsigned char> &bytes, int offset, int length) override;
+    void writeBytes(const std::vector<unsigned char> &bytes, std::size_t offset, std::size_t length) override;
 
     void writeInt(int value) override;
     void writeObjectType(short value) override;

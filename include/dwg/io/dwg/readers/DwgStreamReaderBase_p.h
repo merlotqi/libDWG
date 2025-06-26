@@ -24,7 +24,7 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/readers/IDwgStreamReader_p.h>
-
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -99,6 +99,19 @@ public:
     void advance(int offset) override;
     unsigned short resetShift() override;
     std::string readString(size_t length, Encoding encoding) override;
+
+protected:
+    void applyFlagToPosition(long long lastPos, long long &length, long long &strDataSize);
+    unsigned char applyShiftToLasByte();
+    void applyShiftToArr(int length, std::vector<unsigned char> &arr);
+    unsigned char read3bits();
+    DateTime julianToDate(int jdata, int miliseconds);
+
+protected:
+    std::iostream *_stream;
+    StreamWrapper _wrapper;
+    unsigned char _lastByte = 0;
+    int _bitShift = 0;
 };
 
 }// namespace dwg
