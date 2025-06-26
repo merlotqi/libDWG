@@ -28,7 +28,8 @@
 
 namespace dwg {
 
-StreamWrapper::StreamWrapper(std::iostream *stream) : _stream(stream), _encoding(Encoding(CodePage::Utf8)), _owned(false)
+StreamWrapper::StreamWrapper(std::iostream *stream)
+    : _stream(stream), _encoding(Encoding(CodePage::Utf8)), _owned(false)
 {
     if (!_stream || !_stream->good())
     {

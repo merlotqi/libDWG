@@ -25,8 +25,8 @@
 
 namespace dwg {
 
-DwgMergedStreamWriter::DwgMergedStreamWriter(std::iostream *stream, IDwgStreamWriter *main, IDwgStreamWriter *textwriter,
-                                             IDwgStreamWriter *handlewriter)
+DwgMergedStreamWriter::DwgMergedStreamWriter(std::iostream *stream, IDwgStreamWriter *main,
+                                             IDwgStreamWriter *textwriter, IDwgStreamWriter *handlewriter)
     : _stream(stream), _main(main), _textWriter(textwriter), _handleWriter(handlewriter), _savedPosition(0),
       _savedPositionInBits(0), _positionInBits(0)
 {
@@ -178,7 +178,7 @@ void DwgMergedStreamWriter::handleReference(DwgReferenceType type, unsigned long
     _handleWriter->handleReference(type, handle);
 }
 
-void DwgMergedStreamWriter::writeSpearShift() 
+void DwgMergedStreamWriter::writeSpearShift()
 {
     long long mainSizeBits = _main->positionInBits();
     long long textSizeBits = _textWriter->positionInBits();
@@ -201,7 +201,7 @@ void DwgMergedStreamWriter::writeSpearShift()
             }
         }
 
-		_main->setPositionInBits(positionInBits());
+        _main->setPositionInBits(positionInBits());
         //Write the total size in bits
         _main->writeRawLong(mainTextTotalBits);
         _main->writeShiftValue();
@@ -240,44 +240,44 @@ void DwgMergedStreamWriter::writeRawUShort(unsigned short value)
     _main->writeRawUShort(value);
 }
 
-void DwgMergedStreamWriter::writeRawDouble(double value) 
+void DwgMergedStreamWriter::writeRawDouble(double value)
 {
     _main->writeRawDouble(value);
 }
 
-void DwgMergedStreamWriter::writeBitThickness(double thickness) 
+void DwgMergedStreamWriter::writeBitThickness(double thickness)
 {
     _main->writeBitThickness(thickness);
 }
 
-void DwgMergedStreamWriter::writeBitExtrusion(const XYZ &normal) 
+void DwgMergedStreamWriter::writeBitExtrusion(const XYZ &normal)
 {
     _main->writeBitExtrusion(normal);
 }
 
-void DwgMergedStreamWriter::writeBitDoubleWithDefault(double def, double value) 
+void DwgMergedStreamWriter::writeBitDoubleWithDefault(double def, double value)
 {
     _main->writeBitDoubleWithDefault(def, value);
 }
 
-void DwgMergedStreamWriter::write2BitDoubleWithDefault(const XY &def, const XY &value) 
+void DwgMergedStreamWriter::write2BitDoubleWithDefault(const XY &def, const XY &value)
 {
     _main->write2BitDoubleWithDefault(def, value);
 }
 
-void DwgMergedStreamWriter::write3BitDoubleWithDefault(const XYZ &def, const XYZ &value) 
+void DwgMergedStreamWriter::write3BitDoubleWithDefault(const XYZ &def, const XYZ &value)
 {
     _main->write3BitDoubleWithDefault(def, value);
 }
 
-void DwgMergedStreamWriter::resetStream() 
+void DwgMergedStreamWriter::resetStream()
 {
     _main->resetStream();
     _textWriter->resetStream();
     _handleWriter->resetStream();
 }
 
-void DwgMergedStreamWriter::savePositonForSize() 
+void DwgMergedStreamWriter::savePositonForSize()
 {
     _savedPosition = true;
     _positionInBits = _main->positionInBits();
@@ -285,17 +285,17 @@ void DwgMergedStreamWriter::savePositonForSize()
     _main->writeRawLong(0);
 }
 
-void DwgMergedStreamWriter::setPositionInBits(long long posInBits) 
+void DwgMergedStreamWriter::setPositionInBits(long long posInBits)
 {
     throw std::runtime_error("Not implemented");
 }
 
-void DwgMergedStreamWriter::setPositionByFlag(long long pos) 
+void DwgMergedStreamWriter::setPositionByFlag(long long pos)
 {
     throw std::runtime_error("Not implemented");
 }
 
-void DwgMergedStreamWriter::writeShiftValue() 
+void DwgMergedStreamWriter::writeShiftValue()
 {
     throw std::runtime_error("Not implemented");
 }

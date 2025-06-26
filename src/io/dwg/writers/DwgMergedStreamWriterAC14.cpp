@@ -31,7 +31,7 @@ DwgmMergedStreamWriterAC14::DwgmMergedStreamWriterAC14(std::iostream *stream, ID
 {
 }
 
-void DwgmMergedStreamWriterAC14::writeSpearShift() 
+void DwgmMergedStreamWriterAC14::writeSpearShift()
 {
     int pos = (int) _main->positionInBits();
     if (_savedPosition)

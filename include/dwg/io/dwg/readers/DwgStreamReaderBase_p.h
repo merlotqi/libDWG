@@ -34,8 +34,8 @@ public:
     DwgStreamReaderBase(std::iostream *stream, bool resetPosition);
     ~DwgStreamReaderBase();
 
-    static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::iostream *stream, Encoding encoding = Encoding(),
-                                              bool resetPosition = false);
+    static IDwgStreamReader *GetStreamHandler(ACadVersion version, std::iostream *stream,
+                                              Encoding encoding = Encoding(), bool resetPosition = false);
 
     Encoding encoding() const override;
     void setEncoding(Encoding value) override;
@@ -112,6 +112,7 @@ protected:
     StreamWrapper _wrapper;
     unsigned char _lastByte = 0;
     int _bitShift = 0;
+    Encoding _encoding;
 };
 
 }// namespace dwg

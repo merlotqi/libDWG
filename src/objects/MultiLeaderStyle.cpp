@@ -20,16 +20,16 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/objects/MultiLeaderStyle.h>
-#include <dwg/CadDocument.h>
-#include <dwg/tables/TextStyle.h>
 #include <dwg/tables/BlockRecord.h>
 #include <dwg/tables/LineType.h>
-#include <dwg/tables/collections/TextStylesTable.h>
+#include <dwg/tables/TextStyle.h>
 #include <dwg/tables/collections/BlockRecordsTable.h>
 #include <dwg/tables/collections/LineTypesTable.h>
+#include <dwg/tables/collections/TextStylesTable.h>
 
 namespace dwg {
 
@@ -369,7 +369,7 @@ void MultiLeaderStyle::setUnknownFlag298(bool value)
     _unknownFlag298 = value;
 }
 
-void MultiLeaderStyle::assignDocument(CadDocument *doc) 
+void MultiLeaderStyle::assignDocument(CadDocument *doc)
 {
     NonGraphicalObject::assignDocument(doc);
 

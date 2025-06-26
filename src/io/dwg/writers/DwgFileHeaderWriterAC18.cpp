@@ -166,8 +166,8 @@ void DwgFileHeaderWriterAC18::craeteLocalSection(DwgSectionDescriptor descriptor
 }
 
 std::stringstream DwgFileHeaderWriterAC18::applyCompression(const std::vector<unsigned char> &buffer,
-                                                             int decompressedSize, unsigned long long offset,
-                                                             int totalSize, bool isCompressed)
+                                                            int decompressedSize, unsigned long long offset,
+                                                            int totalSize, bool isCompressed)
 {
     std::stringstream stream;
     StreamWrapper stream_wrapper(&stream);
@@ -237,7 +237,7 @@ void DwgFileHeaderWriterAC18::writeDescriptors()
         swriter->writeInt(1);
         //0x14	4	Compressed(1 = no, 2 = yes, normally 2)
         swriter->writeInt(descriptors.compressedCode());
-        //0x18	4	Section Id(starts at 0). The first section(empty section) is numbered 0, consecutive sections are numbered descending from(the number of sections – 1) down to 1.
+        //0x18	4	Section Id(starts at 0). The first section(empty section) is numbered 0, consecutive sections are numbered descending from(the number of sections - 1) down to 1.
         swriter->writeInt(descriptors.sectionId());
         //0x1C	4	Encrypted(0 = no, 1 = yes, 2 = unknown)
         swriter->writeInt(descriptors.encrypted());
@@ -436,7 +436,7 @@ void DwgFileHeaderWriterAC18::writeFileHeader(std::stringstream *stream)
     //0x64	4	Gap array size
     swriter.write<unsigned int>(_fileHeader->gapArraySize());
 
-    long position = swriter.tell();
+    long position = swriter.pos();
     swriter.write<unsigned int>(0u);
 
     unsigned int seed = swriter.seed();

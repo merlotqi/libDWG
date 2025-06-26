@@ -34,7 +34,7 @@ class LIBDWG_API EntityCollection : public IObservableCadCollection
 public:
     EntityCollection(CadObject *owner);
     ~EntityCollection();
-    
+
     std::vector<CadObject *> rawCadObjects() const override;
 
     CadObject *owner() const;

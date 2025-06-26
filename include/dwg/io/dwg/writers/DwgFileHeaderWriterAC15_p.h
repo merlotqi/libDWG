@@ -38,7 +38,8 @@ class DwgFileHeaderWriterAC15 : public DwgFileHeaderWriterBase
 
 public:
     DwgFileHeaderWriterAC15(std::fstream *stream, Encoding encoding, CadDocument *model);
-    void addSection(const std::string &name, std::iostream *stream, bool isCompressed, int decompsize = 0x7400) override;
+    void addSection(const std::string &name, std::iostream *stream, bool isCompressed,
+                    int decompsize = 0x7400) override;
     void writeFile() override;
 
 protected:

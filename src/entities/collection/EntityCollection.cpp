@@ -20,8 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/entities/Entity.h>
+#include <dwg/entities/collection/EntityCollection.h>
 
 namespace dwg {
 
@@ -32,7 +32,7 @@ EntityCollection::~EntityCollection() {}
 std::vector<CadObject *> EntityCollection::rawCadObjects() const
 {
     std::vector<CadObject *> objects;
-    for (auto&& ent : _entities)
+    for (auto &&ent: _entities)
     {
         objects.emplace_back(ent);
     }
@@ -59,7 +59,7 @@ Entity *EntityCollection::operator[](size_t index)
     return _entities.operator[](index);
 }
 
-void EntityCollection::add(Entity *entity) 
+void EntityCollection::add(Entity *entity)
 {
     assert(entity);
 
@@ -76,7 +76,7 @@ void EntityCollection::add(Entity *entity)
     OnAdd(entity);
 }
 
-void EntityCollection::add(const std::initializer_list<Entity *> &entities) 
+void EntityCollection::add(const std::initializer_list<Entity *> &entities)
 {
     for (auto &&entity: entities)
     {

@@ -38,8 +38,7 @@
 namespace dwg {
 
 DxfWriter::DxfWriter(const std::string &filename, CadDocument *document, bool binary)
-    : DxfWriter(new std::fstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document,
-                binary)
+    : DxfWriter(new std::fstream(filename, binary ? std::ios::out | std::ios::binary : std::ios::out), document, binary)
 {
 }
 

@@ -171,7 +171,7 @@ bool DwgStreamReaderBase::readBit()
         _bitShift = 1;
         return result;
     }
-    
+
     bool value = (_lastByte << _bitShift & 128) == 128;
 
     ++_bitShift;
@@ -191,22 +191,22 @@ unsigned char DwgStreamReaderBase::read2Bits()
     if (_bitShift == 0)
     {
         advanceByte();
-        value = (unsigned char)((unsigned int)_lastByte >> 6);
+        value = (unsigned char) ((unsigned int) _lastByte >> 6);
         _bitShift = 2;
     }
     else if (_bitShift == 7)
     {
-        unsigned char lastValue = (unsigned char)(_lastByte << 1 & 2);
+        unsigned char lastValue = (unsigned char) (_lastByte << 1 & 2);
         advanceByte();
-        value = (unsigned char)(lastValue | (unsigned int)(unsigned char)((unsigned int)_lastByte >> 7));
+        value = (unsigned char) (lastValue | (unsigned int) (unsigned char) ((unsigned int) _lastByte >> 7));
         _bitShift = 1;
     }
     else
     {
-        value = (unsigned char)(_lastByte >> 6 - _bitShift & 3);
+        value = (unsigned char) (_lastByte >> 6 - _bitShift & 3);
         ++_bitShift;
         ++_bitShift;
-        _bitShift &= 7
+        _bitShift &= 7;
     }
 
     return value;
@@ -215,41 +215,40 @@ unsigned char DwgStreamReaderBase::read2Bits()
 short DwgStreamReaderBase::readBitShort()
 {
     short value;
-    switch(read2Bits())
+    switch (read2Bits())
     {
         case 0:
-        {
-            //00 : A short (2 bytes) follows, little-endian order (LSB first)
-            value = _wrapper.readT<short, LittleEndianConverter>();
-            break;
-        }
-        case 1:
-        {
-            //01 : An unsigned char (1 byte) follows
-            if(_bitShift == 0)
             {
-                advanceByte();
-                value = _lastByte;
+                //00 : A short (2 bytes) follows, little-endian order (LSB first)
+                value = _wrapper.readT<short, LittleEndianConverter>();
                 break;
             }
-            value = applyShiftToLasByte();
-            break;
-        }
+        case 1:
+            {
+                //01 : An unsigned char (1 byte) follows
+                if (_bitShift == 0)
+                {
+                    advanceByte();
+                    value = _lastByte;
+                    break;
+                }
+                value = applyShiftToLasByte();
+                break;
+            }
         case 2:
-        {
-            //10 : 0
-            value = 0;
-            break;
-        }
+            {
+                //10 : 0
+                value = 0;
+                break;
+            }
         case 3:
-        {
-            //11 : 256
-            value = 256;
-            break;
-        }
+            {
+                //11 : 256
+                value = 256;
+                break;
+            }
         default:
             throw std::runtime_error("");
-
     }
     return value;
 }
@@ -418,7 +417,7 @@ void DwgStreamReaderBase::setPositionInBits(long long positon) {}
 
 void DwgStreamReaderBase::advanceByte() {}
 
-void DwgStreamReaderBase::advance(int offset) 
+void DwgStreamReaderBase::advance(int offset)
 {
     if (offset > 1)
         _wrapper.seek(offset - 1 + _wrapper.pos());
@@ -444,7 +443,7 @@ std::string DwgStreamReaderBase::readString(size_t length, Encoding encoding)
         return std::string();
 
     std::vector<unsigned char> numArray = readBytes(length);
-    return _encoding.toUtf8(reinterpret_cast<const char*>(numArray.data()));
+    return _encoding.toUtf8(reinterpret_cast<const char *>(numArray.data()));
 }
 
 void DwgStreamReaderBase::applyFlagToPosition(long long lastPos, long long &length, long long &strDataSize) {}

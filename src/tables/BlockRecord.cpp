@@ -20,6 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/blocks/Block.h>
@@ -27,7 +28,7 @@
 #include <dwg/entities/collection/EntityCollection.h>
 #include <dwg/objects/Layout.h>
 #include <dwg/tables/BlockRecord.h>
-#include <dwg/CadDocument.h>
+
 
 namespace dwg {
 
@@ -178,7 +179,7 @@ std::vector<Viewport *> BlockRecord::viewports() const
     return std::vector<Viewport *>();
 }
 
-void BlockRecord::assignDocument(CadDocument *doc) 
+void BlockRecord::assignDocument(CadDocument *doc)
 {
     TableEntry::assignDocument(doc);
     doc->registerCollection(_entities);

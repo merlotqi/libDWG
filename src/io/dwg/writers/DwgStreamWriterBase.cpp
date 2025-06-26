@@ -650,25 +650,25 @@ void DwgStreamWriterBase::savePositonForSize()
 
 void DwgStreamWriterBase::setPositionInBits(long long posInBits)
 {
-     long position = posInBits / 8;
-     _bitShift = (int) (posInBits % 8);
-     _wrapper.seek(position);
+    long position = posInBits / 8;
+    _bitShift = (int) (posInBits % 8);
+    _wrapper.seek(position);
 
-     if (_bitShift > 0)
-     {
-         int value = _wrapper.readByte();
-         if (value < 0)
-         {
-             throw std::runtime_error("End of stream");
-         }
-         _lastByte = (unsigned char) value;
-     }
-     else
-     {
-         _lastByte = 0;
-     }
+    if (_bitShift > 0)
+    {
+        int value = _wrapper.readByte();
+        if (value < 0)
+        {
+            throw std::runtime_error("End of stream");
+        }
+        _lastByte = (unsigned char) value;
+    }
+    else
+    {
+        _lastByte = 0;
+    }
 
-     _wrapper.seek(position);
+    _wrapper.seek(position);
 }
 
 void DwgStreamWriterBase::setPositionByFlag(long long pos)
@@ -695,14 +695,14 @@ void DwgStreamWriterBase::setPositionByFlag(long long pos)
 
 void DwgStreamWriterBase::writeShiftValue()
 {
-     if (_bitShift > 0)
-     {
-         long long position = _wrapper.pos();
-         int lastValue = _wrapper.readByte();
-         unsigned char currValue = (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
-         _wrapper.seek(position);
-         _wrapper.writeByte(currValue);
-     }
+    if (_bitShift > 0)
+    {
+        long long position = _wrapper.pos();
+        int lastValue = _wrapper.readByte();
+        unsigned char currValue = (unsigned char) (_lastByte | ((unsigned char) lastValue & (0b11111111 >> _bitShift)));
+        _wrapper.seek(position);
+        _wrapper.writeByte(currValue);
+    }
 }
 
 void DwgStreamWriterBase::resetShift()

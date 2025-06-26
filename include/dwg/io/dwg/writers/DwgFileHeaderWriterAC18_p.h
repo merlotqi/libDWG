@@ -38,7 +38,8 @@ public:
 
     int handleSectionOffset() const override;
     void writeFile() override;
-    void addSection(const std::string &name, std::iostream *stream, bool isCompressed, int decompsize = 0x7400) override;
+    void addSection(const std::string &name, std::iostream *stream, bool isCompressed,
+                    int decompsize = 0x7400) override;
 
 
 protected:
@@ -46,7 +47,7 @@ protected:
     virtual void craeteLocalSection(DwgSectionDescriptor descriptor, const std::vector<unsigned char> &buffer,
                                     int decompressedSize, unsigned long long offset, int totalSize, bool isCompressed);
     std::stringstream applyCompression(const std::vector<unsigned char> &buffer, int decompressedSize,
-                                        unsigned long long offset, int totalSize, bool isCompressed);
+                                       unsigned long long offset, int totalSize, bool isCompressed);
 
 private:
     void writeRecords();

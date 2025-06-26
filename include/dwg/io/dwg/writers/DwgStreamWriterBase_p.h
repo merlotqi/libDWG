@@ -24,6 +24,7 @@
 
 #include <dwg/ACadVersion.h>
 #include <dwg/io/dwg/writers/IDwgStreamWriter_p.h>
+#include <dwg/utils/StreamWrapper.h>
 
 namespace dwg {
 
@@ -35,6 +36,7 @@ protected:
     std::iostream *_stream;
     Encoding _encoding;
     long long _savedPositionInBits;
+    StreamWrapper _wrapper;
 
 public:
     static IDwgStreamWriter *GetStreamWriter(ACadVersion version, std::iostream *stream, Encoding encoding);
