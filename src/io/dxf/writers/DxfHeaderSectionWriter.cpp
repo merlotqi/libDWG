@@ -24,6 +24,10 @@
 #include <dwg/CadSystemVariables_p.h>
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/CadDocument.h>
+#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
+#include <dwg/attributes/CadSystemVariableAttribute_p.h>
 
 namespace dwg {
 
@@ -46,41 +50,41 @@ void DxfHeaderSectionWriter::writeSection()
     std::map<std::string, CadSystemVariableAttribute> mapAttr = CadSystemVariables::headerMap();
     for (auto it = mapAttr.begin(); it != mapAttr.end(); ++it)
     {
-        // bool contains = false;
-        // auto itFind = std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), it->first);
-        // if(itFind != _configuration.headerVariables().end())
-        //     contains = true;
-        // if(!_configuration.writeAllHeaderVariables() && !contains)
-        //     continue;
+        bool contains = false;
+        auto itFind = std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), it->first);
+        if(itFind != _configuration.headerVariables().end())
+            contains = true;
+        if(!_configuration.writeAllHeaderVariables() && !contains)
+            continue;
 
-        // if(it->second.referenceType() & DxfReferenceType::Ignored)
-        //     continue;
+        if(it->second.referenceType() & DxfReferenceType::Ignored)
+            continue;
 
-        // if(CadSystemVariables::value(it->first, header).isEmpty())
-        //     continue;
+        if(CadSystemVariables::value(it->first, _document->header()).isEmpty())
+            continue;
 
-        // _writer->write(DxfCode::CLShapeText, it->first);
+        _writer->write(DxfCode::CLShapeText, it->first);
 
-        // if(it->first == "$HANDSEED") //Not very elegant but by now...
-        // {
-        //     _writer->write(DxfCode::Handle, _document->header()->handleSeed());
-        //     continue;
-        // }
+        if(it->first == "$HANDSEED") //Not very elegant but by now...
+        {
+            _writer->write(DxfCode::Handle, _document->header()->handleSeed());
+            continue;
+        }
 
-        // if(it->first == "$CECOLOR")
-        // {
-        //     _writer->write(62, _document->header()->currentEntityColor().approxIndex());
-        //     continue;
-        // }
+        if(it->first == "$CECOLOR")
+        {
+            _writer->write(62, _document->header()->currentEntityColor().approxIndex());
+            continue;
+        }
 
-        // for(auto &&csv : it->second.dxfCodes())
-        // {
-        //     DwgVariant value = CadSystemVariables::value(it->first, csv, _document->header());
-        //     if(value.isEmpty())
-        //         continue;
+        for(auto &&csv : it->second.valueCodes())
+        {
+            DwgVariant value = CadSystemVariables::value(it->first, csv, _document->header());
+            if(value.isEmpty())
+                continue;
 
-        //     _writer->write((DxfCode)csv, value);
-        // }
+            _writer->write((DxfCode)csv, value);
+        }
     }
 }
 

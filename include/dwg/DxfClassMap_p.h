@@ -37,6 +37,8 @@ public:
 
     std::map<int, DxfProperty> dxfProperties() const;
 
+    bool dxfProperty(int code, DxfProperty &);
+
     static DxfClassMap create(const std::string &className);
 
 private:

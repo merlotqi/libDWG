@@ -20,27 +20,8 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
-#pragma once
-
-#include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
-#include <dwg/utils/Encoding.h>
-#include <fstream>
+#include <dwg/utils/DwgVariantHolder.h>
 
 namespace dwg {
-
-class DxfAsciiWriter : public DxfStreamWriterBase
-{
-public:
-    DxfAsciiWriter(std::fstream *stream, Encoding encoding);
-
-    void flush() override;
-    void close() override;
-    void writeDxfCode(int code) override;
-    void writeValue(int code, DwgVariant value) override;
-
-private:
-    std::fstream *_stream;
-    Encoding _encoding;
-};
 
 }// namespace dwg

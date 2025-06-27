@@ -39,7 +39,7 @@ public:
 
     static std::map<std::string, CadSystemVariableAttribute> headerMap();
 
-    static DwgVariant value(const std::string &, CadHeader *header);
+    static DwgVariant value(const std::string &, const DxfCode &, CadHeader *header);
 };
 
 }// namespace dwg

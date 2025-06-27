@@ -294,7 +294,7 @@ std::map<std::string, CadSystemVariableAttribute> CadSystemVariables::headerMap(
     return _map;
 }
 
-DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
+DwgVariant CadSystemVariables::value(const std::string &key, const DxfCode &, CadHeader *header)
 {
     assert(header);
     if (key == "$ANGBASE")

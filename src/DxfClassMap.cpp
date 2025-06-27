@@ -24,5 +24,34 @@
 
 namespace dwg {
 
+DxfClassMap::DxfClassMap() {}
+
+DxfClassMap::~DxfClassMap() {}
+
+std::string DxfClassMap::name() const 
+{
+    return _name;
+}
+
+std::map<int, DxfProperty> DxfClassMap::dxfProperties() const 
+{
+    return _dxfProperties;
+}
+
+bool DxfClassMap::dxfProperty(int code, DxfProperty &prop) 
+{
+    auto it = _dxfProperties.find(code);
+    if (it != _dxfProperties.end())
+    {
+        prop = it->second;
+        return true;
+    }
+    return false;
+}
+
+DxfClassMap *DxfClassMap::create(const std::string &className) 
+{
+    return nullptr;
+}
 
 }// namespace dwg

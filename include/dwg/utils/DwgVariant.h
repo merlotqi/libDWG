@@ -22,158 +22,209 @@
 
 #pragma once
 
-#include <dwg/Color.h>
-#include <dwg/Coordinate.h>
 #include <dwg/exports.h>
-#include <dwg/utils/DateTime.h>
 #include <string>
-#include <variant>
 #include <vector>
+#include <fmt/core.h>
 
 namespace dwg {
 
+class DwgVariantHolder;
 class LIBDWG_API DwgVariant
 {
 public:
-    enum VarType
-    {
-        None,
-        I8,
-        U8,
-        I16,
-        U16,
-        I32,
-        U32,
-        I64,
-        U64,
-        F32,
-        F64,
-        STRING,
-        COORD2D,
-        COORD3D,
-        BLOB,
-        DATETIME,
-        COLOR,
-    };
-
     DwgVariant();
 
-    VarType Type;
-
-    union
+    template<typename T>
+    DwgVariant(const T &val)
     {
-        char i8;
-        unsigned char u8;
-        short i16;
-        unsigned short u16;
-        int i32;
-        unsigned int u32;
-        long long i64;
-        unsigned long long u64;
-        float f32;
-        double f64;
-        std::string str;
-        XY xy;
-        XYZ xyz;
-        std::vector<unsigned char> blob;
-        DateTime dt;
-        Color rgb;
-    };
+        construct(val);
+    }
 
-    virtual ~DwgVariant();
-    DwgVariant(char v);
-    DwgVariant(unsigned char v);
-    DwgVariant(short v);
-    DwgVariant(unsigned short v);
-    DwgVariant(int v);
-    DwgVariant(unsigned int v);
-    DwgVariant(long long v);
-    DwgVariant(unsigned long long v);
-    DwgVariant(float v);
-    DwgVariant(double v);
-    DwgVariant(bool v);
-    DwgVariant(const char *v);
-    DwgVariant(const std::string &str);
-    DwgVariant(const XY &v);
-    DwgVariant(const XYZ &v);
-    DwgVariant(const std::vector<unsigned char> &blob);
-    DwgVariant(const DateTime &v);
-    DwgVariant(const Color &v);
+    DwgVariant(const DwgVariant &other);
+    ~DwgVariant();
 
-    DwgVariant(const DwgVariant &rhs);
-    DwgVariant(DwgVariant &&rhs) noexcept;
-    DwgVariant(VarType type);
+    void swap(DwgVariant &other);
 
+    template<typename T>
+    void convert(T &val) const
+    {
+        DwgVariantHolder *holder = content();
+        if (!holder)
+        {
+            throw std::runtime_error("");
+        }
+        holder->convert(val);
+    }
 
-    DwgVariant &operator=(const DwgVariant &rhs);
-    DwgVariant &operator=(char v);
-    DwgVariant &operator=(unsigned char v);
-    DwgVariant &operator=(short v);
-    DwgVariant &operator=(unsigned short v);
-    DwgVariant &operator=(int v);
-    DwgVariant &operator=(unsigned int v);
-    DwgVariant &operator=(long long v);
-    DwgVariant &operator=(unsigned long long v);
-    DwgVariant &operator=(float v);
-    DwgVariant &operator=(double v);
-    DwgVariant &operator=(bool v);
-    DwgVariant &operator=(const std::string &str);
-    DwgVariant &operator=(const XY &v);
-    DwgVariant &operator=(const XYZ &v);
-    DwgVariant &operator=(const DateTime &v);
-    DwgVariant &operator=(const Color &v);
-    DwgVariant &operator=(const std::vector<unsigned char> &blob);
-    DwgVariant &operator=(std::vector<unsigned char> &&blob) noexcept;
+    template<typename T>
+    T convert() const
+    {
+        DwgVariantHolder *holder = content();
+        if (!holder)
+        {
+            throw std::runtime_error("");
+        }
 
-    DwgVariant &operator=(DwgVariant &&v) noexcept;
+        if (typeid(T) == holder->type())
+            return extract<T>();
 
-    bool operator==(const DwgVariant &o) const;
-    bool operator!=(const DwgVariant &o) const;
+        T r;
+        holder->convert(r);
+        return r;
+    }
 
+    template<typename T>
+    operator T() const
+    {
+        DwgVariantHolder *holder = content();
+        if(!holder)
+            throw std::runtime_error("");
+        if(typeid(T) == holder->type())
+            return extract<T>();
+        
+        T r;
+        holder->convert(r);
+        return r;
+    }
+
+    template<typename T>
+    const T &extract() const
+    {
+        DwgVariantHolder *holder = content();
+        if (holder && holder->type() == typeid(T))
+        {
+            auto &&holderT = static_cast<DwgVariantHolderT<T> *>(holder);
+            return holderT->value();
+        }
+        if(!holder)
+            throw std::runtime_error("");
+        else
+            throw std::runtime_error(fmt::format("Can not convert {} to {}"), holder->type().name(), typeid(T).name());
+    }
+
+    template<typename T>
+    DwgVariant &operator=(const T &other)
+    {
+        clear();
+        construct(other);
+        return *this;
+    }
+
+    bool operator!() const;
+    
+    DwgVariant operator=(const DwgVariant &other);
+    
+    const DwgVariant operator+(const DwgVariant &other) const;
+    
+    template<typename T>
+    const DwgVariant operator+(const T &other) const
+    {
+        return convert<T>() + other;
+    }
+
+    DwgVariant &operator++();
+    const DwgVariant operator++(int);
+    DwgVariant &operator--();
+    const DwgVariant operator--(int);
+
+    template<typename T>
+    DwgVariant &operator+=(const T &other)
+    {
+        return *this = convert<T>() + other;
+    }
+
+    DwgVariant &operator+=(const DwgVariant &other);
+
+    template<typename T>
+    DwgVariant &operator-=(const T &other)
+    {
+        return *this = convert<T>() - other;
+    }
+
+    DwgVariant &operator-=(const DwgVariant &other); 
+
+    const DwgVariant operator*(const DwgVariant &other) const;
+    
+    template<typename T>
+    const DwgVariant operator*(const T &other) const
+    {
+        return convert<T>() * other;
+    }
+
+    template<typename T>
+    DwgVariant &operator*=(const T &other)
+    {
+        return *this = convert<T>() * other;
+    }
+
+    DwgVariant &operator*=(const DwgVariant &other);
+
+    const DwgVariant operator/(const DwgVariant &other) const;
+    
+    template<typename T>
+    const DwgVariant operator/(const T &other) const
+    {
+        return convert<T>() / other;
+    }
+
+    template<typename T>
+    DwgVariant &operator/=(const T &other)
+    {
+        return *this = convert<T>() / other;
+    }
+
+    DwgVariant &operator/=(const DwgVariant &other);
+
+	template <typename T>
+	bool operator == (const T& other) const
+    {
+        if (isEmpty()) return false;
+        return convert<T>() == other;
+    }
+    bool operator == (const DwgVariant& other) const;
+
+	template <typename T>
+	bool operator != (const T& other) const
+    {
+        if (isEmpty()) return true;
+        return convert<T>() != other;
+    }
+    bool operator != (const DwgVariant& other) const;
+
+    const std::type_info &type() const;
+    
+    void empty();
     void clear();
     bool isEmpty() const;
+    bool isInteger() const;
+    bool isSigned() const;
+    bool isNumeric() const;
+    bool isBoolean() const;
+    bool isString() const;
+    bool isDateTime() const;
+    bool isColor() const;
+    bool isCoordinate() const;
 
-    char asChar() const;
-    unsigned char asUChar() const;
-    short asShort() const;
-    unsigned short asUShort() const;
-    int asInt() const;
-    unsigned int asUInt() const;
-    long long asLongLong() const;
-    unsigned long long asULongLong() const;
-    float asFloat() const;
-    double asDouble() const;
-    bool asBool() const;
-    std::string asString() const;
-    int asBlob(unsigned char *bBlob) const;
-    XY asCoord2D() const;
-    XYZ asCoord3D() const;
-    const std::vector<unsigned char> &asBlob() const;
-    DateTime asDateTime() const;
-    Color asColor() const;
+    std::string toString() const;
 
-    operator char() const;
-    operator unsigned char() const;
-    operator short() const;
-    operator unsigned short() const;
-    operator int() const;
-    operator unsigned int() const;
-    operator long long() const;
-    operator unsigned long long() const;
-    operator bool() const;
-    operator float() const;
-    operator double() const;
-    operator const std::string &() const;
-    operator const XY &() const;
-    operator const XYZ &() const;
-    operator const std::vector<unsigned char> &() const;
-    operator const DateTime &() const;
-    operator const Color &() const;
+    static DwgVariant fromString(const std::strng &val);
+    static std::string toString(const DwgVariant &var);
 
-    void swap(DwgVariant &rhs);
+private:
+    template<typename T>
+    void construct(const T &v)
+    {
+        _holder.reset(new DwgVariantHolderT<T>(v));
+    }
 
-    static const DwgVariant &Empty();
+    DwgVariantHolder *content() const
+    {
+        return _holder.get();
+    }
+
+    std::unique_ptr<DwgVariantHolder> _holder;
+
 };
-
 
 }// namespace dwg

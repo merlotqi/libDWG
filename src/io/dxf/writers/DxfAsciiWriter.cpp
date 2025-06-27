@@ -21,17 +21,87 @@
  */
 
 #include <dwg/io/dxf/writers/DxfAsciiWriter_p.h>
+#include <fmt/core.h>
+#include <dwg/GroupCodeValue.h>
 
 namespace dwg {
 
-DxfAsciiWriter::DxfAsciiWriter(std::fstream *stream, Encoding encoding) {}
+DxfAsciiWriter::DxfAsciiWriter(std::fstream *stream, Encoding encoding): _stream(stream), _encoding(encoding) {}
 
-void DxfAsciiWriter::flush() {}
+void DxfAsciiWriter::flush()
+{
+    _stream->flush();
+}
 
-void DxfAsciiWriter::close() {}
+void DxfAsciiWriter::close()
+{
+    _stream->close();
+}
 
-void DxfAsciiWriter::writeDxfCode(int code) {}
+void DxfAsciiWriter::writeDxfCode(int code) 
+{
+    if (code < 10)
+    {
+        *_stream << fmt::format("  {}", code) << std::endl;
+    }
+    else if (code < 100)
+    {
+        *_stream << fmt::format(" {}", code) << std::endl;
+    }
+    else
+    {
+        *_stream << fmt::format("{}", code) << std::endl;
+    }
+}
 
-void DxfAsciiWriter::writeValue(int code, DwgVariant value) {}
+void DxfAsciiWriter::writeValue(int code, DwgVariant value) 
+{
+    GroupCodeValueType groupCode = GroupCodeValue::transformValue(code);
+
+    switch (groupCode)
+    {
+        case GroupCodeValueType::None:
+            break;
+        case GroupCodeValueType::String:
+        case GroupCodeValueType::Comment:
+        case GroupCodeValueType::ExtendedDataString:
+            *_stream << value.asString() << std::endl;
+            return;
+        case GroupCodeValueType::Point3D:
+        case GroupCodeValueType::Double:
+        case GroupCodeValueType::ExtendedDataDouble:
+            *_stream << fmt::format("{:.15g}", value.asDouble()) << std::endl;
+            return;
+        case GroupCodeValueType::Int32:
+        case GroupCodeValueType::ExtendedDataInt32:
+            *_stream << fmt::format("{}", value.asInt()) << std::endl;
+            return;
+        case GroupCodeValueType::Int64:
+            *_stream << fmt::format("{}", value.asLongLong()) << std::endl;
+            return;
+        case GroupCodeValueType::Handle:
+        case GroupCodeValueType::ObjectId:
+        case GroupCodeValueType::ExtendedDataHandle:
+            *_stream << fmt::format("{:X}", value.asULongLong()) << std::endl;
+            return;
+        case GroupCodeValueType::Bool:
+            *_stream << fmt::format("{}", value.asShort()) << std::endl;
+            return;
+        case GroupCodeValueType::Chunk:
+        case GroupCodeValueType::ExtendedDataChunk:
+            {
+                std::vector<unsigned char> arr = value.asBlob();
+                for (auto &&v: arr)
+                {
+                    std::string str = fmt::format("{:02X}", v);
+                    _stream->write(str.data(), str.size());
+                }
+                *_stream << std::endl;
+                return;
+            }
+    }
+
+    *_stream << value.asString();
+}
 
 }// namespace dwg

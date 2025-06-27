@@ -51,8 +51,8 @@ private:
 
 private:
     bool _binary = false;
-    IDxfStreamWriter *_writer;
-    CadObjectHolder *_objectHolder;
+    IDxfStreamWriter *_writer = nullptr;
+    CadObjectHolder *_objectHolder = nullptr;
 };
 
 }// namespace dwg

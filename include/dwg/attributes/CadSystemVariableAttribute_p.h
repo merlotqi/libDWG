@@ -32,7 +32,7 @@ namespace dwg {
 class CadSystemVariableAttribute
 {
     std::vector<DxfCode> _valueCodes;
-    DxfReferenceType _referenceType;
+    DxfReferenceTypes _referenceType;
     std::string _name;
     bool _isName = false;
 
@@ -43,11 +43,11 @@ public:
 
     CadSystemVariableAttribute(const std::string &variable, const std::vector<DxfCode> &codes);
 
-    CadSystemVariableAttribute(DxfReferenceType rf, const std::string &variable, const std::vector<int> &codes);
+    CadSystemVariableAttribute(DxfReferenceTypes rf, const std::string &variable, const std::vector<int> &codes);
 
     std::vector<DxfCode> valueCodes() const;
 
-    DxfReferenceType referenceType() const;
+    DxfReferenceTypes referenceType() const;
 
     std::string name() const;
 
