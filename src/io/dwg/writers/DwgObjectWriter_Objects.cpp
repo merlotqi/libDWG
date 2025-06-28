@@ -733,35 +733,35 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
             case GroupCodeValueType::Byte:
             case GroupCodeValueType::Bool:
                 {
-                    ms.writeByte(entry.value.asChar());
+                    ms.writeByte(entry.value.convert<char>());
                     break;
                 }
             case GroupCodeValueType::Int16:
             case GroupCodeValueType::ExtendedDataInt16:
                 {
-                    ms.write<short>(entry.value.asShort());
+                    ms.write<short>(entry.value.convert<short>());
                     break;
                 }
             case GroupCodeValueType::Int32:
             case GroupCodeValueType::ExtendedDataInt32:
                 {
-                    ms.write<int>(entry.value.asInt());
+                    ms.write<int>(entry.value.convert<int>());
                     break;
                 }
             case GroupCodeValueType::Int64:
                 {
-                    ms.write<long>(entry.value.asLongLong());
+                    ms.write<long>(entry.value.convert<long long>());
                     break;
                 }
             case GroupCodeValueType::Double:
             case GroupCodeValueType::ExtendedDataDouble:
                 {
-                    ms.write<double>(entry.value.asDouble());
+                    ms.write<double>(entry.value.convert<double>());
                     break;
                 }
             case GroupCodeValueType::Point3D:
                 {
-                    XYZ xyz = entry.value.asCoord3D();
+                    XYZ xyz = entry.value.convert<XYZ>();
                     ms.write<double>(xyz.X);
                     ms.write<double>(xyz.Y);
                     ms.write<double>(xyz.Z);
@@ -770,7 +770,7 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
             case GroupCodeValueType::Chunk:
             case GroupCodeValueType::ExtendedDataChunk:
                 {
-                    auto chunk = entry.value.asBlob();
+                    auto chunk = entry.value.convert<std::vector<unsigned char>>();
                     ms.write((unsigned char) chunk.size());
                     break;
                 }
@@ -778,7 +778,7 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
             case GroupCodeValueType::ExtendedDataString:
             case GroupCodeValueType::Handle:
                 {
-                    std::string text = entry.value.asString();
+                    std::string text = entry.value.convert<std::string>();
                     if (R2007Plus)
                     {
                         if (text.empty())
@@ -806,7 +806,7 @@ void DwgObjectWriter::writeXRecord(XRecord *xrecord)
             case GroupCodeValueType::ObjectId:
             case GroupCodeValueType::ExtendedDataHandle:
                 {
-                    unsigned long long u = entry.value.asULongLong();
+                    unsigned long long u = entry.value.convert<unsigned long long>();
                     ms.write<unsigned long long, LittleEndianConverter>(u);
                     break;
                 }

@@ -39,6 +39,10 @@ public:
 
     void setWriteAllHeaderVariables(bool value);
 
+    bool writeOptionalValues() const;
+
+    void setWriteOptionalValues(bool value);
+
     void addHeaderVariable(const std::string &name);
 
     bool removeHeaderVariable(const std::string &name);
@@ -47,6 +51,7 @@ public:
 
 private:
     bool _writeAllHeaderVariables;
+    bool _writeOptionalValues;
     std::set<std::string> _headerVariables;
 };
 

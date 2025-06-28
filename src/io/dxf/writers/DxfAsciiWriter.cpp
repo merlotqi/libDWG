@@ -65,32 +65,32 @@ void DxfAsciiWriter::writeValue(int code, DwgVariant value)
         case GroupCodeValueType::String:
         case GroupCodeValueType::Comment:
         case GroupCodeValueType::ExtendedDataString:
-            *_stream << value.asString() << std::endl;
+            *_stream << value.convert<std::string>() << std::endl;
             return;
         case GroupCodeValueType::Point3D:
         case GroupCodeValueType::Double:
         case GroupCodeValueType::ExtendedDataDouble:
-            *_stream << fmt::format("{:.15g}", value.asDouble()) << std::endl;
+            *_stream << fmt::format("{:.15g}", value.convert<double>()) << std::endl;
             return;
         case GroupCodeValueType::Int32:
         case GroupCodeValueType::ExtendedDataInt32:
-            *_stream << fmt::format("{}", value.asInt()) << std::endl;
+            *_stream << fmt::format("{}", value.convert<int>()) << std::endl;
             return;
         case GroupCodeValueType::Int64:
-            *_stream << fmt::format("{}", value.asLongLong()) << std::endl;
+            *_stream << fmt::format("{}", value.convert<long long>()) << std::endl;
             return;
         case GroupCodeValueType::Handle:
         case GroupCodeValueType::ObjectId:
         case GroupCodeValueType::ExtendedDataHandle:
-            *_stream << fmt::format("{:X}", value.asULongLong()) << std::endl;
+            *_stream << fmt::format("{:X}", value.convert<unsigned long long>()) << std::endl;
             return;
         case GroupCodeValueType::Bool:
-            *_stream << fmt::format("{}", value.asShort()) << std::endl;
+            *_stream << fmt::format("{}", value.convert<short>()) << std::endl;
             return;
         case GroupCodeValueType::Chunk:
         case GroupCodeValueType::ExtendedDataChunk:
             {
-                std::vector<unsigned char> arr = value.asBlob();
+                std::vector<unsigned char> arr = value.convert<std::vector<unsigned char>>();
                 for (auto &&v: arr)
                 {
                     std::string str = fmt::format("{:02X}", v);
@@ -101,7 +101,7 @@ void DxfAsciiWriter::writeValue(int code, DwgVariant value)
             }
     }
 
-    *_stream << value.asString();
+    *_stream << value.convert<std::string>();
 }
 
 }// namespace dwg

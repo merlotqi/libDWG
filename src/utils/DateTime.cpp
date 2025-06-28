@@ -940,6 +940,36 @@ std::string DateTime::toString(DateFormat fmt) const
     return std::string();
 }
 
+std::string DateTime::ToString(const DateTime &dt, const std::string &fmt)
+{
+    return std::string();
+}
+
+std::string DateTime::ToString(const DateTime &dt, DateFormat fmt)
+{
+    return std::string();
+}
+
+DateTime DateTime::FromString(const std::string &fmt, const std::string &str, int &timeZoneDifferential)
+{
+    return DateTime();
+}
+
+DateTime DateTime::FromString(DateFormat fmt, const std::string &str, int &timeZoneDifferential)
+{
+    return DateTime();
+}
+
+bool DateTime::FromString(const std::string &fmt, const std::string &str, DateTime &dt, int &timeZoneDifferential)
+{
+    return false;
+}
+
+bool DateTime::FromString(DateFormat fmt, const std::string &str, DateTime &dt, int &timeZoneDifferential)
+{
+    return false;
+}
+
 void DateTime::checkValid()
 {
     if (!isValid(_year, _month, _day, _hour, _minute, _second, _millisecond, _microsecond))

@@ -147,7 +147,7 @@ std::string DxfStreamReaderBase::toString() const
 void DxfStreamReaderBase::start()
 {
     _dxfcode = DxfCode::Invalid;
-    _value = DwgVariant::Empty();
+    _value = DwgVariant();
 }
 
 DwgVariant DxfStreamReaderBase::transformValue(GroupCodeValueType code)

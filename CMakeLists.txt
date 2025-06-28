@@ -3,8 +3,8 @@ project(libDWG LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(BUILD_TESTS "Build tests" OFF)
-option(BUILD_EXAMPLES "Build examples" OFF)
+option(BUILD_LIBDWG_TESTS "Build libdwg tests" OFF)
+option(BUILD_LIBDWG_EXAMPLES "Build libdwg examples" OFF)
 
 set(LIBDWG_VERSION_MAJOR 1)
 set(LIBDWG_VERSION_MINOR 0)
@@ -35,11 +35,11 @@ target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conver
 
 add_library(DWG::dwg ALIAS dwg)
 
-if(BUILD_EXAMPLES)
+if(BUILD_LIBDWG_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-if(BUILD_TESTS)
+if(BUILD_LIBDWG_TESTS)
     include(CTest)
     add_subdirectory(tests)
 endif()

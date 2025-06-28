@@ -59,9 +59,9 @@ void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
 
     writeDxfCode(code);
 
-    if (value.Type == DwgVariant::STRING)
+    if (value.isString())
     {
-        std::string s = value.asString();
+        std::string s = value.convert<std::string>();
         s = StringHelp::replace(s, "^", "^ ");
         s = StringHelp::replace(s, "\n", "^J");
         s = StringHelp::replace(s, "\r", "^M");

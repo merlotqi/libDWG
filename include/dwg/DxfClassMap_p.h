@@ -39,7 +39,7 @@ public:
 
     bool dxfProperty(int code, DxfProperty &);
 
-    static DxfClassMap create(const std::string &className);
+    static DxfClassMap *create(const std::string &className);
 
 private:
     DxfClassMap();

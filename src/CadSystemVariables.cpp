@@ -1289,6 +1289,12 @@ DwgVariant CadSystemVariables::value(const std::string &key, const DxfCode &, Ca
     {
         return header->xedit();
     }
+    return DwgVariant();
+}
+
+DwgVariant CadSystemVariables::value(const std::string &, CadHeader *header)
+{
+    return DwgVariant();
 }
 
 }// namespace dwg

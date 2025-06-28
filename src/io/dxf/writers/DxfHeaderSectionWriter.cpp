@@ -48,38 +48,40 @@ std::string DxfHeaderSectionWriter::sectionName() const
 void DxfHeaderSectionWriter::writeSection()
 {
     std::map<std::string, CadSystemVariableAttribute> mapAttr = CadSystemVariables::headerMap();
-    for (auto it = mapAttr.begin(); it != mapAttr.end(); ++it)
+    for (auto &&[key, value]: mapAttr)
     {
         bool contains = false;
-        auto itFind = std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), it->first);
+        auto filter = [key](const std::string &v) { return v == key; };
+        auto itFind =
+                std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), filter);
         if(itFind != _configuration.headerVariables().end())
             contains = true;
         if(!_configuration.writeAllHeaderVariables() && !contains)
             continue;
 
-        if(it->second.referenceType() & DxfReferenceType::Ignored)
+        if(value.referenceType() & DxfReferenceType::Ignored)
             continue;
 
-        if(CadSystemVariables::value(it->first, _document->header()).isEmpty())
+        if(CadSystemVariables::value(key, _document->header()).isEmpty())
             continue;
 
-        _writer->write(DxfCode::CLShapeText, it->first);
+        _writer->write(DxfCode::CLShapeText, key);
 
-        if(it->first == "$HANDSEED") //Not very elegant but by now...
+        if(key == "$HANDSEED") //Not very elegant but by now...
         {
             _writer->write(DxfCode::Handle, _document->header()->handleSeed());
             continue;
         }
 
-        if(it->first == "$CECOLOR")
+        if(key == "$CECOLOR")
         {
             _writer->write(62, _document->header()->currentEntityColor().approxIndex());
             continue;
         }
 
-        for(auto &&csv : it->second.valueCodes())
+        for(auto &&csv : value.valueCodes())
         {
-            DwgVariant value = CadSystemVariables::value(it->first, csv, _document->header());
+            DwgVariant value = CadSystemVariables::value(key, csv, _document->header());
             if(value.isEmpty())
                 continue;
 
