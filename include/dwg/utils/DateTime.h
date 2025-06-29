@@ -287,10 +287,8 @@ public:
     static std::string ToString(const DateTime &dt, const std::string &fmt);
     static std::string ToString(const DateTime &dt, DateFormat fmt);
 
-    static DateTime FromString(const std::string &fmt, const std::string &str,
-                           int &timeZoneDifferential);
-    static DateTime FromString(DateFormat fmt, const std::string &str,
-                           int &timeZoneDifferential);
+    static DateTime FromString(const std::string &fmt, const std::string &str, int &timeZoneDifferential);
+    static DateTime FromString(DateFormat fmt, const std::string &str, int &timeZoneDifferential);
     static bool FromString(const std::string &fmt, const std::string &str, DateTime &dt, int &timeZoneDifferential);
     static bool FromString(DateFormat fmt, const std::string &str, DateTime &dt, int &timeZoneDifferential);
 

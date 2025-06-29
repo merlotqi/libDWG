@@ -20,12 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/DxfClassMap_p.h>
 #include <dwg/GroupCodeValue.h>
 #include <dwg/IHandledCadObject.h>
 #include <dwg/INamedCadObject.h>
 #include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
 #include <dwg/utils/EndianConverter.h>
-#include <dwg/DxfClassMap_p.h>
 #include <dwg/utils/StringHelp.h>
 
 namespace dwg {
@@ -39,12 +39,12 @@ bool DxfStreamWriterBase::writeOptional() const
     return _writeOptional;
 }
 
-void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap) 
+void DxfStreamWriterBase::write(DxfCode code, DwgVariant value, DxfClassMap *clsmap)
 {
     write((int) code, value, clsmap);
 }
 
-void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap) 
+void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
 {
     if (value.isEmpty())
     {
@@ -54,7 +54,6 @@ void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
     DxfProperty prop;
     if (clsmap && clsmap->dxfProperty(code, prop))
     {
-       
     }
 
     writeDxfCode(code);
@@ -74,7 +73,7 @@ void DxfStreamWriterBase::write(int code, DwgVariant value, DxfClassMap *clsmap)
     }
 }
 
-void DxfStreamWriterBase::writeTrueColor(int code, const Color &color, DxfClassMap *clsmap) 
+void DxfStreamWriterBase::writeTrueColor(int code, const Color &color, DxfClassMap *clsmap)
 {
     unsigned char arr[4] = {0};
     arr[0] = (unsigned char) color.blue();

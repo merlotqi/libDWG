@@ -33,6 +33,7 @@
 #include <vector>
 #undef min
 #undef max
+#include <dwg/utils/Encoding.h>
 #include <limits>
 #include <stdexcept>
 
@@ -446,7 +447,7 @@ public:
     {
         if constexpr (std::is_enum_v<T>)
         {
-            val = NumberFormatter::format(std::underlying_type_t<T>(_val));
+            val = fmt::format(std::underlying_type_t<T>(_val));
         }
         else
         {
@@ -458,8 +459,8 @@ public:
     {
         if constexpr (std::is_enum_v<T>)
         {
-            std::string str = NumberFormatter::format(std::underlying_type_t<T>(_val));
-            Poco::UnicodeConverter::convert(str, val);
+            std::string str = fmt::format(std::underlying_type_t<T>(_val));
+            val = Encoding::Utf8().toUnicode(str);
         }
         else
         {

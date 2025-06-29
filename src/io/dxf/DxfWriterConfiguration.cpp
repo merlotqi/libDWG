@@ -20,13 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadSystemVariables_p.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dxf/DxfWriterConfiguration.h>
 #include <dwg/utils/StringHelp.h>
-#include <vector>
-#include <stdexcept>
 #include <fmt/format.h>
-#include <dwg/CadSystemVariables_p.h>
+#include <stdexcept>
+#include <vector>
 
 namespace dwg {
 
@@ -66,7 +66,7 @@ void DxfWriterConfiguration::setWriteOptionalValues(bool value)
     _writeOptionalValues = value;
 }
 
-void DxfWriterConfiguration::addHeaderVariable(const std::string &name) 
+void DxfWriterConfiguration::addHeaderVariable(const std::string &name)
 {
     auto _map = CadSystemVariables::headerMap();
     if (_map.find(name) == _map.end())

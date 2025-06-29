@@ -492,7 +492,7 @@ int Timezone::utcOffset()
     DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
     return -tzInfo.Bias * 60;
 #else
-    tzinfo.timeZone();
+    return tzinfo.timeZone();
 #endif
 }
 

@@ -21,13 +21,13 @@
  */
 
 #include <algorithm>
+#include <dwg/CadDocument.h>
 #include <dwg/CadSystemVariables_p.h>
 #include <dwg/DxfFileToken_p.h>
-#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
-#include <dwg/header/CadHeader.h>
-#include <dwg/CadDocument.h>
-#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 #include <dwg/attributes/CadSystemVariableAttribute_p.h>
+#include <dwg/header/CadHeader.h>
+#include <dwg/io/dxf/writers/DxfHeaderSectionWriter_p.h>
+#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 
 namespace dwg {
 
@@ -54,38 +54,38 @@ void DxfHeaderSectionWriter::writeSection()
         auto filter = [key](const std::string &v) { return v == key; };
         auto itFind =
                 std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), filter);
-        if(itFind != _configuration.headerVariables().end())
+        if (itFind != _configuration.headerVariables().end())
             contains = true;
-        if(!_configuration.writeAllHeaderVariables() && !contains)
+        if (!_configuration.writeAllHeaderVariables() && !contains)
             continue;
 
-        if(value.referenceType() & DxfReferenceType::Ignored)
+        if (value.referenceType() & DxfReferenceType::Ignored)
             continue;
 
-        if(CadSystemVariables::value(key, _document->header()).isEmpty())
+        if (CadSystemVariables::value(key, _document->header()).isEmpty())
             continue;
 
         _writer->write(DxfCode::CLShapeText, key);
 
-        if(key == "$HANDSEED") //Not very elegant but by now...
+        if (key == "$HANDSEED")//Not very elegant but by now...
         {
             _writer->write(DxfCode::Handle, _document->header()->handleSeed());
             continue;
         }
 
-        if(key == "$CECOLOR")
+        if (key == "$CECOLOR")
         {
             _writer->write(62, _document->header()->currentEntityColor().approxIndex());
             continue;
         }
 
-        for(auto &&csv : value.valueCodes())
+        for (auto &&csv: value.valueCodes())
         {
             DwgVariant value = CadSystemVariables::value(key, csv, _document->header());
-            if(value.isEmpty())
+            if (value.isEmpty())
                 continue;
 
-            _writer->write((DxfCode)csv, value);
+            _writer->write((DxfCode) csv, value);
         }
     }
 }

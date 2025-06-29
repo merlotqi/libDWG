@@ -20,13 +20,13 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/GroupCodeValue.h>
 #include <dwg/io/dxf/writers/DxfAsciiWriter_p.h>
 #include <fmt/core.h>
-#include <dwg/GroupCodeValue.h>
 
 namespace dwg {
 
-DxfAsciiWriter::DxfAsciiWriter(std::fstream *stream, Encoding encoding): _stream(stream), _encoding(encoding) {}
+DxfAsciiWriter::DxfAsciiWriter(std::fstream *stream, Encoding encoding) : _stream(stream), _encoding(encoding) {}
 
 void DxfAsciiWriter::flush()
 {
@@ -38,7 +38,7 @@ void DxfAsciiWriter::close()
     _stream->close();
 }
 
-void DxfAsciiWriter::writeDxfCode(int code) 
+void DxfAsciiWriter::writeDxfCode(int code)
 {
     if (code < 10)
     {
@@ -54,7 +54,7 @@ void DxfAsciiWriter::writeDxfCode(int code)
     }
 }
 
-void DxfAsciiWriter::writeValue(int code, DwgVariant value) 
+void DxfAsciiWriter::writeValue(int code, DwgVariant value)
 {
     GroupCodeValueType groupCode = GroupCodeValue::transformValue(code);
 

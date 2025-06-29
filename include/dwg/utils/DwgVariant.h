@@ -103,7 +103,7 @@ public:
             throw std::runtime_error("Can not extract empty value.");
         else
             throw std::runtime_error(fmt::format("Can not convert {} to {}.", std::string(holder->type().name()),
-                                                std::string(typeid(T).name())));
+                                                 std::string(typeid(T).name())));
     }
 
     template<typename T>
@@ -250,18 +250,6 @@ public:
         return convert<bool>() && other;
     }
     bool operator&&(const DwgVariant &other) const;
-
-    template<typename T>
-    DwgVariant &operator[](const T &n)
-    {
-        return getAt(n);
-    }
-
-    template<typename T>
-    const DwgVariant &operator[](const T &n) const
-    {
-        return const_cast<DwgVariant *>(this)->getAt(n);
-    }
 
     const std::type_info &type() const;
     std::string typeName() const;

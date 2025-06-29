@@ -21,10 +21,10 @@
  */
 
 #include <dwg/CadDocument.h>
+#include <dwg/DxfFileToken_p.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dxf/writers/DxfSectionWriterBase_p.h>
 #include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
-#include <dwg/DxfFileToken_p.h>
 
 namespace dwg {
 
@@ -36,7 +36,7 @@ DxfSectionWriterBase::DxfSectionWriterBase(IDxfStreamWriter *writer, CadDocument
 
 DxfSectionWriterBase::~DxfSectionWriterBase() {}
 
-void DxfSectionWriterBase::write() 
+void DxfSectionWriterBase::write()
 {
     _writer->write(DxfCode::Start, DxfFileToken::BeginSection);
     _writer->write(DxfCode::SymbolTableName, sectionName());

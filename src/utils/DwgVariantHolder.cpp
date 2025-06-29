@@ -1502,10 +1502,7 @@ const char &DwgVariantHolderT<std::string>::operator[](std::string::size_type n)
 
 /* --------------------- DwgVariantHolderT<std::wstring> -------------------- */
 
-DwgVariantHolderT<std::wstring>::DwgVariantHolderT(const char *pVal)
-    : _val(Encoding::Utf8().toUnicode(pVal))
-{
-}
+DwgVariantHolderT<std::wstring>::DwgVariantHolderT(const char *pVal) : _val(Encoding::Utf8().toUnicode(pVal)) {}
 
 DwgVariantHolderT<std::wstring>::DwgVariantHolderT(const std::wstring &val) : _val(val) {}
 
@@ -1651,11 +1648,7 @@ std::string DwgVariantHolderT<std::wstring>::toStdString() const
 
 /* -------------- DwgVariantHolderT<std::vector<unsigned char>> ------------- */
 
-DwgVariantHolderT<std::vector<unsigned char>>::DwgVariantHolderT(
-        const std::vector<unsigned char> &val)
-    : _val(val)
-{
-}
+DwgVariantHolderT<std::vector<unsigned char>>::DwgVariantHolderT(const std::vector<unsigned char> &val) : _val(val) {}
 
 const std::type_info &DwgVariantHolderT<std::vector<unsigned char>>::type() const
 {
@@ -1791,7 +1784,7 @@ void DwgVariantHolderT<Timestamp>::convert(unsigned long long &val) const
 void DwgVariantHolderT<Timestamp>::convert(std::string &val) const
 {
     val = DateTime::ToString(_val, DateTime::DateFormat::ISO8601);
-    }
+}
 
 void DwgVariantHolderT<Timestamp>::convert(DateTime &val) const
 {
@@ -1857,11 +1850,20 @@ void DwgVariantHolderT<Color>::convert(DateTime &val) const {}
 
 void DwgVariantHolderT<Color>::convert(Timestamp &ts) const {}
 
-DwgVariantHolder *DwgVariantHolderT<Color>::clone() const {return nullptr;}
+DwgVariantHolder *DwgVariantHolderT<Color>::clone() const
+{
+    return nullptr;
+}
 
-const Color &DwgVariantHolderT<Color>::value() const {return _val;}
+const Color &DwgVariantHolderT<Color>::value() const
+{
+    return _val;
+}
 
-bool DwgVariantHolderT<Color>::isColor() const {return true;}
+bool DwgVariantHolderT<Color>::isColor() const
+{
+    return true;
+}
 
 
 /* -------------------------- DwgVariantHolderT<XY> ------------------------- */
@@ -1903,11 +1905,20 @@ void DwgVariantHolderT<XY>::convert(DateTime &val) const {}
 
 void DwgVariantHolderT<XY>::convert(Timestamp &ts) const {}
 
-DwgVariantHolder *DwgVariantHolderT<XY>::clone() const {return nullptr;}
+DwgVariantHolder *DwgVariantHolderT<XY>::clone() const
+{
+    return nullptr;
+}
 
-const XY &DwgVariantHolderT<XY>::value() const {return _val;}
+const XY &DwgVariantHolderT<XY>::value() const
+{
+    return _val;
+}
 
-bool DwgVariantHolderT<XY>::isCoordinate() const  {return true;}
+bool DwgVariantHolderT<XY>::isCoordinate() const
+{
+    return true;
+}
 
 
 /* ------------------------- DwgVariantHolderT<XYZ> ------------------------- */
@@ -1949,10 +1960,19 @@ void DwgVariantHolderT<XYZ>::convert(DateTime &val) const {}
 
 void DwgVariantHolderT<XYZ>::convert(Timestamp &ts) const {}
 
-DwgVariantHolder *DwgVariantHolderT<XYZ>::clone() const {return nullptr;}
+DwgVariantHolder *DwgVariantHolderT<XYZ>::clone() const
+{
+    return nullptr;
+}
 
-const XYZ &DwgVariantHolderT<XYZ>::value() const {return _val;}
+const XYZ &DwgVariantHolderT<XYZ>::value() const
+{
+    return _val;
+}
 
-bool DwgVariantHolderT<XYZ>::isCoordinate() const {return true;}
+bool DwgVariantHolderT<XYZ>::isCoordinate() const
+{
+    return true;
+}
 
 }// namespace dwg
