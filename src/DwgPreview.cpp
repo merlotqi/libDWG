@@ -21,6 +21,8 @@
  */
 
 #include <dwg/DwgPreview.h>
+#include <fstream>
+#include <fmt/format.h>
 
 namespace dwg {
 
@@ -49,6 +51,26 @@ std::vector<unsigned char> DwgPreview::rawImage() const
     return _rawImage;
 }
 
-void DwgPreview::save(const std::string &path) {}
+void DwgPreview::save(const std::string &path) 
+{
+    bool writeHeader = false;
+    if (_code == PreviewType::Bmp || _code == PreviewType::Wmf || _code == PreviewType::Png)
+    {
+        writeHeader = false;
+    }
+    else
+    {
+        throw std::runtime_error(fmt::format("Preview with code {} not supported.", (int)_code));
+    }
+
+    std::ofstream ofs(path);
+    if (writeHeader)
+    {
+        ofs.wirte(reinterpret_cast<const char *>(_rawHeader.data()), _rawHeader.size());
+    }
+    ofs.wirte(reinterpret_cast<const char *>(_rawImage.data()), _rawImage.size());
+    ofs.flush();
+    ofs.close();
+}
 
 }// namespace dwg
