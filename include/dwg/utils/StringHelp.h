@@ -30,17 +30,28 @@ namespace dwg {
 
 class LIBDWG_API StringHelp
 {
+    // parse string to number
 public:
-    static std::string replace(const std::string &str, const std::string &from, const std::string &to);
+    static char parse8(const std::string &);
+    static bool tryParse8(const std::string &, char &);
 
-    static int parse(const std::string &);
-    static bool tryParse(const std::string &, int &value);
+    static short parse16(const std::string &);
+    static bool tryParse16(const std::string &, short &);
 
-    static unsigned int parseUnsigned(const std::string &);
-    static bool tryParseUnsigned(const std::string &, unsigned int &value);
+    static int parse32(const std::string &);
+    static bool tryParse32(const std::string &, int &value);
 
     static long long parse64(const std::string &);
     static bool tryParse64(const std::string &, long long &value);
+
+    static unsigned char parseUnsigned8(const std::string &);
+    static bool tryParseUnsigned8(const std::string &, unsigned char &);
+
+    static unsigned short parseUnsigned16(const std::string &);
+    static bool tryParseUnsigned16(const std::string &, unsigned short &);
+
+    static unsigned int parseUnsigned32(const std::string &);
+    static bool tryParseUnsigned32(const std::string &, unsigned int &value);
 
     static unsigned long long parseUnsigned64(const std::string &);
     static bool tryParseUnsigned64(const std::string &, unsigned long long &value);
@@ -53,6 +64,15 @@ public:
 
     static bool parseBool(const std::string &);
     static bool tryParseBool(const std::string &, bool &value);
+
+    // number to string
+public:
+    // No auxiliary functions are provided, and the fmt library is used for implementation
+    // https://github.com/fmtlib/fmt.git
+
+    // string algorithms or check
+public:
+    static std::string replace(const std::string &str, const std::string &from, const std::string &to);
 
     static std::string tolower(const std::string &);
     static std::string toupper(const std::string &);

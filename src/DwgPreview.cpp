@@ -23,6 +23,7 @@
 #include <dwg/DwgPreview.h>
 #include <fstream>
 #include <fmt/format.h>
+#include <magic_enum/magic_enum.hpp>
 
 namespace dwg {
 
@@ -60,15 +61,15 @@ void DwgPreview::save(const std::string &path)
     }
     else
     {
-        throw std::runtime_error(fmt::format("Preview with code {} not supported.", (int)_code));
+        throw std::runtime_error(fmt::format("Preview with code {} not supported.", magic_enum::enum_name(_code)));
     }
 
     std::ofstream ofs(path);
     if (writeHeader)
     {
-        ofs.wirte(reinterpret_cast<const char *>(_rawHeader.data()), _rawHeader.size());
+        ofs.write(reinterpret_cast<const char *>(_rawHeader.data()), _rawHeader.size());
     }
-    ofs.wirte(reinterpret_cast<const char *>(_rawImage.data()), _rawImage.size());
+    ofs.write(reinterpret_cast<const char *>(_rawImage.data()), _rawImage.size());
     ofs.flush();
     ofs.close();
 }

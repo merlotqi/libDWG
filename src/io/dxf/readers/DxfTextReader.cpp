@@ -21,6 +21,7 @@
  */
 
 #include <dwg/io/dxf/readers/DxfTextReader_p.h>
+#include <dwg/utils/StringHelp.h>
 
 namespace dwg {
 
@@ -49,6 +50,13 @@ std::string DxfTextReader::readStringLine()
 
 DxfCode DxfTextReader::readCode()
 {
+    std::string line = readStringLine();
+    int value;
+    if (StringHelp::tryParse(line, value))
+    {
+        return DxfCode(value);
+    }
+    _position++;
     return DxfCode::Invalid;
 }
 

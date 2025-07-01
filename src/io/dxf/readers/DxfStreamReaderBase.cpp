@@ -152,7 +152,39 @@ void DxfStreamReaderBase::start()
 
 DwgVariant DxfStreamReaderBase::transformValue(GroupCodeValueType code)
 {
-    return DwgVariant();
+    switch (code)
+    {
+        case GroupCodeValueType::String:
+        case GroupCodeValueType::Comment:
+        case GroupCodeValueType::ExtendedDataString:
+            return readStringLine();
+        case GroupCodeValueType::Point3D:
+        case GroupCodeValueType::Double:
+        case GroupCodeValueType::ExtendedDataDouble:
+            return lineAsDouble();
+        case GroupCodeValueType::Byte:
+        case GroupCodeValueType::Int16:
+        case GroupCodeValueType::ExtendedDataInt16:
+            return lineAsShort();
+        case GroupCodeValueType::Int32:
+        case GroupCodeValueType::ExtendedDataInt32:
+            return lineAsInt();
+        case GroupCodeValueType::Int64:
+            return lineAsLong();
+        case GroupCodeValueType::Handle:
+        case GroupCodeValueType::ObjectId:
+        case GroupCodeValueType::ExtendedDataHandle:
+            return lineAsHandle();
+        case GroupCodeValueType::Bool:
+            return lineAsBool();
+        case GroupCodeValueType::Chunk:
+        case GroupCodeValueType::ExtendedDataChunk:
+            return lineAsBinaryChunk();
+        case GroupCodeValueType::None:
+        default:
+            throw std::runtime_error(
+                    fmt::format("Invalid dxf code with value {code}, at line {line}.", (int) code, position()));
+    }   
 }
 
 void DxfStreamReaderBase::setDxfCode(DxfCode) {}
