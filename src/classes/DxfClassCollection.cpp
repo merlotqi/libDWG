@@ -99,7 +99,7 @@ void DxfClassCollection::UpdateDxfClasses(CadDocument *doc)
     doc->classes()->addOrUpdate(new DxfClass(
             "AcDbImpNonPersistentObjectsCollection", (short) (500 + doc->classes()->count()), (ACadVersion) 0,
             "NPOCOLLECTION", 499, 0,
-            ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed | ProxyFlag::DisablesProxyWarningDialog,
+            ProxyFlags() | ProxyFlag::EraseAllowed | ProxyFlag::CloningAllowed | ProxyFlag::DisablesProxyWarningDialog,
             false));
 
     //AcDbLayerIndex

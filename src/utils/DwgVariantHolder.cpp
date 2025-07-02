@@ -1371,19 +1371,19 @@ const std::type_info &DwgVariantHolderT<std::string>::type() const
 
 void DwgVariantHolderT<std::string>::convert(char &val) const
 {
-    const int v = StringHelp::parse(_val);
+    const int v = StringHelp::parse32(_val);
     convertToSmaller(v, val);
 }
 
 void DwgVariantHolderT<std::string>::convert(short &val) const
 {
-    const int v = StringHelp::parse(_val);
+    const int v = StringHelp::parse32(_val);
     convertToSmaller(v, val);
 }
 
 void DwgVariantHolderT<std::string>::convert(int &val) const
 {
-    val = StringHelp::parse(_val);
+    val = StringHelp::parse32(_val);
 }
 
 void DwgVariantHolderT<std::string>::convert(long long &val) const
@@ -1393,19 +1393,19 @@ void DwgVariantHolderT<std::string>::convert(long long &val) const
 
 void DwgVariantHolderT<std::string>::convert(unsigned char &val) const
 {
-    const unsigned int v = StringHelp::parseUnsigned(_val);
+    const unsigned int v = StringHelp::parseUnsigned32(_val);
     convertToSmallerUnsigned(v, val);
 }
 
 void DwgVariantHolderT<std::string>::convert(unsigned short &val) const
 {
-    const unsigned int v = StringHelp::parseUnsigned(_val);
+    const unsigned int v = StringHelp::parseUnsigned32(_val);
     convertToSmallerUnsigned(v, val);
 }
 
 void DwgVariantHolderT<std::string>::convert(unsigned int &val) const
 {
-    val = StringHelp::parseUnsigned(_val);
+    val = StringHelp::parseUnsigned32(_val);
 }
 
 void DwgVariantHolderT<std::string>::convert(unsigned long long &val) const
@@ -1513,19 +1513,19 @@ const std::type_info &DwgVariantHolderT<std::wstring>::type() const
 
 void DwgVariantHolderT<std::wstring>::convert(char &val) const
 {
-    const int v = StringHelp::parse(toStdString());
+    const int v = StringHelp::parse32(toStdString());
     convertToSmaller(v, val);
 }
 
 void DwgVariantHolderT<std::wstring>::convert(short &val) const
 {
-    const int v = StringHelp::parse(toStdString());
+    const int v = StringHelp::parse32(toStdString());
     convertToSmaller(v, val);
 }
 
 void DwgVariantHolderT<std::wstring>::convert(int &val) const
 {
-    val = StringHelp::parse(toStdString());
+    val = StringHelp::parse32(toStdString());
 }
 
 void DwgVariantHolderT<std::wstring>::convert(long long &val) const
@@ -1535,19 +1535,19 @@ void DwgVariantHolderT<std::wstring>::convert(long long &val) const
 
 void DwgVariantHolderT<std::wstring>::convert(unsigned char &val) const
 {
-    const unsigned int v = StringHelp::parseUnsigned(toStdString());
+    const unsigned int v = StringHelp::parseUnsigned32(toStdString());
     convertToSmallerUnsigned(v, val);
 }
 
 void DwgVariantHolderT<std::wstring>::convert(unsigned short &val) const
 {
-    const unsigned int v = StringHelp::parseUnsigned(toStdString());
+    const unsigned int v = StringHelp::parseUnsigned32(toStdString());
     convertToSmallerUnsigned(v, val);
 }
 
 void DwgVariantHolderT<std::wstring>::convert(unsigned int &val) const
 {
-    val = StringHelp::parseUnsigned(toStdString());
+    val = StringHelp::parseUnsigned32(toStdString());
 }
 
 void DwgVariantHolderT<std::wstring>::convert(unsigned long long &val) const

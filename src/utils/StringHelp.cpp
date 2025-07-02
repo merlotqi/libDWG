@@ -231,31 +231,44 @@ std::string StringHelp::replace(const std::string &str, const std::string &from,
     return result;
 }
 
-
-int StringHelp::parse(const std::string &str)
+char StringHelp::parse8(const std::string &str)
 {
-    int result;
-    if (tryParse(str, result))
+    char result;
+    if (tryParse8(str, result))
         return result;
     else
         throw std::runtime_error(fmt::format("{} is not a valid integer", str));
 }
 
-bool StringHelp::tryParse(const std::string &str, int &value)
+bool StringHelp::tryParse8(const std::string &str, char &value)
 {
     return strToInt(str.c_str(), value, 10U);
 }
 
-unsigned int StringHelp::parseUnsigned(const std::string &str)
+short StringHelp::parse16(const std::string &str)
 {
-    unsigned int result;
-    if (tryParseUnsigned(str, result))
+    short result;
+    if (tryParse16(str, result))
         return result;
     else
-        throw std::runtime_error(fmt::format("{} is not a valid unsigned integer", str));
+        throw std::runtime_error(fmt::format("{} is not a valid integer", str));
 }
 
-bool StringHelp::tryParseUnsigned(const std::string &str, unsigned int &value)
+bool StringHelp::tryParse16(const std::string &str, short &value)
+{
+    return strToInt(str.c_str(), value, 10U);
+}
+
+int StringHelp::parse32(const std::string &str)
+{
+    int result;
+    if (tryParse32(str, result))
+        return result;
+    else
+        throw std::runtime_error(fmt::format("{} is not a valid integer", str));
+}
+
+bool StringHelp::tryParse32(const std::string &str, int &value)
 {
     return strToInt(str.c_str(), value, 10U);
 }
@@ -270,6 +283,48 @@ long long StringHelp::parse64(const std::string &str)
 }
 
 bool StringHelp::tryParse64(const std::string &str, long long &value)
+{
+    return strToInt(str.c_str(), value, 10U);
+}
+
+unsigned char StringHelp::parseUnsigned8(const std::string &str) 
+{
+    unsigned char result;
+    if (tryParseUnsigned8(str, result))
+        return result;
+    else
+        throw std::runtime_error(fmt::format("{} is not a valid unsigned integer", str));
+}
+
+bool StringHelp::tryParseUnsigned8(const std::string&, unsigned char&)
+{
+    return false;
+}
+
+unsigned short StringHelp::parseUnsigned16(const std::string &str) 
+{
+    unsigned short result;
+    if (tryParseUnsigned16(str, result))
+        return result;
+    else
+        throw std::runtime_error(fmt::format("{} is not a valid unsigned integer", str));
+}
+
+bool StringHelp::tryParseUnsigned16(const std::string&, unsigned short&)
+{
+    return false;
+}
+
+unsigned int StringHelp::parseUnsigned32(const std::string &str)
+{
+    unsigned int result;
+    if (tryParseUnsigned32(str, result))
+        return result;
+    else
+        throw std::runtime_error(fmt::format("{} is not a valid unsigned integer", str));
+}
+
+bool StringHelp::tryParseUnsigned32(const std::string &str, unsigned int &value)
 {
     return strToInt(str.c_str(), value, 10U);
 }
@@ -331,7 +386,7 @@ bool StringHelp::parseBool(const std::string &str)
 bool StringHelp::tryParseBool(const std::string &str, bool &value)
 {
     int n;
-    if (tryParse(str, n))
+    if (tryParse32(str, n))
     {
         value = (n != 0);
         return true;

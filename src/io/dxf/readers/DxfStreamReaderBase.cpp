@@ -50,72 +50,110 @@ int DxfStreamReaderBase::code() const
 
 DwgVariant DxfStreamReaderBase::value() const
 {
-    return DwgVariant();
+    return _value;
 }
 
 size_t DxfStreamReaderBase::position() const
 {
-    return 0;
+    return _position;
 }
 
 std::string DxfStreamReaderBase::valueRaw() const
 {
-    return std::string();
+    return _valueRaw;
 }
 
 std::string DxfStreamReaderBase::valueAsString() const
 {
-    return std::string();
+    if (_value.isEmpty())
+        return std::string();
+
+    std::string str = _value.convert<std::string>();
+    str = StringHelp::replace(str, "^J", "\n");
+    str = StringHelp::replace(str, "^M", "\r");
+    str = StringHelp::replace(str, "^I", "\t");
+    str = StringHelp::replace(str, "^ ", "^");
+    return str;
 }
 
 bool DxfStreamReaderBase::valueAsBool() const
 {
-    return false;
+    if (_value.isEmpty())
+        return false;
+
+    return (_value.convert<unsigned char>() > 0) ? true : false;
 }
 
 short DxfStreamReaderBase::valueAsShort() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0;
+
+    return _value.convert<short>();
 }
 
 unsigned short DxfStreamReaderBase::valueAsUShort() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0;
+
+    return _value.convert<unsigned short>();
 }
 
 int DxfStreamReaderBase::valueAsInt() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0;
+
+    return _value.convert<int>();
 }
 
 unsigned int DxfStreamReaderBase::valueAsUInt() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0;
+
+    return _value.convert<unsigned int>();
 }
 
 long long DxfStreamReaderBase::valueAsLongLong() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0LL;
+
+    return _value.convert<long long>();
 }
 
 unsigned long long DxfStreamReaderBase::valueAsHandle() const
 {
-    return 0;
+    if (_value.isEmpty())
+        return 0ULL;
+
+    return _value.convert<unsigned long long>();
 }
 
 double DxfStreamReaderBase::valueAsDouble() const
 {
-    return 0.0;
+    if (_value.isEmpty())
+        return 0.0;
+
+    return _value.convert<double>();
 }
 
 double DxfStreamReaderBase::valueAsAngle() const
 {
-    return 0.0;
+    if (_value.isEmpty())
+        return 0.0;
+
+    return _value.convert<double>();
 }
 
 std::vector<unsigned char> DxfStreamReaderBase::valueAsBinaryChunk() const
 {
-    return std::vector<unsigned char>();
+    if (_value.isEmpty())
+        return std::vector<unsigned char>();
+
+    return _value.convert<std::vector<unsigned char>>();
 }
 
 void DxfStreamReaderBase::readNext()
@@ -141,7 +179,7 @@ void DxfStreamReaderBase::expectedCode(int code) {}
 
 std::string DxfStreamReaderBase::toString() const
 {
-    return std::string();
+    return fmt::format("{} | {}", code(), valueRaw());
 }
 
 void DxfStreamReaderBase::start()

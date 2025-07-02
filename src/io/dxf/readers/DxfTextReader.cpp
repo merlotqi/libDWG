@@ -52,7 +52,7 @@ DxfCode DxfTextReader::readCode()
 {
     std::string line = readStringLine();
     int value;
-    if (StringHelp::tryParse(line, value))
+    if (StringHelp::tryParse32(line, value))
     {
         return DxfCode(value);
     }
@@ -62,37 +62,91 @@ DxfCode DxfTextReader::readCode()
 
 bool DxfTextReader::lineAsBool()
 {
+    std::string str = readStringLine();
+    unsigned char value;
+    if (StringHelp::tryParseUnsigned8(str, value))
+    {
+        return value > 0;
+    }
     return false;
 }
 
 double DxfTextReader::lineAsDouble()
 {
+    std::string str = readStringLine();
+    double value;
+    if (StringHelp::tryParseFloat(str, value))
+    {
+        return value;
+    }
     return 0.0;
 }
 
 short DxfTextReader::lineAsShort()
 {
+    std::string str = readStringLine();
+    short value;
+    if (StringHelp::tryParse16(str, value))
+    {
+        return value;
+    }
     return 0;
 }
 
 int DxfTextReader::lineAsInt()
 {
+    std::string str = readStringLine();
+    int value;
+    if (StringHelp::tryParse32(str, value))
+    {
+        return value;
+    }
     return 0;
 }
 
 long long DxfTextReader::lineAsLong()
 {
+    std::string str = readStringLine();
+    long long value;
+    if (StringHelp::tryParse64(str, value))
+    {
+        return value;
+    }
     return 0LL;
 }
 
 unsigned long long DxfTextReader::lineAsHandle()
 {
+    std::string str = readStringLine();
+    unsigned long long value;
+    if (StringHelp::tryParseUnsigned64(str, value))
+    {
+        return value;
+    }
     return 0ULL;
 }
 
 std::vector<unsigned char> DxfTextReader::lineAsBinaryChunk()
 {
-    return std::vector<unsigned char>();
+    std::string str = readStringLine();
+
+    std::vector<unsigned char> bytes(str.length(), 0);
+    for (int i = 0; i < str.length(); ++i)
+    {
+        //Create a byte value
+        std::string hex = fmt::format("{}{}", str[i], str[++i]);
+        unsigned char value;
+        if (StringHelp::tryParseUnsigned8(hex, value))
+        {
+            bytes[i] = value;
+        }
+        else
+        {
+            return std::vector<unsigned char>();
+        }
+    }
+
+    return bytes;
 }
 
 }// namespace dwg
