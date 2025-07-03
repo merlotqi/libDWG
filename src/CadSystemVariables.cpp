@@ -28,261 +28,256 @@
 namespace dwg {
 
 static std::vector<CadSystemVariableAttribute> _headerVariables = {
-        {"$ANGBASE", {50}},
-        {"$ANGDIR", {70}},
-        {"$AUNITS", {70}},
-        {"$AUPREC", {70}},
-        {"$DIMLDRBLK", {1}},
-        {"$DIMASO", {70}},
-        {"$ATTMODE", {70}},
-        {"$BLIPMODE", {70}},
-        {"$CAMERADISPLAY", {290}},
-        {"$CAMERAHEIGHT", {40}},
-        {"$CHAMFERD", {40}},
-        {"$CHAMFERA", {40}},
-        {"$CHAMFERB", {40}},
-        {"$CHAMFERC", {40}},
-        {"$DWGCODEPAGE", {3}},
-        {"$TDCREATE", {40}},
-        {"$PELLIPSE", {70}},
-        {"$CECOLOR", {62}},
-        {"$CELTSCALE", {40}},
-        {"$CELWEIGHT", {370}},
-        {"$CEPSNTYPE", {380}},
-        {"$CLAYER", true, {8}},
-        {"$CELTYPE", true, {6}},
-        {"$CMLJUST", {70}},
-        {"$CMLSCALE", {40}},
-        {"$CMLSTYLE", true, {2}},
-        {"$DGNFRAME", {280}},
-        {"$DIMAPOST", {1}},
-        {"$DIMALTD", {70}},
-        {"$DIMALT", {70}},
-        {"$DIMALTU", {70}},
-        {"$DIMALTRND", {40}},
-        {"$DIMALTF", {40}},
-        {"$DIMALTTD", {70}},
-        {"$DIMALTTZ", {70}},
-        {"$DIMALTZ", {70}},
-        {"$DIMALTMZF", {40}},
-        {"$DIMALTMZS", {6}},
-        {"$DIMADEC", {70}},
-        {"$DIMAUNIT", {70}},
-        {"$DIMAZIN", {70}},
-        {"$DIMARCSYM", {70}},
-        {"$DIMASZ", {40}},
-        {"$DIMASSOC", {280}},
-        {"$DIMBLK", {1}},
-        {"$DIMBLK1", {1}},
-        {"$DIMBLK2", {1}},
-        {"$DIMCEN", {40}},
-        {"$DIMUPT", {70}},
-        {"$DIMDEC", {70}},
-        {"$DIMDSEP", {70}},
-        {"$DIMATFIT", {70}},
-        {"$DIMCLRE", {70}},
-        {"$DIMEXE", {40}},
-        {"$DIMEXO", {40}},
-        {"$DIMFIT", {70}},
-        {"$DIMFXL", {40}},
-        {"$DIMFRAC", {70}},
-        {"$DIMTOL", {70}},
-        {"$DIMFXLON", {70}},
-        {"$DIMJOGANG", {40}},
-        {"$DIMLIM", {70}},
-        {"$DIMLFAC", {40}},
-        {"$DIMLUNIT", {70}},
-        {"$DIMCLRD", {70}},
-        {"$DIMDLE", {40}},
-        {"$DIMGAP", {40}},
-        {"$DIMDLI", {40}},
-        {"$DIMLTYPE", {6}},
-        {"$DIMLWD", {70}},
-        {"$DIMTM", {40}},
-        {"$DIMMZF", {40}},
-        {"$DIMMZS", {6}},
-        {"$DIMTP", {40}},
-        {"$DIMPOST", {1}},
-        {"$DIMRND", {40}},
-        {"$DIMSCALE", {40}},
-        {"$DIMSAH", {70}},
-        {"$DIMSTYLE", true, {2}},
-        {"$DIMSD1", {70}},
-        {"$DIMSE1", {70}},
-        {"$DIMSOXD", {70}},
-        {"$DIMSD2", {70}},
-        {"$DIMSE2", {70}},
-        {"$DIMLTEX1", {6}},
-        {"$DIMLTEX2", {6}},
-        {DxfReferenceType::Ignored, "$DIMTFILLCLR", {62}},
-        {"$DIMTFILL", {70}},
-        {"$DIMCLRT", {70}},
-        {"$DIMTXTDIRECTION", {70}},
-        {"$DIMTXT", {40}},
-        {"$DIMJUST", {70}},
-        {"$DIMTIX", {70}},
-        {"$DIMTIH", {70}},
-        {"$DIMTMOVE", {70}},
-        {"$DIMTOFL", {70}},
-        {"$DIMTOH", {70}},
-        {"$DIMTXSTY", true, {7}},
-        {"$DIMTAD", {70}},
-        {"$DIMTVP", {40}},
-        {"$DIMTSZ", {40}},
-        {"$DIMTOLJ", {70}},
-        {"$DIMTDEC", {70}},
-        {"$DIMTFAC", {40}},
-        {"$DIMTZIN", {70}},
-        {"$DIMUNIT", {70}},
-        {"$DIMZIN", {70}},
-        {"$LIGHTGLYPHDISPLAY", {280}},
-        {"$LWDISPLAY", {290}},
-        {"$DISPSILH", {70}},
-        {"$LOFTANG1", {40}},
-        {"$LOFTANG2", {40}},
-        {"$LOFTMAG1", {40}},
-        {"$LOFTMAG2", {40}},
-        {"$3DDWFPREC", {40}},
-        {"$DWFFRAME", {280}},
-        {"$ELEVATION", {40}},
-        {"$ENDCAPS", {280}},
-        {"$SORTENTS", {280}},
-        {"$EXTNAMES", {290}},
-        {"$DIMLWE", {70}},
-        {"$XCLIPFRAME", {280}},
-        {"$FACETRES", {40}},
-        {"$FILLETRAD", {40}},
-        {"$FILLMODE", {70}},
-        {"$FINGERPRINTGUID", {2}},
-        {"$HALOGAP", {280}},
-        {"$HANDSEED", {5}},
-        {"$HIDETEXT", {280}},
-        {"$HYPERLINKBASE", {1}},
-        {"$INDEXCTL", {280}},
-        {"$INSUNITS", {70}},
-        {"$INTERFERECOLOR", {62}},
-        {"$JOINSTYLE", {280}},
-        {DxfReferenceType::Ignored, "$LASTSAVEDBY", {3}},
-        {"$LATITUDE", {40}},
-        {"$LENSLENGTH", {40}},
-        {"$LIMCHECK", {70}},
-        {"$LUNITS", {70}},
-        {"$LUPREC", {70}},
-        {"$LTSCALE", {40}},
-        {"$LOFTNORMALS", {280}},
-        {"$LONGITUDE", {40}},
-        {DxfReferenceType::Ignored, "$ACADMAINTVER", {70}},
-        {"$MAXACTVP", {70}},
-        {"$MEASUREMENT", {70}},
-        {"$MENU", {1}},
-        {"$MIRRTEXT", {70}},
-        {"$EXTMAX", {10, 20, 30}},
-        {"$EXTMIN", {10, 20, 30}},
-        {"$INSBASE", {10, 20, 30}},
-        {"$LIMMAX", {10, 20}},
-        {"$LIMMIN", {10, 20}},
-        {"$UCSORG", {10, 20, 30}},
-        {"$UCSORGBACK", {10, 20, 30}},
-        {"$UCSORGBOTTOM", {10, 20, 30}},
-        {"$UCSORGFRONT", {10, 20, 30}},
-        {"$UCSORGLEFT", {10, 20, 30}},
-        {"$UCSORGRIGHT", {10, 20, 30}},
-        {"$UCSORGTOP", {10, 20, 30}},
-        {"$UCSXDIR", {10, 20, 30}},
-        {"$UCSYDIR", {10, 20, 30}},
-        {"$NORTHDIRECTION", {40}},
-        {"$SPLINESEGS", {70}},
-        {"$OSMODE", {70}},
-        {"$ORTHOMODE", {70}},
-        {"$PUCSBASE", true, {2}},
-        {"$PELEVATION", {40}},
-        {"$PEXTMAX", {10, 20, 30}},
-        {"$PEXTMIN", {10, 20, 30}},
-        {"$PINSBASE", {10, 20, 30}},
-        {"$PLIMCHECK", {70}},
-        {"$PLIMMAX", {10, 20}},
-        {"$PLIMMIN", {10, 20}},
-        {"$PSLTSCALE", {70}},
-        {"$PUCSNAME", true, {2}},
-        {"$PUCSORGBACK", {10, 20, 30}},
-        {"$PUCSORGBOTTOM", {10, 20, 30}},
-        {"$PUCSORGFRONT", {10, 20, 30}},
-        {"$PUCSORGLEFT", {10, 20, 30}},
-        {"$PUCSORGRIGHT", {10, 20, 30}},
-        {"$PUCSORGTOP", {10, 20, 30}},
-        {"$PUCSORG", {10, 20, 30}},
-        {"$PUCSXDIR", {10, 20, 30}},
-        {"$PUCSYDIR", {10, 20, 30}},
-        {"$PSTYLEMODE", {290}},
-        {"$PDMODE", {70}},
-        {"$PDSIZE", {40}},
-        {"$PLINEGEN", {70}},
-        {"$PLINEWID", {40}},
-        {"$PROJECTNAME", {1}},
-        {"$PROXYGRAPHICS", {70}},
-        {"$QTEXTMODE", {70}},
-        {"$REGENMODE", {70}},
-        {DxfReferenceType::Ignored, "$REQUIREDVERSIONS", {70}},
-        {"$VISRETAIN", {70}},
-        {"$SHADEDIF", {70}},
-        {"$SHADEDGE", {70}},
-        {"$CSHADOW", {280}},
-        {"$SHADOWPLANELOCATION", {40}},
-        {"$TILEMODE", {70}},
-        {"$SHOWHIST", {280}},
-        {"$SPLFRAME", {70}},
-        {"$SKETCHINC", {40}},
-        {"$SKPOLY", {70}},
-        {"$LOFTPARAM", {70}},
-        {"$SOLIDHIST", {280}},
-        {"$TREEDEPTH", {70}},
-        {"$SPLINETYPE", {70}},
-        {"$STEPSIZE", {40}},
-        {"$STEPSPERSEC", {40}},
-        {"$STYLESHEET", {1}},
-        {"$SURFU", {70}},
-        {"$SURFV", {70}},
-        {"$SURFTAB1", {70}},
-        {"$SURFTAB2", {70}},
-        {"$SURFTYPE", {70}},
-        {"$PSOLHEIGHT", {40}},
-        {"$PSOLWIDTH", {40}},
-        {"$TEXTSIZE", {40}},
-        {"$TEXTSTYLE", true, {7}},
-        {"$THICKNESS", {40}},
-        {"$TIMEZONE", {70}},
-        {"$TDINDWG", {40}},
-        {"$TRACEWID", {40}},
-        {"$UCSBASE", true, {2}},
-        {"$UCSNAME", true, {2}},
-        {"$UNITMODE", {70}},
-        {"$TDUCREATE", {40}},
-        {"$TDUUPDATE", {40}},
-        {"$TDUPDATE", {40}},
-        {"$DIMSHO", {70}},
-        {"$USERR1", {40}},
-        {"$USERR2", {40}},
-        {"$USERR3", {40}},
-        {"$USERR4", {40}},
-        {"$USERR5", {40}},
-        {"$TDUSRTIMER", {40}},
-        {"$USERI1", {70}},
-        {"$USERI2", {70}},
-        {"$USERI3", {70}},
-        {"$USERI4", {70}},
-        {"$USERI5", {70}},
-        {"$USRTIMER", {70}},
-        {"$VERSIONGUID", {2}},
-        {"$ACADVER", {DxfCode::Text}},
-        {"$PSVPSCALE", {40}},
-        {"$WORLDVIEW", {70}},
-        {"$XEDIT", {290}},
+        {CadSystemVariables::ANGBASE, {50}},
+        {CadSystemVariables::ANGDIR, {70}},
+        {CadSystemVariables::AUNITS, {70}},
+        {CadSystemVariables::AUPREC, {70}},
+        {CadSystemVariables::DIMLDRBLK, {1}},
+        {CadSystemVariables::DIMASO, {70}},
+        {CadSystemVariables::ATTMODE, {70}},
+        {CadSystemVariables::BLIPMODE, {70}},
+        {CadSystemVariables::CAMERADISPLAY, {290}},
+        {CadSystemVariables::CAMERAHEIGHT, {40}},
+        {CadSystemVariables::CHAMFERD, {40}},
+        {CadSystemVariables::CHAMFERA, {40}},
+        {CadSystemVariables::CHAMFERB, {40}},
+        {CadSystemVariables::CHAMFERC, {40}},
+        {CadSystemVariables::DWGCODEPAGE, {3}},
+        {CadSystemVariables::TDCREATE, {40}},
+        {CadSystemVariables::PELLIPSE, {70}},
+        {CadSystemVariables::CECOLOR, {62}},
+        {CadSystemVariables::CELTSCALE, {40}},
+        {CadSystemVariables::CELWEIGHT, {370}},
+        {CadSystemVariables::CEPSNTYPE, {380}},
+        {CadSystemVariables::CLAYER, true, {8}},
+        {CadSystemVariables::CELTYPE, true, {6}},
+        {CadSystemVariables::CMLJUST, {70}},
+        {CadSystemVariables::CMLSCALE, {40}},
+        {CadSystemVariables::CMLSTYLE, true, {2}},
+        {CadSystemVariables::DGNFRAME, {280}},
+        {CadSystemVariables::DIMAPOST, {1}},
+        {CadSystemVariables::DIMALTD, {70}},
+        {CadSystemVariables::DIMALT, {70}},
+        {CadSystemVariables::DIMALTU, {70}},
+        {CadSystemVariables::DIMALTRND, {40}},
+        {CadSystemVariables::DIMALTF, {40}},
+        {CadSystemVariables::DIMALTTD, {70}},
+        {CadSystemVariables::DIMALTTZ, {70}},
+        {CadSystemVariables::DIMALTZ, {70}},
+        {CadSystemVariables::DIMALTMZF, {40}},
+        {CadSystemVariables::DIMALTMZS, {6}},
+        {CadSystemVariables::DIMADEC, {70}},
+        {CadSystemVariables::DIMAUNIT, {70}},
+        {CadSystemVariables::DIMAZIN, {70}},
+        {CadSystemVariables::DIMARCSYM, {70}},
+        {CadSystemVariables::DIMASZ, {40}},
+        {CadSystemVariables::DIMASSOC, {280}},
+        {CadSystemVariables::DIMBLK, {1}},
+        {CadSystemVariables::DIMBLK1, {1}},
+        {CadSystemVariables::DIMBLK2, {1}},
+        {CadSystemVariables::DIMCEN, {40}},
+        {CadSystemVariables::DIMUPT, {70}},
+        {CadSystemVariables::DIMDEC, {70}},
+        {CadSystemVariables::DIMDSEP, {70}},
+        {CadSystemVariables::DIMATFIT, {70}},
+        {CadSystemVariables::DIMCLRE, {70}},
+        {CadSystemVariables::DIMEXE, {40}},
+        {CadSystemVariables::DIMEXO, {40}},
+        {CadSystemVariables::DIMFIT, {70}},
+        {CadSystemVariables::DIMFXL, {40}},
+        {CadSystemVariables::DIMFRAC, {70}},
+        {CadSystemVariables::DIMTOL, {70}},
+        {CadSystemVariables::DIMFXLON, {70}},
+        {CadSystemVariables::DIMJOGANG, {40}},
+        {CadSystemVariables::DIMLIM, {70}},
+        {CadSystemVariables::DIMLFAC, {40}},
+        {CadSystemVariables::DIMLUNIT, {70}},
+        {CadSystemVariables::DIMCLRD, {70}},
+        {CadSystemVariables::DIMDLE, {40}},
+        {CadSystemVariables::DIMGAP, {40}},
+        {CadSystemVariables::DIMDLI, {40}},
+        {CadSystemVariables::DIMLTYPE, {6}},
+        {CadSystemVariables::DIMLWD, {70}},
+        {CadSystemVariables::DIMTM, {40}},
+        {CadSystemVariables::DIMMZF, {40}},
+        {CadSystemVariables::DIMMZS, {6}},
+        {CadSystemVariables::DIMTP, {40}},
+        {CadSystemVariables::DIMPOST, {1}},
+        {CadSystemVariables::DIMRND, {40}},
+        {CadSystemVariables::DIMSCALE, {40}},
+        {CadSystemVariables::DIMSAH, {70}},
+        {CadSystemVariables::DIMSTYLE, true, {2}},
+        {CadSystemVariables::DIMSD1, {70}},
+        {CadSystemVariables::DIMSE1, {70}},
+        {CadSystemVariables::DIMSOXD, {70}},
+        {CadSystemVariables::DIMSD2, {70}},
+        {CadSystemVariables::DIMSE2, {70}},
+        {CadSystemVariables::DIMLTEX1, {6}},
+        {CadSystemVariables::DIMLTEX2, {6}},
+        {DxfReferenceType::Ignored, CadSystemVariables::DIMTFILLCLR, {62}},
+        {CadSystemVariables::DIMTFILL, {70}},
+        {CadSystemVariables::DIMCLRT, {70}},
+        {CadSystemVariables::DIMTXTDIRECTION, {70}},
+        {CadSystemVariables::DIMTXT, {40}},
+        {CadSystemVariables::DIMJUST, {70}},
+        {CadSystemVariables::DIMTIX, {70}},
+        {CadSystemVariables::DIMTIH, {70}},
+        {CadSystemVariables::DIMTMOVE, {70}},
+        {CadSystemVariables::DIMTOFL, {70}},
+        {CadSystemVariables::DIMTOH, {70}},
+        {CadSystemVariables::DIMTXSTY, true, {7}},
+        {CadSystemVariables::DIMTAD, {70}},
+        {CadSystemVariables::DIMTVP, {40}},
+        {CadSystemVariables::DIMTSZ, {40}},
+        {CadSystemVariables::DIMTOLJ, {70}},
+        {CadSystemVariables::DIMTDEC, {70}},
+        {CadSystemVariables::DIMTFAC, {40}},
+        {CadSystemVariables::DIMTZIN, {70}},
+        {CadSystemVariables::DIMUNIT, {70}},
+        {CadSystemVariables::DIMZIN, {70}},
+        {CadSystemVariables::LIGHTGLYPHDISPLAY, {280}},
+        {CadSystemVariables::LWDISPLAY, {290}},
+        {CadSystemVariables::DISPSILH, {70}},
+        {CadSystemVariables::LOFTANG1, {40}},
+        {CadSystemVariables::LOFTANG2, {40}},
+        {CadSystemVariables::LOFTMAG1, {40}},
+        {CadSystemVariables::LOFTMAG2, {40}},
+        {CadSystemVariables::_3DDWFPREC, {40}},
+        {CadSystemVariables::DWFFRAME, {280}},
+        {CadSystemVariables::ELEVATION, {40}},
+        {CadSystemVariables::ENDCAPS, {280}},
+        {CadSystemVariables::SORTENTS, {280}},
+        {CadSystemVariables::EXTNAMES, {290}},
+        {CadSystemVariables::DIMLWE, {70}},
+        {CadSystemVariables::XCLIPFRAME, {280}},
+        {CadSystemVariables::FACETRES, {40}},
+        {CadSystemVariables::FILLETRAD, {40}},
+        {CadSystemVariables::FILLMODE, {70}},
+        {CadSystemVariables::FINGERPRINTGUID, {2}},
+        {CadSystemVariables::HALOGAP, {280}},
+        {CadSystemVariables::HANDSEED, {5}},
+        {CadSystemVariables::HIDETEXT, {280}},
+        {CadSystemVariables::HYPERLINKBASE, {1}},
+        {CadSystemVariables::INDEXCTL, {280}},
+        {CadSystemVariables::INSUNITS, {70}},
+        {CadSystemVariables::INTERFERECOLOR, {62}},
+        {CadSystemVariables::JOINSTYLE, {280}},
+        {DxfReferenceType::Ignored, CadSystemVariables::LASTSAVEDBY, {3}},
+        {CadSystemVariables::LATITUDE, {40}},
+        {CadSystemVariables::LENSLENGTH, {40}},
+        {CadSystemVariables::LIMCHECK, {70}},
+        {CadSystemVariables::LUNITS, {70}},
+        {CadSystemVariables::LUPREC, {70}},
+        {CadSystemVariables::LTSCALE, {40}},
+        {CadSystemVariables::LOFTNORMALS, {280}},
+        {CadSystemVariables::LONGITUDE, {40}},
+        {DxfReferenceType::Ignored, CadSystemVariables::ACADMAINTVER, {70}},
+        {CadSystemVariables::MAXACTVP, {70}},
+        {CadSystemVariables::MEASUREMENT, {70}},
+        {CadSystemVariables::MENU, {1}},
+        {CadSystemVariables::MIRRTEXT, {70}},
+        {CadSystemVariables::EXTMAX, {10, 20, 30}},
+        {CadSystemVariables::EXTMIN, {10, 20, 30}},
+        {CadSystemVariables::INSBASE, {10, 20, 30}},
+        {CadSystemVariables::LIMMAX, {10, 20}},
+        {CadSystemVariables::LIMMIN, {10, 20}},
+        {CadSystemVariables::UCSORG, {10, 20, 30}},
+        {CadSystemVariables::UCSORGBACK, {10, 20, 30}},
+        {CadSystemVariables::UCSORGBOTTOM, {10, 20, 30}},
+        {CadSystemVariables::UCSORGFRONT, {10, 20, 30}},
+        {CadSystemVariables::UCSORGLEFT, {10, 20, 30}},
+        {CadSystemVariables::UCSORGRIGHT, {10, 20, 30}},
+        {CadSystemVariables::UCSORGTOP, {10, 20, 30}},
+        {CadSystemVariables::UCSXDIR, {10, 20, 30}},
+        {CadSystemVariables::UCSYDIR, {10, 20, 30}},
+        {CadSystemVariables::NORTHDIRECTION, {40}},
+        {CadSystemVariables::SPLINESEGS, {70}},
+        {CadSystemVariables::OSMODE, {70}},
+        {CadSystemVariables::ORTHOMODE, {70}},
+        {CadSystemVariables::PUCSBASE, true, {2}},
+        {CadSystemVariables::PELEVATION, {40}},
+        {CadSystemVariables::PEXTMAX, {10, 20, 30}},
+        {CadSystemVariables::PEXTMIN, {10, 20, 30}},
+        {CadSystemVariables::PINSBASE, {10, 20, 30}},
+        {CadSystemVariables::PLIMCHECK, {70}},
+        {CadSystemVariables::PLIMMAX, {10, 20}},
+        {CadSystemVariables::PLIMMIN, {10, 20}},
+        {CadSystemVariables::PSLTSCALE, {70}},
+        {CadSystemVariables::PUCSNAME, true, {2}},
+        {CadSystemVariables::PUCSORGBACK, {10, 20, 30}},
+        {CadSystemVariables::PUCSORGBOTTOM, {10, 20, 30}},
+        {CadSystemVariables::PUCSORGFRONT, {10, 20, 30}},
+        {CadSystemVariables::PUCSORGLEFT, {10, 20, 30}},
+        {CadSystemVariables::PUCSORGRIGHT, {10, 20, 30}},
+        {CadSystemVariables::PUCSORGTOP, {10, 20, 30}},
+        {CadSystemVariables::PUCSORG, {10, 20, 30}},
+        {CadSystemVariables::PUCSXDIR, {10, 20, 30}},
+        {CadSystemVariables::PUCSYDIR, {10, 20, 30}},
+        {CadSystemVariables::PSTYLEMODE, {290}},
+        {CadSystemVariables::PDMODE, {70}},
+        {CadSystemVariables::PDSIZE, {40}},
+        {CadSystemVariables::PLINEGEN, {70}},
+        {CadSystemVariables::PLINEWID, {40}},
+        {CadSystemVariables::PROJECTNAME, {1}},
+        {CadSystemVariables::PROXYGRAPHICS, {70}},
+        {CadSystemVariables::QTEXTMODE, {70}},
+        {CadSystemVariables::REGENMODE, {70}},
+        {DxfReferenceType::Ignored, CadSystemVariables::REQUIREDVERSIONS, {70}},
+        {CadSystemVariables::VISRETAIN, {70}},
+        {CadSystemVariables::SHADEDIF, {70}},
+        {CadSystemVariables::SHADEDGE, {70}},
+        {CadSystemVariables::CSHADOW, {280}},
+        {CadSystemVariables::SHADOWPLANELOCATION, {40}},
+        {CadSystemVariables::TILEMODE, {70}},
+        {CadSystemVariables::SHOWHIST, {280}},
+        {CadSystemVariables::SPLFRAME, {70}},
+        {CadSystemVariables::SKETCHINC, {40}},
+        {CadSystemVariables::SKPOLY, {70}},
+        {CadSystemVariables::LOFTPARAM, {70}},
+        {CadSystemVariables::SOLIDHIST, {280}},
+        {CadSystemVariables::TREEDEPTH, {70}},
+        {CadSystemVariables::SPLINETYPE, {70}},
+        {CadSystemVariables::STEPSIZE, {40}},
+        {CadSystemVariables::STEPSPERSEC, {40}},
+        {CadSystemVariables::STYLESHEET, {1}},
+        {CadSystemVariables::SURFU, {70}},
+        {CadSystemVariables::SURFV, {70}},
+        {CadSystemVariables::SURFTAB1, {70}},
+        {CadSystemVariables::SURFTAB2, {70}},
+        {CadSystemVariables::SURFTYPE, {70}},
+        {CadSystemVariables::PSOLHEIGHT, {40}},
+        {CadSystemVariables::PSOLWIDTH, {40}},
+        {CadSystemVariables::TEXTSIZE, {40}},
+        {CadSystemVariables::TEXTSTYLE, true, {7}},
+        {CadSystemVariables::THICKNESS, {40}},
+        {CadSystemVariables::TIMEZONE, {70}},
+        {CadSystemVariables::TDINDWG, {40}},
+        {CadSystemVariables::TRACEWID, {40}},
+        {CadSystemVariables::UCSBASE, true, {2}},
+        {CadSystemVariables::UCSNAME, true, {2}},
+        {CadSystemVariables::UNITMODE, {70}},
+        {CadSystemVariables::TDUCREATE, {40}},
+        {CadSystemVariables::TDUUPDATE, {40}},
+        {CadSystemVariables::TDUPDATE, {40}},
+        {CadSystemVariables::DIMSHO, {70}},
+        {CadSystemVariables::USERR1, {40}},
+        {CadSystemVariables::USERR2, {40}},
+        {CadSystemVariables::USERR3, {40}},
+        {CadSystemVariables::USERR4, {40}},
+        {CadSystemVariables::USERR5, {40}},
+        {CadSystemVariables::TDUSRTIMER, {40}},
+        {CadSystemVariables::USERI1, {70}},
+        {CadSystemVariables::USERI2, {70}},
+        {CadSystemVariables::USERI3, {70}},
+        {CadSystemVariables::USERI4, {70}},
+        {CadSystemVariables::USERI5, {70}},
+        {CadSystemVariables::USRTIMER, {70}},
+        {CadSystemVariables::VERSIONGUID, {2}},
+        {CadSystemVariables::ACADVER, {DxfCode::Text}},
+        {CadSystemVariables::PSVPSCALE, {40}},
+        {CadSystemVariables::WORLDVIEW, {70}},
+        {CadSystemVariables::XEDIT, {290}},
 };
-
-std::vector<CadSystemVariableAttribute> CadSystemVariables::headerVariables()
-{
-    return _headerVariables;
-}
 
 std::map<std::string, CadSystemVariableAttribute> CadSystemVariables::headerMap()
 {
@@ -294,1007 +289,1013 @@ std::map<std::string, CadSystemVariableAttribute> CadSystemVariables::headerMap(
     return _map;
 }
 
-DwgVariant CadSystemVariables::value(const std::string &key, const DxfCode &, CadHeader *header)
+DwgVariant CadSystemVariables::value(const std::string &key, const DxfCode &code, CadHeader *header)
 {
     assert(header);
-    if (key == "$ANGBASE")
+    DwgVariant var = CadSystemVariables::value(key, header);
+    return var;
+}
+
+DwgVariant CadSystemVariables::value(const std::string &key, CadHeader *header)
+{
+    assert(header);
+    if (key == CadSystemVariables::ANGBASE)
     {
         return header->angleBase();
     }
-    if (key == "$ANGDIR")
+    if (key == CadSystemVariables::ANGDIR)
     {
         return static_cast<short>(header->angularDirection());
     }
-    if (key == "$AUNITS")
+    if (key == CadSystemVariables::AUNITS)
     {
         return static_cast<short>(header->angularUnit());
     }
-    if (key == "$AUPREC")
+    if (key == CadSystemVariables::AUPREC)
     {
         return header->angularUnitPrecision();
     }
-    if (key == "$DIMLDRBLK")
+    if (key == CadSystemVariables::DIMLDRBLK)
     {
         return header->arrowBlockName();
     }
-    if (key == "$DIMASO")
+    if (key == CadSystemVariables::DIMASO)
     {
         return header->associatedDimensions();
     }
-    if (key == "$ATTMODE")
+    if (key == CadSystemVariables::ATTMODE)
     {
         return static_cast<int>(header->attributeVisibility());
     }
-    if (key == "$BLIPMODE")
+    if (key == CadSystemVariables::BLIPMODE)
     {
         return header->blipMode();
     }
-    if (key == "$CAMERADISPLAY")
+    if (key == CadSystemVariables::CAMERADISPLAY)
     {
         return header->cameraDisplayObjects();
     }
-    if (key == "$CAMERAHEIGHT")
+    if (key == CadSystemVariables::CAMERAHEIGHT)
     {
         return header->cameraHeight();
     }
-    if (key == "$CHAMFERD")
+    if (key == CadSystemVariables::CHAMFERD)
     {
         return header->chamferAngle();
     }
-    if (key == "$CHAMFERA")
+    if (key == CadSystemVariables::CHAMFERA)
     {
         return header->chamferDistance1();
     }
-    if (key == "$CHAMFERB")
+    if (key == CadSystemVariables::CHAMFERB)
     {
         return header->chamferDistance2();
     }
-    if (key == "$CHAMFERC")
+    if (key == CadSystemVariables::CHAMFERC)
     {
         return header->chamferLength();
     }
-    if (key == "$DWGCODEPAGE")
+    if (key == CadSystemVariables::DWGCODEPAGE)
     {
         return header->codePage();
     }
-    if (key == "$TDCREATE")
+    if (key == CadSystemVariables::TDCREATE)
     {
         return header->createDateTime();
     }
-    if (key == "$PELLIPSE")
+    if (key == CadSystemVariables::PELLIPSE)
     {
         return header->createEllipseAsPolyline();
     }
-    if (key == "$CECOLOR")
+    if (key == CadSystemVariables::CECOLOR)
     {
         return header->currentEntityColor();
     }
-    if (key == "$CELTSCALE")
+    if (key == CadSystemVariables::CELTSCALE)
     {
         return header->currentEntityLinetypeScale();
     }
-    if (key == "$CELWEIGHT")
+    if (key == CadSystemVariables::CELWEIGHT)
     {
         return static_cast<short>(header->currentEntityLineWeight());
     }
-    if (key == "$CEPSNTYPE")
+    if (key == CadSystemVariables::CEPSNTYPE)
     {
         return static_cast<short>(header->currentEntityPlotStyle());
     }
-    if (key == "$CLAYER")
+    if (key == CadSystemVariables::CLAYER)
     {
         return header->currentLayerName();
     }
-    if (key == "$CELTYPE")
+    if (key == CadSystemVariables::CELTYPE)
     {
         return header->currentLineTypeName();
     }
-    if (key == "$CMLJUST")
+    if (key == CadSystemVariables::CMLJUST)
     {
         return static_cast<short>(header->currentMultilineJustification());
     }
-    if (key == "$CMLSCALE")
+    if (key == CadSystemVariables::CMLSCALE)
     {
         return header->currentMultilineScale();
     }
-    if (key == "$CMLSTYLE")
+    if (key == CadSystemVariables::CMLSTYLE)
     {
         return header->currentMultiLineStyleName();
     }
-    if (key == "$DGNFRAME")
+    if (key == CadSystemVariables::DGNFRAME)
     {
         return header->dgnUnderlayFramesVisibility();
     }
-    if (key == "$DIMAPOST")
+    if (key == CadSystemVariables::DIMAPOST)
     {
         return header->dimensionAlternateDimensioningSuffix();
     }
-    if (key == "$DIMALTD")
+    if (key == CadSystemVariables::DIMALTD)
     {
         return header->dimensionAlternateUnitDecimalPlaces();
     }
-    if (key == "$DIMALT")
+    if (key == CadSystemVariables::DIMALT)
     {
         return header->dimensionAlternateUnitDimensioning();
     }
-    if (key == "$DIMALTU")
+    if (key == CadSystemVariables::DIMALTU)
     {
         return static_cast<short>(header->dimensionAlternateUnitFormat());
     }
-    if (key == "$DIMALTRND")
+    if (key == CadSystemVariables::DIMALTRND)
     {
         return header->dimensionAlternateUnitRounding();
     }
-    if (key == "$DIMALTF")
+    if (key == CadSystemVariables::DIMALTF)
     {
         return header->dimensionAlternateUnitScaleFactor();
     }
-    if (key == "$DIMALTTD")
+    if (key == CadSystemVariables::DIMALTTD)
     {
         return header->dimensionAlternateUnitToleranceDecimalPlaces();
     }
-    if (key == "$DIMALTTZ")
+    if (key == CadSystemVariables::DIMALTTZ)
     {
         return static_cast<unsigned char>(header->dimensionAlternateUnitToleranceZeroHandling());
     }
-    if (key == "$DIMALTZ")
+    if (key == CadSystemVariables::DIMALTZ)
     {
         return static_cast<unsigned char>(header->dimensionAlternateUnitZeroHandling());
     }
-    if (key == "$DIMALTMZF")
+    if (key == CadSystemVariables::DIMALTMZF)
     {
         return header->dimensionAltMzf();
     }
-    if (key == "$DIMALTMZS")
+    if (key == CadSystemVariables::DIMALTMZS)
     {
         return header->dimensionAltMzs();
     }
-    if (key == "$DIMADEC")
+    if (key == CadSystemVariables::DIMADEC)
     {
         return header->dimensionAngularDimensionDecimalPlaces();
     }
-    if (key == "$DIMAUNIT")
+    if (key == CadSystemVariables::DIMAUNIT)
     {
         return static_cast<short>(header->dimensionAngularUnit());
     }
-    if (key == "$DIMAZIN")
+    if (key == CadSystemVariables::DIMAZIN)
     {
         return static_cast<unsigned char>(header->dimensionAngularZeroHandling());
     }
-    if (key == "$DIMARCSYM")
+    if (key == CadSystemVariables::DIMARCSYM)
     {
         return static_cast<short>(header->dimensionArcLengthSymbolPosition());
     }
-    if (key == "$DIMASZ")
+    if (key == CadSystemVariables::DIMASZ)
     {
         return header->dimensionArrowSize();
     }
-    if (key == "$DIMASSOC")
+    if (key == CadSystemVariables::DIMASSOC)
     {
         return static_cast<short>(header->dimensionAssociativity());
     }
-    if (key == "$DIMBLK")
+    if (key == CadSystemVariables::DIMBLK)
     {
         return header->dimensionBlockName();
     }
-    if (key == "$DIMBLK1")
+    if (key == CadSystemVariables::DIMBLK1)
     {
         return header->dimensionBlockNameFirst();
     }
-    if (key == "$DIMBLK2")
+    if (key == CadSystemVariables::DIMBLK2)
     {
         return header->dimensionBlockNameSecond();
     }
-    if (key == "$DIMCEN")
+    if (key == CadSystemVariables::DIMCEN)
     {
         return header->dimensionCenterMarkSize();
     }
-    if (key == "$DIMUPT")
+    if (key == CadSystemVariables::DIMUPT)
     {
         return header->dimensionCursorUpdate();
     }
-    if (key == "$DIMDEC")
+    if (key == CadSystemVariables::DIMDEC)
     {
         return header->dimensionDecimalPlaces();
     }
-    if (key == "$DIMDSEP")
+    if (key == CadSystemVariables::DIMDSEP)
     {
         return header->dimensionDecimalSeparator();
     }
-    if (key == "$DIMATFIT")
+    if (key == CadSystemVariables::DIMATFIT)
     {
         return static_cast<unsigned char>(header->dimensionDimensionTextArrowFit());
     }
-    if (key == "$DIMCLRE")
+    if (key == CadSystemVariables::DIMCLRE)
     {
         return header->dimensionExtensionLineColor();
     }
-    if (key == "$DIMEXE")
+    if (key == CadSystemVariables::DIMEXE)
     {
         return header->dimensionExtensionLineExtension();
     }
-    if (key == "$DIMEXO")
+    if (key == CadSystemVariables::DIMEXO)
     {
         return header->dimensionExtensionLineOffset();
     }
-    if (key == "$DIMFIT")
+    if (key == CadSystemVariables::DIMFIT)
     {
         return header->dimensionFit();
     }
-    if (key == "$DIMFXL")
+    if (key == CadSystemVariables::DIMFXL)
     {
         return header->dimensionFixedExtensionLineLength();
     }
-    if (key == "$DIMFRAC")
+    if (key == CadSystemVariables::DIMFRAC)
     {
         return static_cast<short>(header->dimensionFractionFormat());
     }
-    if (key == "$DIMTOL")
+    if (key == CadSystemVariables::DIMTOL)
     {
         return header->dimensionGenerateTolerances();
     }
-    if (key == "$DIMFXLON")
+    if (key == CadSystemVariables::DIMFXLON)
     {
         return header->dimensionIsExtensionLineLengthFixed();
     }
-    if (key == "$DIMJOGANG")
+    if (key == CadSystemVariables::DIMJOGANG)
     {
         return header->dimensionJoggedRadiusDimensionTransverseSegmentAngle();
     }
-    if (key == "$DIMLIM")
+    if (key == CadSystemVariables::DIMLIM)
     {
         return header->dimensionLimitsGeneration();
     }
-    if (key == "$DIMLFAC")
+    if (key == CadSystemVariables::DIMLFAC)
     {
         return header->dimensionLinearScaleFactor();
     }
-    if (key == "$DIMLUNIT")
+    if (key == CadSystemVariables::DIMLUNIT)
     {
         return static_cast<short>(header->dimensionLinearUnitFormat());
     }
-    if (key == "$DIMCLRD")
+    if (key == CadSystemVariables::DIMCLRD)
     {
         return header->dimensionLineColor();
     }
-    if (key == "$DIMDLE")
+    if (key == CadSystemVariables::DIMDLE)
     {
         return header->dimensionLineExtension();
     }
-    if (key == "$DIMGAP")
+    if (key == CadSystemVariables::DIMGAP)
     {
         return header->dimensionLineGap();
     }
-    if (key == "$DIMDLI")
+    if (key == CadSystemVariables::DIMDLI)
     {
         return header->dimensionLineIncrement();
     }
-    if (key == "$DIMLTYPE")
+    if (key == CadSystemVariables::DIMLTYPE)
     {
         return header->dimensionLineType();
     }
-    if (key == "$DIMLWD")
+    if (key == CadSystemVariables::DIMLWD)
     {
         return static_cast<short>(header->dimensionLineWeight());
     }
-    if (key == "$DIMTM")
+    if (key == CadSystemVariables::DIMTM)
     {
         return header->dimensionMinusTolerance();
     }
-    if (key == "$DIMMZF")
+    if (key == CadSystemVariables::DIMMZF)
     {
         return header->dimensionMzf();
     }
-    if (key == "$DIMMZS")
+    if (key == CadSystemVariables::DIMMZS)
     {
         return header->dimensionMzs();
     }
-    if (key == "$DIMTP")
+    if (key == CadSystemVariables::DIMTP)
     {
         return header->dimensionPlusTolerance();
     }
-    if (key == "$DIMPOST")
+    if (key == CadSystemVariables::DIMPOST)
     {
         return header->dimensionPostFix();
     }
-    if (key == "$DIMRND")
+    if (key == CadSystemVariables::DIMRND)
     {
         return header->dimensionRounding();
     }
-    if (key == "$DIMSCALE")
+    if (key == CadSystemVariables::DIMSCALE)
     {
         return header->dimensionScaleFactor();
     }
-    if (key == "$DIMSAH")
+    if (key == CadSystemVariables::DIMSAH)
     {
         return header->dimensionSeparateArrowBlocks();
     }
-    if (key == "$DIMSTYLE")
+    if (key == CadSystemVariables::DIMSTYLE)
     {
         return header->currentDimensionStyleName();
     }
-    if (key == "$DIMSD1")
+    if (key == CadSystemVariables::DIMSD1)
     {
         return header->dimensionSuppressFirstDimensionLine();
     }
-    if (key == "$DIMSE1")
+    if (key == CadSystemVariables::DIMSE1)
     {
         return header->dimensionSuppressFirstExtensionLine();
     }
-    if (key == "$DIMSOXD")
+    if (key == CadSystemVariables::DIMSOXD)
     {
         return header->dimensionSuppressOutsideExtensions();
     }
-    if (key == "$DIMSD2")
+    if (key == CadSystemVariables::DIMSD2)
     {
         return header->dimensionSuppressSecondDimensionLine();
     }
-    if (key == "$DIMSE2")
+    if (key == CadSystemVariables::DIMSE2)
     {
         return header->dimensionSuppressSecondExtensionLine();
     }
-    if (key == "$DIMLTEX1")
+    if (key == CadSystemVariables::DIMLTEX1)
     {
         return header->dimensionTex1();
     }
-    if (key == "$DIMLTEX2")
+    if (key == CadSystemVariables::DIMLTEX2)
     {
         return header->dimensionTex2();
     }
-    if (key == "$DIMTFILLCLR")
+    if (key == CadSystemVariables::DIMTFILLCLR)
     {
         return header->dimensionTextBackgroundColor();
     }
-    if (key == "$DIMTFILL")
+    if (key == CadSystemVariables::DIMTFILL)
     {
         return static_cast<short>(header->dimensionTextBackgroundFillMode());
     }
-    if (key == "$DIMCLRT")
+    if (key == CadSystemVariables::DIMCLRT)
     {
         return header->dimensionTextColor();
     }
-    if (key == "$DIMTXTDIRECTION")
+    if (key == CadSystemVariables::DIMTXTDIRECTION)
     {
         return static_cast<unsigned char>(header->dimensionTextDirection());
     }
-    if (key == "$DIMTXT")
+    if (key == CadSystemVariables::DIMTXT)
     {
         return header->dimensionTextHeight();
     }
-    if (key == "$DIMJUST")
+    if (key == CadSystemVariables::DIMJUST)
     {
         return static_cast<unsigned char>(header->dimensionTextHorizontalAlignment());
     }
-    if (key == "$DIMTIX")
+    if (key == CadSystemVariables::DIMTIX)
     {
         return header->dimensionTextInsideExtensions();
     }
-    if (key == "$DIMTIH")
+    if (key == CadSystemVariables::DIMTIH)
     {
         return header->dimensionTextInsideHorizontal();
     }
-    if (key == "$DIMTMOVE")
+    if (key == CadSystemVariables::DIMTMOVE)
     {
         return static_cast<short>(header->dimensionTextMovement());
     }
-    if (key == "$DIMTOFL")
+    if (key == CadSystemVariables::DIMTOFL)
     {
         return header->dimensionTextOutsideExtensions();
     }
-    if (key == "$DIMTOH")
+    if (key == CadSystemVariables::DIMTOH)
     {
         return header->dimensionTextOutsideHorizontal();
     }
-    if (key == "$DIMTXSTY")
+    if (key == CadSystemVariables::DIMTXSTY)
     {
         return header->dimensionTextStyleName();
     }
-    if (key == "$DIMTAD")
+    if (key == CadSystemVariables::DIMTAD)
     {
         return static_cast<int>(header->dimensionTextVerticalAlignment());
     }
-    if (key == "$DIMTVP")
+    if (key == CadSystemVariables::DIMTVP)
     {
         return header->dimensionTextVerticalPosition();
     }
-    if (key == "$DIMTSZ")
+    if (key == CadSystemVariables::DIMTSZ)
     {
         return header->dimensionTickSize();
     }
-    if (key == "$DIMTOLJ")
+    if (key == CadSystemVariables::DIMTOLJ)
     {
         return static_cast<unsigned char>(header->dimensionToleranceAlignment());
     }
-    if (key == "$DIMTDEC")
+    if (key == CadSystemVariables::DIMTDEC)
     {
         return header->dimensionToleranceDecimalPlaces();
     }
-    if (key == "$DIMTFAC")
+    if (key == CadSystemVariables::DIMTFAC)
     {
         return header->dimensionToleranceScaleFactor();
     }
-    if (key == "$DIMTZIN")
+    if (key == CadSystemVariables::DIMTZIN)
     {
         return static_cast<unsigned char>(header->dimensionToleranceZeroHandling());
     }
-    if (key == "$DIMUNIT")
+    if (key == CadSystemVariables::DIMUNIT)
     {
         return header->dimensionUnit();
     }
-    if (key == "$DIMZIN")
+    if (key == CadSystemVariables::DIMZIN)
     {
         return static_cast<unsigned char>(header->dimensionZeroHandling());
     }
-    if (key == "$LIGHTGLYPHDISPLAY")
+    if (key == CadSystemVariables::LIGHTGLYPHDISPLAY)
     {
         return header->displayLightGlyphs();
     }
-    if (key == "$LWDISPLAY")
+    if (key == CadSystemVariables::LWDISPLAY)
     {
         return header->displayLineWeight();
     }
-    if (key == "$DISPSILH")
+    if (key == CadSystemVariables::DISPSILH)
     {
         return header->displaySilhouetteCurves();
     }
-    if (key == "$LOFTANG1")
+    if (key == CadSystemVariables::LOFTANG1)
     {
         return header->draftAngleFirstCrossSection();
     }
-    if (key == "$LOFTANG2")
+    if (key == CadSystemVariables::LOFTANG2)
     {
         return header->draftAngleSecondCrossSection();
     }
-    if (key == "$LOFTMAG1")
+    if (key == CadSystemVariables::LOFTMAG1)
     {
         return header->draftMagnitudeFirstCrossSection();
     }
-    if (key == "$LOFTMAG2")
+    if (key == CadSystemVariables::LOFTMAG2)
     {
         return header->draftMagnitudeSecondCrossSection();
     }
-    if (key == "$3DDWFPREC")
+    if (key == CadSystemVariables::_3DDWFPREC)
     {
         return header->dw3DPrecision();
     }
-    if (key == "$DWFFRAME")
+    if (key == CadSystemVariables::DWFFRAME)
     {
         return header->dwgUnderlayFramesVisibility();
     }
-    if (key == "$ELEVATION")
+    if (key == CadSystemVariables::ELEVATION)
     {
         return header->elevation();
     }
-    if (key == "$ENDCAPS")
+    if (key == CadSystemVariables::ENDCAPS)
     {
         return header->endCaps();
     }
-    if (key == "$SORTENTS")
+    if (key == CadSystemVariables::SORTENTS)
     {
         return static_cast<unsigned char>(header->entitySortingFlags());
     }
-    if (key == "$EXTNAMES")
+    if (key == CadSystemVariables::EXTNAMES)
     {
         return header->extendedNames();
     }
-    if (key == "$DIMLWE")
+    if (key == CadSystemVariables::DIMLWE)
     {
         return static_cast<short>(header->extensionLineWeight());
     }
-    if (key == "$XCLIPFRAME")
+    if (key == CadSystemVariables::XCLIPFRAME)
     {
         return header->externalReferenceClippingBoundaryType();
     }
-    if (key == "$FACETRES")
+    if (key == CadSystemVariables::FACETRES)
     {
         return header->facetResolution();
     }
-    if (key == "$FILLETRAD")
+    if (key == CadSystemVariables::FILLETRAD)
     {
         return header->filletRadius();
     }
-    if (key == "$FILLMODE")
+    if (key == CadSystemVariables::FILLMODE)
     {
         return header->fillMode();
     }
-    if (key == "$FINGERPRINTGUID")
+    if (key == CadSystemVariables::FINGERPRINTGUID)
     {
         return header->fingerPrintGuid();
     }
-    if (key == "$HALOGAP")
+    if (key == CadSystemVariables::HALOGAP)
     {
         return header->haloGapPercentage();
     }
-    if (key == "$HANDSEED")
+    if (key == CadSystemVariables::HANDSEED)
     {
         return header->handleSeed();
     }
-    if (key == "$HIDETEXT")
+    if (key == CadSystemVariables::HIDETEXT)
     {
         return header->hideText();
     }
-    if (key == "$INDEXCTL")
+    if (key == CadSystemVariables::INDEXCTL)
     {
         return static_cast<unsigned char>(header->indexCreationFlags());
     }
-    if (key == "$INSUNITS")
+    if (key == CadSystemVariables::INSUNITS)
     {
         return static_cast<short>(header->insUnits());
     }
-    if (key == "$INTERFERECOLOR")
+    if (key == CadSystemVariables::INTERFERECOLOR)
     {
         return header->interfereColor();
     }
-    if (key == "$JOINSTYLE")
+    if (key == CadSystemVariables::JOINSTYLE)
     {
         return header->joinStyle();
     }
-    if (key == "$LASTSAVEDBY")
+    if (key == CadSystemVariables::LASTSAVEDBY)
     {
         return header->lastSavedBy();
     }
-    if (key == "$LATITUDE")
+    if (key == CadSystemVariables::LATITUDE)
     {
         return header->latitude();
     }
-    if (key == "$LENSLENGTH")
+    if (key == CadSystemVariables::LENSLENGTH)
     {
         return header->lensLength();
     }
-    if (key == "$LIMCHECK")
+    if (key == CadSystemVariables::LIMCHECK)
     {
         return header->limitCheckingOn();
     }
-    if (key == "$LUNITS")
+    if (key == CadSystemVariables::LUNITS)
     {
         return static_cast<short>(header->linearUnitFormat());
     }
-    if (key == "$LUPREC")
+    if (key == CadSystemVariables::LUPREC)
     {
         return header->linearUnitPrecision();
     }
-    if (key == "$LTSCALE")
+    if (key == CadSystemVariables::LTSCALE)
     {
         return header->lineTypeScale();
     }
-    if (key == "$LOFTNORMALS")
+    if (key == CadSystemVariables::LOFTNORMALS)
     {
         return header->loftedObjectNormals();
     }
-    if (key == "$LONGITUDE")
+    if (key == CadSystemVariables::LONGITUDE)
     {
         return header->longitude();
     }
-    if (key == "$ACADMAINTVER")
+    if (key == CadSystemVariables::ACADMAINTVER)
     {
         return header->maintenanceVersion();
     }
-    if (key == "$MAXACTVP")
+    if (key == CadSystemVariables::MAXACTVP)
     {
         return header->maxViewportCount();
     }
-    if (key == "$MEASUREMENT")
+    if (key == CadSystemVariables::MEASUREMENT)
     {
         return static_cast<short>(header->measurementUnits());
     }
-    if (key == "$MENU")
+    if (key == CadSystemVariables::MENU)
     {
         return header->menuFileName();
     }
-    if (key == "$MIRRTEXT")
+    if (key == CadSystemVariables::MIRRTEXT)
     {
         return header->mirrorText();
     }
-    if (key == "$EXTMAX")
+    if (key == CadSystemVariables::EXTMAX)
     {
         return header->modelSpaceExtMax();
     }
-    if (key == "$EXTMIN")
+    if (key == CadSystemVariables::EXTMIN)
     {
         return header->modelSpaceExtMin();
     }
-    if (key == "$INSBASE")
+    if (key == CadSystemVariables::INSBASE)
     {
         return header->modelSpaceInsertionBase();
     }
-    if (key == "$LIMMAX")
+    if (key == CadSystemVariables::LIMMAX)
     {
         return header->modelSpaceLimitsMax();
     }
-    if (key == "$LIMMIN")
+    if (key == CadSystemVariables::LIMMIN)
     {
         return header->modelSpaceLimitsMin();
     }
-    if (key == "$UCSORG")
+    if (key == CadSystemVariables::UCSORG)
     {
         return header->modelSpaceOrigin();
     }
-    if (key == "$UCSORGBACK")
+    if (key == CadSystemVariables::UCSORGBACK)
     {
         return header->modelSpaceOrthographicBackDOrigin();
     }
-    if (key == "$UCSORGBOTTOM")
+    if (key == CadSystemVariables::UCSORGBOTTOM)
     {
         return header->modelSpaceOrthographicBottomDOrigin();
     }
-    if (key == "$UCSORGFRONT")
+    if (key == CadSystemVariables::UCSORGFRONT)
     {
         return header->modelSpaceOrthographicFrontDOrigin();
     }
-    if (key == "$UCSORGLEFT")
+    if (key == CadSystemVariables::UCSORGLEFT)
     {
         return header->modelSpaceOrthographicLeftDOrigin();
     }
-    if (key == "$UCSORGRIGHT")
+    if (key == CadSystemVariables::UCSORGRIGHT)
     {
         return header->modelSpaceOrthographicRightDOrigin();
     }
-    if (key == "$UCSORGTOP")
+    if (key == CadSystemVariables::UCSORGTOP)
     {
         return header->modelSpaceOrthographicTopDOrigin();
     }
-    if (key == "$UCSXDIR")
+    if (key == CadSystemVariables::UCSXDIR)
     {
         return header->modelSpaceXAxis();
     }
-    if (key == "$UCSYDIR")
+    if (key == CadSystemVariables::UCSYDIR)
     {
         return header->modelSpaceYAxis();
     }
-    if (key == "$NORTHDIRECTION")
+    if (key == CadSystemVariables::NORTHDIRECTION)
     {
         return header->northDirection();
     }
-    if (key == "$SPLINESEGS")
+    if (key == CadSystemVariables::SPLINESEGS)
     {
         return header->numberOfSplineSegments();
     }
-    if (key == "$OSMODE")
+    if (key == CadSystemVariables::OSMODE)
     {
         return static_cast<unsigned short>(header->objectSnapMode());
     }
-    if (key == "$ORTHOMODE")
+    if (key == CadSystemVariables::ORTHOMODE)
     {
         return header->orthoMode();
     }
-    if (key == "$PUCSBASE")
+    if (key == CadSystemVariables::PUCSBASE)
     {
         return header->paperSpaceBaseName();
     }
-    if (key == "$PELEVATION")
+    if (key == CadSystemVariables::PELEVATION)
     {
         return header->paperSpaceElevation();
     }
-    if (key == "$PEXTMAX")
+    if (key == CadSystemVariables::PEXTMAX)
     {
         return header->paperSpaceExtMax();
     }
-    if (key == "$PEXTMIN")
+    if (key == CadSystemVariables::PEXTMIN)
     {
         return header->paperSpaceExtMin();
     }
-    if (key == "$PINSBASE")
+    if (key == CadSystemVariables::PINSBASE)
     {
         return header->paperSpaceInsertionBase();
     }
-    if (key == "$PLIMCHECK")
+    if (key == CadSystemVariables::PLIMCHECK)
     {
         return header->paperSpaceLimitsChecking();
     }
-    if (key == "$PLIMMAX")
+    if (key == CadSystemVariables::PLIMMAX)
     {
         return header->paperSpaceLimitsMax();
     }
-    if (key == "$PLIMMIN")
+    if (key == CadSystemVariables::PLIMMIN)
     {
         return header->paperSpaceLimitsMin();
     }
-    if (key == "$PSLTSCALE")
+    if (key == CadSystemVariables::PSLTSCALE)
     {
         return static_cast<short>(header->paperSpaceLineTypeScaling());
     }
-    if (key == "$PUCSNAME")
+    if (key == CadSystemVariables::PUCSNAME)
     {
         return header->paperSpaceName();
     }
-    if (key == "$PUCSORGBACK")
+    if (key == CadSystemVariables::PUCSORGBACK)
     {
         return header->paperSpaceOrthographicBackDOrigin();
     }
-    if (key == "$PUCSORGBOTTOM")
+    if (key == CadSystemVariables::PUCSORGBOTTOM)
     {
         return header->paperSpaceOrthographicBottomDOrigin();
     }
-    if (key == "$PUCSORGFRONT")
+    if (key == CadSystemVariables::PUCSORGFRONT)
     {
         return header->paperSpaceOrthographicFrontDOrigin();
     }
-    if (key == "$PUCSORGLEFT")
+    if (key == CadSystemVariables::PUCSORGLEFT)
     {
         return header->paperSpaceOrthographicLeftDOrigin();
     }
-    if (key == "$PUCSORGRIGHT")
+    if (key == CadSystemVariables::PUCSORGRIGHT)
     {
         return header->paperSpaceOrthographicRightDOrigin();
     }
-    if (key == "$PUCSORGTOP")
+    if (key == CadSystemVariables::PUCSORGTOP)
     {
         return header->paperSpaceOrthographicTopDOrigin();
     }
-    if (key == "$PUCSORG")
+    if (key == CadSystemVariables::PUCSORG)
     {
         return header->paperSpaceUcsOrigin();
     }
-    if (key == "$PUCSXDIR")
+    if (key == CadSystemVariables::PUCSXDIR)
     {
         return header->paperSpaceUcsXAxis();
     }
-    if (key == "$$PUCSYDIR")
+    if (key == CadSystemVariables::PUCSYDIR)
     {
         return header->paperSpaceUcsYAxis();
     }
-    if (key == "$PSTYLEMODE")
+    if (key == CadSystemVariables::PSTYLEMODE)
     {
         return header->plotStyleMode();
     }
-    if (key == "$PDMODE")
+    if (key == CadSystemVariables::PDMODE)
     {
         return header->pointDisplayMode();
     }
-    if (key == "$PDSIZE")
+    if (key == CadSystemVariables::PDSIZE)
     {
         return header->pointDisplaySize();
     }
-    if (key == "$PLINEGEN")
+    if (key == CadSystemVariables::PLINEGEN)
     {
         return header->polylineLineTypeGeneration();
     }
-    if (key == "$PLINEWID")
+    if (key == CadSystemVariables::PLINEWID)
     {
         return header->polylineWidthDefault();
     }
-    if (key == "$PROJECTNAME")
+    if (key == CadSystemVariables::PROJECTNAME)
     {
         return header->projectName();
     }
-    if (key == "$PROXYGRAPHICS")
+    if (key == CadSystemVariables::PROXYGRAPHICS)
     {
         return header->proxyGraphics();
     }
-    if (key == "$QTEXTMODE")
+    if (key == CadSystemVariables::QTEXTMODE)
     {
         return header->quickTextMode();
     }
-    if (key == "$REGENMODE")
+    if (key == CadSystemVariables::REGENMODE)
     {
         return header->regenerationMode();
     }
-    if (key == "$REQUIREDVERSIONS")
+    if (key == CadSystemVariables::REQUIREDVERSIONS)
     {
         return header->requiredVersions();
     }
-    if (key == "$VISRETAIN")
+    if (key == CadSystemVariables::VISRETAIN)
     {
         return header->retainXRefDependentVisibilitySettings();
     }
-    if (key == "$SHADEDIF")
+    if (key == CadSystemVariables::SHADEDIF)
     {
         return header->shadeDiffuseToAmbientPercentage();
     }
-    if (key == "$SHADEDGE")
+    if (key == CadSystemVariables::SHADEDGE)
     {
         return static_cast<short>(header->shadeEdge());
     }
-    if (key == "$CSHADOW")
+    if (key == CadSystemVariables::CSHADOW)
     {
         return static_cast<unsigned char>(header->shadowMode());
     }
-    if (key == "$SHADOWPLANELOCATION")
+    if (key == CadSystemVariables::SHADOWPLANELOCATION)
     {
         return header->shadowPlaneLocation();
     }
-    if (key == "$TILEMODE")
+    if (key == CadSystemVariables::TILEMODE)
     {
         return header->showModelSpace();
     }
-    if (key == "$SHOWHIST")
+    if (key == CadSystemVariables::SHOWHIST)
     {
         return header->showSolidsHistory();
     }
-    if (key == "$SPLFRAME")
+    if (key == CadSystemVariables::SPLFRAME)
     {
         return header->showSplineControlPoints();
     }
-    if (key == "$SKETCHINC")
+    if (key == CadSystemVariables::SKETCHINC)
     {
         return header->sketchIncrement();
     }
-    if (key == "$SKPOLY")
+    if (key == CadSystemVariables::SKPOLY)
     {
         return header->sketchPolylines();
     }
-    if (key == "$LOFTPARAM")
+    if (key == CadSystemVariables::LOFTPARAM)
     {
         return header->solidLoftedShape();
     }
-    if (key == "$SOLIDHIST")
+    if (key == CadSystemVariables::SOLIDHIST)
     {
         return header->solidsRetainHistory();
     }
-    if (key == "$TREEDEPTH")
+    if (key == CadSystemVariables::TREEDEPTH)
     {
         return header->spatialIndexMaxTreeDepth();
     }
-    if (key == "$SPLINETYPE")
+    if (key == CadSystemVariables::SPLINETYPE)
     {
         return static_cast<short>(header->splineType());
     }
-    if (key == "$STEPSIZE")
+    if (key == CadSystemVariables::STEPSIZE)
     {
         return header->stepSize();
     }
-    if (key == "$STEPSPERSEC")
+    if (key == CadSystemVariables::STEPSPERSEC)
     {
         return header->stepsPerSecond();
     }
-    if (key == "$STYLESHEET")
+    if (key == CadSystemVariables::STYLESHEET)
     {
         return header->styleSheetName();
     }
-    if (key == "$SURFU")
+    if (key == CadSystemVariables::SURFU)
     {
         return header->surfaceDensityU();
     }
-    if (key == "$SURFV")
+    if (key == CadSystemVariables::SURFV)
     {
         return header->surfaceDensityV();
     }
-    if (key == "$SURFTAB1")
+    if (key == CadSystemVariables::SURFTAB1)
     {
         return header->surfaceMeshTabulationCount1();
     }
-    if (key == "$SURFTAB2")
+    if (key == CadSystemVariables::SURFTAB2)
     {
         return header->surfaceMeshTabulationCount2();
     }
-    if (key == "$SURFTYPE")
+    if (key == CadSystemVariables::SURFTYPE)
     {
         return header->surfaceType();
     }
-    if (key == "$PSOLHEIGHT")
+    if (key == CadSystemVariables::PSOLHEIGHT)
     {
         return header->sweptSolidHeight();
     }
-    if (key == "$PSOLWIDTH")
+    if (key == CadSystemVariables::PSOLWIDTH)
     {
         return header->sweptSolidWidth();
     }
-    if (key == "$TEXTSIZE")
+    if (key == CadSystemVariables::TEXTSIZE)
     {
         return header->textHeightDefault();
     }
-    if (key == "$TEXTSTYLE")
+    if (key == CadSystemVariables::TEXTSTYLE)
     {
         return header->textStyleName();
     }
-    if (key == "$THICKNESS")
+    if (key == CadSystemVariables::THICKNESS)
     {
         return header->thicknessDefault();
     }
-    if (key == "$TIMEZONE")
+    if (key == CadSystemVariables::TIMEZONE)
     {
         return header->timeZone();
     }
-    if (key == "$TDINDWG")
+    if (key == CadSystemVariables::TDINDWG)
     {
         return header->totalEditingTime();
     }
-    if (key == "$TRACEWID")
+    if (key == CadSystemVariables::TRACEWID)
     {
         return header->traceWidthDefault();
     }
-    if (key == "$UCSBASE")
+    if (key == CadSystemVariables::UCSBASE)
     {
         return header->ucsBaseName();
     }
-    if (key == "$UCSNAME")
+    if (key == CadSystemVariables::UCSNAME)
     {
         return header->ucsName();
     }
-    if (key == "$UNITMODE")
+    if (key == CadSystemVariables::UNITMODE)
     {
         return header->unitMode();
     }
-    if (key == "$TDUCREATE")
+    if (key == CadSystemVariables::TDUCREATE)
     {
         return header->universalCreateDateTime();
     }
-    if (key == "$TDUUPDATE")
+    if (key == CadSystemVariables::TDUUPDATE)
     {
         return header->universalUpdateDateTime();
     }
-    if (key == "$TDUPDATE")
+    if (key == CadSystemVariables::TDUPDATE)
     {
         return header->updateDateTime();
     }
-    if (key == "$DIMSHO")
+    if (key == CadSystemVariables::DIMSHO)
     {
         return header->updateDimensionsWhileDragging();
     }
-    if (key == "$USERR1")
+    if (key == CadSystemVariables::USERR1)
     {
         return header->userDouble1();
     }
-    if (key == "$USERR2")
+    if (key == CadSystemVariables::USERR2)
     {
         return header->userDouble2();
     }
-    if (key == "$USERR3")
+    if (key == CadSystemVariables::USERR3)
     {
         return header->userDouble3();
     }
-    if (key == "$USERR4")
+    if (key == CadSystemVariables::USERR4)
     {
         return header->userDouble4();
     }
-    if (key == "$USERR5")
+    if (key == CadSystemVariables::USERR5)
     {
         return header->userDouble5();
     }
-    if (key == "$TDUSRTIMER")
+    if (key == CadSystemVariables::TDUSRTIMER)
     {
         return header->userElapsedTimeSpan();
     }
-    if (key == "$USERI1")
+    if (key == CadSystemVariables::USERI1)
     {
         return header->userShort1();
     }
-    if (key == "$USERI2")
+    if (key == CadSystemVariables::USERI2)
     {
         return header->userShort2();
     }
-    if (key == "$USERI3")
+    if (key == CadSystemVariables::USERI3)
     {
         return header->userShort3();
     }
-    if (key == "$USERI4")
+    if (key == CadSystemVariables::USERI4)
     {
         return header->userShort4();
     }
-    if (key == "$USERI5")
+    if (key == CadSystemVariables::USERI5)
     {
         return header->userShort5();
     }
-    if (key == "$USRTIMER")
+    if (key == CadSystemVariables::USRTIMER)
     {
         return header->userTimer();
     }
-    if (key == "$VERSIONGUID")
+    if (key == CadSystemVariables::VERSIONGUID)
     {
         return header->versionGuid();
     }
-    if (key == "$ACADVER")
+    if (key == CadSystemVariables::ACADVER)
     {
         return header->versionString();
     }
-    if (key == "$PSVPSCALE")
+    if (key == CadSystemVariables::PSVPSCALE)
     {
         return header->viewportDefaultViewScaleFactor();
     }
-    if (key == "$WORLDVIEW")
+    if (key == CadSystemVariables::WORLDVIEW)
     {
         return header->worldView();
     }
-    if (key == "$XEDIT")
+    if (key == CadSystemVariables::XEDIT)
     {
         return header->xedit();
     }
     return DwgVariant();
 }
 
-DwgVariant CadSystemVariables::value(const std::string &, CadHeader *header)
+void CadSystemVariables::setValue(CadHeader *header, const std::string &key, const std::vector<DwgVariant> &parameters)
 {
-    return DwgVariant();
 }
 
 }// namespace dwg

@@ -23,12 +23,13 @@ add_library(dwg SHARED)
 add_subdirectory(include)
 add_subdirectory(src)
 
-if(WIN32)
+if(MSVC)
     target_compile_definitions(dwg PRIVATE _USE_MATH_DEFINES)
     target_compile_options(dwg PRIVATE 
         /wd4251  # class 'X' needs to have dll-interface
         /wd4275  # non-dll-interface class 'std::exception' used as base
         /wd4661  # no suitable definition provided for explicit template instantiation request
+        /bigobj  # MSVC-specific: Allows more sections in COFF object files
     )
 endif()
 target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion magic_enum::magic_enum)

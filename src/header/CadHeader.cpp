@@ -25,12 +25,15 @@
 #include <dwg/header/CadHeader.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
+#include <dwg/tables/LineType.h>
 #include <dwg/tables/TextStyle.h>
 #include <dwg/tables/UCS.h>
 #include <dwg/tables/collections/DimensionStylesTable.h>
 #include <dwg/tables/collections/LayersTable.h>
+#include <dwg/tables/collections/LineTypesTable.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/tables/collections/UCSTable.h>
+#include <dwg/objects/MLineStyle.h>
 #include <stdexcept>
 
 #ifdef _WIN32
@@ -76,6 +79,14 @@ CadHeader::CadHeader(ACadVersion version) : _version(version)
     uuid_unparse_lower(uuid, guid_str);
     _fingerPrintGuid = std::string(guid_str);
 #endif
+
+    _currentLayer = Layer::Default();
+    _currentLineType = LineType::ByLayer();
+    _currentMLineStyle = MLineStyle::Default();
+    _currentTextStyle = TextStyle::Default();
+    _dimensionStyleOverrides = new DimensionStyle("override");
+    _currentDimensionStyle = DimensionStyle::Default();
+    _dimensionTextStyle = TextStyle::Default();
 }
 
 std::string CadHeader::versionString() const
@@ -710,13 +721,6 @@ std::string CadHeader::currentLineTypeName() const
 
 void CadHeader::setCurrentLineTypeName(const std::string &value) {}
 
-std::string CadHeader::multiLineStyleName() const
-{
-    return std::string();
-}
-
-void CadHeader::setMultiLineStyleName(const std::string &value) {}
-
 double CadHeader::traceWidthDefault() const
 {
     return _traceWidthDefault;
@@ -990,12 +994,12 @@ void CadHeader::setUniversalUpdateDateTime(const DateTime &value)
     _universalUpdateDateTime = value;
 }
 
-double CadHeader::totalEditingTime() const
+Timespan CadHeader::totalEditingTime() const
 {
     return _totalEditingTime;
 }
 
-void CadHeader::setTotalEditingTime(double value)
+void CadHeader::setTotalEditingTime(const Timespan &value)
 {
     _totalEditingTime = value;
 }
@@ -2034,14 +2038,6 @@ void CadHeader::setDimensionTextStyleName(const std::string &value)
     }
 }
 
-std::string CadHeader::dimensionStyleOverridesName() const
-{
-    // TODO
-    return std::string();
-}
-
-void CadHeader::setDimensionStyleOverridesName(const std::string &value) {}
-
 short CadHeader::dimensionAngularDimensionDecimalPlaces() const
 {
     return _dimensionStyleOverrides->angularDimensionDecimalPlaces();
@@ -2884,5 +2880,22 @@ void CadHeader::setPaperSpaceUcsBase(UCS *value)
     delete _paperSpaceUcsBase;
     _paperSpaceUcsBase = value;
 }
+
+MLineStyle *CadHeader::currentMLineStyle() const
+{
+    return _currentMLineStyle;
+}
+
+void CadHeader::setCurrentMLineStyle(MLineStyle *value)
+{
+
+}
+
+DimensionStyle *CadHeader::currentDimensionStyle() const
+{
+    return _currentDimensionStyle;
+}
+
+void CadHeader::setCurrentDimensionStyle(DimensionStyle *value) {}
 
 }// namespace dwg

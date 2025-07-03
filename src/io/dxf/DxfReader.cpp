@@ -119,7 +119,82 @@ CadDocument *DxfReader::read()
 
 CadHeader *DxfReader::readHeader()
 {
-    return nullptr;
+    _reader = goToSection(DxfFileToken::HeaderSection);
+
+    CadHeader *header = new CadHeader();
+
+    auto &&headerMap = CadSystemVariables::headerMap();
+
+    //Loop until the section ends
+    while (_reader->valueAsString() != DxfFileToken::EndSection)
+    {
+        //Get the current header variable
+        std::string currVar = _reader->valueAsString();
+
+        if (_reader->valueAsString().empty())
+        {
+            _reader->readNext();
+            continue;
+        }
+
+        auto it = headerMap.find(currVar);
+        if (it == headerMap.end())
+        {
+            _reader->readNext();
+            continue;
+        }
+        const CadSystemVariableAttribute data = it->second;
+
+        std::vector<DwgVariant> parameters(data.valueCodes().size(), DwgVariant());
+        for (int i = 0; i < data.valueCodes().size(); ++i)
+        {
+            _reader->readNext();
+            if (_reader->dxfCode() == DxfCode::CLShapeText)
+            {
+                //Irregular dxf files may not follow the header type
+                int c = (int)data.valueCodes().at(i);
+                GroupCodeValueType g = GroupCodeValue::transformValue(c);
+                switch (g)
+                {
+                    case GroupCodeValueType::Bool:
+                        parameters[i] = false;
+                        break;
+                    case GroupCodeValueType::Byte:
+                    case GroupCodeValueType::Int16:
+                    case GroupCodeValueType::Int32:
+                    case GroupCodeValueType::Int64:
+                    case GroupCodeValueType::Double:
+                    case GroupCodeValueType::Point3D:
+                        parameters[i] = 0;
+                        break;
+                    case GroupCodeValueType::None:
+                    case GroupCodeValueType::String:
+                    default:
+                        break;
+                }
+
+                break;
+            }
+
+            parameters[i] = _reader->value();
+        }
+
+        //Set the header value by name
+        try
+        {
+            CadSystemVariables::setValue(header, currVar, parameters);
+        }
+        catch (const std::exception &)
+        {
+        }
+
+        if (_reader->dxfCode() != DxfCode::CLShapeText)
+        {
+            _reader->readNext();
+        }
+    }
+    
+    return header;           
 }
 
 CadDocument *DxfReader::readTables()
