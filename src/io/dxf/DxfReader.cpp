@@ -22,8 +22,10 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
+#include <dwg/CadSystemVariables_p.h>
 #include <dwg/CadUtils.h>
 #include <dwg/DxfFileToken_p.h>
+#include <dwg/GroupCodeValue.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dxf/DxfDocumentBuilder_p.h>
 #include <dwg/io/dxf/DxfReader.h>
@@ -152,7 +154,7 @@ CadHeader *DxfReader::readHeader()
             if (_reader->dxfCode() == DxfCode::CLShapeText)
             {
                 //Irregular dxf files may not follow the header type
-                int c = (int)data.valueCodes().at(i);
+                int c = (int) data.valueCodes().at(i);
                 GroupCodeValueType g = GroupCodeValue::transformValue(c);
                 switch (g)
                 {
@@ -193,8 +195,8 @@ CadHeader *DxfReader::readHeader()
             _reader->readNext();
         }
     }
-    
-    return header;           
+
+    return header;
 }
 
 CadDocument *DxfReader::readTables()

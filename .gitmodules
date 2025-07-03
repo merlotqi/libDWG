@@ -1,6 +1,0 @@
-[submodule "thirdparty/rttr"]
-	path = thirdparty/rttr
-	url = https://github.com/rttrorg/rttr.git
-[submodule "thirdparty/DKAlgorithms"]
-	path = thirdparty/DKAlgorithms
-	url = https://github.com/KDAB/KDAlgorithms.git

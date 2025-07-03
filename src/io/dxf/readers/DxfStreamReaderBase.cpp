@@ -23,6 +23,7 @@
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/GroupCodeValue.h>
 #include <dwg/io/dxf/readers/DxfStreamReaderBase_p.h>
+#include <dwg/utils/StringHelp.h>
 
 namespace dwg {
 
@@ -222,7 +223,7 @@ DwgVariant DxfStreamReaderBase::transformValue(GroupCodeValueType code)
         default:
             throw std::runtime_error(
                     fmt::format("Invalid dxf code with value {code}, at line {line}.", (int) code, position()));
-    }   
+    }
 }
 
 void DxfStreamReaderBase::setDxfCode(DxfCode) {}
