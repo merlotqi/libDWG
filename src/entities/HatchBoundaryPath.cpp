@@ -53,11 +53,11 @@ BoundaryPathFlags HatchBoundaryPath::flags()
 {
     if (isPolyline())
     {
-        _flags |= BoundaryPathFlag::Polyline;
+        _flags = _flags.setFlag(BoundaryPathFlag::Polyline, true);
     }
     else
     {
-        _flags &= ~BoundaryPathFlag::Polyline;
+        _flags = _flags.setFlag(BoundaryPathFlag::Polyline, false);
     }
     return _flags;
 }

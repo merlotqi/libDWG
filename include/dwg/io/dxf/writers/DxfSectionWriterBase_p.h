@@ -45,7 +45,6 @@ class DimensionAngular3Pt;
 class DimensionOrdinate;
 class Hatch;
 class HatchBoundaryPath;
-class HatchBoundaryPathEdge;
 class HatchPattern;
 class Ellipse;
 class Face3D;
@@ -106,7 +105,6 @@ private:
     void writeDimensionOrdinate(DimensionOrdinate *ordinate);
     void writeHatch(Hatch *hatch);
     void writeBoundaryPath(HatchBoundaryPath *path);
-    void writeHatchBoundaryPathEdge(HatchBoundaryPathEdge *edge);
     void writeHatchPattern(Hatch *hatch, HatchPattern *pattern);
     void writeEllipse(Ellipse *ellipse);
     void writeFace3D(Face3D *face);

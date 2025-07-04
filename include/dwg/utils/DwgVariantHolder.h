@@ -26,7 +26,7 @@
 #include <dwg/Coordinate.h>
 #include <dwg/exports.h>
 #include <dwg/utils/DateTime.h>
-#include <fmt/core.h>
+#include <fmt/format.h>
 #include <string_view>
 #include <type_traits>
 #include <typeinfo>

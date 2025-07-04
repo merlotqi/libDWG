@@ -28,6 +28,11 @@ namespace dwg {
 
 DwgVariant::DwgVariant() {}
 
+DwgVariant::DwgVariant(const char *val)
+{
+    construct(std::string(val));
+}
+
 DwgVariant::DwgVariant(const DwgVariant &other)
 {
     if ((this != &other) && !other.isEmpty())
@@ -63,6 +68,11 @@ const DwgVariant DwgVariant::operator+(const DwgVariant &other) const
         throw std::runtime_error("Invalid operation for this data type.");
 }
 
+const DwgVariant DwgVariant::operator+(const char *other) const
+{
+    return convert<std::string>() + other;
+}
+
 DwgVariant &DwgVariant::operator+=(const DwgVariant &other)
 {
     if (isInteger())
@@ -78,6 +88,11 @@ DwgVariant &DwgVariant::operator+=(const DwgVariant &other)
         return *this = add<std::string>(other);
     else
         throw std::runtime_error("Invalid operation for this data type.");
+}
+
+DwgVariant& DwgVariant::operator+=(const char *other)
+{
+    return *this = convert<std::string>() + other;
 }
 
 const DwgVariant DwgVariant::operator-(const DwgVariant &other) const

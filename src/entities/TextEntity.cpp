@@ -45,6 +45,11 @@ std::string TextEntity::subclassMarker() const
     return DxfSubclassMarker::Text;
 }
 
+const std::type_info &TextEntity::typeInfo() const
+{
+    return typeid(TextEntity);
+}
+
 double TextEntity::thickness() const
 {
     return _thickness;

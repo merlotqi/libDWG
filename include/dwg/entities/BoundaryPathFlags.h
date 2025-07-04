@@ -26,7 +26,7 @@
 
 namespace dwg {
 
-enum BoundaryPathFlag
+enum class BoundaryPathFlag
 {
     Default = 0,               ///< Default boundary path.
     External = 1,              ///< External boundary path.

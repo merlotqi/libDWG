@@ -40,6 +40,7 @@ public:
     virtual ObjectType objectType() const override;
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
+    virtual const std::type_info &typeInfo() const;
 
     double thickness() const;
     void setThickness(double);
