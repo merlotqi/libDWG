@@ -58,8 +58,6 @@ class MLine;
 class MText;
 class MultiLeader;
 class MultiLeaderAnnotContext;
-class MultiLeaderAnnotContextLeaderRoot;
-class MultiLeaderAnnotContextLeaderLine;
 class Point;
 class Polyline;
 class Seqend;
@@ -121,8 +119,6 @@ private:
     void writeMText(MText *mtext, bool writeSubclass = true);
     void writeMultiLeader(MultiLeader *multiLeader);
     void writeMultiLeaderAnnotContext(MultiLeaderAnnotContext *contextData);
-    void writeLeaderRoot(MultiLeaderAnnotContextLeaderRoot *leaderRoot);
-    void writeLeaderLine(MultiLeaderAnnotContextLeaderLine *leaderLine);
     void writePoint(Point *line);
     void writePolyline(Polyline *polyline);
     void writeSeqend(Seqend *seqend);

@@ -41,6 +41,7 @@ public:
         construct(val);
     }
 
+    DwgVariant(const char *val);
     DwgVariant(const DwgVariant &other);
     ~DwgVariant();
     void swap(DwgVariant &other);
@@ -122,6 +123,7 @@ public:
     {
         return convert<T>() + other;
     }
+    const DwgVariant operator+(const char *val) const;
     const DwgVariant operator+(const DwgVariant &other) const;
 
     DwgVariant &operator++();
@@ -135,6 +137,7 @@ public:
     {
         return *this = convert<T>() + other;
     }
+    DwgVariant &operator+=(const char *val);
     DwgVariant &operator+=(const DwgVariant &other);
 
     template<typename T>
@@ -186,6 +189,7 @@ public:
             return false;
         return convert<T>() == other;
     }
+    bool operator==(const char *val) const;
     bool operator==(const DwgVariant &other) const;
 
     template<typename T>
@@ -195,6 +199,7 @@ public:
             return true;
         return convert<T>() != other;
     }
+    bool operator!=(const char *val) const;
     bool operator!=(const DwgVariant &other) const;
 
     template<typename T>
@@ -323,6 +328,7 @@ private:
         return convert<T>() / other.convert<T>();
     }
 
+    void construct(const char *val);
     void construct(const DwgVariant &other);
 
     std::unique_ptr<DwgVariantHolder> _placeholder;

@@ -51,8 +51,6 @@ class CadDimensionTemplate;
 class CadDictionaryTemplate;
 class CadMLeaderTemplate;
 class MultiLeaderAnnotContext;
-class MultiLeaderAnnotContextLeaderRoot;
-class MultiLeaderAnnotContextLeaderLine;
 class CadWipeoutBase;
 class PlotSettings;
 class Vertex;
@@ -166,8 +164,6 @@ private:
     CadTemplate *readMultiLeader();
     MultiLeaderAnnotContext *readMultiLeaderAnnotContext(MultiLeaderAnnotContext *annotContext,
                                                          CadMLeaderTemplate *temp);
-    MultiLeaderAnnotContextLeaderRoot *readLeaderRoot(CadMLeaderTemplate *temp);
-    MultiLeaderAnnotContextLeaderLine *readLeaderLine(CadMLeaderTemplate *temp);
     CadTemplate *readMultiLeaderStyle();
     CadTemplate *readTolerance();
     CadTemplate *readMLine();

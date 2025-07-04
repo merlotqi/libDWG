@@ -937,7 +937,7 @@ template<>
 class LIBDWG_API DwgVariantHolderT<std::string> : public DwgVariantHolder
 {
 public:
-    DwgVariantHolderT(const char *pVal);
+    DwgVariantHolderT(const char *val);
     DwgVariantHolderT(const std::string &val);
     ~DwgVariantHolderT() override = default;
     DwgVariantHolderT() = delete;
@@ -975,7 +975,8 @@ template<>
 class LIBDWG_API DwgVariantHolderT<std::wstring> : public DwgVariantHolder
 {
 public:
-    DwgVariantHolderT(const char *pVal);
+    DwgVariantHolderT(const char *val);
+    DwgVariantHolderT(const wchar_t *val);
     DwgVariantHolderT(const std::wstring &val);
     ~DwgVariantHolderT() override = default;
     DwgVariantHolderT() = delete;
