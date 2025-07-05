@@ -42,11 +42,6 @@ CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variab
     }
 }
 
-CadSystemVariableAttribute::CadSystemVariableAttribute(const std::string &variable, const std::vector<DxfCode> &codes)
-    : _name(variable), _valueCodes(codes), _isName(false), _referenceType(DxfReferenceType::None)
-{
-}
-
 CadSystemVariableAttribute::CadSystemVariableAttribute(DxfReferenceTypes rf, const std::string &variable,
                                                        const std::vector<int> &codes)
     : CadSystemVariableAttribute(variable, codes)

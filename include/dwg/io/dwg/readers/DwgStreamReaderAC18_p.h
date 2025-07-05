@@ -35,7 +35,7 @@ public:
 
     Color readCmColor() override;
 
-    Color readEnColor(Transparency &, bool &isBookColor);
+    Color readEnColor(Transparency &, bool &isBookColor) override;
 };
 
 }// namespace dwg

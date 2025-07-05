@@ -24,6 +24,7 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
+#include <stdexcept>
 
 namespace dwg {
 

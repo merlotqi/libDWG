@@ -24,7 +24,7 @@
 
 namespace dwg {
 
-DwgSectionLocatorRecord::DwgSectionLocatorRecord(int number, long long seeker, long long size)
+DwgSectionLocatorRecord::DwgSectionLocatorRecord(std::optional<int> number, long long seeker, long long size)
     : _number(number), _seeker(seeker), _size(size)
 {
 }
@@ -34,7 +34,7 @@ bool DwgSectionLocatorRecord::isInTheRecord(int position) const
     return position >= _seeker && position < _seeker + _size;
 }
 
-int DwgSectionLocatorRecord::number() const
+std::optional<int> DwgSectionLocatorRecord::number() const
 {
     return _number;
 }

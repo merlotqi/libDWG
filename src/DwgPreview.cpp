@@ -21,8 +21,8 @@
  */
 
 #include <dwg/DwgPreview.h>
-#include <fstream>
 #include <fmt/format.h>
+#include <fstream>
 #include <magic_enum/magic_enum.hpp>
 
 namespace dwg {
@@ -52,7 +52,7 @@ std::vector<unsigned char> DwgPreview::rawImage() const
     return _rawImage;
 }
 
-void DwgPreview::save(const std::string &path) 
+void DwgPreview::save(const std::string &path)
 {
     bool writeHeader = false;
     if (_code == PreviewType::Bmp || _code == PreviewType::Wmf || _code == PreviewType::Png)

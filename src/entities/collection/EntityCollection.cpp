@@ -20,8 +20,10 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <algorithm>
 #include <dwg/entities/Entity.h>
 #include <dwg/entities/collection/EntityCollection.h>
+#include <stdexcept>
 
 namespace dwg {
 

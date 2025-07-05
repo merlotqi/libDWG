@@ -20,6 +20,7 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <algorithm>
 #include <dwg/entities/HatchBoundaryPath.h>
 
 namespace dwg {

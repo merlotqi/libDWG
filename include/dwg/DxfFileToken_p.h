@@ -140,9 +140,9 @@ public:
     static constexpr auto ObjectBlockVisibilityParameter = "BLOCKVISIBILITYPARAMETER";
     static constexpr auto ObjectTableContent = "TABLECONTENT";
     static constexpr auto ObjectGeoData = "GEODATA";
-	static constexpr auto ObjectGroup = "GROUP";
-	static constexpr auto ObjectTableStyle = "TABLESTYLE";
-	static constexpr auto ObjectCellStyleMap = "CELLSTYLEMAP";
+    static constexpr auto ObjectGroup = "GROUP";
+    static constexpr auto ObjectTableStyle = "TABLESTYLE";
+    static constexpr auto ObjectCellStyleMap = "CELLSTYLEMAP";
 };
 
 }// namespace dwg

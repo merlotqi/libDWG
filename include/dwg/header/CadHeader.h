@@ -782,7 +782,7 @@ public:
 
     double sweptSolidHeight() const;
     void setSweptSolidHeight(double);
-    
+
     double sweptSolidWidth() const;
     void setSweptSolidWidth(double);
 

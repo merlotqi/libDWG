@@ -26,6 +26,7 @@
 #include <dwg/entities/TextHorizontalAlignment.h>
 #include <dwg/entities/TextMirrorFlag.h>
 #include <dwg/entities/TextVerticalAlignment.h>
+#include <typeinfo>
 
 namespace dwg {
 

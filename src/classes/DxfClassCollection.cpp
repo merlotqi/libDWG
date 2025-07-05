@@ -193,12 +193,12 @@ void DxfClassCollection::UpdateDxfClasses(CadDocument *doc)
                                              ACadVersion::AC1015, DxfFileToken::ObjectDBColor, 499, 14, ProxyFlag::None,
                                              false));
 
-	//AcDbGeoData
+    //AcDbGeoData
     doc->classes()->addOrUpdate(new DxfClass(DxfSubclassMarker::GeoData, (short) (500 + doc->classes()->count()),
                                              ACadVersion::AC1021, DxfFileToken::ObjectGeoData, 499, 45,
                                              (ProxyFlags) 4095, false));
 
-	//AcDbMLeader
+    //AcDbMLeader
     doc->classes()->addOrUpdate(
             new DxfClass(DxfSubclassMarker::MultiLeader, (short) (500 + doc->classes()->count()), ACadVersion::MC0_0,
                          DxfFileToken::EntityMultiLeader, 499, 0,

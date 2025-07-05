@@ -22,8 +22,10 @@
 
 #pragma once
 
+#include <cstdint>
 #include <dwg/exports.h>
 #include <memory>
+#include <string.h>
 #include <vector>
 
 namespace dwg {
@@ -91,10 +93,10 @@ public:
         constexpr size_t sz = sizeof(T);
         std::vector<unsigned char> buffer;
         buffer.resize(sz);
-        std::memcpy(buffer.data(), bytes, sz);
+        memcpy(buffer.data(), bytes, sz);
         byteswap(buffer.data(), sz);
         T value;
-        std::memcpy(&value, buffer.data(), sz);
+        memcpy(&value, buffer.data(), sz);
         return value;
     }
 

@@ -23,6 +23,7 @@
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
 #include <dwg/header/CadHeader.h>
+#include <dwg/objects/MLineStyle.h>
 #include <dwg/tables/DimensionStyle.h>
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
@@ -33,8 +34,8 @@
 #include <dwg/tables/collections/LineTypesTable.h>
 #include <dwg/tables/collections/TextStylesTable.h>
 #include <dwg/tables/collections/UCSTable.h>
-#include <dwg/objects/MLineStyle.h>
 #include <stdexcept>
+
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -2886,10 +2887,7 @@ MLineStyle *CadHeader::currentMLineStyle() const
     return _currentMLineStyle;
 }
 
-void CadHeader::setCurrentMLineStyle(MLineStyle *value)
-{
-
-}
+void CadHeader::setCurrentMLineStyle(MLineStyle *value) {}
 
 DimensionStyle *CadHeader::currentDimensionStyle() const
 {

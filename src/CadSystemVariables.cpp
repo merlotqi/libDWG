@@ -24,6 +24,8 @@
 #include <dwg/CadSystemVariables_p.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/utils/StringHelp.h>
+#include <initializer_list>
+#include <vector>
 
 namespace dwg {
 
@@ -273,7 +275,7 @@ static std::vector<CadSystemVariableAttribute> _headerVariables = {
         {CadSystemVariables::USERI5, {70}},
         {CadSystemVariables::USRTIMER, {70}},
         {CadSystemVariables::VERSIONGUID, {2}},
-        {CadSystemVariables::ACADVER, {DxfCode::Text}},
+        {CadSystemVariables::ACADVER, {1}},
         {CadSystemVariables::PSVPSCALE, {40}},
         {CadSystemVariables::WORLDVIEW, {70}},
         {CadSystemVariables::XEDIT, {290}},

@@ -19,3 +19,35 @@
  *
  * For more information, visit the project's homepage or contact the author.
  */
+
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/entities/RasterImage.h>
+
+namespace dwg {
+
+RasterImage::RasterImage() {}
+
+RasterImage::RasterImage(ImageDefinition *definition)
+{
+    setDefinition(definition);
+}
+
+RasterImage::~RasterImage() {}
+
+ObjectType RasterImage::objectType() const
+{
+    return ObjectType::UNLISTED;
+}
+
+std::string RasterImage::objectName() const
+{
+    return DxfFileToken::EntityImage;
+}
+
+std::string RasterImage::subclassMarker() const
+{
+    return DxfSubclassMarker::RasterImage;
+}
+
+}// namespace dwg

@@ -41,8 +41,6 @@ public:
 
     CadSystemVariableAttribute(const std::string &variable, const std::vector<int> &codes);
 
-    CadSystemVariableAttribute(const std::string &variable, const std::vector<DxfCode> &codes);
-
     CadSystemVariableAttribute(DxfReferenceTypes rf, const std::string &variable, const std::vector<int> &codes);
 
     std::vector<DxfCode> valueCodes() const;

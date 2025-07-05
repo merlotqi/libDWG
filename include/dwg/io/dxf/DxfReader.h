@@ -22,10 +22,11 @@
 
 #pragma once
 
+#include <dwg/ACadVersion.h>
 #include <dwg/io/CadReaderBase.h>
 #include <dwg/io/dxf/DxfReaderConfiguration.h>
 #include <vector>
-#include <dwg/ACadVersion.h>
+
 
 namespace dwg {
 

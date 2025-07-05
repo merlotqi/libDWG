@@ -64,4 +64,6 @@ void DxfSectionWriterBase::writeCommonEntityData(Entity *entity) {}
 
 void DxfSectionWriterBase::writeLongTextValue(int code, int subcode, const std::string &text) {}
 
+void DxfSectionWriterBase::notify(const std::string &, Notification notificationType) {}
+
 }// namespace dwg

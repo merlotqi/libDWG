@@ -23,6 +23,7 @@
 #pragma once
 
 #include <dwg/ACadVersion.h>
+#include <dwg/io/Notification.h>
 #include <dwg/io/dxf/DxfWriterConfiguration.h>
 
 namespace dwg {
@@ -91,6 +92,8 @@ protected:
     void writeCommonEntityData(Entity *entity);
     void writeLongTextValue(int code, int subcode, const std::string &text);
     void writeEntity(Entity *entity);
+
+    void notify(const std::string &, Notification notificationType = Notification::None);
 
 private:
     void writeArc(Arc *arc);

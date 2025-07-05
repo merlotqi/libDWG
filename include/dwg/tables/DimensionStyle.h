@@ -37,6 +37,7 @@
 #include <dwg/tables/ZeroHandling.h>
 #include <dwg/units/AngularUnitFormat.h>
 #include <dwg/units/LinearUnitFormat.h>
+#include <math.h>
 #include <string>
 
 namespace dwg {

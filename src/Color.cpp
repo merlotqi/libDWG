@@ -311,6 +311,7 @@ std::vector<unsigned char> Color::getRgb() const
         rgb[0] = (unsigned char) (_color >> 16);
         rgb[1] = (unsigned char) (_color >> 8);
         rgb[2] = (unsigned char) _color;
+        return rgb;
     }
     else
     {

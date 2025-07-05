@@ -61,9 +61,9 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::fstream *stream, Encoding 
             {DwgSectionDefinition::ObjFreeSpace,    {DwgSectionLocatorRecord(3), nullptr}},
             {    DwgSectionDefinition::Template,    {DwgSectionLocatorRecord(4), nullptr}},
             {   DwgSectionDefinition::AuxHeader,    {DwgSectionLocatorRecord(5), nullptr}},
-            { DwgSectionDefinition::AcDbObjects, {DwgSectionLocatorRecord(NULL), nullptr}},
+            { DwgSectionDefinition::AcDbObjects, {DwgSectionLocatorRecord(std::nullopt), nullptr}},
             {     DwgSectionDefinition::Handles,    {DwgSectionLocatorRecord(2), nullptr}},
-            {     DwgSectionDefinition::Preview, {DwgSectionLocatorRecord(NULL), nullptr}},
+            {     DwgSectionDefinition::Preview, {DwgSectionLocatorRecord(std::nullopt), nullptr}},
     };
 }
 
@@ -96,12 +96,12 @@ void DwgFileHeaderWriterAC15::writeFileHeader()
 {
     // std::stringstream memoryStream;
 
-    // //0x00	6	“ACXXXX” version string
+    // //0x00	6	"ACXXXX" version string
     // IDwgStreamWriter *writer = DwgStreamWriterBase::GetStreamWriter(_version, &memoryStream, _encoding);
     // writer->WriteBytes(
     //         Encoding::ASCII.GetBytes(_document.Header.VersionString));
     // //The next 7 starting at offset 0x06 are to be six bytes of 0
-    // //(in R14, 5 0’s and the ACADMAINTVER variable) and a byte of 1.
+    // //(in R14, 5 0's and the ACADMAINTVER variable) and a byte of 1.
     // writer->WriteBytes({0, 0, 0, 0, 0, 15, 1});
     // //At 0x0D is a seeker (4 byte long absolute address) for the beginning sentinel of the image data.
     // writer->WriteRawLong(

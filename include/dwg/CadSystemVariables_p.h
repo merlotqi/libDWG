@@ -283,7 +283,7 @@ public:
     static constexpr auto PSVPSCALE = "$PSVPSCALE";
     static constexpr auto WORLDVIEW = "$WORLDVIEW";
     static constexpr auto XEDIT = "$XEDIT";
-    
+
     static std::map<std::string, CadSystemVariableAttribute> headerMap();
 
     static DwgVariant value(const std::string &, const DxfCode &, CadHeader *header);

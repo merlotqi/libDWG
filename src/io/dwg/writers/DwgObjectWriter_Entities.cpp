@@ -2051,26 +2051,26 @@ void DwgObjectWriter::writeMText(MText *mtext)
     //END REDUNDANT FIELDS
 
     //Column type BS 71 0 = No columns, 1 = static columns, 2 = dynamic columns
-    _writer->writeBitShort((short) mtext->column().ColumnType);
+    _writer->writeBitShort((short) mtext->column().columnType);
 
     //IF Has Columns data(column type is not 0)
-    if (mtext->column().ColumnType != ColumnType::NoColumns)
+    if (mtext->column().columnType != ColumnType::NoColumns)
     {
         //Column height count BL 72
-        _writer->writeBitLong(mtext->column().ColumnCount);
+        _writer->writeBitLong(mtext->column().columnCount);
         //Columnn width BD 44
-        _writer->writeBitDouble(mtext->column().ColumnWidth);
+        _writer->writeBitDouble(mtext->column().columnWidth);
         //Gutter BD 45
-        _writer->writeBitDouble(mtext->column().ColumnGutter);
+        _writer->writeBitDouble(mtext->column().columnGutter);
         //Auto height? B 73
-        _writer->writeBit(mtext->column().ColumnAutoHeight);
+        _writer->writeBit(mtext->column().columnAutoHeight);
         //Flow reversed? B 74
-        _writer->writeBit(mtext->column().ColumnFlowReversed);
+        _writer->writeBit(mtext->column().columnFlowReversed);
 
         //IF not auto height and column type is dynamic columns
-        if (!mtext->column().ColumnAutoHeight && mtext->column().ColumnType == ColumnType::DynamicColumns)
+        if (!mtext->column().columnAutoHeight && mtext->column().columnType == ColumnType::DynamicColumns)
         {
-            for (double h: mtext->column().ColumnHeights)
+            for (double h: mtext->column().columnHeights)
             {
                 //Column height BD 46
                 _writer->writeBitDouble(h);

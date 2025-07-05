@@ -90,7 +90,7 @@ DwgVariant &DwgVariant::operator+=(const DwgVariant &other)
         throw std::runtime_error("Invalid operation for this data type.");
 }
 
-DwgVariant& DwgVariant::operator+=(const char *other)
+DwgVariant &DwgVariant::operator+=(const char *other)
 {
     return *this = convert<std::string>() + other;
 }

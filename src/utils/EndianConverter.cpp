@@ -182,7 +182,7 @@ protected:
         {
             swap[i] = buffer[length - 1 - i];
         }
-        std::memcpy(buffer, swap, length);
+        memcpy(buffer, swap, length);
         delete[] swap;
     }
 };

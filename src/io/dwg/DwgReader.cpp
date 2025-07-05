@@ -301,7 +301,7 @@ void DwgReader::readFileHeaderAC15(DwgFileHeaderAC15 *fileheader, IDwgStreamRead
         record.setNumber(sreader->readByte());
         record.setSeeker(sreader->readRawLong());
         record.setSize(sreader->readRawLong());
-        fileheader->records().insert({record.number(), record});
+        fileheader->records().insert({record.number().value(), record});
     }
 
     // RS : CRC for BOF to this point.
@@ -425,7 +425,7 @@ void DwgReader::readFileHeaderAC18(DwgFileHeaderAC18 *fileheader, IDwgStreamRead
             if (record.number() >= 0)
             {
                 record.setSeeker(total);
-                fileheader->records().insert({record.number(), record});
+                fileheader->records().insert({record.number().value(), record});
             }
             else
             {
@@ -1094,7 +1094,7 @@ std::vector<unsigned char> DwgReader::getPageBuffer(unsigned long long pageOffse
     std::vector<unsigned char> buffer(length, 0);
 
     //Relative to data page map 1, add 0x480 to get stream position
-    stream->seekg((std::streampos)(0x480 + pageOffset));
+    stream->seekg((std::streampos) (0x480 + pageOffset));
     stream->read(reinterpret_cast<char *>(buffer.data()), length);
 
     std::vector<unsigned char> compressedData(totalSize, 0);

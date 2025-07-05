@@ -40,13 +40,13 @@ class LIBDWG_API MText : public Entity
 public:
     struct LIBDWG_API TextColumn
     {
-        ColumnType ColumnType;            ///< Type of column layout.
-        int ColumnCount;                  ///< The number of columns.
-        bool ColumnFlowReversed;          ///< Whether the column flow is reversed.
-        bool ColumnAutoHeight;            ///< Whether the column height is automatically adjusted.
-        double ColumnWidth;               ///< The width of each column.
-        double ColumnGutter;              ///< The spacing between columns.
-        std::vector<double> ColumnHeights;///< List of individual column heights.
+        ColumnType columnType;            ///< Type of column layout.
+        int columnCount;                  ///< The number of columns.
+        bool columnFlowReversed;          ///< Whether the column flow is reversed.
+        bool columnAutoHeight;            ///< Whether the column height is automatically adjusted.
+        double columnWidth;               ///< The width of each column.
+        double columnGutter;              ///< The spacing between columns.
+        std::vector<double> columnHeights;///< List of individual column heights.
 
         TextColumn();
     };

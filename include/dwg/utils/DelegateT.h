@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <forward_list>
 #include <typeinfo>
 
 namespace dwg {

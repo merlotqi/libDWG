@@ -22,6 +22,7 @@
 
 #include <dwg/io/dwg/readers/DwgLZ77AC18Decompressor_p.h>
 #include <dwg/utils/StreamWrapper.h>
+#include <limits.h>
 
 namespace dwg {
 

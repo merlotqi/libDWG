@@ -27,6 +27,7 @@
 #include <dwg/objects/MLineStyle.h>
 #include <dwg/objects/MultiLeaderStyle.h>
 #include <dwg/objects/Scale.h>
+#include <stdexcept>
 
 namespace dwg {
 

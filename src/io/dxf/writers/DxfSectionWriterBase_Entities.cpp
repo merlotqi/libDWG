@@ -52,15 +52,19 @@
 #include <dwg/entities/MultiLeader.h>
 #include <dwg/entities/Point.h>
 #include <dwg/entities/PolyLine.h>
+#include <dwg/entities/RasterImage.h>
 #include <dwg/entities/Ray.h>
 #include <dwg/entities/Seqend.h>
 #include <dwg/entities/Shape.h>
 #include <dwg/entities/Solid.h>
+#include <dwg/entities/Solid3D.h>
 #include <dwg/entities/Spline.h>
 #include <dwg/entities/TextEntity.h>
 #include <dwg/entities/Tolerance.h>
+#include <dwg/entities/UnknownEntity.h>
 #include <dwg/entities/Vertex.h>
 #include <dwg/entities/Viewport.h>
+#include <dwg/entities/Wipeout.h>
 #include <dwg/entities/XLine.h>
 #include <dwg/entities/collection/AttributeEntitySeqendCollection.h>
 #include <dwg/entities/collection/VertexSeqendCollection.h>
@@ -76,11 +80,170 @@
 #include <dwg/tables/Layer.h>
 #include <dwg/tables/LineType.h>
 #include <dwg/tables/TextStyle.h>
+#include <dwg/xdata/ExtendedDataDictionary.h>
 #include <fmt/format.h>
 
 namespace dwg {
 
-void DxfSectionWriterBase::writeEntity(Entity *entity) {}
+void DxfSectionWriterBase::writeEntity(Entity *entity)
+{
+    assert(entity);
+    //TODO: Implement complex entities in a separated branch
+
+    if (dynamic_cast<TableEntry *>(entity) || dynamic_cast<Solid3D *>(entity) || dynamic_cast<UnknownEntity *>(entity))
+    {
+        notify(fmt::format("Entity type not implemented : {entity.GetType().FullName}"));
+    }
+
+    _writer->write(DxfCode::Start, entity->objectName());
+
+    writeCommonObjectData(entity);
+
+    writeCommonEntityData(entity);
+
+    Arc *arc = dynamic_cast<Arc *>(entity);
+    Circle *circle = dynamic_cast<Circle *>(entity);
+    Dimension *dimension = dynamic_cast<Dimension *>(entity);
+    Ellipse *ellipse = dynamic_cast<Ellipse *>(entity);
+    Face3D *face3D = dynamic_cast<Face3D *>(entity);
+    Hatch *hatch = dynamic_cast<Hatch *>(entity);
+    Insert *insert = dynamic_cast<Insert *>(entity);
+    Leader *leader = dynamic_cast<Leader *>(entity);
+    Line *line = dynamic_cast<Line *>(entity);
+    LwPolyline *lwPolyline = dynamic_cast<LwPolyline *>(entity);
+    Mesh *mesh = dynamic_cast<Mesh *>(entity);
+    MLine *mline = dynamic_cast<MLine *>(entity);
+    MText *mtext = dynamic_cast<MText *>(entity);
+    MultiLeader *multiLeader = dynamic_cast<MultiLeader *>(entity);
+    Point *point = dynamic_cast<Point *>(entity);
+    Polyline *polyline = dynamic_cast<Polyline *>(entity);
+    RasterImage *rasterImage = dynamic_cast<RasterImage *>(entity);
+    Ray *ray = dynamic_cast<Ray *>(entity);
+    Shape *shape = dynamic_cast<Shape *>(entity);
+    Solid *solid = dynamic_cast<Solid *>(entity);
+    Spline *spline = dynamic_cast<Spline *>(entity);
+    TextEntity *text = dynamic_cast<TextEntity *>(entity);
+    Tolerance *tolerance = dynamic_cast<Tolerance *>(entity);
+    Vertex *vertex = dynamic_cast<Vertex *>(entity);
+    Viewport *viewport = dynamic_cast<Viewport *>(entity);
+    Wipeout *wipeout = dynamic_cast<Wipeout *>(entity);
+    XLine *xline = dynamic_cast<XLine *>(entity);
+
+    if (arc)
+    {
+        writeArc(arc);
+    }
+    else if (circle)
+    {
+        writeCircle(circle);
+    }
+    else if (dimension)
+    {
+        writeDimension(dimension);
+    }
+    else if (ellipse)
+    {
+        writeEllipse(ellipse);
+    }
+    else if (face3D)
+    {
+        writeFace3D(face3D);
+    }
+    else if (hatch)
+    {
+        writeHatch(hatch);
+    }
+    else if (insert)
+    {
+        writeInsert(insert);
+    }
+    else if (leader)
+    {
+        writeLeader(leader);
+    }
+    else if (line)
+    {
+        writeLine(line);
+    }
+    else if (lwPolyline)
+    {
+        writeLwPolyline(lwPolyline);
+    }
+    else if (mesh)
+    {
+        writeMesh(mesh);
+    }
+    else if (mline)
+    {
+        writeMLine(mline);
+    }
+    else if (mtext)
+    {
+        writeMText(mtext);
+    }
+    else if (multiLeader)
+    {
+        writeMultiLeader(multiLeader);
+    }
+    else if (point)
+    {
+        writePoint(point);
+    }
+    else if (polyline)
+    {
+        writePolyline(polyline);
+    }
+    else if (rasterImage)
+    {
+        writeCadImage(rasterImage);
+    }
+    else if (ray)
+    {
+        writeRay(ray);
+    }
+    else if (shape)
+    {
+        writeShape(shape);
+    }
+    else if (solid)
+    {
+        writeSolid(solid);
+    }
+    else if (spline)
+    {
+        writeSpline(spline);
+    }
+    else if (text)
+    {
+        writeTextEntity(text);
+    }
+    else if (tolerance)
+    {
+        writeTolerance(tolerance);
+    }
+    else if (vertex)
+    {
+        writeVertex(vertex);
+    }
+    else if (viewport)
+    {
+        writeViewport(viewport);
+    }
+    else if (wipeout)
+    {
+        writeCadImage(wipeout);
+    }
+    else if (xline)
+    {
+        writeXLine(xline);
+    }
+    else
+    {
+        throw std::runtime_error(fmt::format("Entity not implemented {entity.GetType().FullName}"));
+    }
+
+    writeExtendedData(entity->extendedData());
+}
 
 void DxfSectionWriterBase::writeArc(Arc *arc)
 {

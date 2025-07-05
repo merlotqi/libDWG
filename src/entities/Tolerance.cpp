@@ -25,6 +25,7 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Tolerance.h>
 #include <dwg/tables/DimensionStyle.h>
+#include <stdexcept>
 
 namespace dwg {
 
