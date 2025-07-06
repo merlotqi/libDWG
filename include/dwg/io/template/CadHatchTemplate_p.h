@@ -30,6 +30,9 @@ namespace dwg {
 class Hatch;
 class CadBoundaryPathTemplate
 {
+    HatchBoundaryPath *_path = nullptr;
+    std::vector<unsigned long long> _handles;
+
 public:
     CadBoundaryPathTemplate();
     ~CadBoundaryPathTemplate();
@@ -46,6 +49,9 @@ public:
 
 class CadHatchTemplate : public CadEntityTemplate
 {
+    std::vector<CadBoundaryPathTemplate *> _pathTempaltes;
+    std::string _hatchPatternName;
+
 public:
     CadHatchTemplate();
     CadHatchTemplate(Hatch *hatch);
@@ -54,8 +60,8 @@ public:
     std::string hatchPatternName() const;
     void setHatchPatternName(const std::string &name);
 
-    std::vector<CadBoundaryPathTemplate> PathTempaltes() const;
-    std::vector<CadBoundaryPathTemplate> &PathTempaltes();
+    std::vector<CadBoundaryPathTemplate *> pathTempaltes() const;
+    std::vector<CadBoundaryPathTemplate *> &pathTempaltes();
 
     void build(CadDocumentBuilder *builder) override;
 };

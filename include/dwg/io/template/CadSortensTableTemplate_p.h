@@ -21,3 +21,34 @@
  */
 
 #pragma once
+
+#include <dwg/io/template/CadTemplate_p.h>
+
+namespace dwg {
+
+class SortEntitiesTable;
+class CadSortensTableTemplate : public CadTemplateT<SortEntitiesTable *>
+{
+public:
+    CadSortensTableTemplate();
+    CadSortensTableTemplate(SortEntitiesTable *);
+    ~CadSortensTableTemplate();
+
+    std::optional<unsigned long long> blockOwnerHandle() const;
+    void setBlockOwnerHandle(const unsigned long long &);
+
+    typedef std::optional<unsigned long long> optional_handle;
+    typedef std::pair<optional_handle, optional_handle> optional_handle_pair;
+    typedef std::vector<optional_handle_pair> optional_handle_vector;
+
+    const optional_handle_vector &values() const;
+    optional_handle_vector &values();
+
+    void build(CadDocumentBuilder *builder) override;
+
+private:
+    std::optional<unsigned long long> _blockOwnerHandle;
+    optional_handle_vector _values;
+};
+
+}// namespace dwg

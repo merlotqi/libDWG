@@ -24,4 +24,57 @@
 
 namespace dwg {
 
+CadMLineTemplate::CadMLineTemplate() : CadEntityTemplate(new MLine()) {}
+
+CadMLineTemplate::CadMLineTemplate(MLine *mline) : CadEntityTemplate(mline) {}
+
+CadMLineTemplate::~CadMLineTemplate() {}
+
+std::optional<unsigned long long> CadMLineTemplate::MLineStylehandle() const
+{
+    return _mlineStyleHandle;
+}
+
+void CadMLineTemplate::setMLineStylehandle(unsigned long long handle)
+{
+    _mlineStyleHandle = handle;
+}
+
+const std::string &CadMLineTemplate::MLineStyleName() const
+{
+    return _mlineStyleName;
+}
+
+void CadMLineTemplate::setMLineStyleName(const std::string &name)
+{
+    _mlineStyleName = name;
+}
+
+std::optional<int> CadMLineTemplate::NVertex() const
+{
+    return _nVertex;
+}
+
+void CadMLineTemplate::setNVertex(int n)
+{
+    _nVertex = n;
+}
+
+std::optional<int> CadMLineTemplate::NElements() const
+{
+    return _nElements;
+}
+
+void CadMLineTemplate::setNElements(int n)
+{
+    _nElements = n;
+}
+
+bool CadMLineTemplate::tryReadVertex(int dxfcode, double value)
+{
+    return false;
+}
+
+void CadMLineTemplate::build(CadDocumentBuilder *builder) {}
+
 }// namespace dwg

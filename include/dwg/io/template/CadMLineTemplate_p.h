@@ -23,11 +23,40 @@
 #pragma once
 
 #include <dwg/io/template/CadEntityTemplate_p.h>
+#include <dwg/entities/MLine.h>
 
 namespace dwg {
 
 class CadMLineTemplate : public CadEntityTemplate
 {
+	std::optional<unsigned long long > _mlineStyleHandle;
+	std::string _mlineStyleName;
+    std::optional<int> _nVertex;
+    std::optional<int> _nElements;
+
+	MLine::Vertex _curVertex;
+    MLine::Segment _currSegmentElement;
+
+public:
+    CadMLineTemplate();
+    CadMLineTemplate(MLine *mline);
+    ~CadMLineTemplate();
+
+    std::optional<unsigned long long> MLineStylehandle() const;
+    void setMLineStylehandle(unsigned long long handle);
+
+    const std::string &MLineStyleName() const;
+    void setMLineStyleName(const std::string &name);
+
+    std::optional<int> NVertex() const;
+    void setNVertex(int n);
+
+    std::optional<int> NElements() const;
+    void setNElements(int n);
+
+    bool tryReadVertex(int dxfcode, double value);
+
+	void build(CadDocumentBuilder *builder);
 };
 
 }// namespace dwg

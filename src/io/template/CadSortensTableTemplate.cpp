@@ -21,7 +21,36 @@
  */
 
 #include <dwg/io/template/CadSortensTableTemplate_p.h>
+#include <dwg/objects/SortEntitiesTable.h>
 
 namespace dwg {
+
+CadSortensTableTemplate::CadSortensTableTemplate() : CadTemplateT<SortEntitiesTable *>(new SortEntitiesTable()) {}
+
+CadSortensTableTemplate::CadSortensTableTemplate(SortEntitiesTable *table) : CadTemplateT<SortEntitiesTable *>(table) {}
+
+CadSortensTableTemplate::~CadSortensTableTemplate() {}
+
+std::optional<unsigned long long> CadSortensTableTemplate::blockOwnerHandle() const
+{
+    return _blockOwnerHandle;
+}
+void CadSortensTableTemplate::setBlockOwnerHandle(const unsigned long long &value)
+{
+    _blockOwnerHandle = value;
+}
+
+
+const CadSortensTableTemplate::optional_handle_vector &CadSortensTableTemplate::values() const
+{
+    return _values;
+}
+
+CadSortensTableTemplate::optional_handle_vector &CadSortensTableTemplate::values()
+{
+    return _values;
+}
+
+void CadSortensTableTemplate::build(CadDocumentBuilder *builder) {}
 
 }// namespace dwg
