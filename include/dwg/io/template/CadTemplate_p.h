@@ -92,8 +92,6 @@ template<typename T>
 class CadTemplateT : public CadTemplate
 {
     static_assert(std::is_pointer<T>::value, "T must be a pointer type.");
-    static_assert(std::is_base_of<CadObject, std::remove_pointer_t<T>>::value,
-                  "T must point to a type derived from CadObject.");
 
 public:
     CadTemplateT(T obj) : CadTemplate(obj) {}

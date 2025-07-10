@@ -48,13 +48,12 @@ std::string DxfHeaderSectionWriter::sectionName() const
 void DxfHeaderSectionWriter::writeSection()
 {
     std::map<std::string, CadSystemVariableAttribute> mapAttr = CadSystemVariables::headerMap();
+    auto && configue_variables = _configuration.headerVariables();
     for (auto &&[key, value]: mapAttr)
     {
         bool contains = false;
-        auto filter = [key](const std::string &v) { return v == key; };
-        auto itFind =
-                std::find_if(_configuration.headerVariables().begin(), _configuration.headerVariables().end(), filter);
-        if (itFind != _configuration.headerVariables().end())
+        auto itFind = configue_variables.find(key);
+        if (itFind != configue_variables.end())
             contains = true;
         if (!_configuration.writeAllHeaderVariables() && !contains)
             continue;

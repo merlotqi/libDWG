@@ -21,6 +21,7 @@
  */
 
 #include <dwg/entities/Hatch.h>
+#include <dwg/entities/HatchBoundaryPath.h>
 #include <dwg/io/template/CadHatchTemplate_p.h>
 
 namespace dwg {
@@ -29,7 +30,10 @@ CadBoundaryPathTemplate::CadBoundaryPathTemplate() {}
 
 CadBoundaryPathTemplate::~CadBoundaryPathTemplate() {}
 
-HatchBoundaryPath *CadBoundaryPathTemplate::path() const {}
+HatchBoundaryPath *CadBoundaryPathTemplate::path() const 
+{
+    return _path;
+}
 
 void CadBoundaryPathTemplate::setPath(HatchBoundaryPath *path) {}
 
