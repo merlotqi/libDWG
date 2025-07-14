@@ -24,6 +24,7 @@
 
 #include <dwg/io/dxf/writers/DxfStreamWriterBase_p.h>
 #include <dwg/utils/Encoding.h>
+#include <fstream>
 
 namespace dwg {
 
@@ -36,6 +37,10 @@ public:
     void close() override;
     void writeDxfCode(int code) override;
     void writeValue(int code, DwgVariant value) override;
+
+private:
+    std::fstream *_stream;
+    Encoding _encoding;
 };
 
 }// namespace dwg

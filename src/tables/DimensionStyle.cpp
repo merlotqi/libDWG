@@ -842,16 +842,6 @@ LineType *DimensionStyle::lineTypeExt2() const
     return _lineTypeExt2;
 }
 
-short DimensionStyle::angularDecimalPlaces() const
-{
-    return _angularDecimalPlaces;
-}
-
-void DimensionStyle::setAngularDecimalPlaces(short value)
-{
-    _angularDecimalPlaces = value;
-}
-
 void DimensionStyle::setLineTypeExt2(LineType *) {}
 
 void DimensionStyle::assignDocument(CadDocument *doc) {}
@@ -861,34 +851,34 @@ void DimensionStyle::unassignDocument() {}
 std::vector<std::string> DimensionStyle::getDimStylePrefixAndSuffix(const std::string &text, char start, char end,
                                                                     std::string &prefix, std::string &suffix)
 {
-	int index = -1; // first occurrence of '<>' or '[]'
-	for (int i = 0; i < text.size(); i++)
-	{
-		if (text[i] == start)
-		{
-			if (i + 1 < text.size())
-			{
-				if (text[i + 1] == end)
-				{
-					index = i;
-					break;
-				}
-			}
-		}
-	}
+    int index = -1;// first occurrence of '<>' or '[]'
+    for (int i = 0; i < text.size(); i++)
+    {
+        if (text[i] == start)
+        {
+            if (i + 1 < text.size())
+            {
+                if (text[i + 1] == end)
+                {
+                    index = i;
+                    break;
+                }
+            }
+        }
+    }
 
-	if (index < 0)
-	{
-		prefix = std::string();
-		suffix = text;
-	}
-	else
-	{
-		prefix = text.substr(0, index);
-		suffix = text.substr(index + 2, text.size() - (index + 2));
-	}
+    if (index < 0)
+    {
+        prefix = std::string();
+        suffix = text;
+    }
+    else
+    {
+        prefix = text.substr(0, index);
+        suffix = text.substr(index + 2, text.size() - (index + 2));
+    }
 
-	return { prefix, suffix };
+    return {prefix, suffix};
 }
 
 }// namespace dwg
