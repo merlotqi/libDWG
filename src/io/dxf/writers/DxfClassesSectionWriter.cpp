@@ -20,7 +20,12 @@
  * For more information, visit the project's homepage or contact the author.
  */
 
+#include <dwg/CadDocument.h>
+#include <dwg/DxfFileToken_p.h>
+#include <dwg/classes/DxfClass.h>
+#include <dwg/classes/DxfClassCollection.h>
 #include <dwg/io/dxf/writers/DxfClassesSectionWriter_p.h>
+#include <dwg/io/dxf/writers/IDxfStreamWriter_p.h>
 
 namespace dwg {
 
@@ -35,9 +40,25 @@ DxfClassesSectionWriter::~DxfClassesSectionWriter() {}
 
 std::string DxfClassesSectionWriter::sectionName() const
 {
-    return std::string();
+    return DxfFileToken::ClassesSection;
 }
 
-void DxfClassesSectionWriter::writeSection() {}
+void DxfClassesSectionWriter::writeSection() 
+{
+    auto classes = _document->classes();
+
+    for (auto it = classes->begin(); it != classes->end(); ++it)
+    {
+        auto c = it->second;
+        _writer->write(0, DxfFileToken::ClassEntry);
+        _writer->write(1, c->dxfName());
+        _writer->write(2, c->cppClassName());
+        _writer->write(3, c->applicationName());
+        _writer->write(90, (int) c->proxyFlags());
+        _writer->write(91, c->instanceCount());
+        _writer->write(280, c->wasZombie());
+        _writer->write(281, c->isAnEntity());
+    }
+}
 
 }// namespace dwg

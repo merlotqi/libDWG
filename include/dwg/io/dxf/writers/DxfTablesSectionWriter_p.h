@@ -26,6 +26,17 @@
 
 namespace dwg {
 
+class Table;
+class TableEntry;
+class DxfClassMap;
+class BlockRecord;
+class DimensionStyle;
+class Layer;
+class LineType;
+class TextStyle;
+class UCS;
+class View;
+class VPort;
 class DxfTablesSectionWriter : public DxfSectionWriterBase
 {
 public:
@@ -35,6 +46,18 @@ public:
 
     std::string sectionName() const override;
     void writeSection() override;
+
+private:
+    void writeTable(Table *table, const std::string &subclass = std::string());
+    void writeEntry(TableEntry *entry);
+    void writeBlockRecord(BlockRecord *block, DxfClassMap *clsmap);
+    void writeDimensionStyle(DimensionStyle *style, DxfClassMap *clsmap);
+    void writeLayer(Layer *layer, DxfClassMap *clsmap);
+    void writeLineType(LineType *linetype, DxfClassMap *clsmap);
+    void writeTextStyle(TextStyle *textStyle, DxfClassMap *clsmap);
+    void writeUcs(UCS *ucs, DxfClassMap *clsmap);
+    void writeView(View *view, DxfClassMap *clsmap);
+    void writeVPort(VPort *vport, DxfClassMap *clsmap);   
 };
 
 }// namespace dwg
