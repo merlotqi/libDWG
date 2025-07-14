@@ -2041,12 +2041,12 @@ void CadHeader::setDimensionTextStyleName(const std::string &value)
 
 short CadHeader::dimensionAngularDimensionDecimalPlaces() const
 {
-    return _dimensionStyleOverrides->angularDimensionDecimalPlaces();
+    return _dimensionStyleOverrides->angularDecimalPlaces();
 }
 
 void CadHeader::setDimensionAngularDimensionDecimalPlaces(short value)
 {
-    _dimensionStyleOverrides->setAngularDimensionDecimalPlaces(value);
+    _dimensionStyleOverrides->setAngularDecimalPlaces(value);
 }
 
 short CadHeader::dimensionDecimalPlaces() const

@@ -176,7 +176,101 @@ void DxfTablesSectionWriter::writeBlockRecord(BlockRecord *block, DxfClassMap *c
     _writer->write(281, (unsigned char) (block->canScale() ? 1u : 0u), clsmap);
 }
     
-void DxfTablesSectionWriter::writeDimensionStyle(DimensionStyle *style, DxfClassMap *clsmap) {}
+void DxfTablesSectionWriter::writeDimensionStyle(DimensionStyle *style, DxfClassMap *clsmap) 
+{
+	_writer->write(3, style->postFix(), clsmap);
+	_writer->write(4, style->alternateDimensioningSuffix(), clsmap);
+
+	_writer->write(40, style->scaleFactor(), clsmap);
+	_writer->write(41, style->arrowSize(), clsmap);
+	_writer->write(42, style->extensionLineOffset(), clsmap);
+	_writer->write(43, style->dimensionLineIncrement(), clsmap);
+	_writer->write(44, style->extensionLineExtension(), clsmap);
+	_writer->write(45, style->rounding(), clsmap);
+	_writer->write(46, style->dimensionLineExtension(), clsmap);
+	_writer->write(47, style->plusTolerance(), clsmap);
+	_writer->write(48, style->minusTolerance(), clsmap);
+	_writer->write(49, style->fixedExtensionLineLength(), clsmap);
+	_writer->write(50, style->joggedRadiusDimensionTransverseSegmentAngle(), clsmap);
+
+	if (style->textBackgroundFillMode() != DimensionTextBackgroundFillMode::NoBackground)
+	{
+		_writer->write(69, (short)style->textBackgroundFillMode(), clsmap);
+		_writer->write(70, style->textBackgroundColor().index(), clsmap);
+	}
+	else
+	{
+		_writer->write(70, 0, clsmap);
+	}
+
+	if (style->arcLengthSymbolPosition() != ArcLengthSymbolPosition::AboveDimensionText)
+	{
+		_writer->write(90, (int)style->arcLengthSymbolPosition());
+	}
+
+	_writer->write(140, style->textHeight());
+	_writer->write(141, style->centerMarkSize());
+	_writer->write(142, style->tickSize());
+	_writer->write(143, style->alternateUnitScaleFactor());
+	_writer->write(144, style->linearScaleFactor());
+	_writer->write(145, style->textVerticalPosition());
+	_writer->write(146, style->toleranceScaleFactor());
+	_writer->write(147, style->dimensionLineGap());
+	_writer->write(148, style->alternateUnitRounding());
+
+	_writer->write(71, (short)(style->generateTolerances() ? 1 : 0));
+	_writer->write(72, (short)(style->limitsGeneration() ? 1 : 0));
+	_writer->write(73, (short)(style->textInsideHorizontal() ? 1 : 0));
+	_writer->write(74, (short)(style->textOutsideHorizontal() ? 1 : 0));
+	_writer->write(75, (short)(style->suppressFirstExtensionLine() ? 1 : 0));
+	_writer->write(76, (short)(style->suppressSecondExtensionLine() ? 1 : 0));
+	_writer->write(77, (short)style->textVerticalAlignment());
+	_writer->write(78, (short)style->zeroHandling());
+	_writer->write(79, (short)style->angularZeroHandling());
+
+	_writer->write(170, (short)(style->alternateUnitDimensioning() ? 1 : 0));
+	_writer->write(171, style->alternateUnitDecimalPlaces());
+	_writer->write(172, (short)(style->textOutsideExtensions() ? 1 : 0));
+	_writer->write(173, (short)(style->separateArrowBlocks() ? 1 : 0));
+	_writer->write(174, (short)(style->textInsideExtensions() ? 1 : 0));
+	_writer->write(175, (short)(style->suppressOutsideExtensions() ? 1 : 0));
+
+	_writer->write(176, style->dimensionLineColor().approxIndex(), clsmap);
+	_writer->write(177, style->extensionLineColor().approxIndex(), clsmap);
+	_writer->write(178, style->textColor().approxIndex(), clsmap);
+
+	_writer->write(179, style->angularDecimalPlaces());
+
+	_writer->write(271, style->decimalPlaces());
+	_writer->write(272, style->toleranceDecimalPlaces());
+	_writer->write(273, (short)style->alternateUnitFormat());
+	_writer->write(274, style->alternateUnitToleranceDecimalPlaces());
+	_writer->write(275, (short)style->angularUnit());
+	_writer->write(276, (short)style->fractionFormat());
+	_writer->write(277, (short)style->linearUnitFormat());
+	_writer->write(278, (short)style->decimalSeparator());
+	_writer->write(279, (short)style->textMovement());
+	_writer->write(280, (unsigned char)style->textHorizontalAlignment());
+	_writer->write(281, style->suppressFirstDimensionLine());
+	_writer->write(282, style->suppressSecondDimensionLine());
+	_writer->write(283, (unsigned char)style->toleranceAlignment());
+	_writer->write(284, (unsigned char)style->toleranceZeroHandling());
+	_writer->write(285, (unsigned char)style->alternateUnitZeroHandling());
+	_writer->write(286, (unsigned char)style->alternateUnitToleranceZeroHandling());
+	_writer->write(287, (unsigned char)style->dimensionFit());
+	_writer->write(288, style->cursorUpdate());
+	_writer->write(289, (unsigned char)style->dimensionTextArrowFit());
+	_writer->write(290, style->isExtensionLineLengthFixed());
+
+	_writer->writeHandle(340, style->style(), clsmap);
+	_writer->writeHandle(341, style->leaderArrow(), clsmap);
+	_writer->writeHandle(342, style->arrowBlock(), clsmap);
+	_writer->writeHandle(343, style->dimArrow1(), clsmap);
+	_writer->writeHandle(344, style->dimArrow2(), clsmap);
+
+	_writer->write(371, (short) style->dimensionLineWeight());
+	_writer->write(372, (short) style->extensionLineWeight());
+}
     
 void DxfTablesSectionWriter::writeLayer(Layer *layer, DxfClassMap *clsmap) {}
     
@@ -198,8 +292,8 @@ void DxfTablesSectionWriter::writeUcs(UCS *ucs, DxfClassMap *clsmap)
     _writer->write(22, ucs->yAxis().Y, clsmap);
     _writer->write(32, ucs->yAxis().Z, clsmap);
 
-    _writer->write(71, ucs->orthographicType(), clsmap);
-    _writer->write(79, ucs->orthographicViewType(), clsmap);
+    _writer->write(71, (int) ucs->orthographicType(), clsmap);
+    _writer->write(79, (int) ucs->orthographicViewType(), clsmap);
     _writer->write(146, ucs->elevation(), clsmap);
 }
     

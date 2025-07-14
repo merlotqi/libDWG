@@ -61,140 +61,38 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    std::string postFix() const;
-    void setPostFix(const std::string &postFix);
-
     std::string alternateDimensioningSuffix() const;
     void setAlternateDimensioningSuffix(const std::string &);
-
-    bool generateTolerances() const;
-    void setGenerateTolerances(bool);
-
-    bool limitsGeneration() const;
-    void setLimitsGeneration(bool);
-
-    bool textInsideHorizontal() const;
-    void setTextInsideHorizontal(bool);
-
-    bool textOutsideHorizontal() const;
-    void setTextOutsideHorizontal(bool);
-
-    bool suppressFirstExtensionLine() const;
-    void setSuppressFirstExtensionLine(bool);
-
-    bool suppressSecondExtensionLine() const;
-    void setSuppressSecondExtensionLine(bool);
-
-    DimensionTextVerticalAlignment textVerticalAlignment() const;
-    void setTextVerticalAlignment(DimensionTextVerticalAlignment);
-
-    ZeroHandling zeroHandling() const;
-    void setZeroHandling(ZeroHandling);
-
-    bool alternateUnitDimensioning() const;
-    void setAlternateUnitDimensioning(bool);
 
     short alternateUnitDecimalPlaces() const;
     void setAlternateUnitDecimalPlaces(short);
 
-    bool textOutsideExtensions() const;
-    void setTextOutsideExtensions(bool);
-
-    bool separateArrowBlocks() const;
-    void setSeparateArrowBlocks(bool);
-
-    bool textInsideExtensions() const;
-    void setTextInsideExtensions(bool);
-
-    bool suppressOutsideExtensions() const;
-    void setSuppressOutsideExtensions(bool);
-
-    short angularDimensionDecimalPlaces() const;
-    void setAngularDimensionDecimalPlaces(short);
-
-    DimensionTextHorizontalAlignment textHorizontalAlignment() const;
-    void setTextHorizontalAlignment(DimensionTextHorizontalAlignment);
-
-    bool suppressFirstDimensionLine() const;
-    void setSuppressFirstDimensionLine(bool);
-
-    bool suppressSecondDimensionLine() const;
-    void setSuppressSecondDimensionLine(bool);
-
-    ToleranceAlignment toleranceAlignment() const;
-    void setToleranceAlignment(ToleranceAlignment);
-
-    ZeroHandling toleranceZeroHandling() const;
-    void setToleranceZeroHandling(ZeroHandling);
-
-    ZeroHandling alternateUnitZeroHandling() const;
-    void setAlternateUnitZeroHandling(ZeroHandling);
-
-    short dimensionFit() const;
-    void setDimensionFit(short);
-
-    bool cursorUpdate() const;
-    void setCursorUpdate(bool);
-
-    ZeroHandling alternateUnitToleranceZeroHandling() const;
-    void setAlternateUnitToleranceZeroHandling(ZeroHandling);
-
-    short dimensionUnit() const;
-    void setDimensionUnit(short);
-
-    AngularUnitFormat angularUnit() const;
-    void setAngularUnit(AngularUnitFormat);
-
-    short decimalPlaces() const;
-    void setDecimalPlaces(short);
-
-    short toleranceDecimalPlaces() const;
-    void setToleranceDecimalPlaces(short);
+    bool alternateUnitDimensioning() const;
+    void setAlternateUnitDimensioning(bool);
 
     LinearUnitFormat alternateUnitFormat() const;
     void setAlternateUnitFormat(LinearUnitFormat);
 
+    double alternateUnitRounding() const;
+    void setAlternateUnitRounding(double);
+
+    double alternateUnitScaleFactor() const;
+    void setAlternateUnitScaleFactor(double);
+
     short alternateUnitToleranceDecimalPlaces() const;
     void setAlternateUnitToleranceDecimalPlaces(short);
 
-    double scaleFactor() const;
-    void setScaleFactor(double);
+    ZeroHandling alternateUnitToleranceZeroHandling() const;
+    void setAlternateUnitToleranceZeroHandling(ZeroHandling);
 
-    double arrowSize() const;
-    void setArrowSize(double);
+    ZeroHandling alternateUnitZeroHandling() const;
+    void setAlternateUnitZeroHandling(ZeroHandling);
 
-    double extensionLineOffset() const;
-    void setExtensionLineOffset(double);
+    short angularDecimalPlaces() const;
+    void setAngularDecimalPlaces(short);
 
-    double dimensionLineIncrement() const;
-    void setDimensionLineIncrement(double);
-
-    double extensionLineExtension() const;
-    void setExtensionLineExtension(double);
-
-    double rounding() const;
-    void setRounding(double);
-
-    double dimensionLineExtension() const;
-    void setDimensionLineExtension(double);
-
-    double plusTolerance() const;
-    void setPlusTolerance(double);
-
-    double minusTolerance() const;
-    void setMinusTolerance(double);
-
-    double fixedExtensionLineLength() const;
-    void setFixedExtensionLineLength(double);
-
-    double joggedRadiusDimensionTransverseSegmentAngle() const;
-    void setJoggedRadiusDimensionTransverseSegmentAngle(double);
-
-    DimensionTextBackgroundFillMode textBackgroundFillMode() const;
-    void setTextBackgroundFillMode(DimensionTextBackgroundFillMode);
-
-    Color textBackgroundColor() const;
-    void setTextBackgroundColor(const Color &);
+    AngularUnitFormat angularUnit() const;
+    void setAngularUnit(AngularUnitFormat);
 
     ZeroHandling angularZeroHandling() const;
     void setAngularZeroHandling(ZeroHandling);
@@ -202,77 +100,23 @@ public:
     ArcLengthSymbolPosition arcLengthSymbolPosition() const;
     void setArcLengthSymbolPosition(ArcLengthSymbolPosition);
 
-    double textHeight() const;
-    void setTextHeight(double);
+    BlockRecord *arrowBlock() const;
+    void setArrowBlock(BlockRecord *);
+
+    double arrowSize() const;
+    void setArrowSize(double);
 
     double centerMarkSize() const;
     void setCenterMarkSize(double);
 
-    double tickSize() const;
-    void setTickSize(double);
+    bool cursorUpdate() const;
+    void setCursorUpdate(bool);
 
-    double alternateUnitScaleFactor() const;
-    void setAlternateUnitScaleFactor(double);
-
-    double linearScaleFactor() const;
-    void setLinearScaleFactor(double);
-
-    double textVerticalPosition() const;
-    void setTextVerticalPosition(double);
-
-    double toleranceScaleFactor() const;
-    void setToleranceScaleFactor(double);
-
-    double dimensionLineGap() const;
-    void setDimensionLineGap(double);
-
-    double alternateUnitRounding() const;
-    void setAlternateUnitRounding(double);
-
-    Color dimensionLineColor() const;
-    void setDimensionLineColor(const Color &);
-
-    Color extensionLineColor() const;
-    void setExtensionLineColor(const Color &);
-
-    Color textColor() const;
-    void setTextColor(const Color &);
-
-    FractionFormat fractionFormat() const;
-    void setFractionFormat(FractionFormat);
-
-    LinearUnitFormat linearUnitFormat() const;
-    void setLinearUnitFormat(LinearUnitFormat);
+    short decimalPlaces() const;
+    void setDecimalPlaces(short);
 
     char decimalSeparator() const;
     void setDecimalSeparator(char);
-
-    TextMovement textMovement() const;
-    void setTextMovement(TextMovement);
-
-    bool isExtensionLineLengthFixed() const;
-    void setIsExtensionLineLengthFixed(bool);
-
-    TextDirection textDirection() const;
-    void setTextDirection(TextDirection);
-
-    LineweightType dimensionLineWeight() const;
-    void setDimensionLineWeight(LineweightType);
-
-    LineweightType extensionLineWeight() const;
-    void setExtensionLineWeight(LineweightType);
-
-    TextArrowFitType dimensionTextArrowFit() const;
-    void setDimensionTextArrowFit(TextArrowFitType);
-
-    TextStyle *style() const;
-    void setStyle(TextStyle *);
-
-    BlockRecord *leaderArrow() const;
-    void setLeaderArrow(BlockRecord *);
-
-    BlockRecord *arrowBlock() const;
-    void setArrowBlock(BlockRecord *);
 
     BlockRecord *dimArrow1() const;
     void setDimArrow1(BlockRecord *);
@@ -280,17 +124,68 @@ public:
     BlockRecord *dimArrow2() const;
     void setDimArrow2(BlockRecord *);
 
-    std::string altMzs() const;
-    void setAltMzs(const std::string &);
+    short dimensionFit() const;
+    void setDimensionFit(short);
 
-    std::string mzs() const;
-    void setMzs(const std::string &);
+    Color dimensionLineColor() const;
+    void setDimensionLineColor(const Color &);
 
-    double altMzf() const;
-    void setAltMzf(double);
+    double dimensionLineExtension() const;
+    void setDimensionLineExtension(double);
 
-    double mzf() const;
-    void setMzf(double);
+    double dimensionLineGap() const;
+    void setDimensionLineGap(double);
+
+    double dimensionLineIncrement() const;
+    void setDimensionLineIncrement(double);
+
+    LineweightType dimensionLineWeight() const;
+    void setDimensionLineWeight(LineweightType);
+
+    TextArrowFitType dimensionTextArrowFit() const;
+    void setDimensionTextArrowFit(TextArrowFitType);
+
+    short dimensionUnit() const;
+    void setDimensionUnit(short);
+
+    Color extensionLineColor() const;
+    void setExtensionLineColor(const Color &);
+
+    double extensionLineExtension() const;
+    void setExtensionLineExtension(double);
+
+    double extensionLineOffset() const;
+    void setExtensionLineOffset(double);
+
+    LineweightType extensionLineWeight() const;
+    void setExtensionLineWeight(LineweightType);
+
+    double fixedExtensionLineLength() const;
+    void setFixedExtensionLineLength(double);
+
+    FractionFormat fractionFormat() const;
+    void setFractionFormat(FractionFormat);
+
+    bool generateTolerances() const;
+    void setGenerateTolerances(bool);
+
+    bool isExtensionLineLengthFixed() const;
+    void setIsExtensionLineLengthFixed(bool);
+
+    double joggedRadiusDimensionTransverseSegmentAngle() const;
+    void setJoggedRadiusDimensionTransverseSegmentAngle(double);
+
+    BlockRecord *leaderArrow() const;
+    void setLeaderArrow(BlockRecord *);
+
+    bool limitsGeneration() const;
+    void setLimitsGeneration(bool);
+
+    double linearScaleFactor() const;
+    void setLinearScaleFactor(double);
+
+    LinearUnitFormat linearUnitFormat() const;
+    void setLinearUnitFormat(LinearUnitFormat);
 
     LineType *lineType() const;
     void setLineType(LineType *);
@@ -301,8 +196,122 @@ public:
     LineType *lineTypeExt2() const;
     void setLineTypeExt2(LineType *);
 
+    double minusTolerance() const;
+    void setMinusTolerance(double);
+
+    double plusTolerance() const;
+    void setPlusTolerance(double);
+
+    std::string postFix() const;
+    void setPostFix(const std::string &);
+
+    std::string prefix() const;
+    void setPrefix(const std::string &);
+
+    double rounding() const;
+    void setRounding(double);
+
+    double scaleFactor() const;
+    void setScaleFactor(double);
+
+    bool separateArrowBlocks() const;
+    void setSeparateArrowBlocks(bool);
+
+    TextStyle *style() const;
+    void setStyle(TextStyle *);
+
+    std::string suffix() const;
+    void setSuffix(const std::string &);
+
+    bool suppressFirstDimensionLine() const;
+    void setSuppressFirstDimensionLine(bool);
+
+    bool suppressFirstExtensionLine() const;
+    void setSuppressFirstExtensionLine(bool);
+
+    bool suppressOutsideExtensions() const;
+    void setSuppressOutsideExtensions(bool);
+
+    bool suppressSecondDimensionLine() const;
+    void setSuppressSecondDimensionLine(bool);
+
+    bool suppressSecondExtensionLine() const;
+    void setSuppressSecondExtensionLine(bool);
+
+    Color textBackgroundColor() const;
+    void setTextBackgroundColor(const Color &);
+
+    DimensionTextBackgroundFillMode textBackgroundFillMode() const;
+    void setTextBackgroundFillMode(DimensionTextBackgroundFillMode);
+
+    Color textColor() const;
+    void setTextColor(const Color &);
+
+    TextDirection textDirection() const;
+    void setTextDirection(TextDirection);
+
+    double textHeight() const;
+    void setTextHeight(double);
+
+    DimensionTextHorizontalAlignment textHorizontalAlignment() const;
+    void setTextHorizontalAlignment(DimensionTextHorizontalAlignment);
+
+    bool textInsideExtensions() const;
+    void setTextInsideExtensions(bool);
+
+    bool textInsideHorizontal() const;
+    void setTextInsideHorizontal(bool);
+
+    TextMovement textMovement() const;
+    void setTextMovement(TextMovement);
+
+    bool textOutsideExtensions() const;
+    void setTextOutsideExtensions(bool);
+
+    bool textOutsideHorizontal() const;
+    void setTextOutsideHorizontal(bool);
+
+    DimensionTextVerticalAlignment textVerticalAlignment() const;
+    void setTextVerticalAlignment(DimensionTextVerticalAlignment);
+
+    double textVerticalPosition() const;
+    void setTextVerticalPosition(double);
+
+    double tickSize() const;
+    void setTickSize(double);
+
+    ToleranceAlignment toleranceAlignment() const;
+    void setToleranceAlignment(ToleranceAlignment);
+
+    short toleranceDecimalPlaces() const;
+    void setToleranceDecimalPlaces(short);
+
+    double toleranceScaleFactor() const;
+    void setToleranceScaleFactor(double);
+
+    ZeroHandling toleranceZeroHandling() const;
+    void setToleranceZeroHandling(ZeroHandling);
+
+    ZeroHandling zeroHandling() const;
+    void setZeroHandling(ZeroHandling);
+
+    double altMzf() const;
+    void setAltMzf(double);
+
+    std::string altMzs() const;
+    void setAltMzs(const std::string &);
+
+    double mzf() const;
+    void setMzf(double);
+
+    std::string mzs() const;
+    void setMzs(const std::string &);
+
     void assignDocument(CadDocument *doc) override;
     void unassignDocument() override;
+
+private:
+    std::vector<std::string> getDimStylePrefixAndSuffix(const std::string &text, char start, char end, std::string &prefix, std::string &suffix);
 
 private:
     std::string _postFix = "<>";
@@ -321,7 +330,7 @@ private:
     bool _separateArrowBlocks = true;
     bool _textInsideExtensions = false;
     bool _suppressOutsideExtensions = false;
-    short _angularDimensionDecimalPlaces = 0;
+    short _angularDecimalPlaces = 0;
     DimensionTextHorizontalAlignment _textHorizontalAlignment = DimensionTextHorizontalAlignment::Centered;
     bool _suppressFirstDimensionLine = false;
     bool _suppressSecondDimensionLine = false;

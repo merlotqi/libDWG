@@ -917,7 +917,7 @@ void DwgObjectWriter::writeDimensionStyle(DimensionStyle *dimStyle)
         //DIMCLRT BS 178
         _writer->writeCmColor(dimStyle->textColor());
         //DIMADEC BS 179
-        _writer->writeBitShort(dimStyle->angularDimensionDecimalPlaces());
+        _writer->writeBitShort(dimStyle->angularDecimalPlaces());
         //DIMDEC BS 271
         _writer->writeBitShort(dimStyle->decimalPlaces());
         //DIMTDEC BS 272
