@@ -56,13 +56,13 @@ DwgFileHeaderWriterAC15::DwgFileHeaderWriterAC15(std::fstream *stream, Encoding 
     : DwgFileHeaderWriterBase(stream, encoding, model)
 {
     _records = {
-            {      DwgSectionDefinition::Header,    {DwgSectionLocatorRecord(0), nullptr}},
-            {     DwgSectionDefinition::Classes,    {DwgSectionLocatorRecord(1), nullptr}},
-            {DwgSectionDefinition::ObjFreeSpace,    {DwgSectionLocatorRecord(3), nullptr}},
-            {    DwgSectionDefinition::Template,    {DwgSectionLocatorRecord(4), nullptr}},
-            {   DwgSectionDefinition::AuxHeader,    {DwgSectionLocatorRecord(5), nullptr}},
+            {      DwgSectionDefinition::Header,            {DwgSectionLocatorRecord(0), nullptr}},
+            {     DwgSectionDefinition::Classes,            {DwgSectionLocatorRecord(1), nullptr}},
+            {DwgSectionDefinition::ObjFreeSpace,            {DwgSectionLocatorRecord(3), nullptr}},
+            {    DwgSectionDefinition::Template,            {DwgSectionLocatorRecord(4), nullptr}},
+            {   DwgSectionDefinition::AuxHeader,            {DwgSectionLocatorRecord(5), nullptr}},
             { DwgSectionDefinition::AcDbObjects, {DwgSectionLocatorRecord(std::nullopt), nullptr}},
-            {     DwgSectionDefinition::Handles,    {DwgSectionLocatorRecord(2), nullptr}},
+            {     DwgSectionDefinition::Handles,            {DwgSectionLocatorRecord(2), nullptr}},
             {     DwgSectionDefinition::Preview, {DwgSectionLocatorRecord(std::nullopt), nullptr}},
     };
 }

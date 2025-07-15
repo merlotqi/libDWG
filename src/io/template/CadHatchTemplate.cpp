@@ -30,7 +30,7 @@ CadBoundaryPathTemplate::CadBoundaryPathTemplate() {}
 
 CadBoundaryPathTemplate::~CadBoundaryPathTemplate() {}
 
-HatchBoundaryPath *CadBoundaryPathTemplate::path() const 
+HatchBoundaryPath *CadBoundaryPathTemplate::path() const
 {
     return _path;
 }

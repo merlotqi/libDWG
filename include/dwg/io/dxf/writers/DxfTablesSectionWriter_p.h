@@ -57,7 +57,7 @@ private:
     void writeTextStyle(TextStyle *textStyle, DxfClassMap *clsmap);
     void writeUcs(UCS *ucs, DxfClassMap *clsmap);
     void writeView(View *view, DxfClassMap *clsmap);
-    void writeVPort(VPort *vport, DxfClassMap *clsmap);   
+    void writeVPort(VPort *vport, DxfClassMap *clsmap);
 };
 
 }// namespace dwg

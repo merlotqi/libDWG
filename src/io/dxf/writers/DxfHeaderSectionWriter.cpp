@@ -48,7 +48,7 @@ std::string DxfHeaderSectionWriter::sectionName() const
 void DxfHeaderSectionWriter::writeSection()
 {
     std::map<std::string, CadSystemVariableAttribute> mapAttr = CadSystemVariables::headerMap();
-    auto && configue_variables = _configuration.headerVariables();
+    auto &&configue_variables = _configuration.headerVariables();
     for (auto &&[key, value]: mapAttr)
     {
         bool contains = false;

@@ -22,19 +22,20 @@
 
 #pragma once
 
-#include <dwg/io/template/CadEntityTemplate_p.h>
 #include <dwg/entities/MLine.h>
+#include <dwg/io/template/CadEntityTemplate_p.h>
+
 
 namespace dwg {
 
 class CadMLineTemplate : public CadEntityTemplate
 {
-	std::optional<unsigned long long > _mlineStyleHandle;
-	std::string _mlineStyleName;
+    std::optional<unsigned long long> _mlineStyleHandle;
+    std::string _mlineStyleName;
     std::optional<int> _nVertex;
     std::optional<int> _nElements;
 
-	MLine::Vertex _curVertex;
+    MLine::Vertex _curVertex;
     MLine::Segment _currSegmentElement;
 
 public:
@@ -56,7 +57,7 @@ public:
 
     bool tryReadVertex(int dxfcode, double value);
 
-	void build(CadDocumentBuilder *builder);
+    void build(CadDocumentBuilder *builder);
 };
 
 }// namespace dwg

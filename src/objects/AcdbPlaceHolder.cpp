@@ -22,7 +22,7 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
-#include <dwg/objects/AcadPlaceHolder.h>
+#include <dwg/objects/AcdbPlaceHolder.h>
 
 namespace dwg {
 

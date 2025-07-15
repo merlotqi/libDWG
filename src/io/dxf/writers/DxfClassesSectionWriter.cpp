@@ -43,7 +43,7 @@ std::string DxfClassesSectionWriter::sectionName() const
     return DxfFileToken::ClassesSection;
 }
 
-void DxfClassesSectionWriter::writeSection() 
+void DxfClassesSectionWriter::writeSection()
 {
     auto classes = _document->classes();
 

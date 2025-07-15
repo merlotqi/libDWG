@@ -311,7 +311,8 @@ public:
     void unassignDocument() override;
 
 private:
-    std::vector<std::string> getDimStylePrefixAndSuffix(const std::string &text, char start, char end, std::string &prefix, std::string &suffix);
+    std::vector<std::string> getDimStylePrefixAndSuffix(const std::string &text, char start, char end,
+                                                        std::string &prefix, std::string &suffix);
 
 private:
     std::string _postFix = "<>";
