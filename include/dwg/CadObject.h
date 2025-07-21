@@ -24,6 +24,7 @@
 
 #include <dwg/IHandledCadObject.h>
 #include <dwg/ObjectType.h>
+#include <dwg/Registrar.h>
 #include <dwg/exports.h>
 #include <string>
 #include <vector>
@@ -40,6 +41,7 @@ class TableEntry;
 
 class LIBDWG_API CadObject : public IHandledCadObject
 {
+    RTTR_ENABLE()
 protected:
     unsigned long long _handle = 0x0;
     IHandledCadObject *_owner = nullptr;

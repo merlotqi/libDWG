@@ -24,6 +24,8 @@
 #include <dwg/DxfSubclassMarker_p.h>
 #include <dwg/entities/Arc.h>
 #include <math.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
 
 namespace dwg {
 
@@ -64,6 +66,15 @@ void Arc::setStartAngle(double value)
 void Arc::setEndAngle(double value)
 {
     _endangle = value;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<Arc>("Arc")(metadata("DxfName", DxfFileToken::EntityArc), metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Arc)))
+    .constructor<>()
+    .property("startAngle", &Arc::startAngle, &Arc::setStartAngle)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::IsAngle, {50})))
+    .property("endAngle", &Arc::endAngle, &Arc::setEndAngle)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::IsAngle, {51})));
 }
 
 }// namespace dwg
