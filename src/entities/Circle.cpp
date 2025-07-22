@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/Circle.h>
 #include <stdexcept>
 
@@ -86,6 +88,15 @@ void Circle::setRadius(double radius)
     if (radius <= 0)
         throw std::invalid_argument("Radius must be greater than 0");
     _radius = radius;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<Circle>("Circle")(metadata("DxfName", DxfFileToken::EntityArc),
+                                           metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Arc)))
+            .constructor()
+            .property("center", &Circle::center, &Circle::setCenter);
 }
 
 }// namespace dwg

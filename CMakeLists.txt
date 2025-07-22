@@ -19,6 +19,8 @@ find_package(magic_enum REQUIRED)
 
 include(GenerateExportHeader)
 
+add_subdirectory(thirdparty)
+
 add_library(dwg SHARED)
 
 add_subdirectory(include)
@@ -33,7 +35,7 @@ if(MSVC)
         /bigobj  # MSVC-specific: Allows more sections in COFF object files
     )
 endif()
-target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion magic_enum::magic_enum)
+target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion magic_enum::magic_enum rttr_core)
 
 add_library(DWG::dwg ALIAS dwg)
 
