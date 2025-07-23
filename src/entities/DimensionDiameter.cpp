@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionDiameter.h>
 
 namespace dwg {
@@ -68,6 +70,16 @@ void DimensionDiameter::setLeaderLength(double value)
 double DimensionDiameter::measurement() const
 {
     return insertionPoint().distanceToPoint(_angleVertex) * 2.0;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionDiameter>("DimensionDiameter")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                                 metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::DiametricDimension)))
+            .constructor()
+            .property("angleVertex", &DimensionDiameter::angleVertex, &DimensionDiameter::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("leaderLength", &DimensionDiameter::leaderLength, &DimensionDiameter::setLeaderLength)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})));
 }
 
 }// namespace dwg

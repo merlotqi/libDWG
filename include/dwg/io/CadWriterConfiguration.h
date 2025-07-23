@@ -35,6 +35,15 @@ public:
     bool closeStream() const;
     void setCloseStream(bool value);
 
+    bool resetDxfClasses() const;
+    void setResetDxfClasses(bool);
+
+    bool updateDimensionsInBlocks() const;
+    void setUpdateDimensionsInBlocks(bool);
+
+    bool updateDimensionsInModel() const;
+    void setUpdateDimensionsInModel(bool);
+
     bool writeXRecords() const;
     void setWriteXRecords(bool value);
 
@@ -45,6 +54,9 @@ private:
     bool _closeStream;
     bool _writeXRecords;
     bool _writeXData;
+    bool _resetDxfClasses;
+    bool _updateDimensionsInBlocks;
+    bool _updateDimensionsInModel;
 };
 
 }// namespace dwg

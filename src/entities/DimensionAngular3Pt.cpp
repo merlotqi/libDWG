@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionAngular3Pt.h>
 
 namespace dwg {
@@ -87,6 +89,17 @@ double DimensionAngular3Pt::measurement() const
     //return v1.angleTo(v2);
 
     return 0.0;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionAngular3Pt>("DimensionAngular3Pt")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                                     metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular3PointDimension)))
+            .constructor()
+            .property("angleVertex", &DimensionAngular3Pt::angleVertex, &DimensionAngular3Pt::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("firstPoint", &DimensionAngular3Pt::firstPoint, &DimensionAngular3Pt::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAngular3Pt::secondPoint, &DimensionAngular3Pt::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionOrdinate.h>
 
 namespace dwg {
@@ -85,6 +87,16 @@ void DimensionOrdinate::setIsOrdinateTypeX(bool value)
     {
         _flags &= ~DimensionType::OrdinateTypeX;
     }
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionOrdinate>("DimensionOrdinate")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                             metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::OrdinateDimension)))
+            .constructor()
+            .property("eatureLocation", &DimensionOrdinate::featureLocation, &DimensionOrdinate::setFeatureLocation)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("leaderEndpoint", &DimensionOrdinate::leaderEndpoint, &DimensionOrdinate::setLeaderEndpoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

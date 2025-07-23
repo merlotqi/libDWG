@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionAngular2Line.h>
 
 namespace dwg {
@@ -91,6 +93,18 @@ double DimensionAngular2Line::measurement() const
     XY v2 = (_angleVertex - _dimensionArc).to2D();
     return 0.0;
     //return v1.angleTo(v2);
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionAngular2Line>("DimensionAngular2Line")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                                         metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular2LineDimension)))
+            .constructor()
+            .property("angleVertex", &DimensionAngular2Line::angleVertex, &DimensionAngular2Line::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("dimensionArc", &DimensionAngular2Line::dimensionArc, &DimensionAngular2Line::setDimensionArc)(metadata("DxfCodeValue", DxfCodeValueAttribute({16, 26, 36})))
+            .property("firstPoint", &DimensionAngular2Line::firstPoint, &DimensionAngular2Line::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAngular2Line::secondPoint, &DimensionAngular2Line::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

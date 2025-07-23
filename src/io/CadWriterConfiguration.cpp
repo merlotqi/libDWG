@@ -24,7 +24,8 @@
 
 namespace dwg {
 
-CadWriterConfiguration::CadWriterConfiguration() : _closeStream(true), _writeXRecords(false), _writeXData(true) {}
+CadWriterConfiguration::CadWriterConfiguration() : _closeStream(true), _writeXRecords(false), _writeXData(true)
+    , _resetDxfClasses(true), _updateDimensionsInBlocks(false), _updateDimensionsInModel(false) {}
 
 CadWriterConfiguration::~CadWriterConfiguration() {}
 
@@ -36,6 +37,36 @@ bool CadWriterConfiguration::closeStream() const
 void CadWriterConfiguration::setCloseStream(bool value)
 {
     _closeStream = value;
+}
+
+bool CadWriterConfiguration::resetDxfClasses() const
+{
+    return _resetDxfClasses;
+}
+
+void CadWriterConfiguration::setResetDxfClasses(bool value)
+{
+    _resetDxfClasses = value;
+}
+
+bool CadWriterConfiguration::updateDimensionsInBlocks() const
+{
+    return _updateDimensionsInBlocks;
+}
+
+void CadWriterConfiguration::setUpdateDimensionsInBlocks(bool value)
+{
+    _updateDimensionsInBlocks = value;
+}
+
+bool CadWriterConfiguration::updateDimensionsInModel() const
+{
+    return _updateDimensionsInModel;
+}
+
+void CadWriterConfiguration::setUpdateDimensionsInModel(bool value)
+{
+    _updateDimensionsInModel = value;
 }
 
 bool CadWriterConfiguration::writeXRecords() const

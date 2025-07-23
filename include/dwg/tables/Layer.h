@@ -31,7 +31,7 @@ namespace dwg {
 
 class Material;
 class LineType;
-
+class CadObject;
 class LIBDWG_API Layer : public TableEntry
 {
     LayerFlags _flags;
@@ -50,6 +50,7 @@ public:
 
     static constexpr auto DefaultName = "0";
     static Layer *Default();
+    static Layer *Defpoints();
 
     ObjectType objectType() const override;
     std::string objectName() const override;
@@ -81,6 +82,9 @@ public:
 
     void assignDocument(CadDocument *doc) override;
     void unassignDocument() override;
+
+protected:
+    void tableOnRemove(CadObject *item);
 };
 
 }// namespace dwg

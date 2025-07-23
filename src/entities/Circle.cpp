@@ -96,7 +96,10 @@ RTTR_REGISTRATION
     registration::class_<Circle>("Circle")(metadata("DxfName", DxfFileToken::EntityArc),
                                            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Arc)))
             .constructor()
-            .property("center", &Circle::center, &Circle::setCenter);
+            .property("center", &Circle::center, &Circle::setCenter)(metadata("DxfCodeValue", DxfCodeValueAttribute({10, 20, 30})))
+            .property("normal", &Circle::normal, &Circle::setNormal)(metadata("DxfCodeValue", DxfCodeValueAttribute({210, 220, 230})))
+            .property("radius", &Circle::radius, &Circle::setRadius)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})))
+            .property("thickness", &Circle::thickness, &Circle::setThickness)(metadata("DxfCodeValue", DxfCodeValueAttribute({39})));
 }
 
 }// namespace dwg

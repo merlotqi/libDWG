@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionAligned.h>
 
 namespace dwg {
@@ -81,5 +83,16 @@ double DimensionAligned::measurement() const
 }
 
 DimensionAligned::DimensionAligned(DimensionType type) : Dimension(type) {}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionAligned>("DimensionAligned")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                               metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::AlignedDimension)))
+            .constructor()
+            .property("extLineRotation", &DimensionAligned::extLineRotation, &DimensionAligned::setExtLineRotation)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {52})))
+            .property("firstPoint", &DimensionAligned::firstPoint, &DimensionAligned::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAligned::secondPoint, &DimensionAligned::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
+}
 
 }// namespace dwg

@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/Dimension.h>
 
 namespace dwg {
@@ -208,5 +210,30 @@ void Dimension::setIsTextUserDefinedLocation(bool value) {}
 void Dimension::assignDocument(CadDocument *doc) {}
 
 void Dimension::unassignDocument() {}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<Dimension>("Dimension")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                 metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Dimension)))
+            .constructor()
+            .property("attachmentPoint", &Dimension::attachmentPoint, &Dimension::setAttachmentPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({71})))
+            .property("block", &Dimension::block, &Dimension::setBlock)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Name, {2})))
+            .property("definitionPoint", &Dimension::definitionPoint, &Dimension::setDefinitionPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({10, 20, 30})))
+            .property("flags", &Dimension::flags, &Dimension::setFlags)(metadata("DxfCodeValue", DxfCodeValueAttribute({70})))
+            .property("flipArrow1", &Dimension::flipArrow1, &Dimension::setFlipArrow1)(metadata("DxfCodeValue", DxfCodeValueAttribute({74})))
+            .property("flipArrow2", &Dimension::flipArrow2, &Dimension::setFlipArrow2)(metadata("DxfCodeValue", DxfCodeValueAttribute({75})))
+            .property("horizontalDirection", &Dimension::horizontalDirection, &Dimension::setHorizontalDirection)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional | DxfReferenceType::IsAngle, 51)))
+            .property("insertionPoint", &Dimension::insertionPoint, &Dimension::setInsertionPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({12, 22, 32})))
+            .property("lineSpacingFactor", &Dimension::lineSpacingFactor, &Dimension::setLineSpacingFactor)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {41})))
+            .property("lineSpacingStyle", &Dimension::lineSpacingStyle, &Dimension::setLineSpacingStyle)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {72})))
+            .property_readonly("measurement", &Dimension::measurement)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {42})))
+            .property("normal", &Dimension::normal, &Dimension::setNormal)(metadata("DxfCodeValue", DxfCodeValueAttribute({210, 220, 230})))
+            .property("style", &Dimension::style, &Dimension::setStyle)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Name, {2})))
+            .property("text", &Dimension::text, &Dimension::setText)(metadata("DxfCodeValue", DxfCodeValueAttribute({DxfReferenceType::Optional, {1}})))
+            .property("textMiddlePoint", &Dimension::textMiddlePoint, &Dimension::setTextMiddlePoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({11, 21, 31})))
+            .property("textRotation", &Dimension::textRotation, &Dimension::setTextRotation)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional | DxfReferenceType::IsAngle, {53})))
+            .property("version", &Dimension::version, &Dimension::setVersion)(metadata("DxfCodeValue", DxfCodeValueAttribute({280})));
+}
 
 }// namespace dwg

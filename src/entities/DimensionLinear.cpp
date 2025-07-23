@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/DimensionLinear.h>
 
 namespace dwg {
@@ -53,6 +55,15 @@ double DimensionLinear::rotation() const
 void DimensionLinear::setRotation(double value)
 {
     _rotation = value;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<DimensionLinear>("DimensionLinear")(metadata("DxfName", DxfFileToken::EntityDimension),
+                                                             metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::LinearDimension)))
+            .constructor()
+            .property("rotation", &DimensionLinear::rotation, &DimensionLinear::setRotation)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::IsAngle, {50})));
 }
 
 }// namespace dwg
