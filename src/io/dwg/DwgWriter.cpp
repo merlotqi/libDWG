@@ -23,6 +23,7 @@
 #include <dwg/CadDocument.h>
 #include <dwg/CadSummaryInfo.h>
 #include <dwg/CadUtils.h>
+#include <dwg/classes/DxfClassCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/dwg/DwgWriter.h>
 #include <dwg/io/dwg/fileheaders/DwgFileHeader_p.h>
@@ -60,7 +61,9 @@ DwgWriter::DwgWriter(std::fstream *stream, CadDocument *document)
 
 void DwgWriter::write()
 {
-    CadWriterBase::write();
+    DxfClassCollection::UpdateDxfClasses(_document);
+    _encoding = getListedEncoding(_document->header()->codePage());
+
     getFileHeaderWriter();
     writeHeader();
     writeClasses();

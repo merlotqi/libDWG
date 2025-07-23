@@ -22,12 +22,18 @@
 
 #pragma once
 
+#include <dwg/io/Notification.h>
+#include <dwg/utils/Delegate.h>
+#include <string>
+
 namespace dwg {
 
 class ICadWriter
 {
 public:
     virtual void write() = 0;
+    
+    Delegate<void(const std::string &, Notification)> OnNotification;
 };
 
 }// namespace dwg

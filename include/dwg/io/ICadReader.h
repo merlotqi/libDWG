@@ -22,6 +22,10 @@
 
 #pragma once
 
+#include <dwg/io/Notification.h>
+#include <dwg/utils/Delegate.h>
+#include <string>
+
 namespace dwg {
 
 class CadDocument;
@@ -35,6 +39,8 @@ public:
 
     virtual CadDocument *read() = 0;
     virtual CadHeader *readHeader() = 0;
+    
+    Delegate<void(const std::string &, Notification)> OnNotification;
 };
 
 }// namespace dwg

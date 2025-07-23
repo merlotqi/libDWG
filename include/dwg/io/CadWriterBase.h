@@ -24,7 +24,6 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/CadUtils.h>
-#include <dwg/classes/DxfClassCollection.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/io/CadWriterConfiguration.h>
 #include <dwg/io/ICadWriter.h>
@@ -44,8 +43,6 @@ class CadWriterBase : public ICadWriter, public T
 
 public:
     virtual ~CadWriterBase();
-    virtual void write() override;
-    Delegate<void(const std::string &, Notification)> OnNotification;
 
 protected:
     CadWriterBase();
@@ -72,13 +69,6 @@ inline CadWriterBase<T>::CadWriterBase(std::fstream *stream, CadDocument *docume
 template<typename T>
 inline CadWriterBase<T>::~CadWriterBase()
 {
-}
-
-template<typename T>
-inline void CadWriterBase<T>::write()
-{
-    DxfClassCollection::UpdateDxfClasses(_document);
-    _encoding = getListedEncoding(_document->header()->codePage());
 }
 
 template<typename T>

@@ -23,6 +23,7 @@
 #include <dwg/CadDocument.h>
 #include <dwg/DxfCode.h>
 #include <dwg/DxfFileToken_p.h>
+#include <dwg/classes/DxfClassCollection.h>
 #include <dwg/io/dxf/CadObjectHolder_p.h>
 #include <dwg/io/dxf/DxfWriter.h>
 #include <dwg/io/dxf/writers/DxfAsciiWriter_p.h>
@@ -52,7 +53,9 @@ DxfWriter::~DxfWriter() {}
 
 void DxfWriter::write()
 {
-    CadWriterBase::write();
+    DxfClassCollection::UpdateDxfClasses(_document);
+    _encoding = getListedEncoding(_document->header()->codePage());
+
     createStreamWriter();
     _objectHolder->objects().push(_document->rootDictionary());
     writeHeader();

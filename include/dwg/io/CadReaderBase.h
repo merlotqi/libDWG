@@ -40,7 +40,6 @@ class CadReaderBase : public ICadReader, protected T
 
 public:
     virtual ~CadReaderBase();
-    Delegate<void(const std::string &, Notification)> OnNotification;
 
 protected:
     CadReaderBase();
