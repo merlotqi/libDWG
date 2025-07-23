@@ -28,32 +28,42 @@ namespace dwg {
 
 class LIBDWG_API DimensionAngular2Line : public Dimension
 {
-    XYZ _firstPoint;  // The first point on the first line that defines the angle
-    XYZ _secondPoint; // The second point on the second line that defines the angle
-    XYZ _angleVertex; // The vertex where the two lines meet (angle vertex)
-    XYZ _dimensionArc;// The arc that represents the angular dimension
+    RTTR_ENABLE(Dimension)
 
 public:
     DimensionAngular2Line();
     ~DimensionAngular2Line();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
-
-    XYZ firstPoint() const;
-    void setFirstPoint(const XYZ &value);
-
-    XYZ secondPoint() const;
-    void setSecondPoint(const XYZ &value);
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     XYZ angleVertex() const;
     void setAngleVertex(const XYZ &value);
 
+    XYZ center() const;
+
     XYZ dimensionArc() const;
     void setDimensionArc(const XYZ &value);
 
-    virtual double measurement() const override;
+    XYZ firstPoint() const;
+    void setFirstPoint(const XYZ &value);
+
+    double measurement() const override;
+
+    double offset() const;
+    void setOffset(double value);
+
+    XYZ secondPoint() const;
+    void setSecondPoint(const XYZ &value);
+
+    void updateBlock() override;
+
+private:
+    XYZ _firstPoint;  // The first point on the first line that defines the angle
+    XYZ _secondPoint; // The second point on the second line that defines the angle
+    XYZ _angleVertex; // The vertex where the two lines meet (angle vertex)
+    XYZ _dimensionArc;// The arc that represents the angular dimension
 };
 
 }// namespace dwg

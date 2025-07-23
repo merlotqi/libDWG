@@ -37,6 +37,50 @@ class Material;
 
 class LIBDWG_API Entity : public CadObject
 {
+    RTTR_ENABLE(CadObject)
+
+public:
+    Entity();
+    virtual ~Entity();
+
+    std::string subclassMarker() const override;
+
+    virtual BookColor *bookColor() const;
+    virtual void setBookColor(BookColor *);
+
+    virtual Color color() const;
+    virtual void setColor(const Color &);
+
+    virtual bool isInvisible() const;
+    virtual void setIsInvisible(bool);
+
+    virtual Layer *layer() const;
+    virtual void setLayer(Layer *);
+
+    virtual LineType *lineType() const;
+    virtual void setLineType(LineType *);
+
+    virtual double linetypeScale() const;
+    virtual void setLinetypeScale(double);
+
+    virtual LineweightType lineweight() const;
+    virtual void setLineweight(LineweightType);
+
+    virtual Material *material() const;
+    virtual void setMaterial(Material *);
+
+    virtual Transparency transparency() const;
+    virtual void setTransparency(const Transparency &);
+
+    virtual void matchProperties(Entity *entity);
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
+protected:
+    void tableOnRemove(CadObject *item);
+
+private:
     Layer *_layer;
     Color _color;
     LineweightType _lineweight;
@@ -46,44 +90,6 @@ class LIBDWG_API Entity : public CadObject
     LineType *_linetype;
     BookColor *_bookColor;
     Material *_material;
-
-public:
-    Entity();
-    virtual ~Entity();
-
-    std::string subclassMarker() const override;
-
-    virtual Layer *layer() const;
-    virtual void setLayer(Layer *);
-
-    virtual Color color() const;
-    virtual void setColor(const Color &);
-
-    virtual LineweightType lineweight() const;
-    virtual void setLineweight(LineweightType);
-
-    virtual double linetypeScale() const;
-    virtual void setLinetypeScale(double);
-
-    virtual bool isInvisible() const;
-    virtual void setIsInvisible(bool);
-
-    virtual Transparency transparency() const;
-    virtual void setTransparency(const Transparency &);
-
-    virtual LineType *lineType() const;
-    virtual void setLineType(LineType *);
-
-    virtual Material *material() const;
-    virtual void setMaterial(Material *);
-
-    virtual BookColor *bookColor() const;
-    virtual void setBookColor(BookColor *);
-
-    virtual void matchProperties(Entity *entity);
-
-    void assignDocument(CadDocument *doc) override;
-    void unassignDocument() override;
 };
 
 }// namespace dwg

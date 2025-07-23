@@ -28,10 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Point : public Entity
 {
-    XYZ _location;
-    XYZ _normal;
-    double _thickness;
-    double _rotation;
+    RTTR_ENABLE(Entity)
 
 public:
     Point();
@@ -52,6 +49,12 @@ public:
 
     double rotation() const;
     void setRotation(double);
+
+private:
+    XYZ _location;
+    XYZ _normal;
+    double _thickness;
+    double _rotation;
 };
 
 }// namespace dwg

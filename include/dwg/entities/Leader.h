@@ -33,20 +33,7 @@ class DimensionStyle;
 
 class LIBDWG_API Leader : public Entity
 {
-    DimensionStyle *_style;              ///< Dimension style associated with the leader.
-    bool _arrowHeadEnabled;              ///< Indicates whether the arrowhead is enabled.
-    LeaderPathType _pathType;            ///< Path type of the leader (e.g., straight or spline).
-    LeaderCreationType _creationType;    ///< Creation type of the leader.
-    HookLineDirection _hookLineDirection;///< Direction of the hook line, if applicable.
-    bool _hasHookline;                   ///< Indicates whether the leader has a hook line.
-    double _textHeight;                  ///< Height of the text associated with the leader.
-    double _textWidth;                   ///< Width of the text associated with the leader.
-    std::vector<XYZ> _vertices;          ///< List of vertex points defining the leader path.
-    Entity *_associatedAnnotation;       ///< Associated annotation entity.
-    XYZ _normal;                         ///< Normal vector defining the plane of the leader.
-    XYZ _horizontalDirection;            ///< Horizontal direction vector.
-    XYZ _blockOffset;                    ///< Offset of the block reference.
-    XYZ _annotationOffset;               ///< Offset of the annotation.
+    RTTR_ENABLE(Entity)
 
 public:
     Leader();
@@ -100,6 +87,22 @@ public:
 
     void assignDocument(CadDocument *doc) override;
     void unassignDocument() override;
+
+private:
+    DimensionStyle *_style;              ///< Dimension style associated with the leader.
+    bool _arrowHeadEnabled;              ///< Indicates whether the arrowhead is enabled.
+    LeaderPathType _pathType;            ///< Path type of the leader (e.g., straight or spline).
+    LeaderCreationType _creationType;    ///< Creation type of the leader.
+    HookLineDirection _hookLineDirection;///< Direction of the hook line, if applicable.
+    bool _hasHookline;                   ///< Indicates whether the leader has a hook line.
+    double _textHeight;                  ///< Height of the text associated with the leader.
+    double _textWidth;                   ///< Width of the text associated with the leader.
+    std::vector<XYZ> _vertices;          ///< List of vertex points defining the leader path.
+    Entity *_associatedAnnotation;       ///< Associated annotation entity.
+    XYZ _normal;                         ///< Normal vector defining the plane of the leader.
+    XYZ _horizontalDirection;            ///< Horizontal direction vector.
+    XYZ _blockOffset;                    ///< Offset of the block reference.
+    XYZ _annotationOffset;               ///< Offset of the annotation.
 };
 
 }// namespace dwg

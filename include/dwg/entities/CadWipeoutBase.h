@@ -34,21 +34,7 @@ class ImageDefinitionReactor;
 
 class LIBDWG_API CadWipeoutBase : public Entity
 {
-    int _classVersion;                         ///< Internal version of the class for compatibility.
-    XYZ _insertPoint;                          ///< Insertion point of the wipeout object.
-    XYZ _uvector;                              ///< U-direction vector defining the orientation.
-    XYZ _vvector;                              ///< V-direction vector defining the orientation.
-    XY _size;                                  ///< Size of the wipeout object.
-    ImageDisplayFlags _flags;                  ///< Display flags controlling image properties.
-    bool _clippingState;                       ///< Indicates whether clipping is enabled.
-    unsigned char _brightness;                 ///< Brightness level of the image.
-    unsigned char _contrast;                   ///< Contrast level of the image.
-    unsigned char _fade;                       ///< Fade level of the image.
-    ClipMode _clipMode;                        ///< Clipping mode used for the wipeout.
-    ClipType _clipType;                        ///< Type of clipping applied.
-    std::vector<XY> _clipBoundaryVertices;     ///< Vertices defining the clipping boundary.
-    ImageDefinition *_definition;              ///< Reference to the associated image definition.
-    ImageDefinitionReactor *_definitionReactor;///< Reactor for image definition changes.
+    RTTR_ENABLE(Entity)
 
 public:
     CadWipeoutBase();
@@ -107,6 +93,23 @@ public:
 
 private:
     void imageDefinitionsOnRemove(CadObject *object);
+
+private:
+    int _classVersion;                         ///< Internal version of the class for compatibility.
+    XYZ _insertPoint;                          ///< Insertion point of the wipeout object.
+    XYZ _uvector;                              ///< U-direction vector defining the orientation.
+    XYZ _vvector;                              ///< V-direction vector defining the orientation.
+    XY _size;                                  ///< Size of the wipeout object.
+    ImageDisplayFlags _flags;                  ///< Display flags controlling image properties.
+    bool _clippingState;                       ///< Indicates whether clipping is enabled.
+    unsigned char _brightness;                 ///< Brightness level of the image.
+    unsigned char _contrast;                   ///< Contrast level of the image.
+    unsigned char _fade;                       ///< Fade level of the image.
+    ClipMode _clipMode;                        ///< Clipping mode used for the wipeout.
+    ClipType _clipType;                        ///< Type of clipping applied.
+    std::vector<XY> _clipBoundaryVertices;     ///< Vertices defining the clipping boundary.
+    ImageDefinition *_definition;              ///< Reference to the associated image definition.
+    ImageDefinitionReactor *_definitionReactor;///< Reactor for image definition changes.
 };
 
 }// namespace dwg

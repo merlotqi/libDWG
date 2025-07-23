@@ -28,18 +28,28 @@ namespace dwg {
 
 class LIBDWG_API DimensionLinear : public DimensionAligned
 {
-    double _rotation;// The rotation angle of the linear dimension (in degrees or radians)
+    RTTR_ENABLE(DimensionAligned)
 
 public:
     DimensionLinear();
     ~DimensionLinear();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
+
+    double measurement() const override;
+
+    double offset() const override;
+    void setOffset(double value) override;
 
     double rotation() const;
     void setRotation(double rotation);
+
+    void updateBlock() override;
+
+private:
+    double _rotation;// The rotation angle of the linear dimension (in degrees or radians)
 };
 
 }// namespace dwg

@@ -93,6 +93,11 @@ void Dimension::setInsertionPoint(const XYZ &value)
     _insertionPoint = value;
 }
 
+bool Dimension::isAngular() const
+{
+    return false;
+}
+
 XYZ Dimension::normal() const
 {
     return _normal;

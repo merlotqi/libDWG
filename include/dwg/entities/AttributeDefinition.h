@@ -30,7 +30,7 @@ class AttributeEntity;
 
 class LIBDWG_API AttributeDefinition : public AttributeBase
 {
-    std::string _prompt;
+    RTTR_ENABLE(AttributeBase)
 
 public:
     AttributeDefinition();
@@ -43,6 +43,9 @@ public:
 
     std::string prompt() const;
     void setPrompt(const std::string &prompt);
+
+private:
+    std::string _prompt;
 };
 
 }// namespace dwg

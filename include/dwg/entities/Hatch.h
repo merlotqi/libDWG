@@ -34,6 +34,8 @@ class HatchBoundaryPath;
 class HatchGradientPattern;
 class LIBDWG_API Hatch : public Entity
 {
+    RTTR_ENABLE(Entity)
+    
 public:
     Hatch();
     ~Hatch();

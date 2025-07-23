@@ -28,6 +28,8 @@ namespace dwg {
 
 class LIBDWG_API Solid : public Entity
 {
+    RTTR_ENABLE(Entity)
+    
 public:
     Solid();
     virtual ~Solid();

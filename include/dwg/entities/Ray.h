@@ -28,8 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Ray : public Entity
 {
-    XYZ _startPoint;///< The starting point of the ray.
-    XYZ _direction; ///< The direction vector of the ray.
+    RTTR_ENABLE(Entity)
 
 public:
     Ray();
@@ -44,6 +43,10 @@ public:
 
     XYZ direction() const;
     void setDirection(const XYZ &direction);
+
+private:
+    XYZ _startPoint;///< The starting point of the ray.
+    XYZ _direction; ///< The direction vector of the ray.
 };
 
 }// namespace dwg

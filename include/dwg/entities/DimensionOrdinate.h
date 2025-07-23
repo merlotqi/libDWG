@@ -28,27 +28,32 @@ namespace dwg {
 
 class LIBDWG_API DimensionOrdinate : public Dimension
 {
-    XYZ _featureLocation;// The location of the feature being dimensioned (typically a coordinate)
-    XYZ _leaderEndpoint; // The endpoint of the leader line (connection point for the dimension)
+    RTTR_ENABLE(Dimension)
 
 public:
     DimensionOrdinate();
     ~DimensionOrdinate();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     XYZ featureLocation() const;
     void setFeatureLocation(const XYZ &value);
 
-    XYZ leaderEndpoint() const;
-    void setLeaderEndpoint(const XYZ &value);
-
     bool isOrdinateTypeX() const;
     void setIsOrdinateTypeX(bool value);
 
-    virtual double measurement() const override;
+    XYZ leaderEndpoint() const;
+    void setLeaderEndpoint(const XYZ &value);
+
+    double measurement() const override;
+
+    void updateBlock() override;
+
+private:
+    XYZ _featureLocation;// The location of the feature being dimensioned (typically a coordinate)
+    XYZ _leaderEndpoint; // The endpoint of the leader line (connection point for the dimension)
 };
 
 }// namespace dwg

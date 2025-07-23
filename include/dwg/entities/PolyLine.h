@@ -34,6 +34,8 @@ namespace dwg {
 class VertexSeqendCollection;
 class LIBDWG_API Polyline : public Entity
 {
+    RTTR_ENABLE(Entity)
+    
 public:
     Polyline();
     virtual ~Polyline();

@@ -22,6 +22,8 @@
 
 #include <dwg/CadDocument.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/Entity.h>
 #include <dwg/objects/BookColor.h>
 #include <dwg/objects/collections/ColorCollection.h>

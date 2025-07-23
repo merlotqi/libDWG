@@ -32,6 +32,8 @@ class MText;
 
 class LIBDWG_API AttributeBase : public TextEntity
 {
+    RTTR_ENABLE(TextEntity)
+    
 public:
     enum class AttributeType
     {

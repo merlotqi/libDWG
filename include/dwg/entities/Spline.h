@@ -30,21 +30,7 @@ namespace dwg {
 
 class LIBDWG_API Spline : public Entity
 {
-    XYZ _normal;
-    SplineFlags _flags;
-    int _degree;
-    std::vector<double> _knots;
-    std::vector<XYZ> _controlPoints;
-    std::vector<XYZ> _fitPoints;
-    double _knotTolerance;
-    double _controlPointTolerance;
-    double _fitTolerance;
-    XYZ _startTangent;
-    XYZ _endTangent;
-    std::vector<double> _weights;
-
-    SplineFlag1 _flags1;
-    KnotParameterization _knotParameterization;
+    RTTR_ENABLE(Entity)
 
 public:
     Spline();
@@ -99,6 +85,23 @@ public:
 
     KnotParameterization knotParameterization() const;
     void setKnotParameterization(KnotParameterization);
+
+private:
+    XYZ _normal;
+    SplineFlags _flags;
+    int _degree;
+    std::vector<double> _knots;
+    std::vector<XYZ> _controlPoints;
+    std::vector<XYZ> _fitPoints;
+    double _knotTolerance;
+    double _controlPointTolerance;
+    double _fitTolerance;
+    XYZ _startTangent;
+    XYZ _endTangent;
+    std::vector<double> _weights;
+
+    SplineFlag1 _flags1;
+    KnotParameterization _knotParameterization;
 };
 
 }// namespace dwg

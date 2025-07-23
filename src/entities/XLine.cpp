@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/XLine.h>
 
 namespace dwg {
@@ -63,6 +65,18 @@ XYZ XLine::direction() const
 void XLine::setDirection(const XYZ &value)
 {
     _direction = value;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<XLine>("XLine")(metadata("DxfName", DxfFileToken::EntityXline),
+                                         (metadata("DxfSubClass", DxfSubclassMarker::XLine)))
+            .constructor()
+            .property("firstPoint", &XLine::firstPoint,
+                      &XLine::setFirstPoint)(metadata("DxfCode", DxfCodeValueAttribute({10, 20, 30})))
+            .property("direction", &XLine::direction,
+                      &XLine::setDirection)(metadata("DxfCode", DxfCodeValueAttribute({11, 21, 31})));
 }
 
 }// namespace dwg

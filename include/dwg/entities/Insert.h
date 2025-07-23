@@ -34,6 +34,8 @@ class BlockRecord;
 
 class LIBDWG_API Insert : public Entity
 {
+    RTTR_ENABLE(Entity)
+
 public:
     Insert();
     Insert(BlockRecord *);

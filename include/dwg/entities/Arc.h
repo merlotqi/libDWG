@@ -28,8 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Arc : public Circle
 {
-    double _startangle;
-    double _endangle;
+    RTTR_ENABLE(Circle)
 
 public:
     Arc();
@@ -44,6 +43,10 @@ public:
 
     double endAngle() const;
     void setEndAngle(double angle);
+
+private:
+    double _startangle;
+    double _endangle;
 };
 
 }// namespace dwg

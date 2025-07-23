@@ -29,6 +29,8 @@ namespace dwg {
 class VertexFaceRecordCollection;
 class LIBDWG_API PolyfaceMesh : public Polyline
 {
+    RTTR_ENABLE(Polyline)
+
 public:
     PolyfaceMesh();
     ~PolyfaceMesh();

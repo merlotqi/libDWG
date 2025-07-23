@@ -28,13 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Ellipse : public Entity
 {
-    XYZ _normal;           ///< The normal vector of the ellipse (default is Z-axis)
-    XYZ _center;           ///< The center point of the ellipse (default is the origin)
-    XYZ _endPoint;         ///< A point on the ellipse (default is on the X-axis)
-    double _radiusRatio;   ///< The ratio of the radii (default is 0)
-    double _startParameter;///< The start parameter for the ellipse (default is 0)
-    double _endParameter;  ///< The end parameter for the ellipse (default is 2π)
-    double _thickness;     ///< The thickness of the ellipse (default is 0)
+    RTTR_ENABLE(Entity)
 
 public:
     Ellipse();
@@ -44,17 +38,22 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    XYZ normal() const;
-    void setNormal(const XYZ &normal);
-
     XYZ center() const;
     void setCenter(const XYZ &center);
+
+    double endParameter() const;
+    void setEndParameter(double endParam);
 
     XYZ endPoint() const;
     void setEndPoint(const XYZ &endPoint);
 
-    double thickness() const;
-    void setThickness(double thickness);
+    bool isFullEllipse() const;
+
+    double majorAxis() const;
+    double minorAxis() const;
+
+    XYZ normal() const;
+    void setNormal(const XYZ &normal);
 
     double radiusRatio() const;
     void setRadiusRatio(double radiusRatio);
@@ -62,8 +61,17 @@ public:
     double startParameter() const;
     void setStartParameter(double startParam);
 
-    double endParameter() const;
-    void setEndParameter(double endParam);
+    double thickness() const;
+    void setThickness(double thickness);
+
+private:
+    XYZ _normal;           ///< The normal vector of the ellipse (default is Z-axis)
+    XYZ _center;           ///< The center point of the ellipse (default is the origin)
+    XYZ _endPoint;         ///< A point on the ellipse (default is on the X-axis)
+    double _radiusRatio;   ///< The ratio of the radii (default is 0)
+    double _startParameter;///< The start parameter for the ellipse (default is 0)
+    double _endParameter;  ///< The end parameter for the ellipse (default is 2π)
+    double _thickness;     ///< The thickness of the ellipse (default is 0)
 };
 
 }// namespace dwg

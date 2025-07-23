@@ -28,10 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Circle : public Entity
 {
-    XYZ _center;
-    XYZ _normal;
-    double _thickness;
-    double _radius;
+    RTTR_ENABLE(Entity)
 
 public:
     Circle();
@@ -41,17 +38,23 @@ public:
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
 
+    XYZ center() const;
+    void setCenter(const XYZ &center);
+
     XYZ normal() const;
     void setNormal(const XYZ &normal);
 
-    XYZ center() const;
-    void setCenter(const XYZ &center);
+    double radius() const;
+    void setRadius(double radius);
 
     double thickness() const;
     void setThickness(double thickness);
 
-    double radius() const;
-    void setRadius(double radius);
+private:
+    XYZ _center;
+    XYZ _normal;
+    double _thickness;
+    double _radius;
 };
 
 }// namespace dwg

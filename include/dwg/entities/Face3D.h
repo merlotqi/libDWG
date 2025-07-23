@@ -29,11 +29,7 @@ namespace dwg {
 
 class LIBDWG_API Face3D : public Entity
 {
-    XYZ _firstCorner;
-    XYZ _secondCorner;
-    XYZ _thirdCorner;
-    XYZ _fourthCorner;
-    InvisibleEdgeFlags _flags;
+    RTTR_ENABLE(Entity)
 
 public:
     Face3D();
@@ -57,6 +53,13 @@ public:
 
     InvisibleEdgeFlags flags() const;
     void setFlags(InvisibleEdgeFlags);
+
+private:
+    XYZ _firstCorner;
+    XYZ _secondCorner;
+    XYZ _thirdCorner;
+    XYZ _fourthCorner;
+    InvisibleEdgeFlags _flags;
 };
 
 }// namespace dwg

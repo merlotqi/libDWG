@@ -28,8 +28,7 @@ namespace dwg {
 
 class LIBDWG_API XLine : public Entity
 {
-    XYZ _firstPoint;// The first point defining the XLine.
-    XYZ _direction; // The direction vector defining the XLine.
+    RTTR_ENABLE(Entity)
 
 public:
     XLine();
@@ -44,6 +43,10 @@ public:
 
     XYZ direction() const;
     void setDirection(const XYZ &);
+
+private:
+    XYZ _firstPoint;// The first point defining the XLine.
+    XYZ _direction; // The direction vector defining the XLine.
 };
 
 }// namespace dwg

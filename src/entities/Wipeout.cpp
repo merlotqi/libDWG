@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/Wipeout.h>
 
 namespace dwg {
@@ -43,6 +45,14 @@ std::string Wipeout::objectName() const
 std::string Wipeout::subclassMarker() const
 {
     return DxfSubclassMarker::Wipeout;
+}
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+    registration::class_<Wipeout>("Wipeout")(metadata("DxfName", DxfFileToken::EntityWipeout),
+                                             metadata("DxfSubClass", DxfSubclassMarker::Wipeout))
+            .constructor<>();
 }
 
 }// namespace dwg

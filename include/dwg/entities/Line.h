@@ -28,10 +28,7 @@ namespace dwg {
 
 class LIBDWG_API Line : public Entity
 {
-    XYZ _normal;      ///< Normal vector defining the plane of the line.
-    XYZ _startPoint;  ///< Start point of the line.
-    XYZ _endPoint;    ///< End point of the line.
-    double _thickness;///< Thickness of the line.
+    RTTR_ENABLE(Entity)
 
 public:
     Line();
@@ -52,6 +49,12 @@ public:
 
     double thickness() const;
     void setThickness(double thickness);
+
+private:
+    XYZ _normal;      ///< Normal vector defining the plane of the line.
+    XYZ _startPoint;  ///< Start point of the line.
+    XYZ _endPoint;    ///< End point of the line.
+    double _thickness;///< Thickness of the line.
 };
 
 }// namespace dwg

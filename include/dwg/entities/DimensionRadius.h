@@ -27,16 +27,15 @@
 namespace dwg {
 class LIBDWG_API DimensionRadius : public Dimension
 {
-    XYZ _angleVertex;    // The vertex of the angle (used for radius dimension)
-    double _leaderLength;// The length of the leader line (connection to the dimension line)
+    RTTR_ENABLE(Dimension)
 
 public:
     DimensionRadius();
     ~DimensionRadius();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     XYZ angleVertex() const;
     void setAngleVertex(const XYZ &value);
@@ -44,7 +43,13 @@ public:
     double leaderLength() const;
     void setLeaderLength(double value);
 
-    virtual double measurement() const override;
+    double measurement() const override;
+
+    void updateBlock() override;
+
+private:
+    XYZ _angleVertex;    // The vertex of the angle (used for radius dimension)
+    double _leaderLength;// The length of the leader line (connection to the dimension line)
 };
 
 }// namespace dwg

@@ -31,11 +31,100 @@ namespace dwg {
 
 class BlockRecord;
 class DimensionStyle;
+class Line;
+class MText;
+class Point;
 
 // The Dimension class represents a dimension entity in a CAD system,
 // providing properties and methods for dimension management and manipulation.
 class LIBDWG_API Dimension : public Entity
 {
+    RTTR_ENABLE(Entity)
+
+public:
+    Dimension();
+    Dimension(DimensionType type);
+    virtual ~Dimension();
+
+public:
+    virtual std::string subclassMarker() const override;
+
+    AttachmentPointType attachmentPoint() const;
+    void setAttachmentPoint(AttachmentPointType value);
+
+    BlockRecord *block() const;
+    void setBlock(BlockRecord *value);
+
+    XYZ definitionPoint() const;
+    void setDefinitionPoint(const XYZ &value);
+
+    DimensionTypes flags() const;
+    void setFlags(DimensionTypes value);
+
+    bool flipArrow1() const;
+    void setFlipArrow1(bool value);
+
+    bool flipArrow2() const;
+    void setFlipArrow2(bool value);
+
+    double horizontalDirection() const;
+    void setHorizontalDirection(double value);
+
+    XYZ insertionPoint() const;
+    void setInsertionPoint(const XYZ &value);
+
+    bool isAngular() const;
+
+    bool isTextUserDefinedLocation() const;
+    void setIsTextUserDefinedLocation(bool value);
+
+    double lineSpacingFactor() const;
+    void setLineSpacingFactor(double value);
+
+    LineSpacingStyleType lineSpacingStyle() const;
+    void setLineSpacingStyle(LineSpacingStyleType value);
+
+    virtual double measurement() const = 0;
+
+    XYZ normal() const;
+    void setNormal(const XYZ &value);
+
+    DimensionStyle *style() const;
+    void setStyle(DimensionStyle *value);
+
+    std::string text() const;
+    void setText(const std::string &value);
+
+    XYZ textMiddlePoint() const;
+    void setTextMiddlePoint(const XYZ &value);
+
+    double textRotation() const;
+    void setTextRotation(double value);
+
+    unsigned char version() const;
+    void setVersion(unsigned char value);
+
+    std::string measurementText() const;
+    std::string measurementText(DimensionStyle *style) const;
+
+    virtual void updateBlock();
+
+    void assignDocument(CadDocument *doc) override;
+    void unassignDocument() override;
+
+protected:
+    static Entity *dimensionLine(const XYZ &start, const XYZ &end, DimensionStyle *style);
+    static Line *extensionLine(const XYZ &start, const XYZ &end, DimensionStyle style, LineType linetype);
+    void angularBlock(double radius, const XY &centerRef, const XY &ref1, double minOffset, bool drawRef2);
+    std::vector<Entity *> centerCross(const XYZ &center, double radius, DimensionStyle style);
+    void createBlock();
+    Point *createDefinitionPoint(const XYZ &location);
+    MText *createTextEntity(const XYZ &insertPoint, const std::string &text);
+    Entity *dimensionArrow(const XYZ &insertPoint, const XYZ &dir, DimensionStyle style, BlockRecord record);
+    Line *dimensionRadialLine(const XY &start, const XY &end, double rotation, short reversed);
+    void tableOnRemove(CadObject *item);
+    std::string generateBlockName() const;
+
 protected:
     unsigned char _version;                // The version of the dimension entity
     BlockRecord *_block;                   // Pointer to the block associated with the dimension
@@ -53,71 +142,6 @@ protected:
     double _textRotation;                  // Rotation angle for the dimension text
     double _horizontalDirection;           // Horizontal direction for text alignment
     DimensionStyle *_dimStyle;             // Pointer to the associated dimension style
-
-public:
-    Dimension();
-    Dimension(DimensionType type);
-    virtual ~Dimension();
-
-public:
-    virtual std::string subclassMarker() const override;
-
-    unsigned char version() const;
-    void setVersion(unsigned char value);
-
-    BlockRecord *block() const;
-    void setBlock(BlockRecord *value);
-
-    XYZ definitionPoint() const;
-    void setDefinitionPoint(const XYZ &value);
-
-    XYZ textMiddlePoint() const;
-    void setTextMiddlePoint(const XYZ &value);
-
-    XYZ insertionPoint() const;
-    void setInsertionPoint(const XYZ &value);
-
-    XYZ normal() const;
-    void setNormal(const XYZ &value);
-
-    DimensionTypes flags() const;
-    void setFlags(DimensionTypes value);
-
-    AttachmentPointType attachmentPoint() const;
-    void setAttachmentPoint(AttachmentPointType value);
-
-    LineSpacingStyleType lineSpacingStyle() const;
-    void setLineSpacingStyle(LineSpacingStyleType value);
-
-    double lineSpacingFactor() const;
-    void setLineSpacingFactor(double value);
-
-    bool flipArrow1() const;
-    void setFlipArrow1(bool value);
-
-    bool flipArrow2() const;
-    void setFlipArrow2(bool value);
-
-    const std::string &text() const;
-    void setText(const std::string &value);
-
-    double textRotation() const;
-    void setTextRotation(double value);
-
-    double horizontalDirection() const;
-    void setHorizontalDirection(double value);
-
-    DimensionStyle *dimStyle() const;
-    void setDimStyle(DimensionStyle *value);
-
-    virtual double measurement() const = 0;
-
-public:
-    bool isTextUserDefinedLocation() const;
-    void setIsTextUserDefinedLocation(bool value);
-
-    void assignDocument(CadDocument *doc) override;
-    void unassignDocument() override;
 };
 
 }// namespace dwg

@@ -30,6 +30,7 @@ namespace dwg {
 
 class LIBDWG_API LwPolyline : public Entity
 {
+    RTTR_ENABLE(Entity)
 public:
     struct Vertex
     {

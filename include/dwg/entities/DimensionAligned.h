@@ -28,31 +28,41 @@ namespace dwg {
 
 class LIBDWG_API DimensionAligned : public Dimension
 {
-    XYZ _firstPoint;        // The first point of the aligned dimension
-    XYZ _secondPoint;       // The second point of the aligned dimension
-    double _extLineRotation;// Rotation angle for the extension lines of the aligned dimension
+    RTTR_ENABLE(Dimension)
 
 public:
     DimensionAligned();
+    DimensionAligned(const XYZ &firstPoint, const XYZ &secondPoint);
     ~DimensionAligned();
 
-    virtual ObjectType objectType() const override;
-    virtual std::string objectName() const override;
-    virtual std::string subclassMarker() const override;
-
-    XYZ firstPoint() const;
-    void setFirstPoint(const XYZ &value);
-
-    XYZ secondPoint() const;
-    void setSecondPoint(const XYZ &value);
+    ObjectType objectType() const override;
+    std::string objectName() const override;
+    std::string subclassMarker() const override;
 
     double extLineRotation() const;
     void setExtLineRotation(double value);
 
-    virtual double measurement() const override;
+    XYZ firstPoint() const;
+    void setFirstPoint(const XYZ &value);
+
+    double measurement() const override;
+
+    virtual double offset() const;
+    virtual void setOffset(double value);
+
+    XYZ secondPoint() const;
+    void setSecondPoint(const XYZ &value);
+
+    void updateBlock() override;
+
 
 protected:
     DimensionAligned(DimensionType type);
+
+private:
+    XYZ _firstPoint;        // The first point of the aligned dimension
+    XYZ _secondPoint;       // The second point of the aligned dimension
+    double _extLineRotation;// Rotation angle for the extension lines of the aligned dimension
 };
 
 }// namespace dwg

@@ -22,6 +22,8 @@
 
 #include <dwg/DxfFileToken_p.h>
 #include <dwg/DxfSubclassMarker_p.h>
+#include <dwg/attributes/DxfCodeValueAttribute_p.h>
+#include <dwg/attributes/DxfSubClassAttribute_p.h>
 #include <dwg/entities/Face3D.h>
 
 namespace dwg {
