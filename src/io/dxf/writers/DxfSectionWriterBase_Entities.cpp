@@ -289,7 +289,7 @@ void DxfSectionWriterBase::writeDimension(Dimension *dim)
 
     _writer->write(210, dim->normal());
 
-    _writer->writeName(3, dim->dimStyle());
+    _writer->writeName(3, dim->style());
 
     DimensionAligned *aligned = dynamic_cast<DimensionAligned *>(dim);
     DimensionRadius *radius = dynamic_cast<DimensionRadius *>(dim);

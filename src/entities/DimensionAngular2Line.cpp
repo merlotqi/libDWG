@@ -95,6 +95,8 @@ double DimensionAngular2Line::measurement() const
     //return v1.angleTo(v2);
 }
 
+void DimensionAngular2Line::updateBlock() {}
+
 RTTR_REGISTRATION
 {
     using namespace rttr;

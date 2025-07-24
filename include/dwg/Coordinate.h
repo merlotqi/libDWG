@@ -55,14 +55,9 @@ struct LIBDWG_API XY
     constexpr double &operator[](int i);
     constexpr double operator[](int i) const;
 
-    double length() const noexcept;
-    constexpr double lengthSquared() const noexcept;
-
-    XY normalized() const noexcept;
-    void normalize() noexcept;
     double angle() const noexcept;
-
-    double distanceToPoint(XY point) const noexcept;
+    double angleTo(XY v) const noexcept;
+    XY polar(double distance, double angle) const noexcept;
 
     constexpr XY &operator+=(XY vector) noexcept;
     constexpr XY &operator-=(XY vector) noexcept;
@@ -72,6 +67,9 @@ struct LIBDWG_API XY
     constexpr XY &operator/=(XY vector);
 
     static constexpr double dotProduct(XY v1, XY v2) noexcept;
+    static constexpr double crossProduct(XY v1, XY v2) noexcept;
+    static XY polar(XY u, double distance, double angle) noexcept;
+    static XY rotate(XY value, double angle) noexcept;
 
     constexpr friend inline bool operator==(XY v1, XY v2) noexcept
     {
@@ -153,12 +151,6 @@ struct LIBDWG_API XYZ
     constexpr double &operator[](int i);
     constexpr double operator[](int i) const;
 
-    double length() const noexcept;
-    constexpr double lengthSquared() const noexcept;
-
-    XYZ normalized() const noexcept;
-    void normalize() noexcept;
-
     constexpr XYZ &operator+=(XYZ vector) noexcept;
     constexpr XYZ &operator-=(XYZ vector) noexcept;
     constexpr XYZ &operator*=(double factor) noexcept;
@@ -169,10 +161,6 @@ struct LIBDWG_API XYZ
     static constexpr double dotProduct(XYZ v1, XYZ v2) noexcept;
     static constexpr XYZ crossProduct(XYZ v1, XYZ v2) noexcept;
 
-    static XYZ normal(XYZ v1, XYZ v2) noexcept;
-    static XYZ normal(XYZ v1, XYZ v2, XYZ v3) noexcept;
-
-
     constexpr friend inline bool operator==(XYZ v1, XYZ v2) noexcept
     {
         return v1.v[0] == v2.v[0] && v1.v[1] == v2.v[1] && v1.v[2] == v2.v[2];
@@ -182,8 +170,6 @@ struct LIBDWG_API XYZ
     {
         return v1.v[0] != v2.v[0] || v1.v[1] != v2.v[1] || v1.v[2] != v2.v[2];
     }
-
-    double distanceToPoint(XYZ point) const noexcept;
 
 
     constexpr friend inline XYZ operator+(XYZ v1, XYZ v2) noexcept
@@ -252,40 +238,20 @@ constexpr inline double XY::operator[](int i) const
     return v[i];
 }
 
-inline double XY::length() const noexcept
-{
-    return std::hypot(v[0], v[1]);
-}
-
-constexpr inline double XY::lengthSquared() const noexcept
-{
-    return v[0] * v[0] + v[1] * v[1];
-}
-
-inline XY XY::normalized() const noexcept
-{
-    const double len = length();
-    return fuzzyIsNull(len - 1.0f) ? *this : fuzzyIsNull(len) ? XY() : XY(v[0] / len, v[1] / len);
-}
-
-inline void XY::normalize() noexcept
-{
-    const double len = length();
-    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len))
-        return;
-
-    v[0] /= len;
-    v[1] /= len;
-}
-
 inline double XY::angle() const noexcept
 {
-    return 0.0;
+    return std::atan2(Y, X);
 }
 
-inline double XY::distanceToPoint(XY point) const noexcept
+inline double XY::angleTo(XY v) const noexcept
 {
-    return (*this - point).length();
+    XY dir = v - *this;
+    return dir.angle();
+}
+inline XY XY::polar(double distance, double angle) const noexcept
+{
+    XY dir(std::cos(angle), std::sin(angle));
+    return *this + dir * distance;
 }
 
 constexpr inline XY &XY::operator+=(XY vector) noexcept
@@ -338,6 +304,22 @@ constexpr inline double XY::dotProduct(XY v1, XY v2) noexcept
     return v1.v[0] * v2.v[0] + v1.v[1] * v2.v[1];
 }
 
+constexpr inline double XY::crossProduct(XY v1, XY v2) noexcept
+{
+    return v1.X * v2.Y - v1.Y * v2.X;
+}
+
+inline XY XY::polar(XY u, double distance, double angle) noexcept
+{
+    XY dir(std::cos(angle), std::sin(angle));
+    return u + dir * distance;
+}
+
+inline XY XY::rotate(XY value, double angle) noexcept
+{
+    return XY(value.X * std::cos(angle) - value.Y * std::sin(angle), value.X * std::sin(angle) + value.Y * std::cos(angle));
+}
+
 /***************************** XYZ *****************************/
 
 constexpr inline XYZ::XYZ() noexcept : v{0.0, 0.0, 0.0} {}
@@ -354,33 +336,6 @@ constexpr inline double XYZ::operator[](int i) const
 {
     assert((unsigned int) (i) < 3u);
     return v[i];
-}
-
-inline double XYZ::length() const noexcept
-{
-    return std::hypot(v[0], v[1], v[2]);
-}
-
-inline XYZ XYZ::normalized() const noexcept
-{
-    const double len = length();
-    return fuzzyIsNull(len - 1.0f) ? *this : fuzzyIsNull(len) ? XYZ() : XYZ(v[0] / len, v[1] / len, v[2] / len);
-}
-
-inline void XYZ::normalize() noexcept
-{
-    const double len = length();
-    if (fuzzyIsNull(len - 1.0f) || fuzzyIsNull(len))
-        return;
-
-    v[0] /= len;
-    v[1] /= len;
-    v[2] /= len;
-}
-
-constexpr inline double XYZ::lengthSquared() const noexcept
-{
-    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 }
 
 constexpr inline XYZ &XYZ::operator+=(XYZ vector) noexcept
@@ -446,26 +401,10 @@ constexpr inline XYZ XYZ::crossProduct(XYZ v1, XYZ v2) noexcept
                v1.v[0] * v2.v[1] - v1.v[1] * v2.v[0]);
 }
 
-inline XYZ XYZ::normal(XYZ v1, XYZ v2) noexcept
-{
-    return crossProduct(v1, v2).normalized();
-}
-
-inline XYZ XYZ::normal(XYZ v1, XYZ v2, XYZ v3) noexcept
-{
-    return crossProduct((v2 - v1), (v3 - v1)).normalized();
-}
-
-inline double XYZ::distanceToPoint(XYZ point) const noexcept
-{
-    return (*this - point).length();
-}
-
 constexpr inline XY XYZ::to2D() const noexcept
 {
     return XY(v[0], v[1]);
 }
-
 
 struct Matrix4
 {

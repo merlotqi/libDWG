@@ -219,11 +219,9 @@ void DwgObjectWriter::writeCommonDimensionData(Dimension *dimension)
 
     //Common Entity Handle Data
     //H 3 DIMSTYLE(hard pointer)
-    _writer->handleReference(DwgReferenceType::HardPointer, dimension->dimStyle());
+    _writer->handleReference(DwgReferenceType::HardPointer, dimension->style());
     //H 2 anonymous BLOCK(hard pointer)
-    //TODO: fix annotative dimensions
-    //_writer->handleReference(DwgReferenceType::HardPointer, dimension->Block);
-    _writer->handleReference(DwgReferenceType::HardPointer, nullptr);
+    _writer->handleReference(DwgReferenceType::HardPointer, dimension->block());
 }
 
 void DwgObjectWriter::writeDimensionLinear(DimensionLinear *dimension)

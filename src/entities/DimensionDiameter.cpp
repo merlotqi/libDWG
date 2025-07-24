@@ -69,8 +69,10 @@ void DimensionDiameter::setLeaderLength(double value)
 
 double DimensionDiameter::measurement() const
 {
-    return insertionPoint().distanceToPoint(_angleVertex) * 2.0;
+    return 0.0;
 }
+
+void DimensionDiameter::updateBlock() {}
 
 RTTR_REGISTRATION
 {

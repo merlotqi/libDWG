@@ -89,6 +89,8 @@ void DimensionOrdinate::setIsOrdinateTypeX(bool value)
     }
 }
 
+void DimensionOrdinate::updateBlock() {}
+
 RTTR_REGISTRATION
 {
     using namespace rttr;

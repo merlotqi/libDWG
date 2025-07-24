@@ -33,6 +33,10 @@ namespace dwg {
 class CadHeader;
 class CadSystemVariables
 {
+    static std::map<std::string, std::string> _systemVaraible2PropertyKeyMappings;
+
+#pragma region CadHeader Dxf System Variables
+
 public:
     static constexpr auto ANGBASE = "$ANGBASE";
     static constexpr auto ANGDIR = "$ANGDIR";
@@ -283,6 +287,8 @@ public:
     static constexpr auto PSVPSCALE = "$PSVPSCALE";
     static constexpr auto WORLDVIEW = "$WORLDVIEW";
     static constexpr auto XEDIT = "$XEDIT";
+
+#pragma endregion CadHeader Dxf System Variables
 
     static std::map<std::string, CadSystemVariableAttribute> headerMap();
 

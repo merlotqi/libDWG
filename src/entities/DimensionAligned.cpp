@@ -30,6 +30,8 @@ namespace dwg {
 
 DimensionAligned::DimensionAligned() : Dimension(DimensionType::Aligned) {}
 
+DimensionAligned::DimensionAligned(const XYZ &firstPoint, const XYZ &secondPoint) {}
+
 DimensionAligned::~DimensionAligned() {}
 
 ObjectType DimensionAligned::objectType() const
@@ -79,8 +81,17 @@ void DimensionAligned::setExtLineRotation(double value)
 
 double DimensionAligned::measurement() const
 {
-    return _firstPoint.distanceToPoint(_secondPoint);
+    return 0.0;
 }
+
+double DimensionAligned::offset() const 
+{
+    return 0;
+}
+
+void DimensionAligned::setOffset(double value) {}
+
+void DimensionAligned::updateBlock() {}
 
 DimensionAligned::DimensionAligned(DimensionType type) : Dimension(type) {}
 

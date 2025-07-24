@@ -31,16 +31,16 @@ namespace dwg {
 class DxfCodeValueAttribute
 {
     std::vector<DxfCode> _valueCodes;
-    DxfReferenceType _referenceType;
+    DxfReferenceTypes _referenceTypes;
 
 public:
     DxfCodeValueAttribute(const std::vector<int> &codes);
 
-    DxfCodeValueAttribute(DxfReferenceType rf, const std::vector<int> &codes);
+    DxfCodeValueAttribute(DxfReferenceTypes rf, const std::vector<int> &codes);
 
     std::vector<DxfCode> valueCodes() const;
 
-    DxfReferenceType referenceType() const;
+    DxfReferenceTypes referenceTypes() const;
 };
 
 }// namespace dwg

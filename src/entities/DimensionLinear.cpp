@@ -57,6 +57,19 @@ void DimensionLinear::setRotation(double value)
     _rotation = value;
 }
 
+double DimensionLinear::measurement() const
+{
+    return 0.0;
+}
+
+double DimensionLinear::offset() const
+{
+    return 0.0;
+}
+void DimensionLinear::setOffset(double value) {}
+
+void DimensionLinear::updateBlock() {}
+
 RTTR_REGISTRATION
 {
     using namespace rttr;

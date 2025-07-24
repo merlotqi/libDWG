@@ -69,7 +69,9 @@ void DimensionRadius::setLeaderLength(double value)
 
 double DimensionRadius::measurement() const
 {
-    return _insertionPoint.distanceToPoint(_angleVertex);
+    return 0.0;
 }
+
+void DimensionRadius::updateBlock() {}
 
 }// namespace dwg

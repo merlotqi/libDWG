@@ -35,7 +35,13 @@ if(MSVC)
         /bigobj  # MSVC-specific: Allows more sections in COFF object files
     )
 endif()
-target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion magic_enum::magic_enum rttr_core)
+target_link_libraries(dwg Iconv::Iconv fmt::fmt double-conversion::double-conversion magic_enum::magic_enum)
+if(${BUILD_RTTR_DYNAMIC})
+    target_link_libraries(dwg RTTR::Core)
+endif()
+if(BUILD_STATIC)
+    target_link_libraries(dwg RTTR::Core_Lib)
+endif()
 
 add_library(DWG::dwg ALIAS dwg)
 

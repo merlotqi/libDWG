@@ -114,13 +114,13 @@ public:
 
 protected:
     static Entity *dimensionLine(const XYZ &start, const XYZ &end, DimensionStyle *style);
-    static Line *extensionLine(const XYZ &start, const XYZ &end, DimensionStyle style, LineType linetype);
+    static Line *extensionLine(const XYZ &start, const XYZ &end, DimensionStyle *style, LineType *linetype);
     void angularBlock(double radius, const XY &centerRef, const XY &ref1, double minOffset, bool drawRef2);
-    std::vector<Entity *> centerCross(const XYZ &center, double radius, DimensionStyle style);
+    std::vector<Entity *> centerCross(const XYZ &center, double radius, DimensionStyle *style);
     void createBlock();
     Point *createDefinitionPoint(const XYZ &location);
     MText *createTextEntity(const XYZ &insertPoint, const std::string &text);
-    Entity *dimensionArrow(const XYZ &insertPoint, const XYZ &dir, DimensionStyle style, BlockRecord record);
+    Entity *dimensionArrow(const XYZ &insertPoint, const XYZ &dir, DimensionStyle *style, BlockRecord *record);
     Line *dimensionRadialLine(const XY &start, const XY &end, double rotation, short reversed);
     void tableOnRemove(CadObject *item);
     std::string generateBlockName() const;

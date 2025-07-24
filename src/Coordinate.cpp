@@ -21,6 +21,7 @@
  */
 
 #include <dwg/Coordinate.h>
+#include <rttr/registration>
 
 namespace dwg {
 
@@ -38,5 +39,12 @@ XYZ XYZ::AxisX = XYZ(1, 0, 0);
 XYZ XYZ::AxisY = XYZ(0, 1, 0);
 
 XYZ XYZ::AxisZ = XYZ(0, 0, 1);
+
+RTTR_REGISTRATION
+{
+	using namespace rttr;
+    registration::class_<XY>("XY");
+    registration::class_<XYZ>("XYZ");
+}
 
 }// namespace dwg
