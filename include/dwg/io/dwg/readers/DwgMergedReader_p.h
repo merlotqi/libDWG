@@ -30,6 +30,60 @@ class DwgMergedReader : public IDwgStreamReader
 {
 public:
     DwgMergedReader(IDwgStreamReader *mainReader, IDwgStreamReader *textReader, IDwgStreamReader *handleReader);
+    ~DwgMergedReader();
+
+    void advance(int offset) override;
+    void advanceByte() override;
+    unsigned long long handleReference();
+    unsigned long long handleReference(unsigned long long referenceHandle) override;
+    unsigned long long handleReference(unsigned long long referenceHandle, DwgReferenceType &reference) override;
+    long long positionInBits() override;
+    unsigned char read2Bits() override;
+    XY read2RawDouble() override;
+    XYZ read3RawDouble() override;
+    XYZ read3BitDouble() override;
+    bool readBit() override;
+    short readBitAsShort() override;
+    double readBitDouble() override;
+    XY read2BitDouble() override;
+    int readBitLong() override;
+    long long readBitLongLong() override;
+    short readBitShort() override;
+    bool readBitShortAsBool() override;
+    unsigned char readByte() override;
+    std::vector<unsigned char> readBytes(int length) override;
+    XY read2BitDoubleWithDefault(const XY & defValue) override;
+    XYZ read2BitDoubleWithDefault(const XYZ &defValue) override;
+    Color readCmColor() override;
+    Color readEnColor(Transparency &transparency, bool &flag) override;
+    DateTime read8BitJulianDate() override;
+    DateTime readDateTime() override;
+    double readDouble() override;
+    int readInt() override;
+    unsigned long long readModularChar() override;
+    int readSignedModularChar() override;
+    int readModularShort() override;
+    Color readColorByIndex() override;
+    ObjectType readObjectType() override;
+    XYZ readBitExtrusion() override;
+    double readBitDoubleWithDefault(double def) override;
+    double readBitThickness() override;
+    char readRawChar() override;
+    unsigned long long readRawULong() override;
+    std::vector<unsigned char> readSentinel() override;
+    short readShort() override;
+    std::string readTextUtf8() override;
+    TimeSpan readTimeSpan() override;
+    unsigned int readUInt() override;
+    std::string readVariableText() override;
+    unsigned short resetShift() override;
+    void setPositionInBits(long long position) override;
+    long long setPositionByFlag(long long position) override;
+
+private:
+    IDwgStreamReader *_mainReader;
+    IDwgStreamReader *_textReader;
+    IDwgStreamReader *_handleReader;
 };
 
 }// namespace dwg

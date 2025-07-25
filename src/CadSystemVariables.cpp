@@ -22,9 +22,12 @@
 
 #include <assert.h>
 #include <dwg/CadSystemVariables_p.h>
+#include <dwg/attributes/CadSystemVariableAttribute_p.h>
 #include <dwg/header/CadHeader.h>
 #include <dwg/utils/StringHelp.h>
 #include <initializer_list>
+#include <memory>
+#include <rttr/registration>
 #include <vector>
 
 namespace dwg {
@@ -281,8 +284,25 @@ static std::vector<CadSystemVariableAttribute> _headerVariables = {
         {CadSystemVariables::XEDIT, {290}},
 };
 
+std::vector<std::pair<std::string, std::string>> CadSystemVariables::_systemVaraible2PropertyKeyMappings = {};
+
 std::map<std::string, CadSystemVariableAttribute> CadSystemVariables::headerMap()
 {
+    static std::once_flag flag;
+    std::call_once(flag, [&]() {
+        _systemVaraible2PropertyKeyMappings.clear();
+
+        using namespace rttr;
+        auto type = rttr::type::get<CadHeader>();
+        auto properties = type.get_properties();
+        for (auto &&property: properties)
+        {
+            auto name = property.get_name();
+            auto variable = property.get_metadata("CadSystemVariable").get_value<CadSystemVariableAttribute>();
+            _systemVaraible2PropertyKeyMappings.push_back({variable.name(), std::string(name)});
+        }
+    });
+  
     std::map<std::string, CadSystemVariableAttribute> _map;
     for (auto &&attr: _headerVariables)
     {

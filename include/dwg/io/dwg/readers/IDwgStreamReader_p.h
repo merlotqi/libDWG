@@ -135,7 +135,7 @@ public:
 
     virtual unsigned long long readRawULong() = 0;
 
-    virtual XYZ read2RawDouble() = 0;
+    virtual XY read2RawDouble() = 0;
 
     virtual XYZ read3RawDouble() = 0;
 
@@ -144,6 +144,8 @@ public:
     virtual int readSignedModularChar() = 0;
 
     virtual int readModularShort() = 0;
+
+    virtual unsigned long long handleReference() = 0;
 
     virtual unsigned long long handleReference(unsigned long long referenceHandle) = 0;
 

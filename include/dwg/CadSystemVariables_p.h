@@ -33,7 +33,7 @@ namespace dwg {
 class CadHeader;
 class CadSystemVariables
 {
-    static std::map<std::string, std::string> _systemVaraible2PropertyKeyMappings;
+    static std::vector<std::pair<std::string, std::string>> _systemVaraible2PropertyKeyMappings;
 
 #pragma region CadHeader Dxf System Variables
 

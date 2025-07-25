@@ -71,11 +71,12 @@ public:
     char readRawChar() override;
     long long readRawLong() override;
     unsigned long long readRawULong() override;
-    XYZ read2RawDouble() override;
+    XY read2RawDouble() override;
     XYZ read3RawDouble() override;
     unsigned long long readModularChar() override;
     int readSignedModularChar() override;
     int readModularShort() override;
+    unsigned long long handleReference() override;
     unsigned long long handleReference(unsigned long long referenceHandle) override;
     unsigned long long handleReference(unsigned long long referenceHandle, DwgReferenceType &reference) override;
     std::string readTextUtf8() override;
