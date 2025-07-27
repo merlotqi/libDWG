@@ -58,7 +58,7 @@ namespace dwg {
 	H : handle reference (see the HANDLE REFERENCES section)
 	T : text (bitshort length, followed by the string).
 	TU : Unicode text (bitshort character length, followed by Unicode string, 
-		2 bytes per character). Unicode text is read from the “string stream” 
+		2 bytes per character). Unicode text is read from the "string stream" 
 		within the object data, see the main Object description section for details.
 	TV : Variable text, T for 2004 and earlier files, TU for 2007+ files.
 	X : special form
@@ -179,7 +179,7 @@ public:
 
     virtual DateTime readDateTime() = 0;
 
-    virtual double readTimeSpan() = 0;
+    virtual Timespan readTimeSpan() = 0;
 
     virtual long long positionInBits() = 0;
 

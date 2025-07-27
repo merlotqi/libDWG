@@ -93,7 +93,7 @@ public:
     double readBitThickness() override;
     DateTime read8BitJulianDate() override;
     DateTime readDateTime() override;
-    double readTimeSpan() override;
+    Timespan readTimeSpan() override;
     long long positionInBits() override;
     void setPositionInBits(long long positon) override;
     void advanceByte() override;
@@ -113,6 +113,7 @@ protected:
     StreamWrapper _wrapper;
     unsigned char _lastByte = 0;
     int _bitShift = 0;
+    bool _isEmpty;
     Encoding _encoding;
 };
 

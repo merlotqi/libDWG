@@ -125,7 +125,7 @@ bool DwgStreamReaderBase::isEmpty() const
     return _isEmpty;
 }
 
-void DwgStreamReaderBase::setEmpty(bool v) 
+void DwgStreamReaderBase::setEmpty(bool v)
 {
     _isEmpty = v;
 }
@@ -141,11 +141,11 @@ unsigned char DwgStreamReaderBase::readByte()
     }
 
     // Get the last bits from the last readed byte
-    unsigned char lastValues = (unsigned char)((unsigned int)_lastByte << bitShift());
+    unsigned char lastValues = (unsigned char) ((unsigned int) _lastByte << bitShift());
 
     _lastByte = _wrapper.readByte();
 
-    return (unsigned char)(lastValues | (unsigned int)(unsigned char)((unsigned int)_lastByte >> 8 - bitShift()));
+    return (unsigned char) (lastValues | (unsigned int) (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift()));
 }
 
 short DwgStreamReaderBase::readShort()
@@ -153,9 +153,9 @@ short DwgStreamReaderBase::readShort()
     return _wrapper.readShort();
 }
 
-long long DwgStreamReaderBase::setPositionByFlag(long long positon)
+long long DwgStreamReaderBase::setPositionByFlag(long long position)
 {
-    setPositionInBits(positon);
+    setPositionInBits(position);
 
     //String stream present bit (last bit in pre-handles section).
     bool flag = readBit();
@@ -164,8 +164,8 @@ long long DwgStreamReaderBase::setPositionByFlag(long long positon)
     if (flag)
     {
         // String stream present
-        
-        //If 1, then the “endbit” location should be decremented by 16 bytes
+
+        //If 1, then the "endbit" location should be decremented by 16 bytes
         long long length = 0;
         long long size = 0;
         applyFlagToPosition(position, length, size);
@@ -177,7 +177,7 @@ long long DwgStreamReaderBase::setPositionByFlag(long long positon)
     else
     {
         // mark as empty
-        setIsEmpty(true);
+        setEmpty(true);
         // There is no information, set the position to the end
         setPosition(_wrapper.pos());
     }
@@ -310,31 +310,31 @@ int DwgStreamReaderBase::readBitLong()
     switch (t)
     {
         case 0:
-        // 00 : A long (4 bytes) follows, little-endian order (LSB first)
-        {
-            value = _wrapper.readT<int, LittleEndianConverter>();
-            break;
-        }
-        case 1:
-        // 01 : An unsigned char (1 byte) follows
-        {
-            if (bitShift() == 0)
+            // 00 : A long (4 bytes) follows, little-endian order (LSB first)
             {
-                advanceByte();
-                value = _lastByte;
+                value = _wrapper.readT<int, LittleEndianConverter>();
                 break;
-            } 
-            value = applyShiftToLasByte();
-            break;
-        }
+            }
+        case 1:
+            // 01 : An unsigned char (1 byte) follows
+            {
+                if (bitShift() == 0)
+                {
+                    advanceByte();
+                    value = _lastByte;
+                    break;
+                }
+                value = applyShiftToLasByte();
+                break;
+            }
         case 2:
-        // 10 : 0
-        {
-            value = 0;
-            break;
-        }
+            // 10 : 0
+            {
+                value = 0;
+                break;
+            }
         default:
-        // 11 : not used
+            // 11 : not used
             throw std::runtime_error("Failed to read ReadBitLong");
     }
     return value;
@@ -350,7 +350,7 @@ long long DwgStreamReaderBase::readBitLongLong()
         unsigned long b = readByte();
         value += b << (i << 3);
     }
-    return (long long)value;
+    return (long long) value;
 }
 
 double DwgStreamReaderBase::readBitDouble()
@@ -360,20 +360,20 @@ double DwgStreamReaderBase::readBitDouble()
     switch (t)
     {
         case 0:
-        {
-            value = wrapper.readT<double, LittleEndianConverter>();
-            break;
-        }
+            {
+                value = _wrapper.readT<double, LittleEndianConverter>();
+                break;
+            }
         case 1:
-        {
-            value = 1.0;
-            break;
-        }
+            {
+                value = 1.0;
+                break;
+            }
         case 2:
-        {
-            value = 0.0;
-            break;
-        }
+            {
+                value = 0.0;
+                break;
+            }
         default:
             throw std::runtime_error("");
     }
@@ -392,7 +392,7 @@ XYZ DwgStreamReaderBase::read3BitDouble()
 
 char DwgStreamReaderBase::readRawChar()
 {
-    return (char)readByte();
+    return (char) readByte();
 }
 
 long long DwgStreamReaderBase::readRawLong()
@@ -421,7 +421,7 @@ unsigned long long DwgStreamReaderBase::readModularChar()
     unsigned char lastByte = readByte();
 
     // remove the flag
-    unsigned long long value = (unsigned long long)(lastByte & 0b01111111)
+    unsigned long long value = (unsigned long long) (lastByte & 0b01111111);
 
     if ((lastByte & 0b10000000) != 0)
     {
@@ -429,7 +429,7 @@ unsigned long long DwgStreamReaderBase::readModularChar()
         {
             shift += 7;
             unsigned char last = readByte();
-            value |= (unsigned long long)(last & 0b01111111) << shift;
+            value |= (unsigned long long) (last & 0b01111111) << shift;
 
             // check flag
             if ((last & 0b10000000) == 0)
@@ -442,125 +442,125 @@ unsigned long long DwgStreamReaderBase::readModularChar()
 
 int DwgStreamReaderBase::readSignedModularChar()
 {
-			//Modular characters are a method of storing compressed integer values. They are used in the object map to
-			//indicate both handle offsets and file location offsets.They consist of a stream of bytes, terminating when
-			//the high bit of the byte is 0.
-			int value;
+    //Modular characters are a method of storing compressed integer values. They are used in the object map to
+    //indicate both handle offsets and file location offsets.They consist of a stream of bytes, terminating when
+    //the high bit of the byte is 0.
+    int value;
 
-			if (bitShift() == 0)
-			{
-				//No shift, read normal
-				advanceByte();
+    if (bitShift() == 0)
+    {
+        //No shift, read normal
+        advanceByte();
 
-				//Check if the current byte
-				if ((_lastByte & 0b10000000) == 0) //Check the flag
-				{
-					//Drop the flags
-					value = _lastByte & 0b00111111;
+        //Check if the current byte
+        if ((_lastByte & 0b10000000) == 0)//Check the flag
+        {
+            //Drop the flags
+            value = _lastByte & 0b00111111;
 
-					//Check the sign flag
-					if ((_lastByte & 0b01000000) > 0U)
-						value = -value;
-				}
-				else
-				{
-					int totalShift = 0;
-					int sum = _lastByte & SCHAR_MAX;
-					while (true)
-					{
-						//Shift to apply
-						totalShift += 7;
-						advanceByte();
+            //Check the sign flag
+            if ((_lastByte & 0b01000000) > 0U)
+                value = -value;
+        }
+        else
+        {
+            int totalShift = 0;
+            int sum = _lastByte & SCHAR_MAX;
+            while (true)
+            {
+                //Shift to apply
+                totalShift += 7;
+                advanceByte();
 
-						//Check if the highest byte is 0
-						if ((_lastByte & 0b10000000) != 0)
-							sum |= (_lastByte & SCHAR_MAX) << totalShift;
-						else
-							break;
-					}
+                //Check if the highest byte is 0
+                if ((_lastByte & 0b10000000) != 0)
+                    sum |= (_lastByte & SCHAR_MAX) << totalShift;
+                else
+                    break;
+            }
 
-					//Drop the flags at the las byte, and add it's value
-					value = sum | (_lastByte & 0b00111111) << totalShift;
+            //Drop the flags at the las byte, and add it's value
+            value = sum | (_lastByte & 0b00111111) << totalShift;
 
-					//Check the sign flag
-					if ((_lastByte & 0b01000000) > 0U)
-						value = -value;
-				}
-			}
-			else
-			{
-				//Apply the shift to each byte
-				unsigned char lastByte = applyShiftToLasByte();
-				if ((lastByte & 0b10000000) == 0)
-				{
-					//Drop the flags
-					value = lastByte & 0b00111111;
+            //Check the sign flag
+            if ((_lastByte & 0b01000000) > 0U)
+                value = -value;
+        }
+    }
+    else
+    {
+        //Apply the shift to each byte
+        unsigned char lastByte = applyShiftToLasByte();
+        if ((lastByte & 0b10000000) == 0)
+        {
+            //Drop the flags
+            value = lastByte & 0b00111111;
 
-					//Check the sign flag
-					if ((lastByte & 0b01000000) > 0U)
-						value = -value;
-				}
-				else
-				{
-					int totalShift = 0;
-					int sum = lastByte & SCHAR_MAX;
-					unsigned char currByte;
-					while (true)
-					{
-						//Shift to apply
-						totalShift += 7;
-						currByte = applyShiftToLasByte();
+            //Check the sign flag
+            if ((lastByte & 0b01000000) > 0U)
+                value = -value;
+        }
+        else
+        {
+            int totalShift = 0;
+            int sum = lastByte & SCHAR_MAX;
+            unsigned char currByte;
+            while (true)
+            {
+                //Shift to apply
+                totalShift += 7;
+                currByte = applyShiftToLasByte();
 
-						//Check if the highest byte is 0
-						if ((currByte & 0b10000000) != 0)
-							sum |= (currByte & SCHAR_MAX) << totalShift;
-						else
-							break;
-					}
+                //Check if the highest byte is 0
+                if ((currByte & 0b10000000) != 0)
+                    sum |= (currByte & SCHAR_MAX) << totalShift;
+                else
+                    break;
+            }
 
-					//Drop the flags at the las byte, and add it's value
-					value = sum | (currByte & 0b00111111) << totalShift;
+            //Drop the flags at the las byte, and add it's value
+            value = sum | (currByte & 0b00111111) << totalShift;
 
-					//Check the sign flag
-					if ((currByte & 0b01000000) > 0U)
-						value = -value;
-				}
-			}
-			return value;
+            //Check the sign flag
+            if ((currByte & 0b01000000) > 0U)
+                value = -value;
+        }
+    }
+    return value;
 }
 
 int DwgStreamReaderBase::readModularShort()
 {
-			int shift = 0b1111;
+    int shift = 0b1111;
 
-			//Read the bytes that form the short
-			unsigned char b1 = readByte();
-			unsigned char b2 = readByte();
+    //Read the bytes that form the short
+    unsigned char b1 = readByte();
+    unsigned char b2 = readByte();
 
-			bool flag = (b2 & 0b10000000) == 0;
+    bool flag = (b2 & 0b10000000) == 0;
 
-			//Set the value in little endian
-			int value = b1 | (b2 & 0b1111111) << 8;
+    //Set the value in little endian
+    int value = b1 | (b2 & 0b1111111) << 8;
 
-			while (!flag)
-			{
-				//Read 2 more bytes
-				b1 = readByte();
-				b2 = readByte();
+    while (!flag)
+    {
+        //Read 2 more bytes
+        b1 = readByte();
+        b2 = readByte();
 
-				//Check the flag
-				flag = (b2 & 0b10000000) == 0;
+        //Check the flag
+        flag = (b2 & 0b10000000) == 0;
 
-				//Set the value in little endian
-				value |= b1 << shift;
-				shift += 8;
-				value |= (b2 & 0b1111111) << shift;
+        //Set the value in little endian
+        value |= b1 << shift;
+        shift += 8;
+        value |= (b2 & 0b1111111) << shift;
 
-				//Update the shift
-				shift += 7;
-			}
+        //Update the shift
+        shift += 7;
+    }
 
-			return value;
+    return value;
 }
 
 unsigned long long DwgStreamReaderBase::handleReference()
@@ -632,27 +632,112 @@ XYZ DwgStreamReaderBase::readBitExtrusion()
 
 double DwgStreamReaderBase::readBitDoubleWithDefault(double def)
 {
-    return 0.0;
+    //Get the bytes form the default value
+    std::vector<unsigned char> arr = LittleEndianConverter::instance()->bytes(def);
+
+    switch (read2Bits())
+    {
+        //00 No more data present, use the value of the default double.
+        case 0:
+            return def;
+        //01 4 bytes of data are present. The result is the default double, with the 4 data bytes patched in
+        //replacing the first 4 bytes of the default double(assuming little endian).
+        case 1:
+            if (bitShift() == 0)
+            {
+                advanceByte();
+                arr[0] = _lastByte;
+                advanceByte();
+                arr[1] = _lastByte;
+                advanceByte();
+                arr[2] = _lastByte;
+                advanceByte();
+                arr[3] = _lastByte;
+            }
+            else
+            {
+                int shift = 8 - bitShift();
+                arr[0] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[0] |= (unsigned char) ((unsigned int) _lastByte >> shift);
+                arr[1] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[1] |= (unsigned char) ((unsigned int) _lastByte >> shift);
+                arr[2] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[2] |= (unsigned char) ((unsigned int) _lastByte >> shift);
+                arr[3] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[3] |= (unsigned char) ((unsigned int) _lastByte >> shift);
+            }
+            return LittleEndianConverter::instance()->toDouble(arr.data());
+        //10 6 bytes of data are present. The result is the default double, with the first 2 data bytes patched in
+        //replacing bytes 5 and 6 of the default double, and the last 4 data bytes patched in replacing the first 4
+        //bytes of the default double(assuming little endian).
+        case 2:
+            if (bitShift() == 0)
+            {
+                advanceByte();
+                arr[4] = _lastByte;
+                advanceByte();
+                arr[5] = _lastByte;
+                advanceByte();
+                arr[0] = _lastByte;
+                advanceByte();
+                arr[1] = _lastByte;
+                advanceByte();
+                arr[2] = _lastByte;
+                advanceByte();
+                arr[3] = _lastByte;
+            }
+            else
+            {
+                arr[4] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[4] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+                arr[5] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[5] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+                arr[0] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[0] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+                arr[1] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[1] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+                arr[2] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[2] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+                arr[3] = (unsigned char) ((unsigned int) _lastByte << bitShift());
+                advanceByte();
+                arr[3] |= (unsigned char) ((unsigned int) _lastByte >> 8 - bitShift());
+            }
+            return LittleEndianConverter::instance()->toDouble(arr.data());
+        //11 A full RD follows.
+        case 3:
+            return readDouble();
+        default:
+            throw std::exception();
+    }
 }
 
 double DwgStreamReaderBase::readBitThickness()
 {
-    return 0.0;
+    return readBitDouble();
 }
 
 DateTime DwgStreamReaderBase::read8BitJulianDate()
 {
-    return DateTime();
+    return julianToDate(readInt(), readInt());
 }
 
 DateTime DwgStreamReaderBase::readDateTime()
 {
-    return DateTime();
+    return julianToDate(readBitLong(), readBitLong());
 }
 
-double DwgStreamReaderBase::readTimeSpan()
+Timespan DwgStreamReaderBase::readTimeSpan()
 {
-    return 0.0;
+    return Timespan();
 }
 
 long long DwgStreamReaderBase::positionInBits()
@@ -662,7 +747,10 @@ long long DwgStreamReaderBase::positionInBits()
 
 void DwgStreamReaderBase::setPositionInBits(long long positon) {}
 
-void DwgStreamReaderBase::advanceByte() {}
+void DwgStreamReaderBase::advanceByte()
+{
+    _lastByte = _wrapper.readByte();
+}
 
 void DwgStreamReaderBase::advance(int offset)
 {

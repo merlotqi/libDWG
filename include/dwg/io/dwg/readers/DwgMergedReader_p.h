@@ -34,7 +34,7 @@ public:
 
     void advance(int offset) override;
     void advanceByte() override;
-    unsigned long long handleReference();
+    unsigned long long handleReference() override;
     unsigned long long handleReference(unsigned long long referenceHandle) override;
     unsigned long long handleReference(unsigned long long referenceHandle, DwgReferenceType &reference) override;
     long long positionInBits() override;
@@ -52,8 +52,8 @@ public:
     bool readBitShortAsBool() override;
     unsigned char readByte() override;
     std::vector<unsigned char> readBytes(int length) override;
-    XY read2BitDoubleWithDefault(const XY & defValue) override;
-    XYZ read2BitDoubleWithDefault(const XYZ &defValue) override;
+    XY read2BitDoubleWithDefault(const XY &defValue) override;
+    XYZ read3BitDoubleWithDefault(const XYZ &defValue) override;
     Color readCmColor() override;
     Color readEnColor(Transparency &transparency, bool &flag) override;
     DateTime read8BitJulianDate() override;
@@ -73,7 +73,7 @@ public:
     std::vector<unsigned char> readSentinel() override;
     short readShort() override;
     std::string readTextUtf8() override;
-    TimeSpan readTimeSpan() override;
+    Timespan readTimeSpan() override;
     unsigned int readUInt() override;
     std::string readVariableText() override;
     unsigned short resetShift() override;
