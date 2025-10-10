@@ -48,12 +48,12 @@ std::string Circle::subclassMarker() const
     return DxfSubclassMarker::Circle;
 }
 
-XYZ Circle::normal() const
+const XYZ &Circle::normal() const
 {
     return _normal;
 }
 
-XYZ Circle::center() const
+const XYZ &Circle::center() const
 {
     return _center;
 }
@@ -96,10 +96,14 @@ RTTR_REGISTRATION
     registration::class_<Circle>("Circle")(metadata("DxfName", DxfFileToken::EntityArc),
                                            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Arc)))
             .constructor()
-            .property("center", &Circle::center, &Circle::setCenter)(metadata("DxfCodeValue", DxfCodeValueAttribute({10, 20, 30})))
-            .property("normal", &Circle::normal, &Circle::setNormal)(metadata("DxfCodeValue", DxfCodeValueAttribute({210, 220, 230})))
-            .property("radius", &Circle::radius, &Circle::setRadius)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})))
-            .property("thickness", &Circle::thickness, &Circle::setThickness)(metadata("DxfCodeValue", DxfCodeValueAttribute({39})));
+            .property("center", &Circle::center,
+                      &Circle::setCenter)(metadata("DxfCodeValue", DxfCodeValueAttribute({10, 20, 30})))
+            .property("normal", &Circle::normal,
+                      &Circle::setNormal)(metadata("DxfCodeValue", DxfCodeValueAttribute({210, 220, 230})))
+            .property("radius", &Circle::radius,
+                      &Circle::setRadius)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})))
+            .property("thickness", &Circle::thickness,
+                      &Circle::setThickness)(metadata("DxfCodeValue", DxfCodeValueAttribute({39})));
 }
 
 }// namespace dwg

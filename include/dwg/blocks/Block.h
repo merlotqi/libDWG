@@ -55,13 +55,13 @@ public:
     BlockTypeFlags flags() const;
     void setFlags(BlockTypeFlags flags);
 
-    XYZ basePoint() const;
+    const XYZ &basePoint() const;
     void setBasePoint(const XYZ &);
 
-    std::string xrefPath() const;
+    const std::string &xrefPath() const;
     void setXrefPath(const std::string &);
 
-    std::string comments() const;
+    const std::string &comments() const;
     void setComments(const std::string &);
 
 protected:

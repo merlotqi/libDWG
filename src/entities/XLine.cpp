@@ -47,7 +47,7 @@ std::string XLine::subclassMarker() const
     return DxfSubclassMarker::XLine;
 }
 
-XYZ XLine::firstPoint() const
+const XYZ &XLine::firstPoint() const
 {
     return _firstPoint;
 }
@@ -57,7 +57,7 @@ void XLine::setFirstPoint(const XYZ &value)
     _firstPoint = value;
 }
 
-XYZ XLine::direction() const
+const XYZ &XLine::direction() const
 {
     return _direction;
 }

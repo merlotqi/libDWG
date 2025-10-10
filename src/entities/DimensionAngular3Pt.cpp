@@ -47,7 +47,7 @@ std::string DimensionAngular3Pt::subclassMarker() const
     return DxfSubclassMarker::Angular3PointDimension;
 }
 
-XYZ DimensionAngular3Pt::firstPoint() const
+const XYZ &DimensionAngular3Pt::firstPoint() const
 {
     return _firstPoint;
 }
@@ -57,7 +57,7 @@ void DimensionAngular3Pt::setFirstPoint(const XYZ &value)
     _firstPoint = value;
 }
 
-XYZ DimensionAngular3Pt::secondPoint() const
+const XYZ &DimensionAngular3Pt::secondPoint() const
 {
     return _secondPoint;
 }
@@ -67,7 +67,7 @@ void DimensionAngular3Pt::setSecondPoint(const XYZ &value)
     _secondPoint = value;
 }
 
-XYZ DimensionAngular3Pt::angleVertex() const
+const XYZ &DimensionAngular3Pt::angleVertex() const
 {
     return _angleVertex;
 }
@@ -94,12 +94,16 @@ double DimensionAngular3Pt::measurement() const
 RTTR_REGISTRATION
 {
     using namespace rttr;
-    registration::class_<DimensionAngular3Pt>("DimensionAngular3Pt")(metadata("DxfName", DxfFileToken::EntityDimension),
-                                                                     metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular3PointDimension)))
+    registration::class_<DimensionAngular3Pt>("DimensionAngular3Pt")(
+            metadata("DxfName", DxfFileToken::EntityDimension),
+            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular3PointDimension)))
             .constructor()
-            .property("angleVertex", &DimensionAngular3Pt::angleVertex, &DimensionAngular3Pt::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
-            .property("firstPoint", &DimensionAngular3Pt::firstPoint, &DimensionAngular3Pt::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
-            .property("secondPoint", &DimensionAngular3Pt::secondPoint, &DimensionAngular3Pt::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
+            .property("angleVertex", &DimensionAngular3Pt::angleVertex, &DimensionAngular3Pt::setAngleVertex)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("firstPoint", &DimensionAngular3Pt::firstPoint, &DimensionAngular3Pt::setFirstPoint)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAngular3Pt::secondPoint, &DimensionAngular3Pt::setSecondPoint)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

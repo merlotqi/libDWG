@@ -38,10 +38,10 @@ public:
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
 
-    XYZ center() const;
+    const XYZ &center() const;
     void setCenter(const XYZ &center);
 
-    XYZ normal() const;
+    const XYZ &normal() const;
     void setNormal(const XYZ &normal);
 
     double radius() const;

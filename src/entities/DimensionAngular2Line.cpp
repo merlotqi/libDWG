@@ -47,7 +47,7 @@ std::string DimensionAngular2Line::subclassMarker() const
     return DxfSubclassMarker::Angular2LineDimension;
 }
 
-XYZ DimensionAngular2Line::firstPoint() const
+const XYZ &DimensionAngular2Line::firstPoint() const
 {
     return _firstPoint;
 }
@@ -57,7 +57,7 @@ void DimensionAngular2Line::setFirstPoint(const XYZ &value)
     _firstPoint = value;
 }
 
-XYZ DimensionAngular2Line::secondPoint() const
+const XYZ &DimensionAngular2Line::secondPoint() const
 {
     return _secondPoint;
 }
@@ -67,7 +67,7 @@ void DimensionAngular2Line::setSecondPoint(const XYZ &value)
     _secondPoint = value;
 }
 
-XYZ DimensionAngular2Line::angleVertex() const
+const XYZ &DimensionAngular2Line::angleVertex() const
 {
     return _angleVertex;
 }
@@ -77,7 +77,12 @@ void DimensionAngular2Line::setAngleVertex(const XYZ &value)
     _angleVertex = value;
 }
 
-XYZ DimensionAngular2Line::dimensionArc() const
+XYZ DimensionAngular2Line::center() const
+{
+    return XYZ::Zero;
+}
+
+const XYZ &DimensionAngular2Line::dimensionArc() const
 {
     return _dimensionArc;
 }
@@ -95,18 +100,30 @@ double DimensionAngular2Line::measurement() const
     //return v1.angleTo(v2);
 }
 
+double DimensionAngular2Line::offset() const
+{
+    return 0.0;
+}
+
+void DimensionAngular2Line::setOffset(double value) {}
+
 void DimensionAngular2Line::updateBlock() {}
 
 RTTR_REGISTRATION
 {
     using namespace rttr;
-    registration::class_<DimensionAngular2Line>("DimensionAngular2Line")(metadata("DxfName", DxfFileToken::EntityDimension),
-                                                                         metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular2LineDimension)))
+    registration::class_<DimensionAngular2Line>("DimensionAngular2Line")(
+            metadata("DxfName", DxfFileToken::EntityDimension),
+            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::Angular2LineDimension)))
             .constructor()
-            .property("angleVertex", &DimensionAngular2Line::angleVertex, &DimensionAngular2Line::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
-            .property("dimensionArc", &DimensionAngular2Line::dimensionArc, &DimensionAngular2Line::setDimensionArc)(metadata("DxfCodeValue", DxfCodeValueAttribute({16, 26, 36})))
-            .property("firstPoint", &DimensionAngular2Line::firstPoint, &DimensionAngular2Line::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
-            .property("secondPoint", &DimensionAngular2Line::secondPoint, &DimensionAngular2Line::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
+            .property("angleVertex", &DimensionAngular2Line::angleVertex, &DimensionAngular2Line::setAngleVertex)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("dimensionArc", &DimensionAngular2Line::dimensionArc, &DimensionAngular2Line::setDimensionArc)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({16, 26, 36})))
+            .property("firstPoint", &DimensionAngular2Line::firstPoint, &DimensionAngular2Line::setFirstPoint)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAngular2Line::secondPoint, &DimensionAngular2Line::setSecondPoint)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

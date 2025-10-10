@@ -55,7 +55,7 @@ public:
     BlockRecord *block() const;
     void setBlock(BlockRecord *value);
 
-    XYZ definitionPoint() const;
+    const XYZ &definitionPoint() const;
     void setDefinitionPoint(const XYZ &value);
 
     DimensionTypes flags() const;
@@ -70,7 +70,7 @@ public:
     double horizontalDirection() const;
     void setHorizontalDirection(double value);
 
-    XYZ insertionPoint() const;
+    const XYZ &insertionPoint() const;
     void setInsertionPoint(const XYZ &value);
 
     bool isAngular() const;
@@ -86,16 +86,16 @@ public:
 
     virtual double measurement() const = 0;
 
-    XYZ normal() const;
+    const XYZ &normal() const;
     void setNormal(const XYZ &value);
 
     DimensionStyle *style() const;
     void setStyle(DimensionStyle *value);
 
-    std::string text() const;
+    const std::string &text() const;
     void setText(const std::string &value);
 
-    XYZ textMiddlePoint() const;
+    const XYZ &textMiddlePoint() const;
     void setTextMiddlePoint(const XYZ &value);
 
     double textRotation() const;

@@ -38,15 +38,15 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    XYZ angleVertex() const;
+    const XYZ &angleVertex() const;
     void setAngleVertex(const XYZ &value);
 
-    XYZ firstPoint() const;
+    const XYZ &firstPoint() const;
     void setFirstPoint(const XYZ &value);
 
     double measurement() const override;
 
-    XYZ secondPoint() const;
+    const XYZ &secondPoint() const;
     void setSecondPoint(const XYZ &value);
 
 private:

@@ -49,7 +49,7 @@ std::string DimensionAligned::subclassMarker() const
     return DxfSubclassMarker::AlignedDimension;
 }
 
-XYZ DimensionAligned::firstPoint() const
+const XYZ &DimensionAligned::firstPoint() const
 {
     return _firstPoint;
 }
@@ -59,7 +59,7 @@ void DimensionAligned::setFirstPoint(const XYZ &value)
     _firstPoint = value;
 }
 
-XYZ DimensionAligned::secondPoint() const
+const XYZ &DimensionAligned::secondPoint() const
 {
     return _secondPoint;
 }
@@ -84,7 +84,7 @@ double DimensionAligned::measurement() const
     return 0.0;
 }
 
-double DimensionAligned::offset() const 
+double DimensionAligned::offset() const
 {
     return 0;
 }
@@ -98,12 +98,16 @@ DimensionAligned::DimensionAligned(DimensionType type) : Dimension(type) {}
 RTTR_REGISTRATION
 {
     using namespace rttr;
-    registration::class_<DimensionAligned>("DimensionAligned")(metadata("DxfName", DxfFileToken::EntityDimension),
-                                                               metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::AlignedDimension)))
+    registration::class_<DimensionAligned>("DimensionAligned")(
+            metadata("DxfName", DxfFileToken::EntityDimension),
+            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::AlignedDimension)))
             .constructor()
-            .property("extLineRotation", &DimensionAligned::extLineRotation, &DimensionAligned::setExtLineRotation)(metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {52})))
-            .property("firstPoint", &DimensionAligned::firstPoint, &DimensionAligned::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
-            .property("secondPoint", &DimensionAligned::secondPoint, &DimensionAligned::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
+            .property("extLineRotation", &DimensionAligned::extLineRotation, &DimensionAligned::setExtLineRotation)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute(DxfReferenceType::Optional, {52})))
+            .property("firstPoint", &DimensionAligned::firstPoint,
+                      &DimensionAligned::setFirstPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("secondPoint", &DimensionAligned::secondPoint,
+                      &DimensionAligned::setSecondPoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

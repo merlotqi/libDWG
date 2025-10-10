@@ -47,7 +47,7 @@ std::string DimensionOrdinate::subclassMarker() const
     return DxfSubclassMarker::OrdinateDimension;
 }
 
-XYZ DimensionOrdinate::featureLocation() const
+const XYZ &DimensionOrdinate::featureLocation() const
 {
     return _featureLocation;
 }
@@ -57,7 +57,7 @@ void DimensionOrdinate::setFeatureLocation(const XYZ &value)
     _featureLocation = value;
 }
 
-XYZ DimensionOrdinate::leaderEndpoint() const
+const XYZ &DimensionOrdinate::leaderEndpoint() const
 {
     return _leaderEndpoint;
 }
@@ -94,11 +94,14 @@ void DimensionOrdinate::updateBlock() {}
 RTTR_REGISTRATION
 {
     using namespace rttr;
-    registration::class_<DimensionOrdinate>("DimensionOrdinate")(metadata("DxfName", DxfFileToken::EntityDimension),
-                                                             metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::OrdinateDimension)))
+    registration::class_<DimensionOrdinate>("DimensionOrdinate")(
+            metadata("DxfName", DxfFileToken::EntityDimension),
+            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::OrdinateDimension)))
             .constructor()
-            .property("eatureLocation", &DimensionOrdinate::featureLocation, &DimensionOrdinate::setFeatureLocation)(metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
-            .property("leaderEndpoint", &DimensionOrdinate::leaderEndpoint, &DimensionOrdinate::setLeaderEndpoint)(metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
+            .property("eatureLocation", &DimensionOrdinate::featureLocation, &DimensionOrdinate::setFeatureLocation)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({13, 23, 33})))
+            .property("leaderEndpoint", &DimensionOrdinate::leaderEndpoint, &DimensionOrdinate::setLeaderEndpoint)(
+                    metadata("DxfCodeValue", DxfCodeValueAttribute({14, 24, 34})));
 }
 
 }// namespace dwg

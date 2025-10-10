@@ -85,7 +85,7 @@ public:
     short angularUnitPrecision() const;
     void setAngularUnitPrecision(short);
 
-    std::string arrowBlockName() const;
+    const std::string &arrowBlockName() const;
     void setArrowBlockName(const std::string &);
 
     bool associatedDimensions() const;
@@ -115,16 +115,16 @@ public:
     double chamferLength() const;
     void setChamferLength(double);
 
-    std::string codePage() const;
+    const std::string &codePage() const;
     void setCodePage(const std::string &);
 
-    DateTime createDateTime() const;
+    const DateTime &createDateTime() const;
     void setCreateDateTime(const DateTime &);
 
     bool createEllipseAsPolyline() const;
     void setCreateEllipseAsPolyline(bool);
 
-    Color currentEntityColor() const;
+    const Color &currentEntityColor() const;
     void setCurrentEntityColor(const Color &);
 
     double currentEntityLinetypeScale() const;
@@ -139,13 +139,13 @@ public:
     Layer *currentLayer() const;
     void setCurrentLayer(Layer *);
 
-    std::string currentLayerName() const;
+    const std::string &currentLayerName() const;
     void setCurrentLayerName(const std::string &);
 
     LineType *currentLineType() const;
     void setCurrentLineType(LineType *);
 
-    std::string currentLineTypeName() const;
+    const std::string &currentLineTypeName() const;
     void setCurrentLineTypeName(const std::string &);
 
     MLineStyle *currentMLineStyle() const;
@@ -157,7 +157,7 @@ public:
     double currentMultilineScale() const;
     void setCurrentMultilineScale(double);
 
-    std::string currentMultiLineStyleName() const;
+    const std::string &currentMultiLineStyleName() const;
     void setCurrentMultiLineStyleName(const std::string &);
 
     TextStyle *currentTextStyle() const;
@@ -166,7 +166,7 @@ public:
     char dgnUnderlayFramesVisibility() const;
     void setDgnUnderlayFramesVisibility(char);
 
-    std::string dimensionAlternateDimensioningSuffix() const;
+    const std::string &dimensionAlternateDimensioningSuffix() const;
     void setDimensionAlternateDimensioningSuffix(const std::string &);
 
     short dimensionAlternateUnitDecimalPlaces() const;
@@ -196,7 +196,7 @@ public:
     double dimensionAltMzf() const;
     void setDimensionAltMzf(double);
 
-    std::string dimensionAltMzs() const;
+    const std::string &dimensionAltMzs() const;
     void setDimensionAltMzs(const std::string &);
 
     short dimensionAngularDimensionDecimalPlaces() const;
@@ -217,13 +217,13 @@ public:
     DimensionAssociation dimensionAssociativity() const;
     void setDimensionAssociativity(DimensionAssociation);
 
-    std::string dimensionBlockName() const;
+    const std::string &dimensionBlockName() const;
     void setDimensionBlockName(const std::string &);
 
-    std::string dimensionBlockNameFirst() const;
+    const std::string &dimensionBlockNameFirst() const;
     void setDimensionBlockNameFirst(const std::string &);
 
-    std::string dimensionBlockNameSecond() const;
+    const std::string &dimensionBlockNameSecond() const;
     void setDimensionBlockNameSecond(const std::string &);
 
     double dimensionCenterMarkSize() const;
@@ -241,7 +241,7 @@ public:
     TextArrowFitType dimensionDimensionTextArrowFit() const;
     void setDimensionDimensionTextArrowFit(TextArrowFitType);
 
-    Color dimensionExtensionLineColor() const;
+    const Color &dimensionExtensionLineColor() const;
     void setDimensionExtensionLineColor(const Color &);
 
     double dimensionExtensionLineExtension() const;
@@ -277,7 +277,7 @@ public:
     LinearUnitFormat dimensionLinearUnitFormat() const;
     void setDimensionLinearUnitFormat(LinearUnitFormat);
 
-    Color dimensionLineColor() const;
+    const Color &dimensionLineColor() const;
     void setDimensionLineColor(const Color &);
 
     double dimensionLineExtension() const;
@@ -289,7 +289,7 @@ public:
     double dimensionLineIncrement() const;
     void setDimensionLineIncrement(double);
 
-    std::string dimensionLineType() const;
+    const std::string &dimensionLineType() const;
     void setDimensionLineType(const std::string &);
 
     LineweightType dimensionLineWeight() const;
@@ -301,13 +301,13 @@ public:
     double dimensionMzf() const;
     void setDimensionMzf(double);
 
-    std::string dimensionMzs() const;
+    const std::string &dimensionMzs() const;
     void setDimensionMzs(const std::string &);
 
     double dimensionPlusTolerance() const;
     void setDimensionPlusTolerance(double);
 
-    std::string dimensionPostFix() const;
+    const std::string &dimensionPostFix() const;
     void setDimensionPostFix(const std::string &);
 
     double dimensionRounding() const;
@@ -322,7 +322,7 @@ public:
     DimensionStyle *currentDimensionStyle() const;
     void setCurrentDimensionStyle(DimensionStyle *);
 
-    std::string currentDimensionStyleName() const;
+    const std::string &currentDimensionStyleName() const;
     void setCurrentDimensionStyleName(const std::string &);
 
     bool dimensionSuppressFirstDimensionLine() const;
@@ -340,19 +340,19 @@ public:
     bool dimensionSuppressSecondExtensionLine() const;
     void setDimensionSuppressSecondExtensionLine(bool);
 
-    std::string dimensionTex1() const;
+    const std::string &dimensionTex1() const;
     void setDimensionTex1(const std::string &);
 
-    std::string dimensionTex2() const;
+    const std::string &dimensionTex2() const;
     void setDimensionTex2(const std::string &);
 
-    Color dimensionTextBackgroundColor() const;
+    const Color &dimensionTextBackgroundColor() const;
     void setDimensionTextBackgroundColor(const Color &);
 
     DimensionTextBackgroundFillMode dimensionTextBackgroundFillMode() const;
     void setDimensionTextBackgroundFillMode(DimensionTextBackgroundFillMode);
 
-    Color dimensionTextColor() const;
+    const Color &dimensionTextColor() const;
     void setDimensionTextColor(const Color &);
 
     TextDirection dimensionTextDirection() const;
@@ -382,7 +382,7 @@ public:
     TextStyle *dimensionTextStyle() const;
     void setDimensionTextStyle(TextStyle *);
 
-    std::string dimensionTextStyleName() const;
+    const std::string &dimensionTextStyleName() const;
     void setDimensionTextStyleName(const std::string &);
 
     DimensionTextVerticalAlignment dimensionTextVerticalAlignment() const;
@@ -471,7 +471,7 @@ public:
     bool fillMode() const;
     void setFillMode(bool);
 
-    std::string fingerPrintGuid() const;
+    const std::string &fingerPrintGuid() const;
     void setFingerPrintGuid(const std::string &);
 
     unsigned char haloGapPercentage() const;
@@ -483,7 +483,7 @@ public:
     unsigned char hideText() const;
     void setHideText(unsigned char);
 
-    std::string hyperLinkBase() const;
+    const std::string &hyperLinkBase() const;
     void setHyperLinkBase(const std::string &);
 
     IndexCreationFlags indexCreationFlags() const;
@@ -492,7 +492,7 @@ public:
     UnitsType insUnits() const;
     void setInsUnits(UnitsType);
 
-    Color interfereColor() const;
+    const Color &interfereColor() const;
     void setInterfereColor(const Color &);
 
     unsigned char intersectionDisplay() const;
@@ -501,7 +501,7 @@ public:
     short joinStyle() const;
     void setJoinStyle(short);
 
-    std::string lastSavedBy() const;
+    const std::string &lastSavedBy() const;
     void setLastSavedBy(const std::string &);
 
     double latitude() const;
@@ -540,46 +540,46 @@ public:
     MeasurementUnits measurementUnits() const;
     void setMeasurementUnits(MeasurementUnits);
 
-    std::string menuFileName() const;
+    const std::string &menuFileName() const;
     void setMenuFileName(const std::string &);
 
     bool mirrorText() const;
     void setMirrorText(bool);
 
-    XYZ modelSpaceExtMax() const;
+    const XYZ &modelSpaceExtMax() const;
     void setModelSpaceExtMax(const XYZ &);
 
-    XYZ modelSpaceExtMin() const;
+    const XYZ &modelSpaceExtMin() const;
     void setModelSpaceExtMin(const XYZ &);
 
-    XYZ modelSpaceInsertionBase() const;
+    const XYZ &modelSpaceInsertionBase() const;
     void setModelSpaceInsertionBase(const XYZ &);
 
-    XY modelSpaceLimitsMax() const;
+    const XY &modelSpaceLimitsMax() const;
     void setModelSpaceLimitsMax(const XY &);
 
-    XY modelSpaceLimitsMin() const;
+    const XY &modelSpaceLimitsMin() const;
     void setModelSpaceLimitsMin(const XY &);
 
-    XYZ modelSpaceOrigin() const;
+    const XYZ &modelSpaceOrigin() const;
     void setModelSpaceOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicBackDOrigin() const;
+    const XYZ &modelSpaceOrthographicBackDOrigin() const;
     void setModelSpaceOrthographicBackDOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicBottomDOrigin() const;
+    const XYZ &modelSpaceOrthographicBottomDOrigin() const;
     void setModelSpaceOrthographicBottomDOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicFrontDOrigin() const;
+    const XYZ &modelSpaceOrthographicFrontDOrigin() const;
     void setModelSpaceOrthographicFrontDOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicLeftDOrigin() const;
+    const XYZ &modelSpaceOrthographicLeftDOrigin() const;
     void setModelSpaceOrthographicLeftDOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicRightDOrigin() const;
+    const XYZ &modelSpaceOrthographicRightDOrigin() const;
     void setModelSpaceOrthographicRightDOrigin(const XYZ &);
 
-    XYZ modelSpaceOrthographicTopDOrigin() const;
+    const XYZ &modelSpaceOrthographicTopDOrigin() const;
     void setModelSpaceOrthographicTopDOrigin(const XYZ &);
 
     UCS *modelSpaceUcs() const;
@@ -588,10 +588,10 @@ public:
     UCS *modelSpaceUcsBase() const;
     void setModelSpaceUcsBase(UCS *);
 
-    XYZ modelSpaceXAxis() const;
+    const XYZ &modelSpaceXAxis() const;
     void setModelSpaceXAxis(const XYZ &);
 
-    XYZ modelSpaceYAxis() const;
+    const XYZ &modelSpaceYAxis() const;
     void setModelSpaceYAxis(const XYZ &);
 
     double northDirection() const;
@@ -603,7 +603,7 @@ public:
     ObjectSnapMode objectSnapMode() const;
     void setObjectSnapMode(ObjectSnapMode);
 
-    Color obscuredColor() const;
+    const Color &obscuredColor() const;
     void setObscuredColor(const Color &);
 
     unsigned char obscuredType() const;
@@ -612,52 +612,52 @@ public:
     bool orthoMode() const;
     void setOrthoMode(bool);
 
-    std::string paperSpaceBaseName() const;
+    const std::string &paperSpaceBaseName() const;
     void setPaperSpaceBaseName(const std::string &);
 
     double paperSpaceElevation() const;
     void setPaperSpaceElevation(double);
 
-    XYZ paperSpaceExtMax() const;
+    const XYZ &paperSpaceExtMax() const;
     void setPaperSpaceExtMax(const XYZ &);
 
-    XYZ paperSpaceExtMin() const;
+    const XYZ &paperSpaceExtMin() const;
     void setPaperSpaceExtMin(const XYZ &);
 
-    XYZ paperSpaceInsertionBase() const;
+    const XYZ &paperSpaceInsertionBase() const;
     void setPaperSpaceInsertionBase(const XYZ &);
 
     bool paperSpaceLimitsChecking() const;
     void setPaperSpaceLimitsChecking(bool);
 
-    XY paperSpaceLimitsMax() const;
+    const XY &paperSpaceLimitsMax() const;
     void setPaperSpaceLimitsMax(const XY &);
 
-    XY paperSpaceLimitsMin() const;
+    const XY &paperSpaceLimitsMin() const;
     void setPaperSpaceLimitsMin(const XY &);
 
     SpaceLineTypeScaling paperSpaceLineTypeScaling() const;
     void setPaperSpaceLineTypeScaling(SpaceLineTypeScaling);
 
-    std::string paperSpaceName() const;
+    const std::string &paperSpaceName() const;
     void setPaperSpaceName(const std::string &);
 
-    XYZ paperSpaceOrthographicBackDOrigin() const;
+    const XYZ &paperSpaceOrthographicBackDOrigin() const;
     void setPaperSpaceOrthographicBackDOrigin(const XYZ &);
 
-    XYZ paperSpaceOrthographicBottomDOrigin() const;
+    const XYZ &paperSpaceOrthographicBottomDOrigin() const;
     void setPaperSpaceOrthographicBottomDOrigin(const XYZ &);
 
-    XYZ paperSpaceOrthographicFrontDOrigin() const;
+    const XYZ &paperSpaceOrthographicFrontDOrigin() const;
     void setPaperSpaceOrthographicFrontDOrigin(const XYZ &);
 
-    XYZ paperSpaceOrthographicLeftDOrigin() const;
+    const XYZ &paperSpaceOrthographicLeftDOrigin() const;
     void setPaperSpaceOrthographicLeftDOrigin(const XYZ &);
 
-    XYZ paperSpaceOrthographicRightDOrigin() const;
+    const XYZ &paperSpaceOrthographicRightDOrigin() const;
     void setPaperSpaceOrthographicRightDOrigin(const XYZ &);
 
-    XYZ paperSpaceOrthographicTopDOrigin() const;
+    const XYZ &paperSpaceOrthographicTopDOrigin() const;
     void setPaperSpaceOrthographicTopDOrigin(const XYZ &);
 
     UCS *paperSpaceUcs() const;
@@ -666,13 +666,13 @@ public:
     UCS *paperSpaceUcsBase() const;
     void setPaperSpaceUcsBase(UCS *);
 
-    XYZ paperSpaceUcsOrigin() const;
+    const XYZ &paperSpaceUcsOrigin() const;
     void setPaperSpaceUcsOrigin(const XYZ &);
 
-    XYZ paperSpaceUcsXAxis() const;
+    const XYZ &paperSpaceUcsXAxis() const;
     void setPaperSpaceUcsXAxis(const XYZ &);
 
-    XYZ paperSpaceUcsYAxis() const;
+    const XYZ &paperSpaceUcsYAxis() const;
     void setPaperSpaceUcsYAxis(const XYZ &);
 
     short plotStyleMode() const;
@@ -690,7 +690,7 @@ public:
     double polylineWidthDefault() const;
     void setPolylineWidthDefault(double);
 
-    std::string projectName() const;
+    const std::string &projectName() const;
     void setProjectName(const std::string &);
 
     bool proxyGraphics() const;
@@ -759,7 +759,7 @@ public:
     double stepsPerSecond() const;
     void setStepsPerSecond(double);
 
-    std::string styleSheetName() const;
+    const std::string &styleSheetName() const;
     void setStyleSheetName(const std::string &);
 
     short surfaceDensityU() const;
@@ -792,7 +792,7 @@ public:
     short textQuality() const;
     void setTextQuality(short);
 
-    std::string textStyleName() const;
+    const std::string &textStyleName() const;
     void setTextStyleName(const std::string &);
 
     double thicknessDefault() const;
@@ -801,28 +801,28 @@ public:
     int timeZone() const;
     void setTimeZone(int);
 
-    Timespan totalEditingTime() const;
+    const Timespan &totalEditingTime() const;
     void setTotalEditingTime(const Timespan &);
 
     double traceWidthDefault() const;
     void setTraceWidthDefault(double);
 
-    std::string ucsBaseName() const;
+    const std::string &ucsBaseName() const;
     void setUcsBaseName(const std::string &);
 
-    std::string ucsName() const;
+    const std::string &ucsName() const;
     void setUcsName(const std::string &);
 
     short unitMode() const;
     void setUnitMode(short);
 
-    DateTime universalCreateDateTime() const;
+    const DateTime &universalCreateDateTime() const;
     void setUniversalCreateDateTime(const DateTime &);
 
-    DateTime universalUpdateDateTime() const;
+    const DateTime &universalUpdateDateTime() const;
     void setUniversalUpdateDateTime(const DateTime &);
 
-    DateTime updateDateTime() const;
+    const DateTime &updateDateTime() const;
     void setUpdateDateTime(const DateTime &);
 
     bool updateDimensionsWhileDragging() const;
@@ -867,10 +867,10 @@ public:
     ACadVersion version() const;
     void setVersion(ACadVersion);
 
-    std::string versionGuid() const;
+    const std::string &versionGuid() const;
     void setVersionGuid(const std::string &);
 
-    std::string versionString() const;
+    const std::string &versionString() const;
     void setVersionString(const std::string &);
 
     double viewportDefaultViewScaleFactor() const;

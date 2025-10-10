@@ -38,15 +38,15 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    XYZ angleVertex() const;
+    const XYZ & angleVertex() const;
     void setAngleVertex(const XYZ &value);
 
     XYZ center() const;
 
-    XYZ dimensionArc() const;
+    const XYZ & dimensionArc() const;
     void setDimensionArc(const XYZ &value);
 
-    XYZ firstPoint() const;
+    const XYZ & firstPoint() const;
     void setFirstPoint(const XYZ &value);
 
     double measurement() const override;
@@ -54,7 +54,7 @@ public:
     double offset() const;
     void setOffset(double value);
 
-    XYZ secondPoint() const;
+    const XYZ & secondPoint() const;
     void setSecondPoint(const XYZ &value);
 
     void updateBlock() override;

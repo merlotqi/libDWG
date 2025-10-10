@@ -38,13 +38,13 @@ public:
     std::string objectName() const override;
     std::string subclassMarker() const override;
 
-    XYZ featureLocation() const;
+    const XYZ &featureLocation() const;
     void setFeatureLocation(const XYZ &value);
 
     bool isOrdinateTypeX() const;
     void setIsOrdinateTypeX(bool value);
 
-    XYZ leaderEndpoint() const;
+    const XYZ &leaderEndpoint() const;
     void setLeaderEndpoint(const XYZ &value);
 
     double measurement() const override;

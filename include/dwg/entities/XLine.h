@@ -38,10 +38,10 @@ public:
     virtual std::string objectName() const override;
     virtual std::string subclassMarker() const override;
 
-    XYZ firstPoint() const;
+    const XYZ &firstPoint() const;
     void setFirstPoint(const XYZ &);
 
-    XYZ direction() const;
+    const XYZ &direction() const;
     void setDirection(const XYZ &);
 
 private:

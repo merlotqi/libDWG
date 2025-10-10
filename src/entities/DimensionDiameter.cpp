@@ -47,7 +47,7 @@ std::string DimensionDiameter::subclassMarker() const
     return DxfSubclassMarker::DiametricDimension;
 }
 
-XYZ DimensionDiameter::angleVertex() const
+const XYZ &DimensionDiameter::angleVertex() const
 {
     return _angleVertex;
 }
@@ -55,6 +55,11 @@ XYZ DimensionDiameter::angleVertex() const
 void DimensionDiameter::setAngleVertex(const XYZ &value)
 {
     _angleVertex = value;
+}
+
+XYZ DimensionDiameter::center() const
+{
+    return XYZ::Zero;
 }
 
 double DimensionDiameter::leaderLength() const
@@ -77,11 +82,14 @@ void DimensionDiameter::updateBlock() {}
 RTTR_REGISTRATION
 {
     using namespace rttr;
-    registration::class_<DimensionDiameter>("DimensionDiameter")(metadata("DxfName", DxfFileToken::EntityDimension),
-                                                                 metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::DiametricDimension)))
+    registration::class_<DimensionDiameter>("DimensionDiameter")(
+            metadata("DxfName", DxfFileToken::EntityDimension),
+            metadata("DxfSubClass", DxfSubClassAttribute(DxfSubclassMarker::DiametricDimension)))
             .constructor()
-            .property("angleVertex", &DimensionDiameter::angleVertex, &DimensionDiameter::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
-            .property("leaderLength", &DimensionDiameter::leaderLength, &DimensionDiameter::setLeaderLength)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})));
+            .property("angleVertex", &DimensionDiameter::angleVertex,
+                      &DimensionDiameter::setAngleVertex)(metadata("DxfCodeValue", DxfCodeValueAttribute({15, 25, 35})))
+            .property("leaderLength", &DimensionDiameter::leaderLength,
+                      &DimensionDiameter::setLeaderLength)(metadata("DxfCodeValue", DxfCodeValueAttribute({40})));
 }
 
 }// namespace dwg

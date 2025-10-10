@@ -42,7 +42,7 @@ public:
     double extLineRotation() const;
     void setExtLineRotation(double value);
 
-    XYZ firstPoint() const;
+    const XYZ &firstPoint() const;
     void setFirstPoint(const XYZ &value);
 
     double measurement() const override;
@@ -50,7 +50,7 @@ public:
     virtual double offset() const;
     virtual void setOffset(double value);
 
-    XYZ secondPoint() const;
+    const XYZ &secondPoint() const;
     void setSecondPoint(const XYZ &value);
 
     void updateBlock() override;

@@ -76,7 +76,7 @@ void Block::setFlags(BlockTypeFlags flags)
     _flags = flags;
 }
 
-XYZ Block::basePoint() const
+const XYZ &Block::basePoint() const
 {
     return _base_point;
 }
@@ -86,7 +86,7 @@ void Block::setBasePoint(const XYZ &value)
     _base_point = value;
 }
 
-std::string Block::xrefPath() const
+const std::string &Block::xrefPath() const
 {
     return _xrefPath;
 }
@@ -96,7 +96,7 @@ void Block::setXrefPath(const std::string &value)
     _xrefPath = value;
 }
 
-std::string Block::comments() const
+const std::string &Block::comments() const
 {
     return _comments;
 }
