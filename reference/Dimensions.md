@@ -1,6 +1,6 @@
 # Dimensions
 
-# Aligned
+## Aligned
 
 ![image](./media/dimension-aligned-points.png)
 
@@ -9,7 +9,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Linear
+## Linear
 
 ![image](./media/dimension-linear-points.png)
 
@@ -18,7 +18,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Ordinate
+## Ordinate
 
 ![image](./media/dimension-ordinate-points.png)
 
@@ -27,7 +27,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Diameter
+## Diameter
 
 ![image](./media/dimension-diameter-points.png)
 
@@ -36,7 +36,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Radius
+## Radius
 
 ![image](./media/dimension-radius-points.png)
 
@@ -44,7 +44,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Angular2Line
+## Angular2Line
 
 ![image](./media/dimension-angular2line-points.png)
 
@@ -55,7 +55,7 @@
 - GREEN: `DefinitionPoint`
 - CYAN: `InsertionPoint`
 
-# Angular3pt
+## Angular3pt
 
 ![image](./media/dimension-angular3pt-points.png)
 

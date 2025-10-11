@@ -6,16 +6,20 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_LIBDWG_TESTS "Build libdwg tests" OFF)
 option(BUILD_LIBDWG_EXAMPLES "Build libdwg examples" OFF)
+option(BUILD_LIBDWG_DOCUMENTATION "Build documentation" OFF)
 
-set(LIBDWG_VERSION_MAJOR 1)
-set(LIBDWG_VERSION_MINOR 0)
-set(LIBDWG_VERSION_PATCH 1)
+set(LIBDWG_VERSION_MAJOR 0)
+set(LIBDWG_VERSION_MINOR 1)
+set(LIBDWG_VERSION_PATCH 0)
 set(LIBDWG_VERSION_STRING "${LIBDWG_VERSION_MAJOR}.${LIBDWG_VERSION_MINOR}.${LIBDWG_VERSION_PATCH}")
 
 find_package(Iconv REQUIRED)
 find_package(fmt REQUIRED)
 find_package(double-conversion REQUIRED)
 find_package(magic_enum REQUIRED)
+if(BUILD_LIBDWG_DOCUMENTATION)
+    find_package(Doxygen REQUIRED)
+endif()
 
 include(GenerateExportHeader)
 
@@ -45,4 +49,8 @@ endif()
 if(BUILD_LIBDWG_TESTS)
     include(CTest)
     add_subdirectory(tests)
+endif()
+
+if(BUILD_LIBDWG_DOCUMENTATION)
+    add_subdirectory(docs)
 endif()
